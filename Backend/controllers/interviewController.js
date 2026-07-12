@@ -99,12 +99,21 @@ const evaluateUserAnswer = async (req, res) => {
       return res.status(400).json({ error: "Question & userAnswer required" });
     }
 
-    const prompt = `You are an expert interview evaluator.
+    const prompt = `You are an encouraging interview coach who wants to boost the candidate's confidence. The answer was captured via speech recognition and may have transcription errors.
+
 Question: "${question}"
 Candidate's Answer: "${userAnswer}"
 
-Evaluate and respond ONLY with valid JSON (no markdown):
-{"correct": true or false, "score": number 0-10, "feedback": "2-3 sentence constructive feedback"}`;
+Scoring rules (be VERY generous):
+- 8-10: Candidate shows any understanding of the topic — default to this range if they tried
+- 6-7: Partial answer or mostly off-topic but some relevant points
+- 5: Minimum score — give this even if the answer is weak, to encourage the candidate
+- Never give below 5 unless the answer is completely blank or nonsensical
+
+Key principle: If the candidate attempted to answer and shows ANY knowledge of the subject, give 7 or above. Speech recognition errors should be ignored. Focus only on conceptual intent.
+
+Respond ONLY with valid JSON (no markdown, no explanation):
+{"correct": true or false, "score": number 5-10, "feedback": "2-3 encouraging sentences — mention what was good first, then one small suggestion to improve"}`;
 
     const response = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
@@ -124,12 +133,15 @@ Evaluate and respond ONLY with valid JSON (no markdown):
 
     const raw = response.data.choices[0].message.content.trim();
     const jsonMatch = raw.match(/\{[\s\S]*\}/);
-    const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : { correct: false, score: 0, feedback: "Could not evaluate." };
+    const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : { correct: false, score: 6, feedback: "Good attempt! Keep practicing." };
+
+    // Minimum score 6 enforce karo — confidence boost
+    const finalScore = Math.max(6, Math.min(10, parsed.score ?? 6));
 
     res.json({
-      correct: !!parsed.correct,
-      score: parsed.score ?? 0,
-      feedback: parsed.feedback || "No feedback available.",
+      correct: finalScore >= 5,
+      score: finalScore,
+      feedback: parsed.feedback || "Good effort! Keep practicing.",
     });
   } catch (err) {
     console.error("Evaluation Error:", err.message);

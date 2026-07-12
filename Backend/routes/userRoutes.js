@@ -6,7 +6,12 @@ const cloudinary = require("../config/cloudinary");
 const protect = require("../middleware/authMiddleware");
 const validatePassword = require("../middleware/validatePassword");
 const {
+  sendOtp,
+  verifyOtpAndRegister,
   registerUser,
+  forgotPassword,
+  verifyResetOtp,
+  resetPassword,
   loginUser,
   getProfile,
   updateProfilePhoto,
@@ -24,8 +29,17 @@ const storage = new CloudinaryStorage({
 });
 const upload = multer({ storage });
 
-router.post("/register", validatePassword, registerUser);
+// OTP based registration
+router.post("/send-otp", validatePassword, sendOtp);
+router.post("/verify-otp", verifyOtpAndRegister);
+
+router.post("/register", validatePassword, registerUser); // legacy (disabled)
 router.post("/login", loginUser);
+
+// Forgot Password routes
+router.post("/forgot-password", forgotPassword);
+router.post("/verify-reset-otp", verifyResetOtp);
+router.post("/reset-password", resetPassword);
 router.get("/platform-stats", getPlatformStats);
 router.get("/dashboard", protect, getDashboard);
 router.get("/profile", protect, getProfile);

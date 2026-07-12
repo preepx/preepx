@@ -1,7 +1,10 @@
 const User = require("../models/User");
+const Otp = require("../models/Otp");
 const Interview = require("../models/Interview");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const sendOtpEmail = require("../utils/sendOtpEmail");
+const sendResetOtpEmail = require("../utils/sendResetOtpEmail");
 const { evaluateBadges, getBadgeDetails, getAllBadges } = require("../utils/badges");
 
 const safeUser = (user) => ({
@@ -18,22 +21,168 @@ const safeUser = (user) => ({
   settings: user.settings || {},
 });
 
-const registerUser = async (req, res) => {
+// Step 1: User details submit kare → OTP generate karke email pe bhejo
+const sendOtp = async (req, res) => {
   const { fullName, email, password } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
 
   try {
+    // Check if user already registered
     const userExists = await User.findOne({ email: normalizedEmail });
     if (userExists) return res.status(400).json({ message: "User already exists" });
 
+    // Hash password pehle hi kar lo (OTP verify hone ke baad direct save karenge)
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ fullName, email: normalizedEmail, password: hashedPassword });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-    res.json({ message: "User registered successfully", token, user: safeUser(user) });
+    // 6-digit OTP generate karo
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+
+    // Purana pending OTP delete karo (agar tha to)
+    await Otp.deleteMany({ email: normalizedEmail });
+
+    // Naya OTP save karo
+    await Otp.create({
+      email: normalizedEmail,
+      otp,
+      expiresAt,
+      userData: { fullName, password: hashedPassword },
+    });
+
+    // Email bhejo
+    await sendOtpEmail(normalizedEmail, otp);
+
+    res.json({ message: "OTP sent to your email. Please verify to complete registration." });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+};
+
+// Step 2: OTP verify karo → User account banao
+const verifyOtpAndRegister = async (req, res) => {
+  const { email, otp } = req.body;
+  const normalizedEmail = email?.trim().toLowerCase();
+
+  try {
+    const otpRecord = await Otp.findOne({ email: normalizedEmail });
+
+    if (!otpRecord) {
+      return res.status(400).json({ message: "OTP not found. Please request a new OTP." });
+    }
+
+    // Expiry check
+    if (otpRecord.expiresAt < new Date()) {
+      await Otp.deleteMany({ email: normalizedEmail });
+      return res.status(400).json({ message: "OTP has expired. Please request a new one." });
+    }
+
+    // OTP match check
+    if (otpRecord.otp !== otp.toString()) {
+      return res.status(400).json({ message: "Invalid OTP. Please try again." });
+    }
+
+    // User banao
+    const user = await User.create({
+      fullName: otpRecord.userData.fullName,
+      email: normalizedEmail,
+      password: otpRecord.userData.password,
+    });
+
+    // OTP record delete karo
+    await Otp.deleteMany({ email: normalizedEmail });
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    res.json({ message: "Registration successful!", token, user: safeUser(user) });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// ─── Forgot Password: Step 1 — Email pe OTP bhejo ───
+const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  const normalizedEmail = email?.trim().toLowerCase();
+
+  try {
+    const user = await User.findOne({ email: normalizedEmail });
+    if (!user) return res.status(404).json({ message: "No account found with this email." });
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 min
+
+    await Otp.deleteMany({ email: normalizedEmail, type: "reset" });
+    await Otp.create({ email: normalizedEmail, otp, expiresAt, type: "reset" });
+
+    await sendResetOtpEmail(normalizedEmail, otp, user.fullName);
+
+    res.json({ message: "Password reset OTP sent to your email." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// ─── Forgot Password: Step 2 — OTP verify karo ───
+const verifyResetOtp = async (req, res) => {
+  const { email, otp } = req.body;
+  const normalizedEmail = email?.trim().toLowerCase();
+
+  try {
+    const otpRecord = await Otp.findOne({ email: normalizedEmail, type: "reset" });
+    if (!otpRecord) return res.status(400).json({ message: "OTP not found. Please request a new one." });
+
+    if (otpRecord.expiresAt < new Date()) {
+      await Otp.deleteMany({ email: normalizedEmail, type: "reset" });
+      return res.status(400).json({ message: "OTP has expired. Please request a new one." });
+    }
+
+    if (otpRecord.otp !== otp.toString()) {
+      return res.status(400).json({ message: "Invalid OTP. Please try again." });
+    }
+
+    // OTP sahi hai — frontend ko allow karo new password set karne ke liye
+    // OTP record abhi delete nahi karte, resetPassword mein karenge
+    res.json({ message: "OTP verified. You can now set a new password." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// ─── Forgot Password: Step 3 — Naya password set karo ───
+const resetPassword = async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+  const normalizedEmail = email?.trim().toLowerCase();
+
+  try {
+    if (!newPassword || newPassword.length < 6) {
+      return res.status(400).json({ message: "Password must be at least 6 characters." });
+    }
+
+    // OTP dobara verify karo (security ke liye)
+    const otpRecord = await Otp.findOne({ email: normalizedEmail, type: "reset" });
+    if (!otpRecord) return res.status(400).json({ message: "Session expired. Please start over." });
+
+    if (otpRecord.expiresAt < new Date()) {
+      await Otp.deleteMany({ email: normalizedEmail, type: "reset" });
+      return res.status(400).json({ message: "OTP expired. Please start over." });
+    }
+
+    if (otpRecord.otp !== otp.toString()) {
+      return res.status(400).json({ message: "Invalid OTP." });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await User.findOneAndUpdate({ email: normalizedEmail }, { password: hashedPassword });
+    await Otp.deleteMany({ email: normalizedEmail, type: "reset" });
+
+    res.json({ message: "Password reset successful! You can now log in." });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Old registerUser (ab use nahi hoga, OTP flow se replace ho gaya)
+const registerUser = async (req, res) => {
+  res.status(400).json({ message: "Please use /send-otp and /verify-otp to register." });
 };
 
 const updateProfilePhoto = async (req, res) => {
@@ -267,7 +416,12 @@ const getAchievements = async (req, res) => {
 };
 
 module.exports = {
+  sendOtp,
+  verifyOtpAndRegister,
   registerUser,
+  forgotPassword,
+  verifyResetOtp,
+  resetPassword,
   loginUser,
   getProfile,
   updateProfilePhoto,

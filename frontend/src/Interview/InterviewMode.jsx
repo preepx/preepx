@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
 import { Mic, MicOff, SkipForward, Volume2, Timer, ArrowLeft } from "lucide-react";
 import { evaluateAnswer, saveInterviewResult } from "../services/interviewAPI";
-import { toast } from "react-toastify";
 import { showAppError } from "../utils/appAlert";
 import "./InterviewMode.css";
 
@@ -12,104 +11,155 @@ const InterviewMode = () => {
   const navigate = useNavigate();
   const { jobTitle, jobTopic, questions, interviewId, fromResume } = location.state || {};
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [userAnswer, setUserAnswer] = useState("");
-  const [feedback, setFeedback] = useState("");
+  const [currentIndex,  setCurrentIndex]  = useState(0);
+  const [userAnswer,    setUserAnswer]    = useState("");
+  const [interimAnswer, setInterimAnswer] = useState("");
+  const [feedback,      setFeedback]      = useState("");
   const [feedbackScore, setFeedbackScore] = useState(null);
-  const [allAnswers, setAllAnswers] = useState([]);
-  const [interviewFinished, setInterviewFinished] = useState(false);
-  const [aiSpeaking, setAiSpeaking] = useState(false);
-  const [isListening, setIsListening] = useState(false);
-  const [evaluating, setEvaluating] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [questionTimer, setQuestionTimer] = useState(120);
+  const [aiSpeaking,    setAiSpeaking]    = useState(false);
+  const [isListening,   setIsListening]   = useState(false);
+  const [evaluating,    setEvaluating]    = useState(false);
+  const [saving,        setSaving]        = useState(false);
+  const [questionTimer, setQuestionTimer] = useState(45);
   const [totalDuration, setTotalDuration] = useState(0);
 
-  const webcamRef = useRef(null);
-  const recognitionRef = useRef(null);
-  const silenceTimer = useRef(null);
-  const startTimeRef = useRef(Date.now());
-  const timerRef = useRef(null);
+  const webcamRef       = useRef(null);
+  const recRef          = useRef(null);
+  const timerRef        = useRef(null);
+  const silenceRef      = useRef(null);
+  const startTimeRef    = useRef(Date.now());
 
-  const speakText = (text) => {
+  const answerRef       = useRef("");
+  const indexRef        = useRef(0);
+  const allAnswersRef   = useRef([]);
+  const timerValRef     = useRef(45);
+  const exitedRef       = useRef(false);   // interview exit/done guard
+  const busyRef         = useRef(false);   // triggerNext in progress
+
+  // ── Stop everything ─────────────────────────────────
+  const stopAll = () => {
     window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US";
-    utterance.rate = 0.95;
-    utterance.onstart = () => setAiSpeaking(true);
-    utterance.onend = () => setAiSpeaking(false);
-    window.speechSynthesis.speak(utterance);
+    setAiSpeaking(false);
+
+    if (silenceRef.current) { clearTimeout(silenceRef.current); silenceRef.current = null; }
+    if (timerRef.current)   { clearInterval(timerRef.current);  timerRef.current   = null; }
+
+    if (recRef.current) {
+      try {
+        recRef.current.onend    = null;
+        recRef.current.onresult = null;
+        recRef.current.onerror  = null;
+        recRef.current.stop();
+      } catch (_) {}
+      recRef.current = null;
+    }
+    setIsListening(false);
+    setInterimAnswer("");
   };
 
-  const startListening = () => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
-      showAppError("Speech recognition is not supported in this browser. Try Chrome or Edge.", "Browser not supported");
-      return;
+  // ── TTS ─────────────────────────────────────────────
+  const speakQuestion = (text) => {
+    window.speechSynthesis.cancel();
+    const voices = window.speechSynthesis.getVoices();
+    const preferred = ["Google US English","Microsoft David - English (United States)","Microsoft Zira - English (United States)","Alex","Samantha"];
+    let voice = null;
+    for (const name of preferred) { voice = voices.find(v => v.name === name); if (voice) break; }
+    if (!voice) voice = voices.find(v => v.lang === "en-US") || null;
+
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = "en-US"; u.rate = 0.88; u.pitch = 1.0; u.volume = 1.0;
+    if (voice) u.voice = voice;
+    u.onstart = () => setAiSpeaking(true);
+    u.onend   = () => setAiSpeaking(false);
+    u.onerror = () => setAiSpeaking(false);
+    window.speechSynthesis.speak(u);
+  };
+
+  const doSpeak = (text) => {
+    if (!window.speechSynthesis.getVoices().length) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.onvoiceschanged = null;
+        speakQuestion(text);
+      };
+    } else {
+      speakQuestion(text);
     }
-    if (recognitionRef.current) recognitionRef.current.stop();
+  };
 
-    const recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.interimResults = true;
-    recognition.continuous = true;
+  // ── Speech Recognition ───────────────────────────────
+  const startRec = () => {
+    if (exitedRef.current || busyRef.current) return;
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) return;
 
-    recognition.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map((r) => r[0].transcript)
-        .join(" ");
-      setUserAnswer(transcript);
+    if (recRef.current) {
+      try { recRef.current.onend = null; recRef.current.stop(); } catch (_) {}
+      recRef.current = null;
+    }
 
-      if (silenceTimer.current) clearTimeout(silenceTimer.current);
-      silenceTimer.current = setTimeout(() => handleNext(), 4000);
+    const rec = new SR();
+    rec.lang = "en-US";
+    rec.interimResults = true;
+    rec.continuous = true;
+    recRef.current = rec;
+
+    let processed = 0;
+
+    rec.onstart = () => setIsListening(true);
+
+    rec.onresult = (e) => {
+      let newFinal = "";
+      let interim  = "";
+      for (let i = processed; i < e.results.length; i++) {
+        if (e.results[i].isFinal) {
+          newFinal += e.results[i][0].transcript + " ";
+          processed = i + 1;
+        } else {
+          interim += e.results[i][0].transcript;
+        }
+      }
+      if (newFinal.trim()) {
+        const updated = (answerRef.current + " " + newFinal).trim();
+        answerRef.current = updated;
+        setUserAnswer(updated);
+      }
+      setInterimAnswer(interim.trim());
+
+      // Silence auto-next only in last 15s
+      if (silenceRef.current) clearTimeout(silenceRef.current);
+      if (timerValRef.current > 0 && timerValRef.current <= 15) {
+        silenceRef.current = setTimeout(() => doNext(), 5000);
+      }
     };
 
-    recognition.onstart = () => setIsListening(true);
-    recognition.onend = () => setIsListening(false);
-    recognition.start();
-    recognitionRef.current = recognition;
-  };
-
-  const stopListening = () => {
-    if (recognitionRef.current) recognitionRef.current.stop();
-    if (silenceTimer.current) clearTimeout(silenceTimer.current);
-  };
-
-  useEffect(() => {
-    if (!questions?.length) return;
-
-    if (questions[currentIndex]) {
-      const qText = `Question ${currentIndex + 1}. ${questions[currentIndex]}`;
-      speakText(qText);
-      setUserAnswer("");
-      setFeedback("");
-      setFeedbackScore(null);
-      setQuestionTimer(120);
-      startListening();
-    }
-
-    return () => {
-      window.speechSynthesis.cancel();
-      stopListening();
-      if (timerRef.current) clearInterval(timerRef.current);
+    rec.onerror = (e) => {
+      if (e.error === "not-allowed") {
+        showAppError("Microphone access denied. Please allow mic.", "Permission denied");
+        exitedRef.current = true;
+      }
     };
-  }, [currentIndex, questions]);
 
-  useEffect(() => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      setQuestionTimer((t) => (t <= 1 ? 0 : t - 1));
-      setTotalDuration(Math.floor((Date.now() - startTimeRef.current) / 1000));
-    }, 1000);
-    return () => clearInterval(timerRef.current);
-  }, [currentIndex]);
+    rec.onend = () => {
+      setIsListening(false);
+      if (!exitedRef.current && !busyRef.current) {
+        setTimeout(() => startRec(), 250);
+      }
+    };
 
-  const handleNext = async () => {
-    if (evaluating) return;
-    stopListening();
+    try { rec.start(); } catch (_) {}
+  };
 
-    const answer = userAnswer.trim();
-    const question = questions[currentIndex];
+  // ── Advance to next question ─────────────────────────
+  const doNext = async () => {
+    if (busyRef.current || exitedRef.current) return;
+    busyRef.current = true;
+
+    stopAll();
+
+    const idx      = indexRef.current;
+    const question = (questions || [])[idx];
+    const answer   = answerRef.current.trim();
+
     let result = { correct: false, score: 0, feedback: "No answer provided." };
 
     if (answer) {
@@ -119,75 +169,150 @@ const InterviewMode = () => {
         setFeedback(result.feedback);
         setFeedbackScore(result.score);
       } catch {
-        showAppError("We couldn't evaluate your answer. Moving to the next question.", "Evaluation failed");
+        result.feedback = "Could not evaluate.";
       } finally {
         setEvaluating(false);
       }
     }
 
-    const answerRecord = {
+    const record = {
       question,
       userAnswer: answer || "(skipped)",
-      correct: result.correct,
-      feedback: result.feedback,
-      score: result.score,
+      correct:    result.correct,
+      feedback:   result.feedback,
+      score:      result.score,
     };
 
-    const updatedAnswers = [...allAnswers, answerRecord];
-    setAllAnswers(updatedAnswers);
+    const updated = [...allAnswersRef.current, record];
+    allAnswersRef.current = updated;
 
     setTimeout(() => {
-      if (currentIndex < questions.length - 1) {
-        setCurrentIndex((prev) => prev + 1);
+      if (idx < (questions?.length || 0) - 1) {
+        setCurrentIndex(idx + 1);
       } else {
-        finishInterview(updatedAnswers);
+        finishInterview(updated);
       }
-    }, answer ? 2500 : 500);
+    }, answer ? 1800 : 300);
   };
 
-  const finishInterview = async (answers) => {
-    setInterviewFinished(true);
-    window.speechSynthesis.cancel();
-    stopListening();
+  // ── Exit interview — save partial answers ────────────
+  const doExit = async () => {
+    if (!confirm("Leave interview? Your answers so far will be saved.")) return;
 
-    if (webcamRef.current?.video?.srcObject) {
-      webcamRef.current.video.srcObject.getTracks().forEach((t) => t.stop());
+    exitedRef.current = true;
+    stopAll();
+
+    // Current question ka answer bhi collect karo
+    const currentAnswer = answerRef.current.trim();
+    const partialAnswers = [...allAnswersRef.current];
+    if (currentAnswer) {
+      partialAnswers.push({
+        question:    (questions || [])[indexRef.current],
+        userAnswer:  currentAnswer,
+        correct:     false,
+        feedback:    "Interview exited before completion.",
+        score:       0,
+      });
     }
 
+    if (partialAnswers.length > 0) {
+      setSaving(true);
+      try {
+        await saveInterviewResult({
+          interviewId, jobTitle, jobTopic,
+          questions: questions || [],
+          answers:   partialAnswers,
+          fromResume,
+          duration:  Math.floor((Date.now() - startTimeRef.current) / 1000),
+        });
+      } catch (_) {}
+      setSaving(false);
+    }
+
+    navigate("/interview");
+  };
+
+  // ── Per-question setup ───────────────────────────────
+  useEffect(() => {
+    if (!questions?.length) return;
+
+    exitedRef.current = false;
+    busyRef.current   = false;
+    answerRef.current = "";
+    indexRef.current  = currentIndex;
+    timerValRef.current = 45;
+
+    setUserAnswer("");
+    setInterimAnswer("");
+    setFeedback("");
+    setFeedbackScore(null);
+    setQuestionTimer(45);
+    setEvaluating(false);
+
+    doSpeak(`Question ${currentIndex + 1}. ${questions[currentIndex]}`);
+    startRec();
+
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setQuestionTimer(prev => {
+        const next = prev <= 1 ? 0 : prev - 1;
+        timerValRef.current = next;
+        setTotalDuration(Math.floor((Date.now() - startTimeRef.current) / 1000));
+        if (next === 0) {
+          clearInterval(timerRef.current);
+          doNext();
+        }
+        return next;
+      });
+    }, 1000);
+
+    return () => {
+      stopAll();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex]);
+
+  // ── Finish interview ─────────────────────────────────
+  const finishInterview = async (answers) => {
+    exitedRef.current = true;
+    stopAll();
+    if (webcamRef.current?.video?.srcObject) {
+      webcamRef.current.video.srcObject.getTracks().forEach(t => t.stop());
+    }
     setSaving(true);
     try {
       const result = await saveInterviewResult({
         interviewId, jobTitle, jobTopic, questions, answers, fromResume,
         duration: totalDuration,
       });
-
       const user = JSON.parse(localStorage.getItem("user") || "{}");
-      user.points = (user.points || 0) + (result.pointsEarned || 0);
-      user.level = result.level || user.level;
-      user.streak = result.streak || user.streak;
+      user.points            = (user.points || 0) + (result.pointsEarned || 0);
+      user.level             = result.level  || user.level;
+      user.streak            = result.streak || user.streak;
       user.interviewsCompleted = (user.interviewsCompleted || 0) + 1;
       if (result.newBadges?.length) {
         user.badges = [...new Set([...(user.badges || []), ...result.newBadges])];
       }
       localStorage.setItem("user", JSON.stringify(user));
-
       navigate("/feedback", {
         state: {
           answers, jobTitle, jobTopic,
-          totalScore: result.totalScore, maxScore: result.maxScore,
-          correctCount: result.correctCount, pointsEarned: result.pointsEarned,
-          newBadges: result.newBadges, duration: totalDuration,
+          totalScore:   result.totalScore,
+          maxScore:     result.maxScore,
+          correctCount: result.correctCount,
+          pointsEarned: result.pointsEarned,
+          newBadges:    result.newBadges,
+          duration:     totalDuration,
         },
       });
     } catch {
-      navigate("/feedback", {
-        state: { answers, jobTitle, jobTopic },
-      });
+      navigate("/feedback", { state: { answers, jobTitle, jobTopic } });
     } finally {
       setSaving(false);
     }
   };
 
+  // ── Guards ───────────────────────────────────────────
   if (!questions?.length) {
     return (
       <div className="interview-room empty">
@@ -196,8 +321,7 @@ const InterviewMode = () => {
       </div>
     );
   }
-
-  if (interviewFinished && saving) {
+  if (saving) {
     return (
       <div className="interview-room empty">
         <div className="saving-spinner" />
@@ -210,8 +334,9 @@ const InterviewMode = () => {
 
   return (
     <div className="interview-room">
+      {/* Header */}
       <div className="room-header">
-        <button className="back-btn" onClick={() => { if (confirm("Leave interview?")) navigate("/interview"); }}>
+        <button className="back-btn" onClick={doExit}>
           <ArrowLeft size={18} /> Exit
         </button>
         <div className="room-title">
@@ -221,7 +346,7 @@ const InterviewMode = () => {
         <div className="room-progress">
           <div className="timer-display">
             <Timer size={14} />
-            <span className={questionTimer <= 30 ? "timer-warn" : ""}>
+            <span className={questionTimer <= 15 ? "timer-warn" : ""}>
               {Math.floor(questionTimer / 60)}:{String(questionTimer % 60).padStart(2, "0")}
             </span>
           </div>
@@ -232,25 +357,29 @@ const InterviewMode = () => {
         </div>
       </div>
 
+      {/* Question */}
       <div className="question-card">
         <div className="question-label">
           <Volume2 size={16} />
           {aiSpeaking ? "AI is speaking..." : "Current Question"}
         </div>
         <p className="question-text">{questions[currentIndex]}</p>
+        <button
+          className="replay-btn"
+          onClick={() => doSpeak(`Question ${currentIndex + 1}. ${questions[currentIndex]}`)}
+          disabled={aiSpeaking}
+        >
+          <Volume2 size={14} />
+          {aiSpeaking ? "Speaking..." : "Replay"}
+        </button>
       </div>
 
+      {/* Webcam + AI */}
       <div className="room-body">
         <div className="webcam-panel">
-          <Webcam
-            ref={webcamRef}
-            audio={true}
-            className="webcam-feed"
-            screenshotFormat="image/jpeg"
-          />
+          <Webcam ref={webcamRef} audio={false} className="webcam-feed" screenshotFormat="image/jpeg" />
           <div className="webcam-label">You</div>
         </div>
-
         <div className="ai-panel">
           <div className={`ai-avatar ${aiSpeaking ? "speaking" : ""}`}>
             <div className="ai-circle">
@@ -272,22 +401,25 @@ const InterviewMode = () => {
         </div>
       </div>
 
+      {/* Answer */}
       <div className="answer-section">
         <div className="listening-indicator">
-          {isListening ? (
-            <><Mic size={16} className="pulse" /> Listening...</>
+          {isListening
+            ? <><Mic size={16} className="pulse" /> Listening...</>
+            : <><MicOff size={16} /> Not listening</>
+          }
+        </div>
+        <div className={`answer-box${isListening && (userAnswer || interimAnswer) ? " answer-box--active" : ""}`}>
+          <strong>Your Answer</strong>
+          {(userAnswer || interimAnswer) ? (
+            <p>
+              {userAnswer}
+              {interimAnswer && <span className="interim-text"> {interimAnswer}</span>}
+            </p>
           ) : (
-            <><MicOff size={16} /> Not listening</>
+            <p className="answer-placeholder">Start speaking — your answer will appear here...</p>
           )}
         </div>
-
-        {userAnswer && (
-          <div className="answer-box">
-            <strong>Your answer:</strong>
-            <p>{userAnswer}</p>
-          </div>
-        )}
-
         {feedback && (
           <div className={`feedback-box ${feedbackScore >= 6 ? "good" : "needs-work"}`}>
             <span className="feedback-score">{feedbackScore}/10</span>
@@ -296,11 +428,19 @@ const InterviewMode = () => {
         )}
       </div>
 
+      {/* Actions */}
       <div className="room-actions">
-        <button className="skip-btn" onClick={handleNext} disabled={evaluating}>
-          <SkipForward size={18} />
-          {evaluating ? "Evaluating..." : userAnswer ? "Submit & Next" : "Skip"}
-        </button>
+        {userAnswer ? (
+          <button className="skip-btn primary" onClick={doNext} disabled={evaluating}>
+            <SkipForward size={18} />
+            {evaluating ? "Evaluating..." : "Submit & Next"}
+          </button>
+        ) : (
+          <button className="skip-btn" onClick={doNext} disabled={evaluating}>
+            <SkipForward size={18} />
+            Skip
+          </button>
+        )}
       </div>
     </div>
   );
