@@ -19,13 +19,12 @@ const sendOtpEmail = async (toEmail, otp) => {
             <div style="text-align:center;background:#f5f3ff;border:2px solid #e0d9ff;border-radius:12px;padding:24px;">
               <span style="font-size:42px;font-weight:800;letter-spacing:14px;color:#4f46e5;font-family:monospace;">${otp}</span>
             </div>
-            <p style="font-size:13px;color:#6b7280;margin:20px 0 0;">Valid for <strong>5 minutes</strong>. Do not share this code.</p>
+            <p style="font-size:13px;color:#6b7280;margin:20px 0 0;">Valid for <strong>5 minutes</strong>. Do not share.</p>
           </div>
           <div style="background:#f9fafb;padding:16px 32px;border-top:1px solid #f0f0f0;">
             <p style="margin:0;font-size:12px;color:#9ca3af;">If you didn't request this, ignore this email.</p>
           </div>
-        </div>
-      `,
+        </div>`,
     },
     {
       headers: {
