@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
 import { toast } from "react-toastify";
@@ -44,6 +45,11 @@ function Auth() {
   const [verifiedOtp, setVerifiedOtp] = useState(""); // OTP to pass to reset step
 
   const navigate = useNavigate();
+
+  // Server warm-up ping — taaki register click pe delay na ho
+  useEffect(() => {
+    API.get("/users/platform-stats").catch(() => {});
+  }, []);
 
   // Countdown timer
   useEffect(() => {
