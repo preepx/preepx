@@ -96,10 +96,25 @@
   justify-content: center;
 }
 
-.stat-icon.blue { background: #eff6ff; color: #3b82f6; }
-.stat-icon.green { background: #ecfdf5; color: #10b981; }
-.stat-icon.purple { background: #f5f3ff; color: #8b5cf6; }
-.stat-icon.orange { background: #fff7ed; color: #f97316; }
+.stat-icon.blue {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+
+.stat-icon.green {
+  background: #ecfdf5;
+  color: #10b981;
+}
+
+.stat-icon.purple {
+  background: #f5f3ff;
+  color: #8b5cf6;
+}
+
+.stat-icon.orange {
+  background: #fff7ed;
+  color: #f97316;
+}
 
 .stat-num {
   display: block;
@@ -346,10 +361,19 @@
   font-size: 13px;
 }
 
-.activity-item:last-child { border-bottom: none; }
+.activity-item:last-child {
+  border-bottom: none;
+}
 
-.act-role { font-weight: 600; color: var(--text); }
-.act-score { font-weight: 700; color: var(--primary); }
+.act-role {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.act-score {
+  font-weight: 700;
+  color: var(--primary);
+}
 
 @media (max-width: 900px) {
   .dashboard-grid {

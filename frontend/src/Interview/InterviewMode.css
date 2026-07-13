@@ -24,7 +24,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .room-header {
@@ -220,8 +222,15 @@
 }
 
 @keyframes barPulse {
-  0%, 100% { height: 8px; }
-  50% { height: 22px; }
+
+  0%,
+  100% {
+    height: 8px;
+  }
+
+  50% {
+    height: 22px;
+  }
 }
 
 .ai-label {
@@ -250,8 +259,15 @@
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .answer-box {
@@ -351,6 +367,7 @@
     max-width: 100%;
     height: 220px;
   }
+
   .ai-circle {
     width: 90px;
     height: 90px;

@@ -62,9 +62,17 @@
   background: rgba(79, 70, 229, 0.08);
 }
 
-.lb-row.gold { border-left: 4px solid #fbbf24; }
-.lb-row.silver { border-left: 4px solid #94a3b8; }
-.lb-row.bronze { border-left: 4px solid #d97706; }
+.lb-row.gold {
+  border-left: 4px solid #fbbf24;
+}
+
+.lb-row.silver {
+  border-left: 4px solid #94a3b8;
+}
+
+.lb-row.bronze {
+  border-left: 4px solid #d97706;
+}
 
 .lb-rank {
   width: 32px;
@@ -73,9 +81,17 @@
   color: var(--text-muted);
 }
 
-.lb-row.gold .lb-rank { color: #fbbf24; }
-.lb-row.silver .lb-rank { color: #94a3b8; }
-.lb-row.bronze .lb-rank { color: #d97706; }
+.lb-row.gold .lb-rank {
+  color: #fbbf24;
+}
+
+.lb-row.silver .lb-rank {
+  color: #94a3b8;
+}
+
+.lb-row.bronze .lb-rank {
+  color: #d97706;
+}
 
 .lb-avatar {
   width: 40px;
@@ -166,9 +182,20 @@
   min-width: 100px;
 }
 
-.podium-1 { padding-bottom: 28px; border-color: #fbbf24; }
-.podium-2 { padding-bottom: 16px; border-color: #94a3b8; }
-.podium-3 { padding-bottom: 8px; border-color: #d97706; }
+.podium-1 {
+  padding-bottom: 28px;
+  border-color: #fbbf24;
+}
+
+.podium-2 {
+  padding-bottom: 16px;
+  border-color: #94a3b8;
+}
+
+.podium-3 {
+  padding-bottom: 8px;
+  border-color: #d97706;
+}
 
 .podium-item img {
   width: 48px;
@@ -177,9 +204,22 @@
   margin-bottom: 8px;
 }
 
-.podium-name { font-size: 13px; font-weight: 700; }
-.podium-pts { font-size: 12px; color: var(--primary); font-weight: 600; }
-.podium-rank { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+.podium-name {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.podium-pts {
+  font-size: 12px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.podium-rank {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
 
 .lb-cta {
   text-align: center;
@@ -189,7 +229,11 @@
   border-radius: 14px;
 }
 
-.lb-cta p { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
+.lb-cta p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
 
 .lb-cta button {
   padding: 10px 24px;

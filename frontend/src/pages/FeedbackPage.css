@@ -60,10 +60,8 @@
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  background: conic-gradient(
-    var(--color) calc(var(--pct) * 1%),
-    #e2e8f0 calc(var(--pct) * 1%)
-  );
+  background: conic-gradient(var(--color) calc(var(--pct) * 1%),
+      #e2e8f0 calc(var(--pct) * 1%));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -158,8 +156,13 @@
   border-radius: 6px;
 }
 
-.icon-correct { color: var(--success); }
-.icon-incorrect { color: var(--danger); }
+.icon-correct {
+  color: var(--success);
+}
+
+.icon-incorrect {
+  color: var(--danger);
+}
 
 .q-score {
   margin-left: auto;

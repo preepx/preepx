@@ -14,24 +14,24 @@ function Dashboard() {
   const [platformStats, setPlatformStats] = useState(null);
 
   useEffect(() => {
-    getPlatformStats().then(setPlatformStats).catch(() => {});
+    getPlatformStats().then(setPlatformStats).catch(() => { });
   }, []);
 
   const goToAuth = () => navigate(user ? "/interview" : "/auth");
 
   const heroStats = platformStats
     ? [
-        { value: `${platformStats.totalUsers}+`, label: "Registered Users" },
-        { value: `${platformStats.totalInterviews}+`, label: "Interviews Taken" },
-        { value: `${platformStats.completedInterviews}+`, label: "Completed" },
-        { value: "24/7", label: "AI Available" },
-      ]
+      { value: `${platformStats.totalUsers}+`, label: "Registered Users" },
+      { value: `${platformStats.totalInterviews}+`, label: "Interviews Taken" },
+      { value: `${platformStats.completedInterviews}+`, label: "Completed" },
+      { value: "24/7", label: "AI Available" },
+    ]
     : [
-        { value: "70+", label: "Registered Users" },
-        { value: "—", label: "Interviews Taken" },
-        { value: "95%", label: "Satisfaction" },
-        { value: "24/7", label: "AI Available" },
-      ];
+      { value: "70+", label: "Registered Users" },
+      { value: "—", label: "Interviews Taken" },
+      { value: "95%", label: "Satisfaction" },
+      { value: "24/7", label: "AI Available" },
+    ];
 
   const companies = ["Google", "Amazon", "Microsoft", "Meta", "Netflix", "Adobe"];
 
@@ -94,7 +94,7 @@ function Dashboard() {
             <div className="hero-actions">
               <button className="btn-hero-primary" onClick={goToAuth}>
                 {user ? "Open Dashboard" : "Start Free — No Card Required"}
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </button>
               <button className="btn-hero-secondary" onClick={() => document.getElementById("product")?.scrollIntoView({ behavior: "smooth" })}>
                 <Play size={16} /> See Platform

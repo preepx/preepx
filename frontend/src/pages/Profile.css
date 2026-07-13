@@ -130,8 +130,13 @@
   border-bottom: 1px solid var(--border);
 }
 
-.perf-row:last-child { border-bottom: none; }
-.perf-row strong { color: var(--primary); }
+.perf-row:last-child {
+  border-bottom: none;
+}
+
+.perf-row strong {
+  color: var(--primary);
+}
 
 .profile-details {
   margin: 24px 0;

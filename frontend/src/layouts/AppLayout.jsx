@@ -29,7 +29,7 @@ function AppLayout({ children }) {
   const refreshUser = () => {
     getProfile()
       .then((u) => { setUser(u); syncUserToStorage(u); })
-      .catch(() => {});
+      .catch(() => { });
   };
 
   useEffect(() => {

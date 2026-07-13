@@ -36,9 +36,21 @@
   justify-content: center;
 }
 
-.resume-step svg { color: var(--primary); margin-bottom: 10px; }
-.resume-step h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-.resume-step p { font-size: 12px; color: var(--text-muted); }
+.resume-step svg {
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.resume-step h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.resume-step p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
 
 .drop-zone {
   border: 2px dashed var(--border);
@@ -54,12 +66,27 @@
   background: #fafaff;
 }
 
-.drop-zone.uploading { opacity: 0.7; }
+.drop-zone.uploading {
+  opacity: 0.7;
+}
 
-.drop-icon { color: var(--primary); margin-bottom: 16px; opacity: 0.6; }
+.drop-icon {
+  color: var(--primary);
+  margin-bottom: 16px;
+  opacity: 0.6;
+}
 
-.drop-zone h2 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
-.drop-zone p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+.drop-zone h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.drop-zone p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
 
 .drop-btn {
   display: inline-flex;
@@ -89,8 +116,14 @@
   margin-bottom: 16px;
 }
 
-.result-check { color: var(--success); }
-.result-header h3 { font-size: 18px; font-weight: 700; }
+.result-check {
+  color: var(--success);
+}
+
+.result-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
 
 .skills-found h4 {
   font-size: 13px;
@@ -139,5 +172,7 @@
 }
 
 @media (max-width: 600px) {
-  .resume-steps { grid-template-columns: 1fr; }
+  .resume-steps {
+    grid-template-columns: 1fr;
+  }
 }

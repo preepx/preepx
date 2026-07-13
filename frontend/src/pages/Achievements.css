@@ -99,7 +99,9 @@
   line-height: 1.4;
 }
 
-.badge-emoji { font-size: 36px; }
+.badge-emoji {
+  font-size: 36px;
+}
 
 .badge-earned {
   display: inline-flex;
@@ -150,7 +152,11 @@
   border-radius: 14px;
 }
 
-.ach-cta p { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
+.ach-cta p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
 
 .ach-cta button {
   padding: 10px 24px;

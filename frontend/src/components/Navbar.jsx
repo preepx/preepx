@@ -12,9 +12,9 @@ function Navbar() {
 
   const navLinks = user
     ? [
-        { to: "/interview", label: "Dashboard" },
-        { to: "/profile", label: "Profile" },
-      ]
+      { to: "/interview", label: "Dashboard" },
+      { to: "/profile", label: "Profile" },
+    ]
     : [];
 
   useEffect(() => {
@@ -47,8 +47,8 @@ function Navbar() {
         <Link to={user ? "/interview" : "/"} className="navbar-brand">
           <div className="brand-icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.9"/>
-              <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.9" />
+              <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
           <span className="brand-name">CrackTogether</span>
@@ -83,7 +83,7 @@ function Navbar() {
                 />
                 <span className="profile-name">{user.fullName?.split(" ")[0]}</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="profile-chevron">
-                  <path d="M6 9l6 6 6-6"/>
+                  <path d="M6 9l6 6 6-6" />
                 </svg>
               </button>
 

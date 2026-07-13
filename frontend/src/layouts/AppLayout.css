@@ -218,8 +218,13 @@
   padding: 6px;
 }
 
-.mobile-only { display: none; }
-.desktop-only { display: flex; }
+.mobile-only {
+  display: none;
+}
+
+.desktop-only {
+  display: flex;
+}
 
 .sidebar-overlay {
   display: none;
@@ -230,15 +235,27 @@
     transform: translateX(-100%);
     width: 260px !important;
   }
+
   .sidebar.mobile-open {
     transform: translateX(0);
   }
+
   .app-content {
     margin-left: 0 !important;
   }
-  .mobile-menu-btn { display: flex; }
-  .mobile-only { display: flex; }
-  .desktop-only { display: none; }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .mobile-only {
+    display: flex;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
   .sidebar-overlay {
     display: block;
     position: fixed;
