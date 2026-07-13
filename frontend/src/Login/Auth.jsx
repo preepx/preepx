@@ -58,7 +58,8 @@ function Auth() {
   }, [navigate]);
 
   const handleGoogleLogin = () => {
-    window.location.href = `${import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:4000"}/api/auth/google`;
+    const apiBase = API.defaults.baseURL || "http://localhost:4000/api";
+    window.location.href = `${apiBase.replace(/\/api$/, "")}/api/auth/google`;
   };
 
   // Countdown timer
