@@ -5,7 +5,8 @@ const userSchema = mongoose.Schema(
     fullName: { type: String, required: true },
     mobile: { type: String },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String },           // optional — Google users ka password nahi hota
+    googleId: { type: String },           // Google OAuth ID
     profilePic: { type: String },
     points: { type: Number, default: 0 },
     badges: [{ type: String }],

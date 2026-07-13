@@ -1,34 +1,44 @@
 const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
-const path = require("path");
+const dotenv  = require("dotenv");
+const cors    = require("cors");
+const path    = require("path");
+const session = require("express-session");
 const connectDB = require("./models/db");
 
 dotenv.config();
 connectDB();
 
+require("./config/passport");
+const passport = require("passport");
+
 const app = express();
 
-// ✅ CORS config
 app.use(cors({
-  origin: "*", // abhi sab allow kar do (baad me frontend domain add karna better hoga)
+  origin: process.env.FRONTEND_URL || "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"]
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
 }));
 
 app.use(express.json());
 
-// ✅ Serve uploads folder with absolute path
+app.use(session({
+  secret:            process.env.JWT_SECRET || "cracktogether",
+  resave:            false,
+  saveUninitialized: false,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Health check
 app.get("/api/health", (req, res) => res.json({ status: "ok", version: "2.0" }));
 
-// ==================== Routes ====================
-app.use("/api/users", require("./routes/userRoutes"));
+app.use("/api/users",     require("./routes/userRoutes"));
 app.use("/api/interview", require("./routes/interviewRoutes"));
-app.use("/api/resume", require("./routes/resumeRoutes"));      
+app.use("/api/resume",    require("./routes/resumeRoutes"));
+app.use("/api/auth",      require("./routes/authRoutes"));
 
-// ==================== Start Server ====================
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

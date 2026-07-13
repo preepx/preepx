@@ -1,0 +1,54 @@
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const User = require("../models/User");
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID:     process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL:  process.env.GOOGLE_CALLBACK_URL,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        const email = profile.emails?.[0]?.value;
+        if (!email) return done(new Error("No email from Google"), null);
+
+        let user = await User.findOne({ email });
+
+        if (user) {
+          // Existing user — link Google account if not linked
+          if (!user.googleId) {
+            user.googleId = profile.id;
+            await user.save();
+          }
+          return done(null, user);
+        }
+
+        // New user — create automatically
+        user = await User.create({
+          fullName:   profile.displayName || email.split("@")[0],
+          email,
+          googleId:   profile.id,
+          profilePic: profile.photos?.[0]?.value || null,
+        });
+
+        return done(null, user);
+      } catch (err) {
+        return done(err, null);
+      }
+    }
+  )
+);
+
+passport.serializeUser((user, done) => done(null, user._id));
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
+});
+
+module.exports = passport;

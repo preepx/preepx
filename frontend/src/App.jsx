@@ -19,6 +19,7 @@ const StartInterview = lazy(() => import("./Interview/StartInterview"));
 const InterviewMode = lazy(() => import("./Interview/InterviewMode"));
 const ResumeUpload = lazy(() => import("./resume/ResumeUpload"));
 const Auth = lazy(() => import("./Login/Auth"));
+const AuthCallback = lazy(() => import("./Login/AuthCallback"));
 
 const PUBLIC_ROUTES = ["/", "/dashboard", "/auth"];
 const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback"];
@@ -66,6 +67,7 @@ function AppContent() {
           <Route path="/" element={<GuestRoute><Dashboard /></GuestRoute>} />
           <Route path="/dashboard" element={<GuestRoute><Dashboard /></GuestRoute>} />
           <Route path="/auth" element={<GuestRoute><Auth /></GuestRoute>} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
 
           <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
           <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
