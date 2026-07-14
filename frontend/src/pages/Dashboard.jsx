@@ -36,10 +36,10 @@ function Dashboard() {
   const companies = ["Google", "Amazon", "Microsoft", "Meta", "Netflix", "Adobe"];
 
   const productCards = [
-    { icon: Mic, title: "Live Interview Room", desc: "Webcam + voice + AI interviewer with real-time evaluation", color: "#4f46e5" },
-    { icon: BarChart3, title: "Analytics Dashboard", desc: "Weekly charts, role breakdown, score trends", color: "#06b6d4" },
-    { icon: Trophy, title: "Leaderboard", desc: "Compete globally, earn points, climb ranks", color: "#f59e0b" },
-    { icon: Award, title: "Achievements", desc: "8 unlockable badges for milestones & streaks", color: "#8b5cf6" },
+    { icon: Mic, title: "Live Interview Room", desc: "Webcam + voice + AI interviewer with real-time evaluation", color: "#4f46e5", path: "/interview" },
+    { icon: BarChart3, title: "Analytics Dashboard", desc: "Weekly charts, role breakdown, score trends", color: "#06b6d4", path: "/analytics" },
+    { icon: Trophy, title: "Leaderboard", desc: "Compete globally, earn points, climb ranks", color: "#f59e0b", path: "/leaderboard" },
+    { icon: Award, title: "Achievements", desc: "8 unlockable badges for milestones & streaks", color: "#8b5cf6", path: "/achievements" },
   ];
 
   const steps = [
@@ -142,7 +142,12 @@ function Dashboard() {
         <div className="section-header"><h2>Complete Interview Platform</h2><p>Built by a team of 10 — every feature you need</p></div>
         <div className="product-grid">
           {productCards.map((p) => (
-            <div key={p.title} className="product-card" style={{ "--accent": p.color }}>
+            <div 
+              key={p.title} 
+              className="product-card" 
+              style={{ "--accent": p.color, cursor: "pointer" }}
+              onClick={() => navigate(user ? p.path : "/auth")}
+            >
               <div className="product-icon"><p.icon size={24} /></div>
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
@@ -169,7 +174,7 @@ function Dashboard() {
       </section>
 
       {/* FEATURES */}
-      <section className="section features-section">
+      <section id="features" className="section features-section">
         <div className="section-header"><h2>Platform Features</h2><p>Enterprise-grade tools for interview success</p></div>
         <div className="features-grid">
           {features.map((f) => (
@@ -220,16 +225,8 @@ function Dashboard() {
         </div>
       </section>
 
-      <footer className="landing-footer">
-        <div className="footer-grid">
-          <div><h4>CrackTogether</h4><p>AI-powered interview preparation platform built for aspiring professionals.</p></div>
-          <div><h4>Product</h4><a href="#product" onClick={(e) => e.preventDefault()}>Features</a><a href="#how-it-works" onClick={(e) => { e.preventDefault(); document.getElementById("how-it-works")?.scrollIntoView({ behavior: "smooth" }); }}>How It Works</a><a href="#" onClick={(e) => { e.preventDefault(); goToAuth(); }}>Dashboard</a></div>
-          <div><h4>Resources</h4><a href="#" onClick={(e) => e.preventDefault()}>Blog</a><a href="#" onClick={(e) => e.preventDefault()}>Help Center</a><a href="#" onClick={(e) => e.preventDefault()}>Contact</a></div>
-        </div>
-        <p className="footer-copy">© 2026 CrackTogether. Built with AI for aspiring professionals.</p>
-      </footer>
     </div>
   );
-}
+};
 
 export default Dashboard;

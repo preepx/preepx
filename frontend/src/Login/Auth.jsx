@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import API from "../utils/api";
 import { toast } from "react-toastify";
 import { showAppError } from "../utils/appAlert";
@@ -347,10 +347,9 @@ function Auth() {
         <div className="auth-left-glow auth-left-glow--1" />
         <div className="auth-left-glow auth-left-glow--2" />
         <div className="auth-left-content">
-          <div className="auth-logo">
-            <div className="auth-logo-icon"><Sparkles size={18} /></div>
-            <span>CrackTogether</span>
-          </div>
+          <Link to="/" className="auth-logo" style={{ textDecoration: 'none', display: 'inline-block' }}>
+            <img src="/headername1.png" alt="PrepX" style={{ height: "72px", objectFit: "contain", margin: "-16px 0 -12px -12px" }} />
+          </Link>
           <h1>Master your interviews with AI</h1>
           <p>Practice realistic mock interviews, get instant feedback, and track your progress — all powered by cutting-edge AI.</p>
           <div className="auth-features">

@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════
    LANDING PAGE — MNC-Grade Design
-   CrackTogether · AI Interview Platform
+   PrepX · AI Interview Platform
 ═══════════════════════════════════════════════════════════ */
 * {
   box-sizing: border-box;
@@ -494,41 +494,70 @@
 
 /* ── COMPANIES STRIP ── */
 .companies-strip {
-  padding: 36px 24px;
+  padding: 36px 0;
   background: white;
   border-top: 1px solid #f1f5f9;
   border-bottom: 1px solid #f1f5f9;
   text-align: center;
+  overflow: hidden;
 }
 
 .companies-strip p {
   font-size: 12px;
   font-weight: 700;
-  color: #94a3b8;
+  color: #64748b;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.company-logos-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .company-logos {
   display: flex;
-  justify-content: center;
-  gap: 48px;
-  flex-wrap: wrap;
+  gap: 60px;
   align-items: center;
+  width: max-content;
+  animation: scroll-x 30s linear infinite;
+  padding-left: 60px;
 }
 
-.company-name {
-  font-size: 17px;
-  font-weight: 800;
-  color: #d1d5db;
-  letter-spacing: -0.4px;
-  transition: color 0.2s;
+@keyframes scroll-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 30px)); }
+}
+
+.company-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  filter: grayscale(100%) opacity(0.6);
+  transition: all 0.3s ease;
   cursor: default;
 }
 
-.company-name:hover {
-  color: #9ca3af;
+.company-item:hover {
+  filter: grayscale(0%) opacity(1);
+}
+
+.company-item img {
+  height: 28px;
+  width: auto;
+  border-radius: 4px;
+  object-fit: contain;
+}
+
+.company-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #334155;
+  letter-spacing: -0.5px;
 }
 
 /* ── SECTIONS ── */
@@ -854,13 +883,14 @@
 
 /* ── FAQ ── */
 .faq-section {
-  max-width: 720px;
+  max-width: 1120px;
 }
 
 .faq-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 16px;
+  align-items: start;
 }
 
 .faq-item {
@@ -908,7 +938,7 @@
 }
 
 .cta-card {
-  max-width: 760px;
+  max-width: 1120px;
   margin: 0 auto;
   text-align: center;
   position: relative;

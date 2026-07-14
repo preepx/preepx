@@ -6,8 +6,10 @@ const GuestRoute = lazy(() => import("./components/GuestRoute"));
 const Navbar = lazy(() => import("./components/Navbar"));
 const Loader = lazy(() => import("./components/Loader"));
 const AppLayout = lazy(() => import("./layouts/AppLayout"));
+const Footer = lazy(() => import("./components/Footer"));
 
 const Dashboard = lazy(() => import("./pages/Dashboard"));
+const StaticPage = lazy(() => import("./pages/StaticPage"));
 const Profile = lazy(() => import("./pages/Profile"));
 const FeedbackPage = lazy(() => import("./pages/FeedbackPage"));
 const Analytics = lazy(() => import("./pages/Analytics"));
@@ -21,7 +23,12 @@ const ResumeUpload = lazy(() => import("./resume/ResumeUpload"));
 const Auth = lazy(() => import("./Login/Auth"));
 const AuthCallback = lazy(() => import("./Login/AuthCallback"));
 
-const PUBLIC_ROUTES = ["/", "/dashboard", "/auth"];
+const PUBLIC_ROUTES = [
+  "/", "/dashboard", "/auth",
+  "/features", "/how-it-works", "/mock-interviews", "/resume-analyzer",
+  "/interview-tips", "/blog", "/help-center", "/community",
+  "/about-us", "/careers", "/privacy-policy", "/terms-of-service"
+];
 const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback"];
 const SIDEBAR_ROUTES = [
   "/interview", "/analytics", "/leaderboard", "/achievements",
@@ -36,10 +43,11 @@ function LayoutWrapper({ children }) {
 
   if (isPublic) {
     return (
-      <>
+      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         {location.pathname !== "/auth" && <Navbar />}
-        {children}
-      </>
+        <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
+        {location.pathname !== "/auth" && <Footer />}
+      </div>
     );
   }
 
@@ -68,6 +76,19 @@ function AppContent() {
           <Route path="/dashboard" element={<GuestRoute><Dashboard /></GuestRoute>} />
           <Route path="/auth" element={<GuestRoute><Auth /></GuestRoute>} />
           <Route path="/auth/callback" element={<AuthCallback />} />
+
+          <Route path="/features" element={<StaticPage />} />
+          <Route path="/how-it-works" element={<StaticPage />} />
+          <Route path="/mock-interviews" element={<StaticPage />} />
+          <Route path="/resume-analyzer" element={<StaticPage />} />
+          <Route path="/interview-tips" element={<StaticPage />} />
+          <Route path="/blog" element={<StaticPage />} />
+          <Route path="/help-center" element={<StaticPage />} />
+          <Route path="/community" element={<StaticPage />} />
+          <Route path="/about-us" element={<StaticPage />} />
+          <Route path="/careers" element={<StaticPage />} />
+          <Route path="/privacy-policy" element={<StaticPage />} />
+          <Route path="/terms-of-service" element={<StaticPage />} />
 
           <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
           <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />

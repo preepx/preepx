@@ -6,7 +6,7 @@ function Loader() {
     <div className="loader-screen">
       <div className="loader-brand">
         <div className="loader-icon" />
-        <span>CrackTogether</span>
+        <span>PrepX</span>
       </div>
       <div className="loader-bar">
         <div className="loader-bar-fill" />

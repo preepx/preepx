@@ -61,7 +61,7 @@ function AppLayout({ children }) {
         <div className="sidebar-top">
           <Link to="/interview" className="sidebar-brand">
             <div className="brand-dot" />
-            {!collapsed && <span>CrackTogether</span>}
+            {!collapsed && <span>PrepX</span>}
           </Link>
           <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={18} /></button>
           <button className="sidebar-toggle mobile-only" onClick={() => setMobileOpen(false)}><X size={18} /></button>
