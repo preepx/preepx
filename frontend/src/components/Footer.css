@@ -45,6 +45,39 @@
   line-height: 1.6;
 }
 
+.footer-socials {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.social-icon img {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.social-icon:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.social-icon:hover img {
+  opacity: 1;
+}
+
 .footer-links-group {
   display: flex;
   gap: 80px;

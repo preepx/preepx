@@ -2,10 +2,10 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
+  background: rgba(15, 17, 36, 0.95); /* Matched to dark theme */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: none;
 }
 
 .navbar-inner {
@@ -41,7 +41,7 @@
 .brand-name {
   font-size: 20px;
   font-weight: 800;
-  color: var(--text);
+  color: #ffffff;
   letter-spacing: -0.5px;
 }
 
@@ -58,15 +58,15 @@
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.7);
   transition: all 0.2s;
   white-space: nowrap;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: var(--primary);
-  background: #eef2ff;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .navbar-right {
@@ -89,14 +89,14 @@
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.8);
   transition: color 0.2s, background 0.2s;
   white-space: nowrap;
 }
 
 .btn-ghost:hover {
-  color: var(--primary);
-  background: rgba(79, 70, 229, 0.06);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary-sm {
