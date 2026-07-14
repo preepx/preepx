@@ -45,13 +45,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-inner">
         <Link to={user ? "/interview" : "/"} className="navbar-brand">
-          <div className="brand-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L2 7l10 5 10-5-10-5z" fill="currentColor" opacity="0.9" />
-              <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <span className="brand-name">CrackTogether</span>
+          <img src="/headername1.png" alt="PrepX" className="brand-logo-img" style={{ height: "40px", transform: "scale(2.5)", transformOrigin: "left center", objectFit: "contain", marginLeft: "10px" }} />
         </Link>
 
         <div className="navbar-center">

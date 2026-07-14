@@ -10,8 +10,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px;
-  position: relative;
+  padding: 32px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
   overflow: hidden;
 }
 
@@ -45,6 +47,7 @@
   z-index: 2;
   max-width: 440px;
   color: white;
+  transform: translateY(-2vh);
 }
 
 .auth-logo {
@@ -53,7 +56,7 @@
   gap: 10px;
   font-size: 17px;
   font-weight: 700;
-  margin-bottom: 36px;
+  margin-bottom: 20px;
 }
 
 .auth-logo-icon {
@@ -69,11 +72,11 @@
 }
 
 .auth-left h1 {
-  font-size: 38px;
+  font-size: 32px;
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -1.2px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   background: linear-gradient(135deg, #fff 30%, #c7d2fe);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -82,16 +85,16 @@
 
 .auth-left p {
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.65);
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .auth-features {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 
 .auth-feature-card {
@@ -115,7 +118,7 @@
 .auth-stats {
   display: flex;
   gap: 28px;
-  padding-top: 28px;
+  padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -145,7 +148,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 32px;
+  padding: 24px;
   background: #f1f5f9;
   position: relative;
   overflow: hidden;
@@ -167,11 +170,12 @@
   max-width: 420px;
   background: white;
   border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 24px;
-  padding: 32px;
+  border-radius: 20px;
+  padding: 24px 28px;
   box-shadow:
     0 4px 6px rgba(15, 23, 42, 0.04),
     0 24px 48px rgba(15, 23, 42, 0.08);
+  transform: translateY(-2vh);
 }
 
 .auth-tabs {
@@ -179,7 +183,7 @@
   background: #f1f5f9;
   border-radius: 12px;
   padding: 4px;
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   gap: 4px;
 }
 
@@ -208,7 +212,7 @@
 }
 
 .auth-card-header {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .auth-card h2 {
@@ -228,7 +232,7 @@
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .input-field label {
@@ -236,7 +240,7 @@
   font-size: 13px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   letter-spacing: -0.1px;
 }
 
@@ -256,7 +260,7 @@
 
 .input-group input {
   width: 100%;
-  padding: 13px 14px 13px 42px;
+  padding: 11px 14px 11px 40px;
   border: 1.5px solid var(--border);
   border-radius: 12px;
   font-size: 14px;
@@ -360,7 +364,7 @@
 
 .auth-submit {
   margin-top: 4px;
-  padding: 14px 20px;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -421,11 +425,17 @@
   .auth-left {
     padding: 32px 24px 28px;
     min-height: auto;
+    position: relative;
+    height: auto;
   }
 
   .auth-left h1 {
     font-size: 26px;
     letter-spacing: -0.8px;
+  }
+
+  .auth-left-content {
+    transform: none;
   }
 
   .auth-left p {
@@ -456,6 +466,7 @@
     padding: 24px 20px;
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(15, 23, 42, 0.1);
+    transform: none;
   }
 
   .auth-card h2 {
@@ -604,7 +615,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
 .input-field-row label {
@@ -643,7 +654,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 16px 0;
+  margin: 12px 0;
   color: var(--text-muted);
   font-size: 13px;
   font-weight: 500;
@@ -670,7 +681,7 @@
   justify-content: center;
   gap: 10px;
   width: 100%;
-  padding: 12px 16px;
+  padding: 10px 16px;
   background: white;
   border: 1.5px solid var(--border);
   border-radius: 12px;
