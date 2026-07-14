@@ -20,12 +20,12 @@ const InterviewMode = lazy(() => import("./Interview/InterviewMode"));
 const ResumeUpload = lazy(() => import("./resume/ResumeUpload"));
 const Auth = lazy(() => import("./Login/Auth"));
 const AuthCallback = lazy(() => import("./Login/AuthCallback"));
-
+const ObjectiveExam = lazy(() => import("./Interview/ObjectiveExam"));
 const PUBLIC_ROUTES = ["/", "/dashboard", "/auth"];
 const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback"];
 const SIDEBAR_ROUTES = [
   "/interview", "/analytics", "/leaderboard", "/achievements",
-  "/settings", "/profile", "/resume-interview",
+  "/settings", "/profile", "/resume-interview", "/objective-exam"
 ];
 
 function LayoutWrapper({ children }) {
@@ -79,6 +79,7 @@ function AppContent() {
           <Route path="/resume-interview" element={<ProtectedRoute><ResumeUpload /></ProtectedRoute>} />
           <Route path="/feedback" element={<ProtectedRoute><FeedbackPage /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/objective-exam" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
 
           <Route path="*" element={
             <div style={{ textAlign: "center", padding: "80px 24px" }}>

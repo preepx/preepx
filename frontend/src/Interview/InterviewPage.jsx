@@ -283,6 +283,13 @@ const InterviewPage = () => {
             <button className="action-btn primary full" onClick={() => setShowModal(true)}>
               <Plus size={18} /> New Interview
             </button>
+            <button 
+              className="action-btn primary full" 
+              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px' }} 
+              onClick={() => navigate("/objective-exam")}
+            >
+              ⚡ Objective Exam
+            </button>
             <button className="action-btn secondary full" onClick={() => navigate("/analytics")}>View Analytics</button>
             <button className="action-btn secondary full" onClick={() => navigate("/leaderboard")}>Leaderboard</button>
             <button className="action-btn secondary full" onClick={() => navigate("/achievements")}>Achievements</button>

@@ -1,0 +1,603 @@
+/* ═══════════════════════════════════════════════
+   OBJECTIVE EXAM — Premium MNC-Grade UI
+═══════════════════════════════════════════════ */
+* { box-sizing: border-box; }
+
+.oex-page {
+  min-height: 100vh;
+  background: #04070f;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── SETUP SCREEN ── */
+.oex-setup {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 20px;
+  background: #04070f;
+  position: relative;
+  overflow: hidden;
+}
+
+.oex-setup::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 30%, rgba(79,70,229,0.4), transparent 60%),
+    radial-gradient(ellipse 50% 40% at 80% 70%, rgba(6,182,212,0.25), transparent 60%);
+}
+
+.oex-setup-card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 28px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 500px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+
+.oex-setup-icon {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  box-shadow: 0 8px 32px rgba(79,70,229,0.5);
+}
+
+.oex-setup h1 {
+  font-size: 30px; font-weight: 900; text-align: center;
+  letter-spacing: -0.8px; margin-bottom: 8px;
+  background: linear-gradient(135deg, #fff, #c7d2fe);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.oex-setup-sub {
+  text-align: center; color: rgba(255,255,255,0.5);
+  font-size: 14px; margin-bottom: 36px; line-height: 1.6;
+}
+
+.oex-field { margin-bottom: 20px; }
+
+.oex-field label {
+  display: block; font-size: 12px; font-weight: 700;
+  color: rgba(255,255,255,0.5); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 8px;
+}
+
+.oex-input, .oex-select {
+  width: 100%; padding: 14px 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: 12px; font-size: 15px;
+  font-family: inherit; color: white; outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.oex-input::placeholder { color: rgba(255,255,255,0.25); }
+.oex-input:focus, .oex-select:focus {
+  border-color: #6366f1;
+  background: rgba(255,255,255,0.09);
+}
+
+.oex-select option { background: #1e1b4b; color: white; }
+
+.oex-info-chips {
+  display: flex; gap: 10px; margin-bottom: 28px; flex-wrap: wrap;
+}
+
+.oex-chip {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 14px; border-radius: 100px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 12px; font-weight: 600;
+  color: rgba(255,255,255,0.6);
+}
+
+.oex-chip svg { width: 13px; height: 13px; }
+
+.oex-start-btn {
+  width: 100%; padding: 16px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border: none; border-radius: 14px; color: white;
+  font-size: 16px; font-weight: 700; font-family: inherit;
+  cursor: pointer; display: flex; align-items: center;
+  justify-content: center; gap: 8px;
+  box-shadow: 0 8px 24px rgba(79,70,229,0.5);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.oex-start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(79,70,229,0.6);
+}
+
+.oex-cancel-btn {
+  width: 100%; padding: 14px; margin-top: 10px;
+  background: transparent; border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; color: rgba(255,255,255,0.5);
+  font-size: 15px; font-weight: 600; font-family: inherit;
+  cursor: pointer; transition: all 0.2s;
+}
+
+.oex-cancel-btn:hover {
+  background: rgba(255,255,255,0.06); color: white;
+}
+
+/* ── EXAM SCREEN ── */
+.oex-exam {
+  min-height: 100vh; background: #050912;
+  display: flex; flex-direction: column;
+}
+
+/* Top bar */
+.oex-topbar {
+  height: 64px; padding: 0 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(255,255,255,0.03);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: blur(12px);
+}
+
+.oex-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 15px; font-weight: 800;
+  letter-spacing: -0.3px; color: white;
+}
+
+.oex-brand-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  animation: pulse-dot 2s ease infinite;
+}
+
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.oex-progress-bar-wrap {
+  flex: 1; max-width: 300px; margin: 0 24px;
+  height: 6px; background: rgba(255,255,255,0.1);
+  border-radius: 3px; overflow: hidden;
+}
+
+.oex-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.oex-q-counter {
+  font-size: 13px; font-weight: 700;
+  color: rgba(255,255,255,0.5); white-space: nowrap;
+}
+
+.oex-timer-wrap {
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* Timer circle */
+.oex-timer {
+  position: relative; width: 52px; height: 52px;
+}
+
+.oex-timer svg {
+  transform: rotate(-90deg);
+  width: 52px; height: 52px;
+}
+
+.oex-timer-track { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 3; }
+.oex-timer-fill  { fill: none; stroke-width: 3; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke 0.3s; }
+.oex-timer-text  {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 800; color: white;
+}
+
+.oex-timer.warn .oex-timer-fill { stroke: #ef4444; }
+.oex-timer.ok   .oex-timer-fill { stroke: #4ade80; }
+.oex-timer.mid  .oex-timer-fill { stroke: #fbbf24; }
+
+/* ── EXAM BODY ── */
+.oex-body {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 24px;
+  padding: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+
+/* Question panel */
+.oex-question-panel {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 24px;
+  padding: 40px;
+}
+
+.oex-q-label {
+  font-size: 11px; font-weight: 700; color: #6366f1;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  margin-bottom: 16px;
+}
+
+.oex-question {
+  font-size: 22px; font-weight: 700;
+  line-height: 1.5; color: white;
+  margin-bottom: 32px; letter-spacing: -0.3px;
+}
+
+.oex-options { display: flex; flex-direction: column; gap: 12px; }
+
+.oex-option {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.03);
+  border: 2px solid rgba(255,255,255,0.08);
+  border-radius: 16px; cursor: pointer;
+  transition: all 0.15s; user-select: none;
+}
+
+.oex-option:hover {
+  background: rgba(99,102,241,0.1);
+  border-color: rgba(99,102,241,0.3);
+}
+
+.oex-option.selected {
+  background: rgba(79,70,229,0.18);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+.oex-option-letter {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800; flex-shrink: 0;
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.7);
+  transition: all 0.15s;
+}
+
+.oex-option.selected .oex-option-letter {
+  background: #4f46e5; border-color: #4f46e5; color: white;
+}
+
+.oex-option-text {
+  font-size: 16px; font-weight: 600;
+  color: rgba(255,255,255,0.75); flex: 1;
+  transition: color 0.15s;
+}
+
+.oex-option.selected .oex-option-text { color: white; }
+
+.oex-submit-row {
+  display: flex; justify-content: flex-end;
+  margin-top: 32px; padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+}
+
+.oex-submit-btn {
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border: none; border-radius: 12px; color: white;
+  font-size: 15px; font-weight: 700; font-family: inherit;
+  cursor: pointer; display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 6px 20px rgba(79,70,229,0.45);
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.oex-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 28px rgba(79,70,229,0.55);
+}
+
+.oex-submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ── SIDEBAR (webcam + stats) ── */
+.oex-sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+.oex-webcam-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; overflow: hidden;
+}
+
+.oex-webcam-header {
+  padding: 12px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 12px; font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+.oex-webcam-live {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: #4ade80; font-weight: 700;
+}
+
+.oex-webcam-live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #4ade80; box-shadow: 0 0 6px #4ade80;
+  animation: pulse-dot 1.5s ease infinite;
+}
+
+.oex-webcam-video {
+  width: 100%; height: 180px;
+  object-fit: cover; background: #0f172a;
+  display: block;
+}
+
+.oex-webcam-footer {
+  padding: 10px 16px;
+  font-size: 11px; color: rgba(255,255,255,0.3);
+  text-align: center;
+}
+
+/* Stats mini cards */
+.oex-stats-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px; padding: 18px;
+}
+
+.oex-stats-title {
+  font-size: 11px; font-weight: 700;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase; letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+
+.oex-stats-row {
+  display: flex; justify-content: space-between;
+  gap: 8px;
+}
+
+.oex-stat-box {
+  flex: 1; text-align: center;
+  padding: 10px 6px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.oex-stat-val {
+  font-size: 22px; font-weight: 900;
+  letter-spacing: -0.5px; line-height: 1;
+  margin-bottom: 3px;
+}
+
+.oex-stat-val.green { color: #4ade80; }
+.oex-stat-val.red   { color: #f87171; }
+.oex-stat-val.blue  { color: #818cf8; }
+
+.oex-stat-lbl {
+  font-size: 10px; font-weight: 600;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase; letter-spacing: 0.8px;
+}
+
+/* Anti-cheat warning */
+.oex-warning {
+  background: rgba(239,68,68,0.12);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: 12px; padding: 12px 16px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 600; color: #fca5a5;
+  animation: shake 0.4s ease;
+}
+
+@keyframes shake {
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  75%{transform:translateX(6px)}
+}
+
+/* Loading skeleton */
+.oex-loading {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 20px; flex: 1; padding: 80px;
+}
+
+.oex-spinner {
+  width: 56px; height: 56px; position: relative;
+}
+
+.oex-spinner::before, .oex-spinner::after {
+  content: ""; position: absolute; border-radius: 50%;
+}
+
+.oex-spinner::before {
+  inset: 0; border: 4px solid rgba(255,255,255,0.08);
+}
+
+.oex-spinner::after {
+  inset: 0; border: 4px solid transparent;
+  border-top-color: #6366f1;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.oex-loading-text {
+  font-size: 15px; font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  animation: breathe 2s ease infinite;
+}
+
+@keyframes breathe { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+/* ── RESULTS SCREEN ── */
+.oex-results {
+  min-height: 100vh; background: #050912;
+  padding: 40px 24px 80px; font-family: inherit;
+}
+
+.oex-results-inner { max-width: 900px; margin: 0 auto; }
+
+/* Score hero card */
+.oex-score-hero {
+  background: linear-gradient(135deg, #0f172a, #1e1b4b);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 28px; padding: 56px 40px 48px;
+  text-align: center; margin-bottom: 32px;
+  position: relative; overflow: hidden;
+}
+
+.oex-score-hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 60% at 50% -10%, rgba(79,70,229,0.4), transparent),
+    radial-gradient(ellipse 40% 40% at 80% 100%, rgba(6,182,212,0.2), transparent);
+}
+
+.oex-score-hero > * { position: relative; z-index: 1; }
+
+.oex-score-label {
+  font-size: 11px; font-weight: 700; color: #818cf8;
+  text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;
+}
+
+.oex-score-big {
+  font-size: 96px; font-weight: 900; letter-spacing: -4px;
+  line-height: 1; color: white; margin-bottom: 4px;
+}
+
+.oex-score-big span { font-size: 44px; color: rgba(255,255,255,0.4); font-weight: 700; }
+
+.oex-score-topic {
+  font-size: 15px; color: rgba(255,255,255,0.5);
+  margin-bottom: 28px;
+}
+
+.oex-score-stats {
+  display: flex; gap: 0; justify-content: center;
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px;
+}
+
+.oex-score-stat {
+  padding: 0 28px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.oex-score-stat:last-child { border-right: none; }
+.oex-score-stat-val { font-size: 26px; font-weight: 900; letter-spacing: -0.5px; }
+.oex-score-stat-val.g { color: #4ade80; }
+.oex-score-stat-val.r { color: #f87171; }
+.oex-score-stat-val.b { color: #818cf8; }
+.oex-score-stat-lbl  { font-size: 11px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 1px; margin-top: 4px; }
+
+/* Review header */
+.oex-review-header {
+  font-size: 18px; font-weight: 800;
+  color: white; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+
+/* QA cards */
+.oex-qa-list { display: flex; flex-direction: column; gap: 16px; }
+
+.oex-qa-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px; overflow: hidden;
+}
+
+.oex-qa-card.correct { border-color: rgba(74,222,128,0.25); }
+.oex-qa-card.wrong   { border-color: rgba(248,113,113,0.25); }
+
+.oex-qa-top {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 24px 28px 20px;
+}
+
+.oex-qa-icon { flex-shrink: 0; margin-top: 2px; }
+
+.oex-qa-q {
+  font-size: 16px; font-weight: 700; color: white;
+  line-height: 1.5; flex: 1;
+}
+
+.oex-qa-opts { padding: 0 28px 20px; display: flex; flex-direction: column; gap: 8px; }
+
+.oex-qa-opt {
+  padding: 12px 18px; border-radius: 12px;
+  font-size: 14px; font-weight: 600;
+  display: flex; align-items: center; justify-content: space-between;
+  border: 1.5px solid transparent;
+}
+
+.oex-qa-opt.correct-ans {
+  background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.4); color: #86efac;
+}
+
+.oex-qa-opt.wrong-ans {
+  background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.4); color: #fca5a5;
+}
+
+.oex-qa-opt.neutral {
+  background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.4);
+}
+
+.oex-qa-opt-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+
+.oex-qa-explanation {
+  margin: 0 28px 24px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.2);
+  border-radius: 14px; padding: 18px 22px;
+}
+
+.oex-qa-exp-label {
+  font-size: 11px; font-weight: 700; color: #818cf8;
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;
+}
+
+.oex-qa-exp-text { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.7; }
+
+/* Back button */
+.oex-back-btn {
+  display: flex; align-items: center; gap: 8px;
+  margin: 40px auto 0; padding: 15px 40px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border: none; border-radius: 14px; color: white;
+  font-size: 16px; font-weight: 700; font-family: inherit;
+  cursor: pointer; box-shadow: 0 8px 24px rgba(79,70,229,0.4);
+  transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.oex-back-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(79,70,229,0.5); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .oex-body { grid-template-columns: 1fr; }
+  .oex-sidebar { order: -1; }
+  .oex-webcam-video { height: 140px; }
+  .oex-question { font-size: 18px; }
+  .oex-score-big { font-size: 64px; }
+}
+
+@media (max-width: 480px) {
+  .oex-question-panel { padding: 24px 20px; }
+  .oex-option { padding: 14px 16px; }
+  .oex-topbar { padding: 0 16px; }
+  .oex-progress-bar-wrap { display: none; }
+}

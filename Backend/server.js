@@ -40,5 +40,24 @@ app.use("/api/interview", require("./routes/interviewRoutes"));
 app.use("/api/resume",    require("./routes/resumeRoutes"));
 app.use("/api/auth",      require("./routes/authRoutes"));
 
+const http = require("http");
+const { Server } = require("socket.io");
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
+
+// Import MCQ Handler
+const mcqHandler = require("./socket/mcqHandler");
+io.on("connection", (socket) => {
+  console.log("Socket connected:", socket.id);
+  mcqHandler(io, socket);
+});
+
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
