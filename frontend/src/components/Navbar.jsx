@@ -73,7 +73,7 @@ function Navbar() {
                 <img
                   src={user.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName)}&background=4f46e5&color=fff`}
                   alt="Profile"
-                  className="profile-avatar"
+                  className="nav-profile-avatar"
                 />
                 <span className="profile-name">{user.fullName?.split(" ")[0]}</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="profile-chevron">

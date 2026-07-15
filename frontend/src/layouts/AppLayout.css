@@ -9,12 +9,12 @@
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  bottom: 0;
+  height: 100vh;
+  flex-shrink: 0;
   z-index: 50;
-  transition: width 0.25s ease;
+  transition: width 0.25s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .app-layout.collapsed .sidebar {
@@ -149,14 +149,12 @@
 
 .app-content {
   flex: 1;
-  margin-left: 240px;
-  transition: margin-left 0.25s ease;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
   min-height: 100vh;
   background: var(--bg);
-}
-
-.app-layout.collapsed .app-content {
-  margin-left: 68px;
 }
 
 .topbar {
@@ -169,6 +167,7 @@
   position: sticky;
   top: 0;
   z-index: 40;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .topbar-right {
@@ -232,6 +231,11 @@
 
 @media (max-width: 900px) {
   .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
     transform: translateX(-100%);
     width: 260px !important;
   }

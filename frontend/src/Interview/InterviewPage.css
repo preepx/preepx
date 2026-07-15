@@ -55,7 +55,7 @@
 }
 
 .action-btn.secondary {
-  background: white;
+  background: var(--surface);
   color: var(--text);
   border: 1px solid var(--border);
 }
@@ -81,7 +81,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 20px;
@@ -135,7 +135,7 @@
 }
 
 .panel {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
@@ -228,7 +228,7 @@
 }
 
 .interview-item:hover {
-  background: #f8fafc;
+  background: var(--bg);
 }
 
 .interview-info h3 {

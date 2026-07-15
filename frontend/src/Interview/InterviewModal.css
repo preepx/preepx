@@ -28,6 +28,9 @@
   max-width: 480px;
   box-shadow: var(--shadow-lg);
   animation: slideUp 0.25s ease;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-wide {
@@ -145,7 +148,7 @@
 }
 
 .modal-close {
-  background: #f1f5f9;
+  background: var(--bg);
   border: none;
   border-radius: 8px;
   width: 32px;
@@ -159,7 +162,7 @@
 }
 
 .modal-close:hover {
-  background: #e2e8f0;
+  background: var(--border);
 }
 
 .modal-body {
@@ -167,6 +170,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  overflow-y: auto;
 }
 
 .modal-field label {
@@ -217,12 +221,13 @@
 }
 
 .modal-btn.cancel {
-  background: #f1f5f9;
+  background: var(--bg);
   color: var(--text);
+  border: 1px solid var(--border);
 }
 
 .modal-btn.cancel:hover {
-  background: #e2e8f0;
+  background: var(--border);
 }
 
 .modal-btn.start {

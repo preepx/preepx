@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { getProfile, syncUserToStorage } from "../services/userAPI";
+import Footer from "../components/Footer";
 import "./AppLayout.css";
 
 const NAV_ITEMS = [
@@ -25,7 +26,7 @@ function AppLayout({ children }) {
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
   const location = useLocation();
   const navigate = useNavigate();
-  const dark = document.documentElement.dataset.theme === "dark";
+  const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
 
   const refreshUser = () => {
     getProfile()
@@ -41,9 +42,10 @@ function AppLayout({ children }) {
   }, [location.pathname]);
 
   const toggleTheme = () => {
-    const next = dark ? "light" : "dark";
+    const next = isDark ? "light" : "dark";
     document.documentElement.dataset.theme = next;
     localStorage.setItem("theme", next);
+    setIsDark(!isDark);
   };
 
   const handleLogout = () => {
@@ -57,61 +59,67 @@ function AppLayout({ children }) {
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName || "U")}&background=4f46e5&color=fff`;
 
   return (
-    <div className={`app-layout ${collapsed ? "collapsed" : ""}`}>
-      <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
-        <div className="sidebar-top">
-          <Link to="/interview" className="sidebar-brand">
-            <div className="brand-dot" />
-            {!collapsed && <span>PrepX</span>}
-          </Link>
-          <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={18} /></button>
-          <button className="sidebar-toggle mobile-only" onClick={() => setMobileOpen(false)}><X size={18} /></button>
-        </div>
-
-        <nav className="sidebar-nav">
-          {NAV_ITEMS.map(({ to, icon: Icon, label }) => (
-            <Link key={to} to={to} className={`sidebar-link ${location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to)) ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
-              <Icon size={20} />
-              {!collapsed && <span>{label}</span>}
+    <>
+      <div className={`app-layout ${collapsed ? "collapsed" : ""}`}>
+        <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
+          <div className="sidebar-top">
+            <Link to="/interview" className="sidebar-brand">
+              {collapsed ? (
+                <img src="/logo.png" alt="PrepX" style={{ height: '32px', objectFit: 'contain', marginLeft: '4px' }} />
+              ) : (
+                <img src="/headername1.png" alt="PrepX" style={{ height: '70px', transform: 'scale(1.4)', transformOrigin: 'left center', objectFit: 'contain', marginLeft: '8px' }} />
+              )}
             </Link>
-          ))}
-        </nav>
-
-        <div className="sidebar-bottom">
-          <button className="sidebar-link" onClick={toggleTheme}>
-            {dark ? <Sun size={20} /> : <Moon size={20} />}
-            {!collapsed && <span>{dark ? "Light Mode" : "Dark Mode"}</span>}
-          </button>
-          <button className="sidebar-link danger" onClick={handleLogout}>
-            <LogOut size={20} />
-            {!collapsed && <span>Sign Out</span>}
-          </button>
-          {!collapsed && (
-            <div className="sidebar-user">
-              <img src={avatar} alt="" />
-              <div>
-                <p className="su-name">{user.fullName || "User"}</p>
-                <p className="su-meta">Lvl {user.level || 1} · {user.points || 0} pts</p>
-              </div>
-            </div>
-          )}
-        </div>
-      </aside>
-
-      {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
-
-      <div className="app-content">
-        <header className="topbar">
-          <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
-          <div className="topbar-right">
-            {user.streak > 0 && <span className="streak-badge">🔥 {user.streak} day streak</span>}
-            <span className="level-badge">Level {user.level || 1}</span>
-            <span className="points-badge">{user.points || 0} pts</span>
+            <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={18} /></button>
+            <button className="sidebar-toggle mobile-only" onClick={() => setMobileOpen(false)}><X size={18} /></button>
           </div>
-        </header>
-        <div className="page-content">{children}</div>
+
+          <nav className="sidebar-nav">
+            {NAV_ITEMS.map(({ to, icon: Icon, label }) => (
+              <Link key={to} to={to} className={`sidebar-link ${location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to)) ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
+                <Icon size={20} />
+                {!collapsed && <span>{label}</span>}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="sidebar-bottom">
+            <button className="sidebar-link" onClick={toggleTheme}>
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+              {!collapsed && <span>{isDark ? "Light Mode" : "Dark Mode"}</span>}
+            </button>
+            <button className="sidebar-link danger" onClick={handleLogout}>
+              <LogOut size={20} />
+              {!collapsed && <span>Sign Out</span>}
+            </button>
+            {!collapsed && (
+              <div className="sidebar-user">
+                <img src={avatar} alt="" />
+                <div>
+                  <p className="su-name">{user.fullName || "User"}</p>
+                  <p className="su-meta">Lvl {user.level || 1} · {user.points || 0} pts</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </aside>
+
+        {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
+
+        <div className="app-content">
+          <header className="topbar">
+            <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
+            <div className="topbar-right">
+              {user.streak > 0 && <span className="streak-badge">🔥 {user.streak} day streak</span>}
+              <span className="level-badge">Level {user.level || 1}</span>
+              <span className="points-badge">{user.points || 0} pts</span>
+            </div>
+          </header>
+          <div className="page-content">{children}</div>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

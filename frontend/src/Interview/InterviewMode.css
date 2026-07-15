@@ -109,7 +109,7 @@
 }
 
 .question-card {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 20px 24px;
@@ -271,7 +271,7 @@
 }
 
 .answer-box {
-  background: #f8fafc;
+  background: var(--bg);
   border: 1.5px solid var(--border);
   border-radius: 12px;
   padding: 16px 18px;
@@ -311,13 +311,13 @@
 }
 
 .feedback-box.good {
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .feedback-box.needs-work {
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .feedback-score {

@@ -168,7 +168,7 @@
   z-index: 1;
   width: 100%;
   max-width: 420px;
-  background: white;
+  background: var(--surface);
   border: 1px solid rgba(226, 232, 240, 0.8);
   border-radius: 20px;
   padding: 24px 28px;
@@ -180,7 +180,7 @@
 
 .auth-tabs {
   display: flex;
-  background: #f1f5f9;
+  background: var(--bg);
   border-radius: 12px;
   padding: 4px;
   margin-bottom: 20px;
@@ -202,7 +202,7 @@
 }
 
 .auth-tab.active {
-  background: white;
+  background: var(--surface);
   color: var(--primary);
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
 }
@@ -265,7 +265,7 @@
   border-radius: 12px;
   font-size: 14px;
   font-family: inherit;
-  background: #fafbfc;
+  background: var(--bg);
   color: var(--text);
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
@@ -277,7 +277,7 @@
 .input-group input:focus {
   outline: none;
   border-color: var(--primary);
-  background: white;
+  background: var(--surface);
   box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
 }
 
@@ -525,7 +525,7 @@
   font-weight: 700;
   border: 2px solid var(--border);
   border-radius: 12px;
-  background: #fafbfc;
+  background: var(--bg);
   color: var(--text);
   font-family: inherit;
   transition: border-color 0.15s, box-shadow 0.15s, background 0.15s, transform 0.1s;
@@ -536,20 +536,20 @@
 
 .otp-box:focus {
   border-color: #4f46e5;
-  background: white;
+  background: var(--surface);
   box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
   transform: scale(1.07);
 }
 
 .otp-box--filled {
   border-color: #6366f1;
-  background: #eef2ff;
+  background: rgba(79, 70, 229, 0.1);
   color: #4f46e5;
 }
 
 .otp-box:not(:placeholder-shown) {
   border-color: #6366f1;
-  background: #eef2ff;
+  background: rgba(79, 70, 229, 0.1);
 }
 
 .otp-resend {
@@ -682,7 +682,7 @@
   gap: 10px;
   width: 100%;
   padding: 10px 16px;
-  background: white;
+  background: var(--surface);
   border: 1.5px solid var(--border);
   border-radius: 12px;
   font-size: 14px;
@@ -694,7 +694,7 @@
 }
 
 .auth-google-btn:hover {
-  background: #fafbfc;
+  background: var(--bg);
   border-color: #cbd5e1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
