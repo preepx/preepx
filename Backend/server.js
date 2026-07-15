@@ -1,7 +1,7 @@
 const express = require("express");
-const dotenv  = require("dotenv");
-const cors    = require("cors");
-const path    = require("path");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const path = require("path");
 const session = require("express-session");
 const connectDB = require("./models/db");
 
@@ -34,8 +34,8 @@ app.use(cors({
 app.use(express.json());
 
 app.use(session({
-  secret:            process.env.JWT_SECRET || "prepx",
-  resave:            false,
+  secret: process.env.JWT_SECRET || "prepx",
+  resave: false,
   saveUninitialized: false,
 }));
 
@@ -46,11 +46,12 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/api/health", (req, res) => res.json({ status: "ok", version: "2.0" }));
 
-app.use("/api/users",     require("./routes/userRoutes"));
+app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/interview", require("./routes/interviewRoutes"));
-app.use("/api/mcq",       require("./routes/mcqRoutes"));
-app.use("/api/resume",    require("./routes/resumeRoutes"));
-app.use("/api/auth",      require("./routes/authRoutes"));
+app.use("/api/mcq", require("./routes/mcqRoutes"));
+app.use("/api/resume", require("./routes/resumeRoutes"));
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/wallet", require("./routes/walletRoutes"));
 
 const http = require("http");
 const { Server } = require("socket.io");

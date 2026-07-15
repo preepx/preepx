@@ -1,0 +1,95 @@
+.txn-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.txn-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.txn-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.txn-icon.credit {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.txn-icon.debit {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+[data-theme="dark"] .txn-icon.credit {
+  background: rgba(16, 185, 129, 0.15);
+}
+
+[data-theme="dark"] .txn-icon.debit {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.txn-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.txn-desc {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.txn-date {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.txn-amount {
+  font-size: 15px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.txn-amount.credit {
+  color: #059669;
+}
+
+.txn-amount.debit {
+  color: #dc2626;
+}
+
+.txn-empty {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+
+.txn-empty p {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.txn-empty span {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 4px;
+}

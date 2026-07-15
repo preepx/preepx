@@ -1,1 +1,0 @@
-import{j as a}from"./index-CZ0oRH_t.js";function e(){return a.jsxs("div",{className:"loader-screen",children:[a.jsxs("div",{className:"loader-brand",children:[a.jsx("div",{className:"loader-icon"}),a.jsx("span",{children:"CrackTogether"})]}),a.jsx("div",{className:"loader-bar",children:a.jsx("div",{className:"loader-bar-fill"})})]})}export{e as default};

@@ -20,6 +20,7 @@ const userSchema = mongoose.Schema(
       emailNotifications: { type: Boolean, default: true },
       timerEnabled: { type: Boolean, default: true },
     },
+    isBlocked: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

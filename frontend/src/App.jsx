@@ -24,6 +24,7 @@ const Auth = lazy(() => import("./Login/Auth"));
 const AuthCallback = lazy(() => import("./Login/AuthCallback"));
 const ObjectiveExam = lazy(() => import("./Interview/ObjectiveExam"));
 const ObjectiveExamPage = lazy(() => import("./Interview/ObjectiveExamPage"));
+const WalletPage = lazy(() => import("./features/wallet/pages/WalletPage"));
 
 const PUBLIC_ROUTES = [
   "/", "/dashboard", "/auth",
@@ -36,7 +37,7 @@ const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback"];
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/interview", "/analytics", "/leaderboard", "/achievements",
-    "/settings", "/profile", "/resume-interview", "/objective-exam",
+    "/settings", "/profile", "/resume-interview", "/objective-exam", "/wallet",
   ];
   return sidebarRoutes.includes(pathname) || pathname.startsWith("/objective-exam/");
 }
@@ -107,6 +108,7 @@ function AppContent() {
           <Route path="/feedback" element={<ProtectedRoute><FeedbackPage /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/objective-exam" element={<ProtectedRoute><ObjectiveExamPage /></ProtectedRoute>} />
+          <Route path="/wallet" element={<ProtectedRoute><WalletPage /></ProtectedRoute>} />
           <Route path="/objective-exam/take" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
           <Route path="/objective-exam/result/:id" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
 

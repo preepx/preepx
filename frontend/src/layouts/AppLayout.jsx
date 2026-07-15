@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, Menu, X, Upload, Moon, Sun, Zap,
+  LogOut, Menu, X, Upload, Moon, Sun, Zap, Wallet,
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { getProfile, syncUserToStorage } from "../services/userAPI";
+import WalletBadge from "../features/wallet/components/WalletBadge";
 import Footer from "../components/Footer";
 import "./AppLayout.css";
 
 const NAV_ITEMS = [
   { to: "/interview", icon: LayoutDashboard, label: "Dashboard" },
   { to: "/objective-exam", icon: Zap, label: "Objective Exam" },
+  { to: "/wallet", icon: Wallet, label: "Wallet" },
   { to: "/analytics", icon: BarChart3, label: "Analytics" },
   { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
   { to: "/achievements", icon: Award, label: "Achievements" },
@@ -110,6 +112,7 @@ function AppLayout({ children }) {
           <header className="topbar">
             <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
             <div className="topbar-right">
+              <WalletBadge />
               {user.streak > 0 && <span className="streak-badge">🔥 {user.streak} day streak</span>}
               <span className="level-badge">Level {user.level || 1}</span>
               <span className="points-badge">{user.points || 0} pts</span>

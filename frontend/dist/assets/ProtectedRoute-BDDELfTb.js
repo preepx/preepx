@@ -1,1 +1,0 @@
-import{j as r,N as a}from"./index-CZ0oRH_t.js";function u({children:t}){const e=localStorage.getItem("token"),o=JSON.parse(localStorage.getItem("user")||"null");return!e||!o?r.jsx(a,{to:"/auth",replace:!0}):t}export{u as default};

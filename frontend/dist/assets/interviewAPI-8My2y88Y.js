@@ -1,1 +1,0 @@
-import{A as s}from"./api-CxnbTH9s.js";const i=async(e,t,a={})=>(await s.post("/interview/generate",{jobTitle:e,jobTopic:t,...a})).data,o=async e=>(await s.delete(`/interview/${e}`)).data,c=async(e,t)=>(await s.post("/interview/evaluate",{question:e,userAnswer:t})).data,w=async e=>(await s.post("/interview/save-result",e)).data;export{o as d,c as e,i as f,w as s};

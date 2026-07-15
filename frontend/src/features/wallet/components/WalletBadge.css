@@ -1,0 +1,53 @@
+.wallet-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #b45309;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #fcd34d;
+  transition: transform 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.wallet-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+}
+
+.wallet-badge-balance {
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.wallet-badge-unit {
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+[data-theme="dark"] .wallet-badge {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(251, 191, 36, 0.15));
+  border-color: rgba(251, 191, 36, 0.35);
+  color: #fbbf24;
+}
+
+@media (max-width: 900px) {
+  .wallet-badge-label {
+    display: none;
+  }
+
+  .wallet-badge-unit {
+    display: none;
+  }
+
+  .wallet-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+    gap: 4px;
+  }
+}
