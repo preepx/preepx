@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap } from 'lucide-react';
+import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle } from 'lucide-react';
 import api from '../utils/api';
 import './UserDetails.css';
 
@@ -10,6 +10,9 @@ const UserDetails = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  
+  const [coinsToAdd, setCoinsToAdd] = useState('');
+  const [addingCoins, setAddingCoins] = useState(false);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -85,8 +88,42 @@ const UserDetails = () => {
               <Wallet size={20} className="accent-icon" />
               <h3>Wallet</h3>
             </div>
-            <div className="wallet-balance">
+            <div className="wallet-balance" style={{ marginBottom: '1rem' }}>
               <h2>{wallet.balance} <span className="text-secondary" style={{fontSize: '1rem'}}>Coins</span></h2>
+            </div>
+            
+            <div className="add-coins-form" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+              <input 
+                type="number" 
+                className="input-field" 
+                placeholder="Coins to add" 
+                value={coinsToAdd}
+                onChange={(e) => setCoinsToAdd(e.target.value)}
+                style={{ flex: 1, padding: '0.5rem' }}
+              />
+              <button 
+                className="btn-primary" 
+                disabled={addingCoins || !coinsToAdd}
+                onClick={async () => {
+                  if (!coinsToAdd || isNaN(coinsToAdd) || Number(coinsToAdd) <= 0) return;
+                  setAddingCoins(true);
+                  try {
+                    const res = await api.post(`/users/${id}/wallet/add`, { coins: Number(coinsToAdd) });
+                    // Refresh data
+                    const updatedData = await api.get(`/users/${id}`);
+                    setData(updatedData.data);
+                    setCoinsToAdd('');
+                    alert('Coins added successfully!');
+                  } catch (err) {
+                    alert('Failed to add coins');
+                  } finally {
+                    setAddingCoins(false);
+                  }
+                }}
+                style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+              >
+                <PlusCircle size={18} /> {addingCoins ? 'Adding...' : 'Add'}
+              </button>
             </div>
           </div>
 

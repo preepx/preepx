@@ -8,7 +8,8 @@ const {
   getUsers,
   getUserDetails,
   getTransactions,
-  toggleUserBlock
+  toggleUserBlock,
+  addCoinsToWallet
 } = require("../controllers/adminController");
 
 // Public admin login route
@@ -21,6 +22,7 @@ router.get("/dashboard", getDashboardStats);
 router.get("/users", getUsers);
 router.get("/users/:id", getUserDetails);
 router.put("/users/:id/block", toggleUserBlock);
+router.post("/users/:id/wallet/add", addCoinsToWallet);
 router.get("/transactions", getTransactions);
 
 module.exports = router;

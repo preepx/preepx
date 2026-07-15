@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Users, IndianRupee, Coins, TrendingUp } from 'lucide-react';
 import api from '../utils/api';
 import './Dashboard.css';
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [stats, setStats] = useState({
     totalUsers: 0,
     revenueLast7Days: 0,
@@ -80,15 +82,29 @@ const Dashboard = () => {
                 <table className="admin-table">
                   <thead>
                     <tr>
-                      <th>Name</th>
+                      <th>User</th>
                       <th>Email</th>
                       <th>Joined</th>
                     </tr>
                   </thead>
                   <tbody>
                     {stats.recentUsers.map(user => (
-                      <tr key={user._id}>
-                        <td>{user.fullName}</td>
+                      <tr 
+                        key={user._id} 
+                        onClick={() => navigate(`/users/${user._id}`)}
+                        style={{ cursor: 'pointer' }}
+                        className="clickable-row"
+                      >
+                        <td style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                          {user.profilePic ? (
+                            <img src={user.profilePic} alt={user.fullName} style={{ width: '32px', height: '32px', borderRadius: '50%', objectFit: 'cover' }} />
+                          ) : (
+                            <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#3b82f6', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
+                              {user.fullName.charAt(0).toUpperCase()}
+                            </div>
+                          )}
+                          {user.fullName}
+                        </td>
                         <td>{user.email}</td>
                         <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                       </tr>

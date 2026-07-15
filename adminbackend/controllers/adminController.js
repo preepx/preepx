@@ -72,7 +72,7 @@ const getDashboardStats = async (req, res) => {
     const lifetimeRevenue = lifetimeStats.length > 0 ? lifetimeStats[0].totalRevenue : 0;
 
     // Fetch Recent Activity
-    const recentUsers = await User.find().select("fullName email createdAt").sort({ createdAt: -1 }).limit(5);
+    const recentUsers = await User.find().select("fullName email profilePic createdAt").sort({ createdAt: -1 }).limit(5);
     const recentTransactions = await WalletTransaction.find().populate("userId", "fullName email").sort({ createdAt: -1 }).limit(5);
 
     res.json({
@@ -151,11 +151,40 @@ const toggleUserBlock = async (req, res) => {
   }
 };
 
+// @desc    Add Coins to User Wallet
+const addCoinsToWallet = async (req, res) => {
+  try {
+    const { coins, description } = req.body;
+    if (!coins || coins <= 0) {
+      return res.status(400).json({ message: "Invalid coins amount" });
+    }
+
+    const wallet = await Wallet.findOne({ userId: req.params.id });
+    if (!wallet) return res.status(404).json({ message: "Wallet not found" });
+
+    wallet.balance += Number(coins);
+    await wallet.save();
+
+    await WalletTransaction.create({
+      userId: req.params.id,
+      type: "bonus",
+      coins: Number(coins),
+      balanceAfter: wallet.balance,
+      description: description || "Added by Admin"
+    });
+
+    res.json({ message: "Coins added successfully", wallet });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 module.exports = {
   adminLogin,
   getDashboardStats,
   getUsers,
   getUserDetails,
   getTransactions,
-  toggleUserBlock
+  toggleUserBlock,
+  addCoinsToWallet
 };
