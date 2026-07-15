@@ -71,11 +71,17 @@ const getDashboardStats = async (req, res) => {
     const totalCoinsSold = revenueStats.length > 0 ? revenueStats[0].totalCoinsSold : 0;
     const lifetimeRevenue = lifetimeStats.length > 0 ? lifetimeStats[0].totalRevenue : 0;
 
+    // Fetch Recent Activity
+    const recentUsers = await User.find().select("fullName email createdAt").sort({ createdAt: -1 }).limit(5);
+    const recentTransactions = await WalletTransaction.find().populate("userId", "fullName email").sort({ createdAt: -1 }).limit(5);
+
     res.json({
       totalUsers,
       revenueLast7Days: totalRevenue,
       coinsSoldLast7Days: totalCoinsSold,
-      lifetimeRevenue
+      lifetimeRevenue,
+      recentUsers,
+      recentTransactions
     });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });

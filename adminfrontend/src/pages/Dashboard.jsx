@@ -69,13 +69,73 @@ const Dashboard = () => {
       </div>
 
       <div className="dashboard-content">
+        <div className="glass-panel content-card" style={{ marginBottom: '1.5rem' }}>
+          <div className="card-header">
+            <Users size={20} className="accent-icon" />
+            <h3>Recent Users</h3>
+          </div>
+          <div className="card-body">
+            {stats.recentUsers && stats.recentUsers.length > 0 ? (
+              <div style={{ overflowX: 'auto' }}>
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Joined</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {stats.recentUsers.map(user => (
+                      <tr key={user._id}>
+                        <td>{user.fullName}</td>
+                        <td>{user.email}</td>
+                        <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p className="text-secondary">No recent users found.</p>
+            )}
+          </div>
+        </div>
+
         <div className="glass-panel content-card">
           <div className="card-header">
             <TrendingUp size={20} className="accent-icon" />
-            <h3>Recent Activity</h3>
+            <h3>Recent Transactions</h3>
           </div>
           <div className="card-body">
-            <p className="text-secondary">More detailed charts and activity logs can be placed here.</p>
+            {stats.recentTransactions && stats.recentTransactions.length > 0 ? (
+              <div style={{ overflowX: 'auto' }}>
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>Type</th>
+                      <th>Coins</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {stats.recentTransactions.map(tx => (
+                      <tr key={tx._id}>
+                        <td>{tx.userId?.fullName || 'Unknown User'}</td>
+                        <td style={{ textTransform: 'capitalize' }}>{tx.type}</td>
+                        <td style={{ color: tx.type === 'purchase' ? '#10b981' : '#f59e0b' }}>
+                          {tx.type === 'purchase' ? '+' : '-'}{tx.coins}
+                        </td>
+                        <td>{new Date(tx.createdAt).toLocaleDateString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <p className="text-secondary">No recent transactions found.</p>
+            )}
           </div>
         </div>
       </div>

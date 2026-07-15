@@ -134,3 +134,31 @@ h1, h2, h3, h4, h5, h6 {
 .admin-table tr:hover td {
   background: rgba(255, 255, 255, 0.02);
 }
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+    flex-direction: row;
+    overflow-x: auto;
+    white-space: nowrap;
+    align-items: center;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
