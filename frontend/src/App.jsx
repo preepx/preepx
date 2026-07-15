@@ -23,6 +23,7 @@ const ResumeUpload = lazy(() => import("./resume/ResumeUpload"));
 const Auth = lazy(() => import("./Login/Auth"));
 const AuthCallback = lazy(() => import("./Login/AuthCallback"));
 const ObjectiveExam = lazy(() => import("./Interview/ObjectiveExam"));
+const ObjectiveExamPage = lazy(() => import("./Interview/ObjectiveExamPage"));
 
 const PUBLIC_ROUTES = [
   "/", "/dashboard", "/auth",
@@ -31,16 +32,20 @@ const PUBLIC_ROUTES = [
   "/about-us", "/careers", "/privacy-policy", "/terms-of-service"
 ];
 const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback"];
-const SIDEBAR_ROUTES = [
-  "/interview", "/analytics", "/leaderboard", "/achievements",
-  "/settings", "/profile", "/resume-interview", "/objective-exam"
-];
+
+function usesAppLayout(pathname) {
+  const sidebarRoutes = [
+    "/interview", "/analytics", "/leaderboard", "/achievements",
+    "/settings", "/profile", "/resume-interview", "/objective-exam",
+  ];
+  return sidebarRoutes.includes(pathname) || pathname.startsWith("/objective-exam/");
+}
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
   const isPublic = PUBLIC_ROUTES.includes(location.pathname);
   const isFullscreen = FULLSCREEN_ROUTES.includes(location.pathname);
-  const useSidebar = SIDEBAR_ROUTES.includes(location.pathname);
+  const useSidebar = usesAppLayout(location.pathname);
 
   if (isPublic) {
     return (
@@ -101,7 +106,9 @@ function AppContent() {
           <Route path="/resume-interview" element={<ProtectedRoute><ResumeUpload /></ProtectedRoute>} />
           <Route path="/feedback" element={<ProtectedRoute><FeedbackPage /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-          <Route path="/objective-exam" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
+          <Route path="/objective-exam" element={<ProtectedRoute><ObjectiveExamPage /></ProtectedRoute>} />
+          <Route path="/objective-exam/take" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
+          <Route path="/objective-exam/result/:id" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
 
           <Route path="*" element={
             <div style={{ textAlign: "center", padding: "80px 24px" }}>

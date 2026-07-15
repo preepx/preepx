@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, Menu, X, Upload, Moon, Sun,
+  LogOut, Menu, X, Upload, Moon, Sun, Zap,
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { getProfile, syncUserToStorage } from "../services/userAPI";
@@ -10,6 +10,7 @@ import "./AppLayout.css";
 
 const NAV_ITEMS = [
   { to: "/interview", icon: LayoutDashboard, label: "Dashboard" },
+  { to: "/objective-exam", icon: Zap, label: "Objective Exam" },
   { to: "/analytics", icon: BarChart3, label: "Analytics" },
   { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
   { to: "/achievements", icon: Award, label: "Achievements" },
@@ -69,7 +70,7 @@ function AppLayout({ children }) {
 
         <nav className="sidebar-nav">
           {NAV_ITEMS.map(({ to, icon: Icon, label }) => (
-            <Link key={to} to={to} className={`sidebar-link ${location.pathname === to ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
+            <Link key={to} to={to} className={`sidebar-link ${location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to)) ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
               <Icon size={20} />
               {!collapsed && <span>{label}</span>}
             </Link>

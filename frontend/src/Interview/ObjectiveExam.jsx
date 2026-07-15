@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Webcam from 'react-webcam';
 import API from '../utils/api';
+import { getMcqResultById } from '../services/mcqAPI';
+import { syncUserToStorage } from '../services/userAPI';
 import {
   ArrowRight, CheckCircle, XCircle, AlertTriangle,
   Clock, Target, Zap, Eye, ShieldCheck, BookOpen, Trophy, ChevronLeft,
@@ -36,7 +38,7 @@ function ExamHeader({ onBack, label = 'Assessment Center' }) {
       <div className="oe-header-inner">
         <div className="oe-brand">
           <img src="/logo.png" alt="PrepX" />
-          <span className="hidden sm:inline">{label}</span>
+          <span className="oe-brand-label">{label}</span>
         </div>
         <button type="button" className="oe-back-btn" onClick={onBack}>
           <ChevronLeft size={15} /> Back
@@ -46,18 +48,9 @@ function ExamHeader({ onBack, label = 'Assessment Center' }) {
   );
 }
 
-function LiveStats({ compact }) {
-  return (
-    <div className="oe-stats-row">
-      <div className="oe-stat correct">
-        <div className={`oe-stat-val ${compact ? 'text-lg' : ''}`}>{/* val injected below */}</div>
-      </div>
-    </div>
-  );
-}
-
 export default function ObjectiveExam() {
   const navigate  = useNavigate();
+  const { id: resultIdParam } = useParams();
   const socketRef = useRef(null);
   const webcamRef = useRef(null);
 
@@ -73,7 +66,30 @@ export default function ObjectiveExam() {
   const [showWarn,   setShowWarn]   = useState(false);
   const [correct,    setCorrect]    = useState(0);
   const [wrong,      setWrong]      = useState(0);
+  const [pointsEarned, setPointsEarned] = useState(0);
+  const [loadingResult, setLoadingResult] = useState(!!resultIdParam);
   const timerRef = useRef(null);
+
+  useEffect(() => {
+    if (!resultIdParam) return;
+    setLoadingResult(true);
+    getMcqResultById(resultIdParam)
+      .then((data) => {
+        setTopic(data.topic);
+        setResults({
+          score: data.score,
+          totalQuestions: data.totalQuestions,
+          questionsAndAnswers: data.questionsAndAnswers,
+          resultId: data._id,
+        });
+        setScreen('RESULTS');
+      })
+      .catch(() => {
+        toast.error('Could not load exam result');
+        navigate('/objective-exam');
+      })
+      .finally(() => setLoadingResult(false));
+  }, [resultIdParam, navigate]);
 
   useAntiCheat(screen === 'EXAM', (n) => {
     setWarnings(n); setShowWarn(true);
@@ -102,7 +118,26 @@ export default function ObjectiveExam() {
     socketRef.current.on('connect', () =>
       socketRef.current.emit('start_mcq', { topic, userId: user._id, numQuestions: parseInt(numQ) }));
     socketRef.current.on('receive_question', d => { setQuestion(d); setSelected(''); setSubmitting(false); });
-    socketRef.current.on('mcq_finished',     d => { setResults(d); setScreen('RESULTS'); socketRef.current?.disconnect(); });
+    socketRef.current.on('mcq_finished', d => {
+      setResults(d);
+      setScreen('RESULTS');
+      socketRef.current?.disconnect();
+      if (d.pointsEarned) {
+        setPointsEarned(d.pointsEarned);
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        syncUserToStorage({
+          ...user,
+          points: (user.points || 0) + d.pointsEarned,
+          level: d.level || user.level,
+          streak: d.streak ?? user.streak,
+          badges: d.newBadges?.length
+            ? [...(user.badges || []), ...d.newBadges.filter(b => !(user.badges || []).includes(b))]
+            : user.badges,
+        });
+        window.dispatchEvent(new Event('user-updated'));
+        toast.success(`+${d.pointsEarned} points earned!`);
+      }
+    });
     socketRef.current.on('mcq_error',        e => { toast.error(e.message || 'Error'); setScreen('SETUP'); });
   };
 
@@ -120,7 +155,7 @@ export default function ObjectiveExam() {
     socketRef.current?.emit('submit_answer', { answer: selected || '' });
   };
 
-  const handleForceEnd = () => { clearInterval(timerRef.current); socketRef.current?.disconnect(); navigate('/interview'); };
+  const handleForceEnd = () => { clearInterval(timerRef.current); socketRef.current?.disconnect(); navigate('/objective-exam'); };
 
   const radius  = 20;
   const circ    = 2 * Math.PI * radius;
@@ -161,10 +196,22 @@ export default function ObjectiveExam() {
     </button>
   );
 
+  if (loadingResult) {
+    return (
+      <div className="oe-page">
+        <ExamHeader onBack={() => navigate('/objective-exam')} label="Loading..." />
+        <div className="oe-loading" style={{ minHeight: '60vh' }}>
+          <div className="oe-spinner" />
+          <p>Loading exam result…</p>
+        </div>
+      </div>
+    );
+  }
+
   /* ── SETUP ── */
   if (screen === 'SETUP') return (
     <div className="oe-page">
-      <ExamHeader onBack={() => navigate(-1)} />
+      <ExamHeader onBack={() => navigate('/objective-exam')} />
 
       <div className="oe-setup">
         {/* Left panel — desktop */}
@@ -444,9 +491,15 @@ export default function ObjectiveExam() {
 
     return (
       <div className="oe-page">
-        <ExamHeader onBack={() => navigate('/interview')} label="Assessment Report" />
+        <ExamHeader onBack={() => navigate('/objective-exam')} label="Assessment Report" />
 
         <main className="oe-results-main">
+          {pointsEarned > 0 && (
+            <div className="oe-warn-banner" style={{ background: '#ecfdf5', borderColor: '#a7f3d0', color: '#065f46', marginBottom: 20 }}>
+              <Trophy size={18} />
+              <span>You earned <strong>+{pointsEarned} points</strong> — reflected on your leaderboard rank.</span>
+            </div>
+          )}
           <div className="oe-score-card">
             <div className="oe-score-top">
               <div
@@ -535,8 +588,8 @@ export default function ObjectiveExam() {
           </div>
 
           <div className="oe-results-cta">
-            <button type="button" onClick={() => navigate('/interview')}>
-              <Target size={17} /> Back to Dashboard
+            <button type="button" onClick={() => navigate('/objective-exam')}>
+              <Target size={17} /> Back to Exam Dashboard
             </button>
           </div>
         </main>

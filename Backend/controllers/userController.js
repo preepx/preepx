@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const Otp = require("../models/Otp");
 const Interview = require("../models/Interview");
+const MCQResult = require("../models/MCQResult");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const sendOtpEmail = require("../utils/sendOtpEmail");
@@ -247,10 +248,17 @@ const getAnalytics = async (req, res) => {
   try {
     const userId = req.user;
     const interviews = await Interview.find({ userId, status: "completed" }).sort({ createdAt: 1 });
+    const mcqResults = await MCQResult.find({ userId }).sort({ createdAt: 1 });
 
     const totalInterviews = interviews.length;
+    const totalMcqExams = mcqResults.length;
     const avgScore = totalInterviews
       ? Math.round(interviews.reduce((s, i) => s + (i.maxScore ? (i.totalScore / i.maxScore) * 100 : 0), 0) / totalInterviews)
+      : 0;
+    const mcqAvgAccuracy = totalMcqExams
+      ? Math.round(
+          mcqResults.reduce((s, r) => s + (r.totalQuestions ? (r.score / r.totalQuestions) * 100 : 0), 0) / totalMcqExams
+        )
       : 0;
 
     const weeklyData = [];
@@ -261,11 +269,19 @@ const getAnalytics = async (req, res) => {
       const dayInterviews = interviews.filter(
         (intv) => intv.createdAt.toISOString().split("T")[0] === dayStr
       );
+      const dayMcq = mcqResults.filter(
+        (r) => r.createdAt.toISOString().split("T")[0] === dayStr
+      );
+      const dayCount = dayInterviews.length + dayMcq.length;
+      const dayScores = [
+        ...dayInterviews.map((intv) => (intv.maxScore ? (intv.totalScore / intv.maxScore) * 100 : 0)),
+        ...dayMcq.map((r) => (r.totalQuestions ? (r.score / r.totalQuestions) * 100 : 0)),
+      ];
       weeklyData.push({
         day: d.toLocaleDateString("en-US", { weekday: "short" }),
-        count: dayInterviews.length,
-        avgScore: dayInterviews.length
-          ? Math.round(dayInterviews.reduce((s, intv) => s + (intv.maxScore ? (intv.totalScore / intv.maxScore) * 100 : 0), 0) / dayInterviews.length)
+        count: dayCount,
+        avgScore: dayScores.length
+          ? Math.round(dayScores.reduce((a, b) => a + b, 0) / dayScores.length)
           : 0,
       });
     }
@@ -286,18 +302,30 @@ const getAnalytics = async (req, res) => {
 
     res.json({
       totalInterviews,
+      totalMcqExams,
       avgScore,
+      mcqAvgAccuracy,
       totalPoints: user?.points || 0,
       streak: user?.streak || 0,
       level: user?.level || 1,
       weeklyData,
       topRoles,
-      recentScores: interviews.slice(-10).map((i) => ({
-        date: i.createdAt,
-        score: i.totalScore,
-        maxScore: i.maxScore,
-        role: i.jobTitle,
-      })),
+      recentScores: [
+        ...interviews.slice(-10).map((i) => ({
+          date: i.createdAt,
+          score: i.totalScore,
+          maxScore: i.maxScore,
+          role: i.jobTitle,
+          type: "interview",
+        })),
+        ...mcqResults.slice(-10).map((r) => ({
+          date: r.createdAt,
+          score: r.score,
+          maxScore: r.totalQuestions,
+          role: r.topic,
+          type: "mcq",
+        })),
+      ].sort((a, b) => new Date(a.date) - new Date(b.date)).slice(-10),
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -339,6 +367,7 @@ const getDashboard = async (req, res) => {
     if (!user) return res.status(404).json({ message: "User not found" });
 
     const interviews = await Interview.find({ userId }).sort({ createdAt: -1 });
+    const mcqResults = await MCQResult.find({ userId }).sort({ createdAt: -1 });
     const completed = interviews.filter((i) => i.status === "completed");
     const avgScore = completed.length
       ? Math.round(
@@ -346,6 +375,38 @@ const getDashboard = async (req, res) => {
             completed.length
         )
       : 0;
+
+    const mcqAvgAccuracy = mcqResults.length
+      ? Math.round(
+          mcqResults.reduce((s, r) => s + (r.totalQuestions ? (r.score / r.totalQuestions) * 100 : 0), 0) /
+            mcqResults.length
+        )
+      : 0;
+    const mcqBestScore = mcqResults.length
+      ? Math.max(...mcqResults.map((r) => (r.totalQuestions ? Math.round((r.score / r.totalQuestions) * 100) : 0)))
+      : 0;
+
+    const interviewActivity = completed.slice(0, 5).map((i) => ({
+      type: "interview",
+      role: i.jobTitle,
+      topic: i.jobTopic,
+      score: i.totalScore,
+      maxScore: i.maxScore,
+      date: i.createdAt,
+    }));
+
+    const mcqActivity = mcqResults.slice(0, 5).map((r) => ({
+      type: "mcq",
+      role: r.topic,
+      topic: `${r.totalQuestions} questions`,
+      score: r.score,
+      maxScore: r.totalQuestions,
+      date: r.createdAt,
+    }));
+
+    const recentActivity = [...interviewActivity, ...mcqActivity]
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .slice(0, 6);
 
     res.json({
       user: safeUser(user),
@@ -358,6 +419,12 @@ const getDashboard = async (req, res) => {
         points: user.points || 0,
         streak: user.streak || 0,
         level: user.level || 1,
+      },
+      mcqStats: {
+        totalExams: mcqResults.length,
+        avgAccuracy: mcqAvgAccuracy,
+        bestScore: mcqBestScore,
+        totalQuestions: mcqResults.reduce((s, r) => s + (r.totalQuestions || 0), 0),
       },
       interviews: interviews.map((i) => ({
         _id: i._id,
@@ -372,12 +439,14 @@ const getDashboard = async (req, res) => {
         fromResume: i.fromResume,
         createdAt: i.createdAt,
       })),
-      recentActivity: completed.slice(0, 5).map((i) => ({
-        role: i.jobTitle,
-        score: i.totalScore,
-        maxScore: i.maxScore,
-        date: i.createdAt,
+      mcqResults: mcqResults.map((r) => ({
+        _id: r._id,
+        topic: r.topic,
+        score: r.score,
+        totalQuestions: r.totalQuestions,
+        createdAt: r.createdAt,
       })),
+      recentActivity,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

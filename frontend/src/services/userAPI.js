@@ -47,6 +47,8 @@ export const getDashboard = async () => {
           streak: user.streak || 0,
           level: user.level || 1,
         },
+        mcqResults: [],
+        mcqStats: { totalExams: 0, avgAccuracy: 0, bestScore: 0, totalQuestions: 0 },
         interviews,
         recentActivity: completed.slice(0, 5).map((i) => ({
           role: i.jobTitle,

@@ -1,5 +1,6 @@
 const axios = require("axios");
 const MCQResult = require("../models/MCQResult");
+const { awardMcqCompletion } = require("../utils/userProgress");
 
 const mcqHandler = (io, socket) => {
   // Store user's ongoing session in memory
@@ -46,7 +47,9 @@ const mcqHandler = (io, socket) => {
       if (session.currentQuestionIndex < session.numQuestions) {
         await generateAndSendNextQuestion(socket);
       } else {
-        // Exam finished, save to DB if logged in and send results
+        let resultId = null;
+        let rewards = { pointsEarned: 0, newBadges: [], level: 1, streak: 0 };
+
         if (session.userId && session.userId !== "guest") {
           const newResult = new MCQResult({
             userId: session.userId,
@@ -55,13 +58,23 @@ const mcqHandler = (io, socket) => {
             totalQuestions: session.numQuestions,
             questionsAndAnswers: session.questionsAndAnswers
           });
-          await newResult.save();
+          const saved = await newResult.save();
+          resultId = saved._id;
+          rewards = await awardMcqCompletion(session.userId, {
+            score: session.score,
+            totalQuestions: session.numQuestions,
+          });
         }
 
         socket.emit("mcq_finished", {
+          resultId,
           score: session.score,
           totalQuestions: session.numQuestions,
-          questionsAndAnswers: session.questionsAndAnswers
+          questionsAndAnswers: session.questionsAndAnswers,
+          pointsEarned: rewards.pointsEarned,
+          newBadges: rewards.newBadges,
+          level: rewards.level,
+          streak: rewards.streak,
         });
         
         // Clean up

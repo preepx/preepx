@@ -380,3 +380,134 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 640px) {
+  .dashboard-page {
+    padding: 16px 12px 24px;
+  }
+
+  .dashboard-header {
+    margin-bottom: 20px;
+    gap: 14px;
+  }
+
+  .dashboard-header h1 {
+    font-size: 22px;
+  }
+
+  .dashboard-header p {
+    font-size: 13px;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions .action-btn {
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .stat-card {
+    padding: 14px 12px;
+    gap: 10px;
+  }
+
+  .stat-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+
+  .stat-num {
+    font-size: 20px;
+  }
+
+  .stat-lbl {
+    font-size: 11px;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .panel-tools {
+    width: 100%;
+  }
+
+  .search-box {
+    flex: 1;
+    width: 100%;
+  }
+
+  .search-box input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .interview-item {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 12px;
+    gap: 10px;
+  }
+
+  .interview-info {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .interview-info h3 {
+    font-size: 14px;
+    word-break: break-word;
+  }
+
+  .interview-info p {
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .interview-meta {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .delete-btn {
+    opacity: 1;
+    margin-left: auto;
+  }
+
+  .chevron {
+    display: none;
+  }
+
+  .quick-start-panel,
+  .tips-list {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .activity-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

@@ -263,22 +263,16 @@ const InterviewPage = () => {
               <div className="activity-list">
                 {dashboard.recentActivity.map((a, i) => (
                   <div key={i} className="activity-item">
-                    <span className="act-role">{a.role}</span>
+                    <span className="act-role">
+                      {a.type === "mcq" ? "📝 " : ""}{a.role}
+                      {a.type === "mcq" && <span style={{ fontSize: 11, color: "var(--text-muted)", marginLeft: 6 }}>MCQ</span>}
+                    </span>
                     <span className="act-score">{a.maxScore ? Math.round((a.score / a.maxScore) * 100) : 0}%</span>
                   </div>
                 ))}
               </div>
             </div>
           )}
-          <div className="panel tips-panel">
-            <div className="panel-header"><Lightbulb size={18} /><h2>Pro Tips</h2></div>
-            <ul className="tips-list">
-              <li>Use the STAR method for behavioral questions</li>
-              <li>Try different difficulty levels to challenge yourself</li>
-              <li>Check Analytics to track weekly improvement</li>
-              <li>Earn badges by maintaining your practice streak</li>
-            </ul>
-          </div>
           <div className="panel quick-start-panel">
             <h2>Quick Actions</h2>
             <button className="action-btn primary full" onClick={() => setShowModal(true)}>
@@ -294,6 +288,15 @@ const InterviewPage = () => {
             <button className="action-btn secondary full" onClick={() => navigate("/analytics")}>View Analytics</button>
             <button className="action-btn secondary full" onClick={() => navigate("/leaderboard")}>Leaderboard</button>
             <button className="action-btn secondary full" onClick={() => navigate("/achievements")}>Achievements</button>
+          </div>
+          <div className="panel tips-panel">
+            <div className="panel-header"><Lightbulb size={18} /><h2>Pro Tips</h2></div>
+            <ul className="tips-list">
+              <li>Use the STAR method for behavioral questions</li>
+              <li>Try different difficulty levels to challenge yourself</li>
+              <li>Check Analytics to track weekly improvement</li>
+              <li>Earn badges by maintaining your practice streak</li>
+            </ul>
           </div>
         </div>
       </div>

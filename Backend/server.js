@@ -48,6 +48,7 @@ app.get("/api/health", (req, res) => res.json({ status: "ok", version: "2.0" }))
 
 app.use("/api/users",     require("./routes/userRoutes"));
 app.use("/api/interview", require("./routes/interviewRoutes"));
+app.use("/api/mcq",       require("./routes/mcqRoutes"));
 app.use("/api/resume",    require("./routes/resumeRoutes"));
 app.use("/api/auth",      require("./routes/authRoutes"));
 
