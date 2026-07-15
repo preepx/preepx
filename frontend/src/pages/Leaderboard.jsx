@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Crown, Medal, Trophy, Users, Zap } from "lucide-react";
 import { getLeaderboard } from "../services/userAPI";
 import EmptyState from "../components/EmptyState";
+import Loader from "../components/Loader";
 import "./Leaderboard.css";
 
 const RANK_STYLES = [
@@ -23,7 +24,7 @@ function Leaderboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="page-loading">Loading leaderboard...</div>;
+  if (loading) return <Loader />;
   if (!data) return <EmptyState icon={Trophy} title="Leaderboard Unavailable" desc="Could not load rankings." actionLabel="Retry" onAction={() => window.location.reload()} />;
 
   const top3 = data.leaderboard.slice(0, 3);

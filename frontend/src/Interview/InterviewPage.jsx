@@ -12,6 +12,7 @@ import { showAppError } from "../utils/appAlert";
 import InterviewModal from "./InterviewModal";
 import WelcomeModal from "../components/WelcomeModal";
 import EmptyState from "../components/EmptyState";
+import Loader from "../components/Loader";
 import "./InterviewPage.css";
 
 const InterviewPage = () => {
@@ -116,7 +117,7 @@ const InterviewPage = () => {
   const formatDate = (date) =>
     new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric" });
 
-  if (loading) return <div className="page-loading">Loading your dashboard...</div>;
+  if (loading) return <Loader />;
 
   if (error) {
     return (

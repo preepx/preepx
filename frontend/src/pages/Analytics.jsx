@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TrendingUp, Target, Flame, BarChart3, Plus, Calendar } from "lucide-react";
 import { getAnalytics } from "../services/userAPI";
 import EmptyState from "../components/EmptyState";
+import Loader from "../components/Loader";
 import "./Analytics.css";
 
 function Analytics() {
@@ -17,7 +18,7 @@ function Analytics() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="page-loading">Loading analytics...</div>;
+  if (loading) return <Loader />;
 
   if (!data) {
     return (

@@ -131,8 +131,11 @@
 }
 
 @media (max-width: 600px) {
+  .footer-inner {
+    flex-direction: column-reverse;
+  }
   .footer-links-group {
-    flex-direction: column;
+    flex-direction: row;
     gap: 32px;
   }
 }

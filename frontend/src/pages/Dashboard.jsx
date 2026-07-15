@@ -14,7 +14,7 @@ function Dashboard() {
   const [platformStats, setPlatformStats] = useState(null);
 
   const rotatingTexts = [
-    "AI Mock Interviews",
+    "AI-Mock Interviews",
     "AI-Powered Practice",
     "Real Interview Questions",
     "Personalized Feedback",
@@ -102,7 +102,7 @@ function Dashboard() {
         </div>
         <div className="hero-inner">
           <div className="hero-content">
-            <div className="hero-badge"><img src="/logo.png" alt="AI logo" style={{ height: '24px', width: 'auto' }} /><span>AI-Powered Interview Platform</span></div>
+            <div className="hero-badge"><img src="/logo.png" alt="AI logo" style={{ height: '32px', width: 'auto' }} /><span>AI-Powered Interview Platform</span></div>
             <h1 className="hero-title">
               <span style={{ whiteSpace: 'nowrap' }}>Crack Your Dream Job</span>
               <br />With <span className="gradient-text">{rotatingTexts[textIndex]}</span>

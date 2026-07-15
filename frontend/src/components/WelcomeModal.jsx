@@ -1,5 +1,5 @@
 import React from "react";
-import { Sparkles, X } from "lucide-react";
+import { X } from "lucide-react";
 import "./WelcomeModal.css";
 
 function WelcomeModal({ onClose, userName }) {
@@ -7,7 +7,9 @@ function WelcomeModal({ onClose, userName }) {
     <div className="welcome-overlay">
       <div className="welcome-card">
         <button className="welcome-close" onClick={onClose}><X size={18} /></button>
-        <div className="welcome-icon"><Sparkles size={28} /></div>
+        <div className="welcome-icon">
+          <img src="/logo.png" alt="PrepX Logo" style={{ width: '56px', height: '56px', objectFit: 'contain' }} />
+        </div>
         <h2>Welcome, {userName}! 🎉</h2>
         <p>Your AI interview coach is ready. Here's how to get started:</p>
         <ul>

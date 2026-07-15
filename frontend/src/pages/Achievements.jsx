@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Lock, Award, Star } from "lucide-react";
 import { getAchievements } from "../services/userAPI";
 import EmptyState from "../components/EmptyState";
+import Loader from "../components/Loader";
 import "./Achievements.css";
 
 function Achievements() {
@@ -17,7 +18,7 @@ function Achievements() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <div className="page-loading">Loading achievements...</div>;
+  if (loading) return <Loader />;
   if (!data) return <EmptyState icon={Award} title="Achievements Unavailable" desc="Could not load badges." actionLabel="Go to Dashboard" actionPath="/interview" />;
 
   const pct = Math.round((data.totalEarned / data.totalAvailable) * 100);
