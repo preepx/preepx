@@ -269,12 +269,10 @@
   .topbar-center {
     position: static;
     transform: none;
-    margin-left: auto;
-    margin-right: 10px;
+    margin: 0 auto;
   }
 
   .topbar-right {
-    margin-left: 0;
     flex-wrap: nowrap;
     gap: 6px;
     overflow-x: auto;
