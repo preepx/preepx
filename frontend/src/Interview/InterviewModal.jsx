@@ -103,16 +103,7 @@ const InterviewModal = ({ onClose, onSuccess }) => {
                 ))}
               </div>
             </div>
-            <div className="option-group">
-              <label><Layers size={14} /> Type</label>
-              <div className="option-btns">
-                {["technical", "behavioral", "mixed"].map((t) => (
-                  <button key={t} className={`opt-btn ${interviewType === t ? "active" : ""}`} onClick={() => setInterviewType(t)}>
-                    {t.charAt(0).toUpperCase() + t.slice(1)}
-                  </button>
-                ))}
-              </div>
-            </div>
+
             <div className="option-group">
               <label><Hash size={14} /> Questions: {questionCount}</label>
               <input
