@@ -111,8 +111,12 @@ function AppLayout({ children }) {
         <div className="app-content">
           <header className="topbar">
             <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
-            <div className="topbar-right">
+            
+            <div className="topbar-center">
               <WalletBadge />
+            </div>
+
+            <div className="topbar-right">
               {user.streak > 0 && <span className="streak-badge">🔥 {user.streak} day streak</span>}
               <span className="level-badge">Level {user.level || 1}</span>
               <span className="points-badge">{user.points || 0} pts</span>
