@@ -86,6 +86,53 @@ const mcqHandler = (io, socket) => {
       socket.emit("mcq_error", { message: "Failed to process answer." });
     }
   });
+
+  socket.on("force_end_mcq", async () => {
+    try {
+      const session = socket.mcqSession;
+      if (!session) {
+        return socket.emit("mcq_error", { message: "No active session." });
+      }
+
+      let resultId = null;
+      let rewards = { pointsEarned: 0, newBadges: [], level: 1, streak: 0 };
+      
+      const answeredQuestions = session.questionsAndAnswers.slice(0, session.currentQuestionIndex);
+
+      if (session.userId && session.userId !== "guest") {
+        const newResult = new MCQResult({
+          userId: session.userId,
+          topic: session.topic,
+          score: session.score,
+          totalQuestions: session.numQuestions,
+          questionsAndAnswers: answeredQuestions
+        });
+        const saved = await newResult.save();
+        resultId = saved._id;
+        rewards = await awardMcqCompletion(session.userId, {
+          score: session.score,
+          totalQuestions: session.numQuestions,
+        });
+      }
+
+      socket.emit("mcq_finished", {
+        resultId,
+        score: session.score,
+        totalQuestions: session.numQuestions,
+        questionsAndAnswers: answeredQuestions,
+        pointsEarned: rewards.pointsEarned,
+        newBadges: rewards.newBadges,
+        level: rewards.level,
+        streak: rewards.streak,
+      });
+      
+      delete socket.mcqSession;
+
+    } catch (error) {
+      console.error("Error force ending exam:", error);
+      socket.emit("mcq_error", { message: "Failed to end exam." });
+    }
+  });
 };
 
 async function generateAndSendNextQuestion(socket) {

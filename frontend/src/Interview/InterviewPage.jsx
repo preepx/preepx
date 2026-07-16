@@ -5,7 +5,7 @@ import {
   Search, Trash2, Target, Flame, Award,
 } from "lucide-react";
 import { getDashboard, syncUserToStorage } from "../services/userAPI";
-import { deleteInterview } from "../services/interviewAPI";
+import { deleteInterview, getInterviewById } from "../services/interviewAPI";
 import { uploadResume } from "../services/resumeAPI";
 import { toast } from "react-toastify";
 import { showAppError } from "../utils/appAlert";
@@ -204,9 +204,22 @@ const InterviewPage = () => {
                 <div
                   key={intv._id}
                   className="interview-item"
-                  onClick={() => {
+                  onClick={async () => {
                     if (intv.status === "completed") {
-                      navigate("/feedback", { state: { interview: intv } });
+                      try {
+                        // Fetch full interview including answers array
+                        const fullIntv = await getInterviewById(intv._id);
+                        navigate("/feedback", { 
+                          state: { 
+                            interview: fullIntv, 
+                            jobTitle: fullIntv.jobTitle, 
+                            jobTopic: fullIntv.jobTopic 
+                          } 
+                        });
+                      } catch (err) {
+                        console.error("Failed to fetch full interview details:", err);
+                        navigate("/feedback", { state: { interview: intv } });
+                      }
                     } else {
                       navigate("/start-interview", {
                         state: {

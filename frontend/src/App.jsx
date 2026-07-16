@@ -32,14 +32,14 @@ const PUBLIC_ROUTES = [
   "/interview-tips", "/blog", "/help-center", "/community",
   "/about-us", "/careers", "/privacy-policy", "/terms-of-service"
 ];
-const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback"];
+const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "/objective-exam/take"];
 
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/interview", "/analytics", "/leaderboard", "/achievements",
     "/settings", "/profile", "/resume-interview", "/objective-exam", "/wallet",
   ];
-  return sidebarRoutes.includes(pathname) || pathname.startsWith("/objective-exam/");
+  return sidebarRoutes.includes(pathname) || (pathname.startsWith("/objective-exam/") && !FULLSCREEN_ROUTES.includes(pathname));
 }
 
 function LayoutWrapper({ children }) {

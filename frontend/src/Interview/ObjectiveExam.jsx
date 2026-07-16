@@ -10,6 +10,7 @@ import {
   Clock, Target, Zap, Eye, ShieldCheck, BookOpen, Trophy, ChevronLeft,
 } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { useFaceDetection } from '../hooks/useFaceDetection';
 import './ObjectiveExam.css';
 
 const SOCKET_URL = API.defaults.baseURL
@@ -52,7 +53,8 @@ export default function ObjectiveExam() {
   const navigate  = useNavigate();
   const { id: resultIdParam } = useParams();
   const socketRef = useRef(null);
-  const webcamRef = useRef(null);
+  const desktopCamRef = useRef(null);
+  const mobileCamRef = useRef(null);
 
   const [topic,      setTopic]      = useState('');
   const [numQ,       setNumQ]       = useState(20);
@@ -68,7 +70,15 @@ export default function ObjectiveExam() {
   const [wrong,      setWrong]      = useState(0);
   const [pointsEarned, setPointsEarned] = useState(0);
   const [loadingResult, setLoadingResult] = useState(!!resultIdParam);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [permissionsGranted, setPermissionsGranted] = useState(null);
+  const [showConfirmSubmit, setShowConfirmSubmit] = useState(false);
+
   const timerRef = useRef(null);
+  const { faceWarning } = useFaceDetection(
+    [desktopCamRef, mobileCamRef], 
+    screen === 'EXAM' && isFullscreen && permissionsGranted === true
+  );
 
   useEffect(() => {
     if (!resultIdParam) return;
@@ -110,8 +120,38 @@ export default function ObjectiveExam() {
 
   useEffect(() => () => { clearInterval(timerRef.current); socketRef.current?.disconnect(); }, []);
 
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    if (!resultIdParam) {
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+      const checkPermissions = async () => {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+          setPermissionsGranted(true);
+          stream.getTracks().forEach(t => t.stop());
+        } catch (err) {
+          setPermissionsGranted(false);
+        }
+      };
+      checkPermissions();
+    } else {
+      setPermissionsGranted(true);
+      setIsFullscreen(true);
+    }
+    
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, [resultIdParam]);
+
   const startExam = () => {
     if (!topic.trim()) return toast.error('Please enter a topic.');
+    if (permissionsGranted !== true) return toast.error('Camera permission required.');
+    if (!isFullscreen) return toast.error('Fullscreen required.');
     setScreen('EXAM'); setCorrect(0); setWrong(0); setWarnings(0);
     const user = JSON.parse(localStorage.getItem('user') || '{"_id":"guest"}');
     socketRef.current = io(SOCKET_URL);
@@ -119,6 +159,9 @@ export default function ObjectiveExam() {
       socketRef.current.emit('start_mcq', { topic, userId: user._id, numQuestions: parseInt(numQ) }));
     socketRef.current.on('receive_question', d => { setQuestion(d); setSelected(''); setSubmitting(false); });
     socketRef.current.on('mcq_finished', d => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => null);
+      }
       setResults(d);
       setScreen('RESULTS');
       socketRef.current?.disconnect();
@@ -155,6 +198,10 @@ export default function ObjectiveExam() {
     socketRef.current?.emit('submit_answer', { answer: selected || '' });
   };
 
+  const handleFinalSubmit = () => {
+    setShowConfirmSubmit(true);
+  };
+
   const handleForceEnd = () => { clearInterval(timerRef.current); socketRef.current?.disconnect(); navigate('/objective-exam'); };
 
   const radius  = 20;
@@ -165,19 +212,19 @@ export default function ObjectiveExam() {
   const timerColor = timeLeft <= 10 ? '#ef4444' : timeLeft <= 20 ? '#f59e0b' : '#4f46e5';
 
   const StatsPanel = () => (
-    <div className="oe-stats-row">
-      <div className="oe-stat correct">
-        <div className="oe-stat-val">{correct}</div>
-        <div className="oe-stat-lbl">Correct</div>
-      </div>
-      <div className="oe-stat wrong">
-        <div className="oe-stat-val">{wrong}</div>
-        <div className="oe-stat-lbl">Wrong</div>
-      </div>
-      <div className="oe-stat warn">
+    <div className="oe-stats-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+      <div className="oe-stat warn" style={{ flex: 1 }}>
         <div className="oe-stat-val">{warnings}</div>
         <div className="oe-stat-lbl">Warns</div>
       </div>
+      <button 
+        type="button" 
+        className="oe-primary-btn" 
+        style={{ flex: 2, height: '100%', margin: 0, minHeight: '60px' }}
+        onClick={handleFinalSubmit}
+      >
+        Final Submit
+      </button>
     </div>
   );
 
@@ -208,9 +255,58 @@ export default function ObjectiveExam() {
     );
   }
 
+  const Overlays = () => (
+    <>
+      {showConfirmSubmit && screen !== 'RESULTS' && (
+        <div className="oe-warning-overlay" style={{ zIndex: 9999 }}>
+          <div className="oe-warning-content">
+            <h2>Final Submit</h2>
+            <p>Are you sure you want to submit the exam early? Unanswered questions will not be scored.</p>
+            <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+              <button className="oe-primary-btn" onClick={() => {
+                setShowConfirmSubmit(false);
+                socketRef.current?.emit('force_end_mcq');
+              }}>
+                Yes, Submit
+              </button>
+              <button className="oe-warn-btn secondary" onClick={() => setShowConfirmSubmit(false)}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {permissionsGranted === false && screen !== 'RESULTS' && (
+        <div className="oe-warning-overlay">
+          <div className="oe-warning-content">
+            <h2>Camera Required</h2>
+            <p>Please allow camera access to take the proctored exam.</p>
+            <button className="oe-warn-btn" onClick={() => window.location.reload()}>Reload</button>
+            <button className="oe-warn-btn secondary" onClick={() => navigate('/objective-exam')} style={{ marginLeft: 8 }}>Go Back</button>
+          </div>
+        </div>
+      )}
+      {!isFullscreen && permissionsGranted === true && screen !== 'RESULTS' && (
+        <div className="oe-warning-overlay">
+          <div className="oe-warning-content">
+            <h2>Fullscreen Required</h2>
+            <p>The exam must be taken in fullscreen to prevent cheating.</p>
+            <button className="oe-warn-btn" onClick={() => {
+              const elem = document.documentElement;
+              if (elem.requestFullscreen) elem.requestFullscreen();
+            }}>Enter Fullscreen</button>
+            <button className="oe-warn-btn secondary" onClick={() => navigate('/objective-exam')} style={{ marginLeft: 8 }}>Exit</button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+
   /* ── SETUP ── */
   if (screen === 'SETUP') return (
-    <div className="oe-page">
+    <>
+      <Overlays />
+      <div className={`oe-page ${!isFullscreen ? 'blurred' : ''}`}>
       <ExamHeader onBack={() => navigate('/objective-exam')} />
 
       <div className="oe-setup">
@@ -314,11 +410,14 @@ export default function ObjectiveExam() {
         </div>
       </div>
     </div>
+    </>
   );
 
   /* ── EXAM ── */
   if (screen === 'EXAM') return (
-    <div className="oe-exam">
+    <>
+      <Overlays />
+      <div className={`oe-exam ${!isFullscreen ? 'blurred' : ''}`}>
       <div className="oe-exam-bar">
         <div className="oe-exam-bar-top">
           <div className="oe-brand">
@@ -451,7 +550,14 @@ export default function ObjectiveExam() {
               <span>Proctor Camera</span>
               <span className="oe-live-pill"><span className="oe-live-dot" /> Rec</span>
             </div>
-            <Webcam ref={webcamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
+            <div className="oe-cam-wrapper" style={{ position: 'relative' }}>
+              <Webcam ref={desktopCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
+              {faceWarning && (
+                <div className="oe-face-warn">
+                  <div className="oe-face-warn-box">⚠️ {faceWarning}</div>
+                </div>
+              )}
+            </div>
             <div className="oe-cam-footer">
               <ShieldCheck size={13} /> Anti-cheat monitoring active
             </div>
@@ -472,12 +578,20 @@ export default function ObjectiveExam() {
       </div>
 
       <div className="oe-pip">
-        <Webcam audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
+        <div className="oe-cam-wrapper" style={{ width: '100%', height: '100%' }}>
+          <Webcam ref={mobileCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
+          {faceWarning && (
+            <div className="oe-face-warn">
+              <div className="oe-face-warn-box">⚠️ {faceWarning}</div>
+            </div>
+          )}
+        </div>
         <div className="oe-pip-rec">
           <span className="oe-pip-rec-dot" /> Rec
         </div>
       </div>
     </div>
+    </>
   );
 
   /* ── RESULTS ── */

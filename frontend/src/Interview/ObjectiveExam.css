@@ -3,8 +3,8 @@
 .oe-page {
   min-height: 100vh;
   font-family: "Inter", system-ui, -apple-system, sans-serif;
-  background: #f1f5f9;
-  color: #0f172a;
+  background-color: var(--bg, #f1f5f9);
+  color: var(--text, #0f172a);
 }
 
 .oe-header {
@@ -441,7 +441,8 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #eef2f7;
+  background-color: var(--bg, #eef2f7);
+  color: var(--text, #0f172a);
 }
 
 @media (max-width: 900px) {
@@ -1618,4 +1619,103 @@
 
 .oe-pip {
   position: relative;
+}
+
+/* --- OVERLAY MODALS --- */
+.oe-warning-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.oe-warning-content {
+  background: var(--surface, #fff);
+  color: var(--text, #0f172a);
+  padding: 32px;
+  border-radius: 16px;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  border: 1px solid var(--border, #e2e8f0);
+}
+
+.oe-warning-content h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.oe-warning-content p {
+  font-size: 15px;
+  color: var(--text-muted, #64748b);
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+.oe-warn-btn {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: #4f46e5;
+  color: white;
+  transition: all 0.2s;
+  flex: 1;
+}
+
+.oe-warn-btn:hover {
+  background: #4338ca;
+}
+
+.oe-warn-btn.secondary {
+  background: transparent;
+  color: var(--text, #0f172a);
+  border: 1px solid var(--border, #e2e8f0);
+}
+
+.oe-warn-btn.secondary:hover {
+  background: var(--border, #f8fafc);
+}
+
+/* --- FACE WARNING OVERLAY --- */
+.oe-face-warn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(220, 38, 38, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.oe-face-warn-box {
+  background: rgba(0, 0, 0, 0.75);
+  color: #f87171;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid rgba(248, 113, 113, 0.5);
+  max-width: 90%;
+  animation: oe-pulse-warning 1s infinite alternate;
+}
+
+@keyframes oe-pulse-warning {
+  from { opacity: 0.8; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1.02); }
 }

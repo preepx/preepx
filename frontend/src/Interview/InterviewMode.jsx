@@ -4,6 +4,7 @@ import Webcam from "react-webcam";
 import { Mic, MicOff, SkipForward, Volume2, Timer, ArrowLeft } from "lucide-react";
 import { evaluateAnswer, saveInterviewResult } from "../services/interviewAPI";
 import { showAppError } from "../utils/appAlert";
+import { useFaceDetection } from "../hooks/useFaceDetection";
 import "./InterviewMode.css";
 
 const InterviewMode = () => {
@@ -22,9 +23,15 @@ const InterviewMode = () => {
   const [saving,        setSaving]        = useState(false);
   const [questionTimer, setQuestionTimer] = useState(45);
   const [totalDuration, setTotalDuration] = useState(0);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [showExitModal, setShowExitModal] = useState(false);
+  const [permissionsGranted, setPermissionsGranted] = useState(null); // null=checking, true=ok, false=denied
 
   const webcamRef       = useRef(null);
   const recRef          = useRef(null);
+
+  // Initialize face detection hook
+  const { faceWarning } = useFaceDetection(webcamRef, isFullscreen && permissionsGranted === true);
   const timerRef        = useRef(null);
   const silenceRef      = useRef(null);
   const startTimeRef    = useRef(Date.now());
@@ -35,6 +42,45 @@ const InterviewMode = () => {
   const timerValRef     = useRef(45);
   const exitedRef       = useRef(false);   // interview exit/done guard
   const busyRef         = useRef(false);   // triggerNext in progress
+  const isFullScreenRef = useRef(false);   // track fullscreen status
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isFull = !!document.fullscreenElement;
+      setIsFullscreen(isFull);
+      isFullScreenRef.current = isFull;
+      
+      if (!isFull) {
+        window.speechSynthesis.pause();
+      } else {
+        window.speechSynthesis.resume();
+      }
+    };
+    
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    
+    // Attempt to enter fullscreen on mount
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen().catch(() => {});
+    }
+    
+    // Check for camera/mic permissions
+    const checkPermissions = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        setPermissionsGranted(true);
+        stream.getTracks().forEach(t => t.stop());
+      } catch (err) {
+        setPermissionsGranted(false);
+      }
+    };
+    checkPermissions();
+    
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
 
   // ── Stop everything ─────────────────────────────────
   const stopAll = () => {
@@ -108,6 +154,7 @@ const InterviewMode = () => {
     rec.onstart = () => setIsListening(true);
 
     rec.onresult = (e) => {
+      if (!isFullScreenRef.current) return;
       let newFinal = "";
       let interim  = "";
       for (let i = processed; i < e.results.length; i++) {
@@ -196,11 +243,18 @@ const InterviewMode = () => {
   };
 
   // ── Exit interview — save partial answers ────────────
-  const doExit = async () => {
-    if (!confirm("Leave interview? Your answers so far will be saved.")) return;
+  const handleExitClick = () => {
+    setShowExitModal(true);
+  };
 
+  const confirmExit = async () => {
+    setShowExitModal(false);
     exitedRef.current = true;
     stopAll();
+    
+    if (document.exitFullscreen && document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
 
     // Current question ka answer bhi collect karo
     const currentAnswer = answerRef.current.trim();
@@ -234,7 +288,7 @@ const InterviewMode = () => {
 
   // ── Per-question setup ───────────────────────────────
   useEffect(() => {
-    if (!questions?.length) return;
+    if (!questions?.length || permissionsGranted !== true) return;
 
     exitedRef.current = false;
     busyRef.current   = false;
@@ -254,6 +308,7 @@ const InterviewMode = () => {
 
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
+      if (!isFullScreenRef.current) return;
       setQuestionTimer(prev => {
         const next = prev <= 1 ? 0 : prev - 1;
         timerValRef.current = next;
@@ -270,12 +325,15 @@ const InterviewMode = () => {
       stopAll();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIndex]);
+  }, [currentIndex, permissionsGranted]);
 
   // ── Finish interview ─────────────────────────────────
   const finishInterview = async (answers) => {
     exitedRef.current = true;
     stopAll();
+    if (document.exitFullscreen && document.fullscreenElement) {
+      document.exitFullscreen().catch(() => {});
+    }
     if (webcamRef.current?.video?.srcObject) {
       webcamRef.current.video.srcObject.getTracks().forEach(t => t.stop());
     }
@@ -333,13 +391,55 @@ const InterviewMode = () => {
   const progress = ((currentIndex + 1) / questions.length) * 100;
 
   return (
-    <div className="interview-room">
-      {/* Header */}
-      <div className="room-header">
-        <button className="back-btn" onClick={doExit}>
-          <ArrowLeft size={18} /> Exit
-        </button>
-        <div className="room-title">
+    <>
+      {permissionsGranted === false && (
+        <div className="fullscreen-warning-overlay" style={{ zIndex: 10001 }}>
+          <div className="fullscreen-warning-content">
+            <h2>Camera/Mic Required</h2>
+            <p>Please allow camera and microphone permissions in your browser settings to continue the interview.</p>
+            <button 
+              className="enter-fullscreen-btn" 
+              onClick={() => window.location.reload()}
+            >
+              I have allowed permissions (Reload)
+            </button>
+            <div className="fullscreen-actions" style={{ marginTop: '16px' }}>
+              <button className="exit-fullscreen-btn" onClick={() => navigate('/interview')}>
+                Go Back
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {!isFullscreen && permissionsGranted === true && (
+        <div className="fullscreen-warning-overlay">
+          <div className="fullscreen-warning-content">
+            <h2>Fullscreen Required</h2>
+            <p>The interview must be taken in fullscreen mode to prevent distractions. Timers and recording are paused.</p>
+            <div className="fullscreen-actions">
+              <button className="exit-fullscreen-btn" onClick={handleExitClick}>
+                Exit Interview
+              </button>
+              <button 
+                className="enter-fullscreen-btn" 
+                onClick={() => {
+                  const elem = document.documentElement;
+                  if (elem.requestFullscreen) elem.requestFullscreen();
+                }}
+              >
+                Enter Fullscreen to Continue
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      <div className={`interview-room ${!isFullscreen ? 'blurred' : ''}`}>
+        {/* Header */}
+        <div className="room-header">
+          <button className="back-btn" onClick={handleExitClick}>
+            <ArrowLeft size={18} /> Exit
+          </button>
+          <div className="room-title">
           <h2>{jobTitle}</h2>
           <span className="room-topic">{jobTopic}</span>
         </div>
@@ -357,92 +457,123 @@ const InterviewMode = () => {
         </div>
       </div>
 
-      {/* Question */}
-      <div className="question-card">
-        <div className="question-label">
-          <Volume2 size={16} />
-          {aiSpeaking ? "AI is speaking..." : "Current Question"}
-        </div>
-        <p className="question-text">{questions[currentIndex]}</p>
-        <button
-          className="replay-btn"
-          onClick={() => doSpeak(`Question ${currentIndex + 1}. ${questions[currentIndex]}`)}
-          disabled={aiSpeaking}
-        >
-          <Volume2 size={14} />
-          {aiSpeaking ? "Speaking..." : "Replay"}
-        </button>
-      </div>
-
-      {/* Webcam + AI */}
-      <div className="room-body">
-        <div className="webcam-panel">
-          <Webcam ref={webcamRef} audio={false} className="webcam-feed" screenshotFormat="image/jpeg" />
-          <div className="webcam-label">You</div>
-        </div>
-        <div className="ai-panel">
-          <div className={`ai-avatar ${aiSpeaking ? "speaking" : ""}`}>
-            <div className="ai-circle">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                <line x1="12" y1="19" x2="12" y2="22"/>
-              </svg>
+      {/* Main Content Layout */}
+      <div className="room-content-layout">
+        
+        {/* Left Column (Question + Answer + Actions) */}
+        <div className="room-left">
+          {/* Question */}
+          <div className="question-card">
+            <div className="question-label">
+              <Volume2 size={16} />
+              {aiSpeaking ? "AI is speaking..." : "Current Question"}
             </div>
-            {aiSpeaking && (
-              <div className="audio-bars">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} style={{ animationDelay: `${i * 0.15}s` }} />
-                ))}
+            <p className="question-text">{questions[currentIndex]}</p>
+            <button
+              className="replay-btn"
+              onClick={() => doSpeak(`Question ${currentIndex + 1}. ${questions[currentIndex]}`)}
+              disabled={aiSpeaking}
+            >
+              <Volume2 size={14} />
+              {aiSpeaking ? "Speaking..." : "Replay"}
+            </button>
+          </div>
+
+          {/* Answer */}
+          <div className="answer-section">
+            <div className="listening-indicator">
+              {isListening
+                ? <><Mic size={16} className="pulse" /> Listening...</>
+                : <><MicOff size={16} /> Not listening</>
+              }
+            </div>
+            <div className={`answer-box${isListening && (userAnswer || interimAnswer) ? " answer-box--active" : ""}`}>
+              <strong>Your Answer</strong>
+              {(userAnswer || interimAnswer) ? (
+                <p>
+                  {userAnswer}
+                  {interimAnswer && <span className="interim-text"> {interimAnswer}</span>}
+                </p>
+              ) : (
+                <p className="answer-placeholder">Start speaking — your answer will appear here...</p>
+              )}
+            </div>
+            {feedback && (
+              <div className={`feedback-box ${feedbackScore >= 6 ? "good" : "needs-work"}`}>
+                <span className="feedback-score">{feedbackScore}/10</span>
+                <p>{feedback}</p>
               </div>
             )}
           </div>
-          <span className="ai-label">AI Interviewer</span>
-        </div>
-      </div>
 
-      {/* Answer */}
-      <div className="answer-section">
-        <div className="listening-indicator">
-          {isListening
-            ? <><Mic size={16} className="pulse" /> Listening...</>
-            : <><MicOff size={16} /> Not listening</>
-          }
-        </div>
-        <div className={`answer-box${isListening && (userAnswer || interimAnswer) ? " answer-box--active" : ""}`}>
-          <strong>Your Answer</strong>
-          {(userAnswer || interimAnswer) ? (
-            <p>
-              {userAnswer}
-              {interimAnswer && <span className="interim-text"> {interimAnswer}</span>}
-            </p>
-          ) : (
-            <p className="answer-placeholder">Start speaking — your answer will appear here...</p>
-          )}
-        </div>
-        {feedback && (
-          <div className={`feedback-box ${feedbackScore >= 6 ? "good" : "needs-work"}`}>
-            <span className="feedback-score">{feedbackScore}/10</span>
-            <p>{feedback}</p>
+          {/* Actions */}
+          <div className="room-actions">
+            {userAnswer ? (
+              <button className="skip-btn primary" onClick={doNext} disabled={evaluating}>
+                <SkipForward size={18} />
+                {evaluating ? "Evaluating..." : "Submit & Next"}
+              </button>
+            ) : (
+              <button className="skip-btn" onClick={doNext} disabled={evaluating}>
+                <SkipForward size={18} />
+                Skip
+              </button>
+            )}
           </div>
-        )}
-      </div>
+        </div>
 
-      {/* Actions */}
-      <div className="room-actions">
-        {userAnswer ? (
-          <button className="skip-btn primary" onClick={doNext} disabled={evaluating}>
-            <SkipForward size={18} />
-            {evaluating ? "Evaluating..." : "Submit & Next"}
-          </button>
-        ) : (
-          <button className="skip-btn" onClick={doNext} disabled={evaluating}>
-            <SkipForward size={18} />
-            Skip
-          </button>
-        )}
+        {/* Right Column (Webcam + AI) */}
+        <div className="room-right">
+          <div className="side-panels">
+            <div className="webcam-panel mini">
+              <Webcam ref={webcamRef} audio={false} className="webcam-feed" screenshotFormat="image/jpeg" />
+              <div className="webcam-label">You</div>
+              {faceWarning && (
+                <div className="face-warning-overlay">
+                  <div className="face-warning-box">
+                    ⚠️ {faceWarning}
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="ai-panel mini">
+              <div className={`ai-avatar ${aiSpeaking ? "speaking" : ""}`}>
+                <div className="ai-circle">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="22"/>
+                  </svg>
+                </div>
+                {aiSpeaking && (
+                  <div className="audio-bars">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} style={{ animationDelay: `${i * 0.15}s` }} />
+                    ))}
+                  </div>
+                )}
+              </div>
+              <span className="ai-label">AI Interviewer</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    
+      {/* Custom Exit Modal */}
+      {showExitModal && (
+        <div className="custom-modal-overlay">
+          <div className="custom-modal-content">
+            <h3>Leave Interview?</h3>
+            <p>Are you sure you want to exit? Your progress so far will be saved and the interview will end.</p>
+            <div className="custom-modal-actions">
+              <button className="btn-cancel" onClick={() => setShowExitModal(false)}>Cancel</button>
+              <button className="btn-confirm" onClick={confirmExit}>Leave Interview</button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
