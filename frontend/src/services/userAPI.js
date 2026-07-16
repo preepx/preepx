@@ -7,6 +7,7 @@ export const getAnalytics = () => API.get("/users/analytics").then((r) => r.data
 export const getLeaderboard = () => API.get("/users/leaderboard").then((r) => r.data);
 export const getAchievements = () => API.get("/users/achievements").then((r) => r.data);
 export const updateSettings = (settings) => API.put("/users/settings", settings).then((r) => r.data);
+export const updateProfileDetails = (data) => API.put("/users/profile", data).then((r) => r.data);
 
 export const uploadProfilePhoto = (file) => {
   const data = new FormData();

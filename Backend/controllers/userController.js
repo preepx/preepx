@@ -20,6 +20,12 @@ const safeUser = (user) => ({
   interviewsCompleted: user.interviewsCompleted || 0,
   level: user.level || 1,
   settings: user.settings || {},
+  college: user.college || "",
+  address: user.address || "",
+  bio: user.bio || "",
+  github: user.github || "",
+  linkedin: user.linkedin || "",
+  degree: user.degree || "",
 });
 
 // Step 1: User details submit kare → OTP generate karke email pe bhejo
@@ -227,6 +233,29 @@ const getProfile = async (req, res) => {
     if (!user) return res.status(404).json({ message: "User not found" });
     res.json(safeUser(user));
   } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updateProfileDetails = async (req, res) => {
+  try {
+    const { fullName, mobile, college, address, bio, github, linkedin, degree } = req.body;
+    const user = await User.findById(req.user);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (fullName) user.fullName = fullName;
+    if (mobile !== undefined) user.mobile = mobile;
+    if (college !== undefined) user.college = college;
+    if (address !== undefined) user.address = address;
+    if (bio !== undefined) user.bio = bio;
+    if (github !== undefined) user.github = github;
+    if (linkedin !== undefined) user.linkedin = linkedin;
+    if (degree !== undefined) user.degree = degree;
+
+    await user.save();
+    res.json(safeUser(user));
+  } catch (error) {
+    console.error("Update Profile Error:", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -493,6 +522,7 @@ module.exports = {
   resetPassword,
   loginUser,
   getProfile,
+  updateProfileDetails,
   updateProfilePhoto,
   updateSettings,
   getDashboard,

@@ -264,9 +264,7 @@
   }
 
   .navbar-center {
-    gap: 2px;
-    justify-content: flex-end;
-    flex: 0;
+    display: none;
   }
 
   .nav-link {

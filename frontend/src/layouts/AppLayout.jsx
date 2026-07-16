@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { getProfile, syncUserToStorage } from "../services/userAPI";
+import { useWallet } from "../features/wallet/hooks/useWallet";
 import WalletBadge from "../features/wallet/components/WalletBadge";
 import Footer from "../components/Footer";
 import "./AppLayout.css";
@@ -29,6 +30,7 @@ function AppLayout({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
+  const { balance } = useWallet();
 
   const refreshUser = () => {
     getProfile()
@@ -117,9 +119,9 @@ function AppLayout({ children }) {
             </div>
 
             <div className="topbar-right">
-              {user.streak > 0 && <span className="streak-badge">🔥 {user.streak} day streak</span>}
-              <span className="level-badge">Level {user.level || 1}</span>
-              <span className="points-badge">{user.points || 0} pts</span>
+              {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
+              <span className="level-badge"><span className="badge-text">Level </span>{user.level || 1}</span>
+              <span className="points-badge">⭐ {user.points || 0}<span className="badge-text"> pts</span></span>
             </div>
           </header>
           <div className="page-content">{children}</div>

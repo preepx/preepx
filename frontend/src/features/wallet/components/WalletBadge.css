@@ -39,8 +39,13 @@
 @media (max-width: 900px) {
 
   .wallet-badge {
-    font-size: 11px;
-    padding: 4px 10px;
+    font-size: 13px;
+    padding: 6px 10px;
     gap: 4px;
+  }
+  
+  .wallet-badge-label,
+  .wallet-badge-unit {
+    display: none;
   }
 }
