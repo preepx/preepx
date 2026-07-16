@@ -21,6 +21,12 @@ const userSchema = mongoose.Schema(
       timerEnabled: { type: Boolean, default: true },
     },
     isBlocked: { type: Boolean, default: false },
+    college: { type: String, default: "" },
+    address: { type: String, default: "" },
+    bio: { type: String, default: "" },
+    github: { type: String, default: "" },
+    linkedin: { type: String, default: "" },
+    degree: { type: String, default: "" },
   },
   { timestamps: true }
 );

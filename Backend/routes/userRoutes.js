@@ -14,6 +14,7 @@ const {
   resetPassword,
   loginUser,
   getProfile,
+  updateProfileDetails,
   updateProfilePhoto,
   updateSettings,
   getDashboard,
@@ -43,6 +44,7 @@ router.post("/reset-password", resetPassword);
 router.get("/platform-stats", getPlatformStats);
 router.get("/dashboard", protect, getDashboard);
 router.get("/profile", protect, getProfile);
+router.put("/profile", protect, updateProfileDetails);
 router.put("/profile-photo", protect, upload.single("profilePic"), updateProfilePhoto);
 router.put("/settings", protect, updateSettings);
 router.get("/analytics", protect, getAnalytics);
