@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Plus, Clock, Trophy, Target, Search, Trash2,
-  ChevronRight, Zap, BookOpen, BarChart3, Award,
+  ChevronRight, Zap, BookOpen, BarChart3, Award, Flame,
 } from "lucide-react";
 import { getMcqDashboard, deleteMcqResult } from "../services/mcqAPI";
 import { syncUserToStorage } from "../services/userAPI";
@@ -17,6 +17,7 @@ const ObjectiveExamPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("all");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -64,12 +65,15 @@ const ObjectiveExamPage = () => {
   const mcqResults = dashboard?.mcqResults || [];
   const globalStats = dashboard?.stats || {};
 
-  const filtered = mcqResults.filter((exam) =>
-    exam.topic?.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = mcqResults.filter((exam) => {
+    const matchSearch = exam.topic?.toLowerCase().includes(search.toLowerCase());
+    // Filter can be extended if we have status for exams, currently all are completed
+    const matchFilter = filter === "all" || true; 
+    return matchSearch && matchFilter;
+  });
 
   const formatDate = (date) =>
-    new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    new Date(date).toLocaleDateString("en-US", { month: "short", day: "numeric" });
 
   const getAccuracy = (exam) =>
     exam.totalQuestions ? Math.round((exam.score / exam.totalQuestions) * 100) : 0;
@@ -94,10 +98,10 @@ const ObjectiveExamPage = () => {
     <div className="dashboard-page">
       <div className="dashboard-header">
         <div>
-          <h1>Objective Exams</h1>
+          <h1>Welcome back, {user.fullName?.split(" ")[0] || "there"}</h1>
           <p>
             Level {globalStats.level || 1} · {globalStats.points || 0} points
-            {globalStats.streak > 0 ? ` · 🔥 ${globalStats.streak} day streak` : ""}
+            {globalStats.streak > 0 ? ` · 🔥 ${globalStats.streak} day streak` : " · Start your streak!"}
           </p>
         </div>
         <div className="header-actions">
@@ -113,11 +117,11 @@ const ObjectiveExamPage = () => {
       <div className="stats-row">
         <div className="stat-card">
           <div className="stat-icon blue"><BookOpen size={20} /></div>
-          <div><span className="stat-num">{mcqStats.totalExams}</span><span className="stat-lbl">Exams Taken</span></div>
+          <div><span className="stat-num">{mcqStats.totalExams}</span><span className="stat-lbl">Total Exams</span></div>
         </div>
         <div className="stat-card">
           <div className="stat-icon green"><Target size={20} /></div>
-          <div><span className="stat-num">{mcqStats.avgAccuracy}%</span><span className="stat-lbl">Avg Accuracy</span></div>
+          <div><span className="stat-num">{mcqStats.avgAccuracy}%</span><span className="stat-lbl">Avg Score</span></div>
         </div>
         <div className="stat-card">
           <div className="stat-icon purple"><Trophy size={20} /></div>
@@ -125,7 +129,7 @@ const ObjectiveExamPage = () => {
         </div>
         <div className="stat-card">
           <div className="stat-icon orange"><Zap size={20} /></div>
-          <div><span className="stat-num">{mcqStats.totalQuestions}</span><span className="stat-lbl">Questions Attempted</span></div>
+          <div><span className="stat-num">{mcqStats.totalQuestions}</span><span className="stat-lbl">Questions</span></div>
         </div>
       </div>
 
@@ -136,8 +140,12 @@ const ObjectiveExamPage = () => {
             <div className="panel-tools">
               <div className="search-box">
                 <Search size={16} />
-                <input placeholder="Search by topic..." value={search} onChange={(e) => setSearch(e.target.value)} />
+                <input placeholder="Search..." value={search} onChange={(e) => setSearch(e.target.value)} />
               </div>
+              <select value={filter} onChange={(e) => setFilter(e.target.value)} className="filter-select">
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+              </select>
             </div>
           </div>
 
@@ -173,31 +181,48 @@ const ObjectiveExamPage = () => {
           ) : (
             <EmptyState
               icon={Trophy}
-              title={search ? "No matches found" : "No exams yet"}
-              desc={search
-                ? "Try a different search term."
+              title={search || filter !== "all" ? "No matches found" : "No exams yet"}
+              desc={search || filter !== "all"
+                ? "Try changing your search or filter."
                 : "Take your first objective exam to track scores and review answers."}
-              actionLabel={!search ? "Start First Exam" : undefined}
-              onAction={!search ? () => navigate("/objective-exam/take") : undefined}
+              actionLabel={!search && filter === "all" ? "Start First Exam" : undefined}
+              onAction={!search && filter === "all" ? () => navigate("/objective-exam/take") : undefined}
             />
           )}
         </div>
 
         <div className="side-panels">
+          {dashboard?.recentActivity?.length > 0 && (
+            <div className="panel activity-panel">
+              <div className="panel-header"><Flame size={18} /><h2>Recent Activity</h2></div>
+              <div className="activity-list">
+                {dashboard.recentActivity.map((a, i) => (
+                  <div key={i} className="activity-item">
+                    <span className="act-role">
+                      {a.type === "mcq" ? "📝 " : ""}{a.role}
+                      {a.type === "mcq" && <span style={{ fontSize: 11, color: "var(--text-muted)", marginLeft: 6 }}>MCQ</span>}
+                    </span>
+                    <span className="act-score">{a.maxScore ? Math.round((a.score / a.maxScore) * 100) : 0}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="panel quick-start-panel">
             <h2>Quick Actions</h2>
             <button className="action-btn primary full" onClick={() => navigate("/objective-exam/take")}>
               <Plus size={18} /> New Objective Exam
             </button>
-            <button className="action-btn secondary full" onClick={() => navigate("/leaderboard")}>
-              View Leaderboard
+            <button 
+              className="action-btn primary full" 
+              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px' }} 
+              onClick={() => navigate("/interview")}
+            >
+              ⚡ AI Interview
             </button>
-            <button className="action-btn secondary full" onClick={() => navigate("/analytics")}>
-              <BarChart3 size={16} /> Analytics
-            </button>
-            <button className="action-btn secondary full" onClick={() => navigate("/interview")}>
-              <Clock size={16} /> Mock Interviews
-            </button>
+            <button className="action-btn secondary full" onClick={() => navigate("/analytics")}>View Analytics</button>
+            <button className="action-btn secondary full" onClick={() => navigate("/leaderboard")}>Leaderboard</button>
+            <button className="action-btn secondary full" onClick={() => navigate("/achievements")}>Achievements</button>
           </div>
           <div className="panel tips-panel">
             <div className="panel-header"><Award size={18} /><h2>Pro Tips</h2></div>
@@ -215,3 +240,4 @@ const ObjectiveExamPage = () => {
 };
 
 export default ObjectiveExamPage;
+
