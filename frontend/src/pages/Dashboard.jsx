@@ -49,7 +49,25 @@ function Dashboard() {
       { value: "24/7", label: "AI Available" },
     ];
 
-  const companies = ["Google", "Amazon", "Microsoft", "Meta", "Netflix", "Adobe", "Accenture", "Capgemini", "TCS"];
+  const companies = [
+    { name: "Google", icon: "/company/google-2015-logo-svgrepo-com.svg" },
+    { name: "Amazon", icon: "/company/amazon-2-logo-svgrepo-com.svg" },
+    { name: "Meta", icon: "/company/facebook-logo-svgrepo-com.svg" },
+    { name: "Netflix", icon: "/company/netflix-2-logo-svgrepo-com.svg" },
+    { name: "IBM", icon: "/company/ibm-logo-svgrepo-com.svg" },
+    { name: "Oracle", icon: "/company/oracle-6-logo-svgrepo-com.svg" },
+    { name: "Salesforce", icon: "/company/salesforce-2-logo-svgrepo-com.svg" },
+    { name: "LinkedIn", icon: "/company/linkedin-logo-svgrepo-com.svg" },
+    { name: "Walmart", icon: "/company/walmart-logo-svgrepo-com.svg" },
+    { name: "Cisco", icon: "/company/cisco-2-logo-svgrepo-com.svg" },
+    { name: "DHL", icon: "/company/dhl-express-logo-svgrepo-com.svg" },
+    { name: "Flipkart", icon: "/company/flipkart-logo-svgrepo-com.svg" },
+    { name: "Booking.com", icon: "/company/bookingcom-logo-svgrepo-com.svg" },
+    { name: "Hyundai", icon: "/company/hyundai-automobiles-1-logo-svgrepo-com.svg" },
+    { name: "Mastercard", icon: "/company/mastercard-2-logo-svgrepo-com.svg" },
+    { name: "Paypal", icon: "/company/paypal-logo-svgrepo-com.svg" },
+    { name: "Visa", icon: "/company/visa-logo-svgrepo-com.svg" },
+  ];
 
   const productCards = [
     { icon: Mic, title: "Live Interview Room", desc: "Webcam + voice + AI interviewer with real-time evaluation", color: "#4f46e5", path: "/interview" },
@@ -74,9 +92,9 @@ function Dashboard() {
   ];
 
   const testimonials = [
-    { name: "Priya Sharma", role: "Frontend Dev @ Adobe", text: "PrepX helped me practice 20+ mock interviews. The AI feedback is incredibly detailed!", rating: 5 },
-    { name: "Rahul Verma", role: "SDE @ Capgemini", text: "Improved my answer quality by 40% in just 2 weeks. The analytics dashboard is a game-changer.", rating: 5 },
-    { name: "Ananya Patel", role: "Data Analyst @ Accenture", text: "Resume-based questions were spot-on. Best interview prep platform I've used.", rating: 4 },
+    { name: "Priya Sharma", role: "Software Engineer @ Walmart", text: "PrepX helped me practice 20+ mock interviews. The AI feedback is incredibly detailed!", rating: 5 },
+    { name: "Rahul Verma", role: "Associate @ Amazon", text: "Improved my answer quality by 40% in just 2 weeks. The analytics dashboard is a game-changer.", rating: 5 },
+    { name: "Ananya Patel", role: "Data Analyst @ Cisco", text: "Resume-based questions were spot-on. Best interview prep platform I've used.", rating: 4 },
   ];
 
   const faqs = [
@@ -154,8 +172,8 @@ function Dashboard() {
         <p>Trusted by candidates preparing for</p>
         <div className="company-logos-wrapper">
           <div className="company-logos">
-            {companies.map((c, i) => <span key={`c1-${i}`} className="company-name">{c}</span>)}
-            {companies.map((c, i) => <span key={`c2-${i}`} className="company-name">{c}</span>)}
+            {companies.map((c, i) => <img key={`c1-${i}`} src={c.icon} alt={c.name} className="company-item-img" />)}
+            {companies.map((c, i) => <img key={`c2-${i}`} src={c.icon} alt={c.name} className="company-item-img" />)}
           </div>
         </div>
       </section>

@@ -524,7 +524,7 @@
   gap: 60px;
   align-items: center;
   width: max-content;
-  animation: scroll-x 30s linear infinite;
+  animation: scroll-x 45s linear infinite;
   padding-left: 60px;
 }
 
@@ -538,31 +538,16 @@
   }
 }
 
-.company-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  filter: grayscale(100%) opacity(0.6);
-  transition: all 0.3s ease;
+.company-item-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
   cursor: default;
 }
 
-.company-item:hover {
-  filter: grayscale(0%) opacity(1);
-}
-
-.company-item img {
-  height: 28px;
-  width: auto;
-  border-radius: 4px;
-  object-fit: contain;
-}
-
-.company-name {
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--text);
-  letter-spacing: -0.5px;
+.company-item-img:hover {
+  transform: scale(1.05);
 }
 
 /* ── SECTIONS ── */
