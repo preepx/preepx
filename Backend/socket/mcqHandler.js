@@ -137,7 +137,13 @@ const mcqHandler = (io, socket) => {
 
 async function generateAndSendNextQuestion(socket) {
   const session = socket.mcqSession;
-  const prompt = `Generate exactly ONE multiple choice question about '${session.topic}'. 
+  
+  const previousQuestions = session.questionsAndAnswers.map(qa => qa.question);
+  const avoidQuestionsText = previousQuestions.length > 0 
+    ? `\nDo NOT generate any of the following questions:\n${previousQuestions.map(q => `- "${q}"`).join('\n')}` 
+    : '';
+
+  const prompt = `Generate exactly ONE multiple choice question about '${session.topic}'. ${avoidQuestionsText}
 Provide 4 options. Format the output STRICTLY as a JSON object with this exact structure:
 {
   "question": "The actual question text?",
