@@ -2,7 +2,8 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 const protect = async (req, res, next) => {
-  let token = req.headers.authorization?.split(" ")[1];
+  // Accept token from header OR query string (needed for iframe src requests)
+  let token = req.headers.authorization?.split(" ")[1] || req.query.token;
   if (!token) return res.status(401).json({ message: "No token provided" });
 
   try {

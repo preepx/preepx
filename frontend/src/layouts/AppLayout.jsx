@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, Menu, X, Upload, Moon, Sun, Zap, Wallet,
+  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet,
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { getProfile, syncUserToStorage } from "../services/userAPI";
@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { to: "/analytics", icon: BarChart3, label: "Analytics" },
   { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
   { to: "/achievements", icon: Award, label: "Achievements" },
-  { to: "/resume-interview", icon: Upload, label: "Resume" },
+  { to: "/btech-notes", icon: BookOpen, label: "Btech Notes" },
   { to: "/profile", icon: User, label: "Profile" },
   { to: "/settings", icon: Settings, label: "Settings" },
 ];
@@ -111,23 +111,25 @@ function AppLayout({ children }) {
         {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
 
         <div className="app-content">
-          <header className="topbar">
-            <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
-            
-            <div className="topbar-center">
-              <WalletBadge />
-            </div>
-
-            <div className="topbar-right">
-              {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
-              <span className="level-badge"><span className="badge-text">Level </span>{user.level || 1}</span>
-              <span className="points-badge">⭐ {user.points || 0}<span className="badge-text"> pts</span></span>
-            </div>
-          </header>
+          {!location.pathname.includes("/pdf") && (
+            <header className="topbar">
+              <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
+  
+              <div className="topbar-center">
+                <WalletBadge />
+              </div>
+  
+              <div className="topbar-right">
+                {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
+                <span className="level-badge"><span className="badge-text">Level </span>{user.level || 1}</span>
+                <span className="points-badge">⭐ {user.points || 0}<span className="badge-text"> pts</span></span>
+              </div>
+            </header>
+          )}
           <div className="page-content">{children}</div>
         </div>
       </div>
-      <Footer />
+      {!location.pathname.includes("/pdf") && <Footer />}
     </>
   );
 }

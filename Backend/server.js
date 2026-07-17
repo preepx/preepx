@@ -52,6 +52,7 @@ app.use("/api/mcq", require("./routes/mcqRoutes"));
 app.use("/api/resume", require("./routes/resumeRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/wallet", require("./routes/walletRoutes"));
+app.use("/api/btec-notes", require("./routes/btecNoteRoutes"));
 
 const http = require("http");
 const { Server } = require("socket.io");

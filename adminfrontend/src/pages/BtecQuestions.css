@@ -1,0 +1,141 @@
+/* ── Q&A page ──────────────────────────────────────────────────────────────── */
+.btec-qa-page {
+  max-width: 860px;
+}
+
+.qa-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.qa-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.qa-card--open {
+  border-color: var(--accent-primary);
+}
+
+/* Accordion header */
+.qa-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  text-align: left;
+  gap: 0.75rem;
+  transition: background 0.15s;
+}
+
+.qa-card-header:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.qa-card-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.qa-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  flex-shrink: 0;
+}
+
+.qa-count {
+  font-weight: 600;
+  background: rgba(59, 130, 246, 0.12);
+  color: #60a5fa;
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+}
+
+/* Expanded body */
+.qa-card-body {
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.qa-empty {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  padding: 0.75rem 0;
+}
+
+/* Single Q&A row */
+.qa-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 36px;
+  gap: 0.75rem;
+  align-items: start;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.qa-row-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 10px;
+  flex-shrink: 0;
+}
+
+.qa-row-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.qa-q-input {
+  font-weight: 600;
+}
+
+.qa-a-input {
+  font-size: 0.875rem;
+  resize: vertical;
+}
+
+/* Footer actions */
+.qa-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .qa-row {
+    grid-template-columns: 24px 1fr 34px;
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,272 @@
+/* ── PDF Viewer page ──────────────────────────────────────────────────────── */
+.pv-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  /* fill the app-content area */
+  max-width: 100%;
+  padding: 0;
+  overflow: hidden;
+  animation: pv-in 0.2s ease;
+}
+
+@keyframes pv-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.pv-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.pv-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+
+.pv-back:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--text);
+}
+
+.pv-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.pv-icon {
+  color: #fca5a5;
+  flex-shrink: 0;
+}
+
+.pv-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pv-unit {
+  font-size: 11px;
+  font-weight: 600;
+  color: #a5b4fc;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 2px 8px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+/* ── Frame wrapper ───────────────────────────────────────────────────────── */
+.pv-frame-wrap {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: #1a1a2e;
+}
+
+/* Invisible shield that sits on top of the iframe to block right-click */
+.pv-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  /* pointer-events: none would let clicks through to iframe;
+     we want right-click blocked but scroll/zoom to work —
+     so we only intercept contextmenu via onContextMenu handler.
+     pointer-events stays "auto" so the user can still scroll. */
+  pointer-events: none;
+  /* allow scrolling/zooming through */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.pv-react-pdf-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #1e1e2e;
+}
+
+.pv-pdf-page-wrapper {
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.pv-pdf-page-wrapper:last-child {
+  margin-bottom: 0;
+}
+
+/* React-PDF overrides to make it look clean */
+.react-pdf__Page__canvas {
+  margin: 0 auto;
+}
+
+/* ── Footer notice ───────────────────────────────────────────────────────── */
+.pv-notice {
+  flex-shrink: 0;
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  padding: 6px 16px;
+  background: rgba(239, 68, 68, 0.05);
+  border-top: 1px solid rgba(239, 68, 68, 0.12);
+  letter-spacing: 0.02em;
+}
+
+/* ── Error state ─────────────────────────────────────────────────────────── */
+.pv-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 80px 24px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.pv-error svg {
+  color: #f87171;
+}
+
+.pv-error button {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* ── Block Printing ──────────────────────────────────────────────────────── */
+@media print {
+  body {
+    display: none !important;
+  }
+}
+
+/* ── Extra Info ──────────────────────────────────────────────────────── */
+.pv-extra-info {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 24px;
+}
+
+.pv-extra-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #f1f5f9;
+}
+
+.pv-extra-info p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+}
+
+.pv-topics {
+  margin-bottom: 16px;
+}
+
+.pv-topics strong {
+  display: block;
+  color: #e2e8f0;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.pv-topics ul {
+  list-style: disc inside;
+  color: var(--text-muted);
+  margin: 0;
+  padding: 0;
+}
+
+.pv-topics li {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.pv-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pv-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 50px;
+}
+
+[data-theme="light"] .pv-extra-info {
+  background: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .pv-extra-info h3,
+[data-theme="light"] .pv-topics strong {
+  color: #1e293b;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+
+/* ── Light theme ─────────────────────────────────────────────────────────── */
+[data-theme="light"] .pv-header {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .pv-frame-wrap {
+  background: #f0f0f0;
+}
+
+[data-theme="light"] .pv-notice {
+  background: rgba(239, 68, 68, 0.04);
+  border-color: rgba(239, 68, 68, 0.1);
+}

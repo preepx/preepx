@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Outlet, NavLink, useNavigate, Navigate } from 'react-router-dom';
-import { LayoutDashboard, Users, CreditCard, LogOut, Shield, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Users, CreditCard, LogOut, Shield, Menu, X, BookOpen, HelpCircle, FileUp } from 'lucide-react';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
@@ -58,6 +58,21 @@ const AdminLayout = () => {
           <NavLink to="/transactions" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => setIsMobileMenuOpen(false)}>
             <CreditCard size={20} />
             <span>Transactions</span>
+          </NavLink>
+
+          <NavLink to="/btec-notes" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => setIsMobileMenuOpen(false)}>
+            <BookOpen size={20} />
+            <span>B.Tech Notes</span>
+          </NavLink>
+
+          <NavLink to="/btec-pdf-notes" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => setIsMobileMenuOpen(false)}>
+            <FileUp size={20} />
+            <span>PDF Notes</span>
+          </NavLink>
+
+          <NavLink to="/btec-questions" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => setIsMobileMenuOpen(false)}>
+            <HelpCircle size={20} />
+            <span>Important Q &amp; A</span>
           </NavLink>
         </nav>
 

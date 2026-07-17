@@ -9,8 +9,22 @@ const {
   getUserDetails,
   getTransactions,
   toggleUserBlock,
-  addCoinsToWallet
+  addCoinsToWallet,
 } = require("../controllers/adminController");
+
+const {
+  getAllNotes,
+  getNoteById,
+  createNote,
+  updateNote,
+  deleteNote,
+  togglePublish,
+  updateNoteQA,
+  uploadPdfNote,
+  uploadImageNote,
+} = require("../controllers/btecNoteController");
+
+const { uploadPdf, uploadImage } = require("../config/cloudinary");
 
 // Public admin login route
 router.post("/login", adminLogin);
@@ -24,5 +38,18 @@ router.get("/users/:id", getUserDetails);
 router.put("/users/:id/block", toggleUserBlock);
 router.post("/users/:id/wallet/add", addCoinsToWallet);
 router.get("/transactions", getTransactions);
+
+// B.Tech Notes — PDF upload MUST be registered before /:id routes
+router.post("/btec-notes/upload-pdf", uploadPdf.single("pdf"), uploadPdfNote);
+router.post("/btec-notes/upload-image", uploadImage.single("image"), uploadImageNote);
+
+// B.Tech Notes CRUD
+router.get("/btec-notes", getAllNotes);
+router.post("/btec-notes", createNote);
+router.get("/btec-notes/:id", getNoteById);
+router.put("/btec-notes/:id", updateNote);
+router.delete("/btec-notes/:id", deleteNote);
+router.patch("/btec-notes/:id/publish", togglePublish);
+router.patch("/btec-notes/:id/qa", updateNoteQA);
 
 module.exports = router;

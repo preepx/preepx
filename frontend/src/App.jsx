@@ -19,6 +19,9 @@ const Settings = lazy(() => import("./pages/Settings"));
 const InterviewPage = lazy(() => import("./Interview/InterviewPage"));
 const StartInterview = lazy(() => import("./Interview/StartInterview"));
 const InterviewMode = lazy(() => import("./Interview/InterviewMode"));
+const BtechNotes = lazy(() => import("./pages/BtechNotes"));
+const BtechNoteDetail = lazy(() => import("./pages/BtechNoteDetail"));
+const BtechPdfViewer = lazy(() => import("./pages/BtechPdfViewer"));
 const ResumeUpload = lazy(() => import("./resume/ResumeUpload"));
 const Auth = lazy(() => import("./Login/Auth"));
 const AuthCallback = lazy(() => import("./Login/AuthCallback"));
@@ -37,9 +40,11 @@ const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/interview", "/analytics", "/leaderboard", "/achievements",
-    "/settings", "/profile", "/resume-interview", "/objective-exam", "/wallet",
+    "/settings", "/profile", "/resume-interview", "/btech-notes", "/objective-exam", "/wallet",
   ];
-  return sidebarRoutes.includes(pathname) || (pathname.startsWith("/objective-exam/") && !FULLSCREEN_ROUTES.includes(pathname));
+  return sidebarRoutes.includes(pathname)
+    || pathname.startsWith("/btech-notes/")
+    || (pathname.startsWith("/objective-exam/") && !FULLSCREEN_ROUTES.includes(pathname));
 }
 
 function LayoutWrapper({ children }) {
@@ -105,6 +110,9 @@ function AppContent() {
           <Route path="/start-interview" element={<ProtectedRoute><StartInterview /></ProtectedRoute>} />
           <Route path="/interview-mode" element={<ProtectedRoute><InterviewMode /></ProtectedRoute>} />
           <Route path="/resume-interview" element={<ProtectedRoute><ResumeUpload /></ProtectedRoute>} />
+          <Route path="/btech-notes" element={<ProtectedRoute><BtechNotes /></ProtectedRoute>} />
+          <Route path="/btech-notes/:id" element={<ProtectedRoute><BtechNoteDetail /></ProtectedRoute>} />
+          <Route path="/btech-notes/:id/pdf" element={<ProtectedRoute><BtechPdfViewer /></ProtectedRoute>} />
           <Route path="/feedback" element={<ProtectedRoute><FeedbackPage /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/objective-exam" element={<ProtectedRoute><ObjectiveExamPage /></ProtectedRoute>} />
