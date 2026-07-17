@@ -362,7 +362,7 @@
 }
 
 .answer-placeholder {
-  color: #94a3b8 !important;
+  color: var(--text-muted) !important;
   font-style: italic;
 }
 
@@ -488,7 +488,7 @@
 
 /* Real-time interim speech text */
 .interim-text {
-  color: #94a3b8;
+  color: var(--text-muted);
   font-style: italic;
 }
 
@@ -631,7 +631,7 @@
 
 .btn-cancel {
   padding: 10px 20px;
-  border: 1px solid var(--border, #e2e8f0);
+  border: 1px solid var(--border, var(--border));
   background: transparent;
   border-radius: 8px;
   color: var(--text, #334155);

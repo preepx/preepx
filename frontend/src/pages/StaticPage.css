@@ -29,7 +29,7 @@
 .static-page-content {
   max-width: 1000px;
   margin: -30px auto 60px;
-  background: white;
+  background: var(--surface);
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   padding: 48px;
@@ -47,14 +47,14 @@
 .static-section h2 {
   font-size: 24px;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
   margin-bottom: 16px;
   letter-spacing: -0.5px;
 }
 
 .static-section p {
   font-size: 16px;
-  color: #475569;
+  color: var(--text-muted);
   line-height: 1.8;
   white-space: pre-wrap;
 }

@@ -271,7 +271,7 @@
 }
 
 .input-group input::placeholder {
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .input-group input:focus {
@@ -695,7 +695,7 @@
 
 .auth-google-btn:hover {
   background: var(--bg);
-  border-color: #cbd5e1;
+  border-color: var(--border);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 

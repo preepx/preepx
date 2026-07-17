@@ -495,9 +495,9 @@
 /* ── COMPANIES STRIP ── */
 .companies-strip {
   padding: 36px 0;
-  background: white;
-  border-top: 1px solid #f1f5f9;
-  border-bottom: 1px solid #f1f5f9;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   text-align: center;
   overflow: hidden;
 }
@@ -505,7 +505,7 @@
 .companies-strip p {
   font-size: 12px;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 1.5px;
   margin-bottom: 24px;
@@ -561,7 +561,7 @@
 .company-name {
   font-size: 20px;
   font-weight: 800;
-  color: #334155;
+  color: var(--text);
   letter-spacing: -0.5px;
 }
 
@@ -582,12 +582,12 @@
   font-weight: 900;
   letter-spacing: -1.2px;
   margin-bottom: 10px;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .section-header p {
   font-size: 17px;
-  color: #64748b;
+  color: var(--text-muted);
   max-width: 480px;
   margin: 0 auto;
   line-height: 1.6;
@@ -609,7 +609,7 @@
 /* ── PRODUCT CARDS ── */
 .product-section {
   max-width: 100%;
-  background: #fafbfc;
+  background: var(--bg);
   padding-top: 96px;
   padding-bottom: 96px;
 }
@@ -627,8 +627,8 @@
 }
 
 .product-card {
-  background: white;
-  border: 1px solid #e8ecf0;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 18px;
   padding: 28px;
   transition: all 0.25s;
@@ -649,7 +649,7 @@
 .product-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 20px 48px rgba(15, 23, 42, 0.1);
-  border-color: #d4d8e0;
+  border-color: var(--primary);
 }
 
 .product-icon {
@@ -668,12 +668,12 @@
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 8px;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .product-card p {
   font-size: 13.5px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.55;
 }
 
@@ -685,8 +685,8 @@
 }
 
 .step-card {
-  background: white;
-  border: 1px solid #e8ecf0;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 20px;
   padding: 36px 28px;
   text-align: center;
@@ -732,12 +732,12 @@
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 10px;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .step-card p {
   font-size: 14px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.65;
 }
 
@@ -749,7 +749,7 @@
 /* ── FEATURES ── */
 .features-section {
   max-width: 100%;
-  background: #f1f5f9;
+  background: var(--bg);
   padding: 96px 24px;
 }
 
@@ -767,10 +767,10 @@
 }
 
 .feature-card {
-  background: white;
+  background: var(--surface);
   border-radius: 16px;
   padding: 26px;
-  border: 1px solid #e8ecf0;
+  border: 1px solid var(--border);
   transition: all 0.2s;
 }
 
@@ -796,12 +796,12 @@
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 7px;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .feature-card p {
   font-size: 13.5px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.55;
 }
 
@@ -809,7 +809,7 @@
 .testimonials-section {
   max-width: 100%;
   padding: 96px 24px;
-  background: white;
+  background: var(--surface);
 }
 
 .testimonials-section .section-header,
@@ -876,13 +876,13 @@
   display: block;
   font-size: 14px;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .t-role {
   display: block;
   font-size: 12px;
-  color: #64748b;
+  color: var(--text-muted);
   margin-top: 2px;
 }
 
@@ -899,7 +899,7 @@
 }
 
 .faq-item {
-  background: white;
+  background: var(--surface);
   border: 1px solid #e8ecf0;
   border-radius: 14px;
   padding: 18px 22px;
@@ -919,7 +919,7 @@
   align-items: center;
   font-weight: 600;
   font-size: 15px;
-  color: #0f172a;
+  color: var(--text);
   gap: 12px;
 }
 
@@ -931,7 +931,7 @@
 .faq-a {
   margin-top: 14px;
   font-size: 14px;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.7;
   padding-top: 14px;
   border-top: 1px solid #f1f5f9;

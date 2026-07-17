@@ -46,7 +46,7 @@
   width: 56px;
   height: 56px;
   background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 14px;
   display: flex;
   align-items: center;

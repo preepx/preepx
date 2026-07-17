@@ -86,7 +86,7 @@
 }
 
 .lb-row.silver .lb-rank {
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 .lb-row.bronze .lb-rank {
@@ -189,7 +189,7 @@
 
 .podium-2 {
   padding-bottom: 16px;
-  border-color: #94a3b8;
+  border-color: var(--text-muted);
 }
 
 .podium-3 {

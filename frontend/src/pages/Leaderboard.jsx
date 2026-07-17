@@ -24,6 +24,13 @@ function Leaderboard() {
       .finally(() => setLoading(false));
   }, []);
 
+  const maskName = (name, isCurrentUser) => {
+    const defaultName = name || "Anonymous";
+    if (isCurrentUser || defaultName === "Anonymous") return defaultName;
+    const firstWord = defaultName.split(" ")[0];
+    return firstWord.substring(0, 3) + "***";
+  };
+
   if (loading) return <Loader />;
   if (!data) return <EmptyState icon={Trophy} title="Leaderboard Unavailable" desc="Could not load rankings." actionLabel="Retry" onAction={() => window.location.reload()} />;
 
@@ -56,8 +63,8 @@ function Leaderboard() {
             const heights = ["podium-2", "podium-1", "podium-3"];
             return (
               <div key={entry.rank} className={`podium-item ${heights[idx]}`}>
-                <img src={entry.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(entry.fullName || "U")}&background=4f46e5&color=fff`} alt="" />
-                <span className="podium-name">{entry.fullName?.split(" ")[0]}</span>
+                <img src={entry.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(maskName(entry.fullName, entry.isCurrentUser))}&background=4f46e5&color=fff`} alt="" />
+                <span className="podium-name">{maskName(entry.fullName, entry.isCurrentUser)}</span>
                 <span className="podium-pts">{entry.points} pts</span>
                 <span className="podium-rank">#{entry.rank}</span>
               </div>
@@ -72,9 +79,9 @@ function Leaderboard() {
           return (
             <div key={entry.rank} className={`lb-row ${entry.isCurrentUser ? "current" : ""} ${i < 3 ? RANK_STYLES[i].cls : ""}`}>
               <div className="lb-rank">{RankIcon ? <RankIcon size={18} /> : <span>#{entry.rank}</span>}</div>
-              <img src={entry.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(entry.fullName || "U")}&background=4f46e5&color=fff`} alt="" className="lb-avatar" />
+              <img src={entry.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(maskName(entry.fullName, entry.isCurrentUser))}&background=4f46e5&color=fff`} alt="" className="lb-avatar" />
               <div className="lb-info">
-                <span className="lb-name">{entry.fullName || "Anonymous"}{entry.isCurrentUser && <span className="you-tag">You</span>}</span>
+                <span className="lb-name">{maskName(entry.fullName, entry.isCurrentUser)}{entry.isCurrentUser && <span className="you-tag">You</span>}</span>
                 <span className="lb-meta">Lvl {entry.level} · {entry.interviewsCompleted} interviews{entry.streak > 0 && ` · 🔥 ${entry.streak}`}</span>
               </div>
               <div className="lb-score"><span className="lb-points">{entry.points}</span><span className="lb-pts-label">pts</span></div>

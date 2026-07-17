@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Moon, Sun } from "lucide-react";
 import "./Navbar.css";
 
 function Navbar() {
@@ -9,6 +10,16 @@ function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
   const user = JSON.parse(localStorage.getItem("user") || "null");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   const navLinks = user
     ? [
@@ -61,6 +72,10 @@ function Navbar() {
         </div>
 
         <div className="navbar-right">
+          <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle theme" style={{ background: 'transparent', border: 'none', color: 'rgba(255, 255, 255, 0.8)', cursor: 'pointer', display: 'flex', alignItems: 'center', marginRight: '12px', padding: '8px' }}>
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+
           {user ? (
             <div className="profile-wrapper" ref={profileRef}>
               <button
