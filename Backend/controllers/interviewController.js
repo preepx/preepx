@@ -99,21 +99,21 @@ const evaluateUserAnswer = async (req, res) => {
       return res.status(400).json({ error: "Question & userAnswer required" });
     }
 
-    const prompt = `You are an encouraging interview coach who wants to boost the candidate's confidence. The answer was captured via speech recognition and may have transcription errors.
+    const prompt = `You are a strict, highly professional technical interviewer. Your task is to accurately and critically evaluate the candidate's answer. The answer was captured via speech recognition and may have transcription errors (ignore minor typos).
 
 Question: "${question}"
 Candidate's Answer: "${userAnswer}"
 
-Scoring rules (be VERY generous):
-- 8-10: Candidate shows any understanding of the topic — default to this range if they tried
-- 6-7: Partial answer or mostly off-topic but some relevant points
-- 5: Minimum score — give this even if the answer is weak, to encourage the candidate
-- Never give below 5 unless the answer is completely blank or nonsensical
+CRITICAL INSTRUCTION: You MUST evaluate strictly based on technical accuracy. Do NOT be polite if the answer is wrong.
 
-Key principle: If the candidate attempted to answer and shows ANY knowledge of the subject, give 7 or above. Speech recognition errors should be ignored. Focus only on conceptual intent.
+Scoring Rules:
+- 9-10: Perfect answer. Highly accurate, complete, and clear.
+- 7-8: Good answer. Mostly correct, but misses some minor details.
+- 4-6: Weak answer. Very incomplete, vague, or has significant inaccuracies.
+- 1-3: Wrong answer. Completely incorrect, irrelevant, or shows no understanding of the topic. If the candidate says something unrelated like "hello", "hi", or a completely wrong concept, YOU MUST give a score of 1, 2, or 3.
 
 Respond ONLY with valid JSON (no markdown, no explanation):
-{"correct": true or false, "score": number 5-10, "feedback": "2-3 encouraging sentences — mention what was good first, then one small suggestion to improve"}`;
+{"correct": true or false, "score": number 1-10, "feedback": "Provide strict, constructive feedback pointing out exactly what was wrong or missing."}`;
 
     const response = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
@@ -135,8 +135,8 @@ Respond ONLY with valid JSON (no markdown, no explanation):
     const jsonMatch = raw.match(/\{[\s\S]*\}/);
     const parsed = jsonMatch ? JSON.parse(jsonMatch[0]) : { correct: false, score: 6, feedback: "Good attempt! Keep practicing." };
 
-    // Minimum score 6 enforce karo — confidence boost
-    const finalScore = Math.max(6, Math.min(10, parsed.score ?? 6));
+    // Limit score between 1 and 10 based on strict evaluation
+    const finalScore = Math.max(1, Math.min(10, parsed.score ?? 1));
 
     res.json({
       correct: finalScore >= 5,

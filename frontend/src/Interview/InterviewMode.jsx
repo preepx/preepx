@@ -43,6 +43,7 @@ const InterviewMode = () => {
   const exitedRef       = useRef(false);   // interview exit/done guard
   const busyRef         = useRef(false);   // triggerNext in progress
   const isFullScreenRef = useRef(false);   // track fullscreen status
+  const interimRef      = useRef("");      // keep track of interim transcript
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -170,7 +171,10 @@ const InterviewMode = () => {
         answerRef.current = updated;
         setUserAnswer(updated);
       }
-      setInterimAnswer(interim.trim());
+      
+      const trimmedInterim = interim.trim();
+      interimRef.current = trimmedInterim;
+      setInterimAnswer(trimmedInterim);
 
       // Silence auto-next only in last 15s
       if (silenceRef.current) clearTimeout(silenceRef.current);
@@ -188,6 +192,16 @@ const InterviewMode = () => {
 
     rec.onend = () => {
       setIsListening(false);
+      
+      // Append any lingering interim answer to the final answer before restarting
+      if (interimRef.current) {
+        const updated = (answerRef.current + " " + interimRef.current).trim();
+        answerRef.current = updated;
+        setUserAnswer(updated);
+        interimRef.current = "";
+        setInterimAnswer("");
+      }
+
       if (!exitedRef.current && !busyRef.current) {
         setTimeout(() => startRec(), 250);
       }
@@ -205,7 +219,8 @@ const InterviewMode = () => {
 
     const idx      = indexRef.current;
     const question = (questions || [])[idx];
-    const answer   = answerRef.current.trim();
+    const answer   = (answerRef.current + " " + interimRef.current).trim();
+    interimRef.current = "";
 
     let result = { correct: false, score: 0, feedback: "No answer provided." };
 
@@ -257,7 +272,8 @@ const InterviewMode = () => {
     }
 
     // Current question ka answer bhi collect karo
-    const currentAnswer = answerRef.current.trim();
+    const currentAnswer = (answerRef.current + " " + interimRef.current).trim();
+    interimRef.current = "";
     const partialAnswers = [...allAnswersRef.current];
     if (currentAnswer) {
       partialAnswers.push({
@@ -293,6 +309,7 @@ const InterviewMode = () => {
     exitedRef.current = false;
     busyRef.current   = false;
     answerRef.current = "";
+    interimRef.current = "";
     indexRef.current  = currentIndex;
     timerValRef.current = 45;
 
