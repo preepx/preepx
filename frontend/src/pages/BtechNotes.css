@@ -1,8 +1,7 @@
-/* ── CSS Variables & Base ────────────────────────────────────────────────── */
 .btech-notes-page {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 24px 64px;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 32px 64px;
 }
 
 /* ── Header & Toolbar ────────────────────────────────────────────────────── */

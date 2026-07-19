@@ -18,7 +18,7 @@ const NAV_ITEMS = [
   { to: "/analytics", icon: BarChart3, label: "Analytics" },
   { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
   { to: "/achievements", icon: Award, label: "Achievements" },
-  { to: "/btech-notes", icon: BookOpen, label: "Btech Notes" },
+  { to: "/btech-notes", icon: BookOpen, label: "Btech Notes", isFreeGif: true },
   { to: "/profile", icon: User, label: "Profile" },
   { to: "/settings", icon: Settings, label: "Settings" },
 ];
@@ -79,10 +79,17 @@ function AppLayout({ children }) {
           </div>
 
           <nav className="sidebar-nav">
-            {NAV_ITEMS.map(({ to, icon: Icon, label }) => (
+            {NAV_ITEMS.map(({ to, icon: Icon, label, isFreeGif }) => (
               <Link key={to} to={to} className={`sidebar-link ${location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to)) ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
                 <Icon size={20} />
-                {!collapsed && <span>{label}</span>}
+                {!collapsed && (
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {label}
+                    {isFreeGif && (
+                      <span className="super-free-badge">FREE</span>
+                    )}
+                  </span>
+                )}
               </Link>
             ))}
           </nav>

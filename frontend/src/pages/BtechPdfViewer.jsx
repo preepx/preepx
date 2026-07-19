@@ -41,14 +41,26 @@ function BtechPdfViewer() {
       .finally(() => setLoading(false));
 
     const handleKeyDown = (e) => {
-      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'c')) {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'c' || e.key === 'x')) {
         e.preventDefault();
         alert("Downloading, printing, and copying are disabled for protected notes.");
       }
+      if (e.key === 'PrintScreen') {
+        e.preventDefault();
+        navigator.clipboard.writeText('');
+        alert("Screenshots are disabled for protected notes.");
+      }
     };
 
+    const handleContextMenu = (e) => e.preventDefault();
+
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener("contextmenu", handleContextMenu);
+    
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
   }, [id]);
 
   useEffect(() => {
@@ -96,7 +108,7 @@ function BtechPdfViewer() {
   };
 
   return (
-    <div className="pv-page">
+    <div className="pv-page" onContextMenu={(e) => e.preventDefault()} style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
       <div className="pv-frame-wrap" ref={containerRef}>
         <div 
           className="pv-react-pdf-container"

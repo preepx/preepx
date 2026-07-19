@@ -22,6 +22,28 @@ function BtechNoteDetail() {
       .then((r) => setNote(r.data))
       .catch(() => setError("Could not load this note."))
       .finally(() => setLoading(false));
+
+    const handleKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'c' || e.key === 'x')) {
+        e.preventDefault();
+        alert("Downloading, printing, and copying are disabled for protected notes.");
+      }
+      if (e.key === 'PrintScreen') {
+        e.preventDefault();
+        navigator.clipboard.writeText('');
+        alert("Screenshots are disabled for protected notes.");
+      }
+    };
+
+    const handleContextMenu = (e) => e.preventDefault();
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
   }, [id]);
 
   if (loading) return <Loader />;
@@ -38,7 +60,7 @@ function BtechNoteDetail() {
   const isCore = note.noteType === "core";
 
   return (
-    <div className="nd-page">
+    <div className="nd-page" onContextMenu={(e) => e.preventDefault()} style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
       {/* ── Back bar ── */}
       <button className="nd-back" onClick={() => navigate("/btech-notes")}>
         <ArrowLeft size={16} /> Back to Notes

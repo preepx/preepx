@@ -1,7 +1,7 @@
 .settings-page {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 28px 24px 48px;
+  width: 100%;
+  max-width: 100%;
+  padding: 28px 32px 48px;
 }
 
 .settings-account {

@@ -419,3 +419,10 @@
     padding: 16px 16px 48px;
   }
 }
+
+/* ── Prevent Printing ────────────────────────────────────────────────────── */
+@media print {
+  body {
+    display: none !important;
+  }
+}
