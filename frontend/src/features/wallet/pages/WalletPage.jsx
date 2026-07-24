@@ -80,7 +80,7 @@ function WalletPage() {
 
       <CoinPackages
         packages={config?.packages}
-        mockPurchaseAllowed={config?.mockPurchaseAllowed}
+        billingEnabled={config?.billingEnabled}
         onPurchaseSuccess={() => refresh()}
       />
 

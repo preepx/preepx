@@ -5,10 +5,14 @@ const {
   getWallet,
   purchaseCoins,
   checkSessionAccess,
+  createOrder,
+  verifyPayment
 } = require("../controllers/walletController");
 
 router.get("/", protect, getWallet);
 router.post("/purchase", protect, purchaseCoins);
 router.get("/check-access", protect, checkSessionAccess);
+router.post("/create-order", protect, createOrder);
+router.post("/verify-payment", protect, verifyPayment);
 
 module.exports = router;

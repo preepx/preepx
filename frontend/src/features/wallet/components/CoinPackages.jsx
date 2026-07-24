@@ -1,31 +1,59 @@
 import React, { useState } from "react";
 import { IndianRupee, Sparkles } from "lucide-react";
 import { toast } from "react-toastify";
-import { purchaseCoins } from "../services/walletAPI";
+import { createOrder, verifyPayment } from "../services/walletAPI";
 import { DEFAULT_PACKAGES } from "../constants/walletConfig";
 import "./CoinPackages.css";
 
-function CoinPackages({ packages = DEFAULT_PACKAGES, mockPurchaseAllowed, onPurchaseSuccess }) {
+function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseSuccess }) {
   const [buying, setBuying] = useState(null);
 
   const handleBuy = async (pack) => {
-    if (!mockPurchaseAllowed) {
-      toast.info("**Payment gateway is coming soon! For now, all interviews are free.**");
-      return;
-    }
-
     setBuying(pack.id);
     try {
-      const result = await purchaseCoins({ packageId: pack.id });
-      toast.success(result.message);
-      onPurchaseSuccess?.(result);
+      // 1. Create Order
+      const orderData = await createOrder({ packageId: pack.id });
+
+      // 2. Open Razorpay Checkout
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_THRv3G1OfdhIob", // Fallback for testing
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: "PrepX AI Interview",
+        description: `Purchase ${pack.coins} Coins`,
+        order_id: orderData.orderId,
+        handler: async function (response) {
+          try {
+            // 3. Verify Payment
+            const verifyData = await verifyPayment({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              packageId: pack.id
+            });
+            toast.success(verifyData.message);
+            onPurchaseSuccess?.(verifyData);
+          } catch (error) {
+            toast.error(error.response?.data?.message || "Payment verification failed");
+          }
+        },
+        prefill: {
+          name: "PrepX User",
+          email: "user@example.com",
+        },
+        theme: {
+          color: "#4f46e5",
+        },
+      };
+
+      const rzp1 = new window.Razorpay(options);
+      rzp1.on('payment.failed', function (response) {
+        toast.error("Payment failed. Please try again.");
+      });
+      rzp1.open();
+
     } catch (err) {
-      const code = err.response?.data?.code;
-      if (code === "PAYMENT_NOT_READY") {
-        toast.info("Payment gateway jald integrate hoga. Abhi sab free hai!");
-      } else {
-        toast.error(err.response?.data?.message || "Purchase failed");
-      }
+      toast.error(err.response?.data?.message || "Failed to initiate purchase");
     } finally {
       setBuying(null);
     }
@@ -35,13 +63,13 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, mockPurchaseAllowed, onPurc
     <div className="coin-packages">
       <div className="coin-packages-header">
         <h3>Buy Coins</h3>
-        <p>₹1 = 1 coin · Interview: 2 coins · Objective Exam: 1 coin</p>
+        <p>₹1 = ~1 coin · AI Interview requires coins</p>
       </div>
 
-      {!mockPurchaseAllowed && (
+      {!billingEnabled && (
         <div className="coin-packages-notice">
           <Sparkles size={16} />
-          <span>Payment coming soon — all interviews & exams are <strong>free</strong> right now!</span>
+          <span>Billing is currently disabled in test mode. Payments may not process.</span>
         </div>
       )}
 
@@ -60,7 +88,7 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, mockPurchaseAllowed, onPurc
               onClick={() => handleBuy(pack)}
               disabled={buying === pack.id}
             >
-              {buying === pack.id ? "Processing…" : mockPurchaseAllowed ? "Buy Now" : "Coming Soon"}
+              {buying === pack.id ? "Processing…" : "Buy Now"}
             </button>
           </div>
         ))}

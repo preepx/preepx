@@ -4,6 +4,7 @@ const fs = require("fs");
 const pdf = require("pdf-parse");
 const axios = require("axios");
 const Interview = require("../models/Interview");
+const walletService = require("../services/walletService");
 
 // ================= Multer Storage =================
 const storage = multer.diskStorage({
@@ -55,6 +56,11 @@ const uploadResume = async (req, res) => {
       `;
     }
 
+    if (req.user) {
+      // Deduct coins; throws INSUFFICIENT_COINS if balance < 5
+      await walletService.deductForSession(req.user, "resume_interview");
+    }
+
     const response = await axios.post(
       "https://api.groq.com/openai/v1/chat/completions",
       {
@@ -103,7 +109,11 @@ const uploadResume = async (req, res) => {
       interviewId: interview?._id || null,
     });
   } catch (err) {
-    console.error("Resume Error:", err.response?.data || err.message);
+    console.error("Resume/Wallet Error:", err.response?.data || err.message);
+    if (err.code === "INSUFFICIENT_COINS") {
+      if (req.file && fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
+      return res.status(403).json({ error: "Insufficient coins for interview. Please recharge." });
+    }
     res.status(500).json({ error: "Resume processing failed" });
   }
 };

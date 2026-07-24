@@ -10,17 +10,18 @@ module.exports = {
   RUPEE_TO_COIN_RATE: 1,
 
   PRICING: {
-    INTERVIEW: 2,
-    OBJECTIVE_EXAM: 1,
+    INTERVIEW: 5,
+    OBJECTIVE_EXAM: 0,
   },
 
   /** Mock purchases for dev/testing without a payment gateway */
   ALLOW_MOCK_PURCHASE: process.env.WALLET_MOCK_PURCHASE === "true",
 
   COIN_PACKAGES: [
-    { id: "pack_10", rupees: 10, coins: 10, label: "Starter" },
-    { id: "pack_50", rupees: 50, coins: 50, label: "Popular", popular: true },
-    { id: "pack_100", rupees: 100, coins: 100, label: "Pro" },
-    { id: "pack_500", rupees: 500, coins: 500, label: "Ultimate" },
+    { id: "pack_20", rupees: 19, coins: 20, label: "Starter" },
+    { id: "pack_60", rupees: 49, coins: 60, label: "Popular", popular: true },
+    { id: "pack_130", rupees: 99, coins: 130, label: "Pro" },
+    { id: "pack_280", rupees: 199, coins: 280, label: "Premium" },
+    { id: "pack_800", rupees: 499, coins: 800, label: "Ultimate" },
   ],
 };

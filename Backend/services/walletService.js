@@ -33,7 +33,7 @@ const getWalletSummary = async (userId, { transactionLimit = 20 } = {}) => {
   };
 };
 
-const purchaseCoins = async (userId, { packageId, rupees }) => {
+const purchaseCoins = async (userId, { packageId, rupees, paymentRef }) => {
   let coins;
   let amountRupees;
 
@@ -49,10 +49,12 @@ const purchaseCoins = async (userId, { packageId, rupees }) => {
     throw new Error("Provide a valid package or rupee amount");
   }
 
-  if (!walletConfig.ALLOW_MOCK_PURCHASE) {
-    const err = new Error("Payment gateway not integrated yet. Purchases coming soon.");
-    err.code = "PAYMENT_NOT_READY";
-    throw err;
+  // Ensure this payment hasn't already been processed
+  if (paymentRef) {
+    const existing = await WalletTransaction.findOne({ "metadata.paymentRef": paymentRef });
+    if (existing) {
+      throw new Error("Payment already processed");
+    }
   }
 
   const wallet = await getOrCreateWallet(userId);
@@ -70,8 +72,8 @@ const purchaseCoins = async (userId, { packageId, rupees }) => {
     metadata: {
       rupees: amountRupees,
       packageId: packageId || null,
-      paymentRef: `mock_${Date.now()}`,
-      mock: true,
+      paymentRef: paymentRef || `mock_${Date.now()}`,
+      mock: !paymentRef,
     },
   });
 

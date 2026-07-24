@@ -2,6 +2,7 @@ const axios = require("axios");
 const Interview = require("../models/Interview");
 const User = require("../models/User");
 const { evaluateBadges } = require("../utils/badges");
+const walletService = require("../services/walletService");
 
 let previousQuestions = new Set();
 
@@ -35,6 +36,12 @@ const generateInterviewQuestions = async (req, res) => {
     }
 
     const count = Math.min(Math.max(parseInt(questionCount) || 10, 5), 15);
+
+    if (req.user) {
+      // Will throw INSUFFICIENT_COINS if balance < 5
+      await walletService.deductForSession(req.user, "interview");
+    }
+
     const diffMap = { easy: "beginner-friendly", medium: "intermediate", hard: "advanced and challenging" };
 
     const prompt = `
@@ -87,7 +94,10 @@ const generateInterviewQuestions = async (req, res) => {
 
     res.json({ questions, interviewId: interview?._id || null });
   } catch (err) {
-    console.error("Groq Error:", err.response?.data || err.message);
+    console.error("Groq/Wallet Error:", err.response?.data || err.message);
+    if (err.code === "INSUFFICIENT_COINS") {
+      return res.status(403).json({ error: "Insufficient coins for interview. Please recharge." });
+    }
     res.status(500).json({ error: "Failed to generate questions" });
   }
 };

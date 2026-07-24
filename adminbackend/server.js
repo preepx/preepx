@@ -15,10 +15,10 @@ const app = express();
 app.use(express.json());
 
 // Enable CORS
-app.use(cors({
+app.use(cors({                      //http://localhost:5174 local
   origin: process.env.FRONTEND_URL || "https://interview-coch.vercel.app",
   credentials: true
-}));
+}));  
 
 // Mount routes
 app.use("/api/admin", require("./routes/adminRoutes"));
