@@ -1,6 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const User = require("../models/User");
+const crypto = require("crypto");
 
 passport.use(
   new GoogleStrategy(
@@ -26,11 +27,13 @@ passport.use(
         }
 
         // New user — create automatically
+        const newReferralCode = "REF-" + crypto.randomBytes(3).toString("hex").toUpperCase();
         user = await User.create({
           fullName:   profile.displayName || email.split("@")[0],
           email,
           googleId:   profile.id,
           profilePic: profile.photos?.[0]?.value || null,
+          referralCode: newReferralCode,
         });
 
         return done(null, user);
