@@ -55,6 +55,8 @@ const UserDetails = () => {
             <span className="badge">Joined: {new Date(user.createdAt).toLocaleDateString()}</span>
             <span className="badge badge-accent">Level {user.level || 1}</span>
             <span className="badge badge-yellow">{user.points || 0} XP</span>
+            {user.referralCode && <span className="badge" style={{background: 'rgba(79, 70, 229, 0.2)', color: 'var(--primary)'}}>Code: {user.referralCode}</span>}
+            {user.referredBy && <span className="badge" style={{background: 'rgba(16, 185, 129, 0.2)', color: 'var(--success)'}}>Referred</span>}
             {user.isBlocked && <span className="badge" style={{background: 'rgba(239, 68, 68, 0.2)', color: 'var(--danger)'}}>Blocked</span>}
           </div>
         </div>
@@ -83,6 +85,27 @@ const UserDetails = () => {
 
       <div className="details-grid">
         <div className="details-sidebar">
+          
+          <div className="glass-panel content-card mb-4">
+            <div className="card-header">
+              <User size={20} className="accent-icon" />
+              <h3>Profile Details</h3>
+            </div>
+            <div className="profile-extra-details">
+              {user.bio && <p><strong>Bio:</strong> {user.bio}</p>}
+              {user.mobile && <p><strong>Mobile:</strong> {user.mobile}</p>}
+              {user.college && <p><strong>College:</strong> {user.college}</p>}
+              {user.degree && <p><strong>Degree:</strong> {user.degree}</p>}
+              {user.address && <p><strong>Location:</strong> {user.address}</p>}
+              {user.github && <p><strong>GitHub:</strong> <a href={`https://${user.github.replace(/^https?:\/\//, '')}`} target="_blank" rel="noreferrer">{user.github}</a></p>}
+              {user.linkedin && <p><strong>LinkedIn:</strong> <a href={`https://${user.linkedin.replace(/^https?:\/\//, '')}`} target="_blank" rel="noreferrer">{user.linkedin}</a></p>}
+              
+              {!user.bio && !user.mobile && !user.college && !user.degree && !user.address && !user.github && !user.linkedin && (
+                <p className="text-secondary">No additional details provided.</p>
+              )}
+            </div>
+          </div>
+
           <div className="glass-panel content-card mb-4">
             <div className="card-header">
               <Wallet size={20} className="accent-icon" />

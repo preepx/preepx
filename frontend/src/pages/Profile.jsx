@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Mail, Trophy, Award, Flame, BarChart3, Target, Camera, Edit2, MapPin, GraduationCap, Phone, Github, Linkedin, BookOpen, X, Check } from "lucide-react";
+import { Mail, Trophy, Award, Flame, BarChart3, Target, Camera, Edit2, MapPin, GraduationCap, Phone, Github, Linkedin, BookOpen, X, Check, Share2, Copy } from "lucide-react";
 import { toast } from "react-toastify";
 import { getProfile, getAnalytics, uploadProfilePhoto, syncUserToStorage, updateProfileDetails } from "../services/userAPI";
 import { showAppError } from "../utils/appAlert";
@@ -56,6 +56,9 @@ function Profile() {
       syncUserToStorage(updated);
       window.dispatchEvent(new Event("user-updated"));
       toast.success("Profile updated successfully!");
+      if (updated.bonusMessage) {
+        toast.success(updated.bonusMessage, { icon: "🪙" });
+      }
       setIsEditing(false);
     } catch (err) {
       showAppError(err.response?.data?.message || "Failed to update profile", "Update failed");
@@ -66,6 +69,33 @@ function Profile() {
 
   const handleEditChange = (e) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
+  };
+
+  const handleShareReferral = async () => {
+    if (!user.referralCode) return;
+    const link = `${window.location.origin}/auth?ref=${user.referralCode}`;
+    const text = `Join AI Interview Portal using my referral code ${user.referralCode} and get 20 coins for free! ${link}`;
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Join AI Interview Portal",
+          text: text,
+          url: link,
+        });
+      } catch (err) {
+        console.error("Error sharing", err);
+      }
+    } else {
+      navigator.clipboard.writeText(text);
+      toast.success("Referral message copied to clipboard!");
+    }
+  };
+
+  const handleCopyCode = () => {
+    if (!user.referralCode) return;
+    navigator.clipboard.writeText(user.referralCode);
+    toast.success("Referral code copied to clipboard!");
   };
 
   if (!user) return null;
@@ -215,6 +245,20 @@ function Profile() {
             <div className="profile-stat"><BarChart3 size={20} /><span className="stat-number">{stats?.totalInterviews || user.interviewsCompleted || 0}</span><span className="stat-text">Interviews</span></div>
             <div className="profile-stat"><Award size={20} /><span className="stat-number">{user.badges?.length || 0}</span><span className="stat-text">Badges</span></div>
           </div>
+
+          {!isEditing && user.referralCode && (
+            <div className="profile-referral-section">
+              <h3>Refer a Friend</h3>
+              <p>Share your code. When a friend registers and takes a paid session, you both get 20 coins!</p>
+              <div className="referral-code-box">
+                <span className="code">{user.referralCode}</span>
+                <button onClick={handleCopyCode} title="Copy Code" className="icon-btn"><Copy size={16} /></button>
+              </div>
+              <button className="share-btn" onClick={handleShareReferral}>
+                <Share2 size={16} /> Share on WhatsApp / Others
+              </button>
+            </div>
+          )}
 
           {stats && (
             <div className="profile-performance">
