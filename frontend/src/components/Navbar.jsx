@@ -63,8 +63,8 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-inner">
-        <Link to={user ? "/user-dashboard" : "/"} className="navbar-brand" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-          <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
+        <Link to={user ? "/user-dashboard" : "/"} className="navbar-brand">
+          <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" />
         </Link>
 
         <div className="navbar-center">
