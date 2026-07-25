@@ -13,7 +13,7 @@ import "./Login.css";
 // "login" | "register" | "reg-otp" | "forgot-email" | "forgot-otp" | "forgot-newpass"
 // ─────────────────────────────────────────────────────────
 
-const EMPTY_REGISTER = { fullName: "", email: "", password: "", confirmPassword: "" };
+const EMPTY_REGISTER = { fullName: "", email: "", password: "", confirmPassword: "", referralCode: "" };
 
 function Auth() {
   const [screen, setScreen] = useState("login");
@@ -54,6 +54,13 @@ function Auth() {
     if (params.get("error") === "google_failed") {
       showAppError("Failed to authenticate with Google. Please try again.", "Google Sign-In Failed");
       navigate("/auth", { replace: true });
+    }
+
+    // Auto-fill referral code if present
+    const refCode = params.get("ref");
+    if (refCode) {
+      setRegisterData(prev => ({ ...prev, referralCode: refCode }));
+      setScreen("register");
     }
   }, [navigate]);
 
@@ -166,6 +173,7 @@ function Auth() {
         fullName: registerData.fullName,
         email,
         password: registerData.password,
+        referralCode: registerData.referralCode,
       });
       setOtpEmail(email);
       resetOtp();
@@ -507,6 +515,16 @@ function Auth() {
                     <button type="button" className="password-toggle" onClick={() => setShowConfirmPass(!showConfirmPass)}>
                       {showConfirmPass ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
+                  </div>
+                </div>
+                <div className="input-field">
+                  <label htmlFor="reg-refCode">Referral Code (Optional)</label>
+                  <div className="input-group">
+                    <Sparkles size={18} className="input-icon" />
+                    <input id="reg-refCode" type="text" placeholder="e.g. REF-ABCDEF"
+                      value={registerData.referralCode}
+                      onChange={(e) => setRegisterData({ ...registerData, referralCode: e.target.value.toUpperCase() })}
+                      autoComplete="off" />
                   </div>
                 </div>
                 <button type="submit" className="auth-submit" disabled={loading}>

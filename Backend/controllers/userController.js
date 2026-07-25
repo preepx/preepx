@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const sendOtpEmail = require("../utils/sendOtpEmail");
 const sendResetOtpEmail = require("../utils/sendResetOtpEmail");
 const { evaluateBadges, getBadgeDetails, getAllBadges } = require("../utils/badges");
+const crypto = require("crypto");
+const walletService = require("../services/walletService");
 
 const safeUser = (user) => ({
   _id: user._id,
@@ -26,11 +28,12 @@ const safeUser = (user) => ({
   github: user.github || "",
   linkedin: user.linkedin || "",
   degree: user.degree || "",
+  referralCode: user.referralCode || "",
 });
 
 // Step 1: User details submit kare → OTP generate karke email pe bhejo
 const sendOtp = async (req, res) => {
-  const { fullName, email, password } = req.body;
+  const { fullName, email, password, referralCode } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
 
   try {
@@ -53,7 +56,7 @@ const sendOtp = async (req, res) => {
       email: normalizedEmail,
       otp,
       expiresAt,
-      userData: { fullName, password: hashedPassword },
+      userData: { fullName, password: hashedPassword, referralCode },
     });
 
     // Email bhejo
@@ -88,18 +91,39 @@ const verifyOtpAndRegister = async (req, res) => {
       return res.status(400).json({ message: "Invalid OTP. Please try again." });
     }
 
+    // Handle Referral logic
+    let referredBy = undefined;
+    if (otpRecord.userData.referralCode) {
+      const referrer = await User.findOne({ referralCode: otpRecord.userData.referralCode });
+      if (referrer) {
+        referredBy = referrer._id;
+      }
+    }
+
+    // Generate unique referral code for new user
+    const newReferralCode = "REF-" + crypto.randomBytes(3).toString("hex").toUpperCase();
+
     // User banao
     const user = await User.create({
       fullName: otpRecord.userData.fullName,
       email: normalizedEmail,
       password: otpRecord.userData.password,
+      referralCode: newReferralCode,
+      referredBy,
     });
+
+    // Give signup bonus of 20 coins ONLY if referredBy is present
+    let message = "Registration successful!";
+    if (referredBy) {
+      await walletService.addBonus(user._id, 20, "Signup bonus for using a referral code");
+      message = "Registration successful! You earned 20 coins for using a referral code.";
+    }
 
     // OTP record delete karo
     await Otp.deleteMany({ email: normalizedEmail });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
-    res.json({ message: "Registration successful!", token, user: safeUser(user) });
+    res.json({ message, token, user: safeUser(user) });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

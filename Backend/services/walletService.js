@@ -1,6 +1,24 @@
 const Wallet = require("../models/Wallet");
 const WalletTransaction = require("../models/WalletTransaction");
 const walletConfig = require("../config/wallet");
+const User = require("../models/User");
+
+const addBonus = async (userId, coins, description) => {
+  const wallet = await getOrCreateWallet(userId);
+  wallet.balance += coins;
+  await wallet.save();
+
+  await WalletTransaction.create({
+    userId,
+    type: "bonus",
+    coins,
+    balanceAfter: wallet.balance,
+    description,
+    status: "completed",
+  });
+
+  return wallet;
+};
 
 const getOrCreateWallet = async (userId) => {
   let wallet = await Wallet.findOne({ userId });
@@ -121,6 +139,20 @@ const deductForSession = async (userId, sessionType) => {
     metadata: { sessionType },
   });
 
+  // Check for referral bonus
+  const user = await User.findById(userId);
+  if (user && user.referredBy && !user.hasUsedCoins) {
+    user.hasUsedCoins = true;
+    await user.save();
+    
+    // Reward the referrer
+    await addBonus(
+      user.referredBy, 
+      20, 
+      `Referral bonus: ${user.fullName || "User"} completed their first paid session`
+    );
+  }
+
   return { charged: true, cost, balance: wallet.balance };
 };
 
@@ -143,4 +175,5 @@ module.exports = {
   purchaseCoins,
   deductForSession,
   hasEnoughCoins,
+  addBonus,
 };

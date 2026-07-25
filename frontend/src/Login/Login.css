@@ -170,8 +170,8 @@
   max-width: 420px;
   background: var(--surface);
   border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 20px;
-  padding: 24px 28px;
+  border-radius: 16px;
+  padding: 16px 20px;
   box-shadow:
     0 4px 6px rgba(15, 23, 42, 0.04),
     0 24px 48px rgba(15, 23, 42, 0.08);
@@ -212,35 +212,36 @@
 }
 
 .auth-card-header {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .auth-card h2 {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 800;
-  letter-spacing: -0.6px;
-  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+  margin-bottom: 2px;
   color: var(--text);
 }
 
 .auth-subtitle {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.4;
+  margin-bottom: 12px;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 8px;
 }
 
 .input-field label {
   display: block;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 12px;
+  margin-bottom: 4px;
   letter-spacing: -0.1px;
 }
 
@@ -250,7 +251,7 @@
 
 .input-icon {
   position: absolute;
-  left: 14px;
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-muted);
@@ -260,10 +261,10 @@
 
 .input-group input {
   width: 100%;
-  padding: 11px 14px 11px 40px;
+  padding: 8px 12px 8px 36px;
   border: 1.5px solid var(--border);
-  border-radius: 12px;
-  font-size: 14px;
+  border-radius: 10px;
+  font-size: 13px;
   font-family: inherit;
   background: var(--bg);
   color: var(--text);
@@ -363,8 +364,8 @@
 }
 
 .auth-submit {
-  margin-top: 4px;
-  padding: 12px 20px;
+  margin-top: 2px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,8 +373,8 @@
   background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #7c3aed 100%);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 15px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
@@ -407,8 +408,8 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin-top: 20px;
-  font-size: 12px;
+  margin-top: 10px;
+  font-size: 11px;
   color: var(--text-muted);
 }
 
@@ -654,7 +655,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  margin: 12px 0;
+  margin: 6px 0;
   color: var(--text-muted);
   font-size: 13px;
   font-weight: 500;
@@ -679,12 +680,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-  padding: 10px 16px;
+  padding: 8px 12px;
   background: var(--surface);
   border: 1.5px solid var(--border);
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
   font-family: inherit;
