@@ -43,7 +43,17 @@ const InterviewModal = ({ onClose, onSuccess }) => {
         },
       });
     } catch (err) {
-      showAppError(err.response?.data?.error || "Error generating questions. Check your login & API key.", "Interview setup failed");
+      const errorMsg = err.response?.data?.error || "Error generating questions. Check your login & API key.";
+      if (errorMsg.toLowerCase().includes("insufficient coins") || errorMsg.toLowerCase().includes("recharge")) {
+        showAppError(errorMsg, "Insufficient Coins", {
+          label: "Add Coins",
+          onClick: () => {
+            navigate("/wallet");
+          }
+        });
+      } else {
+        showAppError(errorMsg, "Interview setup failed");
+      }
     } finally {
       setLoading(false);
     }

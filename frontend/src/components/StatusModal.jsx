@@ -8,7 +8,7 @@ const ICONS = {
   info: Info,
 };
 
-function StatusModal({ open, type = "error", title, message, onClose }) {
+function StatusModal({ open, type = "error", title, message, action, onClose }) {
   useEffect(() => {
     if (!open) return undefined;
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -42,9 +42,30 @@ function StatusModal({ open, type = "error", title, message, onClose }) {
         </div>
         <h3 id="status-modal-title" className="status-modal-title">{title}</h3>
         <p id="status-modal-message" className="status-modal-message">{message}</p>
-        <button type="button" className="status-modal-btn" onClick={onClose}>
-          Got it
-        </button>
+        {action ? (
+          <div style={{ display: "flex", gap: "12px", marginTop: "16px" }}>
+            <button 
+              type="button" 
+              className="status-modal-btn" 
+              onClick={() => { action.onClick(); onClose(); }} 
+              style={{ flex: 1 }}
+            >
+              {action.label}
+            </button>
+            <button 
+              type="button" 
+              className="status-modal-btn" 
+              onClick={onClose} 
+              style={{ flex: 1, background: "var(--bg)", color: "var(--text)" }}
+            >
+              Cancel
+            </button>
+          </div>
+        ) : (
+          <button type="button" className="status-modal-btn" onClick={onClose}>
+            Got it
+          </button>
+        )}
       </div>
     </div>
   );

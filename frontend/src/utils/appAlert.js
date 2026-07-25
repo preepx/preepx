@@ -4,8 +4,8 @@ export function setAlertHandler(handler) {
   alertHandler = handler;
 }
 
-export function showAppError(message, title = "Oops! Something went wrong") {
-  alertHandler?.({ type: "error", title, message });
+export function showAppError(message, title = "Oops! Something went wrong", action = null) {
+  alertHandler?.({ type: "error", title, message, action });
 }
 
 export function showAppSuccess(message, title = "Success") {

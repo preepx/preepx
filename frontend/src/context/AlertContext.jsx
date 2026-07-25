@@ -9,8 +9,8 @@ export function AlertProvider({ children }) {
 
   const closeAlert = useCallback(() => setAlert(null), []);
 
-  const showAlert = useCallback(({ type = "error", title, message }) => {
-    setAlert({ type, title, message });
+  const showAlert = useCallback(({ type = "error", title, message, action }) => {
+    setAlert({ type, title, message, action });
   }, []);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ export function AlertProvider({ children }) {
         type={alert?.type}
         title={alert?.title}
         message={alert?.message}
+        action={alert?.action}
         onClose={closeAlert}
       />
     </AlertContext.Provider>
