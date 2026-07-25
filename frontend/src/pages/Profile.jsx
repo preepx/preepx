@@ -56,6 +56,9 @@ function Profile() {
       syncUserToStorage(updated);
       window.dispatchEvent(new Event("user-updated"));
       toast.success("Profile updated successfully!");
+      if (updated.bonusMessage) {
+        toast.success(updated.bonusMessage, { icon: "🪙" });
+      }
       setIsEditing(false);
     } catch (err) {
       showAppError(err.response?.data?.message || "Failed to update profile", "Update failed");

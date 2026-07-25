@@ -276,8 +276,25 @@ const updateProfileDetails = async (req, res) => {
     if (linkedin !== undefined) user.linkedin = linkedin;
     if (degree !== undefined) user.degree = degree;
 
+    let bonusMessage = null;
+
+    // Check if profile is complete to give 5 bonus coins
+    if (
+      !user.profileCompletedBonusClaimed &&
+      user.mobile && user.mobile.trim() !== "" &&
+      user.college && user.college.trim() !== "" &&
+      user.degree && user.degree.trim() !== "" &&
+      user.address && user.address.trim() !== "" &&
+      user.github && user.github.trim() !== "" &&
+      user.linkedin && user.linkedin.trim() !== ""
+    ) {
+      user.profileCompletedBonusClaimed = true;
+      await walletService.addBonus(user._id, 5, "Bonus for completing your profile");
+      bonusMessage = "Profile completed! You've earned 5 bonus coins.";
+    }
+
     await user.save();
-    res.json(safeUser(user));
+    res.json({ ...safeUser(user), bonusMessage });
   } catch (error) {
     console.error("Update Profile Error:", error);
     res.status(500).json({ message: error.message });

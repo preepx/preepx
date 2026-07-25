@@ -30,6 +30,7 @@ const userSchema = mongoose.Schema(
     referralCode: { type: String, unique: true, sparse: true },
     referredBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     hasUsedCoins: { type: Boolean, default: false },
+    profileCompletedBonusClaimed: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
