@@ -9,11 +9,11 @@
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --bg: #f8fafc;
+  --bg: #f0f9ff;
   --surface: #ffffff;
   --text: #0f172a;
   --text-muted: #64748b;
-  --border:  var(--border);
+  --border: #e2e8f0;
   --radius: 12px;
   --shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
   --shadow-lg: 0 12px 40px rgba(15, 23, 42, 0.12);
