@@ -10,8 +10,15 @@
 }
 
 @keyframes udFadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ── HERO ── */
@@ -64,13 +71,27 @@
 }
 
 @keyframes udOrb1 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-20px, 20px); }
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(-20px, 20px);
+  }
 }
 
 @keyframes udOrb2 {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(25px, -15px); }
+
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(25px, -15px);
+  }
 }
 
 .ud-hero-inner {
@@ -232,8 +253,8 @@
 }
 
 .ud-px-icon {
-  width: 24px;
-  height: 24px;
+  width: 14px;
+  height: 14px;
 }
 
 .ud-xp-row strong {
@@ -850,8 +871,15 @@
 }
 
 @keyframes udBannerShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .ud-banner-content {

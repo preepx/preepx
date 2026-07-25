@@ -8,12 +8,21 @@ import "./CoinPackages.css";
 function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseSuccess }) {
   const [buying, setBuying] = useState(null);
   const [activePack, setActivePack] = useState(packages.find(p => p.popular)?.id || packages[0]?.id);
+  const [customAmount, setCustomAmount] = useState(19);
 
   const handleBuy = async (pack) => {
     setBuying(pack.id);
     try {
+      if (pack.id === "custom" && customAmount < 19) {
+        toast.error("Minimum custom amount is ₹19");
+        return;
+      }
+      
       // 1. Create Order
-      const orderData = await createOrder({ packageId: pack.id });
+      const orderData = await createOrder({ 
+        packageId: pack.id, 
+        customAmount: pack.id === "custom" ? Number(customAmount) : undefined 
+      });
 
       // 2. Open Razorpay Checkout
       const options = {
@@ -21,7 +30,7 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
         amount: orderData.amount,
         currency: orderData.currency,
         name: "PreepX AI Interview",
-        description: `Purchase ${pack.coins} Coins`,
+        description: `Purchase ${pack.id === "custom" ? Number(customAmount) : pack.coins} Coins`,
         order_id: orderData.orderId,
         handler: async function (response) {
           try {
@@ -30,7 +39,8 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
               razorpay_order_id: response.razorpay_order_id,
               razorpay_payment_id: response.razorpay_payment_id,
               razorpay_signature: response.razorpay_signature,
-              packageId: pack.id
+              packageId: pack.id,
+              customAmount: pack.id === "custom" ? Number(customAmount) : undefined
             });
             toast.success(verifyData.message);
             onPurchaseSuccess?.(verifyData);
@@ -98,6 +108,56 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
             </button>
           </div>
         ))}
+
+        {/* Custom Amount Card */}
+        <div 
+          className={`coin-pack ${activePack === "custom" ? "popular" : ""}`}
+          onClick={() => setActivePack("custom")}
+          style={{ cursor: 'pointer' }}
+        >
+          {activePack === "custom" && <span className="coin-pack-tag">Custom</span>}
+          <p className="coin-pack-label">Custom Buy</p>
+          <p className="coin-pack-coins">{customAmount >= 19 ? customAmount : 0} <span>coins</span></p>
+          <div style={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            background: 'rgba(0,0,0,0.08)', 
+            border: '2px solid #4f46e5', 
+            borderRadius: '8px', 
+            padding: '6px 12px', 
+            margin: '10px auto 0',
+            width: 'fit-content'
+          }}>
+            <IndianRupee size={16} style={{ color: 'var(--text-muted, #6b7280)' }} />
+            <input 
+              type="number" 
+              min="19" 
+              value={customAmount} 
+              onChange={(e) => setCustomAmount(e.target.value)}
+              onClick={(e) => { e.stopPropagation(); setActivePack("custom"); }}
+              style={{ 
+                width: '70px', 
+                background: 'transparent', 
+                border: 'none', 
+                color: 'var(--text, #111827)', 
+                fontSize: '20px', 
+                fontWeight: '800', 
+                outline: 'none', 
+                textAlign: 'center',
+                marginLeft: '4px'
+              }}
+            />
+          </div>
+          <button
+            className="coin-pack-btn"
+            onClick={() => handleBuy({ id: "custom" })}
+            disabled={buying === "custom"}
+            style={{ marginTop: '10px' }}
+          >
+            {buying === "custom" ? "Processing…" : "Buy Now"}
+          </button>
+        </div>
       </div>
     </div>
   );

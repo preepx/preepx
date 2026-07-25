@@ -36,7 +36,7 @@ const Footer = () => {
             <a href="/#features">Features</a>
             <a href="/#how-it-works">How It Works</a>
             <a href="/#product">Mock Interviews</a>
-            <a href="/#product">Resume Analyzer</a>
+            <Link to="/user-guide">User Guide</Link>
           </div>
 
           <div className="footer-link-col">

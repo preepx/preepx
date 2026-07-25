@@ -1,4 +1,17 @@
-﻿.achievements-page { width: 100%; max-width: 100%; padding: 28px 32px 48px; }
+.achievements-page { width: 100%; max-width: 100%; padding: 28px 32px 48px; }
+
+.page-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.page-header p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
 .ach-progress-card { display: flex; align-items: center; gap: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin: 24px 0; }
 .ach-progress-ring { width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--primary) calc(var(--pct) * 1%), var(--bg) 0); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .ach-progress-ring span { width: 60px; height: 60px; border-radius: 50%; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }

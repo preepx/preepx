@@ -30,9 +30,11 @@ const ObjectiveExam = lazy(() => import("./Interview/ObjectiveExam"));
 const ObjectiveExamPage = lazy(() => import("./Interview/ObjectiveExamPage"));
 const WalletPage = lazy(() => import("./features/wallet/pages/WalletPage"));
 
+const UserGuide = lazy(() => import("./pages/UserGuide"));
+
 const PUBLIC_ROUTES = [
   "/", "/dashboard", "/auth",
-  "/features", "/how-it-works", "/mock-interviews", "/resume-analyzer",
+  "/features", "/how-it-works", "/mock-interviews", "/user-guide",
   "/interview-tips", "/blog", "/help-center", "/community",
   "/about-us", "/careers", "/privacy-policy", "/terms-of-service"
 ];
@@ -93,7 +95,7 @@ function AppContent() {
           <Route path="/features" element={<StaticPage />} />
           <Route path="/how-it-works" element={<StaticPage />} />
           <Route path="/mock-interviews" element={<StaticPage />} />
-          <Route path="/resume-analyzer" element={<StaticPage />} />
+          <Route path="/user-guide" element={<UserGuide />} />
           <Route path="/interview-tips" element={<StaticPage />} />
           <Route path="/blog" element={<StaticPage />} />
           <Route path="/help-center" element={<StaticPage />} />

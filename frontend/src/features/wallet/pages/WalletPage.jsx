@@ -6,11 +6,13 @@ import TransactionList from "../components/TransactionList";
 import { WALLET_PRICING } from "../constants/walletConfig";
 import "./WalletPage.css";
 
+import Loader from "../../../components/Loader";
+
 function WalletPage() {
   const { balance, transactions, config, loading, refresh } = useWallet();
 
   if (loading && !config) {
-    return <div className="page-loading">Loading wallet…</div>;
+    return <Loader />;
   }
 
   const billingEnabled = config?.billingEnabled;
@@ -46,8 +48,8 @@ function WalletPage() {
         <div className="wallet-free-banner">
           <Shield size={18} />
           <div>
-            <strong>Now its Free!</strong>
-            <p>Interviews aur objective exams bilkul free hain. Coin system ready hai — jab billing on hogi tab coins use honge.</p>
+            <strong>Objective Exams are Free!</strong>
+            <p>Objective exams are currently completely free.</p>
           </div>
         </div>
       )}

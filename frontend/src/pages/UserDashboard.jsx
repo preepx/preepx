@@ -142,7 +142,7 @@ function UserDashboard() {
             </div>
             <div className="ud-level-info">
               <div className="ud-xp-row">
-                <img src="/logo.png" alt="XP" className="ud-px-icon" />
+                <img src="/favicon.png" alt="XP" className="ud-px-icon" />
                 <strong>{user?.points || 0}</strong>
                 <span>XP available</span>
               </div>

@@ -374,9 +374,9 @@ export default function ObjectiveExam() {
                 <label>Number of questions</label>
                 <div className="oe-q-grid">
                   {[
-                    { val: 20, label: '20', tag: 'Quick',     time: '~10 min' },
-                    { val: 40, label: '40', tag: 'Standard',  time: '~20 min' },
-                    { val: 60, label: '60', tag: 'Deep Dive', time: '~30 min' },
+                    { val: 10, label: '10', tag: 'Quick',     time: '~5 min' },
+                    { val: 20, label: '20', tag: 'Standard',  time: '~10 min' },
+                    { val: 40, label: '40', tag: 'Deep Dive', time: '~20 min' },
                   ].map(({ val, label, tag, time }) => {
                     const active = numQ === val;
                     return (

@@ -6,14 +6,14 @@ const sendResetOtpEmail = async (toEmail, otp, fullName) => {
   await axios.post(
     "https://api.brevo.com/v3/smtp/email",
     {
-      sender: { name: "PrepX", email: process.env.BREVO_FROM_EMAIL },
+      sender: { name: "PreepX", email: process.env.BREVO_FROM_EMAIL },
       to: [{ email: toEmail }],
-      subject: `${otp} is your PrepX password reset code`,
+      subject: `${otp} is your PreepX password reset code`,
       textContent: `Hi ${firstName}, your reset code: ${otp}\n\nValid for 5 minutes.`,
       htmlContent: `
         <div style="font-family:Arial,sans-serif;max-width:480px;margin:auto;border:1px solid #e4e4e7;border-radius:12px;overflow:hidden;">
           <div style="background:linear-gradient(135deg,#dc2626,#9333ea);padding:28px 32px;">
-            <h1 style="margin:0;color:#fff;font-size:22px;font-weight:700;">PrepX</h1>
+            <h1 style="margin:0;color:#fff;font-size:22px;font-weight:700;">PreepX</h1>
             <p style="margin:4px 0 0;color:rgba(255,255,255,0.8);font-size:13px;">Password Reset</p>
           </div>
           <div style="padding:32px;background:#fff;">

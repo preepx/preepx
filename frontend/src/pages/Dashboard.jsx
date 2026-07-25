@@ -33,7 +33,7 @@ function Dashboard() {
     getPlatformStats().then(setPlatformStats).catch(() => { });
   }, []);
 
-  const goToAuth = () => navigate(user ? "/interview" : "/auth");
+  const goToAuth = () => navigate(user ? "/user-dashboard" : "/auth");
 
   const heroStats = platformStats
     ? [

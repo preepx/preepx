@@ -12,12 +12,12 @@ const sendOtpEmail = async (toEmail, otp) => {
     const response = await axios.post(
       "https://api.brevo.com/v3/smtp/email",
       {
-        sender: { name: "PrepX", email: fromEmail },
+        sender: { name: "PreepX", email: fromEmail },
         to: [{ email: toEmail }],
-        subject: `${otp} is your PrepX verification code`,
+        subject: `${otp} is your PreepX verification code`,
         textContent: `Your verification code is: ${otp}\n\nValid for 5 minutes.`,
         htmlContent: `<div style="font-family:Arial,sans-serif;max-width:480px;margin:auto;padding:32px;border:1px solid #e4e4e7;border-radius:12px;">
-          <h2 style="color:#4f46e5;">PrepX</h2>
+          <h2 style="color:#4f46e5;">PreepX</h2>
           <p>Your verification code:</p>
           <div style="text-align:center;background:#f5f3ff;border-radius:12px;padding:24px;margin:16px 0;">
             <span style="font-size:42px;font-weight:800;letter-spacing:14px;color:#4f46e5;font-family:monospace;">${otp}</span>

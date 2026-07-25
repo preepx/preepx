@@ -22,17 +22,26 @@ const getWallet = async (req, res) => {
 
 const createOrder = async (req, res) => {
   try {
-    const { packageId } = req.body;
+    const { packageId, customAmount } = req.body;
     if (!razorpayInstance) {
       return res.status(503).json({ message: "Payment gateway not configured" });
     }
 
-    const pack = walletConfig.COIN_PACKAGES.find((p) => p.id === packageId);
-    if (!pack) {
-      return res.status(400).json({ message: "Invalid coin package" });
+    let amountInRupees;
+    if (packageId === "custom") {
+      if (!customAmount || customAmount < 19) {
+        return res.status(400).json({ message: "Minimum custom amount is ₹19" });
+      }
+      amountInRupees = Math.floor(customAmount);
+    } else {
+      const pack = walletConfig.COIN_PACKAGES.find((p) => p.id === packageId);
+      if (!pack) {
+        return res.status(400).json({ message: "Invalid coin package" });
+      }
+      amountInRupees = pack.rupees;
     }
 
-    const amount = pack.rupees * 100; // in paise
+    const amount = amountInRupees * 100; // in paise
     const options = {
       amount,
       currency: "INR",
@@ -44,7 +53,6 @@ const createOrder = async (req, res) => {
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
-      packageId: pack.id,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -53,7 +61,7 @@ const createOrder = async (req, res) => {
 
 const verifyPayment = async (req, res) => {
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, packageId } = req.body;
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, packageId, customAmount } = req.body;
 
     const generated_signature = crypto
       .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
@@ -66,7 +74,8 @@ const verifyPayment = async (req, res) => {
 
     // Payment is valid, add coins
     const result = await walletService.purchaseCoins(req.user, {
-      packageId,
+      packageId: packageId === "custom" ? null : packageId,
+      rupees: packageId === "custom" ? customAmount : null,
       paymentRef: razorpay_payment_id,
     });
 

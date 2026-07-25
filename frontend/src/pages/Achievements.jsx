@@ -63,8 +63,9 @@ function Achievements() {
               {tier.popular && <span className="coin-pack-tag">POPULAR</span>}
               <p className="coin-pack-label">{tier.label}</p>
               <p className="coin-pack-coins">{tier.coins} <span>coins</span></p>
-              <p className="coin-pack-price" style={{ justifyContent: "center", color: "#f59e0b", fontSize: "14px", fontWeight: "600", marginBottom: "16px" }}>
-                <img src="/logo.png" alt="XP" style={{width: '32px', height: '32px', marginRight: '-6px', verticalAlign: 'middle', display: 'inline-block'}} />{tier.xp}XP
+              <p className="coin-pack-price" style={{ display: 'flex', alignItems: 'center', justifyContent: "center", gap: '4px', color: "#f59e0b", fontSize: "14px", fontWeight: "600", marginBottom: "16px" }}>
+                <img src="/favicon.png" alt="XP" style={{ width: '14px', height: '14px', objectFit: 'contain' }} />
+                <span>{tier.xp} XP</span>
               </p>
               <button
                 className="coin-pack-btn"

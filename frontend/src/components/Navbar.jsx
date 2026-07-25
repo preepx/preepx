@@ -31,7 +31,7 @@ function Navbar() {
 
   const navLinks = user
     ? [
-      { to: "/interview", label: "Dashboard" },
+      { to: "/user-dashboard", label: "Dashboard" },
       { to: "/profile", label: "Profile" },
     ]
     : [];
@@ -63,7 +63,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-inner">
-        <Link to={user ? "/interview" : "/"} className="navbar-brand" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+        <Link to={user ? "/user-dashboard" : "/"} className="navbar-brand" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
           <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
         </Link>
 
@@ -126,8 +126,8 @@ function Navbar() {
                   <Link to="/profile" className="dropdown-item" onClick={() => setShowMenu(false)}>
                     View Profile
                   </Link>
-                  <Link to="/interview" className="dropdown-item" onClick={() => setShowMenu(false)}>
-                    My Interviews
+                  <Link to="/user-dashboard" className="dropdown-item" onClick={() => setShowMenu(false)}>
+                    Dashboard
                   </Link>
                   <button type="button" className="dropdown-item danger" onClick={handleLogout}>
                     Sign Out
