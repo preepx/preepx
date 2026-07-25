@@ -356,7 +356,7 @@ function Auth() {
         <div className="auth-left-glow auth-left-glow--2" />
         <div className="auth-left-content">
           <Link to="/" className="auth-logo" style={{ textDecoration: 'none', display: 'inline-block' }}>
-            <img src="/headername1.png" alt="PreepX" style={{ height: "72px", objectFit: "contain", margin: "-16px 0 -12px -12px" }} />
+            <img src="/preepx_logo.png" alt="PreepX" style={{ height: "72px", objectFit: "contain", margin: "-16px 0 -12px -12px" }} />
           </Link>
           <h1>Master your interviews with AI</h1>
           <p>Practice realistic mock interviews, get instant feedback, and track your progress — all powered by cutting-edge AI.</p>
