@@ -1,14 +1,15 @@
-const mongoose = require("mongoose");
+﻿const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema(
   {
     fullName: { type: String, required: true },
     mobile: { type: String },
     email: { type: String, required: true, unique: true },
-    password: { type: String },           // optional — Google users ka password nahi hota
+    password: { type: String },           // optional â€” Google users ka password nahi hota
     googleId: { type: String },           // Google OAuth ID
     profilePic: { type: String },
     points: { type: Number, default: 0 },
+    lifetimePoints: { type: Number, default: 0 },
     badges: [{ type: String }],
     streak: { type: Number, default: 0 },
     lastActiveDate: { type: Date },
@@ -36,3 +37,4 @@ const userSchema = mongoose.Schema(
 );
 
 module.exports = mongoose.model("User", userSchema);
+

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+﻿import { useState, useEffect, useCallback } from "react";
 import { getWallet } from "../services/walletAPI";
 
 export function useWallet({ autoFetch = true } = {}) {
@@ -23,6 +23,10 @@ export function useWallet({ autoFetch = true } = {}) {
 
   useEffect(() => {
     if (autoFetch) refresh();
+
+    const handleUpdate = () => refresh();
+    window.addEventListener("walletUpdated", handleUpdate);
+    return () => window.removeEventListener("walletUpdated", handleUpdate);
   }, [autoFetch, refresh]);
 
   return {
@@ -35,3 +39,4 @@ export function useWallet({ autoFetch = true } = {}) {
     refresh,
   };
 }
+

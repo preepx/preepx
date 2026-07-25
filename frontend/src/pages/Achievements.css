@@ -1,170 +1,106 @@
-.achievements-page {
-  width: 100%;
-  max-width: 100%;
-  padding: 28px 32px 48px;
-}
+﻿.achievements-page { width: 100%; max-width: 100%; padding: 28px 32px 48px; }
+.ach-progress-card { display: flex; align-items: center; gap: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 28px; margin: 24px 0; }
+.ach-progress-ring { width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(var(--primary) calc(var(--pct) * 1%), var(--bg) 0); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ach-progress-ring span { width: 60px; height: 60px; border-radius: 50%; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
+.ach-progress-card h3 { font-size: 18px; font-weight: 700; }
+.ach-progress-card p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+.badges-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.badge-card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; text-align: center; transition: all 0.2s; position: relative; }
+.badge-card.unlocked { border-color: var(--primary-light); }
+.badge-card.unlocked:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.badge-card.locked { opacity: 0.55; }
+.badge-icon { font-size: 36px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+.badge-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+.badge-card p { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+.badge-emoji { font-size: 36px; }
+.badge-earned { display: inline-flex; align-items: center; gap: 4px; margin-top: 12px; font-size: 11px; font-weight: 700; color: var(--success); background: #ecfdf5; padding: 3px 10px; border-radius: 50px; text-transform: uppercase; }
+.badge-locked { display: inline-block; margin-top: 12px; font-size: 11px; font-weight: 600; color: var(--text-muted); background: var(--bg); padding: 3px 10px; border-radius: 50px; }
+.earned-preview { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.earned-chip { font-size: 12px; padding: 4px 10px; background: #eef2ff; color: var(--primary); border-radius: 50px; font-weight: 500; }
+.ach-cta { text-align: center; margin-top: 24px; padding: 20px; background: var(--bg); border-radius: 14px; }
+.ach-cta p { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
+.ach-cta button { padding: 10px 24px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 600; font-family: inherit; cursor: pointer; }
+.btn-claim-badge { background: #4caf50; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; font-weight: 500; margin-top: 8px; transition: background 0.2s; }
+.btn-claim-badge:hover { background: #45a049; }
 
-.ach-progress-card {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 28px;
-  margin: 24px 0;
-}
-
-.ach-progress-ring {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: conic-gradient(var(--primary) calc(var(--pct) * 1%), var(--bg) 0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.ach-progress-ring span {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--surface);
+.claim-popup-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
-  font-weight: 700;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease-out forwards;
 }
 
-.ach-progress-card h3 {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.ach-progress-card p {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 4px;
-}
-
-.badges-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-}
-
-.badge-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 24px;
+.claim-popup-content {
+  background: var(--surface, #1e2128);
+  padding: 32px;
+  border-radius: 20px;
   text-align: center;
-  transition: all 0.2s;
-  position: relative;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border, #2d3340);
+  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-.badge-card.unlocked {
-  border-color: var(--primary-light);
+.claim-popup-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both;
 }
 
-.badge-card.unlocked:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow);
-}
-
-.badge-card.locked {
-  opacity: 0.55;
-}
-
-.badge-icon {
-  font-size: 36px;
+.claim-popup-content h2 {
+  font-size: 24px;
+  font-weight: 700;
   margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted);
+  color: var(--text-main, #fff);
 }
 
-.badge-card h3 {
+.claim-popup-content p {
   font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 6px;
+  color: var(--text-muted, #a0aec0);
+  line-height: 1.5;
+  margin-bottom: 24px;
 }
 
-.badge-card p {
-  font-size: 12px;
-  color: var(--text-muted);
-  line-height: 1.4;
+.claim-popup-content p strong {
+  color: var(--primary-light, #8b5cf6);
 }
 
-.badge-emoji {
-  font-size: 36px;
-}
-
-.badge-earned {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 12px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--success);
-  background: #ecfdf5;
-  padding: 3px 10px;
-  border-radius: 50px;
-  text-transform: uppercase;
-}
-
-.badge-locked {
-  display: inline-block;
-  margin-top: 12px;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  background: var(--bg);
-  padding: 3px 10px;
-  border-radius: 50px;
-}
-
-.earned-preview {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 12px;
-}
-
-.earned-chip {
-  font-size: 12px;
-  padding: 4px 10px;
-  background: #eef2ff;
-  color: var(--primary);
-  border-radius: 50px;
-  font-weight: 500;
-}
-
-.ach-cta {
-  text-align: center;
-  margin-top: 24px;
-  padding: 20px;
-  background: var(--bg);
-  border-radius: 14px;
-}
-
-.ach-cta p {
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-bottom: 12px;
-}
-
-.ach-cta button {
-  padding: 10px 24px;
-  background: var(--primary);
+.claim-popup-btn {
+  background: var(--primary, #6d28d9);
   color: white;
   border: none;
-  border-radius: 10px;
+  padding: 12px 32px;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 600;
-  font-family: inherit;
   cursor: pointer;
+  transition: all 0.2s;
+}
+
+.claim-popup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.4);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes bounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
 }

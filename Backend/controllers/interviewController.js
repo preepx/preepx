@@ -1,7 +1,7 @@
-const axios = require("axios");
+﻿const axios = require("axios");
 const Interview = require("../models/Interview");
 const User = require("../models/User");
-const { evaluateBadges } = require("../utils/badges");
+const { evaluateBadges, calculateBadgeBonus } = require("../utils/badges");
 const walletService = require("../services/walletService");
 
 let previousQuestions = new Set();
@@ -208,22 +208,21 @@ const saveInterviewResult = async (req, res) => {
     user.interviewsCompleted = (user.interviewsCompleted || 0) + 1;
     user.level = Math.floor(user.points / 100) + 1;
     if (isPerfect) user.hasPerfectScore = true;
+    await user.save();
 
     await updateStreak(req.user);
 
     const refreshed = await User.findById(req.user);
-    const newBadges = evaluateBadges(refreshed, { hasPerfectScore: isPerfect });
-    const addedBadges = newBadges.filter((b) => !(refreshed.badges || []).includes(b));
-    refreshed.badges = newBadges;
-    await refreshed.save();
-
+    const claimableBadges = evaluateBadges(refreshed, { hasPerfectScore: isPerfect })
+        .filter((b) => !(refreshed.badges || []).includes(b));
+    
     res.json({
       interview,
       totalScore,
       maxScore,
       correctCount,
       pointsEarned,
-      newBadges: addedBadges,
+      claimableBadges,
       level: refreshed.level,
       streak: refreshed.streak,
     });
@@ -261,3 +260,5 @@ module.exports = {
   getInterviewById,
   deleteInterview,
 };
+
+
