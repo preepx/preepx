@@ -158,6 +158,11 @@ function Profile() {
                 <div className="level-bar-wrap">
                   <div className="level-bar completeness-bar" style={{ width: `${completeness}%` }} />
                 </div>
+                {!user.profileCompletedBonusClaimed && (
+                  <p style={{ fontSize: '12px', color: 'var(--primary)', marginTop: '8px', fontWeight: '600' }}>
+                    ✨ Complete your profile 100% to earn 5 bonus coins!
+                  </p>
+                )}
               </div>
             </>
           ) : (

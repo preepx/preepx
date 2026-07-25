@@ -9,8 +9,16 @@ function Navbar() {
   const profileRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const user = JSON.parse(localStorage.getItem("user") || "null");
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    const handleUserUpdate = () => {
+      setUser(JSON.parse(localStorage.getItem("user") || "null"));
+    };
+    window.addEventListener("user-updated", handleUserUpdate);
+    return () => window.removeEventListener("user-updated", handleUserUpdate);
+  }, []);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
