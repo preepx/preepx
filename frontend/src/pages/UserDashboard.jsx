@@ -6,6 +6,7 @@ import {
   ClipboardCheck, Zap,
 } from "lucide-react";
 import { getProfile, getAnalytics } from "../services/userAPI";
+import { useWallet } from "../features/wallet/hooks/useWallet";
 import Loader from "../components/Loader";
 import "./UserDashboard.css";
 
@@ -35,6 +36,7 @@ function UserDashboard() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { balance } = useWallet();
 
   const refreshData = () => {
     Promise.all([
@@ -60,7 +62,7 @@ function UserDashboard() {
     const handleUserUpdate = () => {
       const updatedUser = JSON.parse(localStorage.getItem("user") || "null");
       if (updatedUser) setUser(updatedUser);
-      getAnalytics().then((s) => setStats(s)).catch(() => {});
+      getAnalytics().then((s) => setStats(s)).catch(() => { });
     };
 
     window.addEventListener("user-updated", handleUserUpdate);
@@ -91,7 +93,7 @@ function UserDashboard() {
   const totalMcq = stats?.totalMcqExams || 0;
   const streak = stats?.streak ?? user?.streak ?? 0;
   const badgesCount = user?.badges?.length || 0;
-  const coins = user?.coins || 0;
+  const coins = balance ?? user?.coins ?? 0;
   const avgScore = stats?.avgScore ?? 0;
 
   return (
@@ -140,7 +142,7 @@ function UserDashboard() {
             </div>
             <div className="ud-level-info">
               <div className="ud-xp-row">
-                <img src="/logo.png" alt="Px" className="ud-px-icon" />
+                <img src="/logo.png" alt="XP" className="ud-px-icon" />
                 <strong>{user?.points || 0}</strong>
                 <span>XP available</span>
               </div>
@@ -211,7 +213,7 @@ function UserDashboard() {
               <p>Quick MCQ quizzes to test your technical knowledge</p>
               <span className="ud-practice-cta">Take quiz <ChevronRight size={16} /></span>
             </div>
-            <span className="ud-free-tag">FREE</span>
+            <span className="ud-free-tag">Free</span>
           </button>
         </div>
       </section>
@@ -235,7 +237,7 @@ function UserDashboard() {
               <div>
                 <h4>
                   {label}
-                  {free && <span className="ud-free-pill">FREE</span>}
+                  {free && <span className="ud-free-pill">Free</span>}
                 </h4>
                 <p>{desc}</p>
               </div>

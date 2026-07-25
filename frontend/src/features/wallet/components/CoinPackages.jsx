@@ -7,6 +7,7 @@ import "./CoinPackages.css";
 
 function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseSuccess }) {
   const [buying, setBuying] = useState(null);
+  const [activePack, setActivePack] = useState(packages.find(p => p.popular)?.id || packages[0]?.id);
 
   const handleBuy = async (pack) => {
     setBuying(pack.id);
@@ -75,8 +76,13 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
 
       <div className="coin-packages-grid">
         {packages.map((pack) => (
-          <div key={pack.id} className={`coin-pack ${pack.popular ? "popular" : ""}`}>
-            {pack.popular && <span className="coin-pack-tag">Popular</span>}
+          <div 
+            key={pack.id} 
+            className={`coin-pack ${activePack === pack.id ? "popular" : ""}`}
+            onClick={() => setActivePack(pack.id)}
+            style={{ cursor: 'pointer' }}
+          >
+            {activePack === pack.id && <span className="coin-pack-tag">{pack.label}</span>}
             <p className="coin-pack-label">{pack.label}</p>
             <p className="coin-pack-coins">{pack.coins} <span>coins</span></p>
             <p className="coin-pack-price">

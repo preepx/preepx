@@ -18,16 +18,14 @@ function WalletPage() {
   return (
     <div className="wallet-page">
       <div className="page-header">
-        <div>
-          <h1>Wallet</h1>
-          <p>Manage your coins for interviews & objective exams</p>
-        </div>
+        <h1>Wallet</h1>
+        <p>Manage your coins for interviews & objective exams</p>
       </div>
 
       <div className="wallet-balance-card">
         <div className="wallet-balance-left">
           <div className="wallet-balance-icon">
-            <Coins size={28} />
+            <span style={{ fontSize: '28px', lineHeight: 1 }}>🪙</span>
           </div>
           <div>
             <p className="wallet-balance-label">Available Balance</p>
@@ -66,7 +64,9 @@ function WalletPage() {
           <Zap size={20} />
           <div>
             <p className="wp-label">Objective Exam</p>
-            <p className="wp-cost">{WALLET_PRICING.OBJECTIVE_EXAM} coin</p>
+            <p className="wp-cost">
+              <span className="nav-free-badge" style={{ position: 'static' }}>Free</span>
+            </p>
           </div>
         </div>
         <div className="wallet-pricing-item">

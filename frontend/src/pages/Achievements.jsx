@@ -64,7 +64,7 @@ function Achievements() {
               <p className="coin-pack-label">{tier.label}</p>
               <p className="coin-pack-coins">{tier.coins} <span>coins</span></p>
               <p className="coin-pack-price" style={{ justifyContent: "center", color: "#f59e0b", fontSize: "14px", fontWeight: "600", marginBottom: "16px" }}>
-                <img src="/logo.png" alt="Px" style={{width: '32px', height: '32px', marginRight: '-6px', verticalAlign: 'middle', display: 'inline-block'}} />{tier.xp}Px
+                <img src="/logo.png" alt="XP" style={{width: '32px', height: '32px', marginRight: '-6px', verticalAlign: 'middle', display: 'inline-block'}} />{tier.xp}XP
               </p>
               <button
                 className="coin-pack-btn"

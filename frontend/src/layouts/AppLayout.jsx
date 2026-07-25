@@ -15,11 +15,11 @@ const NAV_ITEMS = [
   { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { to: "/interview", icon: Video, label: "Mock Interview" },
   { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam", isFree: true },
-  { to: "/wallet", icon: Wallet, label: "Wallet" },
+  { to: "/achievements", icon: Award, label: "Achievements" },
   { to: "/btech-notes", icon: BookOpen, label: "Btech Notes", isFree: true },
   { to: "/analytics", icon: BarChart3, label: "Analytics" },
   { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
-  { to: "/achievements", icon: Award, label: "Achievements" },
+  { to: "/wallet", icon: Wallet, label: "Wallet" },
   { to: "/profile", icon: User, label: "Profile" },
   { to: "/settings", icon: Settings, label: "Settings" },
 ];
@@ -107,7 +107,7 @@ function AppLayout({ children }) {
                 <img src={avatar} alt="" />
                 <div>
                   <p className="su-name">{user.fullName || "User"}</p>
-                  <p className="su-meta">Lvl {user.level || 1} · {user.points || 0} Px</p>
+                  <p className="su-meta">Lvl {user.level || 1} · {user.points || 0} XP</p>
                 </div>
               </div>
             )}
@@ -128,7 +128,7 @@ function AppLayout({ children }) {
               <div className="topbar-right">
                 {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
                 <span className="level-badge"><span className="badge-text">Level </span>{user.level || 1}</span>
-                <span className="points-badge"><img src="/logo.png" alt="Px" style={{width: '32px', height: '32px', marginRight: '-6px', verticalAlign: 'middle', display: 'inline-block'}} />{user.points || 0}<span className="badge-text">Px</span></span>
+                <span className="points-badge" style={{ display: 'flex', alignItems: 'center', gap: '0px' }}><img src="/logo.png" alt="XP" style={{width: '32px', height: '32px', margin: '-8px -6px -8px -8px', objectFit: 'contain'}} />{user.points || 0}<span className="badge-text" style={{ marginLeft: '2px' }}>XP</span></span>
               </div>
             </header>
           )}

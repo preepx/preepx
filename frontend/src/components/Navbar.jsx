@@ -119,7 +119,7 @@ function Navbar() {
                   </div>
                   {user.points > 0 && (
                     <div className="dropdown-points">
-                      <span><img src="/logo.png" alt="Px" style={{width: '32px', height: '32px', marginRight: '-6px', verticalAlign: 'middle', display: 'inline-block'}} />{user.points}Px</span>
+                      <span style={{ display: 'flex', alignItems: 'center' }}><img src="/logo.png" alt="XP" style={{width: '32px', height: '32px', marginRight: '-6px', marginLeft: '-6px', marginTop: '-8px', marginBottom: '-8px', objectFit: 'contain'}} />{user.points}XP</span>
                     </div>
                   )}
                   <div className="dropdown-divider" />

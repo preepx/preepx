@@ -100,7 +100,7 @@
 .ud-avatar {
   width: 72px;
   height: 72px;
-  border-radius: 20px;
+  border-radius: 50%;
   object-fit: cover;
   border: 3px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -496,14 +496,23 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
   padding: 4px 10px;
   border-radius: 100px;
   z-index: 2;
+  animation: navFreePulse 2.2s ease-in-out infinite;
+}
+
+[data-theme="dark"] .ud-free-tag {
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.28);
+  animation-name: navFreePulseDark;
 }
 
 /* Explore grid */
@@ -582,10 +591,19 @@
   font-size: 9px;
   font-weight: 800;
   letter-spacing: 0.8px;
-  background: linear-gradient(135deg, #10b981, #059669);
-  color: white;
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
   padding: 2px 7px;
   border-radius: 100px;
+  animation: navFreePulse 2.2s ease-in-out infinite;
+}
+
+[data-theme="dark"] .ud-free-pill {
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.28);
+  animation-name: navFreePulseDark;
 }
 
 .ud-explore-arrow {

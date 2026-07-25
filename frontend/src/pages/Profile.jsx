@@ -245,7 +245,7 @@ function Profile() {
           )}
 
           <div className="profile-stats">
-            <div className="profile-stat"><Trophy size={20} /><span className="stat-number">{user.points || 0}</span><span className="stat-text">Px</span></div>
+            <div className="profile-stat"><Trophy size={20} /><span className="stat-number">{user.points || 0}</span><span className="stat-text">XP</span></div>
             <div className="profile-stat"><Flame size={20} /><span className="stat-number">{user.streak || 0}</span><span className="stat-text">Streak</span></div>
             <div className="profile-stat"><BarChart3 size={20} /><span className="stat-number">{stats?.totalInterviews || user.interviewsCompleted || 0}</span><span className="stat-text">Interviews</span></div>
             <div className="profile-stat"><Award size={20} /><span className="stat-number">{user.badges?.length || 0}</span><span className="stat-text">Badges</span></div>

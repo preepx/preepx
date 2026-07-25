@@ -48,7 +48,7 @@ function Leaderboard() {
 
       <div className="lb-info-cards">
         <div className="lb-info-card"><Users size={18} /><span>Top {topRanks.length} Rankings</span></div>
-        <div className="lb-info-card"><Zap size={18} /><span>Earn 10 Px per correct answer</span></div>
+        <div className="lb-info-card"><Zap size={18} /><span>Earn 10 XP per correct answer</span></div>
         <div className="lb-info-card"><Trophy size={18} /><span>+50 bonus for perfect score</span></div>
       </div>
 
@@ -68,7 +68,7 @@ function Leaderboard() {
               <div key={entry.rank} className={`podium-item ${heights[idx]}`}>
                 <img src={entry.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(maskName(entry.fullName, entry.isCurrentUser))}&background=4f46e5&color=fff`} alt="" />
                 <span className="podium-name">{maskName(entry.fullName, entry.isCurrentUser)}</span>
-                <span className="podium-pts">{entry.points} Px</span>
+                <span className="podium-pts">{entry.points} XP</span>
                 <span className="podium-rank">#{entry.rank}</span>
               </div>
             );
@@ -87,7 +87,7 @@ function Leaderboard() {
                 <span className="lb-name">{maskName(entry.fullName, entry.isCurrentUser)}{entry.isCurrentUser && <span className="you-tag">You</span>}</span>
                 <span className="lb-meta">Lvl {entry.level} · {entry.interviewsCompleted} interviews{entry.streak > 0 && ` · 🔥 ${entry.streak}`}</span>
               </div>
-              <div className="lb-score"><span className="lb-points">{entry.points}</span><span className="lb-pts-label">Px</span></div>
+              <div className="lb-score"><span className="lb-points">{entry.points}</span><span className="lb-pts-label">XP</span></div>
             </div>
           );
         })}

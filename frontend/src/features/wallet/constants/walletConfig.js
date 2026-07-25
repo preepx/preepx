@@ -1,6 +1,6 @@
 /** Frontend wallet constants — mirrors Backend/config/wallet.js */
 export const WALLET_PRICING = {
-  INTERVIEW: 2,
+  INTERVIEW: 5,
   OBJECTIVE_EXAM: 1,
 };
 

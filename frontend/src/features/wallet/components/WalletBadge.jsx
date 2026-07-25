@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Coins } from "lucide-react";
 import { useWallet } from "../hooks/useWallet";
 import "./WalletBadge.css";
 
@@ -9,7 +8,7 @@ function WalletBadge() {
 
   return (
     <Link to="/wallet" className="wallet-badge" title="View wallet">
-      <Coins size={14} />
+      <span style={{ fontSize: '14px', lineHeight: 1 }}>🪙</span>
       <span className="wallet-badge-label">Wallet</span>
       <span className="wallet-badge-balance">
         {loading ? "…" : balance}

@@ -4,6 +4,22 @@
   padding: 28px 32px 48px;
 }
 
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.page-header p {
+  color: var(--text-muted, #64748b);
+  font-size: 14px;
+}
+
 .wallet-balance-card {
   display: flex;
   align-items: center;
@@ -11,15 +27,15 @@
   gap: 16px;
   margin-top: 24px;
   padding: 24px 28px;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+  background: #312f5b;
   border-radius: 20px;
-  border: 1px solid #fbbf24;
-  box-shadow: 0 8px 24px rgba(245, 158, 11, 0.15);
+  border: 1px solid #484581;
+  box-shadow: 0 8px 24px rgba(49, 47, 91, 0.25);
 }
 
 [data-theme="dark"] .wallet-balance-card {
-  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(217, 119, 6, 0.2));
-  border-color: rgba(251, 191, 36, 0.4);
+  background: #312f5b;
+  border-color: #484581;
 }
 
 .wallet-balance-left {
@@ -32,33 +48,32 @@
   width: 56px;
   height: 56px;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #b45309;
+  color: #e2e2f8;
 }
 
 .wallet-balance-label {
   font-size: 13px;
   font-weight: 500;
-  color: #92400e;
-  opacity: 0.85;
+  color: rgba(226, 226, 248, 0.85);
 }
 
 [data-theme="dark"] .wallet-balance-label {
-  color: #fbbf24;
+  color: rgba(226, 226, 248, 0.85);
 }
 
 .wallet-balance-value {
   font-size: 36px;
   font-weight: 800;
-  color: #78350f;
+  color: #ffffff;
   line-height: 1.1;
 }
 
 [data-theme="dark"] .wallet-balance-value {
-  color: #fde68a;
+  color: #ffffff;
 }
 
 .wallet-balance-value span {
