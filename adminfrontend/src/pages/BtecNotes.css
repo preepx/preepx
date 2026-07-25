@@ -433,3 +433,18 @@
   transition: color 0.15s;
 }
 .pn-pdf-link:hover { color: #f87171; }
+
+@media (max-width: 768px) {
+  .admin-search {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .action-btns {
+    flex-wrap: wrap;
+  }
+  
+  .table-responsive {
+    margin-top: 1rem;
+  }
+}

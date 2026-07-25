@@ -37,6 +37,27 @@
   transition: background 0.15s;
 }
 
+@media (max-width: 768px) {
+  .qa-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .qa-card-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .qa-row {
+    grid-template-columns: 24px 1fr;
+  }
+  
+  .qa-row > .icon-btn.danger {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+}
+
 .qa-card-header:hover {
   background: rgba(255, 255, 255, 0.03);
 }

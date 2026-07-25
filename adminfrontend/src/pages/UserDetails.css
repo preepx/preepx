@@ -96,6 +96,11 @@
   color: var(--accent-primary);
 }
 
+.tab-btn.active {
+  color: var(--accent-primary);
+  border-bottom: 2px solid var(--accent-primary);
+}
+
 .badge-yellow {
   background: rgba(245, 158, 11, 0.2);
   color: #f59e0b;
@@ -103,8 +108,26 @@
 
 .details-grid {
   display: grid;
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .profile-badges {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .mb-4 {

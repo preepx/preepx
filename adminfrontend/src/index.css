@@ -65,6 +65,32 @@ h1, h2, h3, h4, h5, h6 {
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    height: 100vh;
+    z-index: 1000;
+    transition: left 0.3s ease;
+    width: 260px;
+  }
+  
+  .sidebar.open {
+    left: 0;
+  }
+  
+  .main-content {
+    padding: 1rem;
+    padding-top: 5.5rem; /* Space for mobile header */
+  }
 }
 
 /* Forms & Buttons */
@@ -166,5 +192,18 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+  }
+}
+
+/* Responsive Table Wrapper */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  .input-field, .btn-primary {
+    width: 100%;
   }
 }
