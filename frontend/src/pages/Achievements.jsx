@@ -1,71 +1,101 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Lock, Award, Star } from "lucide-react";
-import { getAchievements } from "../services/userAPI";
-import EmptyState from "../components/EmptyState";
-import Loader from "../components/Loader";
+import { redeemXp } from "../services/userAPI";
+import "../features/wallet/components/CoinPackages.css";
 import "./Achievements.css";
 
 function Achievements() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [popup, setPopup] = useState(null);
+  const [selectedTier, setSelectedTier] = useState(2);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getAchievements()
-      .then(setData)
-      .catch(() => setData(null))
-      .finally(() => setLoading(false));
-  }, []);
+  const handleRedeem = async (pointsToRedeem) => {
+    try {
+      const res = await redeemXp(pointsToRedeem);
+      setPopup({
+        isError: false,
+        badgeName: "Coins Redeemed",
+        coins: res.coinsEarned,
+        icon: "💎"
+      });
 
-  if (loading) return <Loader />;
-  if (!data) return <EmptyState icon={Award} title="Achievements Unavailable" desc="Could not load badges." actionLabel="Go to Dashboard" actionPath="/interview" />;
+      const localUser = JSON.parse(localStorage.getItem("user") || "{}");
+      if (localUser && res.user) {
+        localStorage.setItem("user", JSON.stringify(res.user));
+        window.dispatchEvent(new Event("user-updated"));
+      }
+      window.dispatchEvent(new Event("walletUpdated"));
+    } catch (err) {
+      setPopup({
+        isError: true,
+        message: err.response?.data?.message || "You do not have enough points to redeem.",
+        icon: "❌"
+      });
+    }
+  };
 
-  const pct = Math.round((data.totalEarned / data.totalAvailable) * 100);
+  const tiers = [
+    { label: "STARTER", xp: 200, coins: 20 },
+    { label: "BRONZE", xp: 300, coins: 35 },
+    { label: "POPULAR", xp: 500, coins: 60, popular: true },
+    { label: "PRO", xp: 1000, coins: 120 },
+    { label: "PREMIUM", xp: 1500, coins: 170 },
+    { label: "ULTIMATE", xp: 2000, coins: 250 }
+  ];
 
   return (
     <div className="achievements-page">
-      <div className="page-header">
-        <h1>Achievements & Badges</h1>
-        <p>Complete challenges to unlock exclusive badges</p>
+      <div className="page-header" style={{ marginTop: "20px" }}>
+        <h1>Redeem XP for Coins</h1>
+        <p>Convert your available XP into Wallet Coins.</p>
       </div>
 
-      <div className="ach-progress-card">
-        <div className="ach-progress-ring" style={{ "--pct": pct }}>
-          <span>{data.totalEarned}/{data.totalAvailable}</span>
-        </div>
-        <div>
-          <h3>{data.totalEarned} of {data.totalAvailable} Badges Unlocked</h3>
-          <p>{pct === 100 ? "You've unlocked everything! 🎉" : "Keep practicing to earn them all!"}</p>
-          {data.earned.length > 0 && (
-            <div className="earned-preview">
-              {data.earned.map((b) => (
-                <span key={b.id} className="earned-chip">{b.icon} {b.name}</span>
-              ))}
+      <div className="coin-packages-grid" style={{ marginTop: "30px", marginBottom: "40px" }}>
+        {tiers.map((tier, idx) => {
+          const isSelected = selectedTier === idx;
+          return (
+            <div
+              key={idx}
+              className={`coin-pack ${isSelected ? "popular" : ""}`}
+              onClick={() => setSelectedTier(idx)}
+              style={{ cursor: "pointer", transition: "all 0.3s ease" }}
+            >
+              {tier.popular && <span className="coin-pack-tag">POPULAR</span>}
+              <p className="coin-pack-label">{tier.label}</p>
+              <p className="coin-pack-coins">{tier.coins} <span>coins</span></p>
+              <p className="coin-pack-price" style={{ justifyContent: "center", color: "#f59e0b", fontSize: "14px", fontWeight: "600", marginBottom: "16px" }}>
+                ⭐ {tier.xp} XP
+              </p>
+              <button
+                className="coin-pack-btn"
+                onClick={(e) => { e.stopPropagation(); handleRedeem(tier.xp); }}
+                style={isSelected ? { background: "#f59e0b", color: "white" } : {}}
+              >
+                Convert
+              </button>
             </div>
-          )}
-        </div>
+          )
+        })}
       </div>
 
-      <div className="badges-grid">
-        {data.all.map((badge) => (
-          <div key={badge.id} className={`badge-card ${badge.unlocked ? "unlocked" : "locked"}`}>
-            <div className="badge-icon">{badge.unlocked ? <span className="badge-emoji">{badge.icon}</span> : <Lock size={20} />}</div>
-            <h3>{badge.name}</h3>
-            <p>{badge.desc}</p>
-            {badge.unlocked ? (
-              <span className="badge-earned"><Star size={12} /> Earned</span>
+      {popup && (
+        <div className="claim-popup-overlay">
+          <div className="claim-popup-content">
+            <div className="claim-popup-icon">{popup.icon || "🎉"}</div>
+            {popup.isError ? (
+              <>
+                <h2 style={{ color: "#ef4444" }}>Oops!</h2>
+                <p>{popup.message}</p>
+                <button className="claim-popup-btn" style={{ background: "#ef4444" }} onClick={() => setPopup(null)}>Try Again</button>
+              </>
             ) : (
-              <span className="badge-locked">Locked</span>
+              <>
+                <h2>Congratulations!</h2>
+                <p>You successfully redeemed XP and earned <strong>{popup.coins} Coins</strong>!</p>
+                <button className="claim-popup-btn" onClick={() => setPopup(null)}>Awesome!</button>
+              </>
             )}
           </div>
-        ))}
-      </div>
-
-      {data.totalEarned === 0 && (
-        <div className="ach-cta">
-          <p>Complete your first interview to earn the "First Step" badge!</p>
-          <button onClick={() => navigate("/interview")}>Start Interview</button>
         </div>
       )}
     </div>
@@ -73,3 +103,5 @@ function Achievements() {
 }
 
 export default Achievements;
+
+

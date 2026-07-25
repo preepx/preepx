@@ -1,4 +1,4 @@
-const Wallet = require("../models/Wallet");
+﻿const Wallet = require("../models/Wallet");
 const WalletTransaction = require("../models/WalletTransaction");
 const walletConfig = require("../config/wallet");
 
@@ -67,7 +67,7 @@ const purchaseCoins = async (userId, { packageId, rupees, paymentRef }) => {
     type: "purchase",
     coins,
     balanceAfter: wallet.balance,
-    description: `Purchased ${coins} coins for ₹${amountRupees}`,
+    description: `Purchased ${coins} coins for â‚¹${amountRupees}`,
     status: "completed",
     metadata: {
       rupees: amountRupees,
@@ -116,7 +116,7 @@ const deductForSession = async (userId, sessionType) => {
     type: "spend",
     coins: -cost,
     balanceAfter: wallet.balance,
-    description: `${labels[sessionType] || "Session"} — ${cost} coin(s)`,
+    description: `${labels[sessionType] || "Session"} â€” ${cost} coin(s)`,
     status: "completed",
     metadata: { sessionType },
   });
@@ -137,10 +137,31 @@ const hasEnoughCoins = async (userId, sessionType) => {
   };
 };
 
+const addBonusToWallet = async (userId, coins, description) => {
+  const wallet = await getOrCreateWallet(userId);
+  wallet.balance += coins;
+  await wallet.save();
+
+  const transaction = await WalletTransaction.create({
+    userId,
+    type: "bonus",
+    coins,
+    balanceAfter: wallet.balance,
+    description: description || `Earned ${coins} bonus coins`,
+    status: "completed",
+    metadata: { isBonus: true },
+  });
+
+  return { wallet, transaction, coinsAdded: coins };
+};
+
 module.exports = {
+  addBonusToWallet,
   getOrCreateWallet,
   getWalletSummary,
   purchaseCoins,
   deductForSession,
   hasEnoughCoins,
 };
+
+

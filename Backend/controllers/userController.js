@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const walletService = require("../services/walletService");
 const Otp = require("../models/Otp");
 const Interview = require("../models/Interview");
 const MCQResult = require("../models/MCQResult");
@@ -6,7 +7,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const sendOtpEmail = require("../utils/sendOtpEmail");
 const sendResetOtpEmail = require("../utils/sendResetOtpEmail");
-const { evaluateBadges, getBadgeDetails, getAllBadges } = require("../utils/badges");
+const { evaluateBadges, getBadgeDetails, getAllBadges, calculateBadgeBonus, BADGE_RULES } = require("../utils/badges");
 
 const safeUser = (user) => ({
   _id: user._id,
@@ -28,7 +29,7 @@ const safeUser = (user) => ({
   degree: user.degree || "",
 });
 
-// Step 1: User details submit kare → OTP generate karke email pe bhejo
+// Step 1: User details submit kare Ã¢â€ â€™ OTP generate karke email pe bhejo
 const sendOtp = async (req, res) => {
   const { fullName, email, password } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
@@ -65,7 +66,7 @@ const sendOtp = async (req, res) => {
   }
 };
 
-// Step 2: OTP verify karo → User account banao
+// Step 2: OTP verify karo Ã¢â€ â€™ User account banao
 const verifyOtpAndRegister = async (req, res) => {
   const { email, otp } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
@@ -105,7 +106,7 @@ const verifyOtpAndRegister = async (req, res) => {
   }
 };
 
-// ─── Forgot Password: Step 1 — Email pe OTP bhejo ───
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Forgot Password: Step 1 Ã¢â‚¬â€ Email pe OTP bhejo Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 const forgotPassword = async (req, res) => {
   const { email } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
@@ -128,7 +129,7 @@ const forgotPassword = async (req, res) => {
   }
 };
 
-// ─── Forgot Password: Step 2 — OTP verify karo ───
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Forgot Password: Step 2 Ã¢â‚¬â€ OTP verify karo Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 const verifyResetOtp = async (req, res) => {
   const { email, otp } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
@@ -146,7 +147,7 @@ const verifyResetOtp = async (req, res) => {
       return res.status(400).json({ message: "Invalid OTP. Please try again." });
     }
 
-    // OTP sahi hai — frontend ko allow karo new password set karne ke liye
+    // OTP sahi hai Ã¢â‚¬â€ frontend ko allow karo new password set karne ke liye
     // OTP record abhi delete nahi karte, resetPassword mein karenge
     res.json({ message: "OTP verified. You can now set a new password." });
   } catch (error) {
@@ -154,7 +155,7 @@ const verifyResetOtp = async (req, res) => {
   }
 };
 
-// ─── Forgot Password: Step 3 — Naya password set karo ───
+// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Forgot Password: Step 3 Ã¢â‚¬â€ Naya password set karo Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
 const resetPassword = async (req, res) => {
   const { email, otp, newPassword } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
@@ -286,8 +287,8 @@ const getAnalytics = async (req, res) => {
       : 0;
     const mcqAvgAccuracy = totalMcqExams
       ? Math.round(
-          mcqResults.reduce((s, r) => s + (r.totalQuestions ? (r.score / r.totalQuestions) * 100 : 0), 0) / totalMcqExams
-        )
+        mcqResults.reduce((s, r) => s + (r.totalQuestions ? (r.score / r.totalQuestions) * 100 : 0), 0) / totalMcqExams
+      )
       : 0;
 
     const weeklyData = [];
@@ -400,16 +401,16 @@ const getDashboard = async (req, res) => {
     const completed = interviews.filter((i) => i.status === "completed");
     const avgScore = completed.length
       ? Math.round(
-          completed.reduce((s, i) => s + (i.maxScore ? (i.totalScore / i.maxScore) * 100 : 0), 0) /
-            completed.length
-        )
+        completed.reduce((s, i) => s + (i.maxScore ? (i.totalScore / i.maxScore) * 100 : 0), 0) /
+        completed.length
+      )
       : 0;
 
     const mcqAvgAccuracy = mcqResults.length
       ? Math.round(
-          mcqResults.reduce((s, r) => s + (r.totalQuestions ? (r.score / r.totalQuestions) * 100 : 0), 0) /
-            mcqResults.length
-        )
+        mcqResults.reduce((s, r) => s + (r.totalQuestions ? (r.score / r.totalQuestions) * 100 : 0), 0) /
+        mcqResults.length
+      )
       : 0;
     const mcqBestScore = mcqResults.length
       ? Math.max(...mcqResults.map((r) => (r.totalQuestions ? Math.round((r.score / r.totalQuestions) * 100) : 0)))
@@ -499,12 +500,19 @@ const getAchievements = async (req, res) => {
     const allBadges = getAllBadges();
     const earned = getBadgeDetails(user.badges || []);
 
+    const claimableBadges = evaluateBadges(user); // what badges they *should* have
+
     res.json({
       earned,
-      all: allBadges.map((b) => ({
-        ...b,
-        unlocked: (user.badges || []).includes(b.id),
-      })),
+      all: allBadges.map((b) => {
+        const isUnlocked = (user.badges || []).includes(b.id);
+        const isClaimable = !isUnlocked && claimableBadges.includes(b.id);
+        return {
+          ...b,
+          unlocked: isUnlocked,
+          claimable: isClaimable,
+        };
+      }),
       totalEarned: earned.length,
       totalAvailable: allBadges.length,
     });
@@ -513,7 +521,106 @@ const getAchievements = async (req, res) => {
   }
 };
 
+const claimBadge = async (req, res) => {
+  try {
+    const { badgeId } = req.body;
+    const user = await User.findById(req.user);
+
+
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+    if ((user.badges || []).includes(badgeId)) {
+      return res.status(400).json({ message: "Badge already claimed" });
+    }
+
+    // Re-evaluate to make sure they actually qualify
+    const claimableBadges = evaluateBadges(user);
+    if (!claimableBadges.includes(badgeId)) {
+      return res.status(400).json({ message: "You haven`t unlocked this badge yet" });
+    }
+
+    const badgeDef = BADGE_RULES.find(b => b.id === badgeId);
+    const bonus = badgeDef ? badgeDef.bonus : 0;
+
+    user.badges = [...(user.badges || []), badgeId];
+    user.points = (user.points || 0) + bonus;
+    user.lifetimePoints = (user.lifetimePoints || user.points || 0) + bonus;
+    user.level = Math.floor(user.lifetimePoints / 100) + 1;
+    await user.save();
+
+    if (bonus > 0) {
+      await walletService.addBonusToWallet(
+        user._id,
+        bonus,
+        `Reward for claiming badge: ${badgeDef ? badgeDef.name : badgeId}`
+      );
+    }
+
+    res.json({
+      message: "Badge claimed successfully",
+      bonusEarned: bonus,
+      totalPoints: user.points,
+      newBadges: user.badges
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const redeemXp = async (req, res) => {
+  try {
+    const { pointsToRedeem } = req.body;
+    const user = await User.findById(req.user);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (!user.points || user.points < pointsToRedeem) {
+      return res.status(400).json({ message: "Not enough XP points to redeem" });
+    }
+
+    const conversionRates = {
+
+      200: 20,
+      300: 35,
+      500: 60,
+      1000: 120,
+      1500: 170,
+      2000: 250
+    };
+
+    const coinsToAdd = conversionRates[pointsToRedeem];
+    if (!coinsToAdd) {
+      return res.status(400).json({ message: "Invalid redemption amount" });
+    }
+
+    // Deduct points, but DON'T drop the level
+    user.points -= pointsToRedeem;
+
+    // Make sure lifetimePoints is populated if it was 0 for older users
+    if (!user.lifetimePoints || user.lifetimePoints === 0) {
+      user.lifetimePoints = (user.points + pointsToRedeem);
+    }
+
+    await user.save();
+
+    await walletService.addBonusToWallet(
+      user._id,
+      coinsToAdd,
+      `Redeemed ${pointsToRedeem} XP for Coins`
+    );
+
+    res.json({
+      message: `Successfully converted ${pointsToRedeem} XP into ${coinsToAdd} Coins!`,
+      points: user.points,
+      coinsEarned: coinsToAdd,
+      user: safeUser(user)
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
+  redeemXp,
   sendOtp,
   verifyOtpAndRegister,
   registerUser,
@@ -530,4 +637,11 @@ module.exports = {
   getAnalytics,
   getLeaderboard,
   getAchievements,
+  claimBadge,
 };
+
+
+
+
+
+

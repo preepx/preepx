@@ -22,6 +22,8 @@ const {
   getAnalytics,
   getLeaderboard,
   getAchievements,
+  claimBadge,
+  redeemXp,
 } = require("../controllers/userController");
 
 const storage = new CloudinaryStorage({
@@ -50,5 +52,8 @@ router.put("/settings", protect, updateSettings);
 router.get("/analytics", protect, getAnalytics);
 router.get("/leaderboard", protect, getLeaderboard);
 router.get("/achievements", protect, getAchievements);
+router.post("/claim-badge", protect, claimBadge);
+router.post("/redeem-xp", protect, redeemXp);
 
 module.exports = router;
+

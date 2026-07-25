@@ -1,5 +1,5 @@
-const User = require("../models/User");
-const { evaluateBadges } = require("./badges");
+﻿const User = require("../models/User");
+const { evaluateBadges, calculateBadgeBonus } = require("./badges");
 
 const updateStreak = async (userId) => {
   const user = await User.findById(userId);
@@ -33,24 +33,24 @@ const awardMcqCompletion = async (userId, { score, totalQuestions }) => {
   const pointsEarned = score * 5 + (pct >= 80 ? 20 : 0) + (isPerfect ? 50 : 0);
 
   user.points = (user.points || 0) + pointsEarned;
-  user.level = Math.floor(user.points / 100) + 1;
+  user.lifetimePoints = (user.lifetimePoints || user.points || 0) + pointsEarned;
+  user.level = Math.floor(user.lifetimePoints / 100) + 1;
   if (isPerfect) user.hasPerfectScore = true;
 
   await user.save();
   await updateStreak(userId);
 
   const refreshed = await User.findById(userId);
-  const newBadges = evaluateBadges(refreshed, { hasPerfectScore: isPerfect });
-  const addedBadges = newBadges.filter((b) => !(refreshed.badges || []).includes(b));
-  refreshed.badges = newBadges;
-  await refreshed.save();
+  const claimableBadges = evaluateBadges(refreshed, { hasPerfectScore: isPerfect })
+      .filter((b) => !(refreshed.badges || []).includes(b));
 
   return {
     pointsEarned,
-    newBadges: addedBadges,
+    claimableBadges,
     level: refreshed.level,
     streak: refreshed.streak,
   };
 };
 
 module.exports = { updateStreak, awardMcqCompletion };
+
