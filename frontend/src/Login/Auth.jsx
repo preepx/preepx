@@ -144,7 +144,7 @@ function Auth() {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       toast.success("Welcome back!");
-      navigate("/interview", { replace: true });
+      navigate("/user-dashboard", { replace: true });
     } catch (error) {
       showAppError(
         error.response?.data?.message || "Something went wrong. Please try again.",
@@ -203,7 +203,7 @@ function Auth() {
       setRegisterData({ ...EMPTY_REGISTER });
       resetOtp();
       toast.success("Account created! Welcome aboard!");
-      navigate("/interview", { replace: true });
+      navigate("/user-dashboard", { replace: true });
     } catch (error) {
       showAppError(error.response?.data?.message || "Invalid code. Try again.", "Verification failed");
       resetOtp();
@@ -356,7 +356,7 @@ function Auth() {
         <div className="auth-left-glow auth-left-glow--2" />
         <div className="auth-left-content">
           <Link to="/" className="auth-logo" style={{ textDecoration: 'none', display: 'inline-block' }}>
-            <img src="/headername1.png" alt="PrepX" style={{ height: "72px", objectFit: "contain", margin: "-16px 0 -12px -12px" }} />
+            <img src="/headername1.png" alt="PreepX" style={{ height: "72px", objectFit: "contain", margin: "-16px 0 -12px -12px" }} />
           </Link>
           <h1>Master your interviews with AI</h1>
           <p>Practice realistic mock interviews, get instant feedback, and track your progress — all powered by cutting-edge AI.</p>

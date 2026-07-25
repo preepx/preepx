@@ -64,7 +64,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-inner">
         <Link to={user ? "/interview" : "/"} className="navbar-brand" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-          <img src="/headername1.png" alt="PrepX" className="brand-logo-img" style={{ height: "40px", transform: "scale(2.5)", transformOrigin: "left center", objectFit: "contain", marginLeft: "10px", marginTop: "8px" }} />
+          <img src="/headername1.png" alt="PreepX" className="brand-logo-img" style={{ height: "40px", transform: "scale(2.5)", transformOrigin: "left center", objectFit: "contain", marginLeft: "10px", marginTop: "8px" }} />
         </Link>
 
         <div className="navbar-center">
@@ -119,7 +119,7 @@ function Navbar() {
                   </div>
                   {user.points > 0 && (
                     <div className="dropdown-points">
-                      <span>⭐ {user.points} points</span>
+                      <span><img src="/logo.png" alt="Px" style={{width: '32px', height: '32px', marginRight: '-6px', verticalAlign: 'middle', display: 'inline-block'}} />{user.points}Px</span>
                     </div>
                   )}
                   <div className="dropdown-divider" />

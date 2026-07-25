@@ -21,7 +21,7 @@ export const staticContent = {
     title: "Mock Interviews",
     subtitle: "Practice makes perfect.",
     sections: [
-      { heading: "Realistic Scenarios", content: "Stop practicing in the mirror. PrepX puts you face-to-face with an intelligent AI that asks follow-up questions based on your answers." },
+      { heading: "Realistic Scenarios", content: "Stop practicing in the mirror. PreepX puts you face-to-face with an intelligent AI that asks follow-up questions based on your answers." },
       { heading: "Any Role, Any Skill", content: "Whether you are a Frontend Developer, Data Scientist, or Product Manager, our AI adapts its domain knowledge to test you accurately." }
     ]
   },
@@ -41,7 +41,7 @@ export const staticContent = {
       { heading: "2. Think Out Loud", content: "In technical interviews, your thought process is just as important as the final solution. Always communicate what you're thinking. If you hit a roadblock, explain the issue—the interviewer might give you a hint." },
       { heading: "3. Know Your Resume", content: "Be prepared to discuss anything you've listed on your resume in depth. If you claim expertise in a framework or language, expect deep-dive questions on it. If you have older projects, briefly review them before the interview." },
       { heading: "4. Ask Good Questions", content: "An interview is a two-way street. Prepare thoughtful questions about the team's engineering culture, the tech stack, or the company's roadmap. It shows genuine interest and helps you decide if the company is a good fit for you." },
-      { heading: "5. Practice Makes Perfect", content: "The best way to reduce anxiety is through practice. Use PrepX to simulate real interview scenarios, get AI-driven feedback, and refine your answers before the actual day." },
+      { heading: "5. Practice Makes Perfect", content: "The best way to reduce anxiety is through practice. Use PreepX to simulate real interview scenarios, get AI-driven feedback, and refine your answers before the actual day." },
       { heading: "Start Practicing Now", content: "Head over to your dashboard and configure your first mock interview session today." }
     ]
   },
@@ -51,7 +51,7 @@ export const staticContent = {
     sections: [
       { heading: "Engineering", content: "How AI is Transforming Technical Interviews\nDiscover how Large Language Models are making mock interviews more realistic and providing actionable feedback faster than ever before.\n\nRead more →" },
       { heading: "Career Advice", content: "5 Resume Mistakes Costing You The Interview\nAre you getting auto-rejected by ATS systems? Learn the top 5 formatting and content mistakes candidates make and how to fix them.\n\nRead more →" },
-      { heading: "PrepX Updates", content: "Introducing the New Analytics Dashboard\nWe've completely revamped our dashboard to help you track your progress, identify weak points, and climb the leaderboard.\n\nRead more →" }
+      { heading: "PreepX Updates", content: "Introducing the New Analytics Dashboard\nWe've completely revamped our dashboard to help you track your progress, identify weak points, and climb the leaderboard.\n\nRead more →" }
     ]
   },
   "/help-center": {
@@ -59,7 +59,7 @@ export const staticContent = {
     subtitle: "How can we assist you today?",
     sections: [
       { heading: "Frequently Asked Questions", content: "How do I start a mock interview?\nOnce you log in, navigate to the \"Interview\" tab on the sidebar. Choose your role, difficulty level, and click \"Start Interview.\" Make sure your microphone and camera permissions are enabled.\n\nIs my audio/video recorded?\nWe temporarily process your audio to generate the transcript for the AI model to evaluate. However, we do not permanently store your video or audio recordings unless you explicitly opt-in for playback features.\n\nHow is the score calculated?\nOur AI evaluates your response against a rubric that checks for technical accuracy, clarity of communication, and completeness. The score is out of 10 for each individual question." },
-      { heading: "Contact Support", content: "If you're facing technical issues or have a billing question that isn't answered here, please reach out to our support team.\n\nEmail: prepxsupport@gmail.com\nResponse Time: We aim to reply within 24 hours." }
+      { heading: "Contact Support", content: "If you're facing technical issues or have a billing question that isn't answered here, please reach out to our support team.\n\nEmail: preepxsupport@gmail.com\nResponse Time: We aim to reply within 24 hours." }
     ]
   },
   "/community": {
@@ -76,24 +76,24 @@ export const staticContent = {
     title: "About Us",
     subtitle: "Empowering professionals to land their dream jobs with AI-driven interview prep.",
     sections: [
-      { heading: "Our Mission", content: "At PrepX, our mission is to democratize access to high-quality interview preparation. We believe that everyone deserves a fair shot at their dream job, regardless of their background or resources. By leveraging cutting-edge Artificial Intelligence, we provide personalized, accessible, and highly effective mock interviews to candidates worldwide." },
-      { heading: "Why PrepX?", content: "Traditional interview preparation often involves expensive coaches or relying on friends for mock interviews. PrepX changes the game by offering a 24/7 AI-powered interviewer that evaluates your technical knowledge, communication skills, and confidence." },
-      { heading: "Our Story", content: "PrepX was built by a passionate team of engineers and designers who recognized the anxiety and challenges associated with job interviews. We combined our expertise in AI and software development to create a platform that simulates real-world interview scenarios. Today, PrepX is trusted by thousands of candidates preparing for top tech companies." },
-      { heading: "Join Us on Our Journey", content: "We are constantly innovating and expanding our platform. Whether you're a recent graduate or a seasoned professional, PrepX is here to support you in every step of your career journey." }
+      { heading: "Our Mission", content: "At PreepX, our mission is to democratize access to high-quality interview preparation. We believe that everyone deserves a fair shot at their dream job, regardless of their background or resources. By leveraging cutting-edge Artificial Intelligence, we provide personalized, accessible, and highly effective mock interviews to candidates worldwide." },
+      { heading: "Why PreepX?", content: "Traditional interview preparation often involves expensive coaches or relying on friends for mock interviews. PreepX changes the game by offering a 24/7 AI-powered interviewer that evaluates your technical knowledge, communication skills, and confidence." },
+      { heading: "Our Story", content: "PreepX was built by a passionate team of engineers and designers who recognized the anxiety and challenges associated with job interviews. We combined our expertise in AI and software development to create a platform that simulates real-world interview scenarios. Today, PreepX is trusted by thousands of candidates preparing for top tech companies." },
+      { heading: "Join Us on Our Journey", content: "We are constantly innovating and expanding our platform. Whether you're a recent graduate or a seasoned professional, PreepX is here to support you in every step of your career journey." }
     ]
   },
   "/careers": {
     title: "Careers",
     subtitle: "Help us build the future of hiring.",
     sections: [
-      { heading: "Open Roles", content: "We are currently not hiring, but we are always on the lookout for exceptional talent. Send your resume to careers@prepx.com." }
+      { heading: "Open Roles", content: "We are currently not hiring, but we are always on the lookout for exceptional talent. Send your resume to careers@preepx.com." }
     ]
   },
   "/privacy-policy": {
     title: "Privacy Policy",
     subtitle: "Last updated: October 2026",
     sections: [
-      { heading: "1. Introduction", content: "Welcome to PrepX. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights." },
+      { heading: "1. Introduction", content: "Welcome to PreepX. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights." },
       { heading: "2. Data We Collect", content: "We may collect, use, store, and transfer different kinds of personal data about you, including:\n\nIdentity Data: First name, last name, username.\nContact Data: Email address.\nTechnical Data: IP address, browser type and version, time zone setting.\nUsage Data: Information about how you use our website, including interview transcripts and AI feedback." },
       { heading: "3. How We Use Your Data", content: "We will only use your personal data when the law allows us to. Most commonly, we use it for the following purposes:\n\nTo register you as a new user.\nTo process and evaluate your interview responses using AI models.\nTo manage our relationship with you and provide customer support.\nTo improve our platform, products, and services." },
       { heading: "4. Data Security", content: "We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an unauthorized way, altered, or disclosed. Access to your personal data is limited to those employees, agents, and contractors who have a business need to know." },
@@ -104,12 +104,12 @@ export const staticContent = {
     title: "Terms of Service",
     subtitle: "Last updated: October 2026",
     sections: [
-      { heading: "1. Acceptance of Terms", content: "By accessing and using the PrepX platform, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to abide by these terms, please do not use this service." },
-      { heading: "2. Description of Service", content: "PrepX provides an AI-powered interview preparation platform, which includes mock interviews, resume analysis, and performance analytics. We reserve the right to modify or discontinue any feature of the service at any time without notice." },
-      { heading: "3. User Accounts", content: "To access certain features of PrepX, you must register for an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account." },
+      { heading: "1. Acceptance of Terms", content: "By accessing and using the PreepX platform, you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to abide by these terms, please do not use this service." },
+      { heading: "2. Description of Service", content: "PreepX provides an AI-powered interview preparation platform, which includes mock interviews, resume analysis, and performance analytics. We reserve the right to modify or discontinue any feature of the service at any time without notice." },
+      { heading: "3. User Accounts", content: "To access certain features of PreepX, you must register for an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account." },
       { heading: "4. Acceptable Use", content: "You agree not to use the platform to:\n\nUpload or transmit any content that is unlawful, harmful, or abusive.\nAttempt to manipulate or game the leaderboard or achievement systems.\nInterfere with or disrupt the service or servers connected to the service.\nReverse engineer, decompile, or extract the source code of our AI models or platform." },
-      { heading: "5. Intellectual Property", content: "All content included on this site, such as text, graphics, logos, and software, is the property of PrepX and protected by international copyright laws. You may not reproduce, distribute, or create derivative works without our express written consent." },
-      { heading: "6. Limitation of Liability", content: "PrepX shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use the service, including but not limited to reliance on AI feedback for actual job interviews." }
+      { heading: "5. Intellectual Property", content: "All content included on this site, such as text, graphics, logos, and software, is the property of PreepX and protected by international copyright laws. You may not reproduce, distribute, or create derivative works without our express written consent." },
+      { heading: "6. Limitation of Liability", content: "PreepX shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use the service, including but not limited to reliance on AI feedback for actual job interviews." }
     ]
   }
 };

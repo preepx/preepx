@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck,
+  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video,
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { getProfile, syncUserToStorage } from "../services/userAPI";
@@ -12,13 +12,14 @@ import Footer from "../components/Footer";
 import "./AppLayout.css";
 
 const NAV_ITEMS = [
-  { to: "/interview", icon: LayoutDashboard, label: "Dashboard" },
-  { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam", isFreeGif: true },
+  { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  { to: "/interview", icon: Video, label: "Mock Interview" },
+  { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam", isFree: true },
   { to: "/wallet", icon: Wallet, label: "Wallet" },
+  { to: "/btech-notes", icon: BookOpen, label: "Btech Notes", isFree: true },
   { to: "/analytics", icon: BarChart3, label: "Analytics" },
   { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
   { to: "/achievements", icon: Award, label: "Achievements" },
-  { to: "/btech-notes", icon: BookOpen, label: "Btech Notes", isFreeGif: true },
   { to: "/profile", icon: User, label: "Profile" },
   { to: "/settings", icon: Settings, label: "Settings" },
 ];
@@ -69,9 +70,9 @@ function AppLayout({ children }) {
           <div className="sidebar-top">
             <Link to="/interview" className="sidebar-brand">
               {collapsed ? (
-                <img src="/logo.png" alt="PrepX" style={{ height: '32px', objectFit: 'contain', marginLeft: '4px' }} />
+                <img src="/logo.png" alt="PreepX" style={{ height: '32px', objectFit: 'contain', marginLeft: '4px' }} />
               ) : (
-                <img src="/headername1.png" alt="PrepX" style={{ height: '70px', transform: 'scale(1.4)', transformOrigin: 'left center', objectFit: 'contain', marginLeft: '8px' }} />
+                <img src="/headername1.png" alt="PreepX" style={{ height: '70px', transform: 'scale(1.4)', transformOrigin: 'left center', objectFit: 'contain', marginLeft: '8px' }} />
               )}
             </Link>
             <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={18} /></button>
@@ -79,16 +80,14 @@ function AppLayout({ children }) {
           </div>
 
           <nav className="sidebar-nav">
-            {NAV_ITEMS.map(({ to, icon: Icon, label, isFreeGif }) => (
+            {NAV_ITEMS.map(({ to, icon: Icon, label, isFree }) => (
               <Link key={to} to={to} className={`sidebar-link ${location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to)) ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
                 <Icon size={20} style={{ flexShrink: 0 }} />
                 {!collapsed && (
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {label}
-                    {isFreeGif && (
-                      <span className="super-free-badge">FREE</span>
-                    )}
-                  </span>
+                  <>
+                    <span className="sidebar-link-label">{label}</span>
+                    {isFree && <span className="nav-free-badge">Free</span>}
+                  </>
                 )}
               </Link>
             ))}
@@ -108,7 +107,7 @@ function AppLayout({ children }) {
                 <img src={avatar} alt="" />
                 <div>
                   <p className="su-name">{user.fullName || "User"}</p>
-                  <p className="su-meta">Lvl {user.level || 1} · {user.points || 0} pts</p>
+                  <p className="su-meta">Lvl {user.level || 1} · {user.points || 0} Px</p>
                 </div>
               </div>
             )}
@@ -129,7 +128,7 @@ function AppLayout({ children }) {
               <div className="topbar-right">
                 {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
                 <span className="level-badge"><span className="badge-text">Level </span>{user.level || 1}</span>
-                <span className="points-badge">⭐ {user.points || 0}<span className="badge-text"> pts</span></span>
+                <span className="points-badge"><img src="/logo.png" alt="Px" style={{width: '32px', height: '32px', marginRight: '-6px', verticalAlign: 'middle', display: 'inline-block'}} />{user.points || 0}<span className="badge-text">Px</span></span>
               </div>
             </header>
           )}

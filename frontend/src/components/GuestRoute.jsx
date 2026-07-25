@@ -6,7 +6,7 @@ export default function GuestRoute({ children }) {
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
   if (token && user) {
-    return <Navigate to="/interview" replace />;
+    return <Navigate to="/user-dashboard" replace />;
   }
 
   return children;

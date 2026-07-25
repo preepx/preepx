@@ -19,7 +19,7 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_THRv3G1OfdhIob", // Fallback for testing
         amount: orderData.amount,
         currency: orderData.currency,
-        name: "PrepX AI Interview",
+        name: "PreepX AI Interview",
         description: `Purchase ${pack.coins} Coins`,
         order_id: orderData.orderId,
         handler: async function (response) {
@@ -38,7 +38,7 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
           }
         },
         prefill: {
-          name: "PrepX User",
+          name: "PreepX User",
           email: "user@example.com",
         },
         theme: {

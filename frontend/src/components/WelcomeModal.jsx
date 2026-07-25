@@ -8,7 +8,7 @@ function WelcomeModal({ onClose, userName }) {
       <div className="welcome-card">
         <button className="welcome-close" onClick={onClose}><X size={18} /></button>
         <div className="welcome-icon">
-          <img src="/logo.png" alt="PrepX Logo" style={{ width: '56px', height: '56px', objectFit: 'contain' }} />
+          <img src="/logo.png" alt="PreepX Logo" style={{ width: '56px', height: '56px', objectFit: 'contain' }} />
         </div>
         <h2>Welcome, {userName}! 🎉</h2>
         <p>Your AI interview coach is ready. Here's how to get started:</p>

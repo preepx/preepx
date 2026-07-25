@@ -406,7 +406,7 @@ const getLeaderboard = async (req, res) => {
   try {
     const users = await User.find()
       .sort({ points: -1 })
-      .limit(20)
+      .limit(10)
       .select("fullName profilePic points badges streak interviewsCompleted level");
 
     const leaderboard = users.map((u, i) => ({

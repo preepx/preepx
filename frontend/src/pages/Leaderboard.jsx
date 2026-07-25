@@ -12,6 +12,8 @@ const RANK_STYLES = [
   { icon: Medal, cls: "bronze" },
 ];
 
+const TOP_RANK_LIMIT = 10;
+
 function Leaderboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -34,7 +36,8 @@ function Leaderboard() {
   if (loading) return <Loader />;
   if (!data) return <EmptyState icon={Trophy} title="Leaderboard Unavailable" desc="Could not load rankings." actionLabel="Retry" onAction={() => window.location.reload()} />;
 
-  const top3 = data.leaderboard.slice(0, 3);
+  const topRanks = data.leaderboard.slice(0, TOP_RANK_LIMIT);
+  const top3 = topRanks.slice(0, 3);
 
   return (
     <div className="leaderboard-page">
@@ -44,8 +47,8 @@ function Leaderboard() {
       </div>
 
       <div className="lb-info-cards">
-        <div className="lb-info-card"><Users size={18} /><span>{data.leaderboard.length} Active Users</span></div>
-        <div className="lb-info-card"><Zap size={18} /><span>Earn 10 pts per correct answer</span></div>
+        <div className="lb-info-card"><Users size={18} /><span>Top {topRanks.length} Rankings</span></div>
+        <div className="lb-info-card"><Zap size={18} /><span>Earn 10 Px per correct answer</span></div>
         <div className="lb-info-card"><Trophy size={18} /><span>+50 bonus for perfect score</span></div>
       </div>
 
@@ -65,7 +68,7 @@ function Leaderboard() {
               <div key={entry.rank} className={`podium-item ${heights[idx]}`}>
                 <img src={entry.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(maskName(entry.fullName, entry.isCurrentUser))}&background=4f46e5&color=fff`} alt="" />
                 <span className="podium-name">{maskName(entry.fullName, entry.isCurrentUser)}</span>
-                <span className="podium-pts">{entry.points} pts</span>
+                <span className="podium-pts">{entry.points} Px</span>
                 <span className="podium-rank">#{entry.rank}</span>
               </div>
             );
@@ -74,7 +77,7 @@ function Leaderboard() {
       )}
 
       <div className="lb-list">
-        {data.leaderboard.map((entry, i) => {
+        {topRanks.map((entry, i) => {
           const RankIcon = i < 3 ? RANK_STYLES[i].icon : null;
           return (
             <div key={entry.rank} className={`lb-row ${entry.isCurrentUser ? "current" : ""} ${i < 3 ? RANK_STYLES[i].cls : ""}`}>
@@ -84,7 +87,7 @@ function Leaderboard() {
                 <span className="lb-name">{maskName(entry.fullName, entry.isCurrentUser)}{entry.isCurrentUser && <span className="you-tag">You</span>}</span>
                 <span className="lb-meta">Lvl {entry.level} · {entry.interviewsCompleted} interviews{entry.streak > 0 && ` · 🔥 ${entry.streak}`}</span>
               </div>
-              <div className="lb-score"><span className="lb-points">{entry.points}</span><span className="lb-pts-label">pts</span></div>
+              <div className="lb-score"><span className="lb-points">{entry.points}</span><span className="lb-pts-label">Px</span></div>
             </div>
           );
         })}

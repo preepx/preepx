@@ -9,6 +9,7 @@ const AppLayout = lazy(() => import("./layouts/AppLayout"));
 const Footer = lazy(() => import("./components/Footer"));
 
 const Dashboard = lazy(() => import("./pages/Dashboard"));
+const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const StaticPage = lazy(() => import("./pages/StaticPage"));
 const Profile = lazy(() => import("./pages/Profile"));
 const FeedbackPage = lazy(() => import("./pages/FeedbackPage"));
@@ -39,7 +40,7 @@ const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "
 
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
-    "/interview", "/analytics", "/leaderboard", "/achievements",
+    "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements",
     "/settings", "/profile", "/resume-interview", "/btech-notes", "/objective-exam", "/wallet",
   ];
   return sidebarRoutes.includes(pathname)
@@ -102,6 +103,7 @@ function AppContent() {
           <Route path="/privacy-policy" element={<StaticPage />} />
           <Route path="/terms-of-service" element={<StaticPage />} />
 
+          <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
           <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
           <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
           <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />

@@ -92,13 +92,13 @@ function Dashboard() {
   ];
 
   const testimonials = [
-    { name: "Priya Sharma", role: "Software Engineer @ Walmart", text: "PrepX helped me practice 20+ mock interviews. The AI feedback is incredibly detailed!", rating: 5 },
+    { name: "Priya Sharma", role: "Software Engineer @ Walmart", text: "PreepX helped me practice 20+ mock interviews. The AI feedback is incredibly detailed!", rating: 5 },
     { name: "Rahul Verma", role: "Associate @ Amazon", text: "Improved my answer quality by 40% in just 2 weeks. The analytics dashboard is a game-changer.", rating: 5 },
     { name: "Ananya Patel", role: "Data Analyst @ Cisco", text: "Resume-based questions were spot-on. Best interview prep platform I've used.", rating: 4 },
   ];
 
   const faqs = [
-    { q: "Is PrepX free to use?", a: "Yes! All core features — AI interviews, analytics, leaderboard, and badges — are completely free." },
+    { q: "Is PreepX free to use?", a: "Yes! All core features — AI interviews, analytics, leaderboard, and badges — are completely free." },
     { q: "How does AI evaluation work?", a: "Our Groq-powered LLM analyzes your spoken answers against each question and returns a score (0-10) with detailed feedback." },
     { q: "What roles can I practice for?", a: "Any role! Frontend, Backend, Data Science, DevOps, Product Manager — enter any title and skills." },
     { q: "Will my data show on the dashboard?", a: "Yes! Every interview you complete is saved to your account. Stats, history, and analytics update in real-time." },
@@ -152,7 +152,7 @@ function Dashboard() {
             <div className="mockup-window">
               <div className="mockup-bar">
                 <span className="dot red" /><span className="dot yellow" /><span className="dot green" />
-                <span className="mockup-title">PrepX — Interview Room</span>
+                <span className="mockup-title">PreepX — Interview Room</span>
               </div>
               <div className="mockup-body">
                 <div className="mock-q">Q3: Explain React hooks and their use cases</div>

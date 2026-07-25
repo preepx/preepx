@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-brand-col">
           <Link to="/" className="footer-logo">
-            <img src="/headername1.png" alt="PrepX Logo" style={{ height: '80px', objectFit: 'contain' }} />
+            <img src="/headername1.png" alt="PreepX Logo" style={{ height: '80px', objectFit: 'contain' }} />
           </Link>
           <p className="footer-desc">
             Your ultimate AI-powered interview preparation platform. Master your skills, build confidence, and crack your dream job.
@@ -58,7 +58,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} PrepX. Built with AI for aspiring professionals.</p>
+        <p>&copy; {new Date().getFullYear()} PreepX. Built with AI for aspiring professionals.</p>
       </div>
     </footer>
   );

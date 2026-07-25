@@ -18,7 +18,7 @@ function AuthCallback() {
     try {
       localStorage.setItem("token", token);
       localStorage.setItem("user", user);
-      navigate("/interview", { replace: true });
+      navigate("/user-dashboard", { replace: true });
     } catch {
       navigate("/auth", { replace: true });
     }

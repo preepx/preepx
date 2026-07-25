@@ -38,7 +38,7 @@ function ExamHeader({ onBack, label = 'Assessment Center' }) {
     <header className="oe-header">
       <div className="oe-header-inner">
         <div className="oe-brand">
-          <img src="/logo.png" alt="PrepX" />
+          <img src="/logo.png" alt="PreepX" />
           <span className="oe-brand-label">{label}</span>
         </div>
         <button type="button" className="oe-back-btn" onClick={onBack}>
@@ -421,7 +421,7 @@ export default function ObjectiveExam() {
       <div className="oe-exam-bar">
         <div className="oe-exam-bar-top">
           <div className="oe-brand">
-            <img src="/logo.png" alt="PrepX" />
+            <img src="/logo.png" alt="PreepX" />
             <span className="oe-live-pill">
               <span className="oe-live-dot" /> Live
             </span>
