@@ -72,7 +72,7 @@ function AppLayout({ children }) {
               {collapsed ? (
                 <img src="/logo.png" alt="PreepX" style={{ height: '32px', objectFit: 'contain', marginLeft: '4px' }} />
               ) : (
-                <img src="/headername1.png" alt="PreepX" style={{ height: '70px', transform: 'scale(1.4)', transformOrigin: 'left center', objectFit: 'contain', marginLeft: '8px' }} />
+                <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
               )}
             </Link>
             <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={18} /></button>
@@ -120,15 +120,15 @@ function AppLayout({ children }) {
           {!location.pathname.includes("/pdf") && (
             <header className="topbar">
               <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
-  
+
               <div className="topbar-center">
                 <WalletBadge />
               </div>
-  
+
               <div className="topbar-right">
                 {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
                 <span className="level-badge"><span className="badge-text">Level </span>{user.level || 1}</span>
-                <span className="points-badge" style={{ display: 'flex', alignItems: 'center', gap: '0px' }}><img src="/logo.png" alt="XP" style={{width: '32px', height: '32px', margin: '-8px -6px -8px -8px', objectFit: 'contain'}} />{user.points || 0}<span className="badge-text" style={{ marginLeft: '2px' }}>XP</span></span>
+                <span className="points-badge" style={{ display: 'flex', alignItems: 'center', gap: '0px' }}><img src="/logo.png" alt="XP" style={{ width: '32px', height: '32px', margin: '-8px -6px -8px -8px', objectFit: 'contain' }} />{user.points || 0}<span className="badge-text" style={{ marginLeft: '2px' }}>XP</span></span>
               </div>
             </header>
           )}

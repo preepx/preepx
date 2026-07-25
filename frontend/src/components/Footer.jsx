@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-brand-col">
           <Link to="/" className="footer-logo">
-            <img src="/headername1.png" alt="PreepX Logo" style={{ height: '80px', objectFit: 'contain' }} />
+            <img src="/preepx_logo.png" alt="PreepX Logo" style={{ height: '80px', objectFit: 'contain' }} />
           </Link>
           <p className="footer-desc">
             Your ultimate AI-powered interview preparation platform. Master your skills, build confidence, and crack your dream job.

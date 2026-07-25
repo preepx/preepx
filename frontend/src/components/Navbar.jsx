@@ -64,7 +64,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="navbar-inner">
         <Link to={user ? "/interview" : "/"} className="navbar-brand" style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-          <img src="/headername1.png" alt="PreepX" className="brand-logo-img" style={{ height: "40px", transform: "scale(2.5)", transformOrigin: "left center", objectFit: "contain", marginLeft: "10px", marginTop: "8px" }} />
+          <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
         </Link>
 
         <div className="navbar-center">
@@ -119,7 +119,7 @@ function Navbar() {
                   </div>
                   {user.points > 0 && (
                     <div className="dropdown-points">
-                      <span style={{ display: 'flex', alignItems: 'center' }}><img src="/logo.png" alt="XP" style={{width: '32px', height: '32px', marginRight: '-6px', marginLeft: '-6px', marginTop: '-8px', marginBottom: '-8px', objectFit: 'contain'}} />{user.points}XP</span>
+                      <span style={{ display: 'flex', alignItems: 'center' }}><img src="/logo.png" alt="XP" style={{ width: '32px', height: '32px', marginRight: '-6px', marginLeft: '-6px', marginTop: '-8px', marginBottom: '-8px', objectFit: 'contain' }} />{user.points}XP</span>
                     </div>
                   )}
                   <div className="dropdown-divider" />
