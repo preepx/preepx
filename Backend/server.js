@@ -17,6 +17,8 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173",
   "http://localhost:3000",
+  "https://preepx.in",
+  "https://www.preepx.in"
 
 ].filter(Boolean);
 
