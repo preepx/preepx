@@ -37,24 +37,16 @@ const uploadResume = async (req, res) => {
       skills = skillMatch[2].split(/,|\n/).map(s => s.trim()).filter(s => s.length > 0);
     }
 
-    let prompt = "";
-
-    if (skills.length > 0) {
-      // Tech / domain-specific prompt
-      prompt = `
-        Generate 25 interview questions based on the following skills or domain:
-        ${skills.join(", ")}
-        Format each question on a new line.
-      `;
-    } else {
-      // No skills detected → generic questions
-      prompt = `
-        Analyze this resume and generate 5 general interview questions 
-        suitable for this candidate based on their resume content:
-        ${resumeText}
-        Format each question on a new line.
-      `;
-    }
+    let prompt = `
+      Analyze the following resume text and generate exactly 10 personalized interview questions for this candidate.
+      The questions must be based specifically on the work experience, internships, projects, and skills mentioned in their resume.
+      Do not ask generic questions; tailor them to what the candidate has actually done.
+      
+      Resume text:
+      """${resumeText}"""
+      
+      Format each question on a new line. Do not include any numbers, bullets, introductions, or conclusions. Just the questions themselves.
+    `;
 
     if (req.user) {
       // Deduct coins; throws INSUFFICIENT_COINS if balance < 5

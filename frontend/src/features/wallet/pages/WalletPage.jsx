@@ -29,9 +29,9 @@ function WalletPage() {
     }
     setBuying(true);
     try {
-      const orderData = await createOrder({ 
-        packageId: "custom", 
-        customAmount: Number(customAmount) 
+      const orderData = await createOrder({
+        packageId: "custom",
+        customAmount: Number(customAmount)
       });
 
       const options = {
@@ -169,13 +169,13 @@ function WalletPage() {
               <h3>Add Coins to Wallet</h3>
               <p>1 Rupee = 1 Coin</p>
             </div>
-            
+
             <div className="wallet-modal-body">
               <label>Enter Amount (₹)</label>
               <div className="wallet-input-wrapper">
                 <span className="wallet-currency-symbol">₹</span>
-                <input 
-                  type="number" 
+                <input
+                  type="number"
                   min="20"
                   value={customAmount}
                   onChange={(e) => setCustomAmount(e.target.value)}
@@ -184,7 +184,7 @@ function WalletPage() {
                   autoFocus
                 />
               </div>
-              
+
               {customAmount < 20 ? (
                 <div className="wallet-coins-error">
                   ⚠️ Minimum amount to add is ₹20
@@ -197,8 +197,8 @@ function WalletPage() {
               )}
             </div>
 
-            <button 
-              className="wallet-checkout-btn" 
+            <button
+              className="wallet-checkout-btn"
               onClick={handleCustomBuy}
               disabled={buying || customAmount < 20}
             >

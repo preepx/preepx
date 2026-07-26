@@ -10,6 +10,7 @@ const {
   getTransactions,
   toggleUserBlock,
   addCoinsToWallet,
+  addXpToUser,
 } = require("../controllers/adminController");
 
 const {
@@ -37,6 +38,7 @@ router.get("/users", getUsers);
 router.get("/users/:id", getUserDetails);
 router.put("/users/:id/block", toggleUserBlock);
 router.post("/users/:id/wallet/add", addCoinsToWallet);
+router.post("/users/:id/xp/add", addXpToUser);
 router.get("/transactions", getTransactions);
 
 // B.Tech Notes — PDF upload MUST be registered before /:id routes

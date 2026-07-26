@@ -59,17 +59,35 @@ export const staticContent = {
     subtitle: "How can we assist you today?",
     sections: [
       { heading: "Frequently Asked Questions", content: "How do I start a mock interview?\nOnce you log in, navigate to the \"Interview\" tab on the sidebar. Choose your role, difficulty level, and click \"Start Interview.\" Make sure your microphone and camera permissions are enabled.\n\nIs my audio/video recorded?\nWe temporarily process your audio to generate the transcript for the AI model to evaluate. However, we do not permanently store your video or audio recordings unless you explicitly opt-in for playback features.\n\nHow is the score calculated?\nOur AI evaluates your response against a rubric that checks for technical accuracy, clarity of communication, and completeness. The score is out of 10 for each individual question." },
-      { heading: "Contact Support", content: "If you're facing technical issues or have a billing question that isn't answered here, please reach out to our support team.\n\nEmail: teampreepx@gmail.com\nResponse Time: We aim to reply within 24 hours." }
+      { heading: "Contact Support", content: "If you're facing technical issues or have a billing question that isn't answered here, please reach out to our support team.\n\nEmail: contact@preepx.in\n\nResponse Time: We aim to reply within 24 hours." }
     ]
   },
   "/community": {
     title: "Join the Community",
     subtitle: "Connect, learn, and grow with thousands of other candidates.",
     sections: [
-      { heading: "We are stronger together", content: "Interview preparation can feel lonely, but it doesn't have to be. Join our vibrant community of developers, data scientists, product managers, and designers who are all working towards their dream jobs.\n\n💬 Join Discord" },
-      { heading: "💼 LinkedIn", content: "Follow us for industry insights, hiring trends, and success stories from our users.\n\nFollow on LinkedIn →" },
-      { heading: "📸 Instagram", content: "Follow us on Instagram for daily tips and behind-the-scenes content.\n\nFollow on Instagram →" },
-      { heading: "📘 Facebook", content: "Join our Facebook group to connect with peers and mentors.\n\nJoin Facebook Group →" }
+
+      {
+        heading: "LinkedIn",
+        icon: "/icons/linkedin.svg",
+        content: "Follow us for industry insights, hiring trends, and success stories from our users.",
+        linkText: "Follow on LinkedIn →",
+        linkUrl: "https://www.linkedin.com/company/preepx"
+      },
+      {
+        heading: "Instagram",
+        icon: "/icons/instagram.svg",
+        content: "Follow us on Instagram for daily tips and behind-the-scenes content.",
+        linkText: "Follow on Instagram →",
+        linkUrl: "#"
+      },
+      {
+        heading: "Facebook",
+        icon: "/icons/facebook.svg",
+        content: "Join our Facebook group to connect with peers and mentors.",
+        linkText: "Join Facebook Group →",
+        linkUrl: "#"
+      }
     ]
   },
   "/about-us": {
@@ -86,8 +104,8 @@ export const staticContent = {
     title: "Careers",
     subtitle: "Help us build the future of hiring.",
     sections: [
-      { heading: "Campus Ambassador Program (Freshers/Students)", content: "We are actively hiring freshers and college students for our Campus Ambassador Program! As an ambassador, you will represent PreepX at your campus, spread awareness, and help your peers prepare for their dream jobs. This is a great opportunity to gain leadership experience, build a strong network, and earn exciting perks and certificates.\n\nTo apply, send your resume and a brief introduction to: teampreepx@gmail.com" },
-      { heading: "Other Open Roles", content: "We are always on the lookout for exceptional talent. If you don't see a perfect fit but want to join us, send your resume to teampreepx@gmail.com." }
+      { heading: "Campus Ambassador Program (Freshers/Students)", content: "We are actively hiring freshers and college students for our Campus Ambassador Program! As an ambassador, you will represent PreepX at your campus, spread awareness, and help your peers prepare for their dream jobs. This is a great opportunity to gain leadership experience, build a strong network, and earn exciting perks and certificates.\n\nTo apply, send your resume and a brief introduction to: career@preepx.in" },
+      { heading: "Other Open Roles", content: "We are always on the lookout for exceptional talent. If you don't see a perfect fit but want to join us, send your resume to career@preepx.in." }
     ]
   },
   "/privacy-policy": {

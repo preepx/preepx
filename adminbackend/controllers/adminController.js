@@ -179,6 +179,34 @@ const addCoinsToWallet = async (req, res) => {
   }
 };
 
+// @desc    Add XP to User
+const addXpToUser = async (req, res) => {
+  try {
+    const { xp, description } = req.body;
+    if (!xp || xp <= 0) {
+      return res.status(400).json({ message: "Invalid XP amount" });
+    }
+
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.points = (user.points || 0) + Number(xp);
+    await user.save();
+
+    await WalletTransaction.create({
+      userId: req.params.id,
+      type: "xp_bonus",
+      coins: Number(xp), // Storing XP amount here for simplicity
+      balanceAfter: user.points, // Storing User XP points here
+      description: description || "XP Added by Admin"
+    });
+
+    res.json({ message: "XP added successfully", user });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 module.exports = {
   adminLogin,
   getDashboardStats,
@@ -186,5 +214,6 @@ module.exports = {
   getUserDetails,
   getTransactions,
   toggleUserBlock,
-  addCoinsToWallet
+  addCoinsToWallet,
+  addXpToUser
 };

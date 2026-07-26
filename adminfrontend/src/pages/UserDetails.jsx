@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle } from 'lucide-react';
+import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star } from 'lucide-react';
 import api from '../utils/api';
 import './UserDetails.css';
 
@@ -13,6 +13,9 @@ const UserDetails = () => {
   
   const [coinsToAdd, setCoinsToAdd] = useState('');
   const [addingCoins, setAddingCoins] = useState(false);
+  
+  const [xpToAdd, setXpToAdd] = useState('');
+  const [addingXp, setAddingXp] = useState(false);
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -150,6 +153,49 @@ const UserDetails = () => {
             </div>
           </div>
 
+          <div className="glass-panel content-card mb-4">
+            <div className="card-header">
+              <Star size={20} className="accent-icon" />
+              <h3>Experience Points</h3>
+            </div>
+            <div className="wallet-balance" style={{ marginBottom: '1rem' }}>
+              <h2>{user.points || 0} <span className="text-secondary" style={{fontSize: '1rem'}}>XP</span></h2>
+            </div>
+            
+            <div className="add-coins-form" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+              <input 
+                type="number" 
+                className="input-field" 
+                placeholder="XP to add" 
+                value={xpToAdd}
+                onChange={(e) => setXpToAdd(e.target.value)}
+                style={{ flex: 1, padding: '0.5rem' }}
+              />
+              <button 
+                className="btn-primary" 
+                disabled={addingXp || !xpToAdd}
+                onClick={async () => {
+                  if (!xpToAdd || isNaN(xpToAdd) || Number(xpToAdd) <= 0) return;
+                  setAddingXp(true);
+                  try {
+                    await api.post(`/users/${id}/xp/add`, { xp: Number(xpToAdd) });
+                    const updatedData = await api.get(`/users/${id}`);
+                    setData(updatedData.data);
+                    setXpToAdd('');
+                    alert('XP added successfully!');
+                  } catch (err) {
+                    alert('Failed to add XP');
+                  } finally {
+                    setAddingXp(false);
+                  }
+                }}
+                style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
+              >
+                <PlusCircle size={18} /> {addingXp ? 'Adding...' : 'Add'}
+              </button>
+            </div>
+          </div>
+
           <div className="glass-panel content-card">
             <div className="card-header">
               <History size={20} className="accent-icon" />
@@ -163,8 +209,8 @@ const UserDetails = () => {
                       <p className="tx-desc">{tx.description}</p>
                       <small className="text-secondary">{new Date(tx.createdAt).toLocaleDateString()}</small>
                     </div>
-                    <div className={`tx-amount ${tx.type === 'purchase' || tx.type === 'bonus' ? 'positive' : 'negative'}`}>
-                      {tx.type === 'purchase' || tx.type === 'bonus' ? '+' : '-'}{tx.coins}
+                    <div className={`tx-amount ${tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus' ? 'positive' : 'negative'}`}>
+                      {tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus' ? '+' : '-'}{tx.coins} {tx.type === 'xp_bonus' ? 'XP' : 'Coins'}
                     </div>
                   </div>
                 ))

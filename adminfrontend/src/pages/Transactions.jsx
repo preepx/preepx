@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react';
 import { CreditCard } from 'lucide-react';
 import api from '../utils/api';
+import Pagination from '../components/Pagination';
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -51,7 +56,9 @@ const Transactions = () => {
               </tr>
             </thead>
             <tbody>
-              {transactions.map(tx => (
+              {transactions
+                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                .map(tx => (
                 <tr key={tx._id}>
                   <td>
                     {tx.userId ? (
@@ -62,12 +69,12 @@ const Transactions = () => {
                     ) : 'Unknown User'}
                   </td>
                   <td>
-                    <span className={`badge ${tx.type === 'purchase' ? 'badge-accent' : (tx.type === 'bonus' ? 'badge-yellow' : '')}`}>
-                      {tx.type.toUpperCase()}
+                    <span className={`badge ${tx.type === 'purchase' ? 'badge-accent' : (tx.type === 'bonus' || tx.type === 'xp_bonus' ? 'badge-yellow' : '')}`}>
+                      {tx.type.toUpperCase().replace('_', ' ')}
                     </span>
                   </td>
-                  <td style={{ fontWeight: 600, color: (tx.type === 'purchase' || tx.type === 'bonus') ? 'var(--success)' : 'var(--danger)' }}>
-                    {(tx.type === 'purchase' || tx.type === 'bonus') ? '+' : '-'}{tx.coins}
+                  <td style={{ fontWeight: 600, color: (tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus') ? 'var(--success)' : 'var(--danger)' }}>
+                    {(tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus') ? '+' : '-'}{tx.coins} {tx.type === 'xp_bonus' ? 'XP' : 'Coins'}
                   </td>
                   <td>{tx.metadata?.rupees ? `₹${tx.metadata.rupees}` : '-'}</td>
                   <td>{tx.description}</td>
@@ -92,6 +99,13 @@ const Transactions = () => {
             </tbody>
           </table>
         </div>
+        
+        <Pagination 
+          currentPage={currentPage}
+          totalItems={transactions.length}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
     </div>
   );

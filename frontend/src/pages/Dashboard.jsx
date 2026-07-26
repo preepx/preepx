@@ -92,8 +92,8 @@ function Dashboard() {
   ];
 
   const testimonials = [
-    { name: "Priya Sharma", role: "Software Engineer @ Walmart", text: "PreepX helped me practice 20+ mock interviews. The AI feedback is incredibly detailed!", rating: 5 },
-    { name: "Rahul Verma", role: "Associate @ Amazon", text: "Improved my answer quality by 40% in just 2 weeks. The analytics dashboard is a game-changer.", rating: 5 },
+    { name: "Minal Singh", role: "Software Engineer @ Walmart", text: "PreepX helped me practice 20+ mock interviews. The AI feedback is incredibly detailed!", rating: 5 },
+    { name: "Gopal Kumar", role: "Associate @ Amazon", text: "Improved my answer quality by 40% in just 2 weeks. The analytics dashboard is a game-changer.", rating: 5 },
     { name: "Ananya Patel", role: "Data Analyst @ Cisco", text: "Resume-based questions were spot-on. Best interview prep platform I've used.", rating: 4 },
   ];
 

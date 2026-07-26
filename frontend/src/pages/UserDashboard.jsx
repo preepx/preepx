@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Video, FileText, Trophy, BarChart3, Award, Flame, PlayCircle,
@@ -6,6 +6,9 @@ import {
   ClipboardCheck, Zap,
 } from "lucide-react";
 import { getProfile, getAnalytics } from "../services/userAPI";
+import { uploadResume } from "../services/resumeAPI";
+import { toast } from "react-toastify";
+import { showAppError } from "../utils/appAlert";
 import { useWallet } from "../features/wallet/hooks/useWallet";
 import Loader from "../components/Loader";
 import "./UserDashboard.css";
@@ -15,7 +18,7 @@ const EXPLORE_LINKS = [
   { icon: Trophy, label: "Leaderboard", desc: "Global rankings", path: "/leaderboard", color: "#f59e0b" },
   { icon: Award, label: "Achievements", desc: "Redeem XP for coins", path: "/achievements", color: "#8b5cf6" },
   { icon: Wallet, label: "Wallet", desc: "Manage your coins", path: "/wallet", color: "#10b981" },
-  { icon: Mic, label: "Resume Interview", desc: "AI questions from resume", path: "/resume-interview", color: "#ec4899" },
+  { icon: Mic, label: "Resume Upload", desc: "AI questions from resume", action: "resume_upload", color: "#ec4899" },
   { icon: BookOpen, label: "Btech Notes", desc: "Study resources", path: "/btech-notes", color: "#3b82f6", free: true },
 ];
 
@@ -36,7 +39,38 @@ function UserDashboard() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [uploadingResume, setUploadingResume] = useState(false);
+  const fileInputRef = useRef(null);
   const { balance } = useWallet();
+
+  const handleResumeUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.name.endsWith(".pdf")) {
+      showAppError("Only PDF files are supported. Please upload a .pdf resume.", "Invalid file type");
+      return;
+    }
+    try {
+      setUploadingResume(true);
+      toast.info("Analyzing resume...");
+      const res = await uploadResume(file);
+      toast.success(`Found ${res.skills?.length || 0} skills. Starting interview!`);
+      navigate("/start-interview", {
+        state: {
+          jobTitle: "Resume-based Role",
+          jobTopic: res.result || "Skills from Resume",
+          questions: res.questions,
+          interviewId: res.interviewId,
+          fromResume: true,
+        },
+      });
+    } catch (err) {
+      showAppError(err.response?.data?.error || "Resume upload failed. Please try again.", "Upload failed");
+    } finally {
+      setUploadingResume(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    }
+  };
 
   const refreshData = () => {
     Promise.all([
@@ -83,7 +117,7 @@ function UserDashboard() {
     return Math.max(...stats.weeklyData.map((d) => d.count), 1);
   }, [stats]);
 
-  if (loading) return <Loader />;
+  if (loading || uploadingResume) return <Loader />;
 
   const firstName = (user?.fullName || "User").split(" ")[0];
   const avatar = user.profilePic ||
@@ -225,13 +259,26 @@ function UserDashboard() {
           <p>Everything you need to ace your interviews</p>
         </div>
         <div className="ud-explore-grid">
-          {EXPLORE_LINKS.map(({ icon: Icon, label, desc, path, color, free }) => (
+          <input
+            type="file"
+            accept=".pdf"
+            hidden
+            ref={fileInputRef}
+            onChange={handleResumeUpload}
+          />
+          {EXPLORE_LINKS.map(({ icon: Icon, label, desc, path, action, color, free }) => (
             <button
-              key={path}
+              key={label}
               type="button"
               className="ud-explore-card"
               style={{ "--accent": color }}
-              onClick={() => navigate(path)}
+              onClick={() => {
+                if (action === "resume_upload") {
+                  fileInputRef.current?.click();
+                } else if (path) {
+                  navigate(path);
+                }
+              }}
             >
               <div className="ud-explore-icon"><Icon size={22} /></div>
               <div>

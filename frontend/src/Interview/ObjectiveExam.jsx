@@ -25,7 +25,7 @@ function useAntiCheat(active, onViolation) {
   useEffect(() => {
     if (!active) return;
     const onBlur = () => { countRef.current += 1; onViolation(countRef.current); };
-    const onVis  = () => { if (document.hidden) { countRef.current += 1; onViolation(countRef.current); } };
+    const onVis = () => { if (document.hidden) { countRef.current += 1; onViolation(countRef.current); } };
     window.addEventListener('blur', onBlur);
     document.addEventListener('visibilitychange', onVis);
     return () => { window.removeEventListener('blur', onBlur); document.removeEventListener('visibilitychange', onVis); };
@@ -50,24 +50,24 @@ function ExamHeader({ onBack, label = 'Assessment Center' }) {
 }
 
 export default function ObjectiveExam() {
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
   const { id: resultIdParam } = useParams();
   const socketRef = useRef(null);
   const desktopCamRef = useRef(null);
   const mobileCamRef = useRef(null);
 
-  const [topic,      setTopic]      = useState('');
-  const [numQ,       setNumQ]       = useState(20);
-  const [screen,     setScreen]     = useState('SETUP');
-  const [question,   setQuestion]   = useState(null);
-  const [selected,   setSelected]   = useState('');
+  const [topic, setTopic] = useState('');
+  const [numQ, setNumQ] = useState(20);
+  const [screen, setScreen] = useState('SETUP');
+  const [question, setQuestion] = useState(null);
+  const [selected, setSelected] = useState('');
   const [submitting, setSubmitting] = useState(false);
-  const [results,    setResults]    = useState(null);
-  const [timeLeft,   setTimeLeft]   = useState(TIMER_SECONDS);
-  const [warnings,   setWarnings]   = useState(0);
-  const [showWarn,   setShowWarn]   = useState(false);
-  const [correct,    setCorrect]    = useState(0);
-  const [wrong,      setWrong]      = useState(0);
+  const [results, setResults] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(TIMER_SECONDS);
+  const [warnings, setWarnings] = useState(0);
+  const [showWarn, setShowWarn] = useState(false);
+  const [correct, setCorrect] = useState(0);
+  const [wrong, setWrong] = useState(0);
   const [pointsEarned, setPointsEarned] = useState(0);
   const [loadingResult, setLoadingResult] = useState(!!resultIdParam);
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -76,7 +76,7 @@ export default function ObjectiveExam() {
 
   const timerRef = useRef(null);
   const { faceWarning } = useFaceDetection(
-    [desktopCamRef, mobileCamRef], 
+    [desktopCamRef, mobileCamRef],
     screen === 'EXAM' && isFullscreen && permissionsGranted === true
   );
 
@@ -128,7 +128,7 @@ export default function ObjectiveExam() {
 
     if (!resultIdParam) {
       if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen().catch(() => {});
+        document.documentElement.requestFullscreen().catch(() => { });
       }
       const checkPermissions = async () => {
         try {
@@ -144,7 +144,7 @@ export default function ObjectiveExam() {
       setPermissionsGranted(true);
       setIsFullscreen(true);
     }
-    
+
     return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, [resultIdParam]);
 
@@ -181,7 +181,7 @@ export default function ObjectiveExam() {
         toast.success(`+${d.pointsEarned} points earned!`);
       }
     });
-    socketRef.current.on('mcq_error',        e => { toast.error(e.message || 'Error'); setScreen('SETUP'); });
+    socketRef.current.on('mcq_error', e => { toast.error(e.message || 'Error'); setScreen('SETUP'); });
   };
 
   const submitAnswer = () => {
@@ -204,8 +204,8 @@ export default function ObjectiveExam() {
 
   const handleForceEnd = () => { clearInterval(timerRef.current); socketRef.current?.disconnect(); navigate('/objective-exam'); };
 
-  const radius  = 20;
-  const circ    = 2 * Math.PI * radius;
+  const radius = 20;
+  const circ = 2 * Math.PI * radius;
   const dashoff = circ - (timeLeft / TIMER_SECONDS) * circ;
   const progress = question ? Math.round((question.questionIndex / question.totalQuestions) * 100) : 0;
 
@@ -217,9 +217,9 @@ export default function ObjectiveExam() {
         <div className="oe-stat-val">{warnings}</div>
         <div className="oe-stat-lbl">Warns</div>
       </div>
-      <button 
-        type="button" 
-        className="oe-primary-btn" 
+      <button
+        type="button"
+        className="oe-primary-btn"
         style={{ flex: 2, height: '100%', margin: 0, minHeight: '60px' }}
         onClick={handleFinalSubmit}
       >
@@ -307,109 +307,109 @@ export default function ObjectiveExam() {
     <>
       <Overlays />
       <div className={`oe-page ${!isFullscreen ? 'blurred' : ''}`}>
-      <ExamHeader onBack={() => navigate('/objective-exam')} />
+        <ExamHeader onBack={() => navigate('/objective-exam')} />
 
-      <div className="oe-setup">
-        {/* Left panel — desktop */}
-        <aside className="oe-setup-hero">
-          <div className="oe-setup-hero-content">
-            <div className="oe-setup-badge">
-              <ShieldCheck size={13} /> Proctored Assessment
-            </div>
-            <h1>Objective Examination</h1>
-            <p>
-              Enterprise-grade MCQ assessment with AI-generated questions,
-              live webcam proctoring, and instant performance analytics.
-            </p>
-            <div className="oe-setup-features">
-              {[
-                { icon: Clock, title: '30 seconds per question', sub: 'Strict timed format' },
-                { icon: Eye, title: 'Live webcam monitoring', sub: 'Continuous proctoring' },
-                { icon: ShieldCheck, title: '3-strike anti-cheat', sub: 'Tab switch detection' },
-              ].map(({ icon: Icon, title, sub }) => (
-                <div key={title} className="oe-setup-feature">
-                  <div className="oe-setup-feature-icon"><Icon size={18} /></div>
-                  <div>
-                    <strong>{title}</strong>
-                    <span>{sub}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </aside>
-
-        {/* Right panel — form */}
-        <div className="oe-setup-form-wrap">
-          <div className="oe-setup-form">
-            <div className="oe-mobile-hero">
-              <div className="oe-setup-badge" style={{ background: '#eef2ff', borderColor: '#c7d2fe', color: '#4338ca' }}>
-                <ShieldCheck size={12} /> Proctored
+        <div className="oe-setup">
+          {/* Left panel — desktop */}
+          <aside className="oe-setup-hero">
+            <div className="oe-setup-hero-content">
+              <div className="oe-setup-badge">
+                <ShieldCheck size={13} /> Proctored Assessment
               </div>
               <h1>Objective Examination</h1>
-              <p>Set up your assessment session below.</p>
+              <p>
+                Enterprise-grade MCQ assessment with AI-generated questions,
+                live webcam proctoring, and instant performance analytics.
+              </p>
+              <div className="oe-setup-features">
+                {[
+                  { icon: Clock, title: '30 seconds per question', sub: 'Strict timed format' },
+                  { icon: Eye, title: 'Live webcam monitoring', sub: 'Continuous proctoring' },
+                  { icon: ShieldCheck, title: '3-strike anti-cheat', sub: 'Tab switch detection' },
+                ].map(({ icon: Icon, title, sub }) => (
+                  <div key={title} className="oe-setup-feature">
+                    <div className="oe-setup-feature-icon"><Icon size={18} /></div>
+                    <div>
+                      <strong>{title}</strong>
+                      <span>{sub}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
+          </aside>
 
-            <div className="oe-form-card">
-              <h2 className="oe-form-title">Configure your exam</h2>
-              <p className="oe-form-sub">Enter a topic and choose the number of questions.</p>
-
-              <div className="oe-field">
-                <label htmlFor="exam-topic">Topic / Subject *</label>
-                <div className="oe-input-wrap">
-                  <span className="oe-input-icon"><BookOpen size={18} /></span>
-                  <input
-                    id="exam-topic"
-                    className="oe-input"
-                    type="text"
-                    value={topic}
-                    onChange={e => setTopic(e.target.value)}
-                    onKeyDown={e => e.key === 'Enter' && startExam()}
-                    placeholder="React, System Design, DBMS..."
-                  />
+          {/* Right panel — form */}
+          <div className="oe-setup-form-wrap">
+            <div className="oe-setup-form">
+              <div className="oe-mobile-hero">
+                <div className="oe-setup-badge" style={{ background: '#eef2ff', borderColor: '#c7d2fe', color: '#4338ca' }}>
+                  <ShieldCheck size={12} /> Proctored
                 </div>
+                <h1>Objective Examination</h1>
+                <p>Set up your assessment session below.</p>
               </div>
 
-              <div className="oe-field">
-                <label>Number of questions</label>
-                <div className="oe-q-grid">
-                  {[
-                    { val: 10, label: '10', tag: 'Quick',     time: '~5 min' },
-                    { val: 20, label: '20', tag: 'Standard',  time: '~10 min' },
-                    { val: 40, label: '40', tag: 'Deep Dive', time: '~20 min' },
-                  ].map(({ val, label, tag, time }) => {
-                    const active = numQ === val;
-                    return (
-                      <button
-                        key={val}
-                        type="button"
-                        className={`oe-q-btn${active ? ' active' : ''}`}
-                        onClick={() => setNumQ(val)}
-                      >
-                        <div className="oe-q-num">{label}</div>
-                        <div className="oe-q-tag">{tag}</div>
-                        <div className="oe-q-time">{time}</div>
-                        {active && (
-                          <span className="oe-q-check"><CheckCircle size={12} color="#fff" /></span>
-                        )}
-                      </button>
-                    );
-                  })}
+              <div className="oe-form-card">
+                <h2 className="oe-form-title">Configure your exam</h2>
+                <p className="oe-form-sub">Enter a topic and choose the number of questions.</p>
+
+                <div className="oe-field">
+                  <label htmlFor="exam-topic">Topic / Subject *</label>
+                  <div className="oe-input-wrap">
+                    <span className="oe-input-icon"><BookOpen size={18} /></span>
+                    <input
+                      id="exam-topic"
+                      className="oe-input"
+                      type="text"
+                      value={topic}
+                      onChange={e => setTopic(e.target.value)}
+                      onKeyDown={e => e.key === 'Enter' && startExam()}
+                      placeholder="React, System Design, DBMS..."
+                    />
+                  </div>
                 </div>
+
+                <div className="oe-field">
+                  <label>Number of questions</label>
+                  <div className="oe-q-grid">
+                    {[
+                      { val: 10, label: '10', tag: 'Quick', time: '~5 min' },
+                      { val: 20, label: '20', tag: 'Standard', time: '~10 min' },
+                      { val: 40, label: '40', tag: 'Deep Dive', time: '~20 min' },
+                    ].map(({ val, label, tag, time }) => {
+                      const active = numQ === val;
+                      return (
+                        <button
+                          key={val}
+                          type="button"
+                          className={`oe-q-btn${active ? ' active' : ''}`}
+                          onClick={() => setNumQ(val)}
+                        >
+                          <div className="oe-q-num">{label}</div>
+                          <div className="oe-q-tag">{tag}</div>
+                          <div className="oe-q-time">{time}</div>
+                          {active && (
+                            <span className="oe-q-check"><CheckCircle size={12} color="#fff" /></span>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <button type="button" className="oe-primary-btn" onClick={startExam}>
+                  Begin Assessment <ArrowRight size={18} />
+                </button>
               </div>
 
-              <button type="button" className="oe-primary-btn" onClick={startExam}>
-                Begin Assessment <ArrowRight size={18} />
-              </button>
+              <p className="oe-disclaimer">
+                By continuing, you agree to webcam monitoring and anti-cheat policies.
+              </p>
             </div>
-
-            <p className="oe-disclaimer">
-              By continuing, you agree to webcam monitoring and anti-cheat policies.
-            </p>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 
@@ -418,179 +418,179 @@ export default function ObjectiveExam() {
     <>
       <Overlays />
       <div className={`oe-exam ${!isFullscreen ? 'blurred' : ''}`}>
-      <div className="oe-exam-bar">
-        <div className="oe-exam-bar-top">
-          <div className="oe-brand">
-            <img src="/logo.png" alt="PreepX" />
-            <span className="oe-live-pill">
-              <span className="oe-live-dot" /> Live
-            </span>
-          </div>
-
-          <div className="oe-exam-progress-wrap">
-            <div className="oe-exam-progress-track">
-              <div className="oe-exam-progress-fill" style={{ width: `${progress}%` }} />
+        <div className="oe-exam-bar">
+          <div className="oe-exam-bar-top">
+            <div className="oe-brand">
+              <img src="/logo.png" alt="PreepX" />
+              <span className="oe-live-pill">
+                <span className="oe-live-dot" /> Live
+              </span>
             </div>
-            <span className="oe-exam-progress-label">
-              {question ? `Question ${question.questionIndex + 1} of ${question.totalQuestions}` : 'Loading…'}
-            </span>
-          </div>
 
-          <div className="oe-timer">
-            <svg viewBox="0 0 48 48">
-              <circle cx="24" cy="24" r={radius} fill="none" stroke="#e2e8f0" strokeWidth="3" />
-              <circle
-                cx="24" cy="24" r={radius}
-                fill="none" stroke={timerColor} strokeWidth="3"
-                strokeLinecap="round"
-                strokeDasharray={circ}
-                strokeDashoffset={dashoff}
-                style={{ transition: 'stroke-dashoffset 1s linear, stroke 0.3s' }}
-              />
-            </svg>
-            <span className="oe-timer-text" style={{ color: timerColor }}>{timeLeft}</span>
-          </div>
-        </div>
-
-        <div className="oe-exam-mobile-meta">
-          <div className="oe-exam-progress-wrap" style={{ display: 'flex' }}>
-            <div className="oe-exam-progress-track">
-              <div className="oe-exam-progress-fill" style={{ width: `${progress}%` }} />
-            </div>
-            <span className="oe-exam-progress-label">
-              {question ? `${question.questionIndex + 1}/${question.totalQuestions}` : '—'}
-            </span>
-          </div>
-          <p className="text-xs text-slate-500 truncate">
-            <strong className="text-slate-700">{topic}</strong>
-          </p>
-          <StatsPanel />
-        </div>
-      </div>
-
-      <div className="oe-exam-body">
-        <main className="oe-exam-main">
-          {!question ? (
-            <div className="oe-loading">
-              <div className="oe-spinner" />
-              <div className="text-center">
-                <p>Generating question…</p>
-                <span>AI is preparing your next challenge</span>
+            <div className="oe-exam-progress-wrap">
+              <div className="oe-exam-progress-track">
+                <div className="oe-exam-progress-fill" style={{ width: `${progress}%` }} />
               </div>
+              <span className="oe-exam-progress-label">
+                {question ? `Question ${question.questionIndex + 1} of ${question.totalQuestions}` : 'Loading…'}
+              </span>
             </div>
-          ) : (
-            <>
-              <div className="oe-exam-scroll">
-                <div className="oe-exam-content">
-                  {showWarn && (
-                    <div className="oe-warn-banner">
-                      <AlertTriangle size={18} style={{ flexShrink: 0, marginTop: 1 }} />
-                      <span>
-                        Tab switch detected — Warning <strong>{warnings}/3</strong>.
-                        Three violations will terminate your exam.
-                      </span>
-                    </div>
-                  )}
 
-                  <div className="oe-q-meta">
-                    <div className="oe-q-badge">
-                      <span className="oe-q-num-badge">{question.questionIndex + 1}</span>
-                      <span className="oe-q-count">
-                        of {question.totalQuestions} questions
-                      </span>
-                    </div>
-                    <span className="oe-type-pill">Single Choice</span>
-                  </div>
-
-                  <div className="oe-question-card">
-                    <p className="oe-question-text">{question.question}</p>
-                  </div>
-
-                  <div>
-                    <p className="oe-options-label">Select your answer</p>
-                    <div className="oe-options">
-                      {question.options.map((opt, idx) => {
-                        const sel = selected === opt;
-                        return (
-                          <button
-                            key={idx}
-                            type="button"
-                            disabled={submitting}
-                            className={`oe-option${sel ? ' selected' : ''}`}
-                            onClick={() => setSelected(opt)}
-                          >
-                            <span className="oe-option-letter">{OPTION_LETTERS[idx]}</span>
-                            <span className="oe-option-text">{opt}</span>
-                            {sel && <CheckCircle size={18} color="#4f46e5" style={{ flexShrink: 0 }} />}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <SubmitBtn
-                    className={`oe-submit-desktop ${selected && !submitting ? 'enabled' : 'disabled'}`}
-                  />
-                </div>
-              </div>
-
-              <div className="oe-submit-mobile">
-                <SubmitBtn
-                  className={selected && !submitting ? 'enabled' : 'disabled'}
-                  mobile
+            <div className="oe-timer">
+              <svg viewBox="0 0 48 48">
+                <circle cx="24" cy="24" r={radius} fill="none" stroke="#e2e8f0" strokeWidth="3" />
+                <circle
+                  cx="24" cy="24" r={radius}
+                  fill="none" stroke={timerColor} strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeDasharray={circ}
+                  strokeDashoffset={dashoff}
+                  style={{ transition: 'stroke-dashoffset 1s linear, stroke 0.3s' }}
                 />
-              </div>
-            </>
-          )}
-        </main>
-
-        <aside className="oe-sidebar">
-          <div>
-            <div className="oe-cam-header">
-              <span>Proctor Camera</span>
-              <span className="oe-live-pill"><span className="oe-live-dot" /> Rec</span>
-            </div>
-            <div className="oe-cam-wrapper" style={{ position: 'relative' }}>
-              <Webcam ref={desktopCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
-              {faceWarning && (
-                <div className="oe-face-warn">
-                  <div className="oe-face-warn-box">⚠️ {faceWarning}</div>
-                </div>
-              )}
-            </div>
-            <div className="oe-cam-footer">
-              <ShieldCheck size={13} /> Anti-cheat monitoring active
+              </svg>
+              <span className="oe-timer-text" style={{ color: timerColor }}>{timeLeft}</span>
             </div>
           </div>
 
-          <div className="oe-sidebar-section">
-            <p className="oe-sidebar-title">Live Score</p>
+          <div className="oe-exam-mobile-meta">
+            <div className="oe-exam-progress-wrap" style={{ display: 'flex' }}>
+              <div className="oe-exam-progress-track">
+                <div className="oe-exam-progress-fill" style={{ width: `${progress}%` }} />
+              </div>
+              <span className="oe-exam-progress-label">
+                {question ? `${question.questionIndex + 1}/${question.totalQuestions}` : '—'}
+              </span>
+            </div>
+            <p className="text-xs text-slate-500 truncate">
+              <strong className="text-slate-700">{topic}</strong>
+            </p>
             <StatsPanel />
           </div>
+        </div>
 
-          <div className="oe-sidebar-section">
-            <p className="oe-sidebar-title">Exam Details</p>
-            <div className="oe-detail-row"><BookOpen size={14} /><span>{topic}</span></div>
-            <div className="oe-detail-row"><Target size={14} /><span>{numQ} questions</span></div>
-            <div className="oe-detail-row"><Clock size={14} /><span>30 sec per question</span></div>
-          </div>
-        </aside>
-      </div>
+        <div className="oe-exam-body">
+          <main className="oe-exam-main">
+            {!question ? (
+              <div className="oe-loading">
+                <div className="oe-spinner" />
+                <div className="text-center">
+                  <p>Generating question…</p>
+                  <span>AI is preparing your next challenge</span>
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="oe-exam-scroll">
+                  <div className="oe-exam-content">
+                    {showWarn && (
+                      <div className="oe-warn-banner">
+                        <AlertTriangle size={18} style={{ flexShrink: 0, marginTop: 1 }} />
+                        <span>
+                          Tab switch detected — Warning <strong>{warnings}/3</strong>.
+                          Three violations will terminate your exam.
+                        </span>
+                      </div>
+                    )}
 
-      <div className="oe-pip">
-        <div className="oe-cam-wrapper" style={{ width: '100%', height: '100%' }}>
-          <Webcam ref={mobileCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
-          {faceWarning && (
-            <div className="oe-face-warn">
-              <div className="oe-face-warn-box">⚠️ {faceWarning}</div>
+                    <div className="oe-q-meta">
+                      <div className="oe-q-badge">
+                        <span className="oe-q-num-badge">{question.questionIndex + 1}</span>
+                        <span className="oe-q-count">
+                          of {question.totalQuestions} questions
+                        </span>
+                      </div>
+                      <span className="oe-type-pill">Single Choice</span>
+                    </div>
+
+                    <div className="oe-question-card">
+                      <p className="oe-question-text">{question.question}</p>
+                    </div>
+
+                    <div>
+                      <p className="oe-options-label">Select your answer</p>
+                      <div className="oe-options">
+                        {question.options.map((opt, idx) => {
+                          const sel = selected === opt;
+                          return (
+                            <button
+                              key={idx}
+                              type="button"
+                              disabled={submitting}
+                              className={`oe-option${sel ? ' selected' : ''}`}
+                              onClick={() => setSelected(opt)}
+                            >
+                              <span className="oe-option-letter">{OPTION_LETTERS[idx]}</span>
+                              <span className="oe-option-text">{opt}</span>
+                              {sel && <CheckCircle size={18} color="#4f46e5" style={{ flexShrink: 0 }} />}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <SubmitBtn
+                      className={`oe-submit-desktop ${selected && !submitting ? 'enabled' : 'disabled'}`}
+                    />
+                  </div>
+                </div>
+
+                <div className="oe-submit-mobile">
+                  <SubmitBtn
+                    className={selected && !submitting ? 'enabled' : 'disabled'}
+                    mobile
+                  />
+                </div>
+              </>
+            )}
+          </main>
+
+          <aside className="oe-sidebar">
+            <div>
+              <div className="oe-cam-header">
+                <span>Proctor Camera</span>
+                <span className="oe-live-pill"><span className="oe-live-dot" /> Rec</span>
+              </div>
+              <div className="oe-cam-wrapper" style={{ position: 'relative' }}>
+                <Webcam ref={desktopCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
+                {faceWarning && (
+                  <div className="oe-face-warn">
+                    <div className="oe-face-warn-box">⚠️ {faceWarning}</div>
+                  </div>
+                )}
+              </div>
+              <div className="oe-cam-footer">
+                <ShieldCheck size={13} /> Anti-cheat monitoring active
+              </div>
             </div>
-          )}
+
+            <div className="oe-sidebar-section">
+              <p className="oe-sidebar-title">Live Score</p>
+              <StatsPanel />
+            </div>
+
+            <div className="oe-sidebar-section">
+              <p className="oe-sidebar-title">Exam Details</p>
+              <div className="oe-detail-row"><BookOpen size={14} /><span>{topic}</span></div>
+              <div className="oe-detail-row"><Target size={14} /><span>{numQ} questions</span></div>
+              <div className="oe-detail-row"><Clock size={14} /><span>30 sec per question</span></div>
+            </div>
+          </aside>
         </div>
-        <div className="oe-pip-rec">
-          <span className="oe-pip-rec-dot" /> Rec
+
+        <div className="oe-pip">
+          <div className="oe-cam-wrapper" style={{ width: '100%', height: '100%' }}>
+            <Webcam ref={mobileCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
+            {faceWarning && (
+              <div className="oe-face-warn">
+                <div className="oe-face-warn-box">⚠️ {faceWarning}</div>
+              </div>
+            )}
+          </div>
+          <div className="oe-pip-rec">
+            <span className="oe-pip-rec-dot" /> Rec
+          </div>
         </div>
       </div>
-    </div>
     </>
   );
 
@@ -598,10 +598,10 @@ export default function ObjectiveExam() {
   if (screen === 'RESULTS' && results) {
     const pct = Math.round((results.score / results.totalQuestions) * 100);
     const grade =
-      pct >= 90 ? { label: 'Excellent',  color: '#059669', bg: '#ecfdf5', border: '#a7f3d0' } :
-      pct >= 70 ? { label: 'Good',        color: '#4f46e5', bg: '#eef2ff', border: '#c7d2fe' } :
-      pct >= 50 ? { label: 'Average',     color: '#d97706', bg: '#fffbeb', border: '#fde68a' } :
-                  { label: 'Needs Work',  color: '#dc2626', bg: '#fef2f2', border: '#fecaca' };
+      pct >= 90 ? { label: 'Excellent', color: '#059669', bg: '#ecfdf5', border: '#a7f3d0' } :
+        pct >= 70 ? { label: 'Good', color: '#4f46e5', bg: '#eef2ff', border: '#c7d2fe' } :
+          pct >= 50 ? { label: 'Average', color: '#d97706', bg: '#fffbeb', border: '#fde68a' } :
+            { label: 'Needs Work', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' };
 
     return (
       <div className="oe-page">
@@ -672,7 +672,7 @@ export default function ObjectiveExam() {
 
                   <div className="oe-review-opts">
                     {qa.options.map((opt, idx) => {
-                      const isRight  = opt === qa.correctAnswer;
+                      const isRight = opt === qa.correctAnswer;
                       const isMissed = opt === qa.userAnswer && !ok;
                       const cls = isRight ? 'right' : isMissed ? 'missed' : 'neutral';
                       return (
@@ -683,7 +683,7 @@ export default function ObjectiveExam() {
                             </span>
                             <span>{opt}</span>
                           </div>
-                          {isRight  && <span className="oe-review-opt-tag">Correct</span>}
+                          {isRight && <span className="oe-review-opt-tag">Correct</span>}
                           {isMissed && <span className="oe-review-opt-tag">Your answer</span>}
                         </div>
                       );

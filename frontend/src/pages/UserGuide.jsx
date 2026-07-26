@@ -21,6 +21,7 @@ function UserGuide() {
             <a href="#objective-exams">Objective Exams</a>
             <a href="#coin-system">Coin System & XP</a>
             <a href="#referrals">Referrals</a>
+            <a href="#support">Support</a>
           </nav>
         </div>
 
@@ -102,6 +103,14 @@ function UserGuide() {
               <li><strong>Your Unique Code:</strong> Found in your Profile. Share it with friends.</li>
               <li><strong>Signup Bonus:</strong> When someone signs up using your referral code, they instantly receive <strong>20 bonus Coins</strong> to kickstart their journey.</li>
             </ul>
+          </section>
+
+          <div className="guide-divider" />
+
+          <section id="support" className="guide-section">
+            <h2><HelpCircle className="section-icon" /> Support</h2>
+            <p>If you have any questions or need assistance, feel free to reach out to our support team.</p>
+            <p>Email us at: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@preepx.in" target="_blank" rel="noopener noreferrer" style={{ color: '#4f46e5', textDecoration: 'underline' }}>contact@preepx.in</a></p>
           </section>
 
           <div className="guide-cta">

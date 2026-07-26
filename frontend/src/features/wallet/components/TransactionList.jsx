@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { ArrowDownLeft, ArrowUpRight, Gift, RotateCcw } from "lucide-react";
+import Pagination from "../../../components/Pagination";
 import "./TransactionList.css";
 
 const TYPE_META = {
@@ -7,6 +8,7 @@ const TYPE_META = {
   spend: { icon: ArrowUpRight, label: "Spent", className: "debit" },
   bonus: { icon: Gift, label: "Bonus", className: "credit" },
   refund: { icon: RotateCcw, label: "Refund", className: "credit" },
+  xp_bonus: { icon: Gift, label: "XP Bonus", className: "credit" },
 };
 
 function formatDate(dateStr) {
@@ -20,6 +22,9 @@ function formatDate(dateStr) {
 }
 
 function TransactionList({ transactions = [] }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   if (!transactions.length) {
     return (
       <div className="txn-empty">
@@ -30,9 +35,12 @@ function TransactionList({ transactions = [] }) {
   }
 
   return (
-    <div className="txn-list">
-      {transactions.map((txn) => {
-        const meta = TYPE_META[txn.type] || TYPE_META.purchase;
+    <div className="txn-list-wrapper">
+      <div className="txn-list">
+        {transactions
+          .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+          .map((txn) => {
+          const meta = TYPE_META[txn.type] || TYPE_META.purchase;
         const Icon = meta.icon;
         const isCredit = txn.coins > 0;
 
@@ -46,11 +54,18 @@ function TransactionList({ transactions = [] }) {
               <p className="txn-date">{formatDate(txn.createdAt)}</p>
             </div>
             <div className={`txn-amount ${isCredit ? "credit" : "debit"}`}>
-              {isCredit ? "+" : ""}{txn.coins}
+              {isCredit ? "+" : ""}{txn.coins} {txn.type === 'xp_bonus' ? 'XP' : ''}
             </div>
           </div>
         );
       })}
+      </div>
+      <Pagination 
+        currentPage={currentPage}
+        totalItems={transactions.length}
+        itemsPerPage={itemsPerPage}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 }

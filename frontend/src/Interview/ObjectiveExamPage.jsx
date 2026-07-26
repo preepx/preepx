@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { showAppError } from "../utils/appAlert";
 import EmptyState from "../components/EmptyState";
 import Loader from "../components/Loader";
+import Pagination from "../components/Pagination";
 import "./InterviewPage.css";
 
 const ObjectiveExamPage = () => {
@@ -18,8 +19,14 @@ const ObjectiveExamPage = () => {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, filter]);
 
   const loadDashboard = useCallback(async () => {
     try {
@@ -68,7 +75,7 @@ const ObjectiveExamPage = () => {
   const filtered = mcqResults.filter((exam) => {
     const matchSearch = exam.topic?.toLowerCase().includes(search.toLowerCase());
     // Filter can be extended if we have status for exams, currently all are completed
-    const matchFilter = filter === "all" || true; 
+    const matchFilter = filter === "all" || true;
     return matchSearch && matchFilter;
   });
 
@@ -151,32 +158,40 @@ const ObjectiveExamPage = () => {
 
           {filtered.length > 0 ? (
             <div className="interview-list">
-              {filtered.map((exam) => {
-                const accuracy = getAccuracy(exam);
-                return (
-                  <div
-                    key={exam._id}
-                    className="interview-item"
-                    onClick={() => navigate(`/objective-exam/result/${exam._id}`)}
-                  >
-                    <div className="interview-info">
-                      <h3>{exam.topic}</h3>
-                      <p>
-                        {exam.score}/{exam.totalQuestions} correct · {exam.totalQuestions} MCQs
-                      </p>
-                      <span className="interview-date">{formatDate(exam.createdAt)}</span>
+              {filtered
+                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                .map((exam) => {
+                  const accuracy = getAccuracy(exam);
+                  return (
+                    <div
+                      key={exam._id}
+                      className="interview-item"
+                      onClick={() => navigate(`/objective-exam/result/${exam._id}`)}
+                    >
+                      <div className="interview-info">
+                        <h3>{exam.topic}</h3>
+                        <p>
+                          {exam.score}/{exam.totalQuestions} correct · {exam.totalQuestions} MCQs
+                        </p>
+                        <span className="interview-date">{formatDate(exam.createdAt)}</span>
+                      </div>
+                      <div className="interview-meta">
+                        <span className="status-badge completed">Done</span>
+                        <span className="score-badge">{accuracy}%</span>
+                        <button className="delete-btn" onClick={(e) => handleDelete(e, exam._id)}>
+                          <Trash2 size={16} />
+                        </button>
+                        <ChevronRight size={18} className="chevron" />
+                      </div>
                     </div>
-                    <div className="interview-meta">
-                      <span className="status-badge completed">Done</span>
-                      <span className="score-badge">{accuracy}%</span>
-                      <button className="delete-btn" onClick={(e) => handleDelete(e, exam._id)}>
-                        <Trash2 size={16} />
-                      </button>
-                      <ChevronRight size={18} className="chevron" />
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              <Pagination
+                currentPage={currentPage}
+                totalItems={filtered.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={setCurrentPage}
+              />
             </div>
           ) : (
             <EmptyState
@@ -213,9 +228,9 @@ const ObjectiveExamPage = () => {
             <button className="action-btn primary full" onClick={() => navigate("/objective-exam/take")}>
               <Plus size={18} /> New Objective Exam
             </button>
-            <button 
-              className="action-btn primary full" 
-              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px' }} 
+            <button
+              className="action-btn primary full"
+              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px' }}
               onClick={() => navigate("/interview")}
             >
               ⚡ AI Interview

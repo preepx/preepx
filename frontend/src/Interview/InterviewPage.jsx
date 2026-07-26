@@ -13,6 +13,7 @@ import InterviewModal from "./InterviewModal";
 import WelcomeModal from "../components/WelcomeModal";
 import EmptyState from "../components/EmptyState";
 import Loader from "../components/Loader";
+import Pagination from "../components/Pagination";
 import "./InterviewPage.css";
 
 const InterviewPage = () => {
@@ -24,8 +25,14 @@ const InterviewPage = () => {
   const [uploading, setUploading] = useState(false);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search, filter]);
 
   const loadDashboard = useCallback(async () => {
     try {
@@ -200,61 +207,69 @@ const InterviewPage = () => {
 
           {filtered.length > 0 ? (
             <div className="interview-list">
-              {filtered.map((intv) => (
-                <div
-                  key={intv._id}
-                  className="interview-item"
-                  onClick={async () => {
-                    if (intv.status === "completed") {
-                      try {
-                        // Fetch full interview including answers array
-                        const fullIntv = await getInterviewById(intv._id);
-                        navigate("/feedback", { 
-                          state: { 
-                            interview: fullIntv, 
-                            jobTitle: fullIntv.jobTitle, 
-                            jobTopic: fullIntv.jobTopic 
-                          } 
+              {filtered
+                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                .map((intv) => (
+                  <div
+                    key={intv._id}
+                    className="interview-item"
+                    onClick={async () => {
+                      if (intv.status === "completed") {
+                        try {
+                          // Fetch full interview including answers array
+                          const fullIntv = await getInterviewById(intv._id);
+                          navigate("/feedback", {
+                            state: {
+                              interview: fullIntv,
+                              jobTitle: fullIntv.jobTitle,
+                              jobTopic: fullIntv.jobTopic
+                            }
+                          });
+                        } catch (err) {
+                          console.error("Failed to fetch full interview details:", err);
+                          navigate("/feedback", { state: { interview: intv } });
+                        }
+                      } else {
+                        navigate("/start-interview", {
+                          state: {
+                            jobTitle: intv.jobTitle, jobTopic: intv.jobTopic,
+                            questions: intv.questions, interviewId: intv._id,
+                          },
                         });
-                      } catch (err) {
-                        console.error("Failed to fetch full interview details:", err);
-                        navigate("/feedback", { state: { interview: intv } });
                       }
-                    } else {
-                      navigate("/start-interview", {
-                        state: {
-                          jobTitle: intv.jobTitle, jobTopic: intv.jobTopic,
-                          questions: intv.questions, interviewId: intv._id,
-                        },
-                      });
-                    }
-                  }}
-                >
-                  <div className="interview-info">
-                    <h3>{intv.jobTitle}</h3>
-                    <p>
-                      {intv.jobTopic} · {intv.questions?.length || 0} Qs
-                      {intv.difficulty && ` · ${intv.difficulty}`}
-                      {intv.fromResume && " · Resume"}
-                    </p>
-                    <span className="interview-date">{formatDate(intv.createdAt)}</span>
-                  </div>
-                  <div className="interview-meta">
-                    <span className={`status-badge ${intv.status}`}>
-                      {intv.status === "completed" ? "Done" : "Pending"}
-                    </span>
-                    {intv.status === "completed" && intv.maxScore > 0 && (
-                      <span className="score-badge">
-                        {Math.round((intv.totalScore / intv.maxScore) * 100)}%
+                    }}
+                  >
+                    <div className="interview-info">
+                      <h3>{intv.jobTitle}</h3>
+                      <p>
+                        {intv.jobTopic} · {intv.questions?.length || 0} Qs
+                        {intv.difficulty && ` · ${intv.difficulty}`}
+                        {intv.fromResume && " · Resume"}
+                      </p>
+                      <span className="interview-date">{formatDate(intv.createdAt)}</span>
+                    </div>
+                    <div className="interview-meta">
+                      <span className={`status-badge ${intv.status}`}>
+                        {intv.status === "completed" ? "Done" : "Pending"}
                       </span>
-                    )}
-                    <button className="delete-btn" onClick={(e) => handleDelete(e, intv._id)}>
-                      <Trash2 size={16} />
-                    </button>
-                    <ChevronRight size={18} className="chevron" />
+                      {intv.status === "completed" && intv.maxScore > 0 && (
+                        <span className="score-badge">
+                          {Math.round((intv.totalScore / intv.maxScore) * 100)}%
+                        </span>
+                      )}
+                      <button className="delete-btn" onClick={(e) => handleDelete(e, intv._id)}>
+                        <Trash2 size={16} />
+                      </button>
+                      <ChevronRight size={18} className="chevron" />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              <Pagination
+                currentPage={currentPage}
+                totalItems={filtered.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={setCurrentPage}
+              />
             </div>
           ) : (
             <EmptyState
@@ -291,9 +306,9 @@ const InterviewPage = () => {
             <button className="action-btn primary full" onClick={() => setShowModal(true)}>
               <Plus size={18} /> New Interview
             </button>
-            <button 
-              className="action-btn primary full" 
-              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px' }} 
+            <button
+              className="action-btn primary full"
+              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px' }}
               onClick={() => navigate("/objective-exam")}
             >
               ⚡ Objective Exam
