@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Enable CORS
 app.use(cors({                      //http://localhost:5174 local
-  origin: process.env.FRONTEND_URL || "https://interview-coch.vercel.app",
+  origin: process.env.FRONTEND_URL || "https://admin.preepx.in",  // Allow requests from the frontend URL or localhost
   credentials: true
 }));  
 
