@@ -98,7 +98,7 @@ function Dashboard() {
   ];
 
   const faqs = [
-    { q: "Is PreepX free to use?", a: "Yes! All core features — AI interviews, analytics, leaderboard, and badges — are completely free." },
+    { q: "Is PreepX free to use?", a: "Yes! All core features — analytics, leaderboard, and badges — are completely free. However, each AI interview session costs 5 coins." },
     { q: "How does AI evaluation work?", a: "Our Groq-powered LLM analyzes your spoken answers against each question and returns a score (0-10) with detailed feedback." },
     { q: "What roles can I practice for?", a: "Any role! Frontend, Backend, Data Science, DevOps, Product Manager — enter any title and skills." },
     { q: "Will my data show on the dashboard?", a: "Yes! Every interview you complete is saved to your account. Stats, history, and analytics update in real-time." },
@@ -106,6 +106,8 @@ function Dashboard() {
     { q: "How is the score calculated?", a: "Our AI evaluates your response against a rubric that checks for technical accuracy, clarity, and completeness. The score is out of 10." },
     { q: "Is my audio/video recorded?", a: "Your webcam feed is processed locally and is never recorded. Audio is temporarily processed for transcription only." },
     { q: "Can I cancel or restart an interview?", a: "Yes, you can end or restart a mock session at any time from the interview room." },
+    { q: "How do I deposit coins?", a: "You can securely deposit coins manually through the Wallet section, or simply by clicking on the coin package boxes." },
+    { q: "Are interview notes available?", a: "Yes, detailed interview notes are available after each session and they are completely free!" }
   ];
 
   return (

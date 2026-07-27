@@ -79,7 +79,7 @@ function LayoutWrapper({ children }) {
 
 function AppContent() {
   useEffect(() => {
-    const theme = localStorage.getItem("theme") || "light";
+    const theme = localStorage.getItem("theme") || "dark";
     document.documentElement.dataset.theme = theme;
   }, []);
 
@@ -136,9 +136,18 @@ function AppContent() {
   );
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <AppContent />
     </Router>
   );
