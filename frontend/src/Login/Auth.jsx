@@ -18,6 +18,7 @@ const EMPTY_REGISTER = { fullName: "", email: "", password: "", confirmPassword:
 function Auth() {
   const [screen, setScreen] = useState("login");
   const [loading, setLoading] = useState(false);
+  const [realtimeUsers, setRealtimeUsers] = useState(70);
 
   // Login
   const [loginData, setLoginData] = useState({ email: "", password: "" });
@@ -47,7 +48,13 @@ function Auth() {
 
   // Server warm-up ping — taaki register click pe delay na ho
   useEffect(() => {
-    API.get("/users/platform-stats").catch(() => { });
+    API.get("/users/platform-stats")
+      .then((res) => {
+        if (res.data && res.data.totalUsers) {
+          setRealtimeUsers(res.data.totalUsers * 10);
+        }
+      })
+      .catch(() => { });
 
     // Check for Google login failure error in URL
     const params = new URLSearchParams(window.location.search);
@@ -366,7 +373,7 @@ function Auth() {
             <div className="auth-feature-card"><Shield size={18} /><span>Secure & private practice sessions</span></div>
           </div>
           <div className="auth-stats">
-            <div><strong>70+</strong><span>Users</span></div>
+            <div><strong>{realtimeUsers}+</strong><span>Users</span></div>
             <div><strong>24/7</strong><span>AI Ready</span></div>
             <div><strong>95%</strong><span>Satisfaction</span></div>
           </div>
