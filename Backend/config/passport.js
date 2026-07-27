@@ -36,6 +36,9 @@ passport.use(
           referralCode: newReferralCode,
         });
 
+        const walletService = require("../services/walletService");
+        await walletService.addBonusToWallet(user._id, 20, "Signup bonus");
+
         return done(null, user);
       } catch (err) {
         return done(err, null);

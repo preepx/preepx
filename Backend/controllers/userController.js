@@ -117,12 +117,8 @@ const verifyOtpAndRegister = async (req, res) => {
       referredBy,
     });
 
-    // Give signup bonus of 20 coins ONLY if referredBy is present
-    let message = "Registration successful!";
-    if (referredBy) {
-      await walletService.addBonusToWallet(user._id, 20, "Signup bonus for using a referral code");
-      message = "Registration successful! You earned 20 coins for using a referral code.";
-    }
+    let message = "Registration successful! You earned 20 free coins.";
+    await walletService.addBonusToWallet(user._id, 20, "Signup bonus");
 
     // OTP record delete karo
     await Otp.deleteMany({ email: normalizedEmail });
