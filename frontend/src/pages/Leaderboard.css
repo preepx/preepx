@@ -4,6 +4,22 @@
   padding: 28px 32px 48px;
 }
 
+.page-header {
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.page-header p {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
 .your-rank-card {
   display: flex;
   align-items: center;

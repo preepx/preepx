@@ -16,7 +16,7 @@ import "./UserDashboard.css";
 const EXPLORE_LINKS = [
   { icon: BarChart3, label: "Analytics", desc: "Score trends & insights", path: "/analytics", color: "#06b6d4" },
   { icon: Trophy, label: "Leaderboard", desc: "Global rankings", path: "/leaderboard", color: "#f59e0b" },
-  { icon: Award, label: "Achievements", desc: "Redeem XP for coins", path: "/achievements", color: "#8b5cf6" },
+  { icon: Award, label: "Redeem XP", desc: "Redeem XP for coins", path: "/achievements", color: "#8b5cf6" },
   { icon: Wallet, label: "Wallet", desc: "Manage your coins", path: "/wallet", color: "#10b981" },
   { icon: Mic, label: "Resume Upload", desc: "AI questions from resume", action: "resume_upload", color: "#ec4899" },
   { icon: BookOpen, label: "Btech Notes", desc: "Study resources", path: "/btech-notes", color: "#3b82f6", free: true },
@@ -109,7 +109,7 @@ function UserDashboard() {
 
   const recentActivity = useMemo(() => {
     if (!stats?.recentScores?.length) return [];
-    return [...stats.recentScores].reverse().slice(0, 5);
+    return [...stats.recentScores].reverse().slice(0, 3);
   }, [stats]);
 
   const maxWeeklyCount = useMemo(() => {
