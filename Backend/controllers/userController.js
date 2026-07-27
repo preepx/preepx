@@ -36,6 +36,11 @@ const sendOtp = async (req, res) => {
   const { fullName, email, password, referralCode } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
 
+  const { isEmailAllowed } = require("../utils/allowedEmailDomains");
+  if (!isEmailAllowed(normalizedEmail)) {
+    return res.status(400).json({ message: "Please use a valid personal or university email address." });
+  }
+
   try {
     // Check if user already registered
     const userExists = await User.findOne({ email: normalizedEmail });
