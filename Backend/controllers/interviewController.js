@@ -1,4 +1,4 @@
-﻿const axios = require("axios");
+const axios = require("axios");
 const Interview = require("../models/Interview");
 const User = require("../models/User");
 const { evaluateBadges, calculateBadgeBonus } = require("../utils/badges");
@@ -214,8 +214,8 @@ const saveInterviewResult = async (req, res) => {
 
     const refreshed = await User.findById(req.user);
     const claimableBadges = evaluateBadges(refreshed, { hasPerfectScore: isPerfect })
-        .filter((b) => !(refreshed.badges || []).includes(b));
-    
+      .filter((b) => !(refreshed.badges || []).includes(b));
+
     res.json({
       interview,
       totalScore,
