@@ -13,7 +13,7 @@ import Loader from "../../../components/Loader";
 function WalletPage() {
   const { balance, transactions, config, loading, refresh } = useWallet();
   const [showAddModal, setShowAddModal] = useState(false);
-  const [customAmount, setCustomAmount] = useState(20);
+  const [customAmount, setCustomAmount] = useState(1);
   const [buying, setBuying] = useState(false);
 
   if (loading && !config) {
@@ -23,8 +23,8 @@ function WalletPage() {
   const billingEnabled = config?.billingEnabled;
 
   const handleCustomBuy = async () => {
-    if (customAmount < 20) {
-      toast.error("Minimum amount is ₹20");
+    if (customAmount < 1) {
+      toast.error("Minimum amount is ₹1");
       return;
     }
     setBuying(true);
@@ -35,7 +35,7 @@ function WalletPage() {
       });
 
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_THRv3G1OfdhIob",
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_TIldjHmH0HwMPb",
         amount: orderData.amount,
         currency: orderData.currency,
         name: "PreepX AI Interview",
@@ -176,7 +176,7 @@ function WalletPage() {
                 <span className="wallet-currency-symbol">₹</span>
                 <input
                   type="number"
-                  min="20"
+                  min="1"
                   value={customAmount}
                   onChange={(e) => setCustomAmount(e.target.value)}
                   disabled={buying}
@@ -185,9 +185,9 @@ function WalletPage() {
                 />
               </div>
 
-              {customAmount < 20 ? (
+              {customAmount < 1 ? (
                 <div className="wallet-coins-error">
-                  ⚠️ Minimum amount to add is ₹20
+                  ⚠️ Minimum amount to add is ₹1
                 </div>
               ) : (
                 <div className="wallet-coins-preview">
@@ -200,7 +200,7 @@ function WalletPage() {
             <button
               className="wallet-checkout-btn"
               onClick={handleCustomBuy}
-              disabled={buying || customAmount < 20}
+              disabled={buying || customAmount < 1}
             >
               {buying ? "Processing..." : `Pay ₹${customAmount || 0}`}
             </button>

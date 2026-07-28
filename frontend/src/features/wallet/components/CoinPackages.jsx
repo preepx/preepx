@@ -19,7 +19,7 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
 
       // 2. Open Razorpay Checkout
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_test_THRv3G1OfdhIob", // Fallback for testing
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_TIldjHmH0HwMPb", // Fallback for testing
         amount: orderData.amount,
         currency: orderData.currency,
         name: "PreepX AI Interview",

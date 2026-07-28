@@ -8,6 +8,7 @@ const {
   getUsers,
   getUserDetails,
   getTransactions,
+  getPurchases,
   toggleUserBlock,
   addCoinsToWallet,
   addXpToUser,
@@ -30,6 +31,8 @@ const { uploadPdf, uploadImage } = require("../config/cloudinary");
 // Public admin login route
 router.post("/login", adminLogin);
 
+
+
 // Protect all other admin routes
 router.use(adminProtect);
 
@@ -40,6 +43,7 @@ router.put("/users/:id/block", toggleUserBlock);
 router.post("/users/:id/wallet/add", addCoinsToWallet);
 router.post("/users/:id/xp/add", addXpToUser);
 router.get("/transactions", getTransactions);
+router.get("/purchases", getPurchases);
 
 // B.Tech Notes — PDF upload MUST be registered before /:id routes
 router.post("/btec-notes/upload-pdf", uploadPdf.single("pdf"), uploadPdfNote);

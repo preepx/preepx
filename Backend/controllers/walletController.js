@@ -29,8 +29,8 @@ const createOrder = async (req, res) => {
 
     let amountInRupees;
     if (packageId === "custom") {
-      if (!customAmount || customAmount < 19) {
-        return res.status(400).json({ message: "Minimum custom amount is ₹19" });
+      if (!customAmount || customAmount < 1) {
+        return res.status(400).json({ message: "Minimum custom amount is ₹1" });
       }
       amountInRupees = Math.floor(customAmount);
     } else {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Outlet, NavLink, useNavigate, Navigate } from 'react-router-dom';
-import { LayoutDashboard, Users, CreditCard, LogOut, Shield, Menu, X, BookOpen, HelpCircle, FileUp } from 'lucide-react';
+import { LayoutDashboard, Users, CreditCard, LogOut, Shield, Menu, X, BookOpen, HelpCircle, FileUp, IndianRupee } from 'lucide-react';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
@@ -58,6 +58,11 @@ const AdminLayout = () => {
           <NavLink to="/transactions" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => setIsMobileMenuOpen(false)}>
             <CreditCard size={20} />
             <span>Transactions</span>
+          </NavLink>
+
+          <NavLink to="/purchases" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => setIsMobileMenuOpen(false)}>
+            <IndianRupee size={20} />
+            <span>Coin Purchases</span>
           </NavLink>
 
           <NavLink to="/btec-notes" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => setIsMobileMenuOpen(false)}>

@@ -136,6 +136,36 @@ const getTransactions = async (req, res) => {
   }
 };
 
+// @desc    Get Purchases (Real Transactions)
+const getPurchases = async (req, res) => {
+  try {
+    const transactions = await WalletTransaction.find({ type: "purchase", status: "completed" })
+      .populate("userId", "fullName email")
+      .sort({ createdAt: -1 });
+
+    const totalStats = await WalletTransaction.aggregate([
+      {
+        $match: {
+          type: "purchase",
+          status: "completed"
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          totalRevenue: { $sum: "$metadata.rupees" }
+        }
+      }
+    ]);
+
+    const totalRevenue = totalStats.length > 0 ? totalStats[0].totalRevenue : 0;
+
+    res.json({ transactions, totalRevenue });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 // @desc    Toggle User Block Status
 const toggleUserBlock = async (req, res) => {
   try {
@@ -213,6 +243,7 @@ module.exports = {
   getUsers,
   getUserDetails,
   getTransactions,
+  getPurchases,
   toggleUserBlock,
   addCoinsToWallet,
   addXpToUser
