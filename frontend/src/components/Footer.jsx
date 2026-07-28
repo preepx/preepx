@@ -5,7 +5,7 @@ import './Footer.css';
 
 const socialLinks = [
   { name: 'Facebook', icon: '/icons/facebook.svg', url: '#' },
-  { name: 'Instagram', icon: '/icons/instagram.svg', url: '#' },
+  { name: 'Instagram', icon: '/icons/instagram.svg', url: 'https://www.instagram.com/preepx.in?igsh=MTdleHB0d2ExMXF2MQ==' },
   { name: 'LinkedIn', icon: '/icons/linkedin.svg', url: 'https://www.linkedin.com/company/preepx' },
   { name: 'Gmail', icon: '/icons/gmail.svg', url: 'https://mail.google.com/mail/?view=cm&fs=1&to=contact@preepx.in' }
 ];
