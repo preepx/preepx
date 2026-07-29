@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cors({                      //http://localhost:5174 local
   origin: process.env.FRONTEND_URL || "https://admin.preepx.in",  // Allow requests from the frontend URL or localhost
   credentials: true
-}));  
+}));
 
 // Mount routes
 app.use("/api/admin", require("./routes/adminRoutes"));

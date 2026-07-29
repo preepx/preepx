@@ -140,3 +140,42 @@ body {
   background: #cbd5e1;
   border-radius: 3px;
 }
+
+.global-face-warn-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(239, 68, 68, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-warn-global 2s infinite;
+}
+
+.global-face-warn-content {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  color: #ef4444;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  max-width: 400px;
+}
+
+.global-face-warn-content h2 {
+  margin: 16px 0 8px;
+  font-size: 24px;
+  color: #1e293b;
+}
+
+.global-face-warn-content p {
+  color: #64748b;
+  font-size: 15px;
+}
+
+@keyframes pulse-warn-global {
+  0% { background: rgba(239, 68, 68, 0.95); }
+  50% { background: rgba(220, 38, 38, 0.98); }
+  100% { background: rgba(239, 68, 68, 0.95); }
+}

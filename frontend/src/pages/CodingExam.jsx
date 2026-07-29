@@ -1,0 +1,453 @@
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Editor from '@monaco-editor/react';
+import Webcam from 'react-webcam';
+import { Play, CheckCircle2, XCircle, Clock, ArrowLeft, Terminal, ShieldCheck } from 'lucide-react';
+import { toast } from 'react-toastify';
+import { useFaceDetection } from '../hooks/useFaceDetection';
+import API from '../utils/api';
+import './CodingExam.css';
+
+const mockQuestions = {
+  easy: [
+    {
+      title: 'Two Sum',
+      description: 'Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.\n\nYou may assume that each input would have exactly one solution, and you may not use the same element twice.',
+      examples: [
+        { input: 'nums = [2,7,11,15], target = 9', output: '[0,1]' },
+        { input: 'nums = [3,2,4], target = 6', output: '[1,2]' }
+      ],
+      starterCode: {
+        javascript: 'function twoSum(nums, target) {\n    // Write your code here\n    \n}',
+        python: 'def twoSum(nums, target):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        // Write your code here\n        \n    }\n};',
+        java: 'class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        // Write your code here\n        \n    }\n}',
+        csharp: 'public class Solution {\n    public int[] TwoSum(int[] nums, int target) {\n        // Write your code here\n        \n    }\n}',
+        go: 'func twoSum(nums []int, target int) []int {\n    // Write your code here\n    \n}',
+        rust: 'impl Solution {\n    pub fn two_sum(nums: Vec<i32>, target: i32) -> Vec<i32> {\n        // Write your code here\n        \n    }\n}',
+        ruby: 'def two_sum(nums, target)\n    # Write your code here\n    \nend',
+        php: 'class Solution {\n    /**\n     * @param Integer[] $nums\n     * @param Integer $target\n     * @return Integer[]\n     */\n    function twoSum($nums, $target) {\n        // Write your code here\n        \n    }\n}',
+        swift: 'class Solution {\n    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {\n        // Write your code here\n        \n    }\n}',
+        typescript: 'function twoSum(nums: number[], target: number): number[] {\n    // Write your code here\n    \n}',
+        kotlin: 'class Solution {\n    fun twoSum(nums: IntArray, target: Int): IntArray {\n        // Write your code here\n        \n    }\n}',
+        scala: 'object Solution {\n    def twoSum(nums: Array[Int], target: Int): Array[Int] = {\n        // Write your code here\n        \n    }\n}',
+        r: 'twoSum <- function(nums, target) {\n    # Write your code here\n    \n}',
+        objectivec: '@implementation Solution\n- (NSArray<NSNumber *> *)twoSum:(NSArray<NSNumber *> *)nums target:(NSInteger)target {\n    // Write your code here\n    \n}\n@end',
+        perl: 'sub twoSum {\n    my ($nums, $target) = @_;\n    # Write your code here\n    \n}',
+        haskell: 'twoSum :: [Int] -> Int -> [Int]\ntwoSum nums target =\n    -- Write your code here\n    ',
+        lua: 'function twoSum(nums, target)\n    -- Write your code here\n    \nend',
+        dart: 'class Solution {\n    List<int> twoSum(List<int> nums, int target) {\n        // Write your code here\n        \n    }\n}'
+      }
+    },
+    {
+      title: 'Valid Palindrome',
+      description: 'A phrase is a palindrome if, after converting all uppercase letters into lowercase letters and removing all non-alphanumeric characters, it reads the same forward and backward. Alphanumeric characters include letters and numbers.\n\nGiven a string s, return true if it is a palindrome, or false otherwise.',
+      examples: [
+        { input: 's = "A man, a plan, a canal: Panama"', output: 'true' },
+        { input: 's = "race a car"', output: 'false' }
+      ],
+      starterCode: {
+        javascript: 'function isPalindrome(s) {\n    // Write your code here\n    \n}',
+        python: 'def isPalindrome(s):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    bool isPalindrome(string s) {\n        // Write your code here\n        \n    }\n};',
+        java: 'class Solution {\n    public boolean isPalindrome(String s) {\n        // Write your code here\n        \n    }\n}',
+        csharp: 'public class Solution {\n    public bool IsPalindrome(string s) {\n        // Write your code here\n        \n    }\n}',
+        go: 'func isPalindrome(s string) bool {\n    // Write your code here\n    \n}',
+        rust: 'impl Solution {\n    pub fn is_palindrome(s: String) -> bool {\n        // Write your code here\n        \n    }\n}',
+        ruby: 'def is_palindrome(s)\n    # Write your code here\n    \nend',
+        php: 'class Solution {\n    /**\n     * @param String $s\n     * @return Boolean\n     */\n    function isPalindrome($s) {\n        // Write your code here\n        \n    }\n}',
+        swift: 'class Solution {\n    func isPalindrome(_ s: String) -> Bool {\n        // Write your code here\n        \n    }\n}',
+        typescript: 'function isPalindrome(s: string): boolean {\n    // Write your code here\n    \n}',
+        kotlin: 'class Solution {\n    fun isPalindrome(s: String): Boolean {\n        // Write your code here\n        \n    }\n}',
+        scala: 'object Solution {\n    def isPalindrome(s: String): Boolean = {\n        // Write your code here\n        \n    }\n}',
+        r: 'isPalindrome <- function(s) {\n    # Write your code here\n    \n}',
+        objectivec: '@implementation Solution\n- (BOOL)isPalindrome:(NSString *)s {\n    // Write your code here\n    \n}\n@end',
+        perl: 'sub isPalindrome {\n    my ($s) = @_;\n    # Write your code here\n    \n}',
+        haskell: 'isPalindrome :: String -> Bool\nisPalindrome s =\n    -- Write your code here\n    ',
+        lua: 'function isPalindrome(s)\n    -- Write your code here\n    \nend',
+        dart: 'class Solution {\n    bool isPalindrome(String s) {\n        // Write your code here\n        \n    }\n}'
+      }
+    }
+  ],
+  medium: [
+    {
+      title: 'Longest Substring Without Repeating Characters',
+      description: 'Given a string s, find the length of the longest substring without repeating characters.',
+      examples: [
+        { input: 's = "abcabcbb"', output: '3' },
+        { input: 's = "bbbbb"', output: '1' }
+      ],
+      starterCode: {
+        javascript: 'function lengthOfLongestSubstring(s) {\n    // Write your code here\n    \n}',
+        python: 'def lengthOfLongestSubstring(s):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    int lengthOfLongestSubstring(string s) {\n        // Write your code here\n        \n    }\n};',
+        java: 'class Solution {\n    public int lengthOfLongestSubstring(String s) {\n        // Write your code here\n        \n    }\n}',
+        csharp: 'public class Solution {\n    public int LengthOfLongestSubstring(string s) {\n        // Write your code here\n        \n    }\n}',
+        go: 'func lengthOfLongestSubstring(s string) int {\n    // Write your code here\n    \n}',
+        rust: 'impl Solution {\n    pub fn length_of_longest_substring(s: String) -> i32 {\n        // Write your code here\n        \n    }\n}',
+        ruby: 'def length_of_longest_substring(s)\n    # Write your code here\n    \nend',
+        php: 'class Solution {\n    /**\n     * @param String $s\n     * @return Integer\n     */\n    function lengthOfLongestSubstring($s) {\n        // Write your code here\n        \n    }\n}',
+        swift: 'class Solution {\n    func lengthOfLongestSubstring(_ s: String) -> Int {\n        // Write your code here\n        \n    }\n}',
+        typescript: 'function lengthOfLongestSubstring(s: string): number {\n    // Write your code here\n    \n}',
+        kotlin: 'class Solution {\n    fun lengthOfLongestSubstring(s: String): Int {\n        // Write your code here\n        \n    }\n}',
+        scala: 'object Solution {\n    def lengthOfLongestSubstring(s: String): Int = {\n        // Write your code here\n        \n    }\n}',
+        r: 'lengthOfLongestSubstring <- function(s) {\n    # Write your code here\n    \n}',
+        objectivec: '@implementation Solution\n- (NSInteger)lengthOfLongestSubstring:(NSString *)s {\n    // Write your code here\n    \n}\n@end',
+        perl: 'sub lengthOfLongestSubstring {\n    my ($s) = @_;\n    # Write your code here\n    \n}',
+        haskell: 'lengthOfLongestSubstring :: String -> Int\nlengthOfLongestSubstring s =\n    -- Write your code here\n    ',
+        lua: 'function lengthOfLongestSubstring(s)\n    -- Write your code here\n    \nend',
+        dart: 'class Solution {\n    int lengthOfLongestSubstring(String s) {\n        // Write your code here\n        \n    }\n}'
+      }
+    }
+  ],
+  hard: [
+    {
+      title: 'Median of Two Sorted Arrays',
+      description: 'Given two sorted arrays nums1 and nums2 of size m and n respectively, return the median of the two sorted arrays.\n\nThe overall run time complexity should be O(log (m+n)).',
+      examples: [
+        { input: 'nums1 = [1,3], nums2 = [2]', output: '2.00000' },
+        { input: 'nums1 = [1,2], nums2 = [3,4]', output: '2.50000' }
+      ],
+      starterCode: {
+        javascript: 'function findMedianSortedArrays(nums1, nums2) {\n    // Write your code here\n    \n}',
+        python: 'def findMedianSortedArrays(nums1, nums2):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {\n        // Write your code here\n        \n    }\n};',
+        java: 'class Solution {\n    public double findMedianSortedArrays(int[] nums1, int[] nums2) {\n        // Write your code here\n        \n    }\n}',
+        csharp: 'public class Solution {\n    public double FindMedianSortedArrays(int[] nums1, int[] nums2) {\n        // Write your code here\n        \n    }\n}',
+        go: 'func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {\n    // Write your code here\n    \n}',
+        rust: 'impl Solution {\n    pub fn find_median_sorted_arrays(nums1: Vec<i32>, nums2: Vec<i32>) -> f64 {\n        // Write your code here\n        \n    }\n}',
+        ruby: 'def find_median_sorted_arrays(nums1, nums2)\n    # Write your code here\n    \nend',
+        php: 'class Solution {\n    /**\n     * @param Integer[] $nums1\n     * @param Integer[] $nums2\n     * @return Float\n     */\n    function findMedianSortedArrays($nums1, $nums2) {\n        // Write your code here\n        \n    }\n}',
+        swift: 'class Solution {\n    func findMedianSortedArrays(_ nums1: [Int], _ nums2: [Int]) -> Double {\n        // Write your code here\n        \n    }\n}',
+        typescript: 'function findMedianSortedArrays(nums1: number[], nums2: number[]): number {\n    // Write your code here\n    \n}',
+        kotlin: 'class Solution {\n    fun findMedianSortedArrays(nums1: IntArray, nums2: IntArray): Double {\n        // Write your code here\n        \n    }\n}',
+        scala: 'object Solution {\n    def findMedianSortedArrays(nums1: Array[Int], nums2: Array[Int]): Double = {\n        // Write your code here\n        \n    }\n}',
+        r: 'findMedianSortedArrays <- function(nums1, nums2) {\n    # Write your code here\n    \n}',
+        objectivec: '@implementation Solution\n- (double)findMedianSortedArrays:(NSArray<NSNumber *> *)nums1 nums2:(NSArray<NSNumber *> *)nums2 {\n    // Write your code here\n    \n}\n@end',
+        perl: 'sub findMedianSortedArrays {\n    my ($nums1, $nums2) = @_;\n    # Write your code here\n    \n}',
+        haskell: 'findMedianSortedArrays :: [Int] -> [Int] -> Double\nfindMedianSortedArrays nums1 nums2 =\n    -- Write your code here\n    ',
+        lua: 'function findMedianSortedArrays(nums1, nums2)\n    -- Write your code here\n    \nend',
+        dart: 'class Solution {\n    double findMedianSortedArrays(List<int> nums1, List<int> nums2) {\n        // Write your code here\n        \n    }\n}'
+      }
+    }
+  ]
+};
+
+const CodingExam = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const searchParams = new URLSearchParams(location.search);
+  const difficulty = searchParams.get('difficulty') || 'easy';
+  const initialLanguage = searchParams.get('lang') || 'javascript';
+  
+  const [currentLanguage, setCurrentLanguage] = useState(initialLanguage);
+
+  // Randomly select a question that hasn't been seen yet
+  const question = useMemo(() => {
+    const questions = mockQuestions[difficulty] || mockQuestions.easy;
+    
+    // Get previously seen questions from localStorage
+    let seenQuestions = JSON.parse(localStorage.getItem('seenCodingQuestions') || '[]');
+    
+    // Filter out seen questions for the current difficulty
+    let availableQuestions = questions.filter(q => !seenQuestions.includes(q.title));
+    
+    // If all questions for this difficulty have been seen, reset the seen list for this difficulty
+    if (availableQuestions.length === 0) {
+      const currentDifficultyTitles = questions.map(q => q.title);
+      seenQuestions = seenQuestions.filter(title => !currentDifficultyTitles.includes(title));
+      availableQuestions = questions;
+    }
+    
+    // Pick a random question from the available ones
+    const selected = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
+    
+    // Add it to seen list and save
+    seenQuestions.push(selected.title);
+    localStorage.setItem('seenCodingQuestions', JSON.stringify(seenQuestions));
+    
+    return selected;
+  }, [difficulty]);
+
+  const [code, setCode] = useState(question.starterCode[currentLanguage] || question.starterCode.javascript);
+  const initialTime = difficulty === 'hard' ? 1800 : difficulty === 'medium' ? 1500 : 1200;
+  const [timeLeft, setTimeLeft] = useState(initialTime); // Set based on difficulty
+  const [output, setOutput] = useState('');
+  const [isRunning, setIsRunning] = useState(false);
+  const [testResults, setTestResults] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isFullscreen, setIsFullscreen] = useState(true);
+  
+  const camRef = useRef(null);
+  const { faceWarning } = useFaceDetection([camRef], true);
+
+  // Update boilerplate code when language changes
+  useEffect(() => {
+    setCode(question.starterCode[currentLanguage] || question.starterCode.javascript);
+  }, [currentLanguage, question]);
+
+  useEffect(() => {
+    // Request fullscreen on mount
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen().catch(err => console.log(err));
+    }
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+    
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      window.removeEventListener('resize', handleResize);
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(err => console.log(err));
+      }
+    };
+  }, []);
+
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  const handleRunCode = () => {
+    setIsRunning(true);
+    setOutput('Running test cases...');
+    setTestResults(null);
+    
+    // Simulate API call for code execution
+    setTimeout(() => {
+      setIsRunning(false);
+      // Mock passing logic
+      const isPass = Math.random() > 0.3; // 70% chance to pass for demo
+      if (isPass) {
+        setOutput('All test cases passed successfully!\nTime: 42ms\nMemory: 34.2MB');
+        setTestResults('pass');
+      } else {
+        setOutput('Test case 2 failed.\nInput: nums = [3,2,4], target = 6\nExpected: [1,2]\nOutput: undefined');
+        setTestResults('fail');
+      }
+    }, 1500);
+  };
+
+  if (isMobile) {
+    return (
+      <div className="coding-exam-mobile-restricted">
+        <Terminal size={48} className="mobile-icon" />
+        <h2>Desktop Mode Required</h2>
+        <p>The Coding Exam requires a physical keyboard and a larger screen to write code effectively. Please open this on your PC/Laptop, or enable "Desktop site" in your mobile browser settings.</p>
+        <button className="back-btn-mobile" onClick={() => navigate('/coding-practice')}>
+          <ArrowLeft size={16} /> Back to Dashboard
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {faceWarning && (
+        <div className="global-face-warn-overlay">
+          <div className="global-face-warn-content">
+            <ShieldCheck size={48} className="warn-icon" />
+            <h2>Proctoring Warning</h2>
+            <p>{faceWarning}</p>
+          </div>
+        </div>
+      )}
+      {!isFullscreen && (
+        <div className="coding-fullscreen-overlay">
+          <div className="coding-fullscreen-content">
+            <h2>Fullscreen Required</h2>
+            <p>The coding practice must be taken in fullscreen to prevent distractions and cheating.</p>
+            <button className="enter-fs-btn" onClick={() => {
+              const elem = document.documentElement;
+              if (elem.requestFullscreen) elem.requestFullscreen();
+            }}>Enter Fullscreen</button>
+            <button className="enter-fs-btn secondary" onClick={() => navigate('/coding-practice')} style={{ marginLeft: 8 }}>Exit</button>
+          </div>
+        </div>
+      )}
+      <div className={`coding-exam-container ${!isFullscreen ? 'blurred' : ''}`}>
+      {/* Top Navbar */}
+      <nav className="exam-navbar">
+        <div className="nav-left">
+          <button className="back-btn" onClick={() => navigate('/coding-practice')}>
+            <ArrowLeft size={20} />
+            <span>Leave</span>
+          </button>
+          <span className="exam-title">{question.title} <span className={`diff-badge ${difficulty}`}>{difficulty}</span></span>
+        </div>
+        <div className="nav-right">
+          <div className={`timer-badge ${timeLeft < 300 ? 'danger' : ''}`}>
+            <Clock size={18} />
+            {formatTime(timeLeft)}
+          </div>
+          <button className="submit-exam-btn" onClick={async () => {
+            const timeSpentSecs = initialTime - timeLeft;
+            
+            // Save to localStorage
+            const history = JSON.parse(localStorage.getItem('codingPracticeHistory') || '[]');
+            const record = {
+              title: question.title,
+              difficulty,
+              language: currentLanguage,
+              status: testResults || 'untested',
+              timeSpentSecs,
+              date: new Date().toISOString()
+            };
+            history.push(record);
+            localStorage.setItem('codingPracticeHistory', JSON.stringify(history));
+
+            // Save to Backend Database
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user && user._id) {
+              try {
+                await API.post('/coding/results', {
+                  userId: user._id,
+                  ...record
+                });
+              } catch (err) {
+                console.error("Failed to save coding result to backend:", err);
+              }
+            }
+            
+            navigate('/coding-practice');
+          }}>
+            Submit Practice
+          </button>
+          
+          <div className="nav-cam-wrapper">
+            <Webcam ref={camRef} audio={false} mirrored className="nav-cam-feed" screenshotFormat="image/jpeg" />
+          </div>
+        </div>
+      </nav>
+
+      <div className="exam-main">
+        {/* Left Panel: Question */}
+        <div className="question-panel">
+          <div className="panel-content">
+            <h2>{question.title}</h2>
+            <div className="description">
+              {question.description.split('\n').map((line, i) => (
+                <p key={i}>{line}</p>
+              ))}
+            </div>
+            
+            <h3>Examples:</h3>
+            <div className="examples-list">
+              {question.examples.map((ex, i) => (
+                <div key={i} className="example-box">
+                  <div className="ex-label">Example {i + 1}</div>
+                  <div className="ex-line"><strong>Input:</strong> {ex.input}</div>
+                  <div className="ex-line"><strong>Output:</strong> {ex.output}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Panel: Editor and Output */}
+        <div className="editor-panel">
+          <div className="editor-header">
+            <select 
+              className="lang-selector-inline" 
+              value={currentLanguage} 
+              onChange={(e) => setCurrentLanguage(e.target.value)}
+            >
+              <option value="javascript">JavaScript (Node.js)</option>
+              <option value="python">Python 3</option>
+              <option value="cpp">C++ (GCC)</option>
+              <option value="java">Java</option>
+              <option value="csharp">C#</option>
+              <option value="go">Go</option>
+              <option value="rust">Rust</option>
+              <option value="ruby">Ruby</option>
+              <option value="php">PHP</option>
+              <option value="swift">Swift</option>
+              <option value="typescript">TypeScript</option>
+              <option value="kotlin">Kotlin</option>
+              <option value="scala">Scala</option>
+              <option value="r">R</option>
+              <option value="objectivec">Objective-C</option>
+              <option value="perl">Perl</option>
+              <option value="haskell">Haskell</option>
+              <option value="lua">Lua</option>
+              <option value="dart">Dart</option>
+            </select>
+          </div>
+          
+          <div 
+            className="editor-wrapper"
+            onCopy={(e) => { e.preventDefault(); toast.warning("Copying is disabled during the exam."); }}
+            onPaste={(e) => { e.preventDefault(); toast.warning("Pasting is disabled during the exam."); }}
+            onCut={(e) => { e.preventDefault(); toast.warning("Cutting is disabled during the exam."); }}
+          >
+            <Editor
+              height="100%"
+              language={currentLanguage}
+              theme="vs-dark"
+              value={code}
+              onChange={(val) => setCode(val)}
+              onMount={(editor, monaco) => {
+                editor.onKeyDown((e) => {
+                  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                  const cmdKey = isMac ? e.metaKey : e.ctrlKey;
+                  // e.browserEvent.code checks the physical key
+                  if (cmdKey && (e.browserEvent.code === 'KeyC' || e.browserEvent.code === 'KeyV' || e.browserEvent.code === 'KeyX')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toast.warning("Copy/Paste is disabled during the exam.");
+                  }
+                });
+              }}
+              options={{
+                minimap: { enabled: false },
+                fontSize: 14,
+                padding: { top: 16 },
+                scrollBeyondLastLine: false,
+                smoothScrolling: true,
+              }}
+            />
+          </div>
+
+          <div className="console-panel">
+            <div className="console-header">
+              <div className="ch-left">
+                <Terminal size={16} />
+                <span>Console</span>
+              </div>
+              <button 
+                className={`run-btn ${isRunning ? 'running' : ''}`}
+                onClick={handleRunCode}
+                disabled={isRunning}
+              >
+                <Play size={16} fill="currentColor" />
+                {isRunning ? 'Running...' : 'Run Code'}
+              </button>
+            </div>
+            <div className={`console-output ${testResults || ''}`}>
+              {testResults === 'pass' && <CheckCircle2 size={16} className="pass-icon" />}
+              {testResults === 'fail' && <XCircle size={16} className="fail-icon" />}
+              <pre>{output || 'Output will appear here after running code...'}</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </>
+  );
+};
+
+export default CodingExam;

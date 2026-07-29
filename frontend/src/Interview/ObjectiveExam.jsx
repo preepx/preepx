@@ -417,6 +417,15 @@ export default function ObjectiveExam() {
   if (screen === 'EXAM') return (
     <>
       <Overlays />
+      {faceWarning && (
+        <div className="global-face-warn-overlay">
+          <div className="global-face-warn-content">
+            <ShieldCheck size={48} className="warn-icon" />
+            <h2>Proctoring Warning</h2>
+            <p>{faceWarning}</p>
+          </div>
+        </div>
+      )}
       <div className={`oe-exam ${!isFullscreen ? 'blurred' : ''}`}>
         <div className="oe-exam-bar">
           <div className="oe-exam-bar-top">
@@ -552,11 +561,6 @@ export default function ObjectiveExam() {
               </div>
               <div className="oe-cam-wrapper" style={{ position: 'relative' }}>
                 <Webcam ref={desktopCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
-                {faceWarning && (
-                  <div className="oe-face-warn">
-                    <div className="oe-face-warn-box">⚠️ {faceWarning}</div>
-                  </div>
-                )}
               </div>
               <div className="oe-cam-footer">
                 <ShieldCheck size={13} /> Anti-cheat monitoring active
@@ -580,11 +584,6 @@ export default function ObjectiveExam() {
         <div className="oe-pip">
           <div className="oe-cam-wrapper" style={{ width: '100%', height: '100%' }}>
             <Webcam ref={mobileCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
-            {faceWarning && (
-              <div className="oe-face-warn">
-                <div className="oe-face-warn-box">⚠️ {faceWarning}</div>
-              </div>
-            )}
           </div>
           <div className="oe-pip-rec">
             <span className="oe-pip-rec-dot" /> Rec

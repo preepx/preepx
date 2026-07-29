@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video,
+  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { getProfile, syncUserToStorage } from "../services/userAPI";
@@ -14,6 +14,7 @@ import "./AppLayout.css";
 const NAV_ITEMS = [
   { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { to: "/interview", icon: Video, label: "Mock Interview" },
+  { to: "/coding-practice", icon: Code, label: "Code Practice", isNew: true },
   { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam", isFree: true },
   { to: "/achievements", icon: Award, label: "Redeem XP" },
   { to: "/btech-notes", icon: BookOpen, label: "Btech Notes", isFree: true },
@@ -80,13 +81,14 @@ function AppLayout({ children }) {
           </div>
 
           <nav className="sidebar-nav">
-            {NAV_ITEMS.map(({ to, icon: Icon, label, isFree }) => (
+            {NAV_ITEMS.map(({ to, icon: Icon, label, isFree, isNew }) => (
               <Link key={to} to={to} className={`sidebar-link ${location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to)) ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
                 <Icon size={20} style={{ flexShrink: 0 }} />
                 {!collapsed && (
                   <>
                     <span className="sidebar-link-label">{label}</span>
                     {isFree && <span className="nav-free-badge">Free</span>}
+                    {isNew && <span className="nav-new-badge">New</span>}
                   </>
                 )}
               </Link>

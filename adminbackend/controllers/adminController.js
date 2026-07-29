@@ -3,6 +3,7 @@ const Wallet = require("../models/Wallet");
 const WalletTransaction = require("../models/WalletTransaction");
 const Interview = require("../models/Interview");
 const MCQResult = require("../models/MCQResult");
+const CodingResult = require("../models/CodingResult");
 const jwt = require("jsonwebtoken");
 
 // @desc    Admin Login
@@ -109,6 +110,7 @@ const getUserDetails = async (req, res) => {
     const wallet = await Wallet.findOne({ userId: user._id });
     const interviews = await Interview.find({ userId: user._id }).sort({ createdAt: -1 });
     const mcqResults = await MCQResult.find({ userId: user._id }).sort({ createdAt: -1 });
+    const codingResults = await CodingResult.find({ userId: user._id }).sort({ date: -1 });
     const transactions = await WalletTransaction.find({ userId: user._id }).sort({ createdAt: -1 }).limit(10);
 
     res.json({
@@ -116,9 +118,11 @@ const getUserDetails = async (req, res) => {
       wallet: wallet || { balance: 0 },
       interviews,
       mcqResults,
+      codingResults,
       recentTransactions: transactions
     });
   } catch (error) {
+    console.error("Error in getUserDetails:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 };

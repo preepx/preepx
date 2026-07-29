@@ -29,6 +29,8 @@ const AuthCallback = lazy(() => import("./Login/AuthCallback"));
 const ObjectiveExam = lazy(() => import("./Interview/ObjectiveExam"));
 const ObjectiveExamPage = lazy(() => import("./Interview/ObjectiveExamPage"));
 const WalletPage = lazy(() => import("./features/wallet/pages/WalletPage"));
+const CodingPractice = lazy(() => import("./pages/CodingPractice"));
+const CodingExam = lazy(() => import("./pages/CodingExam"));
 
 const UserGuide = lazy(() => import("./pages/UserGuide"));
 
@@ -38,12 +40,12 @@ const PUBLIC_ROUTES = [
   "/interview-tips", "/blog", "/help-center", "/community",
   "/about-us", "/careers", "/privacy-policy", "/terms-of-service"
 ];
-const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "/objective-exam/take"];
+const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "/objective-exam/take", "/coding-exam"];
 
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements",
-    "/settings", "/profile", "/resume-interview", "/btech-notes", "/objective-exam", "/wallet",
+    "/settings", "/profile", "/resume-interview", "/btech-notes", "/objective-exam", "/wallet", "/coding-practice",
   ];
   return sidebarRoutes.includes(pathname)
     || pathname.startsWith("/btech-notes/")
@@ -123,6 +125,8 @@ function AppContent() {
           <Route path="/wallet" element={<ProtectedRoute><WalletPage /></ProtectedRoute>} />
           <Route path="/objective-exam/take" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
           <Route path="/objective-exam/result/:id" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
+          <Route path="/coding-practice" element={<ProtectedRoute><CodingPractice /></ProtectedRoute>} />
+          <Route path="/coding-exam" element={<ProtectedRoute><CodingExam /></ProtectedRoute>} />
 
           <Route path="*" element={
             <div style={{ textAlign: "center", padding: "80px 24px" }}>

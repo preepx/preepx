@@ -1,11 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import * as blazeface from '@tensorflow-models/blazeface';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export const useFaceDetection = (webcamRefs, isActive) => {
   const [faceWarning, setFaceWarning] = useState(null);
   const [model, setModel] = useState(null);
   const detectIntervalRef = useRef(null);
+  const warningCountRef = useRef(0);
+  const warningActiveRef = useRef(false);
+  const navigate = useNavigate();
   
   // Load model once
   useEffect(() => {
@@ -44,10 +49,12 @@ export const useFaceDetection = (webcamRefs, isActive) => {
       try {
         const predictions = await model.estimateFaces(video, false);
         
+        let newWarningMsg = null;
+
         if (predictions.length === 0) {
-          setFaceWarning("Face not detected. Please stay in the frame.");
+          newWarningMsg = "Face not detected. Please stay in the frame.";
         } else if (predictions.length > 1) {
-          setFaceWarning("Multiple faces detected. Please ensure you are alone.");
+          newWarningMsg = "Multiple faces detected. Please ensure you are alone.";
         } else {
           // One face detected, check boundaries (optional strict check)
           const prediction = predictions[0];
@@ -64,10 +71,30 @@ export const useFaceDetection = (webcamRefs, isActive) => {
           const isTooFarBottom = bottomRight[1] > vidH * 0.98;
           
           if (isTooFarLeft || isTooFarRight || isTooFarTop || isTooFarBottom) {
-             setFaceWarning("Please align your face properly in the center of the camera.");
-          } else {
-             setFaceWarning(null); // Everything is fine
+             newWarningMsg = "Please align your face properly in the center of the camera.";
           }
+        }
+
+        if (newWarningMsg) {
+          if (!warningActiveRef.current) {
+            warningActiveRef.current = true;
+            warningCountRef.current += 1;
+            
+            if (warningCountRef.current > 5) {
+              toast.error("You have been exited due to repeated proctoring violations (Face not detected/Multiple faces).");
+              navigate('/user-dashboard');
+              // Clear interval immediately
+              if (detectIntervalRef.current) {
+                clearInterval(detectIntervalRef.current);
+                detectIntervalRef.current = null;
+              }
+              return;
+            }
+          }
+          setFaceWarning(`(Warning ${warningCountRef.current}/5) ${newWarningMsg}`);
+        } else {
+          warningActiveRef.current = false;
+          setFaceWarning(null);
         }
       } catch (err) {
         // Ignore frame errors silently
@@ -81,7 +108,7 @@ export const useFaceDetection = (webcamRefs, isActive) => {
         clearInterval(detectIntervalRef.current);
       }
     };
-  }, [isActive, model, webcamRefs]);
+  }, [isActive, model, webcamRefs, navigate]);
 
   return { faceWarning };
 };

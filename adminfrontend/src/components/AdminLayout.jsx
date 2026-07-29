@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Outlet, NavLink, useNavigate, Navigate } from 'react-router-dom';
 import { LayoutDashboard, Users, CreditCard, LogOut, Shield, Menu, X, BookOpen, HelpCircle, FileUp, IndianRupee } from 'lucide-react';
+import preepxLogo from '../../../frontend/public/preepx_logo.png';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
@@ -22,7 +23,7 @@ const AdminLayout = () => {
       {/* Mobile Top Header */}
       <div className="mobile-top-header glass-panel">
         <div className="mobile-logo">
-          <Shield className="logo-icon" size={24} />
+          <img src={preepxLogo} alt="Preepx Logo" style={{ height: '72px', width: 'auto' }} />
           <h2>Admin</h2>
         </div>
         <button 
@@ -40,8 +41,7 @@ const AdminLayout = () => {
 
       <aside className={`sidebar glass-panel ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
-          <Shield className="logo-icon" size={32} />
-          <h2>Admin Portal</h2>
+          <img src={preepxLogo} alt="Preepx Logo" style={{ height: '100px', width: 'auto' }} />
         </div>
         
         <nav className="sidebar-nav">

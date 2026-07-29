@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
-import { Mic, MicOff, SkipForward, Volume2, Timer, ArrowLeft } from "lucide-react";
+import { Mic, MicOff, SkipForward, Volume2, Timer, ArrowLeft, ShieldCheck } from "lucide-react";
 import { evaluateAnswer, saveInterviewResult } from "../services/interviewAPI";
 import { showAppError } from "../utils/appAlert";
 import { useFaceDetection } from "../hooks/useFaceDetection";
@@ -450,6 +450,15 @@ const InterviewMode = () => {
           </div>
         </div>
       )}
+      {faceWarning && (
+        <div className="global-face-warn-overlay">
+          <div className="global-face-warn-content">
+            <ShieldCheck size={48} className="warn-icon" />
+            <h2>Proctoring Warning</h2>
+            <p>{faceWarning}</p>
+          </div>
+        </div>
+      )}
       <div className={`interview-room ${!isFullscreen ? 'blurred' : ''}`}>
         {/* Header */}
         <div className="room-header">
@@ -545,13 +554,6 @@ const InterviewMode = () => {
             <div className="webcam-panel mini">
               <Webcam ref={webcamRef} audio={false} className="webcam-feed" screenshotFormat="image/jpeg" />
               <div className="webcam-label">You</div>
-              {faceWarning && (
-                <div className="face-warning-overlay">
-                  <div className="face-warning-box">
-                    ⚠️ {faceWarning}
-                  </div>
-                </div>
-              )}
             </div>
             <div className="ai-panel mini">
               <div className={`ai-avatar ${aiSpeaking ? "speaking" : ""}`}>

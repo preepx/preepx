@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star } from 'lucide-react';
+import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal } from 'lucide-react';
 import api from '../utils/api';
 import './UserDetails.css';
 
@@ -35,7 +35,7 @@ const UserDetails = () => {
   if (error) return <div className="error-alert">{error}</div>;
   if (!data) return null;
 
-  const { user, wallet, interviews, mcqResults, recentTransactions } = data;
+  const { user, wallet, interviews, mcqResults, codingResults = [], recentTransactions } = data;
 
   return (
     <div className="user-details-page animate-fade-in">
@@ -276,6 +276,43 @@ const UserDetails = () => {
                   ))}
                   {mcqResults.length === 0 && (
                     <tr><td colSpan="3" className="text-secondary text-center">No exams taken.</td></tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="glass-panel content-card mt-4">
+            <div className="card-header">
+              <Terminal size={20} className="accent-icon" />
+              <h3>Coding Practice ({codingResults.length})</h3>
+            </div>
+            <div className="table-responsive">
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Difficulty / Lang</th>
+                    <th>Status</th>
+                    <th>Time Spent</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {codingResults.map(cr => (
+                    <tr key={cr._id}>
+                      <td>{cr.title}</td>
+                      <td>{cr.difficulty} / {cr.language}</td>
+                      <td>
+                        <span className={`badge ${cr.status === 'success' || cr.status === 'passed' ? 'badge-success' : 'badge-warning'}`}>
+                          {cr.status}
+                        </span>
+                      </td>
+                      <td>{Math.floor(cr.timeSpentSecs / 60)}m {cr.timeSpentSecs % 60}s</td>
+                      <td>{new Date(cr.date).toLocaleDateString()}</td>
+                    </tr>
+                  ))}
+                  {codingResults.length === 0 && (
+                    <tr><td colSpan="5" className="text-secondary text-center">No coding practices taken.</td></tr>
                   )}
                 </tbody>
               </table>
