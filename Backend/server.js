@@ -7,6 +7,8 @@ const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
 const connectDB = require("./models/db");
+const rateLimit = require("express-rate-limit");
+const crypto = require("crypto");
 
 dotenv.config();
 connectDB();
@@ -39,10 +41,30 @@ app.use(cors({
 
 app.use(express.json());
 
+// Security Middlewares
+// (Helmet removed due to Express 5 compatibility)
+
+// Global Rate Limiter to prevent DDoS/Brute Force
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 300, // limit each IP to 300 requests per windowMs
+  message: "Too many requests from this IP, please try again after 15 minutes",
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+app.use("/api/", apiLimiter);
+
+// Secure session secret fallback
+const fallbackSecret = crypto.randomBytes(64).toString("hex");
 app.use(session({
-  secret: process.env.JWT_SECRET || "prepx",
+  secret: process.env.JWT_SECRET || fallbackSecret,
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === "production",
+    httpOnly: true,
+    sameSite: "lax"
+  }
 }));
 
 app.use(passport.initialize());
@@ -67,7 +89,7 @@ const { Server } = require("socket.io");
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true
   }

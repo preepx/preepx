@@ -5,7 +5,6 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("../config/cloudinary");
 const protect = require("../middleware/authMiddleware");
 const validatePassword = require("../middleware/validatePassword");
-const requireApiKey = require("../middleware/apiKeyAuth");
 const rateLimit = require("express-rate-limit");
 
 const otpLimiter = rateLimit({
@@ -40,9 +39,6 @@ const storage = new CloudinaryStorage({
   params: { folder: "ai-portal", allowed_formats: ["jpg", "jpeg", "png"] },
 });
 const upload = multer({ storage });
-
-// Apply API Key Middleware to block Postman requests
-router.use(requireApiKey);
 
 // OTP based registration
 router.post("/send-otp", otpLimiter, validatePassword, sendOtp);

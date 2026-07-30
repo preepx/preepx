@@ -11,9 +11,6 @@ API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
   if (token) req.headers.Authorization = `Bearer ${token}`;
 
-  // Send the secret API key to block direct Postman access
-  req.headers["x-api-key"] = import.meta.env.VITE_API_SECRET_KEY || "PreepX_Secret_Key_12345";
-
   return req;
 });
 
