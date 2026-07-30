@@ -9,6 +9,7 @@ const sendOtpEmail = require("../utils/sendOtpEmail");
 const sendResetOtpEmail = require("../utils/sendResetOtpEmail");
 const { evaluateBadges, getBadgeDetails, getAllBadges, calculateBadgeBonus, BADGE_RULES } = require("../utils/badges");
 const crypto = require("crypto");
+const axios = require("axios");
 
 const safeUser = (user) => ({
   _id: user._id,
@@ -31,10 +32,29 @@ const safeUser = (user) => ({
   referralCode: user.referralCode || "",
 });
 
-// Step 1: User details submit kare Ã¢â€ â€™ OTP generate karke email pe bhejo
+// Step 1: User details submit kare → OTP generate karke email pe bhejo
 const sendOtp = async (req, res) => {
-  const { fullName, email, password, referralCode } = req.body;
+  const { fullName, email, password, referralCode, captchaToken } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
+
+  // Validate reCAPTCHA
+  if (!captchaToken) {
+    return res.status(400).json({ message: "Please complete the CAPTCHA verification." });
+  }
+
+  try {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    if (secretKey && secretKey !== "YOUR_RECAPTCHA_SECRET_KEY") {
+      const captchaRes = await axios.post(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`
+      );
+      if (!captchaRes.data.success) {
+        return res.status(400).json({ message: "CAPTCHA verification failed. Please try again." });
+      }
+    }
+  } catch (error) {
+    return res.status(500).json({ message: "Error verifying CAPTCHA. Please try again later." });
+  }
 
   const { isEmailAllowed } = require("../utils/allowedEmailDomains");
   if (!isEmailAllowed(normalizedEmail)) {
@@ -73,7 +93,7 @@ const sendOtp = async (req, res) => {
   }
 };
 
-// Step 2: OTP verify karo Ã¢â€ â€™ User account banao
+// Step 2: OTP verify karo → User account banao
 const verifyOtpAndRegister = async (req, res) => {
   const { email, otp } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
@@ -130,12 +150,26 @@ const verifyOtpAndRegister = async (req, res) => {
   }
 };
 
-// Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Forgot Password: Step 1 Ã¢â‚¬â€ Email pe OTP bhejo Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+// ─── Forgot Password: Step 1 — Email pe OTP bhejo ───
 const forgotPassword = async (req, res) => {
-  const { email } = req.body;
+  const { email, captchaToken } = req.body;
   const normalizedEmail = email?.trim().toLowerCase();
 
+  // Validate reCAPTCHA
+  if (!captchaToken) {
+    return res.status(400).json({ message: "Please complete the CAPTCHA verification." });
+  }
+
   try {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    if (secretKey && secretKey !== "YOUR_RECAPTCHA_SECRET_KEY") {
+      const captchaRes = await axios.post(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`
+      );
+      if (!captchaRes.data.success) {
+        return res.status(400).json({ message: "CAPTCHA verification failed. Please try again." });
+      }
+    }
     const user = await User.findOne({ email: normalizedEmail });
     if (!user) return res.status(404).json({ message: "No account found with this email." });
 

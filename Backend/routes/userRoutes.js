@@ -5,6 +5,15 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("../config/cloudinary");
 const protect = require("../middleware/authMiddleware");
 const validatePassword = require("../middleware/validatePassword");
+const requireApiKey = require("../middleware/apiKeyAuth");
+const rateLimit = require("express-rate-limit");
+
+const otpLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 5 requests per windowMs
+  message: { message: "Too many OTP requests from this IP, please try again after 15 minutes." },
+});
+
 const {
   sendOtp,
   verifyOtpAndRegister,
@@ -32,15 +41,18 @@ const storage = new CloudinaryStorage({
 });
 const upload = multer({ storage });
 
+// Apply API Key Middleware to block Postman requests
+router.use(requireApiKey);
+
 // OTP based registration
-router.post("/send-otp", validatePassword, sendOtp);
+router.post("/send-otp", otpLimiter, validatePassword, sendOtp);
 router.post("/verify-otp", verifyOtpAndRegister);
 
 router.post("/register", validatePassword, registerUser); // legacy (disabled)
 router.post("/login", loginUser);
 
 // Forgot Password routes
-router.post("/forgot-password", forgotPassword);
+router.post("/forgot-password", otpLimiter, forgotPassword);
 router.post("/verify-reset-otp", verifyResetOtp);
 router.post("/reset-password", resetPassword);
 router.get("/platform-stats", getPlatformStats);

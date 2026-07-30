@@ -7,6 +7,7 @@ import {
   Sparkles, Mail, Lock, User, Eye, EyeOff,
   ArrowRight, Shield, Zap, BarChart3, KeyRound, RefreshCw, CheckCircle,
 } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
 import "./Login.css";
 
 // ── Screens ──────────────────────────────────────────────
@@ -43,6 +44,10 @@ function Auth() {
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmNewPass, setShowConfirmNewPass] = useState(false);
   const [verifiedOtp, setVerifiedOtp] = useState(""); // OTP to pass to reset step
+
+  // ReCAPTCHA
+  const [captchaToken, setCaptchaToken] = useState("");
+  const recaptchaRef = useRef(null);
 
   const navigate = useNavigate();
 
@@ -173,6 +178,10 @@ function Auth() {
       showAppError("Both password fields must match.", "Passwords don't match");
       return;
     }
+    if (!captchaToken) {
+      showAppError("Please complete the CAPTCHA to prove you are human.", "CAPTCHA Required");
+      return;
+    }
     setLoading(true);
     try {
       const email = registerData.email.trim().toLowerCase();
@@ -181,6 +190,7 @@ function Auth() {
         email,
         password: registerData.password,
         referralCode: registerData.referralCode,
+        captchaToken,
       });
       setOtpEmail(email);
       resetOtp();
@@ -191,6 +201,8 @@ function Auth() {
       showAppError(error.response?.data?.message || "Registration failed.", "Error");
     } finally {
       setLoading(false);
+      if (recaptchaRef.current) recaptchaRef.current.reset();
+      setCaptchaToken("");
     }
   };
 
@@ -243,10 +255,15 @@ function Auth() {
   // ── FORGOT: Step 1 — Send reset OTP ───────────────────
   const handleForgotEmailSubmit = async (e) => {
     e.preventDefault();
+    if (!captchaToken) {
+      showAppError("Please complete the CAPTCHA to prove you are human.", "CAPTCHA Required");
+      return;
+    }
     setLoading(true);
     try {
       await API.post("/users/forgot-password", {
         email: forgotEmail.trim().toLowerCase(),
+        captchaToken,
       });
       setOtpEmail(forgotEmail.trim().toLowerCase());
       resetOtp();
@@ -257,6 +274,8 @@ function Auth() {
       showAppError(error.response?.data?.message || "Email not found.", "Error");
     } finally {
       setLoading(false);
+      if (recaptchaRef.current) recaptchaRef.current.reset();
+      setCaptchaToken("");
     }
   };
 
@@ -534,6 +553,15 @@ function Auth() {
                       autoComplete="off" />
                   </div>
                 </div>
+                
+                <div style={{ margin: "16px 0", display: "flex", justifyContent: "center" }}>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_RECAPTCHA_SITE_KEY"}
+                    onChange={(token) => setCaptchaToken(token)}
+                  />
+                </div>
+
                 <button type="submit" className="auth-submit" disabled={loading}>
                   {loading ? <span className="auth-submit-loading">Please wait...</span> : <>Create Account <ArrowRight size={18} /></>}
                 </button>
@@ -602,6 +630,15 @@ function Auth() {
                     />
                   </div>
                 </div>
+
+                <div style={{ margin: "16px 0", display: "flex", justifyContent: "center" }}>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_RECAPTCHA_SITE_KEY"}
+                    onChange={(token) => setCaptchaToken(token)}
+                  />
+                </div>
+
                 <button type="submit" className="auth-submit" disabled={loading}>
                   {loading ? <span className="auth-submit-loading">Sending...</span> : <>Send Reset Code <ArrowRight size={18} /></>}
                 </button>
