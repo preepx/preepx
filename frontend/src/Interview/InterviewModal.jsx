@@ -117,7 +117,7 @@ const InterviewModal = ({ onClose, onSuccess }) => {
             <div className="option-group">
               <label><Hash size={14} /> Questions: {questionCount}</label>
               <input
-                type="range" min="5" max="15" value={questionCount}
+                type="range" min="10" max="15" value={questionCount}
                 onChange={(e) => setQuestionCount(Number(e.target.value))}
                 className="range-input"
               />

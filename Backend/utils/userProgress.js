@@ -1,4 +1,4 @@
-﻿const User = require("../models/User");
+const User = require("../models/User");
 const { evaluateBadges, calculateBadgeBonus } = require("./badges");
 
 const updateStreak = async (userId) => {
@@ -30,7 +30,7 @@ const awardMcqCompletion = async (userId, { score, totalQuestions }) => {
 
   const pct = totalQuestions ? Math.round((score / totalQuestions) * 100) : 0;
   const isPerfect = score === totalQuestions && totalQuestions > 0;
-  const pointsEarned = score * 5 + (pct >= 80 ? 20 : 0) + (isPerfect ? 50 : 0);
+  const pointsEarned = score * 2 + (pct >= 80 ? 20 : 0) + (isPerfect ? 50 : 0);
 
   user.points = (user.points || 0) + pointsEarned;
   user.lifetimePoints = (user.lifetimePoints || user.points || 0) + pointsEarned;

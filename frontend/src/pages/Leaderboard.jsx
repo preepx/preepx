@@ -48,7 +48,7 @@ function Leaderboard() {
 
       <div className="lb-info-cards">
         <div className="lb-info-card"><Users size={18} /><span>Top {topRanks.length} Rankings</span></div>
-        <div className="lb-info-card"><Zap size={18} /><span>Earn 10 XP per correct answer</span></div>
+        <div className="lb-info-card"><Zap size={18} /><span>Earn XP by completing challenges</span></div>
         <div className="lb-info-card"><Trophy size={18} /><span>+50 bonus for perfect score</span></div>
       </div>
 

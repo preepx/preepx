@@ -35,7 +35,7 @@ const generateInterviewQuestions = async (req, res) => {
       return res.status(400).json({ error: "Job Title & Job Topic are required" });
     }
 
-    const count = Math.min(Math.max(parseInt(questionCount) || 10, 5), 15);
+    const count = Math.min(Math.max(parseInt(questionCount) || 10, 10), 15);
 
     if (req.user) {
       // Will throw INSUFFICIENT_COINS if balance < 5
@@ -201,7 +201,11 @@ const saveInterviewResult = async (req, res) => {
       });
     }
 
-    const pointsEarned = correctCount * 10 + (isPerfect ? 50 : 0);
+    let diffBonus = 30;
+    if (interview && interview.difficulty === "easy") diffBonus = 20;
+    else if (interview && interview.difficulty === "medium") diffBonus = 30;
+    else if (interview && interview.difficulty === "hard") diffBonus = 40;
+    const pointsEarned = diffBonus + (isPerfect ? 50 : 0);
     const user = await User.findById(req.user);
 
     user.points = (user.points || 0) + pointsEarned;
