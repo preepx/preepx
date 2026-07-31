@@ -16,6 +16,7 @@ const FeedbackPage = lazy(() => import("./pages/FeedbackPage"));
 const Analytics = lazy(() => import("./pages/Analytics"));
 const Leaderboard = lazy(() => import("./pages/Leaderboard"));
 const Achievements = lazy(() => import("./pages/Achievements"));
+const Rewards = lazy(() => import("./pages/Rewards"));
 const Settings = lazy(() => import("./pages/Settings"));
 const InterviewPage = lazy(() => import("./Interview/InterviewPage"));
 const StartInterview = lazy(() => import("./Interview/StartInterview"));
@@ -44,7 +45,7 @@ const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "
 
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
-    "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements",
+    "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements", "/rewards",
     "/settings", "/profile", "/resume-interview", "/btech-notes", "/objective-exam", "/wallet", "/coding-practice",
   ];
   return sidebarRoutes.includes(pathname)
@@ -112,6 +113,7 @@ function AppContent() {
           <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
           <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />
           <Route path="/achievements" element={<ProtectedRoute><Achievements /></ProtectedRoute>} />
+          <Route path="/rewards" element={<ProtectedRoute><Rewards /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           <Route path="/start-interview" element={<ProtectedRoute><StartInterview /></ProtectedRoute>} />
           <Route path="/interview-mode" element={<ProtectedRoute><InterviewMode /></ProtectedRoute>} />

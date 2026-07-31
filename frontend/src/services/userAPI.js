@@ -1,4 +1,4 @@
-﻿import API from "../utils/api";
+import API from "../utils/api";
 import { getAllInterviews } from "./interviewAPI";
 
 export const getProfile = () => API.get("/users/profile").then((r) => r.data);
@@ -7,6 +7,7 @@ export const getAnalytics = () => API.get("/users/analytics").then((r) => r.data
 export const getLeaderboard = () => API.get("/users/leaderboard").then((r) => r.data);
 export const getAchievements = () => API.get("/users/achievements").then((r) => r.data);
 export const claimBadge = (badgeId) => API.post("/users/claim-badge", { badgeId }).then((r) => r.data);
+export const claimXpReward = (rewardId, xpAmount) => API.post("/users/claim-xp-reward", { rewardId, xpAmount }).then((r) => r.data);
 export const redeemXp = (pointsToRedeem) => API.post("/users/redeem-xp", { pointsToRedeem }).then((r) => r.data);
 export const updateSettings = (settings) => API.put("/users/settings", settings).then((r) => r.data);
 export const updateProfileDetails = (data) => API.put("/users/profile", data).then((r) => r.data);

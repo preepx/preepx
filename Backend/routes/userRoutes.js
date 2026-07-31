@@ -32,6 +32,7 @@ const {
   getAchievements,
   claimBadge,
   redeemXp,
+  claimXpReward,
 } = require("../controllers/userController");
 
 const storage = new CloudinaryStorage({
@@ -62,6 +63,7 @@ router.get("/leaderboard", protect, getLeaderboard);
 router.get("/achievements", protect, getAchievements);
 router.post("/claim-badge", protect, claimBadge);
 router.post("/redeem-xp", protect, redeemXp);
+router.post("/claim-xp-reward", protect, claimXpReward);
 
 module.exports = router;
 

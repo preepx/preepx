@@ -17,6 +17,7 @@ const NAV_ITEMS = [
   { to: "/coding-practice", icon: Code, label: "Code Practice", isNew: true },
   { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam", isFree: true },
   { to: "/achievements", icon: Award, label: "Redeem XP" },
+  { to: "/rewards", icon: Zap, label: "My Rewards" },
   { to: "/btech-notes", icon: BookOpen, label: "Btech Notes", isFree: true },
   { to: "/analytics", icon: BarChart3, label: "Analytics" },
   { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },

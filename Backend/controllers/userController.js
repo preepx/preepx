@@ -715,6 +715,42 @@ module.exports = {
   claimBadge,
 };
 
+const claimXpReward = async (req, res) => {
+  try {
+    const { rewardId, xpAmount } = req.body;
+    const user = await User.findById(req.user);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (user.xpRewardsClaimed && user.xpRewardsClaimed.includes(rewardId)) {
+      return res.status(400).json({ message: "Reward already claimed" });
+    }
+
+    user.points = (user.points || 0) + xpAmount;
+    user.lifetimePoints = (user.lifetimePoints || user.points || 0) + xpAmount;
+    user.level = Math.floor(user.lifetimePoints / 100) + 1;
+    
+    if (!user.xpRewardsClaimed) {
+      user.xpRewardsClaimed = [];
+    }
+    user.xpRewardsClaimed.push(rewardId);
+
+    await user.save();
+
+    res.json({
+      message: "XP Reward claimed successfully",
+      xpEarned: xpAmount,
+      totalPoints: user.points,
+      level: user.level,
+      xpRewardsClaimed: user.xpRewardsClaimed,
+      user: safeUser(user)
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports.claimXpReward = claimXpReward;
+
 
 
 

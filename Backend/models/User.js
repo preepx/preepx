@@ -1,4 +1,4 @@
-﻿const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema(
   {
@@ -32,6 +32,7 @@ const userSchema = mongoose.Schema(
     referredBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     hasUsedCoins: { type: Boolean, default: false },
     profileCompletedBonusClaimed: { type: Boolean, default: false },
+    xpRewardsClaimed: [{ type: String }],
   },
   { timestamps: true }
 );
