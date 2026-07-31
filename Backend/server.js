@@ -44,6 +44,9 @@ app.use(express.json());
 // Security Middlewares
 // (Helmet removed due to Express 5 compatibility)
 
+// Trust proxy required for rate limiter behind reverse proxies (like Render, Vercel, Nginx, etc.)
+app.set("trust proxy", 1);
+
 // Global Rate Limiter to prevent DDoS/Brute Force
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
