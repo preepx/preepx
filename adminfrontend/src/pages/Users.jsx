@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users as UsersIcon, Eye } from 'lucide-react';
+import { Users as UsersIcon, Eye, Search } from 'lucide-react';
 import api from '../utils/api';
+import Pagination from '../components/Pagination';
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +27,25 @@ const Users = () => {
     fetchUsers();
   }, []);
 
+  // Filter users based on search term
+  const filteredUsers = users.filter(user => {
+    const searchLower = searchTerm.toLowerCase();
+    return (
+      (user.fullName && user.fullName.toLowerCase().includes(searchLower)) ||
+      (user.email && user.email.toLowerCase().includes(searchLower))
+    );
+  });
+
+  // Calculate pagination
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentUsers = filteredUsers.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Reset to page 1 on search
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
   if (loading) return <div className="loading">Loading users...</div>;
   if (error) return <div className="error-alert">{error}</div>;
 
@@ -34,9 +57,22 @@ const Users = () => {
       </div>
 
       <div className="glass-panel content-card">
-        <div className="card-header">
-          <UsersIcon size={20} className="accent-icon" />
-          <h3>All Users ({users.length})</h3>
+        <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <UsersIcon size={20} className="accent-icon" />
+            <h3>All Users ({filteredUsers.length})</h3>
+          </div>
+          <div className="search-container" style={{ position: 'relative', width: '300px', maxWidth: '100%' }}>
+            <Search size={18} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
+            <input 
+              type="text" 
+              className="input-field" 
+              placeholder="Search by name or email..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={{ paddingLeft: '35px' }}
+            />
+          </div>
         </div>
         
         <div className="table-responsive">
@@ -52,7 +88,7 @@ const Users = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map(user => (
+              {currentUsers.map(user => (
                 <tr key={user._id}>
                   <td>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -60,7 +96,7 @@ const Users = () => {
                         <img src={user.profilePic} alt={user.fullName} style={{ width: 32, height: 32, borderRadius: '50%' }} />
                       ) : (
                         <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--bg-tertiary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                          {user.fullName.charAt(0)}
+                          {user.fullName ? user.fullName.charAt(0).toUpperCase() : 'U'}
                         </div>
                       )}
                       {user.fullName}
@@ -81,7 +117,7 @@ const Users = () => {
                   </td>
                 </tr>
               ))}
-              {users.length === 0 && (
+              {currentUsers.length === 0 && (
                 <tr>
                   <td colSpan="6" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
                     No users found
@@ -91,6 +127,17 @@ const Users = () => {
             </tbody>
           </table>
         </div>
+
+        {filteredUsers.length > itemsPerPage && (
+          <div style={{ padding: '1rem', borderTop: '1px solid var(--border)' }}>
+            <Pagination 
+              currentPage={currentPage}
+              totalItems={filteredUsers.length}
+              itemsPerPage={itemsPerPage}
+              onPageChange={setCurrentPage}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -45,7 +45,9 @@ const Dashboard = () => {
           </div>
           <div className="stat-details">
             <h3 style={{ color: '#10b981', fontWeight: 600 }}>Admin Wallet (Total Earnings)</h3>
-            <p className="stat-value" style={{ fontSize: '2.5rem', color: '#10b981' }}>₹{stats.lifetimeRevenue || 0}</p>
+            <p className="stat-value" style={{ fontSize: '2.5rem', color: '#10b981', display: 'flex', alignItems: 'center' }}>
+              <IndianRupee size={36} style={{ strokeWidth: 2.5 }} /> {stats.lifetimeRevenue || 0}
+            </p>
           </div>
         </div>
 
@@ -78,7 +80,7 @@ const Dashboard = () => {
           </div>
           <div className="card-body">
             {stats.recentUsers && stats.recentUsers.length > 0 ? (
-              <div style={{ overflowX: 'auto' }}>
+              <div className="table-responsive">
                 <table className="admin-table">
                   <thead>
                     <tr>
@@ -125,7 +127,7 @@ const Dashboard = () => {
           </div>
           <div className="card-body">
             {stats.recentTransactions && stats.recentTransactions.length > 0 ? (
-              <div style={{ overflowX: 'auto' }}>
+              <div className="table-responsive">
                 <table className="admin-table">
                   <thead>
                     <tr>

@@ -12,6 +12,7 @@ const {
   toggleUserBlock,
   addCoinsToWallet,
   addXpToUser,
+  getUserReferrals,
 } = require("../controllers/adminController");
 
 const {
@@ -39,6 +40,7 @@ router.use(adminProtect);
 router.get("/dashboard", getDashboardStats);
 router.get("/users", getUsers);
 router.get("/users/:id", getUserDetails);
+router.get("/users/:id/referrals", getUserReferrals);
 router.put("/users/:id/block", toggleUserBlock);
 router.post("/users/:id/wallet/add", addCoinsToWallet);
 router.post("/users/:id/xp/add", addXpToUser);

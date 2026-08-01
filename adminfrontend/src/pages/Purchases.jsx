@@ -45,7 +45,7 @@ const Purchases = () => {
           </div>
           <div>
             <h3 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: '0 0 4px 0' }}>Total Revenue</h3>
-            <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>₹{totalRevenue}</p>
+            <p style={{ fontSize: '2rem', fontWeight: 'bold', margin: 0 }}>Rs.{totalRevenue}</p>
           </div>
         </div>
       </div>
@@ -62,7 +62,7 @@ const Purchases = () => {
               <tr>
                 <th>User</th>
                 <th>Coins Added</th>
-                <th>Amount (₹)</th>
+                <th>Amount (Rs.)</th>
                 <th>Status</th>
                 <th>Date</th>
               </tr>
@@ -83,7 +83,7 @@ const Purchases = () => {
                   <td style={{ fontWeight: 600, color: 'var(--success)' }}>
                     +{tx.coins} Coins
                   </td>
-                  <td style={{ fontWeight: 600 }}>₹{tx.metadata?.rupees || 0}</td>
+                  <td style={{ fontWeight: 600 }}>Rs.{tx.metadata?.rupees || 0}</td>
                   <td>
                     <span style={{ 
                       color: tx.status === 'completed' ? 'var(--success)' : 

@@ -49,7 +49,7 @@ const Transactions = () => {
                 <th>User</th>
                 <th>Type</th>
                 <th>Coins</th>
-                <th>Rupees (₹)</th>
+                <th>Rupees (Rs.)</th>
                 <th>Description</th>
                 <th>Status</th>
                 <th>Date</th>
@@ -76,7 +76,7 @@ const Transactions = () => {
                   <td style={{ fontWeight: 600, color: (tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus') ? 'var(--success)' : 'var(--danger)' }}>
                     {(tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus') ? '+' : '-'}{tx.coins} {tx.type === 'xp_bonus' ? 'XP' : 'Coins'}
                   </td>
-                  <td>{tx.metadata?.rupees ? `₹${tx.metadata.rupees}` : '-'}</td>
+                  <td>{tx.metadata?.rupees ? `Rs.${tx.metadata.rupees}` : '-'}</td>
                   <td>{tx.description}</td>
                   <td>
                     <span style={{ 

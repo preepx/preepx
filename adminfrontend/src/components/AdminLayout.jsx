@@ -6,6 +6,7 @@ import './AdminLayout.css';
 
 const AdminLayout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDesktopCollapsed, setIsDesktopCollapsed] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem('adminToken');
 
@@ -39,9 +40,22 @@ const AdminLayout = () => {
         <div className="mobile-overlay" onClick={() => setIsMobileMenuOpen(false)}></div>
       )}
 
-      <aside className={`sidebar glass-panel ${isMobileMenuOpen ? 'open' : ''}`}>
-        <div className="sidebar-header">
-          <img src={preepxLogo} alt="Preepx Logo" style={{ height: '100px', width: 'auto' }} />
+      <aside className={`sidebar glass-panel ${isMobileMenuOpen ? 'open' : ''} ${isDesktopCollapsed ? 'collapsed' : ''}`}>
+        <div className="sidebar-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+          {!isDesktopCollapsed && (
+            <img src={preepxLogo} alt="Preepx Logo" style={{ height: '70px', width: 'auto', marginLeft: '-10px' }} />
+          )}
+          <button 
+            className="desktop-menu-btn"
+            onClick={() => setIsDesktopCollapsed(!isDesktopCollapsed)}
+            style={{ 
+              background: 'transparent', border: 'none', color: 'var(--text-primary)', 
+              cursor: 'pointer', padding: '8px', display: 'flex', 
+              margin: isDesktopCollapsed ? '0 auto' : '0'
+            }}
+          >
+            {isDesktopCollapsed ? <Menu size={24} /> : <Menu size={24} />}
+          </button>
         </div>
         
         <nav className="sidebar-nav">

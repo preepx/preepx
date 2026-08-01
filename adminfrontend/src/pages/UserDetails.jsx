@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal } from 'lucide-react';
+import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X } from 'lucide-react';
 import api from '../utils/api';
 import './UserDetails.css';
 
@@ -16,6 +16,23 @@ const UserDetails = () => {
   
   const [xpToAdd, setXpToAdd] = useState('');
   const [addingXp, setAddingXp] = useState(false);
+
+  const [referrals, setReferrals] = useState([]);
+  const [showReferralsModal, setShowReferralsModal] = useState(false);
+  const [loadingReferrals, setLoadingReferrals] = useState(false);
+
+  const fetchReferrals = async () => {
+    try {
+      setLoadingReferrals(true);
+      const response = await api.get(`/users/${id}/referrals`);
+      setReferrals(response.data);
+      setShowReferralsModal(true);
+    } catch (err) {
+      alert('Failed to load referrals.');
+    } finally {
+      setLoadingReferrals(false);
+    }
+  };
 
   useEffect(() => {
     const fetchUserDetails = async () => {
@@ -58,7 +75,16 @@ const UserDetails = () => {
             <span className="badge">Joined: {new Date(user.createdAt).toLocaleDateString()}</span>
             <span className="badge badge-accent">Level {user.level || 1}</span>
             <span className="badge badge-yellow">{user.points || 0} XP</span>
-            {user.referralCode && <span className="badge" style={{background: 'rgba(79, 70, 229, 0.2)', color: 'var(--primary)'}}>Code: {user.referralCode}</span>}
+            {user.referralCode && (
+              <span 
+                className="badge" 
+                style={{background: 'rgba(79, 70, 229, 0.2)', color: 'var(--primary)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px'}}
+                onClick={fetchReferrals}
+                title="Click to view referrals"
+              >
+                Code: {user.referralCode} <Users size={12} /> {loadingReferrals ? '...' : ''}
+              </span>
+            )}
             {user.referredBy && <span className="badge" style={{background: 'rgba(16, 185, 129, 0.2)', color: 'var(--success)'}}>Referred</span>}
             {user.isBlocked && <span className="badge" style={{background: 'rgba(239, 68, 68, 0.2)', color: 'var(--danger)'}}>Blocked</span>}
           </div>
@@ -320,6 +346,49 @@ const UserDetails = () => {
           </div>
         </div>
       </div>
+
+      {showReferralsModal && (
+        <div className="modal-overlay" onClick={() => setShowReferralsModal(false)} style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0, 0, 0, 0.75)', zIndex: 9999, display: 'flex', alignItems: 'flex-start', justifyContent: 'center', padding: '5vh 1rem', backdropFilter: 'blur(4px)' }}>
+          <div className="modal-content glass-panel hide-scrollbar" onClick={e => e.stopPropagation()} style={{ width: '100%', maxWidth: '550px', padding: '1.5rem', borderRadius: '16px', maxHeight: '90vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', background: 'var(--bg-secondary)', border: '1px solid var(--border)', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid var(--border)', position: 'sticky', top: 0, background: 'var(--bg-secondary)', zIndex: 10 }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Users size={20} className="accent-icon" /> Referred Users ({referrals.length})</h3>
+              <button onClick={() => setShowReferralsModal(false)} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: 'var(--text-primary)', cursor: 'pointer', padding: '6px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.2s' }} onMouseOver={e => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.2)'} onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.1)'}>
+                <X size={18} />
+              </button>
+            </div>
+            
+            {referrals.length === 0 ? (
+              <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                <p>No users have joined using this referral code yet.</p>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {referrals.map(ref => (
+                  <div key={ref._id} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '12px', background: 'rgba(255,255,255,0.03)', border: '1px solid var(--border)', borderRadius: '12px', transition: 'transform 0.2s, background 0.2s' }} onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'} onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}>
+                    {ref.profilePic ? (
+                      <img src={ref.profilePic} alt={ref.fullName} style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
+                    ) : (
+                      <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                        {ref.fullName ? ref.fullName.charAt(0).toUpperCase() : 'U'}
+                      </div>
+                    )}
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <p style={{ margin: 0, fontWeight: '600', fontSize: '1rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{ref.fullName}</p>
+                      <p style={{ margin: '2px 0 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{ref.email}</p>
+                    </div>
+                    <div style={{ textAlign: 'right', display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '4px' }}>
+                      <span className="badge badge-yellow" style={{ fontSize: '0.75rem', padding: '4px 8px' }}>{ref.points || 0} XP</span>
+                      <p style={{ margin: 0, fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
+                        {new Date(ref.createdAt).toLocaleDateString()}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

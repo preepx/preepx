@@ -241,6 +241,18 @@ const addXpToUser = async (req, res) => {
   }
 };
 
+// @desc    Get Referred Users
+const getUserReferrals = async (req, res) => {
+  try {
+    const referredUsers = await User.find({ referredBy: req.params.id })
+      .select("fullName email profilePic points createdAt")
+      .sort({ createdAt: -1 });
+    res.json(referredUsers);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 module.exports = {
   adminLogin,
   getDashboardStats,
@@ -250,5 +262,6 @@ module.exports = {
   getPurchases,
   toggleUserBlock,
   addCoinsToWallet,
-  addXpToUser
+  addXpToUser,
+  getUserReferrals
 };
