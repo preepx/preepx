@@ -4,17 +4,7 @@ import { CheckCircle, Lock, Gift, UserCheck, FileText, Bot, Trophy, Briefcase, U
 import { toast } from "react-toastify";
 import { getProfile, claimXpReward, getDashboard } from "../services/userAPI";
 import "./Rewards.css";
-
-const REWARDS_DATA = [
-  { id: "daily_login", title: "Daily Login", desc: "Log in and maintain your daily streak.", xp: 5, icon: Gift, target: 1 },
-  { id: "complete_profile", title: "Complete Profile", desc: "Fill in all your profile details.", xp: 20, icon: UserCheck, target: 1 },
-  { id: "upload_resume", title: "Upload Resume", desc: "Upload your resume in the dashboard.", xp: 15, icon: FileText, target: 1 },
-  { id: "ai_interview", title: "Complete AI Interview", desc: "Finish your first AI mock interview.", xp: 25, icon: Bot, target: 1 },
-  { id: "daily_challenge", title: "Complete Daily Challenge", desc: "Finish today's specific challenge.", xp: 15, icon: Target, target: 1 },
-  { id: "five_interviews", title: "Complete 5 Interviews", desc: "Complete 5 mock interviews.", xp: 30, icon: Briefcase, target: 5 },
-  { id: "refer_friend", title: "Refer a Friend", desc: "Invite a friend to join Preepx.", xp: 50, icon: Users, target: 1 },
-  { id: "score_80", title: "Score 80%+", desc: "Achieve an 80% or higher score in any test.", xp: 10, icon: Trophy, target: 1 },
-];
+import { REWARDS_DATA, calculateProgress } from "../utils/rewardsUtils";
 
 function Rewards() {
   const [user, setUser] = useState(null);
@@ -42,69 +32,7 @@ function Rewards() {
     }
   };
 
-  useEffect(() => {
-    if (user && dashboard) {
-      checkAndClaimRewards();
-    }
-  }, [user, dashboard]);
-
-  const checkAndClaimRewards = async () => {
-    const newClaims = [];
-    
-    for (const reward of REWARDS_DATA) {
-      if (claimedRewards.includes(reward.id)) continue;
-      
-      const currentProgress = calculateProgress(reward.id);
-      if (currentProgress >= reward.target) {
-        try {
-          const res = await claimXpReward(reward.id, reward.xp);
-          toast.success(`🎉 Reward Unlocked! +${reward.xp} XP Added`);
-          setXp(res.totalPoints);
-          setLevel(res.level);
-          newClaims.push(reward.id);
-        } catch (err) {
-          console.error("Failed to claim reward:", reward.id, err);
-        }
-      }
-    }
-    
-    if (newClaims.length > 0) {
-      setClaimedRewards([...claimedRewards, ...newClaims]);
-      
-      // Update local storage so other tabs/components sync
-      const updatedUser = { ...user, points: xp, level: level, xpRewardsClaimed: [...claimedRewards, ...newClaims] };
-      localStorage.setItem("user", JSON.stringify(updatedUser));
-      window.dispatchEvent(new Event("user-updated"));
-    }
-  };
-
-  const calculateProgress = (rewardId) => {
-    if (!user) return 0;
-    
-    switch (rewardId) {
-      case "daily_login":
-        return user.streak >= 1 ? 1 : 0;
-      case "complete_profile":
-        const hasProfile = user.fullName && user.email && user.mobile && user.college && user.degree;
-        return hasProfile ? 1 : 0;
-      case "upload_resume":
-        // Fallback mock check if resume is uploaded
-        return user.resumeUrl || dashboard?.stats?.resumeUploaded ? 1 : 0;
-      case "ai_interview":
-        return user.interviewsCompleted >= 1 ? 1 : 0;
-      case "score_80":
-        return user.hasPerfectScore || (dashboard?.mcqAvgAccuracy >= 80) ? 1 : 0;
-      case "five_interviews":
-        return Math.min(user.interviewsCompleted || 0, 5);
-      case "refer_friend":
-        return user.referralCount >= 1 ? 1 : 0;
-      case "daily_challenge":
-        // Mock check
-        return dashboard?.stats?.dailyChallengeCompleted ? 1 : 0;
-      default:
-        return 0;
-    }
-  };
+  // Rewards are auto-claimed globally by AppLayout.jsx
 
   const maxLevelXp = level * 100;
   const progressPct = Math.min((xp / maxLevelXp) * 100, 100);
@@ -152,7 +80,7 @@ function Rewards() {
         <div className="rewards-grid">
           {REWARDS_DATA.map((reward, idx) => {
             const isClaimed = claimedRewards.includes(reward.id);
-            const progress = calculateProgress(reward.id);
+            const progress = calculateProgress(reward.id, user, dashboard);
             const isLocked = !isClaimed && progress < reward.target && reward.target === 1;
             const isInProgress = !isClaimed && reward.target > 1;
 

@@ -5,7 +5,8 @@ import {
   LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code
 } from "lucide-react";
 import { toast } from "react-toastify";
-import { getProfile, syncUserToStorage } from "../services/userAPI";
+import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "../services/userAPI";
+import { REWARDS_DATA, calculateProgress } from "../utils/rewardsUtils";
 import { useWallet } from "../features/wallet/hooks/useWallet";
 import WalletBadge from "../features/wallet/components/WalletBadge";
 import Footer from "../components/Footer";
@@ -35,9 +36,50 @@ function AppLayout({ children }) {
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
   const { balance } = useWallet();
 
+  const checkAndClaimRewards = async (currentUser, currentDash) => {
+    if (!currentUser || !currentDash) return;
+    const claimedRewards = currentUser.xpRewardsClaimed || [];
+    let updated = false;
+    let newXp = currentUser.points || 0;
+    let newLevel = currentUser.level || 1;
+    let newClaims = [];
+
+    for (const reward of REWARDS_DATA) {
+      if (claimedRewards.includes(reward.id)) continue;
+      
+      const currentProgress = calculateProgress(reward.id, currentUser, currentDash);
+      if (currentProgress >= reward.target) {
+        try {
+          const res = await claimXpReward(reward.id, reward.xp);
+          toast.success(`🎉 Reward Unlocked: ${reward.title}! +${reward.xp} XP`);
+          newClaims.push(reward.id);
+          newXp = res.totalPoints;
+          newLevel = res.level;
+          updated = true;
+        } catch (err) {
+          console.error("Failed to claim reward:", reward.id, err);
+        }
+      }
+    }
+
+    if (updated) {
+      const allClaims = [...claimedRewards, ...newClaims];
+      const updatedUser = { ...currentUser, points: newXp, level: newLevel, xpRewardsClaimed: allClaims };
+      setUser(updatedUser);
+      syncUserToStorage(updatedUser);
+      window.dispatchEvent(new Event("user-updated"));
+    }
+  };
+
   const refreshUser = () => {
-    getProfile()
-      .then((u) => { setUser(u); syncUserToStorage(u); })
+    Promise.all([getProfile(), getDashboard().catch(() => null)])
+      .then(([u, dash]) => { 
+        setUser(u); 
+        syncUserToStorage(u); 
+        if (dash) {
+          checkAndClaimRewards(u, dash);
+        }
+      })
       .catch(() => { });
   };
 
