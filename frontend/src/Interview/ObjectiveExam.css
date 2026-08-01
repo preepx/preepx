@@ -941,8 +941,18 @@
 .oe-stat.correct .oe-stat-val { color: #059669; }
 .oe-stat.wrong { background: #fef2f2; border-color: #fecaca; }
 .oe-stat.wrong .oe-stat-val { color: #dc2626; }
-.oe-stat.warn { background: #fffbeb; border-color: #fde68a; }
+.oe-stat.warn { background: #fffbeb; border-color: #fde68a; transition: all 0.2s ease; }
 .oe-stat.warn .oe-stat-val { color: #d97706; }
+
+@keyframes warnBlink {
+  0% { background: #fffbeb; }
+  50% { background: #fde68a; transform: scale(1.05); }
+  100% { background: #fffbeb; }
+}
+
+.oe-stat.warn.blink {
+  animation: warnBlink 0.5s ease-in-out infinite;
+}
 
 .oe-detail-row {
   display: flex;
@@ -1522,11 +1532,45 @@
   .oe-submit-mobile {
     padding: 10px 12px;
     padding-bottom: max(10px, env(safe-area-inset-bottom));
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
-  .oe-submit-mobile button {
-    height: 46px;
-    font-size: 13px;
+  .oe-submit-mobile .oe-submit-mobile-btn {
+    flex: 1;
+    height: 48px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .oe-mobile-cam-inline {
+    width: 60px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #cbd5e1;
+    flex-shrink: 0;
+    background: #000;
+  }
+
+  .oe-mobile-cam-inline .oe-cam-feed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .oe-mobile-cam-rec {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .oe-warn-banner {

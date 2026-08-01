@@ -4,11 +4,14 @@ import { TrendingUp, Target, Flame, BarChart3, Plus, Calendar } from "lucide-rea
 import { getAnalytics } from "../services/userAPI";
 import EmptyState from "../components/EmptyState";
 import Loader from "../components/Loader";
+import Pagination from "../components/Pagination";
 import "./Analytics.css";
 
 function Analytics() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -94,7 +97,9 @@ function Analytics() {
             <div className="chart-panel full">
               <h3>Score History</h3>
               <div className="scores-timeline">
-                {data.recentScores.map((s, i) => (
+                {data.recentScores
+                  .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                  .map((s, i) => (
                   <div key={i} className="score-entry">
                     <div className="score-dot" style={{ opacity: s.maxScore ? s.score / s.maxScore : 0.3 }} />
                     <div><span className="score-role">{s.role}</span><span className="score-date">{new Date(s.date).toLocaleDateString()}</span></div>
@@ -102,6 +107,12 @@ function Analytics() {
                   </div>
                 ))}
               </div>
+              <Pagination
+                currentPage={currentPage}
+                totalItems={data.recentScores.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={setCurrentPage}
+              />
             </div>
           )}
         </>

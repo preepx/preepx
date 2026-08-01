@@ -293,6 +293,7 @@ const InterviewMode = () => {
           questions: questions || [],
           answers:   partialAnswers,
           fromResume,
+          status:    "pending",
           duration:  Math.floor((Date.now() - startTimeRef.current) / 1000),
         });
       } catch (_) {}
@@ -358,6 +359,7 @@ const InterviewMode = () => {
     try {
       const result = await saveInterviewResult({
         interviewId, jobTitle, jobTopic, questions, answers, fromResume,
+        status: "completed",
         duration: totalDuration,
       });
       const user = JSON.parse(localStorage.getItem("user") || "{}");

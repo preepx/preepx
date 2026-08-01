@@ -66,6 +66,7 @@ export default function ObjectiveExam() {
   const [timeLeft, setTimeLeft] = useState(TIMER_SECONDS);
   const [warnings, setWarnings] = useState(0);
   const [showWarn, setShowWarn] = useState(false);
+  const [showWarnBlink, setShowWarnBlink] = useState(false);
   const [correct, setCorrect] = useState(0);
   const [wrong, setWrong] = useState(0);
   const [pointsEarned, setPointsEarned] = useState(0);
@@ -74,10 +75,40 @@ export default function ObjectiveExam() {
   const [permissionsGranted, setPermissionsGranted] = useState(null);
   const [showConfirmSubmit, setShowConfirmSubmit] = useState(false);
 
+  const handleViolation = (type, msg = '') => {
+    setWarnings(prev => {
+      if (prev >= 5) return prev;
+
+      const newCount = prev + 1;
+      
+      setShowWarnBlink(true);
+      setTimeout(() => setShowWarnBlink(false), 2000);
+      
+      toast.dismiss(); // Clear all toasts so only 1 is visible at a time
+      
+      if (newCount >= 5) {
+        toast.error('Exam terminated due to repeated warnings.', { toastId: 'term-error' });
+        handleForceEnd();
+        return newCount;
+      }
+
+      if (type === 'tab') {
+        toast.warning(`Tab switch! Warning ${newCount}/5`, { toastId: 'tab-warn' });
+        setShowWarn(true);
+        setTimeout(() => setShowWarn(false), 4000);
+      } else {
+        toast.warning(`Proctoring Warning! ${newCount}/5: ${msg}`, { toastId: 'proc-warn' });
+      }
+      
+      return newCount;
+    });
+  };
+
   const timerRef = useRef(null);
   const { faceWarning } = useFaceDetection(
     [desktopCamRef, mobileCamRef],
-    screen === 'EXAM' && isFullscreen && permissionsGranted === true
+    screen === 'EXAM' && isFullscreen && permissionsGranted === true,
+    (msg) => handleViolation('face', msg)
   );
 
   useEffect(() => {
@@ -101,11 +132,8 @@ export default function ObjectiveExam() {
       .finally(() => setLoadingResult(false));
   }, [resultIdParam, navigate]);
 
-  useAntiCheat(screen === 'EXAM', (n) => {
-    setWarnings(n); setShowWarn(true);
-    setTimeout(() => setShowWarn(false), 4000);
-    toast.warning(`Tab switch! Warning ${n}/3`);
-    if (n >= 3) { toast.error('Exam terminated.'); handleForceEnd(); }
+  useAntiCheat(screen === 'EXAM', () => {
+    handleViolation('tab');
   });
 
   useEffect(() => {
@@ -211,9 +239,9 @@ export default function ObjectiveExam() {
 
   const timerColor = timeLeft <= 10 ? '#ef4444' : timeLeft <= 20 ? '#f59e0b' : '#4f46e5';
 
-  const StatsPanel = () => (
+  const renderStatsPanel = (mobileCam) => (
     <div className="oe-stats-row" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-      <div className="oe-stat warn" style={{ flex: 1 }}>
+      <div className={`oe-stat warn ${showWarnBlink ? 'blink' : ''}`} style={{ flex: 1, minWidth: '60px' }}>
         <div className="oe-stat-val">{warnings}</div>
         <div className="oe-stat-lbl">Warns</div>
       </div>
@@ -225,10 +253,18 @@ export default function ObjectiveExam() {
       >
         Final Submit
       </button>
+      {mobileCam && (
+        <div className="oe-mobile-cam-inline">
+          <Webcam ref={mobileCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
+          <div className="oe-mobile-cam-rec">
+            <span className="oe-pip-rec-dot" />
+          </div>
+        </div>
+      )}
     </div>
   );
 
-  const SubmitBtn = ({ className, mobile }) => (
+  const renderSubmitBtn = (className, mobile) => (
     <button
       type="button"
       className={className}
@@ -417,15 +453,6 @@ export default function ObjectiveExam() {
   if (screen === 'EXAM') return (
     <>
       <Overlays />
-      {faceWarning && (
-        <div className="global-face-warn-overlay">
-          <div className="global-face-warn-content">
-            <ShieldCheck size={48} className="warn-icon" />
-            <h2>Proctoring Warning</h2>
-            <p>{faceWarning}</p>
-          </div>
-        </div>
-      )}
       <div className={`oe-exam ${!isFullscreen ? 'blurred' : ''}`}>
         <div className="oe-exam-bar">
           <div className="oe-exam-bar-top">
@@ -473,7 +500,7 @@ export default function ObjectiveExam() {
             <p className="text-xs text-slate-500 truncate">
               <strong className="text-slate-700">{topic}</strong>
             </p>
-            <StatsPanel />
+            {renderStatsPanel(true)}
           </div>
         </div>
 
@@ -495,8 +522,8 @@ export default function ObjectiveExam() {
                       <div className="oe-warn-banner">
                         <AlertTriangle size={18} style={{ flexShrink: 0, marginTop: 1 }} />
                         <span>
-                          Tab switch detected — Warning <strong>{warnings}/3</strong>.
-                          Three violations will terminate your exam.
+                          Tab switch detected — Warning <strong>{warnings}/5</strong>.
+                          Five violations will terminate your exam.
                         </span>
                       </div>
                     )}
@@ -537,17 +564,12 @@ export default function ObjectiveExam() {
                       </div>
                     </div>
 
-                    <SubmitBtn
-                      className={`oe-submit-desktop ${selected && !submitting ? 'enabled' : 'disabled'}`}
-                    />
+                    {renderSubmitBtn(`oe-submit-desktop ${selected && !submitting ? 'enabled' : 'disabled'}`, false)}
                   </div>
                 </div>
 
                 <div className="oe-submit-mobile">
-                  <SubmitBtn
-                    className={selected && !submitting ? 'enabled' : 'disabled'}
-                    mobile
-                  />
+                  {renderSubmitBtn(selected && !submitting ? 'enabled' : 'disabled', true)}
                 </div>
               </>
             )}
@@ -569,7 +591,7 @@ export default function ObjectiveExam() {
 
             <div className="oe-sidebar-section">
               <p className="oe-sidebar-title">Live Score</p>
-              <StatsPanel />
+              {renderStatsPanel(false)}
             </div>
 
             <div className="oe-sidebar-section">
@@ -581,14 +603,6 @@ export default function ObjectiveExam() {
           </aside>
         </div>
 
-        <div className="oe-pip">
-          <div className="oe-cam-wrapper" style={{ width: '100%', height: '100%' }}>
-            <Webcam ref={mobileCamRef} audio={false} mirrored className="oe-cam-feed" screenshotFormat="image/jpeg" />
-          </div>
-          <div className="oe-pip-rec">
-            <span className="oe-pip-rec-dot" /> Rec
-          </div>
-        </div>
       </div>
     </>
   );
@@ -646,12 +660,22 @@ export default function ObjectiveExam() {
             </div>
           </div>
 
-          <div className="oe-review-header">
-            <div className="oe-review-icon"><CheckCircle size={18} /></div>
-            <div>
-              <h2>Answer Review</h2>
-              <p>{results.questionsAndAnswers.length} questions with AI explanations</p>
+          <div className="oe-review-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <div className="oe-review-icon"><CheckCircle size={18} /></div>
+              <div>
+                <h2>Answer Review</h2>
+                <p>{results.questionsAndAnswers.length} questions with AI explanations</p>
+              </div>
             </div>
+            <button
+              type="button"
+              className="oe-back-btn"
+              style={{ background: 'var(--surface)', border: '1px solid var(--border)', padding: '6px 12px', borderRadius: '8px', color: 'var(--text)' }}
+              onClick={() => navigate('/objective-exam')}
+            >
+              <ChevronLeft size={16} /> Back
+            </button>
           </div>
 
           <div className="oe-review-list">

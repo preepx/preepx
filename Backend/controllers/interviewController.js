@@ -172,7 +172,8 @@ const getAllInterviews = async (req, res) => {
 
 const saveInterviewResult = async (req, res) => {
   try {
-    const { interviewId, jobTitle, jobTopic, questions, answers, fromResume, duration } = req.body;
+    const { interviewId, jobTitle, jobTopic, questions, answers, fromResume, duration, status } = req.body;
+    const finalStatus = status || "completed";
 
     const totalScore = answers.reduce((sum, a) => sum + (a.score || 0), 0);
     const maxScore = answers.length * 10;
@@ -183,7 +184,7 @@ const saveInterviewResult = async (req, res) => {
     if (interviewId) {
       interview = await Interview.findOneAndUpdate(
         { _id: interviewId, userId: req.user },
-        { answers, totalScore, maxScore, status: "completed", duration: duration || 0 },
+        { answers, totalScore, maxScore, status: finalStatus, duration: duration || 0 },
         { new: true }
       );
     } else {
@@ -195,30 +196,35 @@ const saveInterviewResult = async (req, res) => {
         answers,
         totalScore,
         maxScore,
-        status: "completed",
+        status: finalStatus,
         fromResume: !!fromResume,
         duration: duration || 0,
       });
     }
 
-    let diffBonus = 30;
-    if (interview && interview.difficulty === "easy") diffBonus = 20;
-    else if (interview && interview.difficulty === "medium") diffBonus = 30;
-    else if (interview && interview.difficulty === "hard") diffBonus = 40;
-    const pointsEarned = diffBonus + (isPerfect ? 50 : 0);
+    let pointsEarned = 0;
     const user = await User.findById(req.user);
+    
+    if (finalStatus === "completed") {
+      let diffBonus = 30;
+      if (interview && interview.difficulty === "easy") diffBonus = 20;
+      else if (interview && interview.difficulty === "medium") diffBonus = 30;
+      else if (interview && interview.difficulty === "hard") diffBonus = 40;
+      pointsEarned = diffBonus + (isPerfect ? 50 : 0);
 
-    user.points = (user.points || 0) + pointsEarned;
-    user.interviewsCompleted = (user.interviewsCompleted || 0) + 1;
-    user.level = Math.floor(user.points / 100) + 1;
-    if (isPerfect) user.hasPerfectScore = true;
-    await user.save();
+      user.points = (user.points || 0) + pointsEarned;
+      user.interviewsCompleted = (user.interviewsCompleted || 0) + 1;
+      user.level = Math.floor(user.points / 100) + 1;
+      if (isPerfect) user.hasPerfectScore = true;
+      await user.save();
 
-    await updateStreak(req.user);
+      await updateStreak(req.user);
+    }
 
     const refreshed = await User.findById(req.user);
-    const claimableBadges = evaluateBadges(refreshed, { hasPerfectScore: isPerfect })
-      .filter((b) => !(refreshed.badges || []).includes(b));
+    const claimableBadges = (finalStatus === "completed") 
+      ? evaluateBadges(refreshed, { hasPerfectScore: isPerfect }).filter((b) => !(refreshed.badges || []).includes(b))
+      : [];
 
     res.json({
       interview,

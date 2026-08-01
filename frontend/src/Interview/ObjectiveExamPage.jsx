@@ -20,7 +20,7 @@ const ObjectiveExamPage = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   const navigate = useNavigate();
   const location = useLocation();
 

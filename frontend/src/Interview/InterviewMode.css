@@ -341,7 +341,10 @@
   padding: 16px 18px;
   margin-bottom: 12px;
   min-height: 90px;
+  max-height: 120px;
   transition: border-color 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 
 .answer-box strong {
@@ -360,6 +363,11 @@
   line-height: 1.6;
   color: var(--text);
   font-weight: 500;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .answer-placeholder {
@@ -484,7 +492,7 @@
 
 .answer-box--active {
   border-color: #4f46e5;
-  background: #fafbff;
+  background: rgba(79, 70, 229, 0.1);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.08);
 }
 

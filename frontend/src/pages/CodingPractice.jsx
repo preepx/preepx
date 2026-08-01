@@ -5,6 +5,7 @@ import {
   ChevronRight, BrainCircuit, Rocket, Flame, Code, Terminal, Trash2
 } from "lucide-react";
 import EmptyState from "../components/EmptyState";
+import Pagination from "../components/Pagination";
 import "../Interview/InterviewPage.css"; 
 
 const CodingPractice = () => {
@@ -12,6 +13,8 @@ const CodingPractice = () => {
   const [showConfig, setShowConfig] = useState(false);
   const [difficulty, setDifficulty] = useState('easy');
   const [history, setHistory] = useState(() => JSON.parse(localStorage.getItem('codingPracticeHistory') || '[]'));
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -92,7 +95,9 @@ const CodingPractice = () => {
 
           {history.length > 0 ? (
             <div className="interview-list">
-              {history.slice().reverse().map((session, i) => (
+              {history.slice().reverse()
+                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                .map((session, i) => (
                 <div key={i} className="interview-item">
                   <div className="interview-info">
                     <h3>{session.title}</h3>
@@ -110,6 +115,12 @@ const CodingPractice = () => {
                   </div>
                 </div>
               ))}
+              <Pagination
+                currentPage={currentPage}
+                totalItems={history.length}
+                itemsPerPage={itemsPerPage}
+                onPageChange={setCurrentPage}
+              />
             </div>
           ) : (
             <EmptyState

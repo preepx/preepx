@@ -4,7 +4,7 @@ import * as blazeface from '@tensorflow-models/blazeface';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-export const useFaceDetection = (webcamRefs, isActive) => {
+export const useFaceDetection = (webcamRefs, isActive, onViolation) => {
   const [faceWarning, setFaceWarning] = useState(null);
   const [model, setModel] = useState(null);
   const detectIntervalRef = useRef(null);
@@ -80,15 +80,19 @@ export const useFaceDetection = (webcamRefs, isActive) => {
             warningActiveRef.current = true;
             warningCountRef.current += 1;
             
-            if (warningCountRef.current > 5) {
-              toast.error("You have been exited due to repeated proctoring violations (Face not detected/Multiple faces).");
-              navigate('/user-dashboard');
-              // Clear interval immediately
-              if (detectIntervalRef.current) {
-                clearInterval(detectIntervalRef.current);
-                detectIntervalRef.current = null;
+            if (onViolation) {
+              onViolation(newWarningMsg);
+            } else {
+              if (warningCountRef.current > 5) {
+                toast.error("You have been exited due to repeated proctoring violations (Face not detected/Multiple faces).");
+                navigate('/user-dashboard');
+                // Clear interval immediately
+                if (detectIntervalRef.current) {
+                  clearInterval(detectIntervalRef.current);
+                  detectIntervalRef.current = null;
+                }
+                return;
               }
-              return;
             }
           }
           setFaceWarning(`(Warning ${warningCountRef.current}/5) ${newWarningMsg}`);
@@ -108,7 +112,7 @@ export const useFaceDetection = (webcamRefs, isActive) => {
         clearInterval(detectIntervalRef.current);
       }
     };
-  }, [isActive, model, webcamRefs, navigate]);
+  }, [isActive, model]);
 
   return { faceWarning };
 };
