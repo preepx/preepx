@@ -50,7 +50,7 @@ app.set("trust proxy", 1);
 // Global Rate Limiter to prevent DDoS/Brute Force
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 300, // limit each IP to 300 requests per windowMs
+  max: 3000, // Increased limit from 300 to 3000 to prevent annoying blocks
   message: "Too many requests from this IP, please try again after 15 minutes",
   standardHeaders: true,
   legacyHeaders: false,
