@@ -9,8 +9,13 @@ const rateLimit = require("express-rate-limit");
 
 const otpLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 requests per windowMs
-  message: { message: "Too many OTP requests from this IP, please try again after 15 minutes." },
+  max: 5, // Limit each email/IP to 5 requests per windowMs
+  message: { message: "Too many OTP requests for this email, please try again after 15 minutes." },
+  keyGenerator: (req, res) => {
+    // Proxy IP issue ki wajah se IP ke bajaye Email ke basis par block karenge
+    // Isse hacker spam nahi kar payega aur genuine users block nahi honge
+    return req.body.email || req.ip; 
+  }
 });
 
 const {

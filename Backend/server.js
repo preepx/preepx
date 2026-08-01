@@ -48,14 +48,15 @@ app.use(express.json());
 app.set("trust proxy", 1);
 
 // Global Rate Limiter to prevent DDoS/Brute Force
+// Disabled because reverse proxy is causing all users to share the same IP
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 3000, // Increased limit from 300 to 3000 to prevent annoying blocks
+  windowMs: 15 * 60 * 1000, 
+  max: 3000, 
   message: "Too many requests from this IP, please try again after 15 minutes",
   standardHeaders: true,
   legacyHeaders: false,
 });
-app.use("/api/", apiLimiter);
+// app.use("/api/", apiLimiter); // Disabled to prevent blocking users
 
 // Secure session secret fallback
 const fallbackSecret = crypto.randomBytes(64).toString("hex");
