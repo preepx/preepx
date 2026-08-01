@@ -34,6 +34,9 @@ function WalletPage() {
         customAmount: Number(customAmount)
       });
 
+      const userStr = localStorage.getItem("user");
+      const user = userStr ? JSON.parse(userStr) : {};
+
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_TIldjHmH0HwMPb",
         amount: orderData.amount,
@@ -58,8 +61,9 @@ function WalletPage() {
           }
         },
         prefill: {
-          name: "PreepX User",
-          email: "user@example.com",
+          name: user.fullName || "PreepX User",
+          email: user.email || "user@example.com",
+          contact: user.phone || "",
         },
         theme: {
           color: "#4f46e5",

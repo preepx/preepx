@@ -17,6 +17,9 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
         packageId: pack.id
       });
 
+      const userStr = localStorage.getItem("user");
+      const user = userStr ? JSON.parse(userStr) : {};
+
       // 2. Open Razorpay Checkout
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_TIldjHmH0HwMPb", // Fallback for testing
@@ -41,8 +44,9 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
           }
         },
         prefill: {
-          name: "PreepX User",
-          email: "user@example.com",
+          name: user.fullName || "PreepX User",
+          email: user.email || "user@example.com",
+          contact: user.phone || "",
         },
         theme: {
           color: "#4f46e5",

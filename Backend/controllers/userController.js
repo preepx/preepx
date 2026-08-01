@@ -728,7 +728,7 @@ const claimXpReward = async (req, res) => {
     user.points = (user.points || 0) + xpAmount;
     user.lifetimePoints = (user.lifetimePoints || user.points || 0) + xpAmount;
     user.level = Math.floor(user.lifetimePoints / 100) + 1;
-    
+
     if (!user.xpRewardsClaimed) {
       user.xpRewardsClaimed = [];
     }

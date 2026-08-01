@@ -553,7 +553,7 @@ function Auth() {
                       autoComplete="off" />
                   </div>
                 </div>
-                
+
                 <div style={{ margin: "16px 0", display: "flex", justifyContent: "center" }}>
                   <ReCAPTCHA
                     ref={recaptchaRef}
@@ -594,11 +594,7 @@ function Auth() {
                 <button type="submit" className="auth-submit" disabled={loading}>
                   {loading ? <span className="auth-submit-loading">Verifying...</span> : <>Verify & Create Account <ArrowRight size={18} /></>}
                 </button>
-                <div className="otp-resend">
-                  <button type="button" className="otp-resend-btn" onClick={handleResendRegOtp} disabled={resendTimer > 0 || loading}>
-                    <RefreshCw size={14} />
-                    {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend Code"}
-                  </button>
+                <div className="otp-resend" style={{ justifyContent: "center" }}>
                   <button type="button" className="otp-back-btn" onClick={() => setScreen("register")}>
                     ← Change details
                   </button>
@@ -666,11 +662,7 @@ function Auth() {
                 <button type="submit" className="auth-submit" disabled={loading}>
                   {loading ? <span className="auth-submit-loading">Verifying...</span> : <>Verify Code <ArrowRight size={18} /></>}
                 </button>
-                <div className="otp-resend">
-                  <button type="button" className="otp-resend-btn" onClick={handleResendResetOtp} disabled={resendTimer > 0 || loading}>
-                    <RefreshCw size={14} />
-                    {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend Code"}
-                  </button>
+                <div className="otp-resend" style={{ justifyContent: "center" }}>
                   <button type="button" className="otp-back-btn" onClick={() => setScreen("forgot-email")}>
                     ← Change email
                   </button>
