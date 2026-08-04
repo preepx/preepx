@@ -1,6 +1,7 @@
 const axios = require("axios");
 const MCQResult = require("../models/MCQResult");
 const { awardMcqCompletion } = require("../utils/userProgress");
+const walletService = require("../services/walletService");
 
 const mcqHandler = (io, socket) => {
   // Store user's ongoing session in memory
@@ -9,6 +10,14 @@ const mcqHandler = (io, socket) => {
     try {
       const { topic, userId, numQuestions = 5 } = data;
       console.log(`Starting MCQ for ${topic} (User: ${userId})`);
+      
+      if (userId && userId !== "guest") {
+        try {
+          await walletService.deductForSession(userId, "objective_exam");
+        } catch (walletErr) {
+          return socket.emit("mcq_error", { message: walletErr.message || "Insufficient coins for Objective Exam. Please recharge." });
+        }
+      }
       
       socket.mcqSession = {
         userId,

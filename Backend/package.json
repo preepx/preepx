@@ -36,7 +36,12 @@
     "pdf-parse": "^1.1.1",
     "razorpay": "^2.9.4",
     "resend": "^6.17.2",
-    "socket.io": "^4.7.5"
+    "socket.io": "^4.7.5",
+    "tesseract.js": "^5.0.5",
+    "langchain": "^0.1.30",
+    "@langchain/core": "^0.1.58",
+    "@langchain/google-genai": "^0.0.25",
+    "@google/generative-ai": "^0.14.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"

@@ -107,8 +107,12 @@ const deductForSession = async (userId, sessionType) => {
     return { charged: false, reason: "billing_disabled", cost: 0 };
   }
 
-  const cost = walletConfig.PRICING[sessionType === "objective_exam" ? "OBJECTIVE_EXAM" : "INTERVIEW"];
-  if (!cost) throw new Error("Unknown session type");
+  let cost;
+  if (sessionType === "objective_exam") cost = walletConfig.PRICING.OBJECTIVE_EXAM;
+  else if (sessionType === "ats_score") cost = walletConfig.PRICING.ATS_SCORE;
+  else cost = walletConfig.PRICING.INTERVIEW;
+
+  if (cost === undefined) throw new Error("Unknown session type");
 
   const wallet = await getOrCreateWallet(userId);
   if (wallet.balance < cost) {
@@ -127,6 +131,7 @@ const deductForSession = async (userId, sessionType) => {
     interview: "Mock Interview",
     objective_exam: "Objective Exam",
     resume_interview: "Resume Interview",
+    ats_score: "ATS Resume Score",
   };
 
   await WalletTransaction.create({
@@ -159,7 +164,10 @@ const deductForSession = async (userId, sessionType) => {
 const hasEnoughCoins = async (userId, sessionType) => {
   if (!walletConfig.BILLING_ENABLED) return { allowed: true, cost: 0, balance: null };
 
-  const cost = walletConfig.PRICING[sessionType === "objective_exam" ? "OBJECTIVE_EXAM" : "INTERVIEW"];
+  let cost;
+  if (sessionType === "objective_exam") cost = walletConfig.PRICING.OBJECTIVE_EXAM;
+  else if (sessionType === "ats_score") cost = walletConfig.PRICING.ATS_SCORE;
+  else cost = walletConfig.PRICING.INTERVIEW;
   const wallet = await getOrCreateWallet(userId);
   return {
     allowed: wallet.balance >= cost,

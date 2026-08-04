@@ -25,6 +25,7 @@ const BtechNotes = lazy(() => import("./pages/BtechNotes"));
 const BtechNoteDetail = lazy(() => import("./pages/BtechNoteDetail"));
 const BtechPdfViewer = lazy(() => import("./pages/BtechPdfViewer"));
 const ResumeUpload = lazy(() => import("./resume/ResumeUpload"));
+const AtsScore = lazy(() => import("./resume/AtsScore"));
 const Auth = lazy(() => import("./Login/Auth"));
 const AuthCallback = lazy(() => import("./Login/AuthCallback"));
 const ObjectiveExam = lazy(() => import("./Interview/ObjectiveExam"));
@@ -46,7 +47,7 @@ const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements", "/rewards",
-    "/settings", "/profile", "/resume-interview", "/btech-notes", "/objective-exam", "/wallet", "/coding-practice",
+    "/settings", "/profile", "/resume-interview", "/ats-score", "/btech-notes", "/objective-exam", "/wallet", "/coding-practice",
   ];
   return sidebarRoutes.includes(pathname)
     || pathname.startsWith("/btech-notes/")
@@ -118,6 +119,7 @@ function AppContent() {
           <Route path="/start-interview" element={<ProtectedRoute><StartInterview /></ProtectedRoute>} />
           <Route path="/interview-mode" element={<ProtectedRoute><InterviewMode /></ProtectedRoute>} />
           <Route path="/resume-interview" element={<ProtectedRoute><ResumeUpload /></ProtectedRoute>} />
+          <Route path="/ats-score" element={<ProtectedRoute><AtsScore /></ProtectedRoute>} />
           <Route path="/btech-notes" element={<ProtectedRoute><BtechNotes /></ProtectedRoute>} />
           <Route path="/btech-notes/:id" element={<ProtectedRoute><BtechNoteDetail /></ProtectedRoute>} />
           <Route path="/btech-notes/:id/pdf" element={<ProtectedRoute><BtechPdfViewer /></ProtectedRoute>} />

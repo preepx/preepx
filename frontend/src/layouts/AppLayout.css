@@ -70,6 +70,12 @@
   flex-direction: column;
   gap: 2px;
   overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
 }
 
 .sidebar-link {
@@ -115,36 +121,63 @@
 }
 
 .sidebar-bottom {
-  padding: 12px 8px;
+  padding: 12px;
   border-top: 1px solid var(--border);
 }
 
-.sidebar-user {
+.sidebar-bottom-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px;
-  margin-top: 8px;
+  justify-content: space-around;
+  gap: 8px;
+  width: 100%;
   background: var(--bg);
+  padding: 8px;
   border-radius: 12px;
 }
 
-.sidebar-user img {
+.sidebar-bottom-actions.collapsed {
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sidebar-action-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+
+.sidebar-action-btn:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.sidebar-action-btn.danger {
+  color: var(--danger);
+}
+
+.sidebar-action-btn.danger:hover {
+  background: #fef2f2;
+}
+
+.sidebar-profile-link img {
   width: 36px;
   height: 36px;
   border-radius: 50%;
   object-fit: cover;
+  border: 2px solid transparent;
+  transition: border-color 0.15s;
 }
 
-.su-name {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-}
-
-.su-meta {
-  font-size: 11px;
-  color: var(--text-muted);
+.sidebar-profile-link:hover img {
+  border-color: var(--primary);
 }
 
 .app-content {

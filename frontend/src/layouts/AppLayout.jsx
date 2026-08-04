@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code
+  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code, FileText
 } from "lucide-react";
 import { toast } from "react-toastify";
 import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "../services/userAPI";
@@ -16,13 +16,14 @@ const NAV_ITEMS = [
   { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { to: "/interview", icon: Video, label: "Mock Interview" },
   { to: "/coding-practice", icon: Code, label: "Code Practice", isNew: true },
-  { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam", isFree: true },
-  { to: "/achievements", icon: Award, label: "Redeem XP" },
-  { to: "/rewards", icon: Zap, label: "My Rewards" },
+  { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam" },
+  { to: "/ats-score", icon: FileText, label: "ATS Score", isNew: true },
   { to: "/btech-notes", icon: BookOpen, label: "Btech Notes", isFree: true },
-  { to: "/analytics", icon: BarChart3, label: "Analytics" },
   { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
+  { to: "/analytics", icon: BarChart3, label: "Analytics" },
   { to: "/wallet", icon: Wallet, label: "Wallet" },
+  { to: "/rewards", icon: Zap, label: "My Rewards" },
+  { to: "/achievements", icon: Award, label: "Redeem XP" },
   { to: "/profile", icon: User, label: "Profile" },
   { to: "/settings", icon: Settings, label: "Settings" },
 ];
@@ -138,24 +139,20 @@ function AppLayout({ children }) {
             ))}
           </nav>
 
-          <div className="sidebar-bottom">
-            <button className="sidebar-link" onClick={toggleTheme}>
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
-              {!collapsed && <span>{isDark ? "Light Mode" : "Dark Mode"}</span>}
-            </button>
-            <button className="sidebar-link danger" onClick={handleLogout}>
-              <LogOut size={20} />
-              {!collapsed && <span>Sign Out</span>}
-            </button>
-            {!collapsed && (
-              <div className="sidebar-user">
-                <img src={avatar} alt="" />
-                <div>
-                  <p className="su-name">{user.fullName || "User"}</p>
-                  <p className="su-meta">Lvl {user.level || 1} · {user.points || 0} XP</p>
-                </div>
-              </div>
-            )}
+          <div className="sidebar-bottom" style={{ padding: collapsed ? "12px 8px" : "12px 16px" }}>
+            <div className={`sidebar-bottom-actions ${collapsed ? "collapsed" : ""}`}>
+              <Link to="/profile" className="sidebar-profile-link" title="Profile">
+                <img src={avatar} alt="Profile" />
+              </Link>
+              
+              <button className="sidebar-action-btn" onClick={toggleTheme} title={isDark ? "Light Mode" : "Dark Mode"}>
+                {isDark ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
+
+              <button className="sidebar-action-btn danger" onClick={handleLogout} title="Sign Out">
+                <LogOut size={20} />
+              </button>
+            </div>
           </div>
         </aside>
 

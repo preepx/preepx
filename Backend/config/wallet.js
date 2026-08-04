@@ -11,7 +11,8 @@ module.exports = {
 
   PRICING: {
     INTERVIEW: 5,
-    OBJECTIVE_EXAM: 0,
+    OBJECTIVE_EXAM: 1,
+    ATS_SCORE: 1,
   },
 
   /** Mock purchases for dev/testing without a payment gateway */
