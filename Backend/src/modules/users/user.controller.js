@@ -21,6 +21,7 @@ const safeUser = (user) => ({
   linkedin: user.linkedin || "",
   degree: user.degree || "",
   referralCode: user.referralCode || "",
+  xpRewardsClaimed: user.xpRewardsClaimed || [],
 });
 
 const getProfile = catchAsync(async (req, res) => {

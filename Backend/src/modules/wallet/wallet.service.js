@@ -110,6 +110,7 @@ const deductForSession = async (userId, sessionType) => {
   let cost;
   if (sessionType === "objective_exam") cost = walletConfig.PRICING.OBJECTIVE_EXAM;
   else if (sessionType === "ats_score") cost = walletConfig.PRICING.ATS_SCORE;
+  else if (sessionType === "coding_practice") cost = walletConfig.PRICING.CODING_PRACTICE;
   else cost = walletConfig.PRICING.INTERVIEW;
 
   if (cost === undefined) throw new Error("Unknown session type");
@@ -132,6 +133,7 @@ const deductForSession = async (userId, sessionType) => {
     objective_exam: "Objective Exam",
     resume_interview: "Resume Interview",
     ats_score: "ATS Resume Score",
+    coding_practice: "Coding Practice",
   };
 
   await WalletTransaction.create({
@@ -167,6 +169,7 @@ const hasEnoughCoins = async (userId, sessionType) => {
   let cost;
   if (sessionType === "objective_exam") cost = walletConfig.PRICING.OBJECTIVE_EXAM;
   else if (sessionType === "ats_score") cost = walletConfig.PRICING.ATS_SCORE;
+  else if (sessionType === "coding_practice") cost = walletConfig.PRICING.CODING_PRACTICE;
   else cost = walletConfig.PRICING.INTERVIEW;
   const wallet = await getOrCreateWallet(userId);
   return {

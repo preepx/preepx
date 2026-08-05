@@ -174,11 +174,11 @@ const saveInterviewResult = async (userId, data) => {
   const user = await User.findById(userId);
 
   if (finalStatus === "completed") {
-    let diffBonus = 30;
-    if (interview && interview.difficulty === "easy") diffBonus = 20;
-    else if (interview && interview.difficulty === "medium") diffBonus = 30;
-    else if (interview && interview.difficulty === "hard") diffBonus = 40;
-    pointsEarned = diffBonus + (isPerfect ? 50 : 0);
+    let diffBonus = 10;
+    if (interview && interview.difficulty === "easy") diffBonus = 5;
+    else if (interview && interview.difficulty === "medium") diffBonus = 10;
+    else if (interview && interview.difficulty === "hard") diffBonus = 15;
+    pointsEarned = diffBonus;
 
     user.points = (user.points || 0) + pointsEarned;
     user.interviewsCompleted = (user.interviewsCompleted || 0) + 1;

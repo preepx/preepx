@@ -45,8 +45,8 @@ const requestId = require("./src/common/middleware/requestId");
 app.use(requestId);
 
 const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
-const xss = require("xss-clean");
+// const mongoSanitize = require("express-mongo-sanitize");
+// const xss = require("xss-clean");
 
 // Security Middlewares
 app.use(helmet({
@@ -70,8 +70,8 @@ app.use(helmet({
   },
   referrerPolicy: { policy: "strict-origin-when-cross-origin" }
 }));
-app.use(mongoSanitize());
-app.use(xss());
+// app.use(mongoSanitize());
+// app.use(xss());
 
 // Trust proxy required for rate limiter behind reverse proxies (like Render, Vercel, Nginx, etc.)
 app.set("trust proxy", 1);

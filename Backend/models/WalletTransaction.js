@@ -24,7 +24,7 @@ const walletTransactionSchema = mongoose.Schema(
     metadata: {
       rupees: Number,
       packageId: String,
-      sessionType: { type: String, enum: ["interview", "objective_exam", "resume_interview", "ats_score"] },
+      sessionType: { type: String, enum: ["interview", "objective_exam", "resume_interview", "ats_score", "coding_practice"] },
       paymentRef: String,
       mock: Boolean,
     },

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import API from '../utils/api';
 import {
   Code2, Plus, Clock, Trophy, Target, Search,
   ChevronRight, BrainCircuit, Rocket, Flame, Code, Terminal, Trash2
@@ -39,8 +40,14 @@ const CodingPractice = () => {
     }
   };
 
-  const handleStart = () => {
-    navigate(`/coding-exam?difficulty=${difficulty}`);
+  const handleStart = async () => {
+    try {
+      await API.post('/coding/start', { difficulty });
+      window.dispatchEvent(new Event("walletUpdated"));
+      navigate(`/coding-exam?difficulty=${difficulty}`);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Insufficient coins or error starting session');
+    }
   };
 
   return (
@@ -126,7 +133,7 @@ const CodingPractice = () => {
             <EmptyState
               icon={Code2}
               title="No practice sessions yet"
-              desc="Start a new coding practice session to improve your logic building skills. No XP is awarded here, it's just for your improvement."
+              desc="Start a new coding practice session to improve your logic building skills. Costs 2 coins. Earn 5/10/15 XP based on difficulty."
               actionLabel="Start Coding"
               onAction={() => setShowConfig(true)}
             />
@@ -161,6 +168,10 @@ const CodingPractice = () => {
             </div>
             <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '20px' }}>
               
+              <div style={{ padding: '10px', background: 'rgba(234, 179, 8, 0.1)', color: '#eab308', borderRadius: '8px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                Cost: 2 Coins per session
+              </div>
+
               <div className="form-group">
                 <label style={{ display: 'block', marginBottom: '8px', color: '#94a3b8' }}>Select Difficulty</label>
                 <div style={{ display: 'flex', gap: '10px' }}>

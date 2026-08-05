@@ -22,10 +22,10 @@ const saveCodingResult = async (data) => {
 
   let pointsEarned = 0;
   if (status && (status.toLowerCase().includes("passed") || status.toLowerCase().includes("success") || status.toLowerCase().includes("completed") || status.toLowerCase().includes("solved") || status.toLowerCase().includes("untested"))) {
-    let diffBonus = 30;
-    if (difficulty === "easy" || difficulty === "Easy") diffBonus = 20;
-    else if (difficulty === "medium" || difficulty === "Medium") diffBonus = 30;
-    else if (difficulty === "hard" || difficulty === "Hard") diffBonus = 40;
+    let diffBonus = 10;
+    if (difficulty === "easy" || difficulty === "Easy") diffBonus = 5;
+    else if (difficulty === "medium" || difficulty === "Medium") diffBonus = 10;
+    else if (difficulty === "hard" || difficulty === "Hard") diffBonus = 15;
     
     pointsEarned = diffBonus;
 
