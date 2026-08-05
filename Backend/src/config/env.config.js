@@ -18,9 +18,7 @@ const envVarsSchema = Joi.object()
 const { value: envVars, error } = envVarsSchema.prefs({ errors: { label: 'key' } }).validate(process.env);
 
 if (error) {
-  // Rather than throwing on startup immediately, we can log a warning, 
-  // but for strict production, throwing is safer. We'll throw to ensure it fails fast if critical vars are missing.
-  console.warn(`Config validation error: ${error.message}`);
+  throw new Error(`Config validation error: ${error.message}. Please check your .env file.`);
 }
 
 module.exports = {

@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const { authLimiter } = require("../../common/middleware/rateLimiter");
+
+router.use(authLimiter);
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const envConfig = require("../../config/env.config");

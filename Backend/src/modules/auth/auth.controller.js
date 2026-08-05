@@ -29,9 +29,11 @@ const generateToken = (userId) => {
   return jwt.sign({ id: userId }, envConfig.jwt.secret, { expiresIn: '7d' });
 };
 
+const { logAudit } = require('../../common/services/auditLogger');
+
 const sendOtp = catchAsync(async (req, res) => {
   await authService.sendOtp(req.body);
-  // Original response was direct res.json, now we use standard response
+  logAudit(req, 'SEND_OTP', 'SUCCESS', { email: req.body.email });
   res.json({ message: "OTP sent to your email. Please verify to complete registration." });
 });
 
@@ -39,6 +41,10 @@ const verifyOtpAndRegister = catchAsync(async (req, res) => {
   const { email, otp } = req.body;
   const user = await authService.verifyOtpAndRegister(email, otp);
   const token = generateToken(user._id);
+  
+  // Attach user to req temporarily for audit logging
+  req.user = user;
+  logAudit(req, 'REGISTER_VERIFY_OTP', 'SUCCESS', { email });
   
   res.json({ 
     message: "Registration successful! You earned 20 free coins.", 
@@ -52,24 +58,30 @@ const loginUser = catchAsync(async (req, res) => {
   const user = await authService.loginUser(email, password);
   const token = generateToken(user._id);
   
+  req.user = user;
+  logAudit(req, 'LOGIN', 'SUCCESS', { email });
+  
   res.json({ token, user: safeUser(user) });
 });
 
 const forgotPassword = catchAsync(async (req, res) => {
   const { email, captchaToken } = req.body;
   await authService.forgotPassword(email, captchaToken);
+  logAudit(req, 'FORGOT_PASSWORD', 'SUCCESS', { email });
   res.json({ message: "Password reset OTP sent to your email." });
 });
 
 const verifyResetOtp = catchAsync(async (req, res) => {
   const { email, otp } = req.body;
   await authService.verifyResetOtp(email, otp);
+  logAudit(req, 'VERIFY_RESET_OTP', 'SUCCESS', { email });
   res.json({ message: "OTP verified. You can now set a new password." });
 });
 
 const resetPassword = catchAsync(async (req, res) => {
   const { email, otp, newPassword } = req.body;
   await authService.resetPassword(email, otp, newPassword);
+  logAudit(req, 'RESET_PASSWORD', 'SUCCESS', { email });
   res.json({ message: "Password reset successful! You can now log in." });
 });
 

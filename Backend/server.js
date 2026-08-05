@@ -41,12 +41,35 @@ app.use(cors({
 
 app.use(express.json());
 
+const requestId = require("./src/common/middleware/requestId");
+app.use(requestId);
+
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
 const xss = require("xss-clean");
 
 // Security Middlewares
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "https://www.google.com/recaptcha/", "https://www.gstatic.com/recaptcha/"],
+      frameSrc: ["'self'", "https://www.google.com/recaptcha/", "https://recaptcha.google.com/recaptcha/"],
+      connectSrc: ["'self'", "https://api.cloudinary.com", "https://api.razorpay.com"],
+      imgSrc: ["'self'", "data:", "https://res.cloudinary.com", "https://lh3.googleusercontent.com"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true,
+  },
+  referrerPolicy: { policy: "strict-origin-when-cross-origin" }
+}));
 app.use(mongoSanitize());
 app.use(xss());
 
@@ -54,14 +77,8 @@ app.use(xss());
 app.set("trust proxy", 1);
 
 // Global Rate Limiter to prevent DDoS/Brute Force
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, 
-  max: 3000, 
-  message: "Too many requests from this IP, please try again after 15 minutes",
-  standardHeaders: true,
-  legacyHeaders: false,
-});
-app.use("/api/", apiLimiter);
+const { globalApiLimiter } = require("./src/common/middleware/rateLimiter");
+app.use("/api/", globalApiLimiter);
 
 // Secure session secret fallback
 const fallbackSecret = crypto.randomBytes(64).toString("hex");
@@ -117,4 +134,37 @@ io.on("connection", (socket) => {
 });
 
 const PORT = process.env.PORT || 4000;
-server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+const serverInstance = server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+const monitoringService = require("./src/common/services/monitoringService");
+
+// Graceful Shutdown & Global Error Monitoring
+const gracefulShutdown = (signal) => {
+  console.log(`Received ${signal}. Shutting down gracefully...`);
+  serverInstance.close(() => {
+    console.log("Closed out remaining connections.");
+    process.exit(0);
+  });
+
+  setTimeout(() => {
+    console.error("Could not close connections in time, forcefully shutting down");
+    process.exit(1);
+  }, 10000);
+};
+
+process.on("SIGTERM", () => gracefulShutdown("SIGTERM"));
+process.on("SIGINT", () => gracefulShutdown("SIGINT"));
+
+process.on("uncaughtException", (err) => {
+  monitoringService.captureException(err);
+  console.error("UNCAUGHT EXCEPTION! Shutting down...");
+  process.exit(1);
+});
+
+process.on("unhandledRejection", (err) => {
+  monitoringService.captureException(err);
+  console.error("UNHANDLED REJECTION! Shutting down...");
+  serverInstance.close(() => {
+    process.exit(1);
+  });
+});

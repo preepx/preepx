@@ -15,15 +15,17 @@ const errorHandler = (err, req, res, next) => {
 
   const { statusCode, message } = error;
 
+  const monitoringService = require('../services/monitoringService');
+
   // Log error using Winston
   if (envConfig.env === 'development') {
     logger.error(error);
   } else {
     // In production, only log non-operational (unhandled) errors deeply
     if (!error.isOperational) {
-      logger.error(error);
+      monitoringService.captureException(error, req);
     } else {
-      logger.warn(`${statusCode} - ${message} - ${req.originalUrl} - ${req.method} - ${req.ip}`);
+      logger.warn(`${statusCode} - ${message} - ${req.originalUrl} - ${req.method} - ${req.ip} - RequestID: ${req.requestId}`);
     }
   }
 
