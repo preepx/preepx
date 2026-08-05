@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import {
   Video, FileText, Trophy, BarChart3, Award, Flame, PlayCircle,
   Wallet, BookOpen, Mic, Target, TrendingUp, ChevronRight, Sparkles,
-  ClipboardCheck, Zap,
+  ClipboardCheck, Zap, Code
 } from "lucide-react";
 import { getProfile, getAnalytics } from "../services/userAPI";
 import { uploadResume } from "../services/resumeAPI";
@@ -14,13 +14,14 @@ import Loader from "../components/Loader";
 import "./UserDashboard.css";
 
 const EXPLORE_LINKS = [
-  { icon: BarChart3, label: "Analytics", desc: "Score trends & insights", path: "/analytics", color: "#06b6d4" },
-  { icon: Trophy, label: "Leaderboard", desc: "Global rankings", path: "/leaderboard", color: "#f59e0b" },
-  { icon: Award, label: "Redeem XP", desc: "Redeem XP for coins", path: "/achievements", color: "#8b5cf6" },
-  { icon: Zap, label: "My Rewards", desc: "Level up with XP", path: "/rewards", color: "#f59e0b" },
-  { icon: Wallet, label: "Wallet", desc: "Manage your coins", path: "/wallet", color: "#10b981" },
-  { icon: Mic, label: "Resume Upload", desc: "AI questions from resume", action: "resume_upload", color: "#ec4899" },
+  { icon: Code, label: "Code Practice", desc: "Interactive coding challenges", path: "/coding-practice", color: "#ec4899", isNew: true },
+  { icon: FileText, label: "ATS Score", desc: "Analyze your resume", path: "/ats-score", color: "#14b8a6", isNew: true },
   { icon: BookOpen, label: "Btech Notes", desc: "Study resources", path: "/btech-notes", color: "#3b82f6", free: true },
+  { icon: Trophy, label: "Leaderboard", desc: "Global rankings", path: "/leaderboard", color: "#f59e0b" },
+  { icon: BarChart3, label: "Analytics", desc: "Score trends & insights", path: "/analytics", color: "#06b6d4" },
+  { icon: Wallet, label: "Wallet", desc: "Manage your coins", path: "/wallet", color: "#10b981" },
+  { icon: Zap, label: "My Rewards", desc: "Level up with XP", path: "/rewards", color: "#f59e0b" },
+  { icon: Award, label: "Redeem XP", desc: "Redeem XP for coins", path: "/achievements", color: "#8b5cf6" },
 ];
 
 function getGreeting() {
@@ -267,7 +268,7 @@ function UserDashboard() {
             ref={fileInputRef}
             onChange={handleResumeUpload}
           />
-          {EXPLORE_LINKS.map(({ icon: Icon, label, desc, path, action, color, free }) => (
+          {EXPLORE_LINKS.map(({ icon: Icon, label, desc, path, action, color, free, isNew }) => (
             <button
               key={label}
               type="button"
@@ -286,6 +287,7 @@ function UserDashboard() {
                 <h4>
                   {label}
                   {free && <span className="ud-free-pill">Free</span>}
+                  {isNew && <span className="nav-new-badge" style={{ marginLeft: '6px' }}>New</span>}
                 </h4>
                 <p>{desc}</p>
               </div>

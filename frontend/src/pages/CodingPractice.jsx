@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import EmptyState from "../components/EmptyState";
 import Pagination from "../components/Pagination";
-import "../Interview/InterviewPage.css"; 
+import "../Interview/InterviewPage.css";
 
 const CodingPractice = () => {
   const navigate = useNavigate();
@@ -23,13 +23,13 @@ const CodingPractice = () => {
   const problemsSolved = history.filter(h => h.status === 'pass').length;
   const acceptanceRate = history.length > 0 ? Math.round((problemsSolved / history.length) * 100) : 0;
   const totalTimeSecs = history.reduce((acc, h) => acc + (h.timeSpentSecs || 0), 0);
-  const timeSpentFormatted = totalTimeSecs > 3600 
-    ? `${(totalTimeSecs / 3600).toFixed(1)}h` 
+  const timeSpentFormatted = totalTimeSecs > 3600
+    ? `${(totalTimeSecs / 3600).toFixed(1)}h`
     : `${Math.ceil(totalTimeSecs / 60)}m`;
-  
+
   const diffWeights = { easy: 1, medium: 2, hard: 3 };
-  const avgDiffScore = history.length > 0 
-    ? history.reduce((acc, h) => acc + (diffWeights[h.difficulty] || 1), 0) / history.length 
+  const avgDiffScore = history.length > 0
+    ? history.reduce((acc, h) => acc + (diffWeights[h.difficulty] || 1), 0) / history.length
     : 1;
   const avgDifficulty = avgDiffScore > 2.5 ? 'Hard' : avgDiffScore > 1.5 ? 'Medium' : 'Easy';
 
@@ -105,23 +105,23 @@ const CodingPractice = () => {
               {history.slice().reverse()
                 .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
                 .map((session, i) => (
-                <div key={i} className="interview-item">
-                  <div className="interview-info">
-                    <h3>{session.title}</h3>
-                    <p>
-                      Language: {session.language} · Difficulty: <span style={{ textTransform: 'capitalize'}}>{session.difficulty}</span>
-                    </p>
-                    <span className="interview-date">
-                      {new Date(session.date).toLocaleDateString()} · {Math.ceil(session.timeSpentSecs / 60)}m spent
-                    </span>
+                  <div key={i} className="interview-item">
+                    <div className="interview-info">
+                      <h3>{session.title}</h3>
+                      <p>
+                        Language: {session.language} · Difficulty: <span style={{ textTransform: 'capitalize' }}>{session.difficulty}</span>
+                      </p>
+                      <span className="interview-date">
+                        {new Date(session.date).toLocaleDateString()} · {Math.ceil(session.timeSpentSecs / 60)}m spent
+                      </span>
+                    </div>
+                    <div className="interview-meta">
+                      <span className={`status-badge ${session.status === 'pass' ? 'completed' : 'pending'}`}>
+                        {session.status === 'pass' ? 'Passed' : session.status === 'fail' ? 'Failed' : 'Untested'}
+                      </span>
+                    </div>
                   </div>
-                  <div className="interview-meta">
-                    <span className={`status-badge ${session.status === 'pass' ? 'completed' : 'pending'}`}>
-                      {session.status === 'pass' ? 'Passed' : session.status === 'fail' ? 'Failed' : 'Untested'}
-                    </span>
-                  </div>
-                </div>
-              ))}
+                ))}
               <Pagination
                 currentPage={currentPage}
                 totalItems={history.length}
@@ -162,15 +162,16 @@ const CodingPractice = () => {
       {showConfig && (
         <div className="modal-overlay" onClick={() => setShowConfig(false)}>
           <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '400px' }}>
-            <div className="modal-header">
-              <h2>Setup Practice</h2>
+            <div className="modal-header" style={{ alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <h2 style={{ margin: 0 }}>Setup Practice</h2>
+                <div style={{ padding: '6px 14px', background: 'linear-gradient(145deg, rgba(234, 179, 8, 0.15), rgba(217, 119, 6, 0.05))', border: '1px solid rgba(234, 179, 8, 0.3)', boxShadow: '0 4px 15px rgba(234, 179, 8, 0.1)', color: '#fbbf24', borderRadius: '24px', fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px', letterSpacing: '0.5px' }}>
+                  2 <span style={{ fontSize: '16px', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}>🪙</span> per session
+                </div>
+              </div>
               <button className="close-btn" onClick={() => setShowConfig(false)}>×</button>
             </div>
             <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '20px' }}>
-              
-              <div style={{ padding: '10px', background: 'rgba(234, 179, 8, 0.1)', color: '#eab308', borderRadius: '8px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                Cost: 2 Coins per session
-              </div>
 
               <div className="form-group">
                 <label style={{ display: 'block', marginBottom: '8px', color: '#94a3b8' }}>Select Difficulty</label>

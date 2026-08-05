@@ -63,9 +63,14 @@ const InterviewModal = ({ onClose, onSuccess }) => {
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-card modal-wide" onClick={(e) => e.stopPropagation()}>
         <div className="modal-top">
-          <div>
-            <h2>Configure Interview</h2>
-            <p>Customize your practice session</p>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              <h2 style={{ margin: 0 }}>Configure Interview</h2>
+              <div style={{ padding: '6px 14px', background: 'linear-gradient(145deg, rgba(234, 179, 8, 0.15), rgba(217, 119, 6, 0.05))', border: '1px solid rgba(234, 179, 8, 0.3)', boxShadow: '0 4px 15px rgba(234, 179, 8, 0.1)', color: '#fbbf24', borderRadius: '24px', fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px', letterSpacing: '0.5px' }}>
+                5 <span style={{ fontSize: '16px', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}>🪙</span> per session
+              </div>
+            </div>
+            <p style={{ marginTop: '4px' }}>Customize your practice session</p>
           </div>
           <button className="modal-close" onClick={onClose}><X size={20} /></button>
         </div>

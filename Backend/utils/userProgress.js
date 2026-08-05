@@ -31,7 +31,14 @@ const awardMcqCompletion = async (userId, { score, totalQuestions }) => {
   const pct = totalQuestions ? Math.round((score / totalQuestions) * 100) : 0;
   const isPerfect = score === totalQuestions && totalQuestions > 0;
   // 1 XP per correct answer
-  const pointsEarned = score * 1;
+  let pointsEarned = score * 1;
+  
+  if (pct >= 80) {
+    pointsEarned += 5;
+  }
+  if (isPerfect) {
+    pointsEarned += 10;
+  }
 
   user.points = (user.points || 0) + pointsEarned;
   user.lifetimePoints = (user.lifetimePoints || user.points || 0) + pointsEarned;

@@ -55,8 +55,13 @@ const AtsScore = () => {
   return (
     <div className="ats-page">
       <div className="ats-header">
-        <h1>ATS Resume Score</h1>
-        <p>Find out how well your resume matches Applicant Tracking Systems and get actionable feedback.</p>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'center' }}>
+          <h1 style={{ margin: 0 }}>ATS Resume Score</h1>
+          <div style={{ padding: '6px 14px', background: 'linear-gradient(145deg, rgba(234, 179, 8, 0.15), rgba(217, 119, 6, 0.05))', border: '1px solid rgba(234, 179, 8, 0.3)', boxShadow: '0 4px 15px rgba(234, 179, 8, 0.1)', color: '#fbbf24', borderRadius: '24px', fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px', letterSpacing: '0.5px' }}>
+            1 <span style={{ fontSize: '16px', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}>🪙</span> per session
+          </div>
+        </div>
+        <p style={{ marginTop: '8px' }}>Find out how well your resume matches Applicant Tracking Systems and get actionable feedback.</p>
       </div>
 
       {!result && (
