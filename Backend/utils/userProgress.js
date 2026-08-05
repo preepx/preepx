@@ -43,7 +43,7 @@ const awardMcqCompletion = async (userId, { score, totalQuestions }) => {
 
   const refreshed = await User.findById(userId);
   const claimableBadges = evaluateBadges(refreshed, { hasPerfectScore: isPerfect })
-      .filter((b) => !(refreshed.badges || []).includes(b));
+    .filter((b) => !(refreshed.badges || []).includes(b));
 
   return {
     pointsEarned,

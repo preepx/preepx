@@ -242,7 +242,7 @@ const ObjectiveExamPage = () => {
           <div className="panel tips-panel">
             <div className="panel-header"><Award size={18} /><h2>Pro Tips</h2></div>
             <ul className="tips-list">
-              <li>2 points per correct answer</li>
+              <li>1 XP point per correct answ</li>
               <li>+20 bonus if accuracy ≥ 80%</li>
               <li>+50 bonus for a perfect score</li>
               <li>Points count toward leaderboard rank</li>
