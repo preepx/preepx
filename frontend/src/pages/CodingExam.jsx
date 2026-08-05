@@ -317,10 +317,10 @@ const CodingExam = () => {
       });
 
       if (response.data.passed) {
-        setTestResults('pass');
+        setTestResults('passed');
         setOutput(response.data.feedback || 'All test cases passed successfully!');
       } else {
-        setTestResults('fail');
+        setTestResults('failed');
         setOutput(response.data.feedback || 'Test cases failed.');
       }
     } catch (err) {
