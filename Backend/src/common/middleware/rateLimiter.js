@@ -39,7 +39,7 @@ const createLimiter = (options) => {
 // Extremely strict for auth endpoints (Login, Register, OTP, Forgot Password)
 const authLimiter = createLimiter({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // 10 attempts
+  max: 20, // 10 attempts
   message: "Too many authentication attempts. Please try again after 15 minutes."
 });
 
@@ -53,7 +53,7 @@ const aiLimiter = createLimiter({
 // Moderate for file uploads
 const uploadLimiter = createLimiter({
   windowMs: 60 * 60 * 1000, // 1 hour
-  max: 20, 
+  max: 20,
   message: "Upload limit exceeded. Please try again later."
 });
 

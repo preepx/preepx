@@ -139,33 +139,33 @@ const CodingExam = () => {
   const searchParams = new URLSearchParams(location.search);
   const difficulty = searchParams.get('difficulty') || 'easy';
   const initialLanguage = searchParams.get('lang') || 'javascript';
-  
+
   const [currentLanguage, setCurrentLanguage] = useState(initialLanguage);
 
   // Randomly select a question that hasn't been seen yet
   const question = useMemo(() => {
     const questions = mockQuestions[difficulty] || mockQuestions.easy;
-    
+
     // Get previously seen questions from localStorage
     let seenQuestions = JSON.parse(localStorage.getItem('seenCodingQuestions') || '[]');
-    
+
     // Filter out seen questions for the current difficulty
     let availableQuestions = questions.filter(q => !seenQuestions.includes(q.title));
-    
+
     // If all questions for this difficulty have been seen, reset the seen list for this difficulty
     if (availableQuestions.length === 0) {
       const currentDifficultyTitles = questions.map(q => q.title);
       seenQuestions = seenQuestions.filter(title => !currentDifficultyTitles.includes(title));
       availableQuestions = questions;
     }
-    
+
     // Pick a random question from the available ones
     const selected = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
-    
+
     // Add it to seen list and save
     seenQuestions.push(selected.title);
     localStorage.setItem('seenCodingQuestions', JSON.stringify(seenQuestions));
-    
+
     return selected;
   }, [difficulty]);
 
@@ -177,7 +177,7 @@ const CodingExam = () => {
   const [testResults, setTestResults] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isFullscreen, setIsFullscreen] = useState(true);
-  
+
   const camRef = useRef(null);
   const { faceWarning } = useFaceDetection([camRef], true);
 
@@ -185,6 +185,8 @@ const CodingExam = () => {
   useEffect(() => {
     setCode(question.starterCode[currentLanguage] || question.starterCode.javascript);
   }, [currentLanguage, question]);
+
+  const isFullscreenRef = useRef(true);
 
   useEffect(() => {
     // Request fullscreen on mount
@@ -194,11 +196,15 @@ const CodingExam = () => {
     }
 
     const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+      if (isFullscreenRef.current) {
+        setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+      }
     }, 1000);
-    
+
     const handleFullscreenChange = () => {
-      setIsFullscreen(!!document.fullscreenElement);
+      const isFull = !!document.fullscreenElement;
+      setIsFullscreen(isFull);
+      isFullscreenRef.current = isFull;
     };
 
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -226,7 +232,7 @@ const CodingExam = () => {
     setIsRunning(true);
     setOutput('Running test cases...');
     setTestResults(null);
-    
+
     // Simulate API call for code execution
     setTimeout(() => {
       setIsRunning(false);
@@ -267,185 +273,194 @@ const CodingExam = () => {
         </div>
       )}
       {!isFullscreen && (
-        <div className="coding-fullscreen-overlay">
-          <div className="coding-fullscreen-content">
+        <div className="fullscreen-warning-overlay" style={{ zIndex: 10001 }}>
+          <div className="fullscreen-warning-content">
             <h2>Fullscreen Required</h2>
-            <p>The coding practice must be taken in fullscreen to prevent distractions and cheating.</p>
-            <button className="enter-fs-btn" onClick={() => {
-              const elem = document.documentElement;
-              if (elem.requestFullscreen) elem.requestFullscreen();
-            }}>Enter Fullscreen</button>
-            <button className="enter-fs-btn secondary" onClick={() => navigate('/coding-practice')} style={{ marginLeft: 8 }}>Exit</button>
+            <p>The exam must be taken in fullscreen mode to prevent distractions. Timers and recording are paused.</p>
+            <div className="fullscreen-actions">
+              <button className="exit-fullscreen-btn" onClick={() => navigate('/coding-practice')}>
+                Exit Practice
+              </button>
+              <button 
+                className="enter-fullscreen-btn" 
+                onClick={() => {
+                  const elem = document.documentElement;
+                  if (elem.requestFullscreen) elem.requestFullscreen();
+                }}
+              >
+                Enter Fullscreen to Continue
+              </button>
+            </div>
           </div>
         </div>
       )}
       <div className={`coding-exam-container ${!isFullscreen ? 'blurred' : ''}`}>
-      {/* Top Navbar */}
-      <nav className="exam-navbar">
-        <div className="nav-left">
-          <button className="back-btn" onClick={() => navigate('/coding-practice')}>
-            <ArrowLeft size={20} />
-            <span>Leave</span>
-          </button>
-          <span className="exam-title">{question.title} <span className={`diff-badge ${difficulty}`}>{difficulty}</span></span>
-        </div>
-        <div className="nav-right">
-          <div className={`timer-badge ${timeLeft < 300 ? 'danger' : ''}`}>
-            <Clock size={18} />
-            {formatTime(timeLeft)}
+        {/* Top Navbar */}
+        <nav className="exam-navbar">
+          <div className="nav-left">
+            <button className="back-btn" onClick={() => navigate('/coding-practice')}>
+              <ArrowLeft size={20} />
+              <span>Leave</span>
+            </button>
+            <span className="exam-title">{question.title} <span className={`diff-badge ${difficulty}`}>{difficulty}</span></span>
           </div>
-          <button className="submit-exam-btn" onClick={async () => {
-            const timeSpentSecs = initialTime - timeLeft;
-            
-            // Save to localStorage
-            const history = JSON.parse(localStorage.getItem('codingPracticeHistory') || '[]');
-            const record = {
-              title: question.title,
-              difficulty,
-              language: currentLanguage,
-              status: testResults || 'untested',
-              timeSpentSecs,
-              date: new Date().toISOString()
-            };
-            history.push(record);
-            localStorage.setItem('codingPracticeHistory', JSON.stringify(history));
+          <div className="nav-right">
+            <div className={`timer-badge ${timeLeft < 300 ? 'danger' : ''}`}>
+              <Clock size={18} />
+              {formatTime(timeLeft)}
+            </div>
+            <button className="submit-exam-btn" onClick={async () => {
+              const timeSpentSecs = initialTime - timeLeft;
 
-            // Save to Backend Database
-            const user = JSON.parse(localStorage.getItem('user'));
-            if (user && user._id) {
-              try {
-                await API.post('/coding/results', {
-                  userId: user._id,
-                  ...record
-                });
-              } catch (err) {
-                console.error("Failed to save coding result to backend:", err);
+              // Save to localStorage
+              const history = JSON.parse(localStorage.getItem('codingPracticeHistory') || '[]');
+              const record = {
+                title: question.title,
+                difficulty,
+                language: currentLanguage,
+                status: testResults || 'untested',
+                timeSpentSecs,
+                date: new Date().toISOString()
+              };
+              history.push(record);
+              localStorage.setItem('codingPracticeHistory', JSON.stringify(history));
+
+              // Save to Backend Database
+              const user = JSON.parse(localStorage.getItem('user'));
+              if (user && user._id) {
+                try {
+                  await API.post('/coding/results', {
+                    userId: user._id,
+                    ...record
+                  });
+                } catch (err) {
+                  console.error("Failed to save coding result to backend:", err);
+                }
               }
-            }
-            
-            navigate('/coding-practice');
-          }}>
-            Submit Practice
-          </button>
-          
-          <div className="nav-cam-wrapper">
-            <Webcam ref={camRef} audio={false} mirrored className="nav-cam-feed" screenshotFormat="image/jpeg" />
-          </div>
-        </div>
-      </nav>
 
-      <div className="exam-main">
-        {/* Left Panel: Question */}
-        <div className="question-panel">
-          <div className="panel-content">
-            <h2>{question.title}</h2>
-            <div className="description">
-              {question.description.split('\n').map((line, i) => (
-                <p key={i}>{line}</p>
-              ))}
-            </div>
-            
-            <h3>Examples:</h3>
-            <div className="examples-list">
-              {question.examples.map((ex, i) => (
-                <div key={i} className="example-box">
-                  <div className="ex-label">Example {i + 1}</div>
-                  <div className="ex-line"><strong>Input:</strong> {ex.input}</div>
-                  <div className="ex-line"><strong>Output:</strong> {ex.output}</div>
-                </div>
-              ))}
+              navigate('/coding-practice');
+            }}>
+              Submit Practice
+            </button>
+
+            <div className="nav-cam-wrapper">
+              <Webcam ref={camRef} audio={false} mirrored className="nav-cam-feed" screenshotFormat="image/jpeg" />
             </div>
           </div>
-        </div>
+        </nav>
 
-        {/* Right Panel: Editor and Output */}
-        <div className="editor-panel">
-          <div className="editor-header">
-            <select 
-              className="lang-selector-inline" 
-              value={currentLanguage} 
-              onChange={(e) => setCurrentLanguage(e.target.value)}
-            >
-              <option value="javascript">JavaScript (Node.js)</option>
-              <option value="python">Python 3</option>
-              <option value="cpp">C++ (GCC)</option>
-              <option value="java">Java</option>
-              <option value="csharp">C#</option>
-              <option value="go">Go</option>
-              <option value="rust">Rust</option>
-              <option value="ruby">Ruby</option>
-              <option value="php">PHP</option>
-              <option value="swift">Swift</option>
-              <option value="typescript">TypeScript</option>
-              <option value="kotlin">Kotlin</option>
-              <option value="scala">Scala</option>
-              <option value="r">R</option>
-              <option value="objectivec">Objective-C</option>
-              <option value="perl">Perl</option>
-              <option value="haskell">Haskell</option>
-              <option value="lua">Lua</option>
-              <option value="dart">Dart</option>
-            </select>
-          </div>
-          
-          <div 
-            className="editor-wrapper"
-            onCopy={(e) => { e.preventDefault(); toast.warning("Copying is disabled during the exam."); }}
-            onPaste={(e) => { e.preventDefault(); toast.warning("Pasting is disabled during the exam."); }}
-            onCut={(e) => { e.preventDefault(); toast.warning("Cutting is disabled during the exam."); }}
-          >
-            <Editor
-              height="100%"
-              language={currentLanguage}
-              theme="vs-dark"
-              value={code}
-              onChange={(val) => setCode(val)}
-              onMount={(editor, monaco) => {
-                editor.onKeyDown((e) => {
-                  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
-                  const cmdKey = isMac ? e.metaKey : e.ctrlKey;
-                  // e.browserEvent.code checks the physical key
-                  if (cmdKey && (e.browserEvent.code === 'KeyC' || e.browserEvent.code === 'KeyV' || e.browserEvent.code === 'KeyX')) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toast.warning("Copy/Paste is disabled during the exam.");
-                  }
-                });
-              }}
-              options={{
-                minimap: { enabled: false },
-                fontSize: 14,
-                padding: { top: 16 },
-                scrollBeyondLastLine: false,
-                smoothScrolling: true,
-              }}
-            />
-          </div>
-
-          <div className="console-panel">
-            <div className="console-header">
-              <div className="ch-left">
-                <Terminal size={16} />
-                <span>Console</span>
+        <div className="exam-main">
+          {/* Left Panel: Question */}
+          <div className="question-panel">
+            <div className="panel-content">
+              <h2>{question.title}</h2>
+              <div className="description">
+                {question.description.split('\n').map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
               </div>
-              <button 
-                className={`run-btn ${isRunning ? 'running' : ''}`}
-                onClick={handleRunCode}
-                disabled={isRunning}
-              >
-                <Play size={16} fill="currentColor" />
-                {isRunning ? 'Running...' : 'Run Code'}
-              </button>
+
+              <h3>Examples:</h3>
+              <div className="examples-list">
+                {question.examples.map((ex, i) => (
+                  <div key={i} className="example-box">
+                    <div className="ex-label">Example {i + 1}</div>
+                    <div className="ex-line"><strong>Input:</strong> {ex.input}</div>
+                    <div className="ex-line"><strong>Output:</strong> {ex.output}</div>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className={`console-output ${testResults || ''}`}>
-              {testResults === 'pass' && <CheckCircle2 size={16} className="pass-icon" />}
-              {testResults === 'fail' && <XCircle size={16} className="fail-icon" />}
-              <pre>{output || 'Output will appear here after running code...'}</pre>
+          </div>
+
+          {/* Right Panel: Editor and Output */}
+          <div className="editor-panel">
+            <div className="editor-header">
+              <select
+                className="lang-selector-inline"
+                value={currentLanguage}
+                onChange={(e) => setCurrentLanguage(e.target.value)}
+              >
+                <option value="javascript">JavaScript (Node.js)</option>
+                <option value="python">Python 3</option>
+                <option value="cpp">C++ (GCC)</option>
+                <option value="java">Java</option>
+                <option value="csharp">C#</option>
+                <option value="go">Go</option>
+                <option value="rust">Rust</option>
+                <option value="ruby">Ruby</option>
+                <option value="php">PHP</option>
+                <option value="swift">Swift</option>
+                <option value="typescript">TypeScript</option>
+                <option value="kotlin">Kotlin</option>
+                <option value="scala">Scala</option>
+                <option value="r">R</option>
+                <option value="objectivec">Objective-C</option>
+                <option value="perl">Perl</option>
+                <option value="haskell">Haskell</option>
+                <option value="lua">Lua</option>
+                <option value="dart">Dart</option>
+              </select>
+            </div>
+
+            <div
+              className="editor-wrapper"
+              onCopy={(e) => { e.preventDefault(); toast.warning("Copying is disabled during the exam."); }}
+              onPaste={(e) => { e.preventDefault(); toast.warning("Pasting is disabled during the exam."); }}
+              onCut={(e) => { e.preventDefault(); toast.warning("Cutting is disabled during the exam."); }}
+            >
+              <Editor
+                height="100%"
+                language={currentLanguage}
+                theme="vs-dark"
+                value={code}
+                onChange={(val) => setCode(val)}
+                onMount={(editor, monaco) => {
+                  editor.onKeyDown((e) => {
+                    const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+                    const cmdKey = isMac ? e.metaKey : e.ctrlKey;
+                    // e.browserEvent.code checks the physical key
+                    if (cmdKey && (e.browserEvent.code === 'KeyC' || e.browserEvent.code === 'KeyV' || e.browserEvent.code === 'KeyX')) {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toast.warning("Copy/Paste is disabled during the exam.");
+                    }
+                  });
+                }}
+                options={{
+                  minimap: { enabled: false },
+                  fontSize: 14,
+                  padding: { top: 16 },
+                  scrollBeyondLastLine: false,
+                  smoothScrolling: true,
+                }}
+              />
+            </div>
+
+            <div className="console-panel">
+              <div className="console-header">
+                <div className="ch-left">
+                  <Terminal size={16} />
+                  <span>Console</span>
+                </div>
+                <button
+                  className={`run-btn ${isRunning ? 'running' : ''}`}
+                  onClick={handleRunCode}
+                  disabled={isRunning}
+                >
+                  <Play size={16} fill="currentColor" />
+                  {isRunning ? 'Running...' : 'Run Code'}
+                </button>
+              </div>
+              <div className={`console-output ${testResults || ''}`}>
+                {testResults === 'pass' && <CheckCircle2 size={16} className="pass-icon" />}
+                {testResults === 'fail' && <XCircle size={16} className="fail-icon" />}
+                <pre>{output || 'Output will appear here after running code...'}</pre>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 };

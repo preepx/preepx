@@ -459,3 +459,83 @@
   50% { background: rgba(220, 38, 38, 0.98); }
   100% { background: rgba(239, 68, 68, 0.95); }
 }
+
+/* Fullscreen Warning Overlay */
+.fullscreen-warning-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10001;
+}
+
+.fullscreen-warning-content {
+  background: #1e293b;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.fullscreen-warning-content h2 {
+  font-size: 24px;
+  color: #ef4444;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.fullscreen-warning-content p {
+  color: #94a3b8;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.fullscreen-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.enter-fullscreen-btn {
+  padding: 12px 24px;
+  background: #818cf8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+.enter-fullscreen-btn:hover {
+  background: #6366f1;
+}
+
+.exit-fullscreen-btn {
+  padding: 12px 24px;
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.exit-fullscreen-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #f8fafc;
+}
