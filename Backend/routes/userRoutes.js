@@ -14,7 +14,7 @@ const otpLimiter = rateLimit({
   keyGenerator: (req, res) => {
     // Proxy IP issue ki wajah se IP ke bajaye Email ke basis par block karenge
     // Isse hacker spam nahi kar payega aur genuine users block nahi honge
-    return req.body.email || req.ip; 
+    return req.body.email || req.headers["x-forwarded-for"] || req.socket.remoteAddress; 
   }
 });
 
