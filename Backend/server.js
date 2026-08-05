@@ -41,14 +41,19 @@ app.use(cors({
 
 app.use(express.json());
 
+const helmet = require("helmet");
+const mongoSanitize = require("express-mongo-sanitize");
+const xss = require("xss-clean");
+
 // Security Middlewares
-// (Helmet removed due to Express 5 compatibility)
+app.use(helmet());
+app.use(mongoSanitize());
+app.use(xss());
 
 // Trust proxy required for rate limiter behind reverse proxies (like Render, Vercel, Nginx, etc.)
 app.set("trust proxy", 1);
 
 // Global Rate Limiter to prevent DDoS/Brute Force
-// Disabled because reverse proxy is causing all users to share the same IP
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, 
   max: 3000, 
@@ -56,7 +61,7 @@ const apiLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 });
-// app.use("/api/", apiLimiter); // Disabled to prevent blocking users
+app.use("/api/", apiLimiter);
 
 // Secure session secret fallback
 const fallbackSecret = crypto.randomBytes(64).toString("hex");
@@ -78,15 +83,19 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/api/health", (req, res) => res.json({ status: "ok", version: "2.0" }));
 
-app.use("/api/users", require("./routes/userRoutes"));
-app.use("/api/interview", require("./routes/interviewRoutes"));
-app.use("/api/mcq", require("./routes/mcqRoutes"));
-app.use("/api/resume", require("./routes/resumeRoutes"));
-app.use("/api/ats", require("./routes/atsRoutes"));
-app.use("/api/auth", require("./routes/authRoutes"));
-app.use("/api/wallet", require("./routes/walletRoutes"));
-app.use("/api/btec-notes", require("./routes/btecNoteRoutes"));
-app.use("/api/coding", require("./routes/codingRoutes"));
+app.use("/api/users", require("./src/modules/users/user.routes"));
+app.use("/api/interview", require("./src/modules/interview/interview.routes"));
+app.use("/api/mcq", require("./src/modules/mcq/mcq.routes"));
+app.use("/api/resume", require("./src/modules/resume/resume.routes"));
+app.use("/api/ats", require("./src/modules/ats/ats.routes"));
+app.use("/api/auth", require("./src/modules/auth/auth.routes"));
+app.use("/api/wallet", require("./src/modules/wallet/wallet.routes"));
+app.use("/api/btec-notes", require("./src/modules/btec-notes/btecNote.routes"));
+app.use("/api/coding", require("./src/modules/coding/coding.routes"));
+
+// Global Error Handler
+const errorHandler = require("./src/common/middleware/errorHandler");
+app.use(errorHandler);
 
 const http = require("http");
 const { Server } = require("socket.io");

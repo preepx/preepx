@@ -33,4 +33,6 @@ const mcqResultSchema = new mongoose.Schema({
   },
 });
 
+mcqResultSchema.index({ userId: 1, createdAt: -1 });
+
 module.exports = mongoose.model("MCQResult", mcqResultSchema);

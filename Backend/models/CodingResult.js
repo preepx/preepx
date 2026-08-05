@@ -32,4 +32,6 @@ const codingResultSchema = new mongoose.Schema({
   },
 });
 
+codingResultSchema.index({ userId: 1, date: -1 });
+
 module.exports = mongoose.model("CodingResult", codingResultSchema);

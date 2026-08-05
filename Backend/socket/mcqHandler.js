@@ -1,7 +1,7 @@
 const axios = require("axios");
 const MCQResult = require("../models/MCQResult");
 const { awardMcqCompletion } = require("../utils/userProgress");
-const walletService = require("../services/walletService");
+const walletService = require("../src/modules/wallet/wallet.service");
 
 const mcqHandler = (io, socket) => {
   // Store user's ongoing session in memory
