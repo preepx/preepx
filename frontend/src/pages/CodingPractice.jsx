@@ -46,7 +46,7 @@ const CodingPractice = () => {
       window.dispatchEvent(new Event("walletUpdated"));
       navigate(`/coding-exam?difficulty=${difficulty}`);
     } catch (err) {
-      alert(err.response?.data?.message || 'Insufficient coins or error starting session');
+      alert(err.response?.data?.message || err.response?.data?.error || err.message || 'Error starting session');
     }
   };
 

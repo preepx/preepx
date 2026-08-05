@@ -12,7 +12,7 @@ const startCodingSession = catchAsync(async (req, res) => {
       if (err.code === "INSUFFICIENT_COINS" || err.message.includes("INSUFFICIENT_COINS") || err.message.includes("Insufficient")) {
         return res.status(400).json({ success: false, message: "Insufficient coins for coding practice. Please recharge." });
       }
-      throw err;
+      return res.status(500).json({ success: false, message: err.message || "Internal server error" });
     }
   }
   res.status(200).json({ success: true, message: "Session started" });
