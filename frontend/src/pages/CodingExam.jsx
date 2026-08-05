@@ -67,6 +67,45 @@ const mockQuestions = {
         lua: 'function isPalindrome(s)\n    -- Write your code here\n    \nend',
         dart: 'class Solution {\n    bool isPalindrome(String s) {\n        // Write your code here\n        \n    }\n}'
       }
+    },
+    {
+      title: 'Contains Duplicate',
+      description: 'Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.',
+      examples: [
+        { input: 'nums = [1,2,3,1]', output: 'true' },
+        { input: 'nums = [1,2,3,4]', output: 'false' }
+      ],
+      starterCode: {
+        javascript: 'function containsDuplicate(nums) {\n    // Write your code here\n    \n}',
+        python: 'def containsDuplicate(nums):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    bool containsDuplicate(vector<int>& nums) {\n        // Write your code here\n        \n    }\n};',
+      }
+    },
+    {
+      title: 'Valid Anagram',
+      description: 'Given two strings s and t, return true if t is an anagram of s, and false otherwise.\n\nAn Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.',
+      examples: [
+        { input: 's = "anagram", t = "nagaram"', output: 'true' },
+        { input: 's = "rat", t = "car"', output: 'false' }
+      ],
+      starterCode: {
+        javascript: 'function isAnagram(s, t) {\n    // Write your code here\n    \n}',
+        python: 'def isAnagram(s, t):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    bool isAnagram(string s, string t) {\n        // Write your code here\n        \n    }\n};',
+      }
+    },
+    {
+      title: 'Best Time to Buy and Sell Stock',
+      description: 'You are given an array prices where prices[i] is the price of a given stock on the ith day.\n\nYou want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.\n\nReturn the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.',
+      examples: [
+        { input: 'prices = [7,1,5,3,6,4]', output: '5' },
+        { input: 'prices = [7,6,4,3,1]', output: '0' }
+      ],
+      starterCode: {
+        javascript: 'function maxProfit(prices) {\n    // Write your code here\n    \n}',
+        python: 'def maxProfit(prices):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    int maxProfit(vector<int>& prices) {\n        // Write your code here\n        \n    }\n};',
+      }
     }
   ],
   medium: [
@@ -97,6 +136,30 @@ const mockQuestions = {
         haskell: 'lengthOfLongestSubstring :: String -> Int\nlengthOfLongestSubstring s =\n    -- Write your code here\n    ',
         lua: 'function lengthOfLongestSubstring(s)\n    -- Write your code here\n    \nend',
         dart: 'class Solution {\n    int lengthOfLongestSubstring(String s) {\n        // Write your code here\n        \n    }\n}'
+      }
+    },
+    {
+      title: 'Group Anagrams',
+      description: 'Given an array of strings strs, group the anagrams together. You can return the answer in any order.\n\nAn Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, typically using all the original letters exactly once.',
+      examples: [
+        { input: 'strs = ["eat","tea","tan","ate","nat","bat"]', output: '[["bat"],["nat","tan"],["ate","eat","tea"]]' }
+      ],
+      starterCode: {
+        javascript: 'function groupAnagrams(strs) {\n    // Write your code here\n    \n}',
+        python: 'def groupAnagrams(strs):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    vector<vector<string>> groupAnagrams(vector<string>& strs) {\n        // Write your code here\n        \n    }\n};',
+      }
+    },
+    {
+      title: 'Maximum Subarray',
+      description: 'Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.\n\nA subarray is a contiguous part of an array.',
+      examples: [
+        { input: 'nums = [-2,1,-3,4,-1,2,1,-5,4]', output: '6' }
+      ],
+      starterCode: {
+        javascript: 'function maxSubArray(nums) {\n    // Write your code here\n    \n}',
+        python: 'def maxSubArray(nums):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    int maxSubArray(vector<int>& nums) {\n        // Write your code here\n        \n    }\n};',
       }
     }
   ],
@@ -129,6 +192,18 @@ const mockQuestions = {
         lua: 'function findMedianSortedArrays(nums1, nums2)\n    -- Write your code here\n    \nend',
         dart: 'class Solution {\n    double findMedianSortedArrays(List<int> nums1, List<int> nums2) {\n        // Write your code here\n        \n    }\n}'
       }
+    },
+    {
+      title: 'Trapping Rain Water',
+      description: 'Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.',
+      examples: [
+        { input: 'height = [0,1,0,2,1,0,1,3,2,1,2,1]', output: '6' }
+      ],
+      starterCode: {
+        javascript: 'function trap(height) {\n    // Write your code here\n    \n}',
+        python: 'def trap(height):\n    # Write your code here\n    pass',
+        cpp: 'class Solution {\npublic:\n    int trap(vector<int>& height) {\n        // Write your code here\n        \n    }\n};',
+      }
     }
   ]
 };
@@ -143,7 +218,7 @@ const CodingExam = () => {
   const [currentLanguage, setCurrentLanguage] = useState(initialLanguage);
 
   // Randomly select a question that hasn't been seen yet
-  const question = useMemo(() => {
+  const [question] = useState(() => {
     const questions = mockQuestions[difficulty] || mockQuestions.easy;
 
     // Get previously seen questions from localStorage
@@ -167,7 +242,7 @@ const CodingExam = () => {
     localStorage.setItem('seenCodingQuestions', JSON.stringify(seenQuestions));
 
     return selected;
-  }, [difficulty]);
+  });
 
   const [code, setCode] = useState(question.starterCode[currentLanguage] || question.starterCode.javascript);
   const initialTime = difficulty === 'hard' ? 1800 : difficulty === 'medium' ? 1500 : 1200;
@@ -228,24 +303,32 @@ const CodingExam = () => {
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  const handleRunCode = () => {
+  const handleRunCode = async () => {
     setIsRunning(true);
     setOutput('Running test cases...');
     setTestResults(null);
 
-    // Simulate API call for code execution
-    setTimeout(() => {
-      setIsRunning(false);
-      // Mock passing logic
-      const isPass = Math.random() > 0.3; // 70% chance to pass for demo
-      if (isPass) {
-        setOutput('All test cases passed successfully!\nTime: 42ms\nMemory: 34.2MB');
+    try {
+      const response = await API.post('/coding/evaluate', {
+        title: question.title,
+        description: question.description,
+        language: currentLanguage,
+        code
+      });
+
+      if (response.data.passed) {
         setTestResults('pass');
+        setOutput(response.data.feedback || 'All test cases passed successfully!');
       } else {
-        setOutput('Test case 2 failed.\nInput: nums = [3,2,4], target = 6\nExpected: [1,2]\nOutput: undefined');
         setTestResults('fail');
+        setOutput(response.data.feedback || 'Test cases failed.');
       }
-    }, 1500);
+    } catch (err) {
+      setTestResults('fail');
+      setOutput(err.response?.data?.message || err.message || 'Failed to evaluate code.');
+    } finally {
+      setIsRunning(false);
+    }
   };
 
   if (isMobile) {
@@ -329,10 +412,16 @@ const CodingExam = () => {
               const user = JSON.parse(localStorage.getItem('user'));
               if (user && user._id) {
                 try {
-                  await API.post('/coding/results', {
+                  const res = await API.post('/coding/results', {
                     userId: user._id,
                     ...record
                   });
+                  if (res.data?.pointsEarned > 0) {
+                    toast.success(`🎉 You earned ${res.data.pointsEarned} XP!`);
+                    window.dispatchEvent(new Event('walletUpdated'));
+                  } else {
+                    toast.info('Practice submitted!');
+                  }
                 } catch (err) {
                   console.error("Failed to save coding result to backend:", err);
                 }

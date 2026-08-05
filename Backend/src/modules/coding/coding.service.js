@@ -21,7 +21,7 @@ const saveCodingResult = async (data) => {
   await newResult.save();
 
   let pointsEarned = 0;
-  if (status && (status.toLowerCase().includes("passed") || status.toLowerCase().includes("success") || status.toLowerCase().includes("completed") || status.toLowerCase().includes("solved") || status.toLowerCase().includes("untested"))) {
+  if (status && (status.toLowerCase().includes("passed") || status.toLowerCase().includes("success") || status.toLowerCase().includes("completed") || status.toLowerCase().includes("solved"))) {
     let diffBonus = 10;
     if (difficulty === "easy" || difficulty === "Easy") diffBonus = 5;
     else if (difficulty === "medium" || difficulty === "Medium") diffBonus = 10;
