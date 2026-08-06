@@ -78,7 +78,11 @@ function Auth() {
 
   const handleGoogleLogin = () => {
     const apiBase = API.defaults.baseURL || "http://localhost:4000/api";
-    window.location.href = `${apiBase.replace(/\/api$/, "")}/api/auth/google`;
+    let url = `${apiBase.replace(/\/api$/, "")}/api/auth/google`;
+    if (registerData.referralCode) {
+      url += `?state=${registerData.referralCode}`;
+    }
+    window.location.href = url;
   };
 
   // Countdown timer

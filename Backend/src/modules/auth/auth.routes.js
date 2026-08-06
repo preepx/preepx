@@ -20,7 +20,10 @@ const safeUser = (user) => ({
 });
 
 // Step 1: Redirect to Google
-router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.get("/google", (req, res, next) => {
+  const state = req.query.state;
+  passport.authenticate("google", { scope: ["profile", "email"], state })(req, res, next);
+});
 
 // Step 2: Google callback
 router.get(
