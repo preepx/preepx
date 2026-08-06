@@ -3,7 +3,6 @@ import { Gift, UserCheck, FileText, Bot, Target, Briefcase, Users, Trophy } from
 export const REWARDS_DATA = [
   { id: "daily_login", title: "Daily Login", desc: "Log in and maintain your daily streak.", xp: 5, icon: Gift, target: 1 },
   { id: "complete_profile", title: "Complete Profile", desc: "Fill in all your profile details.", xp: 20, icon: UserCheck, target: 1 },
-  { id: "upload_resume", title: "Upload Resume", desc: "Upload your resume in the dashboard.", xp: 15, icon: FileText, target: 1 },
   { id: "ai_interview", title: "Complete AI Interview", desc: "Finish your first AI mock interview.", xp: 25, icon: Bot, target: 1 },
   { id: "daily_challenge", title: "Complete Daily Challenge", desc: "Finish today's specific challenge.", xp: 15, icon: Target, target: 1 },
   { id: "five_interviews", title: "Complete 5 Interviews", desc: "Complete 5 mock interviews.", xp: 30, icon: Briefcase, target: 5 },
@@ -20,12 +19,10 @@ export const calculateProgress = (rewardId, user, dashboard) => {
     case "complete_profile":
       const hasProfile = user.fullName && user.email && user.mobile && user.college && user.degree;
       return hasProfile ? 1 : 0;
-    case "upload_resume":
-      return user.resumeUrl || dashboard?.stats?.resumeUploaded ? 1 : 0;
     case "ai_interview":
       return user.interviewsCompleted >= 1 ? 1 : 0;
     case "score_80":
-      return user.hasPerfectScore || (dashboard?.mcqAvgAccuracy >= 80) ? 1 : 0;
+      return user.hasPerfectScore || (dashboard?.mcqStats?.bestScore >= 80) ? 1 : 0;
     case "five_interviews":
       return Math.min(user.interviewsCompleted || 0, 5);
     case "refer_friend":

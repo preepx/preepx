@@ -30,6 +30,7 @@ const userSchema = mongoose.Schema(
     degree: { type: String, default: "" },
     referralCode: { type: String, unique: true, sparse: true },
     referredBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    referralCount: { type: Number, default: 0 },
     hasUsedCoins: { type: Boolean, default: false },
     profileCompletedBonusClaimed: { type: Boolean, default: false },
     xpRewardsClaimed: [{ type: String }],

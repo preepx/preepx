@@ -77,9 +77,11 @@ const verifyOtpAndRegister = async (email, otp) => {
 
   let referredBy = undefined;
   if (otpRecord.userData.referralCode) {
-    const referrer = await User.findOne({ referralCode: otpRecord.userData.referralCode }).lean();
+    const referrer = await User.findOne({ referralCode: otpRecord.userData.referralCode });
     if (referrer) {
       referredBy = referrer._id;
+      referrer.referralCount = (referrer.referralCount || 0) + 1;
+      await referrer.save();
     }
   }
 

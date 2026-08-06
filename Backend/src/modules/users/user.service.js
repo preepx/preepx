@@ -125,6 +125,11 @@ const getDashboard = async (userId) => {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 6);
 
+  const todayStr = new Date().toISOString().split("T")[0];
+  const dailyChallengeCompleted = 
+    interviews.some(i => i.createdAt && new Date(i.createdAt).toISOString().split("T")[0] === todayStr) ||
+    mcqResults.some(r => r.createdAt && new Date(r.createdAt).toISOString().split("T")[0] === todayStr);
+
   return {
     user,
     stats: {
@@ -136,6 +141,7 @@ const getDashboard = async (userId) => {
       points: user.points || 0,
       streak: user.streak || 0,
       level: user.level || 1,
+      dailyChallengeCompleted,
     },
     mcqStats: {
       totalExams: mcqResults.length,
