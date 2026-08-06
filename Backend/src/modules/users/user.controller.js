@@ -21,6 +21,7 @@ const safeUser = (user) => ({
   linkedin: user.linkedin || "",
   degree: user.degree || "",
   referralCode: user.referralCode || "",
+  referralCount: user.referralCount || 0,
   xpRewardsClaimed: user.xpRewardsClaimed || [],
 });
 

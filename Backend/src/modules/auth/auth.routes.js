@@ -17,6 +17,7 @@ const safeUser = (user) => ({
   streak: user.streak || 0,
   badges: user.badges || [],
   interviewsCompleted: user.interviewsCompleted || 0,
+  referralCount: user.referralCount || 0,
 });
 
 // Step 1: Redirect to Google
