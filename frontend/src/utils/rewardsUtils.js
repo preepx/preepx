@@ -16,7 +16,7 @@ export const calculateProgress = (rewardId, user, dashboard) => {
   
   switch (rewardId) {
     case "daily_login":
-      return user.streak >= 1 ? 1 : 0;
+      return 1;
     case "complete_profile":
       const hasProfile = user.fullName && user.email && user.mobile && user.college && user.degree;
       return hasProfile ? 1 : 0;

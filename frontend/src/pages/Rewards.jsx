@@ -124,6 +124,9 @@ function Rewards() {
                       </div>
                     </div>
                   )}
+                  {!isClaimed && !isLocked && !isInProgress && progress >= reward.target && (
+                    <span className="status-completed" style={{ color: '#f59e0b' }}>⏳ Claiming...</span>
+                  )}
                 </div>
               </div>
             );

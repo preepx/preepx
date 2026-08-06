@@ -70,12 +70,15 @@
   flex-direction: column;
   gap: 2px;
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
 
 .sidebar-nav::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none;
+  /* Chrome, Safari and Opera */
 }
 
 .sidebar-link {
@@ -376,12 +379,15 @@
 }
 
 @keyframes navFreePulse {
-  0%, 100% {
+
+  0%,
+  100% {
     background: #ecfdf5;
     border-color: #a7f3d0;
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     transform: scale(1);
   }
+
   50% {
     background: #d1fae5;
     border-color: #34d399;
@@ -398,12 +404,15 @@
 }
 
 @keyframes navFreePulseDark {
-  0%, 100% {
+
+  0%,
+  100% {
     background: rgba(16, 185, 129, 0.12);
     border-color: rgba(16, 185, 129, 0.28);
     box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
     transform: scale(1);
   }
+
   50% {
     background: rgba(16, 185, 129, 0.28);
     border-color: rgba(52, 211, 153, 0.55);
@@ -446,12 +455,15 @@
 }
 
 @keyframes navNewPulse {
-  0%, 100% {
+
+  0%,
+  100% {
     background: #fef2f2;
     border-color: #fecaca;
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
     transform: scale(1);
   }
+
   50% {
     background: #fee2e2;
     border-color: #f87171;
@@ -468,12 +480,15 @@
 }
 
 @keyframes navNewPulseDark {
-  0%, 100% {
+
+  0%,
+  100% {
     background: rgba(239, 68, 68, 0.12);
     border-color: rgba(239, 68, 68, 0.28);
     box-shadow: 0 0 0 0 rgba(248, 113, 113, 0);
     transform: scale(1);
   }
+
   50% {
     background: rgba(239, 68, 68, 0.28);
     border-color: rgba(248, 113, 113, 0.55);

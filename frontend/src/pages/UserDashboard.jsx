@@ -249,7 +249,6 @@ function UserDashboard() {
               <p>Quick MCQ quizzes to test your technical knowledge</p>
               <span className="ud-practice-cta">Take quiz <ChevronRight size={16} /></span>
             </div>
-            <span className="ud-free-tag">Free</span>
           </button>
         </div>
       </section>

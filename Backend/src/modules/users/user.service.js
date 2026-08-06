@@ -8,6 +8,20 @@ const { NotFoundError, BadRequestError } = require('../../common/exceptions/cust
 const getProfile = async (userId) => {
   const user = await User.findById(userId).lean();
   if (!user) throw new NotFoundError("User not found");
+  return await filterDailyLogin(user);
+};
+
+const filterDailyLogin = async (user) => {
+  if (!user) return user;
+  const today = new Date().toISOString().split("T")[0];
+  const lastClaimDateStr = user.lastDailyRewardDate ? new Date(user.lastDailyRewardDate).toISOString().split("T")[0] : null;
+  
+  if (lastClaimDateStr !== today) {
+    if (user.xpRewardsClaimed && user.xpRewardsClaimed.includes("daily_login")) {
+      await User.updateOne({ _id: user._id }, { $pull: { xpRewardsClaimed: "daily_login" } });
+      user.xpRewardsClaimed = user.xpRewardsClaimed.filter(id => id !== "daily_login");
+    }
+  }
   return user;
 };
 
@@ -66,8 +80,9 @@ const updateSettings = async (userId, settingsData) => {
 };
 
 const getDashboard = async (userId) => {
-  const user = await User.findById(userId).lean();
+  let user = await User.findById(userId).lean();
   if (!user) throw new NotFoundError("User not found");
+  user = await filterDailyLogin(user);
 
   const [interviews, mcqResults] = await Promise.all([
     Interview.find({ userId }).sort({ createdAt: -1 }).lean(),
@@ -341,16 +356,30 @@ const claimXpReward = async (userId, rewardId, xpAmount) => {
   const user = await User.findById(userId);
   if (!user) throw new NotFoundError("User not found");
 
-  if (user.xpRewardsClaimed && user.xpRewardsClaimed.includes(rewardId)) {
-    throw new BadRequestError("Reward already claimed");
+  if (rewardId === "daily_login") {
+    const today = new Date().toISOString().split("T")[0];
+    const lastClaimDateStr = user.lastDailyRewardDate ? user.lastDailyRewardDate.toISOString().split("T")[0] : null;
+    
+    if (lastClaimDateStr === today) {
+      throw new BadRequestError("Reward already claimed today");
+    }
+    user.lastDailyRewardDate = new Date();
+    
+    if (!user.xpRewardsClaimed) user.xpRewardsClaimed = [];
+    if (!user.xpRewardsClaimed.includes("daily_login")) {
+      user.xpRewardsClaimed.push("daily_login");
+    }
+  } else {
+    if (user.xpRewardsClaimed && user.xpRewardsClaimed.includes(rewardId)) {
+      throw new BadRequestError("Reward already claimed");
+    }
+    if (!user.xpRewardsClaimed) user.xpRewardsClaimed = [];
+    user.xpRewardsClaimed.push(rewardId);
   }
 
   user.points = (user.points || 0) + xpAmount;
   user.lifetimePoints = (user.lifetimePoints || user.points || 0) + xpAmount;
   user.level = Math.floor(user.lifetimePoints / 100) + 1;
-
-  if (!user.xpRewardsClaimed) user.xpRewardsClaimed = [];
-  user.xpRewardsClaimed.push(rewardId);
 
   await user.save();
 

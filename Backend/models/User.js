@@ -33,6 +33,7 @@ const userSchema = mongoose.Schema(
     hasUsedCoins: { type: Boolean, default: false },
     profileCompletedBonusClaimed: { type: Boolean, default: false },
     xpRewardsClaimed: [{ type: String }],
+    lastDailyRewardDate: { type: Date },
   },
   { timestamps: true }
 );

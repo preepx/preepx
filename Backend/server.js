@@ -138,6 +138,10 @@ const serverInstance = server.listen(PORT, () => console.log(`🚀 Server runnin
 
 const monitoringService = require("./src/common/services/monitoringService");
 
+// Initialize Cron Jobs
+const initCronJobs = require("./src/jobs/cronJobs");
+initCronJobs();
+
 // Graceful Shutdown & Global Error Monitoring
 const gracefulShutdown = (signal) => {
   console.log(`Received ${signal}. Shutting down gracefully...`);

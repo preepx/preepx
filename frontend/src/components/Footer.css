@@ -1,5 +1,6 @@
 .global-footer {
-  background-color: #020617; /* Very dark blue/black for distinct footer */
+  background-color: #020617;
+  /* Very dark blue/black for distinct footer */
   color: white;
   padding: 80px 24px 24px;
   margin-top: auto;
@@ -124,6 +125,7 @@
     flex-direction: column;
     gap: 40px;
   }
+
   .footer-links-group {
     gap: 40px;
     justify-content: space-between;
@@ -134,6 +136,7 @@
   .footer-inner {
     flex-direction: column-reverse;
   }
+
   .footer-links-group {
     flex-direction: row;
     gap: 32px;

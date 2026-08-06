@@ -141,6 +141,51 @@
   font-weight: 700;
 }
 
+.interview-modal-header-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.interview-coin-badge {
+  padding: 6px 14px;
+  background: linear-gradient(145deg, rgba(234, 179, 8, 0.15), rgba(217, 119, 6, 0.05));
+  border: 1px solid rgba(234, 179, 8, 0.3);
+  box-shadow: 0 4px 15px rgba(234, 179, 8, 0.1);
+  color: #fbbf24;
+  border-radius: 24px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.interview-coin-badge span {
+  font-size: 16px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+@media (max-width: 500px) {
+  .interview-modal-header-title {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .modal-top h2 {
+    font-size: 1.15rem;
+  }
+  .interview-coin-badge {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+  .interview-coin-badge span {
+    font-size: 14px;
+  }
+}
+
 .modal-top p {
   font-size: 13px;
   color: var(--text-muted);

@@ -115,15 +115,7 @@ function WalletPage() {
         )}
       </div>
 
-      {!billingEnabled && (
-        <div className="wallet-free-banner">
-          <Shield size={18} />
-          <div>
-            <strong>Objective Exams are Free!</strong>
-            <p>Objective exams are currently completely free.</p>
-          </div>
-        </div>
-      )}
+
 
       <div className="wallet-pricing-grid">
         <div className="wallet-pricing-item">
@@ -137,9 +129,7 @@ function WalletPage() {
           <Zap size={20} />
           <div>
             <p className="wp-label">Objective Exam</p>
-            <p className="wp-cost">
-              <span className="nav-free-badge" style={{ position: 'static' }}>Free</span>
-            </p>
+            <p className="wp-cost">{WALLET_PRICING.OBJECTIVE_EXAM} coins</p>
           </div>
         </div>
         <div className="wallet-pricing-item">
