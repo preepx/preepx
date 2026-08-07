@@ -150,8 +150,15 @@ const mcqHandler = (io, socket) => {
 
 async function generateAllQuestions(socket) {
   const session = socket.mcqSession;
-
-  const prompt = `Generate exactly ${session.numQuestions} multiple choice questions about '${session.topic}'.
+  const targetNum = session.numQuestions;
+  
+  try {
+    let allQuestions = [];
+    let attempts = 0;
+    
+    while (allQuestions.length < targetNum && attempts < 4) {
+      const remaining = targetNum - allQuestions.length;
+      const prompt = `Generate exactly ${remaining} multiple choice questions about '${session.topic}'.
 Provide 4 options for each. Format the output STRICTLY as a JSON object with a "questions" array containing objects with this exact structure:
 {
   "questions": [
@@ -165,31 +172,39 @@ Provide 4 options for each. Format the output STRICTLY as a JSON object with a "
 }
 No other text, only the JSON object.`;
 
-  try {
-    const qDataArray = await aiService.generateJson(prompt, {
-      temperature: 0.7,
-      max_tokens: 3000,
-    });
+      const qDataArray = await aiService.generateJson(prompt, {
+        temperature: 0.7,
+        max_tokens: 3000,
+      });
 
-    let parsedArray = qDataArray;
-    
-    // If AI returned an object instead of an array, try to extract the array
-    if (!Array.isArray(parsedArray)) {
-      if (parsedArray.questions && Array.isArray(parsedArray.questions)) {
-        parsedArray = parsedArray.questions;
-      } else if (parsedArray.data && Array.isArray(parsedArray.data)) {
-        parsedArray = parsedArray.data;
-      } else {
-        const firstArray = Object.values(parsedArray).find(val => Array.isArray(val));
-        if (firstArray) parsedArray = firstArray;
+      let parsedArray = qDataArray;
+      
+      // If AI returned an object instead of an array, try to extract the array
+      if (!Array.isArray(parsedArray)) {
+        if (parsedArray.questions && Array.isArray(parsedArray.questions)) {
+          parsedArray = parsedArray.questions;
+        } else if (parsedArray.data && Array.isArray(parsedArray.data)) {
+          parsedArray = parsedArray.data;
+        } else {
+          const firstArray = Object.values(parsedArray).find(val => Array.isArray(val));
+          if (firstArray) parsedArray = firstArray;
+        }
       }
+
+      if (Array.isArray(parsedArray) && parsedArray.length > 0) {
+        allQuestions = allQuestions.concat(parsedArray);
+      }
+      
+      attempts++;
     }
 
-    if (!Array.isArray(parsedArray) || parsedArray.length === 0) {
-      throw new Error("AI did not return an array of questions.");
+    if (allQuestions.length === 0) {
+      throw new Error("AI did not return any questions.");
     }
 
-    session.allGeneratedQuestions = parsedArray.slice(0, session.numQuestions);
+    session.allGeneratedQuestions = allQuestions.slice(0, targetNum);
+    session.numQuestions = session.allGeneratedQuestions.length;
+    
     sendNextQuestion(socket);
 
   } catch (err) {
