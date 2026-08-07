@@ -2,6 +2,7 @@ const axios = require("axios");
 const MCQResult = require("../models/MCQResult");
 const { awardMcqCompletion } = require("../utils/userProgress");
 const walletService = require("../src/modules/wallet/wallet.service");
+const aiService = require("../src/services/ai.service");
 
 const mcqHandler = (io, socket) => {
   // Store user's ongoing session in memory
@@ -25,10 +26,13 @@ const mcqHandler = (io, socket) => {
         numQuestions,
         currentQuestionIndex: 0,
         score: 0,
-        questionsAndAnswers: []
+        questionsAndAnswers: [],
+        allGeneratedQuestions: []
       };
 
-      await generateAndSendNextQuestion(socket);
+      // Tell client we are generating questions
+      socket.emit("mcq_loading", { message: "Generating questions..." });
+      await generateAllQuestions(socket);
     } catch (error) {
       console.error("Error starting MCQ:", error);
       socket.emit("mcq_error", { message: "Failed to start exam." });
@@ -54,7 +58,7 @@ const mcqHandler = (io, socket) => {
       session.currentQuestionIndex += 1;
 
       if (session.currentQuestionIndex < session.numQuestions) {
-        await generateAndSendNextQuestion(socket);
+        sendNextQuestion(socket);
       } else {
         let resultId = null;
         let rewards = { pointsEarned: 0, newBadges: [], level: 1, streak: 0 };
@@ -144,64 +148,80 @@ const mcqHandler = (io, socket) => {
   });
 };
 
-async function generateAndSendNextQuestion(socket) {
+async function generateAllQuestions(socket) {
   const session = socket.mcqSession;
-  
-  const previousQuestions = session.questionsAndAnswers.map(qa => qa.question);
-  const avoidQuestionsText = previousQuestions.length > 0 
-    ? `\nDo NOT generate any of the following questions:\n${previousQuestions.map(q => `- "${q}"`).join('\n')}` 
-    : '';
 
-  const prompt = `Generate exactly ONE multiple choice question about '${session.topic}'. ${avoidQuestionsText}
-Provide 4 options. Format the output STRICTLY as a JSON object with this exact structure:
+  const prompt = `Generate exactly ${session.numQuestions} multiple choice questions about '${session.topic}'.
+Provide 4 options for each. Format the output STRICTLY as a JSON object with a "questions" array containing objects with this exact structure:
 {
-  "question": "The actual question text?",
-  "options": ["Option A", "Option B", "Option C", "Option D"],
-  "correctAnswer": "Option B",
-  "explanation": "Brief explanation of why this is correct."
+  "questions": [
+    {
+      "question": "The actual question text?",
+      "options": ["Option A", "Option B", "Option C", "Option D"],
+      "correctAnswer": "Option B",
+      "explanation": "Brief explanation of why this is correct."
+    }
+  ]
 }
-No other text, only the JSON.`;
+No other text, only the JSON object.`;
 
   try {
-    const response = await axios.post(
-      "https://api.groq.com/openai/v1/chat/completions",
-      {
-        model: "llama-3.3-70b-versatile",
-        messages: [{ role: "user", content: prompt }],
-        response_format: { type: "json_object" }
-      },
-      {
-        headers: {
-          "Authorization": `Bearer ${process.env.GROQ_API_KEY}`,
-          "Content-Type": "application/json"
-        }
+    const qDataArray = await aiService.generateJson(prompt, {
+      temperature: 0.7,
+      max_tokens: 3000,
+    });
+
+    let parsedArray = qDataArray;
+    
+    // If AI returned an object instead of an array, try to extract the array
+    if (!Array.isArray(parsedArray)) {
+      if (parsedArray.questions && Array.isArray(parsedArray.questions)) {
+        parsedArray = parsedArray.questions;
+      } else if (parsedArray.data && Array.isArray(parsedArray.data)) {
+        parsedArray = parsedArray.data;
+      } else {
+        const firstArray = Object.values(parsedArray).find(val => Array.isArray(val));
+        if (firstArray) parsedArray = firstArray;
       }
-    );
+    }
 
-    const resultText = response.data.choices[0].message.content;
-    const qData = JSON.parse(resultText);
+    if (!Array.isArray(parsedArray) || parsedArray.length === 0) {
+      throw new Error("AI did not return an array of questions.");
+    }
 
-    // Save in session
-    session.questionsAndAnswers.push({
-      question: qData.question,
-      options: qData.options,
-      correctAnswer: qData.correctAnswer,
-      explanation: qData.explanation,
-      userAnswer: null
-    });
-
-    // Send question without the correct answer to the client to prevent cheating
-    socket.emit("receive_question", {
-      questionIndex: session.currentQuestionIndex,
-      totalQuestions: session.numQuestions,
-      question: qData.question,
-      options: qData.options
-    });
+    session.allGeneratedQuestions = parsedArray.slice(0, session.numQuestions);
+    sendNextQuestion(socket);
 
   } catch (err) {
-    console.error("Error generating question:", err.response?.data || err.message);
-    socket.emit("mcq_error", { message: "Error generating next question." });
+    console.error("Error generating questions:", err.message);
+    socket.emit("mcq_error", { message: "Error generating questions. Please try again." });
   }
+}
+
+function sendNextQuestion(socket) {
+  const session = socket.mcqSession;
+  const nextQ = session.allGeneratedQuestions[session.currentQuestionIndex];
+  
+  if (!nextQ) {
+    return socket.emit("mcq_error", { message: "Failed to load next question." });
+  }
+
+  // Save in session for grading later
+  session.questionsAndAnswers.push({
+    question: nextQ.question,
+    options: nextQ.options,
+    correctAnswer: nextQ.correctAnswer,
+    explanation: nextQ.explanation,
+    userAnswer: null
+  });
+
+  // Send question without the correct answer to the client
+  socket.emit("receive_question", {
+    questionIndex: session.currentQuestionIndex,
+    totalQuestions: session.numQuestions,
+    question: nextQ.question,
+    options: nextQ.options
+  });
 }
 
 module.exports = mcqHandler;

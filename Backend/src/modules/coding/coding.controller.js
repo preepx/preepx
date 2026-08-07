@@ -36,21 +36,27 @@ const evaluateCode = catchAsync(async (req, res) => {
   }
 
   const prompt = `
-You are an expert technical interviewer and code judge.
+You are an expert technical interviewer and strict code judge.
 The user is attempting the following coding question:
 Title: ${title}
 Description: ${description}
 
 The user's code is written in ${language}:
+\`\`\`${language}
 ${code}
+\`\`\`
 
-Your task is to act as a compiler/test runner. Evaluate if the code correctly solves the problem for all standard edge cases.
+CRITICAL INSTRUCTIONS:
+1. Analyze the user's code strictly and objectively.
+2. If the code is mostly empty, contains gibberish, lacks logic, or has syntax errors, you MUST set "passed" to false.
+3. Do NOT hallucinate or assume the user wrote the correct logic if they didn't. Read the EXACT code provided.
+4. Evaluate if the code correctly solves the problem for standard edge cases.
+
 Return a JSON object with:
 {
   "passed": boolean,
-  "feedback": "A string explaining why it passed or failed. If it failed, give a specific test case that failed and the output."
+  "feedback": "A string explaining why it passed or failed. If it failed, point out the syntax error, gibberish, or give a specific test case that failed."
 }
-Do NOT return anything else, ONLY the JSON object.
 `;
 
   try {

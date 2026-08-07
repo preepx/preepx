@@ -160,6 +160,8 @@
   display: flex;
   flex-direction: column;
   background: #1e1e1e; /* Monaco default dark */
+  overflow: hidden;
+  min-height: 0;
 }
 
 .editor-header {
@@ -258,6 +260,8 @@
   flex: 1;
   background: var(--bg);
   position: relative;
+  overflow: hidden;
+  min-height: 0;
 }
 
 .coding-exam-mobile-restricted {

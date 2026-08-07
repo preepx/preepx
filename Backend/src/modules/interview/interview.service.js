@@ -85,7 +85,7 @@ const generateInterviewQuestions = async (userId, data) => {
 
     return { questions, interviewId: interview?._id || null };
   } catch (err) {
-    throw new BadRequestError("Failed to generate questions. Check Groq API Key or usage limits.");
+    throw new BadRequestError("Failed to generate questions. Check Gemini API Key or usage limits.");
   }
 };
 

@@ -317,10 +317,10 @@ const CodingExam = () => {
       });
 
       if (response.data.passed) {
-        setTestResults('passed');
+        setTestResults('pass');
         setOutput(response.data.feedback || 'All test cases passed successfully!');
       } else {
-        setTestResults('failed');
+        setTestResults('fail');
         setOutput(response.data.feedback || 'Test cases failed.');
       }
     } catch (err) {
@@ -364,8 +364,8 @@ const CodingExam = () => {
               <button className="exit-fullscreen-btn" onClick={() => navigate('/coding-practice')}>
                 Exit Practice
               </button>
-              <button 
-                className="enter-fullscreen-btn" 
+              <button
+                className="enter-fullscreen-btn"
                 onClick={() => {
                   const elem = document.documentElement;
                   if (elem.requestFullscreen) elem.requestFullscreen();
