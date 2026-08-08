@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { triggerAnnouncement } from "../utils/announcement";
+import notify from "../utils/notify";
 
 function AuthCallback() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function AuthCallback() {
       localStorage.setItem("token", token);
       localStorage.setItem("user", user);
       triggerAnnouncement();
+      notify.success("Welcome back! Signed in with Google");
       navigate("/user-dashboard", { replace: true });
     } catch {
       navigate("/auth", { replace: true });
