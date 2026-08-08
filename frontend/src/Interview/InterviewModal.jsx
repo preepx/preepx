@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Briefcase, Code, Gauge, Layers, Hash } from "lucide-react";
 import { fetchInterviewQuestions } from "../services/interviewAPI";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { showAppError } from "../utils/appAlert";
 import "./InterviewModal.css";
 
@@ -16,7 +16,7 @@ const InterviewModal = ({ onClose, onSuccess }) => {
   const [jobTopic, setJobTopic] = useState("");
   const [difficulty, setDifficulty] = useState("medium");
   const [interviewType, setInterviewType] = useState("mixed");
-  const [questionCount, setQuestionCount] = useState(10);
+  const [questionCount, setQuestionCount] = useState(5);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const InterviewModal = ({ onClose, onSuccess }) => {
         return;
       }
       if (onSuccess) onSuccess();
-      toast.success(`${data.questions.length} questions generated!`);
+      notify.success(`${data.questions.length} questions generated!`);
       navigate("/start-interview", {
         state: {
           jobTitle, jobTopic, questions: data.questions,
@@ -122,7 +122,7 @@ const InterviewModal = ({ onClose, onSuccess }) => {
             <div className="option-group">
               <label><Hash size={14} /> Questions: {questionCount}</label>
               <input
-                type="range" min="10" max="15" value={questionCount}
+                type="range" min="5" max="15" value={questionCount}
                 onChange={(e) => setQuestionCount(Number(e.target.value))}
                 className="range-input"
               />

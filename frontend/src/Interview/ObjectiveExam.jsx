@@ -9,7 +9,7 @@ import {
   ArrowRight, CheckCircle, XCircle, AlertTriangle,
   Clock, Target, Zap, Eye, ShieldCheck, BookOpen, Trophy, ChevronLeft,
 } from 'lucide-react';
-import { toast } from 'react-toastify';
+import notify from '../utils/notify';
 import { useFaceDetection } from '../hooks/useFaceDetection';
 import './ObjectiveExam.css';
 
@@ -84,20 +84,20 @@ export default function ObjectiveExam() {
       setShowWarnBlink(true);
       setTimeout(() => setShowWarnBlink(false), 2000);
       
-      toast.dismiss(); // Clear all toasts so only 1 is visible at a time
+      notify.dismiss(); // Clear all toasts so only 1 is visible at a time
       
       if (newCount >= 5) {
-        toast.error('Exam terminated due to repeated warnings.', { toastId: 'term-error' });
+        notify.error('Exam terminated due to repeated warnings.');
         handleForceEnd();
         return newCount;
       }
 
       if (type === 'tab') {
-        toast.warning(`Tab switch! Warning ${newCount}/5`, { toastId: 'tab-warn' });
+        notify.warning(`Tab switch! Warning ${newCount}/5`);
         setShowWarn(true);
         setTimeout(() => setShowWarn(false), 4000);
       } else {
-        toast.warning(`Proctoring Warning! ${newCount}/5: ${msg}`, { toastId: 'proc-warn' });
+        notify.warning(`Proctoring Warning! ${newCount}/5: ${msg}`);
       }
       
       return newCount;
@@ -126,7 +126,7 @@ export default function ObjectiveExam() {
         setScreen('RESULTS');
       })
       .catch(() => {
-        toast.error('Could not load exam result');
+        notify.error('Could not load exam result');
         navigate('/objective-exam');
       })
       .finally(() => setLoadingResult(false));
@@ -177,9 +177,9 @@ export default function ObjectiveExam() {
   }, [resultIdParam]);
 
   const startExam = () => {
-    if (!topic.trim()) return toast.error('Please enter a topic.');
-    if (permissionsGranted !== true) return toast.error('Camera permission required.');
-    if (!isFullscreen) return toast.error('Fullscreen required.');
+    if (!topic.trim()) return notify.error('Please enter a topic.');
+    if (permissionsGranted !== true) return notify.error('Camera permission required.');
+    if (!isFullscreen) return notify.error('Fullscreen required.');
     setScreen('EXAM'); setCorrect(0); setWrong(0); setWarnings(0);
     const user = JSON.parse(localStorage.getItem('user') || '{"_id":"guest"}');
     socketRef.current = io(SOCKET_URL);
@@ -206,10 +206,10 @@ export default function ObjectiveExam() {
             : user.badges,
         });
         window.dispatchEvent(new Event('user-updated'));
-        toast.success(`+${d.pointsEarned} points earned!`);
+        notify.success(`+${d.pointsEarned} points earned!`);
       }
     });
-    socketRef.current.on('mcq_error', e => { toast.error(e.message || 'Error'); setScreen('SETUP'); });
+    socketRef.current.on('mcq_error', e => { notify.error(e.message || 'Error'); setScreen('SETUP'); });
   };
 
   const submitAnswer = () => {
@@ -221,7 +221,7 @@ export default function ObjectiveExam() {
 
   const handleAutoSubmit = () => {
     if (submitting || !question) return;
-    toast.info('Time up!');
+    notify.info('Time up!');
     setSubmitting(true);
     socketRef.current?.emit('submit_answer', { answer: selected || '' });
   };
@@ -418,8 +418,8 @@ export default function ObjectiveExam() {
                   <div className="oe-q-grid">
                     {[
                       { val: 10, label: '10', tag: 'Quick', time: '~5 min' },
+                      { val: 15, label: '15', tag: 'Medium', time: '~7 min' },
                       { val: 20, label: '20', tag: 'Standard', time: '~10 min' },
-                      { val: 40, label: '40', tag: 'Deep Dive', time: '~20 min' },
                     ].map(({ val, label, tag, time }) => {
                       const active = numQ === val;
                       return (

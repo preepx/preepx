@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Coins, Mic, Zap, Shield, TrendingUp, Plus, X } from "lucide-react";
-import { toast } from "react-toastify";
+import notify from '../../../utils/notify';
 import { createOrder, verifyPayment } from "../services/walletAPI";
 import { useWallet } from "../hooks/useWallet";
 import CoinPackages from "../components/CoinPackages";
@@ -24,7 +24,7 @@ function WalletPage() {
 
   const handleCustomBuy = async () => {
     if (customAmount < 1) {
-      toast.error("Minimum amount is ₹1");
+      notify.error("Minimum amount is ₹1");
       return;
     }
     setBuying(true);
@@ -53,11 +53,11 @@ function WalletPage() {
               packageId: "custom",
               customAmount: Number(customAmount)
             });
-            toast.success(verifyData.message);
+            notify.success(verifyData.message);
             setShowAddModal(false);
             refresh();
           } catch (error) {
-            toast.error(error.response?.data?.message || "Payment verification failed");
+            notify.error(error.response?.data?.message || "Payment verification failed");
           }
         },
         prefill: {
@@ -72,12 +72,12 @@ function WalletPage() {
 
       const rzp1 = new window.Razorpay(options);
       rzp1.on('payment.failed', function () {
-        toast.error("Payment failed. Please try again.");
+        notify.error("Payment failed. Please try again.");
       });
       rzp1.open();
 
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to initiate purchase");
+      notify.error(err.response?.data?.message || "Failed to initiate purchase");
     } finally {
       setBuying(false);
     }

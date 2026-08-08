@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import API from "../utils/api";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { showAppError } from "../utils/appAlert";
+import { triggerAnnouncement } from "../utils/announcement";
 import {
   Sparkles, Mail, Lock, User, Eye, EyeOff,
   ArrowRight, Shield, Zap, BarChart3, KeyRound, RefreshCw, CheckCircle,
@@ -159,7 +160,8 @@ function Auth() {
       });
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
-      toast.success("Welcome back!");
+      triggerAnnouncement();
+      notify.success("Welcome back!");
       navigate("/user-dashboard", { replace: true });
     } catch (error) {
       showAppError(
@@ -200,7 +202,7 @@ function Auth() {
       resetOtp();
       setResendTimer(60);
       setScreen("reg-otp");
-      toast.success(`Verification code sent to ${email}`);
+      notify.success(`Verification code sent to ${email}`);
     } catch (error) {
       showAppError(error.response?.data?.message || "Registration failed.", "Error");
     } finally {
@@ -225,7 +227,8 @@ function Auth() {
       localStorage.setItem("user", JSON.stringify(res.data.user));
       setRegisterData({ ...EMPTY_REGISTER });
       resetOtp();
-      toast.success("Account created! Welcome aboard!");
+      triggerAnnouncement();
+      notify.success("Account created! Welcome aboard!");
       navigate("/user-dashboard", { replace: true });
     } catch (error) {
       showAppError(error.response?.data?.message || "Invalid code. Try again.", "Verification failed");
@@ -247,7 +250,7 @@ function Auth() {
       });
       resetOtp();
       setResendTimer(60);
-      toast.success("New code sent!");
+      notify.success("New code sent!");
       otpInputsRef.current[0]?.focus();
     } catch (error) {
       showAppError("Could not resend code. Please try again.", "Resend failed");
@@ -273,7 +276,7 @@ function Auth() {
       resetOtp();
       setResendTimer(60);
       setScreen("forgot-otp");
-      toast.success(`Reset code sent to ${forgotEmail}`);
+      notify.success(`Reset code sent to ${forgotEmail}`);
     } catch (error) {
       showAppError(error.response?.data?.message || "Email not found.", "Error");
     } finally {
@@ -314,7 +317,7 @@ function Auth() {
       await API.post("/users/forgot-password", { email: otpEmail });
       resetOtp();
       setResendTimer(60);
-      toast.success("New reset code sent!");
+      notify.success("New reset code sent!");
       otpInputsRef.current[0]?.focus();
     } catch (error) {
       showAppError("Could not resend code. Please try again.", "Resend failed");
@@ -341,7 +344,7 @@ function Auth() {
         otp: verifiedOtp,
         newPassword,
       });
-      toast.success("Password reset! Please sign in.");
+      notify.success("Password reset! Please sign in.");
       setForgotEmail("");
       setNewPassword("");
       setConfirmNewPassword("");

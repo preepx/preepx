@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, Lock, Gift, UserCheck, FileText, Bot, Trophy, Briefcase, Users, Target } from "lucide-react";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { getProfile, claimXpReward, getDashboard } from "../services/userAPI";
 import "./Rewards.css";
 import { REWARDS_DATA, calculateProgress } from "../utils/rewardsUtils";

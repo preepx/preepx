@@ -38,67 +38,112 @@
 
 .claim-popup-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(4px);
-  animation: fadeIn 0.2s ease-out forwards;
+  z-index: 10000;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: fadeIn 0.25s ease-out forwards;
+  padding: 20px;
 }
 
 .claim-popup-content {
-  background: var(--surface, #1e2128);
-  padding: 32px;
-  border-radius: 20px;
+  position: relative;
+  background: var(--surface);
+  padding: 36px 32px 28px;
+  border-radius: 24px;
   text-align: center;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid var(--border, #2d3340);
-  animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  max-width: 420px;
+  width: 100%;
+  box-shadow:
+    0 4px 6px -1px rgba(15, 23, 42, 0.06),
+    0 24px 64px -12px rgba(15, 23, 42, 0.22),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+  border: 1px solid var(--border);
+  animation: scaleUp 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  overflow: hidden;
+}
+
+.claim-popup-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4f46e5, #818cf8, #a5b4fc);
+  border-radius: 24px 24px 0 0;
+}
+
+.claim-popup-content.claim-popup--error::before {
+  background: linear-gradient(90deg, #ef4444, #f87171, #fca5a5);
 }
 
 .claim-popup-icon {
-  font-size: 64px;
-  margin-bottom: 16px;
-  animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.1s both;
+  font-size: 56px;
+  margin-bottom: 18px;
+  animation: bounceIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  filter: drop-shadow(0 4px 12px rgba(79, 70, 229, 0.2));
 }
 
 .claim-popup-content h2 {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   margin-bottom: 12px;
-  color: var(--text-main, #fff);
+  color: var(--text);
+  letter-spacing: -0.4px;
+}
+
+.claim-popup-content h2.claim-popup-title--error {
+  color: #ef4444;
 }
 
 .claim-popup-content p {
-  font-size: 15px;
-  color: var(--text-muted, #a0aec0);
-  line-height: 1.5;
-  margin-bottom: 24px;
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 28px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .claim-popup-content p strong {
-  color: var(--primary-light, #8b5cf6);
+  color: var(--primary);
+  font-weight: 700;
 }
 
 .claim-popup-btn {
-  background: var(--primary, #6d28d9);
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
   border: none;
-  padding: 12px 32px;
-  border-radius: 12px;
-  font-size: 16px;
+  padding: 13px 32px;
+  border-radius: 14px;
+  font-size: 15px;
   font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  letter-spacing: -0.01em;
 }
 
 .claim-popup-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.4);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+}
+
+.claim-popup-btn--error {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35) !important;
+}
+
+.claim-popup-btn--error:hover {
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.45) !important;
 }
 
 @keyframes fadeIn {

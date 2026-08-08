@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Upload, FileText, CheckCircle, Sparkles, Brain, ListChecks } from "lucide-react";
 import { uploadResume } from "../services/resumeAPI";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { showAppError } from "../utils/appAlert";
 import "./ResumeUpload.css";
 
@@ -28,7 +28,7 @@ const ResumeUpload = () => {
       setUploading(true);
       const res = await uploadResume(file);
       setLastResult(res);
-      toast.success(`Found ${res.skills?.length || 0} skills — ${res.questions?.length} questions ready!`);
+      notify.success(`Found ${res.skills?.length || 0} skills — ${res.questions?.length} questions ready!`);
     } catch (err) {
       showAppError(err.response?.data?.error || "Resume upload failed. Please try again.", "Upload failed");
     } finally {

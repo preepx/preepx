@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { triggerAnnouncement } from "../utils/announcement";
 
 function AuthCallback() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function AuthCallback() {
     try {
       localStorage.setItem("token", token);
       localStorage.setItem("user", user);
+      triggerAnnouncement();
       navigate("/user-dashboard", { replace: true });
     } catch {
       navigate("/auth", { replace: true });

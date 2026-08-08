@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import { getMcqDashboard, deleteMcqResult } from "../services/mcqAPI";
 import { syncUserToStorage } from "../services/userAPI";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { showAppError } from "../utils/appAlert";
 import EmptyState from "../components/EmptyState";
 import Loader from "../components/Loader";
@@ -60,7 +60,7 @@ const ObjectiveExamPage = () => {
     if (!confirm("Delete this exam record?")) return;
     try {
       await deleteMcqResult(id);
-      toast.success("Exam deleted");
+      notify.success("Exam deleted");
       loadDashboard();
     } catch {
       showAppError("Could not delete this exam.", "Delete failed");

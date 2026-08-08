@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Trophy, Award, Flame, BarChart3, Target, Camera, Edit2, MapPin, GraduationCap, Phone, Github, Linkedin, BookOpen, X, Check, Share2, Copy } from "lucide-react";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { getProfile, getAnalytics, uploadProfilePhoto, syncUserToStorage, updateProfileDetails } from "../services/userAPI";
 import { showAppError } from "../utils/appAlert";
 import "./Profile.css";
@@ -39,7 +39,7 @@ function Profile() {
       setEditForm(updated);
       syncUserToStorage(updated);
       window.dispatchEvent(new Event("user-updated"));
-      toast.success("Profile photo updated!");
+      notify.success("Profile photo updated!");
     } catch (err) {
       showAppError(err.response?.data?.message || "Failed to upload photo.", "Upload failed");
     } finally {
@@ -55,9 +55,9 @@ function Profile() {
       setUser(updated);
       syncUserToStorage(updated);
       window.dispatchEvent(new Event("user-updated"));
-      toast.success("Profile updated successfully!");
+      notify.success("Profile updated successfully!");
       if (updated.bonusMessage) {
-        toast.success(updated.bonusMessage, { icon: "🪙" });
+        notify.success(updated.bonusMessage);
       }
       setIsEditing(false);
     } catch (err) {
@@ -88,14 +88,14 @@ function Profile() {
       }
     } else {
       navigator.clipboard.writeText(text);
-      toast.success("Referral message copied to clipboard!");
+      notify.success("Referral message copied to clipboard!");
     }
   };
 
   const handleCopyCode = () => {
     if (!user.referralCode) return;
     navigator.clipboard.writeText(user.referralCode);
-    toast.success("Referral code copied to clipboard!");
+    notify.success("Referral code copied to clipboard!");
   };
 
   if (!user) return null;

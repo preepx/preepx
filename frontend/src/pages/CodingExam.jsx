@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import Webcam from 'react-webcam';
 import { Play, CheckCircle2, XCircle, Clock, ArrowLeft, Terminal, ShieldCheck } from 'lucide-react';
-import { toast } from 'react-toastify';
+import notify from '../utils/notify';
 import { useFaceDetection } from '../hooks/useFaceDetection';
 import API from '../utils/api';
 import './CodingExam.css';
@@ -417,10 +417,10 @@ const CodingExam = () => {
                     ...record
                   });
                   if (res.data?.pointsEarned > 0) {
-                    toast.success(`🎉 You earned ${res.data.pointsEarned} XP!`);
+                    notify.success(`🎉 You earned ${res.data.pointsEarned} XP!`);
                     window.dispatchEvent(new Event('walletUpdated'));
                   } else {
-                    toast.info('Practice submitted!');
+                    notify.info('Practice submitted!');
                   }
                 } catch (err) {
                   console.error("Failed to save coding result to backend:", err);
@@ -494,9 +494,9 @@ const CodingExam = () => {
 
             <div
               className="editor-wrapper"
-              onCopy={(e) => { e.preventDefault(); toast.warning("Copying is disabled during the exam."); }}
-              onPaste={(e) => { e.preventDefault(); toast.warning("Pasting is disabled during the exam."); }}
-              onCut={(e) => { e.preventDefault(); toast.warning("Cutting is disabled during the exam."); }}
+              onCopy={(e) => { e.preventDefault(); notify.warning("Copying is disabled during the exam."); }}
+              onPaste={(e) => { e.preventDefault(); notify.warning("Pasting is disabled during the exam."); }}
+              onCut={(e) => { e.preventDefault(); notify.warning("Cutting is disabled during the exam."); }}
             >
               <Editor
                 height="100%"
@@ -512,7 +512,7 @@ const CodingExam = () => {
                     if (cmdKey && (e.browserEvent.code === 'KeyC' || e.browserEvent.code === 'KeyV' || e.browserEvent.code === 'KeyX')) {
                       e.preventDefault();
                       e.stopPropagation();
-                      toast.warning("Copy/Paste is disabled during the exam.");
+                      notify.warning("Copy/Paste is disabled during the exam.");
                     }
                   });
                 }}

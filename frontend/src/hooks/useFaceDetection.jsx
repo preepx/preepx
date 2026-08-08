@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import * as blazeface from '@tensorflow-models/blazeface';
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import notify from '../utils/notify';
 
 export const useFaceDetection = (webcamRefs, isActive, onViolation) => {
   const [faceWarning, setFaceWarning] = useState(null);
@@ -84,7 +84,7 @@ export const useFaceDetection = (webcamRefs, isActive, onViolation) => {
               onViolation(newWarningMsg);
             } else {
               if (warningCountRef.current > 5) {
-                toast.error("You have been exited due to repeated proctoring violations (Face not detected/Multiple faces).");
+                notify.error("You have been exited due to repeated proctoring violations (Face not detected/Multiple faces).");
                 navigate('/user-dashboard');
                 // Clear interval immediately
                 if (detectIntervalRef.current) {

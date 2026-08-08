@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { getProfile, getAnalytics } from "../services/userAPI";
 import { uploadResume } from "../services/resumeAPI";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { showAppError } from "../utils/appAlert";
 import { useWallet } from "../features/wallet/hooks/useWallet";
 import Loader from "../components/Loader";
@@ -54,9 +54,9 @@ function UserDashboard() {
     }
     try {
       setUploadingResume(true);
-      toast.info("Analyzing resume...");
+      notify.info("Analyzing resume...");
       const res = await uploadResume(file);
-      toast.success(`Found ${res.skills?.length || 0} skills. Starting interview!`);
+      notify.success(`Found ${res.skills?.length || 0} skills. Starting interview!`);
       navigate("/start-interview", {
         state: {
           jobTitle: "Resume-based Role",

@@ -51,7 +51,27 @@ const mcqHandler = (io, socket) => {
       const currentQ = session.questionsAndAnswers[session.currentQuestionIndex];
       currentQ.userAnswer = answer;
       
-      if (answer === currentQ.correctAnswer) {
+      let isCorrect = false;
+      const ansText = (answer || "").toString().trim().toLowerCase();
+      const corrText = (currentQ.correctAnswer || "").toString().trim().toLowerCase();
+
+      if (ansText === corrText) {
+        isCorrect = true;
+      } else {
+        const matchOptionLetter = corrText.match(/^(?:option\s+)?([a-d])$/i);
+        if (matchOptionLetter) {
+          const letter = matchOptionLetter[1].toLowerCase();
+          const index = letter.charCodeAt(0) - 97;
+          if (index >= 0 && index < (currentQ.options || []).length) {
+            const actualCorrectText = currentQ.options[index].toString().trim().toLowerCase();
+            if (ansText === actualCorrectText) {
+              isCorrect = true;
+            }
+          }
+        }
+      }
+
+      if (isCorrect) {
         session.score += 1;
       }
 
@@ -164,13 +184,14 @@ Provide 4 options for each. Format the output STRICTLY as a JSON object with a "
   "questions": [
     {
       "question": "The actual question text?",
-      "options": ["Option A", "Option B", "Option C", "Option D"],
-      "correctAnswer": "Option B",
+      "options": ["First option", "Second option", "Third option", "Fourth option"],
+      "correctAnswer": "The exact text of the correct option",
       "explanation": "Brief explanation of why this is correct."
     }
   ]
 }
-No other text, only the JSON object.`;
+No other text, only the JSON object.
+IMPORTANT: The "correctAnswer" field must exactly match the full text of one of the items in the "options" array. Do NOT return "Option A", "A", or "C". Return the actual text string.`;
 
       const qDataArray = await aiService.generateJson(prompt, {
         temperature: 0.7,

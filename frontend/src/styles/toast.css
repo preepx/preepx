@@ -1,0 +1,266 @@
+/* ── Top-Center Notifications with Spin Orb Entry ─────────── */
+
+.px-toast-root {
+  --px-toast-width: 380px;
+}
+
+.px-toast-root.Toastify__toast-container {
+  width: var(--px-toast-width) !important;
+  max-width: calc(100vw - 32px) !important;
+  padding: 20px 0 0 0 !important;
+  top: 16px !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  z-index: 10001 !important;
+  pointer-events: none;
+}
+
+.px-toast-root .Toastify__toast {
+  pointer-events: auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: unset !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+.px-notify-wrap {
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Outer wrapper */
+.px-notify-wrap-outer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ── Spinning orb ── */
+.px-orb {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  animation: pxOrbDrop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pxOrbDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px) rotate(0deg) scale(0.3);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(4px) rotate(540deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0) rotate(720deg) scale(0.2);
+  }
+}
+
+.px-orb-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2.5px solid transparent;
+  border-top-color: var(--c1);
+  border-right-color: var(--c2);
+  border-bottom-color: var(--c3);
+  border-left-color: var(--c1);
+  animation: pxOrbSpin 0.35s linear infinite;
+}
+
+@keyframes pxOrbSpin {
+  to { transform: rotate(360deg); }
+}
+
+.px-orb-core {
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--c2), var(--c1));
+  box-shadow: 0 2px 12px var(--c1);
+  opacity: 0.8;
+}
+
+/* ── Notification card ── */
+.px-notify {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px 18px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+    0 8px 28px -6px rgba(15, 23, 42, 0.14),
+    0 20px 48px -12px rgba(15, 23, 42, 0.1);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-16px) scale(0.92);
+}
+
+.px-notify--visible {
+  animation: pxNotifyReveal 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes pxNotifyReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.px-notify-glow {
+  position: absolute;
+  top: -30px;
+  left: -10px;
+  width: 100px;
+  height: 60px;
+  background: radial-gradient(ellipse, var(--px-glow) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.px-notify::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--px-accent);
+  border-radius: 16px 0 0 16px;
+}
+
+.px-notify-icon-wrap {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 4px;
+  box-shadow: 0 0 0 3px var(--px-ring);
+  position: relative;
+  z-index: 1;
+}
+
+.px-notify-body {
+  flex: 1;
+  min-width: 0;
+  z-index: 1;
+}
+
+.px-notify-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--px-accent);
+  margin-bottom: 2px;
+}
+
+.px-notify-msg {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.4;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.px-notify-close {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  z-index: 1;
+}
+
+.px-notify-close:hover {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.px-notify-timer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+}
+
+.px-notify-timer-bar {
+  height: 100%;
+  background: var(--px-accent);
+  transition: width 0.05s linear;
+  opacity: 0.65;
+}
+
+/* Dark theme */
+[data-theme="dark"] .px-notify {
+  background: rgba(30, 41, 59, 0.97);
+  border-color: rgba(51, 65, 85, 0.8);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 8px 28px -6px rgba(0, 0, 0, 0.45);
+}
+
+[data-theme="dark"] .px-notify-msg { color: #f1f5f9; }
+[data-theme="dark"] .px-notify-close { color: #64748b; }
+[data-theme="dark"] .px-notify-close:hover { background: #334155; color: #e2e8f0; }
+[data-theme="dark"] .px-notify-timer { background: rgba(255, 255, 255, 0.06); }
+
+@media (max-width: 480px) {
+  .px-toast-root.Toastify__toast-container {
+    width: calc(100vw - 24px) !important;
+    top: 12px !important;
+    max-width: unset !important;
+  }
+  
+  .px-notify {
+    padding: 10px 12px !important;
+    gap: 8px !important;
+  }
+
+  .px-notify-msg {
+    font-size: 13px !important;
+  }
+  
+  .px-orb {
+    width: 32px !important;
+    height: 32px !important;
+  }
+}

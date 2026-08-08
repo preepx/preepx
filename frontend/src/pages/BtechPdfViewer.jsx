@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import notify from '../utils/notify';
 import { AlertTriangle } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
 import API from "../utils/api";
@@ -43,12 +44,12 @@ function BtechPdfViewer() {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'c' || e.key === 'x')) {
         e.preventDefault();
-        alert("Downloading, printing, and copying are disabled for protected notes.");
+        notify.warning("Downloading, printing, and copying are disabled for protected notes.");
       }
       if (e.key === 'PrintScreen') {
         e.preventDefault();
         navigator.clipboard.writeText('');
-        alert("Screenshots are disabled for protected notes.");
+        notify.warning("Screenshots are disabled for protected notes.");
       }
     };
 

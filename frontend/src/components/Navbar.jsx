@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { Moon, Sun } from "lucide-react";
 import "./Navbar.css";
 
@@ -53,7 +53,7 @@ function Navbar() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    toast.success("Logged out successfully!");
+    notify.success("Logged out successfully!");
     setShowMenu(false);
     navigate("/");
   };

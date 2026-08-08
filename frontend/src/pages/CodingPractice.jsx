@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import notify from '../utils/notify';
 import API from '../utils/api';
 import {
   Code2, Plus, Clock, Trophy, Target, Search,
@@ -46,7 +47,7 @@ const CodingPractice = () => {
       window.dispatchEvent(new Event("walletUpdated"));
       navigate(`/coding-exam?difficulty=${difficulty}`);
     } catch (err) {
-      alert(err.response?.data?.message || err.response?.data?.error || err.message || 'Error starting session');
+      notify.error(err.response?.data?.message || err.response?.data?.error || err.message || 'Error starting session');
     }
   };
 

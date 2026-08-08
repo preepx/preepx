@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IndianRupee, Sparkles } from "lucide-react";
-import { toast } from "react-toastify";
+import notify from '../../../utils/notify';
 import { createOrder, verifyPayment } from "../services/walletAPI";
 import { DEFAULT_PACKAGES } from "../constants/walletConfig";
 import "./CoinPackages.css";
@@ -37,10 +37,10 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
               razorpay_signature: response.razorpay_signature,
               packageId: pack.id
             });
-            toast.success(verifyData.message);
+            notify.success(verifyData.message);
             onPurchaseSuccess?.(verifyData);
           } catch (error) {
-            toast.error(error.response?.data?.message || "Payment verification failed");
+            notify.error(error.response?.data?.message || "Payment verification failed");
           }
         },
         prefill: {
@@ -55,12 +55,12 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
 
       const rzp1 = new window.Razorpay(options);
       rzp1.on('payment.failed', function (response) {
-        toast.error("Payment failed. Please try again.");
+        notify.error("Payment failed. Please try again.");
       });
       rzp1.open();
 
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to initiate purchase");
+      notify.error(err.response?.data?.message || "Failed to initiate purchase");
     } finally {
       setBuying(null);
     }

@@ -7,7 +7,7 @@ import {
 import { getDashboard, syncUserToStorage } from "../services/userAPI";
 import { deleteInterview, getInterviewById } from "../services/interviewAPI";
 import { uploadResume } from "../services/resumeAPI";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { showAppError } from "../utils/appAlert";
 import InterviewModal from "./InterviewModal";
 import WelcomeModal from "../components/WelcomeModal";
@@ -80,7 +80,7 @@ const InterviewPage = () => {
     try {
       setUploading(true);
       const res = await uploadResume(file);
-      toast.success("Resume analyzed! Starting interview...");
+      notify.success("Resume analyzed! Starting interview...");
       navigate("/start-interview", {
         state: {
           jobTitle: "Resume-based Role",
@@ -102,7 +102,7 @@ const InterviewPage = () => {
     if (!confirm("Delete this interview?")) return;
     try {
       await deleteInterview(id);
-      toast.success("Interview deleted");
+      notify.success("Interview deleted");
       loadDashboard();
     } catch {
       showAppError("Could not delete this interview. Please try again.", "Delete failed");

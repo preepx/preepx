@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Moon, Sun, Bell, Timer, Save, User, Mail, Shield } from "lucide-react";
 import { updateSettings } from "../services/userAPI";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { showAppError } from "../utils/appAlert";
 import "./Settings.css";
 
@@ -28,7 +28,7 @@ function Settings() {
     try {
       const updated = await updateSettings(settings);
       localStorage.setItem("user", JSON.stringify({ ...stored, settings: updated.settings }));
-      toast.success("Settings saved!");
+      notify.success("Settings saved!");
     } catch {
       showAppError("Your settings could not be saved. Please try again.", "Save failed");
     } finally {

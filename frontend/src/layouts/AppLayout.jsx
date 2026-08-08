@@ -4,7 +4,7 @@ import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
   LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code, FileText
 } from "lucide-react";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "../services/userAPI";
 import { REWARDS_DATA, calculateProgress } from "../utils/rewardsUtils";
 import { useWallet } from "../features/wallet/hooks/useWallet";
@@ -52,7 +52,7 @@ function AppLayout({ children }) {
       if (currentProgress >= reward.target) {
         try {
           const res = await claimXpReward(reward.id, reward.xp);
-          toast.success(`🎉 Reward Unlocked: ${reward.title}! +${reward.xp} XP`);
+          notify.success(`🎉 Reward Unlocked: ${reward.title}! +${reward.xp} XP`);
           newClaims.push(reward.id);
           newXp = res.totalPoints;
           newLevel = res.level;
@@ -91,6 +91,8 @@ function AppLayout({ children }) {
     return () => window.removeEventListener("user-updated", handler);
   }, [location.pathname]);
 
+
+
   const toggleTheme = () => {
     const next = isDark ? "light" : "dark";
     document.documentElement.dataset.theme = next;
@@ -112,7 +114,7 @@ function AppLayout({ children }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    toast.success("Signed out successfully");
+    notify.success("Signed out successfully");
     navigate("/");
   };
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import notify from '../utils/notify';
 import API from "../utils/api";
 import { useNavigate } from "react-router-dom";
 import "./register.css"; // CSS import
@@ -26,7 +27,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      return alert("Passwords do not match!");
+      return notify.error("Passwords do not match!");
     }
 
     const data = new FormData();
@@ -36,10 +37,10 @@ function Register() {
       await API.post("/users/register", data, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      alert("Registration successful! Please verify OTP.");
+      notify.success("Registration successful! Please verify OTP.");
       navigate("/Login"); // ✅ Redirect to OTP page
     } catch (error) {
-      alert(error.response?.data?.message || "Error registering");
+      notify.error(error.response?.data?.message || "Error registering");
     }
   };
 

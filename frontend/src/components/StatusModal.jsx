@@ -43,20 +43,18 @@ function StatusModal({ open, type = "error", title, message, action, onClose }) 
         <h3 id="status-modal-title" className="status-modal-title">{title}</h3>
         <p id="status-modal-message" className="status-modal-message">{message}</p>
         {action ? (
-          <div style={{ display: "flex", gap: "12px", marginTop: "16px" }}>
-            <button 
-              type="button" 
-              className="status-modal-btn" 
-              onClick={() => { action.onClick(); onClose(); }} 
-              style={{ flex: 1 }}
+          <div className="status-modal-actions">
+            <button
+              type="button"
+              className="status-modal-btn"
+              onClick={() => { action.onClick(); onClose(); }}
             >
               {action.label}
             </button>
-            <button 
-              type="button" 
-              className="status-modal-btn" 
-              onClick={onClose} 
-              style={{ flex: 1, background: "var(--bg)", color: "var(--text)" }}
+            <button
+              type="button"
+              className="status-modal-btn status-modal-btn--secondary"
+              onClick={onClose}
             >
               Cancel
             </button>

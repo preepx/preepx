@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import notify from '../utils/notify';
 import {
   ArrowLeft, BookOpen, FileText, Cpu, Tag,
   HelpCircle, ChevronDown, ChevronUp, Hash, ExternalLink,
@@ -26,12 +27,12 @@ function BtechNoteDetail() {
     const handleKeyDown = (e) => {
       if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'c' || e.key === 'x')) {
         e.preventDefault();
-        alert("Downloading, printing, and copying are disabled for protected notes.");
+        notify.warning("Downloading, printing, and copying are disabled for protected notes.");
       }
       if (e.key === 'PrintScreen') {
         e.preventDefault();
         navigator.clipboard.writeText('');
-        alert("Screenshots are disabled for protected notes.");
+        notify.warning("Screenshots are disabled for protected notes.");
       }
     };
 

@@ -81,13 +81,13 @@ function Achievements() {
 
       {popup && (
         <div className="claim-popup-overlay">
-          <div className="claim-popup-content">
+          <div className={`claim-popup-content${popup.isError ? " claim-popup--error" : ""}`}>
             <div className="claim-popup-icon">{popup.icon || "🎉"}</div>
             {popup.isError ? (
               <>
-                <h2 style={{ color: "#ef4444" }}>Oops!</h2>
+                <h2 className="claim-popup-title--error">Oops!</h2>
                 <p>{popup.message}</p>
-                <button className="claim-popup-btn" style={{ background: "#ef4444" }} onClick={() => setPopup(null)}>Try Again</button>
+                <button className="claim-popup-btn claim-popup-btn--error" onClick={() => setPopup(null)}>Try Again</button>
               </>
             ) : (
               <>

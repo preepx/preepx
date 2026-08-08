@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Upload, FileText, CheckCircle, AlertTriangle, Lightbulb, Activity, ArrowRight, RefreshCw } from "lucide-react";
 import { getAtsScore } from "../services/atsAPI";
-import { toast } from "react-toastify";
+import notify from '../utils/notify';
 import { showAppError } from "../utils/appAlert";
 import "./AtsScore.css";
 
@@ -24,7 +24,7 @@ const AtsScore = () => {
       const res = await getAtsScore(file);
       setResult(res);
       window.dispatchEvent(new Event("walletUpdated"));
-      toast.success("Resume analyzed successfully!");
+      notify.success("Resume analyzed successfully!");
     } catch (err) {
       showAppError(err.response?.data?.error || "ATS scoring failed. Please try again.", "Analysis failed");
     } finally {
