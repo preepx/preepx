@@ -3,10 +3,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const sendResetOtpEmail = require('../../../utils/sendResetOtpEmail');
-const { sendSuccessResponse } = require('../../../common/utils/responseFormatter');
-const catchAsync = require('../../../common/middleware/catchAsync');
-const envConfig = require('../../../config/env.config');
-const { BadRequestError, NotFoundError } = require('../../../common/exceptions/customErrors');
+const { sendSuccessResponse } = require('../../common/utils/responseFormatter');
+const catchAsync = require('../../common/middleware/catchAsync');
+const envConfig = require('../../config/env.config');
+const { BadRequestError, NotFoundError } = require('../../common/exceptions/customErrors');
 
 const axios = require('axios');
 
