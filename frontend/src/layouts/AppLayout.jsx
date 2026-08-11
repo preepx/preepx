@@ -226,9 +226,9 @@ function AppLayout({ children }) {
               <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
 
               <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '4px' }}>
-                <button 
-                  onClick={() => setShowComingSoon(true)} 
-                  className="animate-pulse" 
+                <button
+                  onClick={() => setShowComingSoon(true)}
+                  className="animate-pulse"
                   style={{ border: 'none', padding: 0, cursor: 'pointer', background: 'linear-gradient(135deg, #818cf8, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: 'bold', fontSize: '16px', letterSpacing: '0.5px' }}
                 >
                   Apply Jobs
@@ -243,7 +243,7 @@ function AppLayout({ children }) {
                 <button aria-label="Notifications" onClick={() => setShowNotifications(true)} style={{ position: 'relative', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '4px', flexShrink: 0, transition: 'color 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
                   <Bell size={22} />
                   {unreadCount > 0 && (
-                    <span style={{ position: 'absolute', top: '0px', right: '0px', background: 'red', color: 'white', fontSize: '10px', fontWeight: 'bold', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', transform: 'translate(25%, -25%)' }}>
+                    <span className="notification-badge">
                       {unreadCount}
                     </span>
                   )}
