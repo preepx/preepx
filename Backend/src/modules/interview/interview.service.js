@@ -33,7 +33,7 @@ const updateStreak = async (userId) => {
 
 const generateInterviewQuestions = async (userId, data) => {
   const { jobTitle, jobTopic, difficulty = "medium", interviewType = "mixed", questionCount = 10 } = data;
-  const count = Math.min(Math.max(parseInt(questionCount) || 10, 10), 15);
+  const count = Math.min(Math.max(parseInt(questionCount) || 5, 5), 15);
 
   if (userId) {
     try {

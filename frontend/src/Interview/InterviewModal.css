@@ -133,6 +133,7 @@
 .range-input {
   width: 100%;
   accent-color: var(--primary);
+  outline: none;
 }
 
 @keyframes slideUp {
