@@ -27,6 +27,7 @@ const BtechPdfViewer = lazy(() => import("./pages/BtechPdfViewer"));
 const ResumeUpload = lazy(() => import("./resume/ResumeUpload"));
 const AtsScore = lazy(() => import("./resume/AtsScore"));
 const Auth = lazy(() => import("./Login/Auth"));
+const RecruiterAuth = lazy(() => import("./Login/RecruiterAuth"));
 const AuthCallback = lazy(() => import("./Login/AuthCallback"));
 const ObjectiveExam = lazy(() => import("./Interview/ObjectiveExam"));
 const ObjectiveExamPage = lazy(() => import("./Interview/ObjectiveExamPage"));
@@ -37,7 +38,7 @@ const CodingExam = lazy(() => import("./pages/CodingExam"));
 const UserGuide = lazy(() => import("./pages/UserGuide"));
 
 const PUBLIC_ROUTES = [
-  "/", "/dashboard", "/auth",
+  "/", "/dashboard", "/auth", "/auth/recruiter",
   "/features", "/how-it-works", "/mock-interviews", "/user-guide",
   "/interview-tips", "/blog", "/help-center", "/community",
   "/about-us", "/careers", "/privacy-policy", "/terms-of-service"
@@ -61,11 +62,12 @@ function LayoutWrapper({ children }) {
   const useSidebar = usesAppLayout(location.pathname);
 
   if (isPublic) {
+    const isAuthPage = location.pathname === "/auth" || location.pathname === "/auth/recruiter";
     return (
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        {location.pathname !== "/auth" && <Navbar />}
+        {!isAuthPage && <Navbar />}
         <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
-        {location.pathname !== "/auth" && <Footer />}
+        {!isAuthPage && <Footer />}
       </div>
     );
   }
@@ -94,6 +96,7 @@ function AppContent() {
           <Route path="/" element={<GuestRoute><Dashboard /></GuestRoute>} />
           <Route path="/dashboard" element={<GuestRoute><Dashboard /></GuestRoute>} />
           <Route path="/auth" element={<GuestRoute><Auth /></GuestRoute>} />
+          <Route path="/auth/recruiter" element={<GuestRoute><RecruiterAuth /></GuestRoute>} />
           <Route path="/auth/callback" element={<AuthCallback />} />
 
           <Route path="/features" element={<StaticPage />} />

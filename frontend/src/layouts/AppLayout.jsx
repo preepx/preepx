@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code, FileText
+  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code, FileText, Bell
 } from "lucide-react";
 import notify from '../utils/notify';
 import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "../services/userAPI";
+import NotificationModal from "../components/NotificationModal";
 import { REWARDS_DATA, calculateProgress } from "../utils/rewardsUtils";
 import { useWallet } from "../features/wallet/hooks/useWallet";
 import WalletBadge from "../features/wallet/components/WalletBadge";
@@ -36,6 +37,7 @@ function AppLayout({ children }) {
   const navigate = useNavigate();
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
   const { balance } = useWallet();
+  const [showNotifications, setShowNotifications] = useState(false);
 
   const checkAndClaimRewards = async (currentUser, currentDash) => {
     if (!currentUser || !currentDash) return;
@@ -176,12 +178,19 @@ function AppLayout({ children }) {
             <header className="topbar">
               <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
 
+              <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '4px' }}>
+                <Link to="/jobs" style={{ textDecoration: 'none', color: 'inherit', fontWeight: '500', fontSize: '15px' }}>Jobs</Link>
+              </div>
+
               <div className="topbar-center">
                 <WalletBadge />
               </div>
 
               <div className="topbar-right">
                 {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
+                <button aria-label="Notifications" onClick={() => setShowNotifications(true)} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}>
+                  <img src="/icons/notification.png" alt="Notifications" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+                </button>
                 <span className="level-badge"><span className="badge-text">Level </span>{user.level || 1}</span>
                 <span className="points-badge" style={{ display: 'flex', alignItems: 'center', gap: '0px' }}><img src="/logo.png" alt="XP" style={{ width: '32px', height: '32px', margin: '-8px -6px -8px -8px', objectFit: 'contain' }} />{user.points || 0}<span className="badge-text" style={{ marginLeft: '2px' }}>XP</span></span>
               </div>
@@ -191,6 +200,11 @@ function AppLayout({ children }) {
         </div>
       </div>
       {!location.pathname.includes("/pdf") && <Footer />}
+
+      <NotificationModal 
+        isOpen={showNotifications} 
+        onClose={() => setShowNotifications(false)} 
+      />
     </>
   );
 }
