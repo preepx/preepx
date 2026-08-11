@@ -4,7 +4,7 @@ import notify from '../utils/notify';
 import { Moon, Sun } from "lucide-react";
 import "./Navbar.css";
 
-function Navbar() {
+function Navbar({ landingRole, setLandingRole }) {
   const [showMenu, setShowMenu] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate();
@@ -136,9 +136,11 @@ function Navbar() {
               )}
             </div>
           ) : (
-            <div className="auth-buttons">
-              <Link to="/auth" className="btn-ghost">Sign In</Link>
-              <Link to="/auth" className="btn-primary-sm">Get Started</Link>
+            <div className="auth-buttons" style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+              <Link to={`/auth?role=${landingRole || 'candidate'}`} className="btn-ghost">Sign In</Link>
+              <Link to={`/auth?role=${landingRole || 'candidate'}`} className="btn-primary-sm">
+                {landingRole === 'recruiter' ? 'Start Hiring' : 'Get Started'}
+              </Link>
             </div>
           )}
         </div>

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import API from "../utils/api";
 import notify from '../utils/notify';
 import { showAppError } from "../utils/appAlert";
@@ -51,6 +51,9 @@ function Auth() {
   const recaptchaRef = useRef(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const role = new URLSearchParams(location.search).get("role") || "candidate";
+  const isRecruiter = role === "recruiter";
 
   // Server warm-up ping — taaki register click pe delay na ho
   useEffect(() => {
@@ -391,8 +394,8 @@ function Auth() {
           <Link to="/" className="auth-logo" style={{ textDecoration: 'none', display: 'inline-block' }}>
             <img src="/preepx_logo.png" alt="PreepX" style={{ height: "72px", objectFit: "contain", margin: "-16px 0 -12px -12px" }} />
           </Link>
-          <h1>Master your interviews with AI</h1>
-          <p>Practice realistic mock interviews, get instant feedback, and track your progress — all powered by cutting-edge AI.</p>
+          <h1>{isRecruiter ? "Hire top tech talent with AI" : "Master your interviews with AI"}</h1>
+          <p>{isRecruiter ? "Discover, evaluate, and hire the right candidates using AI-powered screening and automated assessments." : "Practice realistic mock interviews, get instant feedback, and track your progress — all powered by cutting-edge AI."}</p>
           <div className="auth-features">
             <div className="auth-feature-card"><Zap size={18} /><span>AI-generated role-specific questions</span></div>
             <div className="auth-feature-card"><BarChart3 size={18} /><span>Detailed scoring & analytics</span></div>
@@ -428,8 +431,8 @@ function Auth() {
           {screen === "login" && (
             <>
               <div className="auth-card-header">
-                <h2>Welcome back</h2>
-                <p className="auth-subtitle">Sign in to continue your interview journey</p>
+                <h2>Welcome back{isRecruiter ? ", Recruiter" : ""}</h2>
+                <p className="auth-subtitle">Sign in to continue your {isRecruiter ? "hiring" : "interview"} journey</p>
               </div>
               <form onSubmit={handleLoginSubmit} className="auth-form" autoComplete="on">
                 <div className="input-field">
@@ -498,7 +501,7 @@ function Auth() {
           {screen === "register" && (
             <>
               <div className="auth-card-header">
-                <h2>Create your account</h2>
+                <h2>Create your {isRecruiter ? "recruiter " : ""}account</h2>
                 <p className="auth-subtitle">Email verified registration (min. 6 char password)</p>
               </div>
               <form onSubmit={handleRegisterSubmit} className="auth-form" autoComplete="off">
