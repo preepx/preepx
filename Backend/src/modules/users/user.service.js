@@ -4,6 +4,7 @@ const MCQResult = require('../../../models/MCQResult');
 const walletService = require('../wallet/wallet.service');
 const { evaluateBadges, getBadgeDetails, getAllBadges, BADGE_RULES } = require('../../../utils/badges');
 const { NotFoundError, BadRequestError } = require('../../common/exceptions/customErrors');
+const socketManager = require("../../../socket/socketManager");
 
 const getProfile = async (userId) => {
   const user = await User.findById(userId).lean();
@@ -392,6 +393,31 @@ const claimXpReward = async (userId, rewardId, xpAmount) => {
   return { xpEarned: xpAmount, totalPoints: user.points, level: user.level, xpRewardsClaimed: user.xpRewardsClaimed, user };
 };
 
+const adminAddXp = async (userId, xpAmount, reason) => {
+  const user = await User.findById(userId);
+  if (!user) throw new NotFoundError("User not found");
+  
+  user.points = (user.points || 0) + xpAmount;
+  user.lifetimePoints = (user.lifetimePoints || user.points || 0) + xpAmount;
+  user.level = Math.floor(user.lifetimePoints / 100) + 1;
+  await user.save();
+
+  try {
+    if (global.io) {
+      global.io.to(`user_${userId}`).emit("global_notification", {
+        title: "XP Awarded",
+        message: reason || `Admin has awarded you ${xpAmount} XP!`,
+        icon: "⭐"
+      });
+      console.log(`Global IO emitted XP Awarded to user_${userId}`);
+    } else {
+      console.error("Global IO is undefined in adminAddXp!");
+    }
+  } catch(e) { console.error("Global IO Emit Error in adminAddXp:", e); }
+
+  return user;
+};
+
 module.exports = {
   getProfile,
   updateProfileDetails,
@@ -405,4 +431,5 @@ module.exports = {
   claimBadge,
   redeemXp,
   claimXpReward,
+  adminAddXp
 };

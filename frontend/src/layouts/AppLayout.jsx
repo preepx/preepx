@@ -9,6 +9,8 @@ import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "../s
 import NotificationModal from "../components/NotificationModal";
 import { REWARDS_DATA, calculateProgress } from "../utils/rewardsUtils";
 import { useWallet } from "../features/wallet/hooks/useWallet";
+import { io } from "socket.io-client";
+import API from "../utils/api";
 import WalletBadge from "../features/wallet/components/WalletBadge";
 import Footer from "../components/Footer";
 import "./AppLayout.css";
@@ -35,6 +37,7 @@ const initialNotifications = [
     title: 'Daily Reward',
     message: 'You have received your daily XP points!',
     time: 'Today',
+    timestamp: Date.now() - 3600000,
     icon: '🎁',
     read: false
   },
@@ -43,6 +46,7 @@ const initialNotifications = [
     title: 'Referral Bonus',
     message: `You have received XP points from your successful referral(s)!`,
     time: 'Recently',
+    timestamp: Date.now() - 86400000,
     icon: '👥',
     read: false
   }
@@ -77,6 +81,7 @@ function AppLayout({ children }) {
         title: e.detail.title,
         message: e.detail.message,
         time: 'Just now',
+        timestamp: Date.now(),
         icon: e.detail.icon || '🔔',
         read: false
       };
@@ -124,8 +129,25 @@ function AppLayout({ children }) {
   const refreshUser = () => {
     Promise.all([getProfile(), getDashboard().catch(() => null)])
       .then(([u, dash]) => {
+        const localUser = JSON.parse(localStorage.getItem("user") || "{}");
+        if (u && localUser && typeof u.points === 'number' && typeof localUser.points === 'number') {
+          if (u.points > localUser.points) {
+            const earned = u.points - localUser.points;
+            window.dispatchEvent(new CustomEvent('newNotification', {
+              detail: {
+                title: "XP Awarded",
+                message: `You have received ${earned} XP!`,
+                icon: "⭐"
+              }
+            }));
+          }
+        }
+
         setUser(u);
         syncUserToStorage(u);
+        window.dispatchEvent(new Event("user-updated"));
+        window.dispatchEvent(new Event("walletUpdated"));
+        
         if (dash) {
           checkAndClaimRewards(u, dash);
         }
@@ -139,6 +161,32 @@ function AppLayout({ children }) {
     window.addEventListener("user-updated", handler);
     return () => window.removeEventListener("user-updated", handler);
   }, [location.pathname]);
+
+  // Global WebSocket for Real-Time Notifications
+  useEffect(() => {
+    if (!user?._id) return;
+    const SOCKET_URL = API.defaults?.baseURL ? API.defaults.baseURL.replace('/api', '') : 'http://localhost:4000';
+    const socket = io(SOCKET_URL);
+    
+    const handleConnect = () => {
+      console.log("Global Socket Connected! Emitting join_room for", user._id);
+      socket.emit('join_room', user._id);
+    };
+
+    if (socket.connected) {
+      handleConnect();
+    } else {
+      socket.on('connect', handleConnect);
+    }
+
+    socket.on('global_notification', (data) => {
+      notify.success(data.title + ": " + data.message);
+      window.dispatchEvent(new CustomEvent('newNotification', { detail: data }));
+      refreshUser(); // Background sync for XP/Coins
+    });
+
+    return () => socket.disconnect();
+  }, [user?._id]);
 
 
 

@@ -207,6 +207,21 @@ const addCoinsToWallet = async (req, res) => {
       description: description || "Added by Admin"
     });
 
+    try {
+      await fetch('http://localhost:4000/api/internal/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: req.params.id,
+          title: "Coins Added",
+          message: description || `Admin has added ${coins} coins to your wallet!`,
+          icon: "🪙"
+        })
+      });
+    } catch (e) {
+      console.error("Webhook notification failed:", e.message);
+    }
+
     res.json({ message: "Coins added successfully", wallet });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
@@ -234,6 +249,21 @@ const addXpToUser = async (req, res) => {
       balanceAfter: user.points, // Storing User XP points here
       description: description || "XP Added by Admin"
     });
+
+    try {
+      await fetch('http://localhost:4000/api/internal/notify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: req.params.id,
+          title: "XP Awarded",
+          message: description || `Admin has awarded you ${xp} XP!`,
+          icon: "⭐"
+        })
+      });
+    } catch (e) {
+      console.error("Webhook notification failed:", e.message);
+    }
 
     res.json({ message: "XP added successfully", user });
   } catch (error) {

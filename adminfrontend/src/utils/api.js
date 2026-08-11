@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://admiminterview-coch.onrender.com/api/admin',
+  baseURL: 'http://localhost:5000/api/admin',
 });  //https://admiminterview-coch.onrender.com  local http://localhost:5000/api/admin
 
 // Add a request interceptor to attach the admin token

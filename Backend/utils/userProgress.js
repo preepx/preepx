@@ -48,6 +48,18 @@ const awardMcqCompletion = async (userId, { score, totalQuestions }) => {
   await user.save();
   await updateStreak(userId);
 
+  try {
+    if (global.io && pointsEarned >= 0) {
+      global.io.to(`user_${userId}`).emit("global_notification", {
+        title: "Exam Completed",
+        message: pointsEarned > 0 ? `Excellent! You earned ${pointsEarned} XP for completing the objective exam.` : `Exam completed! You earned 0 XP this time. Try again to earn XP!`,
+        icon: "⭐"
+      });
+    }
+  } catch (e) {
+    console.error("Failed to emit MCQ XP notification:", e);
+  }
+
   const refreshed = await User.findById(userId);
   const claimableBadges = evaluateBadges(refreshed, { hasPerfectScore: isPerfect })
     .filter((b) => !(refreshed.badges || []).includes(b));

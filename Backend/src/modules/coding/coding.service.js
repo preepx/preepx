@@ -34,6 +34,18 @@ const saveCodingResult = async (data) => {
       user.points = (user.points || 0) + pointsEarned;
       user.level = Math.floor(user.points / 100) + 1;
       await user.save();
+
+      try {
+        if (global.io && pointsEarned > 0) {
+          global.io.to(`user_${userId}`).emit("global_notification", {
+            title: "Coding Challenge Completed",
+            message: `Awesome! You earned ${pointsEarned} XP for completing the coding challenge.`,
+            icon: "⭐"
+          });
+        }
+      } catch (e) {
+        console.error("Failed to emit Coding XP notification:", e);
+      }
     }
   }
 

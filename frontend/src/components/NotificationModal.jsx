@@ -1,6 +1,31 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { X, Bell } from 'lucide-react';
 
+const formatTimeAgo = (timestamp) => {
+  if (!timestamp) return 'Just now';
+  const seconds = Math.floor((new Date() - new Date(timestamp)) / 1000);
+  let interval = seconds / 31536000;
+  if (interval > 1) return Math.floor(interval) + " years ago";
+  interval = seconds / 2592000;
+  if (interval > 1) return Math.floor(interval) + " months ago";
+  interval = seconds / 86400;
+  if (interval > 1) {
+    const days = Math.floor(interval);
+    return days === 1 ? "1 day ago" : days + " days ago";
+  }
+  interval = seconds / 3600;
+  if (interval > 1) {
+    const hours = Math.floor(interval);
+    return hours === 1 ? "1 hour ago" : hours + " hours ago";
+  }
+  interval = seconds / 60;
+  if (interval > 1) {
+    const minutes = Math.floor(interval);
+    return minutes === 1 ? "1 min ago" : minutes + " mins ago";
+  }
+  return "Just now";
+};
+
 const NotificationItem = ({ notif, onRead, onDelete }) => {
   const [translateX, setTranslateX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -61,18 +86,23 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
       style={{
         transform: `translateX(${translateX}px)`,
         transition: isDragging ? 'none' : 'transform 0.3s ease',
-        opacity: notif.read ? 0.5 : 1,
-        cursor: 'pointer'
+        opacity: notif.read ? 0.75 : 1,
+        cursor: 'pointer',
+        paddingLeft: '8px'
       }}
-      className="flex gap-4 p-4 rounded-lg bg-black/5 dark:bg-white/5 border border-[var(--border)] relative"
+      className={`flex gap-4 pr-4 py-4 relative ${notif.read ? 'bg-transparent hover:bg-black/5 dark:hover:bg-white/5' : 'bg-blue-50/50 dark:bg-blue-500/10'}`}
     >
-      <div className="text-2xl select-none">{notif.icon}</div>
-      <div className="flex flex-col flex-1 min-w-0 select-none">
-        <div className="flex justify-between items-start gap-2">
-          <span className="font-semibold text-[15px] text-[var(--text)] truncate">{notif.title}</span>
-          <span className="text-[11px] text-[var(--text-muted)] whitespace-nowrap flex-shrink-0 mt-0.5" style={{ marginRight: '16px' }}>{notif.time}</span>
+      <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 text-2xl select-none">
+        {notif.icon}
+      </div>
+      <div className="flex flex-col flex-1 min-w-0 select-none justify-center pt-0.5">
+        <div className="text-[14px] text-[var(--text)] leading-snug break-words pr-2">
+          <span className="font-bold mr-1">{notif.title}</span>
+          <span className="text-[var(--text-muted)]">{notif.message}</span>
         </div>
-        <span className="text-[13px] text-[var(--text-muted)] mt-2 leading-relaxed break-words">{notif.message}</span>
+        <span className="text-[12px] text-blue-500 font-medium mt-1.5">
+          {notif.timestamp ? formatTimeAgo(notif.timestamp) : notif.time}
+        </span>
       </div>
     </div>
   );
@@ -109,7 +139,7 @@ const NotificationModal = ({ isOpen, onClose, notifs, setNotifs }) => {
       className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9999] flex justify-center items-center"
     >
       <div
-        className="bg-[var(--surface)] p-6 rounded-xl w-[400px] max-w-[90%] min-h-[400px] max-h-[80vh] overflow-y-auto shadow-[var(--shadow-lg)] border border-[var(--border)] flex flex-col"
+        className="bg-[var(--surface)] p-6 rounded-xl w-[400px] max-w-[90%] min-h-[400px] max-h-[80vh] shadow-[var(--shadow-lg)] border border-[var(--border)] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-8 border-b border-[var(--border)]" style={{ paddingBottom: '20px', paddingTop: '8px' }}>
@@ -130,7 +160,7 @@ const NotificationModal = ({ isOpen, onClose, notifs, setNotifs }) => {
         </div>
         <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
           {notifs.length > 0 ? (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2" style={{ paddingTop: '16px' }}>
               {notifs.map(notif => (
                 <NotificationItem
                   key={notif.id}

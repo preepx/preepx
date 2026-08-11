@@ -418,7 +418,25 @@ const CodingExam = () => {
                   });
                   if (res.data?.pointsEarned > 0) {
                     notify.success(`🎉 You earned ${res.data.pointsEarned} XP!`);
+
+                    const newNotif = {
+                      id: Date.now().toString(),
+                      title: "Coding Exam Completed",
+                      message: `You earned ${res.data.pointsEarned} XP!`,
+                      time: 'Just now',
+                      timestamp: Date.now(),
+                      icon: "⭐",
+                      read: false
+                    };
+                    const existingNotifs = JSON.parse(localStorage.getItem('user_notifications') || '[]');
+                    localStorage.setItem('user_notifications', JSON.stringify([newNotif, ...existingNotifs]));
+
+                    window.dispatchEvent(new CustomEvent('newNotification', {
+                      detail: { title: "Coding Exam Completed", message: `You earned ${res.data.pointsEarned} XP!`, icon: "⭐" }
+                    }));
+
                     window.dispatchEvent(new Event('walletUpdated'));
+                    window.dispatchEvent(new Event('user-updated'));
                   } else {
                     notify.info('Practice submitted!');
                   }

@@ -4,6 +4,7 @@ import Webcam from "react-webcam";
 import { Mic, MicOff, SkipForward, Volume2, Timer, ArrowLeft, ShieldCheck } from "lucide-react";
 import { evaluateAnswer, saveInterviewResult } from "../services/interviewAPI";
 import { showAppError } from "../utils/appAlert";
+import notify from "../utils/notify";
 import { useFaceDetection } from "../hooks/useFaceDetection";
 import "./InterviewMode.css";
 
@@ -12,60 +13,60 @@ const InterviewMode = () => {
   const navigate = useNavigate();
   const { jobTitle, jobTopic, questions, interviewId, fromResume } = location.state || {};
 
-  const [currentIndex,  setCurrentIndex]  = useState(0);
-  const [userAnswer,    setUserAnswer]    = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [userAnswer, setUserAnswer] = useState("");
   const [interimAnswer, setInterimAnswer] = useState("");
-  const [feedback,      setFeedback]      = useState("");
+  const [feedback, setFeedback] = useState("");
   const [feedbackScore, setFeedbackScore] = useState(null);
-  const [aiSpeaking,    setAiSpeaking]    = useState(false);
-  const [isListening,   setIsListening]   = useState(false);
-  const [evaluating,    setEvaluating]    = useState(false);
-  const [saving,        setSaving]        = useState(false);
+  const [aiSpeaking, setAiSpeaking] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [evaluating, setEvaluating] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [questionTimer, setQuestionTimer] = useState(45);
   const [totalDuration, setTotalDuration] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
   const [permissionsGranted, setPermissionsGranted] = useState(null); // null=checking, true=ok, false=denied
 
-  const webcamRef       = useRef(null);
-  const recRef          = useRef(null);
+  const webcamRef = useRef(null);
+  const recRef = useRef(null);
 
   // Initialize face detection hook
   const { faceWarning } = useFaceDetection(webcamRef, isFullscreen && permissionsGranted === true);
-  const timerRef        = useRef(null);
-  const silenceRef      = useRef(null);
-  const startTimeRef    = useRef(Date.now());
+  const timerRef = useRef(null);
+  const silenceRef = useRef(null);
+  const startTimeRef = useRef(Date.now());
 
-  const answerRef       = useRef("");
-  const indexRef        = useRef(0);
-  const allAnswersRef   = useRef([]);
-  const timerValRef     = useRef(45);
-  const exitedRef       = useRef(false);   // interview exit/done guard
-  const busyRef         = useRef(false);   // triggerNext in progress
+  const answerRef = useRef("");
+  const indexRef = useRef(0);
+  const allAnswersRef = useRef([]);
+  const timerValRef = useRef(45);
+  const exitedRef = useRef(false);   // interview exit/done guard
+  const busyRef = useRef(false);   // triggerNext in progress
   const isFullScreenRef = useRef(false);   // track fullscreen status
-  const interimRef      = useRef("");      // keep track of interim transcript
+  const interimRef = useRef("");      // keep track of interim transcript
 
   useEffect(() => {
     const handleFullscreenChange = () => {
       const isFull = !!document.fullscreenElement;
       setIsFullscreen(isFull);
       isFullScreenRef.current = isFull;
-      
+
       if (!isFull) {
         window.speechSynthesis.pause();
       } else {
         window.speechSynthesis.resume();
       }
     };
-    
+
     document.addEventListener("fullscreenchange", handleFullscreenChange);
-    
+
     // Attempt to enter fullscreen on mount
     const elem = document.documentElement;
     if (elem.requestFullscreen) {
-      elem.requestFullscreen().catch(() => {});
+      elem.requestFullscreen().catch(() => { });
     }
-    
+
     // Check for camera/mic permissions
     const checkPermissions = async () => {
       try {
@@ -77,7 +78,7 @@ const InterviewMode = () => {
       }
     };
     checkPermissions();
-    
+
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
@@ -89,15 +90,15 @@ const InterviewMode = () => {
     setAiSpeaking(false);
 
     if (silenceRef.current) { clearTimeout(silenceRef.current); silenceRef.current = null; }
-    if (timerRef.current)   { clearInterval(timerRef.current);  timerRef.current   = null; }
+    if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
 
     if (recRef.current) {
       try {
-        recRef.current.onend    = null;
+        recRef.current.onend = null;
         recRef.current.onresult = null;
-        recRef.current.onerror  = null;
+        recRef.current.onerror = null;
         recRef.current.stop();
-      } catch (_) {}
+      } catch (_) { }
       recRef.current = null;
     }
     setIsListening(false);
@@ -108,7 +109,7 @@ const InterviewMode = () => {
   const speakQuestion = (text) => {
     window.speechSynthesis.cancel();
     const voices = window.speechSynthesis.getVoices();
-    const preferred = ["Google US English","Microsoft David - English (United States)","Microsoft Zira - English (United States)","Alex","Samantha"];
+    const preferred = ["Google US English", "Microsoft David - English (United States)", "Microsoft Zira - English (United States)", "Alex", "Samantha"];
     let voice = null;
     for (const name of preferred) { voice = voices.find(v => v.name === name); if (voice) break; }
     if (!voice) voice = voices.find(v => v.lang === "en-US") || null;
@@ -117,7 +118,7 @@ const InterviewMode = () => {
     u.lang = "en-US"; u.rate = 0.88; u.pitch = 1.0; u.volume = 1.0;
     if (voice) u.voice = voice;
     u.onstart = () => setAiSpeaking(true);
-    u.onend   = () => setAiSpeaking(false);
+    u.onend = () => setAiSpeaking(false);
     u.onerror = () => setAiSpeaking(false);
     window.speechSynthesis.speak(u);
   };
@@ -140,7 +141,7 @@ const InterviewMode = () => {
     if (!SR) return;
 
     if (recRef.current) {
-      try { recRef.current.onend = null; recRef.current.stop(); } catch (_) {}
+      try { recRef.current.onend = null; recRef.current.stop(); } catch (_) { }
       recRef.current = null;
     }
 
@@ -157,7 +158,7 @@ const InterviewMode = () => {
     rec.onresult = (e) => {
       if (!isFullScreenRef.current) return;
       let newFinal = "";
-      let interim  = "";
+      let interim = "";
       for (let i = processed; i < e.results.length; i++) {
         if (e.results[i].isFinal) {
           newFinal += e.results[i][0].transcript + " ";
@@ -171,7 +172,7 @@ const InterviewMode = () => {
         answerRef.current = updated;
         setUserAnswer(updated);
       }
-      
+
       const trimmedInterim = interim.trim();
       interimRef.current = trimmedInterim;
       setInterimAnswer(trimmedInterim);
@@ -192,7 +193,7 @@ const InterviewMode = () => {
 
     rec.onend = () => {
       setIsListening(false);
-      
+
       // Append any lingering interim answer to the final answer before restarting
       if (interimRef.current) {
         const updated = (answerRef.current + " " + interimRef.current).trim();
@@ -207,7 +208,7 @@ const InterviewMode = () => {
       }
     };
 
-    try { rec.start(); } catch (_) {}
+    try { rec.start(); } catch (_) { }
   };
 
   // ── Advance to next question ─────────────────────────
@@ -217,9 +218,9 @@ const InterviewMode = () => {
 
     stopAll();
 
-    const idx      = indexRef.current;
+    const idx = indexRef.current;
     const question = (questions || [])[idx];
-    const answer   = (answerRef.current + " " + interimRef.current).trim();
+    const answer = (answerRef.current + " " + interimRef.current).trim();
     interimRef.current = "";
 
     let result = { correct: false, score: 0, feedback: "No answer provided." };
@@ -240,9 +241,9 @@ const InterviewMode = () => {
     const record = {
       question,
       userAnswer: answer || "(skipped)",
-      correct:    result.correct,
-      feedback:   result.feedback,
-      score:      result.score,
+      correct: result.correct,
+      feedback: result.feedback,
+      score: result.score,
     };
 
     const updated = [...allAnswersRef.current, record];
@@ -266,9 +267,9 @@ const InterviewMode = () => {
     setShowExitModal(false);
     exitedRef.current = true;
     stopAll();
-    
+
     if (document.exitFullscreen && document.fullscreenElement) {
-      document.exitFullscreen().catch(() => {});
+      document.exitFullscreen().catch(() => { });
     }
 
     // Current question ka answer bhi collect karo
@@ -277,11 +278,11 @@ const InterviewMode = () => {
     const partialAnswers = [...allAnswersRef.current];
     if (currentAnswer) {
       partialAnswers.push({
-        question:    (questions || [])[indexRef.current],
-        userAnswer:  currentAnswer,
-        correct:     false,
-        feedback:    "Interview exited before completion.",
-        score:       0,
+        question: (questions || [])[indexRef.current],
+        userAnswer: currentAnswer,
+        correct: false,
+        feedback: "Interview exited before completion.",
+        score: 0,
       });
     }
 
@@ -291,12 +292,12 @@ const InterviewMode = () => {
         await saveInterviewResult({
           interviewId, jobTitle, jobTopic,
           questions: questions || [],
-          answers:   partialAnswers,
+          answers: partialAnswers,
           fromResume,
-          status:    "pending",
-          duration:  Math.floor((Date.now() - startTimeRef.current) / 1000),
+          status: "pending",
+          duration: Math.floor((Date.now() - startTimeRef.current) / 1000),
         });
-      } catch (_) {}
+      } catch (_) { }
       setSaving(false);
     }
 
@@ -308,10 +309,10 @@ const InterviewMode = () => {
     if (!questions?.length || permissionsGranted !== true) return;
 
     exitedRef.current = false;
-    busyRef.current   = false;
+    busyRef.current = false;
     answerRef.current = "";
     interimRef.current = "";
-    indexRef.current  = currentIndex;
+    indexRef.current = currentIndex;
     timerValRef.current = 45;
 
     setUserAnswer("");
@@ -350,7 +351,7 @@ const InterviewMode = () => {
     exitedRef.current = true;
     stopAll();
     if (document.exitFullscreen && document.fullscreenElement) {
-      document.exitFullscreen().catch(() => {});
+      document.exitFullscreen().catch(() => { });
     }
     if (webcamRef.current?.video?.srcObject) {
       webcamRef.current.video.srcObject.getTracks().forEach(t => t.stop());
@@ -363,23 +364,44 @@ const InterviewMode = () => {
         duration: totalDuration,
       });
       const user = JSON.parse(localStorage.getItem("user") || "{}");
-      user.points            = (user.points || 0) + (result.pointsEarned || 0);
-      user.level             = result.level  || user.level;
-      user.streak            = result.streak || user.streak;
+      user.points = (user.points || 0) + (result.pointsEarned || 0);
+      user.level = result.level || user.level;
+      user.streak = result.streak || user.streak;
       user.interviewsCompleted = (user.interviewsCompleted || 0) + 1;
       if (result.newBadges?.length) {
         user.badges = [...new Set([...(user.badges || []), ...result.newBadges])];
       }
       localStorage.setItem("user", JSON.stringify(user));
+
+      if (result.pointsEarned > 0) {
+        notify.success(`+${result.pointsEarned} XP earned!`);
+
+        const newNotif = {
+          id: Date.now().toString(),
+          title: "Interview Completed",
+          message: `You earned ${result.pointsEarned} XP!`,
+          time: 'Just now',
+          timestamp: Date.now(),
+          icon: "⭐",
+          read: false
+        };
+        const existingNotifs = JSON.parse(localStorage.getItem('user_notifications') || '[]');
+        localStorage.setItem('user_notifications', JSON.stringify([newNotif, ...existingNotifs]));
+
+        window.dispatchEvent(new CustomEvent('newNotification', {
+          detail: { title: "Interview Completed", message: `You earned ${result.pointsEarned} XP!`, icon: "⭐" }
+        }));
+      }
+
       navigate("/feedback", {
         state: {
           answers, jobTitle, jobTopic,
-          totalScore:   result.totalScore,
-          maxScore:     result.maxScore,
+          totalScore: result.totalScore,
+          maxScore: result.maxScore,
           correctCount: result.correctCount,
           pointsEarned: result.pointsEarned,
-          newBadges:    result.newBadges,
-          duration:     totalDuration,
+          newBadges: result.newBadges,
+          duration: totalDuration,
         },
       });
     } catch {
@@ -416,8 +438,8 @@ const InterviewMode = () => {
           <div className="fullscreen-warning-content">
             <h2>Camera/Mic Required</h2>
             <p>Please allow camera and microphone permissions in your browser settings to continue the interview.</p>
-            <button 
-              className="enter-fullscreen-btn" 
+            <button
+              className="enter-fullscreen-btn"
               onClick={() => window.location.reload()}
             >
               I have allowed permissions (Reload)
@@ -439,8 +461,8 @@ const InterviewMode = () => {
               <button className="exit-fullscreen-btn" onClick={handleExitClick}>
                 Exit Interview
               </button>
-              <button 
-                className="enter-fullscreen-btn" 
+              <button
+                className="enter-fullscreen-btn"
                 onClick={() => {
                   const elem = document.documentElement;
                   if (elem.requestFullscreen) elem.requestFullscreen();
@@ -468,119 +490,119 @@ const InterviewMode = () => {
             <ArrowLeft size={18} /> Exit
           </button>
           <div className="room-title">
-          <h2>{jobTitle}</h2>
-          <span className="room-topic">{jobTopic}</span>
+            <h2>{jobTitle}</h2>
+            <span className="room-topic">{jobTopic}</span>
+          </div>
+          <div className="room-progress">
+            <div className="timer-display">
+              <Timer size={14} />
+              <span className={questionTimer <= 15 ? "timer-warn" : ""}>
+                {Math.floor(questionTimer / 60)}:{String(questionTimer % 60).padStart(2, "0")}
+              </span>
+            </div>
+            <span>Q{currentIndex + 1} of {questions.length}</span>
+            <div className="progress-bar">
+              <div className="progress-fill" style={{ width: `${progress}%` }} />
+            </div>
+          </div>
         </div>
-        <div className="room-progress">
-          <div className="timer-display">
-            <Timer size={14} />
-            <span className={questionTimer <= 15 ? "timer-warn" : ""}>
-              {Math.floor(questionTimer / 60)}:{String(questionTimer % 60).padStart(2, "0")}
-            </span>
-          </div>
-          <span>Q{currentIndex + 1} of {questions.length}</span>
-          <div className="progress-bar">
-            <div className="progress-fill" style={{ width: `${progress}%` }} />
-          </div>
-        </div>
-      </div>
 
-      {/* Main Content Layout */}
-      <div className="room-content-layout">
-        
-        {/* Left Column (Question + Answer + Actions) */}
-        <div className="room-left">
-          {/* Question */}
-          <div className="question-card">
-            <div className="question-label">
-              <Volume2 size={16} />
-              {aiSpeaking ? "AI is speaking..." : "Current Question"}
-            </div>
-            <p className="question-text">{questions[currentIndex]}</p>
-            <button
-              className="replay-btn"
-              onClick={() => doSpeak(`Question ${currentIndex + 1}. ${questions[currentIndex]}`)}
-              disabled={aiSpeaking}
-            >
-              <Volume2 size={14} />
-              {aiSpeaking ? "Speaking..." : "Replay"}
-            </button>
-          </div>
+        {/* Main Content Layout */}
+        <div className="room-content-layout">
 
-          {/* Answer */}
-          <div className="answer-section">
-            <div className="listening-indicator">
-              {isListening
-                ? <><Mic size={16} className="pulse" /> Listening...</>
-                : <><MicOff size={16} /> Not listening</>
-              }
-            </div>
-            <div className={`answer-box${isListening && (userAnswer || interimAnswer) ? " answer-box--active" : ""}`}>
-              <strong>Your Answer</strong>
-              {(userAnswer || interimAnswer) ? (
-                <p>
-                  {userAnswer}
-                  {interimAnswer && <span className="interim-text"> {interimAnswer}</span>}
-                </p>
-              ) : (
-                <p className="answer-placeholder">Start speaking — your answer will appear here...</p>
-              )}
-            </div>
-            {feedback && (
-              <div className={`feedback-box ${feedbackScore >= 6 ? "good" : "needs-work"}`}>
-                <span className="feedback-score">{feedbackScore}/10</span>
-                <p>{feedback}</p>
+          {/* Left Column (Question + Answer + Actions) */}
+          <div className="room-left">
+            {/* Question */}
+            <div className="question-card">
+              <div className="question-label">
+                <Volume2 size={16} />
+                {aiSpeaking ? "AI is speaking..." : "Current Question"}
               </div>
-            )}
-          </div>
-
-          {/* Actions */}
-          <div className="room-actions">
-            {userAnswer ? (
-              <button className="skip-btn primary" onClick={doNext} disabled={evaluating}>
-                <SkipForward size={18} />
-                {evaluating ? "Evaluating..." : "Submit & Next"}
+              <p className="question-text">{questions[currentIndex]}</p>
+              <button
+                className="replay-btn"
+                onClick={() => doSpeak(`Question ${currentIndex + 1}. ${questions[currentIndex]}`)}
+                disabled={aiSpeaking}
+              >
+                <Volume2 size={14} />
+                {aiSpeaking ? "Speaking..." : "Replay"}
               </button>
-            ) : (
-              <button className="skip-btn" onClick={doNext} disabled={evaluating}>
-                <SkipForward size={18} />
-                Skip
-              </button>
-            )}
-          </div>
-        </div>
-
-        {/* Right Column (Webcam + AI) */}
-        <div className="room-right">
-          <div className="side-panels">
-            <div className="webcam-panel mini">
-              <Webcam ref={webcamRef} audio={false} className="webcam-feed" screenshotFormat="image/jpeg" />
-              <div className="webcam-label">You</div>
             </div>
-            <div className="ai-panel mini">
-              <div className={`ai-avatar ${aiSpeaking ? "speaking" : ""}`}>
-                <div className="ai-circle">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
-                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                    <line x1="12" y1="19" x2="12" y2="22"/>
-                  </svg>
-                </div>
-                {aiSpeaking && (
-                  <div className="audio-bars">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} style={{ animationDelay: `${i * 0.15}s` }} />
-                    ))}
-                  </div>
+
+            {/* Answer */}
+            <div className="answer-section">
+              <div className="listening-indicator">
+                {isListening
+                  ? <><Mic size={16} className="pulse" /> Listening...</>
+                  : <><MicOff size={16} /> Not listening</>
+                }
+              </div>
+              <div className={`answer-box${isListening && (userAnswer || interimAnswer) ? " answer-box--active" : ""}`}>
+                <strong>Your Answer</strong>
+                {(userAnswer || interimAnswer) ? (
+                  <p>
+                    {userAnswer}
+                    {interimAnswer && <span className="interim-text"> {interimAnswer}</span>}
+                  </p>
+                ) : (
+                  <p className="answer-placeholder">Start speaking — your answer will appear here...</p>
                 )}
               </div>
-              <span className="ai-label">AI Interviewer</span>
+              {feedback && (
+                <div className={`feedback-box ${feedbackScore >= 6 ? "good" : "needs-work"}`}>
+                  <span className="feedback-score">{feedbackScore}/10</span>
+                  <p>{feedback}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Actions */}
+            <div className="room-actions">
+              {userAnswer ? (
+                <button className="skip-btn primary" onClick={doNext} disabled={evaluating}>
+                  <SkipForward size={18} />
+                  {evaluating ? "Evaluating..." : "Submit & Next"}
+                </button>
+              ) : (
+                <button className="skip-btn" onClick={doNext} disabled={evaluating}>
+                  <SkipForward size={18} />
+                  Skip
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Right Column (Webcam + AI) */}
+          <div className="room-right">
+            <div className="side-panels">
+              <div className="webcam-panel mini">
+                <Webcam ref={webcamRef} audio={false} className="webcam-feed" screenshotFormat="image/jpeg" />
+                <div className="webcam-label">You</div>
+              </div>
+              <div className="ai-panel mini">
+                <div className={`ai-avatar ${aiSpeaking ? "speaking" : ""}`}>
+                  <div className="ai-circle">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                      <line x1="12" y1="19" x2="12" y2="22" />
+                    </svg>
+                  </div>
+                  {aiSpeaking && (
+                    <div className="audio-bars">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} style={{ animationDelay: `${i * 0.15}s` }} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <span className="ai-label">AI Interviewer</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    
+
       {/* Custom Exit Modal */}
       {showExitModal && (
         <div className="custom-modal-overlay">

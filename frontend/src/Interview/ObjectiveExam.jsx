@@ -193,7 +193,7 @@ export default function ObjectiveExam() {
       setResults(d);
       setScreen('RESULTS');
       socketRef.current?.disconnect();
-      if (d.pointsEarned) {
+      if (d.pointsEarned !== undefined) {
         setPointsEarned(d.pointsEarned);
         const user = JSON.parse(localStorage.getItem('user') || '{}');
         syncUserToStorage({
@@ -206,7 +206,28 @@ export default function ObjectiveExam() {
             : user.badges,
         });
         window.dispatchEvent(new Event('user-updated'));
-        notify.success(`+${d.pointsEarned} points earned!`);
+        
+        if (d.pointsEarned > 0) {
+          notify.success(`+${d.pointsEarned} points earned!`);
+        } else {
+          notify.info(`Exam finished! You earned 0 XP this time.`);
+        }
+        
+        const newNotif = {
+          id: Date.now().toString(),
+          title: "Exam Completed",
+          message: `You earned ${d.pointsEarned} XP!`,
+          time: 'Just now',
+          timestamp: Date.now(),
+          icon: "⭐",
+          read: false
+        };
+        const existingNotifs = JSON.parse(localStorage.getItem('user_notifications') || '[]');
+        localStorage.setItem('user_notifications', JSON.stringify([newNotif, ...existingNotifs]));
+
+        window.dispatchEvent(new CustomEvent('newNotification', {
+          detail: { title: "Exam Completed", message: `You earned ${d.pointsEarned} XP!`, icon: "⭐" }
+        }));
       }
     });
     socketRef.current.on('mcq_error', e => { notify.error(e.message || 'Error'); setScreen('SETUP'); });

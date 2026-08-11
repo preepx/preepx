@@ -111,6 +111,18 @@ app.use("/api/wallet", require("./src/modules/wallet/wallet.routes"));
 app.use("/api/btec-notes", require("./src/modules/btec-notes/btecNote.routes"));
 app.use("/api/coding", require("./src/modules/coding/coding.routes"));
 
+// Internal Webhook for Admin Backend to trigger Socket.io events
+app.post("/api/internal/notify", express.json(), (req, res) => {
+  const { userId, title, message, icon } = req.body;
+  if (global.io) {
+    global.io.to(`user_${userId}`).emit("global_notification", { title, message, icon });
+    console.log(`Internal Webhook emitted to user_${userId}`);
+    res.json({ success: true });
+  } else {
+    res.status(500).json({ error: "Socket not initialized" });
+  }
+});
+
 // Global Error Handler
 const errorHandler = require("./src/common/middleware/errorHandler");
 app.use(errorHandler);
@@ -127,10 +139,21 @@ const io = new Server(server, {
   }
 });
 
+// Initialize Global IO
+global.io = io;
+const socketManager = require("./socket/socketManager");
+socketManager.init(io);
+
 // Import MCQ Handler
 const mcqHandler = require("./socket/mcqHandler");
 io.on("connection", (socket) => {
   console.log("Socket connected:", socket.id);
+  
+  socket.on("join_room", (userId) => {
+    socket.join(`user_${userId}`);
+    console.log(`Socket ${socket.id} joined room user_${userId}`);
+  });
+
   mcqHandler(io, socket);
 });
 

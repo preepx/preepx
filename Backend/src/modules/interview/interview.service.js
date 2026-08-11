@@ -185,8 +185,19 @@ const saveInterviewResult = async (userId, data) => {
     user.level = Math.floor(user.points / 100) + 1;
     if (isPerfect) user.hasPerfectScore = true;
     await user.save();
-
     await updateStreak(userId);
+
+    try {
+      if (global.io && pointsEarned > 0) {
+        global.io.to(`user_${userId}`).emit("global_notification", {
+          title: "Interview Completed",
+          message: `Great job! You earned ${pointsEarned} XP for completing the interview.`,
+          icon: "⭐"
+        });
+      }
+    } catch (e) {
+      console.error("Failed to emit interview XP notification:", e);
+    }
   }
 
   const refreshed = await User.findById(userId).lean();

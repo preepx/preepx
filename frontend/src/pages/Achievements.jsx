@@ -25,6 +25,14 @@ function Achievements() {
         window.dispatchEvent(new Event("user-updated"));
       }
       window.dispatchEvent(new Event("walletUpdated"));
+
+      window.dispatchEvent(new CustomEvent('newNotification', {
+        detail: {
+          title: "XP Redeemed",
+          message: `Successfully converted ${pointsToRedeem} XP to ${res.coinsEarned} coins`,
+          icon: "💎"
+        }
+      }));
     } catch (err) {
       setPopup({
         isError: true,
