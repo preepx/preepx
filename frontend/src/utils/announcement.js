@@ -1,7 +1,7 @@
 const SESSION_KEY = "showAnnouncement";
 
 export function triggerAnnouncement() {
-  sessionStorage.setItem(SESSION_KEY, "1");
+  sessionStorage.setItem(SESSION_KEY, "4");
 }
 
 export function shouldShowAnnouncement() {
