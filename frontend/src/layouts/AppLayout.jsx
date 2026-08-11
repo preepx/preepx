@@ -29,6 +29,25 @@ const NAV_ITEMS = [
   { to: "/settings", icon: Settings, label: "Settings" },
 ];
 
+const initialNotifications = [
+  {
+    id: 'daily',
+    title: 'Daily Reward',
+    message: 'You have received your daily XP points!',
+    time: 'Today',
+    icon: '🎁',
+    read: false
+  },
+  {
+    id: 'referral',
+    title: 'Referral Bonus',
+    message: `You have received XP points from your successful referral(s)!`,
+    time: 'Recently',
+    icon: '👥',
+    read: false
+  }
+];
+
 function AppLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -38,7 +57,34 @@ function AppLayout({ children }) {
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
   const { balance } = useWallet();
   const [showNotifications, setShowNotifications] = useState(false);
+  const [notifs, setNotifs] = useState(() => {
+    const saved = localStorage.getItem('user_notifications');
+    if (saved) return JSON.parse(saved);
+    return initialNotifications;
+  });
   const [showComingSoon, setShowComingSoon] = useState(false);
+
+  const unreadCount = notifs.filter(n => !n.read).length;
+
+  useEffect(() => {
+    localStorage.setItem('user_notifications', JSON.stringify(notifs));
+  }, [notifs]);
+
+  useEffect(() => {
+    const handleNewNotif = (e) => {
+      const newNotif = {
+        id: Date.now().toString(),
+        title: e.detail.title,
+        message: e.detail.message,
+        time: 'Just now',
+        icon: e.detail.icon || '🔔',
+        read: false
+      };
+      setNotifs(prev => [newNotif, ...prev]);
+    };
+    window.addEventListener('newNotification', handleNewNotif);
+    return () => window.removeEventListener('newNotification', handleNewNotif);
+  }, []);
 
   const checkAndClaimRewards = async (currentUser, currentDash) => {
     if (!currentUser || !currentDash) return;
@@ -194,8 +240,13 @@ function AppLayout({ children }) {
               </div>
 
               <div className="topbar-right">
-                <button aria-label="Notifications" onClick={() => setShowNotifications(true)} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '0 4px', flexShrink: 0 }}>
-                  <img src="/icons/notification.png" alt="Notifications" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+                <button aria-label="Notifications" onClick={() => setShowNotifications(true)} style={{ position: 'relative', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '4px', flexShrink: 0, transition: 'color 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
+                  <Bell size={22} />
+                  {unreadCount > 0 && (
+                    <span style={{ position: 'absolute', top: '0px', right: '0px', background: 'red', color: 'white', fontSize: '10px', fontWeight: 'bold', width: '18px', height: '18px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', transform: 'translate(25%, -25%)' }}>
+                      {unreadCount}
+                    </span>
+                  )}
                 </button>
                 {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
 
@@ -211,6 +262,8 @@ function AppLayout({ children }) {
       <NotificationModal
         isOpen={showNotifications}
         onClose={() => setShowNotifications(false)}
+        notifs={notifs}
+        setNotifs={setNotifs}
       />
 
       {/* Coming Soon Modal for Jobs */}

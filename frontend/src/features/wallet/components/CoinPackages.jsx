@@ -38,6 +38,7 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
               packageId: pack.id
             });
             notify.success(verifyData.message);
+            window.dispatchEvent(new CustomEvent('newNotification', { detail: { title: 'Wallet Recharge', message: `Successfully added ${pack.coins} Coins to your wallet!`, icon: '💰' } }));
             onPurchaseSuccess?.(verifyData);
           } catch (error) {
             notify.error(error.response?.data?.message || "Payment verification failed");
