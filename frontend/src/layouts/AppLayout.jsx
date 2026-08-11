@@ -198,15 +198,15 @@ function AppLayout({ children }) {
                   <img src="/icons/notification.png" alt="Notifications" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                 </button>
                 {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
-                <span className="level-badge"><span className="badge-text">Level </span>{user.level || 1}</span>
+
                 <span className="points-badge" style={{ display: 'flex', alignItems: 'center', gap: '0px' }}><img src="/logo.png" alt="XP" style={{ width: '32px', height: '32px', margin: '-8px -6px -8px -8px', objectFit: 'contain' }} />{user.points || 0}<span className="badge-text" style={{ marginLeft: '2px' }}>XP</span></span>
               </div>
             </header>
           )}
           <div className="page-content">{children}</div>
-          {!location.pathname.includes("/pdf") && <Footer />}
         </div>
       </div>
+      {!location.pathname.includes("/pdf") && <Footer />}
 
       <NotificationModal
         isOpen={showNotifications}
