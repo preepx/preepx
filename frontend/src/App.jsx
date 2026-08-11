@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
@@ -55,7 +55,7 @@ function usesAppLayout(pathname) {
     || (pathname.startsWith("/objective-exam/") && !FULLSCREEN_ROUTES.includes(pathname));
 }
 
-function LayoutWrapper({ children }) {
+function LayoutWrapper({ children, landingRole, setLandingRole }) {
   const location = useLocation();
   const isPublic = PUBLIC_ROUTES.includes(location.pathname);
   const isFullscreen = FULLSCREEN_ROUTES.includes(location.pathname);
@@ -65,9 +65,9 @@ function LayoutWrapper({ children }) {
     const isAuthPage = location.pathname === "/auth" || location.pathname === "/auth/recruiter";
     return (
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        {!isAuthPage && <Navbar />}
+        {!isAuthPage && <Navbar landingRole={landingRole} setLandingRole={setLandingRole} />}
         <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
-        {!isAuthPage && <Footer />}
+        {!isAuthPage && <Footer landingRole={landingRole} />}
       </div>
     );
   }
@@ -84,6 +84,8 @@ function LayoutWrapper({ children }) {
 }
 
 function AppContent() {
+  const [landingRole, setLandingRole] = useState("candidate");
+
   useEffect(() => {
     const theme = localStorage.getItem("theme") || "dark";
     document.documentElement.dataset.theme = theme;
@@ -91,10 +93,10 @@ function AppContent() {
 
   return (
     <Suspense fallback={<Loader />}>
-      <LayoutWrapper>
+      <LayoutWrapper landingRole={landingRole} setLandingRole={setLandingRole}>
         <Routes>
-          <Route path="/" element={<GuestRoute><Dashboard /></GuestRoute>} />
-          <Route path="/dashboard" element={<GuestRoute><Dashboard /></GuestRoute>} />
+          <Route path="/" element={<GuestRoute><Dashboard landingRole={landingRole} setLandingRole={setLandingRole} /></GuestRoute>} />
+          <Route path="/dashboard" element={<GuestRoute><Dashboard landingRole={landingRole} setLandingRole={setLandingRole} /></GuestRoute>} />
           <Route path="/auth" element={<GuestRoute><Auth /></GuestRoute>} />
           <Route path="/auth/recruiter" element={<GuestRoute><RecruiterAuth /></GuestRoute>} />
           <Route path="/auth/callback" element={<AuthCallback />} />

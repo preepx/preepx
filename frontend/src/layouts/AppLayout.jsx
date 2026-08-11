@@ -49,7 +49,7 @@ function AppLayout({ children }) {
 
     for (const reward of REWARDS_DATA) {
       if (claimedRewards.includes(reward.id)) continue;
-      
+
       const currentProgress = calculateProgress(reward.id, currentUser, currentDash);
       if (currentProgress >= reward.target) {
         try {
@@ -76,9 +76,9 @@ function AppLayout({ children }) {
 
   const refreshUser = () => {
     Promise.all([getProfile(), getDashboard().catch(() => null)])
-      .then(([u, dash]) => { 
-        setUser(u); 
-        syncUserToStorage(u); 
+      .then(([u, dash]) => {
+        setUser(u);
+        syncUserToStorage(u);
         if (dash) {
           checkAndClaimRewards(u, dash);
         }
@@ -159,7 +159,7 @@ function AppLayout({ children }) {
               <Link to="/profile" className="sidebar-profile-link" title="Profile">
                 <img src={avatar} alt="Profile" />
               </Link>
-              
+
               <button className="sidebar-action-btn" onClick={toggleTheme} title={isDark ? "Light Mode" : "Dark Mode"}>
                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
@@ -179,7 +179,7 @@ function AppLayout({ children }) {
               <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
 
               <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '4px' }}>
-                <Link to="/jobs" style={{ textDecoration: 'none', color: 'inherit', fontWeight: '500', fontSize: '15px' }}>Jobs</Link>
+                <Link to="/jobs" className="animate-pulse" style={{ textDecoration: 'none', background: 'linear-gradient(135deg, #818cf8, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: 'bold', fontSize: '16px', letterSpacing: '0.5px' }}>Apply Jobs</Link>
               </div>
 
               <div className="topbar-center">
@@ -201,9 +201,9 @@ function AppLayout({ children }) {
       </div>
       {!location.pathname.includes("/pdf") && <Footer />}
 
-      <NotificationModal 
-        isOpen={showNotifications} 
-        onClose={() => setShowNotifications(false)} 
+      <NotificationModal
+        isOpen={showNotifications}
+        onClose={() => setShowNotifications(false)}
       />
     </>
   );

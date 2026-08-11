@@ -4,6 +4,9 @@ import {
   Sparkles, Mail, Lock, User, Eye, EyeOff,
   ArrowRight, Shield, Zap, BarChart3, KeyRound, RefreshCw, CheckCircle, Phone, Building, Globe
 } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
+import API from "../utils/api";
+import notify from '../utils/notify';
 import "./Login.css";
 
 // ── Screens ──────────────────────────────────────────────
@@ -35,6 +38,9 @@ function RecruiterAuth() {
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmNewPass, setShowConfirmNewPass] = useState(false);
+
+  const [captchaToken, setCaptchaToken] = useState("");
+  const recaptchaRef = useRef(null);
 
   const otpInputsRef = useRef([]);
 
@@ -96,45 +102,68 @@ function RecruiterAuth() {
   };
 
   // ── FORGOT HANDLERS ──────────────────────────────────
-  const handleForgotEmailSubmit = (e) => {
+  const handleForgotEmailSubmit = async (e) => {
     e.preventDefault();
-    console.log("Forgot email data:", forgotEmail);
-    setOtpEmail(forgotEmail.trim().toLowerCase());
-    resetOtp();
-    setScreen("forgot-otp");
+    if (!captchaToken) {
+      notify.error("Please complete the CAPTCHA");
+      return;
+    }
+    setLoading(true);
+    try {
+      await API.post("/recruiter/forgot-password", { email: forgotEmail, captchaToken });
+      notify.success("Password reset OTP sent to your email!");
+      setOtpEmail(forgotEmail.trim().toLowerCase());
+      resetOtp();
+      setScreen("forgot-otp");
+    } catch (err) {
+      notify.error(err.response?.data?.message || "Failed to send reset email");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleVerifyResetOtp = (e) => {
     e.preventDefault();
     const otpValue = otp.join("");
     if (otpValue.length < 6) {
-      alert("Please enter the complete 6-digit code.");
+      notify.error("Please enter the complete 6-digit code.");
       return;
     }
-    console.log("Verify reset OTP:", otpValue);
     setVerifiedOtp(otpValue);
     setNewPassword("");
     setConfirmNewPassword("");
     setScreen("forgot-newpass");
   };
 
-  const handleResetPassword = (e) => {
+  const handleResetPassword = async (e) => {
     e.preventDefault();
     if (newPassword.length < 6) {
-      alert("Password must be at least 6 characters.");
+      notify.error("Password must be at least 6 characters.");
       return;
     }
     if (newPassword !== confirmNewPassword) {
-      alert("Both password fields must match.");
+      notify.error("Both password fields must match.");
       return;
     }
-    console.log("Reset password:", { email: otpEmail, otp: verifiedOtp, newPassword });
-    alert("Password reset successfully! (Not connected to backend)");
-    setForgotEmail("");
-    setNewPassword("");
-    setConfirmNewPassword("");
-    resetOtp();
-    setScreen("login");
+    
+    setLoading(true);
+    try {
+      await API.post("/recruiter/reset-password", { 
+        email: otpEmail, 
+        otp: verifiedOtp, 
+        newPassword 
+      });
+      notify.success("Password reset successfully! You can now sign in.");
+      setForgotEmail("");
+      setNewPassword("");
+      setConfirmNewPassword("");
+      resetOtp();
+      setScreen("login");
+    } catch (err) {
+      notify.error(err.response?.data?.message || "Failed to reset password");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // ── OTP Boxes (shared component) ──────────────────────
@@ -162,15 +191,46 @@ function RecruiterAuth() {
   // ── LOGIN ─────────────────────────────────────────────
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    console.log("Login data:", loginData);
-    alert("Recruiter Login UI form submitted. (Not connected to backend)");
+    setLoading(true);
+    try {
+      const { data } = await API.post("/recruiter/login", loginData);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      window.dispatchEvent(new Event("user-updated"));
+      notify.success("Logged in successfully!");
+      navigate("/user-dashboard");
+    } catch (err) {
+      notify.error(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // ── REGISTER ───────────────────────
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
-    console.log("Register data:", registerData);
-    alert("Recruiter Registration UI form submitted. (Not connected to backend)");
+    if (registerData.password !== registerData.confirmPassword) {
+      notify.error("Passwords do not match");
+      return;
+    }
+    if (!captchaToken) {
+      notify.error("Please complete the CAPTCHA");
+      return;
+    }
+    
+    setLoading(true);
+    try {
+      const { data } = await API.post("/recruiter/register", { ...registerData, captchaToken });
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      window.dispatchEvent(new Event("user-updated"));
+      notify.success("Account created successfully!");
+      navigate("/user-dashboard");
+    } catch (err) {
+      notify.error(err.response?.data?.message || "Registration failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
 
@@ -355,6 +415,14 @@ function RecruiterAuth() {
                     </div>
                   </div>
                 </div>
+                
+                <div style={{ margin: "16px 0", display: "flex", justifyContent: "center" }}>
+                  <ReCAPTCHA
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_SITE_KEY"}
+                    onChange={setCaptchaToken}
+                    ref={recaptchaRef}
+                  />
+                </div>
 
                 <button type="submit" className="auth-submit" disabled={loading} style={{ marginTop: '20px' }}>
                   {loading ? <span className="auth-submit-loading">Please wait...</span> : <>Create Account <ArrowRight size={18} /></>}
@@ -385,6 +453,14 @@ function RecruiterAuth() {
                       autoComplete="off" required
                     />
                   </div>
+                </div>
+                
+                <div style={{ margin: "16px 0", display: "flex", justifyContent: "center" }}>
+                  <ReCAPTCHA
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_SITE_KEY"}
+                    onChange={setCaptchaToken}
+                    ref={recaptchaRef}
+                  />
                 </div>
 
                 <button type="submit" className="auth-submit" disabled={loading} style={{ marginTop: '20px' }}>

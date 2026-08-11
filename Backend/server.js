@@ -106,6 +106,7 @@ app.use("/api/mcq", require("./src/modules/mcq/mcq.routes"));
 app.use("/api/resume", require("./src/modules/resume/resume.routes"));
 app.use("/api/ats", require("./src/modules/ats/ats.routes"));
 app.use("/api/auth", require("./src/modules/auth/auth.routes"));
+app.use("/api/recruiter", require("./src/modules/recruiter/recruiter.routes"));
 app.use("/api/wallet", require("./src/modules/wallet/wallet.routes"));
 app.use("/api/btec-notes", require("./src/modules/btec-notes/btecNote.routes"));
 app.use("/api/coding", require("./src/modules/coding/coding.routes"));
