@@ -1,7 +1,114 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { X, Bell } from 'lucide-react';
 
+const NotificationItem = ({ notif, onRead, onDelete }) => {
+  const [translateX, setTranslateX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const startXRef = useRef(0);
+
+  const handleTouchStart = (e) => {
+    startXRef.current = e.touches[0].clientX;
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging) return;
+    const diff = e.touches[0].clientX - startXRef.current;
+    setTranslateX(diff);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (Math.abs(translateX) > 100) {
+      onDelete(notif.id);
+    } else {
+      setTranslateX(0);
+    }
+  };
+
+  const handleMouseDown = (e) => {
+    startXRef.current = e.clientX;
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    const diff = e.clientX - startXRef.current;
+    setTranslateX(diff);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (Math.abs(translateX) > 100) {
+      onDelete(notif.id);
+    } else {
+      setTranslateX(0);
+    }
+  };
+
+  return (
+    <div
+      onClick={() => onRead(notif.id)}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      style={{
+        transform: `translateX(${translateX}px)`,
+        transition: isDragging ? 'none' : 'transform 0.3s ease',
+        opacity: notif.read ? 0.5 : 1,
+        cursor: 'pointer'
+      }}
+      className="flex gap-4 p-4 rounded-lg bg-black/5 dark:bg-white/5 border border-[var(--border)] relative"
+    >
+      <div className="text-2xl select-none">{notif.icon}</div>
+      <div className="flex flex-col flex-1 min-w-0 select-none">
+        <div className="flex justify-between items-start gap-2">
+          <span className="font-semibold text-[var(--text)] truncate">{notif.title}</span>
+          <span className="text-xs text-[var(--text-muted)] whitespace-nowrap flex-shrink-0">{notif.time}</span>
+        </div>
+        <span className="text-sm text-[var(--text-muted)] mt-1 leading-relaxed break-words">{notif.message}</span>
+      </div>
+    </div>
+  );
+};
+
 const NotificationModal = ({ isOpen, onClose }) => {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  const initialNotifications = [
+    {
+      id: 'daily',
+      title: 'Daily Reward',
+      message: 'You have received your daily XP points!',
+      time: 'Today',
+      icon: '🎁',
+      read: false
+    },
+    {
+      id: 'referral',
+      title: 'Referral Bonus',
+      message: `You have received XP points from your successful referral(s)!`,
+      time: 'Recently',
+      icon: '👥',
+      read: false
+    }
+  ];
+
+  const [notifs, setNotifs] = useState(initialNotifications);
+
+  const handleRead = (id) => {
+    setNotifs(notifs.map(n => n.id === id ? { ...n, read: true } : n));
+  };
+
+  const handleDelete = (id) => {
+    setNotifs(notifs.filter(n => n.id !== id));
+  };
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -19,10 +126,10 @@ const NotificationModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9999] flex justify-center items-center"
     >
-      <div 
+      <div
         className="bg-[var(--surface)] p-6 rounded-xl w-[400px] max-w-[90%] min-h-[400px] max-h-[80vh] overflow-y-auto shadow-[var(--shadow-lg)] border border-[var(--border)] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
@@ -33,16 +140,31 @@ const NotificationModal = ({ isOpen, onClose }) => {
             </div>
             <h3 className="m-0 text-[var(--text)] text-xl font-bold tracking-tight">Notifications</h3>
           </div>
-          <button 
-            onClick={onClose} 
+          <button
+            onClick={onClose}
             className="bg-transparent border-none text-[var(--text-muted)] hover:text-[var(--text)] transition-colors cursor-pointer p-2 flex rounded-full hover:bg-black/5 dark:hover:bg-white/10"
             aria-label="Close notifications"
           >
             <X size={20} />
           </button>
         </div>
-        <div className="flex-1 flex justify-center items-center text-[var(--text-muted)] text-center py-8">
-          No new notifications
+        <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
+          {notifs.length > 0 ? (
+            <div className="flex flex-col gap-3">
+              {notifs.map(notif => (
+                <NotificationItem
+                  key={notif.id}
+                  notif={notif}
+                  onRead={handleRead}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="flex-1 flex justify-center items-center text-[var(--text-muted)] text-center py-8">
+              No new notifications
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
   const user = JSON.parse(localStorage.getItem("user") || "null");
   const [openFaq, setOpenFaq] = useState(null);
   const [platformStats, setPlatformStats] = useState(null);
+  const [showComingSoon, setShowComingSoon] = useState(false);
 
   const rotatingTexts = [
     "AI-Based Mock Interview",
@@ -147,7 +148,7 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
               </button>
               <button
                 className={`role-toggle-btn ${landingRole === 'recruiter' ? 'active' : ''}`}
-                onClick={() => setLandingRole('recruiter')}
+                onClick={() => setShowComingSoon(true)}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                 Recruiter
@@ -511,7 +512,7 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
             </button>
             <button
               className={`role-toggle-btn ${landingRole === 'recruiter' ? 'active' : ''}`}
-              onClick={() => setLandingRole('recruiter')}
+              onClick={() => setShowComingSoon(true)}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
               Recruiter
@@ -664,6 +665,61 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
           <button className="btn-hero-primary" onClick={goToAuth}>{user ? "Go to Dashboard" : "Create Free Account"}</button>
         </div>
       </section>
+
+      {/* Coming Soon Modal */}
+      {showComingSoon && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0, 0, 0, 0.7)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          zIndex: 9999, backdropFilter: 'blur(4px)'
+        }}>
+          <div style={{
+            background: 'var(--surface, #1e1e2d)',
+            padding: '40px',
+            borderRadius: '16px',
+            textAlign: 'center',
+            maxWidth: '400px',
+            width: '90%',
+            border: '1px solid var(--border, #2d2d3f)',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+          }}>
+            <div style={{
+              width: '64px', height: '64px', borderRadius: '50%',
+              background: 'rgba(99, 102, 241, 0.1)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 24px', color: 'var(--primary, #6366f1)'
+            }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text, #fff)', margin: '0 0 12px 0' }}>
+              Coming Soon
+            </h2>
+            <p style={{ color: 'var(--text-muted, #94a3b8)', fontSize: '15px', lineHeight: '1.6', margin: '0 0 32px 0' }}>
+              We are working hard on the Recruiter portal to help you hire top talent with AI. Stay tuned!
+            </p>
+            <button
+              onClick={() => setShowComingSoon(false)}
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                background: 'var(--primary, #6366f1)',
+                color: '#fff',
+                border: 'none',
+                fontSize: '16px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'background 0.2s'
+              }}
+              onMouseOver={(e) => e.target.style.background = '#4f46e5'}
+              onMouseOut={(e) => e.target.style.background = 'var(--primary, #6366f1)'}
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
 
     </div>
   );

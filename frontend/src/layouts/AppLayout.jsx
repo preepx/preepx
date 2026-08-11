@@ -38,6 +38,7 @@ function AppLayout({ children }) {
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
   const { balance } = useWallet();
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showComingSoon, setShowComingSoon] = useState(false);
 
   const checkAndClaimRewards = async (currentUser, currentDash) => {
     if (!currentUser || !currentDash) return;
@@ -179,7 +180,13 @@ function AppLayout({ children }) {
               <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
 
               <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '4px' }}>
-                <Link to="/jobs" className="animate-pulse" style={{ textDecoration: 'none', background: 'linear-gradient(135deg, #818cf8, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: 'bold', fontSize: '16px', letterSpacing: '0.5px' }}>Apply Jobs</Link>
+                <button 
+                  onClick={() => setShowComingSoon(true)} 
+                  className="animate-pulse" 
+                  style={{ border: 'none', padding: 0, cursor: 'pointer', background: 'linear-gradient(135deg, #818cf8, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: 'bold', fontSize: '16px', letterSpacing: '0.5px' }}
+                >
+                  Apply Jobs
+                </button>
               </div>
 
               <div className="topbar-center">
@@ -187,24 +194,79 @@ function AppLayout({ children }) {
               </div>
 
               <div className="topbar-right">
-                {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
-                <button aria-label="Notifications" onClick={() => setShowNotifications(true)} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: 0 }}>
-                  <img src="/icons/notification.png" alt="Notifications" style={{ width: '20px', height: '20px', objectFit: 'contain' }} />
+                <button aria-label="Notifications" onClick={() => setShowNotifications(true)} style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '0 4px', flexShrink: 0 }}>
+                  <img src="/icons/notification.png" alt="Notifications" style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
                 </button>
+                {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
                 <span className="level-badge"><span className="badge-text">Level </span>{user.level || 1}</span>
                 <span className="points-badge" style={{ display: 'flex', alignItems: 'center', gap: '0px' }}><img src="/logo.png" alt="XP" style={{ width: '32px', height: '32px', margin: '-8px -6px -8px -8px', objectFit: 'contain' }} />{user.points || 0}<span className="badge-text" style={{ marginLeft: '2px' }}>XP</span></span>
               </div>
             </header>
           )}
           <div className="page-content">{children}</div>
+          {!location.pathname.includes("/pdf") && <Footer />}
         </div>
       </div>
-      {!location.pathname.includes("/pdf") && <Footer />}
 
       <NotificationModal
         isOpen={showNotifications}
         onClose={() => setShowNotifications(false)}
       />
+
+      {/* Coming Soon Modal for Jobs */}
+      {showComingSoon && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0, 0, 0, 0.7)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          zIndex: 9999, backdropFilter: 'blur(4px)'
+        }}>
+          <div style={{
+            background: 'var(--surface, #1e1e2d)',
+            padding: '40px',
+            borderRadius: '16px',
+            textAlign: 'center',
+            maxWidth: '400px',
+            width: '90%',
+            border: '1px solid var(--border, #2d2d3f)',
+            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+          }}>
+            <div style={{
+              width: '64px', height: '64px', borderRadius: '50%',
+              background: 'rgba(99, 102, 241, 0.1)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 24px', color: 'var(--primary, #6366f1)'
+            }}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text, #fff)', margin: '0 0 12px 0' }}>
+              Coming Soon
+            </h2>
+            <p style={{ color: 'var(--text-muted, #94a3b8)', fontSize: '15px', lineHeight: '1.6', margin: '0 0 32px 0' }}>
+              We are working hard to bring you the best job opportunities. Stay tuned!
+            </p>
+            <button
+              onClick={() => setShowComingSoon(false)}
+              style={{
+                width: '100%',
+                padding: '12px',
+                borderRadius: '8px',
+                background: 'var(--primary, #6366f1)',
+                color: '#fff',
+                border: 'none',
+                fontSize: '16px',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'background 0.2s'
+              }}
+              onMouseOver={(e) => e.target.style.background = '#4f46e5'}
+              onMouseOut={(e) => e.target.style.background = 'var(--primary, #6366f1)'}
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
