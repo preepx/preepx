@@ -130,5 +130,72 @@ export const staticContent = {
       { heading: "5. Intellectual Property", content: "All content included on this site, such as text, graphics, logos, and software, is the property of PreepX and protected by international copyright laws. You may not reproduce, distribute, or create derivative works without our express written consent." },
       { heading: "6. Limitation of Liability", content: "PreepX shall not be liable for any direct, indirect, incidental, or consequential damages resulting from the use or inability to use the service, including but not limited to reliance on AI feedback for actual job interviews." }
     ]
+  },
+  "/hiring-guide": {
+    title: "The Ultimate Hiring Guide",
+    subtitle: "Best practices for sourcing, screening, and interviewing top technical talent.",
+    sections: [
+      { heading: "Automated Screening", content: "Stop wasting hours on manual resume reviews. Let AI instantly filter out unqualified candidates based on your specific job requirements." },
+      { heading: "Standardized Assessments", content: "Ensure fair and unbiased evaluations by putting every candidate through the exact same AI-driven technical assessment." },
+      { heading: "Data-Driven Decisions", content: "Use our comprehensive analytics dashboard to compare candidate scores and make hiring decisions based on actual performance metrics, not gut feelings." }
+    ]
+  },
+  "/recruiter-resources": {
+    title: "Recruiter Resources",
+    subtitle: "Templates, case studies, and insights to supercharge your hiring process.",
+    sections: [
+      { heading: "Job Description Templates", content: "Access our library of highly optimized job descriptions for software engineering, data science, and product management roles." },
+      { heading: "Interview Rubrics", content: "Download standardized grading rubrics to evaluate technical communication, system design, and coding skills effectively." },
+      { heading: "Case Studies", content: "Read how top tech companies reduced their time-to-hire by 40% and improved candidate quality using AI screening and automated mock interviews." }
+    ]
+  },
+  "/documentation": {
+    title: "Documentation",
+    subtitle: "Technical docs and API references for PreepX integration.",
+    sections: [
+      { heading: "ATS Integration", content: "Learn how to connect PreepX seamlessly with your existing Applicant Tracking System (ATS) like Greenhouse, Lever, or Workday via our REST API." },
+      { heading: "Custom Webhooks", content: "Set up real-time webhooks to get instant notifications when a candidate completes an assessment or when a new detailed scorecard is generated." },
+      { heading: "Security & Compliance", content: "Review our security protocols, SOC 2 compliance details, and GDPR/CCPA data handling procedures to ensure enterprise-grade safety." }
+    ]
+  },
+  "/ai-screening": {
+    title: "AI Screening",
+    subtitle: "Instantly filter top candidates from thousands of applications.",
+    sections: [
+      { heading: "Automated Resume Parsing", content: "Our AI automatically parses uploaded resumes, matching skills and experience directly against your custom job descriptions." },
+      { heading: "Bias-Free Shortlisting", content: "Reduce unconscious bias in the early hiring stages. The AI focuses purely on merit, technical qualifications, and relevant experience." }
+    ]
+  },
+  "/job-management": {
+    title: "Job Management",
+    subtitle: "Create, organize, and track your open roles effortlessly.",
+    sections: [
+      { heading: "Custom Job Profiles", content: "Define specific requirements, mandatory technical skills, and ideal candidate personas for every open requisition." },
+      { heading: "Pipeline Tracking", content: "Visualize your entire hiring pipeline. See how many candidates are in the screening, assessment, and final interview stages at a glance." }
+    ]
+  },
+  "/assessments": {
+    title: "Technical Assessments",
+    subtitle: "Test real skills with real-world scenarios.",
+    sections: [
+      { heading: "Coding & Architecture", content: "Send automated coding challenges and system design assessments that candidates can complete in their browser." },
+      { heading: "Anti-Cheating Mechanisms", content: "Our proctoring tools and code similarity checkers ensure that the results you see genuinely reflect the candidate's abilities." }
+    ]
+  },
+  "/interviews": {
+    title: "AI Interviews",
+    subtitle: "Conduct automated, intelligent first-round interviews 24/7.",
+    sections: [
+      { heading: "Conversational AI", content: "PreepX acts as an intelligent proxy interviewer, asking adaptive technical and behavioral questions based on the candidate's live responses." },
+      { heading: "Detailed Transcripts", content: "Review full transcripts and video highlights of the AI interview before deciding to move a candidate to the human interview stage." }
+    ]
+  },
+  "/analytics": {
+    title: "Hiring Analytics",
+    subtitle: "Make data-driven decisions to optimize your recruitment funnel.",
+    sections: [
+      { heading: "Candidate Scorecards", content: "Get detailed, objective scorecards for every candidate, breaking down their performance across multiple technical competencies." },
+      { heading: "Funnel Metrics", content: "Analyze your time-to-hire, drop-off rates, and the predictive accuracy of your assessments to continuously improve your hiring process." }
+    ]
   }
 };

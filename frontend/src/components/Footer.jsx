@@ -40,11 +40,11 @@ const Footer = ({ landingRole = 'candidate' }) => {
             <>
               <div className="footer-link-col">
                 <h4>Product</h4>
-                <a href="#ai-screening">AI Screening</a>
-                <a href="#job-management">Job Management</a>
-                <a href="#assessments">Assessments</a>
-                <a href="#interviews">Interviews</a>
-                <a href="#analytics">Analytics</a>
+                <Link to="/ai-screening">AI Screening</Link>
+                <Link to="/job-management">Job Management</Link>
+                <Link to="/assessments">Assessments</Link>
+                <Link to="/interviews">Interviews</Link>
+                <Link to="/analytics">Analytics</Link>
               </div>
               <div className="footer-link-col">
                 <h4>Resources</h4>

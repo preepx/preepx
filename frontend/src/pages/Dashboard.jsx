@@ -136,24 +136,26 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
             <div className="hero-orb hero-orb-3" />
             <div className="hero-grid" />
           </div>
+          <div className="toggle-wrapper" style={{ zIndex: 10 }}>
+            <div className="role-toggle-container">
+              <button
+                className={`role-toggle-btn ${landingRole === 'candidate' ? 'active' : ''}`}
+                onClick={() => setLandingRole('candidate')}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Candidate
+              </button>
+              <button
+                className={`role-toggle-btn ${landingRole === 'recruiter' ? 'active' : ''}`}
+                onClick={() => setLandingRole('recruiter')}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                Recruiter
+              </button>
+            </div>
+          </div>
           <div className="hero-inner">
             <div className="hero-content">
-              <div className="role-toggle-container">
-                <button
-                  className={`role-toggle-btn ${landingRole === 'candidate' ? 'active' : ''}`}
-                  onClick={() => setLandingRole('candidate')}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                  Candidate
-                </button>
-                <button
-                  className={`role-toggle-btn ${landingRole === 'recruiter' ? 'active' : ''}`}
-                  onClick={() => setLandingRole('recruiter')}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                  Recruiter
-                </button>
-              </div>
               <h1 className="hero-title">
                 <span style={{ whiteSpace: 'nowrap' }}>Hire Better Talent.</span>
                 <br />With <span className="gradient-text">{["Unmatched Speed.", "AI Screening.", "Smart Matching.", "AI Evaluation.", "Zero Hassle."][textIndex % 5]}</span>
@@ -498,24 +500,26 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
           <div className="hero-orb hero-orb-3" />
           <div className="hero-grid" />
         </div>
+        <div className="toggle-wrapper" style={{ zIndex: 10 }}>
+          <div className="role-toggle-container">
+            <button
+              className={`role-toggle-btn ${landingRole === 'candidate' ? 'active' : ''}`}
+              onClick={() => setLandingRole('candidate')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              Candidate
+            </button>
+            <button
+              className={`role-toggle-btn ${landingRole === 'recruiter' ? 'active' : ''}`}
+              onClick={() => setLandingRole('recruiter')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+              Recruiter
+            </button>
+          </div>
+        </div>
         <div className="hero-inner">
           <div className="hero-content">
-              <div className="role-toggle-container">
-                <button
-                  className={`role-toggle-btn ${landingRole === 'candidate' ? 'active' : ''}`}
-                  onClick={() => setLandingRole('candidate')}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                  Candidate
-                </button>
-                <button
-                  className={`role-toggle-btn ${landingRole === 'recruiter' ? 'active' : ''}`}
-                  onClick={() => setLandingRole('recruiter')}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                  Recruiter
-                </button>
-              </div>
             <h1 className="hero-title">
               <span style={{ whiteSpace: 'nowrap' }}>Crack Your Dream Job</span>
               <br />With <span className="gradient-text">{rotatingTexts[textIndex]}</span>

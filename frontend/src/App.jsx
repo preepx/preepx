@@ -41,7 +41,9 @@ const PUBLIC_ROUTES = [
   "/", "/dashboard", "/auth", "/auth/recruiter",
   "/features", "/how-it-works", "/mock-interviews", "/user-guide",
   "/interview-tips", "/blog", "/help-center", "/community",
-  "/about-us", "/careers", "/privacy-policy", "/terms-of-service"
+  "/about-us", "/careers", "/privacy-policy", "/terms-of-service",
+  "/hiring-guide", "/recruiter-resources", "/documentation",
+  "/ai-screening", "/job-management", "/assessments", "/interviews", "/analytics"
 ];
 const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "/objective-exam/take", "/coding-exam"];
 
@@ -113,6 +115,14 @@ function AppContent() {
           <Route path="/careers" element={<StaticPage />} />
           <Route path="/privacy-policy" element={<StaticPage />} />
           <Route path="/terms-of-service" element={<StaticPage />} />
+          <Route path="/hiring-guide" element={<StaticPage />} />
+          <Route path="/recruiter-resources" element={<StaticPage />} />
+          <Route path="/documentation" element={<StaticPage />} />
+          <Route path="/ai-screening" element={<StaticPage />} />
+          <Route path="/job-management" element={<StaticPage />} />
+          <Route path="/assessments" element={<StaticPage />} />
+          <Route path="/interviews" element={<StaticPage />} />
+          <Route path="/analytics" element={<StaticPage />} />
 
           <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
           <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
