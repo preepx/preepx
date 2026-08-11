@@ -1,4 +1,4 @@
-const Recruiter = require('../../../../models/Recruiter');
+const Recruiter = require('../../../models/Recruiter');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');

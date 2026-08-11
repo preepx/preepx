@@ -16,7 +16,7 @@ const createLimiter = (options) => {
     },
     standardHeaders: true,
     legacyHeaders: false,
-    validate: { ip: false, xForwardedForHeader: false },
+    validate: false,
     keyGenerator: (req, res) => {
       // Scale horizontally per-user where applicable to avoid global IP blocks on NATs
       if (req.user && req.user._id) {
