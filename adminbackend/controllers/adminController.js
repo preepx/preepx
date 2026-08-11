@@ -208,7 +208,8 @@ const addCoinsToWallet = async (req, res) => {
     });
 
     try {
-      await fetch('http://localhost:4000/api/internal/notify', {
+      const backendUrl = process.env.BACKEND_URL;
+      await fetch(`${backendUrl}/api/internal/notify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -251,7 +252,8 @@ const addXpToUser = async (req, res) => {
     });
 
     try {
-      await fetch('http://localhost:4000/api/internal/notify', {
+      const backendUrl = process.env.BACKEND_URL;
+      await fetch(`${backendUrl}/api/internal/notify`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

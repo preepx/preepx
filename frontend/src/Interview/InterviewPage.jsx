@@ -285,22 +285,7 @@ const InterviewPage = () => {
         </div>
 
         <div className="side-panels">
-          {dashboard?.recentActivity?.length > 0 && (
-            <div className="panel activity-panel">
-              <div className="panel-header"><Flame size={18} /><h2>Recent Activity</h2></div>
-              <div className="activity-list">
-                {dashboard.recentActivity.map((a, i) => (
-                  <div key={i} className="activity-item">
-                    <span className="act-role">
-                      {a.type === "mcq" ? "📝 " : ""}{a.role}
-                      {a.type === "mcq" && <span style={{ fontSize: 11, color: "var(--text-muted)", marginLeft: 6 }}>MCQ</span>}
-                    </span>
-                    <span className="act-score">{a.maxScore ? Math.round((a.score / a.maxScore) * 100) : 0}%</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+
           <div className="panel quick-start-panel">
             <h2>Quick Actions</h2>
             <button className="action-btn primary full" onClick={() => setShowModal(true)}>

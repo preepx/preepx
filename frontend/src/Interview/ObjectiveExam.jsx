@@ -15,7 +15,7 @@ import './ObjectiveExam.css';
 
 const SOCKET_URL = API.defaults.baseURL
   ? API.defaults.baseURL.replace('/api', '')
-  : 'http://localhost:4000';
+  : 'https://admiminterview-coch.onrender.com';
 
 const TIMER_SECONDS = 30;
 const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
@@ -80,12 +80,12 @@ export default function ObjectiveExam() {
       if (prev >= 5) return prev;
 
       const newCount = prev + 1;
-      
+
       setShowWarnBlink(true);
       setTimeout(() => setShowWarnBlink(false), 2000);
-      
+
       notify.dismiss(); // Clear all toasts so only 1 is visible at a time
-      
+
       if (newCount >= 5) {
         notify.error('Exam terminated due to repeated warnings.');
         handleForceEnd();
@@ -99,7 +99,7 @@ export default function ObjectiveExam() {
       } else {
         notify.warning(`Proctoring Warning! ${newCount}/5: ${msg}`);
       }
-      
+
       return newCount;
     });
   };
@@ -206,13 +206,13 @@ export default function ObjectiveExam() {
             : user.badges,
         });
         window.dispatchEvent(new Event('user-updated'));
-        
+
         if (d.pointsEarned > 0) {
           notify.success(`+${d.pointsEarned} points earned!`);
         } else {
           notify.info(`Exam finished! You earned 0 XP this time.`);
         }
-        
+
         const newNotif = {
           id: Date.now().toString(),
           title: "Exam Completed",
