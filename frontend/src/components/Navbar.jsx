@@ -53,9 +53,10 @@ function Navbar({ landingRole, setLandingRole }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("user_notifications");
     notify.success("Logged out successfully!");
     setShowMenu(false);
-    navigate("/");
+    window.location.href = "/";
   };
 
   const isActive = (path) => location.pathname === path;

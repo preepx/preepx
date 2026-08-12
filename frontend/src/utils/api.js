@@ -22,6 +22,7 @@ API.interceptors.response.use(
     if (status === 401) {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
+      localStorage.removeItem("user_notifications");
       if (!window.location.pathname.includes("/auth")) {
         showAppError("Your session has expired. Please sign in again.", "Session expired");
         window.location.href = "/auth";

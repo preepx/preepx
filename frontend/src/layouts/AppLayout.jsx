@@ -61,31 +61,30 @@ function AppLayout({ children }) {
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
   const { balance } = useWallet();
   const [showNotifications, setShowNotifications] = useState(false);
-  const [notifs, setNotifs] = useState(() => {
-    const saved = localStorage.getItem('user_notifications');
-    if (saved) return JSON.parse(saved);
-    return initialNotifications;
-  });
+  const [notifs, setNotifs] = useState([]);
   const [showComingSoon, setShowComingSoon] = useState(false);
 
   const unreadCount = notifs.filter(n => !n.read).length;
 
   useEffect(() => {
-    localStorage.setItem('user_notifications', JSON.stringify(notifs));
-  }, [notifs]);
+    const fetchNotifs = async () => {
+      try {
+        const res = await API.get('/users/notifications');
+        setNotifs(res.data || []);
+      } catch (err) {
+        console.error("Failed to fetch notifications:", err);
+      }
+    };
+    if (user && user._id) {
+      fetchNotifs();
+    }
+  }, [user]);
 
   useEffect(() => {
     const handleNewNotif = (e) => {
-      const newNotif = {
-        id: Date.now().toString(),
-        title: e.detail.title,
-        message: e.detail.message,
-        time: 'Just now',
-        timestamp: Date.now(),
-        icon: e.detail.icon || '🔔',
-        read: false
-      };
-      setNotifs(prev => [newNotif, ...prev]);
+      if (e.detail) {
+        setNotifs(prev => [e.detail, ...prev]);
+      }
     };
     window.addEventListener('newNotification', handleNewNotif);
     return () => window.removeEventListener('newNotification', handleNewNotif);
@@ -211,8 +210,9 @@ function AppLayout({ children }) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    localStorage.removeItem("user_notifications");
     notify.success("Signed out successfully");
-    navigate("/");
+    window.location.href = "/";
   };
 
   const avatar = user.profilePic ||

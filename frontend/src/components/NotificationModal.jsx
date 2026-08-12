@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { X, Bell } from 'lucide-react';
+import API from '../utils/api';
 
 const formatTimeAgo = (timestamp) => {
   if (!timestamp) return 'Just now';
@@ -111,12 +112,31 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
 const NotificationModal = ({ isOpen, onClose, notifs, setNotifs }) => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-  const handleRead = (id) => {
-    setNotifs(notifs.map(n => n.id === id ? { ...n, read: true } : n));
+  const handleRead = async (id) => {
+    try {
+      setNotifs(notifs.map(n => n.id === id ? { ...n, read: true } : n));
+      await API.put(`/users/notifications/${id}/read`);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleDelete = (id) => {
-    setNotifs(notifs.filter(n => n.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      setNotifs(notifs.filter(n => n.id !== id));
+      await API.delete(`/users/notifications/${id}`);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleClearAll = async () => {
+    try {
+      setNotifs([]);
+      await API.delete(`/users/notifications`);
+    } catch (err) {
+      console.error(err);
+    }
   };
   useEffect(() => {
     if (isOpen) {
@@ -161,6 +181,14 @@ const NotificationModal = ({ isOpen, onClose, notifs, setNotifs }) => {
         <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
           {notifs.length > 0 ? (
             <div className="flex flex-col gap-2" style={{ paddingTop: '16px' }}>
+              {notifs.length > 0 && (
+                <button 
+                  onClick={handleClearAll}
+                  className="text-xs text-[var(--text-muted)] hover:text-red-500 transition-colors self-end mr-4"
+                >
+                  Clear all
+                </button>
+              )}
               {notifs.map(notif => (
                 <NotificationItem
                   key={notif.id}
