@@ -35,7 +35,8 @@
   justify-content: center;
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--text-secondary);
+  color: white;
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   border: 4px solid var(--border);
 }
 
@@ -113,8 +114,9 @@
 
 .details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
+  align-items: start;
 }
 
 @media (max-width: 768px) {
@@ -201,6 +203,12 @@
 
 .content-card {
   padding: 1.5rem;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.content-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(236, 72, 153, 0.15);
 }
 
 .card-header {

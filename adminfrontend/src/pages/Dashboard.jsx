@@ -34,7 +34,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="page-header">
-        <h1>Dashboard Overview</h1>
+        <h1 className="gradient-text">Dashboard Overview</h1>
         <p className="text-secondary">Welcome to your admin panel. Here's what's happening today.</p>
       </div>
 
@@ -120,7 +120,7 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="glass-panel content-card">
+        <div className="glass-panel content-card" style={{ marginBottom: '1.5rem' }}>
           <div className="card-header">
             <TrendingUp size={20} className="accent-icon" />
             <h3>Recent Transactions</h3>

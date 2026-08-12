@@ -13,6 +13,7 @@ const BtecNotes = lazy(() => import('./pages/BtecNotes'));
 const BtecNoteForm = lazy(() => import('./pages/BtecNoteForm'));
 const BtecQuestions = lazy(() => import('./pages/BtecQuestions'));
 const BtecPdfNotes = lazy(() => import('./pages/BtecPdfNotes'));
+const Recruiters = lazy(() => import('./pages/Recruiters'));
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="users" element={<Users />} />
             <Route path="users/:id" element={<UserDetails />} />
+            <Route path="recruiters" element={<Recruiters />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="purchases" element={<Purchases />} />
             <Route path="btec-notes" element={<BtecNotes />} />
