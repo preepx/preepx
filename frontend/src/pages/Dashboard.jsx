@@ -148,7 +148,7 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
               </button>
               <button
                 className={`role-toggle-btn ${landingRole === 'recruiter' ? 'active' : ''}`}
-                onClick={() => setShowComingSoon(true)}
+                onClick={() => setLandingRole('recruiter')}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                 Recruiter
@@ -512,7 +512,7 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
             </button>
             <button
               className={`role-toggle-btn ${landingRole === 'recruiter' ? 'active' : ''}`}
-              onClick={() => setShowComingSoon(true)}
+              onClick={() => setLandingRole('recruiter')}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
               Recruiter
@@ -667,7 +667,7 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
       </section>
 
       {/* Coming Soon Modal */}
-      {showComingSoon && (
+      {/* showComingSoon && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           background: 'rgba(0, 0, 0, 0.7)',
@@ -719,7 +719,7 @@ function Dashboard({ landingRole = 'candidate', setLandingRole }) {
             </button>
           </div>
         </div>
-      )}
+      ) */}
 
     </div>
   );
