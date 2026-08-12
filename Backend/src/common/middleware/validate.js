@@ -13,6 +13,7 @@ const validate = (schema) => (req, res, next) => {
         acc[curr.path[0]] = curr.message.replace(/\"/g, '');
         return acc;
       }, {});
+      console.error(`[VALIDATION FAILED] Path: ${req.originalUrl}, Body:`, req.body, `Errors:`, errors);
       return next(new BadRequestError('Validation failed', errors));
     }
     req.body = value;
