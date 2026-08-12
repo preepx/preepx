@@ -70,7 +70,7 @@ function AppLayout({ children }) {
     const fetchNotifs = async () => {
       try {
         const res = await API.get('/users/notifications');
-        setNotifs(res.data || []);
+        setNotifs([...(res.data || [])].reverse());
       } catch (err) {
         console.error("Failed to fetch notifications:", err);
       }
@@ -172,7 +172,6 @@ function AppLayout({ children }) {
     }
 
     socket.on('global_notification', (data) => {
-      notify.success(data.title + ": " + data.message);
       window.dispatchEvent(new CustomEvent('newNotification', { detail: data }));
       refreshUser(); // Background sync for XP/Coins
     });
