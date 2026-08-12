@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X } from 'lucide-react';
+import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X, Gift } from 'lucide-react';
 import api from '../utils/api';
 import './UserDetails.css';
 
@@ -118,7 +118,7 @@ const UserDetails = () => {
           <div className="glass-panel content-card mb-4">
             <div className="card-header">
               <User size={20} className="accent-icon" />
-              <h3>Profile Details</h3>
+              <h3 className="gradient-text">Profile Details</h3>
             </div>
             <div className="profile-extra-details">
               {user.bio && <p><strong>Bio:</strong> {user.bio}</p>}
@@ -138,13 +138,13 @@ const UserDetails = () => {
           <div className="glass-panel content-card mb-4">
             <div className="card-header">
               <Wallet size={20} className="accent-icon" />
-              <h3>Wallet</h3>
+              <h3 className="gradient-text">Wallet</h3>
             </div>
             <div className="wallet-balance" style={{ marginBottom: '1rem' }}>
               <h2>{wallet.balance} <span className="text-secondary" style={{fontSize: '1rem'}}>Coins</span></h2>
             </div>
             
-            <div className="add-coins-form" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+            <div className="add-coins-form">
               <input 
                 type="number" 
                 className="input-field" 
@@ -182,13 +182,13 @@ const UserDetails = () => {
           <div className="glass-panel content-card mb-4">
             <div className="card-header">
               <Star size={20} className="accent-icon" />
-              <h3>Experience Points</h3>
+              <h3 className="gradient-text">Experience Points</h3>
             </div>
             <div className="wallet-balance" style={{ marginBottom: '1rem' }}>
               <h2>{user.points || 0} <span className="text-secondary" style={{fontSize: '1rem'}}>XP</span></h2>
             </div>
             
-            <div className="add-coins-form" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+            <div className="add-coins-form">
               <input 
                 type="number" 
                 className="input-field" 
@@ -221,11 +221,42 @@ const UserDetails = () => {
               </button>
             </div>
           </div>
+          <div className="glass-panel content-card mb-4">
+            <div className="card-header">
+              <Gift size={20} className="accent-icon" />
+              <h3 className="gradient-text">Rewards & Daily Logins</h3>
+            </div>
+            <div className="rewards-info" style={{ marginTop: '1rem' }}>
+              <div style={{ marginBottom: '1rem' }}>
+                <p className="text-secondary" style={{ fontSize: '0.85rem', marginBottom: '0.25rem' }}>Last Daily Login Claim:</p>
+                <p style={{ fontWeight: '500' }}>
+                  {user.lastDailyRewardDate 
+                    ? new Date(user.lastDailyRewardDate).toLocaleString() 
+                    : <span className="text-secondary">Never claimed</span>}
+                </p>
+              </div>
+              
+              <div>
+                <p className="text-secondary" style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>XP Rewards Claimed ({user.xpRewardsClaimed?.length || 0}):</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  {user.xpRewardsClaimed && user.xpRewardsClaimed.length > 0 ? (
+                    user.xpRewardsClaimed.map((reward, idx) => (
+                      <span key={idx} className="badge badge-accent" style={{ fontSize: '0.75rem', padding: '4px 8px' }}>
+                        {reward.replace(/_/g, ' ').toUpperCase()}
+                      </span>
+                    ))
+                  ) : (
+                    <p className="text-secondary" style={{ fontSize: '0.85rem' }}>No rewards claimed yet.</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="glass-panel content-card">
             <div className="card-header">
               <History size={20} className="accent-icon" />
-              <h3>Recent Transactions</h3>
+              <h3 className="gradient-text">Recent Transactions</h3>
             </div>
             <div className="tx-list">
               {recentTransactions.length > 0 ? (
@@ -251,7 +282,7 @@ const UserDetails = () => {
           <div className="glass-panel content-card mb-4">
             <div className="card-header">
               <Briefcase size={20} className="accent-icon" />
-              <h3>Mock Interviews ({interviews.length})</h3>
+              <h3 className="gradient-text">Mock Interviews ({interviews.length})</h3>
             </div>
             <div className="table-responsive">
               <table className="admin-table">
@@ -281,7 +312,7 @@ const UserDetails = () => {
           <div className="glass-panel content-card">
             <div className="card-header">
               <GraduationCap size={20} className="accent-icon" />
-              <h3>Objective Exams ({mcqResults.length})</h3>
+              <h3 className="gradient-text">Objective Exams ({mcqResults.length})</h3>
             </div>
             <div className="table-responsive">
               <table className="admin-table">
@@ -310,7 +341,7 @@ const UserDetails = () => {
           <div className="glass-panel content-card mt-4">
             <div className="card-header">
               <Terminal size={20} className="accent-icon" />
-              <h3>Coding Practice ({codingResults.length})</h3>
+              <h3 className="gradient-text">Coding Practice ({codingResults.length})</h3>
             </div>
             <div className="table-responsive">
               <table className="admin-table">

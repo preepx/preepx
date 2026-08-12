@@ -4,7 +4,7 @@ import { CheckCircle, Lock, Gift, UserCheck, FileText, Bot, Trophy, Briefcase, U
 import notify from '../utils/notify';
 import { getProfile, claimXpReward, getDashboard } from "../services/userAPI";
 import "./Rewards.css";
-import { REWARDS_DATA, calculateProgress } from "../utils/rewardsUtils";
+import { getRewardsData, calculateProgress } from "../utils/rewardsUtils";
 
 function Rewards() {
   const [user, setUser] = useState(null);
@@ -78,59 +78,104 @@ function Rewards() {
       <div className="rewards-grid-section">
         <h3>Ways to Earn XP</h3>
         <div className="rewards-grid">
-          {REWARDS_DATA.map((reward, idx) => {
-            const isClaimed = claimedRewards.includes(reward.id);
-            const progress = calculateProgress(reward.id, user, dashboard);
-            const isLocked = !isClaimed && progress < reward.target && reward.target === 1;
-            const isInProgress = !isClaimed && reward.target > 1;
+          {(() => {
+            const allRewards = getRewardsData(user);
+            const displayRewards = [];
+            let referCount = 0;
 
-            let statusClass = "locked";
-            if (isClaimed) statusClass = "completed";
-            else if (isInProgress && progress > 0) statusClass = "progress";
+            allRewards.forEach(reward => {
+              if (reward.id.startsWith("refer_friend")) {
+                if (claimedRewards.includes(reward.id)) {
+                  referCount++;
+                }
+              }
+            });
 
-            const Icon = reward.icon;
+            let addedRefer = false;
+            allRewards.forEach(reward => {
+              if (reward.id.startsWith("refer_friend")) {
+                if (!addedRefer) {
+                  addedRefer = true;
+                  displayRewards.push({
+                    ...reward,
+                    id: "refer_friend_ui", 
+                    isReferralGroup: true,
+                    claimCount: referCount
+                  });
+                }
+              } else {
+                displayRewards.push(reward);
+              }
+            });
 
-            return (
-              <div 
-                key={reward.id} 
-                className={`reward-card ${isClaimed ? 'completed' : isLocked ? 'locked' : ''}`}
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <div className="reward-card-header">
-                  <div className="reward-title-group">
-                    <Icon size={20} color={isClaimed ? "#10b981" : "#94a3b8"} />
-                    <span className="reward-title">{reward.title}</span>
-                  </div>
-                  <span className="reward-xp">+{reward.xp} XP</span>
-                </div>
-                
-                <p className="reward-desc">{reward.desc}</p>
-                
-                <div className="reward-status">
-                  {isClaimed && (
-                    <span className="status-completed"><CheckCircle size={14} /> Claimed</span>
-                  )}
-                  {isLocked && (
-                    <span className="status-locked"><Lock size={14} /> Complete condition to unlock</span>
-                  )}
-                  {isInProgress && (
-                    <div style={{ width: "100%" }}>
-                      <span className="status-progress-text">{progress} / {reward.target} Completed</span>
-                      <div className="reward-progress-bar">
-                        <div 
-                          className="reward-progress-fill" 
-                          style={{ width: `${(progress / reward.target) * 100}%` }}
-                        ></div>
-                      </div>
+            return displayRewards.map((reward, idx) => {
+              const isReferral = reward.isReferralGroup;
+              const isClaimed = isReferral ? reward.claimCount > 0 : claimedRewards.includes(reward.id);
+              const progress = calculateProgress(isReferral ? `refer_friend_${reward.claimCount + 1}` : reward.id, user, dashboard);
+              const isLocked = !isReferral && !isClaimed && progress < reward.target && reward.target === 1;
+              const isInProgress = !isReferral && !isClaimed && reward.target > 1;
+
+              let statusClass = "locked";
+              if (isReferral) statusClass = isClaimed ? "completed" : "progress";
+              else if (isClaimed) statusClass = "completed";
+              else if (isInProgress && progress > 0) statusClass = "progress";
+
+              const Icon = reward.icon;
+
+              return (
+                <div 
+                  key={reward.id} 
+                  className={`reward-card ${isClaimed ? 'completed' : isLocked ? 'locked' : ''}`}
+                  style={{ animationDelay: `${idx * 0.1}s` }}
+                >
+                  <div className="reward-card-header">
+                    <div className="reward-title-group">
+                      <Icon size={20} color={isClaimed ? "#10b981" : "#94a3b8"} />
+                      <span className="reward-title">{reward.title}</span>
                     </div>
-                  )}
-                  {!isClaimed && !isLocked && !isInProgress && progress >= reward.target && (
-                    <span className="status-completed" style={{ color: '#f59e0b' }}>⏳ Claiming...</span>
-                  )}
+                    <span className="reward-xp">+{reward.xp} XP</span>
+                  </div>
+                  
+                  <p className="reward-desc">{reward.desc}</p>
+                  
+                  <div className="reward-status">
+                    {isReferral ? (
+                      <div style={{ width: "100%" }}>
+                        {isClaimed ? (
+                          <span className="status-completed"><CheckCircle size={14} /> Claimed ({reward.claimCount})</span>
+                        ) : (
+                          <span className="status-locked"><Lock size={14} /> Complete condition to unlock</span>
+                        )}
+                      </div>
+                    ) : (
+                      <>
+                        {isClaimed && (
+                          <span className="status-completed"><CheckCircle size={14} /> Claimed</span>
+                        )}
+                        {isLocked && (
+                          <span className="status-locked"><Lock size={14} /> Complete condition to unlock</span>
+                        )}
+                        {isInProgress && (
+                          <div style={{ width: "100%" }}>
+                            <span className="status-progress-text">{progress} / {reward.target} Completed</span>
+                            <div className="reward-progress-bar">
+                              <div 
+                                className="reward-progress-fill" 
+                                style={{ width: `${(progress / reward.target) * 100}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                        )}
+                        {!isClaimed && !isLocked && !isInProgress && progress >= reward.target && (
+                          <span className="status-completed" style={{ color: '#f59e0b' }}>⏳ Claiming...</span>
+                        )}
+                      </>
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            });
+          })()}
         </div>
       </div>
     </div>

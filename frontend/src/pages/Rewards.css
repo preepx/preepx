@@ -143,6 +143,7 @@
   background: rgba(245, 158, 11, 0.15);
   padding: 3px 8px;
   border-radius: 20px;
+  white-space: nowrap;
 }
 
 .reward-desc {
