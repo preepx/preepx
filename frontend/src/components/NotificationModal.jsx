@@ -192,7 +192,18 @@ const NotificationModal = ({ isOpen, onClose, notifs, setNotifs }) => {
             <X size={20} />
           </button>
         </div>
-        <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
+        <style>
+          {`
+            .hide-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+            .hide-scrollbar {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+            }
+          `}
+        </style>
+        <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden hide-scrollbar">
           {notifs.length > 0 ? (
             <div className="flex flex-col gap-2" style={{ paddingTop: '16px' }}>
 
