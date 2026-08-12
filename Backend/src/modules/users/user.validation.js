@@ -6,8 +6,8 @@ const updateProfileSchema = Joi.object({
   college: Joi.string().allow('').optional(),
   address: Joi.string().allow('').optional(),
   bio: Joi.string().allow('').optional(),
-  github: Joi.string().uri().allow('').optional(),
-  linkedin: Joi.string().uri().allow('').optional(),
+  github: Joi.string().allow('').optional(),
+  linkedin: Joi.string().allow('').optional(),
   degree: Joi.string().allow('').optional(),
 });
 
