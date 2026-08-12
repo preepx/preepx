@@ -1,6 +1,7 @@
 const CodingResult = require("../../../models/CodingResult");
 const User = require("../../../models/User");
 const { BadRequestError } = require("../../common/exceptions/customErrors");
+const { sendNotification } = require("../../../utils/notificationService");
 
 const saveCodingResult = async (data) => {
   const { userId, title, difficulty, language, status, timeSpentSecs } = data;
@@ -35,16 +36,14 @@ const saveCodingResult = async (data) => {
       user.level = Math.floor(user.points / 100) + 1;
       await user.save();
 
-      try {
-        if (global.io && pointsEarned > 0) {
-          global.io.to(`user_${userId}`).emit("global_notification", {
-            title: "Coding Challenge Completed",
-            message: `Awesome! You earned ${pointsEarned} XP for completing the coding challenge.`,
-            icon: "⭐"
-          });
-        }
-      } catch (e) {
-        console.error("Failed to emit Coding XP notification:", e);
+      if (pointsEarned > 0) {
+        await sendNotification(
+          userId,
+          "Coding Challenge Completed",
+          `Awesome! You earned ${pointsEarned} XP for completing the coding challenge.`,
+          "general",
+          "⭐"
+        );
       }
     }
   }

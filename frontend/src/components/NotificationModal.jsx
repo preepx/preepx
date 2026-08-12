@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { X, Bell } from 'lucide-react';
+import API from '../utils/api';
 
 const formatTimeAgo = (timestamp) => {
   if (!timestamp) return 'Just now';
@@ -30,22 +31,25 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
   const [translateX, setTranslateX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const startXRef = useRef(0);
+  const draggedRef = useRef(false);
 
   const handleTouchStart = (e) => {
     startXRef.current = e.touches[0].clientX;
     setIsDragging(true);
+    draggedRef.current = false;
   };
 
   const handleTouchMove = (e) => {
     if (!isDragging) return;
     const diff = e.touches[0].clientX - startXRef.current;
     setTranslateX(diff);
+    if (Math.abs(diff) > 10) draggedRef.current = true;
   };
 
   const handleTouchEnd = () => {
     if (!isDragging) return;
     setIsDragging(false);
-    if (Math.abs(translateX) > 100) {
+    if (Math.abs(translateX) > 60) {
       onDelete(notif.id);
     } else {
       setTranslateX(0);
@@ -55,27 +59,38 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
   const handleMouseDown = (e) => {
     startXRef.current = e.clientX;
     setIsDragging(true);
+    draggedRef.current = false;
   };
 
   const handleMouseMove = (e) => {
     if (!isDragging) return;
     const diff = e.clientX - startXRef.current;
     setTranslateX(diff);
+    if (Math.abs(diff) > 10) draggedRef.current = true;
   };
 
   const handleMouseUp = () => {
     if (!isDragging) return;
     setIsDragging(false);
-    if (Math.abs(translateX) > 100) {
+    if (Math.abs(translateX) > 60) {
       onDelete(notif.id);
     } else {
       setTranslateX(0);
     }
   };
 
+  const handleClick = (e) => {
+    if (draggedRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    onRead(notif.id);
+  };
+
   return (
     <div
-      onClick={() => onRead(notif.id)}
+      onClick={handleClick}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -86,11 +101,11 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
       style={{
         transform: `translateX(${translateX}px)`,
         transition: isDragging ? 'none' : 'transform 0.3s ease',
-        opacity: notif.read ? 0.75 : 1,
+        opacity: Math.abs(translateX) > 60 ? 0 : (notif.read ? 0.75 : 1),
         cursor: 'pointer',
         paddingLeft: '8px'
       }}
-      className={`flex gap-4 pr-4 py-4 relative ${notif.read ? 'bg-transparent hover:bg-black/5 dark:hover:bg-white/5' : 'bg-blue-50/50 dark:bg-blue-500/10'}`}
+      className={`flex gap-4 pr-4 py-4 relative select-none ${notif.read ? 'bg-transparent hover:bg-black/5 dark:hover:bg-white/5' : 'bg-blue-50/50 dark:bg-blue-500/10'}`}
     >
       <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 text-2xl select-none">
         {notif.icon}
@@ -101,7 +116,7 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
           <span className="text-[var(--text-muted)]">{notif.message}</span>
         </div>
         <span className="text-[12px] text-blue-500 font-medium mt-1.5">
-          {notif.timestamp ? formatTimeAgo(notif.timestamp) : notif.time}
+          {formatTimeAgo(notif.createdAt || notif.timestamp || notif.time)}
         </span>
       </div>
     </div>
@@ -111,12 +126,31 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
 const NotificationModal = ({ isOpen, onClose, notifs, setNotifs }) => {
   const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-  const handleRead = (id) => {
-    setNotifs(notifs.map(n => n.id === id ? { ...n, read: true } : n));
+  const handleRead = async (id) => {
+    try {
+      setNotifs(notifs.map(n => n.id === id ? { ...n, read: true } : n));
+      await API.put(`/users/notifications/${id}/read`);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  const handleDelete = (id) => {
-    setNotifs(notifs.filter(n => n.id !== id));
+  const handleDelete = async (id) => {
+    try {
+      setNotifs(notifs.filter(n => n.id !== id));
+      await API.delete(`/users/notifications/${id}`);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleClearAll = async () => {
+    try {
+      setNotifs([]);
+      await API.delete(`/users/notifications`);
+    } catch (err) {
+      console.error(err);
+    }
   };
   useEffect(() => {
     if (isOpen) {
@@ -143,8 +177,8 @@ const NotificationModal = ({ isOpen, onClose, notifs, setNotifs }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-8 border-b border-[var(--border)]" style={{ paddingBottom: '20px', paddingTop: '8px' }}>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center text-[var(--text)]">
+          <div className="flex items-center gap-2">
+            <div className="flex items-center justify-center text-[var(--text)]" style={{ marginLeft: '12px' }}>
               <Bell size={24} />
             </div>
             <h3 className="m-0 text-[var(--text)] text-xl font-bold tracking-tight">Notifications</h3>
@@ -158,9 +192,21 @@ const NotificationModal = ({ isOpen, onClose, notifs, setNotifs }) => {
             <X size={20} />
           </button>
         </div>
-        <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
+        <style>
+          {`
+            .hide-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+            .hide-scrollbar {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+            }
+          `}
+        </style>
+        <div className="flex-1 flex flex-col overflow-y-auto overflow-x-hidden hide-scrollbar">
           {notifs.length > 0 ? (
             <div className="flex flex-col gap-2" style={{ paddingTop: '16px' }}>
+
               {notifs.map(notif => (
                 <NotificationItem
                   key={notif.id}

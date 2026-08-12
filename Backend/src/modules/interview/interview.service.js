@@ -2,6 +2,7 @@ const axios = require("axios");
 const Interview = require("../../../models/Interview");
 const User = require("../../../models/User");
 const walletService = require("../wallet/wallet.service");
+const { sendNotification } = require("../../../utils/notificationService");
 const { evaluateBadges } = require("../../../utils/badges");
 const { BadRequestError, NotFoundError } = require("../../common/exceptions/customErrors");
 const envConfig = require("../../config/env.config");
@@ -187,16 +188,14 @@ const saveInterviewResult = async (userId, data) => {
     await user.save();
     await updateStreak(userId);
 
-    try {
-      if (global.io && pointsEarned > 0) {
-        global.io.to(`user_${userId}`).emit("global_notification", {
-          title: "Interview Completed",
-          message: `Great job! You earned ${pointsEarned} XP for completing the interview.`,
-          icon: "⭐"
-        });
-      }
-    } catch (e) {
-      console.error("Failed to emit interview XP notification:", e);
+    if (pointsEarned > 0) {
+      await sendNotification(
+        userId,
+        "Interview Completed",
+        `Great job! You earned ${pointsEarned} XP for completing the interview.`,
+        "general",
+        "⭐"
+      );
     }
   }
 

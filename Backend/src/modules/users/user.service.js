@@ -1,4 +1,5 @@
 const User = require('../../../models/User');
+const { sendNotification } = require('../../../utils/notificationService');
 const Interview = require('../../../models/Interview');
 const MCQResult = require('../../../models/MCQResult');
 const walletService = require('../wallet/wallet.service');
@@ -356,6 +357,8 @@ const redeemXp = async (userId, pointsToRedeem) => {
 
   await walletService.addBonusToWallet(user._id, coinsToAdd, `Redeemed ${pointsToRedeem} XP for Coins`);
 
+  await sendNotification(userId, "XP Redeemed", `Successfully converted ${pointsToRedeem} XP into ${coinsToAdd} Coins!`, "general", "🪙");
+
   return { points: user.points, coinsEarned: coinsToAdd, user };
 };
 
@@ -390,18 +393,8 @@ const claimXpReward = async (userId, rewardId, xpAmount) => {
 
   await user.save();
 
-  if (global.io) {
-    try {
-      let title = rewardId === "daily_login" ? "Daily Login Reward" : "XP Claimed";
-      global.io.to(`user_${userId}`).emit("global_notification", {
-        title: title,
-        message: `You earned ${xpAmount} XP!`,
-        type: "xp_earned"
-      });
-    } catch (e) {
-      console.error("Failed to emit XP notification:", e);
-    }
-  }
+  let title = rewardId === "daily_login" ? "Daily Login Reward" : "XP Claimed";
+  await sendNotification(userId, title, `You earned ${xpAmount} XP!`, "xp_earned", "🎁");
 
   return { xpEarned: xpAmount, totalPoints: user.points, level: user.level, xpRewardsClaimed: user.xpRewardsClaimed, user };
 };
@@ -415,20 +408,43 @@ const adminAddXp = async (userId, xpAmount, reason) => {
   user.level = Math.floor(user.lifetimePoints / 100) + 1;
   await user.save();
 
-  try {
-    if (global.io) {
-      global.io.to(`user_${userId}`).emit("global_notification", {
-        title: "XP Awarded",
-        message: reason || `Admin has awarded you ${xpAmount} XP!`,
-        icon: "⭐"
-      });
-      console.log(`Global IO emitted XP Awarded to user_${userId}`);
-    } else {
-      console.error("Global IO is undefined in adminAddXp!");
-    }
-  } catch(e) { console.error("Global IO Emit Error in adminAddXp:", e); }
+  await sendNotification(userId, "XP Awarded", reason || `Admin has awarded you ${xpAmount} XP!`, "general", "⭐");
 
   return user;
+};
+
+const getNotifications = async (userId) => {
+  const user = await User.findById(userId).select("notifications");
+  console.log(`[getNotifications] fetched for user ${userId}, count:`, user?.notifications?.length);
+  if (!user) throw new NotFoundError("User not found");
+  return user.notifications || [];
+};
+
+const markNotificationRead = async (userId, notifId) => {
+  const user = await User.findById(userId);
+  if (!user) throw new NotFoundError("User not found");
+  const notif = user.notifications.find(n => n.id === notifId);
+  if (notif) {
+    notif.read = true;
+    await user.save();
+  }
+  return user.notifications;
+};
+
+const deleteNotification = async (userId, notifId) => {
+  const user = await User.findById(userId);
+  if (!user) throw new NotFoundError("User not found");
+  user.notifications = user.notifications.filter(n => n.id !== notifId);
+  await user.save();
+  return user.notifications;
+};
+
+const clearNotifications = async (userId) => {
+  const user = await User.findById(userId);
+  if (!user) throw new NotFoundError("User not found");
+  user.notifications = [];
+  await user.save();
+  return user.notifications;
 };
 
 module.exports = {
@@ -438,11 +454,15 @@ module.exports = {
   updateSettings,
   getDashboard,
   getPlatformStats,
-  getAnalytics,
   getLeaderboard,
   getAchievements,
   claimBadge,
   redeemXp,
   claimXpReward,
-  adminAddXp
+  adminAddXp,
+  getAnalytics,
+  getNotifications,
+  markNotificationRead,
+  deleteNotification,
+  clearNotifications
 };

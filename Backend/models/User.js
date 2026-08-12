@@ -35,6 +35,15 @@ const userSchema = mongoose.Schema(
     profileCompletedBonusClaimed: { type: Boolean, default: false },
     xpRewardsClaimed: [{ type: String }],
     lastDailyRewardDate: { type: Date },
+    notifications: [{
+      title: { type: String },
+      message: { type: String },
+      type: { type: String },
+      icon: { type: String },
+      read: { type: Boolean, default: false },
+      createdAt: { type: Date, default: Date.now },
+      id: { type: String, default: () => Date.now().toString() }
+    }],
   },
   { timestamps: true }
 );

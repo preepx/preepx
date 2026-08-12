@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const { sendNotification } = require("./notificationService");
 const { evaluateBadges, calculateBadgeBonus } = require("./badges");
 
 const updateStreak = async (userId) => {
@@ -48,16 +49,14 @@ const awardMcqCompletion = async (userId, { score, totalQuestions }) => {
   await user.save();
   await updateStreak(userId);
 
-  try {
-    if (global.io && pointsEarned >= 0) {
-      global.io.to(`user_${userId}`).emit("global_notification", {
-        title: "Exam Completed",
-        message: pointsEarned > 0 ? `Excellent! You earned ${pointsEarned} XP for completing the objective exam.` : `Exam completed! You earned 0 XP this time. Try again to earn XP!`,
-        icon: "⭐"
-      });
-    }
-  } catch (e) {
-    console.error("Failed to emit MCQ XP notification:", e);
+  if (pointsEarned >= 0) {
+    await sendNotification(
+      userId,
+      "Exam Completed",
+      pointsEarned > 0 ? `Excellent! You earned ${pointsEarned} XP for completing the objective exam.` : `Exam completed! You earned 0 XP this time. Try again to earn XP!`,
+      "general",
+      "⭐"
+    );
   }
 
   const refreshed = await User.findById(userId);
