@@ -357,6 +357,8 @@ const redeemXp = async (userId, pointsToRedeem) => {
 
   await walletService.addBonusToWallet(user._id, coinsToAdd, `Redeemed ${pointsToRedeem} XP for Coins`);
 
+  await sendNotification(userId, "XP Redeemed", `Successfully converted ${pointsToRedeem} XP into ${coinsToAdd} Coins!`, "general", "🪙");
+
   return { points: user.points, coinsEarned: coinsToAdd, user };
 };
 

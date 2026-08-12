@@ -54,7 +54,6 @@ function WalletPage() {
               customAmount: Number(customAmount)
             });
             notify.success(verifyData.message);
-            window.dispatchEvent(new CustomEvent('newNotification', { detail: { title: 'Wallet Recharge', message: `Successfully added ${customAmount} Coins to your wallet!`, icon: '💰' } }));
             setShowAddModal(false);
             refresh();
           } catch (error) {

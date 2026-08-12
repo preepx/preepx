@@ -131,14 +131,7 @@ function AppLayout({ children }) {
         const localUser = JSON.parse(localStorage.getItem("user") || "{}");
         if (u && localUser && typeof u.points === 'number' && typeof localUser.points === 'number') {
           if (u.points > localUser.points) {
-            const earned = u.points - localUser.points;
-            window.dispatchEvent(new CustomEvent('newNotification', {
-              detail: {
-                title: "XP Awarded",
-                message: `You have received ${earned} XP!`,
-                icon: "⭐"
-              }
-            }));
+            // XP increased - backend will handle real notification via socket
           }
         }
 

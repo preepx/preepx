@@ -99,6 +99,8 @@ const purchaseCoins = async (userId, { packageId, rupees, paymentRef }) => {
     },
   });
 
+  await sendNotification(userId, "Wallet Recharge", `Successfully added ${coins} Coins to your wallet!`, "general", "💰");
+
   return { wallet, transaction, coinsAdded: coins };
 };
 
