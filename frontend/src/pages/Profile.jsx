@@ -4,6 +4,8 @@ import { Mail, Trophy, Award, Flame, BarChart3, Target, Camera, Edit2, MapPin, G
 import notify from '../utils/notify';
 import { getProfile, getAnalytics, uploadProfilePhoto, syncUserToStorage, updateProfileDetails } from "../services/userAPI";
 import { showAppError } from "../utils/appAlert";
+import Cropper from 'react-easy-crop';
+import getCroppedImg from '../utils/cropImage';
 import "./Profile.css";
 
 function Profile() {
@@ -15,6 +17,12 @@ function Profile() {
   const [editForm, setEditForm] = useState({});
   const [saving, setSaving] = useState(false);
 
+  // Cropping State
+  const [imageToCrop, setImageToCrop] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+
   useEffect(() => {
     if (!user) { navigate("/auth"); return; }
     getProfile().then((u) => { 
@@ -25,26 +33,41 @@ function Profile() {
     getAnalytics().then(setStats).catch(() => {});
   }, []);
 
-  const handlePhotoUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (!file.type.startsWith("image/")) {
-      showAppError("Please upload a JPG or PNG image.", "Invalid file");
-      return;
+  const handlePhotoSelect = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      const file = e.target.files[0];
+      if (!file.type.startsWith("image/")) {
+        showAppError("Please upload a JPG or PNG image.", "Invalid file");
+        return;
+      }
+      const reader = new FileReader();
+      reader.addEventListener("load", () => {
+        setImageToCrop(reader.result);
+      });
+      reader.readAsDataURL(file);
+      e.target.value = "";
     }
+  };
+
+  const onCropComplete = (croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  };
+
+  const handleUploadCroppedImage = async () => {
     try {
       setUploading(true);
-      const updated = await uploadProfilePhoto(file);
+      const croppedImageFile = await getCroppedImg(imageToCrop, croppedAreaPixels);
+      const updated = await uploadProfilePhoto(croppedImageFile);
       setUser(updated);
       setEditForm(updated);
       syncUserToStorage(updated);
       window.dispatchEvent(new Event("user-updated"));
       notify.success("Profile photo updated!");
+      setImageToCrop(null); // Close cropper
     } catch (err) {
-      showAppError(err.response?.data?.message || "Failed to upload photo.", "Upload failed");
+      showAppError(err.response?.data?.message || err.message || "Failed to upload photo.", "Upload failed");
     } finally {
       setUploading(false);
-      e.target.value = "";
     }
   };
 
@@ -122,7 +145,7 @@ function Profile() {
               <img src={avatarUrl} alt="Profile" className="profile-avatar" />
               <label className={`profile-photo-btn ${uploading ? "uploading" : ""}`} title="Upload profile photo">
                 <Camera size={16} />
-                <input type="file" accept="image/jpeg,image/png,image/jpg" onChange={handlePhotoUpload} hidden disabled={uploading} />
+                <input type="file" accept="image/jpeg,image/png,image/jpg" onChange={handlePhotoSelect} hidden disabled={uploading} />
               </label>
             </div>
 
@@ -144,7 +167,54 @@ function Profile() {
             </div>
           </div>
           <p className="profile-upload-hint">{uploading ? "Uploading..." : "Tap camera to upload photo"}</p>
+        </div>
+      </div>
 
+      {imageToCrop && (
+        <div className="cropper-modal-overlay">
+          <div className="cropper-modal">
+            <div className="cropper-header">
+              <h3>Crop Profile Photo</h3>
+              <button className="cropper-close" onClick={() => setImageToCrop(null)}><X size={20} /></button>
+            </div>
+            <div className="cropper-container">
+              <Cropper
+                image={imageToCrop}
+                crop={crop}
+                zoom={zoom}
+                aspect={1}
+                cropShape="round"
+                showGrid={false}
+                onCropChange={setCrop}
+                onCropComplete={onCropComplete}
+                onZoomChange={setZoom}
+              />
+            </div>
+            <div className="cropper-controls">
+              <input
+                type="range"
+                value={zoom}
+                min={1}
+                max={3}
+                step={0.1}
+                aria-labelledby="Zoom"
+                onChange={(e) => {
+                  setZoom(e.target.value);
+                }}
+                className="zoom-range"
+              />
+            </div>
+            <div className="cropper-footer">
+              <button className="cropper-btn-cancel" onClick={() => setImageToCrop(null)}>Cancel</button>
+              <button className="cropper-btn-save" onClick={handleUploadCroppedImage} disabled={uploading}>
+                {uploading ? "Uploading..." : "Crop & Save"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="profile-content">
           {!isEditing ? (
             <>
               <h1>{user.fullName}</h1>
@@ -291,7 +361,6 @@ function Profile() {
           )}
         </div>
       </div>
-    </div>
   );
 }
 
