@@ -146,15 +146,6 @@ function Rewards() {
                         ) : (
                           <span className="status-locked"><Lock size={14} /> Complete condition to unlock</span>
                         )}
-                        <div style={{ marginTop: '8px' }}>
-                          <span className="status-progress-text">{user?.referralCount || 0} / {reward.claimCount + 1} for next reward</span>
-                          <div className="reward-progress-bar">
-                            <div 
-                              className="reward-progress-fill" 
-                              style={{ width: `${((user?.referralCount || 0) / (reward.claimCount + 1)) * 100}%` }}
-                            ></div>
-                          </div>
-                        </div>
                       </div>
                     ) : (
                       <>
