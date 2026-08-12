@@ -43,4 +43,10 @@ router.post("/claim-badge", protect, validate(userValidation.claimBadgeSchema), 
 router.post("/redeem-xp", protect, validate(userValidation.redeemXpSchema), userController.redeemXp);
 router.post("/claim-xp-reward", protect, validate(userValidation.claimXpRewardSchema), userController.claimXpReward);
 
+// --- NOTIFICATION ROUTES ---
+router.get("/notifications", protect, userController.getNotifications);
+router.delete("/notifications", protect, userController.clearNotifications);
+router.put("/notifications/:notifId/read", protect, userController.markNotificationRead);
+router.delete("/notifications/:notifId", protect, userController.deleteNotification);
+
 module.exports = router;

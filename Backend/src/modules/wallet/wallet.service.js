@@ -3,6 +3,7 @@ const WalletTransaction = require("../../../models/WalletTransaction");
 const walletConfig = require("../../../config/wallet");
 const User = require("../../../models/User");
 const socketManager = require("../../../socket/socketManager");
+const { sendNotification } = require("../../../utils/notificationService");
 
 const addBonus = async (userId, coins, description) => {
   const wallet = await getOrCreateWallet(userId);
@@ -18,18 +19,7 @@ const addBonus = async (userId, coins, description) => {
     status: "completed",
   });
 
-  try {
-    if (global.io) {
-      global.io.to(`user_${userId}`).emit("global_notification", {
-        title: "Coins Added",
-        message: description || `You received ${coins} coins!`,
-        icon: "🪙"
-      });
-      console.log(`Global IO emitted Coins Added to user_${userId}`);
-    } else {
-      console.error("Global IO is undefined in addBonus!");
-    }
-  } catch(e) { console.error("Global IO Emit Error in addBonus:", e); }
+  await sendNotification(userId, "Coins Added", description || `You received ${coins} coins!`, "general", "🪙");
 
   return wallet;
 };
@@ -209,18 +199,7 @@ const addBonusToWallet = async (userId, coins, description) => {
     metadata: { isBonus: true },
   });
 
-  try {
-    if (global.io) {
-      global.io.to(`user_${userId}`).emit("global_notification", {
-        title: "Coins Added",
-        message: description || `Earned ${coins} bonus coins!`,
-        icon: "🪙"
-      });
-      console.log(`Global IO emitted Bonus Coins to user_${userId}`);
-    } else {
-      console.error("Global IO is undefined in addBonusToWallet!");
-    }
-  } catch(e) { console.error("Global IO Emit Error in addBonusToWallet:", e); }
+  await sendNotification(userId, "Coins Added", description || `Earned ${coins} bonus coins!`, "general", "🪙");
 
   return { wallet, transaction, coinsAdded: coins };
 };

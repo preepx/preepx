@@ -7,6 +7,7 @@ const cors = require("cors");
 const path = require("path");
 const session = require("express-session");
 const connectDB = require("./models/db");
+const { sendNotification } = require("./utils/notificationService");
 const rateLimit = require("express-rate-limit");
 const crypto = require("crypto");
 
@@ -112,14 +113,15 @@ app.use("/api/btec-notes", require("./src/modules/btec-notes/btecNote.routes"));
 app.use("/api/coding", require("./src/modules/coding/coding.routes"));
 
 // Internal Webhook for Admin Backend to trigger Socket.io events
-app.post("/api/internal/notify", express.json(), (req, res) => {
+app.post("/api/internal/notify", express.json(), async (req, res) => {
   const { userId, title, message, icon } = req.body;
-  if (global.io) {
-    global.io.to(`user_${userId}`).emit("global_notification", { title, message, icon });
-    console.log(`Internal Webhook emitted to user_${userId}`);
+  try {
+    await sendNotification(userId, title, message, "general", icon);
+    console.log(`Internal Webhook processed for user_${userId}`);
     res.json({ success: true });
-  } else {
-    res.status(500).json({ error: "Socket not initialized" });
+  } catch (error) {
+    console.error("Webhook error:", error);
+    res.status(500).json({ error: "Failed to process notification" });
   }
 });
 

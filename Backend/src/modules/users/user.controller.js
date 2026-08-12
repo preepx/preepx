@@ -104,6 +104,26 @@ const claimXpReward = catchAsync(async (req, res) => {
   });
 });
 
+const getNotifications = catchAsync(async (req, res) => {
+  const notifs = await userService.getNotifications(req.user.id);
+  res.json(notifs);
+});
+
+const markNotificationRead = catchAsync(async (req, res) => {
+  const notifs = await userService.markNotificationRead(req.user.id, req.params.notifId);
+  res.json(notifs);
+});
+
+const deleteNotification = catchAsync(async (req, res) => {
+  const notifs = await userService.deleteNotification(req.user.id, req.params.notifId);
+  res.json(notifs);
+});
+
+const clearNotifications = catchAsync(async (req, res) => {
+  const notifs = await userService.clearNotifications(req.user.id);
+  res.json(notifs);
+});
+
 module.exports = {
   getProfile,
   updateProfileDetails,
@@ -117,4 +137,8 @@ module.exports = {
   claimBadge,
   redeemXp,
   claimXpReward,
+  getNotifications,
+  markNotificationRead,
+  deleteNotification,
+  clearNotifications,
 };
