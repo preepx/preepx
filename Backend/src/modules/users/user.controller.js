@@ -105,22 +105,22 @@ const claimXpReward = catchAsync(async (req, res) => {
 });
 
 const getNotifications = catchAsync(async (req, res) => {
-  const notifs = await userService.getNotifications(req.user.id);
+  const notifs = await userService.getNotifications(req.user);
   res.json(notifs);
 });
 
 const markNotificationRead = catchAsync(async (req, res) => {
-  const notifs = await userService.markNotificationRead(req.user.id, req.params.notifId);
+  const notifs = await userService.markNotificationRead(req.user, req.params.notifId);
   res.json(notifs);
 });
 
 const deleteNotification = catchAsync(async (req, res) => {
-  const notifs = await userService.deleteNotification(req.user.id, req.params.notifId);
+  const notifs = await userService.deleteNotification(req.user, req.params.notifId);
   res.json(notifs);
 });
 
 const clearNotifications = catchAsync(async (req, res) => {
-  const notifs = await userService.clearNotifications(req.user.id);
+  const notifs = await userService.clearNotifications(req.user);
   res.json(notifs);
 });
 

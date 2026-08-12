@@ -118,8 +118,9 @@ app.use("/api/coding", require("./src/modules/coding/coding.routes"));
 app.post("/api/internal/notify", express.json(), async (req, res) => {
   const { userId, title, message, icon } = req.body;
   try {
+    console.log(`[WEBHOOK RECEIVED] from adminbackend for user: ${userId}, title: ${title}`);
     await sendNotification(userId, title, message, "general", icon);
-    console.log(`Internal Webhook processed for user_${userId}`);
+    console.log(`[WEBHOOK SUCCESS] Internal Webhook processed for user_${userId}`);
     res.json({ success: true });
   } catch (error) {
     console.error("Webhook error:", error);

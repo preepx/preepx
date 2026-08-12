@@ -413,6 +413,7 @@ const adminAddXp = async (userId, xpAmount, reason) => {
 
 const getNotifications = async (userId) => {
   const user = await User.findById(userId).select("notifications");
+  console.log(`[getNotifications] fetched for user ${userId}, count:`, user?.notifications?.length);
   if (!user) throw new NotFoundError("User not found");
   return user.notifications || [];
 };
