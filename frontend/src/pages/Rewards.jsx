@@ -4,7 +4,7 @@ import { CheckCircle, Lock, Gift, UserCheck, FileText, Bot, Trophy, Briefcase, U
 import notify from '../utils/notify';
 import { getProfile, claimXpReward, getDashboard } from "../services/userAPI";
 import "./Rewards.css";
-import { REWARDS_DATA, calculateProgress } from "../utils/rewardsUtils";
+import { getRewardsData, calculateProgress } from "../utils/rewardsUtils";
 
 function Rewards() {
   const [user, setUser] = useState(null);
@@ -78,7 +78,7 @@ function Rewards() {
       <div className="rewards-grid-section">
         <h3>Ways to Earn XP</h3>
         <div className="rewards-grid">
-          {REWARDS_DATA.map((reward, idx) => {
+          {getRewardsData(user).map((reward, idx) => {
             const isClaimed = claimedRewards.includes(reward.id);
             const progress = calculateProgress(reward.id, user, dashboard);
             const isLocked = !isClaimed && progress < reward.target && reward.target === 1;

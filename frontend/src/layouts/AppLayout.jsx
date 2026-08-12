@@ -7,7 +7,7 @@ import {
 import notify from '../utils/notify';
 import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "../services/userAPI";
 import NotificationModal from "../components/NotificationModal";
-import { REWARDS_DATA, calculateProgress } from "../utils/rewardsUtils";
+import { getRewardsData, calculateProgress } from "../utils/rewardsUtils";
 import { useWallet } from "../features/wallet/hooks/useWallet";
 import { io } from "socket.io-client";
 import API from "../utils/api";
@@ -98,7 +98,7 @@ function AppLayout({ children }) {
     let newLevel = currentUser.level || 1;
     let newClaims = [];
 
-    for (const reward of REWARDS_DATA) {
+    for (const reward of getRewardsData(currentUser)) {
       if (claimedRewards.includes(reward.id)) continue;
 
       const currentProgress = calculateProgress(reward.id, currentUser, currentDash);
