@@ -323,7 +323,10 @@
     display: none;
   }
 
-  .streak-badge,
+  .streak-badge {
+    display: none;
+  }
+
   .level-badge,
   .points-badge {
     font-size: 13px;

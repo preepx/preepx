@@ -390,6 +390,19 @@ const claimXpReward = async (userId, rewardId, xpAmount) => {
 
   await user.save();
 
+  if (global.io) {
+    try {
+      let title = rewardId === "daily_login" ? "Daily Login Reward" : "XP Claimed";
+      global.io.to(`user_${userId}`).emit("global_notification", {
+        title: title,
+        message: `You earned ${xpAmount} XP!`,
+        type: "xp_earned"
+      });
+    } catch (e) {
+      console.error("Failed to emit XP notification:", e);
+    }
+  }
+
   return { xpEarned: xpAmount, totalPoints: user.points, level: user.level, xpRewardsClaimed: user.xpRewardsClaimed, user };
 };
 
