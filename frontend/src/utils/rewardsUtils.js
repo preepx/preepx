@@ -1,16 +1,28 @@
 import { Gift, UserCheck, FileText, Bot, Target, Briefcase, Users, Trophy } from "lucide-react";
 
 export const getRewardsData = (user) => {
-  const referralTarget = (user?.referralCount || 0) + 1;
-  return [
+  const referralCount = user?.referralCount || 0;
+  const baseRewards = [
     { id: "daily_login", title: "Daily Login", desc: "Log in and maintain your daily streak.", xp: 5, icon: Gift, target: 1 },
     { id: "complete_profile", title: "Complete Profile", desc: "Fill in all your profile details.", xp: 20, icon: UserCheck, target: 1 },
     { id: "ai_interview", title: "Complete AI Interview", desc: "Finish your first AI mock interview.", xp: 25, icon: Bot, target: 1 },
     { id: "daily_challenge", title: "Complete Daily Challenge", desc: "Finish today's specific challenge.", xp: 15, icon: Target, target: 1 },
     { id: "five_interviews", title: "Complete 5 Interviews", desc: "Complete 5 mock interviews.", xp: 30, icon: Briefcase, target: 5 },
-    { id: `refer_friend_${referralTarget}`, title: "Refer a Friend", desc: "Invite a friend to join Preepx.", xp: 50, icon: Users, target: referralTarget },
     { id: "score_80", title: "Score 80%+", desc: "Achieve an 80% or higher score in any test.", xp: 10, icon: Trophy, target: 1 },
   ];
+
+  for (let i = 1; i <= referralCount + 1; i++) {
+    baseRewards.push({
+      id: `refer_friend_${i}`,
+      title: "Refer a Friend",
+      desc: "Invite a friend to join Preepx.",
+      xp: 50,
+      icon: Users,
+      target: i
+    });
+  }
+
+  return baseRewards;
 };
 
 export const calculateProgress = (rewardId, user, dashboard) => {
