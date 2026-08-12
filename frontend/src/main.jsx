@@ -13,6 +13,12 @@ pingServer();
 setInterval(pingServer, 4 * 60 * 1000);
 // ─────────────────────────────────────────────────────
 
+// ── Handle Chunk Load Errors (Old cache on new deploy) ─
+window.addEventListener('vite:preloadError', (event) => {
+  window.location.reload()
+});
+// ─────────────────────────────────────────────────────
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AlertProvider>
