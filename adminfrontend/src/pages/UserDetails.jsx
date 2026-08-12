@@ -144,7 +144,7 @@ const UserDetails = () => {
               <h2>{wallet.balance} <span className="text-secondary" style={{fontSize: '1rem'}}>Coins</span></h2>
             </div>
             
-            <div className="add-coins-form" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+            <div className="add-coins-form">
               <input 
                 type="number" 
                 className="input-field" 
@@ -188,7 +188,7 @@ const UserDetails = () => {
               <h2>{user.points || 0} <span className="text-secondary" style={{fontSize: '1rem'}}>XP</span></h2>
             </div>
             
-            <div className="add-coins-form" style={{ display: 'flex', gap: '0.5rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid var(--border)' }}>
+            <div className="add-coins-form">
               <input 
                 type="number" 
                 className="input-field" 

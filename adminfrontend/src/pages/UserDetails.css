@@ -222,3 +222,17 @@
 .accent-icon {
   color: var(--accent-primary);
 }
+
+.add-coins-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  .add-coins-form {
+    flex-direction: column;
+  }
+}
