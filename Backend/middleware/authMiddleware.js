@@ -21,7 +21,14 @@ const protect = async (req, res, next) => {
     req.user = decoded.id;
     next();
   } catch (err) {
-    res.status(401).json({ message: "Invalid token" });
+    if (err.name === "TokenExpiredError") {
+      return res.status(401).json({ message: "Token expired" });
+    }
+    if (err.name === "JsonWebTokenError" || err.name === "NotBeforeError") {
+      return res.status(401).json({ message: "Invalid token" });
+    }
+    // If it's a DB error or something else, return 500 so frontend doesn't log the user out
+    res.status(500).json({ message: "Internal server error during authentication" });
   }
 };
 
