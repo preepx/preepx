@@ -20,6 +20,16 @@ const safeUser = (user) => ({
   github: user.github || "",
   linkedin: user.linkedin || "",
   degree: user.degree || "",
+  skills: user.skills || [],
+  experienceYears: user.experienceYears,
+  preferredRole: user.preferredRole || "",
+  location: user.location || "",
+  graduationYear: user.graduationYear || null,
+  currentCompany: user.currentCompany || "",
+  currentDesignation: user.currentDesignation || "",
+  resumeUrl: user.resumeUrl || "",
+  resumeFileName: user.resumeFileName || "",
+  resumeUploadedAt: user.resumeUploadedAt || null,
   referralCode: user.referralCode || "",
   referralCount: user.referralCount || 0,
   xpRewardsClaimed: user.xpRewardsClaimed || [],
@@ -38,6 +48,11 @@ const updateProfileDetails = catchAsync(async (req, res) => {
 const updateProfilePhoto = catchAsync(async (req, res) => {
   const user = await userService.updateProfilePhoto(req.user, req.file);
   res.json(safeUser(user));
+});
+
+const uploadResume = catchAsync(async (req, res) => {
+  const user = await userService.updateResume(req.user, req.file);
+  res.json({ ...safeUser(user), message: "Resume uploaded successfully" });
 });
 
 const updateSettings = catchAsync(async (req, res) => {
@@ -128,6 +143,7 @@ module.exports = {
   getProfile,
   updateProfileDetails,
   updateProfilePhoto,
+  uploadResume,
   updateSettings,
   getDashboard,
   getPlatformStats,

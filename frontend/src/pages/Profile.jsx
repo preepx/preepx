@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Mail, Trophy, Award, Flame, BarChart3, Target, Camera, Edit2, MapPin, GraduationCap, Phone, Github, Linkedin, BookOpen, X, Check, Share2, Copy } from "lucide-react";
+import { Mail, Trophy, Award, Flame, BarChart3, Target, Camera, Edit2, MapPin, GraduationCap, Phone, Github, Linkedin, X, Check, Share2, Copy, FileText, Upload, Building2 } from "lucide-react";
 import notify from '../utils/notify';
-import { getProfile, getAnalytics, uploadProfilePhoto, syncUserToStorage, updateProfileDetails } from "../services/userAPI";
+import { getProfile, getAnalytics, uploadProfilePhoto, syncUserToStorage, updateProfileDetails, uploadResume } from "../services/userAPI";
+import { getAssetUrl } from "../utils/assetUrl";
 import { showAppError } from "../utils/appAlert";
 import Cropper from 'react-easy-crop';
 import getCroppedImg from '../utils/cropImage';
@@ -16,6 +17,8 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState({});
   const [saving, setSaving] = useState(false);
+  const [uploadingResume, setUploadingResume] = useState(false);
+  const resumeInputRef = React.useRef(null);
 
   // Cropping State
   const [imageToCrop, setImageToCrop] = useState(null);
@@ -28,7 +31,10 @@ function Profile() {
     getProfile().then((u) => { 
       setUser(u); 
       syncUserToStorage(u); 
-      setEditForm(u);
+      setEditForm({
+        ...u,
+        skills: (u.skills || []).join(", "),
+      });
     }).catch(() => {});
     getAnalytics().then(setStats).catch(() => {});
   }, []);
@@ -74,7 +80,13 @@ function Profile() {
   const handleSaveProfile = async () => {
     try {
       setSaving(true);
-      const updated = await updateProfileDetails(editForm);
+      const payload = {
+        ...editForm,
+        skills: typeof editForm.skills === "string"
+          ? editForm.skills
+          : (editForm.skills || []).join(", "),
+      };
+      const updated = await updateProfileDetails(payload);
       setUser(updated);
       syncUserToStorage(updated);
       window.dispatchEvent(new Event("user-updated"));
@@ -87,6 +99,33 @@ function Profile() {
       showAppError(err.response?.data?.message || "Failed to update profile", "Update failed");
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleResumeUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.name.toLowerCase().endsWith(".pdf")) {
+      showAppError("Please upload a PDF resume.", "Invalid file");
+      return;
+    }
+    try {
+      setUploadingResume(true);
+      const updated = await uploadResume(file);
+      setUser(updated);
+      setEditForm((f) => ({
+        ...f,
+        ...updated,
+        skills: (updated.skills || []).join(", "),
+      }));
+      syncUserToStorage(updated);
+      window.dispatchEvent(new Event("user-updated"));
+      notify.success(updated.message || "Resume uploaded! Skills updated for job matching.");
+    } catch (err) {
+      showAppError(err.response?.data?.message || "Resume upload failed", "Upload failed");
+    } finally {
+      setUploadingResume(false);
+      if (resumeInputRef.current) resumeInputRef.current.value = "";
     }
   };
 
@@ -129,8 +168,12 @@ function Profile() {
   const levelProgress = ((user.points || 0) % 100);
   
   // Calculate profile completeness
-  const profileFields = ['profilePic', 'fullName', 'email', 'mobile', 'college', 'address', 'bio', 'github', 'linkedin', 'degree'];
-  const filledFields = profileFields.filter(field => user[field] && user[field].toString().trim() !== '');
+  const profileFields = ['profilePic', 'fullName', 'email', 'mobile', 'college', 'degree', 'graduationYear', 'address', 'bio', 'github', 'linkedin', 'skills', 'preferredRole', 'currentCompany', 'currentDesignation', 'experienceYears', 'resumeUrl', 'location'];
+  const filledFields = profileFields.filter(field => {
+    const val = user[field];
+    if (field === 'skills') return Array.isArray(val) ? val.length > 0 : val && String(val).trim();
+    return val && val.toString().trim() !== '';
+  });
   const completeness = Math.round((filledFields.length / profileFields.length) * 100);
 
   return (
@@ -156,7 +199,7 @@ function Profile() {
                 </button>
               ) : (
                 <div className="edit-actions">
-                  <button className="cancel-btn" onClick={() => { setIsEditing(false); setEditForm(user); }}>
+                  <button className="cancel-btn" onClick={() => { setIsEditing(false); setEditForm({ ...user, skills: (user.skills || []).join(", ") }); }}>
                     <X size={16} /> Cancel
                   </button>
                   <button className="save-btn" onClick={handleSaveProfile} disabled={saving}>
@@ -242,8 +285,8 @@ function Profile() {
                 <input type="text" name="fullName" value={editForm.fullName || ""} onChange={handleEditChange} placeholder="Enter your full name" />
               </div>
               <div className="form-group">
-                <label>Bio</label>
-                <textarea name="bio" value={editForm.bio || ""} onChange={handleEditChange} placeholder="Tell us about yourself..." rows="3" />
+                <label>Bio / Summary</label>
+                <textarea name="bio" value={editForm.bio || ""} onChange={handleEditChange} placeholder="Brief professional summary..." rows="3" />
               </div>
             </div>
           )}
@@ -252,67 +295,175 @@ function Profile() {
             <p className="profile-bio">{user.bio}</p>
           )}
 
+          {/* Naukri-style sections */}
+          <div className="profile-naukri-sections">
+            <section className="profile-block">
+              <h3><GraduationCap size={16} /> Education</h3>
+              {!isEditing ? (
+                <div className="profile-block-grid">
+                  <div className="profile-block-item">
+                    <span className="lbl">College / University</span>
+                    <span className="val">{user.college || "—"}</span>
+                  </div>
+                  <div className="profile-block-item">
+                    <span className="lbl">Degree / Course</span>
+                    <span className="val">{user.degree || "—"}</span>
+                  </div>
+                  <div className="profile-block-item">
+                    <span className="lbl">Passing / Graduation Year</span>
+                    <span className="val">{user.graduationYear || "—"}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="edit-form-grid">
+                  <div className="form-group">
+                    <label>College / University</label>
+                    <input type="text" name="college" value={editForm.college || ""} onChange={handleEditChange} placeholder="e.g. IIT Delhi, VIT Vellore" />
+                  </div>
+                  <div className="form-group">
+                    <label>Degree / Course</label>
+                    <input type="text" name="degree" value={editForm.degree || ""} onChange={handleEditChange} placeholder="e.g. B.Tech Computer Science" />
+                  </div>
+                  <div className="form-group">
+                    <label>Passing / Graduation Year</label>
+                    <input type="number" name="graduationYear" min={1970} max={2035} value={editForm.graduationYear ?? ""} onChange={handleEditChange} placeholder="e.g. 2024" />
+                  </div>
+                </div>
+              )}
+            </section>
+
+            <section className="profile-block">
+              <h3><Building2 size={16} /> Work Experience</h3>
+              {!isEditing ? (
+                <div className="profile-block-grid">
+                  <div className="profile-block-item">
+                    <span className="lbl">Current Company</span>
+                    <span className="val">{user.currentCompany || (user.experienceYears ? "—" : "Fresher / Not working")}</span>
+                  </div>
+                  <div className="profile-block-item">
+                    <span className="lbl">Designation</span>
+                    <span className="val">{user.currentDesignation || "—"}</span>
+                  </div>
+                  <div className="profile-block-item">
+                    <span className="lbl">Total Experience</span>
+                    <span className="val">{user.experienceYears != null && user.experienceYears !== "" ? `${user.experienceYears} year(s)` : "—"}</span>
+                  </div>
+                  <div className="profile-block-item">
+                    <span className="lbl">Preferred Role</span>
+                    <span className="val">{user.preferredRole || "—"}</span>
+                  </div>
+                  <div className="profile-block-item">
+                    <span className="lbl">Preferred Location</span>
+                    <span className="val">{user.location || user.address || "—"}</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="edit-form-grid">
+                  <div className="form-group">
+                    <label>Current Company</label>
+                    <input type="text" name="currentCompany" value={editForm.currentCompany || ""} onChange={handleEditChange} placeholder="Company name (leave blank if fresher)" />
+                  </div>
+                  <div className="form-group">
+                    <label>Current Designation</label>
+                    <input type="text" name="currentDesignation" value={editForm.currentDesignation || ""} onChange={handleEditChange} placeholder="e.g. Software Engineer" />
+                  </div>
+                  <div className="form-group">
+                    <label>Total Experience (years)</label>
+                    <input type="number" min={0} max={50} name="experienceYears" value={editForm.experienceYears ?? ""} onChange={handleEditChange} placeholder="0 for fresher" />
+                  </div>
+                  <div className="form-group">
+                    <label>Preferred Role</label>
+                    <input type="text" name="preferredRole" value={editForm.preferredRole || ""} onChange={handleEditChange} placeholder="e.g. Full Stack Developer" />
+                  </div>
+                  <div className="form-group">
+                    <label>Preferred Location</label>
+                    <input type="text" name="location" value={editForm.location || ""} onChange={handleEditChange} placeholder="e.g. Bangalore, Remote" />
+                  </div>
+                </div>
+              )}
+            </section>
+
+            <section className="profile-block">
+              <h3><Phone size={16} /> Contact & Links</h3>
+              {!isEditing ? (
+                <div className="profile-details-grid">
+                  <div className="detail-item"><Mail size={16} /><span>{user.email}</span></div>
+                  <div className="detail-item"><Phone size={16} /><span>{user.mobile || "—"}</span></div>
+                  {user.github && <div className="detail-item"><Github size={16} /><span>{user.github}</span></div>}
+                  {user.linkedin && <div className="detail-item"><Linkedin size={16} /><span>{user.linkedin}</span></div>}
+                </div>
+              ) : (
+                <div className="edit-form-grid">
+                  <div className="form-group">
+                    <label>Mobile Number</label>
+                    <input type="text" name="mobile" value={editForm.mobile || ""} onChange={handleEditChange} placeholder="+91 9876543210" />
+                  </div>
+                  <div className="form-group">
+                    <label>GitHub</label>
+                    <input type="text" name="github" value={editForm.github || ""} onChange={handleEditChange} placeholder="github.com/username" />
+                  </div>
+                  <div className="form-group">
+                    <label>LinkedIn</label>
+                    <input type="text" name="linkedin" value={editForm.linkedin || ""} onChange={handleEditChange} placeholder="linkedin.com/in/username" />
+                  </div>
+                  <div className="form-group">
+                    <label>Address</label>
+                    <input type="text" name="address" value={editForm.address || ""} onChange={handleEditChange} placeholder="City, State" />
+                  </div>
+                </div>
+              )}
+            </section>
+          </div>
+
           <div className="level-bar-wrap" style={{ marginTop: '20px' }}>
             <div className="level-bar" style={{ width: `${levelProgress}%` }} />
           </div>
           <p className="level-text">{levelProgress}/100 XP to Level {(user.level || 1) + 1}</p>
 
-          {!isEditing ? (
-            <div className="profile-details-grid">
-              <div className="detail-item"><Mail size={16} /><span>{user.email}</span></div>
-              {user.mobile && <div className="detail-item"><Phone size={16} /><span>{user.mobile}</span></div>}
-              {user.college && <div className="detail-item"><GraduationCap size={16} /><span>{user.college}</span></div>}
-              {user.degree && <div className="detail-item"><BookOpen size={16} /><span>{user.degree}</span></div>}
-              {user.address && <div className="detail-item"><MapPin size={16} /><span>{user.address}</span></div>}
-              {user.github && <div className="detail-item"><Github size={16} /><span>{user.github}</span></div>}
-              {user.linkedin && <div className="detail-item"><Linkedin size={16} /><span>{user.linkedin}</span></div>}
-            </div>
-          ) : (
-            <div className="edit-form-grid">
+          <section className="profile-block profile-block-inline">
+            <h3><Target size={16} /> Key Skills</h3>
+            {!isEditing ? (
+              user.skills?.length > 0 ? (
+                <div className="profile-skills-list">
+                  {user.skills.map((s) => <span key={s} className="profile-skill-tag">{s}</span>)}
+                </div>
+              ) : <p className="profile-empty-hint">Add skills to improve job matching</p>
+            ) : (
               <div className="form-group">
-                <label>Mobile Number</label>
-                <div className="input-with-icon">
-                  <Phone size={16} className="input-icon" />
-                  <input type="text" name="mobile" value={editForm.mobile || ""} onChange={handleEditChange} placeholder="e.g. +91 9876543210" />
+                <label>Skills (comma separated)</label>
+                <input type="text" name="skills" value={editForm.skills || ""} onChange={handleEditChange} placeholder="React, Node.js, MongoDB, Java..." />
+              </div>
+            )}
+          </section>
+
+          {/* Resume */}
+          <div className="profile-resume-section">
+            <h3><FileText size={16} /> Resume</h3>
+            <p className="profile-resume-hint">Recruiters see your resume when you apply to jobs. PDF only.</p>
+            <input type="file" accept=".pdf,application/pdf" hidden ref={resumeInputRef} onChange={handleResumeUpload} />
+            {user.resumeUrl ? (
+              <div className="profile-resume-card">
+                <FileText size={20} />
+                <div>
+                  <strong>{user.resumeFileName || "My Resume.pdf"}</strong>
+                  {user.resumeUploadedAt && (
+                    <span>Uploaded {new Date(user.resumeUploadedAt).toLocaleDateString("en-IN")}</span>
+                  )}
+                </div>
+                <div className="profile-resume-actions">
+                  <a href={getAssetUrl(user.resumeUrl)} target="_blank" rel="noopener noreferrer" className="profile-resume-link">View</a>
+                  <button type="button" className="profile-resume-upload-btn" onClick={() => resumeInputRef.current?.click()} disabled={uploadingResume}>
+                    <Upload size={14} /> {uploadingResume ? "Uploading..." : "Replace"}
+                  </button>
                 </div>
               </div>
-              <div className="form-group">
-                <label>College / University</label>
-                <div className="input-with-icon">
-                  <GraduationCap size={16} className="input-icon" />
-                  <input type="text" name="college" value={editForm.college || ""} onChange={handleEditChange} placeholder="Enter college name" />
-                </div>
-              </div>
-              <div className="form-group">
-                <label>Degree</label>
-                <div className="input-with-icon">
-                  <BookOpen size={16} className="input-icon" />
-                  <input type="text" name="degree" value={editForm.degree || ""} onChange={handleEditChange} placeholder="e.g. B.Tech Computer Science" />
-                </div>
-              </div>
-              <div className="form-group">
-                <label>Location / Address</label>
-                <div className="input-with-icon">
-                  <MapPin size={16} className="input-icon" />
-                  <input type="text" name="address" value={editForm.address || ""} onChange={handleEditChange} placeholder="City, Country" />
-                </div>
-              </div>
-              <div className="form-group">
-                <label>GitHub Profile</label>
-                <div className="input-with-icon">
-                  <Github size={16} className="input-icon" />
-                  <input type="text" name="github" value={editForm.github || ""} onChange={handleEditChange} placeholder="github.com/username" />
-                </div>
-              </div>
-              <div className="form-group">
-                <label>LinkedIn Profile</label>
-                <div className="input-with-icon">
-                  <Linkedin size={16} className="input-icon" />
-                  <input type="text" name="linkedin" value={editForm.linkedin || ""} onChange={handleEditChange} placeholder="linkedin.com/in/username" />
-                </div>
-              </div>
-            </div>
-          )}
+            ) : (
+              <button type="button" className="profile-resume-empty" onClick={() => resumeInputRef.current?.click()} disabled={uploadingResume}>
+                <Upload size={18} />
+                {uploadingResume ? "Uploading resume..." : "Upload PDF Resume"}
+              </button>
+            )}
+          </div>
 
           <div className="profile-stats">
             <div className="profile-stat"><Trophy size={20} /><span className="stat-number">{user.points || 0}</span><span className="stat-text">XP</span></div>

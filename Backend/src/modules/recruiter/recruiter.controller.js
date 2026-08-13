@@ -78,7 +78,11 @@ exports.registerRecruiter = catchAsync(async (req, res) => {
       fullName: recruiter.fullName,
       email: recruiter.email,
       companyName: recruiter.companyName,
-      role: 'recruiter'
+      companyWebsite: recruiter.companyWebsite,
+      role: 'recruiter',
+      onboardingCompleted: recruiter.onboardingCompleted,
+      onboardingStep: recruiter.onboardingStep,
+      profileComplete: recruiter.profileComplete,
     }
   });
 });
@@ -107,7 +111,11 @@ exports.loginRecruiter = catchAsync(async (req, res) => {
       fullName: recruiter.fullName,
       email: recruiter.email,
       companyName: recruiter.companyName,
-      role: 'recruiter'
+      companyWebsite: recruiter.companyWebsite,
+      role: 'recruiter',
+      onboardingCompleted: recruiter.onboardingCompleted,
+      onboardingStep: recruiter.onboardingStep,
+      profileComplete: recruiter.profileComplete,
     }
   });
 });
@@ -155,4 +163,21 @@ exports.resetPassword = catchAsync(async (req, res) => {
   await recruiter.save();
 
   res.json({ message: 'Password has been reset successfully. You can now login.' });
+});
+
+const notificationService = require('./recruiterNotification.service');
+
+exports.getNotifications = catchAsync(async (req, res) => {
+  const notifications = await notificationService.getNotifications(req.user);
+  res.json({ success: true, data: notifications });
+});
+
+exports.markNotificationRead = catchAsync(async (req, res) => {
+  const notifications = await notificationService.markNotificationRead(req.user, req.params.notifId);
+  res.json({ success: true, data: notifications });
+});
+
+exports.markAllNotificationsRead = catchAsync(async (req, res) => {
+  const notifications = await notificationService.markAllRead(req.user);
+  res.json({ success: true, data: notifications });
 });

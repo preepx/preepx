@@ -9,6 +9,13 @@ const updateProfileSchema = Joi.object({
   github: Joi.string().allow('').optional(),
   linkedin: Joi.string().allow('').optional(),
   degree: Joi.string().allow('').optional(),
+  skills: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).optional(),
+  preferredRole: Joi.string().allow('').max(120).optional(),
+  experienceYears: Joi.number().min(0).max(50).optional(),
+  location: Joi.string().allow('').max(120).optional(),
+  graduationYear: Joi.number().integer().min(1970).max(2035).optional(),
+  currentCompany: Joi.string().allow('').max(120).optional(),
+  currentDesignation: Joi.string().allow('').max(120).optional(),
 });
 
 const updateSettingsSchema = Joi.object().unknown(true); // allow dynamic settings fields

@@ -221,6 +221,17 @@
   margin-left: auto;
 }
 
+.topbar-apply-jobs-link {
+  text-decoration: none;
+  background: linear-gradient(135deg, #818cf8, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
 .streak-badge,
 .level-badge {
   font-size: 12px;

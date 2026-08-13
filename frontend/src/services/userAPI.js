@@ -20,6 +20,14 @@ export const uploadProfilePhoto = (file) => {
   }).then((r) => r.data);
 };
 
+export const uploadResume = (file) => {
+  const data = new FormData();
+  data.append("resume", file);
+  return API.put("/users/resume", data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  }).then((r) => r.data);
+};
+
 export const syncUserToStorage = (user) => {
   if (user) localStorage.setItem("user", JSON.stringify(user));
   return user;

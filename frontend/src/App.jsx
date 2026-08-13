@@ -11,6 +11,26 @@ const Footer = lazy(() => import("./components/Footer"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard"));
 const RecruiterDashboard = lazy(() => import("./pages/RecruiterDashboard"));
+const RecruiterJobs = lazy(() => import("./pages/recruiter/RecruiterJobs"));
+const CreateJob = lazy(() => import("./pages/recruiter/CreateJob"));
+const RecruiterJobDetail = lazy(() => import("./pages/recruiter/RecruiterJobDetail"));
+const JobBoard = lazy(() => import("./pages/JobBoard"));
+const ApplyJobsDashboard = lazy(() => import("./pages/ApplyJobsDashboard"));
+const MyAssessments = lazy(() => import("./pages/MyAssessments"));
+const RecruiterOnboarding = lazy(() => import("./pages/recruiter/RecruiterOnboarding"));
+const CandidateDiscovery = lazy(() => import("./pages/recruiter/CandidateDiscovery"));
+const CandidateProfile = lazy(() => import("./pages/recruiter/CandidateProfile"));
+const HiringPipeline = lazy(() => import("./pages/recruiter/HiringPipeline"));
+const RecruiterShortlisted = lazy(() => import("./pages/recruiter/RecruiterShortlisted"));
+const RecruiterInterviews = lazy(() => import("./pages/recruiter/RecruiterInterviews"));
+const RecruiterAnalytics = lazy(() => import("./pages/recruiter/RecruiterAnalytics"));
+const RecruiterBilling = lazy(() => import("./pages/recruiter/RecruiterBilling"));
+const CompanyProfile = lazy(() => import("./pages/recruiter/CompanyProfile"));
+const RecruiterAssessments = lazy(() => import("./pages/recruiter/RecruiterAssessments"));
+const RecruiterSettings = lazy(() => import("./pages/recruiter/RecruiterSettings"));
+const RecruiterJobProfileGuard = lazy(() => import("./components/RecruiterJobProfileGuard"));
+const RecruiterCompleteProfile = lazy(() => import("./pages/recruiter/RecruiterCompleteProfile"));
+const TakeAssessment = lazy(() => import("./pages/TakeAssessment"));
 const StaticPage = lazy(() => import("./pages/StaticPage"));
 const Profile = lazy(() => import("./pages/Profile"));
 const FeedbackPage = lazy(() => import("./pages/FeedbackPage"));
@@ -46,14 +66,16 @@ const PUBLIC_ROUTES = [
   "/hiring-guide", "/recruiter-resources", "/documentation",
   "/ai-screening", "/job-management", "/assessments", "/interviews", "/analytics"
 ];
-const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "/objective-exam/take", "/coding-exam"];
+const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "/objective-exam/take", "/coding-exam", "/assessment"];
 
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements", "/rewards",
     "/settings", "/profile", "/resume-interview", "/ats-score", "/btech-notes", "/objective-exam", "/wallet", "/coding-practice",
+    "/my-assessments", "/apply-jobs", "/my-applications",
   ];
   return sidebarRoutes.includes(pathname)
+    || pathname.startsWith("/apply-jobs/")
     || pathname.startsWith("/btech-notes/")
     || (pathname.startsWith("/objective-exam/") && !FULLSCREEN_ROUTES.includes(pathname));
 }
@@ -61,7 +83,7 @@ function usesAppLayout(pathname) {
 function LayoutWrapper({ children, landingRole, setLandingRole }) {
   const location = useLocation();
   const isPublic = PUBLIC_ROUTES.includes(location.pathname);
-  const isFullscreen = FULLSCREEN_ROUTES.includes(location.pathname);
+  const isFullscreen = FULLSCREEN_ROUTES.includes(location.pathname) || location.pathname.startsWith("/assessment/");
   const useSidebar = usesAppLayout(location.pathname);
 
   if (isPublic) {
@@ -125,8 +147,28 @@ function AppContent() {
           <Route path="/interviews" element={<StaticPage />} />
           <Route path="/analytics" element={<StaticPage />} />
 
-          <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
-          <Route path="/recruiter-dashboard" element={<ProtectedRoute><RecruiterDashboard /></ProtectedRoute>} />
+          <Route path="/user-dashboard" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><UserDashboard /></ProtectedRoute>} />
+          <Route path="/recruiter-dashboard" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterDashboard /></ProtectedRoute>} />
+          <Route path="/recruiter/onboarding" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterOnboarding /></ProtectedRoute>} />
+          <Route path="/recruiter/complete-profile" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterCompleteProfile /></ProtectedRoute>} />
+          <Route path="/recruiter/jobs" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterJobs /></ProtectedRoute>} />
+          <Route path="/recruiter/jobs/new" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterJobProfileGuard><CreateJob /></RecruiterJobProfileGuard></ProtectedRoute>} />
+          <Route path="/recruiter/jobs/:jobId" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterJobDetail /></ProtectedRoute>} />
+          <Route path="/recruiter/candidates" element={<ProtectedRoute allowedRoles={["recruiter"]}><CandidateDiscovery /></ProtectedRoute>} />
+          <Route path="/recruiter/candidates/:applicationId" element={<ProtectedRoute allowedRoles={["recruiter"]}><CandidateProfile /></ProtectedRoute>} />
+          <Route path="/recruiter/pipeline" element={<ProtectedRoute allowedRoles={["recruiter"]}><HiringPipeline /></ProtectedRoute>} />
+          <Route path="/recruiter/shortlisted" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterShortlisted /></ProtectedRoute>} />
+          <Route path="/recruiter/interviews" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterInterviews /></ProtectedRoute>} />
+          <Route path="/recruiter/analytics" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterAnalytics /></ProtectedRoute>} />
+          <Route path="/recruiter/billing" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterBilling /></ProtectedRoute>} />
+          <Route path="/recruiter/company" element={<ProtectedRoute allowedRoles={["recruiter"]}><CompanyProfile /></ProtectedRoute>} />
+          <Route path="/recruiter/assessments" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterAssessments /></ProtectedRoute>} />
+          <Route path="/recruiter/settings" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterSettings /></ProtectedRoute>} />
+          <Route path="/my-assessments" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><MyAssessments /></ProtectedRoute>} />
+          <Route path="/apply-jobs" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><ApplyJobsDashboard /></ProtectedRoute>} />
+          <Route path="/apply-jobs/browse" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobBoard /></ProtectedRoute>} />
+          <Route path="/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><ApplyJobsDashboard /></ProtectedRoute>} />
+          <Route path="/assessment/:id" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><TakeAssessment /></ProtectedRoute>} />
           <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
           <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
           <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />

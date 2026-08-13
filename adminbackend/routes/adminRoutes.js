@@ -27,6 +27,13 @@ const {
   uploadImageNote,
 } = require("../controllers/btecNoteController");
 
+const {
+  getRecruiters,
+  getRecruiterDetail,
+  updateVerificationStatus,
+  getVerificationStats,
+} = require("../controllers/recruiterController");
+
 const { uploadPdf, uploadImage } = require("../config/cloudinary");
 
 // Public admin login route
@@ -46,6 +53,12 @@ router.post("/users/:id/wallet/add", addCoinsToWallet);
 router.post("/users/:id/xp/add", addXpToUser);
 router.get("/transactions", getTransactions);
 router.get("/purchases", getPurchases);
+
+// Recruiter verification
+router.get("/recruiters/stats", getVerificationStats);
+router.get("/recruiters", getRecruiters);
+router.get("/recruiters/:companyId", getRecruiterDetail);
+router.patch("/recruiters/:companyId/verification", updateVerificationStatus);
 
 // B.Tech Notes — PDF upload MUST be registered before /:id routes
 router.post("/btec-notes/upload-pdf", uploadPdf.single("pdf"), uploadPdfNote);
