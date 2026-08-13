@@ -55,7 +55,15 @@ const initialNotifications = [
 function AppLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
+  const safeGetUser = () => {
+    try {
+      return JSON.parse(localStorage.getItem("user") || "{}");
+    } catch {
+      localStorage.removeItem("user");
+      return {};
+    }
+  };
+  const [user, setUser] = useState(safeGetUser());
   const location = useLocation();
   const navigate = useNavigate();
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
@@ -149,7 +157,7 @@ function AppLayout({ children }) {
 
   useEffect(() => {
     refreshUser();
-    const handler = () => setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+    const handler = () => setUser(safeGetUser());
     window.addEventListener("user-updated", handler);
     return () => window.removeEventListener("user-updated", handler);
   }, [location.pathname]);

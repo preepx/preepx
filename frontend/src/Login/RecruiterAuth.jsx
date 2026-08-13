@@ -4,7 +4,6 @@ import {
   Sparkles, Mail, Lock, User, Eye, EyeOff,
   ArrowRight, Shield, Zap, BarChart3, KeyRound, RefreshCw, CheckCircle, Phone, Building, Globe
 } from "lucide-react";
-import ReCAPTCHA from "react-google-recaptcha";
 import API from "../utils/api";
 import notify from '../utils/notify';
 import "./Login.css";
@@ -38,9 +37,6 @@ function RecruiterAuth() {
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmNewPass, setShowConfirmNewPass] = useState(false);
-
-  const [captchaToken, setCaptchaToken] = useState("");
-  const recaptchaRef = useRef(null);
 
   const otpInputsRef = useRef([]);
 
@@ -104,13 +100,9 @@ function RecruiterAuth() {
   // ── FORGOT HANDLERS ──────────────────────────────────
   const handleForgotEmailSubmit = async (e) => {
     e.preventDefault();
-    if (!captchaToken) {
-      notify.error("Please complete the CAPTCHA");
-      return;
-    }
     setLoading(true);
     try {
-      await API.post("/recruiter/forgot-password", { email: forgotEmail, captchaToken });
+      await API.post("/recruiter/forgot-password", { email: forgotEmail });
       notify.success("Password reset OTP sent to your email!");
       setOtpEmail(forgotEmail.trim().toLowerCase());
       resetOtp();
@@ -198,7 +190,7 @@ function RecruiterAuth() {
       localStorage.setItem("user", JSON.stringify(data.user));
       window.dispatchEvent(new Event("user-updated"));
       notify.success("Logged in successfully!");
-      navigate("/user-dashboard");
+      navigate("/recruiter-dashboard");
     } catch (err) {
       notify.error(err.response?.data?.message || "Login failed");
     } finally {
@@ -213,21 +205,41 @@ function RecruiterAuth() {
       notify.error("Passwords do not match");
       return;
     }
-    if (!captchaToken) {
-      notify.error("Please complete the CAPTCHA");
+    
+    setLoading(true);
+    try {
+      await API.post("/recruiter/send-otp", registerData);
+      notify.success("OTP sent to your email!");
+      resetOtp();
+      setScreen("register-otp");
+    } catch (err) {
+      notify.error(err.response?.data?.message || "Registration failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyRegisterOtp = async (e) => {
+    e.preventDefault();
+    const otpValue = otp.join("");
+    if (otpValue.length < 6) {
+      notify.error("Please enter the complete 6-digit code.");
       return;
     }
     
     setLoading(true);
     try {
-      const { data } = await API.post("/recruiter/register", { ...registerData, captchaToken });
+      const { data } = await API.post("/recruiter/register", {
+        email: registerData.email,
+        otp: otpValue
+      });
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       window.dispatchEvent(new Event("user-updated"));
       notify.success("Account created successfully!");
-      navigate("/user-dashboard");
+      navigate("/recruiter-dashboard");
     } catch (err) {
-      notify.error(err.response?.data?.message || "Registration failed");
+      notify.error(err.response?.data?.message || "Verification failed");
     } finally {
       setLoading(false);
     }
@@ -415,18 +427,34 @@ function RecruiterAuth() {
                     </div>
                   </div>
                 </div>
-                
-                <div style={{ margin: "16px 0", display: "flex", justifyContent: "center" }}>
-                  <ReCAPTCHA
-                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_SITE_KEY"}
-                    onChange={setCaptchaToken}
-                    ref={recaptchaRef}
-                  />
-                </div>
 
                 <button type="submit" className="auth-submit" disabled={loading} style={{ marginTop: '20px' }}>
                   {loading ? <span className="auth-submit-loading">Please wait...</span> : <>Create Account <ArrowRight size={18} /></>}
                 </button>
+              </form>
+            </>
+          )}
+
+          {/* ══════════════════════════════════════
+              SCREEN: REGISTER OTP
+          ══════════════════════════════════════ */}
+          {screen === "register-otp" && (
+            <>
+              <div className="auth-card-header">
+                <div className="otp-icon-wrap"><Mail size={28} /></div>
+                <h2>Verify your email</h2>
+                <p className="auth-subtitle">We sent a 6-digit code to <strong>{registerData.email}</strong></p>
+              </div>
+              <form onSubmit={handleVerifyRegisterOtp} className="auth-form">
+                {renderOtpBoxes()}
+                <button type="submit" className="auth-submit otp-submit" disabled={loading}>
+                  {loading ? <span className="auth-submit-loading">Verifying...</span> : <>Complete Registration <CheckCircle size={18} /></>}
+                </button>
+                <div className="otp-resend">
+                  <button type="button" className="otp-back-btn" onClick={goRegister}>
+                    ← Back
+                  </button>
+                </div>
               </form>
             </>
           )}
@@ -453,14 +481,6 @@ function RecruiterAuth() {
                       autoComplete="off" required
                     />
                   </div>
-                </div>
-                
-                <div style={{ margin: "16px 0", display: "flex", justifyContent: "center" }}>
-                  <ReCAPTCHA
-                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_SITE_KEY"}
-                    onChange={setCaptchaToken}
-                    ref={recaptchaRef}
-                  />
                 </div>
 
                 <button type="submit" className="auth-submit" disabled={loading} style={{ marginTop: '20px' }}>

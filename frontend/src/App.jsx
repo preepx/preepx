@@ -10,6 +10,7 @@ const Footer = lazy(() => import("./components/Footer"));
 
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard"));
+const RecruiterDashboard = lazy(() => import("./pages/RecruiterDashboard"));
 const StaticPage = lazy(() => import("./pages/StaticPage"));
 const Profile = lazy(() => import("./pages/Profile"));
 const FeedbackPage = lazy(() => import("./pages/FeedbackPage"));
@@ -125,6 +126,7 @@ function AppContent() {
           <Route path="/analytics" element={<StaticPage />} />
 
           <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
+          <Route path="/recruiter-dashboard" element={<ProtectedRoute><RecruiterDashboard /></ProtectedRoute>} />
           <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
           <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
           <Route path="/leaderboard" element={<ProtectedRoute><Leaderboard /></ProtectedRoute>} />

@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const sendResetOtpEmail = require('../../../utils/sendResetOtpEmail');
+const sendOtpEmail = require('../../../utils/sendOtpEmail');
+const Otp = require('../../../models/Otp');
 const { sendSuccessResponse } = require('../../common/utils/responseFormatter');
 const catchAsync = require('../../common/middleware/catchAsync');
 const envConfig = require('../../config/env.config');
@@ -14,27 +16,8 @@ const generateToken = (id) => {
   return jwt.sign({ id, role: 'recruiter' }, envConfig.jwt.secret, { expiresIn: '7d' });
 };
 
-const verifyCaptcha = async (captchaToken) => {
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-  if (secretKey && secretKey !== "YOUR_RECAPTCHA_SECRET_KEY") {
-    if (!captchaToken) throw new BadRequestError("Please complete the CAPTCHA.");
-    try {
-      const captchaRes = await axios.post(
-        `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`
-      );
-      if (!captchaRes.data.success) {
-        throw new BadRequestError("CAPTCHA verification failed. Please try again.");
-      }
-    } catch (error) {
-      if (error instanceof BadRequestError) throw error;
-      throw new BadRequestError("Error verifying CAPTCHA. Please try again later.");
-    }
-  }
-};
-
-exports.registerRecruiter = catchAsync(async (req, res) => {
-  const { fullName, email, companyName, companyWebsite, password, captchaToken } = req.body;
-  await verifyCaptcha(captchaToken);
+exports.sendOtp = catchAsync(async (req, res) => {
+  const { fullName, email, companyName, companyWebsite, password } = req.body;
   const normalizedEmail = email.trim().toLowerCase();
 
   const existingRecruiter = await Recruiter.findOne({ email: normalizedEmail });
@@ -43,18 +26,51 @@ exports.registerRecruiter = catchAsync(async (req, res) => {
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
+
+  await Otp.deleteMany({ email: normalizedEmail });
+
+  await Otp.create({
+    email: normalizedEmail,
+    otp,
+    expiresAt,
+    userData: { fullName, password: hashedPassword, companyName, companyWebsite, role: 'recruiter' },
+  });
+
+  await sendOtpEmail(normalizedEmail, otp);
+  res.json({ message: "OTP sent to your email. Please verify to complete registration." });
+});
+
+exports.registerRecruiter = catchAsync(async (req, res) => {
+  const { email, otp } = req.body;
+  const normalizedEmail = email.trim().toLowerCase();
+
+  const otpRecord = await Otp.findOne({ email: normalizedEmail, otp });
+  if (!otpRecord) {
+    throw new BadRequestError("Invalid or expired OTP");
+  }
+
+  const existingRecruiter = await Recruiter.findOne({ email: normalizedEmail });
+  if (existingRecruiter) {
+    throw new BadRequestError('Recruiter with this email already exists.');
+  }
+
+  const { fullName, password, companyName, companyWebsite } = otpRecord.userData;
+
   const recruiter = await Recruiter.create({
     fullName,
     email: normalizedEmail,
     companyName,
     companyWebsite,
-    password: hashedPassword,
+    password,
   });
+
+  await Otp.deleteOne({ _id: otpRecord._id });
 
   const token = generateToken(recruiter._id);
 
-  sendSuccessResponse(res, {
+  res.status(201).json({
     message: 'Recruiter registered successfully.',
     token,
     user: {
@@ -83,7 +99,7 @@ exports.loginRecruiter = catchAsync(async (req, res) => {
 
   const token = generateToken(recruiter._id);
 
-  sendSuccessResponse(res, {
+  res.status(200).json({
     message: 'Login successful.',
     token,
     user: {
@@ -97,8 +113,7 @@ exports.loginRecruiter = catchAsync(async (req, res) => {
 });
 
 exports.forgotPassword = catchAsync(async (req, res) => {
-  const { email, captchaToken } = req.body;
-  await verifyCaptcha(captchaToken);
+  const { email } = req.body;
   const normalizedEmail = email.trim().toLowerCase();
 
   const recruiter = await Recruiter.findOne({ email: normalizedEmail });
