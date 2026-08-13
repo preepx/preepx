@@ -9,14 +9,23 @@ const updateProfileSchema = Joi.object({
   github: Joi.string().allow('').optional(),
   linkedin: Joi.string().allow('').optional(),
   degree: Joi.string().allow('').optional(),
-  skills: Joi.alternatives().try(Joi.string(), Joi.array().items(Joi.string())).optional(),
+  skills: Joi.alternatives().try(
+    Joi.string().allow(''),
+    Joi.array().items(Joi.string().allow(''))
+  ).optional(),
   preferredRole: Joi.string().allow('').max(120).optional(),
-  experienceYears: Joi.number().min(0).max(50).optional(),
+  experienceYears: Joi.alternatives().try(
+    Joi.number().min(0).max(50),
+    Joi.string().allow('')
+  ).optional().allow(null),
   location: Joi.string().allow('').max(120).optional(),
-  graduationYear: Joi.number().integer().min(1970).max(2035).optional(),
+  graduationYear: Joi.alternatives().try(
+    Joi.number().integer().min(1970).max(2035),
+    Joi.string().allow('')
+  ).optional().allow(null),
   currentCompany: Joi.string().allow('').max(120).optional(),
   currentDesignation: Joi.string().allow('').max(120).optional(),
-});
+}).unknown(true); // allow extra fields from frontend (they are ignored by the service)
 
 const updateSettingsSchema = Joi.object().unknown(true); // allow dynamic settings fields
 

@@ -17,7 +17,6 @@ import "./AppLayout.css";
 
 const NAV_ITEMS = [
   { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { to: "/apply-jobs", icon: Briefcase, label: "Apply Jobs", isNew: true },
   { to: "/my-assessments", icon: ClipboardCheck, label: "Job Assessments", isNew: true },
   { to: "/interview", icon: Video, label: "Mock Interview" },
   { to: "/coding-practice", icon: Code, label: "Code Practice", isNew: true },

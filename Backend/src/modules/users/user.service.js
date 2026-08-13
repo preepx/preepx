@@ -34,12 +34,26 @@ const updateProfileDetails = async (userId, updateData) => {
   const user = await User.findById(userId);
   if (!user) throw new NotFoundError("User not found");
 
-  const fields = ['fullName', 'mobile', 'college', 'address', 'bio', 'github', 'linkedin', 'degree', 'preferredRole', 'location', 'currentCompany', 'currentDesignation'];
+  const fields = ['fullName', 'mobile', 'college', 'address', 'bio', 'github', 'linkedin', 'degree',
+    'preferredRole', 'location', 'currentCompany', 'currentDesignation',
+    // Jobs profile fields
+    'headline', 'phone', 'city', 'summary', 'portfolio'
+  ];
   fields.forEach(field => {
     if (updateData[field] !== undefined) {
       user[field] = updateData[field];
     }
   });
+
+  // Handle experience array
+  if (updateData.experience !== undefined && Array.isArray(updateData.experience)) {
+    user.experience = updateData.experience;
+  }
+
+  // Handle education array
+  if (updateData.education !== undefined && Array.isArray(updateData.education)) {
+    user.education = updateData.education;
+  }
 
   if (updateData.skills !== undefined) {
     if (Array.isArray(updateData.skills)) {

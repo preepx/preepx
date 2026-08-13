@@ -28,15 +28,15 @@ function Profile() {
 
   useEffect(() => {
     if (!user) { navigate("/auth"); return; }
-    getProfile().then((u) => { 
-      setUser(u); 
-      syncUserToStorage(u); 
+    getProfile().then((u) => {
+      setUser(u);
+      syncUserToStorage(u);
       setEditForm({
         ...u,
         skills: (u.skills || []).join(", "),
       });
-    }).catch(() => {});
-    getAnalytics().then(setStats).catch(() => {});
+    }).catch(() => { });
+    getAnalytics().then(setStats).catch(() => { });
   }, []);
 
   const handlePhotoSelect = (e) => {
@@ -137,7 +137,7 @@ function Profile() {
     if (!user.referralCode) return;
     const link = `${window.location.origin}/auth?ref=${user.referralCode}`;
     const text = `Join AI Interview Portal using my referral code ${user.referralCode} and get 20 coins for free! ${link}`;
-    
+
     if (navigator.share) {
       try {
         await navigator.share({
@@ -166,7 +166,7 @@ function Profile() {
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName || "User")}&background=4f46e5&color=fff&size=128`;
 
   const levelProgress = ((user.points || 0) % 100);
-  
+
   // Calculate profile completeness
   const profileFields = ['profilePic', 'fullName', 'email', 'mobile', 'college', 'degree', 'graduationYear', 'address', 'bio', 'github', 'linkedin', 'skills', 'preferredRole', 'currentCompany', 'currentDesignation', 'experienceYears', 'resumeUrl', 'location'];
   const filledFields = profileFields.filter(field => {
@@ -183,7 +183,7 @@ function Profile() {
         <div className="profile-body">
           <div className="profile-top-row">
             <div className="spacer"></div>
-            
+
             <div className="profile-avatar-wrap">
               <img src={avatarUrl} alt="Profile" className="profile-avatar" />
               <label className={`profile-photo-btn ${uploading ? "uploading" : ""}`} title="Upload profile photo">
@@ -258,260 +258,193 @@ function Profile() {
       )}
 
       <div className="profile-content">
-          {!isEditing ? (
-            <>
-              <h1>{user.fullName}</h1>
-              <p className="profile-role">Level {user.level || 1} Candidate</p>
-              
-              <div className="completeness-section">
-                <div className="completeness-header">
-                  <span>Profile Completeness</span>
-                  <span>{completeness}%</span>
-                </div>
-                <div className="level-bar-wrap">
-                  <div className="level-bar completeness-bar" style={{ width: `${completeness}%` }} />
-                </div>
-                {!user.profileCompletedBonusClaimed && (
-                  <p style={{ fontSize: '12px', color: 'var(--primary)', marginTop: '8px', fontWeight: '600' }}>
-                    ✨ Complete your profile 100% to earn 5 bonus coins!
-                  </p>
-                )}
+        {!isEditing ? (
+          <>
+            <h1>{user.fullName}</h1>
+            <p className="profile-role">Level {user.level || 1} Candidate</p>
+
+            <div className="completeness-section">
+              <div className="completeness-header">
+                <span>Profile Completeness</span>
+                <span>{completeness}%</span>
               </div>
-            </>
-          ) : (
-            <div className="edit-form">
-              <div className="form-group">
-                <label>Full Name</label>
-                <input type="text" name="fullName" value={editForm.fullName || ""} onChange={handleEditChange} placeholder="Enter your full name" />
+              <div className="level-bar-wrap">
+                <div className="level-bar completeness-bar" style={{ width: `${completeness}%` }} />
               </div>
-              <div className="form-group">
-                <label>Bio / Summary</label>
-                <textarea name="bio" value={editForm.bio || ""} onChange={handleEditChange} placeholder="Brief professional summary..." rows="3" />
-              </div>
+              {!user.profileCompletedBonusClaimed && (
+                <p style={{ fontSize: '12px', color: 'var(--primary)', marginTop: '8px', fontWeight: '600' }}>
+                  ✨ Complete your profile 100% to earn 5 bonus coins!
+                </p>
+              )}
             </div>
-          )}
+          </>
+        ) : (
+          <div className="edit-form">
+            {/* Full Name */}
+            <div className="form-group">
+              <label>Full Name</label>
+              <input type="text" name="fullName" value={editForm.fullName || ""} onChange={handleEditChange} placeholder="Enter your full name" />
+            </div>
 
-          {!isEditing && user.bio && (
-            <p className="profile-bio">{user.bio}</p>
-          )}
+            {/* Bio */}
+            <div className="form-group">
+              <label>Bio</label>
+              <textarea name="bio" value={editForm.bio || ""} onChange={handleEditChange} placeholder="Tell us about yourself..." rows="3" />
+            </div>
 
-          {/* Naukri-style sections */}
+            {/* Mobile */}
+            <div className="form-group">
+              <label>Mobile Number</label>
+              <input type="text" name="mobile" value={editForm.mobile || ""} onChange={handleEditChange} placeholder="e.g. +91 9876543210" />
+            </div>
+
+            {/* College */}
+            <div className="form-group">
+              <label>College / University</label>
+              <input type="text" name="college" value={editForm.college || ""} onChange={handleEditChange} placeholder="Enter college name" />
+            </div>
+
+            {/* Degree */}
+            <div className="form-group">
+              <label>Degree</label>
+              <input type="text" name="degree" value={editForm.degree || ""} onChange={handleEditChange} placeholder="e.g. B.Tech Computer Science" />
+            </div>
+
+            {/* Location */}
+            <div className="form-group">
+              <label>Location / Address</label>
+              <input type="text" name="address" value={editForm.address || ""} onChange={handleEditChange} placeholder="City, Country" />
+            </div>
+
+            {/* GitHub */}
+            <div className="form-group">
+              <label>GitHub Profile</label>
+              <input type="text" name="github" value={editForm.github || ""} onChange={handleEditChange} placeholder="github.com/username" />
+            </div>
+
+            {/* LinkedIn */}
+            <div className="form-group">
+              <label>LinkedIn Profile</label>
+              <input type="text" name="linkedin" value={editForm.linkedin || ""} onChange={handleEditChange} placeholder="linkedin.com/in/username" />
+            </div>
+          </div>
+        )}
+
+        {!isEditing && user.bio && (
+          <p className="profile-bio">{user.bio}</p>
+        )}
+
+        {/* View-only info blocks */}
+        {!isEditing && (
           <div className="profile-naukri-sections">
             <section className="profile-block">
               <h3><GraduationCap size={16} /> Education</h3>
-              {!isEditing ? (
-                <div className="profile-block-grid">
-                  <div className="profile-block-item">
-                    <span className="lbl">College / University</span>
-                    <span className="val">{user.college || "—"}</span>
-                  </div>
-                  <div className="profile-block-item">
-                    <span className="lbl">Degree / Course</span>
-                    <span className="val">{user.degree || "—"}</span>
-                  </div>
-                  <div className="profile-block-item">
-                    <span className="lbl">Passing / Graduation Year</span>
-                    <span className="val">{user.graduationYear || "—"}</span>
-                  </div>
+              <div className="profile-block-grid">
+                <div className="profile-block-item">
+                  <span className="lbl">College / University</span>
+                  <span className="val">{user.college || "—"}</span>
                 </div>
-              ) : (
-                <div className="edit-form-grid">
-                  <div className="form-group">
-                    <label>College / University</label>
-                    <input type="text" name="college" value={editForm.college || ""} onChange={handleEditChange} placeholder="e.g. IIT Delhi, VIT Vellore" />
-                  </div>
-                  <div className="form-group">
-                    <label>Degree / Course</label>
-                    <input type="text" name="degree" value={editForm.degree || ""} onChange={handleEditChange} placeholder="e.g. B.Tech Computer Science" />
-                  </div>
-                  <div className="form-group">
-                    <label>Passing / Graduation Year</label>
-                    <input type="number" name="graduationYear" min={1970} max={2035} value={editForm.graduationYear ?? ""} onChange={handleEditChange} placeholder="e.g. 2024" />
-                  </div>
+                <div className="profile-block-item">
+                  <span className="lbl">Degree / Course</span>
+                  <span className="val">{user.degree || "—"}</span>
                 </div>
-              )}
-            </section>
-
-            <section className="profile-block">
-              <h3><Building2 size={16} /> Work Experience</h3>
-              {!isEditing ? (
-                <div className="profile-block-grid">
-                  <div className="profile-block-item">
-                    <span className="lbl">Current Company</span>
-                    <span className="val">{user.currentCompany || (user.experienceYears ? "—" : "Fresher / Not working")}</span>
-                  </div>
-                  <div className="profile-block-item">
-                    <span className="lbl">Designation</span>
-                    <span className="val">{user.currentDesignation || "—"}</span>
-                  </div>
-                  <div className="profile-block-item">
-                    <span className="lbl">Total Experience</span>
-                    <span className="val">{user.experienceYears != null && user.experienceYears !== "" ? `${user.experienceYears} year(s)` : "—"}</span>
-                  </div>
-                  <div className="profile-block-item">
-                    <span className="lbl">Preferred Role</span>
-                    <span className="val">{user.preferredRole || "—"}</span>
-                  </div>
-                  <div className="profile-block-item">
-                    <span className="lbl">Preferred Location</span>
-                    <span className="val">{user.location || user.address || "—"}</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="edit-form-grid">
-                  <div className="form-group">
-                    <label>Current Company</label>
-                    <input type="text" name="currentCompany" value={editForm.currentCompany || ""} onChange={handleEditChange} placeholder="Company name (leave blank if fresher)" />
-                  </div>
-                  <div className="form-group">
-                    <label>Current Designation</label>
-                    <input type="text" name="currentDesignation" value={editForm.currentDesignation || ""} onChange={handleEditChange} placeholder="e.g. Software Engineer" />
-                  </div>
-                  <div className="form-group">
-                    <label>Total Experience (years)</label>
-                    <input type="number" min={0} max={50} name="experienceYears" value={editForm.experienceYears ?? ""} onChange={handleEditChange} placeholder="0 for fresher" />
-                  </div>
-                  <div className="form-group">
-                    <label>Preferred Role</label>
-                    <input type="text" name="preferredRole" value={editForm.preferredRole || ""} onChange={handleEditChange} placeholder="e.g. Full Stack Developer" />
-                  </div>
-                  <div className="form-group">
-                    <label>Preferred Location</label>
-                    <input type="text" name="location" value={editForm.location || ""} onChange={handleEditChange} placeholder="e.g. Bangalore, Remote" />
-                  </div>
-                </div>
-              )}
+              </div>
             </section>
 
             <section className="profile-block">
               <h3><Phone size={16} /> Contact & Links</h3>
-              {!isEditing ? (
-                <div className="profile-details-grid">
-                  <div className="detail-item"><Mail size={16} /><span>{user.email}</span></div>
-                  <div className="detail-item"><Phone size={16} /><span>{user.mobile || "—"}</span></div>
-                  {user.github && <div className="detail-item"><Github size={16} /><span>{user.github}</span></div>}
-                  {user.linkedin && <div className="detail-item"><Linkedin size={16} /><span>{user.linkedin}</span></div>}
-                </div>
-              ) : (
-                <div className="edit-form-grid">
-                  <div className="form-group">
-                    <label>Mobile Number</label>
-                    <input type="text" name="mobile" value={editForm.mobile || ""} onChange={handleEditChange} placeholder="+91 9876543210" />
-                  </div>
-                  <div className="form-group">
-                    <label>GitHub</label>
-                    <input type="text" name="github" value={editForm.github || ""} onChange={handleEditChange} placeholder="github.com/username" />
-                  </div>
-                  <div className="form-group">
-                    <label>LinkedIn</label>
-                    <input type="text" name="linkedin" value={editForm.linkedin || ""} onChange={handleEditChange} placeholder="linkedin.com/in/username" />
-                  </div>
-                  <div className="form-group">
-                    <label>Address</label>
-                    <input type="text" name="address" value={editForm.address || ""} onChange={handleEditChange} placeholder="City, State" />
-                  </div>
-                </div>
-              )}
+              <div className="profile-details-grid">
+                <div className="detail-item"><Mail size={16} /><span>{user.email}</span></div>
+                <div className="detail-item"><Phone size={16} /><span>{user.mobile || "—"}</span></div>
+                <div className="detail-item"><MapPin size={16} /><span>{user.address || "—"}</span></div>
+                {user.github && <div className="detail-item"><Github size={16} /><span>{user.github}</span></div>}
+                {user.linkedin && <div className="detail-item"><Linkedin size={16} /><span>{user.linkedin}</span></div>}
+              </div>
             </section>
           </div>
+        )}
 
-          <div className="level-bar-wrap" style={{ marginTop: '20px' }}>
-            <div className="level-bar" style={{ width: `${levelProgress}%` }} />
-          </div>
-          <p className="level-text">{levelProgress}/100 XP to Level {(user.level || 1) + 1}</p>
+        <div className="level-bar-wrap" style={{ marginTop: '20px' }}>
+          <div className="level-bar" style={{ width: `${levelProgress}%` }} />
+        </div>
+        <p className="level-text">{levelProgress}/100 XP to Level {(user.level || 1) + 1}</p>
 
-          <section className="profile-block profile-block-inline">
-            <h3><Target size={16} /> Key Skills</h3>
-            {!isEditing ? (
-              user.skills?.length > 0 ? (
-                <div className="profile-skills-list">
-                  {user.skills.map((s) => <span key={s} className="profile-skill-tag">{s}</span>)}
-                </div>
-              ) : <p className="profile-empty-hint">Add skills to improve job matching</p>
-            ) : (
-              <div className="form-group">
-                <label>Skills (comma separated)</label>
-                <input type="text" name="skills" value={editForm.skills || ""} onChange={handleEditChange} placeholder="React, Node.js, MongoDB, Java..." />
+        {/* Resume */}
+        <div className="profile-resume-section">
+          <h3><FileText size={16} /> Resume</h3>
+          <p className="profile-resume-hint">Recruiters see your resume when you apply to jobs. PDF only.</p>
+          <input type="file" accept=".pdf,application/pdf" hidden ref={resumeInputRef} onChange={handleResumeUpload} />
+          {user.resumeUrl ? (
+            <div className="profile-resume-card">
+              <FileText size={20} />
+              <div>
+                <strong>{user.resumeFileName || "My Resume.pdf"}</strong>
+                {user.resumeUploadedAt && (
+                  <span>Uploaded {new Date(user.resumeUploadedAt).toLocaleDateString("en-IN")}</span>
+                )}
               </div>
-            )}
-          </section>
-
-          {/* Resume */}
-          <div className="profile-resume-section">
-            <h3><FileText size={16} /> Resume</h3>
-            <p className="profile-resume-hint">Recruiters see your resume when you apply to jobs. PDF only.</p>
-            <input type="file" accept=".pdf,application/pdf" hidden ref={resumeInputRef} onChange={handleResumeUpload} />
-            {user.resumeUrl ? (
-              <div className="profile-resume-card">
-                <FileText size={20} />
-                <div>
-                  <strong>{user.resumeFileName || "My Resume.pdf"}</strong>
-                  {user.resumeUploadedAt && (
-                    <span>Uploaded {new Date(user.resumeUploadedAt).toLocaleDateString("en-IN")}</span>
-                  )}
-                </div>
-                <div className="profile-resume-actions">
-                  <a href={getAssetUrl(user.resumeUrl)} target="_blank" rel="noopener noreferrer" className="profile-resume-link">View</a>
-                  <button type="button" className="profile-resume-upload-btn" onClick={() => resumeInputRef.current?.click()} disabled={uploadingResume}>
-                    <Upload size={14} /> {uploadingResume ? "Uploading..." : "Replace"}
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <button type="button" className="profile-resume-empty" onClick={() => resumeInputRef.current?.click()} disabled={uploadingResume}>
-                <Upload size={18} />
-                {uploadingResume ? "Uploading resume..." : "Upload PDF Resume"}
-              </button>
-            )}
-          </div>
-
-          <div className="profile-stats">
-            <div className="profile-stat"><Trophy size={20} /><span className="stat-number">{user.points || 0}</span><span className="stat-text">XP</span></div>
-            <div className="profile-stat"><Flame size={20} /><span className="stat-number">{user.streak || 0}</span><span className="stat-text">Streak</span></div>
-            <div className="profile-stat"><BarChart3 size={20} /><span className="stat-number">{stats?.totalInterviews || user.interviewsCompleted || 0}</span><span className="stat-text">Interviews</span></div>
-            <div className="profile-stat"><Award size={20} /><span className="stat-number">{user.badges?.length || 0}</span><span className="stat-text">Badges</span></div>
-          </div>
-
-          {!isEditing && user.referralCode && (
-            <div className="profile-referral-section">
-              <h3>Refer a Friend</h3>
-              <p>Share your code. When a friend registers and takes a paid session, you both get 20 coins!</p>
-              <div className="referral-code-box">
-                <span className="code">{user.referralCode}</span>
-                <button onClick={handleCopyCode} title="Copy Code" className="icon-btn"><Copy size={16} /></button>
-              </div>
-              <button className="share-btn" onClick={handleShareReferral}>
-                <Share2 size={16} /> Share on WhatsApp / Others
-              </button>
-            </div>
-          )}
-
-          {stats && (
-            <div className="profile-performance">
-              <h3><Target size={16} /> Performance</h3>
-              <div className="perf-row">
-                <span>Average Score</span>
-                <strong>{stats.avgScore}%</strong>
-              </div>
-              <div className="perf-row">
-                <span>Total Interviews</span>
-                <strong>{stats.totalInterviews}</strong>
+              <div className="profile-resume-actions">
+                <a href={getAssetUrl(user.resumeUrl)} target="_blank" rel="noopener noreferrer" className="profile-resume-link">View</a>
+                <button type="button" className="profile-resume-upload-btn" onClick={() => resumeInputRef.current?.click()} disabled={uploadingResume}>
+                  <Upload size={14} /> {uploadingResume ? "Uploading..." : "Replace"}
+                </button>
               </div>
             </div>
-          )}
-
-          {user.badges?.length > 0 && (
-            <div className="badges-section">
-              <h3>Badges</h3>
-              <div className="badges-list">
-                {user.badges.map((badge, i) => (
-                  <span key={i} className="badge-item">{badge.replace(/_/g, " ")}</span>
-                ))}
-              </div>
-            </div>
+          ) : (
+            <button type="button" className="profile-resume-empty" onClick={() => resumeInputRef.current?.click()} disabled={uploadingResume}>
+              <Upload size={18} />
+              {uploadingResume ? "Uploading resume..." : "Upload PDF Resume"}
+            </button>
           )}
         </div>
+
+        <div className="profile-stats">
+          <div className="profile-stat"><Trophy size={20} /><span className="stat-number">{user.points || 0}</span><span className="stat-text">XP</span></div>
+          <div className="profile-stat"><Flame size={20} /><span className="stat-number">{user.streak || 0}</span><span className="stat-text">Streak</span></div>
+          <div className="profile-stat"><BarChart3 size={20} /><span className="stat-number">{stats?.totalInterviews || user.interviewsCompleted || 0}</span><span className="stat-text">Interviews</span></div>
+          <div className="profile-stat"><Award size={20} /><span className="stat-number">{user.badges?.length || 0}</span><span className="stat-text">Badges</span></div>
+        </div>
+
+        {!isEditing && user.referralCode && (
+          <div className="profile-referral-section">
+            <h3>Refer a Friend</h3>
+            <p>Share your code. When a friend registers and takes a paid session, you both get 20 coins!</p>
+            <div className="referral-code-box">
+              <span className="code">{user.referralCode}</span>
+              <button onClick={handleCopyCode} title="Copy Code" className="icon-btn"><Copy size={16} /></button>
+            </div>
+            <button className="share-btn" onClick={handleShareReferral}>
+              <Share2 size={16} /> Share on WhatsApp / Others
+            </button>
+          </div>
+        )}
+
+        {stats && (
+          <div className="profile-performance">
+            <h3><Target size={16} /> Performance</h3>
+            <div className="perf-row">
+              <span>Average Score</span>
+              <strong>{stats.avgScore}%</strong>
+            </div>
+            <div className="perf-row">
+              <span>Total Interviews</span>
+              <strong>{stats.totalInterviews}</strong>
+            </div>
+          </div>
+        )}
+
+        {user.badges?.length > 0 && (
+          <div className="badges-section">
+            <h3>Badges</h3>
+            <div className="badges-list">
+              {user.badges.map((badge, i) => (
+                <span key={i} className="badge-item">{badge.replace(/_/g, " ")}</span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
+    </div>
   );
 }
 

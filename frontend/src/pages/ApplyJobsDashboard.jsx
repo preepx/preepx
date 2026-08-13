@@ -129,7 +129,7 @@ export default function ApplyJobsDashboard() {
             <strong>{assessmentApps.length} assessment{assessmentApps.length > 1 ? "s" : ""} pending</strong>
             <p>Recruiters sent you skill tests — complete them from Job Assessments.</p>
           </div>
-          <Link to="/my-assessments" className="aj-alert-btn">Take Assessment →</Link>
+          <Link to="/apply-jobs/assessments" className="aj-alert-btn">Take Assessment →</Link>
         </section>
       )}
 
@@ -257,7 +257,7 @@ export default function ApplyJobsDashboard() {
                     <strong>{app.matchScore}%</strong> requirement match
                   </div>
                   {["assessment_sent", "assessment_in_progress"].includes(app.status) && (
-                    <Link to="/my-assessments" className="aj-apply-btn">Take Assessment →</Link>
+                    <Link to="/apply-jobs/assessments" className="aj-apply-btn">Take Assessment →</Link>
                   )}
                 </article>
               );

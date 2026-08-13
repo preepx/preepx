@@ -49,6 +49,28 @@ const userSchema = mongoose.Schema(
     profileCompletedBonusClaimed: { type: Boolean, default: false },
     xpRewardsClaimed: [{ type: String }],
     lastDailyRewardDate: { type: Date },
+    // Jobs Profile Fields
+    headline: { type: String, default: "" },
+    phone: { type: String, default: "" },
+    city: { type: String, default: "" },
+    summary: { type: String, default: "" },
+    portfolio: { type: String, default: "" },
+    experience: [{
+      company: String,
+      role: String,
+      from: String,
+      to: String,
+      current: Boolean,
+      description: String,
+    }],
+    education: [{
+      institution: String,
+      degree: String,
+      field: String,
+      from: String,
+      to: String,
+      grade: String,
+    }],
     notifications: [{
       title: { type: String },
       message: { type: String },

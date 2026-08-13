@@ -33,6 +33,14 @@ const safeUser = (user) => ({
   referralCode: user.referralCode || "",
   referralCount: user.referralCount || 0,
   xpRewardsClaimed: user.xpRewardsClaimed || [],
+  // Jobs Profile fields
+  headline: user.headline || "",
+  phone: user.phone || "",
+  city: user.city || "",
+  summary: user.summary || "",
+  portfolio: user.portfolio || "",
+  experience: user.experience || [],
+  education: user.education || [],
 });
 
 const getProfile = catchAsync(async (req, res) => {

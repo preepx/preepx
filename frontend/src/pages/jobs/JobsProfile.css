@@ -1,0 +1,851 @@
+/* ================================================
+   JobsProfile.css — Premium Naukri-style Profile
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+.jp-page {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-family: 'Inter', sans-serif;
+  padding-bottom: 40px;
+}
+
+/* ── PROFILE STRENGTH BANNER ─────────────────── */
+.jp-strength-banner {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 55%, #4338ca 100%);
+  border-radius: 20px;
+  padding: 20px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 8px 32px rgba(99,102,241,0.25);
+}
+
+.jp-strength-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.jp-strength-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffd700;
+  flex-shrink: 0;
+}
+
+.jp-strength-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 2px;
+  letter-spacing: 0.2px;
+}
+
+.jp-strength-sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  max-width: 260px;
+}
+
+.jp-strength-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  min-width: 130px;
+}
+
+.jp-strength-pct {
+  font-size: 26px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.jp-strength-track {
+  width: 100%;
+  height: 7px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.jp-strength-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ── BASE CARD ───────────────────────────────── */
+.jp-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 24px 28px;
+  transition: box-shadow 0.2s ease;
+}
+
+.jp-card:hover {
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+}
+
+[data-theme="dark"] .jp-card {
+  background: #1e293b;
+  border-color: rgba(255,255,255,0.07);
+}
+
+/* ── MAIN PROFILE CARD ───────────────────────── */
+.jp-main-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.jp-photo-section {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+[data-theme="dark"] .jp-photo-section {
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+/* AVATAR */
+.jp-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.jp-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #6366f1;
+  box-shadow: 0 0 0 4px rgba(99,102,241,0.15);
+  display: block;
+}
+
+.jp-photo-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #6366f1;
+  border: 2.5px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.4);
+}
+
+.jp-photo-btn:hover {
+  background: #4f46e5;
+  transform: scale(1.1);
+}
+
+/* MAIN INFO */
+.jp-main-info {
+  flex: 1;
+  min-width: 0;
+  padding-top: 2px;
+}
+
+.jp-main-name-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.jp-name {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+[data-theme="dark"] .jp-name { color: #f1f5f9; }
+
+.jp-edit-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.jp-edit-icon-btn:hover {
+  background: #6366f1;
+  color: #fff;
+  border-color: #6366f1;
+  transform: scale(1.05);
+}
+
+[data-theme="dark"] .jp-edit-icon-btn {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.1);
+  color: #94a3b8;
+}
+
+.jp-headline {
+  font-size: 14px;
+  color: #6366f1;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.jp-contact-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.jp-contact-row span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.jp-summary {
+  font-size: 13.5px;
+  color: #475569;
+  margin: 0;
+  line-height: 1.65;
+  max-width: 500px;
+}
+
+[data-theme="dark"] .jp-summary { color: #94a3b8; }
+
+.jp-missing-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #b45309;
+  background: rgba(245,158,11,0.08);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 1px solid rgba(245,158,11,0.2);
+  transition: all 0.15s;
+}
+
+.jp-missing-hint:hover { background: rgba(245,158,11,0.14); }
+
+/* ── SOCIAL LINKS ────────────────────────────── */
+.jp-social-section {
+  padding-top: 18px;
+  border-top: none;
+}
+
+.jp-social-links {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.jp-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.jp-social-link--linkedin { background: rgba(10,102,194,0.08); color: #0a66c2; border: 1px solid rgba(10,102,194,0.2); }
+.jp-social-link--linkedin:hover { background: rgba(10,102,194,0.16); }
+.jp-social-link--github { background: rgba(36,41,47,0.07); color: #24292f; border: 1px solid rgba(36,41,47,0.15); }
+[data-theme="dark"] .jp-social-link--github { background: rgba(255,255,255,0.06); color: #e2e8f0; border-color: rgba(255,255,255,0.1); }
+.jp-social-link--github:hover { background: rgba(36,41,47,0.15); }
+.jp-social-link--portfolio { background: rgba(6,182,212,0.08); color: #0891b2; border: 1px solid rgba(6,182,212,0.2); }
+.jp-social-link--portfolio:hover { background: rgba(6,182,212,0.16); }
+
+.jp-add-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  background: transparent;
+  border: 1.5px dashed #cbd5e1;
+  color: #64748b;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.jp-add-social-btn:hover {
+  border-color: #6366f1;
+  color: #6366f1;
+  background: rgba(99,102,241,0.05);
+}
+
+/* ── RESUME ──────────────────────────────────── */
+.jp-resume-section {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+[data-theme="dark"] .jp-resume-section { border-top-color: rgba(255,255,255,0.06); }
+
+.jp-resume-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: #64748b;
+  flex: 1;
+}
+
+.jp-resume-info svg { color: #6366f1; }
+
+.jp-resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 9px;
+  background: #6366f1;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  box-shadow: 0 2px 10px rgba(99,102,241,0.25);
+}
+
+.jp-resume-btn:hover { background: #4f46e5; transform: translateY(-1px); }
+.jp-resume-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.jp-resume-view {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6366f1;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 9px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.2);
+  transition: all 0.15s;
+}
+
+.jp-resume-view:hover { background: rgba(99,102,241,0.16); }
+
+/* ── SECTION HEADER ──────────────────────────── */
+.jp-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.jp-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #0f172a;
+}
+
+[data-theme="dark"] .jp-section-title { color: #f1f5f9; }
+
+.jp-section-title svg {
+  color: #6366f1;
+}
+
+.jp-section-title h2 {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.jp-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: 9px;
+  background: rgba(99,102,241,0.06);
+  border: 1.5px solid rgba(99,102,241,0.2);
+  color: #6366f1;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.jp-add-btn:hover {
+  background: #6366f1;
+  color: #fff;
+  border-color: #6366f1;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px rgba(99,102,241,0.3);
+}
+
+/* ── EXPERIENCE / EDUCATION LIST ─────────────── */
+.jp-exp-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.jp-exp-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f8fafc;
+  position: relative;
+  transition: background 0.15s;
+}
+
+[data-theme="dark"] .jp-exp-item { border-bottom-color: rgba(255,255,255,0.05); }
+.jp-exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+.jp-exp-item:first-child { padding-top: 4px; }
+
+.jp-exp-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  margin-top: 1px;
+  box-shadow: 0 3px 10px rgba(99,102,241,0.3);
+}
+
+.jp-exp-details { flex: 1; min-width: 0; }
+
+.jp-exp-role {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+[data-theme="dark"] .jp-exp-role { color: #f1f5f9; }
+
+.jp-exp-company {
+  font-size: 13.5px;
+  color: #6366f1;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.jp-exp-period {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.jp-exp-desc {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.jp-remove-btn {
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 7px;
+  flex-shrink: 0;
+  transition: all 0.15s;
+  align-self: flex-start;
+}
+
+.jp-remove-btn:hover {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+/* ── SKILLS ──────────────────────────────────── */
+.jp-skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  min-height: 36px;
+}
+
+.jp-skill-tag {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px;
+  background: rgba(99,102,241,0.07);
+  border: 1px solid rgba(99,102,241,0.22);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #4f46e5;
+  transition: all 0.15s;
+}
+
+.jp-skill-tag:hover { background: rgba(99,102,241,0.14); }
+
+.jp-skill-tag button {
+  background: none;
+  border: none;
+  color: #6366f1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  opacity: 0.55;
+  transition: opacity 0.15s;
+  margin-left: 2px;
+}
+
+.jp-skill-tag button:hover { opacity: 1; }
+
+.jp-skill-input-wrap {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.jp-skill-input {
+  padding: 6px 12px;
+  border: 1.5px solid #6366f1;
+  border-radius: 9px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  background: #fff;
+  color: #1e293b;
+  min-width: 160px;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+
+[data-theme="dark"] .jp-skill-input {
+  background: #1e293b;
+  color: #f1f5f9;
+}
+
+.jp-add-skill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1.5px dashed #cbd5e1;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.jp-add-skill-btn:hover {
+  border-color: #6366f1;
+  color: #6366f1;
+  background: rgba(99,102,241,0.05);
+}
+
+/* ── INLINE EDIT / ADD FORMS ─────────────────── */
+.jp-edit-form,
+.jp-add-form {
+  background: #f8faff;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1.5px solid rgba(99,102,241,0.18);
+  margin-bottom: 8px;
+  animation: jp-slideIn 0.2s ease;
+}
+
+[data-theme="dark"] .jp-edit-form,
+[data-theme="dark"] .jp-add-form {
+  background: rgba(99,102,241,0.05);
+  border-color: rgba(99,102,241,0.18);
+}
+
+@keyframes jp-slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.jp-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.jp-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 14px;
+}
+
+.jp-field:last-of-type { margin-bottom: 0; }
+
+.jp-field-row .jp-field { margin-bottom: 0; }
+
+.jp-field label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.jp-field input,
+.jp-field textarea,
+.jp-field select {
+  padding: 9px 13px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  background: #fff;
+  color: #1e293b;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+[data-theme="dark"] .jp-field input,
+[data-theme="dark"] .jp-field textarea {
+  background: #1e293b;
+  border-color: rgba(255,255,255,0.1);
+  color: #f1f5f9;
+}
+
+.jp-field input:focus,
+.jp-field textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+
+.jp-field textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.jp-field--check {
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.jp-field--check label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #475569;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .jp-field--check label { color: #94a3b8; }
+.jp-field--check input[type="checkbox"] { width: 16px; height: 16px; accent-color: #6366f1; }
+
+.jp-form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+  padding-top: 6px;
+}
+
+.jp-save-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 22px;
+  border-radius: 9px;
+  background: #6366f1;
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  box-shadow: 0 2px 10px rgba(99,102,241,0.3);
+}
+
+.jp-save-btn:hover { background: #4f46e5; transform: translateY(-1px); }
+.jp-save-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.jp-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 9px;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1.5px solid #e2e8f0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.jp-cancel-btn:hover { background: #e8edf5; color: #334155; }
+
+[data-theme="dark"] .jp-cancel-btn {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.09);
+  color: #94a3b8;
+}
+
+/* ── EMPTY STATE ─────────────────────────────── */
+.jp-empty-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 36px 24px;
+  text-align: center;
+  color: #94a3b8;
+  border: 1.5px dashed #e2e8f0;
+  border-radius: 14px;
+  background: #fafbff;
+}
+
+[data-theme="dark"] .jp-empty-section {
+  border-color: rgba(255,255,255,0.07);
+  background: rgba(255,255,255,0.02);
+}
+
+.jp-empty-section svg { color: #c7d2fe; }
+.jp-empty-section p {
+  margin: 0;
+  font-size: 13px;
+  max-width: 280px;
+  color: #94a3b8;
+  line-height: 1.5;
+}
+
+/* ── COMPLETION CHECKLIST ────────────────────── */
+.jp-checklist-card {
+  background: linear-gradient(135deg, #fafbff, #eff6ff) !important;
+  border-color: rgba(99,102,241,0.15) !important;
+}
+
+[data-theme="dark"] .jp-checklist-card {
+  background: rgba(99,102,241,0.04) !important;
+  border-color: rgba(99,102,241,0.15) !important;
+}
+
+.jp-checklist-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+[data-theme="dark"] .jp-checklist-title { color: #f1f5f9; }
+
+.jp-checklist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.jp-check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ef4444;
+  padding: 9px 12px;
+  border-radius: 9px;
+  background: rgba(239,68,68,0.05);
+  border: 1px solid rgba(239,68,68,0.1);
+  transition: all 0.15s;
+}
+
+.jp-check-item svg { flex-shrink: 0; }
+
+.jp-check-item--done {
+  color: #059669;
+  background: rgba(16,185,129,0.06);
+  border-color: rgba(16,185,129,0.15);
+}
+
+/* ── RESPONSIVE ──────────────────────────────── */
+@media (max-width: 640px) {
+  .jp-page { gap: 12px; }
+  .jp-card { padding: 18px 16px; }
+  .jp-photo-section { flex-direction: column; align-items: center; text-align: center; }
+  .jp-main-info { width: 100%; }
+  .jp-main-name-row { justify-content: center; }
+  .jp-contact-row { justify-content: center; }
+  .jp-social-links { justify-content: center; }
+  .jp-field-row { grid-template-columns: 1fr; }
+  .jp-checklist { grid-template-columns: 1fr; }
+  .jp-strength-banner { flex-direction: column; align-items: flex-start; }
+  .jp-strength-right { width: 100%; align-items: flex-start; }
+  .jp-strength-track { width: 100%; }
+  .jp-resume-section { flex-direction: column; align-items: flex-start; }
+}

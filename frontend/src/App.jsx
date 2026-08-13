@@ -6,6 +6,7 @@ const GuestRoute = lazy(() => import("./components/GuestRoute"));
 const Navbar = lazy(() => import("./components/Navbar"));
 const Loader = lazy(() => import("./components/Loader"));
 const AppLayout = lazy(() => import("./layouts/AppLayout"));
+const JobsLayout = lazy(() => import("./layouts/JobsLayout"));
 const Footer = lazy(() => import("./components/Footer"));
 
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -57,6 +58,9 @@ const CodingPractice = lazy(() => import("./pages/CodingPractice"));
 const CodingExam = lazy(() => import("./pages/CodingExam"));
 
 const UserGuide = lazy(() => import("./pages/UserGuide"));
+const JobsMyApplications = lazy(() => import("./pages/jobs/JobsMyApplications"));
+const JobsAssessments = lazy(() => import("./pages/jobs/JobsAssessments"));
+const JobsProfile = lazy(() => import("./pages/jobs/JobsProfile"));
 
 const PUBLIC_ROUTES = [
   "/", "/dashboard", "/auth", "/auth/recruiter",
@@ -72,12 +76,15 @@ function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements", "/rewards",
     "/settings", "/profile", "/resume-interview", "/ats-score", "/btech-notes", "/objective-exam", "/wallet", "/coding-practice",
-    "/my-assessments", "/apply-jobs", "/my-applications",
+    "/my-assessments", "/my-applications",
   ];
   return sidebarRoutes.includes(pathname)
-    || pathname.startsWith("/apply-jobs/")
     || pathname.startsWith("/btech-notes/")
     || (pathname.startsWith("/objective-exam/") && !FULLSCREEN_ROUTES.includes(pathname));
+}
+
+function usesJobsLayout(pathname) {
+  return pathname === "/apply-jobs" || pathname.startsWith("/apply-jobs/");
 }
 
 function LayoutWrapper({ children, landingRole, setLandingRole }) {
@@ -85,6 +92,7 @@ function LayoutWrapper({ children, landingRole, setLandingRole }) {
   const isPublic = PUBLIC_ROUTES.includes(location.pathname);
   const isFullscreen = FULLSCREEN_ROUTES.includes(location.pathname) || location.pathname.startsWith("/assessment/");
   const useSidebar = usesAppLayout(location.pathname);
+  const useJobs = usesJobsLayout(location.pathname);
 
   if (isPublic) {
     const isAuthPage = location.pathname === "/auth" || location.pathname === "/auth/recruiter";
@@ -99,6 +107,10 @@ function LayoutWrapper({ children, landingRole, setLandingRole }) {
 
   if (isFullscreen) {
     return <>{children}</>;
+  }
+
+  if (useJobs) {
+    return <JobsLayout>{children}</JobsLayout>;
   }
 
   if (useSidebar) {
@@ -167,7 +179,10 @@ function AppContent() {
           <Route path="/my-assessments" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><MyAssessments /></ProtectedRoute>} />
           <Route path="/apply-jobs" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><ApplyJobsDashboard /></ProtectedRoute>} />
           <Route path="/apply-jobs/browse" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobBoard /></ProtectedRoute>} />
-          <Route path="/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><ApplyJobsDashboard /></ProtectedRoute>} />
+          <Route path="/apply-jobs/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsMyApplications /></ProtectedRoute>} />
+          <Route path="/apply-jobs/assessments" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsAssessments /></ProtectedRoute>} />
+          <Route path="/apply-jobs/profile" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsProfile /></ProtectedRoute>} />
+          <Route path="/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsMyApplications /></ProtectedRoute>} />
           <Route path="/assessment/:id" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><TakeAssessment /></ProtectedRoute>} />
           <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
           <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
