@@ -16,10 +16,11 @@ export default function RecruiterJobProfileGuard({ children }) {
 
   if (status === null) return <Loader />;
 
-  if (!status.profileComplete) {
-    const redirect = encodeURIComponent(location.pathname + location.search);
-    return <Navigate to={`/recruiter/complete-profile?redirect=${redirect}`} replace />;
-  }
+  // User requested to allow job posting even if profile is not complete
+  // if (!status.profileComplete) {
+  //   const redirect = encodeURIComponent(location.pathname + location.search);
+  //   return <Navigate to={`/recruiter/complete-profile?redirect=${redirect}`} replace />;
+  // }
 
   return children;
 }

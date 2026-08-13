@@ -64,7 +64,37 @@ const getRecruiterDetail = async (req, res) => {
       .populate("primaryRecruiterId", "-password")
       .lean();
     if (!company) return res.status(404).json({ message: "Company not found" });
-    res.json(company);
+    
+    let jobs = [];
+    let applicationsCount = 0;
+    let assessmentsCount = 0;
+    let assessments = [];
+
+    try {
+      const Job = require("../../Backend/models/Job");
+      const JobApplication = require("../../Backend/models/JobApplication");
+      const Assessment = require("../../Backend/models/Assessment");
+
+      jobs = await Job.find({ companyId: company._id }).sort({ createdAt: -1 }).lean();
+      applicationsCount = await JobApplication.countDocuments({ companyId: company._id });
+      assessments = await Assessment.find({ recruiterId: company.primaryRecruiterId }).sort({ createdAt: -1 }).lean();
+      assessmentsCount = assessments.length;
+
+      // also fetch applications for the latest 10 jobs to show some details if needed, or we just count
+    } catch (e) {
+      console.error("Could not fetch recruiter stats from main Backend models", e);
+    }
+
+    res.json({
+      ...company,
+      stats: {
+        totalJobs: jobs.length,
+        totalApplications: applicationsCount,
+        totalAssessments: assessmentsCount
+      },
+      jobs,
+      assessments
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }

@@ -70,13 +70,11 @@ const getDashboard = async (recruiterId) => {
 };
 
 const createJob = async (recruiterId, data, req) => {
-  await companyService.assertProfileComplete(recruiterId);
   const payload = normalizeJobPayload(data);
   const companyId = await getRecruiterCompanyId(recruiterId);
 
   if (PUBLISHED_STATUSES.includes(payload.status || "draft")) {
     if (payload.status !== "draft") {
-      await companyService.assertVerifiedCompany(recruiterId);
       const canCreate = await billingService.checkLimit(recruiterId, "activeJobs");
       if (!canCreate) throw new ForbiddenError("Active job limit reached. Upgrade your plan.");
     }
@@ -143,7 +141,6 @@ const updateJob = async (recruiterId, jobId, data, req) => {
 };
 
 const publishJob = async (recruiterId, jobId, req) => {
-  await companyService.assertVerifiedCompany(recruiterId);
   const job = await Job.findOne({ _id: jobId, recruiterId });
   if (!job) throw new NotFoundError("Job not found");
   job.status = "published";
@@ -267,8 +264,45 @@ const updateApplicationStatus = async (recruiterId, applicationId, status, feedb
     app.recruiterFeedback = feedback;
     await app.save();
   }
-  if (status === "shortlisted") logRecruiterAction(req, "CANDIDATE_SHORTLISTED", "SUCCESS", { applicationId });
-  if (status === "rejected") logRecruiterAction(req, "CANDIDATE_REJECTED", "SUCCESS", { applicationId });
+  
+  if (status === "shortlisted") {
+    logRecruiterAction(req, "CANDIDATE_SHORTLISTED", "SUCCESS", { applicationId });
+    try {
+      const { sendNotification } = require("../../../utils/notificationService");
+      const job = await Job.findById(app.jobId);
+      if (job) {
+        await sendNotification(
+          app.userId,
+          "Application Shortlisted! 🎉",
+          `Congratulations! Your application for "${job.title}" has been shortlisted. The recruiter will contact you soon.`,
+          "job_update",
+          "🎉"
+        );
+      }
+    } catch (e) {
+      console.error("Failed to notify user for shortlist", e);
+    }
+  }
+  
+  if (status === "rejected") {
+    logRecruiterAction(req, "CANDIDATE_REJECTED", "SUCCESS", { applicationId });
+    try {
+      const { sendNotification } = require("../../../utils/notificationService");
+      const job = await Job.findById(app.jobId);
+      if (job) {
+        await sendNotification(
+          app.userId,
+          "Application Update",
+          `Thank you for applying to "${job.title}". Unfortunately, we have decided to move forward with other candidates at this time.`,
+          "job_update",
+          "😔"
+        );
+      }
+    } catch (e) {
+      console.error("Failed to notify user for reject", e);
+    }
+  }
+  
   return app;
 };
 

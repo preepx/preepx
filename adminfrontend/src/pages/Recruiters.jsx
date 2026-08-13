@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../utils/api';
 import {
   Briefcase, CheckCircle, XCircle, Clock, Shield, Search, Eye, AlertTriangle
@@ -150,9 +151,14 @@ const Recruiters = () => {
                     <td><span className={`status-badge ${cfg.className}`}><Icon size={12} /> {cfg.label}</span></td>
                     <td>{new Date(item.updatedAt).toLocaleDateString()}</td>
                     <td>
-                      <button type="button" className="btn-icon" onClick={() => { setSelected(item); setNotes(item.verificationNotes || ''); }}>
-                        <Eye size={16} /> Review
-                      </button>
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <button type="button" className="btn-icon" onClick={() => { setSelected(item); setNotes(item.verificationNotes || ''); }}>
+                          <CheckCircle size={16} /> Verify
+                        </button>
+                        <Link to={`/recruiters/${item._id}`} className="btn-icon" style={{ textDecoration: 'none' }}>
+                          <Eye size={16} /> Details
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 );

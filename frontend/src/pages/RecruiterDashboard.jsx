@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
-  Briefcase, Send, CheckCircle, Video, UserCheck, Sparkles,
+  Briefcase, Send, CheckCircle, Video, UserCheck, Sparkles, AlertTriangle
 } from "lucide-react";
 import RecruiterLayout from "../layouts/RecruiterLayout";
 import {
-  getRecruiterDashboard, getJobs, getInterviews,
+  getRecruiterDashboard, getJobs, getInterviews, getOnboarding
 } from "../services/recruiterAPI";
 import WelcomeBanner from "../components/recruiter/WelcomeBanner";
 import KpiCard from "../components/recruiter/KpiCard";
@@ -77,7 +78,7 @@ export default function RecruiterDashboard() {
   return (
     <RecruiterLayout title="Dashboard">
       <div className="rx-dashboard">
-        <WelcomeBanner user={user} stats={stats} funnel={funnel} />
+        <WelcomeBanner name={user.fullName || "Recruiter"} stats={stats} funnel={funnel} />
 
         <section className="rx-stats-row">
           {kpis.map((kpi) => (

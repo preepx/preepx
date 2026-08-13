@@ -84,30 +84,29 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  padding: 36px 40px;
+  justify-content: flex-start;
+  gap: 48px;
+  padding: 20px 28px;
   flex-wrap: wrap;
 }
 
 .rx-hero-left {
   display: flex;
   align-items: center;
-  gap: 24px;
-  flex: 1;
+  gap: 16px;
   min-width: 280px;
 }
 
 .rx-avatar-wrap { position: relative; flex-shrink: 0; }
 
 .rx-avatar {
-  width: 72px;
-  height: 72px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
   color: #fff;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -146,12 +145,12 @@
 }
 
 .rx-hero-text h1 {
-  font-size: clamp(24px, 3.5vw, 34px);
+  font-size: clamp(20px, 3vw, 28px);
   font-weight: 800;
   letter-spacing: -0.8px;
   color: white;
   line-height: 1.15;
-  margin: 0 0 8px;
+  margin: 0 0 4px;
 }
 
 .rx-name {
@@ -162,10 +161,10 @@
 }
 
 .rx-hero-text p {
-  font-size: 15px;
+  font-size: 14px;
   color: rgba(255, 255, 255, 0.55);
   line-height: 1.5;
-  margin: 0 0 12px;
+  margin: 0 0 8px;
 }
 
 .rx-hero-meta {
@@ -190,15 +189,15 @@
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
-  padding: 20px 24px;
-  min-width: 260px;
+  border-radius: 16px;
+  padding: 16px 20px;
+  min-width: 240px;
 }
 
 .rx-hiring-ring {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 64px;
+  height: 64px;
   flex-shrink: 0;
 }
 

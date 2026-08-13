@@ -17,7 +17,7 @@ const assertVerifiedCompany = async (recruiterId) => {
 
   const company = await Company.findById(companyId);
   if (!company) throw new ForbiddenError("Complete company profile before this action");
-  if (company.verificationStatus !== "VERIFIED") {
+  if (company.verificationStatus !== "VERIFIED" && company.verificationStatus !== "PENDING") {
     throw new ForbiddenError("Company verification required. Status: " + company.verificationStatus);
   }
   return { recruiter, company };
@@ -37,6 +37,7 @@ const getOnboardingStatus = async (recruiterId) => {
       phone: recruiter.phone,
       companyName: recruiter.companyName,
       companyWebsite: recruiter.companyWebsite,
+      isVerified: recruiter.isVerified,
     },
     company: company
       ? {
@@ -89,6 +90,7 @@ const upsertCompanyProfile = async (recruiterId, data) => {
       companySize: data.companySize ?? company.companySize,
       linkedin: data.linkedin ?? company.linkedin,
       officialEmail: data.officialEmail ?? company.officialEmail,
+      verificationStatus: "PENDING",
     });
     await company.save();
   } else {

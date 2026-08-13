@@ -1,33 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
-  Briefcase, Search, ClipboardCheck, Bell, User, LogOut,
-  ChevronLeft, LayoutDashboard, Star, FileText, Building2,
-  X, CheckCircle, Clock, AlertCircle
+  LayoutDashboard, Briefcase, Search, ClipboardCheck, User, LogOut,
+  Menu, X, Bell, ChevronDown, Moon, Sun, PanelLeftClose, PanelLeft,
+  ChevronLeft, Star, CheckCircle, AlertCircle, Clock,
 } from "lucide-react";
 import API from "../utils/api";
 import { getMyApplications } from "../services/candidateJobsAPI";
 import { getMyAssessments } from "../services/assessmentAPI";
-import Footer from "../components/Footer";
+import "./RecruiterLayout.css";
 import "./JobsLayout.css";
 
-const JOBS_NAV = [
-  { to: "/apply-jobs", icon: LayoutDashboard, label: "Dashboard", exact: true },
-  { to: "/apply-jobs/browse", icon: Search, label: "Browse Jobs" },
-  { to: "/apply-jobs/my-applications", icon: Briefcase, label: "My Applications" },
-  { to: "/apply-jobs/assessments", icon: ClipboardCheck, label: "Assessments" },
-  { to: "/apply-jobs/profile", icon: User, label: "Job Profile" },
+const NAV_SECTIONS = [
+  {
+    label: "Overview",
+    items: [{ to: "/apply-jobs", icon: LayoutDashboard, label: "Dashboard" }],
+  },
+  {
+    label: "Jobs",
+    items: [
+      { to: "/apply-jobs/browse", icon: Search, label: "Browse Jobs" },
+      { to: "/apply-jobs/my-applications", icon: Briefcase, label: "My Applications", badgeKey: "applications" },
+      { to: "/apply-jobs/assessments", icon: ClipboardCheck, label: "Assessments", badgeKey: "assessments" },
+    ],
+  },
+  {
+    label: "Account",
+    items: [{ to: "/apply-jobs/profile", icon: User, label: "Job Profile" }],
+  },
 ];
 
+const PAGE_TITLES = {
+  "/apply-jobs": "Dashboard",
+  "/apply-jobs/browse": "Browse Jobs",
+  "/apply-jobs/my-applications": "My Applications",
+  "/apply-jobs/assessments": "Assessments",
+  "/apply-jobs/profile": "Job Profile",
+};
+
 function JobsLayout({ children }) {
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
-  const [unreadCount, setUnreadCount] = useState(0);
   const [assessmentBadge, setAssessmentBadge] = useState(0);
   const [applicationBadge, setApplicationBadge] = useState(0);
-  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const safeGetUser = () => {
     try { return JSON.parse(localStorage.getItem("user") || "{}"); } catch { return {}; }
@@ -36,16 +57,22 @@ function JobsLayout({ children }) {
   const avatar = user.profilePic ||
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName || "U")}&background=6366f1&color=fff`;
 
+  const pageTitle = PAGE_TITLES[location.pathname] || "Apply Jobs";
+
   useEffect(() => {
-    // Fetch assessments to count pending
+    const theme = localStorage.getItem("theme") || "dark";
+    document.documentElement.dataset.theme = theme;
+    setIsDark(theme === "dark");
+  }, []);
+
+  useEffect(() => {
     getMyAssessments()
       .then((data) => {
         const pending = (data || []).filter((a) => a.status !== "completed").length;
         setAssessmentBadge(pending);
       })
-      .catch(() => {});
+      .catch(() => { });
 
-    // Fetch applications to count shortlisted / new
     getMyApplications()
       .then((data) => {
         const shortlisted = (data || []).filter((a) =>
@@ -53,24 +80,38 @@ function JobsLayout({ children }) {
         ).length;
         setApplicationBadge(shortlisted);
       })
-      .catch(() => {});
+      .catch(() => { });
 
-    // Fetch notifications
     API.get("/users/notifications")
-      .then((res) => {
-        const notifs = (res.data || []).slice(0, 15);
-        setNotifications(notifs);
-        setUnreadCount(notifs.filter((n) => !n.read).length);
-      })
-      .catch(() => {});
+      .then((res) => setNotifications((res.data || []).slice(0, 15)))
+      .catch(() => { });
   }, [location.pathname]);
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
+
+  const isActive = (to) => {
+    if (to === "/apply-jobs") return location.pathname === to;
+    return location.pathname === to || location.pathname.startsWith(to + "/");
+  };
+
+  const getBadge = (badgeKey) => {
+    if (badgeKey === "assessments") return assessmentBadge;
+    if (badgeKey === "applications") return applicationBadge;
+    return 0;
+  };
+
+  const toggleTheme = () => {
+    const next = isDark ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("theme", next);
+    setIsDark(!isDark);
+  };
 
   const markAllRead = async () => {
     try {
       await API.put("/users/notifications/read-all");
       setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
-      setUnreadCount(0);
-    } catch {}
+    } catch { }
   };
 
   const handleLogout = () => {
@@ -79,167 +120,146 @@ function JobsLayout({ children }) {
     window.location.href = "/";
   };
 
-  const isActive = (item) => {
-    if (item.exact) return location.pathname === item.to;
-    return location.pathname === item.to || location.pathname.startsWith(item.to + "/");
-  };
-
-  const getBadge = (to) => {
-    if (to === "/apply-jobs/assessments") return assessmentBadge;
-    if (to === "/apply-jobs/my-applications") return applicationBadge;
-    return 0;
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/apply-jobs/browse${searchQuery ? `?q=${encodeURIComponent(searchQuery)}` : ""}`);
   };
 
   return (
-    <div className="jl-page-wrapper">
-      <div className="jl-root">
-      {/* SIDEBAR */}
-      <aside className={`jl-sidebar ${mobileNavOpen ? "jl-sidebar--open" : ""}`}>
-        <div className="jl-sidebar-top">
-          <Link to="/apply-jobs" className="jl-brand">
-            <div className="jl-brand-icon">
-              <Briefcase size={20} />
-            </div>
-            <div>
-              <div className="jl-brand-name">JobsHub</div>
-              <div className="jl-brand-sub">by PreepX</div>
-            </div>
+    <div className={`rx-root ${collapsed ? "collapsed" : ""}`}>
+      <aside className={`rx-sidebar ${mobileOpen ? "open" : ""}`}>
+        <div className="rx-sidebar-top">
+          <Link to="/apply-jobs" className="rx-brand">
+            <span className="rx-brand-dot" />
+            {!collapsed && <span>Apply Jobs</span>}
           </Link>
-          <button className="jl-mobile-close" onClick={() => setMobileNavOpen(false)}>
-            <X size={20} />
-          </button>
+          {!collapsed && (
+            <button type="button" className="rx-icon-btn" onClick={() => setCollapsed(true)} aria-label="Collapse sidebar">
+              <PanelLeftClose size={18} />
+            </button>
+          )}
         </div>
 
-        {/* User Mini Card */}
-        <div className="jl-user-card">
-          <img src={avatar} alt="avatar" className="jl-user-avatar" />
-          <div className="jl-user-info">
-            <span className="jl-user-name">{user.fullName || "User"}</span>
-            <span className="jl-user-role">{user.email || ""}</span>
-          </div>
-        </div>
 
-        {/* Nav */}
-        <nav className="jl-nav">
-          {JOBS_NAV.map(({ to, icon: Icon, label }) => {
-            const badge = getBadge(to);
-            const active = isActive({ to, exact: to === "/apply-jobs" });
-            return (
-              <Link
-                key={to}
-                to={to}
-                className={`jl-nav-link ${active ? "jl-nav-link--active" : ""}`}
-                onClick={() => setMobileNavOpen(false)}
-              >
-                <Icon size={19} />
-                <span>{label}</span>
-                {badge > 0 && <span className="jl-nav-badge">{badge}</span>}
-              </Link>
-            );
-          })}
+
+        <nav className="rx-nav">
+          {NAV_SECTIONS.map(({ label, items }) => (
+            <div key={label} className="rx-nav-section">
+              {!collapsed && <span className="rx-nav-label">{label}</span>}
+              {items.map(({ to, icon: Icon, label: itemLabel, badgeKey }) => {
+                const badge = getBadge(badgeKey);
+                return (
+                  <Link
+                    key={to}
+                    to={to}
+                    title={collapsed ? itemLabel : undefined}
+                    className={`rx-nav-item ${isActive(to) ? "active" : ""}`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <Icon size={18} />
+                    {!collapsed && <span>{itemLabel}</span>}
+                    {!collapsed && badge > 0 && <span className="jl-nav-badge">{badge}</span>}
+                    {isActive(to) && <span className="rx-nav-indicator" />}
+                  </Link>
+                );
+              })}
+            </div>
+          ))}
         </nav>
 
-        {/* Sidebar Footer */}
-        <div className="jl-sidebar-footer">
-          <Link to="/user-dashboard" className="jl-back-btn">
-            <ChevronLeft size={16} />
-            Back to App
+        <div className="rx-nav-bottom">
+          <Link to="/user-dashboard" className="rx-nav-item" title="Back to App">
+            <ChevronLeft size={18} />
+            {!collapsed && <span>Back to App</span>}
           </Link>
-          <button className="jl-logout-btn" onClick={handleLogout}>
-            <LogOut size={16} />
-            Logout
+          <button type="button" className="rx-nav-item rx-logout" onClick={handleLogout} title="Logout">
+            <LogOut size={18} />
+            {!collapsed && <span>Logout</span>}
           </button>
         </div>
       </aside>
 
-      {/* OVERLAY for mobile */}
-      {mobileNavOpen && (
-        <div className="jl-overlay" onClick={() => setMobileNavOpen(false)} />
-      )}
+      {mobileOpen && <div className="rx-sidebar-overlay" onClick={() => setMobileOpen(false)} aria-hidden="true" />}
 
-      {/* MAIN CONTENT */}
-      <div className="jl-main">
-        {/* TOPBAR */}
-        <header className="jl-topbar">
-          <button className="jl-hamburger" onClick={() => setMobileNavOpen(true)}>
-            <span /><span /><span />
+      <div className="rx-main">
+        <header className="rx-header">
+          <button type="button" className="rx-menu-btn" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-
-          <div className="jl-topbar-title">
-            {JOBS_NAV.find((n) => isActive({ to: n.to, exact: n.to === "/apply-jobs" }))?.label || "Jobs"}
-          </div>
-
-          <div className="jl-topbar-right">
-            {/* Notification Bell */}
-            <div className="jl-notif-wrap">
-              <button
-                className="jl-notif-btn"
-                onClick={() => setShowNotifications(!showNotifications)}
-                aria-label="Notifications"
-              >
-                <Bell size={20} />
+          {collapsed && (
+            <button type="button" className="rx-icon-btn" onClick={() => setCollapsed(false)} aria-label="Expand sidebar">
+              <PanelLeft size={18} />
+            </button>
+          )}
+          <h1 className="rx-page-title">{pageTitle}</h1>
+          <form className="rx-search" onSubmit={handleSearch}>
+            <Search size={16} />
+            <input
+              placeholder="Search jobs, companies..."
+              aria-label="Search jobs"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </form>
+          <button type="button" className="rx-icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+          <button
+            type="button"
+            className="rx-icon-btn rx-notif-btn"
+            aria-label="Notifications"
+            onClick={() => setShowNotifications(!showNotifications)}
+          >
+            <Bell size={18} />
+            {unreadCount > 0 && <span className="rx-notif-badge">{unreadCount > 9 ? "9+" : unreadCount}</span>}
+          </button>
+          {showNotifications && (
+            <div className="rx-notif-panel">
+              <div className="rx-notif-head">
+                <strong>Notifications</strong>
                 {unreadCount > 0 && (
-                  <span className="jl-notif-count">{unreadCount > 9 ? "9+" : unreadCount}</span>
+                  <button type="button" className="rx-notif-mark" onClick={markAllRead}>
+                    Mark all read
+                  </button>
                 )}
-              </button>
-
-              {showNotifications && (
-                <div className="jl-notif-panel">
-                  <div className="jl-notif-header">
-                    <strong>Notifications</strong>
-                    {unreadCount > 0 && (
-                      <button onClick={markAllRead} className="jl-notif-read-all">
-                        Mark all read
-                      </button>
-                    )}
-                  </div>
-                  <div className="jl-notif-list">
-                    {notifications.length === 0 ? (
-                      <div className="jl-notif-empty">
-                        <Bell size={28} />
-                        <p>No notifications yet</p>
+              </div>
+              {notifications.length === 0 ? (
+                <p className="rx-muted" style={{ padding: 16, fontSize: 13 }}>No notifications yet</p>
+              ) : (
+                <ul className="rx-notif-list">
+                  {notifications.map((n, i) => (
+                    <li key={i} className={n.read ? "" : "unread"}>
+                      <span>
+                        {n.type === "shortlisted" ? <Star size={14} /> :
+                          n.type === "assessment" ? <ClipboardCheck size={14} /> :
+                            n.type === "rejected" ? <AlertCircle size={14} /> :
+                              <CheckCircle size={14} />}
+                      </span>
+                      <div>
+                        <strong>{n.title || "Update"}</strong>
+                        <p>{n.message}</p>
+                        <span className="rx-muted" style={{ fontSize: 11 }}>
+                          <Clock size={11} style={{ verticalAlign: -2, marginRight: 4 }} />
+                          {n.time || new Date(n.createdAt || Date.now()).toLocaleDateString()}
+                        </span>
                       </div>
-                    ) : (
-                      notifications.map((n, i) => (
-                        <div key={i} className={`jl-notif-item ${!n.read ? "jl-notif-item--unread" : ""}`}>
-                          <div className="jl-notif-icon">
-                            {n.type === "shortlisted" ? <Star size={16} /> :
-                              n.type === "assessment" ? <ClipboardCheck size={16} /> :
-                                n.type === "rejected" ? <AlertCircle size={16} /> :
-                                  <CheckCircle size={16} />}
-                          </div>
-                          <div className="jl-notif-body">
-                            <div className="jl-notif-title">{n.title || "Update"}</div>
-                            <div className="jl-notif-msg">{n.message}</div>
-                            <div className="jl-notif-time">
-                              <Clock size={11} />
-                              {n.time || new Date(n.createdAt || Date.now()).toLocaleDateString()}
-                            </div>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </div>
+                    </li>
+                  ))}
+                </ul>
               )}
             </div>
-
-            {/* Profile Avatar */}
-            <Link to="/apply-jobs/profile" className="jl-topbar-avatar">
-              <img src={avatar} alt="Profile" />
-            </Link>
-          </div>
+          )}
+          <Link to="/apply-jobs/profile" className="rx-profile">
+            <img src={avatar} alt="" className="rx-profile-avatar-img" />
+            <div className="rx-profile-text">
+              <strong>{user.fullName || "Candidate"}</strong>
+              <span>Job Profile</span>
+            </div>
+            <ChevronDown size={16} className="rx-profile-chevron" />
+          </Link>
         </header>
-
-        {/* PAGE CONTENT */}
-        <main className="jl-page-content">
-          <div className="jl-page-inner">
-            {children}
-          </div>
-        </main>
+        <main className="rx-content">{children}</main>
       </div>
-    </div>
-    <Footer />
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Briefcase, MapPin, DollarSign, BrainCircuit, ListChecks, Save, Send, Trash2, Plus } from "lucide-react";
 import RecruiterLayout from "../../layouts/RecruiterLayout";
 import { createJob } from "../../services/recruiterAPI";
 import notify from "../../utils/notify";
@@ -36,16 +37,18 @@ export default function CreateJob() {
   const [customMcq, setCustomMcq] = useState([{ question: "", options: ["", "", "", ""], correctAnswer: "" }]);
   const [customCoding, setCustomCoding] = useState([{ title: "", description: "", difficulty: "medium" }, { title: "", description: "", difficulty: "medium" }]);
   const [loading, setLoading] = useState(false);
+  const [submitType, setSubmitType] = useState("draft");
 
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e, type = "draft") => {
+    e?.preventDefault();
     if (!form.title || !form.role || !form.description) {
       notify.error("Title, role and description are required");
       return;
     }
     setLoading(true);
+    setSubmitType(type);
     try {
       const payload = {
         title: form.title,
@@ -68,7 +71,7 @@ export default function CreateJob() {
         aiInterviewRequired: !!form.aiInterviewRequired,
         experienceLevel: form.experienceLevel,
         location: form.location,
-        status: "draft",
+        status: type,
         assessmentConfig: {
           mcqCount: Number(form.mcqCount) || 20,
           codingCount: Number(form.codingCount) || 2,
@@ -78,7 +81,7 @@ export default function CreateJob() {
         },
       };
       const job = await createJob(payload);
-      notify.success("Job posted successfully!");
+      notify.success(type === "published" ? "Job published successfully!" : "Job draft saved successfully!");
       navigate(`/recruiter/jobs/${job._id}`);
     } catch (err) {
       notify.error(err.response?.data?.message || "Failed to create job");
@@ -88,130 +91,141 @@ export default function CreateJob() {
   };
 
   return (
-    <RecruiterLayout>
-      <div className="rx-page-header">
-        <h1>Post a Job</h1>
+    <RecruiterLayout title="Post a Job">
+      <div className="rx-premium-form">
+        
+        {/* Section 1: Basic Information */}
+        <div className="rx-form-section">
+          <div className="rx-form-section-head">
+            <div className="rx-form-section-icon"><Briefcase size={20} /></div>
+            <h2>Basic Information</h2>
+          </div>
+          <div className="rx-form-row">
+            <div className="rx-form-group">
+              <label>Job Title *</label>
+              <input className="rx-premium-input" value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="e.g. Senior Frontend Developer" />
+            </div>
+            <div className="rx-form-group">
+              <label>Role *</label>
+              <input className="rx-premium-input" value={form.role} onChange={(e) => set("role", e.target.value)} placeholder="e.g. React Developer" />
+            </div>
+          </div>
+          <div className="rx-form-row">
+            <div className="rx-form-group">
+              <label>Department</label>
+              <input className="rx-premium-input" value={form.department} onChange={(e) => set("department", e.target.value)} placeholder="e.g. Engineering" />
+            </div>
+            <div className="rx-form-group">
+              <label>Required Skills (comma separated)</label>
+              <input className="rx-premium-input" value={form.skills} onChange={(e) => set("skills", e.target.value)} placeholder="Node.js, PostgreSQL, Redis" />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 2: Details & Requirements */}
+        <div className="rx-form-section">
+          <div className="rx-form-section-head">
+            <div className="rx-form-section-icon"><ListChecks size={20} /></div>
+            <h2>Details & Requirements</h2>
+          </div>
+          <div className="rx-form-group">
+            <label>Job Description *</label>
+            <textarea className="rx-premium-input" rows={4} value={form.description} onChange={(e) => set("description", e.target.value)} placeholder="Comprehensive job description and company overview..." />
+          </div>
+          <div className="rx-form-row">
+            <div className="rx-form-group">
+              <label>Responsibilities</label>
+              <textarea className="rx-premium-input" rows={3} value={form.responsibilities} onChange={(e) => set("responsibilities", e.target.value)} placeholder="What will the candidate do on a daily basis?" />
+            </div>
+            <div className="rx-form-group">
+              <label>Requirements</label>
+              <textarea className="rx-premium-input" rows={3} value={form.requirements} onChange={(e) => set("requirements", e.target.value)} placeholder="Must-have criteria and qualifications..." />
+            </div>
+          </div>
+          <div className="rx-form-row">
+            <div className="rx-form-group">
+              <label>Education</label>
+              <input className="rx-premium-input" value={form.education} onChange={(e) => set("education", e.target.value)} placeholder="e.g. Bachelor's in Computer Science" />
+            </div>
+            <div className="rx-form-group">
+              <label>Preferred Skills (Bonus)</label>
+              <input className="rx-premium-input" value={form.preferredSkills} onChange={(e) => set("preferredSkills", e.target.value)} placeholder="Kafka, Docker, AWS" />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 3: Attributes & Location */}
+        <div className="rx-form-section">
+          <div className="rx-form-section-head">
+            <div className="rx-form-section-icon"><MapPin size={20} /></div>
+            <h2>Job Attributes</h2>
+          </div>
+          <div className="rx-form-row">
+            <div className="rx-form-group">
+              <label>Employment Type</label>
+              <select className="rx-premium-input" value={form.employmentType} onChange={(e) => set("employmentType", e.target.value)}>
+                <option value="full_time">Full Time</option><option value="part_time">Part Time</option>
+                <option value="contract">Contract</option><option value="internship">Internship</option>
+              </select>
+            </div>
+            <div className="rx-form-group">
+              <label>Work Mode</label>
+              <select className="rx-premium-input" value={form.workMode} onChange={(e) => set("workMode", e.target.value)}>
+                <option value="remote">Remote</option><option value="hybrid">Hybrid</option><option value="on_site">On-site</option>
+              </select>
+            </div>
+            <div className="rx-form-group">
+              <label>Location</label>
+              <input className="rx-premium-input" value={form.location} onChange={(e) => set("location", e.target.value)} placeholder="e.g. New York, NY" />
+            </div>
+          </div>
+          <div className="rx-form-row" style={{ gridTemplateColumns: "1fr 1fr 1fr" }}>
+            <div className="rx-form-group">
+              <label>Experience Level</label>
+              <select className="rx-premium-input" value={form.experienceLevel} onChange={(e) => set("experienceLevel", e.target.value)}>
+                <option value="fresher">Fresher</option><option value="junior">Junior</option>
+                <option value="mid">Mid</option><option value="senior">Senior</option>
+              </select>
+            </div>
+            <div className="rx-form-group">
+              <label>Min Experience (Years)</label>
+              <input className="rx-premium-input" type="number" min={0} value={form.experienceMin} onChange={(e) => set("experienceMin", e.target.value)} />
+            </div>
+            <div className="rx-form-group">
+              <label>Max Experience (Years)</label>
+              <input className="rx-premium-input" type="number" min={0} value={form.experienceMax} onChange={(e) => set("experienceMax", e.target.value)} />
+            </div>
+          </div>
+        </div>
+
+        {/* Section 4: Compensation */}
+        <div className="rx-form-section">
+          <div className="rx-form-section-head">
+            <div className="rx-form-section-icon"><DollarSign size={20} /></div>
+            <h2>Compensation (Optional)</h2>
+          </div>
+          <div className="rx-form-row">
+            <div className="rx-form-group">
+              <label>Minimum Salary (LPA / USD)</label>
+              <input className="rx-premium-input" type="number" placeholder="e.g. 100000" value={form.salaryMin} onChange={(e) => set("salaryMin", e.target.value)} />
+            </div>
+            <div className="rx-form-group">
+              <label>Maximum Salary (LPA / USD)</label>
+              <input className="rx-premium-input" type="number" placeholder="e.g. 150000" value={form.salaryMax} onChange={(e) => set("salaryMax", e.target.value)} />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <form className="rx-form rx-card" onSubmit={handleSubmit}>
-        <div>
-          <label>Job Title</label>
-          <input value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="e.g. Frontend Developer" />
-        </div>
-        <div>
-          <label>Role</label>
-          <input value={form.role} onChange={(e) => set("role", e.target.value)} placeholder="e.g. React Developer" />
-        </div>
-        <div>
-          <label>Description</label>
-          <textarea rows={4} value={form.description} onChange={(e) => set("description", e.target.value)} placeholder="Job description and requirements..." />
-        </div>
-        <div>
-          <label>Required Skills (comma separated)</label>
-          <input value={form.skills} onChange={(e) => set("skills", e.target.value)} placeholder="Node.js, PostgreSQL, Redis" />
-        </div>
-        <div>
-          <label>Preferred Skills</label>
-          <input value={form.preferredSkills} onChange={(e) => set("preferredSkills", e.target.value)} placeholder="Kafka, Docker" />
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
-          <div><label>Department</label><input value={form.department} onChange={(e) => set("department", e.target.value)} /></div>
-          <div><label>Employment</label>
-            <select value={form.employmentType} onChange={(e) => set("employmentType", e.target.value)}>
-              <option value="full_time">Full Time</option><option value="part_time">Part Time</option>
-              <option value="contract">Contract</option><option value="internship">Internship</option>
-            </select>
-          </div>
-          <div><label>Work Mode</label>
-            <select value={form.workMode} onChange={(e) => set("workMode", e.target.value)}>
-              <option value="remote">Remote</option><option value="hybrid">Hybrid</option><option value="on_site">On-site</option>
-            </select>
-          </div>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: 12 }}>
-          <div><label>Exp Min (yrs)</label><input type="number" value={form.experienceMin} onChange={(e) => set("experienceMin", e.target.value)} /></div>
-          <div><label>Exp Max (yrs)</label><input type="number" value={form.experienceMax} onChange={(e) => set("experienceMax", e.target.value)} /></div>
-          <div><label>Salary Min</label><input type="number" value={form.salaryMin} onChange={(e) => set("salaryMin", e.target.value)} /></div>
-          <div><label>Salary Max</label><input type="number" value={form.salaryMax} onChange={(e) => set("salaryMax", e.target.value)} /></div>
-        </div>
-        <div><label>Education</label><input value={form.education} onChange={(e) => set("education", e.target.value)} /></div>
-        <div><label>Responsibilities</label><textarea rows={3} value={form.responsibilities} onChange={(e) => set("responsibilities", e.target.value)} /></div>
-        <div><label>Requirements</label><textarea rows={3} value={form.requirements} onChange={(e) => set("requirements", e.target.value)} /></div>
-        <label style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <input type="checkbox" checked={form.aiInterviewRequired} onChange={(e) => set("aiInterviewRequired", e.target.checked)} /> AI Interview Required
-        </label>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-          <div>
-            <label>Experience Level</label>
-            <select value={form.experienceLevel} onChange={(e) => set("experienceLevel", e.target.value)}>
-              <option value="fresher">Fresher</option>
-              <option value="junior">Junior</option>
-              <option value="mid">Mid</option>
-              <option value="senior">Senior</option>
-            </select>
-          </div>
-          <div>
-            <label>Location</label>
-            <input value={form.location} onChange={(e) => set("location", e.target.value)} />
-          </div>
-        </div>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-          <div>
-            <label>MCQ Questions</label>
-            <input type="number" min={5} max={30} value={form.mcqCount} onChange={(e) => set("mcqCount", e.target.value)} />
-          </div>
-          <div>
-            <label>Coding Questions</label>
-            <input type="number" min={1} max={5} value={form.codingCount} onChange={(e) => set("codingCount", e.target.value)} />
-          </div>
-        </div>
-
-        <label style={{ display: "flex", alignItems: "center", gap: 8, cursor: "pointer" }}>
-          <input type="checkbox" checked={form.useCustomQuestions} onChange={(e) => set("useCustomQuestions", e.target.checked)} />
-          Use custom questions (otherwise AI auto-generates based on role)
-        </label>
-
-        {form.useCustomQuestions && (
-          <>
-            <h3 className="rx-section-head">Custom MCQ (optional)</h3>
-            {customMcq.map((q, i) => (
-              <div key={i} style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 12 }}>
-                <input placeholder="Question" value={q.question} onChange={(e) => {
-                  const copy = [...customMcq]; copy[i].question = e.target.value; setCustomMcq(copy);
-                }} style={{ marginBottom: 8 }} />
-                {q.options.map((opt, oi) => (
-                  <input key={oi} placeholder={`Option ${oi + 1}`} value={opt} onChange={(e) => {
-                    const copy = [...customMcq]; copy[i].options[oi] = e.target.value; setCustomMcq(copy);
-                  }} style={{ marginBottom: 4 }} />
-                ))}
-                <input placeholder="Correct answer (exact option text)" value={q.correctAnswer} onChange={(e) => {
-                  const copy = [...customMcq]; copy[i].correctAnswer = e.target.value; setCustomMcq(copy);
-                }} />
-              </div>
-            ))}
-            <button type="button" className="rx-btn rx-btn-secondary" onClick={() => setCustomMcq([...customMcq, { question: "", options: ["", "", "", ""], correctAnswer: "" }])}>
-              + Add MCQ
-            </button>
-
-            <h3 className="rx-section-head">Custom Coding Questions</h3>
-            {customCoding.map((q, i) => (
-              <div key={i} style={{ border: "1px solid var(--border)", borderRadius: 8, padding: 12 }}>
-                <input placeholder="Title" value={q.title} onChange={(e) => {
-                  const copy = [...customCoding]; copy[i].title = e.target.value; setCustomCoding(copy);
-                }} style={{ marginBottom: 8 }} />
-                <textarea placeholder="Problem description" rows={3} value={q.description} onChange={(e) => {
-                  const copy = [...customCoding]; copy[i].description = e.target.value; setCustomCoding(copy);
-                }} />
-              </div>
-            ))}
-          </>
-        )}
-
-        <button type="submit" className="rx-btn rx-btn-primary" disabled={loading}>
-          {loading ? "Saving..." : "Save as Draft"}
+      {/* Action Buttons */}
+      <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
+        <button type="button" className="rx-btn rx-btn-secondary" onClick={(e) => handleSubmit(e, "draft")} disabled={loading}>
+          <Save size={16} /> {loading && submitType === "draft" ? "Saving..." : "Save as Draft"}
         </button>
-      </form>
+        <button type="button" className="rx-btn rx-btn-primary" onClick={(e) => handleSubmit(e, "published")} disabled={loading}>
+          <Send size={16} /> {loading && submitType === "published" ? "Publishing..." : "Publish Job Live"}
+        </button>
+      </div>
     </RecruiterLayout>
   );
 }

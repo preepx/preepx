@@ -4,10 +4,12 @@ import { io } from "socket.io-client";
 import {
   LayoutDashboard, Briefcase, Users, ClipboardCheck, Star, Video,
   GitBranch, BarChart3, CreditCard, Building2, Settings, LogOut,
-  Menu, X, Search, Bell, ChevronDown, Moon, Sun, PanelLeftClose, PanelLeft,
+  Menu, X, Search, Bell, ChevronDown, Moon, Sun, PanelLeftClose, PanelLeft, BadgeCheck,
+  AlertTriangle, CheckCircle
 } from "lucide-react";
 import { getRecruiterNotifications, markRecruiterNotificationRead, markAllRecruiterNotificationsRead } from "../services/recruiterAPI";
 import notify from "../utils/notify";
+import { getOnboarding } from "../services/recruiterAPI";
 import "./RecruiterLayout.css";
 
 const SOCKET_URL = import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, "") || "http://localhost:4000";
@@ -48,12 +50,13 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
   const [notifications, setNotifications] = useState([]);
   const [showNotifs, setShowNotifs] = useState(false);
+  const [companyStatus, setCompanyStatus] = useState(null);
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
   const location = useLocation();
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   const loadNotifications = () => {
-    getRecruiterNotifications().then(setNotifications).catch(() => {});
+    getRecruiterNotifications().then(setNotifications).catch(() => { });
   };
 
   useEffect(() => {
@@ -61,6 +64,30 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
     document.documentElement.dataset.theme = theme;
     setIsDark(theme === "dark");
     loadNotifications();
+
+    const fetchStatus = () => {
+      getOnboarding().then((data) => {
+        const isVerified = data.recruiter?.isVerified ?? (data.company?.verificationStatus === "VERIFIED");
+        if (data.company) {
+          setCompanyStatus(data.company.verificationStatus);
+        }
+        setUser(prevUser => {
+          if (prevUser.isVerified !== isVerified) {
+            const updatedUser = { ...prevUser, isVerified };
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+            return updatedUser;
+          }
+          return prevUser;
+        });
+      }).catch(() => {});
+    };
+
+    fetchStatus();
+    window.addEventListener("company_profile_updated", fetchStatus);
+    
+    return () => {
+      window.removeEventListener("company_profile_updated", fetchStatus);
+    };
   }, []);
 
   useEffect(() => {
@@ -73,6 +100,8 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
     socket.on("recruiter_notification", (data) => {
       setNotifications((prev) => [data, ...prev].slice(0, 50));
       notify.info(data.message || data.title);
+      // Automatically refresh onboarding status to hide/show banner in real-time
+      window.dispatchEvent(new Event("company_profile_updated"));
     });
 
     return () => socket.disconnect();
@@ -111,15 +140,7 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
           )}
         </div>
 
-        {!collapsed && (
-          <div className="rx-company-card">
-            <div className="rx-company-avatar">{user.companyName?.[0] || "C"}</div>
-            <div className="rx-company-info">
-              <strong>{user.companyName || "Your Company"}</strong>
-              <span>{user.fullName || "Recruiter"}</span>
-            </div>
-          </div>
-        )}
+
 
         <nav className="rx-nav">
           {NAV_SECTIONS.map(({ label, items }) => (
@@ -153,7 +174,8 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
       {mobileOpen && <div className="rx-sidebar-overlay" onClick={() => setMobileOpen(false)} aria-hidden="true" />}
 
       <div className="rx-main">
-        <header className="rx-header">
+        <div style={{ position: 'sticky', top: 0, zIndex: 50, display: 'flex', flexDirection: 'column' }}>
+          <header className="rx-header" style={{ position: 'static', zIndex: 'auto' }}>
           <button type="button" className="rx-menu-btn" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -205,11 +227,44 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
             <div className="rx-profile-avatar">{user.fullName?.[0] || "R"}</div>
             <div className="rx-profile-text">
               <strong>{user.fullName || "Recruiter"}</strong>
-              <span>{user.designation || user.companyName || "Recruiter"}</span>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                {user.designation || user.companyName || "Recruiter"}
+                <BadgeCheck
+                  size={14}
+                  color={user.isVerified ? "#10b981" : "#6b7280"}
+                  title={user.isVerified ? "Verified Company" : "Unverified Company"}
+                />
+              </span>
             </div>
             <ChevronDown size={16} className="rx-profile-chevron" />
           </div>
-        </header>
+          </header>
+          {!user.isVerified && (
+            <div style={{
+              background: 'var(--bg)',
+              color: companyStatus === 'PENDING' ? '#22c55e' : '#f59e0b', display: 'flex', alignItems: 'center', gap: '8px',
+              padding: '12px 28px', marginBottom: '-16px'
+            }}>
+            {companyStatus === 'PENDING' ? <CheckCircle size={18} style={{ flexShrink: 0 }} /> : <AlertTriangle size={18} style={{ flexShrink: 0 }} />}
+            <div style={{ fontSize: '13px', display: 'flex', alignItems: 'center' }}>
+              <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {companyStatus === 'PENDING' ? (
+                  <><strong>Profile Submitted:</strong> Thanks for completing the profile, waiting for approval by admin.</>
+                ) : (
+                  <><strong>Verification Required:</strong> Complete your company profile to get verified. Once approved, you can post jobs and access all features.</>
+                )}
+              </span>
+              {companyStatus !== 'PENDING' && (
+                <Link to="/recruiter/company" style={{
+                  color: '#f59e0b', fontWeight: '600', textDecoration: 'underline', whiteSpace: 'nowrap', marginLeft: '8px'
+                }}>
+                  Complete Profile →
+                </Link>
+              )}
+            </div>
+          </div>
+          )}
+        </div>
         <main className="rx-content">{children}</main>
       </div>
     </div>

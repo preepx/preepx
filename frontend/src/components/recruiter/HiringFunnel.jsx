@@ -11,7 +11,11 @@ const STEPS = [
   { key: "hired", label: "Hired", color: "#22c55e" },
 ];
 
-export default function HiringFunnel({ funnel = {} }) {
+export default function HiringFunnel({
+  funnel = {},
+  title = "Hiring Pipeline",
+  subtitle = "Match → Assess → Shortlist → Interview → Offer → Hire",
+}) {
   const [hovered, setHovered] = useState(null);
   const values = STEPS.map((s) => funnel[s.key] ?? 0);
   const maxVal = Math.max(...values, 1);
@@ -20,8 +24,8 @@ export default function HiringFunnel({ funnel = {} }) {
     <section className="rx-card rx-funnel-card">
       <div className="rx-section-head">
         <div>
-          <h2>Hiring Pipeline</h2>
-          <p className="rx-muted rx-section-sub">Match → Assess → Shortlist → Interview → Offer → Hire</p>
+          <h2>{title}</h2>
+          <p className="rx-muted rx-section-sub">{subtitle}</p>
         </div>
       </div>
 

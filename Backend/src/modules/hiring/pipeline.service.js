@@ -28,3 +28,27 @@ const PIPELINE_STAGES = [
   "offered",
   "hired",
 ];
+
+const moveApplication = async (application, nextStatus, recruiterId, note = "") => {
+  if (!ALLOWED_TRANSITIONS[application.status]?.includes(nextStatus)) {
+    throw new BadRequestError(`Cannot move application from ${application.status} to ${nextStatus}`);
+  }
+  
+  application.statusHistory.push({
+    from: application.status,
+    to: nextStatus,
+    changedBy: recruiterId,
+    note,
+    at: new Date()
+  });
+  
+  application.status = nextStatus;
+  await application.save();
+  return application;
+};
+
+module.exports = {
+  ALLOWED_TRANSITIONS,
+  PIPELINE_STAGES,
+  moveApplication
+};
