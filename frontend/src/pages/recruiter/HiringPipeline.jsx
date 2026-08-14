@@ -13,14 +13,26 @@ export default function HiringPipeline() {
   const [jobs, setJobs] = useState([]);
   const [pipeline, setPipeline] = useState(null);
   const [loading, setLoading] = useState(true);
-  const jobId = searchParams.get("jobId") || "";
+  const [jobsFetched, setJobsFetched] = useState(false);
+  let jobId = searchParams.get("jobId") || "";
+  if (jobId === "undefined" || jobId === "null") jobId = "";
 
-  useEffect(() => { getJobs().then((j) => { setJobs(j); if (!jobId && j[0]) setSearchParams({ jobId: j[0]._id }); }); }, []);
   useEffect(() => {
-    if (!jobId) { setLoading(false); return; }
+    getJobs().then((j) => {
+      setJobs(j);
+      setJobsFetched(true);
+      if (!jobId && j[0]) setSearchParams({ jobId: j[0]._id });
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!jobId) {
+      if (jobsFetched && jobs.length === 0) setLoading(false);
+      return;
+    }
     setLoading(true);
     getPipeline(jobId).then(setPipeline).finally(() => setLoading(false));
-  }, [jobId]);
+  }, [jobId, jobsFetched, jobs.length]);
 
   const handleMove = async (appId, status) => {
     try {

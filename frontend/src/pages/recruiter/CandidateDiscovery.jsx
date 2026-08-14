@@ -11,23 +11,29 @@ export default function CandidateDiscovery() {
   const [jobs, setJobs] = useState([]);
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [jobsFetched, setJobsFetched] = useState(false);
   const [search, setSearch] = useState("");
-  const jobId = searchParams.get("jobId") || "";
+  let jobId = searchParams.get("jobId") || "";
+  if (jobId === "undefined" || jobId === "null") jobId = "";
 
   useEffect(() => {
     getJobs().then((j) => {
       setJobs(j);
+      setJobsFetched(true);
       if (!jobId && j[0]) setSearchParams({ jobId: j[0]._id });
     });
   }, []);
 
   useEffect(() => {
-    if (!jobId) { setLoading(false); return; }
+    if (!jobId) {
+      if (jobsFetched && jobs.length === 0) setLoading(false);
+      return;
+    }
     setLoading(true);
     discoverCandidates({ jobId, search, minScore: 0 })
       .then(setCandidates)
       .finally(() => setLoading(false));
-  }, [jobId, search]);
+  }, [jobId, search, jobsFetched, jobs.length]);
 
   return (
     <RecruiterLayout title="Candidates">

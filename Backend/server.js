@@ -85,7 +85,7 @@ app.set("trust proxy", 1);
 
 // Global Rate Limiter to prevent DDoS/Brute Force
 const { globalApiLimiter } = require("./src/common/middleware/rateLimiter");
-app.use("/api/", globalApiLimiter);
+// app.use("/api/", globalApiLimiter); // Disabled for local development
 
 // Secure session secret fallback
 const fallbackSecret = crypto.randomBytes(64).toString("hex");

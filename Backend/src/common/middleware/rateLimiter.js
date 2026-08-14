@@ -63,7 +63,7 @@ const uploadLimiter = createLimiter({
 // Global fallback for normal API routes
 const globalApiLimiter = createLimiter({
   windowMs: 15 * 60 * 1000,
-  max: 500,
+  max: 5000,
   message: "Too many requests from this IP, please try again after 15 minutes."
 });
 

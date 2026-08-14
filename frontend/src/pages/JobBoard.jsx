@@ -346,7 +346,7 @@ export default function JobBoard() {
                 
                 <div className="pjc-desc-row">
                   <FileText size={15} className="pjc-desc-icon" />
-                  <p>{(job.description || "No description provided.").slice(0, 110)}...</p>
+                  <p>{(job.description || "No description provided.").slice(0, 80)}...</p>
                 </div>
                 
                 <div className="pjc-skills-row">

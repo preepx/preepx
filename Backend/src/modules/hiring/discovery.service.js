@@ -6,13 +6,17 @@ const MCQResult = require("../../../models/MCQResult");
 const CodingResult = require("../../../models/CodingResult");
 const Assessment = require("../../../models/Assessment");
 const matchingService = require("./matching.service");
-const { NotFoundError, ForbiddenError } = require("../../common/exceptions/customErrors");
+const { NotFoundError, ForbiddenError, BadRequestError } = require("../../common/exceptions/customErrors");
 
 const discoverCandidates = async (recruiterId, { jobId, minScore = 0, search = "", limit = 50 }) => {
-  const job = await Job.findOne({ _id: jobId, recruiterId });
-  if (!job) throw new NotFoundError("Job not found");
+  let query = { recruiterId };
 
-  let query = { jobId, recruiterId };
+  if (jobId && jobId !== "undefined" && jobId !== "null") {
+    const job = await Job.findOne({ _id: jobId, recruiterId });
+    if (!job) throw new NotFoundError("Job not found");
+    query.jobId = jobId;
+  }
+
   if (minScore > 0) query.matchScore = { $gte: minScore };
 
   let apps = await JobApplication.find(query)
