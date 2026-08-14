@@ -20,6 +20,9 @@ app.use(cors({                      //http://localhost:5174 local
   credentials: true
 }));
 
+// Health check endpoint
+app.get("/api/health", (req, res) => res.json({ status: "ok", version: "1.0", service: "adminbackend" }));
+
 // Mount routes
 app.use("/api/admin", require("./routes/adminRoutes"));
 
