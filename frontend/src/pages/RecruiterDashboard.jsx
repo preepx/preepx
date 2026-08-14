@@ -78,7 +78,7 @@ export default function RecruiterDashboard() {
   return (
     <RecruiterLayout title="Dashboard">
       <div className="rx-dashboard">
-        <WelcomeBanner name={user.fullName || "Recruiter"} stats={stats} funnel={funnel} />
+        <WelcomeBanner user={user} stats={stats} funnel={funnel} />
 
         <section className="rx-stats-row">
           {kpis.map((kpi) => (
@@ -103,10 +103,6 @@ export default function RecruiterDashboard() {
           </div>
         </div>
 
-        <footer className="rx-dashboard-tagline">
-          <Sparkles size={14} />
-          Discover talent → Assess skills → Match intelligently → Hire better
-        </footer>
       </div>
     </RecruiterLayout>
   );

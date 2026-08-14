@@ -80,24 +80,26 @@ export default function CompanyProfile() {
                  Update your company's information to help candidates understand your business.
                </p>
              </div>
-             
-             {company.verificationStatus && (
-                <div style={{ 
-                  display: 'flex', alignItems: 'center', gap: '6px', 
-                  background: company.verificationStatus === 'VERIFIED' ? 'color-mix(in srgb, var(--success) 12%, transparent)' : 'color-mix(in srgb, var(--warning) 12%, transparent)', 
-                  padding: '8px 16px', borderRadius: '100px', fontSize: '13px', fontWeight: '700', 
-                  color: company.verificationStatus === 'VERIFIED' ? 'var(--success)' : 'var(--warning)',
-                  border: `1px solid color-mix(in srgb, ${company.verificationStatus === 'VERIFIED' ? 'var(--success)' : 'var(--warning)'} 30%, transparent)`
-                }}>
-                  {company.verificationStatus === 'VERIFIED' ? <CheckCircle size={16} /> : <ShieldAlert size={16} />}
-                  {company.verificationStatus === 'VERIFIED' ? 'Verified' : 'Pending Approval'}
-                </div>
-             )}
-             {!isEditing && (
-               <button type="button" className="rx-btn rx-btn-primary" onClick={() => setIsEditing(true)} style={{ padding: '10px 20px', fontSize: '14px', borderRadius: '12px' }}>
-                 Edit Profile
-               </button>
-             )}
+             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+               {company.verificationStatus && (
+                  <div style={{ 
+                    display: 'flex', alignItems: 'center', gap: '6px', 
+                    background: company.verificationStatus === 'VERIFIED' ? 'color-mix(in srgb, var(--success) 12%, transparent)' : 'color-mix(in srgb, var(--warning) 12%, transparent)', 
+                    padding: '8px 16px', borderRadius: '100px', fontSize: '13px', fontWeight: '700', 
+                    color: company.verificationStatus === 'VERIFIED' ? 'var(--success)' : 'var(--warning)',
+                    border: `1px solid color-mix(in srgb, ${company.verificationStatus === 'VERIFIED' ? 'var(--success)' : 'var(--warning)'} 30%, transparent)`,
+                    whiteSpace: 'nowrap'
+                  }}>
+                    {company.verificationStatus === 'VERIFIED' ? <CheckCircle size={16} /> : <ShieldAlert size={16} />}
+                    {company.verificationStatus === 'VERIFIED' ? 'Verified' : 'Pending Approval'}
+                  </div>
+               )}
+               {!isEditing && (
+                 <button type="button" className="rx-btn rx-btn-primary" onClick={() => setIsEditing(true)} style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '10px', whiteSpace: 'nowrap' }}>
+                   Edit Profile
+                 </button>
+               )}
+             </div>
           </div>
 
           {/* Form Section */}

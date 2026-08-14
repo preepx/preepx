@@ -60,8 +60,8 @@ export default function CandidateDiscovery() {
             .rx-table-compact th { padding: 8px 12px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
             .rx-table-compact td { padding: 8px 12px; font-size: 13px; }
             .rx-match-score-compact { font-size: 14px; font-weight: 700; color: var(--primary); display: inline-flex; align-items: center; gap: 4px; }
-            .rx-badge-compact { padding: 2px 6px; font-size: 11px; }
-            .rx-btn-compact { padding: 4px 10px; font-size: 12px; }
+            .rx-badge-compact { padding: 2px 6px; font-size: 10px; white-space: nowrap; }
+            .rx-btn-compact { padding: 4px 8px; font-size: 11px; white-space: nowrap; }
           `}</style>
           <table className="rx-table rx-table-compact">
             <thead>

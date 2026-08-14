@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Briefcase, MapPin, DollarSign, BrainCircuit, ListChecks, Save, Send, Trash2, Plus } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
-import { createJob } from "@/services/recruiterAPI";
+import { createJob, getJob, updateJob } from "@/services/recruiterAPI";
 import notify from "@/utils/notify";
 import '@/styles/RecruiterLayout.css';
 
@@ -33,11 +33,58 @@ const EMPTY = {
 
 export default function CreateJob() {
   const navigate = useNavigate();
+  const { jobId } = useParams();
+  const isEdit = !!jobId;
+
   const [form, setForm] = useState(EMPTY);
   const [customMcq, setCustomMcq] = useState([{ question: "", options: ["", "", "", ""], correctAnswer: "" }]);
   const [customCoding, setCustomCoding] = useState([{ title: "", description: "", difficulty: "medium" }, { title: "", description: "", difficulty: "medium" }]);
   const [loading, setLoading] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(isEdit);
   const [submitType, setSubmitType] = useState("draft");
+
+  useEffect(() => {
+    if (isEdit) {
+      getJob(jobId).then(job => {
+        setForm({
+          title: job.title || "",
+          role: job.role || "",
+          description: job.description || "",
+          skills: job.requiredSkills?.join(", ") || "",
+          preferredSkills: job.preferredSkills?.join(", ") || "",
+          department: job.department || "",
+          employmentType: job.employmentType || "full_time",
+          experienceMin: job.experienceMin || 0,
+          experienceMax: job.experienceMax || 3,
+          workMode: job.workMode || "remote",
+          salaryMin: job.salaryMin || "",
+          salaryMax: job.salaryMax || "",
+          education: job.education || "",
+          responsibilities: job.responsibilities || "",
+          requirements: job.requirements || "",
+          assessmentRequired: job.assessmentRequired !== false,
+          aiInterviewRequired: !!job.aiInterviewRequired,
+          experienceLevel: job.experienceLevel || "fresher",
+          location: job.location || "Remote",
+          mcqCount: job.assessmentConfig?.mcqCount || 20,
+          codingCount: job.assessmentConfig?.codingCount || 2,
+          useCustomQuestions: job.assessmentConfig?.useCustomQuestions || false,
+        });
+        if (job.assessmentConfig?.useCustomQuestions) {
+          if (job.assessmentConfig.customMcqQuestions?.length) {
+            setCustomMcq(job.assessmentConfig.customMcqQuestions);
+          }
+          if (job.assessmentConfig.customCodingQuestions?.length) {
+            setCustomCoding(job.assessmentConfig.customCodingQuestions);
+          }
+        }
+      }).catch(err => {
+        notify.error("Failed to load job details");
+      }).finally(() => {
+        setInitialLoading(false);
+      });
+    }
+  }, [jobId, isEdit]);
 
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
 
@@ -80,18 +127,18 @@ export default function CreateJob() {
           customCodingQuestions: form.useCustomQuestions ? customCoding.filter((q) => q.title) : [],
         },
       };
-      const job = await createJob(payload);
-      notify.success(type === "published" ? "Job published successfully!" : "Job draft saved successfully!");
-      navigate(`/recruiter/jobs/${job._id}`);
+      const job = isEdit ? await updateJob(jobId, payload) : await createJob(payload);
+      notify.success(isEdit ? "Job updated successfully!" : (type === "published" ? "Job published successfully!" : "Job draft saved successfully!"));
+      navigate(`/recruiter/jobs/${job._id || jobId}`);
     } catch (err) {
-      notify.error(err.response?.data?.message || "Failed to create job");
+      notify.error(err.response?.data?.message || `Failed to ${isEdit ? "update" : "create"} job`);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <RecruiterLayout title="Post a Job">
+    <RecruiterLayout title={isEdit ? "Edit Job" : "Post a Job"}>
       <div className="rx-premium-form">
         
         {/* Section 1: Basic Information */}
@@ -103,11 +150,11 @@ export default function CreateJob() {
           <div className="rx-form-row">
             <div className="rx-form-group">
               <label>Job Title *</label>
-              <input className="rx-premium-input" value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="e.g. Senior Frontend Developer" />
+              <input className="rx-premium-input" value={form.title} onChange={(e) => set("title", e.target.value)} placeholder="e.g. Senior Frontend Developer" disabled={isEdit} />
             </div>
             <div className="rx-form-group">
               <label>Role *</label>
-              <input className="rx-premium-input" value={form.role} onChange={(e) => set("role", e.target.value)} placeholder="e.g. React Developer" />
+              <input className="rx-premium-input" value={form.role} onChange={(e) => set("role", e.target.value)} placeholder="e.g. React Developer" disabled={isEdit} />
             </div>
           </div>
           <div className="rx-form-row">
@@ -130,7 +177,7 @@ export default function CreateJob() {
           </div>
           <div className="rx-form-group">
             <label>Job Description *</label>
-            <textarea className="rx-premium-input" rows={4} value={form.description} onChange={(e) => set("description", e.target.value)} placeholder="Comprehensive job description and company overview..." />
+            <textarea className="rx-premium-input" rows={4} value={form.description} onChange={(e) => set("description", e.target.value)} placeholder="Comprehensive job description and company overview..." disabled={isEdit} />
           </div>
           <div className="rx-form-row">
             <div className="rx-form-group">
@@ -219,11 +266,11 @@ export default function CreateJob() {
 
       {/* Action Buttons */}
       <div style={{ display: 'flex', gap: 12, marginTop: 24 }}>
-        <button type="button" className="rx-btn rx-btn-secondary" onClick={(e) => handleSubmit(e, "draft")} disabled={loading}>
-          <Save size={16} /> {loading && submitType === "draft" ? "Saving..." : "Save as Draft"}
+        <button type="button" className="rx-btn rx-btn-secondary" onClick={(e) => handleSubmit(e, "draft")} disabled={loading || initialLoading}>
+          <Save size={16} /> {loading && submitType === "draft" ? "Saving..." : (isEdit ? "Update Draft" : "Save as Draft")}
         </button>
-        <button type="button" className="rx-btn rx-btn-primary" onClick={(e) => handleSubmit(e, "published")} disabled={loading}>
-          <Send size={16} /> {loading && submitType === "published" ? "Publishing..." : "Publish Job Live"}
+        <button type="button" className="rx-btn rx-btn-primary" onClick={(e) => handleSubmit(e, "published")} disabled={loading || initialLoading}>
+          <Send size={16} /> {loading && submitType === "published" ? "Saving..." : (isEdit ? "Update & Publish" : "Publish Job Live")}
         </button>
       </div>
     </RecruiterLayout>

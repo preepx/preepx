@@ -5,11 +5,12 @@ import {
   LayoutDashboard, Briefcase, Users, ClipboardCheck, Star, Video,
   GitBranch, BarChart3, CreditCard, Building2, Settings, LogOut,
   Menu, X, Search, Bell, ChevronDown, Moon, Sun, PanelLeftClose, PanelLeft, BadgeCheck,
-  AlertTriangle, CheckCircle
+  AlertTriangle, CheckCircle, User
 } from "lucide-react";
-import { getRecruiterNotifications, markRecruiterNotificationRead, markAllRecruiterNotificationsRead } from "@/services/recruiterAPI";
+import { getRecruiterNotifications, markRecruiterNotificationRead, markAllRecruiterNotificationsRead, getJobs, discoverCandidates } from "@/services/recruiterAPI";
 import notify from "@/utils/notify";
 import { getOnboarding } from "@/services/recruiterAPI";
+import Footer from "@/components/Footer";
 import '@/styles/RecruiterLayout.css';
 
 const SOCKET_URL = import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, "") || "http://localhost:4000";
@@ -50,10 +51,29 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
   const [notifications, setNotifications] = useState([]);
   const [showNotifs, setShowNotifs] = useState(false);
-  const [companyStatus, setCompanyStatus] = useState(null);
+  const [companyStatus, setCompanyStatus] = useState("VERIFIED");
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
+  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [allJobs, setAllJobs] = useState([]);
+  const [allCandidates, setAllCandidates] = useState([]);
+  
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getJobs().then(setAllJobs).catch(() => {});
+    discoverCandidates({}).then(setAllCandidates).catch(() => {});
+  }, []);
+
+  const filteredJobs = allJobs.filter(j => j.title?.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredCandidates = allCandidates.filter(c => 
+    c.candidate?.fullName?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    c.candidate?.email?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    c.fullName?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    c.email?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const loadNotifications = () => {
     getRecruiterNotifications().then(setNotifications).catch(() => { });
@@ -126,18 +146,20 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
   };
 
   return (
+    <>
     <div className={`rx-root ${collapsed ? "collapsed" : ""}`}>
       <aside className={`rx-sidebar ${mobileOpen ? "open" : ""}`}>
-        <div className="rx-sidebar-top">
-          <Link to="/recruiter-dashboard" className="rx-brand">
-            <span className="rx-brand-dot" />
-            {!collapsed && <span>PreepX</span>}
+        <div className="rx-sidebar-top" style={{ padding: '8px 8px 16px', marginBottom: '12px' }}>
+          <Link to="/recruiter-dashboard" className="rx-brand" style={{ display: 'flex', alignItems: 'center' }}>
+            {collapsed ? (
+              <img src="/logo.png" alt="PreepX" style={{ height: '32px', objectFit: 'contain', marginLeft: '4px' }} />
+            ) : (
+              <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: '100px', objectFit: 'contain', margin: '-28px 0 -28px 10px' }} />
+            )}
           </Link>
-          {!collapsed && (
-            <button type="button" className="rx-icon-btn" onClick={() => setCollapsed(true)} aria-label="Collapse sidebar">
-              <PanelLeftClose size={18} />
-            </button>
-          )}
+          <button type="button" className="rx-icon-btn" onClick={() => setCollapsed(!collapsed)} aria-label="Toggle sidebar">
+            <Menu size={20} />
+          </button>
         </div>
 
 
@@ -185,9 +207,49 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
             </button>
           )}
           <h1 className="rx-page-title">{title}</h1>
-          <div className="rx-search">
+          <div className="rx-search" style={{ position: 'relative' }}>
             <Search size={16} />
-            <input placeholder="Search candidates, jobs..." aria-label="Search" />
+            <input 
+              placeholder="Search candidates, jobs..." 
+              aria-label="Search" 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setSearchFocused(true)}
+              onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
+            />
+            {searchFocused && searchQuery && (
+              <div className="rx-notif-panel" style={{ top: 'calc(100% + 8px)', left: 0, right: 'auto', width: '320px', paddingBottom: '8px' }}>
+                <ul className="rx-notif-list">
+                  <li style={{ padding: '8px 16px 4px', background: 'transparent', cursor: 'default' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Jobs</span>
+                  </li>
+                  {filteredJobs.slice(0, 3).map(j => (
+                    <li key={j._id} onClick={() => navigate(`/recruiter/jobs`)} style={{ cursor: 'pointer', alignItems: 'center' }}>
+                      <Briefcase size={14} style={{ color: 'var(--primary)' }} />
+                      <div>
+                        <strong>{j.title}</strong>
+                        <p>{j.location || j.type || "Job"}</p>
+                      </div>
+                    </li>
+                  ))}
+                  {filteredJobs.length === 0 && <li style={{ padding: '4px 16px', fontSize: '13px', background: 'transparent' }} className="rx-muted">No jobs found</li>}
+                  
+                  <li style={{ padding: '12px 16px 4px', background: 'transparent', cursor: 'default' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase' }}>Candidates</span>
+                  </li>
+                  {filteredCandidates.slice(0, 4).map(c => (
+                    <li key={c._id} onClick={() => navigate(`/recruiter/candidates`)} style={{ cursor: 'pointer', alignItems: 'center' }}>
+                      <User size={14} style={{ color: 'var(--primary)' }} />
+                      <div>
+                        <strong>{c.candidate?.fullName || c.fullName || "Candidate"}</strong>
+                        <p>{c.candidate?.email || c.email || "No email"}</p>
+                      </div>
+                    </li>
+                  ))}
+                  {filteredCandidates.length === 0 && <li style={{ padding: '4px 16px', fontSize: '13px', background: 'transparent' }} className="rx-muted">No candidates found</li>}
+                </ul>
+              </div>
+            )}
           </div>
           <button type="button" className="rx-icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -197,20 +259,24 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
             {unreadCount > 0 && <span className="rx-notif-badge">{unreadCount > 9 ? "9+" : unreadCount}</span>}
           </button>
           {showNotifs && (
-            <div className="rx-notif-panel">
-              <div className="rx-notif-head">
-                <strong>Notifications</strong>
-                {unreadCount > 0 && (
-                  <button type="button" className="rx-notif-mark" onClick={() => markAllRecruiterNotificationsRead().then(loadNotifications)}>
-                    Mark all read
-                  </button>
-                )}
-              </div>
-              {notifications.length === 0 ? (
-                <p className="rx-muted" style={{ padding: 16, fontSize: 13 }}>No notifications yet</p>
-              ) : (
+            <>
+              <div style={{ position: 'fixed', inset: 0, zIndex: 199 }} onClick={() => setShowNotifs(false)} />
+              <div className="rx-notif-panel" style={{ zIndex: 200 }}>
+                <div className="rx-notif-head">
+                  <strong>Notifications</strong>
+                  {unreadCount > 0 && (
+                    <button type="button" className="rx-notif-mark" onClick={() => markAllRecruiterNotificationsRead().then(loadNotifications)}>
+                      Mark all read
+                    </button>
+                  )}
+                </div>
+                {notifications.length === 0 ? (
+                  <div className="rx-muted" style={{ padding: 16, fontSize: 13, minHeight: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    No notifications yet
+                  </div>
+                ) : (
                 <ul className="rx-notif-list">
-                  {notifications.slice(0, 8).map((n) => (
+                  {notifications.map((n) => (
                     <li key={n.id} className={n.read ? "" : "unread"} onClick={() => markRecruiterNotificationRead(n.id).then(loadNotifications)}>
                       <span>{n.icon || "🔔"}</span>
                       <div>
@@ -222,8 +288,9 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
                 </ul>
               )}
             </div>
+            </>
           )}
-          <div className="rx-profile" role="button" tabIndex={0}>
+          <div className="rx-profile" role="button" tabIndex={0} onClick={() => navigate('/recruiter/company')} style={{ cursor: 'pointer' }}>
             <div className="rx-profile-avatar">{user.fullName?.[0] || "R"}</div>
             <div className="rx-profile-text">
               <strong>{user.fullName || "Recruiter"}</strong>
@@ -268,5 +335,7 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
         <main className="rx-content">{children}</main>
       </div>
     </div>
+    <Footer landingRole="recruiter" />
+    </>
   );
 }

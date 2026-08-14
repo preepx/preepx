@@ -34,33 +34,78 @@ export default function HiringPipeline() {
 
   return (
     <RecruiterLayout title="Hiring Pipeline">
-      <select value={jobId} onChange={(e) => setSearchParams({ jobId: e.target.value })} style={{ padding: "8px 12px", borderRadius: 10, border: "1px solid #e8ecf4", marginBottom: 20 }}>
-        <option value="">Select job</option>
-        {jobs.map((j) => <option key={j._id} value={j._id}>{j.title}</option>)}
-      </select>
+      <div className="rx-section-head">
+        <select 
+          value={jobId} 
+          onChange={(e) => setSearchParams({ jobId: e.target.value })} 
+          className="rx-premium-input" 
+          style={{ width: "auto", minWidth: 250, marginBottom: 20 }}
+        >
+          <option value="">Select job</option>
+          {jobs.map((j) => <option key={j._id} value={j._id}>{j.title}</option>)}
+        </select>
+      </div>
 
       {loading ? <Loader /> : !pipeline ? (
         <div className="rx-empty">Select a job to view pipeline</div>
       ) : (
-        <div style={{ display: "flex", gap: 12, overflowX: "auto", paddingBottom: 16 }}>
+        <>
+        <style>{`
+          .rx-pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding-bottom: 16px;
+            min-height: 60vh;
+          }
+          @media (max-width: 900px) {
+            .rx-pipeline-grid {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+          @media (max-width: 600px) {
+            .rx-pipeline-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        `}</style>
+        <div className="rx-pipeline-grid">
           {STAGES.map((stage) => (
-            <div key={stage} style={{ minWidth: 220, background: "#fff", border: "1px solid #e8ecf4", borderRadius: 14, padding: 12 }}>
-              <h4 style={{ margin: "0 0 12px", textTransform: "capitalize", fontSize: 13, color: "#64748b" }}>{stage.replace(/_/g, " ")}</h4>
-              {(pipeline.stages[stage] || []).map((app) => (
-                <div key={app._id} style={{ background: "#f8fafc", borderRadius: 10, padding: 10, marginBottom: 8, fontSize: 13 }}>
-                  <strong>{app.userId?.fullName}</strong>
-                  <p style={{ margin: "4px 0", color: "#64748b" }}>{app.matchScore}% match</p>
-                  {STAGES.indexOf(stage) < STAGES.length - 1 && (
-                    <button type="button" className="rx-btn rx-btn-ghost" style={{ fontSize: 11, padding: "4px 8px" }}
-                      onClick={() => handleMove(app._id, STAGES[STAGES.indexOf(stage) + 1])}>
-                      Move →
-                    </button>
-                  )}
-                </div>
-              ))}
+            <div key={stage} style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h4 style={{ margin: 0, textTransform: "capitalize", fontSize: 14, fontWeight: 600, color: "var(--text-muted)" }}>{stage.replace(/_/g, " ")}</h4>
+                <span style={{ fontSize: 12, background: "var(--background)", color: "var(--text-muted)", padding: '2px 8px', borderRadius: 10, fontWeight: 600 }}>
+                  {(pipeline.stages[stage] || []).length}
+                </span>
+              </div>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10, flex: 1 }}>
+                {(pipeline.stages[stage] || []).map((app) => (
+                  <div key={app._id} style={{ background: "var(--background)", border: "1px solid var(--border)", borderRadius: 10, padding: 12, display: 'flex', flexDirection: 'column', gap: 8, transition: 'transform 0.2s, box-shadow 0.2s', cursor: 'grab' }}>
+                    <strong style={{ fontSize: 14, color: "var(--text)" }}>{app.userId?.fullName || "Unknown Candidate"}</strong>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <span style={{ fontSize: 12, color: "var(--text-muted)", background: "var(--surface)", padding: '2px 8px', borderRadius: 4 }}>
+                        {app.matchScore}% Match
+                      </span>
+                      {STAGES.indexOf(stage) < STAGES.length - 1 && (
+                        <button type="button" className="rx-btn rx-btn-secondary" style={{ fontSize: 11, padding: "4px 10px", height: 'auto', minHeight: 'unset' }}
+                          onClick={() => handleMove(app._id, STAGES[STAGES.indexOf(stage) + 1])}>
+                          Move &rarr;
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                {(pipeline.stages[stage] || []).length === 0 && (
+                  <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px dashed var(--border)', borderRadius: 10, color: 'var(--text-muted)', fontSize: 13, padding: '20px 0' }}>
+                    Empty
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
+        </>
       )}
     </RecruiterLayout>
   );

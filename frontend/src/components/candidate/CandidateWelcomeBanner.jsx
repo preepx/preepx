@@ -68,7 +68,7 @@ export default function CandidateWelcomeBanner({ user, stats = {}, matchedCount 
             </svg>
             <div className="rx-ring-center">
               <span className="rx-ring-num">{successPct}%</span>
-              <span className="rx-ring-lbl">Progress</span>
+              <span className="rx-ring-lbl" style={{ fontSize: '7px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>Progress</span>
             </div>
           </div>
           <div className="rx-hiring-info">

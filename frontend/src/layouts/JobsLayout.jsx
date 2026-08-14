@@ -9,6 +9,7 @@ import API from "@/utils/api";
 import { getMyApplications } from "@/services/candidateJobsAPI";
 import { getMyAssessments } from "@/services/assessmentAPI";
 import { io } from "socket.io-client";
+import Footer from "@/components/Footer";
 import '@/styles/RecruiterLayout.css';
 import '@/styles/JobsLayout.css';
 
@@ -120,6 +121,8 @@ function JobsLayout({ children }) {
   const [assessmentBadge, setAssessmentBadge] = useState(0);
   const [applicationBadge, setApplicationBadge] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const searchRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -241,22 +244,48 @@ function JobsLayout({ children }) {
 
   const handleSearch = (e) => {
     e.preventDefault();
+    if (!searchQuery) return;
     navigate(`/apply-jobs/browse${searchQuery ? `?q=${encodeURIComponent(searchQuery)}` : ""}`);
+    setShowSearchDropdown(false);
   };
 
+  const SEARCH_LINKS = [
+    { label: "Browse Jobs", path: "/apply-jobs/browse", keywords: ["browse", "jobs", "application", "browse application"] },
+    { label: "My Applications", path: "/apply-jobs/my-applications", keywords: ["my", "application", "applications", "my application"] },
+    { label: "Assessments", path: "/apply-jobs/assessments", keywords: ["assessment", "test", "exam", "assessments"] },
+    { label: "Job Profile", path: "/apply-jobs/profile", keywords: ["profile", "resume", "cv"] },
+  ];
+
+  const filteredLinks = SEARCH_LINKS.filter(l => 
+    l.keywords.some(k => k.includes(searchQuery.toLowerCase())) || 
+    l.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setShowSearchDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
+    <>
     <div className={`rx-root ${collapsed ? "collapsed" : ""}`}>
       <aside className={`rx-sidebar ${mobileOpen ? "open" : ""}`}>
-        <div className="rx-sidebar-top">
-          <Link to="/apply-jobs" className="rx-brand">
-            <span className="rx-brand-dot" />
-            {!collapsed && <span>Apply Jobs</span>}
+        <div className="rx-sidebar-top" style={{ padding: '8px 8px 16px', marginBottom: '12px' }}>
+          <Link to="/apply-jobs" className="rx-brand" style={{ display: 'flex', alignItems: 'center' }}>
+            {collapsed ? (
+              <img src="/logo.png" alt="PreepX" style={{ height: '32px', objectFit: 'contain', marginLeft: '4px' }} />
+            ) : (
+              <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: '100px', objectFit: 'contain', margin: '-28px 0 -28px 10px' }} />
+            )}
           </Link>
-          {!collapsed && (
-            <button type="button" className="rx-icon-btn" onClick={() => setCollapsed(true)} aria-label="Collapse sidebar">
-              <PanelLeftClose size={18} />
-            </button>
-          )}
+          <button type="button" className="rx-icon-btn" onClick={() => setCollapsed(!collapsed)} aria-label="Toggle sidebar">
+            <Menu size={20} />
+          </button>
         </div>
 
 
@@ -311,14 +340,38 @@ function JobsLayout({ children }) {
             </button>
           )}
           <h1 className="rx-page-title">{pageTitle}</h1>
-          <form className="rx-search" onSubmit={handleSearch}>
+          <form className="rx-search" onSubmit={handleSearch} style={{ position: 'relative' }} ref={searchRef}>
             <Search size={16} />
             <input
-              placeholder="Search jobs, companies..."
-              aria-label="Search jobs"
+              placeholder="Search jobs, pages, applications..."
+              aria-label="Search"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setShowSearchDropdown(true)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value);
+                setShowSearchDropdown(true);
+              }}
             />
+            {showSearchDropdown && searchQuery && (
+              <div className="rx-search-dropdown" style={{
+                position: 'absolute', top: '100%', left: 0, right: 0, 
+                background: 'var(--surface)', border: '1px solid var(--border)', 
+                borderRadius: 8, marginTop: 4, zIndex: 100, boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                padding: '8px 0', display: 'flex', flexDirection: 'column'
+              }}>
+                {filteredLinks.length > 0 ? filteredLinks.map((link, idx) => (
+                   <button type="button" key={idx} onClick={() => { navigate(link.path); setShowSearchDropdown(false); setSearchQuery(""); }}
+                     style={{ padding: '8px 16px', textAlign: 'left', background: 'transparent', border: 'none', color: 'var(--text)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
+                     <Search size={14} style={{ color: 'var(--text-muted)' }}/> Go to {link.label}
+                   </button>
+                )) : (
+                   <button type="submit"
+                     style={{ padding: '8px 16px', textAlign: 'left', background: 'transparent', border: 'none', color: 'var(--text)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, width: '100%' }}>
+                     <Search size={14} style={{ color: 'var(--text-muted)' }}/> Search jobs for "{searchQuery}"
+                   </button>
+                )}
+              </div>
+            )}
           </form>
           <button type="button" className="rx-icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
             {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -333,30 +386,35 @@ function JobsLayout({ children }) {
             {unreadCount > 0 && <span className="rx-notif-badge">{unreadCount > 9 ? "9+" : unreadCount}</span>}
           </button>
           {showNotifications && (
-            <div className="rx-notif-panel">
-              <div className="rx-notif-head">
-                <strong>Notifications</strong>
-                {unreadCount > 0 && (
-                  <button type="button" className="rx-notif-mark" onClick={markAllRead}>
-                    Mark all read
-                  </button>
+            <>
+              <div style={{ position: 'fixed', inset: 0, zIndex: 199 }} onClick={() => setShowNotifications(false)} />
+              <div className="rx-notif-panel" style={{ zIndex: 200 }}>
+                <div className="rx-notif-head">
+                  <strong>Notifications</strong>
+                  {unreadCount > 0 && (
+                    <button type="button" className="rx-notif-mark" onClick={markAllRead}>
+                      Mark all read
+                    </button>
+                  )}
+                </div>
+                {notifications.length === 0 ? (
+                  <div className="rx-muted" style={{ padding: 16, fontSize: 13, minHeight: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    No notifications yet
+                  </div>
+                ) : (
+                  <ul className="rx-notif-list">
+                    {notifications.map((n, i) => (
+                      <JobNotificationItem
+                        key={n.id || n._id || i}
+                        n={n}
+                        onRead={handleRead}
+                        onDelete={handleDelete}
+                      />
+                    ))}
+                  </ul>
                 )}
               </div>
-              {notifications.length === 0 ? (
-                <p className="rx-muted" style={{ padding: 16, fontSize: 13 }}>No notifications yet</p>
-              ) : (
-                <ul className="rx-notif-list">
-                  {notifications.slice(0, 5).map((n, i) => (
-                    <JobNotificationItem
-                      key={n.id || n._id || i}
-                      n={n}
-                      onRead={handleRead}
-                      onDelete={handleDelete}
-                    />
-                  ))}
-                </ul>
-              )}
-            </div>
+            </>
           )}
           <Link to="/apply-jobs/profile" className="rx-profile">
             <img src={avatar} alt="" className="rx-profile-avatar-img" />
@@ -370,6 +428,8 @@ function JobsLayout({ children }) {
         <main className="rx-content">{children}</main>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
 

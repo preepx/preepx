@@ -54,7 +54,7 @@ export default function RecruiterSettings() {
           <div><label>Full Name</label><input value={profile.fullName || ""} onChange={(e) => setProfile({ ...profile, fullName: e.target.value })} /></div>
           <div><label>Designation</label><input value={profile.designation || ""} onChange={(e) => setProfile({ ...profile, designation: e.target.value })} /></div>
           <div><label>Phone</label><input value={profile.phone || ""} onChange={(e) => setProfile({ ...profile, phone: e.target.value })} /></div>
-          <button type="button" className="rx-btn rx-btn-primary" onClick={save}>Save Changes</button>
+          <button type="button" className="rx-btn rx-btn-primary" onClick={save} style={{ width: "fit-content", padding: "10px 24px" }}>Save Changes</button>
         </div>
       </div>
     </RecruiterLayout>

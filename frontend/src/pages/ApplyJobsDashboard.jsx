@@ -309,11 +309,6 @@ export default function ApplyJobsDashboard() {
           )}
         </section>
       )}
-
-      <footer className="rx-dashboard-tagline">
-        <Sparkles size={14} />
-        Discover roles → Apply smart → Ace assessments → Land your dream job
-      </footer>
     </div>
   );
 }

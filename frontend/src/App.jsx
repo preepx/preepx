@@ -164,6 +164,7 @@ function AppContent() {
           <Route path="/recruiter/complete-profile" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterCompleteProfile /></ProtectedRoute>} />
           <Route path="/recruiter/jobs" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterJobs /></ProtectedRoute>} />
           <Route path="/recruiter/jobs/new" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterJobProfileGuard><CreateJob /></RecruiterJobProfileGuard></ProtectedRoute>} />
+          <Route path="/recruiter/jobs/:jobId/edit" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterJobProfileGuard><CreateJob /></RecruiterJobProfileGuard></ProtectedRoute>} />
           <Route path="/recruiter/jobs/:jobId" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterJobDetail /></ProtectedRoute>} />
           <Route path="/recruiter/candidates" element={<ProtectedRoute allowedRoles={["recruiter"]}><CandidateDiscovery /></ProtectedRoute>} />
           <Route path="/recruiter/candidates/:applicationId" element={<ProtectedRoute allowedRoles={["recruiter"]}><CandidateProfile /></ProtectedRoute>} />

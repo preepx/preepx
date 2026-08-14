@@ -147,7 +147,7 @@ function AppLayout({ children }) {
         syncUserToStorage(u);
         window.dispatchEvent(new Event("user-updated"));
         window.dispatchEvent(new Event("walletUpdated"));
-        
+
         if (dash) {
           checkAndClaimRewards(u, dash);
         }
@@ -167,7 +167,7 @@ function AppLayout({ children }) {
     if (!user?._id) return;
     const SOCKET_URL = API.defaults?.baseURL ? API.defaults.baseURL.replace('/api', '') : 'http://localhost:4000';
     const socket = io(SOCKET_URL);
-    
+
     const handleConnect = () => {
       console.log("Global Socket Connected! Emitting join_room for", user._id);
       socket.emit('join_room', user._id);
@@ -230,23 +230,27 @@ function AppLayout({ children }) {
                 <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
               )}
             </Link>
-            <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={18} /></button>
-            <button className="sidebar-toggle mobile-only" onClick={() => setMobileOpen(false)}><X size={18} /></button>
+            <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={20} /></button>
+            <button className="sidebar-toggle mobile-only" onClick={() => setMobileOpen(false)}><X size={20} /></button>
           </div>
 
           <nav className="sidebar-nav">
-            {NAV_ITEMS.map(({ to, icon: Icon, label, isFree, isNew }) => (
-              <Link key={to} to={to} className={`sidebar-link ${location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to)) ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
-                <Icon size={20} style={{ flexShrink: 0 }} />
-                {!collapsed && (
-                  <>
-                    <span className="sidebar-link-label">{label}</span>
-                    {isFree && <span className="nav-free-badge">Free</span>}
-                    {isNew && <span className="nav-new-badge">New</span>}
-                  </>
-                )}
-              </Link>
-            ))}
+            {NAV_ITEMS.map(({ to, icon: Icon, label, isFree, isNew }) => {
+              const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
+              return (
+                <Link key={to} to={to} className={`sidebar-link ${isActive ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
+                  <Icon size={20} style={{ flexShrink: 0 }} />
+                  {!collapsed && (
+                    <>
+                      <span className="sidebar-link-label">{label}</span>
+                      {isFree && <span className="nav-free-badge">Free</span>}
+                      {isNew && <span className="nav-new-badge">New</span>}
+                    </>
+                  )}
+                  {isActive && <span className="nav-indicator" />}
+                </Link>
+              )
+            })}
           </nav>
 
           <div className="sidebar-bottom" style={{ padding: collapsed ? "12px 8px" : "12px 16px" }}>

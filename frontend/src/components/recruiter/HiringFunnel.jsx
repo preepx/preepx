@@ -7,14 +7,13 @@ const STEPS = [
   { key: "shortlisted", label: "Shortlisted", color: "#8b5cf6" },
   { key: "assessment", label: "Assessment", color: "#06b6d4" },
   { key: "interview", label: "Interview", color: "#f59e0b" },
-  { key: "selected", label: "Offer", color: "#10b981" },
   { key: "hired", label: "Hired", color: "#22c55e" },
 ];
 
 export default function HiringFunnel({
   funnel = {},
   title = "Hiring Pipeline",
-  subtitle = "Match → Assess → Shortlist → Interview → Offer → Hire",
+  subtitle = "Match → Assess → Shortlist → Interview → Hire",
 }) {
   const [hovered, setHovered] = useState(null);
   const values = STEPS.map((s) => funnel[s.key] ?? 0);
