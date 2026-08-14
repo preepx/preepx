@@ -5,11 +5,11 @@ import {
   Wallet, BookOpen, Target, TrendingUp, ChevronRight, Sparkles,
   ClipboardCheck, Zap, Code, Briefcase
 } from "lucide-react";
-import { getProfile, getAnalytics } from "../services/userAPI";
-import notify from '../utils/notify';
+import { getProfile, getAnalytics } from "@/services/userAPI";
+import notify from "@/utils/notify";
 import { useWallet } from "../features/wallet/hooks/useWallet";
-import Loader from "../components/Loader";
-import "./UserDashboard.css";
+import Loader from "@/components/Loader";
+import '@/styles/UserDashboard.css';
 
 const EXPLORE_LINKS = [
   { icon: Code, label: "Code Practice", desc: "Interactive coding challenges", path: "/coding-practice", color: "#ec4899", isNew: true },

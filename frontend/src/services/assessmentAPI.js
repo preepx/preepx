@@ -1,4 +1,4 @@
-import API from "../utils/api";
+import API from "@/utils/api";
 
 export const getMyAssessments = () => API.get("/assessments").then((r) => r.data.data);
 

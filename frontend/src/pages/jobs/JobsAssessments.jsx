@@ -4,11 +4,11 @@ import {
   ClipboardCheck, PlayCircle, CheckCircle2, Clock, Building2,
   AlertCircle, Sparkles, Trophy, Timer, Star
 } from "lucide-react";
-import { getMyAssessments } from "../../services/assessmentAPI";
-import DashboardSkeleton from "../../components/recruiter/DashboardSkeleton";
-import EmptyState from "../../components/recruiter/EmptyState";
-import "../ApplyJobsDashboard.css"; // Reuse premium styles
-import "./JobsAssessments.css"; // Keep for custom overrides if any
+import { getMyAssessments } from "@/services/assessmentAPI";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
+import EmptyState from "@/components/recruiter/EmptyState";
+import '@/styles/ApplyJobsDashboard.css'; // Reuse premium styles
+import '@/styles/JobsAssessments.css'; // Keep for custom overrides if any
 
 const STATUS_CONFIG = {
   pending:     { label: "Pending",      color: "#f59e0b", bg: "rgba(245,158,11,0.1)",  icon: Clock, class: "" },

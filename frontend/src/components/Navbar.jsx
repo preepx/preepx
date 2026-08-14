@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import notify from '../utils/notify';
+import notify from "@/utils/notify";
 import { Moon, Sun } from "lucide-react";
-import "./Navbar.css";
+import '@/styles/Navbar.css';
 
 function Navbar({ landingRole, setLandingRole }) {
   const [showMenu, setShowMenu] = useState(false);

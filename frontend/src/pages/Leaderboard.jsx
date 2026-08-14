@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Crown, Medal, Trophy, Users, Zap } from "lucide-react";
-import { getLeaderboard } from "../services/userAPI";
-import EmptyState from "../components/EmptyState";
-import Loader from "../components/Loader";
-import "./Leaderboard.css";
+import { getLeaderboard } from "@/services/userAPI";
+import EmptyState from "@/components/EmptyState";
+import Loader from "@/components/Loader";
+import '@/styles/Leaderboard.css';
 
 const RANK_STYLES = [
   { icon: Crown, cls: "gold" },

@@ -3,24 +3,24 @@ import { Link } from "react-router-dom";
 import {
   Briefcase, Send, CheckCircle, Video, UserCheck, Sparkles, AlertTriangle
 } from "lucide-react";
-import RecruiterLayout from "../layouts/RecruiterLayout";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
   getRecruiterDashboard, getJobs, getInterviews, getOnboarding
-} from "../services/recruiterAPI";
-import WelcomeBanner from "../components/recruiter/WelcomeBanner";
-import KpiCard from "../components/recruiter/KpiCard";
-import QuickActions from "../components/recruiter/QuickActions";
-import HiringFunnel from "../components/recruiter/HiringFunnel";
-import HiringAnalytics from "../components/recruiter/HiringAnalytics";
-import AiMatchingCard from "../components/recruiter/AiMatchingCard";
-import JobOverview from "../components/recruiter/JobOverview";
-import CandidateRanking from "../components/recruiter/CandidateRanking";
-import ActivityTimeline, { buildActivityItems } from "../components/recruiter/ActivityTimeline";
-import UpcomingInterviews from "../components/recruiter/UpcomingInterviews";
-import DashboardSkeleton from "../components/recruiter/DashboardSkeleton";
-import EmptyState from "../components/recruiter/EmptyState";
-import "../layouts/RecruiterLayout.css";
-import "./RecruiterDashboard.css";
+} from "@/services/recruiterAPI";
+import WelcomeBanner from "@/components/recruiter/WelcomeBanner";
+import KpiCard from "@/components/recruiter/KpiCard";
+import QuickActions from "@/components/recruiter/QuickActions";
+import HiringFunnel from "@/components/recruiter/HiringFunnel";
+import HiringAnalytics from "@/components/recruiter/HiringAnalytics";
+import AiMatchingCard from "@/components/recruiter/AiMatchingCard";
+import JobOverview from "@/components/recruiter/JobOverview";
+import CandidateRanking from "@/components/recruiter/CandidateRanking";
+import ActivityTimeline, { buildActivityItems } from "@/components/recruiter/ActivityTimeline";
+import UpcomingInterviews from "@/components/recruiter/UpcomingInterviews";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
+import EmptyState from "@/components/recruiter/EmptyState";
+import '@/styles/RecruiterLayout.css';
+import '@/styles/RecruiterDashboard.css';
 
 export default function RecruiterDashboard() {
   const [data, setData] = useState(null);

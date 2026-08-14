@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PlusCircle } from "lucide-react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { getJobs, changeJobStatus, deleteJob } from "../../services/recruiterAPI";
-import Loader from "../../components/Loader";
-import EmptyState from "../../components/recruiter/EmptyState";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { getJobs, changeJobStatus, deleteJob } from "@/services/recruiterAPI";
+import Loader from "@/components/Loader";
+import EmptyState from "@/components/recruiter/EmptyState";
 import { Briefcase } from "lucide-react";
-import notify from "../../utils/notify";
-import "../../layouts/RecruiterLayout.css";
+import notify from "@/utils/notify";
+import '@/styles/RecruiterLayout.css';
 
 const STATUS_BADGE = {
   draft: "rx-badge-gray", published: "rx-badge-green", open: "rx-badge-green",

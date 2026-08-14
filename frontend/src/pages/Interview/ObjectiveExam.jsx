@@ -2,16 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { useNavigate, useParams } from 'react-router-dom';
 import Webcam from 'react-webcam';
-import API from '../utils/api';
-import { getMcqResultById } from '../services/mcqAPI';
-import { syncUserToStorage } from '../services/userAPI';
+import API from "@/utils/api";
+import { getMcqResultById } from "@/services/mcqAPI";
+import { syncUserToStorage } from "@/services/userAPI";
 import {
   ArrowRight, CheckCircle, XCircle, AlertTriangle,
   Clock, Target, Zap, Eye, ShieldCheck, BookOpen, Trophy, ChevronLeft,
 } from 'lucide-react';
-import notify from '../utils/notify';
-import { useFaceDetection } from '../hooks/useFaceDetection';
-import './ObjectiveExam.css';
+import notify from "@/utils/notify";
+import { useFaceDetection } from "@/hooks/useFaceDetection";
+import '@/styles/ObjectiveExam.css';
 
 const SOCKET_URL = API.defaults.baseURL
   ? API.defaults.baseURL.replace('/api', '')

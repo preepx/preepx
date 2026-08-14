@@ -4,10 +4,10 @@ import {
   Edit2, Check, X, Upload, Camera, Globe, Linkedin, Github,
   Plus, Trash2, AlertCircle, CheckCircle2, FileText, Star
 } from "lucide-react";
-import { getProfile, updateProfileDetails, uploadProfilePhoto, uploadResume, syncUserToStorage } from "../../services/userAPI";
-import notify from "../../utils/notify";
-import Loader from "../../components/Loader";
-import "./JobsProfile.css";
+import { getProfile, updateProfileDetails, uploadProfilePhoto, uploadResume, syncUserToStorage } from "@/services/userAPI";
+import notify from "@/utils/notify";
+import Loader from "@/components/Loader";
+import '@/styles/JobsProfile.css';
 
 // Profile completion calculator
 function calcCompletion(user) {

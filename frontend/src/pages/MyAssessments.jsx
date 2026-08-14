@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ClipboardCheck, PlayCircle, CheckCircle, Clock } from "lucide-react";
-import { getMyAssessments } from "../services/assessmentAPI";
-import Loader from "../components/Loader";
-import "./MyAssessments.css";
+import { getMyAssessments } from "@/services/assessmentAPI";
+import Loader from "@/components/Loader";
+import '@/styles/MyAssessments.css';
 
 const STATUS_MAP = {
   pending: { label: "Pending", color: "#f59e0b" },

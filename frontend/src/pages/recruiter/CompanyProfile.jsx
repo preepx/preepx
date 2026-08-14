@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { getOnboarding, updateCompanyProfile } from "../../services/recruiterAPI";
-import notify from "../../utils/notify";
-import Loader from "../../components/Loader";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { getOnboarding, updateCompanyProfile } from "@/services/recruiterAPI";
+import notify from "@/utils/notify";
+import Loader from "@/components/Loader";
 import { Building2, Globe, Mail, Users, Linkedin, FileText, CheckCircle, ShieldAlert, Briefcase } from "lucide-react";
-import "../../layouts/RecruiterLayout.css";
+import '@/styles/RecruiterLayout.css';
 
 export default function CompanyProfile() {
   const [loading, setLoading] = useState(true);

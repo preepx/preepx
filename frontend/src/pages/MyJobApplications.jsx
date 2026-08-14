@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Sparkles, Briefcase } from "lucide-react";
-import { getMyApplications } from "../../services/candidateJobsAPI";
-import Loader from "../../components/Loader";
-import "./JobBoard.css";
+import { getMyApplications } from "@/services/candidateJobsAPI";
+import Loader from "@/components/Loader";
+import '@/styles/JobBoard.css';
 
 const STATUS_LABEL = {
   applied: "Applied",

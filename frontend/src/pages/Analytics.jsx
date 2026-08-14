@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TrendingUp, Target, Flame, BarChart3, Plus, Calendar } from "lucide-react";
-import { getAnalytics } from "../services/userAPI";
-import EmptyState from "../components/EmptyState";
-import Loader from "../components/Loader";
-import Pagination from "../components/Pagination";
-import "./Analytics.css";
+import { getAnalytics } from "@/services/userAPI";
+import EmptyState from "@/components/EmptyState";
+import Loader from "@/components/Loader";
+import Pagination from "@/components/Pagination";
+import '@/styles/Analytics.css';
 
 function Analytics() {
   const [data, setData] = useState(null);

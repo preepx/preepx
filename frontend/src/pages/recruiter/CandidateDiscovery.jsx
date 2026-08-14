@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Sparkles } from "lucide-react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { discoverCandidates, getJobs } from "../../services/recruiterAPI";
-import Loader from "../../components/Loader";
-import "../../layouts/RecruiterLayout.css";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { discoverCandidates, getJobs } from "@/services/recruiterAPI";
+import Loader from "@/components/Loader";
+import '@/styles/RecruiterLayout.css';
 
 export default function CandidateDiscovery() {
   const [searchParams, setSearchParams] = useSearchParams();

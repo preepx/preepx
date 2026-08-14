@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { triggerAnnouncement } from "../utils/announcement";
-import notify from "../utils/notify";
+import { triggerAnnouncement } from "@/utils/announcement";
+import notify from "@/utils/notify";
 
 function AuthCallback() {
   const navigate = useNavigate();

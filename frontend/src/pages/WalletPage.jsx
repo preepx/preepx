@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { Coins, Mic, Zap, Shield, TrendingUp, Plus, X } from "lucide-react";
-import notify from '../../../utils/notify';
-import { createOrder, verifyPayment } from "../services/walletAPI";
-import { useWallet } from "../hooks/useWallet";
-import CoinPackages from "../components/CoinPackages";
-import TransactionList from "../components/TransactionList";
-import { WALLET_PRICING } from "../constants/walletConfig";
-import "./WalletPage.css";
+import notify from "@/utils/notify";
+import { createOrder, verifyPayment } from "@/services/walletAPI";
+import { useWallet } from "@/hooks/useWallet";
+import CoinPackages from "@/components/ui/CoinPackages";
+import TransactionList from "@/components/ui/TransactionList";
+import { WALLET_PRICING } from "@/constants/walletConfig";
+import '@/styles/WalletPage.css';
 
-import Loader from "../../../components/Loader";
+import Loader from "@/components/Loader";
 
 function WalletPage() {
   const { balance, transactions, config, loading, refresh } = useWallet();

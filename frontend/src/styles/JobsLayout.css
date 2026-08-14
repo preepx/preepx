@@ -236,9 +236,17 @@
   color: var(--text);
 }
 
-.aj-status-green { color: var(--success) !important; }
-.aj-status-blue { color: #06b6d4 !important; }
-.aj-status-red { color: var(--danger) !important; }
+.aj-status-green {
+  color: var(--success) !important;
+}
+
+.aj-status-blue {
+  color: #06b6d4 !important;
+}
+
+.aj-status-red {
+  color: var(--danger) !important;
+}
 
 @media (max-width: 768px) {
   .aj-alert-premium {

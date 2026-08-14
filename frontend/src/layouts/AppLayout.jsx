@@ -4,16 +4,16 @@ import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
   LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code, FileText, Bell, Briefcase
 } from "lucide-react";
-import notify from '../utils/notify';
-import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "../services/userAPI";
-import NotificationModal from "../components/NotificationModal";
-import { getRewardsData, calculateProgress } from "../utils/rewardsUtils";
+import notify from "@/utils/notify";
+import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "@/services/userAPI";
+import NotificationModal from "@/components/NotificationModal";
+import { getRewardsData, calculateProgress } from "@/utils/rewardsUtils";
 import { useWallet } from "../features/wallet/hooks/useWallet";
 import { io } from "socket.io-client";
-import API from "../utils/api";
+import API from "@/utils/api";
 import WalletBadge from "../features/wallet/components/WalletBadge";
-import Footer from "../components/Footer";
-import "./AppLayout.css";
+import Footer from "@/components/Footer";
+import '@/styles/AppLayout.css';
 
 const NAV_ITEMS = [
   { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },

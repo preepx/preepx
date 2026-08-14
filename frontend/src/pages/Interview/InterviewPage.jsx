@@ -4,17 +4,17 @@ import {
   Plus, Upload, Clock, Trophy, Lightbulb, ChevronRight,
   Search, Trash2, Target, Flame, Award,
 } from "lucide-react";
-import { getDashboard, syncUserToStorage } from "../services/userAPI";
-import { deleteInterview, getInterviewById } from "../services/interviewAPI";
-import { uploadResume } from "../services/resumeAPI";
-import notify from '../utils/notify';
-import { showAppError } from "../utils/appAlert";
+import { getDashboard, syncUserToStorage } from "@/services/userAPI";
+import { deleteInterview, getInterviewById } from "@/services/interviewAPI";
+import { uploadResume } from "@/services/resumeAPI";
+import notify from '@/utils/notify';
+import { showAppError } from "@/utils/appAlert";
 import InterviewModal from "./InterviewModal";
-import WelcomeModal from "../components/WelcomeModal";
-import EmptyState from "../components/EmptyState";
-import Loader from "../components/Loader";
-import Pagination from "../components/Pagination";
-import "./InterviewPage.css";
+import WelcomeModal from "@/components/WelcomeModal";
+import EmptyState from "@/components/EmptyState";
+import Loader from "@/components/Loader";
+import Pagination from "@/components/Pagination";
+import '@/styles/InterviewPage.css';
 
 const InterviewPage = () => {
   const [showModal, setShowModal] = useState(false);

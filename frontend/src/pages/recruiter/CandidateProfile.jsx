@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Send, Star, XCircle, Calendar, Sparkles, FileText, ExternalLink, Github, Linkedin, Briefcase, MapPin } from "lucide-react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
   getCandidateProfile, sendAssessment, shortlistCandidate, rejectCandidate, scheduleInterview, generateQuestions
-} from "../../services/recruiterAPI";
-import { getAssetUrl } from "../../utils/assetUrl";
-import Loader from "../../components/Loader";
-import notify from "../../utils/notify";
-import "../../layouts/RecruiterLayout.css";
+} from "@/services/recruiterAPI";
+import { getAssetUrl } from "@/utils/assetUrl";
+import Loader from "@/components/Loader";
+import notify from "@/utils/notify";
+import '@/styles/RecruiterLayout.css';
 
 const CAN_SHORTLIST = ["applied", "matched", "assessment_completed"];
 const CAN_SEND_ASSESSMENT = ["shortlisted"];

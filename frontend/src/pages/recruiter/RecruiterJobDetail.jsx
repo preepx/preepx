@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Users, Send, CheckCircle, XCircle, Sparkles, ChevronLeft, Star, FileText } from "lucide-react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
   getJob, getApplications, runAutoMatch, sendAssessment,
   shortlistCandidate, rejectCandidate, getAssessmentResult, generateQuestions
-} from "../../services/recruiterAPI";
-import Loader from "../../components/Loader";
-import notify from "../../utils/notify";
-import "../../layouts/RecruiterLayout.css";
+} from "@/services/recruiterAPI";
+import Loader from "@/components/Loader";
+import notify from "@/utils/notify";
+import '@/styles/RecruiterLayout.css';
 
 const STATUS_LABEL = {
   applied: "Applied",

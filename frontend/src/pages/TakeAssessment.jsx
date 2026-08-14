@@ -3,11 +3,11 @@ import { useParams, useNavigate } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import {
   getAssessment, startAssessment, submitMcq, submitCoding, completeAssessment
-} from "../services/assessmentAPI";
-import Loader from "../components/Loader";
-import notify from "../utils/notify";
+} from "@/services/assessmentAPI";
+import Loader from "@/components/Loader";
+import notify from "@/utils/notify";
 import { ChevronLeft, ChevronRight, CheckCircle, Code, ClipboardList } from "lucide-react";
-import "./TakeAssessment.css";
+import '@/styles/TakeAssessment.css';
 
 export default function TakeAssessment() {
   const { id } = useParams();

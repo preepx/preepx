@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BookOpen, Coins, Video, Target, Users, Zap, Shield, HelpCircle } from "lucide-react";
-import "./UserGuide.css";
+import '@/styles/UserGuide.css';
 
 function UserGuide() {
   return (

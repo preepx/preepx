@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Briefcase, BookOpen, HelpCircle, Play, ArrowLeft } from "lucide-react";
-import "./startinterview.css";
+import '@/styles/startinterview.css';
 
 const StartInterview = () => {
   const navigate = useNavigate();

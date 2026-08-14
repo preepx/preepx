@@ -1,4 +1,4 @@
-import API from "../utils/api";
+import API from "@/utils/api";
 
 export const getBtecNotes = (params = {}) =>
   API.get("/btec-notes", { params }).then((r) => r.data);

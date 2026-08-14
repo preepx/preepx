@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { getJobs, getPipeline, movePipeline } from "../../services/recruiterAPI";
-import Loader from "../../components/Loader";
-import notify from "../../utils/notify";
-import "../../layouts/RecruiterLayout.css";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { getJobs, getPipeline, movePipeline } from "@/services/recruiterAPI";
+import Loader from "@/components/Loader";
+import notify from "@/utils/notify";
+import '@/styles/RecruiterLayout.css';
 
 const STAGES = ["matched", "assessment_sent", "shortlisted", "ai_interview", "interview", "selected", "offered", "hired"];
 

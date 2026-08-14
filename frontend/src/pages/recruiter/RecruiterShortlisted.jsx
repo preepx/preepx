@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { getShortlisted, sendAssessment, generateQuestions } from "../../services/recruiterAPI";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { getShortlisted, sendAssessment, generateQuestions } from "@/services/recruiterAPI";
 import { Link } from "react-router-dom";
 import { Send, Star, Sparkles } from "lucide-react";
-import Loader from "../../components/Loader";
-import notify from "../../utils/notify";
-import EmptyState from "../../components/recruiter/EmptyState";
-import "../../layouts/RecruiterLayout.css";
+import Loader from "@/components/Loader";
+import notify from "@/utils/notify";
+import EmptyState from "@/components/recruiter/EmptyState";
+import '@/styles/RecruiterLayout.css';
 
 export default function RecruiterShortlisted() {
   const [list, setList] = useState([]);

@@ -40,20 +40,20 @@ const Leaderboard = lazy(() => import("./pages/Leaderboard"));
 const Achievements = lazy(() => import("./pages/Achievements"));
 const Rewards = lazy(() => import("./pages/Rewards"));
 const Settings = lazy(() => import("./pages/Settings"));
-const InterviewPage = lazy(() => import("./Interview/InterviewPage"));
-const StartInterview = lazy(() => import("./Interview/StartInterview"));
-const InterviewMode = lazy(() => import("./Interview/InterviewMode"));
+const InterviewPage = lazy(() => import("@/pages/Interview/InterviewPage"));
+const StartInterview = lazy(() => import("@/pages/Interview/StartInterview"));
+const InterviewMode = lazy(() => import("@/pages/Interview/InterviewMode"));
 const BtechNotes = lazy(() => import("./pages/BtechNotes"));
 const BtechNoteDetail = lazy(() => import("./pages/BtechNoteDetail"));
 const BtechPdfViewer = lazy(() => import("./pages/BtechPdfViewer"));
-const ResumeUpload = lazy(() => import("./resume/ResumeUpload"));
-const AtsScore = lazy(() => import("./resume/AtsScore"));
-const Auth = lazy(() => import("./Login/Auth"));
-const RecruiterAuth = lazy(() => import("./Login/RecruiterAuth"));
-const AuthCallback = lazy(() => import("./Login/AuthCallback"));
-const ObjectiveExam = lazy(() => import("./Interview/ObjectiveExam"));
-const ObjectiveExamPage = lazy(() => import("./Interview/ObjectiveExamPage"));
-const WalletPage = lazy(() => import("./features/wallet/pages/WalletPage"));
+const ResumeUpload = lazy(() => import("@/pages/Resume/ResumeUpload"));
+const AtsScore = lazy(() => import("@/pages/Resume/AtsScore"));
+const Auth = lazy(() => import("@/pages/Auth/Auth"));
+const RecruiterAuth = lazy(() => import("@/pages/Auth/RecruiterAuth"));
+const AuthCallback = lazy(() => import("@/pages/Auth/AuthCallback"));
+const ObjectiveExam = lazy(() => import("@/pages/Interview/ObjectiveExam"));
+const ObjectiveExamPage = lazy(() => import("@/pages/Interview/ObjectiveExamPage"));
+const WalletPage = lazy(() => import("@/pages/WalletPage"));
 const CodingPractice = lazy(() => import("./pages/CodingPractice"));
 const CodingExam = lazy(() => import("./pages/CodingExam"));
 
@@ -68,7 +68,7 @@ const PUBLIC_ROUTES = [
   "/interview-tips", "/blog", "/help-center", "/community",
   "/about-us", "/careers", "/privacy-policy", "/terms-of-service",
   "/hiring-guide", "/recruiter-resources", "/documentation",
-  "/ai-screening", "/job-management", "/assessments", "/interviews", "/analytics"
+  "/ai-screening", "/job-management", "/assessments", "/interviews"
 ];
 const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "/objective-exam/take", "/coding-exam", "/assessment"];
 
@@ -157,7 +157,6 @@ function AppContent() {
           <Route path="/job-management" element={<StaticPage />} />
           <Route path="/assessments" element={<StaticPage />} />
           <Route path="/interviews" element={<StaticPage />} />
-          <Route path="/analytics" element={<StaticPage />} />
 
           <Route path="/user-dashboard" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><UserDashboard /></ProtectedRoute>} />
           <Route path="/recruiter-dashboard" element={<ProtectedRoute allowedRoles={["recruiter"]}><RecruiterDashboard /></ProtectedRoute>} />

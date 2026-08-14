@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getJobs, getApplications } from "../../services/recruiterAPI";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import Loader from "../../components/Loader";
+import { getJobs, getApplications } from "@/services/recruiterAPI";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import Loader from "@/components/Loader";
 import { Link } from "react-router-dom";
-import "../../layouts/RecruiterLayout.css";
+import '@/styles/RecruiterLayout.css';
 
 export default function RecruiterAssessments() {
   const [rows, setRows] = useState([]);

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { getInterviews } from "../../services/recruiterAPI";
-import Loader from "../../components/Loader";
-import "../../layouts/RecruiterLayout.css";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { getInterviews } from "@/services/recruiterAPI";
+import Loader from "@/components/Loader";
+import '@/styles/RecruiterLayout.css';
 
 export default function RecruiterInterviews() {
   const [interviews, setInterviews] = useState([]);

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import { staticContent } from '../data/staticContent';
-import './StaticPage.css';
+import { staticContent } from "@/data/staticContent";
+import '@/styles/StaticPage.css';
 
 const StaticPage = () => {
   const location = useLocation();

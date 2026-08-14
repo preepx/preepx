@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import notify from '../utils/notify';
-import API from '../utils/api';
+import notify from "@/utils/notify";
+import API from "@/utils/api";
 import {
   Code2, Plus, Clock, Trophy, Target, Search,
   ChevronRight, BrainCircuit, Rocket, Flame, Code, Terminal, Trash2
 } from "lucide-react";
-import EmptyState from "../components/EmptyState";
-import Pagination from "../components/Pagination";
-import "../Interview/InterviewPage.css";
+import EmptyState from "@/components/EmptyState";
+import Pagination from "@/components/Pagination";
+import '@/styles/InterviewPage.css';
 
 const CodingPractice = () => {
   const navigate = useNavigate();

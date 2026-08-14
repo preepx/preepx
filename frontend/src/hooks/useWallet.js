@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getWallet } from "@/services/walletAPI";
 
 export function useWallet({ autoFetch = true } = {}) {
@@ -39,4 +39,3 @@ export function useWallet({ autoFetch = true } = {}) {
     refresh,
   };
 }
-

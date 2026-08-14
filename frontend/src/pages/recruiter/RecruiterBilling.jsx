@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { getBilling, selectPlan } from "../../services/recruiterAPI";
-import notify from "../../utils/notify";
-import Loader from "../../components/Loader";
-import "../../layouts/RecruiterLayout.css";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { getBilling, selectPlan } from "@/services/recruiterAPI";
+import notify from "@/utils/notify";
+import Loader from "@/components/Loader";
+import '@/styles/RecruiterLayout.css';
 
 export default function RecruiterBilling() {
   const [data, setData] = useState(null);

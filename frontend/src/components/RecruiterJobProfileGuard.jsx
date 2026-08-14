@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { getOnboarding } from "../services/recruiterAPI";
+import { getOnboarding } from "@/services/recruiterAPI";
 import Loader from "./Loader";
 
 /** Only blocks job posting routes until recruiter + company profile is complete. */

@@ -4,14 +4,14 @@ import {
   Plus, Clock, Trophy, Target, Search, Trash2,
   ChevronRight, Zap, BookOpen, BarChart3, Award, Flame,
 } from "lucide-react";
-import { getMcqDashboard, deleteMcqResult } from "../services/mcqAPI";
-import { syncUserToStorage } from "../services/userAPI";
-import notify from '../utils/notify';
-import { showAppError } from "../utils/appAlert";
-import EmptyState from "../components/EmptyState";
-import Loader from "../components/Loader";
-import Pagination from "../components/Pagination";
-import "./InterviewPage.css";
+import { getMcqDashboard, deleteMcqResult } from "@/services/mcqAPI";
+import { syncUserToStorage } from "@/services/userAPI";
+import notify from "@/utils/notify";
+import { showAppError } from "@/utils/appAlert";
+import EmptyState from "@/components/EmptyState";
+import Loader from "@/components/Loader";
+import Pagination from "@/components/Pagination";
+import '@/styles/InterviewPage.css';
 
 const ObjectiveExamPage = () => {
   const [dashboard, setDashboard] = useState(null);

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Pagination.css';
+import '@/styles/Pagination.css';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Pagination = ({ currentPage, totalItems, itemsPerPage, onPageChange }) => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import notify from '../utils/notify';
-import API from "../utils/api";
+import notify from "@/utils/notify";
+import API from "@/utils/api";
 import { useNavigate } from "react-router-dom";
 import "./register.css"; // CSS import
 

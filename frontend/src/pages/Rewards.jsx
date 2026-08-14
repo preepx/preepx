@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, Lock, Gift, UserCheck, FileText, Bot, Trophy, Briefcase, Users, Target } from "lucide-react";
-import notify from '../utils/notify';
-import { getProfile, claimXpReward, getDashboard } from "../services/userAPI";
-import "./Rewards.css";
-import { getRewardsData, calculateProgress } from "../utils/rewardsUtils";
+import notify from "@/utils/notify";
+import { getProfile, claimXpReward, getDashboard } from "@/services/userAPI";
+import '@/styles/Rewards.css';
+import { getRewardsData, calculateProgress } from "@/utils/rewardsUtils";
 
 function Rewards() {
   const [user, setUser] = useState(null);

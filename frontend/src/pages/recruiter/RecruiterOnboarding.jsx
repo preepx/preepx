@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Building2, User, Shield, CreditCard, CheckCircle } from "lucide-react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
   updateRecruiterProfile, updateCompanyProfile, submitVerification, completeOnboarding, getBilling
-} from "../../services/recruiterAPI";
-import notify from "../../utils/notify";
-import "../../layouts/RecruiterLayout.css";
+} from "@/services/recruiterAPI";
+import notify from "@/utils/notify";
+import '@/styles/RecruiterLayout.css';
 
 const STEPS = [
   { id: "profile", label: "Recruiter Profile", icon: User },

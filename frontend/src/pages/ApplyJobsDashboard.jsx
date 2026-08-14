@@ -6,17 +6,17 @@ import {
 } from "lucide-react";
 import {
   getApplicationStats, getMyApplications, getMatchedJobs, applyToJob,
-} from "../services/candidateJobsAPI";
-import CandidateWelcomeBanner from "../components/candidate/CandidateWelcomeBanner";
-import CandidateQuickActions from "../components/candidate/CandidateQuickActions";
-import KpiCard from "../components/recruiter/KpiCard";
-import HiringFunnel from "../components/recruiter/HiringFunnel";
-import DashboardSkeleton from "../components/recruiter/DashboardSkeleton";
-import EmptyState from "../components/recruiter/EmptyState";
-import notify from "../utils/notify";
-import "../layouts/RecruiterLayout.css";
-import "../pages/RecruiterDashboard.css";
-import "./ApplyJobsDashboard.css";
+} from "@/services/candidateJobsAPI";
+import CandidateWelcomeBanner from "@/components/candidate/CandidateWelcomeBanner";
+import CandidateQuickActions from "@/components/candidate/CandidateQuickActions";
+import KpiCard from "@/components/recruiter/KpiCard";
+import HiringFunnel from "@/components/recruiter/HiringFunnel";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
+import EmptyState from "@/components/recruiter/EmptyState";
+import notify from "@/utils/notify";
+import '@/styles/RecruiterLayout.css';
+import '@/styles/RecruiterDashboard.css';
+import '@/styles/ApplyJobsDashboard.css';
 
 const STATUS_LABEL = {
   applied: "Applied",

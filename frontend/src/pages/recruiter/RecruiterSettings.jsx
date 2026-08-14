@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { getOnboarding, updateRecruiterProfile } from "../../services/recruiterAPI";
-import notify from "../../utils/notify";
-import Loader from "../../components/Loader";
-import "../../layouts/RecruiterLayout.css";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { getOnboarding, updateRecruiterProfile } from "@/services/recruiterAPI";
+import notify from "@/utils/notify";
+import Loader from "@/components/Loader";
+import '@/styles/RecruiterLayout.css';
 
 export default function RecruiterSettings() {
   const [loading, setLoading] = useState(true);

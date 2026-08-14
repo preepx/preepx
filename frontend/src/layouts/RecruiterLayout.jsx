@@ -7,10 +7,10 @@ import {
   Menu, X, Search, Bell, ChevronDown, Moon, Sun, PanelLeftClose, PanelLeft, BadgeCheck,
   AlertTriangle, CheckCircle
 } from "lucide-react";
-import { getRecruiterNotifications, markRecruiterNotificationRead, markAllRecruiterNotificationsRead } from "../services/recruiterAPI";
-import notify from "../utils/notify";
-import { getOnboarding } from "../services/recruiterAPI";
-import "./RecruiterLayout.css";
+import { getRecruiterNotifications, markRecruiterNotificationRead, markAllRecruiterNotificationsRead } from "@/services/recruiterAPI";
+import notify from "@/utils/notify";
+import { getOnboarding } from "@/services/recruiterAPI";
+import '@/styles/RecruiterLayout.css';
 
 const SOCKET_URL = import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, "") || "http://localhost:4000";
 

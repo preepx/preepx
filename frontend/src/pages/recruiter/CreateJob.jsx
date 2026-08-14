@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Briefcase, MapPin, DollarSign, BrainCircuit, ListChecks, Save, Send, Trash2, Plus } from "lucide-react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { createJob } from "../../services/recruiterAPI";
-import notify from "../../utils/notify";
-import "../../layouts/RecruiterLayout.css";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { createJob } from "@/services/recruiterAPI";
+import notify from "@/utils/notify";
+import '@/styles/RecruiterLayout.css';
 
 const EMPTY = {
   title: "",

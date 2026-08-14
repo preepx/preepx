@@ -3,12 +3,12 @@ import {
   Briefcase, MapPin, Building2, Clock, Star, ChevronRight, Search,
   Filter, CheckCircle2, XCircle, ClipboardCheck, Video, Sparkles, AlertCircle
 } from "lucide-react";
-import { getMyApplications } from "../../services/candidateJobsAPI";
+import { getMyApplications } from "@/services/candidateJobsAPI";
 import { Link } from "react-router-dom";
-import DashboardSkeleton from "../../components/recruiter/DashboardSkeleton";
-import EmptyState from "../../components/recruiter/EmptyState";
-import "../ApplyJobsDashboard.css"; // Reuse premium styles
-import "./JobsMyApplications.css"; // Keep for custom overrides if any
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
+import EmptyState from "@/components/recruiter/EmptyState";
+import '@/styles/ApplyJobsDashboard.css'; // Reuse premium styles
+import '@/styles/JobsMyApplications.css'; // Keep for custom overrides if any
 
 const STATUS_CONFIG = {
   applied:              { label: "Applied",       color: "#6366f1", bg: "rgba(99,102,241,0.1)",   icon: Briefcase, class: "" },

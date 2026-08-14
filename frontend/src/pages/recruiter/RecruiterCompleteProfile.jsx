@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { User, Building2 } from "lucide-react";
-import RecruiterLayout from "../../layouts/RecruiterLayout";
-import { getOnboarding, completeRecruiterProfile } from "../../services/recruiterAPI";
-import notify from "../../utils/notify";
-import Loader from "../../components/Loader";
-import "../../layouts/RecruiterLayout.css";
+import RecruiterLayout from "@/layouts/RecruiterLayout";
+import { getOnboarding, completeRecruiterProfile } from "@/services/recruiterAPI";
+import notify from "@/utils/notify";
+import Loader from "@/components/Loader";
+import '@/styles/RecruiterLayout.css';
 
 function buildDefaultsFromStorage() {
   const u = JSON.parse(localStorage.getItem("user") || "{}");

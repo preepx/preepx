@@ -2,11 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
 import { Mic, MicOff, SkipForward, Volume2, Timer, ArrowLeft, ShieldCheck } from "lucide-react";
-import { evaluateAnswer, saveInterviewResult } from "../services/interviewAPI";
-import { showAppError } from "../utils/appAlert";
-import notify from "../utils/notify";
-import { useFaceDetection } from "../hooks/useFaceDetection";
-import "./InterviewMode.css";
+import { evaluateAnswer, saveInterviewResult } from "@/services/interviewAPI";
+import { showAppError } from "@/utils/appAlert";
+import notify from "@/utils/notify";
+import { useFaceDetection } from "@/hooks/useFaceDetection";
+import '@/styles/InterviewMode.css';
 
 const InterviewMode = () => {
   const location = useLocation();

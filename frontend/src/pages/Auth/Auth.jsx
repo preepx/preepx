@@ -1,20 +1,23 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+import API from "@/utils/api";
+import notify from "@/utils/notify";
+import { showAppError } from "@/utils/appAlert";
+import { triggerAnnouncement } from "@/utils/announcement";
 import {
   Sparkles, Mail, Lock, User, Eye, EyeOff,
-  ArrowRight, Shield, Zap, BarChart3, KeyRound, RefreshCw, CheckCircle, Phone, Building, Globe
+  ArrowRight, Shield, Zap, BarChart3, KeyRound, RefreshCw, CheckCircle,
 } from "lucide-react";
-import API from "../utils/api";
-import notify from '../utils/notify';
-import "./Login.css";
+import ReCAPTCHA from "react-google-recaptcha";
+import '@/styles/Login.css';
 
 // ── Screens ──────────────────────────────────────────────
-// "login" | "register"
+// "login" | "register" | "reg-otp" | "forgot-email" | "forgot-otp" | "forgot-newpass"
 // ─────────────────────────────────────────────────────────
 
-const EMPTY_REGISTER = { fullName: "", email: "", companyName: "", companyWebsite: "", password: "", confirmPassword: "" };
+const EMPTY_REGISTER = { fullName: "", email: "", password: "", confirmPassword: "", referralCode: "" };
 
-function RecruiterAuth() {
+function Auth() {
   const [screen, setScreen] = useState("login");
   const [loading, setLoading] = useState(false);
   const [realtimeUsers, setRealtimeUsers] = useState(70);
@@ -28,37 +31,89 @@ function RecruiterAuth() {
   const [showRegPass, setShowRegPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
 
+  // Shared OTP state (register + forgot)
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otpEmail, setOtpEmail] = useState("");
+  const [resendTimer, setResendTimer] = useState(0);
+  const otpInputsRef = useRef([]);
+  const timerRef = useRef(null);
+
   // Forgot password
   const [forgotEmail, setForgotEmail] = useState("");
-  const [otpEmail, setOtpEmail] = useState("");
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [verifiedOtp, setVerifiedOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmNewPass, setShowConfirmNewPass] = useState(false);
+  const [verifiedOtp, setVerifiedOtp] = useState(""); // OTP to pass to reset step
 
-  const otpInputsRef = useRef([]);
+  // ReCAPTCHA
+  const [captchaToken, setCaptchaToken] = useState("");
+  const recaptchaRef = useRef(null);
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const role = new URLSearchParams(location.search).get("role") || "candidate";
+  const isRecruiter = role === "recruiter";
+
+  // Server warm-up ping — taaki register click pe delay na ho
+  useEffect(() => {
+    API.get("/users/platform-stats")
+      .then((res) => {
+        if (res.data && res.data.totalUsers) {
+          setRealtimeUsers(res.data.totalUsers * 10);
+        }
+      })
+      .catch(() => { });
+
+    // Check for Google login failure error in URL
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("error") === "google_failed") {
+      showAppError("Failed to authenticate with Google. Please try again.", "Google Sign-In Failed");
+      navigate("/auth", { replace: true });
+    }
+
+    // Auto-fill referral code if present
+    const refCode = params.get("ref");
+    if (refCode) {
+      setRegisterData(prev => ({ ...prev, referralCode: refCode }));
+      setScreen("register");
+    }
+  }, [navigate]);
+
+  const handleGoogleLogin = () => {
+    const apiBase = API.defaults.baseURL || "http://localhost:4000/api";
+    let url = `${apiBase.replace(/\/api$/, "")}/api/auth/google`;
+    if (registerData.referralCode) {
+      url += `?state=${registerData.referralCode}`;
+    }
+    window.location.href = url;
+  };
+
+  // Countdown timer
+  useEffect(() => {
+    if (resendTimer > 0) {
+      timerRef.current = setTimeout(() => setResendTimer((t) => t - 1), 1000);
+    }
+    return () => clearTimeout(timerRef.current);
+  }, [resendTimer]);
+
+  const resetOtp = () => setOtp(["", "", "", "", "", ""]);
 
   const goLogin = () => {
     setScreen("login");
+    resetOtp();
     setShowLoginPass(false);
   };
 
   const goRegister = () => {
     setRegisterData({ ...EMPTY_REGISTER });
     setScreen("register");
-  };
-
-  const resetOtp = () => {
-    setOtp(["", "", "", "", "", ""]);
+    resetOtp();
   };
 
   // ── OTP input helpers ──────────────────────────────────
   const handleOtpChange = (index, value) => {
-    const digit = value.replace(/\D/g, "").slice(-1);
+    const digit = value.replace(/\D/g, "").slice(-1); // sirf ek digit lo
     const newOtp = [...otp];
     newOtp[index] = digit;
     setOtp(newOtp);
@@ -97,62 +152,209 @@ function RecruiterAuth() {
     setTimeout(() => otpInputsRef.current[focusIndex]?.focus(), 0);
   };
 
-  // ── FORGOT HANDLERS ──────────────────────────────────
-  const handleForgotEmailSubmit = async (e) => {
+  // ── LOGIN ─────────────────────────────────────────────
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await API.post("/recruiter/forgot-password", { email: forgotEmail });
-      notify.success("Password reset OTP sent to your email!");
-      setOtpEmail(forgotEmail.trim().toLowerCase());
-      resetOtp();
-      setScreen("forgot-otp");
-    } catch (err) {
-      notify.error(err.response?.data?.message || "Failed to send reset email");
+      const res = await API.post("/users/login", {
+        email: loginData.email.trim().toLowerCase(),
+        password: loginData.password,
+      });
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      triggerAnnouncement();
+      notify.success("Welcome back!");
+      navigate("/user-dashboard", { replace: true });
+    } catch (error) {
+      showAppError(
+        error.response?.data?.message || "Something went wrong. Please try again.",
+        "Sign in failed"
+      );
     } finally {
       setLoading(false);
     }
   };
 
-  const handleVerifyResetOtp = (e) => {
+  // ── REGISTER: Step 1 — Send OTP ───────────────────────
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+    if (registerData.password.length < 6) {
+      showAppError("Password must be at least 6 characters.", "Password too short");
+      return;
+    }
+    if (registerData.password !== registerData.confirmPassword) {
+      showAppError("Both password fields must match.", "Passwords don't match");
+      return;
+    }
+    if (!captchaToken) {
+      showAppError("Please complete the CAPTCHA to prove you are human.", "CAPTCHA Required");
+      return;
+    }
+    setLoading(true);
+    try {
+      const email = registerData.email.trim().toLowerCase();
+      await API.post("/users/send-otp", {
+        fullName: registerData.fullName,
+        email,
+        password: registerData.password,
+        referralCode: registerData.referralCode,
+        captchaToken,
+      });
+      setOtpEmail(email);
+      resetOtp();
+      setResendTimer(60);
+      setScreen("reg-otp");
+      notify.success(`Verification code sent to ${email}`);
+    } catch (error) {
+      showAppError(error.response?.data?.message || "Registration failed.", "Error");
+    } finally {
+      setLoading(false);
+      if (recaptchaRef.current) recaptchaRef.current.reset();
+      setCaptchaToken("");
+    }
+  };
+
+  // ── REGISTER: Step 2 — Verify OTP ─────────────────────
+  const handleVerifyRegOtp = async (e) => {
     e.preventDefault();
     const otpValue = otp.join("");
     if (otpValue.length < 6) {
-      notify.error("Please enter the complete 6-digit code.");
+      showAppError("Please enter the complete 6-digit code.", "Invalid code");
       return;
     }
-    setVerifiedOtp(otpValue);
-    setNewPassword("");
-    setConfirmNewPassword("");
-    setScreen("forgot-newpass");
+    setLoading(true);
+    try {
+      const res = await API.post("/users/verify-otp", { email: otpEmail, otp: otpValue });
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+      setRegisterData({ ...EMPTY_REGISTER });
+      resetOtp();
+      triggerAnnouncement();
+      notify.success("Account created! Welcome aboard!");
+      navigate("/user-dashboard", { replace: true });
+    } catch (error) {
+      showAppError(error.response?.data?.message || "Invalid code. Try again.", "Verification failed");
+      resetOtp();
+      setTimeout(() => otpInputsRef.current[0]?.focus(), 0);
+    } finally {
+      setLoading(false);
+    }
   };
 
+  const handleResendRegOtp = async () => {
+    if (resendTimer > 0) return;
+    setLoading(true);
+    try {
+      await API.post("/users/send-otp", {
+        fullName: registerData.fullName,
+        email: otpEmail,
+        password: registerData.password,
+      });
+      resetOtp();
+      setResendTimer(60);
+      notify.success("New code sent!");
+      otpInputsRef.current[0]?.focus();
+    } catch (error) {
+      showAppError("Could not resend code. Please try again.", "Resend failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ── FORGOT: Step 1 — Send reset OTP ───────────────────
+  const handleForgotEmailSubmit = async (e) => {
+    e.preventDefault();
+    if (!captchaToken) {
+      showAppError("Please complete the CAPTCHA to prove you are human.", "CAPTCHA Required");
+      return;
+    }
+    setLoading(true);
+    try {
+      await API.post("/users/forgot-password", {
+        email: forgotEmail.trim().toLowerCase(),
+        captchaToken,
+      });
+      setOtpEmail(forgotEmail.trim().toLowerCase());
+      resetOtp();
+      setResendTimer(60);
+      setScreen("forgot-otp");
+      notify.success(`Reset code sent to ${forgotEmail}`);
+    } catch (error) {
+      showAppError(error.response?.data?.message || "Email not found.", "Error");
+    } finally {
+      setLoading(false);
+      if (recaptchaRef.current) recaptchaRef.current.reset();
+      setCaptchaToken("");
+    }
+  };
+
+  // ── FORGOT: Step 2 — Verify reset OTP ─────────────────
+  const handleVerifyResetOtp = async (e) => {
+    e.preventDefault();
+    const otpValue = otp.join("");
+    if (otpValue.length < 6) {
+      showAppError("Please enter the complete 6-digit code.", "Invalid code");
+      return;
+    }
+    setLoading(true);
+    try {
+      await API.post("/users/verify-reset-otp", { email: otpEmail, otp: otpValue });
+      setVerifiedOtp(otpValue);
+      setNewPassword("");
+      setConfirmNewPassword("");
+      setScreen("forgot-newpass");
+    } catch (error) {
+      showAppError(error.response?.data?.message || "Invalid code. Try again.", "Verification failed");
+      resetOtp();
+      setTimeout(() => otpInputsRef.current[0]?.focus(), 0);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendResetOtp = async () => {
+    if (resendTimer > 0) return;
+    setLoading(true);
+    try {
+      await API.post("/users/forgot-password", { email: otpEmail });
+      resetOtp();
+      setResendTimer(60);
+      notify.success("New reset code sent!");
+      otpInputsRef.current[0]?.focus();
+    } catch (error) {
+      showAppError("Could not resend code. Please try again.", "Resend failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // ── FORGOT: Step 3 — Set new password ─────────────────
   const handleResetPassword = async (e) => {
     e.preventDefault();
     if (newPassword.length < 6) {
-      notify.error("Password must be at least 6 characters.");
+      showAppError("Password must be at least 6 characters.", "Too short");
       return;
     }
     if (newPassword !== confirmNewPassword) {
-      notify.error("Both password fields must match.");
+      showAppError("Both password fields must match.", "Passwords don't match");
       return;
     }
-    
     setLoading(true);
     try {
-      await API.post("/recruiter/reset-password", { 
-        email: otpEmail, 
-        otp: verifiedOtp, 
-        newPassword 
+      await API.post("/users/reset-password", {
+        email: otpEmail,
+        otp: verifiedOtp,
+        newPassword,
       });
-      notify.success("Password reset successfully! You can now sign in.");
+      notify.success("Password reset! Please sign in.");
       setForgotEmail("");
       setNewPassword("");
       setConfirmNewPassword("");
       resetOtp();
       setScreen("login");
-    } catch (err) {
-      notify.error(err.response?.data?.message || "Failed to reset password");
+    } catch (error) {
+      showAppError(error.response?.data?.message || "Reset failed. Please try again.", "Error");
     } finally {
       setLoading(false);
     }
@@ -180,71 +382,8 @@ function RecruiterAuth() {
     </div>
   );
 
-  // ── LOGIN ─────────────────────────────────────────────
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const { data } = await API.post("/recruiter/login", loginData);
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      window.dispatchEvent(new Event("user-updated"));
-      notify.success("Logged in successfully!");
-      navigate("/recruiter-dashboard");
-    } catch (err) {
-      notify.error(err.response?.data?.message || "Login failed");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // ── REGISTER ───────────────────────
-  const handleRegisterSubmit = async (e) => {
-    e.preventDefault();
-    if (registerData.password !== registerData.confirmPassword) {
-      notify.error("Passwords do not match");
-      return;
-    }
-    
-    setLoading(true);
-    try {
-      await API.post("/recruiter/send-otp", registerData);
-      notify.success("OTP sent to your email!");
-      resetOtp();
-      setScreen("register-otp");
-    } catch (err) {
-      notify.error(err.response?.data?.message || "Registration failed");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleVerifyRegisterOtp = async (e) => {
-    e.preventDefault();
-    const otpValue = otp.join("");
-    if (otpValue.length < 6) {
-      notify.error("Please enter the complete 6-digit code.");
-      return;
-    }
-    
-    setLoading(true);
-    try {
-      const { data } = await API.post("/recruiter/register", {
-        email: registerData.email,
-        otp: otpValue
-      });
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      window.dispatchEvent(new Event("user-updated"));
-      notify.success("Account created successfully!");
-      navigate("/recruiter-dashboard");
-    } catch (err) {
-      notify.error(err.response?.data?.message || "Verification failed");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // ── Left panel content based on screen ────────────────
+  const isForgotFlow = screen.startsWith("forgot");
 
   return (
     <div className="auth-page">
@@ -255,17 +394,17 @@ function RecruiterAuth() {
           <Link to="/" className="auth-logo" style={{ textDecoration: 'none', display: 'inline-block' }}>
             <img src="/preepx_logo.png" alt="PreepX" style={{ height: "72px", objectFit: "contain", margin: "-16px 0 -12px -12px" }} />
           </Link>
-          <h1>Find the best talent with AI</h1>
-          <p>Streamline your hiring process, conduct AI-driven initial screenings, and discover top candidates faster.</p>
+          <h1>{isRecruiter ? "Hire top tech talent with AI" : "Master your interviews with AI"}</h1>
+          <p>{isRecruiter ? "Discover, evaluate, and hire the right candidates using AI-powered screening and automated assessments." : "Practice realistic mock interviews, get instant feedback, and track your progress — all powered by cutting-edge AI."}</p>
           <div className="auth-features">
-            <div className="auth-feature-card"><Zap size={18} /><span>Automated AI Screenings</span></div>
-            <div className="auth-feature-card"><BarChart3 size={18} /><span>Detailed Candidate Analytics</span></div>
-            <div className="auth-feature-card"><Shield size={18} /><span>Secure & private assessments</span></div>
+            <div className="auth-feature-card"><Zap size={18} /><span>AI-generated role-specific questions</span></div>
+            <div className="auth-feature-card"><BarChart3 size={18} /><span>Detailed scoring & analytics</span></div>
+            <div className="auth-feature-card"><Shield size={18} /><span>Secure & private practice sessions</span></div>
           </div>
           <div className="auth-stats">
-            <div><strong>10k+</strong><span>Candidates</span></div>
-            <div><strong>24/7</strong><span>Screening</span></div>
-            <div><strong>Top</strong><span>Talent</span></div>
+            <div><strong>{realtimeUsers}+</strong><span>Users</span></div>
+            <div><strong>24/7</strong><span>AI Ready</span></div>
+            <div><strong>95%</strong><span>Satisfaction</span></div>
           </div>
         </div>
       </aside>
@@ -292,8 +431,8 @@ function RecruiterAuth() {
           {screen === "login" && (
             <>
               <div className="auth-card-header">
-                <h2>Recruiter Login</h2>
-                <p className="auth-subtitle">Sign in to manage your candidates</p>
+                <h2>Welcome back{isRecruiter ? ", Recruiter" : ""}</h2>
+                <p className="auth-subtitle">Sign in to continue your {isRecruiter ? "hiring" : "interview"} journey</p>
               </div>
               <form onSubmit={handleLoginSubmit} className="auth-form" autoComplete="on">
                 <div className="input-field">
@@ -306,6 +445,8 @@ function RecruiterAuth() {
                       value={loginData.email}
                       onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                       autoComplete="new-password"
+                      onFocus={(e) => e.target.removeAttribute("readOnly")}
+                      readOnly
                       required
                     />
                   </div>
@@ -328,6 +469,8 @@ function RecruiterAuth() {
                       onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                       className="input-with-toggle"
                       autoComplete="new-password"
+                      onFocus={(e) => e.target.removeAttribute("readOnly")}
+                      readOnly
                       required
                     />
                     <button type="button" className="password-toggle" onClick={() => setShowLoginPass(!showLoginPass)} aria-label="Toggle password">
@@ -339,6 +482,16 @@ function RecruiterAuth() {
                   {loading ? <span className="auth-submit-loading">Please wait...</span> : <>Sign In <ArrowRight size={18} /></>}
                 </button>
               </form>
+              <div className="auth-divider">or</div>
+              <button type="button" className="auth-google-btn" onClick={handleGoogleLogin} disabled={loading}>
+                <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05" />
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335" />
+                </svg>
+                <span>Continue with Google</span>
+              </button>
             </>
           )}
 
@@ -348,13 +501,13 @@ function RecruiterAuth() {
           {screen === "register" && (
             <>
               <div className="auth-card-header">
-                <h2>Create Recruiter Account</h2>
-                <p className="auth-subtitle">Join us to find top talent</p>
+                <h2>Create your {isRecruiter ? "recruiter " : ""}account</h2>
+                <p className="auth-subtitle">Email verified registration (min. 6 char password)</p>
               </div>
               <form onSubmit={handleRegisterSubmit} className="auth-form" autoComplete="off">
                 <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
                   <div className="input-field" style={{ flex: '1 1 200px' }}>
-                    <label htmlFor="reg-fullName">Name</label>
+                    <label htmlFor="reg-fullName">Full Name</label>
                     <div className="input-group">
                       <User size={18} className="input-icon" />
                       <input id="reg-fullName" type="text" placeholder=""
@@ -371,29 +524,6 @@ function RecruiterAuth() {
                         value={registerData.email}
                         onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                         autoComplete="off" required />
-                    </div>
-                  </div>
-                </div>
-
-                <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-                  <div className="input-field" style={{ flex: '1 1 200px' }}>
-                    <label htmlFor="reg-companyName">Company Name</label>
-                    <div className="input-group">
-                      <Building size={18} className="input-icon" />
-                      <input id="reg-companyName" type="text" placeholder=""
-                        value={registerData.companyName}
-                        onChange={(e) => setRegisterData({ ...registerData, companyName: e.target.value })}
-                        autoComplete="off" required />
-                    </div>
-                  </div>
-                  <div className="input-field" style={{ flex: '1 1 200px' }}>
-                    <label htmlFor="reg-companyWebsite">Company Website</label>
-                    <div className="input-group">
-                      <Globe size={18} className="input-icon" />
-                      <input id="reg-companyWebsite" type="url" placeholder=""
-                        value={registerData.companyWebsite}
-                        onChange={(e) => setRegisterData({ ...registerData, companyWebsite: e.target.value })}
-                        autoComplete="off" />
                     </div>
                   </div>
                 </div>
@@ -427,32 +557,60 @@ function RecruiterAuth() {
                     </div>
                   </div>
                 </div>
+                <div className="input-field">
+                  <label htmlFor="reg-refCode">Referral Code (Optional)</label>
+                  <div className="input-group">
+                    <Sparkles size={18} className="input-icon" />
+                    <input id="reg-refCode" type="text" placeholder="e.g. REF-ABCDEF"
+                      value={registerData.referralCode}
+                      onChange={(e) => setRegisterData({ ...registerData, referralCode: e.target.value.toUpperCase() })}
+                      autoComplete="off" />
+                  </div>
+                </div>
 
-                <button type="submit" className="auth-submit" disabled={loading} style={{ marginTop: '20px' }}>
+                <div style={{ margin: "16px 0", display: "flex", justifyContent: "center" }}>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_RECAPTCHA_SITE_KEY"}
+                    onChange={(token) => setCaptchaToken(token)}
+                  />
+                </div>
+
+                <button type="submit" className="auth-submit" disabled={loading}>
                   {loading ? <span className="auth-submit-loading">Please wait...</span> : <>Create Account <ArrowRight size={18} /></>}
                 </button>
               </form>
+              <div className="auth-divider">or</div>
+              <button type="button" className="auth-google-btn" onClick={handleGoogleLogin} disabled={loading}>
+                <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05" />
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335" />
+                </svg>
+                <span>Continue with Google</span>
+              </button>
             </>
           )}
 
           {/* ══════════════════════════════════════
               SCREEN: REGISTER OTP
           ══════════════════════════════════════ */}
-          {screen === "register-otp" && (
+          {screen === "reg-otp" && (
             <>
               <div className="auth-card-header">
-                <div className="otp-icon-wrap"><Mail size={28} /></div>
+                <div className="otp-icon-wrap"><KeyRound size={28} /></div>
                 <h2>Verify your email</h2>
-                <p className="auth-subtitle">We sent a 6-digit code to <strong>{registerData.email}</strong></p>
+                <p className="auth-subtitle">We sent a 6-digit code to <strong>{otpEmail}</strong></p>
               </div>
-              <form onSubmit={handleVerifyRegisterOtp} className="auth-form">
+              <form onSubmit={handleVerifyRegOtp} className="auth-form" autoComplete="off">
                 {renderOtpBoxes()}
-                <button type="submit" className="auth-submit otp-submit" disabled={loading}>
-                  {loading ? <span className="auth-submit-loading">Verifying...</span> : <>Complete Registration <CheckCircle size={18} /></>}
+                <button type="submit" className="auth-submit" disabled={loading}>
+                  {loading ? <span className="auth-submit-loading">Verifying...</span> : <>Verify & Create Account <ArrowRight size={18} /></>}
                 </button>
-                <div className="otp-resend">
-                  <button type="button" className="otp-back-btn" onClick={goRegister}>
-                    ← Back
+                <div className="otp-resend" style={{ justifyContent: "center" }}>
+                  <button type="button" className="otp-back-btn" onClick={() => setScreen("register")}>
+                    ← Change details
                   </button>
                 </div>
               </form>
@@ -483,11 +641,19 @@ function RecruiterAuth() {
                   </div>
                 </div>
 
-                <button type="submit" className="auth-submit" disabled={loading} style={{ marginTop: '20px' }}>
+                <div style={{ margin: "16px 0", display: "flex", justifyContent: "center" }}>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_RECAPTCHA_SITE_KEY"}
+                    onChange={(token) => setCaptchaToken(token)}
+                  />
+                </div>
+
+                <button type="submit" className="auth-submit" disabled={loading}>
                   {loading ? <span className="auth-submit-loading">Sending...</span> : <>Send Reset Code <ArrowRight size={18} /></>}
                 </button>
-                <div className="otp-resend" style={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
-                  <button type="button" className="otp-back-btn" onClick={goLogin} style={{ background: 'none', border: 'none', color: '#6366f1', cursor: 'pointer', fontWeight: 500 }}>
+                <div className="otp-resend">
+                  <button type="button" className="otp-back-btn" onClick={goLogin}>
                     ← Back to Sign In
                   </button>
                 </div>
@@ -507,11 +673,11 @@ function RecruiterAuth() {
               </div>
               <form onSubmit={handleVerifyResetOtp} className="auth-form" autoComplete="off">
                 {renderOtpBoxes()}
-                <button type="submit" className="auth-submit" disabled={loading} style={{ marginTop: '20px' }}>
+                <button type="submit" className="auth-submit" disabled={loading}>
                   {loading ? <span className="auth-submit-loading">Verifying...</span> : <>Verify Code <ArrowRight size={18} /></>}
                 </button>
-                <div className="otp-resend" style={{ marginTop: '16px', display: 'flex', justifyContent: 'center' }}>
-                  <button type="button" className="otp-back-btn" onClick={() => setScreen("forgot-email")} style={{ background: 'none', border: 'none', color: '#6366f1', cursor: 'pointer', fontWeight: 500 }}>
+                <div className="otp-resend" style={{ justifyContent: "center" }}>
+                  <button type="button" className="otp-back-btn" onClick={() => setScreen("forgot-email")}>
                     ← Change email
                   </button>
                 </div>
@@ -540,7 +706,8 @@ function RecruiterAuth() {
                       placeholder="Min. 6 characters"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
-                      className="input-with-toggle" autoComplete="new-password" minLength={6} required
+                      className="input-with-toggle"
+                      autoComplete="new-password" minLength={6} required
                     />
                     <button type="button" className="password-toggle" onClick={() => setShowNewPass(!showNewPass)}>
                       {showNewPass ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -548,23 +715,24 @@ function RecruiterAuth() {
                   </div>
                 </div>
                 <div className="input-field">
-                  <label htmlFor="confirm-new-password">Confirm Password</label>
+                  <label htmlFor="confirm-new-password">Confirm New Password</label>
                   <div className="input-group">
                     <Lock size={18} className="input-icon" />
                     <input
                       id="confirm-new-password"
                       type={showConfirmNewPass ? "text" : "password"}
-                      placeholder="Match new password"
+                      placeholder="Re-enter new password"
                       value={confirmNewPassword}
                       onChange={(e) => setConfirmNewPassword(e.target.value)}
-                      className="input-with-toggle" autoComplete="new-password" minLength={6} required
+                      className="input-with-toggle"
+                      autoComplete="new-password" minLength={6} required
                     />
                     <button type="button" className="password-toggle" onClick={() => setShowConfirmNewPass(!showConfirmNewPass)}>
                       {showConfirmNewPass ? <EyeOff size={18} /> : <Eye size={18} />}
                     </button>
                   </div>
                 </div>
-                <button type="submit" className="auth-submit" disabled={loading} style={{ marginTop: '20px' }}>
+                <button type="submit" className="auth-submit" disabled={loading}>
                   {loading ? <span className="auth-submit-loading">Resetting...</span> : <>Reset Password <ArrowRight size={18} /></>}
                 </button>
               </form>
@@ -581,4 +749,4 @@ function RecruiterAuth() {
   );
 }
 
-export default RecruiterAuth;
+export default Auth;

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Upload, FileText, CheckCircle, AlertTriangle, Lightbulb, Activity, ArrowRight, RefreshCw } from "lucide-react";
-import { getAtsScore } from "../services/atsAPI";
-import notify from '../utils/notify';
-import { showAppError } from "../utils/appAlert";
-import "./AtsScore.css";
+import { getAtsScore } from "@/services/atsAPI";
+import notify from "@/utils/notify";
+import { showAppError } from "@/utils/appAlert";
+import '@/styles/AtsScore.css';
 
 const AtsScore = () => {
   const [uploading, setUploading] = useState(false);

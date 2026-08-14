@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { X, Bell } from 'lucide-react';
-import API from '../utils/api';
+import API from "@/utils/api";
 
 const formatTimeAgo = (timestamp) => {
   if (!timestamp) return 'Just now';

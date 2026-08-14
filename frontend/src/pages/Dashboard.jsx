@@ -5,8 +5,8 @@ import {
   Star, ChevronDown, ChevronUp, Check, Play, Award, Trophy, Target,
   Calendar, MessageSquare, Lock, Server
 } from "lucide-react";
-import { getPlatformStats } from "../services/userAPI";
-import "./Dashboard.css";
+import { getPlatformStats } from "@/services/userAPI";
+import '@/styles/Dashboard.css';
 
 function Dashboard({ landingRole = 'candidate', setLandingRole }) {
   const navigate = useNavigate();

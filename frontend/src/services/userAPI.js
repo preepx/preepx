@@ -1,4 +1,4 @@
-import API from "../utils/api";
+import API from "@/utils/api";
 import { getAllInterviews } from "./interviewAPI";
 
 export const getProfile = () => API.get("/users/profile").then((r) => r.data);

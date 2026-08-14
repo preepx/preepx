@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Trophy, Award, Flame, BarChart3, Target, Camera, Edit2, MapPin, GraduationCap, Phone, Github, Linkedin, X, Check, Share2, Copy, FileText, Upload, Building2 } from "lucide-react";
-import notify from '../utils/notify';
-import { getProfile, getAnalytics, uploadProfilePhoto, syncUserToStorage, updateProfileDetails, uploadResume } from "../services/userAPI";
-import { getAssetUrl } from "../utils/assetUrl";
-import { showAppError } from "../utils/appAlert";
+import notify from "@/utils/notify";
+import { getProfile, getAnalytics, uploadProfilePhoto, syncUserToStorage, updateProfileDetails, uploadResume } from "@/services/userAPI";
+import { getAssetUrl } from "@/utils/assetUrl";
+import { showAppError } from "@/utils/appAlert";
 import Cropper from 'react-easy-crop';
-import getCroppedImg from '../utils/cropImage';
-import "./Profile.css";
+import getCroppedImg from "@/utils/cropImage";
+import '@/styles/Profile.css';
 
 function Profile() {
   const navigate = useNavigate();

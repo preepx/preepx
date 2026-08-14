@@ -4,7 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "./styles/toast.css";
 import { AlertProvider } from "./context/AlertContext";
 import App from "./App";
-import "./index.css";
+import '@/styles/index.css';
 
 // ── Keep Render backend awake — ping every 4 min ──────
 const BACKEND = import.meta.env.VITE_API_URL?.replace("/api", "") || "https://interview-cochhh.onrender.com";

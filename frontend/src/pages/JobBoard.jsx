@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Briefcase, MapPin, Sparkles, Search, Building2, ChevronRight } from "lucide-react";
-import { getPublishedJobs, applyToJob } from "../services/candidateJobsAPI";
-import DashboardSkeleton from "../components/recruiter/DashboardSkeleton";
-import EmptyState from "../components/recruiter/EmptyState";
-import notify from "../utils/notify";
-import "./JobBoard.css"; // Keep for overrides
-import "../pages/ApplyJobsDashboard.css"; // Reuse premium styles
+import { getPublishedJobs, applyToJob } from "@/services/candidateJobsAPI";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
+import EmptyState from "@/components/recruiter/EmptyState";
+import notify from "@/utils/notify";
+import '@/styles/JobBoard.css'; // Keep for overrides
+import '@/styles/ApplyJobsDashboard.css'; // Reuse premium styles
 
 export default function JobBoard() {
   const [jobs, setJobs] = useState([]);

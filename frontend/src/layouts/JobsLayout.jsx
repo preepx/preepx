@@ -5,12 +5,12 @@ import {
   Menu, X, Bell, ChevronDown, Moon, Sun, PanelLeftClose, PanelLeft,
   ChevronLeft, Star, CheckCircle, AlertCircle, Clock,
 } from "lucide-react";
-import API from "../utils/api";
-import { getMyApplications } from "../services/candidateJobsAPI";
-import { getMyAssessments } from "../services/assessmentAPI";
+import API from "@/utils/api";
+import { getMyApplications } from "@/services/candidateJobsAPI";
+import { getMyAssessments } from "@/services/assessmentAPI";
 import { io } from "socket.io-client";
-import "./RecruiterLayout.css";
-import "./JobsLayout.css";
+import '@/styles/RecruiterLayout.css';
+import '@/styles/JobsLayout.css';
 
 const NAV_SECTIONS = [
   {
@@ -174,7 +174,7 @@ function JobsLayout({ children }) {
     if (!user?._id) return;
     const SOCKET_URL = API.defaults?.baseURL ? API.defaults.baseURL.replace('/api', '') : 'http://localhost:4000';
     const socket = io(SOCKET_URL);
-    
+
     const handleConnect = () => {
       socket.emit('join_room', user._id);
     };
@@ -347,11 +347,11 @@ function JobsLayout({ children }) {
               ) : (
                 <ul className="rx-notif-list">
                   {notifications.slice(0, 5).map((n, i) => (
-                    <JobNotificationItem 
-                      key={n.id || n._id || i} 
-                      n={n} 
-                      onRead={handleRead} 
-                      onDelete={handleDelete} 
+                    <JobNotificationItem
+                      key={n.id || n._id || i}
+                      n={n}
+                      onRead={handleRead}
+                      onDelete={handleDelete}
                     />
                   ))}
                 </ul>

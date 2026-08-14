@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { X, Briefcase, Code, Gauge, Layers, Hash } from "lucide-react";
-import { fetchInterviewQuestions } from "../services/interviewAPI";
-import notify from '../utils/notify';
-import { showAppError } from "../utils/appAlert";
-import "./InterviewModal.css";
+import { fetchInterviewQuestions } from "@/services/interviewAPI";
+import notify from "@/utils/notify";
+import { showAppError } from "@/utils/appAlert";
+import '@/styles/InterviewModal.css';
 
 const ROLES = [
   "Frontend Developer", "Backend Developer", "Full Stack Developer",
