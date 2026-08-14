@@ -10,6 +10,7 @@ import { getMyApplications } from "@/services/candidateJobsAPI";
 import { getMyAssessments } from "@/services/assessmentAPI";
 import { io } from "socket.io-client";
 import Footer from "@/components/Footer";
+import NotificationModal from "@/components/NotificationModal";
 import '@/styles/RecruiterLayout.css';
 import '@/styles/JobsLayout.css';
 
@@ -133,7 +134,7 @@ function JobsLayout({ children }) {
   const avatar = user.profilePic ||
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName || "U")}&background=6366f1&color=fff`;
 
-  const pageTitle = PAGE_TITLES[location.pathname] || "Apply Jobs";
+  const pageTitle = "Apply Jobs";
 
   useEffect(() => {
     const theme = localStorage.getItem("theme") || "dark";
@@ -373,60 +374,36 @@ function JobsLayout({ children }) {
               </div>
             )}
           </form>
-          <button type="button" className="rx-icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
-            {isDark ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
-          <button
-            type="button"
-            className="rx-icon-btn rx-notif-btn"
-            aria-label="Notifications"
-            onClick={() => setShowNotifications(!showNotifications)}
-          >
-            <Bell size={18} />
-            {unreadCount > 0 && <span className="rx-notif-badge">{unreadCount > 9 ? "9+" : unreadCount}</span>}
-          </button>
-          {showNotifications && (
-            <>
-              <div style={{ position: 'fixed', inset: 0, zIndex: 199 }} onClick={() => setShowNotifications(false)} />
-              <div className="rx-notif-panel" style={{ zIndex: 200 }}>
-                <div className="rx-notif-head">
-                  <strong>Notifications</strong>
-                  {unreadCount > 0 && (
-                    <button type="button" className="rx-notif-mark" onClick={markAllRead}>
-                      Mark all read
-                    </button>
-                  )}
-                </div>
-                {notifications.length === 0 ? (
-                  <div className="rx-muted" style={{ padding: 16, fontSize: 13, minHeight: '200px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    No notifications yet
-                  </div>
-                ) : (
-                  <ul className="rx-notif-list">
-                    {notifications.map((n, i) => (
-                      <JobNotificationItem
-                        key={n.id || n._id || i}
-                        n={n}
-                        onRead={handleRead}
-                        onDelete={handleDelete}
-                      />
-                    ))}
-                  </ul>
-                )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
+            <button type="button" className="rx-icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
+              {isDark ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            <button type="button" className="rx-icon-btn" aria-label="Notifications" onClick={() => setShowNotifications(true)} style={{ position: 'relative' }}>
+              <Bell size={18} />
+              {unreadCount > 0 && (
+                <span className="notification-badge">
+                  {unreadCount > 9 ? "9+" : unreadCount}
+                </span>
+              )}
+            </button>
+            <Link to="/apply-jobs/profile" className="rx-profile">
+              <img src={avatar} alt="" className="rx-profile-avatar-img" />
+              <div className="rx-profile-text">
+                <strong>{user.fullName || "Candidate"}</strong>
+                <span>Job Profile</span>
               </div>
-            </>
-          )}
-          <Link to="/apply-jobs/profile" className="rx-profile">
-            <img src={avatar} alt="" className="rx-profile-avatar-img" />
-            <div className="rx-profile-text">
-              <strong>{user.fullName || "Candidate"}</strong>
-              <span>Job Profile</span>
-            </div>
-            <ChevronDown size={16} className="rx-profile-chevron" />
-          </Link>
+              <ChevronDown size={16} className="rx-profile-chevron" />
+            </Link>
+          </div>
         </header>
         <main className="rx-content">{children}</main>
       </div>
+      <NotificationModal
+        isOpen={showNotifications}
+        onClose={() => setShowNotifications(false)}
+        notifs={notifications}
+        setNotifs={setNotifications}
+      />
     </div>
     <Footer />
     </>

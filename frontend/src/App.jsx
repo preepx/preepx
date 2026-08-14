@@ -182,6 +182,7 @@ function AppContent() {
           <Route path="/apply-jobs/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsMyApplications /></ProtectedRoute>} />
           <Route path="/apply-jobs/assessments" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsAssessments /></ProtectedRoute>} />
           <Route path="/apply-jobs/profile" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsProfile /></ProtectedRoute>} />
+          <Route path="/apply-jobs/settings" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><Settings /></ProtectedRoute>} />
           <Route path="/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsMyApplications /></ProtectedRoute>} />
           <Route path="/assessment/:id" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><TakeAssessment /></ProtectedRoute>} />
           <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
