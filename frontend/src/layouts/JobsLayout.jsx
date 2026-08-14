@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Briefcase, Search, ClipboardCheck, User, LogOut,
@@ -8,6 +8,7 @@ import {
 import API from "../utils/api";
 import { getMyApplications } from "../services/candidateJobsAPI";
 import { getMyAssessments } from "../services/assessmentAPI";
+import { io } from "socket.io-client";
 import "./RecruiterLayout.css";
 import "./JobsLayout.css";
 
@@ -37,6 +38,78 @@ const PAGE_TITLES = {
   "/apply-jobs/assessments": "Assessments",
   "/apply-jobs/profile": "Job Profile",
 };
+
+function JobNotificationItem({ n, onRead, onDelete }) {
+  const [translateX, setTranslateX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const startXRef = useRef(0);
+  const draggedRef = useRef(false);
+
+  const handleStart = (clientX) => {
+    startXRef.current = clientX;
+    setIsDragging(true);
+    draggedRef.current = false;
+  };
+  const handleMove = (clientX) => {
+    if (!isDragging) return;
+    const diff = clientX - startXRef.current;
+    setTranslateX(diff);
+    if (Math.abs(diff) > 10) draggedRef.current = true;
+  };
+  const handleEnd = () => {
+    if (!isDragging) return;
+    setIsDragging(false);
+    if (Math.abs(translateX) > 60) {
+      onDelete(n.id || n._id);
+    } else {
+      setTranslateX(0);
+    }
+  };
+
+  const handleClick = (e) => {
+    if (draggedRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    if (!n.read) onRead(n.id || n._id);
+  };
+
+  return (
+    <li
+      className={n.read ? "" : "unread"}
+      onClick={handleClick}
+      onTouchStart={(e) => handleStart(e.touches[0].clientX)}
+      onTouchMove={(e) => handleMove(e.touches[0].clientX)}
+      onTouchEnd={handleEnd}
+      onMouseDown={(e) => handleStart(e.clientX)}
+      onMouseMove={(e) => handleMove(e.clientX)}
+      onMouseUp={handleEnd}
+      onMouseLeave={handleEnd}
+      style={{
+        transform: `translateX(${translateX}px)`,
+        transition: isDragging ? 'none' : 'transform 0.3s ease',
+        opacity: Math.abs(translateX) > 60 ? 0 : 1,
+        cursor: 'pointer'
+      }}
+    >
+      <span>
+        {n.type === "shortlisted" ? <Star size={14} /> :
+          n.type === "assessment" ? <ClipboardCheck size={14} /> :
+            n.type === "rejected" ? <AlertCircle size={14} /> :
+              <CheckCircle size={14} />}
+      </span>
+      <div>
+        <strong>{n.title || "Update"}</strong>
+        <p>{n.message?.length > 60 ? n.message.substring(0, 60) + "..." : n.message}</p>
+        <span className="rx-muted" style={{ fontSize: 11 }}>
+          <Clock size={11} style={{ verticalAlign: -2, marginRight: 4 }} />
+          {n.time || new Date(n.createdAt || Date.now()).toLocaleDateString()}
+        </span>
+      </div>
+    </li>
+  );
+}
 
 function JobsLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -83,9 +156,41 @@ function JobsLayout({ children }) {
       .catch(() => { });
 
     API.get("/users/notifications")
-      .then((res) => setNotifications((res.data || []).slice(0, 15)))
+      .then((res) => setNotifications([...(res.data || [])].reverse()))
       .catch(() => { });
   }, [location.pathname]);
+
+  useEffect(() => {
+    const handleNewNotif = (e) => {
+      if (e.detail) {
+        setNotifications(prev => [e.detail, ...prev]);
+      }
+    };
+    window.addEventListener('newNotification', handleNewNotif);
+    return () => window.removeEventListener('newNotification', handleNewNotif);
+  }, []);
+
+  useEffect(() => {
+    if (!user?._id) return;
+    const SOCKET_URL = API.defaults?.baseURL ? API.defaults.baseURL.replace('/api', '') : 'http://localhost:4000';
+    const socket = io(SOCKET_URL);
+    
+    const handleConnect = () => {
+      socket.emit('join_room', user._id);
+    };
+
+    if (socket.connected) {
+      handleConnect();
+    } else {
+      socket.on('connect', handleConnect);
+    }
+
+    socket.on('global_notification', (data) => {
+      window.dispatchEvent(new CustomEvent('newNotification', { detail: data }));
+    });
+
+    return () => socket.disconnect();
+  }, [user?._id]);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -105,6 +210,20 @@ function JobsLayout({ children }) {
     document.documentElement.dataset.theme = next;
     localStorage.setItem("theme", next);
     setIsDark(!isDark);
+  };
+
+  const handleRead = async (id) => {
+    try {
+      setNotifications(prev => prev.map(n => (n.id === id || n._id === id) ? { ...n, read: true } : n));
+      await API.put(`/users/notifications/${id}/read`);
+    } catch { }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      setNotifications(prev => prev.filter(n => n.id !== id && n._id !== id));
+      await API.delete(`/users/notifications/${id}`);
+    } catch { }
   };
 
   const markAllRead = async () => {
@@ -227,23 +346,13 @@ function JobsLayout({ children }) {
                 <p className="rx-muted" style={{ padding: 16, fontSize: 13 }}>No notifications yet</p>
               ) : (
                 <ul className="rx-notif-list">
-                  {notifications.map((n, i) => (
-                    <li key={i} className={n.read ? "" : "unread"}>
-                      <span>
-                        {n.type === "shortlisted" ? <Star size={14} /> :
-                          n.type === "assessment" ? <ClipboardCheck size={14} /> :
-                            n.type === "rejected" ? <AlertCircle size={14} /> :
-                              <CheckCircle size={14} />}
-                      </span>
-                      <div>
-                        <strong>{n.title || "Update"}</strong>
-                        <p>{n.message}</p>
-                        <span className="rx-muted" style={{ fontSize: 11 }}>
-                          <Clock size={11} style={{ verticalAlign: -2, marginRight: 4 }} />
-                          {n.time || new Date(n.createdAt || Date.now()).toLocaleDateString()}
-                        </span>
-                      </div>
-                    </li>
+                  {notifications.slice(0, 5).map((n, i) => (
+                    <JobNotificationItem 
+                      key={n.id || n._id || i} 
+                      n={n} 
+                      onRead={handleRead} 
+                      onDelete={handleDelete} 
+                    />
                   ))}
                 </ul>
               )}
