@@ -103,6 +103,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/api/health", (req, res) => res.json({ status: "ok", version: "2.0" }));
 
+
+
 app.use("/api/users", require("./src/modules/users/user.routes"));
 app.use("/api/interview", require("./src/modules/interview/interview.routes"));
 app.use("/api/mcq", require("./src/modules/mcq/mcq.routes"));
