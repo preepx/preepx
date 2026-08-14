@@ -43,7 +43,7 @@ const PUBLIC_ROUTES = [
   "/interview-tips", "/blog", "/help-center", "/community",
   "/about-us", "/careers", "/privacy-policy", "/terms-of-service",
   "/hiring-guide", "/recruiter-resources", "/documentation",
-  "/ai-screening", "/job-management", "/assessments", "/interviews", "/analytics"
+  "/ai-screening", "/job-management", "/assessments", "/interviews"
 ];
 const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "/objective-exam/take", "/coding-exam"];
 
@@ -122,7 +122,6 @@ function AppContent() {
           <Route path="/job-management" element={<StaticPage />} />
           <Route path="/assessments" element={<StaticPage />} />
           <Route path="/interviews" element={<StaticPage />} />
-          <Route path="/analytics" element={<StaticPage />} />
 
           <Route path="/user-dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
           <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
