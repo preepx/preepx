@@ -40,7 +40,7 @@ export default function JobOverview({ jobs = [] }) {
           <thead>
             <tr>
               <th>Role</th>
-              <th>Location</th>
+              <th className="rx-col-location">Location</th>
               <th>Candidates</th>
               <th>Status</th>
               <th>Actions</th>
@@ -53,7 +53,7 @@ export default function JobOverview({ jobs = [] }) {
                   <strong>{job.title}</strong>
                   <span className="rx-muted">{job.role} · {job.experienceMin ?? 0}–{job.experienceMax ?? 5} yrs</span>
                 </td>
-                <td><MapPin size={13} /> {job.location || "Remote"}</td>
+                <td className="rx-col-location"><MapPin size={13} /> {job.location || "Remote"}</td>
                 <td><Users size={13} /> {job.candidateCount ?? 0}</td>
                 <td>
                   <span className={`rx-badge ${STATUS_BADGE[job.status] || "rx-badge-gray"}`}>{job.status}</span>

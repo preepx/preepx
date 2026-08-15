@@ -544,9 +544,16 @@
   .rx-sidebar-overlay { display: block; }
   .rx-sidebar { position: fixed; transform: translateX(-100%); transition: transform 0.25s ease; z-index: 1000; }
   .rx-sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
-  .rx-menu-btn { display: block; }
+  .rx-menu-btn { display: block; margin-right: auto; }
+  .rx-page-title { display: none; }
+  .rx-header { padding: 10px 12px; gap: 8px; }
+  .rx-content { padding: 16px 12px 32px; }
+  .rx-icon-btn { width: 34px; height: 34px; border-radius: 8px; }
+  .rx-profile { padding: 0; border: none; background: transparent; }
+  .rx-profile-avatar { width: 30px; height: 30px; font-size: 12px; }
   .rx-profile-text { display: none; }
   .rx-profile-chevron { display: none; }
+  .rx-notif-panel { right: 0; width: min(360px, calc(100vw - 16px)); }
 }
 
 /* Premium Form Styles */
