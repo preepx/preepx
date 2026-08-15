@@ -88,6 +88,10 @@ function Profile() {
       };
       const updated = await updateProfileDetails(payload);
       setUser(updated);
+      setEditForm({
+        ...updated,
+        skills: (updated.skills || []).join(", "),
+      });
       syncUserToStorage(updated);
       window.dispatchEvent(new Event("user-updated"));
       notify.success("Profile updated successfully!");

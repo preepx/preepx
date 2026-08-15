@@ -2,16 +2,20 @@ import { useState, useEffect, useCallback } from "react";
 import { getWallet } from "@/services/walletAPI";
 
 export function useWallet({ autoFetch = true } = {}) {
-  const [wallet, setWallet] = useState(null);
-  const [loading, setLoading] = useState(autoFetch);
+  const cached = localStorage.getItem('wallet_balance');
+  const [wallet, setWallet] = useState(cached ? { balance: parseInt(cached, 10) } : null);
+  const [loading, setLoading] = useState(autoFetch && !cached);
   const [error, setError] = useState(null);
 
   const refresh = useCallback(async () => {
     try {
-      setLoading(true);
+      if (!localStorage.getItem('wallet_balance')) setLoading(true);
       setError(null);
       const data = await getWallet();
       setWallet(data);
+      if (data && data.balance !== undefined) {
+        localStorage.setItem('wallet_balance', data.balance);
+      }
       return data;
     } catch (err) {
       setError(err.response?.data?.message || "Failed to load wallet");
