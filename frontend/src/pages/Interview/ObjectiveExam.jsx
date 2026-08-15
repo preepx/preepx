@@ -61,7 +61,7 @@ export default function ObjectiveExam() {
   const mobileCamRef = useRef(null);
 
   const [topic, setTopic] = useState('');
-  const [numQ, setNumQ] = useState(20);
+  const [numQ, setNumQ] = useState(10);
   const [screen, setScreen] = useState('SETUP');
   const [question, setQuestion] = useState(null);
   const [selected, setSelected] = useState('');
