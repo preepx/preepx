@@ -179,7 +179,8 @@ async function generateAllQuestions(socket) {
     while (allQuestions.length < targetNum && attempts < 4) {
       const remaining = targetNum - allQuestions.length;
       const prompt = `Generate exactly ${remaining} multiple choice questions about '${session.topic}'.
-Provide 4 options for each. Format the output STRICTLY as a JSON object with a "questions" array containing objects with this exact structure:
+Provide 4 options for each. Ensure the questions are highly varied, unique, and cover different difficulty levels, edge cases, or real-world scenarios so they do not repeat standard textbook questions. 
+Format the output STRICTLY as a JSON object with a "questions" array containing objects with this exact structure:
 {
   "questions": [
     {
@@ -194,7 +195,7 @@ No other text, only the JSON object.
 IMPORTANT: The "correctAnswer" field must exactly match the full text of one of the items in the "options" array. Do NOT return "Option A", "A", or "C". Return the actual text string.`;
 
       const qDataArray = await aiService.generateJson(prompt, {
-        temperature: 0.7,
+        temperature: 0.9,
         max_tokens: 3000,
       });
 

@@ -168,7 +168,7 @@ function Profile() {
   const levelProgress = ((user.points || 0) % 100);
 
   // Calculate profile completeness
-  const profileFields = ['profilePic', 'fullName', 'email', 'mobile', 'college', 'degree', 'graduationYear', 'address', 'bio', 'github', 'linkedin', 'skills', 'preferredRole', 'currentCompany', 'currentDesignation', 'experienceYears', 'resumeUrl', 'location'];
+  const profileFields = ['fullName', 'bio', 'mobile', 'college', 'degree', 'address', 'github', 'linkedin', 'resumeUrl'];
   const filledFields = profileFields.filter(field => {
     const val = user[field];
     if (field === 'skills') return Array.isArray(val) ? val.length > 0 : val && String(val).trim();
