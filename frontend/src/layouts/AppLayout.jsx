@@ -157,7 +157,7 @@ function AppLayout({ children }) {
   // Global WebSocket for Real-Time Notifications
   useEffect(() => {
     if (!user?._id) return;
-    const SOCKET_URL = API.defaults?.baseURL ? API.defaults.baseURL.replace('/api', '') : 'http://localhost:4000';
+    const SOCKET_URL = API.defaults?.baseURL ? API.defaults.baseURL.replace('/api', '') : '';
     const socket = io(SOCKET_URL);
     
     const handleConnect = () => {

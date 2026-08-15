@@ -81,7 +81,7 @@ function Auth() {
   }, [navigate]);
 
   const handleGoogleLogin = () => {
-    const apiBase = API.defaults.baseURL || "http://localhost:4000/api";
+    const apiBase = API.defaults.baseURL;
     let url = `${apiBase.replace(/\/api$/, "")}/api/auth/google`;
     if (registerData.referralCode) {
       url += `?state=${registerData.referralCode}`;
