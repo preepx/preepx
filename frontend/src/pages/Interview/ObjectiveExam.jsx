@@ -13,9 +13,7 @@ import notify from "@/utils/notify";
 import { useFaceDetection } from "@/hooks/useFaceDetection";
 import '@/styles/ObjectiveExam.css';
 
-const SOCKET_URL = API.defaults.baseURL
-  ? API.defaults.baseURL.replace('/api', '')
-  : 'https://admiminterview-coch.onrender.com';
+const SOCKET_URL = import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, "") || "";
 
 const TIMER_SECONDS = 30;
 const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
@@ -182,7 +180,7 @@ export default function ObjectiveExam() {
     if (!isFullscreen) return notify.error('Fullscreen required.');
     setScreen('EXAM'); setCorrect(0); setWrong(0); setWarnings(0);
     const user = JSON.parse(localStorage.getItem('user') || '{"_id":"guest"}');
-    socketRef.current = io(SOCKET_URL);
+    socketRef.current = io(SOCKET_URL, { transports: ["websocket", "polling"] });
     socketRef.current.on('connect', () =>
       socketRef.current.emit('start_mcq', { topic, userId: user._id, numQuestions: parseInt(numQ) }));
     socketRef.current.on('receive_question', d => { setQuestion(d); setSelected(''); setSubmitting(false); });
