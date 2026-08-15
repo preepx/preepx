@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { X, Bell } from 'lucide-react';
-import API from '../utils/api';
+import API from "@/utils/api";
 
 const formatTimeAgo = (timestamp) => {
   if (!timestamp) return 'Just now';
@@ -171,6 +171,7 @@ const NotificationModal = ({ isOpen, onClose, notifs, setNotifs }) => {
   return (
     <div
       className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[9999] flex justify-center items-center"
+      onClick={onClose}
     >
       <div
         className="bg-[var(--surface)] p-6 rounded-xl w-[400px] max-w-[90%] min-h-[400px] max-h-[80vh] shadow-[var(--shadow-lg)] border border-[var(--border)] flex flex-col"

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { AlertCircle, CheckCircle2, Info, X } from "lucide-react";
-import "./StatusModal.css";
+import '@/styles/StatusModal.css';
 
 const ICONS = {
   error: AlertCircle,

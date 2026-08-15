@@ -27,16 +27,50 @@ const filterDailyLogin = async (user) => {
   return user;
 };
 
+const fs = require("fs");
+const pdf = require("pdf-parse");
+
 const updateProfileDetails = async (userId, updateData) => {
   const user = await User.findById(userId);
   if (!user) throw new NotFoundError("User not found");
 
-  const fields = ['fullName', 'mobile', 'college', 'address', 'bio', 'github', 'linkedin', 'degree'];
+  const fields = ['fullName', 'mobile', 'college', 'address', 'bio', 'github', 'linkedin', 'degree',
+    'preferredRole', 'location', 'currentCompany', 'currentDesignation',
+    // Jobs profile fields
+    'headline', 'phone', 'city', 'summary', 'portfolio'
+  ];
   fields.forEach(field => {
     if (updateData[field] !== undefined) {
       user[field] = updateData[field];
     }
   });
+
+  // Handle experience array
+  if (updateData.experience !== undefined && Array.isArray(updateData.experience)) {
+    user.experience = updateData.experience;
+  }
+
+  // Handle education array
+  if (updateData.education !== undefined && Array.isArray(updateData.education)) {
+    user.education = updateData.education;
+  }
+
+  if (updateData.skills !== undefined) {
+    if (Array.isArray(updateData.skills)) {
+      user.skills = updateData.skills.map((s) => String(s).trim()).filter(Boolean);
+    } else if (typeof updateData.skills === "string") {
+      user.skills = updateData.skills.split(",").map((s) => s.trim()).filter(Boolean);
+    }
+  }
+
+  if (updateData.experienceYears !== undefined && updateData.experienceYears !== "") {
+    user.experienceYears = Math.max(0, Number(updateData.experienceYears) || 0);
+  }
+
+  if (updateData.graduationYear !== undefined && updateData.graduationYear !== "") {
+    const year = Number(updateData.graduationYear);
+    if (year >= 1970 && year <= 2035) user.graduationYear = year;
+  }
 
   let bonusMessage = null;
 
@@ -67,6 +101,43 @@ const updateProfilePhoto = async (userId, file) => {
     { new: true }
   ).lean();
   
+  if (!user) throw new NotFoundError("User not found");
+  return user;
+};
+
+const updateResume = async (userId, file) => {
+  if (!file) throw new BadRequestError("Please upload a PDF resume");
+  if (file.mimetype !== "application/pdf") throw new BadRequestError("Only PDF files are allowed");
+
+  const resumeUrl = `/uploads/resumes/${file.filename}`;
+  const update = {
+    resumeUrl,
+    resumeFileName: file.originalname,
+    resumeUploadedAt: new Date(),
+  };
+
+  try {
+    const dataBuffer = fs.readFileSync(file.path);
+    const parsed = await pdf(dataBuffer);
+    const skillRegex = /(Skills|Technical Skills|Technologies|Tools|Expertise|Domain)[:\s]*(.+)/i;
+    const skillMatch = parsed.text.match(skillRegex);
+    if (skillMatch) {
+      const extracted = skillMatch[2]
+        .split(/,|\n/)
+        .map((s) => s.trim())
+        .filter((s) => s.length > 1 && s.length < 40)
+        .slice(0, 25);
+      if (extracted.length) {
+        const existing = await User.findById(userId).select("skills").lean();
+        update.skills = [...new Set([...(existing?.skills || []), ...extracted])];
+      }
+    }
+  } catch (_) {
+    // Resume saved even if skill extraction fails
+  }
+
+  const user = await User.findByIdAndUpdate(userId, update, { new: true }).lean();
+
   if (!user) throw new NotFoundError("User not found");
   return user;
 };
@@ -451,6 +522,7 @@ module.exports = {
   getProfile,
   updateProfileDetails,
   updateProfilePhoto,
+  updateResume,
   updateSettings,
   getDashboard,
   getPlatformStats,

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import notify from '../utils/notify';
+import notify from "@/utils/notify";
 import {
   ArrowLeft, BookOpen, FileText, Cpu, Tag,
   HelpCircle, ChevronDown, ChevronUp, Hash, ExternalLink,
 } from "lucide-react";
-import API from "../utils/api";
-import Loader from "../components/Loader";
-import "./BtechNoteDetail.css";
+import API from "@/utils/api";
+import Loader from "@/components/Loader";
+import '@/styles/BtechNoteDetail.css';
 
 function BtechNoteDetail() {
   const { id } = useParams();

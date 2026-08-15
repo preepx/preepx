@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Video, FileText, Trophy, BarChart3, Award, Flame, PlayCircle,
-  Wallet, BookOpen, Mic, Target, TrendingUp, ChevronRight, Sparkles,
-  ClipboardCheck, Zap, Code
+  Wallet, BookOpen, Target, TrendingUp, ChevronRight, Sparkles,
+  ClipboardCheck, Zap, Code, Briefcase
 } from "lucide-react";
-import { getProfile, getAnalytics } from "../services/userAPI";
-import { uploadResume } from "../services/resumeAPI";
-import notify from '../utils/notify';
-import { showAppError } from "../utils/appAlert";
+import { getProfile, getAnalytics } from "@/services/userAPI";
+import notify from "@/utils/notify";
 import { useWallet } from "../features/wallet/hooks/useWallet";
-import Loader from "../components/Loader";
-import "./UserDashboard.css";
+import Loader from "@/components/Loader";
+import '@/styles/UserDashboard.css';
 
 const EXPLORE_LINKS = [
   { icon: Code, label: "Code Practice", desc: "Interactive coding challenges", path: "/coding-practice", color: "#ec4899", isNew: true },
@@ -41,38 +39,7 @@ function UserDashboard() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [uploadingResume, setUploadingResume] = useState(false);
-  const fileInputRef = useRef(null);
   const { balance } = useWallet();
-
-  const handleResumeUpload = async (e) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    if (!file.name.endsWith(".pdf")) {
-      showAppError("Only PDF files are supported. Please upload a .pdf resume.", "Invalid file type");
-      return;
-    }
-    try {
-      setUploadingResume(true);
-      notify.info("Analyzing resume...");
-      const res = await uploadResume(file);
-      notify.success(`Found ${res.skills?.length || 0} skills. Starting interview!`);
-      navigate("/start-interview", {
-        state: {
-          jobTitle: "Resume-based Role",
-          jobTopic: res.result || "Skills from Resume",
-          questions: res.questions,
-          interviewId: res.interviewId,
-          fromResume: true,
-        },
-      });
-    } catch (err) {
-      showAppError(err.response?.data?.error || "Resume upload failed. Please try again.", "Upload failed");
-    } finally {
-      setUploadingResume(false);
-      if (fileInputRef.current) fileInputRef.current.value = "";
-    }
-  };
 
   const refreshData = () => {
     Promise.all([
@@ -119,7 +86,7 @@ function UserDashboard() {
     return Math.max(...stats.weeklyData.map((d) => d.count), 1);
   }, [stats]);
 
-  if (loading || uploadingResume) return <Loader />;
+  if (loading) return <Loader />;
 
   const firstName = (user?.fullName || "User").split(" ")[0];
   const avatar = user.profilePic ||
@@ -223,6 +190,18 @@ function UserDashboard() {
         </div>
       </section>
 
+      {/* APPLY JOBS CTA */}
+      <section className="ud-section">
+        <button type="button" className="ud-apply-banner" onClick={() => navigate("/apply-jobs")}>
+          <div className="ud-apply-banner-icon"><Briefcase size={28} /></div>
+          <div className="ud-apply-banner-text">
+            <h2>Apply Jobs</h2>
+            <p>View matched roles, track applications, shortlists & assessments</p>
+          </div>
+          <ChevronRight size={24} className="ud-apply-banner-arrow" />
+        </button>
+      </section>
+
       {/* PRACTICE CTAs */}
       <section className="ud-section">
         <div className="ud-section-head">
@@ -260,26 +239,13 @@ function UserDashboard() {
           <p>Everything you need to ace your interviews</p>
         </div>
         <div className="ud-explore-grid">
-          <input
-            type="file"
-            accept=".pdf"
-            hidden
-            ref={fileInputRef}
-            onChange={handleResumeUpload}
-          />
-          {EXPLORE_LINKS.map(({ icon: Icon, label, desc, path, action, color, free, isNew }) => (
+          {EXPLORE_LINKS.map(({ icon: Icon, label, desc, path, color, free, isNew }) => (
             <button
               key={label}
               type="button"
               className="ud-explore-card"
               style={{ "--accent": color }}
-              onClick={() => {
-                if (action === "resume_upload") {
-                  fileInputRef.current?.click();
-                } else if (path) {
-                  navigate(path);
-                }
-              }}
+              onClick={() => path && navigate(path)}
             >
               <div className="ud-explore-icon"><Icon size={22} /></div>
               <div>

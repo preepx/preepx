@@ -17,14 +17,17 @@ const createLimiter = (options) => {
     standardHeaders: true,
     legacyHeaders: false,
     validate: false,
-    keyGenerator: (req, res) => {
-      // Scale horizontally per-user where applicable to avoid global IP blocks on NATs
-      if (req.user && req.user._id) {
+    keyGenerator: (req) => {
+      if (req.user?._id) {
         return req.user._id.toString();
       }
-      // Fallback to IP safely
-      return req.headers["x-forwarded-for"] || req.ip || req.connection.remoteAddress;
-    }
+      const headers = req.headers || {};
+      const forwarded = headers["x-forwarded-for"];
+      if (forwarded) {
+        return String(forwarded).split(",")[0].trim();
+      }
+      return req.ip || req.socket?.remoteAddress || "unknown";
+    },
   };
 
   // if (redisClient) {
@@ -60,7 +63,7 @@ const uploadLimiter = createLimiter({
 // Global fallback for normal API routes
 const globalApiLimiter = createLimiter({
   windowMs: 15 * 60 * 1000,
-  max: 500,
+  max: 5000,
   message: "Too many requests from this IP, please try again after 15 minutes."
 });
 

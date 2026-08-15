@@ -2,21 +2,22 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code, FileText, Bell
+  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code, FileText, Bell, Briefcase
 } from "lucide-react";
-import notify from '../utils/notify';
-import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "../services/userAPI";
-import NotificationModal from "../components/NotificationModal";
-import { getRewardsData, calculateProgress } from "../utils/rewardsUtils";
+import notify from "@/utils/notify";
+import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "@/services/userAPI";
+import NotificationModal from "@/components/NotificationModal";
+import { getRewardsData, calculateProgress } from "@/utils/rewardsUtils";
 import { useWallet } from "../features/wallet/hooks/useWallet";
 import { io } from "socket.io-client";
-import API from "../utils/api";
+import API from "@/utils/api";
 import WalletBadge from "../features/wallet/components/WalletBadge";
-import Footer from "../components/Footer";
-import "./AppLayout.css";
+import Footer from "@/components/Footer";
+import '@/styles/AppLayout.css';
 
 const NAV_ITEMS = [
   { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
+  { to: "/my-assessments", icon: ClipboardCheck, label: "Job Assessments", isNew: true },
   { to: "/interview", icon: Video, label: "Mock Interview" },
   { to: "/coding-practice", icon: Code, label: "Code Practice", isNew: true },
   { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam" },
@@ -55,14 +56,21 @@ const initialNotifications = [
 function AppLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
+  const safeGetUser = () => {
+    try {
+      return JSON.parse(localStorage.getItem("user") || "{}");
+    } catch {
+      localStorage.removeItem("user");
+      return {};
+    }
+  };
+  const [user, setUser] = useState(safeGetUser());
   const location = useLocation();
   const navigate = useNavigate();
   const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
   const { balance } = useWallet();
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifs, setNotifs] = useState([]);
-  const [showComingSoon, setShowComingSoon] = useState(false);
 
   const unreadCount = notifs.filter(n => !n.read).length;
 
@@ -139,7 +147,7 @@ function AppLayout({ children }) {
         syncUserToStorage(u);
         window.dispatchEvent(new Event("user-updated"));
         window.dispatchEvent(new Event("walletUpdated"));
-        
+
         if (dash) {
           checkAndClaimRewards(u, dash);
         }
@@ -149,7 +157,7 @@ function AppLayout({ children }) {
 
   useEffect(() => {
     refreshUser();
-    const handler = () => setUser(JSON.parse(localStorage.getItem("user") || "{}"));
+    const handler = () => setUser(safeGetUser());
     window.addEventListener("user-updated", handler);
     return () => window.removeEventListener("user-updated", handler);
   }, [location.pathname]);
@@ -159,7 +167,7 @@ function AppLayout({ children }) {
     if (!user?._id) return;
     const SOCKET_URL = API.defaults?.baseURL ? API.defaults.baseURL.replace('/api', '') : '';
     const socket = io(SOCKET_URL);
-    
+
     const handleConnect = () => {
       console.log("Global Socket Connected! Emitting join_room for", user._id);
       socket.emit('join_room', user._id);
@@ -222,23 +230,27 @@ function AppLayout({ children }) {
                 <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
               )}
             </Link>
-            <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={18} /></button>
-            <button className="sidebar-toggle mobile-only" onClick={() => setMobileOpen(false)}><X size={18} /></button>
+            <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={20} /></button>
+            <button className="sidebar-toggle mobile-only" onClick={() => setMobileOpen(false)}><X size={20} /></button>
           </div>
 
           <nav className="sidebar-nav">
-            {NAV_ITEMS.map(({ to, icon: Icon, label, isFree, isNew }) => (
-              <Link key={to} to={to} className={`sidebar-link ${location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to)) ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
-                <Icon size={20} style={{ flexShrink: 0 }} />
-                {!collapsed && (
-                  <>
-                    <span className="sidebar-link-label">{label}</span>
-                    {isFree && <span className="nav-free-badge">Free</span>}
-                    {isNew && <span className="nav-new-badge">New</span>}
-                  </>
-                )}
-              </Link>
-            ))}
+            {NAV_ITEMS.map(({ to, icon: Icon, label, isFree, isNew }) => {
+              const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
+              return (
+                <Link key={to} to={to} className={`sidebar-link ${isActive ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
+                  <Icon size={20} style={{ flexShrink: 0 }} />
+                  {!collapsed && (
+                    <>
+                      <span className="sidebar-link-label">{label}</span>
+                      {isFree && <span className="nav-free-badge">Free</span>}
+                      {isNew && <span className="nav-new-badge">New</span>}
+                    </>
+                  )}
+                  {isActive && <span className="nav-indicator" />}
+                </Link>
+              )
+            })}
           </nav>
 
           <div className="sidebar-bottom" style={{ padding: collapsed ? "12px 8px" : "12px 16px" }}>
@@ -266,13 +278,12 @@ function AppLayout({ children }) {
               <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
 
               <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '4px' }}>
-                <button
-                  onClick={() => setShowComingSoon(true)}
-                  className="animate-pulse"
-                  style={{ border: 'none', padding: 0, cursor: 'pointer', background: 'linear-gradient(135deg, #818cf8, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontWeight: 'bold', fontSize: '16px', letterSpacing: '0.5px' }}
+                <Link
+                  to="/apply-jobs"
+                  className="topbar-apply-jobs-link"
                 >
                   Apply Jobs
-                </button>
+                </Link>
               </div>
 
               <div className="topbar-center">
@@ -305,61 +316,6 @@ function AppLayout({ children }) {
         notifs={notifs}
         setNotifs={setNotifs}
       />
-
-      {/* Coming Soon Modal for Jobs */}
-      {showComingSoon && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          background: 'rgba(0, 0, 0, 0.7)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          zIndex: 9999, backdropFilter: 'blur(4px)'
-        }}>
-          <div style={{
-            background: 'var(--surface, #1e1e2d)',
-            padding: '40px',
-            borderRadius: '16px',
-            textAlign: 'center',
-            maxWidth: '400px',
-            width: '90%',
-            border: '1px solid var(--border, #2d2d3f)',
-            boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
-          }}>
-            <div style={{
-              width: '64px', height: '64px', borderRadius: '50%',
-              background: 'rgba(99, 102, 241, 0.1)',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              margin: '0 auto 24px', color: 'var(--primary, #6366f1)'
-            }}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-            </div>
-            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--text, #fff)', margin: '0 0 12px 0' }}>
-              Coming Soon
-            </h2>
-            <p style={{ color: 'var(--text-muted, #94a3b8)', fontSize: '15px', lineHeight: '1.6', margin: '0 0 32px 0' }}>
-              We are working hard to bring you the best job opportunities. Stay tuned!
-            </p>
-            <button
-              onClick={() => setShowComingSoon(false)}
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '8px',
-                background: 'var(--primary, #6366f1)',
-                color: '#fff',
-                border: 'none',
-                fontSize: '16px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                transition: 'background 0.2s'
-              }}
-              onMouseOver={(e) => e.target.style.background = '#4f46e5'}
-              onMouseOut={(e) => e.target.style.background = 'var(--primary, #6366f1)'}
-            >
-              Got it
-            </button>
-          </div>
-        </div>
-      )}
     </>
   );
 }

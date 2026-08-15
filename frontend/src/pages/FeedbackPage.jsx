@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Trophy, CheckCircle, XCircle, ArrowLeft, RotateCcw } from "lucide-react";
-import "./FeedbackPage.css";
+import '@/styles/FeedbackPage.css';
 
 const FeedbackPage = () => {
   const { state } = useLocation();

@@ -25,7 +25,7 @@ const auditLogger = winston.createLogger({
 const logAudit = (req, action, status, details = {}) => {
   // Extract essential non-sensitive info
   const userId = req.user ? req.user._id : "unauthenticated";
-  const ip = req.ip || req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  const ip = req?.ip || req?.headers?.["x-forwarded-for"] || req?.socket?.remoteAddress || "unknown";
   const requestId = req.requestId || "unknown";
 
   // explicitly strip sensitive fields if they accidently leak into details

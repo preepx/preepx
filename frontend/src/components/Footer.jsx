@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles } from 'lucide-react';
-import './Footer.css';
+import '@/styles/Footer.css';
 
 const socialLinks = [
   { name: 'Facebook', icon: '/icons/facebook.svg', url: '#' },

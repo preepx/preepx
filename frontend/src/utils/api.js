@@ -25,7 +25,8 @@ API.interceptors.response.use(
       localStorage.removeItem("user_notifications");
       if (!window.location.pathname.includes("/auth")) {
         showAppError("Your session has expired. Please sign in again.", "Session expired");
-        window.location.href = "/auth";
+        const wasRecruiter = window.location.pathname.includes("/recruiter");
+        window.location.href = wasRecruiter ? "/auth/recruiter" : "/auth";
       }
     } else if (status === 500) {
       console.error("API Error:", msg);

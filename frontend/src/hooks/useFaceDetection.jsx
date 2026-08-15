@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import * as tf from '@tensorflow/tfjs';
 import * as blazeface from '@tensorflow-models/blazeface';
 import { useNavigate } from 'react-router-dom';
-import notify from '../utils/notify';
+import notify from "@/utils/notify";
 
 export const useFaceDetection = (webcamRefs, isActive, onViolation) => {
   const [faceWarning, setFaceWarning] = useState(null);

@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+const path = require("path");
+const fs = require("fs");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("../../../config/cloudinary");
 const protect = require("../../../middleware/authMiddleware");
@@ -11,12 +13,31 @@ const userValidation = require("./user.validation");
 const authController = require("../auth/auth.controller");
 const userController = require("./user.controller");
 
+const resumeDir = path.join(__dirname, "../../../uploads/resumes");
+if (!fs.existsSync(resumeDir)) fs.mkdirSync(resumeDir, { recursive: true });
+
 // Shared dependencies configuration
 const storage = new CloudinaryStorage({
   cloudinary,
   params: { folder: "ai-portal", allowed_formats: ["jpg", "jpeg", "png"] },
 });
 const upload = multer({ storage });
+
+const resumeStorage = multer.diskStorage({
+  destination: (_req, _file, cb) => cb(null, resumeDir),
+  filename: (req, file, cb) => {
+    const safeName = file.originalname.replace(/[^a-zA-Z0-9._-]/g, "_");
+    cb(null, `${req.user}-${Date.now()}-${safeName}`);
+  },
+});
+const resumeUpload = multer({
+  storage: resumeStorage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (_req, file, cb) => {
+    if (file.mimetype === "application/pdf") cb(null, true);
+    else cb(new Error("Only PDF resumes are allowed"));
+  },
+});
 
 const { authLimiter, uploadLimiter } = require("../../common/middleware/rateLimiter");
 
@@ -35,6 +56,7 @@ router.get("/dashboard", protect, userController.getDashboard);
 router.get("/profile", protect, userController.getProfile);
 router.put("/profile", protect, validate(userValidation.updateProfileSchema), userController.updateProfileDetails);
 router.put("/profile-photo", protect, uploadLimiter, upload.single("profilePic"), userController.updateProfilePhoto);
+router.put("/resume", protect, uploadLimiter, resumeUpload.single("resume"), userController.uploadResume);
 router.put("/settings", protect, validate(userValidation.updateSettingsSchema), userController.updateSettings);
 router.get("/analytics", protect, userController.getAnalytics);
 router.get("/leaderboard", protect, userController.getLeaderboard);

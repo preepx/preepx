@@ -1,4 +1,4 @@
-import API from "../utils/api";
+import API from "@/utils/api";
 
 export const getAtsScore = async (file) => {
   const formData = new FormData();

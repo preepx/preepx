@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { toast } from "react-toastify";
-import PremiumNotification from "../components/PremiumNotification";
+import PremiumNotification from "@/components/PremiumNotification";
 
 const BASE_OPTS = {
   className: "px-notify-wrap",

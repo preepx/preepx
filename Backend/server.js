@@ -8,11 +8,15 @@ const path = require("path");
 const session = require("express-session");
 const connectDB = require("./models/db");
 const { sendNotification } = require("./utils/notificationService");
+const { sendRecruiterNotification } = require("./utils/recruiterNotificationService");
 const rateLimit = require("express-rate-limit");
 const crypto = require("crypto");
 
 dotenv.config();
 connectDB();
+
+const companyService = require("./src/modules/hiring/company.service");
+companyService.seedPlansIfEmpty().catch(() => {});
 
 require("./config/passport");
 const passport = require("passport");
@@ -37,7 +41,7 @@ app.use(cors({
     if (allowedOrigins.includes(origin)) return callback(null, true);
     return callback(new Error(`CORS blocked: ${origin}`));
   },
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization", "x-api-key"],
   credentials: true,
 }));
@@ -81,7 +85,7 @@ app.set("trust proxy", 1);
 
 // Global Rate Limiter to prevent DDoS/Brute Force
 const { globalApiLimiter } = require("./src/common/middleware/rateLimiter");
-app.use("/api/", globalApiLimiter);
+// app.use("/api/", globalApiLimiter); // Disabled for local development
 
 // Secure session secret fallback
 const fallbackSecret = crypto.randomBytes(64).toString("hex");
@@ -103,8 +107,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.get("/api/health", (req, res) => res.json({ status: "ok", version: "2.0" }));
 
-
-
+app.use("/api/jobs", require("./src/modules/hiring/candidate-jobs.routes"));
 app.use("/api/users", require("./src/modules/users/user.routes"));
 app.use("/api/interview", require("./src/modules/interview/interview.routes"));
 app.use("/api/mcq", require("./src/modules/mcq/mcq.routes"));
@@ -112,6 +115,8 @@ app.use("/api/resume", require("./src/modules/resume/resume.routes"));
 app.use("/api/ats", require("./src/modules/ats/ats.routes"));
 app.use("/api/auth", require("./src/modules/auth/auth.routes"));
 app.use("/api/recruiter", require("./src/modules/recruiter/recruiter.routes"));
+app.use("/api/recruiter/hiring", require("./src/modules/hiring/hiring.routes"));
+app.use("/api/assessments", require("./src/modules/hiring/assessment.routes"));
 app.use("/api/wallet", require("./src/modules/wallet/wallet.routes"));
 app.use("/api/btec-notes", require("./src/modules/btec-notes/btecNote.routes"));
 app.use("/api/coding", require("./src/modules/coding/coding.routes"));
@@ -127,6 +132,21 @@ app.post("/api/internal/notify", express.json(), async (req, res) => {
   } catch (error) {
     console.error("Webhook error:", error);
     res.status(500).json({ error: "Failed to process notification" });
+  }
+});
+
+app.post("/api/internal/notify-recruiter", express.json(), async (req, res) => {
+  const { recruiterId, title, message, type, icon } = req.body;
+  const internalKey = req.headers["x-internal-key"];
+  if (internalKey !== process.env.INTERNAL_API_KEY && process.env.NODE_ENV === "production") {
+    return res.status(403).json({ error: "Unauthorized" });
+  }
+  try {
+    await sendRecruiterNotification(recruiterId, title, message, type || "verification", icon || "✅");
+    res.json({ success: true });
+  } catch (error) {
+    console.error("Recruiter webhook error:", error);
+    res.status(500).json({ error: "Failed to process recruiter notification" });
   }
 });
 
@@ -159,6 +179,11 @@ io.on("connection", (socket) => {
   socket.on("join_room", (userId) => {
     socket.join(`user_${userId}`);
     console.log(`Socket ${socket.id} joined room user_${userId}`);
+  });
+
+  socket.on("join_recruiter_room", (recruiterId) => {
+    socket.join(`recruiter_${recruiterId}`);
+    console.log(`Socket ${socket.id} joined room recruiter_${recruiterId}`);
   });
 
   mcqHandler(io, socket);

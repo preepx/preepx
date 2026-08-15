@@ -1,4 +1,4 @@
-import API from "../utils/api";
+import API from "@/utils/api";
 
 export const fetchInterviewQuestions = async (jobTitle, jobTopic, options = {}) => {
   const res = await API.post("/interview/generate", { jobTitle, jobTopic, ...options });

@@ -1,4 +1,4 @@
-import API from "../utils/api";
+import API from "@/utils/api";
 import { getAllInterviews } from "./interviewAPI";
 
 export const getProfile = () => API.get("/users/profile").then((r) => r.data);
@@ -16,6 +16,14 @@ export const uploadProfilePhoto = (file) => {
   const data = new FormData();
   data.append("profilePic", file);
   return API.put("/users/profile-photo", data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  }).then((r) => r.data);
+};
+
+export const uploadResume = (file) => {
+  const data = new FormData();
+  data.append("resume", file);
+  return API.put("/users/resume", data, {
     headers: { "Content-Type": "multipart/form-data" },
   }).then((r) => r.data);
 };

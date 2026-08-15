@@ -6,8 +6,8 @@ import {
   BarChart3, Zap, Star, Medal
 } from "lucide-react";
 import IndiaFlag from "./IndiaFlag";
-import { dismissAnnouncement } from "../utils/announcement";
-import "./IndependenceDayModal.css";
+import { dismissAnnouncement } from "@/utils/announcement";
+import '@/styles/IndependenceDayModal.css';
 
 const BENEFITS = [
   "Get a chance to connect with industry experts",

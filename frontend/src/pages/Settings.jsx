@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Moon, Sun, Bell, Timer, Save, User, Mail, Shield } from "lucide-react";
-import { updateSettings } from "../services/userAPI";
-import notify from '../utils/notify';
-import { showAppError } from "../utils/appAlert";
-import "./Settings.css";
+import { updateSettings } from "@/services/userAPI";
+import notify from "@/utils/notify";
+import { showAppError } from "@/utils/appAlert";
+import '@/styles/Settings.css';
 
 function Settings() {
   const stored = JSON.parse(localStorage.getItem("user") || "{}");

@@ -3,10 +3,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Editor from '@monaco-editor/react';
 import Webcam from 'react-webcam';
 import { Play, CheckCircle2, XCircle, Clock, ArrowLeft, Terminal, ShieldCheck } from 'lucide-react';
-import notify from '../utils/notify';
-import { useFaceDetection } from '../hooks/useFaceDetection';
-import API from '../utils/api';
-import './CodingExam.css';
+import notify from "@/utils/notify";
+import { useFaceDetection } from "@/hooks/useFaceDetection";
+import API from "@/utils/api";
+import '@/styles/CodingExam.css';
 
 const mockQuestions = {
   easy: [

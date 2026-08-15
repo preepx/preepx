@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import notify from '../utils/notify';
+import notify from "@/utils/notify";
 import { AlertTriangle } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
-import API from "../utils/api";
-import Loader from "../components/Loader";
-import "./BtechPdfViewer.css";
+import API from "@/utils/api";
+import Loader from "@/components/Loader";
+import '@/styles/BtechPdfViewer.css';
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 

@@ -1,20 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import notify from '../utils/notify';
+import notify from "@/utils/notify";
 import { Moon, Sun } from "lucide-react";
-import "./Navbar.css";
+import '@/styles/Navbar.css';
 
 function Navbar({ landingRole, setLandingRole }) {
   const [showMenu, setShowMenu] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user") || "null"));
+  const safeGetUser = () => {
+    try {
+      return JSON.parse(localStorage.getItem("user") || "null");
+    } catch {
+      localStorage.removeItem("user");
+      return null;
+    }
+  };
+
+  const [user, setUser] = useState(safeGetUser());
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
     const handleUserUpdate = () => {
-      setUser(JSON.parse(localStorage.getItem("user") || "null"));
+      setUser(safeGetUser());
     };
     window.addEventListener("user-updated", handleUserUpdate);
     return () => window.removeEventListener("user-updated", handleUserUpdate);

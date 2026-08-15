@@ -4,10 +4,10 @@ import {
   BookOpen, Search, Star, ChevronRight, X,
   FileText, Cpu, HelpCircle, Tag, FileUp, ArrowUpRight,
 } from "lucide-react";
-import { getBtecNotes } from "../services/btecNotesAPI";
-import EmptyState from "../components/EmptyState";
-import Loader from "../components/Loader";
-import "./BtechNotes.css";
+import { getBtecNotes } from "@/services/btecNotesAPI";
+import EmptyState from "@/components/EmptyState";
+import Loader from "@/components/Loader";
+import '@/styles/BtechNotes.css';
 
 const TYPES = [
   { id: "all", label: "All Notes", icon: BookOpen },

@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect, useCallback } from "react";
-import { getWallet } from "../services/walletAPI";
+import { getWallet } from "@/services/walletAPI";
 
 export function useWallet({ autoFetch = true } = {}) {
   const [wallet, setWallet] = useState(null);

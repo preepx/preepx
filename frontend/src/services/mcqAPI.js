@@ -1,4 +1,4 @@
-import API from "../utils/api";
+import API from "@/utils/api";
 
 export const getAllMcqResults = () => API.get("/mcq").then((r) => r.data);
 

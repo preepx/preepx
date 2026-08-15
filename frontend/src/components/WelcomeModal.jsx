@@ -1,6 +1,6 @@
 import React from "react";
 import { X } from "lucide-react";
-import "./WelcomeModal.css";
+import '@/styles/WelcomeModal.css';
 
 function WelcomeModal({ onClose, userName }) {
   return (

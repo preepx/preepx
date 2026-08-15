@@ -8,9 +8,15 @@ const protect = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
-    // Check if user is blocked
-    const user = await User.findById(decoded.id);
+    const Recruiter = require("../models/Recruiter");
+
+    let user;
+    if (decoded.role === 'recruiter') {
+      user = await Recruiter.findById(decoded.id);
+    } else {
+      user = await User.findById(decoded.id);
+    }
+
     if (!user) {
        return res.status(401).json({ message: "User not found" });
     }

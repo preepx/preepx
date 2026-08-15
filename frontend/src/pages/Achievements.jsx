@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { redeemXp } from "../services/userAPI";
-import "../features/wallet/components/CoinPackages.css";
-import "./Achievements.css";
+import { redeemXp } from "@/services/userAPI";
+import '@/styles/CoinPackages.css';
+import '@/styles/Achievements.css';
 
 function Achievements() {
   const [popup, setPopup] = useState(null);

@@ -1,6 +1,6 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
-import StatusModal from "../components/StatusModal";
-import { setAlertHandler } from "../utils/appAlert";
+import StatusModal from "@/components/StatusModal";
+import { setAlertHandler } from "@/utils/appAlert";
 
 const AlertContext = createContext(null);
 
