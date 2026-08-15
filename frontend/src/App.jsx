@@ -58,6 +58,7 @@ const CodingPractice = lazy(() => import("./pages/CodingPractice"));
 const CodingExam = lazy(() => import("./pages/CodingExam"));
 
 const UserGuide = lazy(() => import("./pages/UserGuide"));
+const CertificateVerifyPage = lazy(() => import("@/pages/Interview/CertificateVerifyPage"));
 const JobsMyApplications = lazy(() => import("./pages/jobs/JobsMyApplications"));
 const JobsAssessments = lazy(() => import("./pages/jobs/JobsAssessments"));
 const JobsProfile = lazy(() => import("./pages/jobs/JobsProfile"));
@@ -211,6 +212,9 @@ function AppContent() {
           <Route path="/objective-exam/result/:id" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
           <Route path="/coding-practice" element={<ProtectedRoute><CodingPractice /></ProtectedRoute>} />
           <Route path="/coding-exam" element={<ProtectedRoute><CodingExam /></ProtectedRoute>} />
+
+          {/* Public Certificate Verification — no auth required */}
+          <Route path="/verify/:certificateId" element={<CertificateVerifyPage />} />
 
           <Route path="*" element={
             <div style={{ textAlign: "center", padding: "80px 24px" }}>

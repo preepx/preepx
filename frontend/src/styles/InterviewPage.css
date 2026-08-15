@@ -587,3 +587,417 @@
   0% { transform: scale(0.95); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   OBJECTIVE PERFORMANCE CERTIFICATE CARD
+   ═══════════════════════════════════════════════════════════════ */
+
+.cert-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  background: var(--surface);
+  transition: box-shadow 0.2s;
+}
+
+.cert-card-eligible {
+  border-color: color-mix(in srgb, var(--primary) 35%, var(--border));
+  background: color-mix(in srgb, var(--primary) 3%, var(--surface));
+}
+
+.cert-card-unlocked {
+  border-color: color-mix(in srgb, #f59e0b 40%, var(--border));
+  background: color-mix(in srgb, #f59e0b 4%, var(--surface));
+}
+
+.cert-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.cert-card-header h2 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.cert-header-icon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.cert-gold { color: #f59e0b !important; }
+.cert-near-gold { color: #d97706 !important; }
+
+.cert-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 14px;
+}
+
+/* Performance preview rows */
+.cert-perf-preview {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cert-perf-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.cert-perf-label {
+  color: var(--text-muted);
+}
+
+.cert-perf-val {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cert-eligible { color: #10b981 !important; }
+.cert-not-eligible { color: #ef4444 !important; }
+
+/* Lock section */
+.cert-lock-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  padding-top: 4px;
+}
+
+.cert-lock-icon {
+  color: var(--text-muted);
+}
+.cert-lock-icon.cert-warn { color: #f59e0b; }
+.cert-lock-icon.cert-primary { color: var(--primary); }
+
+.cert-lock-msg {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cert-lock-msg.cert-ready {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Accuracy progress bar */
+.cert-accuracy-bar-wrap {
+  width: 100%;
+}
+
+.cert-accuracy-bar {
+  height: 8px;
+  background: var(--border);
+  border-radius: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cert-accuracy-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 0.5s ease;
+}
+
+.cert-accuracy-fill.not-eligible {
+  background: linear-gradient(90deg, #ef4444, #f97316);
+}
+
+.cert-accuracy-threshold {
+  position: absolute;
+  top: -2px;
+  height: 12px;
+  width: 2px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.cert-accuracy-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.cert-threshold-label {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Coin info */
+.cert-coin-info {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cert-coin-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.cert-coin-badge {
+  font-weight: 700;
+  font-size: 13px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+.cert-coin-badge.insufficient { color: #ef4444; border-color: #ef444440; }
+.cert-coin-badge.sufficient { color: #10b981; border-color: #10b98140; }
+
+/* Action buttons */
+.cert-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 9px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+
+.cert-action-btn.full {
+  width: 100%;
+  justify-content: center;
+}
+
+.cert-unlock-btn {
+  background: var(--primary);
+  color: #fff;
+}
+
+.cert-unlock-btn:hover:not(:disabled) {
+  background: var(--primary-dark, #4338ca);
+}
+
+.cert-unlock-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cert-get-coins-btn {
+  background: #f59e0b;
+  color: #fff;
+}
+
+.cert-get-coins-btn:hover {
+  background: #d97706;
+}
+
+.cert-view-btn {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  flex: 1;
+  justify-content: center;
+}
+
+.cert-view-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.cert-download-btn {
+  background: var(--primary);
+  color: #fff;
+  flex: 1;
+  justify-content: center;
+}
+
+.cert-download-btn:hover {
+  background: var(--primary-dark, #4338ca);
+}
+
+/* Unlocked view */
+.cert-unlocked-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cert-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: color-mix(in srgb, #f59e0b 8%, var(--bg));
+  border: 1px solid color-mix(in srgb, #f59e0b 25%, var(--border));
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.cert-trophy-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.cert-unlocked-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.cert-id-display {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.cert-check-icon {
+  color: #10b981;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.cert-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.cert-stat-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.cert-stat-val {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+
+.cert-stat-lbl {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cert-qr-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.cert-qr-canvas {
+  width: 60px !important;
+  height: 60px !important;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.cert-qr-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0 0 4px;
+}
+
+.cert-issue-date {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.cert-qr-info {
+  flex: 1;
+}
+
+.cert-actions-row {
+  display: flex;
+  gap: 8px;
+}
+
+/* Loading skeleton */
+.cert-loading .cert-skeleton-line {
+  height: 14px;
+  border-radius: 6px;
+  background: var(--border);
+  margin-top: 10px;
+  animation: certPulse 1.4s infinite;
+}
+
+.cert-loading .cert-skeleton-line.short {
+  width: 60%;
+}
+
+@keyframes certPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Retry button */
+.cert-error-msg {
+  font-size: 13px;
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.cert-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  color: var(--primary);
+  background: none;
+  border: 1px solid var(--primary);
+  border-radius: 7px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+/* Spin animation for loading state */
+.cert-spin {
+  animation: certSpin 0.8s linear infinite;
+}
+
+@keyframes certSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
