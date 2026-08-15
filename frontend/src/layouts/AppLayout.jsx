@@ -165,8 +165,14 @@ function AppLayout({ children }) {
   // Global WebSocket for Real-Time Notifications
   useEffect(() => {
     if (!user?._id) return;
-    const SOCKET_URL = API.defaults?.baseURL ? API.defaults.baseURL.replace('/api', '') : '';
-    const socket = io(SOCKET_URL);
+    let SOCKET_URL = "";
+    try {
+      const url = new URL(import.meta.env.VITE_API_URL || "", window.location.origin);
+      SOCKET_URL = url.origin;
+    } catch (e) {
+      SOCKET_URL = window.location.origin;
+    }
+    const socket = io(SOCKET_URL, { transports: ["websocket", "polling"] });
 
     const handleConnect = () => {
       console.log("Global Socket Connected! Emitting join_room for", user._id);

@@ -93,6 +93,7 @@ function Profile() {
       notify.success("Profile updated successfully!");
       if (updated.bonusMessage) {
         notify.success(updated.bonusMessage);
+        window.dispatchEvent(new Event("walletUpdated"));
       }
       setIsEditing(false);
     } catch (err) {

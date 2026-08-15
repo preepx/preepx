@@ -76,12 +76,15 @@ const updateProfileDetails = async (userId, updateData) => {
 
   if (
     !user.profileCompletedBonusClaimed &&
+    user.fullName && user.fullName.trim() !== "" &&
+    user.bio && user.bio.trim() !== "" &&
     user.mobile && user.mobile.trim() !== "" &&
     user.college && user.college.trim() !== "" &&
     user.degree && user.degree.trim() !== "" &&
     user.address && user.address.trim() !== "" &&
     user.github && user.github.trim() !== "" &&
-    user.linkedin && user.linkedin.trim() !== ""
+    user.linkedin && user.linkedin.trim() !== "" &&
+    user.resumeUrl && user.resumeUrl.trim() !== ""
   ) {
     user.profileCompletedBonusClaimed = true;
     await walletService.addBonusToWallet(user._id, 5, "Bonus for completing your profile");
