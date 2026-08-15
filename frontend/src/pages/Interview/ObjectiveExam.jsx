@@ -13,7 +13,13 @@ import notify from "@/utils/notify";
 import { useFaceDetection } from "@/hooks/useFaceDetection";
 import '@/styles/ObjectiveExam.css';
 
-const SOCKET_URL = import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, "") || "";
+let SOCKET_URL = "";
+try {
+  const url = new URL(import.meta.env.VITE_API_URL || "", window.location.origin);
+  SOCKET_URL = url.origin;
+} catch (e) {
+  SOCKET_URL = window.location.origin;
+}
 
 const TIMER_SECONDS = 30;
 const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
