@@ -109,11 +109,16 @@ function LayoutWrapper({ children, landingRole, setLandingRole }) {
     return <>{children}</>;
   }
 
+  const hasToken = !!localStorage.getItem("token");
+  const hasUser = !!localStorage.getItem("user");
+
   if (useJobs) {
+    if (!hasToken || !hasUser) return <>{children}</>;
     return <JobsLayout>{children}</JobsLayout>;
   }
 
   if (useSidebar) {
+    if (!hasToken || !hasUser) return <>{children}</>;
     return <AppLayout>{children}</AppLayout>;
   }
 

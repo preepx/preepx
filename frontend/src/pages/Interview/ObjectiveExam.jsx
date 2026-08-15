@@ -646,7 +646,6 @@ export default function ObjectiveExam() {
 
     return (
       <div className="oe-page">
-        <ExamHeader onBack={() => navigate('/objective-exam')} label="Assessment Report" />
 
         <main className="oe-results-main">
           {pointsEarned > 0 && (
