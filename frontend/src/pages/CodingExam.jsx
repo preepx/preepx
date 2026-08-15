@@ -308,6 +308,14 @@ const CodingExam = () => {
     setOutput('Running test cases...');
     setTestResults(null);
 
+    const defaultCode = (question.starterCode[currentLanguage] || '').trim();
+    if (!code || code.trim() === defaultCode || code.trim() === '') {
+      setIsRunning(false);
+      setTestResults('fail');
+      setOutput('Please write some code before running. The code is currently empty or unchanged.');
+      return;
+    }
+
     try {
       const response = await API.post('/coding/evaluate', {
         title: question.title,

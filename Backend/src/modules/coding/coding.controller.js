@@ -48,7 +48,7 @@ ${code}
 
 CRITICAL INSTRUCTIONS:
 1. Analyze the user's code strictly and objectively.
-2. If the code is mostly empty, contains gibberish, lacks logic, or has syntax errors, you MUST set "passed" to false.
+2. If the code is mostly empty, contains ONLY the function signature/boilerplate, lacks meaningful logic, or has syntax errors, you MUST set "passed" to false. Do NOT pass boilerplate code!
 3. Do NOT hallucinate or assume the user wrote the correct logic if they didn't. Read the EXACT code provided.
 4. Evaluate if the code correctly solves the problem for standard edge cases.
 
