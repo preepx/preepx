@@ -107,12 +107,7 @@ function WalletPage() {
             <Plus size={16} /> Add Coins
           </button>
         )}
-        {!billingEnabled && (
-          <div className="wallet-free-badge">
-            <Shield size={14} />
-            All Free
-          </div>
-        )}
+
       </div>
 
 
