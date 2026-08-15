@@ -109,6 +109,10 @@ const loginUser = async (email, password) => {
     throw new BadRequestError("User not found");
   }
 
+  if (!user.password) {
+    throw new BadRequestError("Please log in using Google, or reset your password.");
+  }
+
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
     throw new BadRequestError("Invalid credentials");
