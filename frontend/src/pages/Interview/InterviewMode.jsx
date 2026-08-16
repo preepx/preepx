@@ -409,7 +409,7 @@ const InterviewMode = () => {
     setEvaluating(false);
 
     const runQuestion = async () => {
-      await speakQuestion(`Question ${currentIndex + 1}. ${questions[currentIndex]}`);
+      await speakQuestion(questions[currentIndex]);
 
       if (exitedRef.current || busyRef.current) return;
 
@@ -585,11 +585,18 @@ const InterviewMode = () => {
             </div>
             <div className="im-role">{jobRole || jobTitle || role || 'Frontend Developer'}</div>
           </div>
-          <div className="im-header-right">
-            <Signal className="im-network-icon" size={20} />
-            <div className="im-timer">
-              {Math.floor(totalDuration / 60).toString().padStart(2, '0')}:{(totalDuration % 60).toString().padStart(2, '0')}
+          <div className="im-header-right" style={{ gap: '16px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.1)', padding: '6px 16px', borderRadius: '20px' }}>
+              <span style={{ color: '#f8fafc', fontSize: '14px', fontWeight: '600', letterSpacing: '0.5px' }}>Question {currentIndex + 1} / {questions.length}</span>
+              <div style={{ width: '1px', height: '16px', background: 'rgba(255,255,255,0.2)' }}></div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: questionTimer <= 10 ? '#ef4444' : '#fbbf24' }}>
+                <Timer size={16} />
+                <span style={{ fontWeight: 'bold', fontSize: '15px', fontVariantNumeric: 'tabular-nums' }}>
+                  00:{questionTimer.toString().padStart(2, '0')}
+                </span>
+              </div>
             </div>
+            <Signal className="im-network-icon" size={20} />
             <div className="im-avatar-small">
               {location.state?.userName ? location.state.userName.substring(0, 2) : 'CK'}
             </div>
@@ -599,13 +606,23 @@ const InterviewMode = () => {
         {/* Main Content Layout */}
         <div className="im-main">
           <div className="im-call-container">
+            {isAudioLoading && (
+              <div style={{ position: 'absolute', top: '15%', background: 'rgba(99, 102, 241, 0.15)', border: '1px solid rgba(99, 102, 241, 0.3)', color: '#818cf8', padding: '8px 20px', borderRadius: '30px', fontSize: '14px', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '10px', zIndex: 10, backdropFilter: 'blur(4px)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                <style>{`
+                  @keyframes pulse-dot { 0% { opacity: 0.4; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.4; transform: scale(0.8); } }
+                `}</style>
+                <span style={{ width: '8px', height: '8px', background: '#818cf8', borderRadius: '50%', display: 'inline-block', animation: 'pulse-dot 1.5s infinite' }}></span>
+                Interviewer is preparing to speak...
+              </div>
+            )}
+
             <div className={`im-big-avatar ${aiSpeaking ? "speaking" : ""}`}>
               I
             </div>
 
             <div className="im-interviewer-pill">
               <span className="im-interviewer-name">
-                {isAudioLoading ? "Waiting for AI..." : "Interviewer"}
+                Interviewer
               </span>
               <div className={`im-wave ${aiSpeaking ? "active" : ""}`}>
                 <span /><span /><span /><span />
@@ -622,8 +639,8 @@ const InterviewMode = () => {
               </div>
             </div>
 
-            {/* Show Captions when AI is speaking or if showCC is true */}
-            {(aiSpeaking || showCC) && (
+            {/* Show Captions when AI is speaking or listening, but NOT when loading the next audio */}
+            {((aiSpeaking || isListening || showCC) && !isAudioLoading) && (
               <div className="im-cc-overlay">
                 <p>{aiText || questions[currentIndex]}</p>
                 {(userAnswer || interimAnswer) && !aiSpeaking && (

@@ -198,10 +198,12 @@ html {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
   }
+
   50% {
     transform: scale(1.05);
     box-shadow: 0 0 0 20px rgba(139, 92, 246, 0);
   }
+
   100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
@@ -318,27 +320,30 @@ html {
 /* CC Overlay (Subtitles) */
 .im-cc-overlay {
   position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.7);
-  padding: 16px 24px;
-  border-radius: 8px;
-  max-width: 80%;
+  bottom: 32px;
+  left: 180px;
+  right: 328px;
+  transform: none;
+  width: auto;
+  max-width: none;
   text-align: center;
-  backdrop-filter: blur(4px);
   z-index: 10;
+  pointer-events: none;
 }
 
 .im-cc-overlay p {
   margin: 0 0 8px 0;
-  font-size: 1.1rem;
-  line-height: 1.4;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.9);
 }
 
 .im-cc-overlay .im-cc-answer {
   color: #93c5fd;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
 }
 
 /* Footer Controls */
@@ -478,4 +483,59 @@ html {
   border-radius: 6px;
   color: white;
   cursor: pointer;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .im-main {
+    padding: 0 16px;
+  }
+
+  .im-call-container {
+    height: calc(100vh - 140px);
+  }
+
+  .im-big-avatar {
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
+  }
+
+  .im-pip-container {
+    width: 100px;
+    height: 140px;
+    bottom: 16px;
+    right: 16px;
+  }
+
+  .im-interviewer-pill {
+    top: 16px;
+    left: 16px;
+    bottom: auto;
+  }
+
+  .im-cc-overlay {
+    left: 16px;
+    right: 132px; /* 100px (pip width) + 16px (gap) + 16px (margin) */
+    bottom: 16px;
+  }
+
+  .im-cc-overlay p {
+    font-size: 0.85rem;
+  }
+
+  .im-cc-overlay .im-cc-answer {
+    font-size: 0.75rem;
+  }
+
+  .im-footer {
+    padding: 0 16px 16px 16px;
+    height: auto;
+    min-height: 70px;
+  }
+
+  .im-next-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
 }

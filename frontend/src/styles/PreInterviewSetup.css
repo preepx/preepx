@@ -446,12 +446,38 @@ body {
 @media (max-width: 900px) {
   .pis-modal-body {
     flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .pis-left-col,
+  .pis-right-col {
+    flex: none;
+    padding: 1.5rem;
+    overflow: visible;
   }
 
   .pis-divider {
     width: 100%;
     height: 1px;
     margin: 0;
+  }
+
+  .pis-camera-overlay {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    width: 100%;
+    height: 240px;
+    margin-top: 1.5rem;
+  }
+  
+  .pis-modal-footer {
+    padding: 1rem 1.5rem;
+    justify-content: center;
+  }
+  
+  .pis-btn-proceed {
+    width: 100%;
   }
 }
 
@@ -531,4 +557,70 @@ body {
 
 .pis-btn-warning-enter:hover {
   background: #6366f1;
+}
+
+/* =========================================
+   DARK MODE OVERRIDES
+   ========================================= */
+[data-theme="dark"] {
+  --pis-modal-bg: #232b3e;
+  --pis-text-main: #f8fafc;
+  --pis-text-muted: #94a3b8;
+  --pis-border-light: #334155;
+}
+
+[data-theme="dark"] .pis-card {
+  background: #1e293b;
+}
+
+[data-theme="dark"] .pis-card-success {
+  background: #064e3b;
+  border-color: #047857;
+}
+
+[data-theme="dark"] .pis-notes-box {
+  background: #1e293b;
+}
+
+[data-theme="dark"] .pis-icon-error {
+  background: #1e293b;
+}
+
+[data-theme="dark"] .pis-icon-neutral {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .pis-camera-overlay {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .pis-camera-denied {
+  background: #451a03;
+  border-color: #78350f;
+}
+
+[data-theme="dark"] .pis-modal-footer {
+  background: #232b3e;
+  border-top-color: #334155;
+}
+
+[data-theme="dark"] .pis-btn-proceed:disabled {
+  background: #1e293b;
+  color: #64748b;
+}
+
+[data-theme="dark"] .pis-btn-dark {
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .pis-btn-dark:hover:not(:disabled) {
+  background: #334155;
+}
+
+[data-theme="dark"] .pis-read-more-btn {
+  color: #818cf8;
 }
