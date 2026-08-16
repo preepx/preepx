@@ -25,8 +25,10 @@ const InterviewModal = ({ onClose, onSuccess }) => {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
     };
   }, []);
 

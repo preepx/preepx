@@ -23,7 +23,7 @@ const InterviewLobby = () => {
   const [isFullScreen, setIsFullScreen] = useState(true);
 
   // Dynamic role logic
-  const jobRole = location?.state?.jobRole || location?.state?.role || 'Frontend Developer';
+  const jobRole = location?.state?.jobTitle || location?.state?.jobRole || location?.state?.role || 'Frontend Developer';
   const userName = location?.state?.userName || 'Candidate';
 
   const enterFullScreen = () => {
