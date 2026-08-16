@@ -63,6 +63,9 @@ const JobsMyApplications = lazy(() => import("./pages/jobs/JobsMyApplications"))
 const JobsAssessments = lazy(() => import("./pages/jobs/JobsAssessments"));
 const JobsProfile = lazy(() => import("./pages/jobs/JobsProfile"));
 
+const PreInterviewSetup = lazy(() => import("@/pages/Interview/PreInterviewSetup"));
+const InterviewLobby = lazy(() => import("@/pages/Interview/InterviewLobby"));
+
 const PUBLIC_ROUTES = [
   "/", "/dashboard", "/auth", "/auth/recruiter",
   "/features", "/how-it-works", "/mock-interviews", "/user-guide",
@@ -71,7 +74,7 @@ const PUBLIC_ROUTES = [
   "/hiring-guide", "/recruiter-resources", "/documentation",
   "/ai-screening", "/job-management", "/assessments", "/interviews"
 ];
-const FULLSCREEN_ROUTES = ["/interview-mode", "/start-interview", "/feedback", "/objective-exam/take", "/coding-exam", "/assessment"];
+const FULLSCREEN_ROUTES = ["/interview-mode", "/interview-setup", "/start-interview", "/feedback", "/objective-exam/take", "/coding-exam", "/assessment"];
 
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
@@ -197,6 +200,8 @@ function AppContent() {
           <Route path="/achievements" element={<ProtectedRoute><Achievements /></ProtectedRoute>} />
           <Route path="/rewards" element={<ProtectedRoute><Rewards /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/interview-setup" element={<ProtectedRoute><PreInterviewSetup /></ProtectedRoute>} />
+          <Route path="/lobby" element={<ProtectedRoute><InterviewLobby /></ProtectedRoute>} />
           <Route path="/start-interview" element={<ProtectedRoute><StartInterview /></ProtectedRoute>} />
           <Route path="/interview-mode" element={<ProtectedRoute><InterviewMode /></ProtectedRoute>} />
           <Route path="/resume-interview" element={<ProtectedRoute><ResumeUpload /></ProtectedRoute>} />
