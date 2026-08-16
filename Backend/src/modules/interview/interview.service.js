@@ -91,21 +91,25 @@ const generateInterviewQuestions = async (userId, data) => {
 };
 
 const evaluateUserAnswer = async (question, userAnswer) => {
-  const prompt = `You are a strict, highly professional technical interviewer. Your task is to accurately and critically evaluate the candidate's answer. The answer was captured via speech recognition and may have transcription errors (ignore minor typos).
+  const prompt = `You are an expert, supportive yet rigorous technical and behavioral interviewer. Your goal is to evaluate the candidate's answer and provide highly constructive, actionable feedback. The answer was transcribed from speech, so ignore minor grammar or transcription errors.
 
 Question: "${question}"
 Candidate's Answer: "${userAnswer}"
 
-CRITICAL INSTRUCTION: You MUST evaluate strictly based on technical accuracy. Do NOT be polite if the answer is wrong.
+INSTRUCTIONS FOR FEEDBACK:
+1. Start with a brief acknowledgement of what they got right (if anything).
+2. Clearly point out any technical inaccuracies, missing key concepts, or logical flaws.
+3. Provide a short suggestion on how to improve or complete the answer next time.
+4. If the answer is completely irrelevant (e.g., "hello", "I don't know"), state that the answer didn't address the question and explain what was expected.
 
 Scoring Rules:
-- 9-10: Perfect answer. Highly accurate, complete, and clear.
-- 7-8: Good answer. Mostly correct, but misses some minor details.
-- 4-6: Weak answer. Very incomplete, vague, or has significant inaccuracies.
-- 1-3: Wrong answer. Completely incorrect, irrelevant, or shows no understanding of the topic. If the candidate says something unrelated like "hello", "hi", or a completely wrong concept, YOU MUST give a score of 1, 2, or 3.
+- 9-10: Exceptional. Accurate, comprehensive, and well-structured.
+- 7-8: Solid. Mostly correct but lacks depth or misses minor details.
+- 4-6: Needs Improvement. Vague, incomplete, or contains notable errors.
+- 1-3: Incorrect or Irrelevant. Fails to answer the question or demonstrates fundamental misunderstanding.
 
-Respond ONLY with valid JSON (no markdown, no explanation):
-{"correct": true or false, "score": number 1-10, "feedback": "Provide strict, constructive feedback pointing out exactly what was wrong or missing."}`;
+Respond ONLY with valid JSON (no markdown block formatting, no extra text):
+{"correct": true or false, "score": number 1-10, "feedback": "Detailed, constructive feedback following the instructions above."}`;
 
   try {
     const parsed = await aiService.generateJson(prompt, {

@@ -274,7 +274,7 @@ html {
 /* User PiP Camera */
 .im-pip-container {
   position: absolute;
-  bottom: 24px;
+  bottom: 74px;
   right: 24px;
   width: 280px;
   height: 180px;

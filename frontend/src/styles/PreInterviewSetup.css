@@ -22,14 +22,6 @@
   --pis-error-border: #fecaca;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: var(--pis-bg-dark);
-  overflow: hidden;
-  /* Prevent entire page from scrolling */
-}
-
 .pis-wrapper {
   display: flex;
   justify-content: center;
@@ -40,6 +32,7 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   box-sizing: border-box;
   overflow: hidden;
+  background-color: var(--pis-bg-dark);
 }
 
 .pis-modal {

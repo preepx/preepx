@@ -50,6 +50,7 @@ const InterviewMode = () => {
   const busyRef = useRef(false);   // triggerNext in progress
   const isFullScreenRef = useRef(false);   // track fullscreen status
   const interimRef = useRef("");      // keep track of interim transcript
+  const speakRequestIdRef = useRef(0);
 
   useEffect(() => {
     const checkIsFull = () => !!(
@@ -107,6 +108,7 @@ const InterviewMode = () => {
 
   // ── Stop everything ─────────────────────────────────
   const stopAll = () => {
+    speakRequestIdRef.current += 1;
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
@@ -138,6 +140,7 @@ const InterviewMode = () => {
         return;
       }
       stopAll();
+      const currentRequestId = speakRequestIdRef.current;
       setIsAudioLoading(true);
       setAiSpeaking(false);
       setAiText(text); // Keep text ready
@@ -159,6 +162,12 @@ const InterviewMode = () => {
         }
 
         const blob = await response.blob();
+
+        if (speakRequestIdRef.current !== currentRequestId || exitedRef.current) {
+          resolve();
+          return;
+        }
+
         const url = URL.createObjectURL(blob);
 
         const audio = new Audio(url);
@@ -639,15 +648,21 @@ const InterviewMode = () => {
               </div>
             </div>
 
+            {(!aiSpeaking && !isAudioLoading && isListening) && (
+              <div style={{ position: 'absolute', bottom: '24px', right: '24px', width: '280px', background: 'rgba(16, 185, 129, 0.12)', border: '1px solid rgba(16, 185, 129, 0.4)', color: '#34d399', padding: '8px 16px', borderRadius: '24px', fontSize: '14px', fontWeight: '500', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', zIndex: 10, backdropFilter: 'blur(6px)', boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)' }}>
+                <style>{`
+                  @keyframes pulse-green { 0% { opacity: 0.4; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.4; transform: scale(0.8); } }
+                `}</style>
+                <Mic size={16} />
+                <span style={{ width: '8px', height: '8px', background: '#34d399', borderRadius: '50%', display: 'inline-block', animation: 'pulse-green 1.5s infinite' }}></span>
+                Speak...
+              </div>
+            )}
+
             {/* Show Captions when AI is speaking or listening, but NOT when loading the next audio */}
             {((aiSpeaking || isListening || showCC) && !isAudioLoading) && (
               <div className="im-cc-overlay">
                 <p>{aiText || questions[currentIndex]}</p>
-                {(userAnswer || interimAnswer) && !aiSpeaking && (
-                  <div className="im-cc-answer">
-                    {userAnswer} <span className="interim-text">{interimAnswer}</span>
-                  </div>
-                )}
               </div>
             )}
           </div>
