@@ -360,8 +360,51 @@ export default function CertificateVerifyPage() {
   const [loading, setLoading] = useState(true);
   const [isGeneratingPng, setIsGeneratingPng] = useState(false);
   const certRef = useRef(null);
+  const certContainerRef = useRef(null);
+  const [certScale, setCertScale] = useState(1);
+  const [canvasHeight, setCanvasHeight] = useState(720);
   const hasAutoDownloadedRef = useRef(false);
   const isGeneratingRef = useRef(false);
+
+  const updateScale = useCallback(() => {
+    if (certContainerRef.current) {
+      const containerWidth = certContainerRef.current.clientWidth;
+      const targetWidth = 1060;
+      if (containerWidth < targetWidth && containerWidth > 0) {
+        setCertScale(containerWidth / targetWidth);
+      } else {
+        setCertScale(1);
+      }
+    }
+    if (certRef.current) {
+      const h = certRef.current.offsetHeight;
+      if (h > 0) {
+        setCanvasHeight(h);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    updateScale();
+    const handleResize = () => {
+      updateScale();
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Also observe container size changes (e.g. orientation changes, mobile dev tools)
+    let resizeObserver = null;
+    if (typeof ResizeObserver !== "undefined" && certContainerRef.current) {
+      resizeObserver = new ResizeObserver(() => {
+        updateScale();
+      });
+      resizeObserver.observe(certContainerRef.current);
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (resizeObserver) resizeObserver.disconnect();
+    };
+  }, [updateScale, result]);
 
   const verify = useCallback(async () => {
     try {
@@ -412,7 +455,7 @@ export default function CertificateVerifyPage() {
       await new Promise((resolve) => setTimeout(resolve, 350));
 
       // 4. Capture at exact fixed element width and height with 2x crisp scale
-      const certWidth = certElement.offsetWidth || 1060;
+      const certWidth = 1060;
       const certHeight = certElement.offsetHeight || 720;
 
       const canvas = await html2canvas(certElement, {
@@ -437,6 +480,12 @@ export default function CertificateVerifyPage() {
             clonedElement.style.minWidth = `${certWidth}px`;
             clonedElement.style.transform = "none";
             clonedElement.style.margin = "0";
+          }
+          const clonedScaleInner = clonedDoc.querySelector(".cert-scale-inner");
+          if (clonedScaleInner) {
+            clonedScaleInner.style.transform = "none";
+            clonedScaleInner.style.marginBottom = "0";
+            clonedScaleInner.style.width = `${certWidth}px`;
           }
         },
       });
@@ -516,8 +565,19 @@ export default function CertificateVerifyPage() {
         </div>
       </div>
 
-      {/* The actual single-page certificate */}
-      <CertificatePrint cert={cert} ref={certRef} />
+      {/* The actual single-page certificate with responsive scaling on mobile */}
+      <div className="cert-scale-wrapper" ref={certContainerRef}>
+        <div
+          className="cert-scale-inner"
+          style={{
+            transform: certScale < 1 ? `scale(${certScale})` : "none",
+            transformOrigin: "top left",
+            marginBottom: certScale < 1 ? `-${Math.round(canvasHeight * (1 - certScale))}px` : "0px",
+          }}
+        >
+          <CertificatePrint cert={cert} ref={certRef} />
+        </div>
+      </div>
 
       {/* Verification details below cert (screen only) */}
       <div className="cv-details-box no-print">
