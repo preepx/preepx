@@ -80,7 +80,7 @@ const InterviewModal = ({ onClose, onSuccess }) => {
         },
       });
     } catch (err) {
-      const errorMsg = err.response?.data?.error || "Error generating questions. Check your login & API key.";
+      const errorMsg = err.response?.data?.message || err.response?.data?.error || "Error generating questions. Check your login & API key.";
       if (errorMsg.toLowerCase().includes("insufficient coins") || errorMsg.toLowerCase().includes("recharge")) {
         showAppError(errorMsg, "Insufficient Coins", {
           label: "Add Coins",
