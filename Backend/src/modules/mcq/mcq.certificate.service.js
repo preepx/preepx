@@ -204,6 +204,87 @@ const unlockObjCertificate = async (userId) => {
 };
 
 /**
+ * Update existing certificate snapshot with latest performance data.
+ * Keeps the same unique certificateId and charges CERTIFICATE_COST coins.
+ */
+const updateObjCertificate = async (userId) => {
+  const user = await User.findById(userId).lean();
+  if (!user) throw new NotFoundError("User not found");
+
+  const existing = await ObjCertificate.findOne({ userId });
+  if (!existing) {
+    throw new NotFoundError("No certificate found for user. Please unlock it first.");
+  }
+
+  // Calculate fresh performance from all completed MCQ results
+  const performance = await calculateObjPerformance(userId);
+
+  if (!performance.isEligible) {
+    throw new BadRequestError(
+      `Your updated accuracy is ${performance.accuracy}%. You need more than ${ELIGIBILITY_THRESHOLD}% to update the certificate.`
+    );
+  }
+
+  // Check if there are actual new updates
+  const hasChanges =
+    performance.totalExams !== existing.totalExams ||
+    performance.totalQuestions !== existing.totalQuestions ||
+    performance.totalCorrect !== existing.totalCorrect ||
+    performance.accuracy !== existing.accuracy ||
+    performance.bestScore !== existing.bestScore;
+
+  if (!hasChanges) {
+    throw new BadRequestError("Certificate is already up to date with your latest exams.");
+  }
+
+  // Deduct coins atomically via wallet service
+  try {
+    await walletService.spendCoins(
+      userId,
+      CERTIFICATE_COST,
+      "Objective Performance Certificate update",
+      { sessionType: "certificate_update", certificateId: existing.certificateId }
+    );
+  } catch (err) {
+    if (err.code === "INSUFFICIENT_COINS") {
+      const e = new BadRequestError(
+        `Insufficient coins. You need ${CERTIFICATE_COST} coins to update your certificate but have ${err.balance}.`
+      );
+      e.code = "INSUFFICIENT_COINS";
+      e.required = err.required;
+      e.balance = err.balance;
+      throw e;
+    }
+    throw err;
+  }
+
+  // Update existing certificate document in place (keep same certificateId)
+  existing.userNameSnapshot = user.fullName || existing.userNameSnapshot;
+  existing.totalExams = performance.totalExams;
+  existing.totalQuestions = performance.totalQuestions;
+  existing.totalCorrect = performance.totalCorrect;
+  existing.accuracy = performance.accuracy;
+  existing.bestScore = performance.bestScore;
+  existing.averageScore = performance.averageScore;
+  existing.technologyPerformance = performance.technologyPerformance;
+  existing.issueDate = new Date();
+  existing.coinsPaid = (existing.coinsPaid || 0) + CERTIFICATE_COST;
+
+  await existing.save();
+
+  // Send notification
+  await sendNotification(
+    userId,
+    "🔄 Certificate Updated!",
+    `Your PreePX Objective Performance Certificate (${existing.certificateId}) has been updated with your latest exam results.`,
+    "general",
+    "🏆"
+  ).catch(() => {});
+
+  return { certificate: existing };
+};
+
+/**
  * Get certificate for a user (for download/view — must own it).
  */
 const getCertificateForUser = async (userId) => {
@@ -243,6 +324,7 @@ module.exports = {
   calculateObjPerformance,
   getCertificateStatus,
   unlockObjCertificate,
+  updateObjCertificate,
   getCertificateForUser,
   verifyCertificateById,
 };

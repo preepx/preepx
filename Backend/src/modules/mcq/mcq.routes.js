@@ -9,6 +9,8 @@ router.get("/certificate/verify/:certificateId", certController.verifyCertificat
 router.get("/certificate/my", protect, certController.getMyCertificate);
 router.get("/certificate", protect, certController.getCertificateStatus);
 router.post("/certificate/unlock", protect, certController.unlockCertificate);
+router.put("/certificate/update", protect, certController.updateCertificate);
+router.post("/certificate/update", protect, certController.updateCertificate);
 
 // ── Existing MCQ result routes ──
 router.get("/", protect, mcqController.getAllMcqResults);

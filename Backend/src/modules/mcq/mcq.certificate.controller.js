@@ -30,6 +30,21 @@ const unlockCertificate = catchAsync(async (req, res) => {
 });
 
 /**
+ * PUT /api/mcq/certificate/update
+ * Updates the user's certificate with their latest exam performance data.
+ * Preserves the existing unique certificateId. Free (no coin deduction).
+ * Authenticated.
+ */
+const updateCertificate = catchAsync(async (req, res) => {
+  const { certificate } = await certService.updateObjCertificate(req.user);
+  res.json({
+    success: true,
+    message: "Certificate updated successfully with your latest exam data!",
+    certificate,
+  });
+});
+
+/**
  * GET /api/mcq/certificate/my
  * Returns the user's own certificate for viewing/download.
  * Authenticated.
@@ -52,6 +67,7 @@ const verifyCertificate = catchAsync(async (req, res) => {
 module.exports = {
   getCertificateStatus,
   unlockCertificate,
+  updateCertificate,
   getMyCertificate,
   verifyCertificate,
 };

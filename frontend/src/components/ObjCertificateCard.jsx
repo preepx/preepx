@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Trophy, Lock, Download, Eye, Coins, AlertCircle, CheckCircle, RefreshCw } from "lucide-react";
 import QRCode from "qrcode";
-import { getCertificateStatus, unlockCertificate } from "@/services/certificateAPI";
+import { getCertificateStatus, unlockCertificate, updateCertificate } from "@/services/certificateAPI";
 import notify from "@/utils/notify";
 import { useNavigate } from "react-router-dom";
 
 const CERT_COST = 5;
 
-function CertificateView({ cert, onDownload, onViewFull }) {
+function CertificateView({ cert, performance, hasUpdates, onUpdate, updating, onDownload, onViewFull, coinCost = 5 }) {
   const qrRef = useRef(null);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function CertificateView({ cert, onDownload, onViewFull }) {
       width: 80,
       margin: 1,
       color: { dark: "#1e293b", light: "#ffffff" },
-    }).catch(() => {});
+    }).catch(() => { });
   }, [cert?.certificateId]);
 
   if (!cert) return null;
@@ -26,7 +26,7 @@ function CertificateView({ cert, onDownload, onViewFull }) {
     <div className="cert-unlocked-view">
       <div className="cert-badge-row">
         <div className="cert-trophy-icon">🏆</div>
-        <div>
+        <div style={{ flex: 1, minWidth: 0 }}>
           <div className="cert-unlocked-label">Certificate Unlocked</div>
           <div className="cert-id-display">ID: {cert.certificateId}</div>
         </div>
@@ -63,13 +63,40 @@ function CertificateView({ cert, onDownload, onViewFull }) {
       </div>
 
       <div className="cert-actions-row">
-        <button className="cert-action-btn cert-view-btn" onClick={onViewFull}>
+        <button className="cert-action-btn cert-view-btn" onClick={onViewFull} title="View full certificate">
           <Eye size={15} /> View
         </button>
-        <button className="cert-action-btn cert-download-btn" onClick={onDownload}>
+        <button className="cert-action-btn cert-download-btn" onClick={onDownload} title="Download certificate image">
           <Download size={15} /> Download
         </button>
       </div>
+
+      {/* Update Certificate button (enabled only when user has taken new exams) */}
+      <button
+        className={`cert-action-btn cert-update-btn ${hasUpdates ? "has-updates" : ""}`}
+        onClick={onUpdate}
+        disabled={!hasUpdates || updating}
+        title={
+          hasUpdates
+            ? `New exams detected! Update certificate with latest stats for ${coinCost} Coins.`
+            : "Certificate data matches your latest exam dashboard."
+        }
+      >
+        <RefreshCw size={13} className={updating ? "cert-spin" : ""} />
+        <span>
+          {updating
+            ? "Updating Certificate..."
+            : hasUpdates
+              ? "Update Certificate"
+              : "Certificate Up to Date"}
+        </span>
+        {hasUpdates && !updating && (
+          <span className="cert-btn-coin-pill">
+            <span>{coinCost}</span>
+            <span>🪙</span>
+          </span>
+        )}
+      </button>
     </div>
   );
 }
@@ -79,6 +106,7 @@ export default function ObjCertificateCard() {
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(true);
   const [unlocking, setUnlocking] = useState(false);
+  const [updating, setUpdating] = useState(false);
   const [error, setError] = useState(null);
 
   const load = useCallback(async () => {
@@ -107,11 +135,34 @@ export default function ObjCertificateCard() {
       await load();
       // Dispatch wallet update event so header coin balance refreshes
       window.dispatchEvent(new Event("wallet-updated"));
+      window.dispatchEvent(new Event("walletUpdated"));
     } catch (err) {
       const msg = err.response?.data?.message || "Failed to unlock certificate";
       notify.error(msg);
     } finally {
       setUnlocking(false);
+    }
+  };
+
+  const handleUpdate = async () => {
+    if (updating) return;
+    if ((status?.coinBalance ?? 0) < CERT_COST) {
+      notify.error(`Insufficient coins. You need ${CERT_COST} coins to update your certificate.`);
+      return;
+    }
+    setUpdating(true);
+    try {
+      await updateCertificate();
+      notify.success("🏆 Certificate updated with your latest exam performance!");
+      await load();
+      window.dispatchEvent(new Event("certificate-updated"));
+      window.dispatchEvent(new Event("wallet-updated"));
+      window.dispatchEvent(new Event("walletUpdated"));
+    } catch (err) {
+      const msg = err.response?.data?.message || "Failed to update certificate";
+      notify.error(msg);
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -160,6 +211,19 @@ export default function ObjCertificateCard() {
   const { performance, certificate, coinBalance } = status || {};
   const { totalExams, totalQuestions, totalCorrect, accuracy, bestScore, isEligible } = performance || {};
 
+  const hasUpdates = Boolean(
+    certificate &&
+    certificate.status === "UNLOCKED" &&
+    performance &&
+    (
+      performance.totalExams !== certificate.totalExams ||
+      performance.totalQuestions !== certificate.totalQuestions ||
+      performance.totalCorrect !== certificate.totalCorrect ||
+      performance.accuracy !== certificate.accuracy ||
+      performance.bestScore !== certificate.bestScore
+    )
+  );
+
   // ─── Already Unlocked ───
   if (certificate && certificate.status === "UNLOCKED") {
     return (
@@ -169,7 +233,16 @@ export default function ObjCertificateCard() {
           <h2>Performance Certificate</h2>
         </div>
         <p className="cert-subtitle">Your Objective Exam journey, recognized.</p>
-        <CertificateView cert={certificate} onDownload={handleDownload} onViewFull={handleViewFull} />
+        <CertificateView
+          cert={certificate}
+          performance={performance}
+          hasUpdates={hasUpdates}
+          onUpdate={handleUpdate}
+          updating={updating}
+          onDownload={handleDownload}
+          onViewFull={handleViewFull}
+          coinCost={CERT_COST}
+        />
       </div>
     );
   }
