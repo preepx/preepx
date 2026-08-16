@@ -18,10 +18,10 @@ const protect = async (req, res, next) => {
     }
 
     if (!user) {
-       return res.status(401).json({ message: "User not found" });
+      return res.status(401).json({ message: "User not found" });
     }
     if (user.isBlocked) {
-       return res.status(403).json({ message: "Your account has been blocked by the admin." });
+      return res.status(403).json({ message: "Your account has been blocked by the admin." });
     }
 
     req.user = decoded.id;
