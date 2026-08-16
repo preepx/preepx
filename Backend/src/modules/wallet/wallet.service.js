@@ -206,6 +206,37 @@ const addBonusToWallet = async (userId, coins, description) => {
   return { wallet, transaction, coinsAdded: coins };
 };
 
+/**
+ * Spend an exact number of coins for a custom purpose (e.g., certificate unlock).
+ * Always validates balance server-side. Throws INSUFFICIENT_COINS if balance < amount.
+ */
+const spendCoins = async (userId, amount, description, metadata = {}) => {
+  const wallet = await getOrCreateWallet(userId);
+  if (wallet.balance < amount) {
+    const err = new Error(`Insufficient coins. Need ${amount}, have ${wallet.balance}.`);
+    err.code = "INSUFFICIENT_COINS";
+    err.required = amount;
+    err.balance = wallet.balance;
+    throw err;
+  }
+
+  wallet.balance -= amount;
+  wallet.totalSpent += amount;
+  await wallet.save();
+
+  await WalletTransaction.create({
+    userId,
+    type: "spend",
+    coins: -amount,
+    balanceAfter: wallet.balance,
+    description,
+    status: "completed",
+    metadata,
+  });
+
+  return { wallet, balanceAfter: wallet.balance };
+};
+
 module.exports = {
   addBonusToWallet,
   getOrCreateWallet,
@@ -214,6 +245,7 @@ module.exports = {
   deductForSession,
   hasEnoughCoins,
   addBonus,
+  spendCoins,
 };
 
 

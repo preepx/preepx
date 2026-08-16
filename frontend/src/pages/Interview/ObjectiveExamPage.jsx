@@ -5,6 +5,7 @@ import {
   ChevronRight, Zap, BookOpen, BarChart3, Award, Flame,
 } from "lucide-react";
 import { getMcqDashboard, deleteMcqResult } from "@/services/mcqAPI";
+import ObjCertificateCard from "@/components/ObjCertificateCard";
 import { syncUserToStorage } from "@/services/userAPI";
 import notify from "@/utils/notify";
 import { showAppError } from "@/utils/appAlert";
@@ -20,13 +21,22 @@ const ObjectiveExamPage = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth < 768 : false));
+  const itemsPerPage = isMobile ? 3 : 10;
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     setCurrentPage(1);
-  }, [search, filter]);
+  }, [search, filter, isMobile]);
 
   const loadDashboard = useCallback(async () => {
     try {
@@ -207,6 +217,7 @@ const ObjectiveExamPage = () => {
         </div>
 
         <div className="side-panels">
+          <ObjCertificateCard />
           {dashboard?.recentActivity?.length > 0 && (
             <div className="panel activity-panel">
               <div className="panel-header"><Flame size={18} /><h2>Recent Activity</h2></div>
