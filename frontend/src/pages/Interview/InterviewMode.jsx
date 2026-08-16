@@ -386,8 +386,8 @@ const InterviewMode = () => {
         const aiNames = ["Alex", "Jordan", "Taylor", "Morgan", "Sam", "Jamie"];
         const aiName = aiNames[Math.floor(Math.random() * aiNames.length)];
 
-        const hour = new Date().getHours();
-        const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+        const greetings = ["Hello", "Hi", "Welcome"];
+        const greeting = greetings[Math.floor(Math.random() * greetings.length)];
 
         await speakQuestion(`${greeting} ${candidateName}. I am ${aiName}, your AI interviewer. Let's start the interview.`);
         if (!exitedRef.current) {
