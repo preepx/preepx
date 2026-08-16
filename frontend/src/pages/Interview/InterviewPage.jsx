@@ -81,7 +81,7 @@ const InterviewPage = () => {
       setUploading(true);
       const res = await uploadResume(file);
       notify.success("Resume analyzed! Starting interview...");
-      navigate("/start-interview", {
+      navigate("/interview-setup", {
         state: {
           jobTitle: "Resume-based Role",
           jobTopic: res.result || "Skills from Resume",
@@ -230,10 +230,12 @@ const InterviewPage = () => {
                           navigate("/feedback", { state: { interview: intv } });
                         }
                       } else {
-                        navigate("/start-interview", {
+                        navigate("/interview-setup", {
                           state: {
-                            jobTitle: intv.jobTitle, jobTopic: intv.jobTopic,
-                            questions: intv.questions, interviewId: intv._id,
+                            jobTitle: intv.jobTitle,
+                            jobTopic: intv.jobTopic,
+                            questions: intv.questions,
+                            interviewId: intv._id,
                           },
                         });
                       }

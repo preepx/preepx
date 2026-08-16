@@ -36,7 +36,7 @@ const InterviewModal = ({ onClose, onSuccess }) => {
       }
       if (onSuccess) onSuccess();
       notify.success(`${data.questions.length} questions generated!`);
-      navigate("/start-interview", {
+      navigate("/interview-setup", {
         state: {
           jobTitle, jobTopic, questions: data.questions,
           interviewId: data.interviewId, difficulty, interviewType,

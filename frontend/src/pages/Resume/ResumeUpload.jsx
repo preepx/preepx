@@ -46,7 +46,7 @@ const ResumeUpload = () => {
 
   const startInterview = () => {
     if (!lastResult) return;
-    navigate("/start-interview", {
+    navigate("/interview-setup", {
       state: {
         jobTitle: "Resume-based Role",
         jobTopic: lastResult.result || "Skills from Resume",

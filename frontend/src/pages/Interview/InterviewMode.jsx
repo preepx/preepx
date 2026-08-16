@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
-import { Mic, MicOff, SkipForward, Volume2, Timer, ArrowLeft, ShieldCheck } from "lucide-react";
+import { Mic, MicOff, SkipForward, Volume2, Timer, ArrowLeft, ShieldCheck, Signal, PhoneOff, Subtitles } from "lucide-react";
 import { evaluateAnswer, saveInterviewResult } from "@/services/interviewAPI";
 import { showAppError } from "@/utils/appAlert";
 import notify from "@/utils/notify";
@@ -11,7 +11,7 @@ import '@/styles/InterviewMode.css';
 const InterviewMode = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { jobTitle, jobTopic, questions, interviewId, fromResume } = location.state || {};
+  const { jobTitle, jobRole, role, jobTopic, questions, interviewId, fromResume } = location.state || {};
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
@@ -26,10 +26,15 @@ const InterviewMode = () => {
   const [totalDuration, setTotalDuration] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showExitModal, setShowExitModal] = useState(false);
-  const [permissionsGranted, setPermissionsGranted] = useState(null); // null=checking, true=ok, false=denied
+  const [permissionsGranted, setPermissionsGranted] = useState(false);
+  const [isAudioLoading, setIsAudioLoading] = useState(false);
+  const [showCC, setShowCC] = useState(false);
+  const [aiText, setAiText] = useState("");
+  const [introPlayed, setIntroPlayed] = useState(false);
 
   const webcamRef = useRef(null);
   const recRef = useRef(null);
+  const audioRef = useRef(null);
 
   // Initialize face detection hook
   const { faceWarning } = useFaceDetection(webcamRef, isFullscreen && permissionsGranted === true);
@@ -47,19 +52,32 @@ const InterviewMode = () => {
   const interimRef = useRef("");      // keep track of interim transcript
 
   useEffect(() => {
+    const checkIsFull = () => !!(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    );
+
+    setIsFullscreen(checkIsFull());
+    isFullScreenRef.current = checkIsFull();
+
     const handleFullscreenChange = () => {
-      const isFull = !!document.fullscreenElement;
+      const isFull = checkIsFull();
       setIsFullscreen(isFull);
       isFullScreenRef.current = isFull;
 
       if (!isFull) {
-        window.speechSynthesis.pause();
+        if (audioRef.current) audioRef.current.pause();
       } else {
-        window.speechSynthesis.resume();
+        if (audioRef.current) audioRef.current.play().catch(() => { });
       }
     };
 
     document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+    document.addEventListener("mozfullscreenchange", handleFullscreenChange);
+    document.addEventListener("MSFullscreenChange", handleFullscreenChange);
 
     // Attempt to enter fullscreen on mount
     const elem = document.documentElement;
@@ -81,13 +99,20 @@ const InterviewMode = () => {
 
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener("webkitfullscreenchange", handleFullscreenChange);
+      document.removeEventListener("mozfullscreenchange", handleFullscreenChange);
+      document.removeEventListener("MSFullscreenChange", handleFullscreenChange);
     };
   }, []);
 
   // ── Stop everything ─────────────────────────────────
   const stopAll = () => {
-    window.speechSynthesis.cancel();
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
     setAiSpeaking(false);
+    setIsAudioLoading(false);
 
     if (silenceRef.current) { clearTimeout(silenceRef.current); silenceRef.current = null; }
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
@@ -106,32 +131,71 @@ const InterviewMode = () => {
   };
 
   // ── TTS ─────────────────────────────────────────────
-  const speakQuestion = (text) => {
-    window.speechSynthesis.cancel();
-    const voices = window.speechSynthesis.getVoices();
-    const preferred = ["Google US English", "Microsoft David - English (United States)", "Microsoft Zira - English (United States)", "Alex", "Samantha"];
-    let voice = null;
-    for (const name of preferred) { voice = voices.find(v => v.name === name); if (voice) break; }
-    if (!voice) voice = voices.find(v => v.lang === "en-US") || null;
+  const speakQuestion = (text, questionIndexAtStart) => {
+    return new Promise(async (resolve) => {
+      if (exitedRef.current) {
+        resolve();
+        return;
+      }
+      stopAll();
+      setIsAudioLoading(true);
+      setAiSpeaking(false);
+      setAiText(text); // Keep text ready
 
-    const u = new SpeechSynthesisUtterance(text);
-    u.lang = "en-US"; u.rate = 0.88; u.pitch = 1.0; u.volume = 1.0;
-    if (voice) u.voice = voice;
-    u.onstart = () => setAiSpeaking(true);
-    u.onend = () => setAiSpeaking(false);
-    u.onerror = () => setAiSpeaking(false);
-    window.speechSynthesis.speak(u);
+      try {
+        const baseUrl = import.meta.env.VITE_API_URL || '';
+        const ttsUrl = baseUrl.endsWith('/api') ? baseUrl.replace(/\/api$/, '') + '/api/tts' : baseUrl + '/api/tts';
+        const response = await fetch(ttsUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          },
+          body: JSON.stringify({ text })
+        });
+
+        if (!response.ok) {
+          throw new Error('TTS generation failed');
+        }
+
+        const blob = await response.blob();
+        const url = URL.createObjectURL(blob);
+
+        const audio = new Audio(url);
+        audioRef.current = audio;
+
+        audio.onplay = () => {
+          setIsAudioLoading(false);
+          setAiSpeaking(true);
+        };
+
+        audio.onended = () => {
+          setAiSpeaking(false);
+          setAiText(""); // Clear text
+          URL.revokeObjectURL(url);
+          resolve();
+        };
+
+        audio.onerror = () => {
+          console.error("Audio playback error");
+          setAiSpeaking(false);
+          setAiText("");
+          setIsAudioLoading(false);
+          resolve(); // Always resolve so interview can proceed
+        };
+
+        await audio.play();
+      } catch (error) {
+        console.error("TTS fetch error:", error);
+        setIsAudioLoading(false);
+        setAiSpeaking(false);
+        resolve();
+      }
+    });
   };
 
   const doSpeak = (text) => {
-    if (!window.speechSynthesis.getVoices().length) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        window.speechSynthesis.onvoiceschanged = null;
-        speakQuestion(text);
-      };
-    } else {
-      speakQuestion(text);
-    }
+    speakQuestion(text);
   };
 
   // ── Speech Recognition ───────────────────────────────
@@ -304,47 +368,76 @@ const InterviewMode = () => {
     navigate("/interview");
   };
 
+  // ── Intro logic ──────────────────────────────────────
+  useEffect(() => {
+    if (permissionsGranted === true && !introPlayed) {
+      const playIntro = async () => {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        const candidateName = location.state?.userName || user.fullName || user.name || "Candidate";
+        const aiNames = ["Alex", "Jordan", "Taylor", "Morgan", "Sam", "Jamie"];
+        const aiName = aiNames[Math.floor(Math.random() * aiNames.length)];
+
+        const hour = new Date().getHours();
+        const greeting = hour < 12 ? "Good morning" : hour < 18 ? "Good afternoon" : "Good evening";
+
+        await speakQuestion(`${greeting} ${candidateName}. I am ${aiName}, your AI interviewer. Let's start the interview.`);
+        if (!exitedRef.current) {
+          setIntroPlayed(true);
+        }
+      };
+      playIntro();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [permissionsGranted]);
+
   // ── Per-question setup ───────────────────────────────
   useEffect(() => {
-    if (!questions?.length || permissionsGranted !== true) return;
+    if (!questions?.length || permissionsGranted !== true || !introPlayed) return;
 
     exitedRef.current = false;
     busyRef.current = false;
     answerRef.current = "";
     interimRef.current = "";
     indexRef.current = currentIndex;
-    timerValRef.current = 45;
+    timerValRef.current = 40;
 
     setUserAnswer("");
     setInterimAnswer("");
     setFeedback("");
     setFeedbackScore(null);
-    setQuestionTimer(45);
+    setQuestionTimer(40);
     setEvaluating(false);
 
-    doSpeak(`Question ${currentIndex + 1}. ${questions[currentIndex]}`);
-    startRec();
+    const runQuestion = async () => {
+      await speakQuestion(`Question ${currentIndex + 1}. ${questions[currentIndex]}`);
 
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      if (!isFullScreenRef.current) return;
-      setQuestionTimer(prev => {
-        const next = prev <= 1 ? 0 : prev - 1;
-        timerValRef.current = next;
-        setTotalDuration(Math.floor((Date.now() - startTimeRef.current) / 1000));
-        if (next === 0) {
-          clearInterval(timerRef.current);
-          doNext();
-        }
-        return next;
-      });
-    }, 1000);
+      if (exitedRef.current || busyRef.current) return;
+
+      startRec();
+
+      if (timerRef.current) clearInterval(timerRef.current);
+      timerRef.current = setInterval(() => {
+        if (!isFullScreenRef.current) return;
+        setQuestionTimer(prev => {
+          const next = prev <= 1 ? 0 : prev - 1;
+          timerValRef.current = next;
+          setTotalDuration(Math.floor((Date.now() - startTimeRef.current) / 1000));
+          if (next === 0) {
+            clearInterval(timerRef.current);
+            doNext();
+          }
+          return next;
+        });
+      }, 1000);
+    };
+
+    runQuestion();
 
     return () => {
       stopAll();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIndex, permissionsGranted]);
+  }, [currentIndex, permissionsGranted, introPlayed]);
 
   // ── Finish interview ─────────────────────────────────
   const finishInterview = async (answers) => {
@@ -485,120 +578,93 @@ const InterviewMode = () => {
       )}
       <div className={`interview-room ${!isFullscreen ? 'blurred' : ''}`}>
         {/* Header */}
-        <div className="room-header">
-          <button className="back-btn" onClick={handleExitClick}>
-            <ArrowLeft size={18} /> Exit
-          </button>
-          <div className="room-title">
-            <h2>{jobTitle}</h2>
-            <span className="room-topic">{jobTopic}</span>
-          </div>
-          <div className="room-progress">
-            <div className="timer-display">
-              <Timer size={14} />
-              <span className={questionTimer <= 15 ? "timer-warn" : ""}>
-                {Math.floor(questionTimer / 60)}:{String(questionTimer % 60).padStart(2, "0")}
-              </span>
+        <div className="im-header">
+          <div className="im-header-left" style={{ gap: '12px' }}>
+            <div className="im-logo" style={{ display: 'flex', alignItems: 'center' }}>
+              <img src="/preepx_logo.png" alt="Preepx Logo" style={{ height: '80px', width: 'auto', display: 'block' }} />
             </div>
-            <span>Q{currentIndex + 1} of {questions.length}</span>
-            <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${progress}%` }} />
+            <div className="im-role">{jobRole || jobTitle || role || 'Frontend Developer'}</div>
+          </div>
+          <div className="im-header-right">
+            <Signal className="im-network-icon" size={20} />
+            <div className="im-timer">
+              {Math.floor(totalDuration / 60).toString().padStart(2, '0')}:{(totalDuration % 60).toString().padStart(2, '0')}
+            </div>
+            <div className="im-avatar-small">
+              {location.state?.userName ? location.state.userName.substring(0, 2) : 'CK'}
             </div>
           </div>
         </div>
 
         {/* Main Content Layout */}
-        <div className="room-content-layout">
-
-          {/* Left Column (Question + Answer + Actions) */}
-          <div className="room-left">
-            {/* Question */}
-            <div className="question-card">
-              <div className="question-label">
-                <Volume2 size={16} />
-                {aiSpeaking ? "AI is speaking..." : "Current Question"}
-              </div>
-              <p className="question-text">{questions[currentIndex]}</p>
-              <button
-                className="replay-btn"
-                onClick={() => doSpeak(`Question ${currentIndex + 1}. ${questions[currentIndex]}`)}
-                disabled={aiSpeaking}
-              >
-                <Volume2 size={14} />
-                {aiSpeaking ? "Speaking..." : "Replay"}
-              </button>
+        <div className="im-main">
+          <div className="im-call-container">
+            <div className={`im-big-avatar ${aiSpeaking ? "speaking" : ""}`}>
+              I
             </div>
 
-            {/* Answer */}
-            <div className="answer-section">
-              <div className="listening-indicator">
-                {isListening
-                  ? <><Mic size={16} className="pulse" /> Listening...</>
-                  : <><MicOff size={16} /> Not listening</>
-                }
+            <div className="im-interviewer-pill">
+              <span className="im-interviewer-name">
+                {isAudioLoading ? "Waiting for AI..." : "Interviewer"}
+              </span>
+              <div className={`im-wave ${aiSpeaking ? "active" : ""}`}>
+                <span /><span /><span /><span />
               </div>
-              <div className={`answer-box${isListening && (userAnswer || interimAnswer) ? " answer-box--active" : ""}`}>
-                <strong>Your Answer</strong>
-                {(userAnswer || interimAnswer) ? (
-                  <p>
-                    {userAnswer}
-                    {interimAnswer && <span className="interim-text"> {interimAnswer}</span>}
-                  </p>
-                ) : (
-                  <p className="answer-placeholder">Start speaking — your answer will appear here...</p>
+            </div>
+
+            <div className="im-pip-container">
+              <Webcam ref={webcamRef} audio={false} className="im-webcam" screenshotFormat="image/jpeg" />
+              <div className="im-pip-badges">
+                <span className="im-pip-you">You</span>
+                <div className="im-pip-mic">
+                  {isListening ? <Mic size={14} color="white" /> : <MicOff size={14} color="#ef4444" />}
+                </div>
+              </div>
+            </div>
+
+            {/* Show Captions when AI is speaking or if showCC is true */}
+            {(aiSpeaking || showCC) && (
+              <div className="im-cc-overlay">
+                <p>{aiText || questions[currentIndex]}</p>
+                {(userAnswer || interimAnswer) && !aiSpeaking && (
+                  <div className="im-cc-answer">
+                    {userAnswer} <span className="interim-text">{interimAnswer}</span>
+                  </div>
                 )}
               </div>
-              {feedback && (
-                <div className={`feedback-box ${feedbackScore >= 6 ? "good" : "needs-work"}`}>
-                  <span className="feedback-score">{feedbackScore}/10</span>
-                  <p>{feedback}</p>
-                </div>
-              )}
-            </div>
-
-            {/* Actions */}
-            <div className="room-actions">
-              {userAnswer ? (
-                <button className="skip-btn primary" onClick={doNext} disabled={evaluating}>
-                  <SkipForward size={18} />
-                  {evaluating ? "Evaluating..." : "Submit & Next"}
-                </button>
-              ) : (
-                <button className="skip-btn" onClick={doNext} disabled={evaluating}>
-                  <SkipForward size={18} />
-                  Skip
-                </button>
-              )}
-            </div>
+            )}
           </div>
+        </div>
 
-          {/* Right Column (Webcam + AI) */}
-          <div className="room-right">
-            <div className="side-panels">
-              <div className="webcam-panel mini">
-                <Webcam ref={webcamRef} audio={false} className="webcam-feed" screenshotFormat="image/jpeg" />
-                <div className="webcam-label">You</div>
-              </div>
-              <div className="ai-panel mini">
-                <div className={`ai-avatar ${aiSpeaking ? "speaking" : ""}`}>
-                  <div className="ai-circle">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" />
-                      <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                      <line x1="12" y1="19" x2="12" y2="22" />
-                    </svg>
-                  </div>
-                  {aiSpeaking && (
-                    <div className="audio-bars">
-                      {[...Array(5)].map((_, i) => (
-                        <span key={i} style={{ animationDelay: `${i * 0.15}s` }} />
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <span className="ai-label">AI Interviewer</span>
-              </div>
-            </div>
+        {/* Footer */}
+        <div className="im-footer">
+          <div className="im-footer-left">
+            <button
+              className={`im-control-btn ${showCC ? 'active' : ''}`}
+              onClick={() => setShowCC(!showCC)}
+              title="Toggle Captions"
+            >
+              <Subtitles size={20} />
+            </button>
+          </div>
+          <div className="im-footer-center">
+            <button
+              className="im-end-call-btn"
+              onClick={handleExitClick}
+              title="End Interview"
+            >
+              <PhoneOff size={24} />
+            </button>
+          </div>
+          <div className="im-footer-right">
+            <button
+              className="im-next-btn"
+              onClick={doNext}
+              disabled={evaluating || busyRef.current}
+            >
+              {evaluating ? "Evaluating..." : "Skip"}
+              <SkipForward size={18} />
+            </button>
           </div>
         </div>
       </div>

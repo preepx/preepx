@@ -120,6 +120,7 @@ app.use("/api/assessments", require("./src/modules/hiring/assessment.routes"));
 app.use("/api/wallet", require("./src/modules/wallet/wallet.routes"));
 app.use("/api/btec-notes", require("./src/modules/btec-notes/btecNote.routes"));
 app.use("/api/coding", require("./src/modules/coding/coding.routes"));
+app.use("/api/tts", require("./src/routes/ttsRoutes"));
 
 // Internal Webhook for Admin Backend to trigger Socket.io events
 app.post("/api/internal/notify", express.json(), async (req, res) => {

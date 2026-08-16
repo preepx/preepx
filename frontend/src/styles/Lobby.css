@@ -1,0 +1,316 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --lobby-bg-grad-start: #0f172a; /* Slate 900 */
+  --lobby-bg-grad-end: #1e1b4b; /* Indigo 950 */
+  --lobby-card-bg: #1e293b; /* Slate 800 */
+  --lobby-text-primary: #f8fafc;
+  --lobby-text-secondary: #94a3b8;
+  --lobby-btn-primary: #0ea5e9; /* Light blue like screenshot */
+  --lobby-btn-primary-hover: #0284c7;
+  --lobby-border: #334155;
+}
+
+.pis-lobby-logo {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  z-index: 10;
+}
+
+.pis-lobby-logo img {
+  height: 100px;
+  width: auto;
+}
+
+/* Local wrapper to prevent body-level overrides */
+.pis-lobby-wrapper {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Force no scrolling globally */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Fullscreen Warning Modal */
+.pis-fullscreen-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.pis-fullscreen-warning-box {
+  background: #1e293b;
+  padding: 40px;
+  border-radius: 16px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.pis-fullscreen-warning-box h2 {
+  font-size: 24px;
+  color: #ef4444;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.pis-fullscreen-warning-box p {
+  font-size: 16px;
+  color: #9ca3af;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.pis-warning-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.pis-btn-warning-exit {
+  padding: 12px 24px;
+  background: transparent;
+  color: #9ca3af;
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pis-btn-warning-exit:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  border-color: #9ca3af;
+}
+
+.pis-btn-warning-enter {
+  padding: 12px 24px;
+  background: #818cf8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.pis-btn-warning-enter:hover {
+  background: #6366f1;
+}
+
+/* -------------------------------------- */
+/* Lobby Layout                           */
+/* -------------------------------------- */
+
+.pis-lobby-container {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, var(--lobby-bg-grad-start) 0%, var(--lobby-bg-grad-end) 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--lobby-text-primary);
+  box-sizing: border-box;
+}
+
+.pis-lobby-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 60px;
+  max-width: 1200px;
+  width: 100%;
+  padding: 40px;
+}
+
+/* Left Side: Video Section */
+.pis-video-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 700px;
+}
+
+.pis-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background-color: #111827; /* Darker than slate-800 for unlit camera */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--lobby-border);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pis-lobby-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* Mirror camera */
+}
+
+.pis-name-tag {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background-color: rgba(30, 64, 175, 0.8); /* Dark blue overlay */
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  backdrop-filter: blur(4px);
+}
+
+.pis-video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--lobby-text-secondary);
+}
+
+.pis-placeholder-icon {
+  color: var(--lobby-text-secondary);
+}
+
+.pis-placeholder-icon.error {
+  color: #ef4444;
+}
+
+.pis-btn-retry {
+  background: transparent;
+  border: 1px solid var(--lobby-text-secondary);
+  color: var(--lobby-text-secondary);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pis-btn-retry:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.pis-device-status-row {
+  display: flex;
+  gap: 16px;
+}
+
+.pis-device-pill {
+  flex: 1;
+  background-color: rgba(30, 41, 59, 0.7); /* Slate 800 */
+  border: 1px solid var(--lobby-border);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  color: var(--lobby-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pis-device-icon {
+  font-size: 1rem;
+}
+
+/* Right Side: Info Section */
+.pis-info-section {
+  flex: 0.7;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pis-role-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.pis-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.pis-status-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #8b5cf6; /* Purple */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.pis-status-text {
+  color: var(--lobby-text-secondary);
+  font-size: 1rem;
+}
+
+.pis-join-btn {
+  background-color: #1e293b;
+  color: #94a3b8;
+  padding: 14px 40px;
+  border-radius: 30px; /* Pill shape */
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  cursor: not-allowed;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.pis-join-btn.ready {
+  background-color: var(--lobby-btn-primary);
+  color: white;
+  cursor: pointer;
+}
+
+.pis-join-btn.ready:hover {
+  background: #0284c7;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  .pis-lobby-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .pis-info-section {
+    align-items: center;
+    text-align: center;
+  }
+
+  .pis-role-title {
+    font-size: 2rem;
+  }
+}
