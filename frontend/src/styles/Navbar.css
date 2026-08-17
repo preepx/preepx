@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(15, 17, 36, 0.95);
+  background: #040B1D;
   /* Matched to dark theme */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

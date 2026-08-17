@@ -1,212 +1,229 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import notify from "@/utils/notify";
 import API from "@/utils/api";
 import {
   Code2, Plus, Clock, Trophy, Target, Search,
-  ChevronRight, BrainCircuit, Rocket, Flame, Code, Terminal, Trash2
+  ChevronRight, BrainCircuit, Rocket, Flame, Code, Terminal, Bookmark,
+  CheckCircle2
 } from "lucide-react";
 import EmptyState from "@/components/EmptyState";
 import Pagination from "@/components/Pagination";
 import '@/styles/InterviewPage.css';
 
+const ALL_TOPICS = [
+  { name: 'Array', count: 230 },
+  { name: 'Binary Search', count: 11 },
+  { name: 'Hash Table', count: 45 },
+  { name: 'Linked List', count: 20 },
+  { name: 'Math', count: 30 },
+  { name: 'Dynamic Programming', count: 90 },
+  { name: 'String', count: 65 },
+  { name: 'Sliding Window', count: 15 }
+];
+
 const CodingPractice = () => {
   const navigate = useNavigate();
-  const [showConfig, setShowConfig] = useState(false);
-  const [difficulty, setDifficulty] = useState('easy');
-  const [history, setHistory] = useState(() => JSON.parse(localStorage.getItem('codingPracticeHistory') || '[]'));
+  const [problems, setProblems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedTopics, setSelectedTopics] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 10;
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-  // Calculate Stats
-  const problemsSolved = history.filter(h => h.status === 'pass').length;
-  const acceptanceRate = history.length > 0 ? Math.round((problemsSolved / history.length) * 100) : 0;
-  const totalTimeSecs = history.reduce((acc, h) => acc + (h.timeSpentSecs || 0), 0);
-  const timeSpentFormatted = totalTimeSecs > 3600
-    ? `${(totalTimeSecs / 3600).toFixed(1)}h`
-    : `${Math.ceil(totalTimeSecs / 60)}m`;
-
-  const diffWeights = { easy: 1, medium: 2, hard: 3 };
-  const avgDiffScore = history.length > 0
-    ? history.reduce((acc, h) => acc + (diffWeights[h.difficulty] || 1), 0) / history.length
-    : 1;
-  const avgDifficulty = avgDiffScore > 2.5 ? 'Hard' : avgDiffScore > 1.5 ? 'Medium' : 'Easy';
-
-  const clearHistory = () => {
-    if (window.confirm('Clear all practice history?')) {
-      localStorage.removeItem('codingPracticeHistory');
-      setHistory([]);
+  const fetchProblems = async () => {
+    setLoading(true);
+    try {
+      const topicQuery = selectedTopics.length > 0 ? `&topics=${selectedTopics.join(',')}` : '';
+      const res = await API.get(`/coding/problems?page=${currentPage}&limit=${itemsPerPage}${topicQuery}`);
+      if (res.data.success) {
+        setProblems(res.data.problems);
+        setTotalPages(res.data.totalPages);
+      }
+    } catch (err) {
+      console.error("Failed to fetch problems", err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleStart = async () => {
+  useEffect(() => {
+    fetchProblems();
+  }, [currentPage, selectedTopics]);
+
+  const handleTopicToggle = (topicName) => {
+    setSelectedTopics(prev => 
+      prev.includes(topicName) 
+        ? prev.filter(t => t !== topicName)
+        : [...prev, topicName]
+    );
+    setCurrentPage(1); // reset to page 1 on filter
+  };
+
+  const handleSolve = async (problem) => {
     try {
-      await API.post('/coding/start', { difficulty });
+      // Deduct coins if required, here we just do a start check
+      await API.post('/coding/start', { difficulty: problem.difficulty });
       window.dispatchEvent(new Event("walletUpdated"));
-      navigate(`/coding-exam?difficulty=${difficulty}`);
+      navigate(`/coding-exam?problemId=${problem._id}`);
     } catch (err) {
       notify.error(err.response?.data?.message || err.response?.data?.error || err.message || 'Error starting session');
     }
   };
 
+  const getDifficultyColor = (diff) => {
+    if (diff === 'easy') return '#10b981'; // Green
+    if (diff === 'medium') return '#f59e0b'; // Orange
+    if (diff === 'hard') return '#ef4444'; // Red
+    return '#8b5cf6';
+  };
+
   return (
-    <div className="dashboard-page">
-      <div className="dashboard-header">
+    <div className="dashboard-page" style={{ padding: '20px', maxWidth: '1400px', margin: '0 auto' }}>
+      <div className="dashboard-header" style={{ marginBottom: '30px' }}>
         <div>
-          <h1>Coding Practice Dashboard</h1>
+          <h1>Coding Practice</h1>
           <p>Sharpen your problem-solving skills with algorithms and data structures.</p>
         </div>
-        <div className="header-actions">
-          <button className="action-btn primary" onClick={() => setShowConfig(true)}>
-            <Plus size={18} /> New Practice
-          </button>
-        </div>
       </div>
 
-      <div className="stats-row">
-        <div className="stat-card">
-          <div className="stat-icon blue"><Code2 size={20} /></div>
-          <div><span className="stat-num">{problemsSolved}</span><span className="stat-lbl">Problems Solved</span></div>
+      <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
+        
+        {/* LEFT SIDEBAR: TOPIC FILTERS */}
+        <div className="panel" style={{ width: '280px', flexShrink: 0, padding: '20px' }}>
+          <h3 style={{ marginBottom: '16px', fontSize: '1.1rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '12px' }}>
+            Topics
+          </h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '600px', overflowY: 'auto' }}>
+            {ALL_TOPICS.map(topic => (
+              <label key={topic.name} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', color: '#cbd5e1' }}>
+                <input 
+                  type="checkbox" 
+                  checked={selectedTopics.includes(topic.name)}
+                  onChange={() => handleTopicToggle(topic.name)}
+                  style={{ width: '16px', height: '16px', accentColor: '#4f46e5' }}
+                />
+                <span style={{ flex: 1 }}>{topic.name}</span>
+                {/* Optional: <span style={{ color: '#64748b', fontSize: '0.85rem' }}>({topic.count})</span> */}
+              </label>
+            ))}
+          </div>
         </div>
-        <div className="stat-card">
-          <div className="stat-icon green"><Target size={20} /></div>
-          <div><span className="stat-num">{acceptanceRate}%</span><span className="stat-lbl">Acceptance Rate</span></div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon purple"><Terminal size={20} /></div>
-          <div><span className="stat-num">{avgDifficulty}</span><span className="stat-lbl">Avg Difficulty</span></div>
-        </div>
-        <div className="stat-card">
-          <div className="stat-icon orange"><Clock size={20} /></div>
-          <div><span className="stat-num">{timeSpentFormatted}</span><span className="stat-lbl">Time Spent</span></div>
-        </div>
-      </div>
 
-      <div className="dashboard-grid">
-        <div className="panel interviews-panel">
-          <div className="panel-header">
-            <h2>Practice History</h2>
-            <div className="panel-tools">
-              <div className="search-box">
-                <Search size={16} />
-                <input placeholder="Search..." />
-              </div>
-              {history.length > 0 && (
-                <button onClick={clearHistory} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', padding: '4px' }}>
-                  <Trash2 size={16} />
-                </button>
-              )}
+        {/* MAIN AREA: PROBLEM LIST */}
+        <div className="panel" style={{ flex: 1, padding: '0' }}>
+          <div className="panel-header" style={{ padding: '20px', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+            <h2>Problems</h2>
+            <div className="search-box">
+              <Search size={16} />
+              <input placeholder="Search problems..." />
             </div>
           </div>
 
-          {history.length > 0 ? (
-            <div className="interview-list">
-              {history.slice().reverse()
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                .map((session, i) => (
-                  <div key={i} className="interview-item">
-                    <div className="interview-info">
-                      <h3>{session.title}</h3>
-                      <p>
-                        Language: {session.language} · Difficulty: <span style={{ textTransform: 'capitalize' }}>{session.difficulty}</span>
-                      </p>
-                      <span className="interview-date">
-                        {new Date(session.date).toLocaleDateString()} · {Math.ceil(session.timeSpentSecs / 60)}m spent
-                      </span>
+          <div style={{ padding: '0' }}>
+            {loading ? (
+              <div style={{ padding: '40px', textAlign: 'center', color: '#94a3b8' }}>Loading problems...</div>
+            ) : problems.length > 0 ? (
+              <div>
+                {problems.map(problem => (
+                  <div key={problem._id} style={{ 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    padding: '20px', 
+                    borderBottom: '1px solid rgba(255,255,255,0.05)',
+                    transition: 'background 0.2s',
+                    cursor: 'default'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.02)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                  >
+                    <div style={{ marginRight: '20px', color: '#64748b' }}>
+                      <Bookmark size={20} />
                     </div>
-                    <div className="interview-meta">
-                      <span className={`status-badge ${session.status === 'pass' ? 'completed' : 'pending'}`}>
-                        {session.status === 'pass' ? 'Passed' : session.status === 'fail' ? 'Failed' : 'Untested'}
-                      </span>
+                    
+                    <div style={{ flex: 2 }}>
+                      <h3 style={{ margin: '0 0 6px 0', fontSize: '1.1rem', color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                        {problem.title}
+                      </h3>
+                      <p style={{ margin: 0, fontSize: '0.85rem', color: '#94a3b8' }}>
+                        {problem.topics?.join(', ')}
+                      </p>
+                    </div>
+
+                    <div style={{ flex: 1, color: getDifficultyColor(problem.difficulty), textTransform: 'capitalize', fontWeight: '500' }}>
+                      {problem.difficulty}
+                    </div>
+
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '8px', color: '#cbd5e1' }}>
+                      <span style={{ fontSize: '0.9rem' }}>{problem.acceptanceRate || 0}%</span>
+                      {/* Simple progress bar representation */}
+                      <div style={{ display: 'flex', gap: '2px' }}>
+                        {[1,2,3,4,5].map(i => (
+                          <div key={i} style={{ 
+                            width: '4px', height: '12px', 
+                            background: i <= (problem.acceptanceRate / 20) ? '#3b82f6' : 'rgba(255,255,255,0.1)',
+                            borderRadius: '2px'
+                          }} />
+                        ))}
+                      </div>
+                    </div>
+
+                    <div style={{ flex: 1, color: '#94a3b8', fontSize: '0.9rem' }}>
+                      0/{problem.points || 100}
+                    </div>
+
+                    <div>
+                      <button 
+                        className="action-btn"
+                        onClick={() => handleSolve(problem)}
+                        style={{ 
+                          background: 'transparent', 
+                          border: '1px solid #4f46e5', 
+                          color: '#818cf8',
+                          padding: '8px 20px',
+                          borderRadius: '20px',
+                          fontWeight: '500',
+                          transition: 'all 0.2s'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = '#4f46e5';
+                          e.currentTarget.style.color = '#fff';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'transparent';
+                          e.currentTarget.style.color = '#818cf8';
+                        }}
+                      >
+                        Solve
+                      </button>
                     </div>
                   </div>
                 ))}
-              <Pagination
-                currentPage={currentPage}
-                totalItems={history.length}
-                itemsPerPage={itemsPerPage}
-                onPageChange={setCurrentPage}
+                
+                <div style={{ padding: '20px' }}>
+                  <Pagination
+                    currentPage={currentPage}
+                    totalItems={totalPages * itemsPerPage}
+                    itemsPerPage={itemsPerPage}
+                    onPageChange={setCurrentPage}
+                  />
+                </div>
+              </div>
+            ) : (
+              <EmptyState
+                icon={Code2}
+                title="No problems found"
+                desc="Try adjusting your topic filters to find more problems."
+                actionLabel="Clear Filters"
+                onAction={() => setSelectedTopics([])}
               />
-            </div>
-          ) : (
-            <EmptyState
-              icon={Code2}
-              title="No practice sessions yet"
-              desc="Start a new coding practice session to improve your logic building skills. Costs 2 coins. Earn 5/10/15 XP based on difficulty."
-              actionLabel="Start Coding"
-              onAction={() => setShowConfig(true)}
-            />
-          )}
+            )}
+          </div>
         </div>
 
-        <div className="side-panels">
-          <div className="panel quick-start-panel">
-            <h2>Quick Actions</h2>
-            <button className="action-btn primary full" onClick={() => setShowConfig(true)}>
-              <Plus size={18} /> New Coding Session
-            </button>
-          </div>
-          <div className="panel tips-panel">
-            <div className="panel-header"><Code size={18} /><h2>Practice Tips</h2></div>
-            <ul className="tips-list">
-              <li>Read the problem statement carefully</li>
-              <li>Consider edge cases before writing code</li>
-              <li>Optimize for time and space complexity</li>
-              <li>Run sample test cases often</li>
-            </ul>
-          </div>
-        </div>
       </div>
-
-      {showConfig && (
-        <div className="modal-overlay" onClick={() => setShowConfig(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '400px' }}>
-            <div className="modal-header" style={{ alignItems: 'center' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <h2 style={{ margin: 0 }}>Setup Practice</h2>
-                <div style={{ padding: '6px 14px', background: 'linear-gradient(145deg, rgba(234, 179, 8, 0.15), rgba(217, 119, 6, 0.05))', border: '1px solid rgba(234, 179, 8, 0.3)', boxShadow: '0 4px 15px rgba(234, 179, 8, 0.1)', color: '#fbbf24', borderRadius: '24px', fontSize: '0.85rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '6px', letterSpacing: '0.5px' }}>
-                  2 <span style={{ fontSize: '16px', filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }}>🪙</span> per session
-                </div>
-              </div>
-              <button className="close-btn" onClick={() => setShowConfig(false)}>×</button>
-            </div>
-            <div className="modal-body" style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '20px' }}>
-
-              <div className="form-group">
-                <label style={{ display: 'block', marginBottom: '8px', color: '#94a3b8' }}>Select Difficulty</label>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  {['easy', 'medium', 'hard'].map(level => (
-                    <button
-                      key={level}
-                      onClick={() => setDifficulty(level)}
-                      style={{
-                        flex: 1,
-                        padding: '10px',
-                        borderRadius: '8px',
-                        border: `1px solid ${difficulty === level ? '#4f46e5' : 'rgba(255,255,255,0.1)'}`,
-                        background: difficulty === level ? 'rgba(79, 70, 229, 0.1)' : 'transparent',
-                        color: difficulty === level ? '#818cf8' : '#cbd5e1',
-                        cursor: 'pointer',
-                        textTransform: 'capitalize'
-                      }}
-                    >
-                      {level}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-            <div className="modal-footer" style={{ padding: '20px', borderTop: '1px solid rgba(255,255,255,0.1)', display: 'flex', justifyContent: 'flex-end' }}>
-              <button className="action-btn primary" onClick={handleStart} style={{ width: '100%' }}>
-                Start Practice <ChevronRight size={18} />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

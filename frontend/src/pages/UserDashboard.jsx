@@ -40,7 +40,21 @@ function UserDashboard() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showComingSoon, setShowComingSoon] = useState(false);
+  const [currentBanner, setCurrentBanner] = useState(0);
   const { balance } = useWallet();
+
+  const banners = [
+    "/dsbanner/dashboard_banner.png",
+    "/dsbanner/interview_banner.png",
+    "/dsbanner/onjective_banner.png"
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentBanner((prev) => (prev + 1) % banners.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [banners.length]);
 
   const refreshData = () => {
     Promise.all([
@@ -102,62 +116,46 @@ function UserDashboard() {
 
   return (
     <div className="ud-page">
-      {/* HERO */}
-      <section className="ud-hero">
-        <div className="ud-hero-bg">
-          <div className="ud-orb ud-orb-1" />
-          <div className="ud-orb ud-orb-2" />
-          <div className="ud-hero-grid" />
-        </div>
 
-        <div className="ud-hero-inner">
-          <div className="ud-hero-left">
-            <div className="ud-avatar-wrap">
-              <img src={avatar} alt={firstName} className="ud-avatar" />
-              {streak > 0 && (
-                <span className="ud-avatar-streak" title={`${streak} day streak`}>
-                  <Flame size={12} /> {streak}
-                </span>
-              )}
-            </div>
-            <div className="ud-hero-text">
-              <span className="ud-greeting-badge">
-                <Sparkles size={13} /> {getGreeting()}
-              </span>
-              <h1>Welcome back, <span className="ud-name">{firstName}</span></h1>
-              <p>Ready to sharpen your skills? Pick up where you left off.</p>
-            </div>
-          </div>
 
-          <div className="ud-level-panel">
-            <div className="ud-level-ring">
-              <svg viewBox="0 0 80 80">
-                <circle cx="40" cy="40" r="34" className="ud-ring-bg" />
-                <circle
-                  cx="40" cy="40" r="34"
-                  className="ud-ring-fill"
-                  strokeDasharray={`${levelProgress * 2.136} 213.6`}
-                />
-              </svg>
-              <div className="ud-level-center">
-                <span className="ud-level-num">{user?.level || 1}</span>
-                <span className="ud-level-lbl">Level</span>
-              </div>
-            </div>
-            <div className="ud-level-info">
-              <div className="ud-xp-row">
-                <img src="/favicon.png" alt="XP" className="ud-px-icon" />
-                <strong>{user?.points || 0}</strong>
-                <span>XP available</span>
-              </div>
-              <div className="ud-xp-bar">
-                <div className="ud-xp-fill" style={{ width: `${levelProgress}%` }} />
-              </div>
-              <p className="ud-xp-hint">{pointsToNext} XP to Level {(user?.level || 1) + 1}</p>
-            </div>
-          </div>
+      {/* BANNER SLIDER */}
+      <div className="ud-banner-slider-wrap">
+        {banners.map((src, index) => (
+          <img
+            key={index}
+            src={src}
+            alt={`Banner ${index + 1}`}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: index === 0 ? 'top' : 'center 50%',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              opacity: currentBanner === index ? 1 : 0,
+              transition: 'opacity 0.8s ease-in-out'
+            }}
+          />
+        ))}
+        {/* Slider Dots */}
+        <div style={{ position: 'absolute', bottom: '16px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '8px' }}>
+          {banners.map((_, index) => (
+            <div
+              key={index}
+              onClick={() => setCurrentBanner(index)}
+              style={{
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                background: currentBanner === index ? '#818cf8' : 'rgba(255, 255, 255, 0.3)',
+                cursor: 'pointer',
+                transition: 'all 0.3s'
+              }}
+            />
+          ))}
         </div>
-      </section>
+      </div>
 
       {/* STATS */}
       <section className="ud-stats-row">
