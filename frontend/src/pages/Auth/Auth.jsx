@@ -21,6 +21,7 @@ const EMPTY_CANDIDATE_REG = {
   referralCode: ""
 };
 
+
 const EMPTY_RECRUITER_REG = {
   fullName: "",
   email: "",
