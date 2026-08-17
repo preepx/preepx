@@ -176,8 +176,62 @@ function JourneysSection() {
             </svg>
           </div>
 
+          {/* Mobile Vertical Circuit Traces (Only visible on Mobile) */}
+          <div className="mobile-circuit-traces">
+            <svg viewBox="0 0 240 280" className="mobile-circuit-svg">
+              <defs>
+                <filter id="mCyanGlow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feDropShadow dx="0" dy="0" stdDeviation="2.5" floodColor="#38bdf8" floodOpacity="0.9" />
+                </filter>
+                <filter id="mPurpleGlow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feDropShadow dx="0" dy="0" stdDeviation="2.5" floodColor="#c084fc" floodOpacity="0.9" />
+                </filter>
+              </defs>
+
+              {/* Top Traces (Connecting from Candidates Card above down to Orb) */}
+              <path d="M 60 0 L 60 40 Q 60 65, 80 80 L 95 90" fill="none" stroke="rgba(56, 189, 248, 0.2)" strokeWidth="1.8" />
+              <path d="M 60 0 L 60 40 Q 60 65, 80 80 L 95 90" fill="none" stroke="#38bdf8" strokeWidth="2.4" filter="url(#mCyanGlow)" className="mobile-circuit-path-cyan" />
+              <circle cx="60" cy="6" r="3.5" fill="#38bdf8" filter="url(#mCyanGlow)" className="mobile-circuit-dot" />
+              <circle cx="80" cy="55" r="2.5" fill="#38bdf8" filter="url(#mCyanGlow)" />
+
+              <path d="M 110 0 L 110 85" fill="none" stroke="rgba(129, 140, 248, 0.2)" strokeWidth="1.8" />
+              <path d="M 110 0 L 110 85" fill="none" stroke="#818cf8" strokeWidth="2.4" filter="url(#mCyanGlow)" className="mobile-circuit-path-cyan" style={{ animationDelay: '0.4s' }} />
+              <circle cx="110" cy="6" r="3.5" fill="#818cf8" className="mobile-circuit-dot" />
+
+              <path d="M 155 0 L 155 45 Q 155 65, 140 80 L 135 85" fill="none" stroke="rgba(192, 132, 252, 0.2)" strokeWidth="1.8" />
+              <path d="M 155 0 L 155 45 Q 155 65, 140 80 L 135 85" fill="none" stroke="#c084fc" strokeWidth="2.4" filter="url(#mPurpleGlow)" className="mobile-circuit-path-purple" />
+              <circle cx="155" cy="6" r="3.5" fill="#c084fc" filter="url(#mPurpleGlow)" className="mobile-circuit-dot" />
+              <circle cx="145" cy="50" r="2.5" fill="#c084fc" filter="url(#mPurpleGlow)" />
+
+              <path d="M 190 0 L 190 35 Q 190 65, 160 85 L 145 92" fill="none" stroke="rgba(232, 121, 249, 0.2)" strokeWidth="1.8" />
+              <path d="M 190 0 L 190 35 Q 190 65, 160 85 L 145 92" fill="none" stroke="#e879f9" strokeWidth="2.4" filter="url(#mPurpleGlow)" className="mobile-circuit-path-purple" style={{ animationDelay: '0.6s' }} />
+              <circle cx="190" cy="6" r="3.5" fill="#e879f9" filter="url(#mPurpleGlow)" className="mobile-circuit-dot" />
+
+              {/* Bottom Traces (Connecting from Orb down to Recruiters Card below) */}
+              <path d="M 95 190 L 80 200 Q 60 215, 60 240 L 60 280" fill="none" stroke="rgba(56, 189, 248, 0.2)" strokeWidth="1.8" />
+              <path d="M 95 190 L 80 200 Q 60 215, 60 240 L 60 280" fill="none" stroke="#38bdf8" strokeWidth="2.4" filter="url(#mCyanGlow)" className="mobile-circuit-path-cyan" style={{ animationDelay: '0.3s' }} />
+              <circle cx="60" cy="274" r="3.5" fill="#38bdf8" filter="url(#mCyanGlow)" className="mobile-circuit-dot" />
+              <circle cx="80" cy="225" r="2.5" fill="#38bdf8" filter="url(#mCyanGlow)" />
+
+              <path d="M 110 195 L 110 280" fill="none" stroke="rgba(129, 140, 248, 0.2)" strokeWidth="1.8" />
+              <path d="M 110 195 L 110 280" fill="none" stroke="#818cf8" strokeWidth="2.4" filter="url(#mCyanGlow)" className="mobile-circuit-path-cyan" style={{ animationDelay: '0.7s' }} />
+              <circle cx="110" cy="274" r="3.5" fill="#818cf8" className="mobile-circuit-dot" />
+
+              <path d="M 135 195 L 140 200 Q 155 215, 155 235 L 155 280" fill="none" stroke="rgba(192, 132, 252, 0.2)" strokeWidth="1.8" />
+              <path d="M 135 195 L 140 200 Q 155 215, 155 235 L 155 280" fill="none" stroke="#c084fc" strokeWidth="2.4" filter="url(#mPurpleGlow)" className="mobile-circuit-path-purple" />
+              <circle cx="155" cy="274" r="3.5" fill="#c084fc" filter="url(#mPurpleGlow)" className="mobile-circuit-dot" />
+              <circle cx="145" cy="230" r="2.5" fill="#c084fc" filter="url(#mPurpleGlow)" />
+
+              <path d="M 145 188 L 160 195 Q 190 215, 190 245 L 190 280" fill="none" stroke="rgba(232, 121, 249, 0.2)" strokeWidth="1.8" />
+              <path d="M 145 188 L 160 195 Q 190 215, 190 245 L 190 280" fill="none" stroke="#e879f9" strokeWidth="2.4" filter="url(#mPurpleGlow)" className="mobile-circuit-path-purple" style={{ animationDelay: '0.5s' }} />
+              <circle cx="190" cy="274" r="3.5" fill="#e879f9" filter="url(#mPurpleGlow)" className="mobile-circuit-dot" />
+            </svg>
+          </div>
+
           {/* Central Ecosystem Orb */}
           <div className="ecosystem-orb-wrapper">
+            <div className="ecosystem-sonar-wave" />
+            <div className="ecosystem-sonar-wave-2" />
             <div className="ecosystem-orb-glow" />
             <div className="ecosystem-orb-ring" />
             <div className="ecosystem-orb-ring-outer" />
