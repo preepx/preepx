@@ -214,14 +214,37 @@ IMPORTANT: The "correctAnswer" field must exactly match the full text of one of 
       }
 
       if (Array.isArray(parsedArray) && parsedArray.length > 0) {
-        allQuestions = allQuestions.concat(parsedArray);
+        const validQuestions = parsedArray
+          .filter(q => q && (q.question || q.title) && Array.isArray(q.options) && q.options.length > 0)
+          .map(q => {
+            const rawOptions = q.options.map(opt => typeof opt === 'object' ? (opt.text || Object.values(opt)[0]) : String(opt));
+            let correctAns = q.correctAnswer || q.correct_answer || q.answer || rawOptions[0];
+            
+            // If correct answer is a letter like 'A', 'B', 'C', 'D'
+            const letterMatch = String(correctAns).trim().match(/^(?:option\s+)?([a-d])$/i);
+            if (letterMatch) {
+              const idx = letterMatch[1].toLowerCase().charCodeAt(0) - 97;
+              if (idx >= 0 && idx < rawOptions.length) {
+                correctAns = rawOptions[idx];
+              }
+            }
+
+            return {
+              question: q.question || q.title,
+              options: rawOptions,
+              correctAnswer: correctAns,
+              explanation: q.explanation || "No explanation provided."
+            };
+          });
+
+        allQuestions = allQuestions.concat(validQuestions);
       }
       
       attempts++;
     }
 
     if (allQuestions.length === 0) {
-      throw new Error("AI did not return any questions.");
+      throw new Error("AI did not return any valid questions.");
     }
 
     session.allGeneratedQuestions = allQuestions.slice(0, targetNum);
@@ -231,7 +254,7 @@ IMPORTANT: The "correctAnswer" field must exactly match the full text of one of 
 
   } catch (err) {
     console.error("Error generating questions:", err.message);
-    socket.emit("mcq_error", { message: "Error generating questions. Please try again." });
+    socket.emit("mcq_error", { message: "Error generating questions: " + (err.message || "Please try again.") });
   }
 }
 
