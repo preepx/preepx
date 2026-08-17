@@ -5,7 +5,7 @@ export function triggerAnnouncement() {
 }
 
 export function shouldShowAnnouncement() {
-  return sessionStorage.getItem(SESSION_KEY) === "3";
+  return sessionStorage.getItem(SESSION_KEY) === "32";
 }
 
 export function dismissAnnouncement() {
