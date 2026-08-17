@@ -49,18 +49,22 @@ const generateInterviewQuestions = async (userId, data) => {
 
   const diffMap = { easy: "beginner-friendly", medium: "intermediate", hard: "advanced and challenging" };
   const prompt = `
-    You are an experienced interviewer conducting a ${interviewType} interview.
-    Generate exactly ${count} ${diffMap[difficulty] || "intermediate"} interview questions for "${jobTitle}".
-    Focus on: ${jobTopic}.
-    Type: ${interviewType} (${interviewType === "technical" ? "coding, concepts, problem-solving" : interviewType === "behavioral" ? "STAR method, soft skills, leadership" : "mix of technical and behavioral"}).
+    You are an expert technical interviewer.
+    Target Role: ${jobTitle}
+    Specific Skills/Topics to Test: ${jobTopic}
+    
+    Task: Generate exactly ${count} ${diffMap[difficulty] || "intermediate"} ${interviewType} interview questions.
+    CRITICAL INSTRUCTION: Your questions MUST STRICTLY revolve around the "Specific Skills/Topics" provided above (${jobTopic}). Do not ask generic questions outside of these specific skills.
+
     Rules:
-    - Do NOT repeat: ${Array.from(previousQuestions).join(" | ")}
-    - Numbered list only, no answers.
+    - Return ONLY a numbered list of questions.
+    - No introductions, no explanations, no answers.
+    - Do NOT repeat these previous questions: ${Array.from(previousQuestions).join(" | ")}
   `;
 
   try {
     const rawText = await aiService.generateText(prompt, {
-      temperature: 0.8,
+      temperature: 0.6,
       max_tokens: 1000,
     });
     const questions = rawText
