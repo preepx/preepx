@@ -13,6 +13,18 @@ const InterviewMode = () => {
   const navigate = useNavigate();
   const { jobTitle, jobRole, role, jobTopic, questions, interviewId, fromResume } = location.state || {};
 
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const candidateName = location.state?.userName || user.fullName || user.name || "Candidate";
+
+  const getInitials = (name) => {
+    if (!name || name === "Candidate") return "CK";
+    const parts = name.trim().split(/\s+/);
+    if (parts.length >= 2) {
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
+  };
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [interimAnswer, setInterimAnswer] = useState("");
@@ -381,8 +393,6 @@ const InterviewMode = () => {
   useEffect(() => {
     if (permissionsGranted === true && !introPlayed) {
       const playIntro = async () => {
-        const user = JSON.parse(localStorage.getItem('user') || '{}');
-        const candidateName = location.state?.userName || user.fullName || user.name || "Candidate";
         const aiNames = ["Alex", "Jordan", "Taylor", "Morgan", "Sam", "Jamie"];
         const aiName = aiNames[Math.floor(Math.random() * aiNames.length)];
 
@@ -612,8 +622,12 @@ const InterviewMode = () => {
               </div>
             </div>
             <Signal className="im-network-icon" size={20} />
-            <div className="im-avatar-small">
-              {location.state?.userName ? location.state.userName.substring(0, 2) : 'CK'}
+            <div className="im-avatar-small" style={{ overflow: 'hidden', padding: user.profilePic ? '0' : undefined }}>
+              {user.profilePic ? (
+                <img src={user.profilePic} alt="Avatar" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              ) : (
+                getInitials(candidateName)
+              )}
             </div>
           </div>
         </div>
