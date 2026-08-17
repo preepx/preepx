@@ -10,8 +10,8 @@ class AIService {
       apiKey: this.groqApiKey,
       baseURL: "https://api.groq.com/openai/v1",
     });
-    // Groq's fast Llama 3.1 model
-    this.defaultModelName = "llama-3.1-8b-instant";
+    // Active Groq text model
+    this.defaultModelName = "qwen/qwen3.6-27b";
   }
 
   detectAnomaly(prompt, req) {
