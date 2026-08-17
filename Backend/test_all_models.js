@@ -5,7 +5,7 @@ async function listModels() {
   try {
     const response = await axios.get(`https://generativelanguage.googleapis.com/v1beta/models?key=${process.env.GEMINI_API_KEY}`);
     const models = response.data.models;
-    console.log("All available models:");
+    console.log("All available modelsss:");
     models.forEach(m => console.log("- " + m.name));
   } catch (err) {
     console.error("Error fetching models:", err.message);
