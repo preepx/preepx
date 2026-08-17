@@ -86,7 +86,8 @@ const generateInterviewQuestions = async (userId, data) => {
 
     return { questions, interviewId: interview?._id || null };
   } catch (err) {
-    throw new BadRequestError("Failed to generate questions. Check Gemini API Key or usage limits.");
+    console.error("AI Generation Error:", err);
+    throw new BadRequestError("Failed to generate questions. Check API Key or usage limits.");
   }
 };
 
