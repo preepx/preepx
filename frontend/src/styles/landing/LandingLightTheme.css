@@ -226,7 +226,12 @@
 }
 
 /* ── TRUSTED & STATS LIGHT ── */
-[data-theme="light"] .trusted-card-container,
+[data-theme="light"] .trusted-card-container {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 [data-theme="light"] .stats-unified-card {
   background: linear-gradient(165deg, #ffffff 0%, #f8fafc 100%) !important;
   border-color: #cbd5e1 !important;
