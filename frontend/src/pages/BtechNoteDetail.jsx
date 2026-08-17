@@ -9,14 +9,15 @@ import API from "@/utils/api";
 import Loader from "@/components/Loader";
 import '@/styles/BtechNoteDetail.css';
 
+
 function BtechNoteDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [note,    setNote]    = useState(null);
+  const [note, setNote] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error,   setError]   = useState("");
-  const [openQA,  setOpenQA]  = useState(null); // index of expanded Q
+  const [error, setError] = useState("");
+  const [openQA, setOpenQA] = useState(null); // index of expanded Q
 
   useEffect(() => {
     API.get(`/btec-notes/${id}`)
