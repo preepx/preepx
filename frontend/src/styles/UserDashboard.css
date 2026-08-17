@@ -20,6 +20,25 @@
   }
 }
 
+/* ── BANNER SLIDER ── */
+.ud-banner-slider-wrap {
+  margin: 0 0 24px 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  height: 280px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .ud-banner-slider-wrap {
+    height: 160px;
+    border-radius: 16px;
+    margin: 0 0 16px 0;
+  }
+}
+
 /* ── HERO ── */
 .ud-hero {
   position: relative;
@@ -426,9 +445,24 @@
   flex-shrink: 0;
 }
 
-.ud-apply-banner-text h2 { margin: 0 0 4px; font-size: 18px; font-weight: 800; color: var(--text); }
-.ud-apply-banner-text p { margin: 0; font-size: 13px; color: var(--text-muted); }
-.ud-apply-banner-arrow { margin-left: auto; color: var(--primary); flex-shrink: 0; }
+.ud-apply-banner-text h2 {
+  margin: 0 0 4px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.ud-apply-banner-text p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.ud-apply-banner-arrow {
+  margin-left: auto;
+  color: var(--primary);
+  flex-shrink: 0;
+}
 
 /* Practice cards */
 .ud-practice-grid {
@@ -1052,14 +1086,49 @@
   border: 2px solid;
 }
 
-.ud-match-ring small { font-size: 9px; font-weight: 600; opacity: 0.85; }
-.ud-match-ring.high { border-color: #10b981; color: #10b981; background: rgba(16, 185, 129, 0.1); }
-.ud-match-ring.mid { border-color: #f59e0b; color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
-.ud-match-ring.low { border-color: #6366f1; color: #6366f1; background: rgba(99, 102, 241, 0.1); }
+.ud-match-ring small {
+  font-size: 9px;
+  font-weight: 600;
+  opacity: 0.85;
+}
 
-.ud-job-role { margin: 0; font-size: 13px; color: var(--primary); font-weight: 600; }
-.ud-job-meta { display: flex; gap: 12px; font-size: 12px; color: var(--text-muted); }
-.ud-job-meta span { display: flex; align-items: center; gap: 4px; }
+.ud-match-ring.high {
+  border-color: #10b981;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+}
+
+.ud-match-ring.mid {
+  border-color: #f59e0b;
+  color: #f59e0b;
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.ud-match-ring.low {
+  border-color: #6366f1;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.ud-job-role {
+  margin: 0;
+  font-size: 13px;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.ud-job-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.ud-job-meta span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
 
 .ud-job-skills {
   display: flex;
@@ -1090,7 +1159,10 @@
   transition: opacity 0.2s;
 }
 
-.ud-job-apply:disabled { opacity: 0.6; cursor: wait; }
+.ud-job-apply:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
 
 .ud-jobs-empty {
   text-align: center;
@@ -1101,8 +1173,16 @@
   color: var(--text-muted);
 }
 
-.ud-jobs-empty h3 { color: var(--text); margin: 12px 0 8px; }
-.ud-jobs-empty p { margin: 0 0 20px; max-width: 400px; margin-inline: auto; }
+.ud-jobs-empty h3 {
+  color: var(--text);
+  margin: 12px 0 8px;
+}
+
+.ud-jobs-empty p {
+  margin: 0 0 20px;
+  max-width: 400px;
+  margin-inline: auto;
+}
 
 .ud-jobs-empty-actions {
   display: flex;

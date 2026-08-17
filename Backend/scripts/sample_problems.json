@@ -1,0 +1,1262 @@
+[
+  {
+    "id": 1,
+    "title": "Two Sum",
+    "problem_statement": "Given an array of integers 'nums' and an integer target 't', return the indices of the two numbers such that they add up to 't'. Assume exactly one solution exists, and you may not use the same element twice.",
+    "input_format": "First line contains N and t. Second line contains N integers.",
+    "output_format": "Print the two indices (0-based) whose values sum to t.",
+    "example_input": "4 9\n2 7 11 15",
+    "example_output": "0 1"
+  },
+  {
+    "id": 2,
+    "title": "Find Missing Number",
+    "problem_statement": "Given an array containing N distinct numbers taken from 0 to N, find the one number that is missing from the array.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the missing number.",
+    "example_input": "3\n3 0 1",
+    "example_output": "2"
+  },
+  {
+    "id": 3,
+    "title": "Contains Duplicate",
+    "problem_statement": "Given an array of integers, determine if any value appears at least twice in the array.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print 'true' if any duplicate exists, otherwise 'false'.",
+    "example_input": "4\n1 2 3 1",
+    "example_output": "true"
+  },
+  {
+    "id": 4,
+    "title": "Remove Duplicates from Sorted Array",
+    "problem_statement": "Given a sorted array, remove the duplicates in-place such that each unique element appears only once, and return the new length.",
+    "input_format": "First line contains N. Second line contains N sorted integers.",
+    "output_format": "Print the new length followed by the modified array.",
+    "example_input": "5\n1 1 2 2 3",
+    "example_output": "3\n1 2 3"
+  },
+  {
+    "id": 5,
+    "title": "Move Zeroes",
+    "problem_statement": "Given an array of integers, move all zeroes to the end while maintaining the relative order of the non-zero elements.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the array after moving all zeroes to the end.",
+    "example_input": "5\n0 1 0 3 12",
+    "example_output": "1 3 12 0 0"
+  },
+  {
+    "id": 6,
+    "title": "Best Time to Buy and Sell Stock",
+    "problem_statement": "Given an array of prices where prices[i] is the price of a stock on day i, find the maximum profit achievable by buying on one day and selling on a later day.",
+    "input_format": "First line contains N. Second line contains N integers representing prices.",
+    "output_format": "Print the maximum profit possible. Print 0 if no profit is possible.",
+    "example_input": "6\n7 1 5 3 6 4",
+    "example_output": "5"
+  },
+  {
+    "id": 7,
+    "title": "Maximum Subarray",
+    "problem_statement": "Given an integer array, find the contiguous subarray (containing at least one number) which has the largest sum, and return that sum.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the maximum subarray sum.",
+    "example_input": "9\n-2 1 -3 4 -1 2 1 -5 4",
+    "example_output": "6"
+  },
+  {
+    "id": 8,
+    "title": "Product of Array Except Self",
+    "problem_statement": "Given an array of N integers, return an array where each element at index i is the product of all elements except nums[i], without using division.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the resulting array.",
+    "example_input": "4\n1 2 3 4",
+    "example_output": "24 12 8 6"
+  },
+  {
+    "id": 9,
+    "title": "Rotate Array",
+    "problem_statement": "Given an array, rotate the array to the right by k steps, where k is non-negative.",
+    "input_format": "First line contains N and k. Second line contains N integers.",
+    "output_format": "Print the array after rotating right by k steps.",
+    "example_input": "7 3\n1 2 3 4 5 6 7",
+    "example_output": "5 6 7 1 2 3 4"
+  },
+  {
+    "id": 10,
+    "title": "Merge Sorted Arrays",
+    "problem_statement": "Given two sorted arrays, merge them into a single sorted array.",
+    "input_format": "First line contains M and N. Next two lines contain M and N sorted integers respectively.",
+    "output_format": "Print the merged sorted array.",
+    "example_input": "3 3\n1 2 3\n2 5 6",
+    "example_output": "1 2 2 3 5 6"
+  },
+  {
+    "id": 11,
+    "title": "Majority Element",
+    "problem_statement": "Given an array of size N, find the majority element - the element that appears more than N/2 times. Assume the majority element always exists.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the majority element.",
+    "example_input": "7\n2 2 1 1 1 2 2",
+    "example_output": "2"
+  },
+  {
+    "id": 12,
+    "title": "Find Pivot Index",
+    "problem_statement": "Given an array, find the leftmost pivot index where the sum of all numbers to the left equals the sum of all numbers to the right. Return -1 if no such index exists.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the pivot index, or -1 if it does not exist.",
+    "example_input": "5\n1 7 3 6 5 6",
+    "example_output": "3"
+  },
+  {
+    "id": 13,
+    "title": "Third Maximum Number",
+    "problem_statement": "Given an integer array, return the third distinct maximum number. If it does not exist, return the maximum number.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the third maximum, or the maximum if the third does not exist.",
+    "example_input": "3\n3 2 1",
+    "example_output": "1"
+  },
+  {
+    "id": 14,
+    "title": "Missing Ranges",
+    "problem_statement": "Given a sorted array of unique integers and a range [lower, upper], return the shortest sorted list of ranges that exactly covers all missing numbers.",
+    "input_format": "First line contains N, lower, upper. Second line contains N sorted unique integers.",
+    "output_format": "Print the missing ranges.",
+    "example_input": "2 0 99\n0 99",
+    "example_output": "no missing ranges"
+  },
+  {
+    "id": 15,
+    "title": "Sort Colors",
+    "problem_statement": "Given an array with N objects colored red, white, or blue represented by 0, 1, and 2, sort them in-place so objects of the same color are adjacent, in the order 0, 1, 2 (Dutch National Flag problem).",
+    "input_format": "First line contains N. Second line contains N integers (0, 1, or 2).",
+    "output_format": "Print the sorted array.",
+    "example_input": "6\n2 0 2 1 1 0",
+    "example_output": "0 0 1 1 2 2"
+  },
+  {
+    "id": 16,
+    "title": "Kth Largest Element",
+    "problem_statement": "Given an unsorted array and an integer k, find the kth largest element in the array.",
+    "input_format": "First line contains N and k. Second line contains N integers.",
+    "output_format": "Print the kth largest element.",
+    "example_input": "6 2\n3 2 1 5 6 4",
+    "example_output": "5"
+  },
+  {
+    "id": 17,
+    "title": "Find All Duplicates",
+    "problem_statement": "Given an array of integers where 1 <= a[i] <= N (N = size of array), some elements appear twice and others once. Find all elements that appear twice.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print all elements that appear twice.",
+    "example_input": "8\n4 3 2 7 8 2 3 1",
+    "example_output": "2 3"
+  },
+  {
+    "id": 18,
+    "title": "Maximum Product Subarray",
+    "problem_statement": "Given an integer array, find the contiguous subarray within the array that has the largest product, and return that product.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the maximum product of a contiguous subarray.",
+    "example_input": "4\n2 3 -2 4",
+    "example_output": "6"
+  },
+  {
+    "id": 19,
+    "title": "Longest Consecutive Sequence",
+    "problem_statement": "Given an unsorted array of integers, find the length of the longest consecutive elements sequence, in O(n) time.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the length of the longest consecutive sequence.",
+    "example_input": "6\n100 4 200 1 3 2",
+    "example_output": "4"
+  },
+  {
+    "id": 20,
+    "title": "Spiral Matrix",
+    "problem_statement": "Given an m x n matrix, return all elements of the matrix in spiral order.",
+    "input_format": "First line contains rows and cols. Following lines contain the matrix elements.",
+    "output_format": "Print all elements in spiral order.",
+    "example_input": "3 3\n1 2 3\n4 5 6\n7 8 9",
+    "example_output": "1 2 3 6 9 8 7 4 5"
+  },
+  {
+    "id": 21,
+    "title": "Set Matrix Zeroes",
+    "problem_statement": "Given an m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place.",
+    "input_format": "First line contains rows and cols. Following lines contain the matrix elements.",
+    "output_format": "Print the modified matrix.",
+    "example_input": "3 3\n1 1 1\n1 0 1\n1 1 1",
+    "example_output": "1 0 1\n0 0 0\n1 0 1"
+  },
+  {
+    "id": 22,
+    "title": "Rotate Matrix",
+    "problem_statement": "Given an n x n 2D matrix, rotate the matrix by 90 degrees clockwise in-place.",
+    "input_format": "First line contains n. Following n lines contain n integers each.",
+    "output_format": "Print the rotated matrix.",
+    "example_input": "3\n1 2 3\n4 5 6\n7 8 9",
+    "example_output": "7 4 1\n8 5 2\n9 6 3"
+  },
+  {
+    "id": 23,
+    "title": "Merge Intervals",
+    "problem_statement": "Given an array of intervals, merge all overlapping intervals and return an array of the non-overlapping intervals covering all intervals in the input.",
+    "input_format": "First line contains N (number of intervals). Next N lines contain start and end of each interval.",
+    "output_format": "Print the merged intervals.",
+    "example_input": "4\n1 3\n2 6\n8 10\n15 18",
+    "example_output": "1 6\n8 10\n15 18"
+  },
+  {
+    "id": 24,
+    "title": "Insert Interval",
+    "problem_statement": "Given a set of non-overlapping intervals sorted by start time, insert a new interval into the intervals, merging if necessary.",
+    "input_format": "First line contains N. Next N lines contain intervals. Last line contains the new interval to insert.",
+    "output_format": "Print the resulting list of intervals.",
+    "example_input": "4\n1 3\n6 9\nnew: 2 5",
+    "example_output": "1 5\n6 9"
+  },
+  {
+    "id": 25,
+    "title": "Summary Ranges",
+    "problem_statement": "Given a sorted unique integer array, return the smallest sorted list of ranges that cover all numbers in the array exactly.",
+    "input_format": "First line contains N. Second line contains N sorted unique integers.",
+    "output_format": "Print the summary ranges.",
+    "example_input": "7\n0 1 2 4 5 7 9",
+    "example_output": "0->2 4->5 7 9"
+  },
+  {
+    "id": 26,
+    "title": "Minimum Size Subarray Sum",
+    "problem_statement": "Given an array of positive integers and a target sum, find the minimal length of a contiguous subarray of which the sum is greater than or equal to target. Return 0 if no such subarray exists.",
+    "input_format": "First line contains N and target. Second line contains N integers.",
+    "output_format": "Print the minimal length, or 0 if none exists.",
+    "example_input": "6 7\n2 3 1 2 4 3",
+    "example_output": "2"
+  },
+  {
+    "id": 27,
+    "title": "Trapping Rain Water",
+    "problem_statement": "Given N non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the total trapped water.",
+    "example_input": "12\n0 1 0 2 1 0 1 3 2 1 2 1",
+    "example_output": "6"
+  },
+  {
+    "id": 28,
+    "title": "Container With Most Water",
+    "problem_statement": "Given N non-negative integers representing heights of vertical lines, find two lines that together with the x-axis form a container that holds the most water.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the maximum amount of water the container can hold.",
+    "example_input": "9\n1 8 6 2 5 4 8 3 7",
+    "example_output": "49"
+  },
+  {
+    "id": 29,
+    "title": "Candy Distribution",
+    "problem_statement": "There are N children standing in a line, each with a rating value. Each child must get at least one candy, and children with a higher rating get more candies than their neighbors. Find the minimum number of candies needed.",
+    "input_format": "First line contains N. Second line contains N integers representing ratings.",
+    "output_format": "Print the minimum total number of candies required.",
+    "example_input": "3\n1 0 2",
+    "example_output": "5"
+  },
+  {
+    "id": 30,
+    "title": "Gas Station",
+    "problem_statement": "There are N gas stations along a circular route, with gas[i] amount of gas at station i and it costs cost[i] to travel from station i to station i+1. Find the starting gas station index from which you can travel around the circuit once, or -1 if not possible.",
+    "input_format": "First line contains N. Second line contains gas array. Third line contains cost array.",
+    "output_format": "Print the starting station index, or -1 if impossible.",
+    "example_input": "5\n1 2 3 4 5\n3 4 5 1 2",
+    "example_output": "3"
+  },
+  {
+    "id": 31,
+    "title": "Jump Game",
+    "problem_statement": "Given an array of non-negative integers where each element represents the maximum jump length at that position, determine if you can reach the last index starting from the first index.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print 'true' if the last index is reachable, otherwise 'false'.",
+    "example_input": "5\n2 3 1 1 4",
+    "example_output": "true"
+  },
+  {
+    "id": 32,
+    "title": "Jump Game II",
+    "problem_statement": "Given an array of non-negative integers where each element represents the maximum jump length at that position, find the minimum number of jumps required to reach the last index.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the minimum number of jumps needed.",
+    "example_input": "5\n2 3 1 1 4",
+    "example_output": "2"
+  },
+  {
+    "id": 33,
+    "title": "Next Permutation",
+    "problem_statement": "Given an array of integers representing a permutation, rearrange it into the lexicographically next greater permutation. If no such permutation exists, rearrange it as the lowest possible order (sorted ascending), in-place.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the next permutation.",
+    "example_input": "3\n1 2 3",
+    "example_output": "1 3 2"
+  },
+  {
+    "id": 34,
+    "title": "Dutch National Flag",
+    "problem_statement": "Given an array containing only 0s, 1s, and 2s, sort the array in a single pass using constant extra space (three-way partitioning around a pivot).",
+    "input_format": "First line contains N. Second line contains N integers (0, 1, or 2).",
+    "output_format": "Print the sorted array.",
+    "example_input": "6\n0 2 1 2 0 1",
+    "example_output": "0 0 1 1 2 2"
+  },
+  {
+    "id": 35,
+    "title": "Rearrange Positive and Negative Numbers",
+    "problem_statement": "Given an array of positive and negative integers, rearrange them so that positive and negative numbers are placed alternately, preserving the relative order where possible.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the rearranged array.",
+    "example_input": "8\n1 2 -3 -1 4 -5 6 -6",
+    "example_output": "1 -3 2 -1 4 -5 6 -6"
+  },
+  {
+    "id": 36,
+    "title": "Maximum Circular Subarray",
+    "problem_statement": "Given a circular integer array, find the maximum possible sum of a non-empty subarray, where the subarray may wrap around from the end to the beginning.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the maximum circular subarray sum.",
+    "example_input": "4\n1 -2 3 -2",
+    "example_output": "3"
+  },
+  {
+    "id": 37,
+    "title": "Find Peak Element",
+    "problem_statement": "Given an integer array, find a peak element (an element strictly greater than its neighbors) and return its index. If multiple peaks exist, return the index of any one of them.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the index of any peak element.",
+    "example_input": "6\n1 2 1 3 5 6 4",
+    "example_output": "5"
+  },
+  {
+    "id": 38,
+    "title": "Missing Positive Number",
+    "problem_statement": "Given an unsorted integer array, find the smallest missing positive integer, using O(n) time and O(1) extra space.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the smallest missing positive integer.",
+    "example_input": "3\n7 8 9",
+    "example_output": "1"
+  },
+  {
+    "id": 39,
+    "title": "Rotate Image",
+    "problem_statement": "Given an n x n 2D matrix representing an image, rotate the image by 90 degrees clockwise in-place.",
+    "input_format": "First line contains n. Following n lines contain n integers each.",
+    "output_format": "Print the rotated matrix.",
+    "example_input": "4\n5 1 9 11\n2 4 8 10\n13 3 6 7\n15 14 12 16",
+    "example_output": "15 13 2 5\n14 3 4 1\n12 6 8 9\n16 7 10 11"
+  },
+  {
+    "id": 40,
+    "title": "Array Partition",
+    "problem_statement": "Given an integer array of 2N numbers, group them into N pairs so that the sum of the minimum of each pair is maximized.",
+    "input_format": "First line contains 2N. Second line contains 2N integers.",
+    "output_format": "Print the maximized sum of minimums.",
+    "example_input": "4\n1 4 3 2",
+    "example_output": "4"
+  },
+  {
+    "id": 1,
+    "title": "Two Sum using HashMap",
+    "problem_statement": "Given an array of integers and a target, use a hashmap to find the indices of two numbers such that they add up to the target, in O(n) time.",
+    "input_format": "First line contains N and target. Second line contains N integers.",
+    "output_format": "Print the two indices whose values sum to the target.",
+    "example_input": "4 6\n2 7 11 4",
+    "example_output": "0 3"
+  },
+  {
+    "id": 2,
+    "title": "Frequency Counter",
+    "problem_statement": "Given an array of elements, build a frequency map counting how many times each distinct element appears.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print each distinct element with its frequency.",
+    "example_input": "5\n1 2 2 3 3",
+    "example_output": "1:1 2:2 3:2"
+  },
+  {
+    "id": 3,
+    "title": "Top K Frequent Elements",
+    "problem_statement": "Given an integer array and an integer k, return the k most frequent elements in the array.",
+    "input_format": "First line contains N and k. Second line contains N integers.",
+    "output_format": "Print the k most frequent elements.",
+    "example_input": "6 2\n1 1 1 2 2 3",
+    "example_output": "1 2"
+  },
+  {
+    "id": 4,
+    "title": "Happy Number",
+    "problem_statement": "Given a number n, determine if it is a 'happy number', i.e., repeatedly replacing it with the sum of the squares of its digits eventually results in 1. Use a hashset to detect cycles.",
+    "input_format": "A single line containing n.",
+    "output_format": "Print 'true' if n is a happy number, otherwise 'false'.",
+    "example_input": "19",
+    "example_output": "true"
+  },
+  {
+    "id": 5,
+    "title": "Isomorphic Strings",
+    "problem_statement": "Given two strings s and t, use two hashmaps to determine if they are isomorphic, meaning there exists a consistent character mapping between s and t.",
+    "input_format": "First line contains s. Second line contains t.",
+    "output_format": "Print 'true' if isomorphic, otherwise 'false'.",
+    "example_input": "paper\ntitle",
+    "example_output": "true"
+  },
+  {
+    "id": 6,
+    "title": "Group Shifted Strings",
+    "problem_statement": "Given an array of strings, group all strings that belong to the same shifting sequence, where each letter is shifted by the same offset in a cyclic manner.",
+    "input_format": "First line contains N. Second line contains N space separated strings.",
+    "output_format": "Print the groups of shifted strings.",
+    "example_input": "5\nabc bal acd bcd cde",
+    "example_output": "abc bcd cde\nbal\nacd"
+  },
+  {
+    "id": 7,
+    "title": "Subarray Sum Equals K",
+    "problem_statement": "Given an array of integers and an integer k, use a prefix-sum hashmap to find the total number of continuous subarrays whose sum equals k.",
+    "input_format": "First line contains N and k. Second line contains N integers.",
+    "output_format": "Print the count of subarrays whose sum equals k.",
+    "example_input": "3 2\n1 1 1",
+    "example_output": "2"
+  },
+  {
+    "id": 8,
+    "title": "Longest Harmonious Subsequence",
+    "problem_statement": "Given an integer array, find the length of the longest subsequence where the difference between the maximum and minimum value is exactly 1.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the length of the longest harmonious subsequence.",
+    "example_input": "6\n1 3 2 2 5 2",
+    "example_output": "4"
+  },
+  {
+    "id": 9,
+    "title": "Word Frequency",
+    "problem_statement": "Given a paragraph of text, use a hashmap to count the frequency of each word and return the words sorted by decreasing frequency.",
+    "input_format": "A single line containing the paragraph.",
+    "output_format": "Print each word with its frequency, sorted by decreasing frequency.",
+    "example_input": "the day is sunny the the the sunny is is",
+    "example_output": "the:4 is:3 sunny:2 day:1"
+  },
+  {
+    "id": 10,
+    "title": "Count Distinct Elements",
+    "problem_statement": "Given an array, count the number of distinct elements in every window of size k using a hashmap.",
+    "input_format": "First line contains N and k. Second line contains N integers.",
+    "output_format": "Print the count of distinct elements for each window.",
+    "example_input": "7 4\n1 2 1 3 4 2 3",
+    "example_output": "3 4 4 3"
+  },
+  {
+    "id": 11,
+    "title": "Find Duplicate File",
+    "problem_statement": "Given a list of directory paths with file names and content, group files with identical content together using a hashmap keyed by content.",
+    "input_format": "First line contains N. Next N lines contain directory path followed by files and their content.",
+    "output_format": "Print groups of file paths that have identical content.",
+    "example_input": "2\nroot/a 1.txt(abcd) 2.txt(efgh)\nroot/c 3.txt(abcd)",
+    "example_output": "root/a/1.txt root/c/3.txt"
+  },
+  {
+    "id": 12,
+    "title": "Common Characters",
+    "problem_statement": "Given an array of strings, find all characters that appear in all strings (including duplicates), using frequency hashmaps.",
+    "input_format": "First line contains N. Second line contains N space separated strings.",
+    "output_format": "Print the list of common characters.",
+    "example_input": "3\nbella label roller",
+    "example_output": "e l l"
+  },
+  {
+    "id": 13,
+    "title": "First Unique Character",
+    "problem_statement": "Given a string, find the index of the first non-repeating character using a hashmap. Return -1 if it does not exist.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print the index of the first unique character, or -1.",
+    "example_input": "leetcode",
+    "example_output": "0"
+  },
+  {
+    "id": 14,
+    "title": "Majority Element II",
+    "problem_statement": "Given an integer array of size n, find all elements that appear more than n/3 times, using a hashmap based counting approach.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print all elements that appear more than n/3 times.",
+    "example_input": "6\n1 1 1 3 3 2",
+    "example_output": "1 3"
+  },
+  {
+    "id": 15,
+    "title": "Longest Equal Subarray",
+    "problem_statement": "Given a binary array, find the length of the longest contiguous subarray with an equal number of 0s and 1s, using a hashmap of prefix sums.",
+    "input_format": "First line contains N. Second line contains N integers (0 or 1).",
+    "output_format": "Print the length of the longest equal subarray.",
+    "example_input": "6\n0 1 0 0 1 1",
+    "example_output": "6"
+  },
+  {
+    "id": 16,
+    "title": "Count Good Pairs",
+    "problem_statement": "Given an array of integers, count the number of good pairs (i, j) where i < j and nums[i] == nums[j], using a frequency hashmap.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the number of good pairs.",
+    "example_input": "5\n1 2 3 1 1",
+    "example_output": "3"
+  },
+  {
+    "id": 17,
+    "title": "Most Frequent Even Number",
+    "problem_statement": "Given an integer array, use a hashmap to return the most frequent even element. If multiple elements are equally frequent, return the smallest one. Return -1 if no even element exists.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the most frequent even number, or -1.",
+    "example_input": "6\n0 1 2 2 4 4",
+    "example_output": "2"
+  },
+  {
+    "id": 18,
+    "title": "Intersection of Arrays",
+    "problem_statement": "Given two integer arrays, return their intersection such that each element appears as many times as it shows in both arrays, using a hashmap.",
+    "input_format": "First line contains N and M. Second line contains N integers. Third line contains M integers.",
+    "output_format": "Print the intersection array.",
+    "example_input": "4 4\n1 2 2 1\n2 2 3 4",
+    "example_output": "2 2"
+  },
+  {
+    "id": 19,
+    "title": "Find Difference of Arrays",
+    "problem_statement": "Given two integer arrays, find the distinct elements present in the first array but not in the second, and vice versa, using hashsets.",
+    "input_format": "First line contains N and M. Second line contains N integers. Third line contains M integers.",
+    "output_format": "Print the two lists of distinct differences.",
+    "example_input": "4 4\n1 2 3 3\n2 4 6 6",
+    "example_output": "1 3\n4 6"
+  },
+  {
+    "id": 20,
+    "title": "Pair Sum",
+    "problem_statement": "Given an array and a target sum, use a hashmap to count all unique pairs of elements whose sum equals the target.",
+    "input_format": "First line contains N and target. Second line contains N integers.",
+    "output_format": "Print the count of unique pairs whose sum equals target.",
+    "example_input": "5 6\n1 5 7 -1 5",
+    "example_output": "2"
+  },
+  {
+    "id": 21,
+    "title": "Random Pick",
+    "problem_statement": "Given an array of integers with possible duplicates and a target number, design a data structure that picks a random index of the target uniformly, using a hashmap of indices per value.",
+    "input_format": "First line contains N. Second line contains N integers. Third line contains the target to pick.",
+    "output_format": "Print any valid index at which the target occurs.",
+    "example_input": "5\n1 2 3 3 3\n3",
+    "example_output": "2"
+  },
+  {
+    "id": 22,
+    "title": "Design HashMap",
+    "problem_statement": "Design a HashMap without using any built-in hash table libraries, supporting put(key, value), get(key), and remove(key) operations.",
+    "input_format": "A sequence of operations: put, get, remove with their arguments.",
+    "output_format": "Print the result of each get operation performed.",
+    "example_input": "put 1 1\nput 2 2\nget 1\nget 3\nput 2 1\nget 2\nremove 2\nget 2",
+    "example_output": "1\n-1\n1\n-1"
+  },
+  {
+    "id": 23,
+    "title": "Design HashSet",
+    "problem_statement": "Design a HashSet without using any built-in hash set libraries, supporting add(key), remove(key), and contains(key) operations.",
+    "input_format": "A sequence of operations: add, remove, contains with their arguments.",
+    "output_format": "Print the result of each contains operation performed.",
+    "example_input": "add 1\nadd 2\ncontains 1\ncontains 3\nadd 3\ncontains 3\nremove 2\ncontains 2",
+    "example_output": "true\nfalse\ntrue\nfalse"
+  },
+  {
+    "id": 24,
+    "title": "Sparse Vector Dot Product",
+    "problem_statement": "Given two sparse vectors represented as arrays, design a class using a hashmap to store only non-zero values, and implement an efficient dot product method.",
+    "input_format": "First line contains N. Second and third lines contain the two vectors of size N.",
+    "output_format": "Print the dot product of the two vectors.",
+    "example_input": "4\n1 0 0 2\n1 3 0 0",
+    "example_output": "1"
+  },
+  {
+    "id": 25,
+    "title": "LRU Cache",
+    "problem_statement": "Design a Least Recently Used (LRU) cache with a fixed capacity that supports get(key) and put(key, value) in O(1) time, using a combination of a hashmap and a doubly linked list.",
+    "input_format": "First line contains the capacity. Following lines contain operations: get or put with their arguments.",
+    "output_format": "Print the result of each get operation performed.",
+    "example_input": "2\nput 1 1\nput 2 2\nget 1\nput 3 3\nget 2\nput 4 4\nget 1\nget 3\nget 4",
+    "example_output": "1\n-1\n-1\n3\n4"
+  },
+  {
+    "id": 1,
+    "title": "Valid Anagram",
+    "problem_statement": "Given two strings s and t, determine if t is an anagram of s (i.e., contains the same characters with the same frequencies, possibly in a different order).",
+    "input_format": "First line contains string s. Second line contains string t.",
+    "output_format": "Print 'true' if t is an anagram of s, otherwise 'false'.",
+    "example_input": "anagram\nnagaram",
+    "example_output": "true"
+  },
+  {
+    "id": 2,
+    "title": "Valid Palindrome",
+    "problem_statement": "Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring case.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print 'true' if it is a valid palindrome, otherwise 'false'.",
+    "example_input": "A man, a plan, a canal: Panama",
+    "example_output": "true"
+  },
+  {
+    "id": 3,
+    "title": "Reverse String",
+    "problem_statement": "Given a string, reverse it in-place using O(1) extra space.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print the reversed string.",
+    "example_input": "hello",
+    "example_output": "olleh"
+  },
+  {
+    "id": 4,
+    "title": "Reverse Words",
+    "problem_statement": "Given a string containing words separated by spaces, reverse the order of the words while removing any leading, trailing, or extra spaces between words.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print the string with word order reversed.",
+    "example_input": "the sky is blue",
+    "example_output": "blue is sky the"
+  },
+  {
+    "id": 5,
+    "title": "Longest Common Prefix",
+    "problem_statement": "Given an array of strings, find the longest common prefix string among all the strings in the array. If there is no common prefix, return an empty string.",
+    "input_format": "First line contains N. Second line contains N space separated strings.",
+    "output_format": "Print the longest common prefix.",
+    "example_input": "3\nflower flow flight",
+    "example_output": "fl"
+  },
+  {
+    "id": 6,
+    "title": "Roman to Integer",
+    "problem_statement": "Given a roman numeral string, convert it to an integer.",
+    "input_format": "A single line containing a valid roman numeral.",
+    "output_format": "Print the integer value.",
+    "example_input": "MCMXCIV",
+    "example_output": "1994"
+  },
+  {
+    "id": 7,
+    "title": "Integer to Roman",
+    "problem_statement": "Given an integer, convert it to a roman numeral string.",
+    "input_format": "A single line containing an integer.",
+    "output_format": "Print the roman numeral representation.",
+    "example_input": "1994",
+    "example_output": "MCMXCIV"
+  },
+  {
+    "id": 8,
+    "title": "String Compression",
+    "problem_statement": "Given an array of characters, compress it in-place by replacing consecutive repeating characters with the character followed by the count (counts of 1 are not written), and return the new length.",
+    "input_format": "A single line containing the character array as a string.",
+    "output_format": "Print the compressed string and its new length.",
+    "example_input": "aabbccc",
+    "example_output": "a2b2c3\n6"
+  },
+  {
+    "id": 9,
+    "title": "Longest Substring Without Repeating Characters",
+    "problem_statement": "Given a string, find the length of the longest substring without repeating characters.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print the length of the longest substring without repeating characters.",
+    "example_input": "abcabcbb",
+    "example_output": "3"
+  },
+  {
+    "id": 10,
+    "title": "Group Anagrams",
+    "problem_statement": "Given an array of strings, group the anagrams together. You may return the answer in any order.",
+    "input_format": "First line contains N. Second line contains N space separated strings.",
+    "output_format": "Print the groups of anagrams, one group per line.",
+    "example_input": "6\neat tea tan ate nat bat",
+    "example_output": "eat tea ate\ntan nat\nbat"
+  },
+  {
+    "id": 11,
+    "title": "Minimum Window Substring",
+    "problem_statement": "Given two strings s and t, find the minimum window substring of s such that every character in t (including duplicates) is included in the window. Return an empty string if no such substring exists.",
+    "input_format": "First line contains string s. Second line contains string t.",
+    "output_format": "Print the minimum window substring.",
+    "example_input": "ADOBECODEBANC\nABC",
+    "example_output": "BANC"
+  },
+  {
+    "id": 12,
+    "title": "Decode String",
+    "problem_statement": "Given an encoded string in the form k[encoded_string], decode it fully, where encoded_string is repeated k times.",
+    "input_format": "A single line containing the encoded string.",
+    "output_format": "Print the decoded string.",
+    "example_input": "3[a]2[bc]",
+    "example_output": "aaabcbc"
+  },
+  {
+    "id": 13,
+    "title": "Zigzag Conversion",
+    "problem_statement": "Given a string and a number of rows, write the string in a zigzag pattern across the given number of rows, then read line by line to produce the output string.",
+    "input_format": "First line contains the string. Second line contains numRows.",
+    "output_format": "Print the zigzag converted string.",
+    "example_input": "PAYPALISHIRING\n3",
+    "example_output": "PAHNAPLSIIGYIR"
+  },
+  {
+    "id": 14,
+    "title": "Count and Say",
+    "problem_statement": "The count-and-say sequence is defined by starting with '1', where each term is generated by describing the previous term (run-length encoding). Given n, return the nth term of the sequence.",
+    "input_format": "A single line containing n.",
+    "output_format": "Print the nth term of the count-and-say sequence.",
+    "example_input": "4",
+    "example_output": "1211"
+  },
+  {
+    "id": 15,
+    "title": "Compare Version Numbers",
+    "problem_statement": "Given two version numbers, version1 and version2, compare them. Return -1 if version1 < version2, 1 if version1 > version2, and 0 if they are equal.",
+    "input_format": "First line contains version1. Second line contains version2.",
+    "output_format": "Print -1, 0, or 1 based on the comparison.",
+    "example_input": "1.01\n1.001",
+    "example_output": "0"
+  },
+  {
+    "id": 16,
+    "title": "Multiply Strings",
+    "problem_statement": "Given two non-negative integers represented as strings, return the product of the two numbers, also represented as a string, without using built-in big integer libraries.",
+    "input_format": "First line contains num1. Second line contains num2.",
+    "output_format": "Print the product as a string.",
+    "example_input": "123\n456",
+    "example_output": "56088"
+  },
+  {
+    "id": 17,
+    "title": "Implement strStr",
+    "problem_statement": "Given two strings haystack and needle, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.",
+    "input_format": "First line contains haystack. Second line contains needle.",
+    "output_format": "Print the index of the first occurrence, or -1.",
+    "example_input": "hello\nll",
+    "example_output": "2"
+  },
+  {
+    "id": 18,
+    "title": "KMP Pattern Matching",
+    "problem_statement": "Given a text string and a pattern string, find all starting indices of the pattern's occurrences in the text using the Knuth-Morris-Pratt algorithm in O(n + m) time.",
+    "input_format": "First line contains the text. Second line contains the pattern.",
+    "output_format": "Print all starting indices where the pattern occurs.",
+    "example_input": "ababcababcabc\nabc",
+    "example_output": "2 7 10"
+  },
+  {
+    "id": 19,
+    "title": "Rabin-Karp",
+    "problem_statement": "Given a text string and a pattern string, find all occurrences of the pattern in the text using the Rabin-Karp rolling hash algorithm.",
+    "input_format": "First line contains the text. Second line contains the pattern.",
+    "output_format": "Print all starting indices where the pattern occurs.",
+    "example_input": "GEEKSFORGEEKS\nGEEK",
+    "example_output": "0 8"
+  },
+  {
+    "id": 20,
+    "title": "Z Algorithm",
+    "problem_statement": "Given a string, compute the Z-array where Z[i] is the length of the longest substring starting at i that is also a prefix of the string. Use this to solve pattern matching in O(n + m).",
+    "input_format": "A single line containing the string (pattern + special separator + text).",
+    "output_format": "Print the Z-array values.",
+    "example_input": "aabxaabxcaabxaabxay",
+    "example_output": "0 1 0 0 3 1 0 0 0 2 1 0 0 3 1 0 0 0 1"
+  },
+  {
+    "id": 21,
+    "title": "Longest Palindromic Substring",
+    "problem_statement": "Given a string, find the longest substring that is a palindrome.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print the longest palindromic substring.",
+    "example_input": "babad",
+    "example_output": "bab"
+  },
+  {
+    "id": 22,
+    "title": "Shortest Palindrome",
+    "problem_statement": "Given a string s, convert it to a palindrome by adding characters only in front of it, and return the shortest such palindrome.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print the shortest palindrome that can be formed.",
+    "example_input": "aacecaaa",
+    "example_output": "aaacecaaa"
+  },
+  {
+    "id": 23,
+    "title": "Text Justification",
+    "problem_statement": "Given an array of words and a maximum width, format the text such that each line has exactly maxWidth characters, fully justified with extra spaces distributed as evenly as possible.",
+    "input_format": "First line contains N and maxWidth. Second line contains N space separated words.",
+    "output_format": "Print the fully justified lines.",
+    "example_input": "4 16\nThis is an example",
+    "example_output": "This    is    an\nexample"
+  },
+  {
+    "id": 24,
+    "title": "Reverse Vowels",
+    "problem_statement": "Given a string, reverse only the vowels in the string, keeping the rest of the characters in their original positions.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print the string with vowels reversed.",
+    "example_input": "hello",
+    "example_output": "holle"
+  },
+  {
+    "id": 25,
+    "title": "Isomorphic Strings",
+    "problem_statement": "Given two strings s and t, determine if they are isomorphic, meaning the characters in s can be replaced to get t, with a consistent one-to-one mapping.",
+    "input_format": "First line contains s. Second line contains t.",
+    "output_format": "Print 'true' if isomorphic, otherwise 'false'.",
+    "example_input": "egg\nadd",
+    "example_output": "true"
+  },
+  {
+    "id": 26,
+    "title": "Word Pattern",
+    "problem_statement": "Given a pattern string and a string consisting of words separated by spaces, determine if the string follows the same pattern, with a full one-to-one mapping between letters and words.",
+    "input_format": "First line contains the pattern. Second line contains the string of words.",
+    "output_format": "Print 'true' if it follows the pattern, otherwise 'false'.",
+    "example_input": "abba\ndog cat cat dog",
+    "example_output": "true"
+  },
+  {
+    "id": 27,
+    "title": "Add Binary",
+    "problem_statement": "Given two binary strings, return their sum, also as a binary string.",
+    "input_format": "First line contains binary string a. Second line contains binary string b.",
+    "output_format": "Print the binary sum.",
+    "example_input": "11\n1",
+    "example_output": "100"
+  },
+  {
+    "id": 28,
+    "title": "Valid Parentheses String",
+    "problem_statement": "Given a string containing only the characters '(', ')' and '*' (where '*' can represent '(', ')', or an empty string), determine if the string is valid, meaning the parentheses can be matched correctly.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print 'true' if the string is valid, otherwise 'false'.",
+    "example_input": "(*))",
+    "example_output": "true"
+  },
+  {
+    "id": 29,
+    "title": "Custom String Sort",
+    "problem_statement": "Given a string 'order' representing a custom character ordering and another string s, sort the characters of s according to the custom order. Characters not in order can appear at the end in any order.",
+    "input_format": "First line contains order. Second line contains s.",
+    "output_format": "Print s sorted according to the custom order.",
+    "example_input": "cba\nabcd",
+    "example_output": "cbad"
+  },
+  {
+    "id": 30,
+    "title": "String Rotation",
+    "problem_statement": "Given two strings s1 and s2, determine if s2 is a rotation of s1 using only one call to a substring-search function.",
+    "input_format": "First line contains s1. Second line contains s2.",
+    "output_format": "Print 'true' if s2 is a rotation of s1, otherwise 'false'.",
+    "example_input": "waterbottle\nerbottlewat",
+    "example_output": "true"
+  },
+  {
+    "id": 1,
+    "title": "Reverse Linked List",
+    "problem_statement": "Given the head of a singly linked list, reverse the list and return the new head.",
+    "input_format": "First line contains N. Second line contains N integers representing the list nodes.",
+    "output_format": "Print the reversed linked list.",
+    "example_input": "5\n1 2 3 4 5",
+    "example_output": "5 4 3 2 1"
+  },
+  {
+    "id": 2,
+    "title": "Middle of Linked List",
+    "problem_statement": "Given the head of a singly linked list, return the middle node. If there are two middle nodes, return the second one.",
+    "input_format": "First line contains N. Second line contains N integers representing the list nodes.",
+    "output_format": "Print the value of the middle node.",
+    "example_input": "5\n1 2 3 4 5",
+    "example_output": "3"
+  },
+  {
+    "id": 3,
+    "title": "Merge Two Sorted Lists",
+    "problem_statement": "Given the heads of two sorted linked lists, merge them into a single sorted linked list and return its head.",
+    "input_format": "First line contains N and M. Second and third lines contain N and M sorted integers respectively.",
+    "output_format": "Print the merged sorted linked list.",
+    "example_input": "3 3\n1 2 4\n1 3 4",
+    "example_output": "1 1 2 3 4 4"
+  },
+  {
+    "id": 4,
+    "title": "Remove Nth Node",
+    "problem_statement": "Given the head of a linked list, remove the nth node from the end of the list and return its head.",
+    "input_format": "First line contains N (list size) and n (node to remove from end). Second line contains N integers.",
+    "output_format": "Print the list after removing the nth node from the end.",
+    "example_input": "5 2\n1 2 3 4 5",
+    "example_output": "1 2 3 5"
+  },
+  {
+    "id": 5,
+    "title": "Detect Cycle",
+    "problem_statement": "Given the head of a linked list, determine if the linked list has a cycle in it, using Floyd's cycle detection algorithm.",
+    "input_format": "First line contains N and pos (index where tail connects, -1 if no cycle). Second line contains N integers.",
+    "output_format": "Print 'true' if a cycle exists, otherwise 'false'.",
+    "example_input": "4 1\n3 2 0 -4",
+    "example_output": "true"
+  },
+  {
+    "id": 6,
+    "title": "Linked List Cycle II",
+    "problem_statement": "Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.",
+    "input_format": "First line contains N and pos (index where tail connects, -1 if no cycle). Second line contains N integers.",
+    "output_format": "Print the value of the node where the cycle begins, or -1 if none.",
+    "example_input": "4 1\n3 2 0 -4",
+    "example_output": "2"
+  },
+  {
+    "id": 7,
+    "title": "Intersection of Two Lists",
+    "problem_statement": "Given the heads of two singly linked lists, find the node at which the two lists intersect, or return null if they do not intersect.",
+    "input_format": "First line contains the two lists and the intersection point details.",
+    "output_format": "Print the value of the intersecting node, or 'null' if none.",
+    "example_input": "listA: 4 1 8 4 5\nlistB: 5 6 1 8 4 5\nintersect at value 8",
+    "example_output": "8"
+  },
+  {
+    "id": 8,
+    "title": "Palindrome Linked List",
+    "problem_statement": "Given the head of a singly linked list, determine if it is a palindrome.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print 'true' if the list is a palindrome, otherwise 'false'.",
+    "example_input": "5\n1 2 3 2 1",
+    "example_output": "true"
+  },
+  {
+    "id": 9,
+    "title": "Odd Even Linked List",
+    "problem_statement": "Given the head of a singly linked list, group all the nodes with odd indices together followed by nodes with even indices, and return the reordered list.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the reordered list.",
+    "example_input": "5\n1 2 3 4 5",
+    "example_output": "1 3 5 2 4"
+  },
+  {
+    "id": 10,
+    "title": "Rotate List",
+    "problem_statement": "Given the head of a linked list, rotate the list to the right by k places.",
+    "input_format": "First line contains N and k. Second line contains N integers.",
+    "output_format": "Print the list after rotating right by k places.",
+    "example_input": "5 2\n1 2 3 4 5",
+    "example_output": "4 5 1 2 3"
+  },
+  {
+    "id": 11,
+    "title": "Swap Nodes in Pairs",
+    "problem_statement": "Given a linked list, swap every two adjacent nodes and return its head, without modifying the values in the nodes.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the list after swapping every pair of adjacent nodes.",
+    "example_input": "4\n1 2 3 4",
+    "example_output": "2 1 4 3"
+  },
+  {
+    "id": 12,
+    "title": "Reverse K Group",
+    "problem_statement": "Given a linked list, reverse the nodes of the list k at a time, and return the modified list. If the number of remaining nodes is less than k, leave them as is.",
+    "input_format": "First line contains N and k. Second line contains N integers.",
+    "output_format": "Print the list after reversing every k-group.",
+    "example_input": "5 2\n1 2 3 4 5",
+    "example_output": "2 1 4 3 5"
+  },
+  {
+    "id": 13,
+    "title": "Sort Linked List",
+    "problem_statement": "Given the head of a linked list, sort the list in ascending order using merge sort, achieving O(n log n) time and O(1) space.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the sorted list.",
+    "example_input": "4\n4 2 1 3",
+    "example_output": "1 2 3 4"
+  },
+  {
+    "id": 14,
+    "title": "Flatten Multilevel Linked List",
+    "problem_statement": "Given a multilevel doubly linked list where nodes have an additional child pointer that may point to a separate list, flatten the list so all nodes appear in a single-level doubly linked list.",
+    "input_format": "First line contains the multilevel list structure with child pointers described.",
+    "output_format": "Print the flattened list.",
+    "example_input": "1 2 3 4 5 6 (3 has child 7 8 9)",
+    "example_output": "1 2 3 7 8 9 4 5 6"
+  },
+  {
+    "id": 15,
+    "title": "Add Two Numbers",
+    "problem_statement": "Given two non-empty linked lists representing two non-negative integers with digits stored in reverse order, add the two numbers and return the sum as a linked list.",
+    "input_format": "First line contains list1 digits. Second line contains list2 digits (both in reverse order).",
+    "output_format": "Print the resulting sum as a linked list (reverse order digits).",
+    "example_input": "2 4 3\n5 6 4",
+    "example_output": "7 0 8"
+  },
+  {
+    "id": 16,
+    "title": "Remove Duplicates",
+    "problem_statement": "Given the head of a sorted linked list, delete all duplicate nodes such that each element appears only once.",
+    "input_format": "First line contains N. Second line contains N sorted integers.",
+    "output_format": "Print the list after removing duplicates.",
+    "example_input": "5\n1 1 2 3 3",
+    "example_output": "1 2 3"
+  },
+  {
+    "id": 17,
+    "title": "Delete Middle Node",
+    "problem_statement": "Given the head of a linked list, delete the middle node and return the head of the modified list. If there are two middle nodes, delete the second one.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the list after deleting the middle node.",
+    "example_input": "5\n1 3 4 7 1",
+    "example_output": "1 3 7 1"
+  },
+  {
+    "id": 18,
+    "title": "Copy Random Pointer",
+    "problem_statement": "Given a linked list where each node contains an additional random pointer that could point to any node in the list or null, construct a deep copy of the list.",
+    "input_format": "First line contains N. Second line contains N values with their random pointer indices (-1 if null).",
+    "output_format": "Print the deep-copied list with values and random pointer indices.",
+    "example_input": "3\n7 -1\n13 0\n11 4",
+    "example_output": "7 -1\n13 0\n11 4"
+  },
+  {
+    "id": 19,
+    "title": "Reorder List",
+    "problem_statement": "Given the head of a singly linked list, reorder it so the nodes are arranged as L0, Ln, L1, Ln-1, L2, Ln-2, and so on.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the reordered list.",
+    "example_input": "4\n1 2 3 4",
+    "example_output": "1 4 2 3"
+  },
+  {
+    "id": 20,
+    "title": "Partition List",
+    "problem_statement": "Given the head of a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x, preserving the original relative order within each partition.",
+    "input_format": "First line contains N and x. Second line contains N integers.",
+    "output_format": "Print the partitioned list.",
+    "example_input": "6 3\n1 4 3 2 5 2",
+    "example_output": "1 2 2 4 3 5"
+  },
+  {
+    "id": 21,
+    "title": "Merge K Lists",
+    "problem_statement": "Given an array of k sorted linked lists, merge all the lists into one sorted linked list and return it.",
+    "input_format": "First line contains k. Following k lines contain each sorted list.",
+    "output_format": "Print the merged sorted list.",
+    "example_input": "3\n1 4 5\n1 3 4\n2 6",
+    "example_output": "1 1 2 3 4 4 5 6"
+  },
+  {
+    "id": 22,
+    "title": "Design Browser History",
+    "problem_statement": "Design a browser history system using a doubly linked list, supporting visit(url), back(steps), and forward(steps) operations.",
+    "input_format": "First line contains the homepage. Following lines contain operations: visit, back, forward with their arguments.",
+    "output_format": "Print the current URL after each back/forward operation.",
+    "example_input": "leetcode.com\nvisit google.com\nvisit facebook.com\nvisit youtube.com\nback 1\nback 1\nforward 1",
+    "example_output": "facebook.com\ngoogle.com\nfacebook.com"
+  },
+  {
+    "id": 23,
+    "title": "Circular Linked List",
+    "problem_statement": "Given the head of a linked list, determine whether it is a circular linked list, meaning the last node points back to some earlier node forming a loop that covers the whole list traversal check.",
+    "input_format": "First line contains N and pos (index the tail connects to, -1 if none). Second line contains N integers.",
+    "output_format": "Print 'true' if the list is circular, otherwise 'false'.",
+    "example_input": "3 0\n1 2 3",
+    "example_output": "true"
+  },
+  {
+    "id": 24,
+    "title": "Delete Node",
+    "problem_statement": "Given a node (not the tail) in a singly linked list, delete that node from the list, given access only to that node (not the head).",
+    "input_format": "First line contains N. Second line contains N integers. Third line contains the value of the node to delete.",
+    "output_format": "Print the list after deleting the given node.",
+    "example_input": "5\n4 5 1 9 3\n5",
+    "example_output": "4 1 9 3"
+  },
+  {
+    "id": 25,
+    "title": "Reverse Between",
+    "problem_statement": "Given the head of a linked list and two integers left and right, reverse the nodes of the list from position left to position right, and return the modified list.",
+    "input_format": "First line contains N, left, and right. Second line contains N integers.",
+    "output_format": "Print the list after reversing the specified segment.",
+    "example_input": "5 2 4\n1 2 3 4 5",
+    "example_output": "1 4 3 2 5"
+  },
+  {
+    "id": 1,
+    "title": "Valid Parentheses",
+    "problem_statement": "Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid, meaning every open bracket is closed by the same type in the correct order.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print 'true' if the string is valid, otherwise 'false'.",
+    "example_input": "()[]{}",
+    "example_output": "true"
+  },
+  {
+    "id": 2,
+    "title": "Min Stack",
+    "problem_statement": "Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.",
+    "input_format": "A sequence of operations: push, pop, top, getMin with their arguments.",
+    "output_format": "Print the result of each top/getMin operation performed.",
+    "example_input": "push -2\npush 0\npush -3\ngetMin\npop\ntop\ngetMin",
+    "example_output": "-3\n0\n-2"
+  },
+  {
+    "id": 3,
+    "title": "Evaluate Reverse Polish Notation",
+    "problem_statement": "Given an array of tokens representing an arithmetic expression in Reverse Polish Notation, evaluate the expression and return the result.",
+    "input_format": "First line contains N. Second line contains N space separated tokens.",
+    "output_format": "Print the evaluated result.",
+    "example_input": "5\n2 1 + 3 *",
+    "example_output": "9"
+  },
+  {
+    "id": 4,
+    "title": "Daily Temperatures",
+    "problem_statement": "Given an array of daily temperatures, return an array such that for each day, it tells you how many days you would have to wait until a warmer temperature. If no future day is warmer, put 0.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the array of days to wait for a warmer temperature.",
+    "example_input": "8\n73 74 75 71 69 72 76 73",
+    "example_output": "1 1 4 2 1 1 0 0"
+  },
+  {
+    "id": 5,
+    "title": "Next Greater Element",
+    "problem_statement": "Given an array, find the next greater element for every element using a stack. If no greater element exists, output -1 for that position.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the next greater element for each position.",
+    "example_input": "4\n4 5 2 25",
+    "example_output": "5 25 25 -1"
+  },
+  {
+    "id": 6,
+    "title": "Largest Rectangle Histogram",
+    "problem_statement": "Given an array of integers representing the heights of histogram bars where each bar has width 1, find the area of the largest rectangle that can be formed within the histogram.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the area of the largest rectangle.",
+    "example_input": "6\n2 1 5 6 2 3",
+    "example_output": "10"
+  },
+  {
+    "id": 7,
+    "title": "Basic Calculator",
+    "problem_statement": "Given a string representing a valid mathematical expression, implement a basic calculator to evaluate it, supporting +, -, parentheses, and non-negative integers, without using eval.",
+    "input_format": "A single line containing the expression.",
+    "output_format": "Print the evaluated result.",
+    "example_input": "(1+(4+5+2)-3)+(6+8)",
+    "example_output": "23"
+  },
+  {
+    "id": 8,
+    "title": "Remove K Digits",
+    "problem_statement": "Given a non-negative integer represented as a string num and an integer k, remove k digits from the number so that the resulting number is the smallest possible, using a monotonic stack.",
+    "input_format": "First line contains num. Second line contains k.",
+    "output_format": "Print the smallest possible number after removing k digits.",
+    "example_input": "1432219\n3",
+    "example_output": "1219"
+  },
+  {
+    "id": 9,
+    "title": "Asteroid Collision",
+    "problem_statement": "Given an array of integers representing asteroids in a row, where the sign represents direction and the magnitude represents size, simulate collisions using a stack and return the state after all collisions.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the state of the asteroids after all collisions.",
+    "example_input": "4\n5 10 -5 -15",
+    "example_output": "-15"
+  },
+  {
+    "id": 10,
+    "title": "Decode String",
+    "problem_statement": "Given an encoded string in the form k[encoded_string], decode it fully using a stack, where encoded_string is repeated k times.",
+    "input_format": "A single line containing the encoded string.",
+    "output_format": "Print the decoded string.",
+    "example_input": "3[a2[c]]",
+    "example_output": "accaccacc"
+  },
+  {
+    "id": 11,
+    "title": "Simplify Path",
+    "problem_statement": "Given an absolute Unix-style file path, simplify it to its canonical form using a stack, resolving '.' and '..' correctly.",
+    "input_format": "A single line containing the path.",
+    "output_format": "Print the simplified canonical path.",
+    "example_input": "/a/./b/../../c/",
+    "example_output": "/c"
+  },
+  {
+    "id": 12,
+    "title": "Online Stock Span",
+    "problem_statement": "Design an algorithm that collects daily stock price quotes and returns the span of the stock's price for the current day, using a monotonic stack, where the span is the number of consecutive days the price was less than or equal to today's price.",
+    "input_format": "First line contains N. Second line contains N stock prices in the order they occur.",
+    "output_format": "Print the span for each day's price.",
+    "example_input": "7\n100 80 60 70 60 75 85",
+    "example_output": "1 1 1 2 1 4 6"
+  },
+  {
+    "id": 13,
+    "title": "Exclusive Time of Functions",
+    "problem_statement": "Given a log of function calls with start and end timestamps for a single-threaded CPU, use a stack to compute the exclusive time spent by each function.",
+    "input_format": "First line contains N (number of functions) and M (number of logs). Following M lines contain the logs.",
+    "output_format": "Print the exclusive time for each function.",
+    "example_input": "2 6\n0:start:0\n1:start:2\n1:end:5\n0:end:6",
+    "example_output": "3 4"
+  },
+  {
+    "id": 14,
+    "title": "Remove Duplicate Letters",
+    "problem_statement": "Given a string, remove duplicate letters so that every letter appears only once, and the result is the smallest possible in lexicographical order among all valid results, using a monotonic stack.",
+    "input_format": "A single line containing the string.",
+    "output_format": "Print the resulting string.",
+    "example_input": "cbacdcbc",
+    "example_output": "acdb"
+  },
+  {
+    "id": 15,
+    "title": "Monotonic Stack",
+    "problem_statement": "Given an array, use a monotonic stack to find, for each element, the nearest element to its right (or left) that is smaller (or greater) than it.",
+    "input_format": "First line contains N. Second line contains N integers.",
+    "output_format": "Print the required nearest elements for each position.",
+    "example_input": "5\n4 10 5 8 3",
+    "example_output": "-1 5 -1 3 -1"
+  },
+  {
+    "id": 16,
+    "title": "Infix to Postfix",
+    "problem_statement": "Given an infix arithmetic expression, convert it to postfix notation using a stack, respecting operator precedence and associativity.",
+    "input_format": "A single line containing the infix expression.",
+    "output_format": "Print the postfix expression.",
+    "example_input": "A+B*C",
+    "example_output": "ABC*+"
+  },
+  {
+    "id": 17,
+    "title": "Prefix Evaluation",
+    "problem_statement": "Given a valid prefix arithmetic expression, evaluate it and return the result using a stack, scanning the expression from right to left.",
+    "input_format": "A single line containing the prefix expression.",
+    "output_format": "Print the evaluated result.",
+    "example_input": "*+23-43",
+    "example_output": "5"
+  },
+  {
+    "id": 18,
+    "title": "Postfix Evaluation",
+    "problem_statement": "Given a valid postfix arithmetic expression, evaluate it and return the result using a stack, scanning the expression from left to right.",
+    "input_format": "A single line containing the postfix expression.",
+    "output_format": "Print the evaluated result.",
+    "example_input": "23+4*",
+    "example_output": "20"
+  },
+  {
+    "id": 19,
+    "title": "Celebrity Problem",
+    "problem_statement": "Given a matrix representing acquaintance relationships among N people, find the celebrity - a person known by everyone but who knows no one - using a stack based approach, or return -1 if no celebrity exists.",
+    "input_format": "First line contains N. Following N lines contain the N x N acquaintance matrix.",
+    "output_format": "Print the index of the celebrity, or -1 if none exists.",
+    "example_input": "3\n0 1 0\n0 0 0\n0 1 0",
+    "example_output": "1"
+  },
+  {
+    "id": 20,
+    "title": "Balanced Parentheses",
+    "problem_statement": "Given a string of brackets, use a stack to determine if the brackets are balanced, and if not, determine the minimum number of insertions needed to make it balanced.",
+    "input_format": "A single line containing the string of brackets.",
+    "output_format": "Print 'true' if balanced, or the minimum insertions required to balance it.",
+    "example_input": "(()",
+    "example_output": "1"
+  }
+]

@@ -80,6 +80,10 @@ const userSchema = mongoose.Schema(
       createdAt: { type: Date, default: Date.now },
       id: { type: String, default: () => Date.now().toString() }
     }],
+    challengeProgress: {
+      currentDay: { type: Number, default: 1 },
+      completedDays: [{ type: Number }]
+    },
   },
   { timestamps: true }
 );

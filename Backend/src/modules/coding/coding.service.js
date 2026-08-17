@@ -1,4 +1,5 @@
 const CodingResult = require("../../../models/CodingResult");
+const CodingProblem = require("../../../models/CodingProblem");
 const User = require("../../../models/User");
 const { BadRequestError } = require("../../common/exceptions/customErrors");
 const { sendNotification } = require("../../../utils/notificationService");
@@ -58,4 +59,66 @@ const getAllCodingResults = async () => {
     .lean();
 };
 
-module.exports = { saveCodingResult, getAllCodingResults };
+const getProblems = async (filters, page = 1, limit = 10) => {
+  const query = {};
+  if (filters.difficulty) {
+    query.difficulty = filters.difficulty;
+  }
+  if (filters.topics && filters.topics.length > 0) {
+    query.topics = { $in: filters.topics };
+  }
+  
+  const skip = (page - 1) * limit;
+  
+  const [problems, total] = await Promise.all([
+    CodingProblem.find(query).skip(skip).limit(limit).lean(),
+    CodingProblem.countDocuments(query)
+  ]);
+  
+  return {
+    problems,
+    total,
+    page,
+    totalPages: Math.ceil(total / limit)
+  };
+};
+
+const getProblemById = async (id) => {
+  const problem = await CodingProblem.findById(id).lean();
+  if (!problem) {
+    throw new BadRequestError("Problem not found");
+  }
+  return problem;
+};
+
+const getChallenge = async (userId) => {
+  // 1. Get all problems that have a dayNumber, sorted by dayNumber
+  const problems = await CodingProblem.find({ dayNumber: { $ne: null } })
+    .select("title difficulty topics dayNumber description")
+    .sort({ dayNumber: 1 })
+    .lean();
+
+  // 2. Group them by day
+  const days = {};
+  problems.forEach(p => {
+    if (!days[p.dayNumber]) {
+      days[p.dayNumber] = { day: p.dayNumber, problems: [] };
+    }
+    days[p.dayNumber].problems.push(p);
+  });
+
+  const challengeDays = Object.values(days).sort((a, b) => a.day - b.day);
+
+  // 3. Get user progress
+  let progress = { currentDay: 1, completedDays: [] };
+  if (userId) {
+    const user = await User.findById(userId).select("challengeProgress").lean();
+    if (user && user.challengeProgress) {
+      progress = user.challengeProgress;
+    }
+  }
+
+  return { challengeDays, progress };
+};
+
+module.exports = { saveCodingResult, getAllCodingResults, getProblems, getProblemById, getChallenge };

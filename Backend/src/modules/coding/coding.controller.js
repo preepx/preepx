@@ -2,6 +2,8 @@ const codingService = require("./coding.service");
 const walletService = require("../wallet/wallet.service");
 const catchAsync = require("../../common/middleware/catchAsync");
 const aiService = require("../../services/ai.service");
+const CodingProblem = require("../../../models/CodingProblem");
+const problemsData = require("../../../scripts/sample_problems.json");
 
 const startCodingSession = catchAsync(async (req, res) => {
   const userId = req.user;
@@ -68,4 +70,82 @@ Return a JSON object with:
   }
 });
 
-module.exports = { startCodingSession, saveCodingResult, getAllCodingResults, evaluateCode };
+const getProblems = catchAsync(async (req, res) => {
+  const { difficulty, topics, page, limit } = req.query;
+  const filters = {};
+  if (difficulty) filters.difficulty = difficulty;
+  if (topics) filters.topics = topics.split(",");
+
+  const result = await codingService.getProblems(filters, parseInt(page) || 1, parseInt(limit) || 10);
+  res.status(200).json({ success: true, ...result });
+});
+
+const getChallenge = catchAsync(async (req, res) => {
+  const userId = req.user; // from protect middleware
+  const result = await codingService.getChallenge(userId);
+  res.status(200).json({ success: true, data: result });
+});
+
+const getProblemById = catchAsync(async (req, res) => {
+  const problem = await codingService.getProblemById(req.params.id);
+  res.status(200).json({ success: true, data: problem });
+});
+
+// TEMPORARY: Seed from API because terminal fails due to DNS issues
+const seedProblemsTemp = catchAsync(async (req, res) => {
+  let added = 0;
+  let updated = 0;
+  const totalProblems = problemsData.length;
+
+  for (let i = 0; i < totalProblems; i++) {
+    const item = problemsData[i];
+    const title = item.title;
+    const dayNumber = Math.min(100, Math.ceil((i + 1) * 100 / totalProblems));
+    const existing = await CodingProblem.findOne({ title });
+
+    const description = `**Problem Statement**\n${item.problem_statement}\n\n**Input Format**\n${item.input_format}\n\n**Output Format**\n${item.output_format}`;
+
+    let assignedTopics = ["Array"];
+    const lowerTitle = item.title.toLowerCase();
+    if (lowerTitle.includes("hash") || lowerTitle.includes("frequency") || lowerTitle.includes("cache") || lowerTitle.includes("distinct") || lowerTitle.includes("duplicate file")) {
+      assignedTopics = ["HashMap"];
+    } else if (lowerTitle.includes("string") || lowerTitle.includes("anagram") || lowerTitle.includes("palindrome") || lowerTitle.includes("word") || lowerTitle.includes("character") || lowerTitle.includes("prefix")) {
+      assignedTopics = ["String"];
+    } else if (lowerTitle.includes("list") || lowerTitle.includes("node") || lowerTitle.includes("pointer")) {
+      assignedTopics = ["Linked List"];
+    } else if (lowerTitle.includes("stack") || lowerTitle.includes("parentheses") || lowerTitle.includes("calculator") || lowerTitle.includes("postfix") || lowerTitle.includes("prefix eval") || lowerTitle.includes("polish") || lowerTitle.includes("asteroid") || lowerTitle.includes("histogram")) {
+      assignedTopics = ["Stack"];
+    }
+
+    const testCases = [];
+    if (item.example_input && item.example_output) {
+      testCases.push({ input: String(item.example_input), output: String(item.example_output) });
+    }
+
+    const problemToSave = {
+      title: item.title,
+      description: description,
+      difficulty: "easy",
+      topics: assignedTopics,
+      dayNumber: dayNumber,
+      acceptanceRate: Math.floor(Math.random() * 50) + 40,
+      points: 100,
+      testCases: testCases,
+      boilerplateCode: {
+        javascript: "function solve(input) {\n    // Write your code here\n}",
+        python: "def solve(input):\n    # Write your code here\n    pass"
+      }
+    };
+
+    if (!existing) {
+      await CodingProblem.create(problemToSave);
+      added++;
+    } else {
+      await CodingProblem.updateOne({ title }, { $set: problemToSave });
+      updated++;
+    }
+  }
+  res.status(200).json({ success: true, message: `Successfully seeded! Added: ${added}, Updated: ${updated}` });
+});
+
+module.exports = { startCodingSession, saveCodingResult, getAllCodingResults, evaluateCode, getProblems, getProblemById, seedProblemsTemp, getChallenge };

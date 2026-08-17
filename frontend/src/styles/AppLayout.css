@@ -21,6 +21,11 @@
   width: 68px;
 }
 
+[data-theme="dark"] .sidebar,
+[data-theme="dark"] .topbar {
+  background: #040B1D;
+}
+
 .sidebar-top {
   display: flex;
   align-items: center;
