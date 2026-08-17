@@ -90,7 +90,7 @@ function Navbar({ landingRole, setLandingRole }) {
         </div>
 
         <div className="navbar-right">
-          <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle theme" style={{ background: 'transparent', border: 'none', color: 'rgba(255, 255, 255, 0.8)', cursor: 'pointer', display: 'flex', alignItems: 'center', marginRight: '12px', padding: '8px' }}>
+          <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle theme">
             {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
           </button>
 

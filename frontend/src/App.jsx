@@ -100,11 +100,12 @@ function LayoutWrapper({ children, landingRole, setLandingRole }) {
 
   if (isPublic) {
     const isAuthPage = location.pathname === "/auth" || location.pathname === "/auth/recruiter";
+    const isLandingPage = location.pathname === "/" || location.pathname === "/dashboard";
     return (
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         {!isAuthPage && <Navbar landingRole={landingRole} setLandingRole={setLandingRole} />}
         <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
-        {!isAuthPage && <Footer landingRole={landingRole} />}
+        {!isAuthPage && !isLandingPage && <Footer landingRole={landingRole} />}
       </div>
     );
   }
