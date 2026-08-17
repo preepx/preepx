@@ -43,27 +43,27 @@ const calculateObjPerformance = async (userId) => {
   const bestScore =
     results.length > 0
       ? Math.max(
-          ...results.map((r) =>
-            r.totalQuestions
-              ? parseFloat(((r.score / r.totalQuestions) * 100).toFixed(2))
-              : 0
-          )
+        ...results.map((r) =>
+          r.totalQuestions
+            ? parseFloat(((r.score / r.totalQuestions) * 100).toFixed(2))
+            : 0
         )
+      )
       : 0;
 
   // Average score = average of per-exam percentages (display metric, different from accuracy)
   const averageScore =
     results.length > 0
       ? parseFloat(
-          (
-            results.reduce(
-              (s, r) =>
-                s +
-                (r.totalQuestions ? (r.score / r.totalQuestions) * 100 : 0),
-              0
-            ) / results.length
-          ).toFixed(2)
-        )
+        (
+          results.reduce(
+            (s, r) =>
+              s +
+              (r.totalQuestions ? (r.score / r.totalQuestions) * 100 : 0),
+            0
+          ) / results.length
+        ).toFixed(2)
+      )
       : 0;
 
   // Technology-wise breakdown
@@ -195,10 +195,10 @@ const unlockObjCertificate = async (userId) => {
   await sendNotification(
     userId,
     "🏆 Certificate Unlocked!",
-    "Your PreePX Objective Performance Certificate has been issued. You can view and download it from the Objective Exam page.",
+    "Your PreepX Objective Performance Certificate has been issued. You can view and download it from the Objective Exam page.",
     "general",
     "🏆"
-  ).catch(() => {}); // non-blocking
+  ).catch(() => { }); // non-blocking
 
   return { certificate, alreadyUnlocked: false };
 };
@@ -276,10 +276,10 @@ const updateObjCertificate = async (userId) => {
   await sendNotification(
     userId,
     "🔄 Certificate Updated!",
-    `Your PreePX Objective Performance Certificate (${existing.certificateId}) has been updated with your latest exam results.`,
+    `Your PreepX Objective Performance Certificate (${existing.certificateId}) has been updated with your latest exam results.`,
     "general",
     "🏆"
-  ).catch(() => {});
+  ).catch(() => { });
 
   return { certificate: existing };
 };

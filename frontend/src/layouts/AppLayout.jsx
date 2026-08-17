@@ -318,7 +318,7 @@ function AppLayout({ children }) {
           <div className="page-content">{children}</div>
         </div>
       </div>
-      {!location.pathname.includes("/pdf") && <Footer />}
+      {!location.pathname.includes("/pdf") && location.pathname !== "/" && <Footer />}
 
       <NotificationModal
         isOpen={showNotifications}

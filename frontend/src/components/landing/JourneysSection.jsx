@@ -18,7 +18,7 @@ function JourneysSection() {
     { icon: BookOpen, title: "Learn", desc: "Prepare with AI-powered mock interviews and tests" },
     { icon: Code, title: "Practice", desc: "Solve real-world questions and improve every day" },
     { icon: TrendingUp, title: "Assess", desc: "Get detailed performance analytics" },
-    { icon: Shield, title: "Get Certified", desc: "Earn PreePX certificates to validate your skills" },
+    { icon: Shield, title: "Get Certified", desc: "Earn PreepX certificates to validate your skills" },
     { icon: Briefcase, title: "Get Hired", desc: "Get discovered by top recruiters" },
   ];
 
@@ -49,11 +49,11 @@ function JourneysSection() {
   ];
 
   return (
-    <section className="prepx-journeys section">
+    <section id="journeys" className="prepx-journeys section">
       {/* Title */}
       <div className="section-header journeys-section-header">
         <h2 className="prepx-journeys-title">
-          One Platform. Two Journeys. <span className="gradient-text-blue">One Goal.</span>
+          One Platform. Two Journeys. <span className="gradient-text-one-goal">One Goal.</span>
         </h2>
       </div>
 
@@ -180,10 +180,11 @@ function JourneysSection() {
           <div className="ecosystem-orb-wrapper">
             <div className="ecosystem-orb-glow" />
             <div className="ecosystem-orb-ring" />
+            <div className="ecosystem-orb-ring-outer" />
             <div className="ecosystem-orb-card">
               <img
                 src="/preepx_logo.png"
-                alt="PreePX"
+                alt="PreepX"
                 className="ecosystem-logo-img"
               />
               <span className="ecosystem-tagline">Talent Ecosystem</span>

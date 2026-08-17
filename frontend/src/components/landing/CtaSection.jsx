@@ -3,8 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { User, Briefcase } from "lucide-react";
 import "@/styles/landing/FaqCtaLanding.css";
 
-function CtaSection() {
+function CtaSection({ onRecruiterClick }) {
   const navigate = useNavigate();
+
+  const handleRecruiterClick = () => {
+    if (onRecruiterClick) {
+      onRecruiterClick();
+    } else {
+      navigate("/auth?role=recruiter");
+    }
+  };
 
   return (
     <section className="prepx-cta section">
@@ -13,7 +21,7 @@ function CtaSection() {
         <div className="cta-left-content">
           <h2 className="cta-heading">
             Whether you're building your career <br />
-            or your team, start with <span className="gradient-text-blue">PreePX.</span>
+            or your team, start with <span className="gradient-text-blue">PreepX.</span>
           </h2>
 
           <div className="cta-buttons-row">
@@ -37,7 +45,7 @@ function CtaSection() {
             {/* Recruiter Button */}
             <button
               className="cta-action-btn cta-recruiter-btn"
-              onClick={() => navigate("/auth?role=recruiter")}
+              onClick={handleRecruiterClick}
             >
               <div className="cta-btn-icon">
                 <Briefcase size={18} />
@@ -53,7 +61,7 @@ function CtaSection() {
           </div>
         </div>
 
-        {/* Right Side: AI Generated Infinity Illustration with PreePX Logo */}
+        {/* Right Side: AI Generated Infinity Illustration with PreepX Logo */}
         <div className="cta-right-visual">
           <div className="cta-illustration-card">
             {/* Background Glow */}
@@ -62,7 +70,7 @@ function CtaSection() {
             {/* 3D Illustration */}
             <img
               src="/cta_infinity_visual.jpg"
-              alt="PreePX Ecosystem - Candidate & Recruiter"
+              alt="PreepX Ecosystem - Candidate & Recruiter"
               className="cta-illustration-img"
             />
 
@@ -73,7 +81,7 @@ function CtaSection() {
             <div className="cta-center-logo-badge">
               <img
                 src="/preepx_logo.png"
-                alt="PreePX"
+                alt="PreepX"
                 className="cta-logo-img"
               />
             </div>

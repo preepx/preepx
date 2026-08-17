@@ -9,8 +9,8 @@ function FaqSection() {
   const faqs = [
     {
       category: "candidate",
-      q: "What is PreePX and how does it help me get hired?",
-      a: "PreePX is an intelligent talent ecosystem that helps candidates practice real-time AI mock interviews, take objective assessments, earn verifiable certificates, and get discovered by top tech recruiters looking for proven skills.",
+      q: "What is PreepX and how does it help me get hired?",
+      a: "PreepX is an intelligent talent ecosystem that helps candidates practice real-time AI mock interviews, take objective assessments, earn verifiable certificates, and get discovered by top tech recruiters looking for proven skills.",
     },
     {
       category: "candidate",
@@ -19,7 +19,7 @@ function FaqSection() {
     },
     {
       category: "recruiter",
-      q: "How do recruiters use PreePX to hire faster?",
+      q: "How do recruiters use PreepX to hire faster?",
       a: "Recruiters create custom skill-based assessments, evaluate candidate code and responses with AI analytics, shortlist proven talent with confidence, and conduct seamless automated interviews.",
     },
     {
@@ -34,8 +34,8 @@ function FaqSection() {
     },
     {
       category: "general",
-      q: "Are PreePX certificates verifiable?",
-      a: "Yes! Every certificate issued by PreePX includes a unique verifiable credential ID that can be shared on LinkedIn, added to your resume, and verified by partner recruiters.",
+      q: "Are PreepX certificates verifiable?",
+      a: "Yes! Every certificate issued by PreepX includes a unique verifiable credential ID that can be shared on LinkedIn, added to your resume, and verified by partner recruiters.",
     },
     {
       category: "general",
@@ -62,13 +62,13 @@ function FaqSection() {
   };
 
   return (
-    <section className="prepx-faq section">
+    <section id="faq" className="prepx-faq section">
       <div className="section-header faq-header">
         <h2 className="prepx-faq-title">
           Frequently Asked <span className="gradient-text-blue">Questions</span>
         </h2>
         <p className="faq-subtitle">
-          Everything you need to know about the PreePX platform and how it works for candidates and recruiters.
+          Everything you need to know about the PreepX platform and how it works for candidates and recruiters.
         </p>
 
         {/* Category Filters */}

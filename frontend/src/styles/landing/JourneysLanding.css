@@ -21,6 +21,17 @@
   margin-bottom: 12px;
 }
 
+.gradient-text-one-goal {
+  background: linear-gradient(135deg, #c084fc 0%, #a855f7 40%, #38bdf8 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.5));
+  font-weight: 800;
+  display: inline-block;
+  padding: 0 4px;
+}
+
 .journeys-unified-card {
   max-width: 1200px;
   margin: 0 auto;
@@ -109,13 +120,22 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
   padding: 12px 14px;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: pointer;
 }
 
-.journey-step-item:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.12);
-  transform: translateX(3px);
+.journey-candidate-col .journey-step-item:hover {
+  background: rgba(56, 189, 248, 0.06);
+  border-color: rgba(56, 189, 248, 0.4);
+  transform: translateX(6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.18);
+}
+
+.journey-recruiter-col .journey-step-item:hover {
+  background: rgba(168, 85, 247, 0.06);
+  border-color: rgba(168, 85, 247, 0.4);
+  transform: translateX(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(168, 85, 247, 0.18);
 }
 
 .journey-step-icon {
@@ -126,6 +146,11 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.journey-step-item:hover .journey-step-icon {
+  transform: scale(1.12);
 }
 
 .candidate-icon-box {
@@ -214,49 +239,93 @@
 
 .ecosystem-orb-glow {
   position: absolute;
-  width: 130px;
-  height: 130px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent 70%);
-  filter: blur(15px);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.45), rgba(56, 189, 248, 0.25) 40%, transparent 70%);
+  filter: blur(18px);
+  animation: glowPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% { transform: scale(0.9); opacity: 0.7; }
+  100% { transform: scale(1.15); opacity: 1; }
 }
 
 .ecosystem-orb-ring {
   position: absolute;
-  width: 120px;
-  height: 120px;
+  width: 138px;
+  height: 138px;
   border-radius: 50%;
-  border: 1px dashed rgba(255, 255, 255, 0.2);
-  animation: rotateClockwise 20s linear infinite;
+  border: 1px dashed rgba(56, 189, 248, 0.4);
+  animation: rotateClockwise 25s linear infinite;
+  pointer-events: none;
+}
+
+.ecosystem-orb-ring-outer {
+  position: absolute;
+  width: 162px;
+  height: 162px;
+  border-radius: 50%;
+  border: 1px dashed rgba(192, 132, 252, 0.35);
+  animation: rotateCounterClockwise 18s linear infinite;
+  pointer-events: none;
 }
 
 .ecosystem-orb-card {
   position: relative;
-  width: 105px;
-  height: 105px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle, #182238 0%, #0c1220 100%);
+  background: radial-gradient(circle, #141c2e 0%, #080c16 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.95), 0 0 20px rgba(56, 189, 248, 0.35);
+  animation: orbBreathe 4s ease-in-out infinite alternate;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ecosystem-orb-card:hover {
+  transform: scale(1.06);
+  border-color: rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 45px rgba(0, 0, 0, 0.95), 0 0 30px rgba(99, 102, 241, 0.6);
+}
+
+@keyframes orbBreathe {
+  0% { box-shadow: 0 0 35px rgba(0, 0, 0, 0.95), 0 0 15px rgba(56, 189, 248, 0.3); border-color: rgba(56, 189, 248, 0.3); }
+  100% { box-shadow: 0 0 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(192, 132, 252, 0.45); border-color: rgba(192, 132, 252, 0.4); }
 }
 
 .ecosystem-logo-img {
-  height: 34px;
-  max-width: 80px;
+  height: 42px;
+  max-width: 96px;
+  width: auto;
   object-fit: contain;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4));
+  animation: logoFloat 4s ease-in-out infinite alternate;
+}
+
+@keyframes logoFloat {
+  0% { transform: translateY(0px) scale(1); }
+  100% { transform: translateY(-2px) scale(1.02); }
 }
 
 .ecosystem-tagline {
-  font-size: 8px;
+  font-size: 9.5px;
   color: #cbd5e1;
   font-weight: 700;
+  font-style: italic;
   text-align: center;
   line-height: 1.1;
+  letter-spacing: 0.3px;
+  background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @keyframes rotateClockwise {
@@ -264,12 +333,17 @@
   to { transform: rotate(360deg); }
 }
 
+@keyframes rotateCounterClockwise {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
   .journeys-unified-card {
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 36px;
     padding: 36px 24px;
   }
 
@@ -281,5 +355,115 @@
   .journey-center-hub {
     margin: 10px 0;
     transform: scale(0.95);
+  }
+}
+
+@media (max-width: 768px) {
+  .prepx-journeys {
+    padding: 20px 14px;
+  }
+
+  .prepx-journeys-title {
+    font-size: 26px;
+    margin-bottom: 8px;
+  }
+
+  .journeys-unified-card {
+    padding: 20px 14px;
+    border-radius: 20px;
+    gap: 16px;
+  }
+
+  .circuit-svg-container {
+    display: none;
+  }
+
+  .journey-center-hub {
+    width: 100%;
+    height: auto;
+    min-height: auto;
+    margin: 8px 0;
+    padding: 14px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Connecting Vertical Pulse Lines on Mobile */
+  .journey-center-hub::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.6) 0%, rgba(99, 102, 241, 0.4) 50%, rgba(192, 132, 252, 0.6) 100%);
+    z-index: 1;
+  }
+
+  .ecosystem-orb-wrapper {
+    position: relative;
+    z-index: 5;
+  }
+
+  .ecosystem-orb-glow {
+    width: 130px;
+    height: 130px;
+  }
+
+  .ecosystem-orb-ring {
+    width: 120px;
+    height: 120px;
+  }
+
+  .ecosystem-orb-ring-outer {
+    width: 140px;
+    height: 140px;
+  }
+
+  .ecosystem-orb-card {
+    width: 105px;
+    height: 105px;
+  }
+
+  .ecosystem-logo-img {
+    height: 36px;
+    max-width: 85px;
+    margin-bottom: 2px;
+  }
+
+  .ecosystem-tagline {
+    font-size: 8.5px;
+  }
+
+  .journey-step-item {
+    padding: 10px 12px;
+    gap: 10px;
+    border-radius: 12px;
+  }
+
+  .journey-step-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .journey-step-text h4 {
+    font-size: 12.5px;
+  }
+
+  .journey-step-text p {
+    font-size: 10.5px;
+  }
+
+  .journey-role-title {
+    font-size: 20px;
+  }
+
+  .journey-role-sub {
+    font-size: 11.5px;
+    margin-bottom: 14px;
   }
 }

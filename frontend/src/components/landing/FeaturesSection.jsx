@@ -24,7 +24,7 @@ function FeaturesSection() {
     },
     {
       icon: ShieldCheck,
-      title: "PreePX Certificates",
+      title: "PreepX Certificates",
       desc: "Earn verifiable certificates and showcase your achievements.",
       colorClass: "feat-purple",
     },
@@ -43,10 +43,10 @@ function FeaturesSection() {
   ];
 
   return (
-    <section className="prepx-features section">
+    <section id="features" className="prepx-features section">
       <div className="section-header">
         <h2 className="prepx-features-title">
-          Everything you need. <span className="gradient-text-blue">All in one place.</span>
+          Everything you need. <span className="gradient-text-all-in-one">All in one place.</span>
         </h2>
       </div>
       <div className="features-grid-wrapper">

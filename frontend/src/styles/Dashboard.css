@@ -9,10 +9,17 @@
 @import "./landing/FeaturesLanding.css";
 @import "./landing/TrustedStatsLanding.css";
 @import "./landing/FaqCtaLanding.css";
+@import "./landing/LandingFooter.css";
+@import "./landing/LandingLightTheme.css";
+@import "./landing/RecruiterModal.css";
 
 /* ── GLOBAL LAYOUT & RESETS ── */
 * {
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html, body {

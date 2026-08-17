@@ -15,7 +15,7 @@ function HeroMockup() {
             <div className="mockup-logo">
               <img
                 src="/preepx_logo.png"
-                alt="PreePX"
+                alt="PreepX"
                 style={{ height: "60px", objectFit: "contain", marginBottom: "20px", display: "block" }}
               />
             </div>
@@ -148,7 +148,7 @@ function HeroMockup() {
           <div className="floating-header">
             <div className="floating-avatar-wrap">
               <img
-                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop"
                 alt="Aarav Sharma"
                 className="floating-avatar"
               />
