@@ -8,6 +8,15 @@ function HeroMockup() {
         {/* Top-Right Decorative Dot Matrix */}
         <div className="mockup-dots mockup-dots-tr" />
 
+        {/* Mobile Mockup Header */}
+        <div className="mobile-mockup-header">
+          <img
+            src="/preepx_logo.png"
+            alt="PreepX"
+            className="mobile-mockup-logo"
+          />
+        </div>
+
         {/* Main Dashboard Container */}
         <div className="mockup-dashboard">
           {/* Left Sidebar */}

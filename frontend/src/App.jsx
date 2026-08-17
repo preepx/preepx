@@ -76,6 +76,9 @@ const PUBLIC_ROUTES = [
 ];
 const FULLSCREEN_ROUTES = ["/interview-mode", "/interview-setup", "/start-interview", "/feedback", "/objective-exam/take", "/coding-exam", "/assessment"];
 
+const LandingFooter = lazy(() => import("./components/landing/LandingFooter"));
+const RecruiterComingSoonModal = lazy(() => import("./components/landing/RecruiterComingSoonModal"));
+
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements", "/rewards",
@@ -93,6 +96,7 @@ function usesJobsLayout(pathname) {
 
 function LayoutWrapper({ children, landingRole, setLandingRole }) {
   const location = useLocation();
+  const [showRecruiterModal, setShowRecruiterModal] = useState(false);
   const isPublic = PUBLIC_ROUTES.includes(location.pathname);
   const isFullscreen = FULLSCREEN_ROUTES.includes(location.pathname) || location.pathname.startsWith("/assessment/");
   const useSidebar = usesAppLayout(location.pathname);
@@ -105,7 +109,12 @@ function LayoutWrapper({ children, landingRole, setLandingRole }) {
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         {!isAuthPage && <Navbar landingRole={landingRole} setLandingRole={setLandingRole} />}
         <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>{children}</main>
-        {!isAuthPage && !isLandingPage && <Footer landingRole={landingRole} />}
+        {!isAuthPage && !isLandingPage && (
+          <LandingFooter onRecruiterClick={() => setShowRecruiterModal(true)} />
+        )}
+        {showRecruiterModal && (
+          <RecruiterComingSoonModal onClose={() => setShowRecruiterModal(false)} />
+        )}
       </div>
     );
   }

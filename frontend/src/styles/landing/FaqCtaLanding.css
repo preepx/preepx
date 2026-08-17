@@ -410,7 +410,26 @@
 
   .cta-right-visual {
     width: 100%;
-    transform: scale(0.9);
+    transform: scale(1);
+  }
+
+  .cta-center-logo-badge {
+    padding: 3px 10px !important;
+    background: rgba(9, 14, 26, 0.65) !important;
+    backdrop-filter: blur(6px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6), 0 0 10px rgba(99, 102, 241, 0.35) !important;
+  }
+
+  .cta-logo-img {
+    height: 18px !important;
+    max-width: 58px !important;
+  }
+
+  .cta-loop-tag {
+    font-size: 8.5px !important;
+    padding: 3px 8px !important;
+    bottom: 8px !important;
   }
 }
 
@@ -450,5 +469,14 @@
   .cta-right-visual {
     width: 100%;
     transform: scale(1);
+  }
+
+  .cta-center-logo-badge {
+    padding: 2.5px 8px !important;
+  }
+
+  .cta-logo-img {
+    height: 16px !important;
+    max-width: 52px !important;
   }
 }

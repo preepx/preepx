@@ -208,25 +208,107 @@
 }
 
 .circuit-animated-path-cyan {
-  stroke-dasharray: 20, 60;
-  animation: pulseWaveCyan 2.5s linear infinite;
+  stroke-dasharray: 35 150;
+  stroke-width: 3px !important;
+  animation: pulseWaveCyan 2.2s linear infinite;
 }
 
 .circuit-animated-path-purple {
-  stroke-dasharray: 20, 60;
-  animation: pulseWavePurple 2.5s linear infinite;
+  stroke-dasharray: 35 150;
+  stroke-width: 3px !important;
+  animation: pulseWavePurple 2.2s linear infinite;
 }
 
 @keyframes pulseWaveCyan {
-  0% { stroke-dashoffset: 80; opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { stroke-dashoffset: -80; opacity: 0.2; }
+  0% { stroke-dashoffset: 185; opacity: 0.2; }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.2; }
 }
 
 @keyframes pulseWavePurple {
-  0% { stroke-dashoffset: -80; opacity: 0.2; }
-  50% { opacity: 1; }
-  100% { stroke-dashoffset: 80; opacity: 0.2; }
+  0% { stroke-dashoffset: 185; opacity: 0.2; }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0.2; }
+}
+
+.mobile-circuit-traces {
+  display: none;
+}
+
+/* Animated Circuit Flow Waves on Mobile */
+.mobile-circuit-path-cyan {
+  stroke-dasharray: 25 75;
+  animation: pulseFlowDown 2.2s linear infinite;
+}
+
+.mobile-circuit-path-purple {
+  stroke-dasharray: 25 75;
+  animation: pulseFlowDown 2.2s linear infinite;
+}
+
+.mobile-circuit-dot {
+  animation: dotPulseGlow 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes pulseFlowDown {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dotPulseGlow {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
+/* Pulsing Radiating Sonar Waves */
+.ecosystem-sonar-wave {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.75);
+  animation: sonarWave 3.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.ecosystem-sonar-wave-2 {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(168, 85, 247, 0.75);
+  animation: sonarWave 3.2s cubic-bezier(0.1, 0.8, 0.3, 1) infinite 1.6s;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes sonarWave {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.9;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+  }
+  60% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+    box-shadow: 0 0 35px rgba(168, 85, 247, 0);
+  }
 }
 
 .ecosystem-orb-wrapper {
@@ -343,64 +425,53 @@
   .journeys-unified-card {
     flex-direction: column;
     align-items: center;
-    gap: 36px;
-    padding: 36px 24px;
+    gap: 32px;
+    padding: 32px 20px 24px;
   }
 
-  .journey-col {
+  .journey-candidate-col {
+    order: 1;
     max-width: 100%;
     width: 100%;
   }
 
   .journey-center-hub {
-    margin: 10px 0;
-    transform: scale(0.95);
-  }
-}
-
-@media (max-width: 768px) {
-  .prepx-journeys {
-    padding: 20px 14px;
-  }
-
-  .prepx-journeys-title {
-    font-size: 26px;
-    margin-bottom: 8px;
+    order: 2;
+    width: 100%;
+    height: 270px;
+    margin: 8px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .journeys-unified-card {
-    padding: 20px 14px;
-    border-radius: 20px;
-    gap: 16px;
+  .journey-recruiter-col {
+    order: 3;
+    max-width: 100%;
+    width: 100%;
   }
 
   .circuit-svg-container {
     display: none;
   }
 
-  .journey-center-hub {
-    width: 100%;
-    height: auto;
-    min-height: auto;
-    margin: 8px 0;
-    padding: 14px 0;
+  .mobile-circuit-traces {
     display: flex;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     align-items: center;
     justify-content: center;
-    position: relative;
+    pointer-events: none;
+    z-index: 1;
   }
 
-  /* Connecting Vertical Pulse Lines on Mobile */
-  .journey-center-hub::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 2px;
-    transform: translateX(-50%);
-    background: linear-gradient(180deg, rgba(56, 189, 248, 0.6) 0%, rgba(99, 102, 241, 0.4) 50%, rgba(192, 132, 252, 0.6) 100%);
-    z-index: 1;
+  .mobile-circuit-svg {
+    width: 240px;
+    height: 280px;
+    overflow: visible;
   }
 
   .ecosystem-orb-wrapper {
@@ -409,33 +480,67 @@
   }
 
   .ecosystem-orb-glow {
-    width: 130px;
-    height: 130px;
-  }
-
-  .ecosystem-orb-ring {
-    width: 120px;
-    height: 120px;
-  }
-
-  .ecosystem-orb-ring-outer {
     width: 140px;
     height: 140px;
   }
 
+  .ecosystem-orb-ring {
+    width: 130px;
+    height: 130px;
+  }
+
+  .ecosystem-orb-ring-outer {
+    width: 150px;
+    height: 150px;
+  }
+
   .ecosystem-orb-card {
-    width: 105px;
-    height: 105px;
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #0f1629 0%, #060913 100%);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(56, 189, 248, 0.4), 0 0 25px rgba(168, 85, 247, 0.4);
+    position: relative;
   }
 
   .ecosystem-logo-img {
-    height: 36px;
-    max-width: 85px;
+    height: 40px;
+    max-width: 90px;
     margin-bottom: 2px;
   }
 
   .ecosystem-tagline {
     font-size: 8.5px;
+    color: #f1f5f9;
+    font-weight: 700;
+    font-style: italic;
+  }
+}
+
+@media (max-width: 768px) {
+  .prepx-journeys {
+    padding: 16px 12px 24px;
+  }
+
+  .prepx-journeys-title {
+    font-size: 25px;
+    margin-bottom: 8px;
+  }
+
+  .journeys-unified-card {
+    padding: 20px 14px 16px;
+    border-radius: 20px;
+    gap: 20px;
+  }
+
+  .journey-center-hub {
+    height: 260px;
+    margin: 10px 0 0 0;
+  }
+
+  .mobile-circuit-svg {
+    width: 220px;
+    height: 260px;
   }
 
   .journey-step-item {
@@ -459,11 +564,11 @@
   }
 
   .journey-role-title {
-    font-size: 20px;
+    font-size: 19px;
   }
 
   .journey-role-sub {
-    font-size: 11.5px;
-    margin-bottom: 14px;
+    font-size: 11px;
+    margin-bottom: 12px;
   }
 }
