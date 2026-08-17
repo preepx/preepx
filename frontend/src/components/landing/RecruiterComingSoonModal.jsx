@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { X, Sparkles, Briefcase, Zap, CheckCircle2, ShieldCheck, ArrowRight, Bell } from "lucide-react";
 import "@/styles/landing/RecruiterModal.css";
 
-function RecruiterComingSoonModal({ isOpen, onClose }) {
+function RecruiterComingSoonModal({ isOpen = true, onClose }) {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 

@@ -10,6 +10,7 @@ import {
   Building, Globe, X, ArrowLeft, BarChart3, Briefcase
 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
+import RecruiterComingSoonModal from "@/components/landing/RecruiterComingSoonModal";
 import "@/styles/ModernAuth.css";
 
 const EMPTY_CANDIDATE_REG = {
@@ -38,6 +39,7 @@ function Auth({ defaultRole }) {
   const isRecruiterPath = location.pathname.includes("/recruiter");
   const initialRole = defaultRole || (isRecruiterPath || queryRole === "recruiter" ? "recruiter" : "candidate");
   const [activeRole, setActiveRole] = useState(initialRole);
+  const [showRecruiterComingSoon, setShowRecruiterComingSoon] = useState(false);
 
   // Screen: "login" | "register" | "reg-otp" | "forgot-email" | "forgot-otp" | "forgot-newpass"
   const [screen, setScreen] = useState("login");
@@ -79,7 +81,7 @@ function Auth({ defaultRole }) {
   // Sync role state from props/query
   useEffect(() => {
     if (queryRole === "recruiter" || isRecruiterPath) {
-      setActiveRole("recruiter");
+      setShowRecruiterComingSoon(true);
     } else if (queryRole === "candidate") {
       setActiveRole("candidate");
     }
@@ -111,10 +113,14 @@ function Auth({ defaultRole }) {
   const resetOtp = () => setOtp(["", "", "", "", "", ""]);
 
   const handleRoleChange = (role) => {
+    if (role === "recruiter") {
+      setShowRecruiterComingSoon(true);
+      return;
+    }
     setActiveRole(role);
     setScreen("login");
     resetOtp();
-    const targetUrl = role === "recruiter" ? "/auth?role=recruiter" : "/auth?role=candidate";
+    const targetUrl = "/auth?role=candidate";
     navigate(targetUrl, { replace: true });
   };
 
@@ -496,7 +502,11 @@ function Auth({ defaultRole }) {
                 </div>
               </div>
 
-              <div className="auth-prop-card">
+              <div
+                className="auth-prop-card"
+                style={{ cursor: "pointer" }}
+                onClick={() => setShowRecruiterComingSoon(true)}
+              >
                 <div className="auth-prop-icon recruiter-icon">
                   <Briefcase size={17} />
                 </div>
@@ -1114,6 +1124,13 @@ function Auth({ defaultRole }) {
           )}
         </div>
       </div>
+
+      {showRecruiterComingSoon && (
+        <RecruiterComingSoonModal
+          isOpen={showRecruiterComingSoon}
+          onClose={() => setShowRecruiterComingSoon(false)}
+        />
+      )}
     </div>
   );
 }
