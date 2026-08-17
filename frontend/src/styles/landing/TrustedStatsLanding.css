@@ -1,0 +1,136 @@
+/* ═══════════════════════════════════════════════════════════
+   TRUSTED BY & STATS SECTION STYLES
+   PreepX · AI Interview Platform
+═══════════════════════════════════════════════════════════ */
+
+/* ── TRUSTED BY SECTION ── */
+.prepx-trusted {
+  padding: 10px 24px 25px;
+}
+
+.trusted-card-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(165deg, #0d1322 0%, #060a14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 22px 28px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.trusted-header-text {
+  font-size: 13px;
+  color: #8e9cb2;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+
+.company-logos-wrapper {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.company-logos {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  width: max-content;
+  animation: scroll-x 45s linear infinite;
+  padding-left: 60px;
+}
+
+@keyframes scroll-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 30px)); }
+}
+
+.company-item-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  cursor: default;
+  opacity: 0.85;
+}
+
+.company-item-img:hover {
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* ── STATS SECTION ── */
+.prepx-stats {
+  padding: 10px 24px 35px;
+}
+
+.stats-unified-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(165deg, #0d1322 0%, #060a14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 30px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.stat-card-col {
+  flex: 1;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.stat-num {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+.stat-blue .stat-num { color: #38bdf8; }
+.stat-cyan .stat-num { color: #22d3ee; }
+.stat-amber .stat-num { color: #fbbf24; }
+.stat-pink .stat-num { color: #f43f5e; }
+.stat-sky .stat-num { color: #60a5fa; }
+
+.stat-txt {
+  font-size: 12px;
+  color: #8e9cb2;
+  font-weight: 500;
+  margin: 0;
+}
+
+.stat-col-divider {
+  width: 1px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.07);
+  flex-shrink: 0;
+}
+
+/* Responsive Stats */
+@media (max-width: 768px) {
+  .stats-unified-card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 24px 16px;
+  }
+
+  .stat-col-divider {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .stats-unified-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

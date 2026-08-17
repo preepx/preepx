@@ -1,0 +1,134 @@
+/* ═══════════════════════════════════════════════════════════
+   FEATURES SECTION STYLES
+   PreepX · AI Interview Platform
+═══════════════════════════════════════════════════════════ */
+
+.prepx-features {
+  padding: 30px 24px 30px;
+}
+
+.prepx-features-title {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.features-grid-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.features-grid-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.prepx-feature-card {
+  background: linear-gradient(165deg, #0d1322 0%, #060a14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 22px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all 0.25s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.prepx-feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6);
+}
+
+.feature-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+/* Feature Colors */
+.feat-blue .feature-icon-box {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.2);
+}
+
+.feat-cyan .feature-icon-box {
+  background: rgba(20, 184, 166, 0.12);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  color: #2dd4bf;
+  box-shadow: 0 0 14px rgba(20, 184, 166, 0.2);
+}
+
+.feat-amber .feature-icon-box {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.2);
+}
+
+.feat-purple .feature-icon-box {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  color: #c084fc;
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.2);
+}
+
+.feat-pink .feature-icon-box {
+  background: rgba(236, 72, 153, 0.12);
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  color: #f472b6;
+  box-shadow: 0 0 14px rgba(236, 72, 153, 0.2);
+}
+
+.feat-green .feature-icon-box {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.2);
+}
+
+.feature-card-title {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.feature-card-desc {
+  font-size: 11px;
+  color: #8e9cb2;
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Responsive Grid */
+@media (max-width: 1100px) {
+  .features-grid-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .features-grid-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .features-grid-row {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,285 @@
+/* ═══════════════════════════════════════════════════════════
+   JOURNEYS SECTION STYLES
+   PreepX · AI Interview Platform
+═══════════════════════════════════════════════════════════ */
+
+.prepx-journeys {
+  padding: 30px 24px 30px;
+}
+
+.journeys-section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 28px;
+}
+
+.prepx-journeys-title {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+.journeys-unified-card {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(165deg, #090e1c 0%, #050811 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 28px;
+  padding: 44px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+}
+
+.journeys-ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glow-cyan {
+  left: -100px;
+  top: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.15), transparent 70%);
+  filter: blur(50px);
+}
+
+.glow-purple {
+  right: -100px;
+  bottom: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.15), transparent 70%);
+  filter: blur(50px);
+}
+
+.journey-col {
+  flex: 1;
+  max-width: 440px;
+  position: relative;
+  z-index: 3;
+}
+
+.journey-col-header {
+  margin-bottom: 20px;
+}
+
+.journey-role-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+
+.candidate-text {
+  color: #38bdf8;
+}
+
+.recruiter-text {
+  color: #c084fc;
+}
+
+.journey-role-sub {
+  font-size: 13px;
+  color: #8e9cb2;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.journey-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.journey-step-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 12px 14px;
+  transition: all 0.2s ease;
+}
+
+.journey-step-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateX(3px);
+}
+
+.journey-step-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.candidate-icon-box {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #38bdf8;
+}
+
+.recruiter-icon-box {
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid rgba(168, 85, 247, 0.25);
+  color: #c084fc;
+}
+
+.journey-step-text h4 {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.journey-step-text p {
+  font-size: 11px;
+  color: #8e9cb2;
+  margin: 0;
+}
+
+/* ── CENTER ECOSYSTEM & CIRCUIT VISUAL ── */
+.journey-center-hub {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 350px;
+  flex-shrink: 0;
+  z-index: 4;
+}
+
+.circuit-svg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.circuit-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.circuit-animated-path-cyan {
+  stroke-dasharray: 20, 60;
+  animation: pulseWaveCyan 2.5s linear infinite;
+}
+
+.circuit-animated-path-purple {
+  stroke-dasharray: 20, 60;
+  animation: pulseWavePurple 2.5s linear infinite;
+}
+
+@keyframes pulseWaveCyan {
+  0% { stroke-dashoffset: 80; opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { stroke-dashoffset: -80; opacity: 0.2; }
+}
+
+@keyframes pulseWavePurple {
+  0% { stroke-dashoffset: -80; opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { stroke-dashoffset: 80; opacity: 0.2; }
+}
+
+.ecosystem-orb-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.ecosystem-orb-glow {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent 70%);
+  filter: blur(15px);
+}
+
+.ecosystem-orb-ring {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  animation: rotateClockwise 20s linear infinite;
+}
+
+.ecosystem-orb-card {
+  position: relative;
+  width: 105px;
+  height: 105px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #182238 0%, #0c1220 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+.ecosystem-logo-img {
+  height: 34px;
+  max-width: 80px;
+  object-fit: contain;
+  margin-bottom: 2px;
+}
+
+.ecosystem-tagline {
+  font-size: 8px;
+  color: #cbd5e1;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
+}
+
+@keyframes rotateClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .journeys-unified-card {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 36px 24px;
+  }
+
+  .journey-col {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .journey-center-hub {
+    margin: 10px 0;
+    transform: scale(0.95);
+  }
+}
