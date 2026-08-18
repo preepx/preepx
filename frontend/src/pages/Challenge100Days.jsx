@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import {
   Flame, Lock, Trophy, CheckCircle2, ChevronRight, ChevronLeft,
   Code2, TrendingUp, Zap, Target, Brain, Sparkles, Gem,
-  Calendar, Clock, Star, Flag, Play, Award
+  Calendar, Clock, Star, Flag, Play, Award, ArrowRight,
+  Crown, Rocket, Shield, Swords
 } from "lucide-react";
 import API from "@/utils/api";
 import "@/styles/Challenge100Days.css";
@@ -11,10 +12,10 @@ import "@/styles/Challenge100Days.css";
 const TOTAL_DAYS = 100;
 
 const FEATURES = [
-  { icon: Code2, label: "Daily Problems" },
-  { icon: TrendingUp, label: "Track Progress" },
-  { icon: Zap, label: "Earn XP & Rewards" },
-  { icon: Target, label: "Build Consistency" },
+  { icon: Code2, label: "Daily Problems", desc: "Curated DSA questions" },
+  { icon: TrendingUp, label: "Track Progress", desc: "Visual analytics" },
+  { icon: Zap, label: "Earn XP & Rewards", desc: "Unlock achievements" },
+  { icon: Target, label: "Build Consistency", desc: "Daily streaks" },
 ];
 
 const BOTTOM_FEATURES = [
@@ -25,10 +26,10 @@ const BOTTOM_FEATURES = [
 ];
 
 const PHASES = [
-  { upTo: 25, name: "Foundation", desc: "Arrays, Strings & Hash Maps" },
-  { upTo: 50, name: "Core DSA", desc: "Trees, Graphs & Recursion" },
-  { upTo: 75, name: "Advanced", desc: "Dynamic Programming & Greedy" },
-  { upTo: 100, name: "Mastery", desc: "Hard Problems & Interview Prep" },
+  { upTo: 25, name: "Foundation", desc: "Arrays, Strings & Hash Maps", icon: Shield, color: "#6366f1" },
+  { upTo: 50, name: "Core DSA", desc: "Trees, Graphs & Recursion", icon: Swords, color: "#a78bfa" },
+  { upTo: 75, name: "Advanced", desc: "DP & Greedy Algorithms", icon: Rocket, color: "#c084fc" },
+  { upTo: 100, name: "Mastery", desc: "Hard Problems & Interview", icon: Crown, color: "#f59e0b" },
 ];
 
 const MILESTONES = [
@@ -44,17 +45,37 @@ const DIFFICULTY_XP = { easy: 5, medium: 10, hard: 15 };
 function getPhase(day) {
   return PHASES.find((p) => day <= p.upTo) || PHASES[PHASES.length - 1];
 }
+function getPhaseIndex(day) {
+  return PHASES.findIndex((p) => day <= p.upTo);
+}
 
+/* ── Animated Counter ── */
+function AnimatedNumber({ value, duration = 1200 }) {
+  const [display, setDisplay] = useState(0);
+  useEffect(() => {
+    let start = 0;
+    const step = Math.ceil(value / (duration / 16));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= value) { setDisplay(value); clearInterval(timer); }
+      else setDisplay(start);
+    }, 16);
+    return () => clearInterval(timer);
+  }, [value, duration]);
+  return <>{display}</>;
+}
+
+/* ── Circular Progress ── */
 function CircularProgress({ percent }) {
-  const size = 128;
-  const stroke = 8;
-  const radius = 48;
+  const size = 140;
+  const stroke = 10;
+  const radius = 52;
   const normalizedRadius = radius - stroke / 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const offset = circumference - (percent / 100) * circumference;
 
   return (
-    <div className="challenge-progress-ring-wrap">
+    <div className="c100-progress-ring-wrap">
       <svg width={size} height={size} aria-hidden="true">
         <defs>
           <linearGradient id="c100ProgressGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -62,10 +83,14 @@ function CircularProgress({ percent }) {
             <stop offset="50%" stopColor="#a78bfa" />
             <stop offset="100%" stopColor="#c084fc" />
           </linearGradient>
+          <filter id="c100ProgressGlow">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
         </defs>
         <circle
           cx={size / 2} cy={size / 2} r={normalizedRadius}
-          fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth={stroke}
+          fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth={stroke}
         />
         <circle
           cx={size / 2} cy={size / 2} r={normalizedRadius}
@@ -73,94 +98,32 @@ function CircularProgress({ percent }) {
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
-          style={{ transition: "stroke-dashoffset 1s cubic-bezier(0.22, 1, 0.36, 1)" }}
+          filter="url(#c100ProgressGlow)"
+          style={{ transition: "stroke-dashoffset 1.5s cubic-bezier(0.22, 1, 0.36, 1)" }}
         />
       </svg>
-      <div className="challenge-progress-percent">
-        <span className="challenge-progress-percent-value">{percent}%</span>
-        <span className="challenge-progress-percent-label">Complete</span>
+      <div className="c100-progress-center">
+        <span className="c100-progress-value">{percent}%</span>
+        <span className="c100-progress-label">Complete</span>
       </div>
     </div>
   );
 }
 
-function MountainSVG() {
-  return (
-    <div className="challenge-hero-mountain" aria-hidden="true">
-      <svg viewBox="0 0 1200 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="c100Mtn" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#1a113d" />
-            <stop offset="100%" stopColor="#080914" />
-          </linearGradient>
-          <linearGradient id="c100Path" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#6366f1" />
-            <stop offset="50%" stopColor="#a78bfa" />
-            <stop offset="100%" stopColor="#f59e0b" />
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* Mountain Silhouette */}
-        <path d="M0,200 L150,110 L300,160 L450,80 L600,120 L750,40 L900,110 L1050,30 L1200,90 L1200,200 Z" fill="url(#c100Mtn)" opacity="0.8" />
-        <path d="M0,200 L200,140 L400,180 L650,90 L850,150 L1100,50 L1200,120 L1200,200 Z" fill="rgba(8,9,20,0.5)" />
-
-        {/* Glowing Path */}
-        <path
-          d="M 120 170 Q 280 140 450 150 Q 600 100 750 90 Q 900 60 1050 30"
-          fill="none" stroke="url(#c100Path)" strokeWidth="3"
-          strokeLinecap="round" filter="url(#glow)"
-          strokeDasharray="8 6"
-        />
-
-        {/* Markers */}
-        <g transform="translate(450, 150)">
-          <circle cx="0" cy="0" r="4" fill="#a78bfa" filter="url(#glow)" />
-          <rect x="-24" y="-30" width="48" height="20" rx="4" fill="#1e1b4b" stroke="#7c3aed" strokeWidth="1" />
-          <text x="0" y="-16" fill="#fff" fontSize="10" fontWeight="bold" textAnchor="middle">DAY 1</text>
-        </g>
-
-        <g transform="translate(600, 110)">
-          <circle cx="0" cy="0" r="4" fill="#a78bfa" filter="url(#glow)" />
-          <rect x="-24" y="-30" width="48" height="20" rx="4" fill="#1e1b4b" stroke="#7c3aed" strokeWidth="1" />
-          <text x="0" y="-16" fill="#fff" fontSize="10" fontWeight="bold" textAnchor="middle">DAY 25</text>
-        </g>
-
-        <g transform="translate(750, 90)">
-          <circle cx="0" cy="0" r="4" fill="#c084fc" filter="url(#glow)" />
-          <rect x="-24" y="-30" width="48" height="20" rx="4" fill="#1e1b4b" stroke="#9333ea" strokeWidth="1" />
-          <text x="0" y="-16" fill="#fff" fontSize="10" fontWeight="bold" textAnchor="middle">DAY 50</text>
-        </g>
-
-        <g transform="translate(1050, 30)">
-          <circle cx="0" cy="0" r="6" fill="#f59e0b" filter="url(#glow)" />
-          <rect x="-24" y="-36" width="48" height="20" rx="4" fill="#451a03" stroke="#f59e0b" strokeWidth="1" />
-          <text x="0" y="-22" fill="#fff" fontSize="10" fontWeight="bold" textAnchor="middle">DAY 100</text>
-          <path d="M0,-8 L0,0 M-5,-8 L5,-8 M-3,-12 L3,-12" stroke="#f59e0b" strokeWidth="1.5" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
+/* ── Skeleton ── */
 function SkeletonLoader() {
   return (
-    <div className="challenge-skeleton-page">
-      <div className="challenge-skeleton-hero" />
-      <div className="challenge-skeleton-stats">
-        {[1, 2, 3, 4].map((i) => <div key={i} className="challenge-skeleton-stat" />)}
+    <div className="c100-skeleton">
+      <div className="c100-skeleton-hero" />
+      <div className="c100-skeleton-stats">
+        {[1, 2, 3, 4].map((i) => <div key={i} className="c100-skeleton-stat" />)}
       </div>
-      <div className="challenge-skeleton-journey" />
+      <div className="c100-skeleton-journey" />
     </div>
   );
 }
 
+/* ── Main Component ── */
 const Challenge100Days = () => {
   const [challengeData, setChallengeData] = useState([]);
   const [progress, setProgress] = useState({ currentDay: 1, completedDays: [] });
@@ -197,6 +160,7 @@ const Challenge100Days = () => {
   const progressPercent = Math.min(100, Math.round((completedCount / TOTAL_DAYS) * 100));
   const daysRemaining = TOTAL_DAYS - completedCount;
   const currentPhase = getPhase(activeDay);
+  const currentPhaseIdx = getPhaseIndex(activeDay);
 
   const visibleDays = useMemo(() => {
     const fromApi = challengeData.map((d) => d.day).filter((d) => d < 100);
@@ -222,71 +186,90 @@ const Challenge100Days = () => {
 
   const scrollJourney = (dir) => {
     if (!scrollRef.current) return;
-    scrollRef.current.scrollBy({ left: dir * 240, behavior: "smooth" });
+    scrollRef.current.scrollBy({ left: dir * 260, behavior: "smooth" });
   };
 
   if (loading) return <SkeletonLoader />;
 
-  const unlockHint = activeDay < TOTAL_DAYS
-    ? `Complete Day ${activeDay} to unlock Day ${activeDay + 1}`
-    : "Congratulations — you've completed the challenge!";
-
   return (
-    <div className="challenge-100-page">
-      <div className="challenge-banner-wrap">
-        <img src="/chealgebanner.png" alt="100 Days Challenge" className="challenge-banner-img" />
+    <div className="c100-page">
+      {/* Ambient background effects */}
+      <div className="c100-ambient" aria-hidden="true">
+        <div className="c100-orb c100-orb-1" />
+        <div className="c100-orb c100-orb-2" />
+        <div className="c100-orb c100-orb-3" />
       </div>
 
-      {/* Stats */}
-      <section className="challenge-stats" aria-label="Challenge statistics">
-        <div className="challenge-stat-card">
-          <div className="challenge-stat-top">
-            <div className="challenge-stat-icon purple"><CheckCircle2 size={18} /></div>
+      {/* ─── Banner ─── */}
+      <div className="c100-banner-wrap">
+        <img src="/chealgebanner.png" alt="100 Days Challenge" className="c100-banner-img" />
+      </div>
+
+      {/* ─── Stats Strip ─── */}
+      <section className="c100-stats" aria-label="Challenge statistics">
+        {[
+          { icon: CheckCircle2, value: completedCount, label: "Days Completed", color: "purple", accent: "#818cf8" },
+          { icon: Flame, value: streak, label: "Day Streak", color: "orange", accent: "#fb923c" },
+          { icon: Calendar, value: daysRemaining, label: "Days Remaining", color: "green", accent: "#34d399" },
+          { icon: Star, value: activeDay, label: "Current Day", color: "gold", accent: "#fbbf24" },
+        ].map(({ icon: Icon, value, label, color, accent }) => (
+          <div key={label} className="c100-stat-card">
+            <div className="c100-stat-glow" style={{ background: accent }} />
+            <div className={`c100-stat-icon ${color}`}><Icon size={20} /></div>
+            <div className="c100-stat-value"><AnimatedNumber value={value} /></div>
+            <div className="c100-stat-label">{label}</div>
           </div>
-          <div className="challenge-stat-value">{completedCount}</div>
-          <div className="challenge-stat-label">Days Completed</div>
-        </div>
-        <div className="challenge-stat-card">
-          <div className="challenge-stat-top">
-            <div className="challenge-stat-icon orange"><Flame size={18} /></div>
-          </div>
-          <div className="challenge-stat-value">{streak}</div>
-          <div className="challenge-stat-label">Day Streak</div>
-        </div>
-        <div className="challenge-stat-card">
-          <div className="challenge-stat-top">
-            <div className="challenge-stat-icon green"><Calendar size={18} /></div>
-          </div>
-          <div className="challenge-stat-value">{daysRemaining}</div>
-          <div className="challenge-stat-label">Days Remaining</div>
-        </div>
-        <div className="challenge-stat-card">
-          <div className="challenge-stat-top">
-            <div className="challenge-stat-icon gold"><Star size={18} /></div>
-          </div>
-          <div className="challenge-stat-value">{activeDay}</div>
-          <div className="challenge-stat-label">Current Day</div>
-        </div>
+        ))}
       </section>
 
-      {/* Milestone progress */}
-      <section className="challenge-milestone" aria-label="Overall milestone progress">
-        <div className="challenge-milestone-header">
-          <h3>Roadmap Progress</h3>
-          <span className="challenge-milestone-phase">
-            Phase: {currentPhase.name} — {currentPhase.desc}
-          </span>
+      {/* ─── Phase Roadmap ─── */}
+      <section className="c100-roadmap" aria-label="Phase roadmap">
+        <div className="c100-roadmap-header">
+          <div>
+            <h3><Rocket size={18} /> Phase Roadmap</h3>
+            <p>Your journey through 4 phases of DSA mastery</p>
+          </div>
+          <div className="c100-roadmap-current-phase">
+            <span className="c100-phase-indicator" style={{ background: currentPhase.color }} />
+            Currently in: <strong>{currentPhase.name}</strong>
+          </div>
         </div>
-        <div className="challenge-milestone-track">
-          <div className="challenge-milestone-fill" style={{ width: `${progressPercent}%` }} />
-          <div className="challenge-milestone-markers">
+        <div className="c100-roadmap-phases">
+          {PHASES.map((phase, idx) => {
+            const PhaseIcon = phase.icon;
+            const isActive = idx === currentPhaseIdx;
+            const isDone = currentPhaseIdx > idx;
+            return (
+              <div key={phase.name} className={`c100-phase-card ${isActive ? "active" : ""} ${isDone ? "done" : ""}`}>
+                {idx < PHASES.length - 1 && <div className={`c100-phase-connector ${isDone ? "done" : ""}`} />}
+                <div className="c100-phase-icon-wrap" style={{ borderColor: phase.color + "55", color: phase.color }}>
+                  {isDone ? <CheckCircle2 size={22} /> : <PhaseIcon size={22} />}
+                </div>
+                <div className="c100-phase-info">
+                  <span className="c100-phase-name">{phase.name}</span>
+                  <span className="c100-phase-range">Day 1–{phase.upTo}</span>
+                  <span className="c100-phase-desc">{phase.desc}</span>
+                </div>
+                {isActive && <span className="c100-phase-active-badge">Current</span>}
+                {isDone && <span className="c100-phase-done-badge"><CheckCircle2 size={12} /> Done</span>}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Milestone progress bar */}
+        <div className="c100-milestone-track">
+          <div className="c100-milestone-fill" style={{ width: `${progressPercent}%` }} />
+          <div className="c100-milestone-markers">
             {MILESTONES.map(({ day, label }) => {
               const reached = completedCount >= day || (day === 1 && completedCount >= 0);
               const isFinal = day === 100;
               return (
-                <div key={day} className="challenge-milestone-dot-wrap">
-                  <div className={`challenge-milestone-dot ${reached ? "reached" : ""} ${isFinal ? "final" : ""}`} />
-                  <span className={`challenge-milestone-dot-label ${reached ? "reached" : ""}`}>{label}</span>
+                <div key={day} className="c100-milestone-dot-wrap">
+                  <div className={`c100-milestone-dot ${reached ? "reached" : ""} ${isFinal ? "final" : ""}`}>
+                    {reached && <CheckCircle2 size={8} />}
+                  </div>
+                  <span className={`c100-milestone-label ${reached ? "reached" : ""}`}>{label}</span>
                 </div>
               );
             })}
@@ -294,35 +277,35 @@ const Challenge100Days = () => {
         </div>
       </section>
 
-      {/* Journey */}
+      {/* ─── Journey / Day Cards ─── */}
       {challengeData.length === 0 ? (
-        <div className="challenge-empty">
-          <div className="challenge-empty-icon"><Code2 size={28} /></div>
+        <div className="c100-empty">
+          <div className="c100-empty-icon"><Code2 size={32} /></div>
           <h3>Challenge content coming soon</h3>
           <p>Daily coding problems are being prepared. Check back shortly to begin your 100-day journey.</p>
         </div>
       ) : (
-        <section className="challenge-journey" aria-label="Daily challenge journey">
-          <div className="challenge-journey-top">
-            <div className="challenge-journey-header">
+        <section className="c100-journey" aria-label="Daily challenge journey">
+          <div className="c100-journey-top">
+            <div className="c100-journey-header">
               <h2><Trophy size={22} color="#f59e0b" /> The Journey</h2>
               <p>Complete each day sequentially to unlock the next challenge.</p>
             </div>
-            <div className="challenge-journey-nav">
-              <button type="button" className="challenge-nav-btn" onClick={() => scrollJourney(-1)} aria-label="Scroll left">
+            <div className="c100-journey-nav">
+              <button type="button" className="c100-nav-btn" onClick={() => scrollJourney(-1)} aria-label="Scroll left">
                 <ChevronLeft size={18} />
               </button>
-              <button type="button" className="challenge-nav-btn" onClick={() => scrollJourney(1)} aria-label="Scroll right">
+              <button type="button" className="c100-nav-btn" onClick={() => scrollJourney(1)} aria-label="Scroll right">
                 <ChevronRight size={18} />
               </button>
             </div>
           </div>
 
-          <div className="challenge-journey-scroll" ref={scrollRef}>
-            <div className="challenge-journey-track">
+          <div className="c100-journey-scroll" ref={scrollRef}>
+            <div className="c100-journey-track">
               {/* Timeline nodes */}
-              <div className="challenge-timeline">
-                <div className="challenge-timeline-line" />
+              <div className="c100-timeline">
+                <div className="c100-timeline-line" />
                 {visibleDays.map((dayNum) => {
                   const isFinal = dayNum === 100;
                   const unlocked = isUnlocked(dayNum);
@@ -331,20 +314,18 @@ const Challenge100Days = () => {
                   const allPrevDone = completedCount >= 99;
 
                   return (
-                    <div key={`tl-${dayNum}`} className={`challenge-timeline-step ${isFinal ? "wide" : ""}`}>
-                      <span className={`challenge-step-badge ${inProgress ? "in-progress" : completed ? "completed-tag" : "empty"
-                        }`}>
+                    <div key={`tl-${dayNum}`} className={`c100-timeline-step ${isFinal ? "wide" : ""}`}>
+                      <span className={`c100-step-badge ${inProgress ? "in-progress" : completed ? "completed-tag" : "empty"}`}>
                         {inProgress ? "IN PROGRESS" : completed ? "COMPLETED" : ""}
                       </span>
 
                       {isFinal ? (
-                        <div className={`challenge-step-circle final ${allPrevDone ? "" : "locked-final"}`}>
+                        <div className={`c100-step-circle final ${allPrevDone ? "" : "locked-final"}`}>
                           <span>100</span>
                           <Trophy size={15} />
                         </div>
                       ) : (
-                        <div className={`challenge-step-circle ${completed ? "completed" : unlocked ? "active" : "locked"
-                          }`}>
+                        <div className={`c100-step-circle ${completed ? "completed" : unlocked ? "active" : "locked"}`}>
                           {completed ? <CheckCircle2 size={22} /> : unlocked ? dayNum : <Lock size={16} />}
                         </div>
                       )}
@@ -354,7 +335,7 @@ const Challenge100Days = () => {
               </div>
 
               {/* Day cards */}
-              <div className="challenge-cards-row">
+              <div className="c100-cards-row">
                 {visibleDays.map((dayNum) => {
                   const isFinal = dayNum === 100;
                   const dayObj = getDayData(dayNum);
@@ -368,18 +349,18 @@ const Challenge100Days = () => {
                   if (isFinal) {
                     const allDone = completedCount >= 99;
                     return (
-                      <div key={`card-${dayNum}`} className="challenge-day-card wide final">
-                        <div className="challenge-card-header">
-                          <span className="challenge-card-day-label">Day 100</span>
+                      <div key={`card-${dayNum}`} className="c100-day-card wide final">
+                        <div className="c100-card-header">
+                          <span className="c100-card-day-label">Day 100</span>
                           <Flag size={14} color="#fbbf24" />
                         </div>
-                        <div className="challenge-final-icon"><Gem size={24} /></div>
-                        <h3 className="challenge-card-title">The Final Day</h3>
-                        <p className="challenge-card-desc">
+                        <div className="c100-final-icon"><Gem size={24} /></div>
+                        <h3 className="c100-card-title">The Grand Finale</h3>
+                        <p className="c100-card-desc">
                           Complete all 99 days to unlock the grand finale.
                           Earn exclusive rewards and the 100 Days badge.
                         </p>
-                        <div className="challenge-final-reward">
+                        <div className="c100-final-reward">
                           <Trophy size={14} />
                           {allDone ? "Ready to claim your reward" : "Grand Reward Locked"}
                         </div>
@@ -390,55 +371,55 @@ const Challenge100Days = () => {
                   return (
                     <div
                       key={`card-${dayNum}`}
-                      className={`challenge-day-card ${inProgress ? "active" : ""} ${completed ? "completed-card" : ""} ${!unlocked ? "locked" : ""}`}
+                      className={`c100-day-card ${inProgress ? "active" : ""} ${completed ? "completed-card" : ""} ${!unlocked ? "locked" : ""}`}
                     >
-                      <div className="challenge-card-header">
-                        <span className="challenge-card-day-label">Day {dayNum}</span>
+                      <div className="c100-card-header">
+                        <span className="c100-card-day-label">Day {dayNum}</span>
                         {problem?.difficulty && (
-                          <span className={`challenge-difficulty ${diff}`}>{problem.difficulty}</span>
+                          <span className={`c100-difficulty ${diff}`}>{problem.difficulty}</span>
                         )}
                       </div>
 
                       {!unlocked ? (
-                        <div className="challenge-card-lock-msg">
-                          <div className="challenge-lock-icon-wrap"><Lock size={20} /></div>
+                        <div className="c100-card-lock-msg">
+                          <div className="c100-lock-icon-wrap"><Lock size={20} /></div>
                           <span>Complete Day {dayNum - 1} to unlock</span>
                         </div>
                       ) : (
                         <>
-                          <h3 className="challenge-card-title">
+                          <h3 className="c100-card-title">
                             {problem?.title || `Challenge Day ${dayNum}`}
                           </h3>
 
                           {problem?.topics?.length > 0 && (
-                            <div className="challenge-card-tags">
+                            <div className="c100-card-tags">
                               {problem.topics.slice(0, 2).map((t) => (
-                                <span key={t} className="challenge-card-tag">{t}</span>
+                                <span key={t} className="c100-card-tag">{t}</span>
                               ))}
                             </div>
                           )}
 
-                          <p className="challenge-card-desc">{getShortDesc(problem)}</p>
+                          <p className="c100-card-desc">{getShortDesc(problem)}</p>
 
-                          <div className="challenge-card-meta">
+                          <div className="c100-card-meta">
                             <span><Zap size={12} /> +{xp} XP</span>
                             <span><Clock size={12} /> ~30 min</span>
                           </div>
 
-                          <div className="challenge-card-progress-label">
+                          <div className="c100-card-progress-label">
                             <span>Progress</span>
                             <span>{completed ? "100%" : "0%"}</span>
                           </div>
-                          <div className="challenge-card-progress-bar">
+                          <div className="c100-card-progress-bar">
                             <div
-                              className={`challenge-card-progress-fill ${completed ? "done" : ""}`}
+                              className={`c100-card-progress-fill ${completed ? "done" : ""}`}
                               style={{ width: completed ? "100%" : "0%" }}
                             />
                           </div>
 
                           <button
                             type="button"
-                            className={`challenge-card-btn ${completed ? "completed" : "primary"}`}
+                            className={`c100-card-btn ${completed ? "completed" : "primary"}`}
                             onClick={() => problem && handleStart(problem._id)}
                             disabled={!problem}
                           >
@@ -456,21 +437,21 @@ const Challenge100Days = () => {
         </section>
       )}
 
-      {/* Bottom bar */}
-      <section className="challenge-bottom-bar">
-        <div className="challenge-bottom-left">
+      {/* ─── Bottom Motivation Bar ─── */}
+      <section className="c100-bottom-bar">
+        <div className="c100-bottom-left">
           <h3>Stay consistent — small daily wins lead to big career outcomes.</h3>
-          <div className="challenge-bottom-features">
+          <div className="c100-bottom-features">
             {BOTTOM_FEATURES.map(({ icon: Icon, label }) => (
-              <span key={label} className="challenge-bottom-feature">
-                <Icon size={14} color="#6366f1" />
+              <span key={label} className="c100-bottom-feature">
+                <Icon size={14} />
                 {label}
               </span>
             ))}
           </div>
         </div>
-        <div className="challenge-streak-pill">
-          <Flame size={17} color="#f97316" />
+        <div className="c100-streak-pill">
+          <Flame size={20} className="c100-streak-flame" />
           {streak > 0 ? (
             <>Keep the streak alive — <strong>{streak} day streak</strong></>
           ) : (

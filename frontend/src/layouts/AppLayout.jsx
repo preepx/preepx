@@ -18,7 +18,7 @@ import '@/styles/AppLayout.css';
 const NAV_ITEMS = [
   { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
   { to: "/interview", icon: Video, label: "Mock Interview" },
-  { to: "/coding-practice", icon: Code, label: "Code Practice" },
+  // { to: "/coding-practice", icon: Code, label: "Code Practice" },
   { to: "/100-days-challenge", icon: Trophy, label: "100 Days Challenge", isNew: true },
   { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam" },
   { to: "/ats-score", icon: FileText, label: "ATS Score", isNew: true },
