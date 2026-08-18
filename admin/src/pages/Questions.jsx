@@ -64,7 +64,7 @@ export default function Questions() {
   });
 
   const editMutation = useMutation({
-    mutationFn: ({ index, data }) => questionsService.edit(skill, index, data),
+    mutationFn: ({ id, data }) => questionsService.edit(skill, id, data),
     onSuccess: () => {
       queryClient.invalidateQueries(['questions', skill]);
       toast.success('Question updated!');
@@ -74,7 +74,7 @@ export default function Questions() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (index) => questionsService.delete(skill, index),
+    mutationFn: (id) => questionsService.delete(skill, id),
     onSuccess: () => {
       queryClient.invalidateQueries(['questions', skill]);
       queryClient.invalidateQueries(['skills']);
@@ -227,9 +227,9 @@ export default function Questions() {
                   </td>
                 </tr>
               ) : (
-                questions.map((q) => (
-                  <tr key={q.index}>
-                    <td className="text-zinc-500 w-12">{q.index + 1}</td>
+                questions.map((q, idx) => (
+                  <tr key={q._id}>
+                    <td className="text-zinc-500 w-12">{((page - 1) * 25) + idx + 1}</td>
                     <td className="max-w-md">
                       <p className="text-sm text-zinc-200 line-clamp-2">{q.question}</p>
                     </td>
@@ -243,7 +243,7 @@ export default function Questions() {
                           Edit
                         </button>
                         <button
-                          onClick={() => setDeleteTarget(q.index)}
+                          onClick={() => setDeleteTarget(q._id)}
                           className="btn btn-sm text-zinc-600 hover:text-red-400 hover:bg-red-500/10 transition-colors"
                         >
                           Delete
@@ -295,7 +295,7 @@ export default function Questions() {
       {/* Edit Question Modal */}
       <Modal isOpen={!!editTarget} onClose={() => setEditTarget(null)} title="Edit Question" size="lg">
         <form
-          onSubmit={editForm.handleSubmit((d) => editMutation.mutate({ index: editTarget?.index, data: d }))}
+          onSubmit={editForm.handleSubmit((d) => editMutation.mutate({ id: editTarget?._id, data: d }))}
           className="space-y-4"
         >
           <div>

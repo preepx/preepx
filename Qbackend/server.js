@@ -33,6 +33,7 @@ const allowedOrigins = [
   process.env.CLIENT_URL,
   process.env.MOCK_INTERVIEW_URL,
   "http://localhost:5173",
+  "http://localhost:5174", // Admin panel
   "http://localhost:3000",
 ].filter(Boolean);
 

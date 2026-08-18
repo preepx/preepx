@@ -54,6 +54,9 @@ const seedQuestions = async () => {
         question: q.question
       }));
 
+      // Delete existing questions for this skill before inserting (prevents duplicates on re-run)
+      await Question.deleteMany({ skill: skill });
+
       // Insert into MongoDB
       await Question.insertMany(docs);
       totalInserted += docs.length;
