@@ -21,7 +21,7 @@ const getLocalQuestions = (skill, count, difficulty) => {
     const primarySkill = skill.split(',')[0].trim();
     const slug = primarySkill.toLowerCase().replace(/\s+/g, "");
     
-    const qbackendPath = path.join(__dirname, "../../../../../Qbackend/src/questions");
+    const qbackendPath = path.join(__dirname, "../../../../Qbackend/src/questions");
     const filePath = path.join(qbackendPath, `${slug}.json`);
     
     if (!fs.existsSync(filePath)) {
