@@ -8,16 +8,12 @@
   </url>
 
   <url>
-    <loc>https://www.preepx.in/login</loc>
+    <loc>https://www.preepx.in/auth</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <url>
-    <loc>https://www.preepx.in/register</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
+ 
 
   <url>
     <loc>https://www.preepx.in/interview</loc>
