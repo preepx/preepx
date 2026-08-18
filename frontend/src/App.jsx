@@ -54,7 +54,7 @@ const AuthCallback = lazy(() => import("@/pages/Auth/AuthCallback"));
 const ObjectiveExam = lazy(() => import("@/pages/Interview/ObjectiveExam"));
 const ObjectiveExamPage = lazy(() => import("@/pages/Interview/ObjectiveExamPage"));
 const WalletPage = lazy(() => import("@/pages/WalletPage"));
-const CodingPractice = lazy(() => import("./pages/CodingPractice"));
+
 const CodingExam = lazy(() => import("./pages/CodingExam"));
 const Challenge100Days = lazy(() => import("./pages/Challenge100Days"));
 
@@ -83,7 +83,7 @@ const RecruiterComingSoonModal = lazy(() => import("./components/landing/Recruit
 function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements", "/rewards",
-    "/settings", "/profile", "/resume-interview", "/ats-score", "/btech-notes", "/objective-exam", "/wallet", "/coding-practice",
+    "/settings", "/profile", "/resume-interview", "/ats-score", "/btech-notes", "/objective-exam", "/wallet",
     "/my-assessments", "/my-applications", "/100-days-challenge"
   ];
   return sidebarRoutes.includes(pathname)
@@ -226,7 +226,7 @@ function AppContent() {
           <Route path="/wallet" element={<ProtectedRoute><WalletPage /></ProtectedRoute>} />
           <Route path="/objective-exam/take" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
           <Route path="/objective-exam/result/:id" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
-          <Route path="/coding-practice" element={<ProtectedRoute><CodingPractice /></ProtectedRoute>} />
+
           <Route path="/coding-exam/:id" element={<ProtectedRoute><CodingExam /></ProtectedRoute>} />
           <Route path="/100-days-challenge" element={<ProtectedRoute><Challenge100Days /></ProtectedRoute>} />
 

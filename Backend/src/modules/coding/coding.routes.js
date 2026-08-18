@@ -16,4 +16,8 @@ router.get("/problems/:id", protect, codingController.getProblemById);
 // Temporary route to seed questions via browser since terminal is failing
 router.get("/seed-temp", codingController.seedProblemsTemp);
 
+// Mark a challenge day as complete
+router.post("/challenge/complete", protect, codingController.completeChallengeDay);
+
 module.exports = router;
+

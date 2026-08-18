@@ -182,7 +182,7 @@ const Challenge100Days = () => {
     return "Solve today's coding challenge to unlock the next day.";
   };
 
-  const handleStart = (problemId) => navigate(`/coding-exam?problemId=${problemId}`);
+  const handleStart = (problemId, dayNum) => navigate(`/coding-exam/${problemId}?source=challenge&day=${dayNum}`);
 
   const scrollJourney = (dir) => {
     if (!scrollRef.current) return;
@@ -420,7 +420,7 @@ const Challenge100Days = () => {
                           <button
                             type="button"
                             className={`c100-card-btn ${completed ? "completed" : "primary"}`}
-                            onClick={() => problem && handleStart(problem._id)}
+                            onClick={() => problem && handleStart(problem._id, dayNum)}
                             disabled={!problem}
                           >
                             {completed ? "Review Solution" : "Start Challenge"}

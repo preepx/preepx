@@ -121,4 +121,46 @@ const getChallenge = async (userId) => {
   return { challengeDays, progress };
 };
 
-module.exports = { saveCodingResult, getAllCodingResults, getProblems, getProblemById, getChallenge };
+
+const completeChallengeDay = async (userId, day) => {
+  if (!userId) throw new BadRequestError("User not authenticated");
+  if (!day || day < 1 || day > 100) throw new BadRequestError("Invalid day number");
+
+  const user = await User.findById(userId).select("challengeProgress points level").lean(false);
+  if (!user) throw new BadRequestError("User not found");
+
+  const progress = user.challengeProgress || { currentDay: 1, completedDays: [] };
+
+  // Add day if not already completed
+  if (!progress.completedDays.includes(day)) {
+    progress.completedDays.push(day);
+  }
+
+  // Update currentDay to next unlocked day
+  const nextDay = Math.min(100, day + 1);
+  if (nextDay > progress.currentDay) {
+    progress.currentDay = nextDay;
+  }
+
+  user.challengeProgress = progress;
+
+  // Award XP for completing the day
+  const xpEarned = 10;
+  user.points = (user.points || 0) + xpEarned;
+  user.level = Math.floor(user.points / 100) + 1;
+
+  await user.save();
+
+  await sendNotification(
+    userId,
+    "Challenge Day Completed! 🏆",
+    `Day ${day} of the 100 Days Challenge is complete! +${xpEarned} XP earned.`,
+    "general",
+    "🏆"
+  );
+
+  return { progress, xpEarned };
+};
+
+module.exports = { saveCodingResult, getAllCodingResults, getProblems, getProblemById, getChallenge, completeChallengeDay };
+

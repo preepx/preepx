@@ -12,7 +12,7 @@ import Loader from "@/components/Loader";
 import '@/styles/UserDashboard.css';
 
 const EXPLORE_LINKS = [
-  { icon: Code, label: "Code Practice", desc: "Interactive coding challenges", path: "/coding-practice", color: "#ec4899", isNew: true },
+
   { icon: FileText, label: "ATS Score", desc: "Analyze your resume", path: "/ats-score", color: "#14b8a6", isNew: true },
   { icon: BookOpen, label: "Btech Notes", desc: "Study resources", path: "/btech-notes", color: "#3b82f6", free: true },
   { icon: Trophy, label: "Leaderboard", desc: "Global rankings", path: "/leaderboard", color: "#f59e0b" },

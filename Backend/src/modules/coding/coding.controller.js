@@ -148,4 +148,12 @@ const seedProblemsTemp = catchAsync(async (req, res) => {
   res.status(200).json({ success: true, message: `Successfully seeded! Added: ${added}, Updated: ${updated}` });
 });
 
-module.exports = { startCodingSession, saveCodingResult, getAllCodingResults, evaluateCode, getProblems, getProblemById, seedProblemsTemp, getChallenge };
+const completeChallengeDay = catchAsync(async (req, res) => {
+  const userId = req.user;
+  const { day } = req.body;
+  const result = await codingService.completeChallengeDay(userId, day);
+  res.status(200).json({ success: true, data: result });
+});
+
+module.exports = { startCodingSession, saveCodingResult, getAllCodingResults, evaluateCode, getProblems, getProblemById, seedProblemsTemp, getChallenge, completeChallengeDay };
+
