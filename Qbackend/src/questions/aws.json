@@ -1,14 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is AWS and what does cloud computing mean?" },
-  { "difficulty": "Easy", "question": "What is the difference between EC2 and Lambda in AWS?" },
-  { "difficulty": "Easy", "question": "What is S3 in AWS and what is it used for?" },
-  { "difficulty": "Medium", "question": "What is IAM in AWS and how does it work?" },
-  { "difficulty": "Medium", "question": "What is VPC in AWS and why is it important?" },
-  { "difficulty": "Medium", "question": "What is the difference between RDS and DynamoDB in AWS?" },
-  { "difficulty": "Medium", "question": "What is CloudFront in AWS?" },
-  { "difficulty": "Medium", "question": "What is the difference between vertical and horizontal scaling in AWS?" },
-  { "difficulty": "Hard", "question": "Explain AWS ECS and EKS and when you'd use each." },
-  { "difficulty": "Hard", "question": "What is AWS SQS and how does it differ from SNS?" },
-  { "difficulty": "Hard", "question": "How do you design a highly available architecture on AWS?" },
-  { "difficulty": "Hard", "question": "What is the shared responsibility model in AWS?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is AWS and what does cloud computing mean?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different types of cloud computing service models (IaaS, PaaS, SaaS)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between public cloud, private cloud, and hybrid cloud?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are AWS Regions and Availability Zones?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a Region and an Availability Zone?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an Edge Location in AWS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the AWS Management Console?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the AWS CLI and how is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the AWS Free Tier?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an AWS account and what is the root user?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between AWS and other cloud providers like Azure and GCP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is elasticity in cloud computing and how does AWS provide it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is scalability in cloud computing?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between scalability and elasticity?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is pay-as-you-go pricing in AWS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an AWS Well-Architected Framework?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the pillars of the AWS Well-Architected Framework?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between on-demand and reserved pricing models in AWS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Spot Instance in AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between On-Demand, Reserved, and Spot Instances?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is AWS Marketplace?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the AWS Global Infrastructure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Local Zone in AWS and how does it differ from a Region?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Outposts and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the shared responsibility model in AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Organizations and how is it used to manage multiple accounts?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Control Tower?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Service Control Policy (SCP) in AWS Organizations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Cost Explorer and how does it help track spending?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Budgets used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is EC2 in AWS and what is it used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between EC2 and Lambda in AWS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an AMI (Amazon Machine Image)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an EC2 instance type and how do you choose one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EC2 instance families (general purpose, compute optimized, memory optimized, storage optimized)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an EC2 security group and how does it differ from a Network ACL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an EC2 key pair and how is it used to access an instance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is user data in EC2 and how is it used during instance launch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an Elastic IP address in AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between stopping and terminating an EC2 instance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an EC2 placement group and what types exist (cluster, spread, partition)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is EC2 Auto Scaling and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an Auto Scaling Group (ASG) and what are its key components?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a launch template/launch configuration in EC2 Auto Scaling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between target tracking, step scaling, and simple scaling policies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Lambda and how does serverless computing work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Lambda function's execution role and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a cold start in AWS Lambda and how can it be minimized?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the limitations of AWS Lambda (timeout, memory, payload size)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Lambda concurrency and how do reserved and provisioned concurrency differ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What triggers can invoke an AWS Lambda function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Lambda layer and why would you use one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain AWS ECS and EKS and when you'd use each."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ECS and Fargate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a task definition in ECS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the EC2 launch type and Fargate launch type in ECS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Kubernetes pod and how does EKS manage it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between self-managed Kubernetes and AWS EKS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Elastic Beanstalk and how does it simplify application deployment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Elastic Beanstalk and manually managing EC2 instances?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Batch and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Lightsail and how is it different from EC2?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an EC2 dedicated host vs a dedicated instance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between horizontal and vertical scaling in AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is EC2 instance metadata and how is it accessed?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is IMDSv2 and why was it introduced over IMDSv1?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an EC2 hibernation feature and how does it differ from stopping an instance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an Application Load Balancer, Network Load Balancer, and Gateway Load Balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a target group in the context of an Elastic Load Balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is health check configuration in a Load Balancer and Auto Scaling Group?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Lambda@Edge and CloudFront Functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Fargate and how does it eliminate the need to manage servers for containers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a warm pool in EC2 Auto Scaling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an internal and internet-facing load balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cross-zone load balancing?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is S3 in AWS and what is it used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an S3 bucket?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between S3 storage classes (Standard, IA, One Zone-IA, Glacier)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is S3 Glacier and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is S3 Intelligent-Tiering and how does it optimize storage costs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is S3 versioning and how does it help protect against accidental deletion?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is S3 lifecycle policy and how does it automate storage class transitions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is S3 Object Lock and how does it provide immutability for compliance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between S3 bucket policy and an IAM policy for accessing S3?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Cross-Region Replication in S3?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is S3 Transfer Acceleration and how does it improve upload speeds?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a pre-signed URL in S3 and when would you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between S3 and EBS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is EBS (Elastic Block Store) and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EBS volume types (gp3, io2, st1, sc1)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an EBS snapshot and how is it used for backup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EBS and instance store volumes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon EFS (Elastic File System) and how is it different from EBS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EFS and FSx?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon FSx and what use cases does it support (Windows File Server, Lustre, NetApp ONTAP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Storage Gateway and how does it bridge on-premises storage with AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between S3 Standard and S3 One Zone-IA in terms of durability and availability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data durability in S3 and what percentage does AWS guarantee?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multipart upload in S3 and when is it recommended?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is S3 static website hosting and how do you configure it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between S3 event notifications and S3 access logs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Backup and how does it centralize backup management across services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a bucket policy vs an ACL (Access Control List) in S3?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is S3 Select and how does it optimize data retrieval?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EBS-optimized instances and regular EC2 instances?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Provisioned IOPS SSD volume in EBS and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data encryption at rest in S3 and what options exist (SSE-S3, SSE-KMS, SSE-C)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between encryption in transit and encryption at rest in AWS storage services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is S3 replication time control (RTC) and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the maximum size of an object you can store in S3, and how does multipart upload relate to this?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Glacier Deep Archive and how does its retrieval time compare to regular Glacier?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is VPC in AWS and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a subnet in a VPC and what is the difference between public and private subnets?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an Internet Gateway and how does it enable internet access for a VPC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a NAT Gateway and how does it differ from an Internet Gateway?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a NAT Gateway and a NAT instance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a route table in a VPC and how does it control traffic flow?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Network ACL and how does it differ from a Security Group?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is VPC peering and what are its limitations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Transit Gateway and how does it simplify multi-VPC networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between VPC peering and Transit Gateway?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a VPC endpoint and what is the difference between a Gateway endpoint and an Interface endpoint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS PrivateLink and how does it enable private connectivity to services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CloudFront in AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CloudFront distribution and how does it use edge locations for content delivery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CloudFront and S3 for serving static content?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Route 53 and what DNS routing policies does it support?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between simple, weighted, latency-based, and failover routing policies in Route 53?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Route 53 health check and how is it used for failover routing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a public hosted zone and a private hosted zone in Route 53?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Direct Connect and how does it differ from a VPN connection to AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Site-to-Site VPN in AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Client VPN in AWS and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a bastion host and a VPN for accessing private resources?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an Elastic Network Interface (ENI)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an Application Load Balancer and a Classic Load Balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CIDR block and how is it used to define VPC and subnet IP ranges?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between IPv4 and IPv6 support in AWS VPC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Global Accelerator and how does it improve application availability and performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CloudFront and Global Accelerator?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a multi-VPC hub-and-spoke network architecture and how is it implemented using Transit Gateway?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DNS resolution within a VPC and how does Route 53 Resolver work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a flow log in AWS VPC and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an internet-facing and internal-only Application Load Balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is sticky sessions (session affinity) in a Load Balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Layer 4 and Layer 7 load balancing, and which AWS services provide each?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RDS and DynamoDB in AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon RDS and what database engines does it support?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Multi-AZ deployment in RDS and how does it provide high availability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RDS Multi-AZ and Read Replicas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Aurora and how does it differ from standard RDS MySQL/PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Aurora Serverless and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DynamoDB and what type of database is it (NoSQL key-value/document)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a partition key and sort key in DynamoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between DynamoDB provisioned capacity and on-demand capacity?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Global Secondary Index (GSI) and Local Secondary Index (LSI) in DynamoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DynamoDB Streams and how is it used for change data capture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DynamoDB Accelerator (DAX) and how does it improve read performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between eventually consistent reads and strongly consistent reads in DynamoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon ElastiCache and what engines does it support (Redis, Memcached)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis and Memcached in ElastiCache?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Redshift and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redshift and RDS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redshift Spectrum and how does it query data directly in S3?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Neptune and what type of database is it (graph database)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon DocumentDB and how does it relate to MongoDB compatibility?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Timestream and what use case does it target?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon QLDB (Quantum Ledger Database) used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database sharding and how does DynamoDB handle partitioning internally?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hot partition problem in DynamoDB and how can it be avoided?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RDS automated backup vs manual snapshot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is point-in-time recovery in RDS and DynamoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical scaling of an RDS instance and horizontal scaling with read replicas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection pooling and how does RDS Proxy help manage database connections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between OLTP and OLAP workloads, and which AWS database services target each?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data encryption for RDS and DynamoDB, and how is AWS KMS involved?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is IAM in AWS and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an IAM user, IAM group, and IAM role?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an IAM policy and how is it structured (JSON)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an identity-based policy and a resource-based policy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the principle of least privilege and how is it applied in IAM?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an IAM role and when would you use it instead of an IAM user?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cross-account access in AWS and how is it implemented using IAM roles?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS STS (Security Token Service) and how does it relate to temporary credentials?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is MFA (Multi-Factor Authentication) in AWS and why is it recommended?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between AWS managed policies and customer managed policies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an inline policy in IAM and when would you use one over a managed policy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS KMS (Key Management Service) and how is it used for encryption?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Customer Managed Key and an AWS Managed Key in KMS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is envelope encryption and how does KMS implement it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Secrets Manager and how does it differ from Systems Manager Parameter Store?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS WAF (Web Application Firewall) and what does it protect against?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Shield and what is the difference between Shield Standard and Shield Advanced?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a DDoS attack and how does AWS help mitigate it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS GuardDuty and what threats does it detect?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Inspector and how does it help with vulnerability assessment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Config and how does it help with compliance monitoring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS CloudTrail and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CloudTrail and CloudWatch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Macie and what data does it help protect?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Security Hub and how does it aggregate findings from other security services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is federated identity and how does AWS support SSO/SAML-based federation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Cognito and how is it used for user authentication in applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between authentication and authorization in the context of AWS IAM?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is resource tagging and how does it support security and cost governance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the concept of defense in depth and how does it apply to AWS security architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is AWS SQS and how does it differ from SNS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a standard queue and a FIFO queue in SQS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a dead-letter queue (DLQ) in SQS and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is visibility timeout in SQS and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is long polling vs short polling in SQS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon SNS and how does the pub/sub messaging model work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SNS and EventBridge?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon EventBridge and how does it enable event-driven architectures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an EventBridge rule and how does it route events to targets?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Kinesis and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Kinesis Data Streams and Kinesis Data Firehose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a shard in Kinesis Data Streams?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Kinesis and SQS for streaming vs queuing use cases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Step Functions and how does it orchestrate serverless workflows?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a state machine and a Lambda function in the context of Step Functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS AppSync and how does it relate to GraphQL APIs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon API Gateway and how does it integrate with Lambda?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between REST API and HTTP API in API Gateway?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is throttling in API Gateway and how is it configured?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous invocation of a Lambda function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Serverless Application Model (SAM) and how does it simplify serverless deployments?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between orchestration and choreography in serverless event-driven systems on AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon MQ and when would you use it instead of SQS/SNS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Batch's relationship with SQS for job queuing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is idempotency and how do you design idempotent Lambda functions consuming from SQS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is fan-out messaging pattern and how is it implemented using SNS and SQS together?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Lambda destination and how does it differ from a dead-letter queue?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between push-based and pull-based event sources for Lambda?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon MSK (Managed Streaming for Kafka) and when would you choose it over Kinesis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is backpressure in event-driven systems and how do SQS and Kinesis handle it differently?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon CloudWatch and what does it monitor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CloudWatch Metrics, Logs, and Alarms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CloudWatch Alarm and how does it trigger automated actions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CloudWatch Logs Insights used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom metric in CloudWatch and how do you publish one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS X-Ray and how does it help with distributed tracing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS CloudFormation and how does it enable Infrastructure as Code?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CloudFormation stack and how does it manage resource lifecycle?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CloudFormation template and what sections does it typically contain?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CloudFormation and Terraform?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS CDK (Cloud Development Kit) and how does it differ from raw CloudFormation templates?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is drift detection in CloudFormation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a nested stack in CloudFormation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS CodeCommit and how does it compare to GitHub/GitLab?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS CodeBuild and what role does it play in a CI/CD pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS CodeDeploy and how does it automate application deployment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS CodePipeline and how does it orchestrate CI/CD stages?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a blue/green deployment and how is it implemented using CodeDeploy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a canary deployment and how does it differ from blue/green deployment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Systems Manager and what capabilities does it provide (Session Manager, Parameter Store, Patch Manager)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Systems Manager Session Manager and how does it improve on SSH access to EC2?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS OpsWorks and how does it relate to Chef/Puppet-based configuration management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a golden AMI pipeline and why is it used in immutable infrastructure practices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is EC2 Image Builder and how does it automate AMI creation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between mutable and immutable infrastructure, and how does AWS support each?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Trusted Advisor and what categories of recommendations does it provide?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Health Dashboard and how does it differ from the Service Health Dashboard?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a tagging strategy and how does it support cost allocation and automation in AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between infrastructure as code and configuration management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is GitOps and how can it be applied to managing AWS infrastructure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the AWS Well-Architected Tool and how is it used to review workloads?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is chaos engineering and how does AWS Fault Injection Simulator support it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synthetic monitoring (CloudWatch Synthetics) and real user monitoring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a runbook and how is it automated using AWS Systems Manager Automation documents?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CloudWatch Events and EventBridge (are they the same service)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you design a highly available architecture on AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between high availability and fault tolerance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a disaster recovery (DR) strategy and what DR patterns does AWS support (backup/restore, pilot light, warm standby, multi-site)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RTO (Recovery Time Objective) and RPO (Recovery Point Objective)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a multi-region architecture and when would you design one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an active-active and active-passive multi-region setup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the AWS Cloud Adoption Framework (CAF)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 6 R's of migration strategy (rehost, replatform, refactor, repurchase, retire, retain)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the AWS Migration Hub and how does it help track migration projects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Database Migration Service (DMS) and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Server Migration Service (SMS) and how does it differ from DMS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the AWS Snow Family (Snowball, Snowcone, Snowmobile) used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a lift-and-shift migration strategy, and what are its trade-offs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a microservices architecture and how does AWS support building one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a monolithic and microservices architecture on AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the strangler fig pattern for migrating a monolith to microservices on AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a service mesh and how does AWS App Mesh support microservices communication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous communication patterns in a distributed AWS architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the circuit breaker pattern and how can it be implemented in an AWS-based microservices architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is auto scaling based on custom CloudWatch metrics, and how would you design it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a three-tier architecture on AWS (web, application, database tiers)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between stateful and stateless application design, and why is statelessness preferred in cloud architectures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is session state management in a stateless auto-scaled application on AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cost optimization and what strategies does AWS Well-Architected recommend?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is right-sizing in the context of AWS cost optimization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Savings Plans and how does it differ from Reserved Instances?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Compute Savings Plans and EC2 Instance Savings Plans?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spot Fleet and how does it optimize costs for fault-tolerant workloads?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a well-designed tagging and resource organization strategy for a large AWS environment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is landing zone architecture in the context of AWS multi-account strategy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a data lake and a data warehouse, and which AWS services support each?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Lake Formation and how does it simplify building a data lake?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Glue and how is it used in ETL pipelines?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between batch processing and stream processing architectures on AWS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a globally distributed, low-latency application architecture using AWS services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Elastic Container Registry (ECR) and how does it relate to ECS/EKS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a container image and a virtual machine image?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS App Runner and how does it simplify container deployment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between AWS App Runner and Elastic Beanstalk?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Amplify and what type of applications is it designed for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between server-side rendering and static site hosting on AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon SageMaker and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between training and inference in the context of SageMaker?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Comprehend and what NLP tasks does it support?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Rekognition used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Textract and how does it differ from Rekognition?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Bedrock and how does it relate to generative AI on AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between AWS-managed AI services and building custom ML models with SageMaker?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Athena and how does it enable serverless SQL queries on S3 data?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Athena and Redshift Spectrum?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS QuickSight and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a data pipeline and how does AWS Data Pipeline or Glue Workflows help automate one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between AWS Glue and AWS EMR?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon EMR and what big data frameworks does it support?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Hadoop/Spark cluster and how does EMR manage it on AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a data warehouse's columnar storage and a traditional row-based database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is edge computing and how does AWS support it with IoT Greengrass?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS IoT Core and what role does it play in IoT architectures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the MQTT protocol and how is it used in AWS IoT?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Outposts used for in a hybrid cloud strategy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hybrid cloud and multi-cloud strategies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a landing zone and how does AWS Control Tower help set one up?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the AWS Artifact service used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is compliance certification (like SOC 2, PCI DSS, HIPAA) and how does AWS support customers in achieving it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between AWS's compliance responsibilities and the customer's compliance responsibilities under the shared responsibility model?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a service quota (limit) in AWS and how do you request an increase?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is throttling and how does AWS API rate limiting protect service stability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is exponential backoff and how should client applications handle AWS API throttling errors?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is idempotency in the context of AWS API requests, and why does it matter for retries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a regional service and a global service in AWS (e.g., IAM vs EC2)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between AWS Free Tier's always-free, 12-month free, and trial offers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an AWS Support Plan and what tiers does AWS offer (Basic, Developer, Business, Enterprise)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the AWS Well-Architected Tool used for in reviewing a workload?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a CloudWatch dashboard and how is it used to visualize metrics?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an AWS SDK and the AWS CLI?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a resource-based policy example for S3, and how does it interact with IAM identity policies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is policy evaluation logic in AWS IAM (explicit deny, explicit allow, default deny)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an AWS Organizations service control policy vs an IAM permissions boundary?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a permissions boundary in IAM and when would you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cross-service confused deputy problem and how does AWS mitigate it (e.g., using external ID)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an AWS account alias and account ID?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is consolidated billing in AWS Organizations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Reserved Instance Marketplace and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Convertible and Standard Reserved Instances?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the AWS Pricing Calculator used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a cost allocation tag and how is it used in AWS billing reports?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the AWS Cost and Usage Report (CUR)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is anomaly detection in AWS Cost Explorer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between S3 Requester Pays and normal bucket billing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data transfer cost in AWS and how does it differ between same-AZ, cross-AZ, and cross-region transfers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an Application Load Balancer's listener and a rule?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is path-based routing and host-based routing in an Application Load Balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an Auto Scaling lifecycle hook and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an Auto Scaling Group's minimum, desired, and maximum capacity settings?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a scheduled scaling action in EC2 Auto Scaling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is predictive scaling in AWS Auto Scaling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an EC2 Reserved Instance's Availability Zone scope and Regional scope?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an EC2 Capacity Reservation and how does it differ from a Reserved Instance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Lambda function's ephemeral storage (/tmp) and using EFS for persistent storage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Lambda SnapStart and how does it reduce cold start times?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the maximum execution timeout for an AWS Lambda function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Lambda function URL and how does it differ from exposing a function through API Gateway?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous API Gateway integration and asynchronous Lambda invocation via SNS/SQS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is mutual TLS (mTLS) authentication and how is it supported in API Gateway?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a usage plan and API key in API Gateway used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between AWS WAF rate-based rules and API Gateway throttling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Route 53 Application Recovery Controller and how does it help with multi-region failover?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Route 53 Resolver inbound and outbound endpoints?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a private DNS namespace and how is it used with AWS Cloud Map for service discovery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AWS Cloud Map and how does it enable service discovery for microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an EBS-backed AMI and an instance-store-backed AMI?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a launch template's versioning feature used for in EC2 Auto Scaling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Reserved Capacity and On-Demand Capacity Reservations for EC2?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a VPC's default security group behavior compared to a custom security group?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between stateful security groups and stateless network ACLs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an Elastic Fabric Adapter (EFA) and when is it used in HPC workloads on AWS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Amazon Aurora Global Database and standard cross-region read replicas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Aurora's storage auto-scaling feature?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a DynamoDB Transaction and how does it support ACID operations across multiple items?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between DynamoDB's TTL (Time to Live) feature and manually deleting expired items?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between DynamoDB's on-demand backup and continuous backups with point-in-time recovery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a composite key in DynamoDB and how does it combine partition key and sort key?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DynamoDB's adaptive capacity feature and how does it help with uneven data access patterns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Aurora Serverless v1 and v2 in terms of scaling behavior?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon RDS Proxy and how does it help serverless applications manage database connections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cross-region snapshot copying in RDS and why would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous replication in RDS Multi-AZ vs Read Replicas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Amazon Redshift's concurrency scaling feature?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Redshift cluster's leader node and compute nodes?"
+  }
 ]
