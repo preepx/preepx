@@ -1,25 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is JVM (Java Virtual Machine)?" },
-  { "difficulty": "Easy", "question": "What is the difference between JDK, JRE, and JVM?" },
-  { "difficulty": "Easy", "question": "What are the main features of Java?" },
-  { "difficulty": "Easy", "question": "What is the difference between primitive data types and reference types in Java?" },
-  { "difficulty": "Easy", "question": "What is the difference between == and .equals() in Java?" },
-  { "difficulty": "Easy", "question": "What is a constructor in Java?" },
-  { "difficulty": "Easy", "question": "What is method overloading in Java?" },
-  { "difficulty": "Medium", "question": "Explain the difference between ArrayList and LinkedList in Java." },
-  { "difficulty": "Medium", "question": "What is the difference between HashMap and HashTable in Java?" },
-  { "difficulty": "Medium", "question": "What is the purpose of the 'final' keyword in Java?" },
-  { "difficulty": "Medium", "question": "Explain the concept of garbage collection in Java." },
-  { "difficulty": "Medium", "question": "What is the difference between abstract class and interface in Java?" },
-  { "difficulty": "Medium", "question": "What are generics in Java and why are they useful?" },
-  { "difficulty": "Medium", "question": "Explain the Java Collections Framework." },
-  { "difficulty": "Medium", "question": "What is the difference between checked and unchecked exceptions in Java?" },
-  { "difficulty": "Medium", "question": "What is multithreading in Java? Explain Thread lifecycle." },
-  { "difficulty": "Hard", "question": "Explain the Java Memory Model (JMM) and how it handles visibility and atomicity." },
-  { "difficulty": "Hard", "question": "What is the difference between HashMap and ConcurrentHashMap in Java?" },
-  { "difficulty": "Hard", "question": "Explain the concept of Java reflection and its use cases." },
-  { "difficulty": "Hard", "question": "What are Java Streams? Explain lazy evaluation and terminal operations." },
-  { "difficulty": "Hard", "question": "What is the Fork/Join framework in Java? How does work-stealing work?" },
-  { "difficulty": "Hard", "question": "Explain the volatile keyword and when to use it in Java." },
-  { "difficulty": "Hard", "question": "What is a deadlock in Java? How can it be prevented?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is JVM (Java Virtual Machine)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between JDK, JRE, and JVM?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the main features of Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between primitive data types and reference types in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between == and .equals() in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a constructor in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method overloading in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why is Java called platform independent?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is bytecode in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between JIT and JVM?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different types of memory areas allocated by JVM?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default value of a boolean variable in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between int and Integer in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is autoboxing and unboxing in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a package in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'public static void main(String[] args)' method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a class in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an object in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class and an object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is inheritance in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is polymorphism in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is encapsulation in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is abstraction in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'this' keyword used for in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'super' keyword used for in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a default constructor?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can a constructor be private in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a constructor and a method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method overriding in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between method overloading and method overriding?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are access modifiers in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between public, private, protected, and default access modifiers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'static' keyword used for in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can we override a static method in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between static and instance variables?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static block in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'final' keyword when applied to a variable?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a wrapper class in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between String, StringBuilder, and StringBuffer?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why are Strings immutable in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the String pool in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a String in Java without using the 'new' keyword?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between length() and length in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an array in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you declare and initialize an array in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default value of array elements in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a multidimensional array in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an array and an ArrayList?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a loop in Java? Name the different types of loops."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a while loop and a do-while loop?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'break' and 'continue' statements?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a switch statement in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between switch and if-else?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is type casting in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between implicit and explicit type casting?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local variable and an instance variable?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is garbage collection in simple terms?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'void' keyword in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an interface in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an abstract class in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can we instantiate an abstract class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a package-private access modifier?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the import statement used for in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between compile-time and runtime in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an exception in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the try-catch block used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the finally block used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'throw' keyword?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'throws' keyword?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an error and an exception?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Scanner class used for in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between System.out.print() and System.out.println()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is command line argument in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the entry point of a Java program?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the toString() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the hashCode() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the equals() method in the Object class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a ternary operator in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between instance methods and static methods?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the difference between ArrayList and LinkedList in Java."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HashMap and HashTable in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the 'final' keyword in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the concept of garbage collection in Java."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between abstract class and interface in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are generics in Java and why are they useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the Java Collections Framework."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between checked and unchecked exceptions in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multithreading in Java? Explain Thread lifecycle."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Comparable and Comparator in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HashSet, LinkedHashSet, and TreeSet?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HashMap, LinkedHashMap, and TreeMap?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the concept of immutability. How do you create an immutable class in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between fail-fast and fail-safe iterators?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Iterator and ListIterator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the transient keyword in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronized method and synchronized block?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the difference between wait(), notify(), and notifyAll()."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between sleep() and wait() in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Singleton design pattern? How do you implement it in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shallow copy and deep copy in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the clone() method? What is the difference between shallow and deep cloning?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an inner class and a static nested class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an anonymous inner class in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a functional interface in Java? Give examples."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a lambda expression in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is method reference in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between String pool and heap memory for Strings?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between StringBuilder and StringBuffer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the concept of exception chaining."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom exception in Java? How do you create one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between throw and throws in detail?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the finally block and when will it not execute?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is try-with-resources in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Runnable and Callable interfaces?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ExecutorService in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a thread pool? Why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the producer-consumer problem and how to implement it in Java."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Process and Thread?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is thread priority in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a daemon thread in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a thread in Java? Explain both approaches."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between extending Thread class and implementing Runnable interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is synchronization in Java and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a race condition? How can it be avoided?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between == and equals() for objects vs primitives?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain how HashMap works internally."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens when two objects have the same hashCode but are not equal?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the load factor and initial capacity in HashMap?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Vector and ArrayList?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Stack and Queue in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Deque and Queue?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the PriorityQueue in Java and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Set and List in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a List and a Map?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is autoboxing overhead and how can it affect performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between var and explicit type declaration in Java 10+?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the diamond problem in Java and how does Java handle it with interfaces?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are default methods in interfaces? Why were they introduced?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are static methods in interfaces?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between composition and inheritance in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'is-a' vs 'has-a' relationship in OOP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is method hiding in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overriding and hiding for static methods?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is covariant return type in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Object class in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Serializable and Externalizable?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is serialVersionUID and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is reflection used for in Java? Give a practical example."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow class hierarchy and deep class hierarchy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface and an abstract class post Java 8?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Optional class in Java 8?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Stream in Java and how is it different from a Collection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between map() and flatMap() in Streams?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between findFirst() and findAny() in Streams?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Collectors.toList() and Collectors.toSet()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between parallel streams and sequential streams?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an enum and a class in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do enums work internally in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between instance initializer block and constructor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the order of execution of static block, instance block, and constructor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is object cloning and what are its limitations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Comparable interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between compareTo() and equals()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is boxing/unboxing caching in Java (Integer cache)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between String.equals() and String.contentEquals()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is varargs in Java and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between varargs and array parameters?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the Java Memory Model (JMM) and how it handles visibility and atomicity."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between HashMap and ConcurrentHashMap in Java?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the concept of Java reflection and its use cases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are Java Streams? Explain lazy evaluation and terminal operations."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Fork/Join framework in Java? How does work-stealing work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the volatile keyword and when to use it in Java."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a deadlock in Java? How can it be prevented?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the internal working of ConcurrentHashMap in Java 8+."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between CountDownLatch and CyclicBarrier?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Semaphore and Mutex/Lock in Java?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the ReentrantLock class and how it differs from synchronized."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between ReadWriteLock and ReentrantLock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the CompletableFuture class and its use cases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Future and CompletableFuture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the happens-before relationship in the Java Memory Model."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is false sharing in concurrent programming and how do you avoid it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the different types of garbage collectors available in the JVM."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between G1GC, CMS, and ZGC garbage collectors?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the generational garbage collection model (Young, Old, Permanent/Metaspace)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Minor GC and Major/Full GC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are strong, weak, soft, and phantom references in Java?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the classloader hierarchy works in Java."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Bootstrap, Extension, and Application classloaders?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is ClassNotFoundException vs NoClassDefFoundError?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the concept of a memory leak in Java and how to detect it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a thread-local variable? Explain ThreadLocal and its use cases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the risks of using ThreadLocal in a thread pool environment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the internal working of ArrayList and its resizing mechanism."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the internal working of HashMap in Java 8, including treeification of buckets."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What changed in HashMap implementation between Java 7 and Java 8?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between StampedLock and ReentrantReadWriteLock."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the AQS (AbstractQueuedSynchronizer) and how is it used internally?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the ForkJoinPool differs from a regular ExecutorService thread pool."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a livelock, and how is it different from a deadlock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is thread starvation and how can it be avoided?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between pessimistic locking and optimistic locking with examples in Java."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is compare-and-swap (CAS) and how is it used in java.util.concurrent.atomic classes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the internal working of AtomicInteger and how it avoids locks."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the ABA problem in lock-free programming and how is it solved?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how String interning works and its impact on memory."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is escape analysis in the JVM and how does it optimize object allocation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is JIT compilation and how does it differ from AOT compilation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the tiered compilation strategy used by the HotSpot JVM."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are intrinsic locks (monitor locks) in Java and how do they work at the bytecode level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how synchronized blocks are implemented at the bytecode level (monitorenter/monitorexit)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is biased locking and lock coarsening in the JVM?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between checked exceptions and unchecked exceptions from a design perspective."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does exception handling affect performance in Java, and how can you minimize the overhead?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between stack unwinding and exception propagation in Java?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Java handles multiple inheritance ambiguity with default methods in interfaces."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Java Module System (JPMS) introduced in Java 9? Explain its benefits."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a module and a package in Java 9+?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the concept of Project Loom and virtual threads in Java."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do virtual threads differ from platform threads in terms of scheduling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the sealed classes feature introduced in Java 17."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are records in Java and how do they differ from regular classes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain pattern matching for switch statements introduced in recent Java versions."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between deep reflection and shallow reflection access in Java 9+ module system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Java's varhandle API differs from traditional reflection for field access."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between MethodHandles and reflection in terms of performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the java.util.concurrent.locks.Condition interface works with locks."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between BlockingQueue implementations like ArrayBlockingQueue and LinkedBlockingQueue?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the internal architecture of the Disruptor pattern as an alternative to BlockingQueue."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is memory barrier/fence and how does the volatile keyword relate to it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the Java Memory Model guarantees visibility across threads for volatile and synchronized."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between an unbounded and a bounded thread pool, and what risks does each carry?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the internal working of the CopyOnWriteArrayList and its use cases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the trade-off between using CopyOnWriteArrayList and synchronizedList?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Stream.peek() differs from map() and why relying on peek() for side effects is discouraged."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is spliterator in Java Streams and how does it enable parallel processing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the JVM handles stack overflow versus heap overflow errors."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between OutOfMemoryError types (heap space, metaspace, GC overhead limit exceeded)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would profile and diagnose a memory leak in a production Java application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a soft reference and a weak reference in the context of caching?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the internal implementation of TreeMap and how it maintains order using red-black trees."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the time complexity of common operations in HashMap, TreeMap, and LinkedHashMap, and why?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how equals() and hashCode() contracts must be honored for correct behavior in hash-based collections."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is double-checked locking and why is the volatile keyword essential for its correctness?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the Java 9 immutable collection factory methods (List.of, Map.of) and how they differ from Collections.unmodifiableList."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a strong consistency guarantee and eventual consistency in the context of concurrent collections?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the JVM performs bytecode verification and why it matters for security."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a custom classloader and when would you need to write one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the security implications of Java serialization and how to mitigate deserialization vulnerabilities."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between StampedLock's optimistic read and a regular read lock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Java's try-with-resources handles suppressed exceptions."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between hard, soft, and terminal operations regarding Stream reuse limitations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how object pooling works and when it is (or isn't) beneficial in modern JVMs."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the impact of the 'happens-before' edge created by starting and joining a thread?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an object reference and an object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'new' keyword in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a variable declaration and initialization?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the scope of a variable in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between pass by value and pass by reference in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How does Java pass objects to methods: by value or by reference?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a package and a library in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is javac used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between 'java' and 'javac' commands?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a compiler error vs a runtime error?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of comments in Java? Name the types."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between single-line and multi-line comments?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a literal in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different types of literals in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an identifier in Java? What are the naming rules?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a keyword and an identifier?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is unicode support in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the char data type used for in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the range of byte, short, int, and long data types?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between float and double in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is type promotion in expressions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an operator in Java? Name the different categories."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is operator precedence in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between prefix and postfix increment operators?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is short-circuit evaluation in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between & and && operators?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the instanceof operator used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a nested class in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a top-level class and a nested class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the main purpose of the toString() method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the hashCode() and equals() contract?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a null pointer in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is NullPointerException and when does it occur?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an array of primitives and an array of objects?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the length property of an array?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you copy an array in Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Arrays class used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Arrays.sort() and Collections.sort()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is recursion? Give a simple example in Java."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class variable and a local variable?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between BufferedReader and Scanner for reading input?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between FileReader and FileInputStream?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between byte streams and character streams in Java I/O?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the InputStreamReader class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is serialization in Java? How do you make a class serializable?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the transient keyword during serialization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Serializable and Externalizable interfaces?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the java.util.Objects class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Builder design pattern and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Factory design pattern? Give a Java example."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Observer design pattern? How is it implemented in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Decorator design pattern? Give a Java example (e.g., I/O streams)."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the Adapter and Facade design patterns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dependency injection and how is it related to design patterns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between tight coupling and loose coupling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SOLID principle in object-oriented design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Single Responsibility Principle with a Java example?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Open/Closed Principle with a Java example?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Liskov Substitution Principle with a Java example?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Interface Segregation Principle with a Java example?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Dependency Inversion Principle with a Java example?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is JDBC? Explain the steps to connect to a database in Java."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Statement and PreparedStatement in JDBC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a connection pool and why is it used in JDBC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between JDBC and JPA/Hibernate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an annotation in Java? Give examples of built-in annotations."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Override, @Deprecated, and @SuppressWarnings?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a custom annotation in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between compile-time and runtime annotations (retention policy)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @FunctionalInterface annotation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Java NIO package and how is it different from java.io?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a ByteBuffer in Java NIO?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between blocking and non-blocking I/O in Java?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Path and Files class used for in NIO.2?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow class and a deep hierarchy in terms of maintainability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is object composition and how does it help avoid the fragile base class problem?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a marker interface and a functional interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Cloneable interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a String literal and a String object created with 'new'?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the intern() method used for in String?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between mutable and immutable objects with examples?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you make a custom class thread-safe?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between local class, anonymous class, and lambda expression?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is effectively final in the context of lambda expressions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is variable capturing in lambda expressions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Predicate, Function, Supplier, and Consumer functional interfaces?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the BiFunction interface and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is method chaining and how do Streams use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Collectors.groupingBy() and Collectors.partitioningBy()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between reduce() and collect() in Streams?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the JVM performs stack frame allocation for method calls."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between direct (off-heap) ByteBuffers and heap ByteBuffers in NIO?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how memory-mapped files work in Java NIO and their performance benefits."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a Selector-based non-blocking I/O model and a thread-per-connection model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how epoll/kqueue is leveraged by Java NIO Selectors under the hood."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous and asynchronous I/O in the context of AsynchronousFileChannel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the Java compiler performs type erasure with generics and its implications."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are bounded type parameters and wildcard types (? extends, ? super) in generics?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the PECS (Producer Extends, Consumer Super) principle in Java generics."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a heap pollution warning in generics and when does it occur?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how bridge methods are generated by the compiler for generic method overriding."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between raw types and parameterized types in legacy code interoperability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the JVM's tiered JIT compiler (C1 vs C2) optimizes hot code paths."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is inlining in JIT compilation and how does it affect performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is deoptimization in the JVM and when does it occur?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the JVM handles polymorphic call sites and vtable dispatch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between static binding and dynamic binding in Java?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how invokedynamic works and its role in lambda expression implementation."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between anonymous classes and lambdas at the bytecode level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how method references are compiled and invoked internally."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a monitor lock and Java's AQS-based locks in terms of fairness?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain what lock fairness means and the trade-offs of using a fair ReentrantLock."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is thread contention and how would you diagnose it using profiling tools?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would use jstack and thread dumps to diagnose a deadlock in production."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between heap dump analysis and thread dump analysis for troubleshooting?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would use VisualVM or JFR (Java Flight Recorder) to profile a Java application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is safepoint in the JVM and why does it matter for garbage collection pauses?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the concept of stop-the-world pauses and how modern collectors like ZGC minimize them."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between concurrent and parallel garbage collection phases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain card marking and the remembered set concept in generational garbage collectors."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a copying collector and a mark-sweep-compact collector?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how object promotion from young generation to old generation works and tenuring thresholds."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TLAB (Thread Local Allocation Buffer) and regular heap allocation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the JVM's metaspace differs from the older PermGen space."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a class data sharing (CDS) archive and how does it improve JVM startup time?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how AppCDS works and its benefits for microservice startup performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager class loading and lazy class loading in Java?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how static initialization order is determined across multiple classes with circular dependencies."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a checked exception hierarchy design and using unchecked exceptions for domain errors?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how exception stack trace capturing affects performance and how to avoid it in hot paths."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Throwable, Exception, Error, and RuntimeException in the class hierarchy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how try-with-resources handles multiple resources and their closing order."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between StampedLock's tryOptimisticRead and a traditional read-write lock's read lock in terms of writer starvation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how virtual threads (Project Loom) change the mental model for blocking I/O operations."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between structured concurrency and traditional thread management?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how pattern matching for instanceof simplifies type-checking code introduced in recent Java versions."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a sealed interface and a regular interface in terms of exhaustiveness checking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the performance implications of using records versus traditional POJOs with Lombok-generated boilerplate."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Executors factory methods and manually configuring a ThreadPoolExecutor?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the rejection policies (CallerRunsPolicy, AbortPolicy, etc.) available in ThreadPoolExecutor."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between corePoolSize, maximumPoolSize, and keepAliveTime in ThreadPoolExecutor?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Java Collections API used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a checked exception and a runtime exception in simple terms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Runnable and Thread in terms of design flexibility?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a stack and heap memory in Java?"
+  }
 ]
