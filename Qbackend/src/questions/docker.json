@@ -1,0 +1,17 @@
+[
+  { "difficulty": "Easy", "question": "What is Docker and what problem does it solve?" },
+  { "difficulty": "Easy", "question": "What is the difference between a Docker image and a Docker container?" },
+  { "difficulty": "Easy", "question": "What is a Dockerfile?" },
+  { "difficulty": "Easy", "question": "What is Docker Hub?" },
+  { "difficulty": "Medium", "question": "What is the difference between COPY and ADD in a Dockerfile?" },
+  { "difficulty": "Medium", "question": "What is Docker Compose and when do you use it?" },
+  { "difficulty": "Medium", "question": "What are Docker volumes and why are they used?" },
+  { "difficulty": "Medium", "question": "What is the difference between ENTRYPOINT and CMD in Dockerfile?" },
+  { "difficulty": "Medium", "question": "How do Docker networks work? Explain bridge, host, and overlay networks." },
+  { "difficulty": "Medium", "question": "What is a multi-stage build in Docker?" },
+  { "difficulty": "Hard", "question": "How do you optimize Docker image size?" },
+  { "difficulty": "Hard", "question": "Explain Docker Swarm and how it compares to Kubernetes." },
+  { "difficulty": "Hard", "question": "How do you secure a Docker container?" },
+  { "difficulty": "Hard", "question": "What is Docker layer caching and how does it work?" },
+  { "difficulty": "Hard", "question": "How would you monitor resource usage of Docker containers in production?" }
+]

@@ -1,0 +1,18 @@
+[
+  { "difficulty": "Easy", "question": "What is System Design?" },
+  { "difficulty": "Easy", "question": "What is the difference between horizontal and vertical scaling?" },
+  { "difficulty": "Easy", "question": "What is a load balancer and why is it used?" },
+  { "difficulty": "Easy", "question": "What is caching and why is it important in system design?" },
+  { "difficulty": "Medium", "question": "Explain CAP theorem in distributed systems." },
+  { "difficulty": "Medium", "question": "What is the difference between SQL and NoSQL databases in system design?" },
+  { "difficulty": "Medium", "question": "What is a CDN (Content Delivery Network) and when do you use it?" },
+  { "difficulty": "Medium", "question": "What is a message queue? When would you use Kafka vs RabbitMQ?" },
+  { "difficulty": "Medium", "question": "What is database sharding and when should it be used?" },
+  { "difficulty": "Medium", "question": "What is consistent hashing and how does it help in distributed systems?" },
+  { "difficulty": "Hard", "question": "Design a URL shortener like bit.ly. Walk through the architecture." },
+  { "difficulty": "Hard", "question": "Design a rate limiter for an API gateway." },
+  { "difficulty": "Hard", "question": "How would you design Twitter's news feed?" },
+  { "difficulty": "Hard", "question": "Design a distributed cache system like Redis." },
+  { "difficulty": "Hard", "question": "How would you design a notification system that handles millions of users?" },
+  { "difficulty": "Hard", "question": "Explain the SAGA pattern for distributed transactions." }
+]

@@ -1,0 +1,19 @@
+[
+  { "difficulty": "Easy", "question": "What is Python and what are its key features?" },
+  { "difficulty": "Easy", "question": "What is the difference between a list and a tuple in Python?" },
+  { "difficulty": "Easy", "question": "What is a dictionary in Python?" },
+  { "difficulty": "Easy", "question": "What is list comprehension in Python?" },
+  { "difficulty": "Easy", "question": "What is the difference between is and == in Python?" },
+  { "difficulty": "Medium", "question": "What are decorators in Python? Give an example." },
+  { "difficulty": "Medium", "question": "What is a generator in Python? How does yield work?" },
+  { "difficulty": "Medium", "question": "What is the GIL (Global Interpreter Lock) in Python?" },
+  { "difficulty": "Medium", "question": "What is the difference between deep copy and shallow copy in Python?" },
+  { "difficulty": "Medium", "question": "What are *args and **kwargs in Python?" },
+  { "difficulty": "Medium", "question": "What is duck typing in Python?" },
+  { "difficulty": "Medium", "question": "What are context managers and the 'with' statement in Python?" },
+  { "difficulty": "Hard", "question": "Explain metaclasses in Python." },
+  { "difficulty": "Hard", "question": "What is asyncio in Python? Explain async/await." },
+  { "difficulty": "Hard", "question": "How does Python's garbage collection work?" },
+  { "difficulty": "Hard", "question": "What are Python descriptors? Explain __get__, __set__, __delete__." },
+  { "difficulty": "Hard", "question": "How does Python's multiprocessing module differ from threading?" }
+]

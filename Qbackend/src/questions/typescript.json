@@ -1,0 +1,18 @@
+[
+  { "difficulty": "Easy", "question": "What is TypeScript and how is it different from JavaScript?" },
+  { "difficulty": "Easy", "question": "What are type annotations in TypeScript?" },
+  { "difficulty": "Easy", "question": "What is the difference between interface and type in TypeScript?" },
+  { "difficulty": "Easy", "question": "What are enums in TypeScript?" },
+  { "difficulty": "Easy", "question": "What is the 'any' type and why should you avoid it?" },
+  { "difficulty": "Medium", "question": "What are generics in TypeScript? Give a practical example." },
+  { "difficulty": "Medium", "question": "What is the difference between unknown and any in TypeScript?" },
+  { "difficulty": "Medium", "question": "What are union and intersection types in TypeScript?" },
+  { "difficulty": "Medium", "question": "What is type narrowing in TypeScript?" },
+  { "difficulty": "Medium", "question": "What are utility types in TypeScript? Explain Partial, Required, Pick, Omit." },
+  { "difficulty": "Medium", "question": "What is a discriminated union in TypeScript?" },
+  { "difficulty": "Hard", "question": "What are conditional types in TypeScript? Give an example." },
+  { "difficulty": "Hard", "question": "What are mapped types in TypeScript?" },
+  { "difficulty": "Hard", "question": "Explain TypeScript's structural typing system." },
+  { "difficulty": "Hard", "question": "What is the infer keyword in TypeScript and how is it used?" },
+  { "difficulty": "Hard", "question": "How do you create a type-safe event emitter in TypeScript?" }
+]

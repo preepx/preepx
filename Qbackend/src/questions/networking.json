@@ -1,0 +1,14 @@
+[
+  { "difficulty": "Easy", "question": "What is the OSI model? Name all 7 layers." },
+  { "difficulty": "Easy", "question": "What is the difference between TCP and UDP?" },
+  { "difficulty": "Easy", "question": "What is an IP address and what is the difference between IPv4 and IPv6?" },
+  { "difficulty": "Medium", "question": "What is the three-way handshake in TCP?" },
+  { "difficulty": "Medium", "question": "What is DNS and how does it work?" },
+  { "difficulty": "Medium", "question": "What is the difference between HTTP and HTTPS?" },
+  { "difficulty": "Medium", "question": "What is a subnet mask and CIDR notation?" },
+  { "difficulty": "Medium", "question": "What is NAT (Network Address Translation)?" },
+  { "difficulty": "Hard", "question": "Explain how SSL/TLS handshake works." },
+  { "difficulty": "Hard", "question": "What is BGP and how does it work in the internet?" },
+  { "difficulty": "Hard", "question": "What is a CDN and how does Anycast routing work?" },
+  { "difficulty": "Hard", "question": "What is the difference between a router, switch, and hub?" }
+]

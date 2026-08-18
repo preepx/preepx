@@ -1,0 +1,14 @@
+[
+  { "difficulty": "Easy", "question": "What is Next.js and how is it different from plain React?" },
+  { "difficulty": "Easy", "question": "What is the difference between SSR and SSG in Next.js?" },
+  { "difficulty": "Easy", "question": "What is the file-system based routing in Next.js?" },
+  { "difficulty": "Medium", "question": "What is getServerSideProps in Next.js and when do you use it?" },
+  { "difficulty": "Medium", "question": "What is getStaticProps and getStaticPaths in Next.js?" },
+  { "difficulty": "Medium", "question": "What is ISR (Incremental Static Regeneration) in Next.js?" },
+  { "difficulty": "Medium", "question": "What are API Routes in Next.js?" },
+  { "difficulty": "Medium", "question": "What is the App Router in Next.js 13+ and how does it differ from Pages Router?" },
+  { "difficulty": "Hard", "question": "What are Server Components in Next.js 13+?" },
+  { "difficulty": "Hard", "question": "How do you implement authentication in Next.js using NextAuth.js?" },
+  { "difficulty": "Hard", "question": "How does Next.js optimize images?" },
+  { "difficulty": "Hard", "question": "Explain middleware in Next.js and its use cases." }
+]

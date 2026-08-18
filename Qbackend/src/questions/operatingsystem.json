@@ -1,0 +1,14 @@
+[
+  { "difficulty": "Easy", "question": "What is an operating system and what are its main functions?" },
+  { "difficulty": "Easy", "question": "What is the difference between a process and a thread?" },
+  { "difficulty": "Easy", "question": "What is a deadlock in operating systems?" },
+  { "difficulty": "Medium", "question": "What are the different CPU scheduling algorithms?" },
+  { "difficulty": "Medium", "question": "What is virtual memory and how does paging work?" },
+  { "difficulty": "Medium", "question": "What is the difference between preemptive and non-preemptive scheduling?" },
+  { "difficulty": "Medium", "question": "What is semaphore in OS and how is it used for synchronization?" },
+  { "difficulty": "Medium", "question": "What are the conditions for deadlock and how can it be prevented?" },
+  { "difficulty": "Hard", "question": "Explain the Banker's algorithm for deadlock avoidance." },
+  { "difficulty": "Hard", "question": "What is thrashing in operating systems and how is it prevented?" },
+  { "difficulty": "Hard", "question": "Explain page replacement algorithms: FIFO, LRU, and Optimal." },
+  { "difficulty": "Hard", "question": "What is the difference between monolithic kernel and microkernel?" }
+]

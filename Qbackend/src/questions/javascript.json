@@ -1,0 +1,22 @@
+[
+  { "difficulty": "Easy", "question": "What is the difference between var, let, and const in JavaScript?" },
+  { "difficulty": "Easy", "question": "What is hoisting in JavaScript?" },
+  { "difficulty": "Easy", "question": "What is a closure in JavaScript?" },
+  { "difficulty": "Easy", "question": "What is the difference between null and undefined?" },
+  { "difficulty": "Easy", "question": "What are arrow functions and how do they differ from regular functions?" },
+  { "difficulty": "Easy", "question": "What is the difference between == and === in JavaScript?" },
+  { "difficulty": "Medium", "question": "Explain the concept of 'this' in JavaScript and how it changes in different contexts." },
+  { "difficulty": "Medium", "question": "What is the prototype chain in JavaScript?" },
+  { "difficulty": "Medium", "question": "Explain event bubbling and event capturing in JavaScript." },
+  { "difficulty": "Medium", "question": "What are Promises in JavaScript? Explain the states." },
+  { "difficulty": "Medium", "question": "What is the difference between call(), apply(), and bind()?" },
+  { "difficulty": "Medium", "question": "What is destructuring in JavaScript? Give examples." },
+  { "difficulty": "Medium", "question": "What is the spread operator and rest parameter in JavaScript?" },
+  { "difficulty": "Medium", "question": "What is a generator function in JavaScript?" },
+  { "difficulty": "Hard", "question": "Explain the JavaScript event loop, call stack, and microtask queue." },
+  { "difficulty": "Hard", "question": "What is the difference between deep copy and shallow copy in JavaScript?" },
+  { "difficulty": "Hard", "question": "Explain WeakMap and WeakSet and their use cases." },
+  { "difficulty": "Hard", "question": "What is debouncing and throttling? How do you implement them?" },
+  { "difficulty": "Hard", "question": "What is a Proxy object in JavaScript? What are its use cases?" },
+  { "difficulty": "Hard", "question": "Explain how JavaScript handles memory management and garbage collection." }
+]

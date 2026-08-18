@@ -1,0 +1,22 @@
+[
+  { "difficulty": "Easy", "question": "What is Node.js and how is it different from browser JavaScript?" },
+  { "difficulty": "Easy", "question": "What is the event loop in Node.js?" },
+  { "difficulty": "Easy", "question": "What is npm and what is the purpose of package.json?" },
+  { "difficulty": "Easy", "question": "What are modules in Node.js? Difference between require and import?" },
+  { "difficulty": "Easy", "question": "What is the difference between synchronous and asynchronous code in Node.js?" },
+  { "difficulty": "Easy", "question": "What is a callback function in Node.js?" },
+  { "difficulty": "Medium", "question": "Explain Promises and async/await in Node.js." },
+  { "difficulty": "Medium", "question": "What is the Node.js cluster module and when would you use it?" },
+  { "difficulty": "Medium", "question": "What is the difference between process.nextTick() and setImmediate()?" },
+  { "difficulty": "Medium", "question": "Explain streams in Node.js and their types." },
+  { "difficulty": "Medium", "question": "What is middleware in Node.js/Express?" },
+  { "difficulty": "Medium", "question": "How do you handle errors in async/await code in Node.js?" },
+  { "difficulty": "Medium", "question": "What is the Buffer class in Node.js and when is it used?" },
+  { "difficulty": "Medium", "question": "How does Node.js handle child processes?" },
+  { "difficulty": "Hard", "question": "Explain Node.js event-driven architecture in detail." },
+  { "difficulty": "Hard", "question": "What is libuv and how does it enable Node.js non-blocking I/O?" },
+  { "difficulty": "Hard", "question": "How would you prevent memory leaks in a Node.js application?" },
+  { "difficulty": "Hard", "question": "Explain Worker Threads in Node.js and when to use them over clustering." },
+  { "difficulty": "Hard", "question": "How do you implement rate limiting in a Node.js API?" },
+  { "difficulty": "Hard", "question": "Describe strategies to scale a Node.js application for production." }
+]

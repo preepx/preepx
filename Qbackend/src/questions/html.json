@@ -1,0 +1,14 @@
+[
+  { "difficulty": "Easy", "question": "What is HTML and what does it stand for?" },
+  { "difficulty": "Easy", "question": "What is the difference between block-level and inline elements in HTML?" },
+  { "difficulty": "Easy", "question": "What are semantic HTML elements? Give examples." },
+  { "difficulty": "Easy", "question": "What is the purpose of the <!DOCTYPE html> declaration?" },
+  { "difficulty": "Medium", "question": "What is the difference between id and class attributes in HTML?" },
+  { "difficulty": "Medium", "question": "What are HTML data attributes and how are they used?" },
+  { "difficulty": "Medium", "question": "What is the difference between localStorage, sessionStorage, and cookies?" },
+  { "difficulty": "Medium", "question": "What is the HTML Canvas element used for?" },
+  { "difficulty": "Medium", "question": "What are ARIA attributes in HTML and why are they important for accessibility?" },
+  { "difficulty": "Hard", "question": "What is the Shadow DOM in web components?" },
+  { "difficulty": "Hard", "question": "How does the browser render HTML? Explain the critical rendering path." },
+  { "difficulty": "Hard", "question": "What are Web Workers and how do they help with performance?" }
+]

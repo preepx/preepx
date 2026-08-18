@@ -1,0 +1,17 @@
+[
+  { "difficulty": "Easy", "question": "What is MySQL and what type of database is it?" },
+  { "difficulty": "Easy", "question": "What is the difference between PRIMARY KEY and UNIQUE KEY in MySQL?" },
+  { "difficulty": "Easy", "question": "What is a foreign key in MySQL?" },
+  { "difficulty": "Easy", "question": "What is the difference between CHAR and VARCHAR in MySQL?" },
+  { "difficulty": "Medium", "question": "Explain the different types of JOINs in MySQL with examples." },
+  { "difficulty": "Medium", "question": "What is a stored procedure in MySQL?" },
+  { "difficulty": "Medium", "question": "What are database indexes and how do they improve performance?" },
+  { "difficulty": "Medium", "question": "What is the difference between HAVING and WHERE clause in MySQL?" },
+  { "difficulty": "Medium", "question": "What is normalization in MySQL? Explain 1NF, 2NF, 3NF." },
+  { "difficulty": "Medium", "question": "What is a transaction in MySQL? Explain ACID properties." },
+  { "difficulty": "Hard", "question": "How does the MySQL query optimizer work?" },
+  { "difficulty": "Hard", "question": "Explain MySQL replication (master-slave)." },
+  { "difficulty": "Hard", "question": "What is the InnoDB storage engine and how does it differ from MyISAM?" },
+  { "difficulty": "Hard", "question": "How do you handle deadlocks in MySQL?" },
+  { "difficulty": "Hard", "question": "Explain partitioning in MySQL and its types." }
+]

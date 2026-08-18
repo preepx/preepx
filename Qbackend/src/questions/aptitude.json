@@ -1,0 +1,12 @@
+[
+  { "difficulty": "Easy", "question": "If a train travels 60 km in 1 hour, how far will it travel in 2.5 hours?" },
+  { "difficulty": "Easy", "question": "What is 15% of 200?" },
+  { "difficulty": "Easy", "question": "A shopkeeper sells a shirt for Rs. 500, making a 25% profit. What is the cost price?" },
+  { "difficulty": "Medium", "question": "Two pipes A and B can fill a tank in 12 and 15 hours respectively. How long to fill the tank together?" },
+  { "difficulty": "Medium", "question": "A and B can do a work in 10 and 15 days respectively. In how many days can they finish it together?" },
+  { "difficulty": "Medium", "question": "The ratio of A's and B's salaries is 3:4. If B's salary is Rs. 8000, what is A's salary?" },
+  { "difficulty": "Medium", "question": "What is the compound interest on Rs. 10000 for 2 years at 10% per annum?" },
+  { "difficulty": "Hard", "question": "A train 250m long passes a pole in 25 seconds. Find its speed in km/h." },
+  { "difficulty": "Hard", "question": "In a class, 40% students failed in Math, 30% in Science, and 15% in both. What % passed in both?" },
+  { "difficulty": "Hard", "question": "Find the next number in the series: 2, 6, 12, 20, 30, ?" }
+]

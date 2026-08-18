@@ -1,0 +1,18 @@
+[
+  { "difficulty": "Easy", "question": "What is OOP and what are its four main principles?" },
+  { "difficulty": "Easy", "question": "What is a class and what is an object in OOP?" },
+  { "difficulty": "Easy", "question": "What is encapsulation? Give an example." },
+  { "difficulty": "Easy", "question": "What is inheritance in OOP?" },
+  { "difficulty": "Easy", "question": "What is polymorphism? Give an example." },
+  { "difficulty": "Easy", "question": "What is abstraction in OOP?" },
+  { "difficulty": "Medium", "question": "What is the difference between overriding and overloading?" },
+  { "difficulty": "Medium", "question": "What is an abstract class vs an interface?" },
+  { "difficulty": "Medium", "question": "What is the SOLID principle?" },
+  { "difficulty": "Medium", "question": "What is a design pattern? Name a few common ones." },
+  { "difficulty": "Medium", "question": "What is the Singleton design pattern? How is it implemented?" },
+  { "difficulty": "Medium", "question": "What is the difference between composition and inheritance?" },
+  { "difficulty": "Hard", "question": "Explain the Factory design pattern with an example." },
+  { "difficulty": "Hard", "question": "What is the Observer design pattern?" },
+  { "difficulty": "Hard", "question": "Explain the Dependency Injection principle." },
+  { "difficulty": "Hard", "question": "What is the difference between DRY, KISS, and YAGNI principles?" }
+]

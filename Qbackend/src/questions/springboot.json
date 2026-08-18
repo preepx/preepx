@@ -1,0 +1,14 @@
+[
+  { "difficulty": "Easy", "question": "What is Spring Boot and how does it simplify Spring development?" },
+  { "difficulty": "Easy", "question": "What is Dependency Injection in Spring Boot?" },
+  { "difficulty": "Easy", "question": "What is @RestController annotation in Spring Boot?" },
+  { "difficulty": "Medium", "question": "What is Spring Data JPA and how does it work?" },
+  { "difficulty": "Medium", "question": "What is the difference between @Component, @Service, and @Repository in Spring?" },
+  { "difficulty": "Medium", "question": "What is Spring Security and how do you implement JWT authentication?" },
+  { "difficulty": "Medium", "question": "What is Spring Boot Auto-Configuration?" },
+  { "difficulty": "Medium", "question": "What is the difference between @RequestParam and @PathVariable in Spring Boot?" },
+  { "difficulty": "Hard", "question": "Explain the Spring Bean lifecycle." },
+  { "difficulty": "Hard", "question": "What is Spring AOP (Aspect Oriented Programming)?" },
+  { "difficulty": "Hard", "question": "How does Spring Boot handle transactions? What is @Transactional?" },
+  { "difficulty": "Hard", "question": "What is Spring Cloud and how does it support microservices?" }
+]

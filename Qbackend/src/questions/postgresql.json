@@ -1,0 +1,13 @@
+[
+  { "difficulty": "Easy", "question": "What is PostgreSQL and how does it differ from MySQL?" },
+  { "difficulty": "Easy", "question": "What is the difference between SQL and PostgreSQL?" },
+  { "difficulty": "Medium", "question": "What are PostgreSQL schemas and how do they differ from databases?" },
+  { "difficulty": "Medium", "question": "What are CTEs (Common Table Expressions) in PostgreSQL?" },
+  { "difficulty": "Medium", "question": "What is a window function in PostgreSQL?" },
+  { "difficulty": "Medium", "question": "What is JSONB in PostgreSQL and how is it different from JSON?" },
+  { "difficulty": "Medium", "question": "What is the difference between INNER JOIN and OUTER JOIN in PostgreSQL?" },
+  { "difficulty": "Hard", "question": "Explain MVCC (Multi-Version Concurrency Control) in PostgreSQL." },
+  { "difficulty": "Hard", "question": "What are table partitions in PostgreSQL?" },
+  { "difficulty": "Hard", "question": "How do you create and use full-text search in PostgreSQL?" },
+  { "difficulty": "Hard", "question": "What are GiST and GIN indexes in PostgreSQL?" }
+]

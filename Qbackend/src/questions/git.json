@@ -1,0 +1,17 @@
+[
+  { "difficulty": "Easy", "question": "What is Git and why is version control important?" },
+  { "difficulty": "Easy", "question": "What is the difference between git pull and git fetch?" },
+  { "difficulty": "Easy", "question": "What is a branch in Git?" },
+  { "difficulty": "Easy", "question": "What is the difference between git merge and git rebase?" },
+  { "difficulty": "Easy", "question": "What is .gitignore and how do you use it?" },
+  { "difficulty": "Medium", "question": "Explain the Git branching strategy (Gitflow)." },
+  { "difficulty": "Medium", "question": "What is git cherry-pick and when would you use it?" },
+  { "difficulty": "Medium", "question": "What is git stash and how do you use it?" },
+  { "difficulty": "Medium", "question": "How do you resolve a merge conflict in Git?" },
+  { "difficulty": "Medium", "question": "What is the difference between git reset and git revert?" },
+  { "difficulty": "Hard", "question": "Explain git bisect and how it helps debug issues." },
+  { "difficulty": "Hard", "question": "What is git reflog and when is it useful?" },
+  { "difficulty": "Hard", "question": "Explain git hooks and their use cases." },
+  { "difficulty": "Hard", "question": "What is the difference between a fast-forward merge and a three-way merge?" },
+  { "difficulty": "Hard", "question": "How do you squash commits in Git and when should you do it?" }
+]

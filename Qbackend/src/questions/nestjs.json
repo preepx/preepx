@@ -1,0 +1,12 @@
+[
+  { "difficulty": "Easy", "question": "What is NestJS and what is it built on top of?" },
+  { "difficulty": "Easy", "question": "What are modules in NestJS?" },
+  { "difficulty": "Medium", "question": "What is the difference between @Injectable() and @Controller() in NestJS?" },
+  { "difficulty": "Medium", "question": "What are Guards in NestJS?" },
+  { "difficulty": "Medium", "question": "What are Interceptors in NestJS?" },
+  { "difficulty": "Medium", "question": "What are Pipes in NestJS and how are they used for validation?" },
+  { "difficulty": "Hard", "question": "How does NestJS implement dependency injection?" },
+  { "difficulty": "Hard", "question": "What are microservices in NestJS and how are they communicated?" },
+  { "difficulty": "Hard", "question": "How do you implement WebSocket support in NestJS?" },
+  { "difficulty": "Hard", "question": "What is CQRS pattern in NestJS?" }
+]

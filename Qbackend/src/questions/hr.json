@@ -1,0 +1,15 @@
+[
+  { "difficulty": "Easy", "question": "Tell me about yourself." },
+  { "difficulty": "Easy", "question": "Why do you want to work at this company?" },
+  { "difficulty": "Easy", "question": "What are your greatest strengths?" },
+  { "difficulty": "Easy", "question": "What are your weaknesses?" },
+  { "difficulty": "Easy", "question": "Where do you see yourself in 5 years?" },
+  { "difficulty": "Medium", "question": "Describe a challenging project you worked on and how you handled it." },
+  { "difficulty": "Medium", "question": "Tell me about a time you had a conflict with a team member and how you resolved it." },
+  { "difficulty": "Medium", "question": "How do you handle tight deadlines?" },
+  { "difficulty": "Medium", "question": "Tell me about a time you failed and what you learned from it." },
+  { "difficulty": "Medium", "question": "How do you prioritize tasks when you have multiple deadlines?" },
+  { "difficulty": "Hard", "question": "Describe a situation where you had to make a difficult technical decision with limited information." },
+  { "difficulty": "Hard", "question": "How have you mentored or helped junior developers grow?" },
+  { "difficulty": "Hard", "question": "Tell me about a time you disagreed with your manager and how you handled it." }
+]

@@ -1,0 +1,16 @@
+[
+  { "difficulty": "Easy", "question": "What is CSS and what is it used for?" },
+  { "difficulty": "Easy", "question": "What is the difference between margin and padding in CSS?" },
+  { "difficulty": "Easy", "question": "What is the CSS Box Model?" },
+  { "difficulty": "Easy", "question": "What is the difference between relative, absolute, fixed, and sticky positioning in CSS?" },
+  { "difficulty": "Medium", "question": "What is Flexbox in CSS? Explain the main properties." },
+  { "difficulty": "Medium", "question": "What is CSS Grid and how does it differ from Flexbox?" },
+  { "difficulty": "Medium", "question": "What are CSS pseudo-classes and pseudo-elements? Give examples." },
+  { "difficulty": "Medium", "question": "What is CSS specificity and how is it calculated?" },
+  { "difficulty": "Medium", "question": "What are CSS custom properties (variables)?" },
+  { "difficulty": "Medium", "question": "What is a CSS media query and how is it used for responsive design?" },
+  { "difficulty": "Hard", "question": "What is the CSS cascade and how does it determine which styles apply?" },
+  { "difficulty": "Hard", "question": "What is CSS-in-JS and what are its trade-offs?" },
+  { "difficulty": "Hard", "question": "Explain CSS animations and transitions. What is the difference?" },
+  { "difficulty": "Hard", "question": "What is the will-change CSS property and when should you use it?" }
+]

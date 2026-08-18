@@ -1,0 +1,17 @@
+[
+  { "difficulty": "Easy", "question": "What is Express.js and why is it popular?" },
+  { "difficulty": "Easy", "question": "How do you create a basic Express server?" },
+  { "difficulty": "Easy", "question": "What is routing in Express.js?" },
+  { "difficulty": "Easy", "question": "What is the purpose of app.use() in Express?" },
+  { "difficulty": "Medium", "question": "What is the difference between app.get() and app.use() in Express?" },
+  { "difficulty": "Medium", "question": "How do you implement error handling middleware in Express?" },
+  { "difficulty": "Medium", "question": "What is the difference between query params, route params, and request body in Express?" },
+  { "difficulty": "Medium", "question": "How do you implement CORS in Express?" },
+  { "difficulty": "Medium", "question": "What is Express Router and how is it used?" },
+  { "difficulty": "Medium", "question": "How do you serve static files in Express?" },
+  { "difficulty": "Hard", "question": "How do you implement JWT authentication middleware in Express?" },
+  { "difficulty": "Hard", "question": "Explain how to structure a large-scale Express application using MVC pattern." },
+  { "difficulty": "Hard", "question": "How do you implement file uploads in Express using Multer?" },
+  { "difficulty": "Hard", "question": "How would you implement rate limiting in Express?" },
+  { "difficulty": "Hard", "question": "Explain the difference between next() and next(err) in Express middleware." }
+]

@@ -1,0 +1,14 @@
+[
+  { "difficulty": "Easy", "question": "What is DBMS and what are its advantages over file systems?" },
+  { "difficulty": "Easy", "question": "What is the difference between DDL and DML in databases?" },
+  { "difficulty": "Easy", "question": "What are the ACID properties of a transaction?" },
+  { "difficulty": "Medium", "question": "What is normalization and why is it important?" },
+  { "difficulty": "Medium", "question": "What is the difference between OLTP and OLAP systems?" },
+  { "difficulty": "Medium", "question": "What are different types of database indexes?" },
+  { "difficulty": "Medium", "question": "What is a deadlock in a database and how is it resolved?" },
+  { "difficulty": "Medium", "question": "What are the different isolation levels in a DBMS?" },
+  { "difficulty": "Hard", "question": "Explain B-Tree and B+ Tree indexes and how they work." },
+  { "difficulty": "Hard", "question": "What is the two-phase locking protocol in DBMS?" },
+  { "difficulty": "Hard", "question": "What is denormalization and when should it be applied?" },
+  { "difficulty": "Hard", "question": "What is the difference between a clustered and non-clustered index?" }
+]

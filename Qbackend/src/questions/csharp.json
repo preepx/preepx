@@ -1,0 +1,12 @@
+[
+  { "difficulty": "Easy", "question": "What is C# and what platform is it primarily used on?" },
+  { "difficulty": "Easy", "question": "What is the difference between value types and reference types in C#?" },
+  { "difficulty": "Medium", "question": "What is LINQ in C# and how is it used?" },
+  { "difficulty": "Medium", "question": "What is async/await in C# and how does it work?" },
+  { "difficulty": "Medium", "question": "What is the difference between IEnumerable and IQueryable in C#?" },
+  { "difficulty": "Medium", "question": "What are delegates and events in C#?" },
+  { "difficulty": "Hard", "question": "What is the garbage collector in .NET and how does it work?" },
+  { "difficulty": "Hard", "question": "What is dependency injection in ASP.NET Core?" },
+  { "difficulty": "Hard", "question": "Explain the Entity Framework Core lifecycle." },
+  { "difficulty": "Hard", "question": "What is the difference between Task and Thread in C#?" }
+]

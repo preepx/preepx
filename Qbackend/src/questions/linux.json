@@ -1,0 +1,13 @@
+[
+  { "difficulty": "Easy", "question": "What is Linux and what is the Linux kernel?" },
+  { "difficulty": "Easy", "question": "What is the difference between a process and a thread in Linux?" },
+  { "difficulty": "Easy", "question": "What is the chmod command in Linux?" },
+  { "difficulty": "Medium", "question": "Explain the Linux file permission system (rwx)." },
+  { "difficulty": "Medium", "question": "What is a cron job in Linux and how do you schedule one?" },
+  { "difficulty": "Medium", "question": "What is the difference between hard links and soft links in Linux?" },
+  { "difficulty": "Medium", "question": "What is the Linux process management? Explain fork() and exec()." },
+  { "difficulty": "Hard", "question": "What is the Linux kernel scheduler? Explain CFS (Completely Fair Scheduler)." },
+  { "difficulty": "Hard", "question": "What are Linux namespaces and how do they enable containerization?" },
+  { "difficulty": "Hard", "question": "What are Linux cgroups and how do they work?" },
+  { "difficulty": "Hard", "question": "How does Linux virtual memory management work?" }
+]

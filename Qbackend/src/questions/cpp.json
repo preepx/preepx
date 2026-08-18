@@ -1,0 +1,13 @@
+[
+  { "difficulty": "Easy", "question": "What is C++ and how is it different from C?" },
+  { "difficulty": "Easy", "question": "What is a pointer in C++?" },
+  { "difficulty": "Easy", "question": "What is a reference in C++? How is it different from a pointer?" },
+  { "difficulty": "Medium", "question": "What is the Rule of Three/Five/Zero in C++?" },
+  { "difficulty": "Medium", "question": "What are templates in C++?" },
+  { "difficulty": "Medium", "question": "What is RAII (Resource Acquisition Is Initialization) in C++?" },
+  { "difficulty": "Medium", "question": "What is the STL (Standard Template Library) in C++?" },
+  { "difficulty": "Hard", "question": "What is move semantics in C++11 and how does it improve performance?" },
+  { "difficulty": "Hard", "question": "What are smart pointers in C++? Explain unique_ptr, shared_ptr, weak_ptr." },
+  { "difficulty": "Hard", "question": "What is undefined behavior in C++ and how do you avoid it?" },
+  { "difficulty": "Hard", "question": "Explain the vtable and virtual function mechanism in C++." }
+]

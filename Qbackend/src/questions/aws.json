@@ -1,0 +1,14 @@
+[
+  { "difficulty": "Easy", "question": "What is AWS and what does cloud computing mean?" },
+  { "difficulty": "Easy", "question": "What is the difference between EC2 and Lambda in AWS?" },
+  { "difficulty": "Easy", "question": "What is S3 in AWS and what is it used for?" },
+  { "difficulty": "Medium", "question": "What is IAM in AWS and how does it work?" },
+  { "difficulty": "Medium", "question": "What is VPC in AWS and why is it important?" },
+  { "difficulty": "Medium", "question": "What is the difference between RDS and DynamoDB in AWS?" },
+  { "difficulty": "Medium", "question": "What is CloudFront in AWS?" },
+  { "difficulty": "Medium", "question": "What is the difference between vertical and horizontal scaling in AWS?" },
+  { "difficulty": "Hard", "question": "Explain AWS ECS and EKS and when you'd use each." },
+  { "difficulty": "Hard", "question": "What is AWS SQS and how does it differ from SNS?" },
+  { "difficulty": "Hard", "question": "How do you design a highly available architecture on AWS?" },
+  { "difficulty": "Hard", "question": "What is the shared responsibility model in AWS?" }
+]

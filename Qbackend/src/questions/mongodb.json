@@ -1,0 +1,18 @@
+[
+  { "difficulty": "Easy", "question": "What is MongoDB and how is it different from SQL databases?" },
+  { "difficulty": "Easy", "question": "What is a document in MongoDB?" },
+  { "difficulty": "Easy", "question": "What is a collection in MongoDB?" },
+  { "difficulty": "Easy", "question": "What is BSON in MongoDB?" },
+  { "difficulty": "Medium", "question": "What is an index in MongoDB and why is it important?" },
+  { "difficulty": "Medium", "question": "Explain the aggregation pipeline in MongoDB with an example." },
+  { "difficulty": "Medium", "question": "What is the difference between find() and findOne() in MongoDB?" },
+  { "difficulty": "Medium", "question": "What is the $lookup operator in MongoDB aggregation?" },
+  { "difficulty": "Medium", "question": "What are MongoDB transactions and when do you use them?" },
+  { "difficulty": "Medium", "question": "What is Mongoose and how does it relate to MongoDB?" },
+  { "difficulty": "Medium", "question": "What is schema validation in MongoDB?" },
+  { "difficulty": "Hard", "question": "Explain MongoDB replication and replica sets." },
+  { "difficulty": "Hard", "question": "What is MongoDB sharding and when is it needed?" },
+  { "difficulty": "Hard", "question": "How do you optimize query performance in MongoDB?" },
+  { "difficulty": "Hard", "question": "What is the WiredTiger storage engine in MongoDB?" },
+  { "difficulty": "Hard", "question": "Explain the difference between embedding and referencing documents in MongoDB." }
+]

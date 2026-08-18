@@ -1,0 +1,12 @@
+[
+  { "difficulty": "Easy", "question": "What is Redis and why is it used?" },
+  { "difficulty": "Easy", "question": "What are the main data structures supported by Redis?" },
+  { "difficulty": "Medium", "question": "What is the difference between Redis caching strategies: write-through, write-back, write-around?" },
+  { "difficulty": "Medium", "question": "What is Redis Pub/Sub and how does it work?" },
+  { "difficulty": "Medium", "question": "What is Redis Persistence? Explain RDB and AOF." },
+  { "difficulty": "Medium", "question": "How do you implement session management using Redis?" },
+  { "difficulty": "Hard", "question": "What is Redis Cluster and how does it achieve horizontal scaling?" },
+  { "difficulty": "Hard", "question": "How do you implement distributed locking with Redis?" },
+  { "difficulty": "Hard", "question": "What is Redis Sentinel and how does it provide high availability?" },
+  { "difficulty": "Hard", "question": "How do you prevent cache stampede in Redis?" }
+]

@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const axios = require("axios");
 const Interview = require("../../../models/Interview");
 const User = require("../../../models/User");
@@ -9,6 +11,45 @@ const envConfig = require("../../config/env.config");
 const aiService = require("../../services/ai.service");
 
 let previousQuestions = new Set();
+
+const getLocalQuestions = (skill, count, difficulty) => {
+  try {
+    if (!skill || count <= 0) return [];
+    
+    // Sometimes skill can be a comma-separated list like "React, Node.js"
+    // For simplicity, we take the first skill if there are commas.
+    const primarySkill = skill.split(',')[0].trim();
+    const slug = primarySkill.toLowerCase().replace(/\s+/g, "");
+    
+    const qbackendPath = path.join(__dirname, "../../../../../Qbackend/src/questions");
+    const filePath = path.join(qbackendPath, `${slug}.json`);
+    
+    if (!fs.existsSync(filePath)) {
+      return [];
+    }
+    
+    const raw = fs.readFileSync(filePath, "utf-8");
+    let questions = JSON.parse(raw);
+    
+    // If difficulty is specified and valid, filter
+    const validDiffs = ["easy", "medium", "hard"];
+    if (difficulty && validDiffs.includes(difficulty.toLowerCase())) {
+      const diffQuestions = questions.filter(q => q.difficulty && q.difficulty.toLowerCase() === difficulty.toLowerCase());
+      // Only use filtered if it has enough questions to be useful, else fallback to all
+      if (diffQuestions.length >= count) {
+        questions = diffQuestions;
+      }
+    }
+    
+    if (questions.length === 0) return [];
+    
+    const shuffled = [...questions].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count).map(q => q.question);
+  } catch (error) {
+    console.error("Error fetching local questions:", error);
+    return [];
+  }
+};
 
 const updateStreak = async (userId) => {
   const user = await User.findById(userId);
@@ -47,52 +88,70 @@ const generateInterviewQuestions = async (userId, data) => {
     }
   }
 
-  const diffMap = { easy: "beginner-friendly", medium: "intermediate", hard: "advanced and challenging" };
-  const prompt = `
-    You are an expert technical interviewer.
-    Target Role: ${jobTitle}
-    Specific Skills/Topics to Test: ${jobTopic}
-    
-    Task: Generate exactly ${count} ${diffMap[difficulty] || "intermediate"} ${interviewType} interview questions.
-    CRITICAL INSTRUCTION: Your questions MUST STRICTLY revolve around the "Specific Skills/Topics" provided above (${jobTopic}). Do not ask generic questions outside of these specific skills.
+  // Target ratio: 60% JSON, 40% AI
+  const targetJsonCount = Math.ceil(count * 0.6);
+  
+  // Try to fetch local questions from Qbackend
+  const localQuestions = getLocalQuestions(jobTopic, targetJsonCount, difficulty);
+  const actualJsonCount = localQuestions.length;
+  const aiCount = count - actualJsonCount;
+  
+  let aiQuestions = [];
 
-    Rules:
-    - Return ONLY a numbered list of questions.
-    - No introductions, no explanations, no answers.
-    - Do NOT repeat these previous questions: ${Array.from(previousQuestions).join(" | ")}
-  `;
+  if (aiCount > 0) {
+    const diffMap = { easy: "beginner-friendly", medium: "intermediate", hard: "advanced and challenging" };
+    const prompt = `
+      You are an expert technical interviewer.
+      Target Role: ${jobTitle}
+      Specific Skills/Topics to Test: ${jobTopic}
+      
+      Task: Generate exactly ${aiCount} ${diffMap[difficulty] || "intermediate"} ${interviewType} interview questions.
+      CRITICAL INSTRUCTION: Your questions MUST STRICTLY revolve around the "Specific Skills/Topics" provided above (${jobTopic}). Do not ask generic questions outside of these specific skills.
 
-  try {
-    const rawText = await aiService.generateText(prompt, {
-      temperature: 0.6,
-      max_tokens: 1000,
-    });
-    const questions = rawText
-      .split("\n")
-      .map((q) => q.replace(/^\d+[\.\)]\s*/, "").trim())
-      .filter((q) => q.length > 0)
-      .slice(0, count);
+      Rules:
+      - Return ONLY a numbered list of questions.
+      - No introductions, no explanations, no answers.
+      - Do NOT repeat these previous questions: ${Array.from(previousQuestions).join(" | ")}
+    `;
 
-    questions.forEach((q) => previousQuestions.add(q));
-
-    let interview = null;
-    if (userId) {
-      interview = await Interview.create({
-        userId,
-        jobTitle,
-        jobTopic,
-        questions,
-        difficulty,
-        interviewType,
-        status: "pending",
+    try {
+      const rawText = await aiService.generateText(prompt, {
+        temperature: 0.6,
+        max_tokens: 1000,
       });
+      aiQuestions = rawText
+        .split("\n")
+        .map((q) => q.replace(/^\d+[\.\)]\s*/, "").trim())
+        .filter((q) => q.length > 0)
+        .slice(0, aiCount);
+    } catch (err) {
+      console.error("AI Generation Error:", err);
+      if (localQuestions.length === 0) {
+        throw new BadRequestError("Failed to generate questions. Check API Key or usage limits.");
+      }
     }
-
-    return { questions, interviewId: interview?._id || null };
-  } catch (err) {
-    console.error("AI Generation Error:", err);
-    throw new BadRequestError("Failed to generate questions. Check API Key or usage limits.");
   }
+
+  // Merge and Shuffle AI and JSON questions
+  let questions = [...localQuestions, ...aiQuestions].filter(Boolean);
+  questions = questions.sort(() => Math.random() - 0.5);
+
+  questions.forEach((q) => previousQuestions.add(q));
+
+  let interview = null;
+  if (userId && questions.length > 0) {
+    interview = await Interview.create({
+      userId,
+      jobTitle,
+      jobTopic,
+      questions,
+      difficulty,
+      interviewType,
+      status: "pending",
+    });
+  }
+
+  return { questions, interviewId: interview?._id || null };
 };
 
 const evaluateUserAnswer = async (question, userAnswer) => {
