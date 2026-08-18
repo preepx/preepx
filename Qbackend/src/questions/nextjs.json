@@ -1,14 +1,1202 @@
 [
-  { "difficulty": "Easy", "question": "What is Next.js and how is it different from plain React?" },
-  { "difficulty": "Easy", "question": "What is the difference between SSR and SSG in Next.js?" },
-  { "difficulty": "Easy", "question": "What is the file-system based routing in Next.js?" },
-  { "difficulty": "Medium", "question": "What is getServerSideProps in Next.js and when do you use it?" },
-  { "difficulty": "Medium", "question": "What is getStaticProps and getStaticPaths in Next.js?" },
-  { "difficulty": "Medium", "question": "What is ISR (Incremental Static Regeneration) in Next.js?" },
-  { "difficulty": "Medium", "question": "What are API Routes in Next.js?" },
-  { "difficulty": "Medium", "question": "What is the App Router in Next.js 13+ and how does it differ from Pages Router?" },
-  { "difficulty": "Hard", "question": "What are Server Components in Next.js 13+?" },
-  { "difficulty": "Hard", "question": "How do you implement authentication in Next.js using NextAuth.js?" },
-  { "difficulty": "Hard", "question": "How does Next.js optimize images?" },
-  { "difficulty": "Hard", "question": "Explain middleware in Next.js and its use cases." }
+  {
+    "difficulty": "Easy",
+    "question": "What is Next.js and how is it different from plain React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between SSR and SSG in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the file-system based routing in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a new Next.js project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the pages directory used for in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the _app.js file in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the _document.js file in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the public folder used for in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a dynamic route in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Link component used for in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between the Link component and a regular anchor tag?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Image component in Next.js used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is client-side rendering (CSR) and how does Next.js support it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between CSR, SSR, and SSG?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a page in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you navigate programmatically in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the useRouter hook used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a catch-all route in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a catch-all route and an optional catch-all route?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a 404 page in Next.js and how do you customize it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a custom error page in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the next.config.js file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add environment variables in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between NEXT_PUBLIC_ prefixed environment variables and regular ones?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What command is used to run a Next.js app in development mode?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What command is used to build a Next.js app for production?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What command is used to start a Next.js app in production mode?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is hot module replacement (Fast Refresh) in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Next.js and Create React App?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Next.js and Gatsby?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What styling options are supported out of the box in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is CSS Modules and how are they used in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you use global CSS in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the styled-jsx feature in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add a favicon in a Next.js app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the head component used for in Next.js (next/head)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set the page title dynamically in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a layout in Next.js at a basic level?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is code splitting and does Next.js do it automatically?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is automatic static optimization in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a static page and a dynamic page in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you fetch data in a Next.js page using the Pages Router?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between fetching data on the client versus fetching data on the server in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the next/script component?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between next/script strategies (beforeInteractive, afterInteractive, lazyOnload)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the next/font module used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is font optimization in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you deploy a Next.js application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Vercel and how does it relate to Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between deploying Next.js on Vercel versus a custom Node.js server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a preview deployment and a production deployment in typical Next.js hosting workflows?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a rewrite in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a redirect in Next.js and how do you configure one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a redirect and a rewrite?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is trailing slash configuration in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the basePath configuration option used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is TypeScript support like in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add TypeScript to an existing Next.js project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the next-env.d.ts file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static asset in Next.js and where do you put it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between the public folder and importing an image directly in a component?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a Next.js page and a React component in general?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add a global loading spinner in the Pages Router?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the module.exports syntax used for in next.config.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between next.config.js and next.config.mjs?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you enable strict mode in a Next.js application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is React Strict Mode and how does Next.js integrate it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a relative import and an absolute import in a Next.js project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you configure absolute imports using the baseUrl option in tsconfig.json?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the eslint configuration that ships with a new Next.js project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add a custom 500 error page in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a static export and a normal Next.js build?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you preview the production build locally before deploying?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the .next folder generated after building?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Should the .next folder be committed to version control? Why or why not?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between npm run dev and npm run build && npm run start?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add a custom font without using next/font, and why is next/font preferred?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Script component's onLoad prop?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you conditionally render content only in development mode in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the process.env.NODE_ENV variable used for in a Next.js app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a page-level component and a shared component placed in a components folder?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set up absolute image imports from the public folder in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the assetPrefix configuration option?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you configure a custom port when running the Next.js development server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between SSR and pre-rendering as general Next.js concepts?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is pre-rendering in Next.js and why is it beneficial for SEO?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between client-side data fetching using useEffect and server-side data fetching in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the swcMinify option (and SWC as a compiler) in Next.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is SWC and how does it differ from Babel in the Next.js toolchain?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a Progressive Web App manifest and a regular web app in terms of Next.js configuration?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the loading.tsx skeleton pattern for improving perceived performance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add a custom 403 (forbidden) page pattern in Next.js since there's no built-in convention for it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between exporting metadata as a static object versus using generateMetadata for dynamic pages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set canonical URLs for pages using the metadata API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is getServerSideProps in Next.js and when do you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is getStaticProps and getStaticPaths in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is ISR (Incremental Static Regeneration) in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are API Routes in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the App Router in Next.js 13+ and how does it differ from Pages Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between getStaticProps and getServerSideProps in terms of when the code runs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the fallback option in getStaticPaths and what do 'true', 'false', and 'blocking' mean?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the revalidate option in getStaticProps used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does on-demand revalidation work in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between getInitialProps and getStaticProps/getServerSideProps?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why is getInitialProps considered a legacy approach in modern Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle dynamic API routes in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What HTTP methods can you handle in a single API route file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you parse the request body in a Next.js API route?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is middleware in the context of API routes versus the dedicated middleware.ts file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you protect an API route with authentication in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Route Handler in the App Router and an API Route in the Pages Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you define a Route Handler in the App Router (route.ts)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What HTTP methods can a Route Handler export as named functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the layout.js file used for in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between layout.js and template.js in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the loading.js file used for in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the error.js file used for in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the not-found.js file used for in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a route group in the App Router (folder wrapped in parentheses)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a parallel route in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an intercepting route in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static rendering and dynamic rendering in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does the App Router decide whether to statically or dynamically render a route?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the dynamic export configuration option (force-dynamic, force-static) used for in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the revalidate export used for at the route segment level in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between fetch caching behavior in the App Router versus the Pages Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you opt out of fetch caching for a specific request in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the cache option in the fetch API when used in Next.js (force-cache, no-store)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the next.revalidate option passed to fetch calls used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is streaming in the context of the App Router and React Server Components?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does the loading.js file enable streaming with Suspense?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Suspense component and how is it used in Next.js data fetching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Server Action in Next.js and how do you define one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you call a Server Action from a client component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'use server' directive used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'use client' directive used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Server Component and a Client Component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can a Server Component import a Client Component, and vice versa?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you pass data from a Server Component to a Client Component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the metadata export in the App Router for SEO?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the generateMetadata function used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the generateStaticParams function used for in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does generateStaticParams relate to getStaticPaths in the old Pages Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dynamicParams and how does it control behavior for unknown params in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Client Component's state and a Server Component's rendering model?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle forms in the App Router using Server Actions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is optimistic UI update and how do you implement it with useOptimistic in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the useFormStatus hook used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the useFormState (or useActionState) hook used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement authentication in Next.js using NextAuth.js at a conceptual level?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is middleware.ts used for in Next.js and where does it run?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Edge Runtime in Next.js and how does it differ from the Node.js runtime?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When would you choose the Edge Runtime over the Node.js runtime for an API route?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static and dynamic segments in file-based routing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement internationalization (i18n) routing in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the next/dynamic function used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you lazy-load a component in Next.js using next/dynamic?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ssr: false option in next/dynamic used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Next.js handle automatic image optimization with the Image component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the priority and loading props on the Image component used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a fixed layout and a fill layout for the Image component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure allowed external image domains in next.config.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the sizes prop on the Image component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a custom 404 page versus a not-found.js file in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between cookies() and headers() functions in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you read and set cookies in a Server Action or Route Handler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the notFound() function in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the redirect() function used for in the App Router, and how does it differ from next/router push?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shallow routing and a full navigation in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you preserve scroll position or state during client-side navigation in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between useParams and useSearchParams hooks in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you read query parameters in a Server Component versus a Client Component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the usePathname hook used for in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the useRouter hook in the Pages Router and the one in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement nested layouts that persist across route changes without re-rendering shared UI?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the default export requirement for a page.js file in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between page.js and layout.js in terms of what each can and cannot contain?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you share state between a Server Component and multiple Client Components on the same page?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the children prop's special role in a layout.js file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a global error boundary that catches errors from the root layout itself?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between throwing an error in a Server Component versus a Client Component in terms of how it's caught?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you fetch data in parallel across multiple Server Components on the same page to avoid request waterfalls?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a request waterfall and how does it commonly occur in nested Server Component data fetching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you pass a Server Component as a prop (children) into a Client Component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of not being able to pass functions as props from a Server Component to a Client Component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle third-party client-only libraries (like a charting library) inside the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of wrapping a third-party client component with 'use client' in its own file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you type the props of a page component that receives dynamic route params in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the searchParams prop available to page components used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement breadcrumb navigation using nested layouts and route segments?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a hard navigation (full page reload) and a soft navigation in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does the router cache invalidate itself after calling router.refresh()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of router.refresh() and when would you call it manually?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between revalidating data via Server Actions versus calling router.refresh() from the client?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a search-as-you-type feature backed by Server Components without excessive re-fetching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is debouncing and how would you combine it with useSearchParams-driven data fetching in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle file uploads in a Next.js Server Action or Route Handler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between multipart form data handling in Route Handlers versus Server Actions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the maximum body size consideration for Route Handlers and how do you configure it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you stream a file download response from a Route Handler in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between NextResponse and the standard Response object in a Route Handler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set custom response headers in a Route Handler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between NextRequest and the standard Request object in middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement CORS handling for a public API built with Next.js Route Handlers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the config export (matcher) used for in middleware.ts?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you restrict middleware to run only on specific paths using the matcher config?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between running logic in middleware versus in a layout.js Server Component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement A/B testing by rewriting requests to different route variants in middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a soft 404 and using the notFound() function properly in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you generate a dynamic sitemap.xml in Next.js using the App Router's file conventions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you generate a dynamic robots.txt in Next.js using the App Router's file conventions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the opengraph-image.tsx file convention used for in the App Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you generate dynamic Open Graph images using the ImageResponse API in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the manifest.json file convention used for in the App Router (for PWA support)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you turn a Next.js application into a installable Progressive Web App (PWA)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between metadataBase and per-page metadata in terms of resolving relative Open Graph URLs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are Server Components in Next.js 13+?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement authentication in Next.js using NextAuth.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Next.js optimize images?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain middleware in Next.js and its use cases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the React Server Component payload get streamed to the client, and what is the RSC wire format conceptually?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between hydration in traditional SSR and the selective hydration model enabled by Suspense boundaries?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Next.js achieve partial prerendering (PPR), and what problem does it solve?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between static shell rendering and dynamic hole filling in partial prerendering?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a caching strategy in the App Router that mixes statically cached data with per-request dynamic data on the same page?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the request memoization behavior of fetch in React Server Components, and how does it prevent duplicate network calls within a single render pass?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Next.js's Data Cache differ from the Full Route Cache and the Router Cache?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the four layers of caching in the Next.js App Router (Request Memoization, Data Cache, Full Route Cache, Router Cache) and how do they interact?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you invalidate the Data Cache for a specific tag using revalidateTag after a mutation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between revalidatePath and revalidateTag, and when would you use each?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Router Cache (client-side) affect the perceived freshness of data after a Server Action mutation, and how do you handle stale UI?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect a large e-commerce Next.js app to balance SSG for product pages with ISR for frequently changing inventory data?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs between using ISR versus SSR for a page that updates every few minutes but is accessed by millions of users?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a stale-while-revalidate caching pattern manually in a Next.js API route or Route Handler?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Next.js middleware execute relative to the Edge Runtime, and what are its limitations (e.g., no direct database access)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement geolocation-based or A/B testing logic using Next.js middleware and rewrites?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the security consideration when running authentication checks in middleware versus in individual Server Components or Route Handlers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a robust authentication system in the App Router that works correctly across Server Components, Client Components, and Route Handlers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between session-based authentication and JWT-based authentication in the context of Next.js middleware performing auth checks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does NextAuth.js (Auth.js) handle session persistence across Server Components given that Server Components cannot use React hooks or context?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement role-based access control (RBAC) that protects both UI rendering and Server Actions consistently?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the risk of leaking sensitive server-only code into the client bundle, and how does the 'server-only' package help prevent it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you audit a Next.js App Router codebase to ensure no server secrets are inadvertently exposed to Client Components?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a multi-tenant Next.js application where each tenant has a custom domain, using middleware for tenant resolution?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an image optimization pipeline for a Next.js app that serves user-uploaded images from a third-party CDN not covered by the default loader?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a custom image loader in Next.js and how would you implement one for a service like Cloudinary or Imgix?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Next.js Image component determine which image format (AVIF, WebP, fallback) to serve to a given browser?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you troubleshoot Largest Contentful Paint (LCP) regressions caused by improper use of the Image component's priority prop across a large page?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement true infinite scroll with streaming Server Components while keeping SEO-friendly initial content?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between prefetching behavior for Link components pointing to static routes versus dynamic routes in the App Router?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you fine-tune or disable prefetching for specific links to reduce unnecessary network and compute load?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a resumable, multi-step form wizard using Server Actions while preserving state across page reloads?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between progressive enhancement of a Server Action-powered form and a fully client-rendered form with client-side validation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you combine Server Actions with optimistic UI updates (useOptimistic) to keep a chat or comment feed responsive despite network latency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect error boundaries across nested layouts in the App Router to isolate failures to the smallest possible UI region?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between error.js boundaries and global-error.js in terms of scope and what they can catch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a custom server (Node.js with Express or Fastify) alongside Next.js, and what capabilities does it unlock versus the built-in server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of using a custom server in Next.js given that it disables some automatic optimizations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you set up Next.js in a monorepo (e.g., with Turborepo or Nx) to share components and types across multiple apps?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Turbopack and how does it differ from Webpack in the Next.js build pipeline?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you profile and reduce the JavaScript bundle size of a large Next.js application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the @next/bundle-analyzer tool and how would you use it to find bloated dependencies?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement server-side rendering of a component that depends on browser-only APIs (like window or localStorage) without causing hydration mismatches?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What causes a hydration mismatch error in Next.js and what are common patterns to avoid it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you debug a 'Text content does not match server-rendered HTML' error in a production Next.js app?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement draft mode (preview mode) in Next.js for a headless CMS integration, and how does it interact with the Data Cache?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design webhook-driven on-demand ISR so that a CMS content update triggers revalidation of only the affected pages?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement rate limiting for Next.js API Routes or Route Handlers running on the Edge Runtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between deploying Next.js as a fully static export (output: 'export') versus a hybrid server-rendered deployment, and what features are lost in static export?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a robust logging and observability strategy across Server Components, Server Actions, and middleware in production?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you set up distributed tracing (e.g., OpenTelemetry) for a Next.js application running on Vercel or a self-hosted Node.js server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Node.js runtime and Edge Runtime in terms of available APIs, cold start time, and deployment region behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you decide which Route Handlers should run on the Edge Runtime versus the Node.js runtime for a globally distributed application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement incremental adoption of the App Router in a large existing Pages Router codebase without a full rewrite?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the interoperability considerations when both the Pages Router and App Router coexist in the same Next.js project?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe data-fetching layer shared between Server Components and Client Components, ensuring consistent types end to end?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design cache-busting for statically generated pages that embed a build-time API response which later becomes stale?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you handle very large getStaticPaths output (millions of dynamic pages) without blowing up build time?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the fallback: 'blocking' strategy's effect on Time to First Byte for pages not pre-rendered at build time, and how does it compare to 'true'?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a hybrid rendering strategy where the same route serves a cached static shell to anonymous users but a personalized dynamic response to logged-in users?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the risk of accidentally making an entire route dynamic by calling cookies() or headers() deep inside a shared component, and how would you isolate that dynamic dependency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement cross-request deduplication for expensive database queries shared across many Server Components using React's cache() function?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between React's built-in cache() function and Next.js's Data Cache for fetch requests?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect a Next.js app to safely run database queries directly inside Server Components without exposing credentials or query logic to the client bundle?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the significance of colocating server-only utility files and using the 'server-only' package to catch accidental client imports at build time?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a feature flag system that affects both static generation at build time and dynamic behavior at request time in the App Router?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a robust retry and fallback strategy for external API calls made inside Server Components, given they run at build time or request time depending on caching mode?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you measure and optimize Time to First Byte (TTFB) for a Next.js app deployed behind a CDN with a mix of static and dynamic routes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a self-hosted Next.js deployment on Docker/Kubernetes to replicate the caching and ISR behavior available on Vercel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Vercel's managed ISR implementation and self-hosted ISR using the standalone Next.js output mode?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement blue-green or canary deployments for a Next.js application with zero-downtime cache warm-up?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you handle secrets rotation for a Next.js app using Server Actions that call third-party APIs, without redeploying the application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an end-to-end testing strategy (e.g., with Playwright) for a Next.js app that mixes Server Components, Client Components, and Server Actions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What challenges arise when unit testing a Server Component in isolation, given it cannot use React hooks or browser APIs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you mock a Server Action in a component test to verify optimistic UI behavior without hitting a real backend?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a rollback strategy for a failed Server Action mutation that already triggered an optimistic UI update?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between validating form input on the client, in a Server Action, and at the database layer, and why do you need all three?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement idempotency for a Server Action that submits a payment, to guard against duplicate submissions on retry?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a queueing mechanism for long-running background jobs triggered from a Next.js Server Action?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you handle a Server Action that needs to perform work after the response has already been sent to the client (fire-and-forget)?"
+  }
 ]

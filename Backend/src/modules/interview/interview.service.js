@@ -11,38 +11,83 @@ const { BadRequestError, NotFoundError } = require("../../common/exceptions/cust
 const envConfig = require("../../config/env.config");
 const aiService = require("../../services/ai.service");
 
-let previousQuestions = new Set();
-
-const getLocalQuestions = async (skill, count, difficulty) => {
+const getLocalQuestions = async (skill, count, difficulty, userId = null) => {
   try {
     if (!skill || count <= 0) return [];
     
     const primarySkill = skill.split(',')[0].trim();
     const slug = primarySkill.toLowerCase().replace(/\s+/g, "");
-    
-    let matchStage = { skill: slug };
-    
-    const validDiffs = ["easy", "medium", "hard"];
-    if (difficulty && validDiffs.includes(difficulty.toLowerCase())) {
-      matchStage.difficulty = { $regex: new RegExp(`^${difficulty}$`, "i") };
+
+    // Get questions the user has already seen (last 10 interviews)
+    let seenQuestionTexts = new Set();
+    if (userId) {
+      const recentInterviews = await Interview.find({ userId })
+        .sort({ createdAt: -1 })
+        .limit(10)
+        .select("questions")
+        .lean();
+      
+      recentInterviews.forEach(interview => {
+        (interview.questions || []).forEach(q => seenQuestionTexts.add(q));
+      });
     }
 
-    let questions = await Question.aggregate([
-      { $match: matchStage },
-      { $sample: { size: count } }
-    ]);
+    // Build match query - exclude already-seen questions
+    const baseMatch = { skill: slug };
+    if (seenQuestionTexts.size > 0) {
+      baseMatch.question = { $nin: Array.from(seenQuestionTexts) };
+    }
 
-    if (questions.length < count && matchStage.difficulty) {
-      const fallbackQuestions = await Question.aggregate([
-        { $match: { skill: slug } },
+    const validDiffs = ["easy", "medium", "hard"];
+    const isValidDiff = difficulty && validDiffs.includes(difficulty.toLowerCase());
+
+    let questions = [];
+
+    if (isValidDiff) {
+      // User selected specific difficulty
+      const matchWithDiff = { ...baseMatch, difficulty: { $regex: new RegExp(`^${difficulty}$`, "i") } };
+      questions = await Question.aggregate([
+        { $match: matchWithDiff },
         { $sample: { size: count } }
       ]);
-      if (fallbackQuestions.length >= count) {
-        questions = fallbackQuestions;
+
+      // Fallback: if not enough unseen questions, allow seen ones
+      if (questions.length < count) {
+        questions = await Question.aggregate([
+          { $match: { skill: slug, difficulty: { $regex: new RegExp(`^${difficulty}$`, "i") } } },
+          { $sample: { size: count } }
+        ]);
       }
+    } else {
+      // No specific difficulty — distribute: ~40% Easy, ~40% Medium, ~20% Hard for variety
+      const easyCount   = Math.round(count * 0.4);
+      const hardCount   = Math.round(count * 0.2);
+      const mediumCount = count - easyCount - hardCount;
+
+      const fetchWithFallback = async (diff, needed) => {
+        const matchDiff = { ...baseMatch, difficulty: { $regex: new RegExp(`^${diff}$`, "i") } };
+        let res = await Question.aggregate([{ $match: matchDiff }, { $sample: { size: needed } }]);
+        if (res.length < needed) {
+          res = await Question.aggregate([
+            { $match: { skill: slug, difficulty: { $regex: new RegExp(`^${diff}$`, "i") } } },
+            { $sample: { size: needed } }
+          ]);
+        }
+        return res;
+      };
+
+      const [easyQs, mediumQs, hardQs] = await Promise.all([
+        fetchWithFallback("Easy", easyCount),
+        fetchWithFallback("Medium", mediumCount),
+        fetchWithFallback("Hard", hardCount),
+      ]);
+
+      questions = [...easyQs, ...mediumQs, ...hardQs]
+        .sort(() => Math.random() - 0.5)
+        .slice(0, count);
     }
-    
-    console.log(`✅ Fetched ${questions.length} questions from MongoDB for skill: ${slug}`);
+
+    console.log(`✅ Fetched ${questions.length} questions from MongoDB for skill: ${slug} (${seenQuestionTexts.size} excluded as seen)`);
     
     return questions.map(q => q.question);
   } catch (error) {
@@ -88,11 +133,11 @@ const generateInterviewQuestions = async (userId, data) => {
     }
   }
 
-  // Target ratio: 60% JSON, 40% AI
+  // Target ratio: 60% DB questions, 40% AI
   const targetJsonCount = Math.ceil(count * 0.6);
   
-  // Try to fetch local questions from DB
-  const localQuestions = await getLocalQuestions(jobTopic, targetJsonCount, difficulty);
+  // Fetch local questions from DB — pass userId to exclude seen questions
+  const localQuestions = await getLocalQuestions(jobTopic, targetJsonCount, difficulty, userId);
   const actualJsonCount = localQuestions.length;
   const aiCount = count - actualJsonCount;
   
@@ -111,7 +156,7 @@ const generateInterviewQuestions = async (userId, data) => {
       Rules:
       - Return ONLY a numbered list of questions.
       - No introductions, no explanations, no answers.
-      - Do NOT repeat these previous questions: ${Array.from(previousQuestions).join(" | ")}
+      - Make sure questions are diverse and cover different subtopics within ${jobTopic}.
     `;
 
     try {
@@ -132,11 +177,9 @@ const generateInterviewQuestions = async (userId, data) => {
     }
   }
 
-  // Merge and Shuffle AI and JSON questions
+  // Merge and Shuffle AI and DB questions
   let questions = [...localQuestions, ...aiQuestions].filter(Boolean);
   questions = questions.sort(() => Math.random() - 0.5);
-
-  questions.forEach((q) => previousQuestions.add(q));
 
   let interview = null;
   if (userId && questions.length > 0) {

@@ -1,18 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is TypeScript and how is it different from JavaScript?" },
-  { "difficulty": "Easy", "question": "What are type annotations in TypeScript?" },
-  { "difficulty": "Easy", "question": "What is the difference between interface and type in TypeScript?" },
-  { "difficulty": "Easy", "question": "What are enums in TypeScript?" },
-  { "difficulty": "Easy", "question": "What is the 'any' type and why should you avoid it?" },
-  { "difficulty": "Medium", "question": "What are generics in TypeScript? Give a practical example." },
-  { "difficulty": "Medium", "question": "What is the difference between unknown and any in TypeScript?" },
-  { "difficulty": "Medium", "question": "What are union and intersection types in TypeScript?" },
-  { "difficulty": "Medium", "question": "What is type narrowing in TypeScript?" },
-  { "difficulty": "Medium", "question": "What are utility types in TypeScript? Explain Partial, Required, Pick, Omit." },
-  { "difficulty": "Medium", "question": "What is a discriminated union in TypeScript?" },
-  { "difficulty": "Hard", "question": "What are conditional types in TypeScript? Give an example." },
-  { "difficulty": "Hard", "question": "What are mapped types in TypeScript?" },
-  { "difficulty": "Hard", "question": "Explain TypeScript's structural typing system." },
-  { "difficulty": "Hard", "question": "What is the infer keyword in TypeScript and how is it used?" },
-  { "difficulty": "Hard", "question": "How do you create a type-safe event emitter in TypeScript?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is TypeScript and how is it different from JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are type annotations in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between interface and type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are enums in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'any' type and why should you avoid it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you install and set up TypeScript in a project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the tsconfig.json file used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the tsc command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the basic data types supported in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between let, const, and var in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is type inference in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'void' type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'null' and 'undefined' type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'never' type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an array type in TypeScript and how do you declare one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a tuple type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an array and a tuple?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an object type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define a function type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are optional parameters in a function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are default parameters in a function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a rest parameter in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the readonly modifier used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between const and readonly?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a string literal type?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a numeric literal type?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the boolean type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define a class in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are access modifiers in TypeScript classes (public, private, protected)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between public and private in TypeScript classes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a constructor in a TypeScript class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an interface and a class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you implement an interface in a TypeScript class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the extends keyword used for in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the implements keyword used for in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are optional properties in an interface?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a function interface in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is type assertion in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between type assertion using 'as' and angle bracket syntax?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between == and === in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the strict mode in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the noImplicitAny compiler option?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the strictNullChecks compiler option?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between compiling TypeScript with tsc versus using ts-node?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What file extension is used for TypeScript files?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a .d.ts file used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a type declaration file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the @types namespace used for in npm packages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add type definitions for a third-party JavaScript library?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the target compiler option in tsconfig.json?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the module compiler option in tsconfig.json?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the outDir compiler option used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the rootDir compiler option used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between import and require in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a namespace in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a module and a namespace?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the export keyword used for in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a default export versus a named export?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is destructuring in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the spread operator used for in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an arrow function and how do you type it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'this' keyword in TypeScript classes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a getter and setter in a TypeScript class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static property or method in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an abstract class in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can you instantiate an abstract class directly?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an abstract class and an interface in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a union type in simple terms?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the pipe (|) operator used for in type declarations?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is object destructuring with type annotations?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'as const' assertion?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an array of objects type and an object with array properties?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a callback function type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Promise type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you type an async function in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the await keyword and how does TypeScript type it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a JavaScript file and a TypeScript file in terms of compilation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is type erasure in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between compile-time type checking and runtime type checking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a type alias in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define a type alias for an object shape?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a function signature in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a named function and an anonymous function type?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'unknown' type used for at a basic level?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between 'never' and 'void'?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a class property initializer in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an instance property and a static property?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a method in a TypeScript class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the super keyword used for in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is inheritance in TypeScript classes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method overriding in a TypeScript subclass?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an interface extending another interface?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an interface extending multiple interfaces?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a hybrid type (function with properties) in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an object literal and a class instance in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a JSX file extension used for in TypeScript (tsx)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between .ts and .tsx files?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the lib compiler option used for in tsconfig.json?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the declaration compiler option used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the sourceMap compiler option used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a compiler error and a linter warning in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is ESLint and how is it used alongside TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between tslint and eslint for TypeScript projects?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a type parameter placeholder like T commonly used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Array<T> generic type?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Map and Set type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you type a Map with specific key and value types?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an object type and a Record type for key-value pairs?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a class implementing multiple interfaces?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between function declaration and function expression typing?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a type predicate in a simple function like isString(x): x is string?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of typing function parameters explicitly versus relying on inference?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a literal type union used for enum-like values (e.g., 'small' | 'medium' | 'large')?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class field declared with a type and one declared with just a default value?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'public' keyword being the default access modifier in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a getter-only property (readonly via accessor) in a TypeScript class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an interface describing a class's instance shape and describing its static shape?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a hybrid type combining a callable signature and additional properties?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between 'Object', 'object', and '{}' types in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of type-only property access on an interface versus a class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between typing an array of unions versus a union of arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'as unknown as T' double assertion pattern, and when is it necessary?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between typing a class property as optional (?) versus initializing it to undefined?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a private field using the '#' syntax (JS private fields) and TypeScript's 'private' keyword?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a protected constructor and a private constructor in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of an interface with only method signatures, commonly called a 'contract'?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a plain JavaScript object passed to a typed function and the type checking performed on it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between array destructuring and object destructuring in terms of type annotations?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of typing the catch clause parameter as 'unknown' in strict mode?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a synchronous function's return type and an async function's return type in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between declaring a variable with a union type and declaring it with the 'any' type in terms of safety?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the noUnusedLocals and noUnusedParameters compiler options?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the noImplicitReturns compiler option?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class expression and a class declaration in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the allowJs compiler option?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the checkJs compiler option used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a runtime type check (like typeof) and a compile-time type annotation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are generics in TypeScript? Give a practical example."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between unknown and any in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are union and intersection types in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is type narrowing in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are utility types in TypeScript? Explain Partial, Required, Pick, Omit."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a discriminated union in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Record utility type used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Readonly utility type used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Exclude utility type used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Extract utility type used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the NonNullable utility type used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ReturnType utility type used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Parameters utility type used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the InstanceType utility type used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generic constraint in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use the 'extends' keyword to constrain a generic type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generic interface in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generic class in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generic function in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a generic type parameter and the 'any' type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is type guard in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you write a custom type guard function using the 'is' keyword?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the typeof type guard used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the instanceof type guard used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the in operator type guard used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an index signature in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a mapped type at a basic level?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the keyof operator used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the typeof operator used for in a type context (as opposed to runtime)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a lookup type (indexed access type) in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is function overloading in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you declare overloaded function signatures in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an intersection type and extending an interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between declaration merging for interfaces and types?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is declaration merging in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a module augmentation in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is ambient declaration (declare keyword) used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a global declaration file used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an ambient module and a regular module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is structural subtyping (duck typing) in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is excess property checking in TypeScript object literals?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you bypass excess property checking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a class implementing an interface versus extending an abstract class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'satisfies' operator introduced in TypeScript 4.9?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between 'as const' and 'satisfies'?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a tuple with optional elements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a tuple with rest elements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a labeled tuple in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is variance in TypeScript generics (covariance and contravariance)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a readonly array and a mutable array type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ReadonlyArray type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Array<T> and T[] syntax?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an enum with string values versus numeric values?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a const enum and how does it differ from a regular enum?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the performance implications of using enums versus union of string literals?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a namespace merging with a class or function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the 'unique symbol' type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a template literal type in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use template literal types to build string patterns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a type alias and an interface for defining object shapes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When would you prefer a type alias over an interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between optional chaining (?.) and non-null assertion (!) in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the nullish coalescing operator (??) and how does TypeScript type it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generic default type parameter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you type a higher-order function in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between function type expression and a call signature in an interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a construct signature in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ThisType utility type used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a type-only import and a regular import?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the isolatedModules compiler option and why does it matter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between compiling with tsc and transpiling with Babel for TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the esModuleInterop compiler option used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the skipLibCheck compiler option used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between strict mode and individual strict flags like strictFunctionTypes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is bivariant method checking in TypeScript and why does it exist for methods?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between typing a React functional component with React.FC versus a plain function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a public field with a default value and one initialized in the constructor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a parameter property (shorthand constructor property) in TypeScript classes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface's method signature and a property holding a function type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between optional properties and properties typed with 'undefined' explicitly included?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a union of object types and an interface with optional properties for each variant?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Omit and Pick utility types when building derived DTOs from an entity type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the 'in' type guard and using optional chaining for checking property existence?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generic utility type that you might write to make specific keys of an object required while others stay optional?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between generic type inference at the call site versus explicit type arguments like fn<string>()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a conditional type used for at a basic level (before getting into distributive behavior)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface merging via declaration merging versus a type alias which cannot merge?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the 'declare global' syntax?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between augmenting the Window interface and creating a new global variable declaration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a triple-slash directive in TypeScript and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between import type and a regular import statement?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the verbatimModuleSyntax compiler option?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CommonJS and ES module output when compiling TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the moduleResolution compiler option and why does it matter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between 'node' and 'bundler' module resolution strategies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is path mapping (paths option) in tsconfig.json used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a project reference in TypeScript (composite projects)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is incremental compilation in TypeScript and how does it speed up builds?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a public API surface and internal types when publishing a TypeScript library?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you generate .d.ts declaration files automatically when publishing an npm package?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a JavaScript object and a TypeScript interface at runtime?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Do TypeScript types exist at runtime? Why or why not?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between type checking errors and runtime errors in a TypeScript application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the 'declare' keyword when working with global variables from a script tag?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface and a type alias when defining a function type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a callable interface in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an indexable type in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a string index signature and a number index signature?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Object.keys() method combined with type assertions in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a class and a namespace for organizing related functions and constants?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using 'export default' versus multiple named exports in a module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a re-export and how do you re-export types and values from a module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a barrel file (index.ts) used for in TypeScript projects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between importing a type and importing a value from the same module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a generic type parameter with a default and one without, when the caller omits the type argument?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the 'keyof typeof' pattern when working with const objects used as enums?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a const object with 'as const' and a real TypeScript enum for representing fixed sets of values?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface method shorthand and a property typed as an arrow function, regarding 'this' binding?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does TypeScript type array methods like map, filter, and reduce generically?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Array.prototype.find's return type and direct index access in terms of null safety?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the noUncheckedIndexedAccess compiler option?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a union type narrowed by a type guard and one narrowed by an assertion function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface's optional method and a method that can be explicitly undefined?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you type a function that accepts either a single item or an array of items and normalizes it internally?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overload signatures and a single signature using union types for parameters?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When would you choose function overloads over a parameter with a union type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between generic type parameter inference from arguments versus inference from the expected return type context?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the 'as const' assertion when passed to a generic function expecting literal types?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a readonly tuple and a mutable tuple in terms of allowed operations like push?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between typing a Promise.all call's resolved array versus typing each individual promise?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface describing an async iterator and one describing a regular iterator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Iterable and IterableIterator type used for in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Symbol.iterator protocol and how does TypeScript type classes that implement it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between structural typing pitfalls with functions that have fewer parameters being assignable to types expecting more?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between assigning a more specific function type to a less specific one and vice versa?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a WeakMap and a Map in terms of typing and garbage collection semantics?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Awaited<T> utility type introduced in TypeScript 4.5?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between typing a class's constructor function itself versus typing its instances?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'new' signature in an interface used for, and how does it differ from a call signature?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you type a factory function that returns different class instances based on an input discriminator string?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a generic type argument inferred from a class constructor call and one inferred from a plain function call?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the abstract construct signature (abstract new) in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between typing an array method callback with explicit parameter types versus relying on contextual inference from the array's element type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you type a plugin's configuration object so that unknown keys produce a compile error while known optional keys remain flexible?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the 'exactOptionalPropertyTypes' compiler option, and how does it change the meaning of optional properties?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a type-safe command pattern for a CLI tool where each command's options object type is inferred from its command definition?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are conditional types in TypeScript? Give an example."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are mapped types in TypeScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain TypeScript's structural typing system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the infer keyword in TypeScript and how is it used?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you create a type-safe event emitter in TypeScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a distributive conditional type and how does it behave differently over union types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you prevent distribution in a conditional type using bracket wrapping?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a recursive conditional type, such as a Flatten<T> type for nested arrays?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a deep partial type (DeepPartial<T>) using mapped and conditional types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a deep readonly type (DeepReadonly<T>)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is key remapping in mapped types (the 'as' clause) introduced in TypeScript 4.1?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use key remapping to filter object properties by their value type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement your own version of the Pick utility type from scratch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement your own version of the Omit utility type from scratch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe deep merge function using generics and conditional types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the 'infer' keyword's behavior in covariant versus contravariant positions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you extract the argument types of a function using infer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you extract the resolved type of a Promise using infer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-level tuple-to-union conversion?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-level union-to-tuple conversion, and why is it non-trivial?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's nominal-like features (branding/tagging) and its default structural typing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement nominal typing in TypeScript using branded types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a phantom type and how can it be used for compile-time-only safety guarantees?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a type-safe builder pattern using generics that tracks which properties have been set?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe Redux-like reducer with discriminated union actions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type a middleware/pipeline system so each stage's output type matches the next stage's input type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe dependency injection container in TypeScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a type-safe ORM query builder that infers result types from the schema definition?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between structural typing pitfalls and how excess property checks only partially mitigate them?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement an exhaustive switch statement check using the 'never' type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of assertion functions (asserts keyword) in TypeScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you write a custom assertion function and what does the 'asserts' return type mean?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type a curry function generically so that partial application preserves argument types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type function overloads for a generic API client that returns different types based on an endpoint string literal?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between generic type inference from function arguments versus explicit type arguments?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does TypeScript infer generic types in nested function calls, and where does inference commonly fail?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is contextual typing and how does it help infer types for callback parameters?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe state machine using discriminated unions and generics?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you model exhaustive pattern matching in TypeScript, given it lacks native pattern matching?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's type system computations and being Turing-complete, and what are the practical limits (recursion depth)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you debug excessively deep or infinite type instantiation errors in complex generic types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe path getter (like Lodash's get) that infers the return type from a dot-notation string literal path?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use template literal types combined with infer to parse a string literal type into its parts?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe router where route parameters are inferred from a path pattern string?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between variance annotations (in/out) introduced for generic type parameters and TypeScript's default inferred variance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a plugin system where each plugin's type is inferred and merged into a combined application type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement function composition (compose/pipe) with full type inference across an arbitrary number of functions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's control flow analysis for narrowing and how it interacts with closures capturing narrowed variables?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Why does TypeScript sometimes 'widen' a narrowed type inside a callback, and how do you work around it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe observable/event bus where subscribers are typed based on the event name?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design generic React hooks (like a custom useFetch<T>) with proper type inference for consumers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's structural typing and how it can cause unsound assignments with optional properties (the 'weak type' detection)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does TypeScript's weak type detection work, and what triggers 'no overlap' errors between object types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a compile-time-only validation of object literal keys against a union of allowed strings, without runtime overhead?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a fully type-safe form validation library where field types drive both the schema and the error object shape?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using declaration merging and module augmentation to extend a third-party library's types safely?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you write .d.ts type definitions for a complex untyped JavaScript library with dynamic APIs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of using 'any' versus 'unknown' versus a generic type parameter when the exact type truly cannot be known?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you enforce exhaustiveness checking across a large discriminated union used throughout a codebase as new variants are added?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe schema validation library (like Zod) from scratch that infers static types from runtime schema definitions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between static type inference from a schema object and manually maintaining a parallel TypeScript interface?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type a generic memoization function (memoize) so the cache key and return type are correctly inferred for any input function?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe currying utility that supports partial application with correct remaining-argument inference at each step?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a type-level JSON parser that converts a JSON string literal type into its corresponding TypeScript object type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe SQL-like query builder where selected columns determine the shape of the returned row type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's handling of readonly arrays/tuples for immutability versus true runtime immutability (Object.freeze)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you model a linked list or tree data structure with full type safety for node values in TypeScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement an exhaustive mapped type that transforms every function property of an object into an async version returning a Promise?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between how TypeScript narrows discriminated unions inside a switch statement versus inside an if/else chain with early returns?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you write a generic type that computes the union of all possible values at any depth of a nested object (a 'flatten keys' type)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement compile-time route type-safety for a REST API client, where the URL, method, and body types are all linked via a single route map type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's structural compatibility for classes with private members versus interfaces, and why can private fields break structural typing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a generic Result<T, E> type (like Rust's Result) for error handling, and how would you implement type-safe chaining (map/flatMap) over it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe dependency graph resolver where each module's type depends on its declared dependencies' types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's assignability rules for function parameters (bivariance) and its rules for function return types (covariance)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use the 'this' parameter in a function type to properly type a method that depends on the calling context?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe plugin/middleware pipeline (like Express or Koa) where each middleware can augment a shared context object's type for subsequent middleware?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between generic constraints using extends and using a mapped type to restrict allowed keys at the type level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe pub/sub system where the payload type for each channel is inferred from a central channel-to-payload map?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you write a type that recursively makes all properties of a nested object optional except for specified 'required' keys?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-level string case converter (e.g., camelCase to snake_case) using template literal types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type a generic 'compose' function for Redux-style higher-order reducers, ensuring state and action types propagate correctly?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a type-safe environment variable validator that returns a strongly typed config object from process.env at compile time and runtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement type-level arithmetic (like adding two number literal types) using tuple length tricks in TypeScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's recursion limit for conditional types and how you might restructure a type to avoid hitting it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type a fluent validation chain where each '.min()', '.max()', '.email()' call narrows the resulting schema type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a generic 'DeepPick' type that selects a nested subset of properties using dot-notation paths?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between how TypeScript infers types for object spread versus array spread in terms of resulting property types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type a reducer function so that the action type is a discriminated union and the switch statement is exhaustively checked?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's handling of optional chaining combined with generic type parameters that could be undefined?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a generically typed 'pipe' function that threads a value through a sequence of typed transformation functions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a type-safe GraphQL-like query builder where the shape of the query determines the shape of the response type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's assignability of readonly properties versus mutable properties when passing objects to functions expecting mutable types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement branded/nominal primitive types (e.g., UserId vs ProductId, both strings) to prevent accidental mixing at compile time?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using a class with a private brand field versus a type-level intersection with a unique symbol for creating branded types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type a generic 'debounce' or 'throttle' utility function so the wrapped function's signature is fully preserved?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe finite state machine library where valid transitions are enforced at the type level, not just at runtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's structural typing and how it handles function parameter bivariance specifically for method shorthand versus property function types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a generic 'Zip<T, U>' type that pairs up two tuple types element-wise?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-level implementation of Awaited<T> to unwrap nested Promise types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type a plugin architecture where each plugin can register hooks, and the hook payload types are aggregated into a single event map type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's inference for generic classes when the type parameter is only used in method parameters versus only in the return type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a strongly typed 'assertNever' helper function to guarantee exhaustive checks at both compile time and runtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a type-safe internationalization (i18n) system where translation keys and their required interpolation parameters are checked at compile time?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's type narrowing across a discriminated union stored in an array versus a single variable?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a recursive type that computes the JSON-serializable subset of a given TypeScript type, excluding functions and symbols?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type an ORM's 'where' clause builder so that operators available depend on the column's underlying data type (e.g., string columns get 'contains', number columns get 'gt'/'lt')?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between how TypeScript's control flow analysis handles narrowing through a destructured variable versus narrowing through direct property access?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a generic memoized selector (like Reselect) with full type inference for the combiner function's arguments and return type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a type-safe HTTP client where response types are automatically inferred based on the request's method and endpoint using a route definition map?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's narrowing behavior for a union type discriminated by a literal property versus one discriminated by the presence/absence of a property?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a type-safe form library where nested field errors mirror the exact shape of the form's data type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a recursive type to compute the 'leaf paths' of a deeply nested object as a union of dot-notation string literals?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TypeScript's treatment of optional properties in mapped types when using the '+?' and '-?' modifiers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use the '-readonly' and '-?' modifiers together in a mapped type to create a fully mutable, fully required version of a readonly partial type?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you type a generic 'Either<L, R>' type for functional error handling and implement type-safe pattern matching over it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement compile-time exhaustiveness checking for a plugin registry where new plugin types must also update a corresponding renderer switch statement?"
+  }
 ]
