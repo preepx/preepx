@@ -1,8 +1,7 @@
 /**
  * controllers/skillController.js — Skill CRUD operations
- * Each skill corresponds to a JSON file in src/questions/
  */
-const fileService = require("../services/fileService");
+const Question = require("../models/Question");
 const { sendSuccess, sendError } = require("../utils/response");
 
 /**
@@ -12,7 +11,27 @@ const { sendSuccess, sendError } = require("../utils/response");
  */
 const getAllSkills = async (req, res) => {
   try {
-    const skills = fileService.getAllSkillStats();
+    const stats = await Question.aggregate([
+      {
+        $group: {
+          _id: "$skill",
+          totalQuestions: { $sum: 1 },
+          easy: { $sum: { $cond: [{ $eq: ["$difficulty", "Easy"] }, 1, 0] } },
+          medium: { $sum: { $cond: [{ $eq: ["$difficulty", "Medium"] }, 1, 0] } },
+          hard: { $sum: { $cond: [{ $eq: ["$difficulty", "Hard"] }, 1, 0] } },
+        }
+      }
+    ]);
+
+    const skills = stats.map(s => ({
+      skill: s._id,
+      displayName: s._id.charAt(0).toUpperCase() + s._id.slice(1),
+      totalQuestions: s.totalQuestions,
+      easy: s.easy,
+      medium: s.medium,
+      hard: s.hard,
+      lastModified: new Date() // Since we don't track file modification anymore
+    }));
 
     // Sort by skill name alphabetically
     skills.sort((a, b) => a.skill.localeCompare(b.skill));
@@ -31,7 +50,7 @@ const getAllSkills = async (req, res) => {
 
 /**
  * @route   POST /api/skills
- * @desc    Create a new skill (creates empty JSON file)
+ * @desc    Create a new skill (inserts placeholder question)
  * @access  Protected
  */
 const createSkill = async (req, res) => {
@@ -44,7 +63,16 @@ const createSkill = async (req, res) => {
       return sendError(res, "Invalid skill name after normalization", 400);
     }
 
-    fileService.createSkillFile(slug);
+    const existing = await Question.findOne({ skill: slug });
+    if (existing) {
+      return sendError(res, `Skill "${slug}" already exists`, 409);
+    }
+
+    await Question.create({
+      skill: slug,
+      difficulty: "Easy",
+      question: "Dummy Question (Please Delete)"
+    });
 
     return sendSuccess(
       res,
@@ -53,16 +81,13 @@ const createSkill = async (req, res) => {
       201
     );
   } catch (error) {
-    if (error.message.includes("already exists")) {
-      return sendError(res, error.message, 409);
-    }
     return sendError(res, error.message || "Failed to create skill", 500);
   }
 };
 
 /**
  * @route   PUT /api/skills/:skill
- * @desc    Rename a skill (renames JSON file)
+ * @desc    Rename a skill (updates all questions with that skill)
  * @access  Protected
  */
 const renameSkill = async (req, res) => {
@@ -71,7 +96,19 @@ const renameSkill = async (req, res) => {
     const { newName } = req.body;
     const newSlug = newName.toLowerCase().replace(/\s+/g, "").replace(/[^a-z0-9+#.-]/g, "");
 
-    fileService.renameSkillFile(skill.toLowerCase(), newSlug);
+    const existing = await Question.findOne({ skill: newSlug });
+    if (existing) {
+      return sendError(res, `Skill "${newSlug}" already exists`, 409);
+    }
+
+    const result = await Question.updateMany(
+      { skill: skill.toLowerCase() },
+      { $set: { skill: newSlug } }
+    );
+
+    if (result.modifiedCount === 0) {
+      return sendError(res, `Skill "${skill}" not found`, 404);
+    }
 
     return sendSuccess(
       res,
@@ -79,31 +116,27 @@ const renameSkill = async (req, res) => {
       `Skill renamed to "${newName}" successfully`
     );
   } catch (error) {
-    if (error.message.includes("not found")) {
-      return sendError(res, error.message, 404);
-    }
-    if (error.message.includes("already exists")) {
-      return sendError(res, error.message, 409);
-    }
     return sendError(res, error.message || "Failed to rename skill", 500);
   }
 };
 
 /**
  * @route   DELETE /api/skills/:skill
- * @desc    Delete a skill and its JSON file
+ * @desc    Delete a skill and its questions
  * @access  Protected
  */
 const deleteSkill = async (req, res) => {
   try {
     const { skill } = req.params;
-    fileService.deleteSkillFile(skill.toLowerCase());
+    
+    const result = await Question.deleteMany({ skill: skill.toLowerCase() });
+
+    if (result.deletedCount === 0) {
+      return sendError(res, `Skill "${skill}" not found`, 404);
+    }
 
     return sendSuccess(res, null, `Skill "${skill}" deleted successfully`);
   } catch (error) {
-    if (error.message.includes("not found")) {
-      return sendError(res, error.message, 404);
-    }
     return sendError(res, error.message || "Failed to delete skill", 500);
   }
 };

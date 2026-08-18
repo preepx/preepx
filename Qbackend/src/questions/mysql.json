@@ -1,17 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is MySQL and what type of database is it?" },
-  { "difficulty": "Easy", "question": "What is the difference between PRIMARY KEY and UNIQUE KEY in MySQL?" },
-  { "difficulty": "Easy", "question": "What is a foreign key in MySQL?" },
-  { "difficulty": "Easy", "question": "What is the difference between CHAR and VARCHAR in MySQL?" },
-  { "difficulty": "Medium", "question": "Explain the different types of JOINs in MySQL with examples." },
-  { "difficulty": "Medium", "question": "What is a stored procedure in MySQL?" },
-  { "difficulty": "Medium", "question": "What are database indexes and how do they improve performance?" },
-  { "difficulty": "Medium", "question": "What is the difference between HAVING and WHERE clause in MySQL?" },
-  { "difficulty": "Medium", "question": "What is normalization in MySQL? Explain 1NF, 2NF, 3NF." },
-  { "difficulty": "Medium", "question": "What is a transaction in MySQL? Explain ACID properties." },
-  { "difficulty": "Hard", "question": "How does the MySQL query optimizer work?" },
-  { "difficulty": "Hard", "question": "Explain MySQL replication (master-slave)." },
-  { "difficulty": "Hard", "question": "What is the InnoDB storage engine and how does it differ from MyISAM?" },
-  { "difficulty": "Hard", "question": "How do you handle deadlocks in MySQL?" },
-  { "difficulty": "Hard", "question": "Explain partitioning in MySQL and its types." }
+  {
+    "difficulty": "Easy",
+    "question": "What is MySQL and what type of database is it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between PRIMARY KEY and UNIQUE KEY in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a foreign key in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between CHAR and VARCHAR in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between MySQL and SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different data types available in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a table in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a database and a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a database in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a table in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SELECT statement used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DELETE and TRUNCATE?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DELETE and DROP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between TRUNCATE and DROP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the WHERE clause?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ORDER BY clause?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the GROUP BY clause?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between INT and BIGINT?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between FLOAT and DOUBLE?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DECIMAL data type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a NULL value in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check for NULL values in a query?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between IS NULL and = NULL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DEFAULT constraint used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the AUTO_INCREMENT attribute?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between TEXT and VARCHAR?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between BLOB and TEXT?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different types of TEXT data types in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the LIMIT clause used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DISTINCT keyword used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you rename a table in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you rename a column in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ALTER TABLE statement used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between ALTER and UPDATE?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a composite primary key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can a table have more than one primary key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can a table have more than one unique key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the NOT NULL constraint?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CHECK constraint used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DDL, DML, and DCL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is DDL in MySQL? Give examples."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is DML in MySQL? Give examples."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is DCL in MySQL? Give examples."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is TCL in MySQL? Give examples."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between COMMIT and ROLLBACK?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the SAVEPOINT command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between WHERE and HAVING at a basic level?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a MySQL query?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you insert data into a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you update data in a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you delete data from a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SHOW DATABASES command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the USE statement in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DESCRIBE command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SHOW TABLES command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you list all columns of a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a clustered and non-clustered index at a basic level?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an index in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the LIKE operator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between % and _ wildcards in LIKE?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the BETWEEN operator used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the IN operator used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between IN and BETWEEN?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are aggregate functions in MySQL? Give examples."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the COUNT() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between COUNT(*) and COUNT(column_name)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SUM() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the AVG() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the MIN() and MAX() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CONCAT() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between CONCAT and CONCAT_WS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the UPPER() and LOWER() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the LENGTH() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SUBSTRING() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the TRIM() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the REPLACE() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the NOW() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CURDATE() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DATEDIFF() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DATE and DATETIME data types?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the TIMESTAMP data type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DATETIME and TIMESTAMP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ENUM data type in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SET data type in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add a new column to an existing table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you drop a column from a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you change the data type of a column?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a schema in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a schema and a database in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the phpMyAdmin tool used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the MySQL Workbench used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What port does MySQL run on by default?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you connect to MySQL from the command line?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the root user in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a new user in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you grant privileges to a user in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the GRANT statement used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the REVOKE statement used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the FLUSH PRIVILEGES command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a comment in MySQL and how do you write one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between single quotes and double quotes in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the backtick (`) used for in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a subquery in simple terms?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an alias in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the AS keyword used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between UNION and UNION ALL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a self join in simple terms?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CASE statement used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the IFNULL() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the COALESCE() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between IFNULL and COALESCE?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a view in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a view in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the DISTINCT keyword with COUNT?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a temporary table and a regular table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a temporary table in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ROUND() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the FLOOR() and CEIL() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the RAND() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of backup in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is mysqldump used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What character set does MySQL use by default?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is UTF-8 in the context of MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between utf8 and utf8mb4 in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a collation in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between case-sensitive and case-insensitive collation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the LIMIT and OFFSET clause?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between LIMIT 5 and LIMIT 5,10?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the SHOW CREATE TABLE command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local variable and a user-defined variable in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you declare and use a user-defined variable in a MySQL query?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the SHOW STATUS command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SHOW PROCESSLIST command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the KILL command used for in MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a temporary table and a derived table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the INFORMATION_SCHEMA.TABLES view?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the different types of JOINs in MySQL with examples."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a stored procedure in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are database indexes and how do they improve performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HAVING and WHERE clause in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is normalization in MySQL? Explain 1NF, 2NF, 3NF."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a transaction in MySQL? Explain ACID properties."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between INNER JOIN and OUTER JOIN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a LEFT JOIN and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a RIGHT JOIN and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CROSS JOIN and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a self join and give a real-world use case?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is denormalization and when is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a correlated subquery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a correlated and non-correlated subquery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a stored function and how does it differ from a stored procedure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a trigger in MySQL? Give an example use case."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different types of triggers in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between BEFORE and AFTER triggers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a composite index and when should you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a clustered index and a secondary index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you decide which columns to index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the downsides of over-indexing a table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the EXPLAIN statement used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you read the output of an EXPLAIN query?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is query caching in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a materialized view and a regular view in MySQL context?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the GROUP_CONCAT() function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a window function in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RANK(), DENSE_RANK(), and ROW_NUMBER()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a common table expression (CTE) in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a CTE and a subquery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a recursive CTE and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between UNION and JOIN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the EXISTS operator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EXISTS and IN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the isolation level in a database transaction?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different transaction isolation levels supported by MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the default isolation level in InnoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a dirty read?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a non-repeatable read?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a phantom read?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between optimistic and pessimistic locking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is row-level locking versus table-level locking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the LOCK TABLES statement?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a foreign key constraint and what are ON DELETE CASCADE options?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ON DELETE CASCADE and ON DELETE SET NULL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is referential integrity?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a composite foreign key?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you enforce data integrity in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a natural key and a surrogate key?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of database normalization beyond 3NF (BCNF)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are functional dependencies in database design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a many-to-many relationship and how is it implemented in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a junction/bridge table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between horizontal and vertical partitioning at a conceptual level?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is sharding and how is it different from partitioning?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection pooling and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of prepared statements in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do prepared statements help prevent SQL injection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SQL injection and how can it be prevented in MySQL applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a stored procedure and a function in terms of return values?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you pass parameters to a stored procedure in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the DELIMITER command in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a cursor in MySQL stored procedures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a cursor and a loop in stored procedures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the HANDLER statement in stored procedures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an event scheduler in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you schedule a recurring job in MySQL using events?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a view and a table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can you insert data into a view? Explain with conditions."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an updatable view in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the WITH CHECK OPTION in a view?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a simple view and a complex view?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database replication and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous replication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a database backup strategy (full vs incremental)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between logical and physical backups in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the mysqlpump utility used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the information_schema database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you find all tables that have a specific column name?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you find duplicate rows in a MySQL table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you delete duplicate rows while keeping one copy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the ROW_NUMBER() window function for deduplication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a self-referencing foreign key?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you model a hierarchical (tree) structure in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the adjacency list model versus the nested set model for hierarchies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of JSON data type in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you query JSON columns in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the JSON_EXTRACT() function used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is full-text search in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a FULLTEXT index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between natural language mode and boolean mode in full-text search?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the EXPLAIN ANALYZE statement?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a covering index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is index cardinality and why does it matter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a primary index and a secondary index in InnoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is query execution order in a SQL statement (logical order of clauses)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the CASE WHEN statement in aggregations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you pivot data in MySQL using CASE statements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a scalar subquery and a table subquery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is lazy loading versus eager loading in the context of database queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the N+1 query problem and how do you avoid it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database connection timeout and how do you configure it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the SET autocommit command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens if autocommit is disabled and you don't commit a transaction?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between START TRANSACTION and BEGIN in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a savepoint and how is it used within a transaction?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the SIGNAL statement in stored procedures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle errors within a stored procedure using DECLARE HANDLER?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a warning and an error in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the STRICT_TRANS_TABLES SQL mode?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SQL_MODE in MySQL and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ANSI SQL mode and default MySQL mode?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you optimize a slow SELECT query with multiple JOINs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the slow query log in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you enable and analyze the slow query log?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the pt-query-digest tool used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the ANALYZE TABLE statement?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the OPTIMIZE TABLE statement?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is table fragmentation and how do you fix it in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a hash index and a B-tree index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When would MySQL use a hash index over a B-tree index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the CHECK TABLE and REPAIR TABLE statements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between logical replication and binary log replication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the binary log (binlog) used for in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different binlog formats (STATEMENT, ROW, MIXED)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is GTID-based replication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the my.cnf configuration file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are some important MySQL server configuration parameters?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the innodb_buffer_pool_size parameter and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the query_cache_type variable (and why was it removed in MySQL 8)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a natural join and an inner join with ON clause?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use the WITH ROLLUP modifier in a GROUP BY query?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the GENERATED ALWAYS AS (virtual/generated columns) feature?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a stored generated column and a virtual generated column?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use the LOAD DATA INFILE statement to bulk import data?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the SELECT ... INTO OUTFILE statement?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an inline view and a CTE in a complex query?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the MySQL query optimizer work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain MySQL replication (master-slave)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the InnoDB storage engine and how does it differ from MyISAM?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle deadlocks in MySQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain partitioning in MySQL and its types."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is multi-version concurrency control (MVCC) and how does InnoDB implement it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does InnoDB handle crash recovery?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the InnoDB redo log and how does it work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the InnoDB undo log and how does it work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the InnoDB doublewrite buffer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between physical and logical replication in MySQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does master-master replication work and what are its risks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is semi-synchronous replication in MySQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is group replication in MySQL and how does it achieve consensus?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between MySQL Group Replication and traditional replication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you set up a high-availability MySQL cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is MySQL InnoDB Cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the Orchestrator or ProxySQL tools in a MySQL HA setup?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL handle replication lag and how do you monitor it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What strategies can you use to reduce replication lag?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between statement-based and row-based replication in terms of consistency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of row-based replication versus statement-based replication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the MySQL cost-based optimizer choose an execution plan?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What statistics does the optimizer use to make decisions and how are they collected?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of optimizer hints and when should you use them?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL decide whether to use an index or perform a full table scan?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is index merge optimization in MySQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a range scan and an index scan?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL handle join order optimization internally?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Block Nested Loop Join algorithm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Hash Join in MySQL and when is it used (MySQL 8.0+)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager evaluation and lazy evaluation in query execution?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL implement subquery optimization (semi-join, materialization)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is derived table merging in the MySQL optimizer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the FORCE INDEX and IGNORE INDEX hints?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What causes a deadlock in InnoDB and how does InnoDB detect it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you diagnose a deadlock using the InnoDB status output?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What strategies can you use to prevent deadlocks in application design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is lock escalation and does InnoDB support it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is gap locking in InnoDB and why does it exist?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is next-key locking in InnoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between shared locks and exclusive locks in InnoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between intention locks and record locks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does InnoDB implement repeatable read isolation without heavy locking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a consistent non-locking read in InnoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the different types of partitioning in MySQL (RANGE, LIST, HASH, KEY)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is subpartitioning in MySQL and when would you use it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the limitations of partitioning in MySQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does partition pruning work and how does it improve query performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you choose a partitioning key for a large table?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between horizontal partitioning and database sharding at the architecture level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement sharding in a MySQL-based application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the challenges of cross-shard joins and transactions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a shard key and how do you choose a good one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between InnoDB and MyISAM in terms of transaction support?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between InnoDB and MyISAM in terms of locking granularity?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between InnoDB and MyISAM in terms of crash recovery?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Why is InnoDB generally preferred over MyISAM in modern applications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the InnoDB buffer pool and how does it affect performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you tune the InnoDB buffer pool size for a production server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of innodb_flush_log_at_trx_commit and its performance implications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between fsync and O_DIRECT in InnoDB I/O configuration?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the InnoDB change buffer and how does it optimize secondary index writes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of adaptive hash indexing in InnoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does InnoDB handle auto-increment locking in concurrent inserts?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the innodb_autoinc_lock_mode setting and its effect on concurrency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a MySQL schema for very high write throughput?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you scale MySQL reads using read replicas?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between read replicas and a caching layer like Redis for scaling reads?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the CAP theorem and how does it relate to MySQL replication trade-offs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a MySQL-backed system for eventual consistency across regions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a split-brain scenario in a replicated MySQL cluster and how do you avoid it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you perform an online schema change on a large InnoDB table with minimal downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of tools like gh-ost or pt-online-schema-change?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between INSTANT, INPLACE, and COPY algorithms for ALTER TABLE in MySQL 8?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle a large data migration in MySQL without locking the table for long periods?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the InnoDB tablespace and how does file-per-table mode work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a shared tablespace and a file-per-table tablespace?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you recover a corrupted InnoDB table?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is point-in-time recovery in MySQL and how do you perform it using binlogs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of Percona XtraBackup and how does it differ from mysqldump?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you perform a hot backup of a MySQL database with minimal downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between logical and physical backup restore time trade-offs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL handle character set conversion issues during replication across servers with different configurations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the impact of large transactions on replication and undo log growth?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you monitor and troubleshoot high CPU usage caused by MySQL queries?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What tools would you use to profile a slow MySQL query at the engine level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the Performance Schema in MySQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Performance Schema and the sys schema?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you identify the most resource-intensive queries running on a production MySQL server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is query plan caching and how does MySQL 8 handle it compared to earlier versions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL 8's data dictionary differ from earlier MySQL versions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are common table expressions with recursion used for in hierarchical query optimization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL implement window functions internally and what are their performance implications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a covering index scan and an index condition pushdown (ICP)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is index condition pushdown and how does it reduce I/O?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is multi-range read optimization (MRR) in MySQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you design an efficient database schema for time-series data in MySQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using MySQL and a dedicated time-series database for high-frequency data?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect MySQL for multi-tenant SaaS applications (shared schema vs separate databases)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs between a single large table with a tenant_id column versus separate databases per tenant?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you secure sensitive data such as passwords in a MySQL database?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of encryption at rest in MySQL (InnoDB tablespace encryption)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between encryption at rest and encryption in transit for MySQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL implement row-level security or is it something you must build at the application layer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of MySQL's audit log plugin?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you set up disaster recovery for a mission-critical MySQL database across data centers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Galera Cluster and how does it differ from standard MySQL replication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Galera Cluster handle write conflicts across multiple master nodes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is certification-based replication in Galera Cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle schema drift between a primary and replica database?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the impact of long-running transactions on InnoDB purge and undo log size?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you diagnose and resolve InnoDB history list length growth issues?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purge thread in InnoDB and what does it do?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL handle very large result sets efficiently (streaming vs buffering)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between mysql_use_result and mysql_store_result at a driver level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design connection pooling and query routing for a sharded MySQL environment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the InnoDB clustered index physically order data on disk and what implications does this have for insert performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is write amplification in InnoDB and how do secondary indexes contribute to it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between logical corruption and physical corruption in an InnoDB tablespace, and how do you recover from each?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you migrate a live, high-traffic MySQL database to a new schema version with zero downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the binlog_row_image setting and how does it affect replication size and recovery?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement a blue-green deployment strategy for MySQL schema changes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MySQL 8's redo log architecture (multiple redo log files vs innodb_redo_log_capacity) differ from earlier versions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the change buffer merge process and how can it affect I/O spikes during low-traffic periods?"
+  }
 ]

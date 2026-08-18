@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const axios = require("axios");
 const Interview = require("../../../models/Interview");
+const Question = require("../../../models/Question");
 const User = require("../../../models/User");
 const walletService = require("../wallet/wallet.service");
 const { sendNotification } = require("../../../utils/notificationService");
@@ -12,41 +13,40 @@ const aiService = require("../../services/ai.service");
 
 let previousQuestions = new Set();
 
-const getLocalQuestions = (skill, count, difficulty) => {
+const getLocalQuestions = async (skill, count, difficulty) => {
   try {
     if (!skill || count <= 0) return [];
     
-    // Sometimes skill can be a comma-separated list like "React, Node.js"
-    // For simplicity, we take the first skill if there are commas.
     const primarySkill = skill.split(',')[0].trim();
     const slug = primarySkill.toLowerCase().replace(/\s+/g, "");
     
-    const qbackendPath = path.join(__dirname, "../../../../Qbackend/src/questions");
-    const filePath = path.join(qbackendPath, `${slug}.json`);
+    let matchStage = { skill: slug };
     
-    if (!fs.existsSync(filePath)) {
-      return [];
-    }
-    
-    const raw = fs.readFileSync(filePath, "utf-8");
-    let questions = JSON.parse(raw);
-    
-    // If difficulty is specified and valid, filter
     const validDiffs = ["easy", "medium", "hard"];
     if (difficulty && validDiffs.includes(difficulty.toLowerCase())) {
-      const diffQuestions = questions.filter(q => q.difficulty && q.difficulty.toLowerCase() === difficulty.toLowerCase());
-      // Only use filtered if it has enough questions to be useful, else fallback to all
-      if (diffQuestions.length >= count) {
-        questions = diffQuestions;
+      matchStage.difficulty = { $regex: new RegExp(`^${difficulty}$`, "i") };
+    }
+
+    let questions = await Question.aggregate([
+      { $match: matchStage },
+      { $sample: { size: count } }
+    ]);
+
+    if (questions.length < count && matchStage.difficulty) {
+      const fallbackQuestions = await Question.aggregate([
+        { $match: { skill: slug } },
+        { $sample: { size: count } }
+      ]);
+      if (fallbackQuestions.length >= count) {
+        questions = fallbackQuestions;
       }
     }
     
-    if (questions.length === 0) return [];
+    console.log(`✅ Fetched ${questions.length} questions from MongoDB for skill: ${slug}`);
     
-    const shuffled = [...questions].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, count).map(q => q.question);
+    return questions.map(q => q.question);
   } catch (error) {
-    console.error("Error fetching local questions:", error);
+    console.error("Error fetching local questions from DB:", error);
     return [];
   }
 };
@@ -91,8 +91,8 @@ const generateInterviewQuestions = async (userId, data) => {
   // Target ratio: 60% JSON, 40% AI
   const targetJsonCount = Math.ceil(count * 0.6);
   
-  // Try to fetch local questions from Qbackend
-  const localQuestions = getLocalQuestions(jobTopic, targetJsonCount, difficulty);
+  // Try to fetch local questions from DB
+  const localQuestions = await getLocalQuestions(jobTopic, targetJsonCount, difficulty);
   const actualJsonCount = localQuestions.length;
   const aiCount = count - actualJsonCount;
   

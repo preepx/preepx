@@ -1,19 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is Python and what are its key features?" },
-  { "difficulty": "Easy", "question": "What is the difference between a list and a tuple in Python?" },
-  { "difficulty": "Easy", "question": "What is a dictionary in Python?" },
-  { "difficulty": "Easy", "question": "What is list comprehension in Python?" },
-  { "difficulty": "Easy", "question": "What is the difference between is and == in Python?" },
-  { "difficulty": "Medium", "question": "What are decorators in Python? Give an example." },
-  { "difficulty": "Medium", "question": "What is a generator in Python? How does yield work?" },
-  { "difficulty": "Medium", "question": "What is the GIL (Global Interpreter Lock) in Python?" },
-  { "difficulty": "Medium", "question": "What is the difference between deep copy and shallow copy in Python?" },
-  { "difficulty": "Medium", "question": "What are *args and **kwargs in Python?" },
-  { "difficulty": "Medium", "question": "What is duck typing in Python?" },
-  { "difficulty": "Medium", "question": "What are context managers and the 'with' statement in Python?" },
-  { "difficulty": "Hard", "question": "Explain metaclasses in Python." },
-  { "difficulty": "Hard", "question": "What is asyncio in Python? Explain async/await." },
-  { "difficulty": "Hard", "question": "How does Python's garbage collection work?" },
-  { "difficulty": "Hard", "question": "What are Python descriptors? Explain __get__, __set__, __delete__." },
-  { "difficulty": "Hard", "question": "How does Python's multiprocessing module differ from threading?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is Python and what are its key features?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a list and a tuple in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a dictionary in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is list comprehension in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between is and == in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a variable in Python and how do you declare one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the built-in data types in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between mutable and immutable data types in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a set in Python and how is it different from a list?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a list and a set?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a function in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the return statement used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between print() and return?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is indentation in Python and why is it important?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a for loop in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a while loop in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the range() function used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between break and continue statements?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the pass statement used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a string in Python and how do you create one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string slicing in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between single quotes and double quotes in Python strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an f-string in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the len() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the type() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is type casting in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between int(), float(), and str() functions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are Python comments and how do you write them?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a comment and a docstring?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an index in Python, and does indexing start at 0 or 1?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is negative indexing in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add an element to a list in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you remove an element from a list in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between append() and extend() methods?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between remove() and pop() methods for lists?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the sort() method used for in lists?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between sort() and sorted()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a nested list in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a shallow list copy using slicing and direct assignment?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the keys and values in a Python dictionary?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access a value in a dictionary using a key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the get() method used for in dictionaries?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the keys(), values(), and items() method used for in dictionaries?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a dictionary and a list in terms of ordering and lookup?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is None in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between None and 0 or an empty string?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are Boolean values in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are logical operators in Python (and, or, not)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between input() and print() in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are Python modules and how do you import them?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between import module and from module import function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the __name__ == '__main__' idiom used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a comment block and how do you write multi-line comments in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a function and a method in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a keyword argument in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between positional and keyword arguments?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are decorators in Python? Give an example."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generator in Python? How does yield work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the GIL (Global Interpreter Lock) in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between deep copy and shallow copy in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are *args and **kwargs in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is duck typing in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are context managers and the 'with' statement in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a class method, static method, and instance method?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the __init__ method used for in Python classes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between __init__ and __new__?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is inheritance in Python and how do you implement it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multiple inheritance in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Method Resolution Order (MRO) in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the super() function used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is method overriding in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Does Python support method overloading? How do you achieve similar behavior?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is encapsulation in Python and how is it implemented?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between public, protected, and private attributes in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is name mangling in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is polymorphism in Python? Give an example."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an abstract base class in Python and how do you create one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the abc module in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a lambda function in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a lambda function and a regular function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the map() function used for in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the filter() function used for in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the reduce() function used for in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between map(), filter(), and list comprehension?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a dictionary comprehension in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a set comprehension in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generator expression and how does it differ from a list comprehension?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between iterators and iterables in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the __iter__ and __next__ method used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a custom iterator class in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the StopIteration exception used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is exception handling in Python? Explain try, except, else, and finally."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between except Exception and a bare except?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you raise a custom exception in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an error and an exception in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the assert statement used for in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow and deep understanding of Python's pass-by-object-reference semantics?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between mutable default arguments and why are they discouraged?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is monkey patching in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a module and a package in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the __init__.py file used for in a Python package?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a virtual environment in Python and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between pip and conda?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between requirements.txt and a Pipfile?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is PEP 8 and why does it matter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Python script and a Python module?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain metaclasses in Python."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is asyncio in Python? Explain async/await."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Python's garbage collection work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are Python descriptors? Explain __get__, __set__, __delete__."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Python's multiprocessing module differ from threading?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between concurrency and parallelism in the context of Python."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a coroutine and a generator in Python?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the event loop works in asyncio."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between asyncio.gather() and asyncio.wait()?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a thread-based and process-based approach for CPU-bound versus I/O-bound tasks in Python?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python's reference counting garbage collection works alongside the generational garbage collector."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a reference cycle in Python and how does the garbage collector detect it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between __new__ and __init__ in the object instantiation process."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between __repr__ and __str__ methods?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how operator overloading works in Python using dunder methods."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between __eq__ and __hash__ and why must they be consistent?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python implements the Method Resolution Order using the C3 linearization algorithm."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a metaclass and how would you use one to enforce a coding pattern (e.g., singleton)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between type() and a custom metaclass for creating classes dynamically?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the __slots__ attribute affects memory usage and attribute access in Python classes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using __slots__ and a regular __dict__-based class?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python's import system resolves module paths and handles circular imports."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between absolute and relative imports in Python packages?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom context manager using the contextlib module."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using a class-based context manager and the @contextmanager decorator?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a decorator that accepts arguments."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a function decorator and a class decorator?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how functools.wraps helps preserve metadata when writing decorators."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between functools.lru_cache and manually implementing memoization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between shallow and deep immutability in Python's built-in types."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between id(), is, and == when comparing small integers due to interning?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python's string interning works and its implications for performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between CPython, PyPy, and Jython implementations of Python?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the GIL affects multi-threaded CPU-bound Python programs and how PyPy or C extensions can mitigate this."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous, threaded, and asynchronous web servers in Python (e.g., WSGI vs ASGI)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would profile a Python application to identify performance bottlenecks."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between cProfile and line_profiler for performance analysis?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would use the tracemalloc module to detect memory leaks in Python."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between weak references and strong references in Python's gc module?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom memory-efficient data structure using __slots__ and generators."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a bytecode-level optimization and a source-level optimization in CPython?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the dis module can be used to inspect Python bytecode for optimization purposes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between numpy arrays and Python lists in terms of memory layout and performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python's Global Interpreter Lock interacts with C extensions that release the GIL (e.g., NumPy operations)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between multiprocessing.Pool and concurrent.futures.ProcessPoolExecutor?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how pickling works in Python and its role in multiprocessing."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between pickle and json serialization in terms of capabilities and security?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the security risks of unpickling untrusted data in Python."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a Protocol (structural typing) and an Abstract Base Class (nominal typing) in Python's typing module?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python's type hints and static type checkers like mypy work, given Python is dynamically typed."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a compiled and an interpreted language, and where does Python fit?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is PEP and what does PEP 8 refer to?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an IDE and name a few commonly used for Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Python Standard Library?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a syntax error versus a logical error in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local scope and a global scope in Python functions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the global keyword used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the nonlocal keyword used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a docstring and how do you access a function's docstring?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the help() function used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the dir() function used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the id() function used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a shallow understanding of == for lists versus for strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check if a key exists in a dictionary?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you merge two dictionaries in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the update() method used for in dictionaries?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a frozenset in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a set and a frozenset?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the union(), intersection(), and difference() method used for in sets?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you remove duplicates from a list in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the enumerate() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the zip() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between zip() and enumerate()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you reverse a list in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you reverse a string in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string formatting and name the different ways to do it in Python."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the format() method used for in strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the % operator used for in string formatting?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between % formatting, .format(), and f-strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a file object in Python and how do you open a file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between 'r', 'w', 'a', and 'rb' modes when opening a file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you read the contents of a file in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you write to a file in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of closing a file after use?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the with statement used for when working with files?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the os module used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the sys module used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the datetime module used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the random module used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the math module used for in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow copy using copy() and a deep copy using deepcopy()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the copy module used for in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between == and is when comparing mutable objects like lists?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a class attribute and an instance attribute?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a class variable shared across instances and an instance variable unique to each object?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a property in Python and how do you use the @property decorator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a property and a regular attribute access?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is operator overloading and how would you implement __add__ for a custom class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the __call__ method used for in Python classes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a callable object in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a regular class and a dataclass in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @dataclass decorator used for and what boilerplate does it eliminate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between namedtuple and a dataclass?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the collections module used for in Python? Name a few of its classes."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between defaultdict and a regular dict?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Counter in the collections module used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is OrderedDict and how does it differ from a regular dict in modern Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is deque and when would you use it over a list?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the itertools module used for? Name a few commonly used functions."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between itertools.chain() and simply concatenating lists?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between itertools.permutations() and itertools.combinations()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is unit testing and what module does Python provide for it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between unittest and pytest?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a test fixture in pytest?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is mocking in unit tests and what module is used for it in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a mock and a stub in testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is test-driven development (TDD)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between integration testing and unit testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a virtual environment tool like venv used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between venv and virtualenv?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is setup.py used for in a Python package?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between setup.py and pyproject.toml?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a wheel file in Python packaging?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an egg and a wheel distribution format?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a synchronous web framework like Flask and an asynchronous one like FastAPI?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a WSGI application in Python web development?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between WSGI and ASGI?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a decorator-based route in Flask, and how does it work under the hood?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dependency injection in FastAPI and how is it implemented?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Django's ORM and using raw SQL queries?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python's data model (dunder methods) enables operator overloading and protocol-based behavior."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the sequence protocol and the mapping protocol in Python's data model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the __getattr__, __setattr__, and __getattribute__ methods differ in controlling attribute access."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between __getattr__ and __getattribute__ in terms of when they are invoked?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a lazy-loading property using a descriptor."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a data descriptor and a non-data descriptor in Python?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python resolves attribute lookup order between instance __dict__, class __dict__, and descriptors."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between class-level __slots__ inheritance and mixing slots with regular classes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement an ORM-like field validation system using descriptors."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between abstract methods enforced by ABCMeta versus NotImplementedError-based conventions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a plugin system in Python using entry points or metaclass registration."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between __init_subclass__ and a metaclass for customizing subclass creation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python's asyncio event loop schedules coroutines and handles I/O multiplexing (select/epoll)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between asyncio.create_task() and directly awaiting a coroutine?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how asyncio.Queue can be used to implement a producer-consumer pattern with coroutines."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between asyncio.Lock and threading.Lock in terms of the concurrency model they protect?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would run blocking synchronous code inside an asyncio event loop without blocking other coroutines."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between loop.run_in_executor and using asyncio-native async libraries for I/O?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how context variables (contextvars module) work for maintaining state across async call chains."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between thread-local storage and context variables for async code?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a connection pool for a database in an async Python application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous database drivers and async drivers (e.g., psycopg2 vs asyncpg)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python's memory allocator (pymalloc) manages small object allocation for performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Python's private heap and the C-level memory management it relies on?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would use gc.disable() strategically and the trade-offs involved."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between generational garbage collection thresholds (gen0, gen1, gen2) in CPython?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom iterator protocol supporting both __iter__ and __next__ for an infinite sequence."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a generator's send() method and simply calling next()?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would use a generator to implement a coroutine-based state machine (pre-async/await style)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between PEP 492 (async/await syntax) and the older generator-based coroutines (PEP 380)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Cython or C extensions can be used to bypass GIL limitations for performance-critical code."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between ctypes and writing a C extension module for interfacing with native code?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom serialization format that is more secure than pickle for untrusted data."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between marshalling and pickling in the context of Python's internal bytecode serialization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a rate-limited, retryable HTTP client using asyncio and exponential backoff."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous retries using a decorator versus async-aware retry libraries like tenacity?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement dependency injection in a large Python application without a framework."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between structural pattern matching (match-case, PEP 634) and a chain of if-elif statements?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Python's typing module supports generics (TypeVar, Generic) for writing type-safe reusable code."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between covariant, contravariant, and invariant type parameters in Python's typing system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a script and a module in Python execution context?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an argument and a parameter in a Python function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a default parameter value in a Python function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What happens if you call a function with fewer arguments than required parameters?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is variable scope resolution order in Python (LEGB rule)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a tuple used for and why might you choose it over a list?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you unpack a tuple into multiple variables?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is tuple packing in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a list and a string in terms of mutability?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check the length of a dictionary?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you iterate over a dictionary's keys and values together?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a nested dictionary in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between del and pop() for removing dictionary items?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the clear() method used for on lists and dictionaries?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between count() and index() methods on a list?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string multiplication in Python (e.g., 'ab' * 3)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is list multiplication in Python (e.g., [0] * 5)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an empty list and None as a default value?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ord() and chr() function used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the bin(), oct(), and hex() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the abs() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the round() function used for and how does it handle .5 values?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the sum() function used for on a list of numbers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the min() and max() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the all() and any() function used for on iterables?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between all() and any()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a conditional expression (ternary operator) in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the walrus operator (:=) introduced in Python 3.8?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an exception traceback and how do you read it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between raising an exception and catching one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a built-in exception like ValueError or KeyError used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between IndexError and KeyError?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a script argument and reading from standard input?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the sys.argv list used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a shebang line in a Python script?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Python 2 and Python 3 (high level)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the print() function's sep and end parameter used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string encoding and the encode()/decode() methods used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between bytes and str in Python 3?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the __doc__ attribute on a function or class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a bound method and an unbound function reference in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the __dict__ attribute of an object used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vars() and __dict__?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between isinstance() and type() for type checking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why is isinstance() generally preferred over comparing type() directly?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the issubclass() function used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a class hierarchy and how does Python resolve attribute lookup through it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between composition and inheritance, with a Python example of each?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a mixin class in Python and how is it typically used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the diamond problem and how does Python's MRO resolve it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface (informal, via duck typing) and an ABC in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the functools module used for? Name a few useful functions."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is functools.partial() used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is functools.reduce() used for and how does it differ from a for loop accumulation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the operator module used for in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between sorted() with a key function versus a cmp function (Python 2 legacy)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you sort a list of dictionaries by a specific key in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you sort a list of tuples by the second element?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between sorting in place versus returning a new sorted list?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shallow sorting stability and unstable sort algorithms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memoization and how would you implement it manually using a dictionary?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between recursion and iteration, and when would you prefer one over the other in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a recursive limit in Python and how do you change it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the risk of deep recursion in Python given it lacks tail call optimization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow understanding of Python's dynamic typing versus duck typing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is monkey patching and give a practical example of when it might be used (and its risks)."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between eval() and exec() in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the security risk associated with eval() on untrusted input?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Python script's global namespace and a module's namespace when imported?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shallow module caching and reloading a module using importlib.reload()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the __all__ variable used for in a module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a relative import and an absolute import inside a package?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a namespace package in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between logging module's levels (DEBUG, INFO, WARNING, ERROR, CRITICAL)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between print statements and using the logging module for debugging?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a logging handler and formatter used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the json module's dump/dumps and load/loads functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CSV reading using the csv module versus pandas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a context manager's __enter__ and __exit__ method used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between suppressing exceptions in __exit__ versus letting them propagate?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a thread-safe singleton in Python considering the GIL."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using a Lock and using an atomic operation for thread safety in Python?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the multiprocessing module's shared memory (Value, Array) differs from using a Manager for shared state."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between fork and spawn start methods in Python's multiprocessing module?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain why spawn is preferred over fork on some platforms and its implications for picklability of shared objects."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a Process pool's map() and apply_async() methods?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement inter-process communication using Pipes versus Queues in multiprocessing."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous locks and semaphores when limiting concurrent access to a resource in Python?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a producer-consumer system using threading.Condition."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between threading.Event and threading.Condition for coordinating threads?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement your own thread pool executor from scratch using the threading module."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between concurrent.futures.ThreadPoolExecutor and manually managing threads?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would profile and reduce the memory footprint of a large Python application processing big datasets."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using generators versus lists for processing large datasets in terms of memory usage?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a streaming CSV/JSON parser in Python to avoid loading an entire large file into memory."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between numpy's vectorized operations and native Python loops in terms of performance, and why?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the buffer protocol works in Python and its relevance to libraries like numpy and array."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between array.array and a Python list in terms of memory efficiency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom hash function for a class to be used as a dictionary key."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between requiring __hash__ and __eq__ for immutable versus mutable custom objects?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the security implications of using os.system() or subprocess with shell=True versus a safer alternative."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between subprocess.run(), subprocess.Popen(), and os.system() in terms of control and safety?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would sandbox or restrict a Python script's capabilities when executing user-submitted code."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a virtual environment and a container (e.g., Docker) for isolating Python dependencies?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how dependency resolution works with pip and how it differs from a lock-file-based tool like Poetry."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between semantic versioning constraints (^, ~, ==) in a Python dependency specification?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would set up a CI pipeline to run linting, type checking, and tests for a Python project."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between static type checking with mypy and runtime type checking with libraries like pydantic?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how pydantic performs data validation and how it differs from manually writing validation logic."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Django's synchronous views and its newer async view support?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Django's ORM lazy evaluation of querysets works and the N+1 query problem it can cause."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between select_related() and prefetch_related() in Django's ORM for optimizing queries?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement caching (e.g., with Redis) to reduce database load in a Python web application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between cache invalidation strategies like TTL-based expiry and event-based invalidation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a Python microservice's health check and graceful shutdown handling."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between SIGTERM and SIGKILL handling in a long-running Python process?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement idempotent API endpoints in a Python web service to safely handle retries."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between optimistic and pessimistic locking when handling concurrent database writes in Python ORMs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a distributed lock using Redis for coordinating multiple Python service instances."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eventual consistency and strong consistency, and how does it affect Python service design in a distributed system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a Python interpreter's REPL and running a .py script file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a keyword and a built-in function in Python?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shallow scoping in a list comprehension versus a for loop in Python 3?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a class-level docstring and a module-level docstring?"
+  }
 ]

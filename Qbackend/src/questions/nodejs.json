@@ -1,22 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is Node.js and how is it different from browser JavaScript?" },
-  { "difficulty": "Easy", "question": "What is the event loop in Node.js?" },
-  { "difficulty": "Easy", "question": "What is npm and what is the purpose of package.json?" },
-  { "difficulty": "Easy", "question": "What are modules in Node.js? Difference between require and import?" },
-  { "difficulty": "Easy", "question": "What is the difference between synchronous and asynchronous code in Node.js?" },
-  { "difficulty": "Easy", "question": "What is a callback function in Node.js?" },
-  { "difficulty": "Medium", "question": "Explain Promises and async/await in Node.js." },
-  { "difficulty": "Medium", "question": "What is the Node.js cluster module and when would you use it?" },
-  { "difficulty": "Medium", "question": "What is the difference between process.nextTick() and setImmediate()?" },
-  { "difficulty": "Medium", "question": "Explain streams in Node.js and their types." },
-  { "difficulty": "Medium", "question": "What is middleware in Node.js/Express?" },
-  { "difficulty": "Medium", "question": "How do you handle errors in async/await code in Node.js?" },
-  { "difficulty": "Medium", "question": "What is the Buffer class in Node.js and when is it used?" },
-  { "difficulty": "Medium", "question": "How does Node.js handle child processes?" },
-  { "difficulty": "Hard", "question": "Explain Node.js event-driven architecture in detail." },
-  { "difficulty": "Hard", "question": "What is libuv and how does it enable Node.js non-blocking I/O?" },
-  { "difficulty": "Hard", "question": "How would you prevent memory leaks in a Node.js application?" },
-  { "difficulty": "Hard", "question": "Explain Worker Threads in Node.js and when to use them over clustering." },
-  { "difficulty": "Hard", "question": "How do you implement rate limiting in a Node.js API?" },
-  { "difficulty": "Hard", "question": "Describe strategies to scale a Node.js application for production." }
+  {
+    "difficulty": "Easy",
+    "question": "What is Node.js and how is it different from browser JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the event loop in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is npm and what is the purpose of package.json?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are modules in Node.js? Difference between require and import?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between synchronous and asynchronous code in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a callback function in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the V8 engine and what role does it play in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is npx and how is it different from npm?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the package-lock.json file used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between dependencies and devDependencies in package.json?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a global module versus a local module in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you install a package globally versus locally using npm?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the node_modules folder?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between module.exports and exports in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a simple HTTP server in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the http module used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the fs module used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between fs.readFile and fs.readFileSync?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the path module used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the os module used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between __dirname and __filename?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is process.argv used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is process.env used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of environment variables in a Node.js application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the require() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between built-in modules, local modules, and third-party modules?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Express.js and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set up a basic Express server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is routing in Express.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between app.get() and app.post() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is req and res in an Express route handler?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the next() function in Express middleware?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is JSON and how do you send a JSON response in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a REST API?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the common HTTP methods used in REST APIs?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between GET and POST HTTP methods?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between PUT and PATCH HTTP methods?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an HTTP status code and name a few common ones."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between 404 and 500 HTTP status codes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is CORS and why might you need to enable it in a Node.js API?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is body-parser and why was it needed in older Express apps?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is nodemon and why is it used during development?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between console.log and process.stdout.write?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a .env file in a Node.js project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the dotenv package used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a single-threaded model, and is Node.js single-threaded?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is non-blocking I/O in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between blocking and non-blocking operations with a simple example?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Node.js package registry and what is npmjs.com?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is semantic versioning (semver) in the context of npm packages?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain Promises and async/await in Node.js."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Node.js cluster module and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between process.nextTick() and setImmediate()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain streams in Node.js and their types."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is middleware in Node.js/Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle errors in async/await code in Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Buffer class in Node.js and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Node.js handle child processes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between spawn(), exec(), and fork() in the child_process module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a readable stream and a writable stream?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a duplex stream and a transform stream?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is backpressure in Node.js streams and how is it handled?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is piping in Node.js streams?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between pipe() and manually handling stream events?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the EventEmitter class in Node.js and how do you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a custom event emitter in Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between .on() and .once() in EventEmitter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is error-first callback convention in Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between operational errors and programmer errors in Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement centralized error handling middleware in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous error handling with try-catch and handling errors in Promises?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an unhandled promise rejection and how do you catch it globally in Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between process.on('uncaughtException') and process.on('unhandledRejection')?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is JWT (JSON Web Token) and how is it used for authentication in Node.js APIs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between session-based authentication and token-based authentication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is bcrypt and why is it used for password hashing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hashing and encryption?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is middleware order and why does it matter in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a router in Express.js and how do you modularize routes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between app-level middleware and router-level middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the helmet package in an Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is rate limiting and why is it important for an API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between MongoDB and a relational database like PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Mongoose and what problem does it solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a schema in Mongoose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between findOne() and find() in Mongoose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is population in Mongoose and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection pooling in the context of a Node.js database driver?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an ORM and how does Sequelize compare to Mongoose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SQL injection risk with raw queries versus using parameterized queries or an ORM?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a .gitignore file and what should typically be included for a Node.js project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between unit testing and integration testing in a Node.js application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Mocha and Chai used for in Node.js testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Jest and how does it compare to Mocha for testing Node.js applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is supertest used for in API testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between mocking a database call and using a test database for integration tests?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a REST API versioning strategy and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is pagination and how would you implement it in a Node.js REST API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between offset-based pagination and cursor-based pagination?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is compression middleware used for in an Express application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain Node.js event-driven architecture in detail."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is libuv and how does it enable Node.js non-blocking I/O?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you prevent memory leaks in a Node.js application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain Worker Threads in Node.js and when to use them over clustering."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement rate limiting in a Node.js API?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe strategies to scale a Node.js application for production."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the phases of the Node.js event loop in detail (timers, pending callbacks, poll, check, close callbacks)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the microtask queue and the macrotask queue in Node.js's event loop?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how process.nextTick() callbacks are prioritized relative to Promise microtasks in Node.js."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the thread pool used by libuv and the main event loop thread?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how libuv's thread pool handles file system operations and DNS lookups by default."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the default thread pool size in libuv and how would you configure it (UV_THREADPOOL_SIZE)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would diagnose a memory leak in a running Node.js production process using heap snapshots."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a shallow heap snapshot comparison and using --inspect with Chrome DevTools for memory profiling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would use clinic.js or 0x to profile CPU performance bottlenecks in Node.js."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between vertical scaling and horizontal scaling for a Node.js application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the cluster module distributes incoming connections across worker processes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between round-robin scheduling and OS-level scheduling for cluster workers on different platforms?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would share state (e.g., session data) across multiple Node.js cluster workers."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between sticky sessions and stateless session management in a load-balanced Node.js cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Worker Threads communicate with the main thread using message passing and SharedArrayBuffer."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between structured cloning and transferable objects when passing data to a Worker Thread?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a CPU-intensive task offloading system using a Worker Thread pool."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using Worker Threads versus spawning a child process for CPU-bound work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how graceful shutdown works in a Node.js server (handling SIGTERM, draining connections)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between process.exit() and allowing the event loop to drain naturally before exit?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a circuit breaker pattern in a Node.js microservice calling external APIs."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between retry with exponential backoff and a circuit breaker for handling downstream failures?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement distributed rate limiting across multiple Node.js instances using Redis."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a token bucket and a leaky bucket algorithm for rate limiting?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design idempotency keys for a Node.js payment processing API to handle retries safely."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between optimistic concurrency control and using database transactions in a Node.js application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement request tracing/correlation IDs across microservices in a Node.js system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous logging and asynchronous logging, and why does it matter for performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would set up structured logging with a library like pino or winston in a production Node.js app."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between application-level metrics and infrastructure-level metrics, and how would you expose them from Node.js (e.g., Prometheus)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a health check endpoint that accounts for downstream dependency failures."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between liveness probes and readiness probes in a containerized Node.js deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would optimize a Node.js Docker image for smaller size and faster startup (multi-stage builds)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between npm ci and npm install in a CI/CD pipeline context?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement zero-downtime deployment for a Node.js application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between blue-green deployment and rolling deployment for a Node.js service?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would secure a Node.js API against common vulnerabilities (SQL injection, XSS, prototype pollution)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is prototype pollution and how can it manifest as a vulnerability in a Node.js application using merge utilities?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement input validation and sanitization at scale in a Node.js API (e.g., with Joi or Zod)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous validation middleware and async validation involving database lookups?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a message queue-based architecture (e.g., RabbitMQ or Kafka) integrated with Node.js for decoupling services."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between at-least-once, at-most-once, and exactly-once delivery semantics in a Node.js message consumer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a WebSocket server in Node.js and handle horizontal scaling of WebSocket connections across instances."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Socket.IO's fallback mechanisms and raw WebSocket connections in terms of reliability and overhead?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a package manager and name the popular ones used in Node.js."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between yarn and npm?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is pnpm and how does it differ from npm in terms of storage?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a script defined in package.json and how do you run it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the main field in package.json used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the version field in package.json used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a patch, minor, and major version update in semver?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the caret (^) and tilde (~) symbol used for in package.json version ranges?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the bin field in package.json?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a CommonJS module?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an ES module in Node.js and how do you enable it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the type field in package.json used for (commonjs vs module)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between module.exports = {} and exports.foo = ?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you import a JSON file in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the util module used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is util.promisify() used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the events module in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the crypto module used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between hashing and encoding (e.g., base64) in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the querystring module used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the URL module used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the readline module used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a terminal command-line tool and a web server in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is REPL in the context of Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you exit a Node.js process programmatically?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the process object in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between process.exit(0) and process.exit(1)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Node.js addon and what is it typically written in?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a CLI tool and a web server built with Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a README file in a Node.js project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between GET query parameters and POST request body?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access query parameters in an Express route?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access route parameters (e.g., /users/:id) in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the express.json() middleware used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the express.static() middleware used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static file and how do you serve one in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between app.use() and app.get() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a 404 handler in Express and how do you implement one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is templating in the context of server-rendered Node.js apps (e.g., EJS, Pug)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between server-side rendering and serving a JSON API in Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between TypeScript and JavaScript, and why might you use TypeScript with Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the tsconfig.json file used for in a TypeScript Node.js project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ts-node and compiling TypeScript before running it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a type definition file (.d.ts) used for in a Node.js TypeScript project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the DefinitelyTyped repository and the @types namespace used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dependency injection and how might you implement it in a Node.js/Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the MVC pattern and how would you structure a Node.js application using it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the repository pattern and why might you use it in a Node.js data layer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the service layer pattern in a layered Node.js application architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a monolithic Node.js application and a microservices architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an API gateway and what role does it play in a Node.js microservices setup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous inter-service communication (REST/HTTP) and asynchronous (message queues) in microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is GraphQL and how does it differ from REST for a Node.js API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a resolver in a GraphQL server built with Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a GraphQL query and a mutation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Apollo Server and how do you set it up with Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is N+1 query problem in GraphQL and how does DataLoader help solve it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between REST API caching and GraphQL caching strategies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is WebSocket and how is it different from HTTP polling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Socket.IO and how does it build on top of WebSockets?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between long polling and WebSockets for real-time communication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Server-Sent Events (SSE) and how does it differ from WebSockets?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a load balancer and a reverse proxy in front of a Node.js app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Nginx commonly used for in front of a Node.js application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is PM2 and what problem does it solve for running Node.js in production?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between PM2's cluster mode and the built-in Node.js cluster module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is containerization and why is Docker commonly used with Node.js applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Dockerfile and what are the typical steps for containerizing a Node.js app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Docker image and a Docker container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is docker-compose used for in a multi-service Node.js application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a CI/CD pipeline for a Node.js project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between continuous integration and continuous deployment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is code linting and what tool is commonly used for it in Node.js (ESLint)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ESLint and Prettier?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a pre-commit hook and how might you use Husky in a Node.js project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between integration tests that hit a real database versus using an in-memory database like SQLite or mongodb-memory-server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is API documentation and what tool is commonly used to generate it for Node.js APIs (Swagger/OpenAPI)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous request validation and asynchronous validation involving external checks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a health check endpoint in a Node.js microservice?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical logging (single service) and centralized logging (ELK stack) for Node.js microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom Node.js stream Transform class for processing data on the fly."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between object mode streams and binary streams in Node.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how highWaterMark affects buffering behavior in Node.js streams."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between stream.pipeline() and manually chaining .pipe() calls with error handling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom Readable stream that generates data on demand."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between push-based and pull-based stream implementations in Node.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Node.js handles asynchronous stack traces and the performance cost of enabling long stack traces."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is async_hooks in Node.js and what problem does it solve for tracing async operations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how AsyncLocalStorage works and how it's used for request-scoped context (e.g., correlation IDs) without passing parameters explicitly."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between AsyncLocalStorage and using a global variable or singleton for request context in Node.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the V8 garbage collector's generational approach (scavenge, mark-sweep-compact) affects Node.js application performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the old space and new space in V8's heap, and why does it matter for memory tuning?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would tune V8's --max-old-space-size flag for a memory-intensive Node.js application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a memory leak caused by closures retaining references versus one caused by an ever-growing cache?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would use heapdump or the built-in v8 module to capture and analyze heap snapshots programmatically."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous CPU-bound blocking of the event loop and asynchronous I/O-bound waiting in terms of diagnosing performance issues?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would detect event loop lag/blocking in a production Node.js application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using process.hrtime() and Date.now() for measuring performance in Node.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom load-shedding mechanism to protect a Node.js service from being overwhelmed under high traffic."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between backpressure at the TCP socket level and backpressure implemented at the application stream level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how keep-alive connections work in Node.js's HTTP module and their impact on connection pooling for outgoing requests."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the default HTTP agent's maxSockets setting and unbounded concurrent outgoing requests?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement mutual TLS (mTLS) authentication between Node.js microservices."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between TLS termination at a load balancer versus end-to-end TLS to the Node.js process?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would rotate secrets (API keys, database credentials) in a running Node.js production service without downtime."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between environment-based secret injection and using a dedicated secrets manager (e.g., Vault, AWS Secrets Manager)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a saga pattern for handling distributed transactions across Node.js microservices."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between choreography-based and orchestration-based saga implementations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design an event sourcing system using Node.js and a message broker like Kafka."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between event sourcing and traditional CRUD-based persistence for a Node.js service?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement idempotent Kafka consumers in Node.js to handle message redelivery safely."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between consumer group rebalancing strategies and their impact on a Node.js Kafka consumer's throughput?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement connection draining for in-flight requests during a rolling deployment of a Node.js service behind a load balancer."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a readiness gate and a liveness probe failing, in terms of how Kubernetes handles a Node.js pod?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement request coalescing (deduplication) for identical concurrent requests hitting a Node.js API."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between an in-memory cache (node-cache) and a distributed cache (Redis) for a horizontally scaled Node.js service?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how cache stampede can occur in a Node.js service and strategies to prevent it (e.g., locking, jittered TTLs)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between write-through, write-back, and write-around caching strategies for a Node.js application using Redis?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a bulkhead pattern to isolate failures between different downstream dependencies in a Node.js service."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between timeout-based failure isolation and bulkhead-based resource isolation in a resilient Node.js architecture?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an npm package and a Node.js core module?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the require cache in Node.js and how does it affect repeated require() calls?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a Node.js server and a static file server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the listen() method used for when creating an HTTP server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a port number and why does a Node.js server need one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is localhost and what does it refer to when testing a Node.js server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTTP and HTTPS in the context of a Node.js server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a status code 200 versus 201 used for in an API response?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a status code 400 versus 401 used for in an API response?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is JSON.stringify() used for when sending data from a Node.js server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Content-Type header used for in an HTTP response?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a request header and give an example of a common one."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a client and a server in a Node.js web application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an async function's default return type in JavaScript/Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between calling a function with a callback versus returning a Promise?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you read command-line arguments passed to a Node.js script?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a development dependency and a production dependency being installed?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the npm audit command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the npm outdated command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between npm update and npm install?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a lockfile and why should it be committed to version control?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the .nvmrc file in a Node.js project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is NVM (Node Version Manager) used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between LTS and current release lines of Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a Buffer and a String in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you convert a Buffer to a String in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between fs.existsSync() and checking a file with a try-catch on fs.readFileSync()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a callback hell and why is it considered problematic?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of wrapping asynchronous code with async/await instead of nested callbacks?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a Promise's resolve and reject functions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Promise.resolve() and Promise.reject() used for as static methods?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between chaining .then() and using async/await for the same asynchronous flow?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a try-catch block around an await expression?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between throwing an error inside an async function and returning a rejected Promise?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the util.inspect() function used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between console.error() and console.log()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is console.table() used for in Node.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a Node.js script run locally and one deployed to a server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a start script in package.json?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between running node index.js directly and using npm start?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous middleware and asynchronous middleware in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of app.locals or res.locals in an Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a cookie and how do you set one in an Express response?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the cookie-parser middleware used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSRF and how might you protect an Express application against it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between authentication and authorization in the context of an Express API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Passport.js and what problem does it solve for Node.js authentication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a strategy in Passport.js (e.g., local strategy, JWT strategy)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is refresh token rotation and how would you implement it in a Node.js auth system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between storing a JWT in localStorage versus an httpOnly cookie for a Node.js-backed web app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between symmetric and asymmetric signing algorithms for JWTs (HS256 vs RS256)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is API key-based authentication and when might it be preferred over JWT?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is OAuth2 and how does a Node.js application typically integrate with an OAuth2 provider?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the authorization code flow and the client credentials flow in OAuth2?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is rate limiting middleware like express-rate-limit used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between IP-based rate limiting and user-based rate limiting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a webhook and how would you implement a webhook receiver endpoint in Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is webhook signature verification and why is it important for security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between polling an external API and receiving webhooks from it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a job queue and why might you use one (e.g., Bull, BullMQ) in a Node.js application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a synchronous task and a background job in a Node.js web application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a cron job and how would you schedule one in Node.js (e.g., using node-cron)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between in-process scheduling and using an external scheduler for recurring Node.js tasks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical and horizontal partitioning of data accessed by a Node.js application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database migration and what tool might you use to manage it in a Node.js project (e.g., Knex, Sequelize migrations)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a seed file used for in database setup for a Node.js application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection string configuration and why is it typically stored in environment variables?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a read replica and the primary database in terms of how a Node.js app might route queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between eager loading and lazy loading of related data in an ORM used with Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a transaction in the context of a Node.js application performing multiple related database writes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an optimistic locking strategy and using database-level row locks in a Node.js app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of connection pooling for a database client used in Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between short-lived and long-lived database connections in a serverless Node.js function context?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a serverless function and how does writing one in Node.js differ from a traditional Express server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cold start in the context of serverless Node.js functions (e.g., AWS Lambda)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a serverless architecture and a traditional server-based Node.js deployment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous invocation of a Lambda function written in Node.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the API Gateway's role when exposing a Node.js Lambda function as an HTTP endpoint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a monorepo and a polyrepo setup for multiple Node.js services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Lerna or Nx used for in managing a Node.js monorepo?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement graceful degradation for a Node.js service when a downstream cache becomes unavailable."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between fail-fast and fail-safe error handling strategies in a resilient Node.js architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a leader election mechanism among multiple Node.js service instances using a distributed lock."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using Redis SETNX for leader election versus a dedicated coordination service like etcd or Zookeeper?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a multi-tenant Node.js SaaS application's data isolation strategy (shared schema vs. schema-per-tenant)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between row-level security and application-level tenant filtering in a multi-tenant Node.js API?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a blue-green database migration strategy for a Node.js application with zero downtime."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between backward-compatible and breaking schema migrations in a continuously deployed Node.js service?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would instrument a Node.js application with OpenTelemetry for distributed tracing across microservices."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a span and a trace in distributed tracing, and how do they map to Node.js request handling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement request-level context propagation across async boundaries using AsyncLocalStorage in a tracing system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous instrumentation overhead and sampling-based tracing for high-throughput Node.js services?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a Node.js API to handle idempotent retries for payment processing under network partition scenarios."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the CAP theorem's consistency and availability trade-offs as they apply to a Node.js service backed by a distributed database?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom LRU cache with TTL support from scratch in Node.js."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a Map-based cache and a WeakMap-based cache in terms of garbage collection behavior in Node.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would benchmark and compare the performance of two different JSON serialization approaches in a hot path of a Node.js API."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between V8's fast and slow object property access paths, and how does object shape consistency affect Node.js performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom binary protocol over TCP sockets in Node.js instead of using HTTP for a low-latency service."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Node.js's net module for raw TCP sockets and using a higher-level framework like Express?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement flow control manually when writing to a raw TCP socket in Node.js to avoid overwhelming the receiver."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Nagle's algorithm's effect on TCP socket latency and how you would disable it in Node.js using setNoDelay()?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a Node.js worker architecture that autoscales based on queue depth in a message-driven system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between horizontal pod autoscaling based on CPU metrics versus custom metrics (like queue length) for a Node.js worker deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a circuit breaker with half-open state testing in a Node.js service calling a flaky downstream API."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a bulkhead pattern implemented via separate thread pools versus separate process pools in Node.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would secure inter-service Node.js communication in a service mesh (e.g., Istio) versus implementing mTLS manually in application code."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a sidecar proxy handling retries/timeouts versus implementing that logic directly in Node.js application code?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement schema validation for Kafka messages consumed by a Node.js service using a schema registry (e.g., Avro, Protobuf)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between JSON Schema validation and binary schema formats like Protobuf in terms of performance for a high-throughput Node.js service?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a rolling feature flag rollout system integrated into a Node.js API without requiring redeployment."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between client-side feature flag evaluation and server-side evaluation for a Node.js-backed application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a token bucket rate limiter as a piece of reusable middleware with per-user and per-IP granularity in Node.js."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous validation of a large batch request and streaming validation for a Node.js API accepting bulk uploads?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement chunked file upload handling in Node.js to support resumable uploads for very large files."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between multipart form data parsing done in memory versus streaming directly to disk or cloud storage in Node.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom middleware to enforce API request/response schema contracts using JSON Schema or Zod in Express."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between validating input at the API boundary versus validating at the database layer in a layered Node.js architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a Node.js application to support graceful feature rollback if a newly deployed version causes elevated error rates."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between canary analysis based on error rate thresholds and manual rollback triggers for a Node.js deployment pipeline?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom connection retry mechanism with jitter for a Node.js service reconnecting to a message broker after a network blip."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a request timeout and a connection timeout in a Node.js HTTP client?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an npm scope (e.g., @org/package) and a regular package name?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the engines field in package.json?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a soft delete and a hard delete in a Node.js application's data layer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is API throttling and how does it differ from rate limiting in a Node.js service?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical logging levels and structured JSON logging for a Node.js microservice?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a distributed tracing context propagation across a Kafka message boundary in a Node.js consumer."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a soft real-time and hard real-time requirement, and how would that affect the design of a Node.js service handling time-sensitive events?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a Node.js service to safely handle out-of-order message delivery from a distributed queue."
+  }
 ]

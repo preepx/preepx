@@ -6,8 +6,8 @@ import api from './api';
 export const questionsService = {
   getAll: (skill, params) => api.get(`/questions/${skill}`, { params }),
   add: (skill, data) => api.post(`/questions/${skill}`, data),
-  edit: (skill, index, data) => api.put(`/questions/${skill}/${index}`, data),
-  delete: (skill, index) => api.delete(`/questions/${skill}/${index}`),
+  edit: (skill, id, data) => api.put(`/questions/${skill}/${id}`, data),
+  delete: (skill, id) => api.delete(`/questions/${skill}/${id}`),
   bulkUpload: (skill, file, mode = 'replace') => {
     const formData = new FormData();
     formData.append('file', file);

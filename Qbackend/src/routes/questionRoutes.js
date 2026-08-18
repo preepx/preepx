@@ -30,8 +30,8 @@ const upload = multer({
 
 router.get("/:skill", protect, getQuestions);
 router.post("/:skill", protect, addQuestionValidator, addQuestion);
-router.put("/:skill/:index", protect, addQuestionValidator, editQuestion);
-router.delete("/:skill/:index", protect, deleteQuestion);
+router.put("/:skill/:id", protect, addQuestionValidator, editQuestion);
+router.delete("/:skill/:id", protect, deleteQuestion);
 router.post("/:skill/bulk-upload", protect, upload.single("file"), bulkUpload);
 router.get("/:skill/export", protect, exportQuestions);
 

@@ -1,24 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is the Virtual DOM in React?" },
-  { "difficulty": "Easy", "question": "What is JSX in React?" },
-  { "difficulty": "Easy", "question": "What are props in React and how do you pass them?" },
-  { "difficulty": "Easy", "question": "What is the difference between functional and class components in React?" },
-  { "difficulty": "Easy", "question": "What is useState hook in React?" },
-  { "difficulty": "Easy", "question": "What is useEffect hook and when do you use it?" },
-  { "difficulty": "Easy", "question": "What is the key prop in React lists and why is it important?" },
-  { "difficulty": "Medium", "question": "Explain the React component lifecycle methods." },
-  { "difficulty": "Medium", "question": "What is Context API in React? When would you use it over props?" },
-  { "difficulty": "Medium", "question": "Explain the useMemo and useCallback hooks and their differences." },
-  { "difficulty": "Medium", "question": "What is React.memo and when should you use it?" },
-  { "difficulty": "Medium", "question": "What is the difference between controlled and uncontrolled components in React?" },
-  { "difficulty": "Medium", "question": "How does React handle forms? Explain controlled form components." },
-  { "difficulty": "Medium", "question": "What is React Router and how do you implement protected routes?" },
-  { "difficulty": "Medium", "question": "What is the useRef hook and what are its use cases?" },
-  { "difficulty": "Hard", "question": "Explain React's reconciliation algorithm and diffing strategy." },
-  { "difficulty": "Hard", "question": "What is code splitting in React and how do you implement it with React.lazy and Suspense?" },
-  { "difficulty": "Hard", "question": "Explain the useReducer hook and when to prefer it over useState." },
-  { "difficulty": "Hard", "question": "What are React Portals and when would you use them?" },
-  { "difficulty": "Hard", "question": "How does React handle error boundaries? Implement one." },
-  { "difficulty": "Hard", "question": "What is React Query? How does it manage server state differently from Redux?" },
-  { "difficulty": "Hard", "question": "Explain React's Fiber architecture and how it enables concurrent rendering." }
+  {
+    "difficulty": "Easy",
+    "question": "What is the Virtual DOM in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is JSX in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are props in React and how do you pass them?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between functional and class components in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is useState hook in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is useEffect hook and when do you use it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the key prop in React lists and why is it important?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is React and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a component in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a component and an element in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a functional component in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is state in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between state and props?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you update state in a functional component?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why should you never mutate state directly in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the render() method in class components?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is ReactDOM and how is it different from React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between React and ReactDOM?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is npm/yarn used for in a React project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is create-react-app used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Vite and how is it different from create-react-app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a fragment in React and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the <React.Fragment> or shorthand <> syntax?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are conditional rendering techniques in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you render a list of items in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an event handler in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How does event handling in React differ from vanilla JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a synthetic event in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between onClick and onclick in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the significance of className instead of class in JSX?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you pass data from a child component to a parent component?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is prop drilling in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a default prop in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set default values for props?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is PropTypes and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the index.js file in a React app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a single-page application and a multi-page application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between inline styling and CSS files in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you apply conditional CSS classes in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between React.createElement and JSX?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a self-closing tag in JSX?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can you return multiple elements from a component without a wrapper element?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a presentational component and a container component?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the significance of the 'key' warning in React console?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is React StrictMode and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between npm start and npm run build?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does 'React is declarative' mean?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is one-way data binding in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between React and Angular at a high level?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a hook in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the rules of hooks in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the React component lifecycle methods."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Context API in React? When would you use it over props?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the useMemo and useCallback hooks and their differences."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is React.memo and when should you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between controlled and uncontrolled components in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does React handle forms? Explain controlled form components."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is React Router and how do you implement protected routes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the useRef hook and what are its use cases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between useEffect and useLayoutEffect?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you fetch data in a React component using hooks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the dependency array in useEffect and how does it affect behavior?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens if you omit the dependency array in useEffect?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you clean up side effects in useEffect?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom hook in React? How do you create one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between useState and useReducer for form state management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you lift state up in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Context + useReducer pattern used for state management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is prop drilling and how does Context API solve it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are higher-order components (HOCs) in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HOCs and render props pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the render props pattern in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HOCs, render props, and hooks for code reuse?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you optimize performance in a large list using React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is windowing/virtualization and how do libraries like react-window help?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of stable keys vs using array index as key?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shallow comparison and deep comparison in React.memo?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you prevent unnecessary re-renders in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of React DevTools Profiler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between client-side rendering and server-side rendering?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is hydration in the context of server-side rendered React apps?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Next.js and how does it relate to React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between getStaticProps and getServerSideProps in Next.js?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is static site generation (SSG) vs server-side rendering (SSR)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle authentication in a React application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of environment variables in a React app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement lazy loading of images in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between axios and fetch for making API calls in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle errors from API calls in React components?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is debouncing and how would you implement it in a React search input?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is throttling and how is it different from debouncing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the useImperativeHandle hook used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is forwardRef in React and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you manage global state without Redux in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redux and what problem does it solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the core principles of Redux (single source of truth, state is read-only, pure functions)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redux and Context API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Redux reducer and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Redux action and action creator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is middleware in Redux? Give an example like redux-thunk."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between redux-thunk and redux-saga?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain React's reconciliation algorithm and diffing strategy."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is code splitting in React and how do you implement it with React.lazy and Suspense?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the useReducer hook and when to prefer it over useState."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are React Portals and when would you use them?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does React handle error boundaries? Implement one."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is React Query? How does it manage server state differently from Redux?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain React's Fiber architecture and how it enables concurrent rendering."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is concurrent rendering in React 18 and how does it differ from the legacy synchronous rendering model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the useTransition hook and how it helps with responsiveness during state updates."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is useDeferredValue and how does it differ from useTransition?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain automatic batching introduced in React 18."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between React 17 batching behavior and React 18 batching behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Suspense works for data fetching, not just code splitting."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Suspense boundary and how does it interact with error boundaries?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain server components in React and how they differ from client components."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is streaming SSR and how does React 18 support it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how React's scheduler prioritizes updates using lanes in the Fiber architecture."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous, task, and idle priority updates in React's scheduler?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the double buffering technique (current tree vs work-in-progress tree) works in Fiber."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the commit phase and render phase in React's rendering lifecycle?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Why can the render phase be interrupted while the commit phase cannot?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how React batches state updates inside and outside of event handlers."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a memory leak in React and how would useEffect cleanup prevent one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would detect and fix unnecessary re-renders using the React Profiler flame graph."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between reconciliation keys at the same level vs across different component types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain why changing a component's type (e.g., div to span) causes React to unmount and remount the subtree."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between useLayoutEffect and useEffect in terms of the browser paint cycle?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom state management solution using useContext and useReducer for a large app."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs between Redux Toolkit and Zustand for state management?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain normalized state shape in Redux and why it's recommended for relational data."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between reselect memoized selectors and plain derived state in Redux?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how React handles hydration mismatches and common causes of hydration errors in SSR apps."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between hydrateRoot and createRoot in React 18?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement optimistic UI updates with React Query or SWR."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is stale-while-revalidate caching strategy and how do libraries like SWR implement it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would architect code splitting at the route level vs component level in a large React application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between React.lazy with dynamic import() and manual chunk splitting via bundler configuration?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Web Workers can be integrated with React for offloading expensive computations."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between useSyncExternalStore and traditional external store subscriptions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would test React components using React Testing Library vs Enzyme, and the philosophy difference."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between shallow rendering and full DOM rendering in component testing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement accessibility (a11y) best practices in a complex React form component."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the significance of ARIA roles and how does React handle focus management for accessibility?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would profile and fix a performance bottleneck caused by context re-renders in a deeply nested component tree."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is context selector pattern and how does it mitigate unnecessary re-renders from Context API?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the useId hook works and why it was introduced for SSR consistency."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between React's legacy mode, blocking mode, and concurrent mode rendering (historical context)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement infinite scrolling with proper cleanup and cancellation of in-flight requests in React."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a race condition in useEffect data fetching and how do you prevent it (e.g., cleanup with AbortController)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how micro-frontends can be implemented using React with Module Federation."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between React Server Components and traditional SSR in terms of bundle size and data fetching?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is npm and what is it used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between npm install and npm ci?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is package.json used for in a React project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between dependencies and devDependencies?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Babel and why is it used in React projects?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Webpack and what role does it play in a React app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a component tree in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the parent-child relationship between components?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the children prop in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you pass a function as a prop to a child component?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an event object in React's synthetic event system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you prevent the default behavior of a form submission in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a text input and a textarea in a controlled form?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the value prop used for in a controlled input?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the onChange event used for in React forms?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle checkbox input in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle radio button input in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle select dropdown input in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the htmlFor attribute in JSX labels?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between defaultValue and value for inputs?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is CSS Modules in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is styled-components and how is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between inline styles object and CSS classes in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you conditionally show or hide an element in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ternary operator's use in JSX for conditional rendering?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is short-circuit evaluation (&&) used for in JSX?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a controlled component in a simple sentence?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an uncontrolled component in a simple sentence?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the useState initial value used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can useState hold an object or array as state?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What happens when you call the state setter function from useState?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Does calling the state setter cause an immediate re-render?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between React and a plain JavaScript DOM manipulation approach?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the public folder in a React app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the role of the index.html file in a React app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an npm script and how do you run it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is git and why is it commonly used alongside React projects?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a library and a framework? Is React a library or framework?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of ESLint in a React project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Prettier and how does it help in React development?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is React Hook Form and how does it differ from Formik?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is form validation and how would you implement it in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous form validation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle file uploads in a React form?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the useContext hook and how do you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Context Provider and Consumer pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you update context value from a deeply nested component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is prop types validation and how does it differ from TypeScript types?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use TypeScript with React functional components?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between React.FC and a plain function component type in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you type props and state in a TypeScript React component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generic component in TypeScript React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between interface and type for defining props in TypeScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle optional props in TypeScript React components?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the as prop pattern in component libraries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a compound component pattern in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the container/presentational component pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between smart and dumb components?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you test a React component with Jest and React Testing Library?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between unit testing and integration testing for React components?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is snapshot testing in Jest and when is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is mocking in Jest and how do you mock an API call?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between fireEvent and userEvent in React Testing Library?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you test asynchronous behavior in React components?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of act() in React Testing Library?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you test custom hooks in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is renderHook used for in testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between mount and shallow rendering in Enzyme?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is code coverage and how is it measured in a React project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between end-to-end testing and component testing? Give examples of tools (Cypress, Playwright)."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement dark mode toggling in a React application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a theme provider and how does it work with styled-components or Context?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement internationalization (i18n) in a React app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the react-i18next library used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement pagination in a React application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is infinite scrolling and how would you implement it with the Intersection Observer API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Intersection Observer API and how is it used in React for lazy loading?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a modal component in React using portals or state?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a toast notification system and how would you architect it in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle global loading and error states across multiple API calls in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the AbortController with fetch in React data fetching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement route-based code splitting with React Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a nested route in React Router v6?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between useParams, useNavigate, and useLocation in React Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the outlet component in React Router v6 used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a 404 not found page in React Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HashRouter and BrowserRouter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you persist Redux state to localStorage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is redux-persist and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Redux Toolkit createSlice function and how does it simplify reducer logic?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom render-as-you-fetch data fetching pattern with Suspense."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager loading, lazy loading, and prefetching strategies in React apps?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how React Query's stale time and cache time settings interact to control refetching behavior."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is query invalidation in React Query and how do you use it after a mutation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain optimistic updates with rollback in React Query on mutation failure."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between normalized caching in Apollo Client and React Query's query-key based caching?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how GraphQL fragments help avoid over-fetching in a React + Apollo application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between REST and GraphQL from a React client architecture perspective?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement role-based access control (RBAC) for routes in a React application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between authentication and authorization, and how would each be implemented in React with JWT?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how refresh token rotation works and how you would implement it in a React app using interceptors."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the security risk of storing JWTs in localStorage vs httpOnly cookies for a React SPA?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Content Security Policy (CSP) affects a React application and how you would configure it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Cross-Site Scripting (XSS) risk in React, and how does React's default escaping mitigate it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "When would dangerouslySetInnerHTML be necessary, and what precautions should you take?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a design system with a component library using React and Storybook."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Storybook and how does it help in isolated component development and visual regression testing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would set up visual regression testing for a React component library."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between atomic design methodology and feature-based folder structure in large React apps?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would architect a monorepo containing multiple React applications using tools like Turborepo or Nx."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Module Federation in Webpack 5 and how does it enable micro-frontend architectures with React?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the trade-offs between iframe-based, Web Component-based, and Module Federation-based micro-frontend approaches."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you share state between two independently deployed React micro-frontends?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement undo/redo functionality in a React application with complex state."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the command pattern and how could it be applied to implement undo/redo in React?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement drag-and-drop functionality in React, comparing native HTML5 DnD vs a library like dnd-kit."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between React's synthetic event pooling in legacy versions and the removal of event pooling in React 17+?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would debug a 'maximum update depth exceeded' error in React."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What causes an infinite render loop in React and how do you identify the root cause using dependency arrays?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement animations in React using the Web Animations API vs a library like Framer Motion."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the FLIP technique for animations and how does Framer Motion's layout animations leverage it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would measure and improve the Largest Contentful Paint (LCP) metric for a React SPA."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Time to Interactive (TTI) and First Input Delay (FID), and how does React's concurrent rendering help each?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how tree-shaking works with ES modules and how it affects the final bundle size of a React app."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between dynamic import() and static import in terms of bundle splitting?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would set up a CI/CD pipeline to run tests, lint, and deploy a React application automatically."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between blue-green deployment and canary deployment for a React frontend?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how service workers and the Cache API enable offline-first functionality in a React Progressive Web App (PWA)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a Progressive Web App and a native mobile app built with React Native in terms of architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the bridge architecture in React Native and how the new architecture (Fabric and TurboModules) changes it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you share business logic and components between a React web app and a React Native app?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement server-side caching with stale-while-revalidate at the CDN edge for a Next.js app."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Incremental Static Regeneration (ISR) in Next.js and how does it differ from pure SSG?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how React Server Components reduce client bundle size by keeping certain component logic on the server."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a client boundary and a server boundary in the React Server Components model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how streaming HTML with Suspense boundaries improves perceived performance during SSR."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is partial hydration (islands architecture) and how does it compare to React's full-page hydration model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would profile a memory leak caused by unclosed subscriptions (e.g., WebSocket) in a long-lived React SPA."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between useEffect cleanup timing and componentWillUnmount timing for class components?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design a plugin architecture for a React application allowing third-party components to be dynamically loaded."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a headless UI library (e.g., Radix, Headless UI) and a fully styled component library in terms of design flexibility?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a stateless and stateful component?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the useEffect cleanup function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a side effect in the context of React components?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between mounting, updating, and unmounting phases?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is componentDidMount used for in class components?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is componentWillUnmount used for in class components?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is componentDidUpdate used for in class components?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the equivalent of componentDidMount using hooks?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the equivalent of componentWillUnmount using hooks?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the significance of returning null from a component?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between props.children and named props?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a wrapper component in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of spreading props using the spread operator in JSX?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does {...props} do when passed to a JSX element?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a template literal and JSX expression?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you embed a JavaScript expression inside JSX?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between attributes in HTML and props in JSX (e.g., class vs className)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the significance of camelCase for event handlers in JSX (onClick vs onclick)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between React Fragments and a div wrapper in terms of the rendered DOM?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the alt attribute for images in JSX for accessibility?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Zustand and how does it compare to Redux for simple state management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Recoil and how does its atom/selector model differ from Redux's single store?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Jotai and how does its bottom-up atomic state model work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is MobX and how does its reactive programming model differ from Redux's unidirectional flow?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redux Toolkit's createAsyncThunk and manually writing thunks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Redux DevTools extension?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you structure a large-scale Redux store using the ducks pattern or feature slices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between combineReducers and a single root reducer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between dispatching an action and calling a reducer directly?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement undo functionality using Redux middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of selectors in Redux and how do they help with performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memoized selector creation using the createSelector function from reselect?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you connect a React component to the Redux store using hooks (useSelector, useDispatch)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between connect() HOC and useSelector/useDispatch hooks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a slice in Redux Toolkit and how does it bundle reducer and action logic?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Immer and how does Redux Toolkit use it to allow 'mutating' state safely?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a custom hook for handling API pagination state?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a custom hook for debounced search input?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the useOnClickOutside custom hook pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a custom hook to detect window resize and viewport size?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CSS-in-JS solutions like styled-components and emotion?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the performance concern with CSS-in-JS libraries at runtime, and how do zero-runtime solutions like vanilla-extract address it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Tailwind CSS and how does its utility-first approach differ from component-scoped CSS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you conditionally apply Tailwind classes based on component state in React?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the clsx or classnames library used for in React projects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a design token and a hardcoded style value in a component library?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement responsive design in a React application without a CSS framework?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the useMediaQuery custom hook pattern used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between server state and client state, and why does this distinction matter for state management choice?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you decide between using Context API, Redux, and React Query for a given piece of state?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the React reconciler determines whether to update, insert, or delete a Fiber node in the tree."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the alternate field and the current field on a Fiber node?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how React's Scheduler package implements cooperative time slicing for concurrent rendering."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the significance of requestIdleCallback in the historical implementation of React's scheduler versus the current custom scheduler?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how effect lists and side-effect flags were used in older Fiber implementations to batch DOM mutations."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between passive effects (useEffect) and layout effects (useLayoutEffect) in terms of Fiber commit sub-phases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how React ensures effects run in the correct order across a tree during the commit phase."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between an interruption due to a higher-priority update and yielding due to time slicing in concurrent mode?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom renderer using react-reconciler for a non-DOM target (e.g., canvas or terminal)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the host config in react-reconciler and what methods must a custom renderer implement?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how React Native's renderer differs from react-dom in terms of the host environment it targets."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous rendering to canvas via react-konva versus imperative canvas manipulation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would architect state synchronization between multiple browser tabs in a React app using BroadcastChannel or localStorage events."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between optimistic concurrency control and pessimistic locking when synchronizing collaborative edits in a React app (e.g., a collaborative editor)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how operational transformation (OT) or CRDTs are used to build real-time collaborative React applications."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a WebSocket-based real-time subscription system integrated with React Query or Apollo Client's subscription support?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how backpressure is handled when a React UI receives high-frequency updates from a WebSocket stream."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between throttling renders at the component level versus at the data source level for high-frequency updates?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement virtualized rendering for a grid with both horizontal and vertical scrolling in React."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between fixed-size and variable-size list virtualization, and what additional complexity does variable sizing introduce?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would measure and reduce Time to First Byte (TTFB) for a Next.js application deployed at the edge."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is edge rendering and how does it differ from traditional origin-server SSR for a React framework like Next.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the trade-offs of using a monolithic Redux store versus feature-sliced independent stores in a micro-frontend architecture."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between prop-based composition and dependency injection via Context for decoupling components in large codebases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement feature flagging in a React application and how it interacts with code splitting."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between build-time feature flags and runtime feature flags in terms of bundle size and deployment strategy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would set up telemetry (e.g., web vitals reporting) in a React application and send it to an analytics backend."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the significance of the reportWebVitals function in a create-react-app project and what metrics does it expose?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would architect a React application to support A/B testing without causing layout shift or hydration mismatches."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between hydration errors caused by browser extensions modifying the DOM versus genuine server/client markup mismatches?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would design an error reporting and monitoring strategy (e.g., Sentry) integrated with React error boundaries."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between componentDidCatch and the newer static getDerivedStateFromError lifecycle method in error boundaries?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement retry logic with exponential backoff for failed data fetches in a React application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between circuit breaker and retry patterns when a React app depends on a flaky backend service?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would architect a design system's theming to support runtime theme switching without a full page reload or flash of unstyled content (FOUC)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between critical CSS extraction and full CSS bundling in terms of avoiding FOUC in a React SSR app?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement keyboard navigation and focus trapping for a modal dialog to meet WCAG accessibility standards."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between aria-live regions 'polite' and 'assertive', and when would you use each in a React notification system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a React hook's naming convention and why must custom hooks start with 'use'?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between rendering an array of strings versus an array of objects as a list in React?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the alt text and semantic HTML tags in a React component for accessibility?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a functional update and a direct value update in useState's setter?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the significance of the empty dependency array [] in useEffect?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a warning and an error in the browser console when developing React apps?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of React's built-in development mode warnings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between npm run build output and the development server output?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a single-page application's routing challenge that React Router solves?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Link component in React Router used for instead of an anchor tag?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between useState and useRef for storing a value that doesn't need to trigger a re-render?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an event listener added via useEffect and one added directly in JSX?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a simple toggle component reusable across the app using a custom hook?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of memoizing a callback passed to a memoized child component?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shallow equality checks used by React.memo and useMemo's dependency comparison?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you avoid creating a new object or array literal on every render when passing props to a memoized child?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between colocating state close to where it's used versus lifting it to a common ancestor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of splitting a large context into multiple smaller contexts for performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a simple pub-sub event bus pattern in a React application without external libraries?"
+  }
 ]

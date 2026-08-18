@@ -1,18 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is OOP and what are its four main principles?" },
-  { "difficulty": "Easy", "question": "What is a class and what is an object in OOP?" },
-  { "difficulty": "Easy", "question": "What is encapsulation? Give an example." },
-  { "difficulty": "Easy", "question": "What is inheritance in OOP?" },
-  { "difficulty": "Easy", "question": "What is polymorphism? Give an example." },
-  { "difficulty": "Easy", "question": "What is abstraction in OOP?" },
-  { "difficulty": "Medium", "question": "What is the difference between overriding and overloading?" },
-  { "difficulty": "Medium", "question": "What is an abstract class vs an interface?" },
-  { "difficulty": "Medium", "question": "What is the SOLID principle?" },
-  { "difficulty": "Medium", "question": "What is a design pattern? Name a few common ones." },
-  { "difficulty": "Medium", "question": "What is the Singleton design pattern? How is it implemented?" },
-  { "difficulty": "Medium", "question": "What is the difference between composition and inheritance?" },
-  { "difficulty": "Hard", "question": "Explain the Factory design pattern with an example." },
-  { "difficulty": "Hard", "question": "What is the Observer design pattern?" },
-  { "difficulty": "Hard", "question": "Explain the Dependency Injection principle." },
-  { "difficulty": "Hard", "question": "What is the difference between DRY, KISS, and YAGNI principles?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is OOP and what are its four main principles?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a class and what is an object in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is encapsulation? Give an example."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is inheritance in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is polymorphism? Give an example."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is abstraction in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class and a struct?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a constructor in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a destructor in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a constructor and a method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default constructor?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a parameterized constructor?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'this' keyword used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'self' keyword used for in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a data member (field/attribute) of a class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a member function (method) of a class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class variable and an instance variable?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a static method and an instance method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static variable in a class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of access modifiers (public, private, protected)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between public and private access modifiers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the protected access modifier used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a getter and a setter method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why do we use getters and setters instead of public fields?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method overloading?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method overriding?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class method and an instance method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is object instantiation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'new' keyword used for in OOP languages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a package/module in the context of OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an object and a class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a real-world analogy for a class and an object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a blueprint in the context of OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between OOP and procedural programming?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the advantages of OOP over procedural programming?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is code reusability and how does OOP achieve it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a base class (parent class)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a derived class (child class/subclass)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is single inheritance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is multiple inheritance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is multilevel inheritance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is hierarchical inheritance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is hybrid inheritance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'super' keyword used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method resolution order (MRO)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a final class or method (or sealed class)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between 'is-a' and 'has-a' relationships?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an interface in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an abstract method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an abstract class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can you create an object of an abstract class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an abstract class and a concrete class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a virtual function/method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a pure virtual function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is dynamic binding versus static binding?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is early binding and late binding?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a constructor chaining?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a copy constructor?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between shallow copy and deep copy?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is object cloning?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a namespace and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the toString() method used for (or __str__ in Python)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the equals() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the hashCode() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is garbage collection in OOP languages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a memory leak and how can OOP help prevent it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between stack and heap memory allocation for objects?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an anonymous class/object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a nested class (inner class)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a friend function/class (as in C++)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is operator overloading?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a property in OOP (as in C# or Python)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a field and a property?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a class hierarchy?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an object's state and its behavior?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is message passing in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class definition and a class declaration?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class and a type?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is instantiation versus initialization of an object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a class constructor's initializer list (as in C++)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an instance and a reference to an instance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is object identity versus object equality?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between reference type and value type in OOP languages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a class invariant?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'final' keyword when applied to a variable?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'final' keyword when applied to a class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'final' keyword when applied to a method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static class and when would you use one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a utility class in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a static block and an instance block (initializer)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between class-level and object-level scope?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method signature and why does it matter for overloading?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an object's interface and its implementation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is information hiding and how does it relate to encapsulation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a mutator method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an accessor method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a public method and a private method in terms of usage?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a class constant and how do you define one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of enumerations (enums) in OOP languages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an enum and a class with constants?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a singleton object versus a singleton class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is object composition and give a simple example?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a wrapper class and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is autoboxing and unboxing?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between primitive types and object types in OOP languages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a generic class or generic method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of generics/templates in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is type erasure in the context of generics?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a generic class and an interface with type parameters?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an exception in OOP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between checked and unchecked exceptions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of try-catch-finally blocks?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a custom exception class and how do you create one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is exception chaining?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between throw and throws (or raise in Python)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a base Exception class in exception hierarchies?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method chaining and how is it implemented?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class hierarchy and an object graph?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a mixin class in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is multiple inheritance support in Python versus Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an interface in Java and a protocol in Swift/Objective-C?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is duck typing and how is it used in dynamically typed OOP languages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between static typing and dynamic typing in OOP languages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a metaclass in Python?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is reflection in OOP and what is it used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is introspection in the context of OOP languages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is serialization of an object and why is it needed?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between serialization and deserialization?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the transient keyword used for in serialization?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Serializable interface (or equivalent) used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between deep serialization and shallow serialization?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a factory function versus a factory class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between class-based OOP and prototype-based OOP (as in JavaScript)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is prototypal inheritance in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between JavaScript's class syntax and its underlying prototype chain?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the 'instanceof' operator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between 'instanceof' checks and polymorphic method dispatch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overriding and overloading?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an abstract class vs an interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SOLID principle?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a design pattern? Name a few common ones."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Singleton design pattern? How is it implemented?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between composition and inheritance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Single Responsibility Principle (SRP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Open/Closed Principle (OCP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Liskov Substitution Principle (LSP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Interface Segregation Principle (ISP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Dependency Inversion Principle (DIP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is aggregation and how is it different from composition?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between 'has-a' relationship types: aggregation vs composition?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is coupling and why should it be minimized?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cohesion and why is high cohesion desirable?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between tight coupling and loose coupling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is polymorphism achieved through interfaces versus inheritance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is runtime polymorphism versus compile-time polymorphism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an abstract class with all abstract methods and an interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can a class implement multiple interfaces? Why or why not?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why doesn't Java (or similar languages) support multiple inheritance of classes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the diamond problem in multiple inheritance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do interfaces solve the diamond problem?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a mixin and how does it relate to multiple inheritance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is duck typing in OOP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between structural typing and nominal typing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Builder design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Prototype design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Adapter design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Decorator design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Facade design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Proxy design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Strategy design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Command design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the State design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Template Method design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Chain of Responsibility design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Iterator design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Composite design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Bridge design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Flyweight design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Mediator design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Memento design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Visitor design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between creational, structural, and behavioral design patterns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a thread-safe Singleton and how do you implement it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is lazy initialization in the context of the Singleton pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dependency injection and why is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different types of dependency injection (constructor, setter, interface)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an IoC (Inversion of Control) container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Dependency Injection and Service Locator pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface and an abstract class in terms of default methods?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are default methods in interfaces (as in Java 8+)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a functional interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a marker interface? Give an example."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between association, aggregation, and composition?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is UML and how is it used to model OOP designs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a class diagram in UML?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is method hiding versus method overriding?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static polymorphism and dynamic polymorphism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is object slicing in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Law of Demeter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an immutable class and a mutable class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you design an immutable class in OOP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between value objects and entity objects in domain-driven design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is encapsulation's role in achieving data hiding?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between data hiding and abstraction?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a fluent interface / method chaining?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow hierarchy and a deep inheritance hierarchy, and why is deep inheritance discouraged?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is favoring composition over inheritance, and why is it recommended?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a POJO (Plain Old Java Object)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an anemic domain model versus a rich domain model?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a DTO (Data Transfer Object) and a domain entity?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is polymorphic behavior in exception handling (catching base exception types)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is covariant return type in method overriding?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the rules for method overriding regarding access modifiers and return types?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overloading based on parameter types versus overloading based on return type only?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of interfaces in achieving loose coupling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between abstract methods and virtual methods in terms of default implementation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a sealed class and why would you use one instead of a fully open class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a value object and a reference object in terms of equality checks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you correctly override equals() and hashCode() together, and why must they be consistent?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the contract between equals() and hashCode() in Java-like languages?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between compareTo() and equals() for implementing sortable objects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Comparable interface used for, and how does it differ from Comparator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is operator overloading and what are its pros and cons?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between implicit and explicit type conversion in OOP languages?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a copy assignment operator and how does it differ from a copy constructor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Rule of Three (or Rule of Five) in C++ class design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is move semantics and how does it relate to OOP resource management in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RAII (Resource Acquisition Is Initialization) and how does it relate to OOP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between composition-based polymorphism and inheritance-based polymorphism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface default method and an abstract class's concrete method?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the diamond inheritance problem and how does C++ virtual inheritance solve it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is virtual inheritance in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is name hiding in inheritance, and how does it differ from overriding?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shadowing a field and overriding a method in subclasses?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is polymorphic deletion and why do base classes need virtual destructors in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why is it dangerous to delete a derived object through a base class pointer without a virtual destructor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a vtable (virtual method table) and how does it enable dynamic dispatch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the performance cost of virtual function calls compared to non-virtual calls?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface's contract and an abstract class's partial implementation, from a design perspective?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you decide whether to use an abstract class or an interface for a new feature?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Adapter pattern's role in integrating legacy code with a modern OOP system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a class adapter and an object adapter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of the Facade pattern in reducing the complexity of a subsystem's API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the Facade pattern and simply writing utility functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you design a class to be both extensible and encapsulated at the same time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the Template Method pattern and using callback functions/delegates?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hook method in the Template Method pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an abstract base class in Python (via ABC module) and duck typing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of Python's abc.ABCMeta and @abstractmethod decorator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between protocol-oriented programming and traditional OOP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Swift's protocol extensions relate to default interface methods in other languages?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a trait in languages like PHP, Scala, or Rust, and how does it differ from an interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between traits and mixins?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the Strategy pattern and simply passing a function/lambda as a parameter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of first-class functions in reducing the need for some classic OOP design patterns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement the Observer pattern using events/delegates instead of explicit observer interfaces?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an event and a callback in OOP-based frameworks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow class hierarchy designed around roles versus a deep hierarchy designed around types?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is role-based design and how does it differ from type-based inheritance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the Decorator pattern and the Chain of Responsibility pattern, since both involve wrapping behavior?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Null Object pattern in simplifying client code?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Value Object and a Data Transfer Object in terms of behavior?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do immutable value objects simplify reasoning about state in a multi-threaded OOP application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between thread safety achieved through immutability versus through synchronization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a synchronized method and how does it relate to object-level locking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between object-level locking and class-level locking in a multi-threaded OOP program?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you design a thread-safe Builder pattern for concurrent object construction?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a factory pattern that returns interfaces versus one that returns concrete classes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use polymorphism to eliminate a large if-else chain based on object type checks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static factory methods and constructors, and when would you prefer one over the other?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a fluent API and how does method chaining relate to the Builder pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow equals() comparison and a deep equals() comparison for composite objects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between structural equality and reference equality?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you design a class that supports both mutable and immutable variants without duplicating logic?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Copy-on-Write pattern and how does it relate to immutability in OOP?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the Factory design pattern with an example."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Observer design pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the Dependency Injection principle."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between DRY, KISS, and YAGNI principles?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the Abstract Factory design pattern and how it differs from the Factory Method pattern."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Factory Method pattern and the Simple Factory pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement the Observer pattern in a language without built-in event support?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of using the Singleton pattern in a multi-threaded, distributed system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Singleton pattern break testability, and how can you mitigate this?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is double-checked locking and why is it used in Singleton implementations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Why can double-checked locking fail without proper memory visibility guarantees (e.g., volatile)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Strategy pattern and the State pattern, since both use composition and interfaces similarly?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you refactor a large switch/if-else chain using the Strategy pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Decorator pattern and subclassing for extending behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Decorator pattern support the Open/Closed Principle?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Proxy pattern and the Decorator pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a virtual proxy versus a protection proxy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a plugin architecture using OOP principles?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Visitor pattern and how does it enable double dispatch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is double dispatch and why is it needed in some OOP languages?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Visitor pattern violate encapsulation, and is that trade-off justified?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Template Method pattern and the Strategy pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use the Chain of Responsibility pattern to implement middleware in a web framework?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Mediator pattern and the Observer pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Command pattern enable undo/redo functionality?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Command pattern and the Strategy pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a class hierarchy for a payment processing system using SOLID principles?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you apply the Liskov Substitution Principle to avoid violating expected behavior in a subclass?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Give an example of a Liskov Substitution Principle violation and how to fix it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Interface Segregation Principle help avoid 'fat interfaces'?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you refactor a god class/object that violates the Single Responsibility Principle?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between dependency inversion and dependency injection?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a testable class using constructor-based dependency injection?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the drawbacks of excessive use of design patterns in a codebase?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you decide between using inheritance and the Strategy pattern for varying behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Circle-Ellipse problem (or Square-Rectangle problem) and how does it relate to LSP?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an extensible notification system (email, SMS, push) using OOP principles?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of interfaces versus abstract classes when designing a plugin-based architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement the Repository pattern and how does it relate to OOP abstraction?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Unit of Work pattern and how does it complement the Repository pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an OOP system to be open for extension but closed for modification in a real project?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is covariance and contravariance in the context of OOP generics/type systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Bridge pattern decouple abstraction from implementation, and when would you use it over inheritance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Bridge pattern and the Adapter pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use the Composite pattern to represent a file system (files and folders)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Composite pattern and a simple tree data structure?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a caching layer using the Proxy pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Flyweight pattern and how does it optimize memory usage in large object graphs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Give a real-world example where the Flyweight pattern would meaningfully reduce memory footprint."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you refactor deeply nested conditional logic using polymorphism instead of if-else/switch statements?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the 'tell, don't ask' principle and how does it relate to encapsulation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a class hierarchy that avoids the fragile base class problem?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the fragile base class problem and how does composition help avoid it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement multiple dispatch in a language that only supports single dispatch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between structural design patterns and architectural patterns like MVC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the MVC (Model-View-Controller) pattern apply OOP principles like separation of concerns?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between MVC, MVP, and MVVM architectural patterns?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a domain model for an e-commerce system, balancing rich behavior with persistence concerns?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Specification pattern and how is it used to encapsulate business rules?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you apply the Null Object pattern to avoid null checks throughout a codebase?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Null Object pattern and Optional/Maybe types?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a thread-safe object pool using OOP design patterns?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Object Pool pattern and when is it appropriate to use?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you handle versioning of an interface in a large OOP system without breaking existing implementations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is interface evolution and how do default methods help with backward compatibility?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an event-driven system using the Observer pattern while avoiding memory leaks from dangling listeners?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a weak reference and how does it help prevent memory leaks in observer-based designs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you refactor a tightly coupled monolithic class into smaller, well-designed collaborating classes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a rich domain model and a service-oriented anemic model in terms of long-term maintainability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an aggregate root in domain-driven design and why does it enforce invariants across an object graph?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between an aggregate and an entity in domain-driven design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement the Specification pattern to combine business rules using AND/OR/NOT composition?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Visitor pattern's relationship to the expression problem in programming language design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the expression problem and how do different OOP and functional paradigms address it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a class hierarchy for a shape-drawing application that supports adding new shapes and new operations without modifying existing code?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is double dispatch and how would you implement it manually in a language lacking native support?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you refactor an inheritance-heavy legacy codebase toward composition without breaking existing clients?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Liskov Substitution Principle's relationship to design by contract (preconditions and postconditions)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is design by contract and how does it complement OOP encapsulation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you enforce invariants in a class constructor to guarantee a valid object state at all times?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between defensive copying and immutability for protecting internal object state?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a fluent builder for constructing complex immutable objects with many optional parameters?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the telescoping constructor anti-pattern and how does the Builder pattern solve it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a plugin system where third-party classes implement a well-defined interface without knowing internal implementation details?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of abstract factories in decoupling client code from concrete class instantiation across product families?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you test a class that has hard-coded dependencies, and how does refactoring toward interfaces improve testability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a seam in legacy code, and how do interfaces help create seams for unit testing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use the Decorator pattern to add cross-cutting concerns like logging or caching without modifying core business logic?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between static dispatch decorators and dynamic runtime decorators?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an event bus using the Observer and Mediator patterns together?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between tightly coupled event handling (direct method calls) and a publish-subscribe architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you avoid the 'god object' anti-pattern when designing a central coordinator class?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between orchestration and choreography in the context of OOP-based service design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you apply the Interface Segregation Principle when a legacy interface has grown too large over time?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is interface pollution and how does it violate ISP?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a hierarchy of exception classes for a large application to balance granularity and simplicity?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using exceptions for control flow versus using result/optional types in an OOP language?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a class hierarchy for a multi-payment-gateway system (credit card, PayPal, crypto) that is easy to extend with new gateways?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Strategy pattern and the Bridge pattern when both seem to decouple an abstraction from its implementation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you refactor a class with many boolean flags controlling behavior into a cleaner polymorphic design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the anti-pattern of 'primitive obsession' and how does OOP encapsulation help resolve it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you model a state machine (e.g., order status: pending, shipped, delivered, cancelled) using the State pattern versus an enum with switch statements?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the trade-off between using the State pattern (more classes, more OOP-idiomatic) and a simple enum-based state field (simpler, less extensible)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an extensible validation framework using the Chain of Responsibility or Specification pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between compile-time extensibility (generics/templates) and runtime extensibility (polymorphism) in OOP system design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you avoid violating the Open/Closed Principle when adding a new type to an existing switch statement scattered across a codebase?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Visitor pattern's downside when new concrete element types are added frequently, and how does it compare to simple polymorphic methods in that scenario?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a serialization-friendly class hierarchy that still respects encapsulation (e.g., avoiding exposing internal mutable state)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between defensive copying in getters and returning immutable wrappers/views of internal collections?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement equals() and hashCode() for a class with a mutable collection field, and what pitfalls should you avoid?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the risk of using mutable objects as keys in a hash-based collection, and how does immutability mitigate it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a generic Repository<T> interface that works polymorphically across different entity types while preserving type safety?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is bounded type parameterization in generics (e.g., <T extends Comparable<T>>) and why is it useful?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use the Template Method pattern to define a common algorithm skeleton for different report-generation formats (PDF, CSV, HTML)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a hook method and an abstract method within the Template Method pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a caching decorator that works transparently with any interface implementation, using generics and the Proxy/Decorator pattern together?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between static (compile-time) polymorphism achieved via templates/generics and dynamic (runtime) polymorphism achieved via inheritance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you refactor a class that mixes persistence logic and business logic to better follow the Single Responsibility Principle?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Repository pattern's role in separating domain logic from data access concerns in an OOP application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a plugin-based reporting engine so that new report types can be added without modifying the core engine class?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Abstract Factory pattern and using a simple dependency injection container to resolve families of related objects?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you handle versioned APIs in an OOP system while maintaining backward compatibility for existing interface implementers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between structural subtyping (as in TypeScript) and nominal subtyping (as in Java) in terms of interface satisfaction?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a class hierarchy to model a company's employee types (manager, developer, intern) while avoiding rigid inheritance that breaks LSP?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use the Strategy pattern combined with a factory to select algorithms dynamically at runtime based on configuration?"
+  }
 ]

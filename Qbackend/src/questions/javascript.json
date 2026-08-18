@@ -1,22 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is the difference between var, let, and const in JavaScript?" },
-  { "difficulty": "Easy", "question": "What is hoisting in JavaScript?" },
-  { "difficulty": "Easy", "question": "What is a closure in JavaScript?" },
-  { "difficulty": "Easy", "question": "What is the difference between null and undefined?" },
-  { "difficulty": "Easy", "question": "What are arrow functions and how do they differ from regular functions?" },
-  { "difficulty": "Easy", "question": "What is the difference between == and === in JavaScript?" },
-  { "difficulty": "Medium", "question": "Explain the concept of 'this' in JavaScript and how it changes in different contexts." },
-  { "difficulty": "Medium", "question": "What is the prototype chain in JavaScript?" },
-  { "difficulty": "Medium", "question": "Explain event bubbling and event capturing in JavaScript." },
-  { "difficulty": "Medium", "question": "What are Promises in JavaScript? Explain the states." },
-  { "difficulty": "Medium", "question": "What is the difference between call(), apply(), and bind()?" },
-  { "difficulty": "Medium", "question": "What is destructuring in JavaScript? Give examples." },
-  { "difficulty": "Medium", "question": "What is the spread operator and rest parameter in JavaScript?" },
-  { "difficulty": "Medium", "question": "What is a generator function in JavaScript?" },
-  { "difficulty": "Hard", "question": "Explain the JavaScript event loop, call stack, and microtask queue." },
-  { "difficulty": "Hard", "question": "What is the difference between deep copy and shallow copy in JavaScript?" },
-  { "difficulty": "Hard", "question": "Explain WeakMap and WeakSet and their use cases." },
-  { "difficulty": "Hard", "question": "What is debouncing and throttling? How do you implement them?" },
-  { "difficulty": "Hard", "question": "What is a Proxy object in JavaScript? What are its use cases?" },
-  { "difficulty": "Hard", "question": "Explain how JavaScript handles memory management and garbage collection." }
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between var, let, and const in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is hoisting in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a closure in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between null and undefined?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are arrow functions and how do they differ from regular functions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between == and === in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is JavaScript and how is it different from Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the primitive data types in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the typeof operator used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is NaN in JavaScript and how do you check for it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a function declaration and a function expression?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an anonymous function in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an Immediately Invoked Function Expression (IIFE)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a parameter and an argument?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a default parameter in JavaScript functions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is template literal syntax in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string concatenation and how do you do it in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an array in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an object in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an array and an object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add an element to an array in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you remove an element from an array in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between push() and pop() methods?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between shift() and unshift() methods?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the map() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the filter() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the forEach() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between map() and forEach()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the reduce() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the find() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check if a value exists in an array?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the length property of an array and a string?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a for loop in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a for loop and a for...of loop?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between for...in and for...of loops?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a while loop and a do-while loop?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the break and continue statements?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an if-else statement used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a switch statement in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ternary operator in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is truthy and falsy in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the falsy values in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between undefined and not defined?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the console.log() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is JSON and how is it used in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between JSON.stringify() and JSON.parse()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a comment in JavaScript and how do you write one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between single quotes, double quotes, and backticks in JavaScript strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string interpolation in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the document object in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DOM (Document Object Model)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you select an HTML element using JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between getElementById and querySelector?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an event in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add an event listener to an element?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the window object in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between window and document objects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the concept of 'this' in JavaScript and how it changes in different contexts."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the prototype chain in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain event bubbling and event capturing in JavaScript."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Promises in JavaScript? Explain the states."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between call(), apply(), and bind()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is destructuring in JavaScript? Give examples."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the spread operator and rest parameter in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a generator function in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a callback function and what is callback hell?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do async/await work in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Promise.all() and Promise.race()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Promise.all() and Promise.allSettled()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Promise.any() and Promise.race()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the module pattern in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CommonJS and ES modules?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between import/export and require/module.exports?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is currying in JavaScript? Give an example."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is function composition in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memoization and how would you implement it in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a pure function and an impure function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is immutability in JavaScript and why does it matter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between mutable and immutable data structures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Object.freeze() and const?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is optional chaining (?.) in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the nullish coalescing operator (??) and how is it different from ||?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between deep equality and reference equality for objects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Map and a plain object in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Set and an Array?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous iteration (Symbol.iterator vs Symbol.asyncIterator)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an iterator and iterable in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Symbol data type used for in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow copy and using the spread operator on nested objects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you clone an object in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is event delegation and why is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between preventDefault() and stopPropagation()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between local storage, session storage, and cookies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the same-origin policy and how does it relate to CORS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CORS and why does it exist?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Web API versus a JavaScript built-in feature (e.g., setTimeout vs Array.map)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between setTimeout and setInterval?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between microtasks and macrotasks in the event loop?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a regular function and a method in an object?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between class-based and prototype-based inheritance in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the class syntax in ES6 and how does it relate to prototypes under the hood?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a static method in a JavaScript class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between instance properties and static properties in a class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is inheritance in JavaScript using the extends and super keywords?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is method overriding in JavaScript classes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a getter and setter in JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the JavaScript event loop, call stack, and microtask queue."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between deep copy and shallow copy in JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain WeakMap and WeakSet and their use cases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is debouncing and throttling? How do you implement them?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Proxy object in JavaScript? What are its use cases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how JavaScript handles memory management and garbage collection."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between mark-and-sweep and reference counting garbage collection algorithms?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the concept of a memory leak in JavaScript and common causes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the call stack and the heap in JavaScript's runtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how closures can cause memory leaks if not handled carefully."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Temporal Dead Zone (TDZ) in JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between hoisting behavior of var, let, const, and function declarations."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a Proxy's get/set traps and Object.defineProperty for reactivity (as used in Vue.js)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom Promise class from scratch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the microtask queue and the animation frame callback queue (requestAnimationFrame)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how async/await is transpiled to generator functions and promises under the hood."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a generator function and an async generator function?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement an async iterator using Symbol.asyncIterator?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the JavaScript engine performs just-in-time (JIT) compilation (e.g., V8's TurboFan and Ignition)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is hidden class optimization in V8 and how does it affect object property access performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain inline caching in the V8 engine and how it speeds up repeated property access."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between monomorphic, polymorphic, and megamorphic call sites in V8 optimization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how V8 handles array optimization differently for packed vs holey arrays."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the stack and the heap for primitive vs reference type storage?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the 'this' binding differs between regular functions, arrow functions, and class methods."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between implicit binding, explicit binding, new binding, and default binding for 'this'?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the new keyword works internally when instantiating an object in JavaScript."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Object.create() and using the new keyword with a constructor function?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the prototype chain lookup process and how it affects property shadowing."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between own properties and inherited properties, and how does hasOwnProperty() check this?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement your own version of bind(), call(), or apply() from scratch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is tail call optimization in JavaScript and why do most engines not implement it despite being in the ES6 spec?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would detect and prevent a race condition when multiple async operations update shared state."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a Web Worker and the main thread in terms of the JavaScript execution model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how SharedArrayBuffer and Atomics enable true shared-memory concurrency between Web Workers."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between structured cloning and JSON serialization when passing data to a Web Worker?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom EventEmitter class in JavaScript."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Observer pattern and the Pub/Sub pattern in JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a simple Virtual DOM diffing algorithm in vanilla JavaScript."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between reflow and repaint in the browser rendering pipeline, and how does JavaScript trigger each?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how requestAnimationFrame differs from setTimeout for animation purposes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Shadow DOM and the regular DOM, and how does it relate to Web Components?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Custom Elements and Web Components work without any framework."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between an ArrayBuffer and a TypedArray in JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would use the Fetch API's streaming response body to process large data incrementally."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between AbortController-based cancellation and simply ignoring a stale Promise result?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the 'use strict' directive changes JavaScript's runtime behavior."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between strict mode and non-strict mode regarding 'this' binding and silent errors?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how JavaScript engines implement string interning and its effect on memory and comparison performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager evaluation and lazy evaluation, and how do generators enable lazy evaluation in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a variable in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the rules for naming variables in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a global variable and a local variable?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is scope in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is block scope versus function scope?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between let and var in terms of scope?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can you redeclare a variable using let? What about var?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between assignment and comparison operators?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are logical operators in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between AND (&&), OR (||), and NOT (!) operators?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string length and how do you find it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you convert a string to a number in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you convert a number to a string in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the parseInt() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the parseFloat() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between parseInt() and Number()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string trimming and which method is used for it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the toUpperCase() and toLowerCase() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the substring() method used for in strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the slice() method used for in strings and arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the split() method used for in strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the join() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is array indexing and how does it start in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the includes() method used for in arrays and strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the indexOf() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a nested array or nested object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access a nested property in an object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the delete operator used for in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Object.keys() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Object.values() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Object.entries() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a method and a property in an object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'new' keyword used for in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a constructor function in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Math object used for in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Math.random() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Math.floor() and Math.ceil() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Date object used for in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an alert(), prompt(), and confirm() dialog in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between try-catch and throw in JavaScript error handling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom error class in JavaScript and how do you create one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the finally block used for in try-catch-finally?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a SyntaxError, TypeError, and ReferenceError?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a regular expression literal and the RegExp constructor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are common regex methods used in JavaScript (test, match, replace, exec)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between test() and match() in regex operations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a regex flag and what do g, i, and m flags mean?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between greedy and lazy quantifiers in regex?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you validate an email address using a regular expression in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Array.from() and the spread operator for converting iterables to arrays?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a sparse array and a dense array?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Array.isArray() and typeof for checking if a value is an array?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between sort() and the need for a comparator function with numbers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between splice() and slice() methods in arrays?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between flat() and flatMap() array methods?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Array.of() and the Array constructor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between String.prototype.padStart() and padEnd()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Object.assign() and the spread operator for merging objects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a computed property name and a regular property in an object literal?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a tagged template literal in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Object.freeze(), Object.seal(), and Object.preventExtensions()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between enumerable and non-enumerable properties?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of Object.defineProperty()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a getter/setter defined using Object.defineProperty()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shallow freezing and deep freezing an object?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the localStorage API and IndexedDB for client-side storage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Fetch API and how does it differ from XMLHttpRequest?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a GET and POST request using the Fetch API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle errors when using the Fetch API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between async function return values and regular function return values?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between resolving and rejecting a Promise?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you chain multiple .then() calls and what does each return?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Promise chain and using async/await for the same logic?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between setTimeout(fn, 0) and directly calling fn()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a task queue and a microtask queue in terms of execution priority?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between bubbling phase and capturing phase in the addEventListener third argument?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between event.target and event.currentTarget?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a named function and a function expression assigned to a variable in terms of hoisting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is currying used for in functional programming with a practical JavaScript example?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how JavaScript's single-threaded nature coexists with asynchronous operations like network requests."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the browser's rendering engine and JavaScript engine, and how do they communicate?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the browser's task scheduling interacts with the JavaScript event loop (rendering steps vs macrotasks)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between requestIdleCallback and requestAnimationFrame in terms of scheduling priority?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a rate limiter in JavaScript using a token bucket algorithm."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a sliding window and fixed window rate limiting algorithm implementation in JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a LRU (Least Recently Used) cache in JavaScript using a Map."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Map insertion order guarantees and plain object key ordering in JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement deep object comparison (deep equality) without using a library."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between structuredClone() and JSON.parse(JSON.stringify()) for deep cloning?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the limitations of JSON.stringify() for cloning objects with functions, undefined, or circular references."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you detect and handle circular references when serializing an object?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement your own Promise.all() from scratch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between how Promise.all() and Promise.allSettled() handle a single rejected promise?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a simple debounce function with a 'leading' and 'trailing' edge option."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a debounce function that cancels pending calls versus one that just delays them?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a deep freeze function that recursively freezes nested objects."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between WeakRef and a regular reference in terms of garbage collection eligibility?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how FinalizationRegistry works and its use cases for cleanup logic tied to garbage collection."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous script execution and the 'defer' and 'async' attributes on script tags?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the browser parses and executes JavaScript relative to DOM construction with normal, async, and defer scripts."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a content security policy nonce and a hash-based CSP for allowing inline scripts?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain common XSS attack vectors in JavaScript applications and how to mitigate them."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between prototype pollution and XSS as security vulnerabilities in JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a prototype pollution attack works and how you would prevent it when merging user input into objects."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between CSRF and XSS, and how does JavaScript-based mitigation differ for each?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Subresource Integrity (SRI) works for script tags loading third-party JavaScript."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between same-site cookies (strict, lax, none) and how they affect JavaScript-initiated requests?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a simple state machine in JavaScript for managing complex UI states."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a finite state machine and a statechart (hierarchical states) as implemented by libraries like XState?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom Observable (like RxJS) from scratch with subscribe/unsubscribe."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between hot and cold observables in reactive programming with RxJS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how operators like switchMap, mergeMap, and concatMap differ in RxJS for handling inner observables."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between imperative and declarative/reactive programming paradigms, with JavaScript examples of each?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would optimize a JavaScript application's bundle for tree-shaking to work effectively."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between side-effect-free ES modules and CommonJS modules in terms of tree-shaking support?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement your own version of a simple dependency injection container in JavaScript."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager singleton instantiation and lazy singleton instantiation in a JavaScript module?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the module singleton pattern works with ES modules being cached by the module resolution system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous module loading and dynamic import() for code splitting in vanilla JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement optimistic locking for concurrent updates to shared state in a JavaScript application."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an expression and a statement in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an array literal and an object literal?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a boolean value in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a string primitive and a String object?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check the data type of a variable in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Infinity and -Infinity in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the isNaN() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Number.isNaN() and the global isNaN()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Number.isInteger() and typeof checks for numbers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string immutability in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the concat() method used for in strings and arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the repeat() method used for in strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the charAt() method used for in strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the charCodeAt() method used for in strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the replace() method used for in strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between replace() and replaceAll() in strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the startsWith() and endsWith() method used for in strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an array constructor and how do you create an array with it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an empty array and an array with undefined elements?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the concat() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the reverse() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the every() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the some() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between every() and some() array methods?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the fill() method used for in arrays?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a labeled statement in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the void operator used for in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the comma operator used for in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a nested function in JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a recursive function and give a simple example?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a synchronous function call and an asynchronous callback?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the setTimeout function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the clearTimeout function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the setInterval function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the clearInterval function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between innerHTML and innerText?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between innerHTML and textContent?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a new HTML element using JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you append a child element to a DOM node using JavaScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between appendChild() and append() methods?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is event.preventDefault() used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a form submit event in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a named export and a default export in ES modules?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dynamic import() and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a module bundler and why is it needed for JavaScript projects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between AMD, UMD, and ES module formats?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the 'use strict' directive at the top of a file versus inside a function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is variable shadowing in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a factory function and a constructor function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the module pattern using an IIFE and closures for encapsulation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the revealing module pattern in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the singleton pattern and how would you implement it in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between composition and inheritance in JavaScript design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is mixin-based inheritance in JavaScript and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is duck typing in the context of JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a callback-based API and a Promise-based API design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between chaining Promises and nesting Promises?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you convert a callback-based function into a Promise-based function (promisify)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Array destructuring and Object destructuring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you swap two variables using destructuring in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is default value assignment in destructuring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is nested destructuring and give an example with an object containing an array?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between rest parameters in a function and the rest pattern in destructuring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the spread operator in function calls versus in array/object literals?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you merge two arrays using the spread operator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between using Object.assign() for a deep merge versus a shallow merge?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an array-like object and a true array (e.g., arguments object, NodeList)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you convert an array-like object into a real array?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the arguments object in a regular function, and why is it unavailable in arrow functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a bound function created with bind() and calling a function normally?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement partial application using bind() in JavaScript?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between currying and partial application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a higher-order function? Give examples from array methods."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is function composition and how would you implement a compose() utility function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the pipe pattern in functional JavaScript and how does it differ from compose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between eager and lazy function invocation in a functional pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a thunk in JavaScript and how is it used in state management libraries like Redux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous validation and asynchronous validation for form fields?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the localStorage and sessionStorage APIs in terms of persistence?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a cookie's expiration attribute and how does it differ from localStorage persistence?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HTTP-only cookies and JavaScript-accessible cookies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the History API's pushState and a full page navigation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom Promise-based mutex/lock to serialize access to a shared async resource."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between cooperative and preemptive multitasking, and where does JavaScript's concurrency model fit?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the browser's compositor thread relates to JavaScript execution for scroll and animation performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the main thread's long task and a jank-causing synchronous JavaScript operation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would break up a long synchronous task into smaller chunks to avoid blocking the main thread."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using setTimeout(fn, 0) versus requestIdleCallback for scheduling non-urgent work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a task queue with priority levels in vanilla JavaScript."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between cooperative yielding using async/await versus true multithreading via Web Workers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a simple virtual scrolling list in vanilla JavaScript without a framework."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Intersection Observer API and manually calculating element positions with getBoundingClientRect for lazy loading?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the Mutation Observer API works and a use case for observing DOM changes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Mutation Observer and Resize Observer APIs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement infinite scroll with proper request cancellation using AbortController."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous XMLHttpRequest and asynchronous XMLHttpRequest, and why is synchronous deprecated?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how HTTP/2 multiplexing affects how a JavaScript application should batch or parallelize network requests."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a service worker's install, activate, and fetch lifecycle events?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a cache-first versus network-first strategy in a service worker."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Cache API and IndexedDB for offline data storage in a service worker context?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement background sync using a service worker for offline form submissions."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between push notifications and the Notification API in terms of requiring a service worker?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom binary search tree or linked list data structure in JavaScript."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between an array-based queue implementation and a linked-list-based queue in terms of time complexity for shift operations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a trie (prefix tree) in JavaScript for autocomplete functionality."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a hash map collision resolution strategy (chaining vs open addressing) if implementing your own Map?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would detect a cycle in a linked list using JavaScript (Floyd's cycle detection)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between depth-first search and breadth-first search when traversing a JavaScript object tree?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a debounce-based autosave feature that also handles component unmount cleanup."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous recursion and trampolining for avoiding stack overflow in deep recursive JavaScript functions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a simple promise-based task queue that limits concurrency (e.g., max 3 parallel requests)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Promise.race() based timeout implementation and AbortController-based cancellation for fetch timeouts?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement your own Array.prototype.map() as a polyfill."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a polyfill and a shim in JavaScript?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a polyfill for Array.prototype.flat() handling arbitrary depth."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between transpilation (e.g., Babel) and polyfilling in terms of solving browser compatibility issues?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would detect feature support in the browser before using a modern JavaScript or Web API."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between graceful degradation and progressive enhancement as applied to JavaScript-dependent features?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement a custom throttle function that guarantees the last call executes (trailing throttle)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous error handling with try-catch and handling errors in a Promise chain?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how unhandled promise rejections are surfaced in the browser and Node.js, and how you would globally handle them."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between process.on('unhandledRejection') in Node.js and the window.onunhandledrejection event in browsers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how you would implement server-side rendering of vanilla JavaScript-driven UI without a framework, and the challenges involved."
+  }
 ]
