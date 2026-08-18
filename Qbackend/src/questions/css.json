@@ -1,16 +1,402 @@
 [
-  { "difficulty": "Easy", "question": "What is CSS and what is it used for?" },
-  { "difficulty": "Easy", "question": "What is the difference between margin and padding in CSS?" },
-  { "difficulty": "Easy", "question": "What is the CSS Box Model?" },
-  { "difficulty": "Easy", "question": "What is the difference between relative, absolute, fixed, and sticky positioning in CSS?" },
-  { "difficulty": "Medium", "question": "What is Flexbox in CSS? Explain the main properties." },
-  { "difficulty": "Medium", "question": "What is CSS Grid and how does it differ from Flexbox?" },
-  { "difficulty": "Medium", "question": "What are CSS pseudo-classes and pseudo-elements? Give examples." },
-  { "difficulty": "Medium", "question": "What is CSS specificity and how is it calculated?" },
-  { "difficulty": "Medium", "question": "What are CSS custom properties (variables)?" },
-  { "difficulty": "Medium", "question": "What is a CSS media query and how is it used for responsive design?" },
-  { "difficulty": "Hard", "question": "What is the CSS cascade and how does it determine which styles apply?" },
-  { "difficulty": "Hard", "question": "What is CSS-in-JS and what are its trade-offs?" },
-  { "difficulty": "Hard", "question": "Explain CSS animations and transitions. What is the difference?" },
-  { "difficulty": "Hard", "question": "What is the will-change CSS property and when should you use it?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is CSS and what is it used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different ways to add CSS to an HTML document?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between inline, internal, and external CSS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between margin and padding in CSS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CSS Box Model?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between border-box and content-box in box-sizing?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between class selectors and id selectors in CSS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are CSS selectors and what are the different types?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between relative, absolute, fixed, and sticky positioning in CSS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between display: none and visibility: hidden?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different values of the display property?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between em, rem, px, and % units in CSS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the color property vs background-color property?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a CSS combinator and a selector?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the CSS reset or normalize.css?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Flexbox in CSS? Explain the main properties."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSS Grid and how does it differ from Flexbox?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between justify-content and align-items in Flexbox?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the flex-grow, flex-shrink, and flex-basis property used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between grid-template-columns and grid-template-areas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between fr unit in CSS Grid and percentage widths?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static, relative, and floated positioning?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a float in CSS and why is it less commonly used for layout today?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the clearfix technique and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between inline-block and block display?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you center an element horizontally and vertically using CSS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CSS Grid's implicit and explicit grid?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the gap property in Flexbox and Grid?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between align-content and align-items in Flexbox?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is subgrid in CSS Grid and what problem does it solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the order property in Flexbox used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is z-index and how does stacking context affect it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What creates a new stacking context in CSS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are CSS pseudo-classes and pseudo-elements? Give examples."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSS specificity and how is it calculated?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between :nth-child() and :nth-of-type()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the descendant combinator and the child combinator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between :hover, :focus, and :active pseudo-classes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the !important rule in CSS and why should it generally be avoided?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between :not() and :is() pseudo-classes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the :where() pseudo-class and how does it differ from :is()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between attribute selectors like [type='text'] and [class^='btn']?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the universal selector (*) and when is it useful?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How is CSS specificity calculated when combining inline styles, IDs, classes, and element selectors?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ::before and ::after pseudo-elements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are CSS custom properties (variables)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do CSS variables differ from preprocessor variables (like in SASS/LESS)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the var() function and how do you provide a fallback value?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the calc() function used for in CSS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between min(), max(), and clamp() functions in CSS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does inheritance work with CSS custom properties?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the @property rule and how does it enhance CSS custom properties?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CSS media query and how is it used for responsive design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between mobile-first and desktop-first responsive design approaches?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the viewport meta tag's relationship with CSS media queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between min-width and max-width in media queries?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are container queries in CSS and how do they differ from media queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a fluid layout vs a fixed layout in responsive design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between responsive images using CSS and using the HTML srcset attribute?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are CSS breakpoints and how do you decide where to place them?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the CSS cascade and how does it determine which styles apply?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSS inheritance and which properties are inherited by default?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the inherit, initial, and unset keywords?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between source order and specificity in the cascade algorithm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are CSS cascade layers (@layer) and what problem do they solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the all property and resetting individual properties?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain CSS animations and transitions. What is the difference?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the transition-timing-function property and what values can it take?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are @keyframes in CSS and how are they used to define animations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between animation-fill-mode values (none, forwards, backwards, both)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the will-change CSS property and when should you use it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between animating with CSS transforms/opacity vs animating layout properties like width/height, in terms of performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the transform property and what are common 2D and 3D transform functions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is hardware/GPU acceleration in CSS animations and how do you trigger it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between animation-iteration-count: infinite and a fixed count?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is FLIP technique in the context of CSS/JS animations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is CSS-in-JS and what are its trade-offs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is BEM (Block Element Modifier) naming convention and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between utility-first CSS (like Tailwind) and traditional semantic CSS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CSS preprocessor (like SASS or LESS) and what advantages does it offer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SASS's @mixin and @extend?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is PostCSS and how is it different from a preprocessor like SASS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSS Modules and how do they solve the global namespace problem?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is critical CSS and why is it used for performance optimization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ITCSS (Inverted Triangle CSS) methodology?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between atomic CSS and component-scoped CSS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is reflow and repaint in CSS rendering, and how can you minimize them?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between properties that trigger layout, paint, and composite in the browser rendering pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the content-visibility CSS property used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using transform: translate() and changing top/left for positioning animations, performance-wise?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the contain CSS property?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the browser compute the CSSOM and combine it with the DOM to build the render tree?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between visibility: hidden and opacity: 0?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overflow: hidden, scroll, and auto?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CSS box-shadow property and how do its parameters work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between linear-gradient and radial-gradient in CSS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the object-fit property used for on images and videos?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between currentColor and inherit for color values?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the writing-mode property used for in CSS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the ch, vw, vh, and vmin/vmax units?"
+  }
 ]

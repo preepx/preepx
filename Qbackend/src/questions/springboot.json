@@ -1,14 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is Spring Boot and how does it simplify Spring development?" },
-  { "difficulty": "Easy", "question": "What is Dependency Injection in Spring Boot?" },
-  { "difficulty": "Easy", "question": "What is @RestController annotation in Spring Boot?" },
-  { "difficulty": "Medium", "question": "What is Spring Data JPA and how does it work?" },
-  { "difficulty": "Medium", "question": "What is the difference between @Component, @Service, and @Repository in Spring?" },
-  { "difficulty": "Medium", "question": "What is Spring Security and how do you implement JWT authentication?" },
-  { "difficulty": "Medium", "question": "What is Spring Boot Auto-Configuration?" },
-  { "difficulty": "Medium", "question": "What is the difference between @RequestParam and @PathVariable in Spring Boot?" },
-  { "difficulty": "Hard", "question": "Explain the Spring Bean lifecycle." },
-  { "difficulty": "Hard", "question": "What is Spring AOP (Aspect Oriented Programming)?" },
-  { "difficulty": "Hard", "question": "How does Spring Boot handle transactions? What is @Transactional?" },
-  { "difficulty": "Hard", "question": "What is Spring Cloud and how does it support microservices?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is Spring Framework and what problem does it solve?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Spring Boot and how does it simplify Spring development?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Spring Framework and Spring Boot?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Dependency Injection in Spring Boot?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Inversion of Control (IoC) and how does Spring implement it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Spring Bean?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Spring IoC Container?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between BeanFactory and ApplicationContext?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the @Autowired annotation used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different types of Dependency Injection in Spring (constructor, setter, field)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why is constructor injection preferred over field injection in Spring?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the @Component annotation used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Component, @Service, and @Repository in Spring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @Controller and how is it different from @RestController?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is @RestController annotation in Spring Boot?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the @SpringBootApplication annotation and what does it combine?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @ComponentScan and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @Configuration annotation used for in Spring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Bean and @Component annotations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the default scope of a Spring Bean?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different Bean scopes available in Spring (singleton, prototype, request, session)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between singleton and prototype bean scope?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @Qualifier annotation used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @Primary annotation and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Value and @ConfigurationProperties?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is application.properties/application.yml used for in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Spring Profiles and how are they used with @Profile?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Spring Boot support externalized configuration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @PostConstruct and @PreDestroy annotation used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the main() method's role in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SpringApplication.run() doing internally?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Spring Boot starter dependency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between spring-boot-starter-web and spring-boot-starter-data-jpa?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CommandLineRunner interface used for in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ApplicationRunner interface and how is it different from CommandLineRunner?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Boot Auto-Configuration?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Spring Boot's auto-configuration mechanism work internally?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of spring.factories or AutoConfiguration.imports in Spring Boot auto-configuration?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is @ConditionalOnClass and other @Conditional annotations used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you exclude a specific auto-configuration class in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @EnableAutoConfiguration annotation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Spring Boot decide the order in which auto-configurations are applied?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Spring Boot embedded server and how does it differ from deploying to an external server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Tomcat, Jetty, and Undertow as embedded servers in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you change the embedded server in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Boot DevTools and what features does it provide?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Spring Boot Actuator and what does it provide out of the box?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are some commonly used Actuator endpoints (health, info, metrics)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you secure Actuator endpoints in a production Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between application.yml and application.properties?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Spring Boot resolve property values from multiple sources (env vars, command-line args, files)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the order of precedence for configuration properties in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom starter in Spring Boot and how would you create one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you write a custom auto-configuration class in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the META-INF/spring.factories file in older Spring Boot versions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Boot's banner customization feature?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the fat/uber jar and how does Spring Boot package applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between java -jar and running a Spring Boot app via an IDE?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is graceful shutdown in Spring Boot and how is it configured?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Spring Boot BuildInfo and how is it generated with Maven/Gradle plugins?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Data JPA and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between JPA, Hibernate, and Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Spring Data Repository and what interfaces does it provide (CrudRepository, JpaRepository)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CrudRepository and JpaRepository?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are derived query methods in Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @Query annotation used for in Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between JPQL and native SQL queries in Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @Entity annotation and what does it require?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @OneToMany, @ManyToOne, @ManyToMany, and @OneToOne?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between FetchType.LAZY and FetchType.EAGER?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the N+1 select problem in JPA/Hibernate and how do you solve it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @Id and @GeneratedValue annotation used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different GenerationType strategies in JPA (AUTO, IDENTITY, SEQUENCE, TABLE)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Table and @Entity annotations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a composite primary key and how is it implemented in JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the persistence context in JPA/Hibernate?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the first-level cache and second-level cache in Hibernate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between save() and saveAndFlush() in Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is optimistic locking and how is it implemented using @Version?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is pessimistic locking and when would you use it over optimistic locking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Specification interface used for in Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Querydsl and how does it integrate with Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is pagination and sorting support in Spring Data JPA (Pageable, Sort)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Page and Slice in Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a projection in Spring Data JPA and what types exist (interface-based, class-based)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @Transactional annotation's role in a repository method?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database migration and how do tools like Flyway or Liquibase integrate with Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection pooling and how does Spring Boot configure HikariCP by default?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between DataSource and JdbcTemplate in Spring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is JdbcTemplate and when would you use it instead of Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between NamedParameterJdbcTemplate and JdbcTemplate?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Spring Boot auto-configure a DataSource based on classpath dependencies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between embedded databases (H2) and external databases in Spring Boot testing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the dirty checking mechanism in Hibernate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cascading in JPA and what CascadeType options are available?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @RequestParam and @PathVariable in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @RequestBody and @ResponseBody annotation used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, and @PatchMapping?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @RequestMapping annotation and how does it differ from the HTTP-method-specific annotations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle exceptions globally in a Spring Boot REST API using @ControllerAdvice?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @ExceptionHandler and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is ResponseEntity and why would you use it over returning a plain object?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is content negotiation in Spring MVC and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @RequestHeader and @CookieValue annotations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @Valid annotation used for in request validation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Bean Validation (JSR-380) integrate with Spring Boot for validating DTOs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom validator in Spring Boot and how do you create one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CORS and how do you configure it in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the DispatcherServlet and what role does it play in Spring MVC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the complete request lifecycle in a Spring MVC application from request to response."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a HandlerInterceptor and how is it different from a Filter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Servlet Filter and a Spring Interceptor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is HttpMessageConverter and how does Spring use it for JSON serialization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Spring Boot automatically configure Jackson for JSON conversion?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous REST endpoints in Spring (@Async, DeferredResult)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is WebFlux and how does it differ from traditional Spring MVC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between reactive programming with WebFlux and the imperative model of Spring MVC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Mono and a Flux in Spring WebFlux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring HATEOAS and how does it support hypermedia-driven REST APIs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you version a REST API in Spring Boot (URI versioning, header versioning)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is API documentation using Swagger/OpenAPI and how is it integrated with Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between idempotent and non-idempotent HTTP methods, and how does this affect API design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a RestTemplate and why is it now considered legacy in favor of WebClient?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is WebClient and how does it differ from RestTemplate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the FeignClient and how does it simplify inter-service HTTP calls?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multipart file upload handling in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement rate limiting in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @ResponseStatus annotation used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is content compression (GZIP) and how is it enabled in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a stateless and stateful REST API design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement API request/response logging in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Security and how do you implement JWT authentication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between authentication and authorization in Spring Security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a SecurityFilterChain in Spring Security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between form-based login and basic authentication in Spring Security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a UserDetailsService and how is it used in Spring Security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the PasswordEncoder interface and why should passwords never be stored in plain text?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is BCryptPasswordEncoder and why is it commonly used?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does JWT-based authentication work end-to-end in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a JWT access token and a refresh token?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is OAuth2 and how does Spring Security support it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between OAuth2 and OpenID Connect?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is method-level security in Spring using @PreAuthorize and @PostAuthorize?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @Secured annotation and how is it different from @PreAuthorize?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSRF protection and why is it typically disabled for stateless REST APIs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of the SecurityContextHolder in Spring Security?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Spring Security's filter chain process an incoming HTTP request?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom authentication provider in Spring Security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is role-based access control (RBAC) and how is it implemented in Spring Security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hasRole() and hasAuthority() in Spring Security?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement a custom JWT filter in Spring Security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is session management in Spring Security and how do you configure stateless sessions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between in-memory authentication and database-backed authentication in Spring Security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Security's default behavior for unauthenticated requests?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a security configuration class (extending WebSecurityConfigurerAdapter or using SecurityFilterChain bean) used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you secure microservice-to-microservice communication using Spring Security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is API key-based authentication and how would you implement it in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of CORS configuration in relation to Spring Security?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is token blacklisting/revocation and how would you implement it for JWT in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the principle of least privilege and how does it apply to Spring Security configuration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is method security expression language (SpEL) used for in @PreAuthorize?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle multi-tenant security in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the Spring Bean lifecycle."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Spring AOP (Aspect Oriented Programming)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Spring Boot handle transactions? What is @Transactional?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an Aspect, Advice, Pointcut, and JoinPoint in Spring AOP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Before, @After, @Around, @AfterReturning, and @AfterThrowing advice?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Spring AOP and AspectJ?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Spring AOP use proxies (JDK dynamic proxy vs CGLIB) to implement aspects?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a self-invocation problem in Spring AOP and why doesn't @Transactional work when called internally?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different transaction propagation types in Spring (REQUIRED, REQUIRES_NEW, etc.)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different transaction isolation levels supported by Spring?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between declarative and programmatic transaction management in Spring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is rollback behavior in @Transactional and how do you customize it with rollbackFor?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Spring manage transactions across multiple data sources?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the PlatformTransactionManager interface used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a distributed transaction and how does Spring handle it (e.g., with JTA)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the BeanPostProcessor interface and how does it participate in the bean lifecycle?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the BeanFactoryPostProcessor and how is it different from BeanPostProcessor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the InitializingBean and DisposableBean interface used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is circular dependency in Spring and how does Spring resolve it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Spring resolve circular dependencies between singleton beans using setter injection but not constructor injection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a FactoryBean in Spring and when would you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is lazy initialization of beans and how is it enabled with @Lazy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between eager and lazy bean instantiation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is ApplicationContextAware and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an ApplicationEvent and ApplicationListener in Spring, and how does event-driven communication work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @EventListener annotation used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous event handling in Spring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @Async annotation and how do you enable asynchronous method execution in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a TaskExecutor and how does Spring Boot configure a default thread pool for @Async?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @Scheduled annotation and how do you schedule tasks in Spring Boot?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Spring Cloud and how does it support microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is service discovery and how does Eureka work in Spring Cloud?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Config Server in Spring Cloud and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Cloud Gateway and how does it differ from Zuul?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is client-side load balancing and how does Spring Cloud LoadBalancer work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Circuit Breaker pattern and how is it implemented with Resilience4j in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Hystrix and Resilience4j for fault tolerance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the API Gateway pattern in microservices architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is distributed tracing and how does Spring Cloud Sleuth/Micrometer Tracing help with it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Zipkin and how does it integrate with Spring Boot for tracing requests across services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Saga pattern and how is it used for managing distributed transactions in microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is event-driven communication between microservices and how does Spring Cloud Stream help?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous (REST) and asynchronous (messaging) communication between microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Cloud Bus and what problem does it solve?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Strangler Fig pattern in the context of migrating a monolith to microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Bulkhead pattern and how does it prevent cascading failures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Retry pattern and how do you configure retries with Resilience4j?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between orchestration and choreography in microservices communication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Cloud Config's support for refreshing configuration at runtime with @RefreshScope?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement centralized logging for microservices built with Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is containerization and how do you dockerize a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of Kubernetes in deploying and scaling Spring Boot microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a health check endpoint and how does Kubernetes use Spring Boot Actuator's /health endpoint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between liveness and readiness probes in the context of Spring Boot apps on Kubernetes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is API composition pattern in microservices for aggregating data from multiple services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Backend for Frontend (BFF) pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle data consistency across microservices that each own their own database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is idempotency and why is it important in microservice APIs, especially for retries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a message broker (like RabbitMQ or Kafka) and how does Spring Boot integrate with it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Kafka and RabbitMQ integration in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring for Apache Kafka and how do you produce/consume messages?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Dead Letter Queue and how is it used for handling failed message processing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the outbox pattern and how does it help with reliable event publishing in microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you version microservice APIs without breaking existing consumers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is contract testing (e.g., using Spring Cloud Contract) and why is it important in microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is service mesh (e.g., Istio) and how does it relate to Spring Cloud's own service discovery/routing features?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @SpringBootTest annotation used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @SpringBootTest and @WebMvcTest?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @DataJpaTest and what does it configure automatically?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Mockito and how is it used for mocking dependencies in Spring Boot tests?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Mock, @MockBean, and @Spy in testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is MockMvc and how is it used to test REST controllers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between unit tests and integration tests in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Testcontainers and how is it used for integration testing with real databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @TestConfiguration and how does it differ from @Configuration in tests?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @ActiveProfiles annotation used for in tests?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you test a @Transactional method, and why does @Transactional in tests behave differently (auto-rollback)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is contract testing and how does Spring Cloud Contract help verify API contracts between services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between JUnit 4 and JUnit 5 in the context of Spring Boot testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @ParameterizedTest in JUnit 5 and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AssertJ and how does it improve test assertions over plain JUnit assertions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you test asynchronous methods annotated with @Async?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you test scheduled tasks annotated with @Scheduled?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a slice test in Spring Boot testing (e.g., @WebMvcTest, @DataJpaTest, @JsonTest)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @JsonTest used for in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you mock an external REST API call in a Spring Boot test?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is WireMock and how is it used to stub external HTTP services in tests?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between H2 in-memory database testing and Testcontainers-based testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you write a test for a custom Spring Security filter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is test coverage and what tools are commonly used to measure it in a Spring Boot project (e.g., JaCoCo)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is behavior-driven testing and how can tools like Cucumber be integrated with Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is caching in Spring Boot and how do you enable it with @EnableCaching and @Cacheable?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Cacheable, @CachePut, and @CacheEvict?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What cache providers can be integrated with Spring Boot (e.g., Redis, EhCache, Caffeine)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you integrate Redis with a Spring Boot application for caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection pooling and why does it matter for database performance in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is HikariCP and why is it the default connection pool in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you monitor a Spring Boot application in production using Micrometer and Prometheus?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between logging levels (DEBUG, INFO, WARN, ERROR) and how are they configured in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SLF4J and Logback's role in Spring Boot's default logging setup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you externalize sensitive configuration like database passwords in Spring Boot (e.g., Vault, environment variables)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Spring Boot health indicator and how do you create a custom one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical and horizontal scaling for a Spring Boot microservice?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection timeout and read timeout configuration when calling external services with RestTemplate/WebClient?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you diagnose and fix a memory leak in a running Spring Boot application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What tools would you use to profile a slow Spring Boot application (e.g., JFR, VisualVM, async-profiler)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is lazy loading vs eager loading trade-offs from a performance perspective in JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is batch processing in Spring Boot and how does Spring Batch help with large data jobs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Spring Batch Job, Step, ItemReader, ItemProcessor, and ItemWriter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you optimize a Spring Boot application's startup time?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is GraalVM native image support in Spring Boot, and what benefits does it provide?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a traditional JVM-run Spring Boot app and a native-compiled one in terms of startup and memory?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of connection pool sizing and thread pool sizing for throughput in a Spring Boot app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request throttling or rate limiting to protect a Spring Boot API from overload?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical scaling of a single Spring Boot instance and running multiple instances behind a load balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are best practices for structuring a large Spring Boot application (layered architecture, hexagonal architecture)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between XML-based configuration and Java-based (annotation) configuration in Spring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Expression Language (SpEL) and where is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @Conditional annotation and how do you write a custom condition?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Import and @ComponentScan for including beans?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Spring Boot CommandLineRunner used for in application startup tasks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a monolithic and microservices architecture, and how does Spring Boot fit into both?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Dependency Injection's role in making code more testable?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between tight coupling and loose coupling, and how does Spring achieve the latter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a DTO (Data Transfer Object) and why is it used instead of exposing entities directly in APIs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an Entity and a DTO in a typical Spring Boot layered architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Repository pattern and how does Spring Data implement it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Service layer's responsibility in a typical Spring Boot application architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is ModelMapper or MapStruct used for in Spring Boot applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between checked and unchecked exceptions, and how does Spring's DataAccessException hierarchy relate to this?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a global exception handler and how does @ControllerAdvice combined with @ExceptionHandler achieve this?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @Order annotation in Spring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Spring Boot application context refresh, and when does it happen?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between @RequestScope, @SessionScope, and @ApplicationScope bean scopes in a web application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multi-module Maven/Gradle project structure and how is it used to organize a large Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Maven and Gradle for building Spring Boot projects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Boot's support for internationalization (i18n)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the MessageSource bean used for in Spring?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager singleton bean creation at context startup vs lazy bean creation, in terms of application startup performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ResponseStatusException class and when would you use it over a custom exception with @ControllerAdvice?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a Spring Boot application to support blue-green or canary deployments?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Spring MVC and Spring Boot?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a POJO and how is it used in Spring applications?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the pom.xml file in a Maven-based Spring Boot project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the build.gradle file in a Gradle-based Spring Boot project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Spring Initializr and how does it help bootstrap a new project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a REST API and how does Spring Boot help build one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a JAR and a WAR file in Spring Boot deployment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @ModelAttribute and @RequestBody?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Spring Boot filter and how do you register a custom Filter bean?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between application context startup failure and a bean creation exception?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a NoSuchBeanDefinitionException and what commonly causes it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a BeanCurrentlyInCreationException and how is it related to circular dependencies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @RestControllerAdvice and @ControllerAdvice?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous request handling and Server-Sent Events (SSE) in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement Server-Sent Events (SSE) in a Spring Boot REST controller?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is WebSocket support in Spring Boot and how do you set up a simple WebSocket endpoint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is STOMP protocol and how does it relate to Spring's WebSocket messaging support?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @RequestMapping's consumes and produces attributes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the ObjectMapper bean in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you customize JSON serialization/deserialization using Jackson annotations in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @JsonIgnore and @JsonProperty annotation used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between DTO validation using @Valid on method parameters vs validating inside the service layer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a global CORS configuration bean (WebMvcConfigurer) vs per-controller @CrossOrigin annotation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ETag support in Spring for HTTP caching, and how is it configured?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is conditional GET request handling using Last-Modified headers in Spring MVC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a stateless JWT-based session and a traditional HttpSession-based session?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the HandlerExceptionResolver interface in Spring MVC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a checked exception thrown from a controller and an unchecked exception, in terms of default HTTP status handling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Boot's default error handling page (Whitelabel Error Page) and how do you customize it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement API throttling per user using Spring Boot and Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical slicing and horizontal layering when designing a Spring Boot module?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Spring Boot's auto-configuration interact with a multi-module project where some modules define their own beans?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is bean definition overriding in Spring, and when might it cause unexpected behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between ApplicationContext refresh and a full JVM restart when applying @RefreshScope changes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement idempotent POST requests in a Spring Boot REST API using idempotency keys?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between optimistic concurrency control and pessimistic concurrency control at the database transaction level, and how does Spring support each?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design schema migrations for zero-downtime deployments in a Spring Boot application using Flyway?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a read replica and the primary database, and how would you configure Spring Boot to route read-only queries to a replica?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement multi-tenancy in a Spring Boot + JPA application (schema-per-tenant vs discriminator column)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager fetching a whole entity graph and using an @EntityGraph annotation for selective fetching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is @EntityGraph used for in Spring Data JPA?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between DTO projections and Entity Graphs for optimizing JPA queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is batch insert/update optimization in Hibernate and how do you configure it in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the hibernate.jdbc.batch_size property used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is soft delete and how would you implement it using Hibernate's @SQLDelete and @Where annotations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is auditing in Spring Data JPA (@CreatedDate, @LastModifiedDate, @EnableJpaAuditing)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is optimistic locking failure (OptimisticLockException) and how should an application handle it gracefully?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Transactional(readOnly = true) and a regular @Transactional for read queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection leak detection and how would you diagnose one in a Spring Boot + HikariCP application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Spring Boot application's embedded Tomcat thread pool sizing and database connection pool sizing, and how do they interact under load?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the spring-boot-maven-plugin or spring-boot-gradle-plugin?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you build a Docker image for a Spring Boot application using layered jars for better caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a multi-stage Docker build and a single-stage build for a Spring Boot app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between environment-specific application-{profile}.yml files and Kubernetes ConfigMaps for configuration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you inject Kubernetes Secrets into a Spring Boot application's configuration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Spring Boot application's readiness probe failing vs its liveness probe failing, in terms of Kubernetes behavior?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is graceful degradation and how would you design fallback behavior with Resilience4j's Fallback method?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a timeout and a circuit breaker in handling failing downstream service calls?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the RateLimiter feature in Resilience4j and how do you apply it to a Spring Boot method?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is bulkheading using thread pools vs semaphores in Resilience4j?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Retryable (Spring Retry) and Resilience4j's Retry module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Retry and how do you configure retry behavior with backoff policies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a correlation ID and how would you propagate it across microservice calls for tracing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the MDC (Mapped Diagnostic Context) in logging and how is it used with correlation IDs in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is structured logging (JSON logging) and why is it preferred in microservice/cloud environments?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ELK stack (Elasticsearch, Logstash, Kibana) and how does it integrate with Spring Boot logs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between push-based and pull-based metrics collection, and where does Micrometer/Prometheus fit?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom Micrometer metric and how would you register one in a Spring Boot service?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is distributed configuration refresh using Spring Cloud Bus and a message broker?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a synchronous REST call timing out vs a message being lost in an asynchronous queue-based system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is exactly-once, at-least-once, and at-most-once delivery semantics, and how does this affect Spring Kafka consumer design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is consumer group rebalancing in Kafka and how does Spring for Apache Kafka handle it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @KafkaListener and manually polling a KafkaConsumer in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Kafka Streams application and how does Spring Cloud Stream Kafka Binder support stream processing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is idempotent producer configuration in Kafka and why does it matter for exactly-once semantics?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is schema evolution and how does a schema registry (e.g., Avro with Confluent Schema Registry) help with Kafka messages in Spring Boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RabbitMQ's exchange types (direct, topic, fanout, headers)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Spring AMQP RabbitTemplate used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is message acknowledgment (ack/nack) in RabbitMQ and how is it configured in Spring AMQP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous request-reply messaging and fire-and-forget messaging patterns in Spring integrations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Spring Integration and how does it relate to Enterprise Integration Patterns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a monolith's in-process method call and a microservice's network call, in terms of failure modes to design for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a Spring Boot based e-commerce order service to handle payment failures and partial order fulfillment consistently?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is eventual consistency and how would a Spring Boot microservice architecture typically achieve it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the CAP theorem and how does it influence architectural decisions in a Spring Boot microservices system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical partitioning of a database and sharding, and how might a Spring Boot application need to adapt its data access layer for each?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a read-through/write-through cache pattern and how would you implement it with Spring Cache and Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache stampede/thundering herd problem and how can it be mitigated in a Spring Boot caching layer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between L1 (application-local) cache and L2 (distributed) cache in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a feature flag and how might you implement simple feature toggling in a Spring Boot application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a canary release and a rolling update strategy for deploying Spring Boot services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is chaos engineering and how might you test the resilience of a Spring Boot microservice architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous health checks and asynchronous background health monitoring in Spring Boot Actuator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom Actuator endpoint and how would you expose one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the /actuator/metrics endpoint used for and how does it expose JVM and application metrics?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical scaling limitations and horizontal scaling benefits for a Spring Boot service under heavy load?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is API rate limiting at the gateway level (Spring Cloud Gateway) versus at the individual service level?"
+  }
 ]

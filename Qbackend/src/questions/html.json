@@ -1,14 +1,402 @@
 [
-  { "difficulty": "Easy", "question": "What is HTML and what does it stand for?" },
-  { "difficulty": "Easy", "question": "What is the difference between block-level and inline elements in HTML?" },
-  { "difficulty": "Easy", "question": "What are semantic HTML elements? Give examples." },
-  { "difficulty": "Easy", "question": "What is the purpose of the <!DOCTYPE html> declaration?" },
-  { "difficulty": "Medium", "question": "What is the difference between id and class attributes in HTML?" },
-  { "difficulty": "Medium", "question": "What are HTML data attributes and how are they used?" },
-  { "difficulty": "Medium", "question": "What is the difference between localStorage, sessionStorage, and cookies?" },
-  { "difficulty": "Medium", "question": "What is the HTML Canvas element used for?" },
-  { "difficulty": "Medium", "question": "What are ARIA attributes in HTML and why are they important for accessibility?" },
-  { "difficulty": "Hard", "question": "What is the Shadow DOM in web components?" },
-  { "difficulty": "Hard", "question": "How does the browser render HTML? Explain the critical rendering path." },
-  { "difficulty": "Hard", "question": "What are Web Workers and how do they help with performance?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is HTML and what does it stand for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTML elements and HTML tags?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the basic structure of an HTML document?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between block-level and inline elements in HTML?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are semantic HTML elements? Give examples."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the <!DOCTYPE html> declaration?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between <div> and <span>?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are HTML attributes and how are they used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTML and XHTML?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the <head> tag and what can it contain?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between <meta> tags used for charset and viewport?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an ordered list and an unordered list?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between <a> href and <a> target attributes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the alt attribute on an <img> tag?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTML entities and regular characters?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between id and class attributes in HTML?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are HTML data attributes and how are they used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <section>, <article>, and <div>?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <header>, <footer>, <nav>, and <aside>?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the <figure> and <figcaption> elements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <b>/<strong> and <i>/<em>?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the void element in HTML? Give examples."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HTML5 and HTML4?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the lang attribute on the <html> tag?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between absolute, relative, and root-relative URLs in HTML links?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between <script> placed in the head vs at the end of the body?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between async and defer attributes on a <script> tag?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <link> and <script> tags in terms of resource loading?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the <base> tag in HTML?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an HTML form and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between GET and POST methods in an HTML form?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <input type='text'> and <textarea>?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different input types introduced in HTML5?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the required, pattern, and placeholder attributes in form inputs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a <select> element and a <datalist> element?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is form validation and how does HTML5 support native validation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <button type='submit'> and <button type='button'>?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the <fieldset> and <legend> elements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between disabled and readonly attributes on form inputs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the name attribute on form inputs and how is it used on submission?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between multipart/form-data and application/x-www-form-urlencoded enctypes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the label element and why should it be associated with form controls?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Constraint Validation API work in HTML5 forms?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of <table>, <tr>, <td>, and <th> tags?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between colspan and rowspan in an HTML table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of <thead>, <tbody>, and <tfoot> in a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between the <video> and <audio> elements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the common attributes used with the <video> tag (controls, autoplay, loop, muted)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the <source> element inside <video> or <audio>?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <img>, <picture>, and <source> for responsive images?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the srcset attribute used for in responsive images?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SVG and Canvas for rendering graphics in HTML?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between localStorage, sessionStorage, and cookies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the size limitation of localStorage compared to cookies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous storage APIs (e.g., localStorage vs IndexedDB)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is IndexedDB and when would you use it over localStorage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the HttpOnly and Secure flags on cookies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SameSite attribute on cookies and why was it introduced?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Cache API and how is it used with Service Workers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are Service Workers and how do they enable offline functionality?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Progressive Web App (PWA) and what HTML/browser features enable it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the History API (pushState) and traditional page navigation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the HTML Canvas element used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the 2D context and WebGL context on a canvas?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Canvas API differ from SVG in terms of performance and use cases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an SVG element and how is it embedded in HTML?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the viewBox attribute in SVG used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you animate elements drawn on an HTML canvas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are ARIA attributes in HTML and why are they important for accessibility?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between aria-label and aria-labelledby?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role attribute in ARIA and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the tabindex attribute and how does it affect keyboard navigation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the alt attribute for screen readers, and when should it be left empty?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the accessibility tree and how does the browser construct it from the DOM?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between accessible and semantic markup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are landmark roles in ARIA and how do they help assistive technology users?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you make a custom dropdown or modal component accessible using ARIA?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Shadow DOM in web components?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the browser render HTML? Explain the critical rendering path."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are Web Workers and how do they help with performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the DOM and the CSSOM, and how do they combine to form the render tree?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is reflow and repaint in the browser rendering process, and how can they be minimized?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is lazy loading of images in HTML and how is it implemented with the loading attribute?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Shadow DOM and iframe for encapsulating content?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are custom elements in the Web Components specification?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is HTML template element (<template>) and how does it differ from regular hidden content?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Web Workers and Service Workers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does preloading resources with <link rel='preload'> affect page load performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of resource hints like dns-prefetch, preconnect, and prefetch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the browser parse HTML incrementally, and what happens when it encounters a blocking script?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between rel='preload' and rel='prefetch'?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are meta tags used for in SEO and social sharing (e.g., Open Graph tags)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the robots meta tag?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a canonical URL and a redirect for SEO purposes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is structured data (schema.org / JSON-LD) and how does it help search engines?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the sitemap and how does it relate to HTML/SEO?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HTML validation and browser rendering leniency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an HTML comment and a hidden element?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the contenteditable attribute used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the <iframe> element and embedding content via Shadow DOM?"
+  }
 ]

@@ -1,13 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is C++ and how is it different from C?" },
-  { "difficulty": "Easy", "question": "What is a pointer in C++?" },
-  { "difficulty": "Easy", "question": "What is a reference in C++? How is it different from a pointer?" },
-  { "difficulty": "Medium", "question": "What is the Rule of Three/Five/Zero in C++?" },
-  { "difficulty": "Medium", "question": "What are templates in C++?" },
-  { "difficulty": "Medium", "question": "What is RAII (Resource Acquisition Is Initialization) in C++?" },
-  { "difficulty": "Medium", "question": "What is the STL (Standard Template Library) in C++?" },
-  { "difficulty": "Hard", "question": "What is move semantics in C++11 and how does it improve performance?" },
-  { "difficulty": "Hard", "question": "What are smart pointers in C++? Explain unique_ptr, shared_ptr, weak_ptr." },
-  { "difficulty": "Hard", "question": "What is undefined behavior in C++ and how do you avoid it?" },
-  { "difficulty": "Hard", "question": "Explain the vtable and virtual function mechanism in C++." }
+  {
+    "difficulty": "Easy",
+    "question": "What is C++ and how is it different from C?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the basic data types in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between C++ and Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a variable and how is it declared in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different types of operators in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between '==' and '=' in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between prefix and postfix increment operators?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is type casting and what are its types in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between implicit and explicit type conversion?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the scope resolution operator (::) used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different loop types available in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between while and do-while loops?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a function in C++ and how is it declared?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is function overloading in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is default argument in a function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between call by value and call by reference?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an array in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an array and a vector?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a string in C++ and how is it different from a C-style string?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are header files and why are they used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the #include directive?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a namespace in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the 'using namespace std;' statement used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are comments and why are they important?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between cin/cout and printf/scanf?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the sizeof operator used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a declaration and a definition?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between local and global variables?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a constant in C++ and how is it declared?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between #define and const?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Object-Oriented Programming and what are its main pillars?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a class and an object in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is encapsulation in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is abstraction and how is it achieved in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are access specifiers in C++? Explain public, private, and protected."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a constructor in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a destructor in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a default constructor?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a parameterized constructor?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a copy constructor and when is it called?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a move constructor and when is it called?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow copy and a deep copy?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is inheritance in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different types of inheritance in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multiple inheritance and what problems can it cause?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the diamond problem in C++ and how is it solved?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is virtual inheritance and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is polymorphism in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between compile-time and run-time polymorphism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a virtual function in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a pure virtual function and what is an abstract class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an abstract class and an interface in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is function overriding and how is it different from overloading?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens if a base class destructor is not virtual and you delete a derived object through a base pointer?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static member variable in a class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static member function in a class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'this' pointer and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a friend function and a friend class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can constructors be private? What is the use case?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can destructors be virtual, and why should they be in base classes meant for inheritance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is object slicing in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between composition and inheritance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is aggregation in the context of OOP design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between struct and class in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an initializer list in a constructor and why is it preferred?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the order of constructor and destructor calls in inheritance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a delegating constructor in C++11?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between 'override' and 'final' specifiers in C++11?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a nested class in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is operator overloading and what operators cannot be overloaded?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a pointer in C++?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a reference in C++? How is it different from a pointer?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a null pointer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a dangling pointer and how does it occur?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a wild pointer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a void pointer and where is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between new/delete and malloc/free?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a memory leak and how can it be avoided?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is dangling reference and how is it different from a dangling pointer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is pointer arithmetic and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a pointer to a pointer (double pointer)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a pointer to a constant and a constant pointer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dynamic memory allocation in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What happens when you delete an array using 'delete' instead of 'delete[]'?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a function pointer and how is it declared?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a pointer to a member function?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is placement new and when would you use it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is memory alignment and why does it matter in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is stack memory vs heap memory in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a memory pool and why might you use one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between stack overflow and heap corruption?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between passing a pointer and passing a reference to a function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can a reference be reassigned after initialization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an array decay and how does it affect pointer arithmetic?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you write a custom memory allocator in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between 'const int*', 'int* const', and 'const int* const'?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a reference to a pointer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between deep copy and copy-on-write for pointer-managed resources?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a self-referential structure and how are pointers used in it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between std::addressof and the '&' operator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are templates in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a function template and a class template?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is template specialization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is partial template specialization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are variadic templates in C++11?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is SFINAE (Substitution Failure Is Not An Error)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::enable_if used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a non-type template parameter?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is template metaprogramming?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Curiously Recurring Template Pattern (CRTP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between typename and class in a template declaration?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are type traits in C++ and how are they used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is template instantiation and when does it occur?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a template template parameter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between templates and generics in other languages like Java?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is perfect forwarding and how does it relate to templates?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are fold expressions in C++17?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are concepts in C++20 and how do they improve template constraints?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is explicit template instantiation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the 'most vexing parse' and how can templates be affected by it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a default template argument?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is tag dispatching in template programming?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is expression templates and where are they used (e.g., in Eigen)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does template argument deduction work in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between compile-time polymorphism via templates and runtime polymorphism via virtual functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the STL (Standard Template Library) in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::vector and std::array?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::vector and std::list?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::map and std::unordered_map?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::set and std::unordered_set?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::deque and std::vector?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a std::pair and a std::tuple?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the time complexity of insertion in std::vector vs std::list?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens to iterators when a std::vector reallocates memory?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::stack, std::queue, and std::priority_queue?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a std::multimap and how is it different from std::map?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the internal data structure used by std::map?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the internal data structure used by std::unordered_map?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is capacity vs size in std::vector?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What does the reserve() function do in std::vector?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is emplace_back and how is it different from push_back?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::bitset used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::span in C++20?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::string and std::string_view?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does std::unordered_map handle hash collisions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom comparator in std::map or std::set?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom hash function and how do you use it with std::unordered_map?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::forward_list and std::list?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::vector<bool> and other vector specializations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the invalidation rules for iterators across different STL containers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are iterators in C++ and what types of iterators exist?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an iterator and a pointer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::find and std::binary_search?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What does std::sort use internally and what is its time complexity?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::sort and std::stable_sort?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a lambda expression in C++11 and how is it used with STL algorithms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::for_each and how does it differ from a range-based for loop?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::copy and std::move algorithm?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::transform used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::accumulate and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between begin()/end() and cbegin()/cend()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a reverse iterator and how is rbegin()/rend() used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::remove and std::erase, and why do we need the erase-remove idiom?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is an insert iterator (std::back_inserter) and why is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::unique and how is it typically used with sorted containers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::count and std::count_if?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a random access iterator vs a forward iterator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::any_of, std::all_of, and std::none_of?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do C++20 ranges improve on traditional STL algorithms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::algorithm header and name a few commonly used functions from it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'auto' keyword in C++11 and how does type deduction work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a range-based for loop and how does it work internally?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'nullptr' keyword and why was it introduced over NULL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an enum class and how is it different from a plain enum?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a lambda expression and what is its syntax?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a capture list in a lambda and what are the different ways to capture variables?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a generic lambda in C++14?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a lambda with 'mutable' keyword used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is constexpr and how is it different from const?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between constexpr and consteval in C++20?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'decltype' keyword used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is uniform initialization (brace initialization) in C++11?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::initializer_list?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is structured bindings in C++17?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is if-with-initializer in C++17?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::optional and when should you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::variant and how is it different from a union?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::any and where is it useful?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are C++20 concepts and how do they simplify template constraints?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are C++20 coroutines and what problem do they solve?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are C++20 modules and how do they improve on header files?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the spaceship operator (<=>) introduced in C++20?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between 'auto' and 'decltype(auto)'?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a trailing return type and when is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'explicit' keyword used for on constructors?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are user-defined literals in C++11?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::chrono and how is it used for time measurement?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::function and how does it relate to callable objects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::bind and when would you use it over a lambda?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is fold expression syntax introduced in C++17 for variadic templates?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static_assert and a runtime assert?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is inline variable (C++17) and what problem does it solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a designated initializer in C++20?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::filesystem introduced in C++17 used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the three-way comparison and how does it simplify operator overloading?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between C++98/03, C++11, C++14, C++17, and C++20 in terms of major features?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::array and why is it preferred over a C-style array?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the 'override' contextual keyword and why is it recommended?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a nested namespace definition introduced in C++17?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::jthread introduced in C++20 and how is it different from std::thread?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is move semantics in C++11 and how does it improve performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is an rvalue reference and how is it different from an lvalue reference?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::move and what does it actually do internally?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between std::move and std::forward?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is perfect forwarding and why is it needed?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are smart pointers in C++? Explain unique_ptr, shared_ptr, weak_ptr."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does std::shared_ptr manage reference counting internally?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a circular reference problem with shared_ptr and how does weak_ptr solve it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between std::unique_ptr and std::shared_ptr in terms of ownership?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you transfer ownership of a std::unique_ptr?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::make_unique and std::make_shared, and why are they preferred over direct 'new'?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a custom deleter in smart pointers and how do you define one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Rule of Five in the context of move semantics?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is copy elision and Return Value Optimization (RVO)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between RVO and move semantics?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a moved-from state and what guarantees does the standard give about it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Why should move constructors and move assignment operators be marked noexcept?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between shallow move and deep move for a class managing a resource?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::enable_shared_from_this used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the overhead of std::shared_ptr compared to a raw pointer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a universal reference (forwarding reference) and how do you distinguish it from an rvalue reference?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the compiler decide whether to call the copy constructor or the move constructor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::exchange and how is it used in move assignment operators?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between std::shared_ptr's control block and the managed object memory?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the exception safety implications of move constructors that can throw?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is exception handling in C++ and how does try/catch/throw work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between throwing an exception by value vs by reference?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom exception class and how do you create one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the 'noexcept' specifier?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens if an exception is thrown inside a destructor?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the different exception safety guarantees (basic, strong, no-throw)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is stack unwinding in the context of exception handling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between catch(...) and catching a specific exception type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::exception and how do you derive custom exceptions from it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between error codes and exceptions for error handling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What happens if an exception escapes a noexcept function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RAII's role in exception safety?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can constructors throw exceptions? What about destructors?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::terminate and std::abort?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a function-try-block in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is exception specification (throw()) and why was it deprecated?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you ensure exception safety when writing a class that manages a resource?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::uncaught_exceptions used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the order of catch blocks when catching multiple exception types, and why does it matter?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the performance cost of exceptions in C++ compared to error codes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multithreading and how is it supported in C++11 onward?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::thread and how do you create and join a thread?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between join() and detach() in std::thread?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a race condition and how can it be prevented in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::mutex and how does it prevent data races?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between std::mutex and std::recursive_mutex?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a deadlock and how can it occur in multithreaded C++ programs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::lock_guard and how is it different from std::unique_lock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::atomic and when should you use it instead of a mutex?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a memory ordering/memory model in C++11 and why does it matter for concurrency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between std::memory_order_relaxed, acquire, release, and seq_cst?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a condition variable and how is it used with std::mutex?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a spurious wakeup and how do you guard against it with condition variables?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::async and how does it differ from creating a std::thread directly?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::future and std::promise used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a lock-free data structure and why is it hard to implement correctly?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is false sharing in the context of multithreaded performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between std::launch::async and std::launch::deferred?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a thread pool and why would you use one instead of spawning threads on demand?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the ABA problem in lock-free programming?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is thread-local storage and how is it declared using thread_local in C++11?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a data race, formally, according to the C++ memory model?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is std::call_once and std::once_flag used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the double-checked locking pattern and why is it tricky to implement correctly in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a reader-writer lock (shared_mutex) and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between concurrency and parallelism?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is std::jthread and how does it simplify thread management in C++20?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are coroutines' relationship to concurrency and how do they differ from threads?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a producer-consumer problem and how would you implement it in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does std::shared_ptr behave in a multithreaded environment regarding thread safety?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the stages of compilation in C++ (preprocessing, compilation, assembly, linking)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a compiler and a linker?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static linking and dynamic linking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a header guard and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between #pragma once and traditional include guards?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the One Definition Rule (ODR) in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is name mangling in C++ and why is it necessary?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is extern 'C' used for and why is it needed when linking with C code?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a static library (.lib/.a) and a dynamic library (.dll/.so)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an object file and what does it contain?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Link-Time Optimization (LTO)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between debug and release builds in terms of compiler flags?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Undefined Reference / unresolved external symbol error and what commonly causes it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a translation unit and a source file?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is ABI (Application Binary Interface) compatibility and why does it matter for C++ libraries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of forward declarations and how do they reduce compile time?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between inline functions and macros?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a compilation firewall / PIMPL idiom used for reducing build dependencies?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Return Value Optimization and how do compiler optimization flags affect it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a header-only library and a compiled library?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is undefined behavior in C++ and how do you avoid it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between undefined behavior, unspecified behavior, and implementation-defined behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What happens when you access an out-of-bounds array index in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a use-after-free bug and how can tools help detect it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is signed integer overflow and why is it undefined behavior in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is strict aliasing and why can violating it cause undefined behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is uninitialized memory access and why is it dangerous?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What tools can be used to detect memory errors in C++ (e.g., Valgrind, AddressSanitizer)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a double free and what problems can it cause?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the sequencing/order of evaluation problem in expressions like i = i++ + 1?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a compiler warning and undefined behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is null pointer dereference and why does the compiler not always catch it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is buffer overflow and how does it relate to security vulnerabilities in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are best practices to write safer C++ code (e.g., RAII, smart pointers, const correctness)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the 'as-if' rule in C++ and how does it relate to compiler optimizations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a data race vs a benign race condition, and why does the C++ standard treat all data races as UB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is const correctness and why is it important?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is type punning and why is it risky in C++?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the impact of undefined behavior on compiler optimizations (e.g., how UB can 'break' seemingly correct code)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is static analysis and how can it help catch bugs before runtime?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Singleton design pattern and how do you implement a thread-safe Singleton in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Factory design pattern and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Observer design pattern and how can it be implemented in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the PIMPL (Pointer to Implementation) idiom and what problem does it solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Builder design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Strategy design pattern and how does it relate to polymorphism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Decorator design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Adapter design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RAII and how is it itself considered a design idiom in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the Factory Method and Abstract Factory patterns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Visitor design pattern and when is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dependency injection and how can it be implemented in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Command design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Proxy design pattern and how do smart pointers relate to it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between composition over inheritance as a design principle?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CRTP (Curiously Recurring Template Pattern) used for in static polymorphism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Template Method design pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a design pattern and an idiom in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Rule of Zero and how does it relate to good class design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SOLID principle and how does it apply to C++ design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is operator overloading and give an example of overloading the + operator."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overloading operators as member functions vs friend functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you overload the assignment operator (operator=) correctly?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overloading prefix ++ and postfix ++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static_cast, dynamic_cast, const_cast, and reinterpret_cast?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does dynamic_cast work internally and what is its runtime cost?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When would you use const_cast and what are the risks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When would you use reinterpret_cast and why is it considered dangerous?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between C-style casts and C++-style casts?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you overload the stream insertion (<<) and extraction (>>) operators?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overloading operator() and creating a functor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a functor (function object) in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you overload the subscript operator ([]) for a custom container class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the rule about overloading operators that should not change operand precedence or associativity?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is implicit conversion via a single-argument constructor and how does 'explicit' prevent it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you overload comparison operators, and how does C++20's spaceship operator simplify this?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is operator overloading ambiguity and how can it be resolved?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overloading -> and overloading * for a smart-pointer-like class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can you overload operators for built-in types like int or double? Why or why not?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between implicit type conversion operators and conversion constructors?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the vtable and virtual function mechanism in C++."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a vptr (virtual pointer) and how is it set up for an object?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does multiple inheritance affect the layout of vtables?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the performance overhead of virtual function calls compared to non-virtual calls?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Why can't constructors be virtual in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why should destructors in a polymorphic base class typically be virtual?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What happens when a virtual function is called from within a constructor or destructor?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is pure virtual function with a definition (why would you define a pure virtual function)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the compiler resolve which vtable entry to call for an overridden virtual function?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is covariant return type in the context of virtual functions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is RTTI (Run-Time Type Information) and how does typeid work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How is dynamic_cast implemented using RTTI and vtables?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static binding and dynamic binding?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is virtual function table sharing across multiple inheritance vs virtual inheritance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the memory layout overhead added to an object by making a class polymorphic?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Rule of Three/Five/Zero in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RAII (Resource Acquisition Is Initialization) in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a header-only implementation and separate .cpp/.h files?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is copy-and-swap idiom and how does it help write exception-safe assignment operators?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a union in C++ and how is it different from a struct?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a tagged union / std::variant used to safely replace a raw union?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between #include <header> and #include \"header\"?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a bit field in C++ structs and when is it used?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the empty base optimization (EBO) in C++?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::size_t and int for representing sizes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is name hiding in inheritance and how do you resolve it with the 'using' declaration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is argument-dependent lookup (ADL), also known as Koenig lookup?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the static initialization order fiasco and how can it be avoided?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow const and deep const member function guarantee?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the mutable keyword used for in a class member?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is type erasure and how is it used in std::function or std::any?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between std::cin.get() and std::cin >> for reading input?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an rvalue and an lvalue in general C++ expression evaluation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Return Type Covariance and how does it interact with virtual functions and templates?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between C++ exceptions and C-style setjmp/longjmp error handling?"
+  }
 ]
