@@ -1,14 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is an operating system and what are its main functions?" },
-  { "difficulty": "Easy", "question": "What is the difference between a process and a thread?" },
-  { "difficulty": "Easy", "question": "What is a deadlock in operating systems?" },
-  { "difficulty": "Medium", "question": "What are the different CPU scheduling algorithms?" },
-  { "difficulty": "Medium", "question": "What is virtual memory and how does paging work?" },
-  { "difficulty": "Medium", "question": "What is the difference between preemptive and non-preemptive scheduling?" },
-  { "difficulty": "Medium", "question": "What is semaphore in OS and how is it used for synchronization?" },
-  { "difficulty": "Medium", "question": "What are the conditions for deadlock and how can it be prevented?" },
-  { "difficulty": "Hard", "question": "Explain the Banker's algorithm for deadlock avoidance." },
-  { "difficulty": "Hard", "question": "What is thrashing in operating systems and how is it prevented?" },
-  { "difficulty": "Hard", "question": "Explain page replacement algorithms: FIFO, LRU, and Optimal." },
-  { "difficulty": "Hard", "question": "What is the difference between monolithic kernel and microkernel?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is an operating system and what are its main functions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different types of operating systems (batch, time-sharing, real-time, distributed)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a real-time operating system and a general-purpose OS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the kernel of an operating system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between user mode and kernel mode?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a system call and why is it needed?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a system call and a library function call?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is booting and what is the boot process of an OS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the BIOS/UEFI and its role in starting up a computer?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a device driver and why is it needed?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is multiprogramming in operating systems?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is multitasking and how is it different from multiprogramming?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between multitasking and multithreading?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is time-sharing in operating systems?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between single-user and multi-user operating systems?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an interrupt and how does the OS handle it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between hardware interrupts and software interrupts?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a shell in an operating system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between GUI-based and CLI-based operating systems?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is firmware and how is it different from an operating system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a 32-bit and 64-bit operating system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the role of the OS in resource management?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a spooling and how is it used in operating systems?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is buffering in the context of operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between monolithic kernel and microkernel?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hybrid kernel and how does it combine features of monolithic and microkernels?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an exokernel and how does it differ from other kernel designs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Type 1 and Type 2 hypervisor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is virtualization and how does an OS support it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a container and how is it different from a virtual machine?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a process in an operating system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a process and a program?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a process and a thread?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different states of a process (new, ready, running, waiting, terminated)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Process Control Block (PCB) and what information does it store?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is context switching and why is it needed?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the overhead involved in context switching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a process queue and what types of queues exist (ready queue, device queue)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is process creation and what are fork() and exec() system calls used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between fork() and vfork() in Unix-like systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a zombie process and how is it created?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an orphan process and how does the OS handle it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a parent process and a child process?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is inter-process communication (IPC) and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different IPC mechanisms (pipes, message queues, shared memory, sockets)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a pipe and how is it used for communication between processes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a named pipe (FIFO) and an anonymous pipe?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is shared memory and why is it the fastest IPC mechanism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is message passing and how does it differ from shared memory IPC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a signal in Unix-like operating systems and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous IPC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is process synchronization and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the critical section problem in operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the requirements for a valid solution to the critical section problem (mutual exclusion, progress, bounded waiting)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Peterson's solution for the critical section problem and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a race condition and how does it occur in concurrent processes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is process scheduling and why is it necessary?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a long-term scheduler, short-term scheduler, and medium-term scheduler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the degree of multiprogramming and how does the long-term scheduler control it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is swapping in the context of process management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between I/O-bound and CPU-bound processes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is process starvation and how does it occur?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is priority inversion and how does it relate to process scheduling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does priority inheritance solve the priority inversion problem?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a daemon process and give examples?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different CPU scheduling algorithms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between preemptive and non-preemptive scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is First-Come-First-Served (FCFS) scheduling and what are its drawbacks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Shortest Job First (SJF) scheduling and how is it different from Shortest Remaining Time First (SRTF)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Round Robin scheduling and how does time quantum affect its performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Priority Scheduling and how does it handle processes with the same priority?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Multilevel Queue Scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Multilevel Feedback Queue Scheduling and how is it different from Multilevel Queue Scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the convoy effect in CPU scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is turnaround time, waiting time, and response time in CPU scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is throughput in the context of CPU scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the criteria used to evaluate a CPU scheduling algorithm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you calculate average waiting time for a set of processes using FCFS scheduling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you calculate average waiting time for a set of processes using SJF scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a real-time scheduling algorithm and how does it differ from general-purpose scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Rate Monotonic Scheduling used for in real-time systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Earliest Deadline First (EDF) scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hard real-time and soft real-time systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CPU burst time and I/O burst time in the context of scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Gantt chart and how is it used to visualize CPU scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is aging in the context of CPU scheduling and how does it prevent starvation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between symmetric and asymmetric multiprocessing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is load balancing in multiprocessor scheduling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is processor affinity and why does it matter in multiprocessor systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between soft affinity and hard affinity in scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is gang scheduling in the context of parallel processing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Completely Fair Scheduler (CFS) used in the Linux kernel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Linux CFS scheduler use a red-black tree to schedule processes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a scheduling quantum and how do you choose an optimal value?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between cooperative and preemptive multitasking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a thread in an operating system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a user-level thread and a kernel-level thread?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different multithreading models (many-to-one, one-to-one, many-to-many)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the advantage of multithreading over multiprocessing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is thread pooling and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between concurrency and parallelism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a mutex and how does it differ from a semaphore?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a binary semaphore and how is it different from a counting semaphore?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a spinlock and when would you use it instead of a mutex?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a spinlock and a mutex in terms of CPU usage while waiting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a monitor in the context of process synchronization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a condition variable and how is it used with monitors?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the readers-writers problem and how is it solved using semaphores?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the producer-consumer (bounded buffer) problem and how is it solved?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the dining philosophers problem and what does it illustrate about deadlock and starvation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a barrier in the context of thread synchronization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is thread safety and how do you ensure a data structure is thread-safe?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is false sharing in multithreaded programs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between lock-based and lock-free synchronization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is thread starvation and how does it differ from deadlock?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a livelock and how is it different from a deadlock?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between kernel threads and green threads?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a fiber and how does it differ from a thread?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is thread-local storage and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous execution models in concurrent programming?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is semaphore in OS and how is it used for synchronization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a mutex lock and a semaphore?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the classic implementation of wait() and signal() operations on a semaphore?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is mutual exclusion and why is it important in concurrent systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a critical section and how do locks help protect it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is test-and-set instruction and how is it used to implement mutual exclusion?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is compare-and-swap (CAS) and how is it used in lock-free programming?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is busy waiting and what are its drawbacks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between blocking and non-blocking synchronization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a recursive lock (reentrant lock) and when would you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a read-write lock and when is it preferred over a regular mutex?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the happens-before relationship in concurrent programming?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is atomic operation and why is it important for synchronization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hardware-based and software-based synchronization mechanisms?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Dekker's algorithm and what problem does it solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is deadlock-free vs starvation-free synchronization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a counting semaphore used for, with an example?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of atomicity in the context of process synchronization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is priority inversion and how do priority ceiling protocols address it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between kernel-level locks and user-level locks?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a deadlock in operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the conditions for deadlock and how can it be prevented?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the four necessary conditions for a deadlock to occur (Coffman conditions)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between deadlock prevention and deadlock avoidance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the Banker's algorithm for deadlock avoidance."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a safe state and an unsafe state in the context of deadlock avoidance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a resource allocation graph and how is it used to detect deadlocks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you detect a deadlock using a resource allocation graph with multiple instances of a resource?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is deadlock detection and recovery, and how does it differ from prevention/avoidance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the strategies for deadlock recovery once detected?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is process termination as a deadlock recovery strategy, and what are its trade-offs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is resource preemption as a deadlock recovery strategy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does breaking the 'hold and wait' condition help prevent deadlocks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does breaking the 'circular wait' condition help prevent deadlocks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between deadlock and starvation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a livelock and how does it relate to deadlock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the wait-for graph and how is it used for deadlock detection with single-instance resources?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why is deadlock avoidance generally considered more restrictive than deadlock detection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the resource-request algorithm used within the Banker's algorithm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you modify the Banker's algorithm to handle multiple resource types?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an example of a real-world deadlock scenario in a database system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ostrich algorithm and when might an OS choose to ignore deadlocks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between deadlock in single-instance vs multi-instance resource systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does timeout-based deadlock detection work in distributed systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a circular wait and how is a resource ordering scheme used to prevent it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memory management and why is it important in an OS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between contiguous and non-contiguous memory allocation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is fragmentation, and what is the difference between internal and external fragmentation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is compaction and how does it solve external fragmentation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between fixed (static) partitioning and dynamic partitioning?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different memory allocation strategies (first fit, best fit, worst fit)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a memory management unit (MMU) and what role does it play?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is logical address space vs physical address space?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is address binding and when can it occur (compile time, load time, execution time)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dynamic loading and dynamic linking in the context of memory management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static linking and dynamic linking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is swapping and how does it relate to memory management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is segmentation in memory management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between segmentation and paging?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a segment table and what information does it contain?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a base and limit register pair used for in memory protection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memory protection and how does the OS enforce it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is overlay in the context of older memory management schemes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is buddy system memory allocation and how does it work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a slab allocator and where is it used in operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a heap and a stack in process memory layout?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the typical memory layout of a process (text, data, heap, stack segments)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static memory allocation and dynamic memory allocation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memory-mapped I/O and how does it differ from port-mapped I/O?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is copy-on-write and how is it used in process creation (e.g., after fork())?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memory compaction overhead and why is it costly?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is address space layout randomization (ASLR) and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a null pointer exception at the OS/hardware level, and how does the MMU detect invalid memory access?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of the translation lookaside buffer (TLB) in memory management?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What happens on a TLB miss and how does the OS/hardware handle it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is virtual memory and how does paging work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a page table and what information does each entry store?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a page and a frame?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is demand paging and how does it improve memory utilization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a page fault and how is it handled by the OS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the sequence of steps the OS takes to handle a page fault?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the effective access time formula in the context of paging and page faults?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain page replacement algorithms: FIFO, LRU, and Optimal."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between FIFO and LRU page replacement algorithms?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Belady's anomaly and which page replacement algorithm is affected by it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Clock (Second Chance) page replacement algorithm?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Least Frequently Used (LFU) and Most Frequently Used (MFU) page replacement algorithm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How is the Optimal page replacement algorithm implemented in practice, given it requires future knowledge?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is thrashing in operating systems and how is it prevented?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the working set model and how does it relate to thrashing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the page-fault frequency (PFF) strategy for controlling thrashing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a multi-level page table and why is it used for large address spaces?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an inverted page table and how does it differ from a traditional page table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hashed page table used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between pure demand paging and prepaging?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is copy-on-write in the context of virtual memory and forked processes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memory-mapped files and how do they relate to virtual memory?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is page size and what trade-offs are involved in choosing a larger vs smaller page size?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the impact of TLB reach on system performance with large memory-intensive applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is swap space and how is it used in virtual memory systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a hard page fault and a soft page fault?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the dirty bit in a page table entry used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the reference bit (accessed bit) used for in page replacement algorithms?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is huge pages (large pages) support in modern OS kernels and why is it beneficial?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is virtual address space and how does it enable process isolation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a file system and what are its main responsibilities?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a file and what attributes does the OS typically store about it (metadata)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a directory in a file system and how is it structured?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between single-level, two-level, and hierarchical directory structures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an inode in a Unix-based file system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What information does an inode typically store?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a hard link and a symbolic (soft) link?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens to a hard link and a symbolic link if the original file is deleted?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is file allocation and what are the different file allocation methods (contiguous, linked, indexed)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between contiguous and linked file allocation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is indexed allocation and how does it avoid the drawbacks of linked allocation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a multi-level indexed allocation scheme (like in Unix inodes with direct, indirect, double indirect, triple indirect blocks)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the File Allocation Table (FAT) file system and how does it manage file allocation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between FAT32, NTFS, and ext4 file systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a journaling file system and how does it improve reliability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between metadata journaling and full data journaling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is free space management in a file system, and what techniques are used (bitmap, linked list)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is file system fragmentation and how does defragmentation help?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between sequential access and direct (random) access to files?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a file control block (FCB) and how is it related to an inode?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is mounting a file system and how does the OS handle it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an absolute path and a relative path?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is access control in file systems, and how do permission bits (read/write/execute) work in Unix-like systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Access Control Lists (ACLs) and traditional Unix permission bits?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a regular file, a directory, and a special file (device file) in Unix?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is disk quota and how is it used to limit file system usage per user?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a distributed file system, and what problems does it solve compared to a local file system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between NFS (Network File System) and a local file system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a log-structured file system and how does it differ from traditional file systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous file writes, and how does it affect durability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is I/O management in an operating system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between programmed I/O, interrupt-driven I/O, and DMA (Direct Memory Access)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DMA and how does it reduce CPU overhead during I/O operations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is polling and how does it differ from interrupt-driven I/O?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a device controller and how does it interact with the OS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the I/O buffering technique and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is double buffering and how does it improve I/O performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is disk scheduling and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different disk scheduling algorithms (FCFS, SSTF, SCAN, C-SCAN, LOOK, C-LOOK)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Shortest Seek Time First (SSTF) disk scheduling algorithm?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SCAN and C-SCAN disk scheduling algorithms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between LOOK and SCAN disk scheduling algorithms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is seek time, rotational latency, and transfer time in disk I/O?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is disk fragmentation and how does it affect seek time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RAID and what are the common RAID levels (0, 1, 5, 6, 10)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RAID 0 and RAID 1 in terms of performance and redundancy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RAID 5 and how does it use parity for fault tolerance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an HDD and an SSD, and how does disk scheduling differ for each?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is disk formatting and what is the difference between low-level and high-level formatting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a bad block/sector and how does the OS or disk controller handle it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the boot sector/Master Boot Record (MBR) and its role in disk-based booting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between MBR and GPT partitioning schemes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a device driver interface and how does the OS abstract different hardware devices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is asynchronous I/O and how does it benefit application performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the I/O scheduler's role in the Linux kernel (e.g., CFQ, Deadline, NOOP schedulers)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a character device vs a block device in Unix-like systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memory-mapped I/O at the hardware level, and how does the OS support it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous device communication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a spooler and how is it used for managing print jobs or similar sequential devices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of interrupt handlers/ISR (Interrupt Service Routines) in I/O operations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a distributed operating system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a distributed OS and a network OS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is mutual exclusion in a distributed system, and how does it differ from single-machine synchronization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Lamport's logical clock algorithm used for in distributed systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between logical clocks and vector clocks in distributed systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is distributed deadlock detection and how does timeout-based detection work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a remote procedure call (RPC) and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RPC and remote method invocation (RMI)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is load balancing in a distributed operating system context?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is process migration in distributed systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is OS-level security and what are the main threats an OS needs to protect against?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the principle of least privilege in the context of OS security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between authentication and authorization at the OS level?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a buffer overflow attack and how can the OS help mitigate it (e.g., stack canaries, ASLR, DEP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Data Execution Prevention (DEP) / NX bit and how does it prevent code injection attacks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a rootkit and how does it compromise OS-level security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is sandboxing and how does the OS use it to isolate untrusted processes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is access control and what models exist (DAC, MAC, RBAC) at the OS level?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Trusted Computing Base (TCB) in operating system security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between capability-based and access-control-list-based security models?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a trap and an interrupt?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a system call table and how does the kernel use it to dispatch system calls?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between blocking and non-blocking system calls?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of the loader in an operating system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static and dynamic loading of libraries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a light-weight process (LWP) and a traditional heavy-weight process?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CPU utilization and how is it maximized by an operating system scheduler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between batch processing systems and interactive systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a real-time constraint and how does an RTOS guarantee it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is jitter in the context of real-time operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hard real-time and firm real-time systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the boot loader (e.g., GRUB) and its role in loading the OS kernel?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a live OS and an installed OS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a shell script and how does it interact with the OS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the environment variable and how does the OS use it for process configuration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an absolute and relative process priority?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the nice value in Unix/Linux systems and how does it affect scheduling priority?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cgroups in Linux and how is it used for resource management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Linux namespaces and how do they enable containerization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do cgroups and namespaces together enable Docker-style containerization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is copy-on-write file systems (like OverlayFS) used for in container images?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between preemptible and non-preemptible kernel code?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is kernel panic and what typically causes it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a watchdog timer and how is it used in operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is power management in modern operating systems (e.g., sleep, hibernate states)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hibernate and sleep/suspend power states?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is NUMA (Non-Uniform Memory Access) and how does it affect OS scheduling decisions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does an OS scheduler account for NUMA architecture when placing processes and threads?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a kernel module and how does it differ from a statically compiled kernel feature?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between monolithic and modular kernel design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an application software and system software?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a bootstrap loader?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a foreground process and a background process?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the command line interpreter and what role does it play in an OS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an operating system and a kernel?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache memory and how does the OS/hardware use it to speed up access?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the principle of locality (temporal and spatial) and why does it matter for caching and paging?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is write-through vs write-back caching policy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between L1, L2, and L3 cache in modern CPUs, and how does the OS interact with them?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache coherence and why does it matter in multiprocessor systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the MESI protocol and how does it maintain cache coherence across multiple cores?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a superscalar processor and how does it affect OS scheduling considerations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is hyper-threading (simultaneous multithreading) and how does the OS scheduler treat hyper-threaded cores?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between symmetric multiprocessing (SMP) and asymmetric multiprocessing (AMP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of an OS in supporting multicore processors efficiently?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a system boot sequence from power-on to a fully loaded OS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between cold boot and warm boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dual booting and how does a boot loader manage multiple operating systems on one machine?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a physical machine and a virtual machine from an OS perspective?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is para-virtualization and how does it differ from full virtualization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of a hypervisor in resource allocation between virtual machines?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is live migration of virtual machines and what OS-level features enable it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static priority and dynamic priority scheduling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a scheduler activation and how does it relate to the many-to-many threading model?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between kernel preemption points and user-space preemption in real-time kernels?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a soft interrupt (softirq) and a hardware interrupt in the Linux kernel?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a tasklet in the Linux kernel and how is it different from a softirq?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is bottom-half processing in interrupt handling, and why is it separated from the top-half?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between polling-based and interrupt-driven device drivers in terms of latency and CPU usage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of the Memory Management Unit in enforcing process isolation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between physical memory and virtual address space from a security perspective?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is buffer cache (page cache) in Unix-like operating systems and how does it speed up file I/O?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the page cache and the disk cache at the hardware controller level?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is fsync() and why is it needed even when using buffered I/O?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a hard mount and a soft mount in NFS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous replication and asynchronous replication in distributed file systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is consensus in distributed systems, and how does it relate to distributed OS design (e.g., Paxos, Raft)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Byzantine Generals Problem and why is it relevant to distributed operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CAP theorem and how does it apply to distributed file systems and databases run on an OS cluster?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a heartbeat mechanism used for in distributed/clustered operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is failover and how is it implemented in clustered OS environments?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between active-active and active-passive clustering?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of a resource manager in cluster-based operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical scaling and horizontal scaling from an OS resource perspective?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a checkpoint in the context of process recovery after a failure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is rollback recovery and how is it used in distributed and fault-tolerant systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between stateful and stateless recovery mechanisms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memory leak detection at the OS level, and what tools does the OS provide to diagnose it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the out-of-memory (OOM) killer in Linux and how does it decide which process to terminate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is overcommitting memory in an OS, and what are its risks and benefits?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between resident memory and virtual memory usage as reported by OS monitoring tools?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is process affinity binding and how can it improve cache performance on multicore systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical partitioning of workloads across cores and horizontal load distribution?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is I/O wait time and how does it affect overall system throughput?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a monolithic file system driver and a modular/pluggable file system architecture (e.g., VFS in Linux)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Virtual File System (VFS) layer in Unix-like operating systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between kernel space and user space memory, and why is this separation enforced?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a page cache eviction policy and how does it interact with application-level caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between demand-zero pages and pages loaded from a backing file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a shared library and how does the OS avoid loading multiple copies into memory for different processes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is position-independent code (PIC) and why is it important for shared libraries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static executable and dynamically linked executable in terms of memory footprint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of the exec system call replacing a process image?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between wait() and waitpid() system calls in process management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between kill() sending a termination signal and a process actually terminating?"
+  }
 ]
