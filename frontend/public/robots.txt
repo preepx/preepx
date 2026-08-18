@@ -1,0 +1,7 @@
+# robots.txt for Preepx
+# https://www.preepx.in
+
+User-agent: *
+Allow: /
+
+Sitemap: https://www.preepx.in/sitemap.xml

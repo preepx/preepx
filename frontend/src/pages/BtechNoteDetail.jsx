@@ -10,6 +10,7 @@ import Loader from "@/components/Loader";
 import '@/styles/BtechNoteDetail.css';
 
 
+
 function BtechNoteDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
