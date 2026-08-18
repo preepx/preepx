@@ -1,13 +1,1174 @@
 [
-  { "difficulty": "Easy", "question": "What is PostgreSQL and how does it differ from MySQL?" },
-  { "difficulty": "Easy", "question": "What is the difference between SQL and PostgreSQL?" },
-  { "difficulty": "Medium", "question": "What are PostgreSQL schemas and how do they differ from databases?" },
-  { "difficulty": "Medium", "question": "What are CTEs (Common Table Expressions) in PostgreSQL?" },
-  { "difficulty": "Medium", "question": "What is a window function in PostgreSQL?" },
-  { "difficulty": "Medium", "question": "What is JSONB in PostgreSQL and how is it different from JSON?" },
-  { "difficulty": "Medium", "question": "What is the difference between INNER JOIN and OUTER JOIN in PostgreSQL?" },
-  { "difficulty": "Hard", "question": "Explain MVCC (Multi-Version Concurrency Control) in PostgreSQL." },
-  { "difficulty": "Hard", "question": "What are table partitions in PostgreSQL?" },
-  { "difficulty": "Hard", "question": "How do you create and use full-text search in PostgreSQL?" },
-  { "difficulty": "Hard", "question": "What are GiST and GIN indexes in PostgreSQL?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is PostgreSQL and how does it differ from MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between SQL and PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an RDBMS and is PostgreSQL one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you install PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the psql command-line tool used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a PostgreSQL database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a PostgreSQL table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a database in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a table in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default port used by PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the postgres superuser?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you connect to a PostgreSQL database from the command line?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SELECT statement used for in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DELETE and TRUNCATE in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DELETE and DROP in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SERIAL data type in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between SERIAL and INTEGER?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the BIGSERIAL data type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the basic data types supported in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between CHAR, VARCHAR, and TEXT in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the BOOLEAN data type in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the NUMERIC data type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between NUMERIC and FLOAT?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DATE data type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the TIMESTAMP data type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between TIMESTAMP and TIMESTAMPTZ?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the PRIMARY KEY constraint in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a FOREIGN KEY constraint in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a UNIQUE constraint in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a NOT NULL constraint in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a CHECK constraint in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DEFAULT constraint used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the WHERE clause used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ORDER BY clause used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the GROUP BY clause used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the LIMIT clause used for in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the OFFSET clause used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DISTINCT keyword used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between LIMIT and FETCH in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ALTER TABLE statement used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add a column to an existing table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you drop a column from a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you rename a table in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you rename a column in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between COMMIT and ROLLBACK?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the BEGIN statement in a transaction?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are aggregate functions in PostgreSQL? Give examples."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the COUNT() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SUM(), AVG(), MIN(), and MAX() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CONCAT() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the || operator used for in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the LIKE operator used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ILIKE operator and how does it differ from LIKE?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the BETWEEN operator used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the IN operator used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the IS NULL condition used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a NULL value in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the COALESCE() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between COALESCE and NULLIF?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CASE expression used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an alias in a SQL query and how do you use AS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the UNION operator used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between UNION and UNION ALL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a view in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a view in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the pgAdmin tool used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the \\d command used for in psql?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the \\l command used for in psql?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the \\dt command used for in psql?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you list all users/roles in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a PostgreSQL role?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a user and a role in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you grant privileges to a user in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the REVOKE statement used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the pg_dump utility?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the pg_restore utility?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between pg_dump's plain SQL format and custom format?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ANALYZE command's basic purpose for a beginner to understand?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check the version of PostgreSQL you are running?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a primary key and a unique key in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the RETURNING keyword used for at a basic level?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you insert multiple rows in a single INSERT statement?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between INSERT and UPDATE in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a comment in SQL and how do you write one in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between single quotes and double quotes in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CURRENT_DATE function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CURRENT_TIMESTAMP function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the NOW() function used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you calculate the difference between two dates in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the INTERVAL data type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the UUID data type used for in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you generate a UUID in PostgreSQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the pgcrypto extension used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a PostgreSQL extension and how do you install one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CREATE EXTENSION command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local variable and a table column in a query context?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the HAVING clause used for and how does it differ from WHERE?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are PostgreSQL schemas and how do they differ from databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are CTEs (Common Table Expressions) in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a window function in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is JSONB in PostgreSQL and how is it different from JSON?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between INNER JOIN and OUTER JOIN in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the public schema in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a custom schema in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the search_path setting used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a recursive CTE and when would you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a CTE and a subquery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between WITH and WITH RECURSIVE?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the common window functions like ROW_NUMBER, RANK, and DENSE_RANK used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RANK() and DENSE_RANK()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the PARTITION BY clause used for in window functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an aggregate function and a window function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the LAG() and LEAD() window function used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the OVER() clause used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you query a JSONB column in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the -> and ->> operator used for with JSON/JSONB columns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the @> operator used for with JSONB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between JSON and JSONB in terms of storage and performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a GIN index on a JSONB column?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the jsonb_set() function used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the LEFT JOIN used for and how does it differ from INNER JOIN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a RIGHT JOIN and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a FULL OUTER JOIN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CROSS JOIN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a self join and give an example use case?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a LATERAL JOIN in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the EXPLAIN statement used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EXPLAIN and EXPLAIN ANALYZE?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an index in PostgreSQL and why is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the default index type in PostgreSQL (B-tree)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a composite index and when should you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a partial index in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a unique index in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a unique constraint and a unique index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an expression index in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ANALYZE command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the VACUUM command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between VACUUM and VACUUM FULL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is autovacuum in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is table bloat and how does VACUUM help address it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a sequence in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use the nextval() and currval() functions with sequences?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SERIAL and using a sequence manually?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the IDENTITY column feature introduced in PostgreSQL 10?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between GENERATED ALWAYS AS IDENTITY and SERIAL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a stored procedure in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a function and a procedure in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is PL/pgSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a simple PL/pgSQL function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a trigger in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a BEFORE and AFTER trigger?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a trigger function in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the RETURNING clause used for in INSERT/UPDATE/DELETE statements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the UPSERT operation and how is it implemented using ON CONFLICT?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ON CONFLICT DO NOTHING and ON CONFLICT DO UPDATE?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a materialized view in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a regular view and a materialized view?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you refresh a materialized view?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ARRAY data type in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you query an array column in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the unnest() function used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a normal table and a temporary table in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is table inheritance in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the EXTRACT() function used for with dates?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the AGE() function used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between TO_CHAR and CAST for formatting values?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a domain type in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a composite type in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an enumerated type (ENUM) in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an ENUM type and a CHECK constraint restricting values?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you perform a full text search using to_tsvector and to_tsquery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the tsvector data type?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a stored generated column and a computed value at query time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a GENERATED ALWAYS AS (STORED) column and a regular view column?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EXPLAIN's default output and EXPLAIN (BUFFERS) output?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the FILTER clause and a CASE expression inside an aggregate function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the DISTINCT ON clause used for in PostgreSQL, and how is it different from standard DISTINCT?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an exclusion constraint and a unique constraint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the tsrange or daterange type used for in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a range type in PostgreSQL and what operators does it support?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you prevent overlapping date ranges using an exclusion constraint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a foreign key ON DELETE CASCADE and ON DELETE RESTRICT?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a deferrable constraint in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between INITIALLY DEFERRED and INITIALLY IMMEDIATE for a constraint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the LISTEN/NOTIFY feature in PostgreSQL used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use LISTEN/NOTIFY to implement simple pub/sub messaging between application instances?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a cursor in PostgreSQL and how do you use one within a PL/pgSQL function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a cursor and simply fetching all rows into a result set?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dollar quoting ($$ ... $$) used for in PostgreSQL function definitions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a SQL function and a PL/pgSQL function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between VOLATILE, STABLE, and IMMUTABLE function volatility categories?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why does function volatility matter for query planning and index usage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the pg_stat_activity view used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the pg_stat_statements extension used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain MVCC (Multi-Version Concurrency Control) in PostgreSQL."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are table partitions in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you create and use full-text search in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are GiST and GIN indexes in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does PostgreSQL's MVCC handle concurrent reads and writes without blocking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a transaction ID (XID) wraparound issue and how does PostgreSQL prevent it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the xmin and xmax system columns in MVCC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a dead tuple and a live tuple in PostgreSQL's storage model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does VACUUM reclaim space from dead tuples, and why can't PostgreSQL do this automatically on every update?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the four transaction isolation levels PostgreSQL supports?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the default isolation level in PostgreSQL and how does it differ from the SQL standard's default?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a serialization failure and how do you handle it in the SERIALIZABLE isolation level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Serializable Snapshot Isolation (SSI) and how does PostgreSQL implement it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between RANGE, LIST, and HASH partitioning in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does partition pruning work in PostgreSQL and how does it improve query performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the limitations of table partitioning in PostgreSQL (e.g., unique constraints across partitions)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you attach and detach partitions from a partitioned table without downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between declarative partitioning (PostgreSQL 10+) and inheritance-based partitioning?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a GIN index and when would you use it over a B-tree index?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a GiST index and what kinds of data types is it suited for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between GIN and GiST indexes in terms of build time and query performance trade-offs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a SP-GiST index and when is it useful?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a BRIN index and when would you use it over a B-tree index?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between BRIN and B-tree indexes for very large, naturally ordered tables?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a covering index in PostgreSQL and how does the INCLUDE clause help create one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is index-only scan and what conditions must be met for PostgreSQL to use one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the visibility map and how does it enable index-only scans?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the query planner/optimizer in PostgreSQL and how does it choose an execution plan?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are planner statistics and how does ANALYZE collect them?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a sequential scan, an index scan, and a bitmap index scan?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "When does the PostgreSQL planner prefer a sequential scan over an index scan even when an index exists?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a nested loop join, a hash join, and a merge join, and how does the planner choose between them?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the work_mem configuration parameter and how does it affect sort and hash operations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the shared_buffers configuration parameter and how do you tune it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the effective_cache_size parameter used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between logical replication and streaming (physical) replication in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does streaming replication work between a primary and a standby server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a replication slot and why is it important for preventing WAL loss?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Write-Ahead Log (WAL) and why is it central to PostgreSQL's durability guarantees?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous and asynchronous replication in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a hot standby in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a hot standby and a warm standby?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you perform a failover in a PostgreSQL streaming replication setup?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of tools like Patroni or repmgr in managing PostgreSQL high availability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is logical decoding and how does logical replication use it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a publication and a subscription in PostgreSQL logical replication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the limitations of logical replication compared to physical replication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a sharding strategy for PostgreSQL using extensions like Citus?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between horizontal sharding and table partitioning in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the foreign data wrapper (FDW) feature and how does postgres_fdw enable querying remote databases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use FDWs to implement a federated query across multiple PostgreSQL instances?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a deadlock in PostgreSQL and how does the database detect and resolve it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you diagnose a deadlock using PostgreSQL's log output?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between row-level locks and table-level locks in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is an advisory lock and when would you use one instead of a table-level lock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between SELECT ... FOR UPDATE and SELECT ... FOR SHARE?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the SKIP LOCKED clause and how is it used to implement a job queue?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a highly concurrent job queue table in PostgreSQL using FOR UPDATE SKIP LOCKED?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between optimistic locking and pessimistic locking, and how would you implement optimistic locking in PostgreSQL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does PostgreSQL handle long-running transactions in terms of their impact on VACUUM and table bloat?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the idle_in_transaction_session_timeout setting used for and why is it important in production?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you tune autovacuum settings for a table with extremely high update/delete churn?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between autovacuum_vacuum_scale_factor and autovacuum_vacuum_threshold?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a schema migration strategy for a large PostgreSQL table with minimal locking (e.g., adding a NOT NULL column)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between ALTER TABLE ADD COLUMN with a default value in PostgreSQL 11+ versus earlier versions in terms of table rewrites?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you perform an online index creation without locking writes, using CREATE INDEX CONCURRENTLY?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the risks and limitations of CREATE INDEX CONCURRENTLY?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement point-in-time recovery (PITR) in PostgreSQL using WAL archiving?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a base backup and continuous WAL archiving for disaster recovery?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a multi-tenant PostgreSQL architecture comparing schema-per-tenant versus row-level tenant_id with Row-Level Security (RLS)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Row-Level Security (RLS) in PostgreSQL and how do you implement policies for it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a permissive and a restrictive RLS policy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you optimize a full-text search system in PostgreSQL for relevance ranking using ts_rank?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between plain to_tsquery, plainto_tsquery, and websearch_to_tsquery?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you combine trigram similarity search (pg_trgm) with full-text search for fuzzy matching?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the pg_trgm extension and how does it enable fast LIKE/ILIKE queries using GIN or GiST indexes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the similarity() and word_similarity() functions in pg_trgm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you diagnose and resolve a case of severe query plan regression after a PostgreSQL version upgrade?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between statistics target (default_statistics_target) and how increasing it affects planner accuracy versus ANALYZE cost?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a connection pooling strategy for PostgreSQL using PgBouncer, and what are the differences between session, transaction, and statement pooling modes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between PgBouncer's transaction pooling mode and PostgreSQL features that don't work well with it (e.g., prepared statements, session-level settings)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement zero-downtime major version upgrades for a large PostgreSQL cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between pg_upgrade in link mode versus copy mode, and what are the trade-offs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a backup and disaster recovery strategy combining base backups, WAL archiving, and a standby cluster across regions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you troubleshoot a sudden spike in transaction ID (XID) consumption threatening wraparound in a busy production database?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a hot standby that can serve read queries and a purely archival replica used only for failover?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement multi-master or active-active replication in PostgreSQL, given it lacks native support, using tools like BDR or Citus?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the conflict resolution challenges in a multi-master PostgreSQL setup, and how do different tools address last-writer-wins versus custom merge logic?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use Citus to distribute a large multi-tenant PostgreSQL database across multiple worker nodes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a reference table and a distributed table in Citus?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you optimize JSONB storage and indexing for a table where documents have highly variable schemas across millions of rows?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is TOAST in PostgreSQL and how does it handle large field values that exceed the page size?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does TOAST compression affect query performance for large JSONB or TEXT columns?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between EXTERNAL, EXTENDED, and PLAIN storage strategies for TOASTable columns?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an efficient audit logging system in PostgreSQL using triggers and a separate history table, balancing write overhead and query performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between statement-level triggers and row-level triggers, and when would you use each?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a soft-delete pattern in PostgreSQL while keeping query performance acceptable using partial indexes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a time-series data model in PostgreSQL, comparing native partitioning against the TimescaleDB extension?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between continuous aggregates in TimescaleDB and materialized views in vanilla PostgreSQL for rollup queries?"
+  }
 ]
