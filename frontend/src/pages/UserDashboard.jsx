@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Video, FileText, Trophy, BarChart3, Award, Flame, PlayCircle,
-  Wallet, BookOpen, Target, TrendingUp, ChevronRight, Sparkles,
+  Wallet, BookOpen, Target, TrendingUp, ChevronLeft, ChevronRight, Sparkles,
   ClipboardCheck, Zap, Code, Briefcase
 } from "lucide-react";
 import { getProfile, getAnalytics } from "@/services/userAPI";
@@ -41,20 +41,64 @@ function UserDashboard() {
   const [loading, setLoading] = useState(true);
   const [showComingSoon, setShowComingSoon] = useState(false);
   const [currentBanner, setCurrentBanner] = useState(0);
+  const [isBannerHovered, setIsBannerHovered] = useState(false);
+  const touchStartX = useRef(null);
   const { balance } = useWallet();
 
   const banners = [
-    "/dsbanner/dashboard_banner.png",
-    "/dsbanner/interview_banner.png",
-    "/dsbanner/onjective_banner.png"
+    {
+      webSrc: "https://ik.imagekit.io/cjnon47kr/onjective_banner.png",
+      mobileSrc: "https://ik.imagekit.io/cjnon47kr/objective.png",
+      alt: "Objective MCQ Exam",
+      link: "/objective-exam"
+    },
+    {
+      webSrc: "https://ik.imagekit.io/cjnon47kr/interview_Webbanner.png",
+      mobileSrc: "https://ik.imagekit.io/cjnon47kr/interview.png",
+      alt: "AI Mock Interview",
+      link: "/interview"
+    },
+    {
+      webSrc: "https://ik.imagekit.io/cjnon47kr/webCodingPractice.png",
+      mobileSrc: "https://ik.imagekit.io/cjnon47kr/Coding_challenge.png",
+      alt: "100 Days Coding Challenge",
+      link: "/100-days-challenge"
+    }
   ];
 
   useEffect(() => {
+    if (isBannerHovered) return;
     const interval = setInterval(() => {
       setCurrentBanner((prev) => (prev + 1) % banners.length);
-    }, 4000);
+    }, 4500);
     return () => clearInterval(interval);
-  }, [banners.length]);
+  }, [banners.length, isBannerHovered]);
+
+  const handlePrevBanner = (e) => {
+    e?.stopPropagation();
+    setCurrentBanner((prev) => (prev - 1 + banners.length) % banners.length);
+  };
+
+  const handleNextBanner = (e) => {
+    e?.stopPropagation();
+    setCurrentBanner((prev) => (prev + 1) % banners.length);
+  };
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    if (diff > 40) {
+      handleNextBanner();
+    } else if (diff < -40) {
+      handlePrevBanner();
+    }
+    touchStartX.current = null;
+  };
 
   const refreshData = () => {
     Promise.all([
@@ -119,39 +163,46 @@ function UserDashboard() {
 
 
       {/* BANNER SLIDER */}
-      <div className="ud-banner-slider-wrap">
-        {banners.map((src, index) => (
-          <img
+      <div
+        className="ud-banner-slider-wrap"
+        onMouseEnter={() => setIsBannerHovered(true)}
+        onMouseLeave={() => setIsBannerHovered(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
+        {banners.map((item, index) => (
+          <div
             key={index}
-            src={src}
-            alt={`Banner ${index + 1}`}
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: index === 0 ? 'top' : 'center 50%',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              opacity: currentBanner === index ? 1 : 0,
-              transition: 'opacity 0.8s ease-in-out'
-            }}
-          />
+            className={`ud-banner-slide ${currentBanner === index ? "active" : ""}`}
+            onClick={() => item.link && navigate(item.link)}
+            role="button"
+            tabIndex={0}
+            aria-label={item.alt}
+          >
+            <picture className="ud-banner-picture">
+              <source media="(max-width: 768px)" srcSet={item.mobileSrc} />
+              <img
+                src={item.webSrc}
+                alt={item.alt}
+                className="ud-banner-img"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            </picture>
+          </div>
         ))}
+
         {/* Slider Dots */}
-        <div style={{ position: 'absolute', bottom: '16px', left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: '8px' }}>
+        <div className="ud-banner-dots">
           {banners.map((_, index) => (
-            <div
+            <button
               key={index}
-              onClick={() => setCurrentBanner(index)}
-              style={{
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                background: currentBanner === index ? '#818cf8' : 'rgba(255, 255, 255, 0.3)',
-                cursor: 'pointer',
-                transition: 'all 0.3s'
+              type="button"
+              className={`ud-banner-dot ${currentBanner === index ? "active" : ""}`}
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentBanner(index);
               }}
+              aria-label={`Go to banner ${index + 1}`}
             />
           ))}
         </div>

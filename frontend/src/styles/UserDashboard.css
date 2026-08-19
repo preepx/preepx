@@ -25,17 +25,118 @@
   margin: 0 0 24px 0;
   position: relative;
   overflow: hidden;
-  border-radius: 24px;
-  height: 280px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  width: 100%;
+  aspect-ratio: 2168 / 740;
+  background: #060913;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+  user-select: none;
+  touch-action: pan-y;
+  line-height: 0;
+}
+
+.ud-banner-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.ud-banner-slide.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.ud-banner-picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+  line-height: 0;
+}
+
+.ud-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
+
+/* Dots indicator */
+.ud-banner-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  line-height: 1;
+}
+
+.ud-banner-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: none;
+  padding: 0;
+}
+
+.ud-banner-dot:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.ud-banner-dot.active {
+  width: 24px;
+  border-radius: 6px;
+  background: #6366f1;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
 }
 
 @media (max-width: 768px) {
   .ud-banner-slider-wrap {
-    height: 160px;
-    border-radius: 16px;
-    margin: 0 0 16px 0;
+    height: auto;
+    aspect-ratio: 1730 / 910;
+    border-radius: 14px;
+    margin: 0 0 18px 0;
+  }
+
+  .ud-banner-img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .ud-banner-dots {
+    bottom: 8px;
+    gap: 6px;
+    padding: 3px 8px;
+  }
+
+  .ud-banner-dot {
+    width: 6px;
+    height: 6px;
+  }
+
+  .ud-banner-dot.active {
+    width: 16px;
   }
 }
 
