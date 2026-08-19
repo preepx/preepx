@@ -118,7 +118,7 @@
   position: relative;
   margin: 0;
   width: 100%;
-  aspect-ratio: 1600 / 440;
+  height: auto;
   border-radius: var(--c100-radius-xl);
   overflow: hidden;
   z-index: 1;
@@ -160,7 +160,7 @@
 
 .c100-banner-picture {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
   line-height: 0;
   pointer-events: none;
@@ -168,10 +168,8 @@
 
 .c100-banner-img {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
-  object-fit: cover;
-  object-position: center;
   image-rendering: -webkit-optimize-contrast;
   user-select: none;
   -webkit-user-select: none;
@@ -1508,10 +1506,6 @@
 
 /* Tablet (<= 1024px) */
 @media (max-width: 1024px) {
-  .c100-banner-wrap {
-    aspect-ratio: 1024 / 500;
-  }
-
   .c100-stats-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1533,7 +1527,6 @@
   }
 
   .c100-banner-wrap {
-    aspect-ratio: 1024 / 500;
     border-radius: 16px;
     margin: 0;
   }
@@ -1607,10 +1600,9 @@
   }
 }
 
-/* Small Mobile (<= 480px) */
-@media (max-width: 480px) {
+/* Mobile (< 600px) */
+@media (max-width: 600px) {
   .c100-banner-wrap {
-    aspect-ratio: 800 / 420;
     border-radius: 12px;
   }
 
