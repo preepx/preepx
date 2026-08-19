@@ -1,0 +1,802 @@
+[
+    {
+        "difficulty": "Easy",
+        "question": "What is Microsoft Azure and what is it used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between Azure and other cloud providers like AWS or GCP?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure subscription?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure resource group?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of the Azure Portal?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure CLI and what is it used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure PowerShell and how does it differ from Azure CLI?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure region?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure availability zone?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a region and an availability zone in Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Resource Manager (ARM)?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an ARM template?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a virtual machine (VM) in Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure App Service used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Blob Storage?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between Blob, File, Queue, and Table storage in Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure SQL Database?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between Azure SQL Database and SQL Server on a VM?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Virtual Network (VNet)?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a subnet in Azure networking?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a Network Security Group (NSG) in Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Active Directory (Azure AD)?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between Azure AD and on-premises Active Directory?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Role-Based Access Control (RBAC) in Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure Service Principal?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Key Vault used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Monitor used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Storage Account?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between hot, cool, and archive storage tiers in Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Functions and when would you use it?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a serverless computing model and how does Azure support it?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Logic Apps used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Container Instances (ACI)?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Kubernetes Service (AKS)?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a container and how does Azure support containerization?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure DevOps used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between Azure DevOps and GitHub?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a CI/CD pipeline in the context of Azure DevOps?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Load Balancer used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a public IP and a private IP in Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Traffic Manager?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Application Gateway used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Backup?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Site Recovery used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between backup and disaster recovery in Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure Marketplace?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Cost Management used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between PaaS, IaaS, and SaaS, and how does Azure support each?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Resource Manager's tagging feature used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the Azure Well-Architected Framework?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Azure Virtual Machines and Azure App Service for hosting applications?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is an availability set in Azure and how does it differ from an availability zone?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Scale Set and how is it used for autoscaling?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between vertical scaling and horizontal scaling in Azure?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Load Balancer versus Azure Application Gateway, and when would you use each?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a Standard Load Balancer and a Basic Load Balancer in Azure?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Front Door and how does it differ from Traffic Manager?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is peering in Azure Virtual Networks?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between VNet peering and VPN Gateway connections?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure ExpressRoute and when would you use it over a site-to-site VPN?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a Network Security Group rule and how is priority determined?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between an NSG and an Azure Firewall?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Firewall and what are its key capabilities?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Bastion and why is it used?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Azure AD B2B and Azure AD B2C?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Conditional Access in Azure AD?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Multi-Factor Authentication (MFA) in Azure AD and how is it configured?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure AD Privileged Identity Management (PIM)?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a Managed Identity in Azure and why is it useful?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a system-assigned and a user-assigned managed identity?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Policy and how does it differ from RBAC?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is an Azure Blueprint and how does it relate to Azure Policy?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Resource Locks used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between CanNotDelete and ReadOnly resource locks in Azure?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Monitor Log Analytics used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Kusto Query Language (KQL) and where is it used in Azure?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Application Insights used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Azure Monitor metrics and logs?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is an Azure Alert Rule and how is it configured?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Service Bus and what is it used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Azure Service Bus and Azure Storage Queues?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Event Grid and how does it differ from Event Hubs?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Event Hubs used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Event Hubs, Service Bus, and Event Grid?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Data Factory and what is it used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Azure Data Factory and Azure Synapse Analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Databricks and how is it used for big data processing?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Cosmos DB and what makes it different from Azure SQL Database?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between consistency levels in Azure Cosmos DB?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Redis Cache used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a deployment slot in Azure App Service?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between staging and production deployment slots in App Service?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure API Management used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Azure API Management and Azure Application Gateway?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Infrastructure as Code (IaC) and how does Azure support it?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between ARM templates and Terraform for provisioning Azure resources?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Bicep and how does it relate to ARM templates?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a Shared Access Signature (SAS) in Azure Storage?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a SAS token and a storage account key?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is geo-replication in Azure Storage?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how Azure Availability Zones provide fault tolerance for a multi-tier application."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a highly available and disaster-resilient architecture using Azure services?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain the difference between active-active and active-passive disaster recovery configurations in Azure."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a hub-and-spoke network topology in Azure and what are its benefits?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how Azure ExpressRoute achieves private connectivity and how it differs from a public internet-based VPN."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you secure a multi-tenant application built on Azure App Service?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how Azure AD Conditional Access policies can be layered to enforce zero-trust security."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a CI/CD pipeline in Azure DevOps for a microservices application deployed to AKS?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how Azure Kubernetes Service handles pod autoscaling and cluster autoscaling."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you troubleshoot a pod that is stuck in CrashLoopBackOff state in AKS?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain the difference between Azure Cosmos DB's partition key design strategies and their impact on performance."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you optimize costs for a large-scale Azure environment with multiple subscriptions?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how Azure Policy can be used to enforce compliance across an organization with multiple subscriptions using Management Groups."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a multi-region active-active architecture using Azure Cosmos DB and Azure Front Door?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how Azure Service Bus implements message sessions and how they support ordered processing."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design an event-driven architecture using Azure Event Grid and Azure Functions?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain the difference between Azure Data Lake Storage Gen2 and traditional Blob Storage for big data workloads."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you implement a secure hybrid connectivity solution between on-premises data centers and Azure?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how Azure Private Link improves security for accessing PaaS services like Azure SQL Database."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a zero-downtime deployment strategy for a stateful application on Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the Azure free tier and what services does it typically include?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure Resource Manager (ARM) deployment?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of the az login command in Azure CLI?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure tenant?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between an Azure tenant and an Azure subscription?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Advisor used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Service Health used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the Azure Status page used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure Virtual Machine Scale Set at a basic level?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a Network Interface Card (NIC) in an Azure VM?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure Disk and what types of disks are available?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between managed disks and unmanaged disks in Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Container Registry (ACR) used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a Dockerfile in the context of deploying to Azure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure App Service Plan and what does it determine?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a Free, Basic, Standard, and Premium App Service Plan tier?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Static Web Apps used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Notification Hubs used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Cognitive Services in simple terms?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Machine Learning used for at a high level?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Azure Blob Storage lifecycle management policies and manual tiering?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of soft delete in Azure Blob Storage?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is versioning in Azure Blob Storage and how does it help with data protection?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Locally Redundant Storage (LRS) and Geo-Redundant Storage (GRS)?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Zone-Redundant Storage (ZRS) and when would you choose it over LRS?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of Azure Private Endpoint compared to a Service Endpoint?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a Service Endpoint and Private Link in Azure networking?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Automation and what is it commonly used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is an Azure Runbook in the context of Azure Automation?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of Azure Update Management?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Sentinel and what is it used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Azure Sentinel and Azure Security Center (Defender for Cloud)?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Microsoft Defender for Cloud used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the Secure Score in Microsoft Defender for Cloud?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of diagnostic settings in Azure Monitor?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between activity logs and resource logs in Azure Monitor?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Log Analytics Workspace and how is data ingested into it?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a workbook in Azure Monitor?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Chaos Studio used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of Azure Resource Graph?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would implement a landing zone architecture for a large enterprise adopting Azure."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design network segmentation for a regulated industry workload in Azure?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how Azure Cosmos DB's change feed can be used to build event-driven data pipelines."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you implement blue-green deployments for an AKS-hosted application using Azure DevOps?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a cost governance strategy across multiple Azure subscriptions using Management Groups and budgets."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you troubleshoot intermittent connectivity issues between a VNet-peered application and an on-premises network via ExpressRoute?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a data encryption strategy covering data at rest, in transit, and in use within Azure."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you implement a self-healing infrastructure pattern using Azure Monitor alerts and Azure Automation?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a multi-subscription CI/CD strategy for promoting infrastructure changes from dev to production."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a solution for near-real-time analytics on streaming IoT data using Azure services?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure Resource ID and what information does it contain?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of the Azure Cloud Shell?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a public cloud and a private cloud, and where does Azure fit?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Stack and why would an organization use it?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Arc and what is it used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a management group in Azure's resource hierarchy?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a resource group and a management group?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure billing account?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of an Azure Reservation for cost savings?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure Hybrid Benefit and how does it reduce licensing costs?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of Azure Bicep modules for reusable infrastructure code?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between imperative and declarative deployment approaches in Azure?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is idempotency in the context of ARM template deployments?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a deployment stack in Azure and how does it help manage resource lifecycle?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of parameter files in ARM template deployments?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between incremental and complete deployment modes in ARM templates?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Azure Verified Modules and why are they useful in Bicep deployments?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of using tags for cost allocation across teams in Azure?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Azure Cost Management budgets and cost alerts?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of Azure Pricing Calculator when planning a deployment?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of Azure Support Plans and how do they differ?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Azure Managed Application?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a first-party and third-party Azure Marketplace offering?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of Azure Purview (Microsoft Purview) in data governance?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Data Explorer used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of Azure IoT Hub?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between Azure IoT Hub and Azure IoT Central?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure SignalR Service used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Azure Communication Services used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of Azure Batch for large-scale parallel workloads?"
+    }
+]
