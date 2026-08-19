@@ -1,0 +1,2002 @@
+[
+    {
+        "difficulty": "Easy",
+        "question": "What is data analysis and why is it important for businesses?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between data analysis and data analytics?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the role of a data analyst in an organization?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between qualitative and quantitative data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between structured and unstructured data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a dataset?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a variable and an observation in a dataset?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is data cleaning and why is it necessary?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What are missing values and how do they affect analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an outlier in a dataset?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a population and a sample in statistics?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the mean of a dataset?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the median of a dataset?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the mode of a dataset?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between mean, median, and mode?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is variance in statistics?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is standard deviation and what does it measure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between variance and standard deviation?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a percentile in statistics?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a data type and what are common data types used in analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between categorical and numerical data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between discrete and continuous data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a primary key in a dataset or database table?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a foreign key and why is it used in relational data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an Excel spreadsheet used for in data analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a pivot table in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the VLOOKUP function used for in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between VLOOKUP and HLOOKUP in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a conditional formatting feature in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of the SUMIF function in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between SUMIF and SUMIFS in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a chart in Excel and why is it used?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a bar chart and a line chart?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a pie chart used for in data visualization?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a histogram and when is it used?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a histogram and a bar chart?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a scatter plot used for in data analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a dashboard in the context of data analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a KPI (Key Performance Indicator)?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a metric and a KPI?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is SQL and why is it important for data analysts?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a database table?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a row and a column in a table?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the SELECT statement used for in SQL?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the WHERE clause used for in SQL?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between WHERE and HAVING in SQL?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the GROUP BY clause used for in SQL?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the ORDER BY clause used for in SQL?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a JOIN in SQL?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between INNER JOIN and LEFT JOIN in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is data normalization and why is it used in data preprocessing?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between normalization and standardization?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is data transformation and why is it necessary before analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is exploratory data analysis (EDA)?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What are the key steps involved in the data analysis process?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a correlation coefficient and what does it indicate?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between correlation and causation?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a confidence interval in statistics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a hypothesis test and how is it used in data analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the null hypothesis and the alternative hypothesis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a p-value and how is it interpreted?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Type I error and Type II error in hypothesis testing?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a Z-score and how is it used to detect outliers?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is skewness in a dataset?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is kurtosis and what does it measure?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a normal distribution and why is it important in statistics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the Central Limit Theorem and why is it important?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is A/B testing and how is it used in data analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a control group and a treatment group in A/B testing?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is statistical significance in the context of A/B testing?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is regression analysis and how is it used?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between simple linear regression and multiple linear regression?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the R-squared value in regression analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is multicollinearity and why is it a problem in regression models?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a moving average and how is it used in trend analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is cohort analysis and how is it used in business analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is funnel analysis and how is it used in a business context?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is customer segmentation and why is it useful for data analysts?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between descriptive, diagnostic, predictive, and prescriptive analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a data warehouse and how does it differ from a database?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is ETL (Extract, Transform, Load) in data analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between ETL and ELT?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a star schema in data warehousing?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a fact table and a dimension table in a data warehouse?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is data granularity and why does it matter in reporting?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a subquery and a CTE (common table expression) in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a window function in SQL and how is it used?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between RANK(), DENSE_RANK(), and ROW_NUMBER() in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a self-join and when would you use one?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between UNION and UNION ALL in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is data visualization best practice for choosing the right chart type?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between Tableau and Power BI for data visualization?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a slicer in Power BI or Excel and what is it used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is DAX in Power BI and what is it used for?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a calculated column and a measure in Power BI?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of using pandas in Python for data analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a DataFrame in pandas?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a Series and a DataFrame in pandas?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the groupby() function used for in pandas?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the merge() function in pandas?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a dashboard to track key business metrics for executive stakeholders?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you handle a dataset with a significant amount of missing or inconsistent data?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would approach detecting and treating outliers in a large dataset."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design an A/B test to measure the impact of a new feature on user engagement?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you determine the appropriate sample size for an A/B test?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would use cohort analysis to measure user retention over time."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you build a predictive model to forecast next quarter's sales using historical data?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain the trade-offs between using SQL versus Python/pandas for a large-scale data analysis task."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you optimize a slow-running SQL query on a large dataset?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a data pipeline to automate a recurring weekly report."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you validate the accuracy and reliability of a dataset before presenting insights to stakeholders?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would communicate a complex statistical finding to a non-technical audience."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach a situation where stakeholders disagree with your data-driven conclusions?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design an experiment to measure the causal impact of a marketing campaign."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you handle survivorship bias in a customer churn analysis?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would detect and correct for selection bias in a dataset."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you build a customer lifetime value (CLV) model using transactional data?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain the difference between leading and lagging indicators in a business analytics context."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a data governance framework to ensure data quality across an organization?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would use time series decomposition to analyze seasonality in sales data."
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a spreadsheet and a database?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a CSV file and why is it commonly used in data analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between CSV and Excel file formats?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is data entry and why is data quality important at this stage?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of data validation in a spreadsheet?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a formula in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a formula and a function in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the COUNTIF function used for in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the AVERAGEIF function used for in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the IF function used for in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a nested IF function in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of freezing panes in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of data filters in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is sorting and how is it used in spreadsheet analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data table in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between absolute and relative cell references in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a named range in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of the TEXT function in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the CONCATENATE function used for in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the TRIM function used for in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is duplicate data and how can it be identified in a spreadsheet?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of removing duplicates in a dataset?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a report in the context of business data analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a static report and an interactive dashboard?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is data storytelling and why is it important for analysts?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between raw data and processed data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a data source in the context of business intelligence tools?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data model in business intelligence?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is Google Sheets and how does it compare to Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of collaborative editing in Google Sheets for team analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a left join and a right join in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a full outer join and when would you use it?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the CASE statement in SQL for conditional logic?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between an aggregate function and a window function in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the PARTITION BY clause in SQL window functions?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between COUNT(*), COUNT(1), and COUNT(column_name) in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is data binning and why is it used in analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a wide format and a long format dataset?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the pivot and unpivot operations on a dataset?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is feature engineering and why is it important for predictive analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is one-hot encoding and when is it used?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between label encoding and one-hot encoding?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is data imputation and what are common imputation techniques?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between mean imputation and median imputation for missing values?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a box plot and what insights does it provide?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the interquartile range (IQR) and how is it used to detect outliers?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between univariate, bivariate, and multivariate analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a heatmap and how is it used in data visualization?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a correlation matrix in exploratory data analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is seasonality in time series data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a trend in time series analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between seasonality and cyclicality in time series data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a moving average used for in smoothing time series data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is churn rate and how is it calculated?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is conversion rate and how is it typically calculated in business analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is customer acquisition cost (CAC) and how is it used in analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is retention rate and how does it differ from churn rate?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between gross margin and net margin in financial analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is year-over-year (YoY) growth and how is it calculated?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is month-over-month (MoM) growth and how is it different from YoY growth?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a data quality monitoring system for an automated reporting pipeline."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you identify and address data leakage in a predictive model built for business forecasting?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would use Bayesian statistics to update predictions as new data arrives."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach analyzing a highly imbalanced dataset, such as fraud detection data?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would use clustering techniques like k-means to segment customers."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you evaluate whether a k-means clustering result is meaningful for business decisions?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a metric framework to avoid vanity metrics in a product analytics dashboard."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you handle conflicting data from multiple sources when building a single source of truth?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would perform root cause analysis when a key business metric suddenly drops."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design an experiment when a true randomized control trial is not feasible?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a data catalog and why is it useful for analysts?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a data analyst and a data scientist?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a data analyst and a business analyst?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a data analyst and a data engineer?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is business intelligence (BI) and how does it relate to data analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a data pipeline in simple terms?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of automating a recurring report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between real-time data and batch-processed data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is an API and how might a data analyst use one to gather data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is web scraping and how is it used to collect data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a survey in collecting quantitative data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between an open-ended and a closed-ended survey question?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is sampling in statistics and why is it used?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is random sampling and why is it important for unbiased analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between simple random sampling and stratified sampling?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a data quality issue and how can it affect business decisions?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is data consistency and why does it matter across systems?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is data accuracy and how is it different from data completeness?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a data audit and why might an organization perform one?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of documenting assumptions in a data analysis report?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a data dictionary in a data analysis project?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a business requirement and a technical requirement in an analytics project?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of defining success metrics before starting an analysis project?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between leading indicators and lagging indicators in a KPI framework?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of setting up a baseline before measuring the impact of a change?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is Simpson's Paradox and why is it important to be aware of in aggregated data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is survivorship bias and how can it mislead an analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is confirmation bias and how can it affect a data analyst's conclusions?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between correlation strength interpretation using Pearson versus Spearman coefficients?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a scatter plot matrix in exploratory data analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between parametric and non-parametric statistical tests?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a chi-square test used for in data analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a t-test and when would you use it instead of a z-test?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is ANOVA (Analysis of Variance) and when is it used?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a one-tailed and a two-tailed hypothesis test?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of power analysis in designing an experiment?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between observational data and experimental data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is data lineage and why is it important for auditing analysis results?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a single source of truth in a data analytics context?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of role-based access control for sensitive business data?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a robust anomaly detection system for monitoring key business metrics."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach measuring the incremental impact of a marketing channel using multi-touch attribution?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a data model to support both operational reporting and ad-hoc analysis."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you handle a situation where historical data is not comparable due to a change in tracking methodology?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would use propensity score matching to reduce bias in an observational study."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a self-serve analytics platform that balances flexibility with data governance?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would detect data drift in a dataset feeding a production dashboard over time."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach prioritizing which insights to present when time with stakeholders is limited?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a metric to measure product-market fit using usage data."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you validate that a dashboard's numbers reconcile with the underlying source system of record?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a report and an analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of labeling axes and adding titles to a chart?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is chart junk and why should it be avoided in data visualization?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of using color effectively in a dashboard?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a static Excel report and a live-connected Power BI report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a data refresh and why is scheduling one important for dashboards?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data validation drop-down list in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a macro in Excel and what is it generally used for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a workbook and a worksheet in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of the IFERROR function in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a lookup table and why is it useful in spreadsheet analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the INDEX and MATCH combination used for in Excel?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between VLOOKUP and INDEX-MATCH in terms of flexibility?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a Gantt chart and how is it used in project-related data analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a waterfall chart and what kind of data does it best represent?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a funnel chart used for in business analytics?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a bullet chart and what does it typically measure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of small multiples in data visualization?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a dashboard for operational use and one for strategic use?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of annotating a chart with context or benchmarks?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between INNER JOIN and CROSS JOIN in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a common table expression (CTE) and why might you use one over a subquery?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a recursive CTE and what kind of problems does it solve?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of indexing a table to speed up SQL queries?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a clustered and non-clustered index from a query performance perspective?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the EXPLAIN or EXECUTION PLAN feature used for in SQL query optimization?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of using LIMIT or TOP in a SQL query?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between DATE, DATETIME, and TIMESTAMP data types in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the DATEDIFF function in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the EXTRACT or DATEPART function in SQL?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a temporary table and a permanent table in SQL analysis workflows?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the pandas pivot_table() function?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between pandas merge(), join(), and concat() functions?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the pandas fillna() function in handling missing data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the pandas apply() function?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between loc[] and iloc[] in pandas?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the pandas describe() function?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of matplotlib or seaborn in Python data visualization?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between matplotlib and seaborn for statistical visualization?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of Jupyter Notebook in a data analyst's workflow?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a north star metric for a subscription-based product."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach explaining a negative correlation that contradicts stakeholder intuition?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design an experiment to test pricing changes without harming revenue."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you handle multiple comparisons problem when running many simultaneous A/B tests?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would use difference-in-differences analysis to measure a policy change's impact."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach forecasting demand for a new product with no historical data?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a data validation framework to catch pipeline errors before they reach dashboards."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you determine which features are driving a drop in a key conversion metric?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain the trade-offs of using median versus mean when reporting metrics with skewed distributions."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach reconciling conflicting KPIs across different departments in an organization?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a data analyst's daily tasks and monthly/quarterly responsibilities?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is stakeholder communication and why is it a key skill for a data analyst?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of writing a clear problem statement before starting an analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between an ad-hoc analysis and a recurring reporting task?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of version control for analysis scripts or notebooks?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a data source refresh schedule and why does it matter for reporting accuracy?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between internal data and external/third-party data sources?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is benchmarking and how is it used in business data analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a control chart used for in quality analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of setting thresholds or alerts on a monitored metric?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between absolute change and percentage change in reporting metrics?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a rolling average and how does it differ from a simple average?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a summary statistics table in a report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a frequency table and a contingency table?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is cross-tabulation and how is it used in data analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of grouping data into categories before visualizing it?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a leading question and a neutral question in survey design?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is response bias in survey data and how can it affect results?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of pilot testing a survey before full deployment?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between primary data and secondary data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is data provenance and why is it important for trust in analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data request intake process in a data team?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a one-time report and a self-service dashboard?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of setting up row-level security in a shared dashboard?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a metric owner and a metric consumer in an organization?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a glossary of business terms in an analytics team?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between operational data and analytical data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of archiving old data instead of deleting it?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is data retention policy and why do organizations need one?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between structured query results and raw log data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a data quality scorecard in an analytics team?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between accuracy, completeness, consistency, and timeliness as data quality dimensions?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of setting up automated data quality checks in a pipeline?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a soft launch and an A/B test rollout for a new feature?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a holdout group in measuring long-term campaign effects?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between short-term and long-term metric impact in experimentation?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is novelty effect in A/B testing and how can it distort results?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of segmenting A/B test results by user cohort?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between statistical significance and practical significance in business decisions?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the minimum detectable effect in the context of experiment design?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a pre-registration plan for an experiment?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between within-subject and between-subject experiment designs?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of stratified randomization in an A/B test?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is network effect bias in experiments and why does it matter for social platforms?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between intention-to-treat and per-protocol analysis in experimentation?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is a funnel drop-off analysis and how is it used to identify friction points?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is path analysis in the context of user behavior data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between session-based and user-based analytics tracking?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is event tracking and why is it foundational to product analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a first-touch and last-touch attribution model?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is multi-touch attribution and why is it more complex than single-touch models?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a marketing mix model in measuring channel effectiveness?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is customer segmentation using RFM (Recency, Frequency, Monetary) analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of building a customer persona from behavioral data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between demographic and behavioral segmentation?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a Pareto analysis (80/20 rule) in business data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of sensitivity analysis in a financial or business model?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is scenario analysis and how does it support business decision-making?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a forecast and a budget in financial analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is variance analysis in the context of comparing actual results to forecasts?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a metrics tree to diagnose the cause of a revenue decline."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach building a churn prediction model and validating its business impact?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a longitudinal study to measure the long-term effect of an onboarding change."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you handle seasonality when comparing performance metrics across different time periods?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a data quality SLA between a data team and downstream stakeholders."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach communicating uncertainty (confidence intervals) in a forecast to executives?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would identify and mitigate confounding variables in an observational analysis."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a test to isolate the effect of a UI change from a concurrent marketing campaign?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would build a framework to prioritize data requests from multiple business teams."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach auditing a dashboard that stakeholders have flagged as showing incorrect numbers?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is a data analyst's typical involvement in a cross-functional product launch?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a requirements-gathering meeting before building a report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a one-off query and a productionized report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of unit testing a data transformation script?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a development environment and a production environment for data pipelines?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of using consistent naming conventions for tables and columns?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a flat file and a relational data structure?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data profiling step before analysis begins?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between summary statistics and raw data inspection?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of documenting data sources and calculation logic for a report?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a leading metric and an outcome metric in a product analytics framework?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of setting a north star metric for a product team?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between activation, engagement, and retention metrics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a cohort retention curve and how is it interpreted?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a power user curve and a standard retention curve?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of segmenting metrics by acquisition channel?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between organic and paid traffic in marketing analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of calculating return on ad spend (ROAS)?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between click-through rate (CTR) and conversion rate?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a landing page A/B test in conversion rate optimization?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between bounce rate and exit rate in web analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of setting up event funnels in a product analytics tool like Amplitude or Mixpanel?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a session and a pageview in web analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of UTM parameters in tracking marketing campaign performance?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between first-party and third-party cookies in the context of web analytics?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a data blend when combining data from multiple sources in a BI tool?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between row-level data and aggregated data in a reporting layer?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a semantic layer in a business intelligence architecture?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a live connection and an extract/import connection in Tableau?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of context filters in Tableau for improving performance?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design an incrementality test to measure the true lift from a promotional discount."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach building a lifetime value model that accounts for varying customer acquisition costs?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would detect and correct for regression to the mean in a performance metric."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you design a metric to detect early signs of customer dissatisfaction before churn occurs?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would reconcile discrepancies between marketing platform data and internal analytics data."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach measuring the ROI of a long-term brand awareness campaign with delayed impact?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a framework for testing multiple hypotheses without inflating false positive rates."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach building a real-time alerting system for anomalies in transaction data?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a data model that supports both historical trend analysis and real-time monitoring."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach validating a third-party data vendor's data before integrating it into your analysis?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data request template to standardize stakeholder asks?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a KPI dashboard and an exploratory analysis tool?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of color-coding status indicators (red/yellow/green) in a dashboard?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a trend line and a forecast line on a chart?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of adding error bars to a chart?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between absolute numbers and rates/ratios in reporting?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of normalizing metrics per user or per session for fair comparison?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a snapshot report and a time-series report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a executive summary at the start of a data analysis report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between an insight and a recommendation in a data analysis presentation?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of using bootstrapping to estimate confidence intervals?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between parametric and bootstrap-based confidence interval estimation?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a control chart's upper and lower control limits in process monitoring?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between common cause and special cause variation in quality analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of using logistic regression for a binary outcome analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between linear regression and logistic regression?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a confusion matrix in evaluating a classification model?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between precision and recall in a classification context?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of the ROC curve and AUC metric in model evaluation?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between overfitting and underfitting in a predictive model?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is cross-validation and why is it used to evaluate model performance?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a train-test split in building a predictive model?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is feature importance and how is it used to interpret a model's predictions?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a leading and a lagging metric when evaluating model-driven decisions?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of monitoring model drift after deployment?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data analyst reviewing raw data before running any calculations?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a metric definition and a metric calculation formula?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of rounding numbers appropriately when presenting results?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a leading zero error and a formatting error in reported numbers?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of using consistent date formats across a report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between fiscal year and calendar year reporting?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data analyst maintaining a change log for report updates?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a one-time data pull and a scheduled data extract?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of sanity-checking totals against a known source before publishing a report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a summary dashboard and a detailed drill-down report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of labeling units of measurement clearly in a report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a percentage point change and a percentage change?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of using consistent color schemes to represent categories across charts?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a leading dataset and a trailing dataset in trend reporting?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data analyst flagging data anomalies to the source system owner?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a data validation checklist before publishing a dashboard?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a hard-coded value and a dynamically calculated value in a report?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of parameterizing a report to allow stakeholder customization?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between row-level calculations and aggregate-level calculations in a BI tool?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of setting up drill-through functionality in a dashboard?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a snapshot table and a slowly changing dimension in reporting?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of maintaining historical snapshots for trend analysis?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between point-in-time reporting and as-of-today reporting?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of reconciling a summary report total against detailed transaction-level data?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a business metric and a technical/system metric?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of setting SLAs for report delivery timelines?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between self-service BI and centralized reporting?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of training stakeholders to use a self-service dashboard effectively?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a data analyst's role in a startup versus a large enterprise?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of prioritizing quick wins versus long-term analytics infrastructure projects?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a framework to measure the ROI of the data analytics team itself."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach building trust with stakeholders who have been burned by inaccurate reports before?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a metric governance process to prevent metric definition drift across teams."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach scaling a manual reporting process into an automated, self-service solution?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design an experimentation platform's guardrail metrics to prevent unintended harm."
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data analyst attending stand-up meetings with product or engineering teams?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between an internal report and a client-facing report?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of anonymizing personally identifiable information (PII) in a dataset?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between GDPR compliance considerations and general data privacy best practices?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of role-based dashboard views for different stakeholder groups?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a metric definition document and a data dictionary?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data analyst validating assumptions with subject matter experts?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a leading practice and a lagging practice in reporting cadence?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of setting up email or Slack alerts for report failures?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a manual QA process and an automated testing process for reports?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of using a staging table before loading data into a production reporting table?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between incremental load and full refresh in a data pipeline?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of deduplication logic in an ETL pipeline?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a batch job schedule and an event-triggered pipeline?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of logging pipeline run metadata for troubleshooting?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a data analyst writing ad-hoc SQL and building a reusable data model?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of documenting known data limitations in a report footnote?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a leading question in stakeholder interviews and a neutral discovery question?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a retrospective after a major reporting error is discovered?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between reactive reporting and proactive/predictive reporting?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a data analyst onboarding plan to quickly ramp up on business context."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach deciding which metrics should be automated versus calculated manually?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would build a case for investing in better data infrastructure using cost-benefit analysis."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach measuring the impact of data quality improvements on business decision speed?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a framework to sunset outdated or unused dashboards in an organization."
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of a data analyst maintaining good relationships with engineering teams for data access?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a dashboard viewer and a dashboard editor role in most BI tools?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of scheduling regular check-ins with stakeholders on report usage?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the difference between a leading business question and a leading analytical question?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the purpose of testing a report with sample edge-case data before full rollout?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a rollback plan when deploying changes to a production dashboard?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a breaking change and a non-breaking change in a data schema?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of communicating schema changes to downstream report owners in advance?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the difference between a shared metric layer and metrics calculated independently in each report?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the purpose of a data analyst tracking dashboard usage analytics to prioritize maintenance?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a process to sunset a legacy metric definition without disrupting reporting."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach measuring the trade-off between report freshness and pipeline processing cost?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design an escalation process for critical data pipeline failures affecting daily reporting."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "How would you approach building analyst capacity planning based on incoming request volume trends?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain how you would design a framework for peer review of analytical work before it reaches stakeholders."
+    }
+]
