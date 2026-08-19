@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Skills from './pages/Skills';
 import Questions from './pages/Questions';
+import McqQuestions from './pages/McqQuestions';
 import Upload from './pages/Upload';
 import Settings from './pages/Settings';
 
@@ -42,6 +43,8 @@ export default function App() {
               <Route path="/skills" element={<Skills />} />
               <Route path="/questions" element={<Questions />} />
               <Route path="/questions/:skill" element={<Questions />} />
+              <Route path="/mcq-questions" element={<McqQuestions />} />
+              <Route path="/mcq-questions/:skill" element={<McqQuestions />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/settings" element={<Settings />} />
             </Route>

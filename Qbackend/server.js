@@ -69,6 +69,7 @@ const publicLimiter = rateLimit({
 app.use("/api/auth", authRoutes);
 app.use("/api/skills", skillRoutes);
 app.use("/api/questions", questionRoutes);
+app.use("/api/mcq-questions", require("./src/routes/mcqQuestionRoutes"));
 app.use("/api/public", publicLimiter, publicRoutes);
 
 // ─── Health Check ────────────────────────────────────────────────────────────

@@ -178,11 +178,7 @@ const generateInterviewQuestions = async (userId, data) => {
   let localQuestions = await getLocalQuestions(jobTopic, targetJsonCount, difficulty, userId);
   const actualJsonCount = localQuestions.length;
   
-  // If the skill is completely unknown (even after typo auto-correct)
-  if (actualJsonCount === 0) {
-    throw new BadRequestError(`Sorry, we couldn't find any questions for the skill "${jobTopic}". Please check the spelling or select a valid topic.`);
-  }
-
+  // We don't throw an error if no DB questions are found, we let AI handle the rest.
   const aiCount = count - actualJsonCount;
   let aiQuestions = [];
 

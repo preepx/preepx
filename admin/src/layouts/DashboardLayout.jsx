@@ -12,6 +12,7 @@ const pageTitles = {
   '/': 'Dashboard',
   '/skills': 'Skills',
   '/questions': 'Questions',
+  '/mcq-questions': 'MCQ Questions',
   '/upload': 'Bulk Upload',
   '/settings': 'Settings',
 };
