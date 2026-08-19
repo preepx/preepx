@@ -133,8 +133,16 @@ const generateInterviewQuestions = async (userId, data) => {
     }
   }
 
-  // Target ratio: 60% DB questions, 40% AI
-  const targetJsonCount = Math.ceil(count * 0.6);
+  // Custom logic for DB vs AI question distribution based on user selection
+  let targetJsonCount;
+  switch (count) {
+    case 3: targetJsonCount = 3; break;       // 3 DB, 0 AI
+    case 5: targetJsonCount = 4; break;       // 4 DB, 1 AI
+    case 10: targetJsonCount = 8; break;      // 8 DB, 2 AI
+    case 15: targetJsonCount = 12; break;     // 12 DB, 3 AI (Fixed your typo 11+3=14 -> 12+3=15)
+    case 20: targetJsonCount = 15; break;     // 15 DB, 5 AI
+    default: targetJsonCount = Math.ceil(count * 0.8); // Fallback
+  }
   
   // Fetch local questions from DB — pass userId to exclude seen questions
   const localQuestions = await getLocalQuestions(jobTopic, targetJsonCount, difficulty, userId);

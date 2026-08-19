@@ -5,7 +5,7 @@ const generateQuestionsSchema = Joi.object({
   jobTopic: Joi.string().required(),
   difficulty: Joi.string().valid('easy', 'medium', 'hard').default('medium'),
   interviewType: Joi.string().valid('technical', 'behavioral', 'mixed').default('mixed'),
-  questionCount: Joi.number().min(1).max(15).default(10)
+  questionCount: Joi.number().min(1).max(20).default(10)
 });
 
 const evaluateAnswerSchema = Joi.object({
