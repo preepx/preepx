@@ -1,3 +1,1022 @@
 [
-
+  {
+    "difficulty": "Easy",
+    "question": "What is CSS and what is it used for?",
+    "options": [
+      "A: A programming language used to create web applications.",
+      "B: A stylesheet language used to describe the presentation of a document written in HTML or XML.",
+      "C: A database query language.",
+      "D: A server-side scripting language."
+    ],
+    "correctAnswer": "B: A stylesheet language used to describe the presentation of a document written in HTML or XML.",
+    "explanation": "CSS is a stylesheet language that defines how HTML elements are rendered."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different ways to add CSS to an HTML document?",
+    "options": [
+      "A: Only through external stylesheets.",
+      "B: Through inline styles, internal stylesheets, and external stylesheets.",
+      "C: Only through internal stylesheets.",
+      "D: Through JavaScript only."
+    ],
+    "correctAnswer": "B: Through inline styles, internal stylesheets, and external stylesheets.",
+    "explanation": "CSS can be added inline, in a <style> tag, or via an external .css file."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between inline, internal, and external CSS?",
+    "options": [
+      "A: Inline CSS is applied directly to an element, internal CSS is defined in a <style> tag, external CSS is in a separate .css file.",
+      "B: All three are the same.",
+      "C: Inline CSS is in a separate file, internal is in <style>, external is in the element.",
+      "D: Only inline CSS is allowed."
+    ],
+    "correctAnswer": "A: Inline CSS is applied directly to an element, internal CSS is defined in a <style> tag, external CSS is in a separate .css file.",
+    "explanation": "Each method scopes CSS differently: inline is per element, internal is per page, external is shared."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between margin and padding in CSS?",
+    "options": [
+      "A: Margin is inside the border, padding is outside.",
+      "B: Margin is outside the border, padding is inside.",
+      "C: Margin and padding are the same.",
+      "D: Margin is for text, padding is for images."
+    ],
+    "correctAnswer": "B: Margin is outside the border, padding is inside.",
+    "explanation": "Margin creates space outside the element’s border; padding creates space inside the border."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CSS Box Model?",
+    "options": [
+      "A: It defines how elements are displayed as boxes with content, padding, border, and margin.",
+      "B: It is a model for database tables.",
+      "C: It is a way to layout tables.",
+      "D: It is a CSS framework."
+    ],
+    "correctAnswer": "A: It defines how elements are displayed as boxes with content, padding, border, and margin.",
+    "explanation": "The box model describes the layout of elements including content, padding, border, and margin."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between border-box and content-box in box-sizing?",
+    "options": [
+      "border-box includes padding and border in width/height, content-box excludes them.",
+      "border-box excludes padding and border, content-box includes them.",
+      "border-box only affects margin, content-box only affects padding.",
+      "border-box is default, content-box is not supported."
+    ],
+    "correctAnswer": "border-box includes padding and border in width/height, content-box excludes them.",
+    "explanation": "In border-box the specified width/height includes the element’s padding and border, while in content-box the width/height refers only to the content area."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between class selectors and id selectors in CSS?",
+    "options": [
+      "Class selectors target elements with a class attribute; id selectors target elements with a unique id attribute.",
+      "Class selectors are case-sensitive; id selectors are not.",
+      "Class selectors can be used only once per page; id selectors can be reused.",
+      "Class selectors are defined with #, id selectors with ."
+    ],
+    "correctAnswer": "Class selectors target elements with a class attribute; id selectors target elements with a unique id attribute.",
+    "explanation": "Class selectors ('.class') can be applied to many elements, whereas id selectors ('#id') must be unique to a single element."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are CSS selectors and what are the different types?",
+    "options": [
+      "CSS selectors are patterns used to select elements; types include element, class, id, attribute, pseudo-class, pseudo-element, combinator.",
+      "CSS selectors are only element names; types include only element and class.",
+      "CSS selectors are JavaScript functions; types include function, variable, object.",
+      "CSS selectors are not used in CSS; they are used in HTML."
+    ],
+    "correctAnswer": "CSS selectors are patterns used to select elements; types include element, class, id, attribute, pseudo-class, pseudo-element, combinator.",
+    "explanation": "Selectors allow CSS to target elements in many ways, from simple tag names to complex combinations and pseudo-classes."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between relative, absolute, fixed, and sticky positioning in CSS?",
+    "options": [
+      "Relative positions relative to its normal spot; absolute relative to nearest positioned ancestor; fixed relative to viewport; sticky toggles between relative and fixed based on scroll.",
+      "Relative moves element to top-left; absolute moves to bottom-right; fixed moves to center; sticky moves to top.",
+      "All four are the same except sticky is deprecated.",
+      "Relative is static; absolute is static; fixed is static; sticky is static."
+    ],
+    "correctAnswer": "Relative positions relative to its normal spot; absolute relative to nearest positioned ancestor; fixed relative to viewport; sticky toggles between relative and fixed based on scroll.",
+    "explanation": "Each positioning scheme defines how an element is placed: relative offsets its normal position, absolute removes it from flow relative to an ancestor, fixed ties it to the viewport, and sticky behaves like relative until a threshold is crossed."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between display: none and visibility: hidden?",
+    "options": [
+      "display:none removes element from layout flow; visibility:hidden keeps space but hides content.",
+      "display:none hides element but keeps space; visibility:hidden removes element from flow.",
+      "display:none and visibility:hidden are identical.",
+      "display:none shows element; visibility:hidden hides element."
+    ],
+    "correctAnswer": "display:none removes element from layout flow; visibility:hidden keeps space but hides content.",
+    "explanation": "display:none causes the element to be omitted from the document flow entirely, while visibility:hidden makes it invisible but still occupies its allocated space."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different values of the display property?",
+    "options": [
+      "block, inline, flex, grid",
+      "table, list-item, none, inline-block",
+      "block, inline, flex, grid, table, none, inline-block, list-item",
+      "all of the above"
+    ],
+    "correctAnswer": "block, inline, flex, grid, table, none, inline-block, list-item",
+    "explanation": "The display property accepts many keyword values; the most common are block, inline, flex, grid, table, none, inline-block, and list-item."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between em, rem, px, and % units in CSS?",
+    "options": [
+      "em is relative to the parent element’s font size, rem is relative to the root font size, px is an absolute unit, % is relative to the parent element’s size",
+      "em is relative to the root font size, rem is relative to the parent element’s font size, px is relative to the parent element’s size, % is relative to the root element’s size",
+      "em is relative to the element’s font size, rem is relative to the root font size, px is an absolute unit, % is relative to the parent element’s width",
+      "all of the above"
+    ],
+    "correctAnswer": "em is relative to the parent element’s font size, rem is relative to the root font size, px is an absolute unit, % is relative to the parent element’s size",
+    "explanation": "em scales with the element’s font-size, rem with the root’s font-size, px is fixed, and % scales relative to the parent’s dimensions."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the color property vs background-color property?",
+    "options": [
+      "color sets the text color of an element, background-color sets the background color of an element",
+      "color sets the background color, background-color sets the text color",
+      "color sets the border color, background-color sets the background image",
+      "color sets the font style, background-color sets the font weight"
+    ],
+    "correctAnswer": "color sets the text color of an element, background-color sets the background color of an element",
+    "explanation": "The color property controls the foreground (text) color, while background-color controls the element’s background."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a CSS combinator and a selector?",
+    "options": [
+      "A combinator defines the relationship between two selectors, while a selector matches elements",
+      "A combinator matches elements, while a selector defines the relationship",
+      "A combinator is a property, and a selector is a value",
+      "A combinator is a pseudo-class, and a selector is a pseudo-element"
+    ],
+    "correctAnswer": "A combinator defines the relationship between two selectors, while a selector matches elements",
+    "explanation": "Selectors identify elements; combinators (>, +, ~, space) describe how selectors relate to each other."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the CSS reset or normalize.css?",
+    "options": [
+      "To remove default browser styles for consistency across browsers",
+      "To add new styles to a page",
+      "To increase page load speed",
+      "To create animations"
+    ],
+    "correctAnswer": "To remove default browser styles for consistency across browsers",
+    "explanation": "Reset/normalize.css neutralizes browser default styling so developers start from a consistent baseline."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Flexbox in CSS? Explain the main properties.",
+    "options": [
+      "A layout model that arranges elements in a single line or column, using properties like flex-direction, justify-content, align-items.",
+      "A grid system for two-dimensional layouts using rows and columns.",
+      "A way to animate elements with keyframes.",
+      "A method to apply styles to pseudo-classes."
+    ],
+    "correctAnswer": "A layout model that arranges elements in a single line or column, using properties like flex-direction, justify-content, align-items.",
+    "explanation": "Flexbox is a one-dimensional layout model that uses properties such as flex-direction, justify-content, and align-items to control the arrangement of items."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSS Grid and how does it differ from Flexbox?",
+    "options": [
+      "Grid is a two-dimensional layout system using rows and columns, whereas Flexbox is one-dimensional.",
+      "Grid is used only for background images.",
+      "Grid is a JavaScript library.",
+      "Grid and Flexbox are identical."
+    ],
+    "correctAnswer": "Grid is a two-dimensional layout system using rows and columns, whereas Flexbox is one-dimensional.",
+    "explanation": "CSS Grid handles both rows and columns simultaneously, making it a two-dimensional layout system, while Flexbox handles only one dimension at a time."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between justify-content and align-items in Flexbox?",
+    "options": [
+      "justify-content aligns items along the main axis, align-items along the cross axis.",
+      "justify-content aligns items along the cross axis, align-items along the main axis.",
+      "Both align items on the same axis.",
+      "justify-content only works in Grid."
+    ],
+    "correctAnswer": "justify-content aligns items along the main axis, align-items along the cross axis.",
+    "explanation": "justify-content distributes space along the main axis (row or column), whereas align-items distributes space along the cross axis."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the flex-grow, flex-shrink, and flex-basis property used for?",
+    "options": [
+      "They control how flex items grow, shrink, and set the initial main size.",
+      "They set font size and line height.",
+      "They define border radius.",
+      "They are used for positioning elements absolutely."
+    ],
+    "correctAnswer": "They control how flex items grow, shrink, and set the initial main size.",
+    "explanation": "flex-grow determines how much an item grows relative to others, flex-shrink how it shrinks, and flex-basis sets its initial size before growth or shrinkage."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between grid-template-columns and grid-template-areas?",
+    "options": [
+      "grid-template-columns defines column sizes, grid-template-areas defines named grid areas.",
+      "grid-template-columns defines row sizes, grid-template-areas defines column sizes.",
+      "Both define the same thing.",
+      "grid-template-areas is only for CSS variables."
+    ],
+    "correctAnswer": "grid-template-columns defines column sizes, grid-template-areas defines named grid areas.",
+    "explanation": "grid-template-columns sets the width of each column, while grid-template-areas assigns named areas that can be referenced in grid placement."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between fr unit in CSS Grid and percentage widths?",
+    "options": [
+      "fr distributes remaining space after fixed-size tracks, percentages are relative to parent width.",
+      "fr is only for flexbox, percentages only for grid.",
+      "fr units are absolute pixel values, percentages are relative to viewport.",
+      "fr units cannot be used with minmax, percentages can."
+    ],
+    "correctAnswer": "fr distributes remaining space after fixed-size tracks, percentages are relative to parent width.",
+    "explanation": "The fr unit represents a fraction of the free space in a grid container after accounting for fixed tracks, while percentages are calculated relative to the size of the parent element."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static, relative, and floated positioning?",
+    "options": [
+      "static is default, relative moves element without affecting layout, floated removes element from normal flow and allows text wrap.",
+      "static moves element relative to viewport, relative is default, floated is same as relative.",
+      "static removes element from flow, relative keeps it, floated keeps it in flow.",
+      "static is only for tables, relative for flex, floated for grid."
+    ],
+    "correctAnswer": "static is default, relative moves element without affecting layout, floated removes element from normal flow and allows text wrap.",
+    "explanation": "Static is the default positioning; relative offsets the element but still occupies its original space; floated elements are removed from the normal flow, allowing surrounding content to wrap around them."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a float in CSS and why is it less commonly used for layout today?",
+    "options": [
+      "Float moves element left/right, used for text wrapping; less used because flexbox and grid provide better layout control.",
+      "Float centers elements horizontally; less used because it breaks mobile layouts.",
+      "Float is a CSS property for animations; less used because JavaScript does it better.",
+      "Float is a property for background images; less used due to performance issues."
+    ],
+    "correctAnswer": "Float moves element left/right, used for text wrapping; less used because flexbox and grid provide better layout control.",
+    "explanation": "Floats were originally designed to allow text to wrap around images; modern layout techniques like Flexbox and Grid offer more robust and predictable control, making floats less common."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the clearfix technique and why is it needed?",
+    "options": [
+      "clearfix adds a pseudo-element to clear floats, preventing container collapse.",
+      "clearfix removes all floats from a page.",
+      "clearfix is a CSS reset for margins.",
+      "clearfix sets display to block for all elements."
+    ],
+    "correctAnswer": "clearfix adds a pseudo-element to clear floats, preventing container collapse.",
+    "explanation": "The clearfix hack inserts a pseudo-element that clears floated children, ensuring that a container expands to contain its floated descendants."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between inline-block and block display?",
+    "options": [
+      "block starts on new line and takes full width; inline-block flows inline but respects width/height.",
+      "block is inline-level, inline-block is block-level.",
+      "block cannot have margins, inline-block can.",
+      "block is only for images, inline-block for text."
+    ],
+    "correctAnswer": "block starts on new line and takes full width; inline-block flows inline but respects width/height.",
+    "explanation": "Block-level elements begin on a new line and occupy the full available width, whereas inline-block elements behave like inline elements but can have explicit width and height set."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you center an element horizontally and vertically using CSS?",
+    "options": [
+      "Using margin: auto; and text-align: center;",
+      "Using flexbox with justify-content: center; align-items: center;",
+      "Using grid with grid-template-columns: 1fr; grid-template-rows: 1fr;",
+      "Using position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
+    ],
+    "correctAnswer": "Using flexbox with justify-content: center; align-items: center;",
+    "explanation": "Flexbox’s justify-content and align-items properties center items along the main and cross axes, respectively."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between CSS Grid's implicit and explicit grid?",
+    "options": [
+      "Implicit grid is defined by the author, explicit grid is auto-generated.",
+      "Explicit grid is defined by the author, implicit grid is auto-generated when content overflows.",
+      "Both are the same, just terminology.",
+      "Implicit grid only applies to flex containers."
+    ],
+    "correctAnswer": "Explicit grid is defined by the author, implicit grid is auto-generated when content overflows.",
+    "explanation": "Explicit grid tracks are set with grid-template-rows/columns; implicit tracks are created automatically for items that exceed those tracks."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the gap property in Flexbox and Grid?",
+    "options": [
+      "It sets the spacing between grid cells only.",
+      "It sets the spacing between flex items only.",
+      "It sets the spacing between both grid cells and flex items.",
+      "It is a deprecated property."
+    ],
+    "correctAnswer": "It sets the spacing between both grid cells and flex items.",
+    "explanation": "The gap property works in both flex and grid layouts to define space between items or cells."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between align-content and align-items in Flexbox?",
+    "options": [
+      "align-items aligns individual items, align-content aligns the whole flex container's content.",
+      "align-items aligns the whole flex container, align-content aligns individual items.",
+      "Both are synonyms.",
+      "align-content only works in grid."
+    ],
+    "correctAnswer": "align-items aligns individual items, align-content aligns the whole flex container's content.",
+    "explanation": "align-items aligns each flex item along the cross axis; align-content aligns the collection of flex lines within the container."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is subgrid in CSS Grid and what problem does it solve?",
+    "options": [
+      "It allows a grid item to inherit its parent's grid tracks, solving nested grid alignment.",
+      "It creates a sub-grid for each flex item.",
+      "It is a feature for subpixel rendering.",
+      "It is a deprecated property."
+    ],
+    "correctAnswer": "It allows a grid item to inherit its parent's grid tracks, solving nested grid alignment.",
+    "explanation": "Subgrid lets a nested grid use the parent grid’s track definitions, keeping alignment consistent across nested grids."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the order property in Flexbox used for?",
+    "options": [
+      "Determines the order of flex items along the main axis.",
+      "Sets the flex grow factor.",
+      "Specifies the flex basis.",
+      "Controls the flex shrink factor."
+    ],
+    "correctAnswer": "Determines the order of flex items along the main axis.",
+    "explanation": "The order property reorders flex items within a flex container without changing the source order."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is z-index and how does stacking context affect it?",
+    "options": [
+      "z-index controls the stacking order of positioned elements; stacking context limits z-index to its own context.",
+      "z-index sets the opacity of elements; stacking context changes background color.",
+      "z-index defines the element's width; stacking context defines height.",
+      "z-index is only for inline elements; stacking context is irrelevant."
+    ],
+    "correctAnswer": "z-index controls the stacking order of positioned elements; stacking context limits z-index to its own context.",
+    "explanation": "z-index only applies to positioned elements and is evaluated within the nearest stacking context, which can be created by certain CSS properties."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What creates a new stacking context in CSS?",
+    "options": [
+      "Any element with position relative and z-index not auto.",
+      "Elements with opacity less than 1, transform, filter, perspective, etc.",
+      "Only the root element creates a stacking context.",
+      "Elements with display flex."
+    ],
+    "correctAnswer": "Elements with opacity less than 1, transform, filter, perspective, etc.",
+    "explanation": "These properties trigger a new stacking context, isolating z-index values from the rest of the document."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are CSS pseudo-classes and pseudo-elements? Give examples.",
+    "options": [
+      "Pseudo-classes target elements in a specific state like :hover; pseudo-elements target parts like ::before.",
+      "Pseudo-classes are for styling text; pseudo-elements are for layout.",
+      "Pseudo-classes and pseudo-elements are the same thing.",
+      "Pseudo-classes target classes; pseudo-elements target IDs."
+    ],
+    "correctAnswer": "Pseudo-classes target elements in a specific state like :hover; pseudo-elements target parts like ::before.",
+    "explanation": "Pseudo-classes (e.g., :hover) apply to element states, while pseudo-elements (e.g., ::before) style virtual elements."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSS specificity and how is it calculated?",
+    "options": [
+      "Specificity is a weight based on selectors; calculated by counting IDs, classes, and elements.",
+      "Specificity is the color of the text; calculated by RGB values.",
+      "Specificity is the font size; calculated by px values.",
+      "Specificity is the number of CSS files; calculated by file count."
+    ],
+    "correctAnswer": "Specificity is a weight based on selectors; calculated by counting IDs, classes, and elements.",
+    "explanation": "Specificity is determined by a formula that assigns weights to ID selectors, class/attribute/pseudo-class selectors, and type/pseudo-element selectors."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are CSS custom properties (variables)?",
+    "options": [
+      "They are global variables that can be used across all CSS files.",
+      "They are placeholders that get replaced during preprocessing.",
+      "They are properties prefixed with -- that can be defined and accessed at runtime.",
+      "They are functions that compute values based on other CSS properties."
+    ],
+    "correctAnswer": "They are properties prefixed with -- that can be defined and accessed at runtime.",
+    "explanation": "CSS custom properties are defined with a double hyphen prefix and are part of the live DOM, allowing runtime access via var()."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do CSS variables differ from preprocessor variables (like in SASS/LESS)?",
+    "options": [
+      "CSS variables are static, preprocessor variables are dynamic.",
+      "CSS variables are evaluated at compile time, preprocessor variables at runtime.",
+      "CSS variables are part of the DOM and can change with JavaScript, preprocessor variables are resolved during compilation.",
+      "CSS variables cannot be used in media queries, preprocessor variables can."
+    ],
+    "correctAnswer": "CSS variables are part of the DOM and can change with JavaScript, preprocessor variables are resolved during compilation.",
+    "explanation": "CSS variables live in the rendered document and can be altered at runtime, whereas preprocessor variables are replaced during the build step."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the var() function and how do you provide a fallback value?",
+    "options": [
+      "It declares a new variable; fallback is provided with a comma.",
+      "It retrieves a custom property value; fallback is the second argument after a comma.",
+      "It calculates a value; fallback is specified with an equals sign.",
+      "It sets a variable's default; fallback is defined with a semicolon."
+    ],
+    "correctAnswer": "It retrieves a custom property value; fallback is the second argument after a comma.",
+    "explanation": "var(--name, fallback) returns the custom property value or the fallback if the property is undefined."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the calc() function used for in CSS?",
+    "options": [
+      "To perform arithmetic operations on values.",
+      "To calculate the size of the viewport.",
+      "To convert units between px and em.",
+      "To create responsive images."
+    ],
+    "correctAnswer": "To perform arithmetic operations on values.",
+    "explanation": "calc() allows addition, subtraction, multiplication, and division of CSS values at runtime."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between min(), max(), and clamp() functions in CSS?",
+    "options": [
+      "min() returns the smallest value, max() returns the largest, clamp() limits a value between min and max.",
+      "min() and max() are for media queries, clamp() is for font sizes.",
+      "min() and max() are deprecated, clamp() is the new standard.",
+      "min() and max() only work with percentages, clamp() works with lengths."
+    ],
+    "correctAnswer": "min() returns the smallest value, max() returns the largest, clamp() limits a value between min and max.",
+    "explanation": "min() and max() return the minimum or maximum of their arguments, while clamp() constrains a value within a specified range."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does inheritance work with CSS custom properties?",
+    "options": [
+      "They are inherited by default like color.",
+      "They are not inherited unless explicitly set.",
+      "They are inherited only by elements that have the same selector.",
+      "They are inherited only if the property is defined on the root element."
+    ],
+    "correctAnswer": "They are inherited by default like color.",
+    "explanation": "Custom properties are inherited by default, just like other inheritable CSS properties."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the @property rule and how does it enhance CSS custom properties?",
+    "options": [
+      "It defines custom property syntax for browsers.",
+      "It allows custom properties to be animated.",
+      "It registers custom properties for use in @property.",
+      "It sets default values for custom properties."
+    ],
+    "correctAnswer": "It defines custom property syntax for browsers.",
+    "explanation": "The @property rule declares the syntax of a custom property, enabling features such as animation and type checking."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CSS media query and how is it used for responsive design?",
+    "options": [
+      "A rule that applies styles based on media type.",
+      "A rule that applies styles based on viewport size.",
+      "A rule that applies styles based on device orientation.",
+      "All of the above."
+    ],
+    "correctAnswer": "All of the above.",
+    "explanation": "Media queries can target media type, viewport width, orientation, and other features to adapt styles."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between mobile-first and desktop-first responsive design approaches?",
+    "options": [
+      "Mobile-first starts with large screens, desktop-first starts with small screens.",
+      "Mobile-first starts with small screens, desktop-first starts with large screens.",
+      "Mobile-first uses only CSS, desktop-first uses CSS and JS.",
+      "No difference."
+    ],
+    "correctAnswer": "Mobile-first starts with small screens, desktop-first starts with large screens.",
+    "explanation": "Mobile-first defines base styles for small screens and adds media queries for larger ones, while desktop-first does the opposite."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the viewport meta tag's relationship with CSS media queries?",
+    "options": [
+      "It sets the viewport width for media queries to reference.",
+      "It overrides media queries.",
+      "It is unrelated.",
+      "It only affects mobile browsers."
+    ],
+    "correctAnswer": "It sets the viewport width for media queries to reference.",
+    "explanation": "The viewport meta tag defines the layout viewport width, which media queries use to determine which styles to apply."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the CSS cascade and how does it determine which styles apply?",
+    "options": [
+      "The cascade is the order of CSS files that are loaded.",
+      "The cascade is the process of resolving conflicts based on origin, importance, specificity, and source order.",
+      "The cascade is a way to cascade colors through a page.",
+      "The cascade is a CSS property that applies to all elements."
+    ],
+    "correctAnswer": "The cascade is the process of resolving conflicts based on origin, importance, specificity, and source order.",
+    "explanation": "The cascade resolves conflicts by considering the style origin, importance (!important), specificity of selectors, and the order in which rules appear."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSS inheritance and which properties are inherited by default?",
+    "options": [
+      "Inheritance is when child elements automatically get all styles from their parents.",
+      "Inheritance is when certain properties like color and font-family are passed to child elements by default.",
+      "Inheritance is a CSS function that copies styles to all descendants.",
+      "Inheritance only applies to block elements and not inline elements."
+    ],
+    "correctAnswer": "Inheritance is when certain properties like color and font-family are passed to child elements by default.",
+    "explanation": "Only a subset of properties, such as color, font-family, line-height, etc., are inherited automatically unless overridden."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the inherit, initial, and unset keywords?",
+    "options": [
+      "inherit copies the parent value, initial sets the property to its default value, unset resets to inherited or initial depending on the property.",
+      "All three keywords perform the same action of resetting a property to its default value.",
+      "inherit sets the property to its default value, initial copies the parent value, unset does nothing.",
+      "None of the above."
+    ],
+    "correctAnswer": "inherit copies the parent value, initial sets the property to its default value, unset resets to inherited or initial depending on the property.",
+    "explanation": "inherit forces the property to adopt the parent’s value, initial forces the browser’s default, and unset reverts to the natural inheritance behavior."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between source order and specificity in the cascade algorithm?",
+    "options": [
+      "Specificity determines order, source order is ignored.",
+      "Source order is only used when specificity ties.",
+      "Specificity is only used for inline styles.",
+      "Source order is the same as specificity."
+    ],
+    "correctAnswer": "Source order is only used when specificity ties.",
+    "explanation": "When two rules have the same specificity, the one that appears later in the source wins."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are CSS cascade layers (@layer) and what problem do they solve?",
+    "options": [
+      "They group CSS rules into layers to control precedence, solving specificity wars.",
+      "They are used for layering background images only.",
+      "They are a new selector type for targeting nested elements.",
+      "They replace media queries for responsive design."
+    ],
+    "correctAnswer": "They group CSS rules into layers to control precedence, solving specificity wars.",
+    "explanation": "@layer lets developers define named layers that determine which rules win, making it easier to manage complex cascades and avoid specificity conflicts."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the all property and resetting individual properties?",
+    "options": [
+      "all sets all properties at once; resetting individual properties only resets specified ones.",
+      "all only resets inherited properties; individual resets all.",
+      "all is shorthand for transition; individual resets only animations.",
+      "all is CSS variable; individual resets only custom properties."
+    ],
+    "correctAnswer": "all sets all properties at once; resetting individual properties only resets specified ones.",
+    "explanation": "The all property applies to every CSS property, resetting them to their initial or inherited values, whereas resetting individual properties only affects the properties you list."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain CSS animations and transitions. What is the difference?",
+    "options": [
+      "Animations use @keyframes; transitions change property values over time.",
+      "Transitions use @keyframes; animations change property values over time.",
+      "Both are same; difference is vendor prefixes.",
+      "Animations are for layout changes; transitions are for color changes."
+    ],
+    "correctAnswer": "Animations use @keyframes; transitions change property values over time.",
+    "explanation": "Animations are defined with @keyframes and can run independently, while transitions automatically animate a change in a property when its value changes."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the transition-timing-function property and what values can it take?",
+    "options": [
+      "It controls speed curve; values: linear, ease, ease-in, ease-out, ease-in-out, cubic-bezier.",
+      "It sets duration; values: 1s, 2s, 3s.",
+      "It defines delay; values: 0s, 0.5s.",
+      "It sets property names; values: opacity, transform."
+    ],
+    "correctAnswer": "It controls speed curve; values: linear, ease, ease-in, ease-out, ease-in-out, cubic-bezier.",
+    "explanation": "transition-timing-function determines how the intermediate values are calculated during a transition."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are @keyframes in CSS and how are they used to define animations?",
+    "options": [
+      "They define stages of animation; used with animation-name.",
+      "They set transition durations; used with transition property.",
+      "They declare CSS variables; used with :root.",
+      "They specify media queries; used with @media."
+    ],
+    "correctAnswer": "They define stages of animation; used with animation-name.",
+    "explanation": "An @keyframes rule lists the keyframes that describe the intermediate states of an animation."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between animation-fill-mode values (none, forwards, backwards, both)?",
+    "options": [
+      "none: no effect; forwards: retains final state; backwards: applies before start; both: applies both.",
+      "none: retains final state; forwards: no effect; backwards: applies after end; both: applies before start.",
+      "none: applies before start; forwards: after end; backwards: none; both: both.",
+      "none: applies after end; forwards: before start; backwards: both; both: none."
+    ],
+    "correctAnswer": "none: no effect; forwards: retains final state; backwards: applies before start; both: applies both.",
+    "explanation": "animation-fill-mode controls how the animation applies styles before it starts and after it ends."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the will-change CSS property and when should you use it?",
+    "options": [
+      "It hints the browser to pre-render an element for future changes, used before heavy animations",
+      "It changes the color of an element",
+      "It changes the layout of an element",
+      "It changes the font of an element"
+    ],
+    "correctAnswer": "It hints the browser to pre-render an element for future changes, used before heavy animations",
+    "explanation": "will-change tells the browser to optimize the element for upcoming changes, reducing repaint costs."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between animating with CSS transforms/opacity vs animating layout properties like width/height, in terms of performance?",
+    "options": [
+      "Transforms and opacity are composited and avoid layout reflow, making them faster",
+      "Width and height are composited and faster",
+      "Transforms cause reflow and are slower",
+      "Width and height cause compositing and are faster"
+    ],
+    "correctAnswer": "Transforms and opacity are composited and avoid layout reflow, making them faster",
+    "explanation": "Changing transform or opacity only affects the compositor layer, while width/height triggers layout and paint."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the transform property and what are common 2D and 3D transform functions?",
+    "options": [
+      "It moves an element in 2D/3D space; functions include translate, rotate, scale, skew, perspective",
+      "It changes the color of an element",
+      "It changes the font of an element",
+      "It changes the layout of an element"
+    ],
+    "correctAnswer": "It moves an element in 2D/3D space; functions include translate, rotate, scale, skew, perspective",
+    "explanation": "The transform property applies geometric transformations; common functions are translate, rotate, scale, skew, and perspective."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is hardware/GPU acceleration in CSS animations and how do you trigger it?",
+    "options": [
+      "It offloads rendering to the GPU, triggered by using transform or opacity changes or setting translateZ(0)",
+      "It offloads rendering to the CPU, triggered by color changes",
+      "It offloads rendering to the GPU, triggered by width changes",
+      "It offloads rendering to the CPU, triggered by transform changes"
+    ],
+    "correctAnswer": "It offloads rendering to the GPU, triggered by using transform or opacity changes or setting translateZ(0)",
+    "explanation": "GPU acceleration is achieved when the browser can render changes on a separate GPU layer, which happens with transforms, opacity, or translateZ(0)."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between animation-iteration-count: infinite and a fixed count?",
+    "options": [
+      "Infinite repeats forever, fixed repeats a specified number of times",
+      "Infinite repeats once, fixed repeats forever",
+      "Infinite repeats a specified number of times, fixed repeats forever",
+      "Infinite repeats forever, fixed repeats once"
+    ],
+    "correctAnswer": "Infinite repeats forever, fixed repeats a specified number of times",
+    "explanation": "The infinite value causes the animation to loop indefinitely; a numeric value limits the number of iterations."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is FLIP technique in the context of CSS/JS animations?",
+    "options": [
+      "A method to flip elements horizontally.",
+      "A technique for optimizing animations by capturing positions before and after changes.",
+      "A library for 3D transformations.",
+      "A CSS property for flipping content."
+    ],
+    "correctAnswer": "A technique for optimizing animations by capturing positions before and after changes.",
+    "explanation": "FLIP stands for First, Last, Invert, Play; it captures element positions before and after changes, calculates delta, and animates smoothly."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is CSS-in-JS and what are its trade-offs?",
+    "options": [
+      "Writing CSS inside JavaScript files, enabling scoped styles but increasing bundle size.",
+      "Using CSS files inside JavaScript functions, which reduces performance.",
+      "A technique to convert CSS to JavaScript objects, eliminating the need for CSS files.",
+      "A method to embed CSS directly in HTML tags."
+    ],
+    "correctAnswer": "Writing CSS inside JavaScript files, enabling scoped styles but increasing bundle size.",
+    "explanation": "CSS-in-JS writes styles as JS objects or template literals, providing scoped, dynamic styles at the cost of larger bundles and runtime overhead."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is BEM (Block Element Modifier) naming convention and why is it used?",
+    "options": [
+      "A naming convention that uses hyphens to separate words.",
+      "A methodology for naming CSS classes to avoid specificity issues and improve maintainability.",
+      "A tool for automatically generating CSS.",
+      "A CSS preprocessor."
+    ],
+    "correctAnswer": "A methodology for naming CSS classes to avoid specificity issues and improve maintainability.",
+    "explanation": "BEM structures class names into block__element--modifier, creating clear, reusable, low-specificity styles."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between utility-first CSS (like Tailwind) and traditional semantic CSS?",
+    "options": [
+      "Utility-first uses pre-built classes for common styles, while semantic uses descriptive class names for components.",
+      "Utility-first is only for JavaScript frameworks.",
+      "Semantic CSS is always faster to load.",
+      "Tailwind is a CSS preprocessor."
+    ],
+    "correctAnswer": "Utility-first uses pre-built classes for common styles, while semantic uses descriptive class names for components.",
+    "explanation": "Utility-first provides many small, single-purpose classes; semantic CSS uses meaningful class names that describe the component."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CSS preprocessor (like SASS or LESS) and what advantages does it offer?",
+    "options": [
+      "A tool that compiles CSS from a higher-level language, adding variables, nesting, mixins.",
+      "A browser extension for debugging CSS.",
+      "A CSS property that allows preprocessing of images.",
+      "A method to minify CSS."
+    ],
+    "correctAnswer": "A tool that compiles CSS from a higher-level language, adding variables, nesting, mixins.",
+    "explanation": "Preprocessors let you write more maintainable code with variables, nesting, mixins, then compile to plain CSS."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SASS's @mixin and @extend?",
+    "options": [
+      "@mixin allows you to define reusable blocks of CSS that can accept arguments, while @extend merges selectors to share the same rules.",
+      "@mixin merges selectors, @extend defines reusable blocks with arguments.",
+      "Both do the same thing, just different syntax.",
+      "@mixin is only for variables, @extend is for mixins."
+    ],
+    "correctAnswer": "@mixin allows you to define reusable blocks of CSS that can accept arguments, while @extend merges selectors to share the same rules.",
+    "explanation": "@mixin creates reusable style blocks (optionally with parameters) that are included where needed; @extend merges selectors so they share the same rule set, reducing duplication."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is PostCSS and how is it different from a preprocessor like SASS?",
+    "options": [
+      "PostCSS is a JavaScript-based tool that uses plugins to transform CSS, operating on standard CSS, whereas SASS is a preprocessor that adds its own syntax and compiles to CSS.",
+      "PostCSS is a CSS preprocessor that adds variables and nesting.",
+      "PostCSS compiles SCSS to CSS.",
+      "PostCSS is a browser engine."
+    ],
+    "correctAnswer": "PostCSS is a JavaScript-based tool that uses plugins to transform CSS, operating on standard CSS, whereas SASS is a preprocessor that adds its own syntax and compiles to CSS.",
+    "explanation": "PostCSS works on plain CSS with a plugin ecosystem, while SASS introduces its own syntax (SCSS/Sass) that must be compiled to CSS."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSS Modules and how do they solve the global namespace problem?",
+    "options": [
+      "CSS Modules scope class names locally by generating unique identifiers, preventing clashes across components.",
+      "CSS Modules combine all CSS into a single global file.",
+      "CSS Modules use !important to override global styles.",
+      "CSS Modules are a type of preprocessor."
+    ],
+    "correctAnswer": "CSS Modules scope class names locally by generating unique identifiers, preventing clashes across components.",
+    "explanation": "Each class name is transformed into a unique hash, so styles are component‑scoped and do not pollute the global namespace."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is critical CSS and why is it used for performance optimization?",
+    "options": [
+      "Critical CSS is the minimal CSS required to render above-the-fold content, inlined to reduce render‑blocking resources.",
+      "Critical CSS is the CSS that is loaded after the page is fully rendered.",
+      "Critical CSS is a CSS framework for critical UI components.",
+      "Critical CSS refers to CSS that contains errors."
+    ],
+    "correctAnswer": "Critical CSS is the minimal CSS required to render above-the-fold content, inlined to reduce render‑blocking resources.",
+    "explanation": "Inlining only the styles needed for initial view eliminates render‑blocking network requests, speeding up first paint."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ITCSS (Inverted Triangle CSS) methodology?",
+    "options": [
+      "ITCSS is a layered architecture that organizes CSS from generic, low-specificity rules at the base to high-specificity, component‑specific rules at the top.",
+      "ITCSS is a CSS preprocessor.",
+      "ITCSS stands for Inline Tailwind CSS System.",
+      "ITCSS is a JavaScript library for styling."
+    ],
+    "correctAnswer": "ITCSS is a layered architecture that organizes CSS from generic, low-specificity rules at the base to high-specificity, component‑specific rules at the top.",
+    "explanation": "ITCSS structures styles in a logical hierarchy (settings, tools, generic, elements, objects, components, utilities) to manage specificity and scalability."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between atomic CSS and component-scoped CSS?",
+    "options": [
+      "Atomic CSS uses single-purpose classes, component-scoped CSS encapsulates styles within a component.",
+      "Atomic CSS is scoped to components, component-scoped CSS uses utility classes.",
+      "Both are the same.",
+      "Atomic CSS is only for layout, component-scoped CSS is for typography."
+    ],
+    "correctAnswer": "Atomic CSS uses single-purpose classes, component-scoped CSS encapsulates styles within a component.",
+    "explanation": "Atomic CSS focuses on reusable utility classes that apply one style at a time, while component-scoped CSS keeps styles tied to a specific component, preventing leakage."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is reflow and repaint in CSS rendering, and how can you minimize them?",
+    "options": [
+      "Reflow recalculates layout, repaint updates pixels; minimize by batching DOM changes and using transform/opacity.",
+      "Reflow updates pixels, repaint recalculates layout; minimize by using display:none.",
+      "Both are same; minimize by using CSS variables.",
+      "Reflow is only for animations; repaint is only for static pages."
+    ],
+    "correctAnswer": "Reflow recalculates layout, repaint updates pixels; minimize by batching DOM changes and using transform/opacity.",
+    "explanation": "Reflow (layout) recomputes geometry; repaint (painting) updates pixels. Grouping DOM changes and using transforms/opacity avoids layout thrashing."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between properties that trigger layout, paint, and composite in the browser rendering pipeline?",
+    "options": [
+      "Layout triggers reflow, paint triggers repaint, composite triggers compositing layers.",
+      "Paint triggers reflow, layout triggers repaint, composite triggers layout.",
+      "Composite triggers reflow, paint triggers layout, layout triggers composite.",
+      "None of the above."
+    ],
+    "correctAnswer": "Layout triggers reflow, paint triggers repaint, composite triggers compositing layers.",
+    "explanation": "Layout properties (e.g., width, height) cause reflow; paint properties (e.g., background-color) cause repaint; composite properties (e.g., transform, opacity) trigger compositing."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the content-visibility CSS property used for?",
+    "options": [
+      "It allows the browser to skip rendering of offscreen content to improve performance.",
+      "It controls the visibility of text content only.",
+      "It is used to hide images.",
+      "It sets the opacity of an element."
+    ],
+    "correctAnswer": "It allows the browser to skip rendering of offscreen content to improve performance.",
+    "explanation": "content-visibility: auto tells the browser to skip layout, paint, and compositing for hidden or offscreen content, boosting performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between using transform: translate() and changing top/left for positioning animations, performance-wise?",
+    "options": [
+      "transform: translate() uses GPU compositing and is smoother; top/left triggers layout and is slower.",
+      "top/left uses GPU compositing; transform: translate() triggers layout.",
+      "Both are identical in performance.",
+      "transform: translate() only works on block elements."
+    ],
+    "correctAnswer": "transform: translate() uses GPU compositing and is smoother; top/left triggers layout and is slower.",
+    "explanation": "transform creates a compositing layer and avoids layout changes, making animations smoother compared to top/left which forces reflow."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the contain CSS property?",
+    "options": [
+      "To specify the containment of an element's layout, painting, and style calculations.",
+      "To define the background color of an element.",
+      "To set the width and height of an element.",
+      "To control the visibility of an element."
+    ],
+    "correctAnswer": "To specify the containment of an element's layout, painting, and style calculations.",
+    "explanation": "The contain property limits the scope of layout, paint, and style calculations to improve performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the browser compute the CSSOM and combine it with the DOM to build the render tree?",
+    "options": [
+      "It parses CSS into a CSSOM, then walks the DOM, matching selectors to build render tree nodes.",
+      "It merges CSSOM and DOM into a single tree before layout.",
+      "It ignores CSSOM and uses only DOM.",
+      "It builds render tree from CSSOM only."
+    ],
+    "correctAnswer": "It parses CSS into a CSSOM, then walks the DOM, matching selectors to build render tree nodes.",
+    "explanation": "The browser creates a CSSOM from stylesheets, then traverses the DOM to match rules and construct the render tree."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between visibility: hidden and opacity: 0?",
+    "options": [
+      "visibility: hidden removes the element from the layout flow, opacity: 0 keeps it in flow but invisible.",
+      "visibility: hidden keeps the element in flow but invisible, opacity: 0 removes it from flow.",
+      "Both hide the element, but visibility: hidden makes it non-interactive while opacity: 0 keeps it interactive.",
+      "Both hide the element and make it non-interactive."
+    ],
+    "correctAnswer": "Both hide the element, but visibility: hidden makes it non-interactive while opacity: 0 keeps it interactive.",
+    "explanation": "visibility: hidden hides the element and disables interaction; opacity: 0 makes it fully transparent but still interactive and occupies space."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overflow: hidden, scroll, and auto?",
+    "options": [
+      "hidden hides overflow content, scroll always shows scrollbars, auto shows scrollbars only when needed.",
+      "hidden shows scrollbars only when needed, scroll hides overflow, auto always shows scrollbars.",
+      "hidden shows scrollbars always, scroll hides overflow, auto shows scrollbars only when needed.",
+      "hidden hides overflow content, scroll shows scrollbars only when needed, auto always shows scrollbars."
+    ],
+    "correctAnswer": "hidden hides overflow content, scroll always shows scrollbars, auto shows scrollbars only when needed.",
+    "explanation": "overflow: hidden clips content, scroll forces scrollbars, auto shows them only if content overflows."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CSS box-shadow property and how do its parameters work?",
+    "options": [
+      "It adds a shadow to an element; parameters are offset-x, offset-y, blur-radius, spread-radius, and color.",
+      "It adds a border; parameters are width, style, color.",
+      "It changes background; parameters are color and opacity.",
+      "It adds a gradient; parameters are direction and color stops."
+    ],
+    "correctAnswer": "It adds a shadow to an element; parameters are offset-x, offset-y, blur-radius, spread-radius, and color.",
+    "explanation": "box-shadow creates a shadow with specified offsets, blur, spread, and color to enhance visual depth."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between linear-gradient and radial-gradient in CSS?",
+    "options": [
+      "linear-gradient draws a gradient along a straight line, while radial-gradient draws a gradient radiating from a center point.",
+      "linear-gradient uses color stops, while radial-gradient uses only two colors.",
+      "linear-gradient only works on backgrounds, while radial-gradient works on borders.",
+      "linear-gradient is CSS3, while radial-gradient is CSS4."
+    ],
+    "correctAnswer": "linear-gradient draws a gradient along a straight line, while radial-gradient draws a gradient radiating from a center point.",
+    "explanation": "linear-gradient creates a gradient along a straight axis, whereas radial-gradient creates a circular or elliptical gradient that radiates from a center point."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the object-fit property used for on images and videos?",
+    "options": [
+      "to control how the element's content is resized to fit its container.",
+      "to set the opacity of the element.",
+      "to define the aspect ratio of the element.",
+      "to apply a filter effect."
+    ],
+    "correctAnswer": "to control how the element's content is resized to fit its container.",
+    "explanation": "object-fit specifies how the content of a replaced element (image/video) should be resized to fit its box, e.g., contain, cover, fill, etc."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between currentColor and inherit for color values?",
+    "options": [
+      "currentColor uses the element's computed color; inherit passes the color from the parent.",
+      "currentColor inherits from parent; inherit uses the element's own color.",
+      "currentColor is a keyword for black; inherit is for transparent.",
+      "currentColor is only for text; inherit is for background."
+    ],
+    "correctAnswer": "currentColor uses the element's computed color; inherit passes the color from the parent.",
+    "explanation": "currentColor refers to the element's own color value, while inherit forces the property to take the value from its parent element."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the writing-mode property used for in CSS?",
+    "options": [
+      "to set the direction in which text is laid out (horizontal or vertical).",
+      "to rotate the entire page.",
+      "to change the font size.",
+      "to control line spacing."
+    ],
+    "correctAnswer": "to set the direction in which text is laid out (horizontal or vertical).",
+    "explanation": "writing-mode controls the flow of text, allowing horizontal, vertical, or sideways writing."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the ch, vw, vh, and vmin/vmax units?",
+    "options": [
+      "ch is based on the width of the '0' character; vw/vh are viewport width/height; vmin/vmax are the smaller/larger of vw and vh.",
+      "ch is viewport width; vw/vh are character width; vmin/vmax are viewport height.",
+      "ch is for color; vw/vh for width; vmin/vmax for maximum.",
+      "ch is for font size; vw/vh for vertical height; vmin/vmax for minimum."
+    ],
+    "correctAnswer": "ch is based on the width of the '0' character; vw/vh are viewport width/height; vmin/vmax are the smaller/larger of vw and vh.",
+    "explanation": "ch measures relative to the '0' glyph width, vw/vh are percentages of the viewport, and vmin/vmax are the min/max of vw and vh respectively."
+  }
 ]

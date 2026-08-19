@@ -1,3 +1,1022 @@
 [
-
+  {
+    "difficulty": "Easy",
+    "question": "What is HTML and what does it stand for?",
+    "options": [
+      "HyperText Markup Language, a language for creating web pages",
+      "Hyperlink Transfer Machine, a protocol for data transfer",
+      "Home Tool Markup Language, a desktop application",
+      "HyperText Modeling Language, a database schema"
+    ],
+    "correctAnswer": "HyperText Markup Language, a language for creating web pages",
+    "explanation": "HTML stands for HyperText Markup Language and is used to structure content on the web."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTML elements and HTML tags?",
+    "options": [
+      "Elements are the complete units including start tag, content, and end tag, while tags are only the opening or closing markup",
+      "Elements are only the opening tags, tags are the closing tags",
+      "Elements refer to CSS, tags refer to JavaScript",
+      "There is no difference; they are synonyms"
+    ],
+    "correctAnswer": "Elements are the complete units including start tag, content, and end tag, while tags are only the opening or closing markup",
+    "explanation": "An element consists of a start tag, optional content, and an end tag; a tag is just the markup itself."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the basic structure of an HTML document?",
+    "options": [
+      "<!DOCTYPE html>\\\\n<html>\\\\n<head>\\\\n<title>Title</title>\\\\n</head>\\\\n<body>\\\\n...content...\\\\n</body>\\\\n</html>",
+      "<html>\\\\n<head>\\\\n<title>Title</title>\\\\n</head>\\\\n<body>\\\\n...content...\\\\n</html>",
+      "<!DOCTYPE html>\\\\n<head>\\\\n<title>Title</title>\\\\n</head>\\\\n<body>\\\\n...content...\\\\n</body>",
+      "<html>\\n<body>\\n...content...\\n</body>\\n</html>"
+    ],
+    "correctAnswer": "<!DOCTYPE html>\\\\n<html>\\\\n<head>\\\\n<title>Title</title>\\\\n</head>\\\\n<body>\\\\n...content...\\\\n</body>\\\\n</html>",
+    "explanation": "A valid HTML document starts with the DOCTYPE, then html, head (with title), and body sections."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between block-level and inline elements in HTML?",
+    "options": [
+      "Block-level elements start on a new line and take the full width, while inline elements flow within a line and only take the width of their content",
+      "Block-level elements can only contain text, while inline elements can contain other elements",
+      "Block-level elements are deprecated, inline elements are modern",
+      "Both types behave the same; the terms are interchangeable"
+    ],
+    "correctAnswer": "Block-level elements start on a new line and take the full width, while inline elements flow within a line and only take the width of their content",
+    "explanation": "Block-level elements create a new block (e.g., <div>, <p>), whereas inline elements (e.g., <span>, <a>) sit within a line of text."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are semantic HTML elements? Give examples.",
+    "options": [
+      "Elements that clearly describe their meaning to both browser and developer, such as <header>, <nav>, <article>, <section>, <footer>",
+      "Elements that add visual styling, like <b>, <i>, <u>, <font>",
+      "Elements that are only used for scripting, like <script> and <noscript>",
+      "Elements that are deprecated in HTML5, such as <center> and <font>"
+    ],
+    "correctAnswer": "Elements that clearly describe their meaning to both browser and developer, such as <header>, <nav>, <article>, <section>, <footer>",
+    "explanation": "Semantic elements convey the purpose of the content, improving accessibility and SEO."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the <!DOCTYPE html> declaration?",
+    "options": [
+      "It tells the browser which version of HTML the page is written in.",
+      "It defines the character encoding of the document.",
+      "It links an external stylesheet to the page.",
+      "It creates a comment that is ignored by browsers."
+    ],
+    "correctAnswer": "It tells the browser which version of HTML the page is written in.",
+    "explanation": "The doctype informs the browser about the HTML version and triggers standards mode rendering."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between <div> and <span>?",
+    "options": [
+      "<div> is an inline element, while <span> is a block-level element.",
+      "<div> can contain only text, whereas <span> can contain other HTML elements.",
+      "<div> is a block-level element used for layout, while <span> is an inline element used for styling small pieces of text.",
+      "<div> automatically adds a line break, while <span> does not."
+    ],
+    "correctAnswer": "<div> is a block-level element used for layout, while <span> is an inline element used for styling small pieces of text.",
+    "explanation": "<div> creates a block container affecting layout, whereas <span> is inline and typically used for styling fragments of text."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are HTML attributes and how are they used?",
+    "options": [
+      "They are tags that define the structure of a page, used only in the <head> section.",
+      "They are name‑value pairs added to HTML tags to provide additional information or configure behavior.",
+      "They are CSS rules that style HTML elements.",
+      "They are JavaScript functions embedded inside HTML elements."
+    ],
+    "correctAnswer": "They are name‑value pairs added to HTML tags to provide additional information or configure behavior.",
+    "explanation": "Attributes appear inside start tags (e.g., <a href=\"...\">) and modify the element's behavior or provide metadata."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTML and XHTML?",
+    "options": [
+      "HTML is case‑insensitive and allows omitted tags; XHTML is XML‑based, case‑sensitive, and requires well‑formed markup.",
+      "HTML uses .xhtml file extension while XHTML uses .html.",
+      "HTML supports multimedia, XHTML does not.",
+      "HTML is only for web pages, XHTML is for mobile apps."
+    ],
+    "correctAnswer": "HTML is case‑insensitive and allows omitted tags; XHTML is XML‑based, case‑sensitive, and requires well‑formed markup.",
+    "explanation": "XHTML follows XML rules, requiring proper nesting, closing tags, and case sensitivity, unlike traditional HTML."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the <head> tag and what can it contain?",
+    "options": [
+      "It displays the main content of the page and can contain paragraphs and images.",
+      "It defines the footer of the document and contains navigation links.",
+      "It contains meta-information about the document such as title, meta tags, links to stylesheets, and scripts; it is not displayed in the page body.",
+      "It is used to embed video content directly into the page."
+    ],
+    "correctAnswer": "It contains meta-information about the document such as title, meta tags, links to stylesheets, and scripts; it is not displayed in the page body.",
+    "explanation": "The <head> section holds metadata, title, links to CSS, scripts, and other information that does not render as page content."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between <meta> tags used for charset and viewport?",
+    "options": [
+      "Charset defines the character encoding of the document, while viewport controls the layout on mobile devices",
+      "Charset sets the page language, while viewport sets the page title",
+      "Charset defines CSS styles, while viewport defines JavaScript behavior",
+      "Both tags serve the same purpose"
+    ],
+    "correctAnswer": "Charset defines the character encoding of the document, while viewport controls the layout on mobile devices",
+    "explanation": "The charset meta tag tells the browser which character set to use (e.g., UTF-8), whereas the viewport meta tag tells the browser how to scale and display the page on different screen sizes."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an ordered list and an unordered list?",
+    "options": [
+      "An ordered list (<ol>) displays items with numbers, while an unordered list (<ul>) displays items with bullet points",
+      "An ordered list is used only for navigation menus, while an unordered list is used only for forms",
+      "An ordered list cannot contain nested lists, but an unordered list can",
+      "An ordered list is styled with CSS only, while an unordered list requires JavaScript"
+    ],
+    "correctAnswer": "An ordered list (<ol>) displays items with numbers, while an unordered list (<ul>) displays items with bullet points",
+    "explanation": "<ol> creates a numbered list, indicating a specific order, whereas <ul> creates a bulleted list where order is not implied."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between <a> href and <a> target attributes?",
+    "options": [
+      "href specifies the URL the link points to, while target specifies where the linked document will open",
+      "href sets the link text, while target sets the link color",
+      "href defines a CSS class for the link, while target defines a JavaScript function to run",
+      "Both attributes are deprecated in HTML5"
+    ],
+    "correctAnswer": "href specifies the URL the link points to, while target specifies where the linked document will open",
+    "explanation": "The href attribute contains the destination URL, and the target attribute determines the browsing context (e.g., _blank opens in a new tab)."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the alt attribute on an <img> tag?",
+    "options": [
+      "It provides alternative text for accessibility and when the image cannot be displayed",
+      "It sets the image border thickness",
+      "It defines the image file size",
+      "It controls the animation speed of the image"
+    ],
+    "correctAnswer": "It provides alternative text for accessibility and when the image cannot be displayed",
+    "explanation": "The alt attribute supplies descriptive text that screen readers can read and that appears if the image fails to load, improving accessibility."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTML entities and regular characters?",
+    "options": [
+      "Entities represent characters that would otherwise be interpreted as markup, using the &...; syntax",
+      "Entities are used only in CSS stylesheets",
+      "Regular characters cannot be displayed in HTML documents",
+      "Entities are only used for emoji characters"
+    ],
+    "correctAnswer": "Entities represent characters that would otherwise be interpreted as markup, using the &...; syntax",
+    "explanation": "HTML entities (e.g., &amp;, &lt;) allow you to display characters like < or & that have special meaning in HTML markup."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between id and class attributes in HTML?",
+    "options": [
+      "An id must be unique within a page, while a class can be used on multiple elements.",
+      "An id can be used on multiple elements, while a class must be unique.",
+      "Both id and class must be unique.",
+      "Both id and class can be used on any number of elements."
+    ],
+    "correctAnswer": "An id must be unique within a page, while a class can be used on multiple elements.",
+    "explanation": "The id attribute is required to be unique in the document, whereas the class attribute can be applied to many elements for shared styling or behavior."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are HTML data attributes and how are they used?",
+    "options": [
+      "Custom attributes prefixed with \"data-\" that store private data for the page and can be accessed via JavaScript.",
+      "Standard attributes that define the visual style of an element.",
+      "Attributes that replace the need for CSS.",
+      "Deprecated attributes removed in HTML5."
+    ],
+    "correctAnswer": "Custom attributes prefixed with \"data-\" that store private data for the page and can be accessed via JavaScript.",
+    "explanation": "Data attributes allow developers to embed custom data in HTML elements; they start with \"data-\" and are accessible through the DOM (e.g., element.dataset)."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <section>, <article>, and <div>?",
+    "options": [
+      "<section> defines a thematic grouping, <article> defines a self-contained composition, and <div> is a generic container with no semantic meaning.",
+      "<section> is for navigation, <article> for footers, <div> for headers.",
+      "All three are identical and interchangeable.",
+      "<div> provides semantic meaning while <section> and <article> do not."
+    ],
+    "correctAnswer": "<section> defines a thematic grouping, <article> defines a self-contained composition, and <div> is a generic container with no semantic meaning.",
+    "explanation": "<section> groups related content, <article> represents an independent piece that could be syndicated, and <div> is a non-semantic block-level element used for styling or scripting."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <header>, <footer>, <nav>, and <aside>?",
+    "options": [
+      "<header> defines introductory content, <footer> defines footer content, <nav> defines navigation links, and <aside> defines tangentially related content.",
+      "<header> is for navigation, <footer> for sidebars, <nav> for headers, <aside> for footers.",
+      "All four are generic containers without semantic meaning.",
+      "<aside> is used for main content, while the others are for decorative purposes."
+    ],
+    "correctAnswer": "<header> defines introductory content, <footer> defines footer content, <nav> defines navigation links, and <aside> defines tangentially related content.",
+    "explanation": "Each element provides specific semantic meaning: <header> for introductory material, <footer> for concluding material, <nav> for navigation blocks, and <aside> for content related to the main flow but not central."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the <figure> and <figcaption> elements?",
+    "options": [
+      "<figure> groups self-contained media content, and <figcaption> provides a caption or legend for that content.",
+      "<figure> creates a table, and <figcaption> adds a header row.",
+      "<figure> is used for form inputs, and <figcaption> validates them.",
+      "<figure> replaces the <img> tag, and <figcaption> replaces the <alt> attribute."
+    ],
+    "correctAnswer": "<figure> groups self-contained media content, and <figcaption> provides a caption or legend for that content.",
+    "explanation": "<figure> is used to encapsulate media such as images, diagrams, or code snippets, and <figcaption> supplies a descriptive caption associated with that figure."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <b>/<strong> and <i>/<em>?",
+    "options": [
+      "<b> provides visual bold styling while <strong> conveys semantic importance; <i> provides visual italic styling while <em> conveys semantic emphasis.",
+      "All four tags are deprecated in HTML5 and should not be used.",
+      "<b> and <i> add CSS classes automatically, whereas <strong> and <em> trigger JavaScript events.",
+      "There is no difference; they are exact synonyms."
+    ],
+    "correctAnswer": "<b> provides visual bold styling while <strong> conveys semantic importance; <i> provides visual italic styling while <em> conveys semantic emphasis.",
+    "explanation": "<b> and <i> are presentational tags, while <strong> and <em> add meaning (importance and emphasis) in addition to default styling."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a void element in HTML? Give examples.",
+    "options": [
+      "Elements that cannot have any content and are self‑closing, such as <img>, <br>, <hr>, and <input>.",
+      "Elements that must contain a <script> child element.",
+      "Elements that require an explicit closing tag like <div> or <p>.",
+      "Elements that are only valid in HTML5 and not in earlier versions."
+    ],
+    "correctAnswer": "Elements that cannot have any content and are self‑closing, such as <img>, <br>, <hr>, and <input>.",
+    "explanation": "Void elements are defined by the HTML specification as having no end tag and no content; they are written as self‑closing tags."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HTML5 and HTML4?",
+    "options": [
+      "HTML5 adds new semantic elements, multimedia tags, and APIs that HTML4 lacks.",
+      "HTML5 removes support for tables entirely, which HTML4 provides.",
+      "HTML4 uses strict XML syntax while HTML5 does not.",
+      "HTML5 is designed only for mobile browsers, whereas HTML4 is for desktop browsers."
+    ],
+    "correctAnswer": "HTML5 adds new semantic elements, multimedia tags, and APIs that HTML4 lacks.",
+    "explanation": "HTML5 introduces elements like <section>, <article>, <video>, <audio>, and many new APIs, expanding capabilities beyond HTML4."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the lang attribute on the <html> tag?",
+    "options": [
+      "It specifies the primary language of the document for accessibility tools, search engines, and translation services.",
+      "It sets the default font family for the entire page.",
+      "It determines the character encoding (e.g., UTF‑8).",
+      "It enables or disables JavaScript execution for the page."
+    ],
+    "correctAnswer": "It specifies the primary language of the document for accessibility tools, search engines, and translation services.",
+    "explanation": "The lang attribute informs browsers and assistive technologies about the document's language, aiding pronunciation, indexing, and translation."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between absolute, relative, and root‑relative URLs in HTML links?",
+    "options": [
+      "An absolute URL includes the full scheme and domain; a relative URL is based on the current document’s path; a root‑relative URL starts with '/' and is resolved from the site root.",
+      "Absolute URLs are used only for images, relative URLs only for scripts, and root‑relative URLs only for CSS files.",
+      "Absolute URLs are always shorter than relative URLs, and root‑relative URLs are identical to absolute URLs.",
+      "There is no functional difference; the three terms are interchangeable."
+    ],
+    "correctAnswer": "An absolute URL includes the full scheme and domain; a relative URL is based on the current document’s path; a root‑relative URL starts with '/' and is resolved from the site root.",
+    "explanation": "These three URL forms determine how the browser resolves the link: absolute includes protocol and host, relative depends on the current location, and root‑relative starts from the domain root."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between <script> placed in the head vs at the end of the body?",
+    "options": [
+      "When placed in the head, the script blocks HTML parsing until it is downloaded and executed; when placed at the end of the body, the HTML is parsed first, so the page renders faster.",
+      "Scripts in the head are executed after the page loads, while scripts at the end run before any content is displayed.",
+      "Head scripts are only for external files, body scripts must be inline.",
+      "There is no difference; browsers treat them the same."
+    ],
+    "correctAnswer": "When placed in the head, the script blocks HTML parsing until it is downloaded and executed; when placed at the end of the body, the HTML is parsed first, so the page renders faster.",
+    "explanation": "A script in the head blocks parsing and rendering until it finishes, whereas placing it just before </body> lets the browser render the page first and then execute the script, improving perceived load speed."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between async and defer attributes on a <script> tag?",
+    "options": [
+      "async downloads the script asynchronously and executes it as soon as it is ready, possibly before HTML parsing finishes; defer downloads asynchronously but executes only after the HTML document has been fully parsed.",
+      "async executes after defer, both block rendering.",
+      "Both async and defer guarantee execution order as they appear in the document.",
+      "async works only with external scripts, defer works only with inline scripts."
+    ],
+    "correctAnswer": "async downloads the script asynchronously and executes it as soon as it is ready, possibly before HTML parsing finishes; defer downloads asynchronously but executes only after the HTML document has been fully parsed.",
+    "explanation": "async runs the script immediately when it finishes downloading, which can interrupt parsing; defer waits until parsing is complete, preserving document order."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <link> and <script> tags in terms of resource loading?",
+    "options": [
+      "<link> is used to load external resources like stylesheets and is fetched in parallel without blocking rendering, while <script> loads JavaScript and can block rendering unless async/defer are used.",
+      "<link> loads JavaScript, <script> loads CSS.",
+      "Both tags load resources synchronously and block rendering.",
+      "Only <script> can load external files; <link> is only for internal resources."
+    ],
+    "correctAnswer": "<link> is used to load external resources like stylesheets and is fetched in parallel without blocking rendering, while <script> loads JavaScript and can block rendering unless async/defer are used.",
+    "explanation": "<link> typically loads CSS, which the browser can fetch in parallel and apply after download, while <script> loads JavaScript that may halt parsing unless its loading behavior is altered with async or defer."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the <base> tag in HTML?",
+    "options": [
+      "It sets the base URL for all relative URLs in the document and optionally the default target for hyperlinks and forms.",
+      "It defines the base font size for the page.",
+      "It creates a base element for CSS inheritance.",
+      "It is used to embed a base64-encoded image."
+    ],
+    "correctAnswer": "It sets the base URL for all relative URLs in the document and optionally the default target for hyperlinks and forms.",
+    "explanation": "The <base> element establishes a reference URL that the browser uses to resolve any relative links or form actions, and can also set a default target window."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an HTML form and what is it used for?",
+    "options": [
+      "An HTML form is a container for input controls that allows users to submit data to a server for processing.",
+      "An HTML form is a way to style text with CSS.",
+      "An HTML form is a script that runs on page load.",
+      "An HTML form is used to embed multimedia content."
+    ],
+    "correctAnswer": "An HTML form is a container for input controls that allows users to submit data to a server for processing.",
+    "explanation": "Forms group input elements (text fields, buttons, etc.) and send the collected data to a server endpoint via GET or POST when the user submits the form."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between GET and POST methods in an HTML form?",
+    "options": [
+      "GET appends form data to the URL and is limited in length; POST sends data in the request body and has no size limit.",
+      "GET encrypts the data while POST does not.",
+      "GET can only be used for submitting forms, POST cannot.",
+      "GET uses HTTP/2 and POST uses HTTP/1.1."
+    ],
+    "correctAnswer": "GET appends form data to the URL and is limited in length; POST sends data in the request body and has no size limit.",
+    "explanation": "GET includes the data in the query string of the URL, which is visible and length‑limited; POST sends the data in the request body, keeping it out of the URL and allowing larger payloads."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <input type='text'> and <textarea>?",
+    "options": [
+      "<input type='text'> creates a single-line text field; <textarea> creates a multi-line text area.",
+      "<input type='text'> supports rich text formatting; <textarea> does not.",
+      "<input type='text'> can upload files; <textarea> cannot.",
+      "<input type='text'> is only for numbers; <textarea> is for dates."
+    ],
+    "correctAnswer": "<input type='text'> creates a single-line text field; <textarea> creates a multi-line text area.",
+    "explanation": "The <input> element with type='text' renders a single‑line input box, whereas <textarea> provides a larger, multi‑line area for longer text."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different input types introduced in HTML5?",
+    "options": [
+      "email, url, number, date, range, color, tel, search, datetime-local, month, week, time",
+      "text, password, hidden, button, submit, reset",
+      "file, image, hidden, password",
+      "radio, checkbox, select, option"
+    ],
+    "correctAnswer": "email, url, number, date, range, color, tel, search, datetime-local, month, week, time",
+    "explanation": "HTML5 added many new input types such as email, url, number, date, range, color, tel, search, datetime-local, month, week, and time to improve native validation and UI controls."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the required, pattern, and placeholder attributes in form inputs?",
+    "options": [
+      "required forces a field to be filled; pattern defines a regex the input must match; placeholder shows example text inside the field.",
+      "required encrypts the data; pattern sets the field's background color; placeholder disables the field.",
+      "required makes the field read‑only; pattern changes the input type; placeholder submits the form automatically.",
+      "required adds a tooltip; pattern validates the form on the server; placeholder sets the field's name attribute."
+    ],
+    "correctAnswer": "required forces a field to be filled; pattern defines a regex the input must match; placeholder shows example text inside the field.",
+    "explanation": "'required' makes the field mandatory, 'pattern' provides a regular‑expression constraint, and 'placeholder' displays hint text that disappears when the user types."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a <select> element and a <datalist> element?",
+    "options": [
+      "<select> provides a dropdown list of predefined options that must be chosen; <datalist> offers autocomplete suggestions while still allowing free text entry.",
+      "<select> allows multiple selections by default; <datalist> does not support multiple selections.",
+      "<select> is only for numeric values; <datalist> is only for dates.",
+      "<select> requires JavaScript to function; <datalist> works without any HTML."
+    ],
+    "correctAnswer": "<select> provides a dropdown list of predefined options that must be chosen; <datalist> offers autocomplete suggestions while still allowing free text entry.",
+    "explanation": "The <select> element restricts input to its listed options, whereas <datalist> supplies suggested values but lets the user type any value."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is form validation and how does HTML5 support native validation?",
+    "options": [
+      "Form validation checks user input on the server side only; HTML5 provides no native validation features.",
+      "Form validation ensures that user input meets specified criteria; HTML5 adds built-in attributes like required, pattern, type, minlength, etc., that perform client‑side validation automatically.",
+      "Form validation is the process of encrypting form data; HTML5 supports it via the <encrypt> tag.",
+      "Form validation refers to styling forms with CSS; HTML5 supports it through the <style> attribute."
+    ],
+    "correctAnswer": "Form validation ensures that user input meets specified criteria; HTML5 adds built-in attributes like required, pattern, type, minlength, etc., that perform client‑side validation automatically.",
+    "explanation": "HTML5 introduces attributes such as required, pattern, type, minlength, maxlength, etc., which let browsers validate inputs on the client without extra JavaScript."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <button type='submit'> and <button type='button'>?",
+    "options": [
+      "<button type='submit'> triggers form submission; <button type='button'> does nothing unless scripted.",
+      "<button type='submit'> creates a new form; <button type='button'> deletes the form.",
+      "<button type='submit'> is only for GET method; <button type='button'> is only for POST.",
+      "<button type='submit'> disables the form; <button type='button'> enables it."
+    ],
+    "correctAnswer": "<button type='submit'> triggers form submission; <button type='button'> does nothing unless scripted.",
+    "explanation": "A submit button automatically sends the form data to the action URL, while a button of type 'button' has no default behavior and must be handled with script."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the <fieldset> and <legend> elements?",
+    "options": [
+      "<fieldset> groups related controls; <legend> provides a caption for the group.",
+      "<fieldset> creates a table; <legend> adds a tooltip.",
+      "<fieldset> validates inputs; <legend> disables them.",
+      "<fieldset> is for styling only; <legend> is for scripting."
+    ],
+    "correctAnswer": "<fieldset> groups related controls; <legend> provides a caption for the group.",
+    "explanation": "<fieldset> semantically groups form controls, and <legend> gives that group a visible title, improving accessibility and organization."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between disabled and readonly attributes on form inputs?",
+    "options": [
+      "disabled prevents the control from being focused or submitted; readonly allows focus but prevents editing while still submitting its value.",
+      "disabled makes the control invisible; readonly hides its label.",
+      "disabled works only on buttons; readonly works only on text inputs.",
+      "disabled and readonly are synonyms."
+    ],
+    "correctAnswer": "disabled prevents the control from being focused or submitted; readonly allows focus but prevents editing while still submitting its value.",
+    "explanation": "A disabled field is excluded from form submission and cannot receive focus; a readonly field can be focused and its value is sent, but the user cannot modify it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the name attribute on form inputs and how is it used on submission?",
+    "options": [
+      "The name attribute identifies the control's data key; upon submission the name/value pair is sent to the server.",
+      "The name attribute sets the visible label of the input.",
+      "The name attribute determines the input's CSS class.",
+      "The name attribute encrypts the input value."
+    ],
+    "correctAnswer": "The name attribute identifies the control's data key; upon submission the name/value pair is sent to the server.",
+    "explanation": "When a form is submitted, each input's name becomes the key in the query string or request body, paired with its current value, allowing the server to process the data."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of <thead>, <tbody>, and <tfoot> in a table?",
+    "options": [
+      "They define header, body, and footer rows for styling and accessibility.",
+      "They are used to create separate tables.",
+      "They are deprecated.",
+      "They automatically sort table data."
+    ],
+    "correctAnswer": "They define header, body, and footer rows for styling and accessibility.",
+    "explanation": "Thead, tbody, and tfoot group rows semantically, aiding styling, accessibility, and scripts."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between the <video> and <audio> elements?",
+    "options": [
+      "<video> displays video, <audio> displays audio.",
+      "<video> only works in Chrome, <audio> works in all browsers.",
+      "<video> requires a source tag, <audio> does not.",
+      "<video> is for images, <audio> is for sound."
+    ],
+    "correctAnswer": "<video> displays video, <audio> displays audio.",
+    "explanation": "<video> embeds video content; <audio> embeds audio-only content."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the common attributes used with the <video> tag (controls, autoplay, loop, muted)?",
+    "options": [
+      "controls, autoplay, loop, muted",
+      "src, width, height, poster",
+      "alt, title, class, id",
+      "data, role, aria-label, tabindex"
+    ],
+    "correctAnswer": "controls, autoplay, loop, muted",
+    "explanation": "These attributes control playback UI, auto‑play, looping, and mute state."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the <source> element inside <video> or <audio>?",
+    "options": [
+      "To provide multiple media formats for browser compatibility.",
+      "To set the volume level.",
+      "To display captions.",
+      "To embed subtitles."
+    ],
+    "correctAnswer": "To provide multiple media formats for browser compatibility.",
+    "explanation": "<source> lets the browser pick the first supported format, ensuring compatibility."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between <img>, <picture>, and <source> for responsive images?",
+    "options": [
+      "<img> displays a single image, <picture> allows multiple sources for different media queries, <source> is used within <picture> to specify each source.",
+      "<img> is for video, <picture> is for audio, <source> is for text.",
+      "<img> is deprecated, <picture> is new, <source> is obsolete.",
+      "All three are identical."
+    ],
+    "correctAnswer": "<img> displays a single image, <picture> allows multiple sources for different media queries, <source> is used within <picture> to specify each source.",
+    "explanation": "<picture> with <source> lets browsers choose the best image based on media queries or type."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the srcset attribute used for in responsive images?",
+    "options": [
+      "Specify multiple image sources for different resolutions",
+      "Set the source of an image element",
+      "Define the alt text",
+      "Control image caching"
+    ],
+    "correctAnswer": "Specify multiple image sources for different resolutions",
+    "explanation": "The srcset attribute lets the browser choose the most appropriate image based on device pixel density, viewport size, or other criteria, enabling responsive image delivery."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SVG and Canvas for rendering graphics in HTML?",
+    "options": [
+      "SVG is vector-based and DOM-accessible, Canvas is pixel-based and imperative",
+      "SVG is raster and Canvas is vector",
+      "Both are vector but SVG is older",
+      "Canvas is only for 3D"
+    ],
+    "correctAnswer": "SVG is vector-based and DOM-accessible, Canvas is pixel-based and imperative",
+    "explanation": "SVG creates scalable vector graphics that are part of the DOM and can be styled or scripted, while Canvas draws pixels on a bitmap and is manipulated imperatively via JavaScript."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between localStorage, sessionStorage, and cookies?",
+    "options": [
+      "localStorage persists across sessions, sessionStorage lasts per tab, cookies are sent to server",
+      "localStorage is server-side, sessionStorage is client-side, cookies are database",
+      "localStorage is for images, sessionStorage for text, cookies for audio",
+      "All are the same but have different names"
+    ],
+    "correctAnswer": "localStorage persists across sessions, sessionStorage lasts per tab, cookies are sent to server",
+    "explanation": "localStorage data remains until cleared, sessionStorage data is cleared when the tab closes, and cookies are included with every HTTP request to the server."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the size limitation of localStorage compared to cookies?",
+    "options": [
+      "localStorage ~5MB, cookies ~4KB",
+      "localStorage ~4KB, cookies ~5MB",
+      "Both ~5MB",
+      "localStorage unlimited, cookies limited"
+    ],
+    "correctAnswer": "localStorage ~5MB, cookies ~4KB",
+    "explanation": "Browsers typically allow about 5 megabytes per origin for localStorage, whereas each cookie is limited to roughly 4 kilobytes."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous storage APIs (e.g., localStorage vs IndexedDB)?",
+    "options": [
+      "localStorage is synchronous and blocks the main thread, IndexedDB is asynchronous and non-blocking",
+      "localStorage is async, IndexedDB is sync",
+      "Both are sync",
+      "Both are async"
+    ],
+    "correctAnswer": "localStorage is synchronous and blocks the main thread, IndexedDB is asynchronous and non-blocking",
+    "explanation": "localStorage operations execute immediately and can freeze the UI, while IndexedDB uses callbacks or promises to perform operations without blocking the main thread."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is IndexedDB and when would you use it over localStorage?",
+    "options": [
+      "IndexedDB is a synchronous key-value store that stores only strings.",
+      "IndexedDB is an asynchronous object store that can store structured data and large amounts of data.",
+      "IndexedDB is limited to 5MB of storage per domain.",
+      "IndexedDB is only available in Internet Explorer."
+    ],
+    "correctAnswer": "IndexedDB is an asynchronous object store that can store structured data and large amounts of data.",
+    "explanation": "IndexedDB supports complex data types, larger storage limits, and asynchronous access, making it preferable over localStorage for large or structured data."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the HttpOnly and Secure flags on cookies?",
+    "options": [
+      "HttpOnly prevents client‑side scripts from accessing the cookie, and Secure ensures the cookie is only sent over HTTPS.",
+      "HttpOnly allows cross‑site requests, and Secure allows the cookie to be sent over HTTP.",
+      "HttpOnly encrypts the cookie value, and Secure sets the cookie to be HTTP only.",
+      "HttpOnly and Secure are the same flag and both restrict cookie usage to the same domain."
+    ],
+    "correctAnswer": "HttpOnly prevents client‑side scripts from accessing the cookie, and Secure ensures the cookie is only sent over HTTPS.",
+    "explanation": "HttpOnly blocks JavaScript access, mitigating XSS, while Secure forces HTTPS transmission, protecting the cookie from being sent over insecure connections."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SameSite attribute on cookies and why was it introduced?",
+    "options": [
+      "It controls whether a cookie is sent with cross‑site requests, introduced to mitigate CSRF attacks.",
+      "It determines the expiration time of a cookie.",
+      "It specifies the domain that can read the cookie.",
+      "SameSite is a feature for session storage only."
+    ],
+    "correctAnswer": "It controls whether a cookie is sent with cross‑site requests, introduced to mitigate CSRF attacks.",
+    "explanation": "SameSite limits cookie transmission to same-site contexts, reducing the risk of cross‑site request forgery."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Cache API and how is it used with Service Workers?",
+    "options": [
+      "It allows storing network responses for offline use and is accessed by Service Workers to intercept fetch events.",
+      "It is a server‑side caching mechanism for database queries.",
+      "It replaces localStorage for all client‑side data storage.",
+      "It is only used for caching images in the browser."
+    ],
+    "correctAnswer": "It allows storing network responses for offline use and is accessed by Service Workers to intercept fetch events.",
+    "explanation": "The Cache API provides a key‑value store of Request/Response objects that Service Workers can read/write during fetch handling, enabling offline functionality."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are Service Workers and how do they enable offline functionality?",
+    "options": [
+      "Background scripts that intercept network requests, allowing the app to serve cached assets when offline.",
+      "They are only used for push notifications.",
+      "They are part of HTML5 form validation.",
+      "They are used to render CSS stylesheets."
+    ],
+    "correctAnswer": "Background scripts that intercept network requests, allowing the app to serve cached assets when offline.",
+    "explanation": "Service Workers run separately from the main thread, intercept fetch events, and can serve cached responses, enabling the application to function without a network connection."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Progressive Web App (PWA) and what HTML/browser features enable it?",
+    "options": [
+      "A native app built with HTML, CSS, and JS that runs offline using Service Workers and Web App Manifest.",
+      "A web page that uses AJAX to load content dynamically.",
+      "A website that uses Flash for animations.",
+      "A server-side rendered application."
+    ],
+    "correctAnswer": "A native app built with HTML, CSS, and JS that runs offline using Service Workers and Web App Manifest.",
+    "explanation": "PWAs are web apps that feel native, using Service Workers for offline caching, a Web App Manifest for installability, and modern APIs to provide a native‑like experience."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the History API (pushState) and traditional page navigation?",
+    "options": [
+      "pushState changes the URL without reloading the page, while traditional navigation reloads the page.",
+      "pushState loads a new page from the server, traditional navigation updates the DOM.",
+      "pushState is only for mobile browsers, traditional navigation is for desktop.",
+      "pushState is a CSS feature."
+    ],
+    "correctAnswer": "pushState changes the URL without reloading the page, while traditional navigation reloads the page.",
+    "explanation": "The History API lets scripts modify the browser history and URL without triggering a full page load, enabling single‑page‑app navigation."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the HTML Canvas element used for?",
+    "options": [
+      "Rendering raster graphics via JavaScript.",
+      "Defining semantic sections of a page.",
+      "Embedding videos.",
+      "Creating forms."
+    ],
+    "correctAnswer": "Rendering raster graphics via JavaScript.",
+    "explanation": "The <canvas> element provides a bitmap surface that JavaScript can draw on, ideal for games, charts, and other dynamic graphics."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the 2D context and WebGL context on a canvas?",
+    "options": [
+      "2D context uses CPU for rendering, WebGL uses GPU for 3D.",
+      "2D context is for text only, WebGL is for images.",
+      "2D context is deprecated, WebGL is the new standard.",
+      "They are the same."
+    ],
+    "correctAnswer": "2D context uses CPU for rendering, WebGL uses GPU for 3D.",
+    "explanation": "The 2D context draws 2‑D shapes using CPU, while WebGL taps the GPU for accelerated 3‑D rendering."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Canvas API differ from SVG in terms of performance and use cases?",
+    "options": [
+      "Canvas is pixel-based and faster for animations, SVG is vector-based and better for static graphics.",
+      "Canvas is vector-based and better for static graphics, SVG is pixel-based.",
+      "Canvas cannot be styled with CSS, SVG can.",
+      "Canvas is only for 3D."
+    ],
+    "correctAnswer": "Canvas is pixel-based and faster for animations, SVG is vector-based and better for static graphics.",
+    "explanation": "Canvas draws pixels directly, making it efficient for frequent redraws like games, whereas SVG keeps a DOM of shapes, excelling at scalable, interactive graphics."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an SVG element and how is it embedded in HTML?",
+    "options": [
+      "It is a vector graphics format that can be included using the <svg> tag directly in HTML.",
+      "It is a raster image format that requires the <img> tag.",
+      "It is a script element for animations.",
+      "It is a CSS property."
+    ],
+    "correctAnswer": "It is a vector graphics format that can be included using the <svg> tag directly in HTML.",
+    "explanation": "SVG is an XML-based vector graphics format that can be embedded inline with the <svg> element in HTML."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the viewBox attribute in SVG used for?",
+    "options": [
+      "It defines the coordinate system and scaling of the SVG content.",
+      "It specifies the background color of the SVG.",
+      "It sets the width and height of the SVG element.",
+      "It controls the animation timing of the SVG."
+    ],
+    "correctAnswer": "It defines the coordinate system and scaling of the SVG content.",
+    "explanation": "The viewBox attribute establishes the internal coordinate system and how the SVG scales to fit its container."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you animate elements drawn on an HTML canvas?",
+    "options": [
+      "By using requestAnimationFrame to redraw frames in a loop.",
+      "By applying CSS transitions to the canvas element.",
+      "By using the <animate> tag inside the canvas.",
+      "By setting the 'animation' attribute on the canvas."
+    ],
+    "correctAnswer": "By using requestAnimationFrame to redraw frames in a loop.",
+    "explanation": "Canvas animations require repeatedly drawing frames, typically done with requestAnimationFrame for smooth performance."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are ARIA attributes in HTML and why are they important for accessibility?",
+    "options": [
+      "They provide semantic information to assistive technologies, improving accessibility.",
+      "They are used to style elements with CSS.",
+      "They define the layout of the page.",
+      "They are only for debugging."
+    ],
+    "correctAnswer": "They provide semantic information to assistive technologies, improving accessibility.",
+    "explanation": "ARIA attributes give screen readers context about elements that lack native semantics, enhancing accessibility."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between aria-label and aria-labelledby?",
+    "options": [
+      "aria-label provides a text label, while aria-labelledby references another element's text.",
+      "aria-label is for images, aria-labelledby is for forms.",
+      "aria-label is deprecated, aria-labelledby is current.",
+      "They are identical."
+    ],
+    "correctAnswer": "aria-label provides a text label, while aria-labelledby references another element's text.",
+    "explanation": "aria-label supplies an explicit label string, whereas aria-labelledby points to an existing element whose text becomes the accessible name."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role attribute in ARIA and how is it used?",
+    "options": [
+      "It defines the CSS role of an element.",
+      "It specifies the semantic role of an element for assistive technology.",
+      "It sets the JavaScript event handler for an element.",
+      "It controls the element's visibility on the page."
+    ],
+    "correctAnswer": "It specifies the semantic role of an element for assistive technology.",
+    "explanation": "The ARIA role attribute tells assistive technologies what kind of widget or landmark an element represents."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the tabindex attribute and how does it affect keyboard navigation?",
+    "options": [
+      "It sets the tab order and can be negative to remove an element from the tab order.",
+      "It changes the font size of the element.",
+      "It defines the color theme of the element.",
+      "It controls the scrolling behavior of the page."
+    ],
+    "correctAnswer": "It sets the tab order and can be negative to remove an element from the tab order.",
+    "explanation": "tabindex determines the order in which elements receive focus when the user presses the Tab key, and a negative value excludes the element from the tab sequence."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the alt attribute for screen readers, and when should it be left empty?",
+    "options": [
+      "It provides an image description; leave it empty for decorative images.",
+      "It sets alt text for CSS styling purposes.",
+      "It determines the file path of the image.",
+      "It has no effect on accessibility."
+    ],
+    "correctAnswer": "It provides an image description; leave it empty for decorative images.",
+    "explanation": "alt text conveys the meaning of an image to screen readers; it should be omitted (empty) when the image is purely decorative."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the accessibility tree and how does the browser construct it from the DOM?",
+    "options": [
+      "It is a tree of CSS styles applied to elements.",
+      "It is a tree of DOM nodes with ARIA roles, built by filtering the DOM and merging ARIA attributes.",
+      "It is a tree of JavaScript objects representing event listeners.",
+      "It is a tree of network requests made by the page."
+    ],
+    "correctAnswer": "It is a tree of DOM nodes with ARIA roles, built by filtering the DOM and merging ARIA attributes.",
+    "explanation": "The browser creates an accessibility tree by traversing the DOM, applying ARIA roles and properties, and discarding non‑accessible nodes."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between accessible and semantic markup?",
+    "options": [
+      "Accessible markup uses ARIA; semantic markup uses proper HTML tags.",
+      "Semantic markup is always accessible.",
+      "Accessible markup is only for screen readers.",
+      "There is no difference between the two."
+    ],
+    "correctAnswer": "Accessible markup uses ARIA; semantic markup uses proper HTML tags.",
+    "explanation": "Semantic markup relies on native HTML elements that convey meaning, while accessible markup adds ARIA attributes to improve assistive‑technology support."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is HTML template element (<template>) and how does it differ from regular hidden content?",
+    "options": [
+      "It is a container for reusable content that is not rendered until instantiated.",
+      "It is a hidden element that is rendered but not visible.",
+      "It is a script tag that runs JavaScript.",
+      "It is a CSS class that hides content."
+    ],
+    "correctAnswer": "It is a container for reusable content that is not rendered until instantiated.",
+    "explanation": "The <template> element holds inert DOM that is not rendered until activated via JavaScript, unlike regular hidden content which is still part of the layout."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Web Workers and Service Workers?",
+    "options": [
+      "Web Workers run in background threads for CPU tasks; Service Workers intercept network requests and cache responses.",
+      "Web Workers are for caching; Service Workers are for UI updates.",
+      "Web Workers are only for images; Service Workers only for audio.",
+      "Both are identical."
+    ],
+    "correctAnswer": "Web Workers run in background threads for CPU tasks; Service Workers intercept network requests and cache responses.",
+    "explanation": "Web Workers provide parallel execution of scripts; Service Workers act as a network proxy to cache and serve resources."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does preloading resources with <link rel='preload'> affect page load performance?",
+    "options": [
+      "It tells the browser to fetch the resource early, reducing latency for critical assets.",
+      "It delays the download until after the page loads.",
+      "It only works for CSS files.",
+      "It blocks rendering until the resource is loaded."
+    ],
+    "correctAnswer": "It tells the browser to fetch the resource early, reducing latency for critical assets.",
+    "explanation": "Preload signals high priority, causing the browser to fetch the resource as soon as possible, improving perceived load time."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of resource hints like dns-prefetch, preconnect, and prefetch?",
+    "options": [
+      "They reduce latency by resolving DNS, establishing connections, or fetching resources before they're needed.",
+      "They are used to hide resources from the user.",
+      "They are only for mobile devices.",
+      "They prevent caching."
+    ],
+    "correctAnswer": "They reduce latency by resolving DNS, establishing connections, or fetching resources before they're needed.",
+    "explanation": "These hints allow the browser to perform network optimizations ahead of time, lowering the cost of future requests."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the browser parse HTML incrementally, and what happens when it encounters a blocking script?",
+    "options": [
+      "It parses and renders as it goes; a blocking script pauses parsing until the script is fetched and executed.",
+      "It waits until the entire document is loaded before parsing.",
+      "It ignores scripts entirely.",
+      "It parses scripts first, then the rest."
+    ],
+    "correctAnswer": "It parses and renders as it goes; a blocking script pauses parsing until the script is fetched and executed.",
+    "explanation": "Incremental parsing allows early rendering, but a blocking script halts parsing until it is downloaded and executed, delaying further parsing."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between rel='preload' and rel='prefetch'?",
+    "options": [
+      "preload loads resource immediately, prefetch loads when idle",
+      "preload loads when idle, prefetch loads immediately",
+      "preload is for CSS, prefetch is for JS",
+      "preload and prefetch are identical"
+    ],
+    "correctAnswer": "preload loads resource immediately, prefetch loads when idle",
+    "explanation": "preload tells the browser to fetch a resource with high priority right away, while prefetch hints the browser to fetch it later when idle."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are meta tags used for in SEO and social sharing (e.g., Open Graph tags)?",
+    "options": [
+      "They define page layout",
+      "They provide metadata like title, description, image for search engines and social platforms",
+      "They control user authentication",
+      "They are used for styling"
+    ],
+    "correctAnswer": "They provide metadata like title, description, image for search engines and social platforms",
+    "explanation": "Meta tags supply structured information that crawlers and social platforms use to display previews and index content."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the robots meta tag?",
+    "options": [
+      "To set the page's background color",
+      "To instruct search engine crawlers how to index or follow links",
+      "To enable JavaScript",
+      "To create navigation menus"
+    ],
+    "correctAnswer": "To instruct search engine crawlers how to index or follow links",
+    "explanation": "The robots meta tag tells crawlers whether to index the page, follow links, or apply noindex/nofollow directives."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a canonical URL and a redirect for SEO purposes?",
+    "options": [
+      "Canonical URL tells search engines the preferred URL; redirect changes the URL for users",
+      "Canonical URL redirects users; redirect tells search engines the preferred URL",
+      "Both are the same",
+      "Canonical URL is only for images"
+    ],
+    "correctAnswer": "Canonical URL tells search engines the preferred URL; redirect changes the URL for users",
+    "explanation": "A canonical tag signals the preferred URL to search engines, while a redirect actually sends users and crawlers to a different URL."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is structured data (schema.org / JSON-LD) and how does it help search engines?",
+    "options": [
+      "It's a CSS framework",
+      "It's a way to embed machine-readable data to help search engines understand content",
+      "It's a JavaScript library for animations",
+      "It's a server-side language"
+    ],
+    "correctAnswer": "It's a way to embed machine-readable data to help search engines understand content",
+    "explanation": "Structured data provides semantic context that search engines use to generate rich results and better understand page content."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the sitemap and how does it relate to HTML/SEO?",
+    "options": [
+      "It lists all pages for search engines to index, improving crawl efficiency.",
+      "It is a visual map of the website for users.",
+      "It contains CSS styles for navigation.",
+      "It is used to store user session data."
+    ],
+    "correctAnswer": "It lists all pages for search engines to index, improving crawl efficiency.",
+    "explanation": "A sitemap provides search engines with a structured list of URLs, helping them discover and index pages more efficiently, which directly supports SEO."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HTML validation and browser rendering leniency?",
+    "options": [
+      "Validation checks syntax against the spec; browsers tolerate errors and still render.",
+      "Validation ensures accessibility; browsers ignore accessibility.",
+      "Validation is performed by search engines; browsers do not.",
+      "Validation is only for HTML5; browsers only support HTML4."
+    ],
+    "correctAnswer": "Validation checks syntax against the spec; browsers tolerate errors and still render.",
+    "explanation": "HTML validation enforces strict adherence to the specification, while browsers are designed to be forgiving and render pages even when markup is imperfect."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an HTML comment and a hidden element?",
+    "options": [
+      "A comment is removed from the DOM; a hidden element remains in the DOM but is not displayed.",
+      "A comment is displayed to users; a hidden element is visible.",
+      "A comment is styled with CSS; a hidden element is not.",
+      "A comment is part of the CSS; a hidden element is part of the HTML."
+    ],
+    "correctAnswer": "A comment is removed from the DOM; a hidden element remains in the DOM but is not displayed.",
+    "explanation": "Comments are stripped from the DOM and never rendered, whereas hidden elements stay in the DOM tree but are not visible to the user."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the contenteditable attribute used for?",
+    "options": [
+      "It makes an element's content editable by the user.",
+      "It hides the element from view.",
+      "It adds a tooltip to the element.",
+      "It defines the element's language."
+    ],
+    "correctAnswer": "It makes an element's content editable by the user.",
+    "explanation": "The contenteditable attribute turns an element into an editable region, allowing users to modify its text directly in the browser."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the <iframe> element and embedding content via Shadow DOM?",
+    "options": [
+      "An iframe loads an entire separate document; Shadow DOM encapsulates part of the DOM with its own styles.",
+      "An iframe is used for images; Shadow DOM is used for text.",
+      "An iframe is a CSS feature; Shadow DOM is an HTML tag.",
+      "An iframe and Shadow DOM are identical in functionality."
+    ],
+    "correctAnswer": "An iframe loads an entire separate document; Shadow DOM encapsulates part of the DOM with its own styles.",
+    "explanation": "An iframe embeds a whole separate HTML document, while Shadow DOM creates a scoped subtree with isolated styles and markup within the same document."
+  }
 ]

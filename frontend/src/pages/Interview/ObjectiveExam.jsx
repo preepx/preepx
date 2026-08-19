@@ -81,27 +81,14 @@ export default function ObjectiveExam() {
 
   const handleViolation = (type, msg = '') => {
     setWarnings(prev => {
-      if (prev >= 5) return prev;
-
       const newCount = prev + 1;
 
       setShowWarnBlink(true);
       setTimeout(() => setShowWarnBlink(false), 2000);
 
-      notify.dismiss(); // Clear all toasts so only 1 is visible at a time
-
-      if (newCount >= 5) {
-        notify.error('Exam terminated due to repeated warnings.');
-        handleForceEnd();
-        return newCount;
-      }
-
       if (type === 'tab') {
-        notify.warning(`Tab switch! Warning ${newCount}/5`);
         setShowWarn(true);
         setTimeout(() => setShowWarn(false), 4000);
-      } else {
-        notify.warning(`Proctoring Warning! ${newCount}/5: ${msg}`);
       }
 
       return newCount;
@@ -550,15 +537,7 @@ export default function ObjectiveExam() {
               <>
                 <div className="oe-exam-scroll">
                   <div className="oe-exam-content">
-                    {showWarn && (
-                      <div className="oe-warn-banner">
-                        <AlertTriangle size={18} style={{ flexShrink: 0, marginTop: 1 }} />
-                        <span>
-                          Tab switch detected — Warning <strong>{warnings}/5</strong>.
-                          Five violations will terminate your exam.
-                        </span>
-                      </div>
-                    )}
+                    {/* Removed oe-warn-banner from here to move it to the camera */}
 
                     <div className="oe-q-meta">
                       <div className="oe-q-badge">
@@ -610,7 +589,14 @@ export default function ObjectiveExam() {
           <aside className="oe-sidebar">
             <div>
               <div className="oe-cam-header">
-                <span>Proctor Camera</span>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {(faceWarning || showWarn) && (
+                    <span style={{ color: '#ef4444', fontSize: '12px', fontWeight: 600 }}>
+                      ⚠️ {showWarn ? `Tab Switch! (${warnings})` : faceWarning}
+                    </span>
+                  )}
+                  {!(faceWarning || showWarn) && <span>Proctor Camera</span>}
+                </span>
                 <span className="oe-live-pill"><span className="oe-live-dot" /> Rec</span>
               </div>
               <div className="oe-cam-wrapper" style={{ position: 'relative' }}>

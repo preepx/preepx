@@ -592,15 +592,7 @@ const InterviewMode = () => {
           </div>
         </div>
       )}
-      {faceWarning && (
-        <div className="global-face-warn-overlay">
-          <div className="global-face-warn-content">
-            <ShieldCheck size={48} className="warn-icon" />
-            <h2>Proctoring Warning</h2>
-            <p>{faceWarning}</p>
-          </div>
-        </div>
-      )}
+      {/* Removed global face warning popup */}
       <div className={`interview-room ${!isFullscreen ? 'blurred' : ''}`}>
         {/* Header */}
         <div className="im-header">
@@ -659,6 +651,11 @@ const InterviewMode = () => {
             </div>
 
             <div className="im-pip-container">
+              {faceWarning && (
+                <div style={{ position: 'absolute', top: '10px', left: '10px', right: '10px', background: 'rgba(239, 68, 68, 0.9)', color: 'white', padding: '6px', borderRadius: '4px', fontSize: '11px', fontWeight: 'bold', zIndex: 20, textAlign: 'center' }}>
+                  ⚠️ {faceWarning}
+                </div>
+              )}
               <Webcam ref={webcamRef} audio={false} className="im-webcam" screenshotFormat="image/jpeg" />
               <div className="im-pip-badges">
                 <span className="im-pip-you">You</span>

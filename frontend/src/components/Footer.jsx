@@ -1,93 +1,149 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Sparkles } from 'lucide-react';
-import '@/styles/Footer.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Linkedin, Instagram, Github, Mail } from "lucide-react";
+import "@/styles/landing/LandingFooter.css";
 
-const socialLinks = [
-  { name: 'Facebook', icon: '/icons/facebook.svg', url: '#' },
-  { name: 'Instagram', icon: '/icons/instagram.svg', url: 'https://www.instagram.com/preepx.in?igsh=MTdleHB0d2ExMXF2MQ==' },
-  { name: 'LinkedIn', icon: '/icons/linkedin.svg', url: 'https://www.linkedin.com/company/preepx' },
-  { name: 'Gmail', icon: '/icons/gmail.svg', url: 'https://mail.google.com/mail/?view=cm&fs=1&to=contact@preepx.in' }
-];
+function Footer({ onRecruiterClick }) {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
 
-const Footer = ({ landingRole = 'candidate' }) => {
-  const isRecruiter = landingRole === 'recruiter';
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (email) {
+      setSubscribed(true);
+      setTimeout(() => setSubscribed(false), 4000);
+      setEmail("");
+    }
+  };
+
+  const handleRecruiter = (e) => {
+    if (onRecruiterClick) {
+      e.preventDefault();
+      onRecruiterClick();
+    }
+  };
 
   return (
-    <footer className="global-footer">
-      <div className="footer-inner">
-        <div className="footer-brand-col">
-          <Link to="/" className="footer-logo">
-            <img src="/preepx_logo.png" alt="PreepX Logo" style={{ height: '80px', objectFit: 'contain' }} />
-          </Link>
-          <p className="footer-desc">
-            {isRecruiter 
-              ? "PreepX is an AI-powered hiring platform helping companies discover, evaluate, and hire better technical talent faster."
-              : "Your ultimate AI-powered interview preparation platform. Master your skills, build confidence, and crack your dream job."
-            }
-          </p>
-          <div className="footer-socials">
-            {socialLinks.map((social) => (
-              <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className="social-icon">
-                <img src={social.icon} alt={social.name} />
+    <footer className="prepx-landing-footer">
+      <div className="footer-container">
+        {/* Top Newsletter / Talent Ecosystem Strip */}
+        <div className="footer-top-strip">
+          <div className="footer-strip-left">
+            <h3>Join the next-generation talent ecosystem</h3>
+            <p>Get the latest AI interview prep tips & recruiter intelligence insights.</p>
+          </div>
+          <form className="footer-subscribe-form" onSubmit={handleSubscribe}>
+            <div className="footer-input-wrap">
+              <input
+                type="email"
+                placeholder={subscribed ? "✓ Subscribed successfully!" : "Enter your work or personal email"}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="footer-email-input"
+                required
+              />
+            </div>
+            <button type="submit" className="footer-subscribe-btn">
+              {subscribed ? "Joined ✓" : "Subscribe"}
+            </button>
+          </form>
+        </div>
+
+        {/* 5-Column Navigation Grid (Candidate + Recruiter Mixup) */}
+        <div className="footer-main-grid">
+          {/* Brand Column */}
+          <div className="footer-brand-col">
+            <Link to="/" className="footer-logo-link">
+              <img src="/preepx_logo.png" alt="PreepX" className="footer-brand-logo" />
+            </Link>
+            <p className="footer-brand-desc">
+              The intelligent AI hiring & preparation ecosystem. Empowering candidates to prove their skills while enabling modern recruiters to discover and hire top talent.
+            </p>
+            <div className="footer-social-links">
+              <a href="https://www.linkedin.com/company/preepx" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="LinkedIn">
+                <Linkedin size={16} />
               </a>
-            ))}
+              <a href="https://www.instagram.com/preepx" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Instagram">
+                <Instagram size={16} />
+              </a>
+              <a href="https://github.com/preepx" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="GitHub">
+                <Github size={16} />
+              </a>
+              <a href="mailto:support@preepx.com" className="footer-social-icon" aria-label="Email">
+                <Mail size={16} />
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div className="footer-links-group">
-          {isRecruiter ? (
-            <>
-              <div className="footer-link-col">
-                <h4>Product</h4>
-                <Link to="/ai-screening">AI Screening</Link>
-                <Link to="/job-management">Job Management</Link>
-                <Link to="/assessments">Assessments</Link>
-                <Link to="/interviews">Interviews</Link>
-                <Link to="/analytics">Analytics</Link>
-              </div>
-              <div className="footer-link-col">
-                <h4>Resources</h4>
-                <Link to="/hiring-guide">Hiring Guide</Link>
-                <Link to="/recruiter-resources">Recruiter Resources</Link>
-                <Link to="/help-center">Help Center</Link>
-                <Link to="/documentation">Documentation</Link>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className="footer-link-col">
-                <h4>Product</h4>
-                <a href="/#features">Features</a>
-                <a href="/#how-it-works">How It Works</a>
-                <a href="/#product">Mock Interviews</a>
-                <Link to="/user-guide">User Guide</Link>
-              </div>
-              <div className="footer-link-col">
-                <h4>Resources</h4>
-                <Link to="/interview-tips">Interview Tips</Link>
-                <Link to="/blog">Blog</Link>
-                <Link to="/help-center">Help Center</Link>
-                <Link to="/community">Community</Link>
-              </div>
-            </>
-          )}
+          {/* Column 2: For Candidates */}
+          <div className="footer-nav-col">
+            <h4>
+              Candidates <span className="footer-role-badge badge-candidate">Prepare</span>
+            </h4>
+            <ul className="footer-nav-list">
+              <li><Link to="/auth?role=candidate">AI Mock Interviews</Link></li>
+              <li><Link to="/objective-exam">Objective Exams & Mocks</Link></li>
+              <li><Link to="/analytics">Performance Analytics</Link></li>
+              <li><Link to="/auth?role=candidate">PreepX Certificates</Link></li>
+              <li><Link to="/ats-score">Resume ATS Scanner <span className="footer-new-tag">AI</span></Link></li>
+              <li><Link to="/apply-jobs/browse">Explore Tech Jobs</Link></li>
+            </ul>
+          </div>
 
-          <div className="footer-link-col">
+          {/* Column 3: For Recruiters */}
+          <div className="footer-nav-col">
+            <h4>
+              Recruiters <span className="footer-role-badge badge-recruiter">Hire</span>
+            </h4>
+            <ul className="footer-nav-list">
+              <li><Link to="/auth?role=recruiter" onClick={handleRecruiter}>Talent Discovery Search</Link></li>
+              <li><Link to="/auth?role=recruiter" onClick={handleRecruiter}>Create Custom Assessments</Link></li>
+              <li><Link to="/auth?role=recruiter" onClick={handleRecruiter}>AI Candidate Scoring</Link></li>
+              <li><Link to="/auth?role=recruiter" onClick={handleRecruiter}>Automated Screening</Link></li>
+              <li><Link to="/auth?role=recruiter" onClick={handleRecruiter}>Hiring Pipeline Analytics</Link></li>
+              <li><Link to="/auth?role=recruiter" onClick={handleRecruiter}>Enterprise Integration</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Platform & Ecosystem */}
+          <div className="footer-nav-col">
+            <h4>Platform</h4>
+            <ul className="footer-nav-list">
+              <li><a href="#journeys">How PreepX Works</a></li>
+              <li><a href="#features">Features Overview</a></li>
+              <li><Link to="/user-guide">User Guide & Docs</Link></li>
+              <li><Link to="/btech-notes">Knowledge Hub</Link></li>
+              <li><a href="#faq">Frequently Asked Questions</a></li>
+              <li><Link to="/feedback">Product Feedback</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 5: Company & Legal */}
+          <div className="footer-nav-col">
             <h4>Company</h4>
-            <Link to="/about-us">About Us</Link>
-            <Link to="/careers">Careers</Link>
-            <Link to="/privacy-policy">Privacy Policy</Link>
-            <Link to="/terms-of-service">Terms of Service</Link>
+            <ul className="footer-nav-list">
+              <li><Link to="/about-us">About PreepX</Link></li>
+              <li><Link to="/careers">Careers <span className="footer-hiring-tag">Hiring</span></Link></li>
+              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+              <li><Link to="/terms-of-service">Terms of Service</Link></li>
+              <li><Link to="/privacy-policy">Trust & Security</Link></li>
+              <li><Link to="/help-center">Help Center & Support</Link></li>
+            </ul>
           </div>
         </div>
-      </div>
 
-      <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} PreepX. Built with AI for aspiring professionals.</p>
+        {/* Bottom Copyright Bar */}
+        <div className="footer-bottom-bar">
+          <p>© {new Date().getFullYear()} PreepX AI Technologies Inc. All rights reserved.</p>
+          <ul className="footer-bottom-links">
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link to="/terms-of-service">Terms of Service</Link></li>
+            <li><Link to="/help-center">Help Center</Link></li>
+          </ul>
+        </div>
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

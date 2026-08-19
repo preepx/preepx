@@ -282,7 +282,7 @@ const Challenge100Days = () => {
               <Rocket size={18} />
             </div>
             <div>
-              <h2 className="c100-section-title">Curriculum Roadmap</h2>
+              <h2 className="c100-section-title premium-text-gradient">Curriculum Roadmap</h2>
               <p className="c100-section-subtitle">Structured progression from fundamentals to interview mastery</p>
             </div>
           </div>
@@ -404,7 +404,7 @@ const Challenge100Days = () => {
                 <Trophy size={18} />
               </div>
               <div>
-                <h2 className="c100-section-title">The 100-Day Journey</h2>
+                <h2 className="c100-section-title premium-text-gradient">The 100-Day Journey</h2>
                 <p className="c100-section-subtitle">
                   Complete challenges in sequential order. Solve each to unlock the next.
                 </p>

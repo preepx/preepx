@@ -5,7 +5,7 @@ import Webcam from 'react-webcam';
 import {
   Play, CheckCircle2, XCircle, Clock, ArrowLeft, Terminal,
   ShieldCheck, ChevronDown, RotateCcw, Maximize2, Trophy, BookOpen, List,
-  Bookmark, Sun, Lightbulb, Settings, HelpCircle
+  Bookmark, Sun, Moon, Lightbulb, Settings, HelpCircle, AlertTriangle
 } from 'lucide-react';
 import notify from "@/utils/notify";
 import { useFaceDetection } from "@/hooks/useFaceDetection";
@@ -13,11 +13,19 @@ import API from "@/utils/api";
 import '@/styles/CodingExam.css';
 
 const LANGUAGES = [
-  { value: 'c', label: 'C (GCC 7.3.0)' },
-  { value: 'cpp', label: 'C++ (GCC 7.3.0)' },
-  { value: 'java', label: 'Java (1.8)' },
-  { value: 'python', label: 'Python 3' },
-  { value: 'javascript', label: 'JavaScript (Node.js)' },
+  { value: 'c-7', base: 'c', label: 'C (gcc 7.3.0)' },
+  { value: 'c-13', base: 'c', label: 'C (GCC 13.2.0)' },
+  { value: 'cpp-13', base: 'cpp', label: 'C++ (GCC 13.2.0)' },
+  { value: 'cpp-7', base: 'cpp', label: 'C++ (g++ 7.3.0)' },
+  { value: 'csharp', base: 'csharp', label: 'C# (mcs 5.4.0.201)' },
+  { value: 'java-7', base: 'java', label: 'Java (openjdk 1.7.0_91)' },
+  { value: 'java-8', base: 'java', label: 'Java 8 (oracle 1.8.0_91)' },
+  { value: 'java-21', base: 'java', label: 'Java (OpenJDK 21.0)' },
+  { value: 'node-24', base: 'javascript', label: 'JavaScript (Node.js 24.4.1)' },
+  { value: 'node-12', base: 'javascript', label: 'JavaScript (Node.js 12.14.0)' },
+  { value: 'python-3.12', base: 'python', label: 'Python (3.12.11)' },
+  { value: 'python-2.7', base: 'python', label: 'Python (2.7.17)' },
+  { value: 'python-3.8', base: 'python', label: 'Python (3.8.1)' },
 ];
 
 const BOILERPLATES = {
@@ -26,6 +34,7 @@ const BOILERPLATES = {
   java: `import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        // Write your code here\n    }\n}`,
   python: `# Write your code here\nimport sys\ninput = sys.stdin.readline\n`,
   javascript: `function solve(input) {\n    // Write your code here\n}\n`,
+  csharp: `using System;\nusing System.Collections.Generic;\nusing System.IO;\nclass Solution {\n    static void Main(String[] args) {\n        /* Enter your code here. Read input from STDIN. Print output to STDOUT. */\n    }\n}`
 };
 
 const CodingExam = () => {
@@ -37,7 +46,7 @@ const CodingExam = () => {
   const challengeDay = searchParams.get('day');
   const backPath = source === 'challenge' ? '/100-days-challenge' : '/user-dashboard';
 
-  const [currentLanguage, setCurrentLanguage] = useState('cpp');
+  const [currentLanguage, setCurrentLanguage] = useState('cpp-13');
   const [showLangDropdown, setShowLangDropdown] = useState(false);
   const problemId = paramId || searchParams.get('problemId');
 
@@ -58,9 +67,16 @@ const CodingExam = () => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [isFullscreen, setIsFullscreen] = useState(true);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isDark, setIsDark] = useState(document.documentElement.dataset.theme !== "light");
 
   const [isOutputExpanded, setIsOutputExpanded] = useState(false);
   const [activeSampleTab, setActiveSampleTab] = useState(0);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showHelpModal, setShowHelpModal] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
+  const [reportIssueType, setReportIssueType] = useState('');
+  const [reportDetails, setReportDetails] = useState('');
+  const [infoTab, setInfoTab] = useState('shortcuts');
 
   const camRef = useRef(null);
   const { faceWarning } = useFaceDetection([camRef], true);
@@ -91,10 +107,12 @@ const CodingExam = () => {
   }, [problemId]);
 
   useEffect(() => {
-    if (question?.boilerplateCode?.[currentLanguage]) {
-      setCode(question.boilerplateCode[currentLanguage]);
+    const selectedLang = LANGUAGES.find(l => l.value === currentLanguage);
+    const base = selectedLang?.base || 'cpp';
+    if (question?.boilerplateCode?.[base]) {
+      setCode(question.boilerplateCode[base]);
     } else {
-      setCode(BOILERPLATES[currentLanguage] || '// Write your code here\n');
+      setCode(BOILERPLATES[base] || '// Write your code here\n');
     }
   }, [currentLanguage, question]);
 
@@ -127,6 +145,17 @@ const CodingExam = () => {
   }, []);
 
   useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'h') {
+        e.preventDefault();
+        setShowInfoModal(true);
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, []);
+
+  useEffect(() => {
     const handler = (e) => {
       if (langDropdownRef.current && !langDropdownRef.current.contains(e.target)) {
         setShowLangDropdown(false);
@@ -142,13 +171,22 @@ const CodingExam = () => {
     return `${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
   };
 
+  const toggleTheme = () => {
+    const next = isDark ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("theme", next);
+    setIsDark(!isDark);
+  };
+
   const handleRunCode = async () => {
     setIsRunning(true);
     setIsOutputExpanded(true);
     setOutput('Running test cases...');
     setTestResults(null);
 
-    const defaultCode = (BOILERPLATES[currentLanguage] || '').trim();
+    const selectedLang = LANGUAGES.find(l => l.value === currentLanguage);
+    const base = selectedLang?.base || 'cpp';
+    const defaultCode = (BOILERPLATES[base] || '').trim();
     if (!code || code.trim() === defaultCode || code.trim() === '') {
       setIsRunning(false);
       setTestResults('fail');
@@ -254,12 +292,157 @@ const CodingExam = () => {
 
   return (
     <>
-      {faceWarning && (
-        <div className="ce-face-overlay">
-          <div className="ce-face-box">
-            <ShieldCheck size={48} />
-            <h2>Proctoring Warning</h2>
-            <p>{faceWarning}</p>
+      {showInfoModal && (
+        <div className="ce-info-overlay" data-cet-theme={isDark ? "dark" : "light"}>
+          <div className="ce-info-modal" onClick={e => e.stopPropagation()}>
+            <div className="ce-info-header">
+              <h3>Information</h3>
+              <XCircle size={20} className="ce-info-close" onClick={() => setShowInfoModal(false)} />
+            </div>
+            
+            <div className="ce-info-tabs">
+              <div className={`ce-info-tab ${infoTab === 'shortcuts' ? 'active' : ''}`} onClick={() => setInfoTab('shortcuts')}>
+                Shortcuts Guide
+              </div>
+              <div className={`ce-info-tab ${infoTab === 'env' ? 'active' : ''}`} onClick={() => setInfoTab('env')}>
+                Execution Environment
+              </div>
+            </div>
+
+            <div className="ce-info-content">
+              {infoTab === 'shortcuts' ? (
+                <>
+                  <h4>The options below will help you explore keyboard shortcuts.</h4>
+                  <p>Master these keyboard shortcuts to navigate seamlessly and enhance your productivity throughout your workflow.</p>
+                  
+                  <div className="ce-shortcut-list">
+                    <div className="ce-shortcut-item">
+                      <span>1. Run / Save & Compile Code:</span>
+                      <strong>Ctrl + Enter</strong>
+                    </div>
+                    <div className="ce-shortcut-item">
+                      <span>2. Submit Code:</span>
+                      <strong>Ctrl + Shift + Enter</strong>
+                    </div>
+                    <div className="ce-shortcut-item">
+                      <span>3. Open Shortcut Help Modal :</span>
+                      <strong>Ctrl + shift + H</strong>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                  <div className="ce-env-list-wrap">
+                    <ul className="ce-env-bullets" style={{ margin: '0 0 20px 20px', padding: 0 }}>
+                      <li style={{ marginBottom: '8px' }}>Submissions run on an Ubuntu 18.04 (LTS) AMD64 virtualized EC2 instance.</li>
+                      <li>There is a limit set on the size of the code submission which is 100kB</li>
+                    </ul>
+
+                    <div className="ce-env-table-header" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 16px 12px 16px', fontWeight: 600, fontSize: '14px', color: '#f8fafc' }}>
+                      <span>Language</span>
+                      <span>Version</span>
+                    </div>
+
+                    <div className="ce-shortcut-list">
+                      {LANGUAGES.map((lang, idx) => {
+                        const match = lang.label.match(/(.*?)\s*\((.*?)\)/);
+                        const langName = match ? match[1].trim() : lang.label;
+                        const langVersion = match ? match[2].trim() : '';
+                        return (
+                          <div key={idx} className="ce-shortcut-item">
+                            <span>{langName}</span>
+                            <strong>{langVersion}</strong>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showReportModal && (
+        <div className="ce-info-overlay" data-cet-theme={isDark ? "dark" : "light"} onClick={() => setShowReportModal(false)}>
+          <div className="ce-info-modal" style={{ maxWidth: '450px', height: 'auto', paddingBottom: '20px' }} onClick={e => e.stopPropagation()}>
+            <div className="ce-info-header" style={{ borderBottom: 'none' }}>
+              <h3>Report an Issue</h3>
+              <XCircle size={20} className="ce-info-close" onClick={() => setShowReportModal(false)} />
+            </div>
+            <div className="ce-report-content" style={{ padding: '0 24px 24px 24px' }}>
+              <div className="ce-report-fieldset">
+                <div className="ce-report-legend">Issue with</div>
+                <label className="ce-report-radio">
+                  <input type="radio" name="issueType" value="editor" onChange={e => setReportIssueType(e.target.value)} />
+                  <span>The code editor</span>
+                </label>
+                <label className="ce-report-radio">
+                  <input type="radio" name="issueType" value="questions" onChange={e => setReportIssueType(e.target.value)} />
+                  <span>The questions</span>
+                </label>
+                <label className="ce-report-radio">
+                  <input type="radio" name="issueType" value="testcases" onChange={e => setReportIssueType(e.target.value)} />
+                  <span>The sample testcases</span>
+                </label>
+                <label className="ce-report-radio">
+                  <input type="radio" name="issueType" value="submissions" onChange={e => setReportIssueType(e.target.value)} />
+                  <span>Submissions</span>
+                </label>
+                <label className="ce-report-radio">
+                  <input type="radio" name="issueType" value="editorial" onChange={e => setReportIssueType(e.target.value)} />
+                  <span>Editorial</span>
+                </label>
+                <label className="ce-report-radio">
+                  <input type="radio" name="issueType" value="others" onChange={e => setReportIssueType(e.target.value)} />
+                  <span>Others</span>
+                </label>
+              </div>
+              <textarea 
+                className="ce-report-textarea" 
+                placeholder="Details" 
+                value={reportDetails}
+                onChange={e => setReportDetails(e.target.value)}
+              />
+              <button 
+                className="ce-compile-btn" 
+                style={{ width: '100%', marginTop: '16px' }}
+                onClick={() => {
+                  if (!reportIssueType) {
+                    notify.warning("Please select an issue type.");
+                    return;
+                  }
+                  const subject = encodeURIComponent(`PreepX Exam Issue: ${reportIssueType}`);
+                  const body = encodeURIComponent(`Issue Type: ${reportIssueType}\n\nDetails:\n${reportDetails}`);
+                  window.location.href = `mailto:teampreepx@gmail.com?subject=${subject}&body=${body}`;
+                  notify.success("Opening your mail client...");
+                  setShowReportModal(false);
+                  setReportDetails('');
+                }}
+              >
+                Submit Report
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showHelpModal && (
+        <div className="ce-info-overlay" data-cet-theme={isDark ? "dark" : "light"} onClick={() => setShowHelpModal(false)}>
+          <div className="ce-info-modal" style={{ maxWidth: '400px', height: 'auto', paddingBottom: '20px' }} onClick={e => e.stopPropagation()}>
+            <div className="ce-info-header">
+              <h3>How to Work</h3>
+              <XCircle size={20} className="ce-info-close" onClick={() => setShowHelpModal(false)} />
+            </div>
+            <div className="ce-info-content" style={{ padding: '24px' }}>
+              <ol style={{ paddingLeft: '16px', margin: 0, lineHeight: 1.8 }}>
+                <li>Read the problem statement on the left carefully.</li>
+                <li>Select your preferred programming language from the dropdown.</li>
+                <li>Write your solution in the code editor.</li>
+                <li>Click <strong>Save & Compile</strong> to run your code against sample test cases.</li>
+                <li>Check the output panel below to ensure your logic is correct.</li>
+                <li>Once you are confident, click <strong>Submit Code</strong> to submit your final solution.</li>
+              </ol>
+            </div>
           </div>
         </div>
       )}
@@ -288,7 +471,9 @@ const CodingExam = () => {
           {/* ── Top Navbar (Unstop Style) ── */}
           <nav className="ce-navbar">
             <div className="ce-nav-left">
-              <div className="ce-brand">preepx</div>
+              <div className="ce-brand">
+                <img src="/preepx_logo.png" alt="PreepX Logo" style={{ height: '48px', objectFit: 'contain' }} />
+              </div>
               <div className="ce-nav-divider"></div>
               <Bookmark size={16} className="ce-icon-muted" />
               <div className="ce-nav-title">{question.title}</div>
@@ -298,10 +483,34 @@ const CodingExam = () => {
               <button className="ce-feature-btn">Request a Feature</button>
 
               <div className="ce-nav-icons">
-                <Sun size={18} />
-                <Lightbulb size={18} />
-                <Settings size={18} />
-                <HelpCircle size={18} />
+                <button
+                  onClick={toggleTheme}
+                  style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  title="Toggle Theme"
+                >
+                  {isDark ? <Sun size={16} /> : <Moon size={16} />}
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setShowInfoModal(true); }}
+                  style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  title="Information"
+                >
+                  <Lightbulb size={16} />
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setShowReportModal(true); }}
+                  style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  title="Report an Issue"
+                >
+                  <AlertTriangle size={16} />
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); setShowHelpModal(true); }}
+                  style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
+                  title="How to Work"
+                >
+                  <HelpCircle size={16} />
+                </button>
               </div>
 
               {/* Language Dropdown in Navbar */}
@@ -333,7 +542,7 @@ const CodingExam = () => {
                 {formatTime(timeLeft)}
               </div>
 
-              <button className="ce-nav-icon-btn" onClick={() => setCode(BOILERPLATES[currentLanguage] || '')}>
+              <button className="ce-nav-icon-btn" onClick={() => setCode(BOILERPLATES[selectedLang?.base || 'cpp'] || '')}>
                 <RotateCcw size={16} />
               </button>
 
@@ -341,7 +550,12 @@ const CodingExam = () => {
                 Exit
               </button>
 
-              <div className="ce-cam-wrap">
+              {faceWarning && (
+                <div className="ce-cam-warning" title={faceWarning}>
+                  ⚠️ Warning
+                </div>
+              )}
+              <div className="ce-cam-wrap" style={{ borderColor: faceWarning ? '#ef4444' : '#6366f1' }}>
                 <Webcam ref={camRef} audio={false} mirrored className="ce-cam" screenshotFormat="image/jpeg" />
               </div>
             </div>
@@ -468,8 +682,8 @@ const CodingExam = () => {
               >
                 <Editor
                   height="100%"
-                  language={currentLanguage === 'c' ? 'c' : currentLanguage}
-                  theme="vs-dark"
+                  language={selectedLang?.base === 'c' ? 'c' : selectedLang?.base || 'javascript'}
+                  theme={isDark ? "unstop-dark" : "unstop-light"}
                   value={code}
                   onChange={val => setCode(val)}
                   onMount={(editor, monaco) => {
@@ -479,6 +693,19 @@ const CodingExam = () => {
                       if (cmdKey && ['KeyC', 'KeyV', 'KeyX'].includes(e.browserEvent.code)) {
                         e.preventDefault(); e.stopPropagation();
                         notify.warning("Copy/Paste disabled during exam.");
+                      }
+                      
+                      if (cmdKey && e.browserEvent.key === 'Enter') {
+                        e.preventDefault(); e.stopPropagation();
+                        if (e.shiftKey) {
+                          document.getElementById('ce-submit-btn-bottom')?.click();
+                        } else {
+                          document.getElementById('ce-run-btn')?.click();
+                        }
+                      }
+                      if (cmdKey && e.shiftKey && e.browserEvent.code === 'KeyH') {
+                        e.preventDefault(); e.stopPropagation();
+                        setShowInfoModal(true);
                       }
                     });
 
@@ -492,7 +719,18 @@ const CodingExam = () => {
                         'editor.lineHighlightBackground': '#33415550'
                       }
                     });
-                    monaco.editor.setTheme('unstop-dark');
+
+                    monaco.editor.defineTheme('unstop-light', {
+                      base: 'vs',
+                      inherit: true,
+                      rules: [],
+                      colors: {
+                        'editor.background': '#ffffff',
+                        'editor.lineHighlightBackground': '#f1f5f9'
+                      }
+                    });
+
+                    monaco.editor.setTheme(isDark ? 'unstop-dark' : 'unstop-light');
                   }}
                   options={{
                     minimap: { enabled: false },
@@ -525,20 +763,22 @@ const CodingExam = () => {
                 </div>
 
                 <div className="ce-bottom-center">
-                  <button className="ce-nav-icon-btn ce-reset-btn-bottom" onClick={() => setCode(BOILERPLATES[currentLanguage] || '')} title="Reset Code">
+                  <button className="ce-nav-icon-btn ce-reset-btn-bottom" onClick={() => setCode(BOILERPLATES[selectedLang?.base || 'cpp'] || '')} title="Reset Code">
                     <RotateCcw size={16} />
                   </button>
                 </div>
 
                 <div className="ce-bottom-right">
                   <button
-                    className={`ce-compile-btn ${isRunning ? 'running' : ''}`}
+                    id="ce-run-btn"
+                    className="ce-compile-btn"
                     onClick={handleRunCode}
                     disabled={isRunning}
                   >
-                    Save & Compile
+                    {isRunning ? 'Running...' : 'Save & Compile'}
                   </button>
                   <button
+                    id="ce-submit-btn-bottom"
                     className="ce-submit-bottom-btn"
                     onClick={handleSubmit}
                     disabled={isSubmitting}
