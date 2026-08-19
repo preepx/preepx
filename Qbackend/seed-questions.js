@@ -36,7 +36,9 @@ const seedQuestions = async () => {
     let totalInserted = 0;
 
     for (const file of files) {
-      const skill = file.replace(".json", "");
+      const originalSkill = file.replace(".json", "");
+      // Remove spaces, underscores, hyphens etc. to match frontend slug
+      const skill = originalSkill.toLowerCase().replace(/[^a-z0-9]/g, "");
       const filePath = path.join(QUESTIONS_DIR, file);
       
       const raw = fs.readFileSync(filePath, "utf-8");
