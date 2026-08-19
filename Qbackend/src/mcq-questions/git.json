@@ -1,3 +1,2738 @@
 [
-
+  {
+    "difficulty": "Easy",
+    "question": "What is Git and why is version control important?",
+    "options": [
+      "Git is a distributed version control system that tracks changes in source code, allowing multiple developers to collaborate efficiently; version control is important because it records history, enables rollback, and facilitates teamwork.",
+      "Git is a cloud storage service for binary files; version control is important because it compresses data.",
+      "Git is a programming language used for scripting; version control is important because it speeds up execution.",
+      "Git is an operating system; version control is important because it manages hardware resources."
+    ],
+    "correctAnswer": "Git is a distributed version control system that tracks changes in source code, allowing multiple developers to collaborate efficiently; version control is important because it records history, enables rollback, and facilitates teamwork.",
+    "explanation": "Git tracks changes and enables collaboration; version control provides history, rollback, and teamwork benefits."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git pull and git fetch?",
+    "options": [
+      "git fetch downloads commits and updates remote-tracking branches without modifying the working directory, while git pull does the same plus automatically merges (or rebases) the changes into the current branch.",
+      "git fetch deletes local branches, whereas git pull creates new remote branches.",
+      "git fetch permanently removes remote history, while git pull only shows a summary.",
+      "git fetch and git pull are identical commands with different aliases."
+    ],
+    "correctAnswer": "git fetch downloads commits and updates remote-tracking branches without modifying the working directory, while git pull does the same plus automatically merges (or rebases) the changes into the current branch.",
+    "explanation": "git fetch only updates remote refs; git pull fetches then merges/rebases into the current branch."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a branch in Git?",
+    "options": [
+      "A branch is a lightweight movable pointer to a commit that allows you to develop features or fixes independently of other work.",
+      "A branch is a separate copy of the entire repository stored on a different server.",
+      "A branch is a compiled binary of the project.",
+      "A branch is a security token used for authentication."
+    ],
+    "correctAnswer": "A branch is a lightweight movable pointer to a commit that allows you to develop features or fixes independently of other work.",
+    "explanation": "A branch points to a commit and lets you work on isolated lines of development."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git merge and git rebase?",
+    "options": [
+      "git merge creates a new merge commit that combines histories of two branches, preserving the original commit chronology, while git rebase rewrites the commits of one branch onto another, producing a linear history without a merge commit.",
+      "git merge permanently deletes the source branch, whereas git rebase copies it.",
+      "git merge only works with remote branches, while git rebase works only locally.",
+      "git merge encrypts the repository, while git rebase compresses it."
+    ],
+    "correctAnswer": "git merge creates a new merge commit that combines histories of two branches, preserving the original commit chronology, while git rebase rewrites the commits of one branch onto another, producing a linear history without a merge commit.",
+    "explanation": "Merge adds a merge commit preserving history; rebase rewrites commits to create a linear history."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is .gitignore and how do you use it?",
+    "options": [
+      ".gitignore is a plain‑text file placed in a repository that lists file patterns to be ignored by Git; you add patterns (e.g., *.log or /build/) so those files are not tracked or shown as untracked.",
+      ".gitignore is a binary configuration file that speeds up Git operations by caching objects.",
+      ".gitignore is a command you run to delete the repository history.",
+      ".gitignore is a Git submodule that automatically syncs with remote servers."
+    ],
+    "correctAnswer": ".gitignore is a plain‑text file placed in a repository that lists file patterns to be ignored by Git; you add patterns (e.g., *.log or /build/) so those files are not tracked or shown as untracked.",
+    "explanation": "The .gitignore file tells Git which files/patterns to ignore, preventing them from being tracked."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Git repository?",
+    "options": [
+      "A directory that contains a .git folder storing all version history and metadata.",
+      "A remote server that hosts multiple unrelated projects.",
+      "A file that lists all the branches in a project.",
+      "A command-line tool for merging code."
+    ],
+    "correctAnswer": "A directory that contains a .git folder storing all version history and metadata.",
+    "explanation": "A Git repository is a folder with a .git subdirectory that holds all commits, branches, and configuration data."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local and a remote repository?",
+    "options": [
+      "A local repository resides on your computer, while a remote repository is hosted on a server accessible over a network.",
+      "A local repository can only store binary files, whereas a remote repository stores source code.",
+      "A local repository automatically syncs with all other developers, while a remote repository does not.",
+      "A local repository uses Git, while a remote repository uses SVN."
+    ],
+    "correctAnswer": "A local repository resides on your computer, while a remote repository is hosted on a server accessible over a network.",
+    "explanation": "Local repositories are on your machine; remote repositories live on a server (e.g., GitHub) and are accessed via network protocols."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git init command used for?",
+    "options": [
+      "To create a new, empty Git repository in the current directory.",
+      "To clone an existing repository from a remote server.",
+      "To push local commits to a remote repository.",
+      "To merge two branches together."
+    ],
+    "correctAnswer": "To create a new, empty Git repository in the current directory.",
+    "explanation": "git init initializes a new .git directory, turning the current folder into a Git repository."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git clone command used for?",
+    "options": [
+      "To copy an existing remote repository to a new local directory, including its history.",
+      "To initialize a new empty repository.",
+      "To delete a branch from the remote repository.",
+      "To view the commit log of a repository."
+    ],
+    "correctAnswer": "To copy an existing remote repository to a new local directory, including its history.",
+    "explanation": "git clone creates a full local copy of a remote repo, bringing down all commits, branches, and tags."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git clone and git fork?",
+    "options": [
+      "Cloning creates a local copy of an existing repository, while forking creates a personal copy on a hosting service like GitHub, allowing you to propose changes back.",
+      "Cloning copies only the latest commit, whereas forking copies the entire history.",
+      "Cloning works only with local repositories, while forking works only with remote repositories.",
+      "Cloning automatically grants write access to the original repository, while forking does not."
+    ],
+    "correctAnswer": "Cloning creates a local copy of an existing repository, while forking creates a personal copy on a hosting service like GitHub, allowing you to propose changes back.",
+    "explanation": "Forking is a server‑side operation that creates a new repository under your account; cloning is a client‑side operation that copies any repo to your machine."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git add command used for?",
+    "options": [
+      "To stage changes for the next commit",
+      "To permanently delete files from the repository",
+      "To merge two branches",
+      "To view the commit history"
+    ],
+    "correctAnswer": "To stage changes for the next commit",
+    "explanation": "git add moves changes to the staging area so they will be included in the next commit."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git commit command used for?",
+    "options": [
+      "To create a new branch",
+      "To record staged changes as a new commit",
+      "To discard uncommitted changes",
+      "To list remote repositories"
+    ],
+    "correctAnswer": "To record staged changes as a new commit",
+    "explanation": "git commit creates a new commit object from the contents that have been staged with git add."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git status command used for?",
+    "options": [
+      "To display the current branch's commit log",
+      "To show which files are staged, modified, or untracked",
+      "To push commits to a remote repository",
+      "To initialize a new Git repository"
+    ],
+    "correctAnswer": "To show which files are staged, modified, or untracked",
+    "explanation": "git status reports the state of the working directory and staging area, indicating staged, modified, and untracked files."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git log command used for?",
+    "options": [
+      "To display a list of commits in the repository",
+      "To apply changes from one branch to another",
+      "To remove files from the index",
+      "To configure user name and email"
+    ],
+    "correctAnswer": "To display a list of commits in the repository",
+    "explanation": "git log shows the commit history, listing commits with details such as hash, author, date, and message."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git diff command used for?",
+    "options": [
+      "To compare changes between commits, branches, or the working tree",
+      "To clone a remote repository",
+      "To create a new tag",
+      "To set upstream tracking for a branch"
+    ],
+    "correctAnswer": "To compare changes between commits, branches, or the working tree",
+    "explanation": "git diff displays line-by-line differences between various states, such as working tree vs. index or between commits."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git push command used for?",
+    "options": [
+      "To upload local commits to a remote repository",
+      "To download changes from a remote repository",
+      "To create a new branch",
+      "To merge branches"
+    ],
+    "correctAnswer": "To upload local commits to a remote repository",
+    "explanation": "git push sends the commits from your local branch to the corresponding branch on the remote repository."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the staging area (index) in Git?",
+    "options": [
+      "A temporary storage for files before commit",
+      "The directory where the repository is cloned",
+      "The remote repository",
+      "The final commit history"
+    ],
+    "correctAnswer": "A temporary storage for files before commit",
+    "explanation": "The index holds the snapshot of the next commit; files are added to it with git add before committing."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the working directory in Git?",
+    "options": [
+      "The directory where the repository is checked out and files are edited",
+      "The directory where commits are stored",
+      "The directory of the remote server",
+      "The directory where Git configuration is stored"
+    ],
+    "correctAnswer": "The directory where the repository is checked out and files are edited",
+    "explanation": "The working directory contains the actual files you edit; changes are tracked relative to the repository."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a commit hash (SHA)?",
+    "options": [
+      "A unique identifier for a commit generated by SHA-1",
+      "The name of the branch",
+      "The timestamp of the commit",
+      "The size of the commit"
+    ],
+    "correctAnswer": "A unique identifier for a commit generated by SHA-1",
+    "explanation": "Git uses a SHA-1 hash to uniquely identify each commit, ensuring integrity and traceability."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git checkout and git switch?",
+    "options": [
+      "git checkout can change branches, files, or restore, while git switch is specifically for changing branches",
+      "git switch can change branches, files, or restore, while git checkout is only for branches",
+      "Both commands do exactly the same",
+      "git checkout is deprecated"
+    ],
+    "correctAnswer": "git checkout can change branches, files, or restore, while git switch is specifically for changing branches",
+    "explanation": "git checkout is a multi-purpose command; git switch was introduced to simplify branch switching."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is HEAD in Git?",
+    "options": [
+      "The latest commit on the current branch",
+      "A reference to the current branch tip",
+      "The default branch name",
+      "The remote repository URL"
+    ],
+    "correctAnswer": "A reference to the current branch tip",
+    "explanation": "HEAD is a pointer that refers to the tip of the current branch."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a detached HEAD state?",
+    "options": [
+      "HEAD points to a branch name",
+      "HEAD points to a specific commit, not a branch",
+      "HEAD points to the remote repository",
+      "HEAD points to the master branch"
+    ],
+    "correctAnswer": "HEAD points to a specific commit, not a branch",
+    "explanation": "In a detached HEAD, HEAD refers directly to a commit hash, not a branch."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the master/main branch in Git?",
+    "options": [
+      "The default branch created when initializing a repo",
+      "A branch used only for tags",
+      "The branch that holds merge conflicts",
+      "The branch that tracks remote changes"
+    ],
+    "correctAnswer": "The default branch created when initializing a repo",
+    "explanation": "By convention, the first branch created is master or main."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a new branch in Git?",
+    "options": [
+      "git branch new-branch",
+      "git checkout -b new-branch",
+      "git merge new-branch",
+      "git commit -b new-branch"
+    ],
+    "correctAnswer": "git checkout -b new-branch",
+    "explanation": "git checkout -b creates and switches to the new branch."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you delete a branch in Git?",
+    "options": [
+      "git delete branch",
+      "git branch -d branchname",
+      "git remove branch",
+      "git branch --remove branchname"
+    ],
+    "correctAnswer": "git branch -d branchname",
+    "explanation": "git branch -d deletes a local branch safely."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you rename a branch in Git?",
+    "options": [
+      "git branch -m old new",
+      "git branch --rename old new",
+      "git rename branch old new",
+      "git branch old new"
+    ],
+    "correctAnswer": "git branch -m old new",
+    "explanation": "git branch -m is the command to rename a branch locally."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local branch and a remote-tracking branch?",
+    "options": [
+      "Local branch exists only on your machine, remote-tracking branch tracks a branch on a remote repository",
+      "Local branch tracks remote, remote-tracking is a local copy",
+      "They are the same",
+      "Remote-tracking branch is a remote repository"
+    ],
+    "correctAnswer": "Local branch exists only on your machine, remote-tracking branch tracks a branch on a remote repository",
+    "explanation": "A local branch is stored locally, while a remote-tracking branch reflects the state of a branch on a remote."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is origin in Git?",
+    "options": [
+      "Default name for your local repository",
+      "Default name for the remote repository you cloned from",
+      "A special branch",
+      "A command"
+    ],
+    "correctAnswer": "Default name for the remote repository you cloned from",
+    "explanation": "origin is the default alias given to the remote you cloned from."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add a remote repository in Git?",
+    "options": [
+      "git remote add origin <url>",
+      "git add remote <url>",
+      "git remote set-url origin <url>",
+      "git clone <url>"
+    ],
+    "correctAnswer": "git remote add origin <url>",
+    "explanation": "git remote add is used to add a new remote with a given name and URL."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git remote -v command used for?",
+    "options": [
+      "To list all remote repositories and their URLs",
+      "To view the status of remote branches",
+      "To delete a remote",
+      "To push changes to remote"
+    ],
+    "correctAnswer": "To list all remote repositories and their URLs",
+    "explanation": "git remote -v shows each remote name and its fetch/push URLs."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Git tag?",
+    "options": [
+      "A branch pointer",
+      "A reference to a specific commit used for marking releases",
+      "A temporary stash",
+      "A merge conflict marker"
+    ],
+    "correctAnswer": "A reference to a specific commit used for marking releases",
+    "explanation": "A tag is a lightweight or annotated reference that points to a specific commit, often used to mark releases."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an annotated tag and a lightweight tag?",
+    "options": [
+      "Annotated tags are stored in the database, lightweight tags are not",
+      "Annotated tags include metadata like tagger and date, lightweight tags are just pointers",
+      "Lightweight tags are signed, annotated are not",
+      "Annotated tags can only be created on master branch"
+    ],
+    "correctAnswer": "Annotated tags include metadata like tagger and date, lightweight tags are just pointers",
+    "explanation": "Annotated tags are full objects with metadata; lightweight tags are simple refs."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you view the commit history of a file?",
+    "options": [
+      "git log --all",
+      "git log -- <file>",
+      "git show <file>",
+      "git status <file>"
+    ],
+    "correctAnswer": "git log -- <file>",
+    "explanation": "The -- <file> option limits log output to commits that touched that file."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a commit message?",
+    "options": [
+      "To change file names",
+      "To describe the changes made",
+      "To merge branches",
+      "To delete commits"
+    ],
+    "correctAnswer": "To describe the changes made",
+    "explanation": "Commit messages explain why a change was made and what it does."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are best practices for writing good commit messages?",
+    "options": [
+      "Keep subject line under 50 chars, use imperative mood, explain why",
+      "Write long paragraphs, use passive voice",
+      "Omit subject line, focus on code",
+      "Use random words"
+    ],
+    "correctAnswer": "Keep subject line under 50 chars, use imperative mood, explain why",
+    "explanation": "Short, clear subject lines and detailed body help future readers."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git rm and deleting a file manually?",
+    "options": [
+      "git rm removes the file from the working directory and stages its deletion for the next commit.",
+      "git rm only stages the deletion but leaves the file in the working directory.",
+      "git rm deletes the file but does not record the change in the index.",
+      "git rm renames the file instead of deleting it."
+    ],
+    "correctAnswer": "git rm removes the file from the working directory and stages its deletion for the next commit.",
+    "explanation": "git rm removes the file from both the working tree and the index, staging the removal so it will be committed; manually deleting only removes the file locally and leaves the index unchanged."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git mv and renaming a file manually?",
+    "options": [
+      "git mv moves the file and stages the rename in the index.",
+      "git mv only copies the file without updating the index.",
+      "git mv deletes the file but does not record the change.",
+      "git mv does nothing to the file."
+    ],
+    "correctAnswer": "git mv moves the file and stages the rename in the index.",
+    "explanation": "git mv updates the working tree and the index, recording the rename so it is tracked in the next commit; a manual rename changes only the filesystem."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the README file in a Git repository?",
+    "options": [
+      "It provides documentation and an overview of the project for users and contributors.",
+      "It stores the commit history of the repository.",
+      "It contains configuration settings for the Git server.",
+      "It holds the license information for the project."
+    ],
+    "correctAnswer": "It provides documentation and an overview of the project for users and contributors.",
+    "explanation": "A README is meant to explain what the project does, how to set it up, and how to contribute, serving as the first point of contact for visitors."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a README.md file typically used for?",
+    "options": [
+      "It is a Markdown-formatted README that displays nicely on Git hosting platforms.",
+      "It is a binary file that stores compiled assets.",
+      "It contains configuration settings for the repository.",
+      "It is a hidden file used only by Git internals."
+    ],
+    "correctAnswer": "It is a Markdown-formatted README that displays nicely on Git hosting platforms.",
+    "explanation": "The .md extension indicates Markdown, which GitHub, GitLab, and Bitbucket render into formatted HTML for easy reading."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between GitHub, GitLab, and Bitbucket?",
+    "options": [
+      "All are Git hosting services but differ in features, pricing, and self‑hosting options.",
+      "GitHub is a local version control system, while GitLab and Bitbucket are cloud services.",
+      "GitLab only supports Git, whereas GitHub and Bitbucket support Mercurial.",
+      "Bitbucket does not support Git repositories at all."
+    ],
+    "correctAnswer": "All are Git hosting services but differ in features, pricing, and self‑hosting options.",
+    "explanation": "They all host Git repositories, but GitLab offers built‑in CI/CD and self‑hosting, GitHub focuses on community and marketplace, and Bitbucket integrates tightly with Atlassian tools and offers free private repos."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a pull request (or merge request)?",
+    "options": [
+      "A command to pull changes from remote to local",
+      "A request to merge code changes from one branch to another",
+      "A tool to merge two repositories into one",
+      "A way to delete a branch"
+    ],
+    "correctAnswer": "A request to merge code changes from one branch to another",
+    "explanation": "A pull request is a mechanism for proposing changes to a repository and requesting that they be merged into another branch."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of code review in a pull request workflow?",
+    "options": [
+      "To automatically merge code",
+      "To test code for bugs",
+      "To ensure code quality and consistency",
+      "To deploy code to production"
+    ],
+    "correctAnswer": "To ensure code quality and consistency",
+    "explanation": "Code review checks for correctness, style, and potential issues before merging, improving overall quality."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a fork in Git/GitHub terminology?",
+    "options": [
+      "A copy of a repository that you own",
+      "A branch within the same repository",
+      "A merge of two branches",
+      "A tag for a release"
+    ],
+    "correctAnswer": "A copy of a repository that you own",
+    "explanation": "Forking creates a separate copy of a repository under your GitHub account, allowing independent changes."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between forking and cloning a repository?",
+    "options": [
+      "Forking creates a copy on GitHub, cloning copies locally",
+      "Forking copies locally, cloning creates a copy on GitHub",
+      "Both do the same thing",
+      "Forking merges branches"
+    ],
+    "correctAnswer": "Forking creates a copy on GitHub, cloning copies locally",
+    "explanation": "Forking duplicates the repo on GitHub under your account; cloning pulls the repo to your local machine."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is SSH authentication in Git and why is it used?",
+    "options": [
+      "A method to encrypt data during transfer",
+      "A way to authenticate using a private/public key pair",
+      "A protocol for HTTP requests",
+      "A tool to manage branches"
+    ],
+    "correctAnswer": "A way to authenticate using a private/public key pair",
+    "explanation": "SSH keys provide secure, password-less authentication to Git servers, protecting access and simplifying workflows."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTTPS and SSH for Git remotes?",
+    "options": [
+      "HTTPS uses username/password or token authentication, while SSH uses key-based authentication.",
+      "HTTPS requires SSH keys, SSH uses HTTPS.",
+      "HTTPS is faster, SSH is slower.",
+      "HTTPS is only for GitHub, SSH for GitLab."
+    ],
+    "correctAnswer": "HTTPS uses username/password or token authentication, while SSH uses key-based authentication.",
+    "explanation": "HTTPS authenticates with credentials or tokens, whereas SSH authenticates with public/private key pairs."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Git config file used for?",
+    "options": [
+      "Storing repository metadata like commit history.",
+      "Defining user preferences and settings for Git operations.",
+      "Keeping track of branches.",
+      "Storing the code."
+    ],
+    "correctAnswer": "Defining user preferences and settings for Git operations.",
+    "explanation": "The config file holds settings such as user name, email, aliases, and other Git behavior preferences."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set your username and email in Git?",
+    "options": [
+      "git set user name \"...\" and git set user email \"...\"",
+      "git config --global user.name \"...\" and git config --global user.email \"...\"",
+      "git user set name \"...\" and git user set email \"...\"",
+      "git config user.name \"...\" and git config user.email \"...\" (without --global)"
+    ],
+    "correctAnswer": "git config --global user.name \"...\" and git config --global user.email \"...\"",
+    "explanation": "The --global flag writes the name and email to the global config file (~/.gitconfig)."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git config --global?",
+    "options": [
+      "Sets config for current repository only.",
+      "Sets config for all repositories for current user.",
+      "Sets system-wide config.",
+      "Removes all config."
+    ],
+    "correctAnswer": "Sets config for all repositories for current user.",
+    "explanation": "The --global flag applies the setting to the user’s global configuration file, affecting all Git repos for that user."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between local, global, and system Git config?",
+    "options": [
+      "Local is per repository, global per user, system per machine.",
+      "Local is per machine, global per repository, system per user.",
+      "All are the same.",
+      "Local is only for GitHub."
+    ],
+    "correctAnswer": "Local is per repository, global per user, system per machine.",
+    "explanation": "Local config (~/.git/config) applies to a single repo, global (~/.gitconfig) to a user, and system (/etc/gitconfig) to all users on the machine."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a commit's parent commit?",
+    "options": [
+      "The commit that was made immediately before it in the same branch.",
+      "The commit that contains the same changes.",
+      "The commit that was made after it.",
+      "The commit that is unrelated."
+    ],
+    "correctAnswer": "The commit that was made immediately before it in the same branch.",
+    "explanation": "Each commit points to its immediate predecessor, establishing the history chain."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does it mean for Git to be a distributed version control system?",
+    "options": [
+      "Every user has a full copy of the repository and its history.",
+      "Only the central server stores the full history.",
+      "Changes are only tracked locally, not remotely.",
+      "The repository is distributed across multiple servers automatically."
+    ],
+    "correctAnswer": "Every user has a full copy of the repository and its history.",
+    "explanation": "In Git, each clone contains the entire repository, allowing offline work and independent branching."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between centralized and distributed version control systems?",
+    "options": [
+      "Centralized systems have a single central repository; distributed systems have multiple full copies.",
+      "Centralized systems store only the latest version; distributed systems store all history.",
+      "Centralized systems are for small teams; distributed systems are for large teams.",
+      "Centralized systems use Git; distributed systems use Subversion."
+    ],
+    "correctAnswer": "Centralized systems have a single central repository; distributed systems have multiple full copies.",
+    "explanation": "Centralized VCS rely on a central server; distributed VCS give each user a full repository."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the .git directory?",
+    "options": [
+      "It stores all the repository data, including objects, refs, and configuration.",
+      "It contains the source code of the project.",
+      "It holds temporary files during compilation.",
+      "It is used only for storing user credentials."
+    ],
+    "correctAnswer": "It stores all the repository data, including objects, refs, and configuration.",
+    "explanation": "The .git directory holds the entire history and metadata of the repo."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What happens when you run git init in a folder?",
+    "options": [
+      "Git creates a new empty repository in that folder.",
+      "Git deletes all files in the folder.",
+      "Git copies the folder to a remote server.",
+      "Git merges the folder with an existing repository."
+    ],
+    "correctAnswer": "Git creates a new empty repository in that folder.",
+    "explanation": "git init initializes a new repository, creating .git directory."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a merge commit?",
+    "options": [
+      "A commit that records the result of merging two branches",
+      "A commit that records the result of rebasing",
+      "A commit that records the result of cherry-picking",
+      "A commit that records the result of resetting"
+    ],
+    "correctAnswer": "A commit that records the result of merging two branches",
+    "explanation": "A merge commit is created when two branches are merged and contains two parent commits."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between staged and unstaged changes?",
+    "options": [
+      "Staged changes are ready to commit, unstaged are not",
+      "Staged changes are in the repository, unstaged are in the working directory",
+      "Staged changes are in the index, unstaged are in the working directory",
+      "Staged changes are ignored by Git, unstaged are tracked"
+    ],
+    "correctAnswer": "Staged changes are in the index, unstaged are in the working directory",
+    "explanation": "Staged changes are added to the index (staging area) and ready to be committed, while unstaged changes remain only in the working directory."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you unstage a file in Git?",
+    "options": [
+      "git reset HEAD <file>",
+      "git add <file>",
+      "git commit --amend <file>",
+      "git revert <file>"
+    ],
+    "correctAnswer": "git reset HEAD <file>",
+    "explanation": "Running git reset HEAD <file> removes the file from the index, effectively unstaging it."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you discard changes in your working directory?",
+    "options": [
+      "git checkout -- <file>",
+      "git reset --hard",
+      "git stash",
+      "git revert <file>"
+    ],
+    "correctAnswer": "git checkout -- <file>",
+    "explanation": "git checkout -- <file> restores the file to the state of the last commit, discarding local modifications."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git show?",
+    "options": [
+      "To display the commit history",
+      "To display the contents of a commit",
+      "To display the status of the working directory",
+      "To display the configuration settings"
+    ],
+    "correctAnswer": "To display the contents of a commit",
+    "explanation": "git show displays the details of a commit, including its diff and metadata."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git blame?",
+    "options": [
+      "To show the commit history of a repository.",
+      "To identify which commit last modified each line of a file.",
+      "To merge branches automatically.",
+      "To revert changes to a previous commit."
+    ],
+    "correctAnswer": "To identify which commit last modified each line of a file.",
+    "explanation": "git blame annotates each line with the commit hash, author, and timestamp of the last change."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does git blame tell you about a file?",
+    "options": [
+      "The size of the file in bytes.",
+      "The author and commit hash for each line.",
+      "The number of times the file was modified.",
+      "The file's permissions."
+    ],
+    "correctAnswer": "The author and commit hash for each line.",
+    "explanation": "git blame shows the author, commit ID, and timestamp for every line in the file."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git log --oneline and git log?",
+    "options": [
+      "--oneline shows only the commit message, while git log shows full diff.",
+      "--oneline shows a single line per commit, git log shows full commit details.",
+      "--oneline includes merge commits, git log excludes them.",
+      "They are identical."
+    ],
+    "correctAnswer": "--oneline shows a single line per commit, git log shows full commit details.",
+    "explanation": "--oneline condenses each commit to a single line of hash and message; git log displays full metadata and diffs."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Git branch pointer, conceptually?",
+    "options": [
+      "A pointer to the current working directory.",
+      "A reference to a specific commit.",
+      "A file that stores branch names.",
+      "A network connection to a remote repository."
+    ],
+    "correctAnswer": "A reference to a specific commit.",
+    "explanation": "A branch is a movable reference that points to a particular commit in the history."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default branch name in newer versions of Git?",
+    "options": [
+      "master",
+      "main",
+      "develop",
+      "trunk"
+    ],
+    "correctAnswer": "main",
+    "explanation": "Since Git 2.28, the default initial branch name is 'main' instead of 'master'."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check which branch you are currently on?",
+    "options": [
+      "git status",
+      "git branch",
+      "git log",
+      "git checkout"
+    ],
+    "correctAnswer": "git branch",
+    "explanation": "`git branch` lists all local branches and marks the current one with an asterisk."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git help?",
+    "options": [
+      "To display the commit history",
+      "To show usage information for Git commands",
+      "To merge branches automatically",
+      "To delete branches"
+    ],
+    "correctAnswer": "To show usage information for Git commands",
+    "explanation": "`git help` provides documentation and usage examples for Git commands."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a shallow clone in Git?",
+    "options": [
+      "Clone that includes all history",
+      "Clone that excludes tags",
+      "Clone that only fetches a limited depth of history",
+      "Clone that clones submodules only"
+    ],
+    "correctAnswer": "Clone that only fetches a limited depth of history",
+    "explanation": "A shallow clone limits the depth of the commit history, reducing download size."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git pull and git pull --rebase?",
+    "options": [
+      "pull merges, pull --rebase rebases",
+      "pull fetches only, pull --rebase deletes branches",
+      "pull reverts commits, pull --rebase resets HEAD",
+      "pull pushes changes, pull --rebase pulls tags"
+    ],
+    "correctAnswer": "pull merges, pull --rebase rebases",
+    "explanation": "`git pull` performs a merge of remote changes, while `git pull --rebase` rebases local commits on top of the fetched changes."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the -m flag in git commit?",
+    "options": [
+      "To specify the commit message",
+      "To merge branches",
+      "To amend previous commit",
+      "To push changes"
+    ],
+    "correctAnswer": "To specify the commit message",
+    "explanation": "The `-m` flag allows you to provide the commit message directly on the command line."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an empty commit and how do you create one?",
+    "options": [
+      "A commit with no changes, created with git commit --allow-empty",
+      "A commit that deletes all files, created with git commit --empty",
+      "A commit that contains only merge information, created with git merge --empty",
+      "A commit that contains no files but includes a message, created with git commit --no-files"
+    ],
+    "correctAnswer": "A commit with no changes, created with git commit --allow-empty",
+    "explanation": "The --allow-empty flag creates a commit that records no file changes but can include a message."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git commit --amend?",
+    "options": [
+      "To modify the last commit message or add changes to it",
+      "To create a new branch from the last commit",
+      "To revert the last commit",
+      "To push the last commit to remote"
+    ],
+    "correctAnswer": "To modify the last commit message or add changes to it",
+    "explanation": "git commit --amend lets you edit the most recent commit, changing its message or adding new changes."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a merge conflict?",
+    "options": [
+      "A situation where Git cannot automatically merge changes from two branches",
+      "A conflict between two remote repositories",
+      "A conflict that occurs when pushing to a protected branch",
+      "A conflict that happens when pulling from a non-fast-forward branch"
+    ],
+    "correctAnswer": "A situation where Git cannot automatically merge changes from two branches",
+    "explanation": "A merge conflict arises when Git cannot reconcile differing changes in the same file."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What causes a merge conflict in Git?",
+    "options": [
+      "Simultaneous edits to the same line in a file from different branches",
+      "Merging a branch that has no commits",
+      "Using the wrong merge strategy",
+      "Deleting a branch before merging"
+    ],
+    "correctAnswer": "Simultaneous edits to the same line in a file from different branches",
+    "explanation": "Conflicts occur when the same part of a file is modified differently in two branches."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a public and a private GitHub repository?",
+    "options": [
+      "Public repos are visible to everyone, private repos are only visible to collaborators",
+      "Public repos cannot be forked, private repos can",
+      "Public repos require a paid plan, private repos are free",
+      "Public repos are stored on GitHub, private repos are stored locally"
+    ],
+    "correctAnswer": "Public repos are visible to everyone, private repos are only visible to collaborators",
+    "explanation": "Public repositories are accessible to anyone, while private ones restrict access to invited collaborators."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a GitHub Gist?",
+    "options": [
+      "A private repository for code snippets",
+      "A public or private snippet of code that can be shared",
+      "A feature to merge branches",
+      "A tool for continuous integration"
+    ],
+    "correctAnswer": "A public or private snippet of code that can be shared",
+    "explanation": "A Gist is a lightweight way to share code snippets or notes, which can be public or private."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a license file in a repository?",
+    "options": [
+      "To specify the programming language",
+      "To define the terms under which the code can be used",
+      "To track changes",
+      "To store commit history"
+    ],
+    "correctAnswer": "To define the terms under which the code can be used",
+    "explanation": "A license file tells users what they can and cannot do with the code."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git checkout -- <file> and git restore <file>?",
+    "options": [
+      "checkout -- <file> discards local changes and restores the file from the index, while git restore <file> restores the file from the index to the working tree",
+      "checkout discards changes, restore reverts to last commit",
+      "checkout replaces file with HEAD, restore discards local changes",
+      "checkout is deprecated, restore is new"
+    ],
+    "correctAnswer": "checkout -- <file> discards local changes and restores the file from the index, while git restore <file> restores the file from the index to the working tree",
+    "explanation": "Both commands restore a file from the index, but checkout -- is the older syntax and restore is the newer, clearer command."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a submodule in Git?",
+    "options": [
+      "A branch that tracks another repository",
+      "A separate repository embedded inside another repository",
+      "A feature to merge commits",
+      "A way to tag releases"
+    ],
+    "correctAnswer": "A separate repository embedded inside another repository",
+    "explanation": "A submodule is an external repository linked at a specific commit within a parent repo."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git log --graph?",
+    "options": [
+      "Show commit history in a graph format",
+      "Display file changes",
+      "List branches",
+      "Show tags"
+    ],
+    "correctAnswer": "Show commit history in a graph format",
+    "explanation": "The --graph flag visualizes the commit history as a graph in the terminal."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between committing and pushing?",
+    "options": [
+      "Committing records changes locally; pushing uploads them to a remote repository.",
+      "Committing uploads changes to remote; pushing records changes locally.",
+      "Committing merges branches; pushing creates a new branch.",
+      "Committing deletes files; pushing restores them."
+    ],
+    "correctAnswer": "Committing records changes locally; pushing uploads them to a remote repository.",
+    "explanation": "Committing creates a new commit in the local repository, while pushing sends those commits to a remote repository."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the Git branching strategy (Gitflow).",
+    "options": [
+      "Gitflow uses only master and develop branches, with feature, release, and hotfix branches for parallel development.",
+      "Gitflow merges all changes directly into master without branching.",
+      "Gitflow requires every commit to be on a separate branch.",
+      "Gitflow is a strategy that deletes branches after merging."
+    ],
+    "correctAnswer": "Gitflow uses only master and develop branches, with feature, release, and hotfix branches for parallel development.",
+    "explanation": "Gitflow defines a set of branches (master, develop, feature, release, hotfix) to manage parallel development and releases."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is git cherry-pick and when would you use it?",
+    "options": [
+      "cherry-pick copies a single commit from one branch to another without merging the whole branch.",
+      "cherry-pick deletes a commit from history.",
+      "cherry-pick merges all commits from a branch.",
+      "cherry-pick rebases the entire branch onto another."
+    ],
+    "correctAnswer": "cherry-pick copies a single commit from one branch to another without merging the whole branch.",
+    "explanation": "git cherry-pick applies the changes of a specific commit to the current branch."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is git stash and how do you use it?",
+    "options": [
+      "stash temporarily saves uncommitted changes to a stack so you can switch branches.",
+      "stash permanently deletes uncommitted changes.",
+      "stash pushes changes to remote.",
+      "stash merges branches automatically."
+    ],
+    "correctAnswer": "stash temporarily saves uncommitted changes to a stack so you can switch branches.",
+    "explanation": "git stash stores the working directory state so you can cleanly switch branches and later reapply the changes."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you resolve a merge conflict in Git?",
+    "options": [
+      "Manually edit conflicted files, then add and commit.",
+      "Delete the conflicted file and re-run merge.",
+      "Run git merge --abort and start over.",
+      "Use git revert to undo merge."
+    ],
+    "correctAnswer": "Manually edit conflicted files, then add and commit.",
+    "explanation": "You resolve conflicts by editing the files to keep desired changes, staging them, and committing the merge."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git reset and git revert?",
+    "options": [
+      "reset changes the commit history and can move the HEAD pointer, while revert creates a new commit that undoes the changes of a previous commit.",
+      "reset creates a new commit, revert modifies the index.",
+      "reset only works on remote branches, revert only works on local branches.",
+      "reset is used for merging, revert is used for branching."
+    ],
+    "correctAnswer": "reset changes the commit history and can move the HEAD pointer, while revert creates a new commit that undoes the changes of a previous commit.",
+    "explanation": "git reset rewrites history by moving HEAD and optionally updating the index and working tree, whereas git revert preserves history by adding a new commit that negates the effects of a specified commit."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the three modes of git reset (--soft, --mixed, --hard)?",
+    "options": [
+      "soft keeps the index and working tree unchanged, mixed resets the index to match the commit but leaves the working tree unchanged, hard resets both the index and working tree to match the commit.",
+      "soft resets both the index and working tree, mixed keeps the index, hard resets only the index.",
+      "soft resets only the working tree, mixed resets the index and working tree, hard does nothing.",
+      "soft does nothing, mixed resets the index, hard resets the working tree."
+    ],
+    "correctAnswer": "soft keeps the index and working tree unchanged, mixed resets the index to match the commit but leaves the working tree unchanged, hard resets both the index and working tree to match the commit.",
+    "explanation": "The three reset modes control how much of the repository state is moved to the target commit: --soft only moves HEAD, --mixed (default) also resets the index, and --hard resets both index and working tree."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git reset --hard and git checkout on a commit?",
+    "options": [
+      "reset --hard moves HEAD and updates the index and working tree to the target commit, while checkout only changes HEAD and the index but leaves the working tree unchanged unless you use --detach.",
+      "reset --hard only updates the index, checkout updates the working tree.",
+      "reset --hard is for tags, checkout is for branches.",
+      "reset --hard creates a new commit, checkout deletes commits."
+    ],
+    "correctAnswer": "reset --hard moves HEAD and updates the index and working tree to the target commit, while checkout only changes HEAD and the index but leaves the working tree unchanged unless you use --detach.",
+    "explanation": "git reset --hard rewrites the repository state completely, whereas git checkout simply switches the HEAD and index, leaving the working tree as is unless explicitly forced."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does git rebase differ from git merge in terms of commit history?",
+    "options": [
+      "rebase rewrites history to create a linear sequence of commits, while merge preserves the original history and adds a merge commit.",
+      "rebase creates a merge commit, merge rewrites history.",
+      "rebase deletes commits, merge duplicates commits.",
+      "rebase only works on master, merge only works on feature branches."
+    ],
+    "correctAnswer": "rebase rewrites history to create a linear sequence of commits, while merge preserves the original history and adds a merge commit.",
+    "explanation": "Rebase applies commits on top of another base, producing a straight line, whereas merge keeps the branching structure and records a merge commit."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the risks of rebasing shared branches?",
+    "options": [
+      "rewriting history can cause conflicts for collaborators and force them to rebase or reset their local copies.",
+      "rebasing deletes all commits permanently.",
+      "rebasing automatically pushes to the remote repository.",
+      "rebasing creates new branches automatically."
+    ],
+    "correctAnswer": "rewriting history can cause conflicts for collaborators and force them to rebase or reset their local copies.",
+    "explanation": "Because rebase changes commit hashes, any collaborators who have based work on the old history will need to reconcile their branches, which can lead to merge conflicts or lost work if not handled carefully."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an interactive rebase and what can you do with it?",
+    "options": [
+      "It allows you to edit, reorder, squash, or drop commits interactively",
+      "It creates a new branch from the current HEAD",
+      "It merges all changes from one branch into another",
+      "It deletes the current branch"
+    ],
+    "correctAnswer": "It allows you to edit, reorder, squash, or drop commits interactively",
+    "explanation": "Interactive rebase lets you rewrite commit history by editing, reordering, squashing, or dropping commits."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you squash multiple commits using interactive rebase?",
+    "options": [
+      "Use git rebase -i and mark commits as squash (s)",
+      "Use git merge --squash",
+      "Use git commit --amend",
+      "Use git rebase --onto"
+    ],
+    "correctAnswer": "Use git rebase -i and mark commits as squash (s)",
+    "explanation": "During an interactive rebase you change the command from pick to squash (s) to combine commits."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git rebase --onto?",
+    "options": [
+      "To move a series of commits onto a new base commit",
+      "To merge two branches together",
+      "To reset the current branch to a previous commit",
+      "To delete a branch"
+    ],
+    "correctAnswer": "To move a series of commits onto a new base commit",
+    "explanation": "git rebase --onto lets you transplant commits onto a different base, effectively changing their parent."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you abort a rebase that has conflicts?",
+    "options": [
+      "git rebase --abort",
+      "git rebase --continue",
+      "git reset --hard",
+      "git merge --abort"
+    ],
+    "correctAnswer": "git rebase --abort",
+    "explanation": "git rebase --abort restores the branch to its state before the rebase started."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you continue a rebase after resolving conflicts?",
+    "options": [
+      "git rebase --continue",
+      "git rebase --skip",
+      "git rebase --abort",
+      "git rebase --edit-todo"
+    ],
+    "correctAnswer": "git rebase --continue",
+    "explanation": "After fixing conflicts, git rebase --continue tells Git to apply the next commit."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git stash pop and git stash apply?",
+    "options": [
+      "git stash pop removes the stash after applying it, while git stash apply leaves the stash intact.",
+      "git stash pop applies the stash and also creates a new stash entry.",
+      "git stash apply deletes the stash after applying it, whereas git stash pop keeps it.",
+      "Both commands do the same thing; there is no difference."
+    ],
+    "correctAnswer": "git stash pop removes the stash after applying it, while git stash apply leaves the stash intact.",
+    "explanation": "git stash pop applies the stash and then drops it, whereas git stash apply only applies the stash and keeps it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you stash only specific files instead of all changes?",
+    "options": [
+      "Use git stash push -m \"message\" -- path/to/file",
+      "Use git stash --keep-index",
+      "Use git stash -p to interactively select changes",
+      "Use git stash -k to stash only staged changes"
+    ],
+    "correctAnswer": "Use git stash -p to interactively select changes",
+    "explanation": "The -p option enters interactive patch mode, letting you choose which hunks or files to stash."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git stash list and git stash drop?",
+    "options": [
+      "git stash list shows all stashes, git stash drop removes a specific stash.",
+      "git stash list removes all stashes, git stash drop lists them.",
+      "git stash list creates a new stash, git stash drop lists all stashes.",
+      "git stash list and git stash drop are aliases for git stash show."
+    ],
+    "correctAnswer": "git stash list shows all stashes, git stash drop removes a specific stash.",
+    "explanation": "git stash list displays the stack of stashed changes; git stash drop deletes a chosen entry."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a fast-forward merge and a no-fast-forward merge?",
+    "options": [
+      "Fast-forward merges create a new merge commit, no-fast-forward merges do not.",
+      "Fast-forward merges move the branch pointer forward without creating a merge commit, no-fast-forward merges create a merge commit even if a fast-forward is possible.",
+      "Fast-forward merges are only possible in rebase, no-fast-forward merges are only possible in merge.",
+      "There is no difference; both produce the same result."
+    ],
+    "correctAnswer": "Fast-forward merges move the branch pointer forward without creating a merge commit, no-fast-forward merges create a merge commit even if a fast-forward is possible.",
+    "explanation": "A fast-forward simply advances the branch tip; --no-ff forces a merge commit to preserve history."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git merge --squash?",
+    "options": [
+      "To merge branches without creating a merge commit, combining all changes into a single commit.",
+      "To perform a fast-forward merge only.",
+      "To revert the last commit.",
+      "To delete the source branch after merging."
+    ],
+    "correctAnswer": "To merge branches without creating a merge commit, combining all changes into a single commit.",
+    "explanation": "git merge --squash combines all changes from the source branch into a single commit on the target branch, without creating a merge commit."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you view the differences between two branches?",
+    "options": [
+      "git diff branch1..branch2",
+      "git log branch1..branch2",
+      "git status branch1 branch2",
+      "git merge branch1 branch2"
+    ],
+    "correctAnswer": "git diff branch1..branch2",
+    "explanation": "git diff branch1..branch2 shows the differences between the tip of branch1 and the tip of branch2."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you compare two commits using git diff?",
+    "options": [
+      "git diff <commit1> <commit2>",
+      "git diff <commit1>..<commit2>",
+      "git diff <commit1>.. <commit2>",
+      "git diff --compare <commit1> <commit2>"
+    ],
+    "correctAnswer": "git diff <commit1> <commit2>",
+    "explanation": "git diff <commit1> <commit2> directly compares the contents of the two commits and lists the differences."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git diff --staged?",
+    "options": [
+      "To show changes between the index and the last commit.",
+      "To show changes between the working directory and the last commit.",
+      "To show changes between two branches.",
+      "To show changes that have already been committed."
+    ],
+    "correctAnswer": "To show changes between the index and the last commit.",
+    "explanation": "git diff --staged compares the index (staged changes) with the last commit to show what will be committed."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a three-way merge and how does Git perform it?",
+    "options": [
+      "A merge that uses the two branch tips and their common ancestor to combine changes.",
+      "A merge that only uses the two branch tips without a common ancestor.",
+      "A merge that uses a four-way comparison of branches.",
+      "A merge that requires manual conflict resolution only."
+    ],
+    "correctAnswer": "A merge that uses the two branch tips and their common ancestor to combine changes.",
+    "explanation": "A three-way merge uses the two branch tips and their most recent common ancestor to merge changes, resolving conflicts based on the ancestor."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a .gitattributes file?",
+    "options": [
+      "To store commit messages for the repository.",
+      "To define file-specific attributes such as line endings, merge strategies, and diff drivers.",
+      "To configure the default branch name for new repositories.",
+      "To list all contributors to the project."
+    ],
+    "correctAnswer": "To define file-specific attributes such as line endings, merge strategies, and diff drivers.",
+    "explanation": "The .gitattributes file is used to set attributes per path, controlling behaviors like line ending normalization, merge drivers, and diff settings."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure line-ending normalization using .gitattributes?",
+    "options": [
+      "Add \"core.autocrlf=true\" to .gitattributes.",
+      "Add \"text=auto\" to .gitattributes for the files.",
+      "Use \"git config --global core.autocrlf\" command.",
+      "Add \"eol=lf\" to .gitattributes for all files."
+    ],
+    "correctAnswer": "Add \"text=auto\" to .gitattributes for the files.",
+    "explanation": "Setting text=auto in .gitattributes tells Git to normalize line endings on checkout and commit for those files."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between core.autocrlf settings on Windows vs. Linux?",
+    "options": [
+      "On Windows, it converts LF to CRLF on checkout; on Linux, it does nothing.",
+      "On Windows, it converts CRLF to LF on commit; on Linux, it converts LF to CRLF on checkout.",
+      "Both platforms behave identically; core.autocrlf has no platform-specific effect.",
+      "On Windows, it is disabled by default; on Linux, it is enabled by default."
+    ],
+    "correctAnswer": "On Windows, it converts LF to CRLF on checkout; on Linux, it does nothing.",
+    "explanation": "On Windows, core.autocrlf=true converts LF to CRLF when checking out and back to LF on commit; on Linux, the setting is usually false, so no conversion occurs."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git fetch --all?",
+    "options": [
+      "To merge all remote branches into the current branch.",
+      "To delete all local branches that have no remote counterpart.",
+      "To download all branches and tags from all configured remotes.",
+      "To push local commits to all remote repositories."
+    ],
+    "correctAnswer": "To download all branches and tags from all configured remotes.",
+    "explanation": "git fetch --all retrieves updates from every remote configured in the repository, bringing in all branches and tags."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you update a local branch with changes from a remote branch without merging?",
+    "options": [
+      "Use git merge --no-ff.",
+      "Use git rebase origin/<branch>.",
+      "Use git pull --rebase.",
+      "Use git cherry-pick."
+    ],
+    "correctAnswer": "Use git rebase origin/<branch>.",
+    "explanation": "Rebasing rewrites the local commits on top of the remote branch, incorporating changes without creating a merge commit."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git pull --ff-only and a regular git pull?",
+    "options": [
+      "git pull --ff-only will only perform a fast-forward merge, refusing to create a merge commit if the branch is not up to date.",
+      "git pull --ff-only will automatically rebase the local branch onto the remote.",
+      "git pull --ff-only will fetch but not merge.",
+      "git pull --ff-only will delete local commits that are not on remote."
+    ],
+    "correctAnswer": "git pull --ff-only will only perform a fast-forward merge, refusing to create a merge commit if the branch is not up to date.",
+    "explanation": "git pull --ff-only only allows a fast-forward; if a merge commit would be required it aborts, preventing unintended merge commits."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of tracking branches in Git?",
+    "options": [
+      "To keep a local branch synchronized with a remote branch and automatically know where to push and pull.",
+      "To store the commit history of a branch.",
+      "To create a backup of the repository.",
+      "To merge branches automatically."
+    ],
+    "correctAnswer": "To keep a local branch synchronized with a remote branch and automatically know where to push and pull.",
+    "explanation": "A tracking branch records the remote branch it follows, enabling simple push/pull commands and status comparisons."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set up a local branch to track a remote branch?",
+    "options": [
+      "git branch --set-upstream-to=origin/branchname localbranch",
+      "git checkout -b localbranch origin/branchname",
+      "git remote add origin <url>",
+      "git push -u origin localbranch"
+    ],
+    "correctAnswer": "git checkout -b localbranch origin/branchname",
+    "explanation": "This command creates a new local branch from the remote branch and sets it to track that remote branch."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git push origin main and git push -u origin main?",
+    "options": [
+      "git push -u sets the upstream for the local branch to origin/main.",
+      "git push -u deletes the remote branch.",
+      "git push -u pushes all branches.",
+      "git push -u forces a push."
+    ],
+    "correctAnswer": "git push -u sets the upstream for the local branch to origin/main.",
+    "explanation": "The -u flag records the remote branch as the upstream, so future pushes/pulls can be done without specifying the remote."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What does git push --force do and why is it dangerous?",
+    "options": [
+      "It overwrites the remote branch with local commits, potentially discarding others' work.",
+      "It creates a new branch on the remote.",
+      "It merges the local branch into the remote.",
+      "It only updates tags."
+    ],
+    "correctAnswer": "It overwrites the remote branch with local commits, potentially discarding others' work.",
+    "explanation": "git push --force replaces the remote history with the local one, which can erase commits that others rely on, leading to data loss."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git push --force and git push --force-with-lease?",
+    "options": [
+      "git push --force overwrites the remote branch regardless of its current state, while git push --force-with-lease only overwrites if the remote branch has not changed since the last fetch.",
+      "git push --force-with-lease is a safer version of git push --force that requires user confirmation before overwriting.",
+      "git push --force and git push --force-with-lease are identical commands with different names.",
+      "git push --force-with-lease deletes the remote branch before pushing."
+    ],
+    "correctAnswer": "git push --force overwrites the remote branch regardless of its current state, while git push --force-with-lease only overwrites if the remote branch has not changed since the last fetch.",
+    "explanation": "The --force-with-lease option checks that the remote branch hasn't been updated since you last fetched, preventing accidental overwrites."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you delete a remote branch?",
+    "options": [
+      "git branch -d origin/feature-branch",
+      "git push origin :feature-branch",
+      "git remote delete feature-branch",
+      "git branch -r -d feature-branch"
+    ],
+    "correctAnswer": "git push origin :feature-branch",
+    "explanation": "Pushing an empty ref (:) to the remote deletes the specified branch on the remote repository."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you rename a remote branch?",
+    "options": [
+      "git branch -m old-branch new-branch",
+      "git push origin :old-branch new-branch",
+      "git push origin old-branch:new-branch",
+      "git remote rename old-branch new-branch"
+    ],
+    "correctAnswer": "git push origin old-branch:new-branch",
+    "explanation": "The syntax old:new pushes the local branch as a new name on the remote, effectively renaming it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git remote prune?",
+    "options": [
+      "To remove local branches that no longer exist on the remote.",
+      "To remove remote-tracking branches that no longer exist on the remote.",
+      "To delete the remote repository itself.",
+      "To clean up local tags that are not on the remote."
+    ],
+    "correctAnswer": "To remove remote-tracking branches that no longer exist on the remote.",
+    "explanation": "git remote prune cleans up stale remote-tracking references that have been deleted from the remote."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you clean up stale remote-tracking branches?",
+    "options": [
+      "git fetch --prune",
+      "git remote prune origin",
+      "git branch -d -r",
+      "Both git fetch --prune and git remote prune origin"
+    ],
+    "correctAnswer": "git remote prune origin",
+    "explanation": "git remote prune origin removes stale remote-tracking branches for the specified remote."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git fsck?",
+    "options": [
+      "To check the integrity of the repository's objects and detect corruption.",
+      "To automatically clean up unused objects.",
+      "To compress the repository into a single file.",
+      "To merge branches automatically."
+    ],
+    "correctAnswer": "To check the integrity of the repository's objects and detect corruption.",
+    "explanation": "git fsck verifies that all objects are reachable and valid, reporting missing or corrupted objects."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git gc and git prune?",
+    "options": [
+      "git gc performs garbage collection, while git prune only removes unreachable objects.",
+      "git gc only compresses objects, git prune deletes branches.",
+      "git gc deletes tags, git prune cleans up logs.",
+      "git gc and git prune are aliases for the same command."
+    ],
+    "correctAnswer": "git gc performs garbage collection, while git prune only removes unreachable objects.",
+    "explanation": "git gc runs several housekeeping tasks including prune, but prune only removes unreachable objects."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Git decide when to run automatic garbage collection?",
+    "options": [
+      "When the number of loose objects exceeds a threshold or after a certain number of commits.",
+      "When you manually run git gc.",
+      "When the repository size is below 10 MB.",
+      "When you push to a remote."
+    ],
+    "correctAnswer": "When the number of loose objects exceeds a threshold or after a certain number of commits.",
+    "explanation": "Git triggers auto-gc based on loose object count and commit count thresholds."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Git object (blob, tree, commit)?",
+    "options": [
+      "A binary representation of data stored in the repository.",
+      "A command-line tool.",
+      "A user interface element.",
+      "A network protocol."
+    ],
+    "correctAnswer": "A binary representation of data stored in the repository.",
+    "explanation": "Git objects are immutable blobs of data stored in the object database."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Git store file content internally using blobs and trees?",
+    "options": [
+      "Each file is a blob; directories are trees that reference blobs and other trees.",
+      "Files are stored as plain text in the working directory only.",
+      "Git converts files into commits directly.",
+      "Git stores files in a single large blob per repository."
+    ],
+    "correctAnswer": "Each file is a blob; directories are trees that reference blobs and other trees.",
+    "explanation": "Blobs hold file contents; trees map filenames to blobs or subtrees."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git describe and git tag?",
+    "options": [
+      "git describe outputs a human-readable name based on the most recent tag and commit distance",
+      "git tag creates a new tag on the current commit",
+      "git describe lists all tags in the repository",
+      "git tag shows the most recent tag"
+    ],
+    "correctAnswer": "git describe outputs a human-readable name based on the most recent tag and commit distance",
+    "explanation": "git describe uses the nearest tag to generate a readable name for a commit, whereas git tag creates a new tag."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle merge conflicts in a binary file?",
+    "options": [
+      "Use git merge -s ours to keep the current branch's version",
+      "Use a custom merge driver defined in .gitattributes",
+      "Git cannot merge binary files, you must replace the file manually",
+      "Delete the binary file from the repository"
+    ],
+    "correctAnswer": "Use a custom merge driver defined in .gitattributes",
+    "explanation": "Binary conflicts require a custom merge driver or manual resolution; git cannot automatically merge binary files."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a merge driver in .gitattributes?",
+    "options": [
+      "To specify how to merge text files",
+      "To define custom merge strategies for specific file types",
+      "To prevent merges entirely",
+      "To automatically rebase branches"
+    ],
+    "correctAnswer": "To define custom merge strategies for specific file types",
+    "explanation": "A merge driver in .gitattributes tells Git how to merge files of particular types, enabling custom conflict resolution."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between rebasing and merging when working on a feature branch before opening a PR?",
+    "options": [
+      "Rebasing rewrites history to create a linear sequence, while merging preserves the original branch history and creates a merge commit",
+      "Merging rewrites history to create a linear sequence, while rebasing preserves the original branch history and creates a merge commit",
+      "Both rebasing and merging produce identical commit histories",
+      "Rebasing deletes commits from the feature branch"
+    ],
+    "correctAnswer": "Rebasing rewrites history to create a linear sequence, while merging preserves the original branch history and creates a merge commit",
+    "explanation": "Rebase rewrites commits onto the target branch for a clean history; merge keeps all commits and adds a merge commit."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Git worktree and when would you use one?",
+    "options": [
+      "A separate repository clone that shares the same history",
+      "A way to have multiple working directories for the same repository without cloning",
+      "A tool for merging branches automatically",
+      "A backup of the repository on a different machine"
+    ],
+    "correctAnswer": "A way to have multiple working directories for the same repository without cloning",
+    "explanation": "A worktree allows you to check out different branches in separate directories while sharing the same repository data."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create and switch between multiple worktrees?",
+    "options": [
+      "Use git worktree add <path> <branch> and then git checkout <branch> in that worktree.",
+      "Create a new branch with git branch <name> and switch to it with git switch <name>.",
+      "Clone the repository again with git clone --single-branch.",
+      "Use git worktree create <path> <branch> and then cd into that directory to work in it."
+    ],
+    "correctAnswer": "Use git worktree create <path> <branch> and then cd into that directory to work in it.",
+    "explanation": "The git worktree create (or add) command creates a new working directory for a branch, allowing you to switch between worktrees by simply changing directories."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git submodule update --init --recursive?",
+    "options": [
+      "To clone the superproject and all its submodules.",
+      "To initialize and update all submodules, including nested ones, to the commit recorded in the superproject.",
+      "To delete all submodules from the repository.",
+      "To push changes from the superproject to all submodules."
+    ],
+    "correctAnswer": "To initialize and update all submodules, including nested ones, to the commit recorded in the superproject.",
+    "explanation": "The --init flag initializes any uninitialized submodules, and --recursive updates nested submodules as well, ensuring the working tree matches the superproject's recorded commits."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the challenges of working with Git submodules?",
+    "options": [
+      "They automatically merge changes from the submodule into the superproject.",
+      "They require separate commits and can lead to a detached HEAD state in the submodule.",
+      "They are always up to date with the remote repository.",
+      "They replace the need for branches in the superproject."
+    ],
+    "correctAnswer": "They require separate commits and can lead to a detached HEAD state in the submodule.",
+    "explanation": "Submodules are independent repositories; you must commit changes inside them separately, and they often sit on a specific commit, not a branch, which can cause confusion."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Git subtree and how does it differ from a submodule?",
+    "options": [
+      "A subtree is a separate repository that is merged into the main repository as a subdirectory, preserving its history without separate commits.",
+      "A subtree is a branch inside the main repository that tracks another repository.",
+      "A subtree is a way to embed a repository as a subdirectory, with history, without separate commits.",
+      "A subtree is a submodule with additional configuration options."
+    ],
+    "correctAnswer": "A subtree is a way to embed a repository as a subdirectory, with history, without separate commits.",
+    "explanation": "Subtrees copy the other repository into a subdirectory and keep its history, allowing you to commit changes in the main repo without managing separate submodule commits."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git filter-branch and why is it considered dangerous?",
+    "options": [
+      "To rewrite history to remove sensitive data; dangerous because it rewrites commits and can break shared history.",
+      "To filter branches for display in the log.",
+      "To merge branches together.",
+      "To delete branches from the repository."
+    ],
+    "correctAnswer": "To rewrite history to remove sensitive data; dangerous because it rewrites commits and can break shared history.",
+    "explanation": "git filter-branch rewrites commit objects, which can invalidate existing references and disrupt collaborators if used on shared branches."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is git filter-repo and how does it improve on filter-branch?",
+    "options": [
+      "A tool that replaces git filter-branch by providing faster, safer, and more flexible rewriting of history.",
+      "A command that merges branches automatically.",
+      "A GUI for visualizing git history.",
+      "A plugin for GitHub Actions."
+    ],
+    "correctAnswer": "A tool that replaces git filter-branch by providing faster, safer, and more flexible rewriting of history.",
+    "explanation": "git filter-repo is a Python-based tool that rewrites history more efficiently, with fewer bugs and more features than the older filter-branch."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you remove a large file accidentally committed to history?",
+    "options": [
+      "Use git reset --hard and delete the file.",
+      "Use git filter-repo or BFG Repo-Cleaner to rewrite history and remove the file.",
+      "Delete the file in the latest commit only.",
+      "Use git revert to undo the commit."
+    ],
+    "correctAnswer": "Use git filter-repo or BFG Repo-Cleaner to rewrite history and remove the file.",
+    "explanation": "Both tools rewrite the entire repository history to purge the file from all commits, ensuring it never appears in the repo again."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a pre-commit hook?",
+    "options": [
+      "To run tests before pushing code.",
+      "To prevent commits that fail linting or tests.",
+      "To automatically merge branches.",
+      "To send notifications after a commit."
+    ],
+    "correctAnswer": "To prevent commits that fail linting or tests.",
+    "explanation": "The pre-commit hook runs before a commit is finalized, allowing scripts to abort the commit if checks fail."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a pre-push hook?",
+    "options": [
+      "To run tests before pushing to remote.",
+      "To delete local branches.",
+      "To modify commit messages.",
+      "To pull changes from remote."
+    ],
+    "correctAnswer": "To run tests before pushing to remote.",
+    "explanation": "The pre-push hook executes on the client before data is sent to the remote, making it ideal for running tests or linting."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set up a commit-msg hook to enforce commit message conventions?",
+    "options": [
+      "Create a file named commit-msg in .git/hooks and write a script that checks the message format.",
+      "Add a configuration to git config.",
+      "Use git commit --message-format.",
+      "Use git log --pretty."
+    ],
+    "correctAnswer": "Create a file named commit-msg in .git/hooks and write a script that checks the message format.",
+    "explanation": "The commit-msg hook runs after the commit message is entered; a custom script can validate the format and reject the commit if it does not match the convention."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between client-side and server-side Git hooks?",
+    "options": [
+      "Client-side hooks run on the machine that initiates the Git command, while server-side hooks run on the repository server after a push.",
+      "Client-side hooks modify the repository on the server, server-side hooks modify local working tree.",
+      "Client-side hooks are only for GitHub, server-side hooks are only for GitLab.",
+      "Client-side hooks are executed after a push, server-side hooks before a commit."
+    ],
+    "correctAnswer": "Client-side hooks run on the machine that initiates the Git command, while server-side hooks run on the repository server after a push.",
+    "explanation": "Client-side hooks run locally before or after commands; server-side hooks run on the server after a push."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a .gitkeep file?",
+    "options": [
+      "It tells Git to track an otherwise empty directory.",
+      "It keeps the Git index from being corrupted.",
+      "It is used to lock the repository during merges.",
+      "It stores the commit history of a branch."
+    ],
+    "correctAnswer": "It tells Git to track an otherwise empty directory.",
+    "explanation": "Git does not track empty directories; a placeholder file like .gitkeep keeps the directory in the repository."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git diff --word-diff?",
+    "options": [
+      "Show differences at word level",
+      "Show differences at line level",
+      "Show commit history",
+      "Show branch status"
+    ],
+    "correctAnswer": "Show differences at word level",
+    "explanation": "The --word-diff flag makes git diff highlight changes at the word level instead of the default line level."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you view changes at the word level instead of line level?",
+    "options": [
+      "git diff --word-diff",
+      "git diff --stat",
+      "git diff --shortstat",
+      "git diff --color"
+    ],
+    "correctAnswer": "git diff --word-diff",
+    "explanation": "Using the --word-diff option tells git diff to display changes word by word."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git log -p and git show for viewing changes?",
+    "options": [
+      "git log -p shows patch for each commit in the log, git show shows patch for a single commit",
+      "git log -p shows only commit messages, git show shows patch",
+      "git log -p shows branch status, git show shows file tree",
+      "git log -p shows tags, git show shows branches"
+    ],
+    "correctAnswer": "git log -p shows patch for each commit in the log, git show shows patch for a single commit",
+    "explanation": "git log -p outputs the diff for every commit listed, while git show displays the diff for one specified commit."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a patch file from a commit and apply it elsewhere?",
+    "options": [
+      "git format-patch <commit> and git apply <patch>",
+      "git diff <commit> > patch and git cherry-pick",
+      "git commit -p and git merge",
+      "git revert and git rebase"
+    ],
+    "correctAnswer": "git format-patch <commit> and git apply <patch>",
+    "explanation": "git format-patch generates a patch file from a commit, and git apply applies that patch to another repository."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git format-patch and git am?",
+    "options": [
+      "To create email-friendly patches and apply them via email",
+      "To create a new branch",
+      "To delete commits",
+      "To list remote repositories"
+    ],
+    "correctAnswer": "To create email-friendly patches and apply them via email",
+    "explanation": "git format-patch creates patches in a format suitable for email, and git am applies patches received via email."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you sign commits using GPG in Git?",
+    "options": [
+      "git commit -S",
+      "git commit --sign",
+      "git commit -gpg",
+      "git commit --gpg-sign"
+    ],
+    "correctAnswer": "git commit -S",
+    "explanation": "The -S flag (or --gpg-sign) tells Git to sign the commit with the configured GPG key."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of verified commits on GitHub?",
+    "options": [
+      "To ensure commits are from a verified email address",
+      "To confirm that the commit was signed with a GPG key",
+      "To show that the commit has passed CI checks",
+      "To indicate that the commit is from a protected branch"
+    ],
+    "correctAnswer": "To confirm that the commit was signed with a GPG key",
+    "explanation": "Verified commits are those that GitHub can validate as having been signed with a GPG key that matches the user’s account."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a lightweight tag and a signed tag?",
+    "options": [
+      "Lightweight tags are pointers to commits, signed tags are annotated with a GPG signature",
+      "Lightweight tags are stored in the .git folder, signed tags are stored in the remote",
+      "Lightweight tags can be deleted, signed tags cannot",
+      "Lightweight tags are only for releases, signed tags are for branches"
+    ],
+    "correctAnswer": "Lightweight tags are pointers to commits, signed tags are annotated with a GPG signature",
+    "explanation": "A lightweight tag is just a name pointing to a commit, while a signed (annotated) tag includes metadata and a GPG signature."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure Git to always sign commits automatically?",
+    "options": [
+      "git config --global commit.gpgSign true",
+      "git config --global commit.sign true",
+      "git config --global commit.gpg true",
+      "git config --global commit.signing true"
+    ],
+    "correctAnswer": "git config --global commit.gpgSign true",
+    "explanation": "Setting commit.gpgSign to true tells Git to sign every commit with the configured GPG key."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is trunk-based development and how does it differ from Gitflow?",
+    "options": [
+      "Trunk-based development uses a single main branch for all work, Gitflow uses multiple long-lived branches",
+      "Trunk-based development requires feature branches, Gitflow does not",
+      "Trunk-based development is only for monorepos, Gitflow is for microservices",
+      "Trunk-based development uses Git tags, Gitflow uses Git branches"
+    ],
+    "correctAnswer": "Trunk-based development uses a single main branch for all work, Gitflow uses multiple long-lived branches",
+    "explanation": "Trunk-based development encourages frequent merges to a single main branch, whereas Gitflow relies on separate develop, feature, release, and hotfix branches."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between feature branching and trunk-based development?",
+    "options": [
+      "Feature branching isolates features in separate branches, while trunk-based development merges frequently into main.",
+      "Feature branching merges directly into main, trunk-based uses long-lived branches.",
+      "Feature branching uses tags, trunk-based uses branches.",
+      "Feature branching is for small teams, trunk-based for large teams."
+    ],
+    "correctAnswer": "Feature branching isolates features in separate branches, while trunk-based development merges frequently into main.",
+    "explanation": "Feature branching keeps each feature isolated until finished, whereas trunk-based development encourages frequent integration into the main branch to avoid long-lived divergence."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a release branch and how is it used in Gitflow?",
+    "options": [
+      "A branch created from develop to prepare a new version; used for final bug fixes and version tagging.",
+      "A branch that contains only documentation.",
+      "A branch that is never merged back.",
+      "A branch that is used to deploy to production immediately."
+    ],
+    "correctAnswer": "A branch created from develop to prepare a new version; used for final bug fixes and version tagging.",
+    "explanation": "In Gitflow, a release branch is created from develop to polish the upcoming release, allowing bug fixes and version number updates before merging back into main and develop."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hotfix branch and when is it created?",
+    "options": [
+      "A branch created from main to fix critical bugs in production; created after a release is deployed.",
+      "A branch used for feature development.",
+      "A branch that contains only test code.",
+      "A branch that is merged into develop only."
+    ],
+    "correctAnswer": "A branch created from main to fix critical bugs in production; created after a release is deployed.",
+    "explanation": "Hotfix branches are spawned from the production branch (main) to address urgent issues, then merged back into main and develop."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle long-lived feature branches without excessive merge conflicts?",
+    "options": [
+      "Regularly rebase onto main to keep branch up-to-date.",
+      "Never merge main into feature branch.",
+      "Delete the feature branch after a week.",
+      "Use tags instead of branches."
+    ],
+    "correctAnswer": "Regularly rebase onto main to keep branch up-to-date.",
+    "explanation": "Rebasing a long-lived feature branch onto main incorporates the latest changes, minimizing conflicts when the feature is eventually merged."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of rebasing a feature branch onto main regularly?",
+    "options": [
+      "To keep the feature branch up-to-date with the latest changes from main and reduce merge conflicts.",
+      "To create a new commit history for main.",
+      "To delete the feature branch.",
+      "To push the branch to remote."
+    ],
+    "correctAnswer": "To keep the feature branch up-to-date with the latest changes from main and reduce merge conflicts.",
+    "explanation": "Regular rebasing aligns the feature branch with main’s current state, making the final merge smoother and less conflict-prone."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git pull --rebase and manually running fetch then rebase?",
+    "options": [
+      "git pull --rebase combines fetch and rebase in one command, while manually running fetch then rebase allows you to inspect changes between the two steps.",
+      "git pull --rebase only fetches remote changes without rebasing, whereas fetch then rebase performs both actions.",
+      "There is no difference; both commands execute the same underlying operations in the same order.",
+      "git pull --rebase performs a merge, while fetch then rebase performs a fast‑forward only."
+    ],
+    "correctAnswer": "git pull --rebase combines fetch and rebase in one command, while manually running fetch then rebase allows you to inspect changes between the two steps.",
+    "explanation": "git pull --rebase is a shortcut that does a fetch followed immediately by a rebase; doing the steps manually lets you examine the fetched changes before rebasing."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure Git to always rebase instead of merge on pull?",
+    "options": [
+      "Set the global config pull.rebase to true using git config --global pull.rebase true.",
+      "Add rebase=true to the .gitignore file.",
+      "Create an alias named pull that runs git pull --rebase.",
+      "Set core.autocrlf to rebase in the Git config."
+    ],
+    "correctAnswer": "Set the global config pull.rebase to true using git config --global pull.rebase true.",
+    "explanation": "The pull.rebase setting controls the default behavior of git pull; setting it to true makes pull use rebase instead of merge."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git config pull.rebase true?",
+    "options": [
+      "It tells Git to use rebase instead of merge when pulling, rewriting local commits on top of upstream changes.",
+      "It disables pulling altogether.",
+      "It forces all branches to be rebased automatically on every commit.",
+      "It changes the default editor for commit messages to rebase."
+    ],
+    "correctAnswer": "It tells Git to use rebase instead of merge when pulling, rewriting local commits on top of upstream changes.",
+    "explanation": "When pull.rebase is true, git pull will reapply local commits on top of the fetched upstream commits rather than creating a merge commit."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Conventional Commits and why are they used?",
+    "options": [
+      "A specification for writing commit messages with a structured format (type, scope, description) to improve readability, automation, and changelog generation.",
+      "A Git command that automatically creates conventional branches.",
+      "A Git hook that enforces code style before committing.",
+      "A GUI tool for visualizing commit history."
+    ],
+    "correctAnswer": "A specification for writing commit messages with a structured format (type, scope, description) to improve readability, automation, and changelog generation.",
+    "explanation": "Conventional Commits define a standard commit message format that enables tools to parse commits for automated releases, changelogs, and better collaboration."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use Git aliases to speed up common commands?",
+    "options": [
+      "Define short alias names in the Git config, e.g., git config --global alias.st status, then run git st instead of git status.",
+      "Create shell scripts named after Git commands.",
+      "Install a third‑party plugin that replaces Git commands.",
+      "Set the environment variable GIT_ALIAS_PATH to a directory of scripts."
+    ],
+    "correctAnswer": "Define short alias names in the Git config, e.g., git config --global alias.st status, then run git st instead of git status.",
+    "explanation": "Git aliases map a short name to a longer command in the config, allowing you to type fewer characters for frequently used commands."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git reflog expire?",
+    "options": [
+      "Clean up old reflog entries to free disk space",
+      "Force a rebase of the current branch",
+      "Merge remote changes into local",
+      "Delete all branches"
+    ],
+    "correctAnswer": "Clean up old reflog entries to free disk space",
+    "explanation": "git reflog expire removes reflog entries older than a specified age, helping to keep the reflog from growing indefinitely."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you recover a deleted branch using reflog?",
+    "options": [
+      "Use git checkout -b <branch> <commit> referencing a reflog entry",
+      "Use git reset --hard HEAD~1",
+      "Use git merge --abort",
+      "Use git reflog expire"
+    ],
+    "correctAnswer": "Use git checkout -b <branch> <commit> referencing a reflog entry",
+    "explanation": "The reflog records the previous HEAD positions; you can create a new branch pointing to the desired commit from the reflog."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you recover a lost commit that isn't referenced by any branch?",
+    "options": [
+      "Use git fsck --lost-found to find dangling commits",
+      "Use git revert HEAD",
+      "Use git rebase -i",
+      "Use git reflog expire"
+    ],
+    "correctAnswer": "Use git fsck --lost-found to find dangling commits",
+    "explanation": "git fsck --lost-found lists dangling objects, including commits that are no longer referenced by any branch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain git bisect and how it helps debug issues.",
+    "options": [
+      "Binary search through commits to find the first bad commit",
+      "Automatically merges branches",
+      "Reverts all changes",
+      "Deletes stale branches"
+    ],
+    "correctAnswer": "Binary search through commits to find the first bad commit",
+    "explanation": "git bisect automates a binary search over the commit history, narrowing down the commit that introduced a bug."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is git reflog and when is it useful?",
+    "options": [
+      "Log of local reference updates, useful for recovering lost commits",
+      "Remote log of commits",
+      "Configuration file",
+      "A type of branch"
+    ],
+    "correctAnswer": "Log of local reference updates, useful for recovering lost commits",
+    "explanation": "git reflog records every change to the tips of branches and HEAD, allowing recovery of commits that are otherwise unreachable."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Git's SHA-1 and the newer SHA-256 object format, and why is Git migrating?",
+    "options": [
+      "SHA-1 uses a 160‑bit hash while SHA-256 uses a 256‑bit hash, and Git is migrating to improve collision resistance.",
+      "SHA-1 is faster but less secure, migration is due to performance concerns.",
+      "SHA-256 is backward compatible, migration is due to licensing issues.",
+      "SHA-1 uses base64, SHA-256 uses hex, migration is for readability."
+    ],
+    "correctAnswer": "SHA-1 uses a 160‑bit hash while SHA-256 uses a 256‑bit hash, and Git is migrating to improve collision resistance.",
+    "explanation": "SHA‑1’s 160‑bit hash has known collision vulnerabilities; SHA‑256’s 256‑bit hash provides stronger security, prompting Git to transition to mitigate collision risk."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does packfile compression work in Git, and how does it reduce repository size?",
+    "options": [
+      "Git stores objects as plain text and compresses them with gzip, reducing size.",
+      "Git uses delta compression between similar objects, packs them into a single file, reducing redundancy.",
+      "Git deletes unused objects automatically, reducing size.",
+      "Git stores only the latest commit, discarding history."
+    ],
+    "correctAnswer": "Git uses delta compression between similar objects, packs them into a single file, reducing redundancy.",
+    "explanation": "Packfiles store objects in a single file using delta compression, eliminating duplicate data and thus shrinking the repository."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between loose objects and packed objects in Git's object database?",
+    "options": [
+      "Loose objects are stored as individual files, packed objects are stored in packfiles.",
+      "Loose objects are compressed, packed objects are uncompressed.",
+      "Loose objects are only for tags, packed objects for commits.",
+      "Loose objects are temporary, packed objects are permanent."
+    ],
+    "correctAnswer": "Loose objects are stored as individual files, packed objects are stored in packfiles.",
+    "explanation": "Loose objects exist as separate files in .git/objects, while packed objects are combined into packfiles for efficient storage."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does git gc decide which objects to pack, prune, or keep?",
+    "options": [
+      "It packs all objects, prunes those older than 30 days, keeps others.",
+      "It uses heuristics based on object age, reachability, and size to pack, prune unreachable objects, keep reachable ones.",
+      "It packs only tags, prunes branches, keeps commits.",
+      "It randomly selects objects to pack."
+    ],
+    "correctAnswer": "It uses heuristics based on object age, reachability, and size to pack, prune unreachable objects, keep reachable ones.",
+    "explanation": "git gc evaluates object reachability and age, packing reachable objects, pruning those that are unreachable and old, and preserving important ones."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a dangling commit and how do you find and recover one?",
+    "options": [
+      "A commit with no parents, find with git log, recover by cherry‑pick.",
+      "A commit that is not referenced by any branch or tag, find with git fsck --lost‑found, recover by creating a new branch.",
+      "A commit that has been deleted, find with git reflog, recover by reset.",
+      "A commit that is corrupted, find with git fsck, recover by re‑cloning."
+    ],
+    "correctAnswer": "A commit that is not referenced by any branch or tag, find with git fsck --lost‑found, recover by creating a new branch.",
+    "explanation": "Dangling commits are orphaned objects; git fsck --lost-found lists them, and you can recover by checking them out or creating a branch pointing to them."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you recover work after an accidental git reset --hard with no backup?",
+    "options": [
+      "Use git reflog to find the commit and reset back.",
+      "Use git fsck to recover lost objects.",
+      "Use git cherry-pick from a remote branch.",
+      "Use git reset --soft to restore the index."
+    ],
+    "correctAnswer": "Use git reflog to find the commit and reset back.",
+    "explanation": "git reflog records all updates to the tip of branches, allowing you to locate the commit that was lost by a hard reset and restore it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git revert on a merge commit vs. a regular commit, and why does it require specifying a parent?",
+    "options": [
+      "Reverting a merge creates a new commit that undoes all changes; specifying a parent is irrelevant.",
+      "Reverting a merge requires specifying which parent to revert to, because a merge has two parents.",
+      "Reverting a merge always fails in Git.",
+      "Reverting a merge uses the first parent by default."
+    ],
+    "correctAnswer": "Reverting a merge requires specifying which parent to revert to, because a merge has two parents.",
+    "explanation": "A merge commit has two parents; Git needs to know which side to treat as the base when generating the reverse changes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle rewriting published history safely when a force-push is unavoidable?",
+    "options": [
+      "Use git push --force-with-lease and inform the team before pushing.",
+      "Use git push --force and ignore warnings.",
+      "Rewrite history with git revert instead of a force push.",
+      "Reset the remote branch to the old commit with git reset --hard."
+    ],
+    "correctAnswer": "Use git push --force-with-lease and inform the team before pushing.",
+    "explanation": "--force-with-lease checks that the remote hasn’t advanced since you last fetched, reducing the risk of overwriting others’ work, and notifying teammates ensures coordination."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git rebase -i and git filter-repo for rewriting multiple commits?",
+    "options": [
+      "rebase -i rewrites history interactively; filter-repo rewrites entire repo data.",
+      "rebase -i only changes commit messages; filter-repo changes file contents.",
+      "rebase -i is for local branches; filter-repo is for remote branches.",
+      "rebase -i cannot reorder commits."
+    ],
+    "correctAnswer": "rebase -i rewrites history interactively; filter-repo rewrites entire repo data.",
+    "explanation": "git rebase -i lets you edit, reorder, squash commits in a branch, while git filter-repo is a powerful tool to rewrite history across the whole repository, including file paths and content."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you split a single large commit into multiple smaller commits after the fact?",
+    "options": [
+      "Use git rebase -i and edit the commit, then use git reset to unstage changes and commit incrementally.",
+      "Use git revert to split the commit into parts.",
+      "Use git cherry-pick to split the commit into parts.",
+      "Use git filter-repo to split the commit into parts."
+    ],
+    "correctAnswer": "Use git rebase -i and edit the commit, then use git reset to unstage changes and commit incrementally.",
+    "explanation": "During an interactive rebase you can mark the large commit for editing, then reset it to the working tree, stage subsets of changes, and commit them separately."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a recursive merge strategy and how does it differ from the resolve strategy?",
+    "options": [
+      "Recursive performs a three‑way merge that can handle nested merges and submodule merges, while resolve is a simpler two‑way merge that only handles straightforward conflicts.",
+      "Recursive is used only for octopus merges, whereas resolve is used for single‑branch merges.",
+      "Recursive merges automatically rebase the current branch, while resolve does not.",
+      "Recursive is a fast‑forward merge strategy, whereas resolve performs a full merge."
+    ],
+    "correctAnswer": "Recursive performs a three‑way merge that can handle nested merges and submodule merges, while resolve is a simpler two‑way merge that only handles straightforward conflicts.",
+    "explanation": "Recursive is the default strategy for two‑branch merges and can handle nested merges; resolve is a simpler algorithm that only deals with basic conflicts."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the ORT and recursive merge strategies introduced in newer Git versions?",
+    "options": [
+      "ORT is a new octopus merge strategy that is faster and uses less memory, whereas recursive is the default strategy for two‑branch merges.",
+      "ORT uses a three‑way merge algorithm, while recursive uses a two‑way merge.",
+      "ORT is only available in Git 1.7, while recursive is available in all versions.",
+      "ORT and recursive are identical; ORT is just an alias."
+    ],
+    "correctAnswer": "ORT is a new octopus merge strategy that is faster and uses less memory, whereas recursive is the default strategy for two‑branch merges.",
+    "explanation": "ORT was added to improve performance and memory usage for octopus merges; recursive remains the default for normal two‑branch merges."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do rename detection heuristics work during a Git merge or diff?",
+    "options": [
+      "They compare the contents of files and use a similarity threshold to decide if a file was renamed.",
+      "They only look at file names and ignore content.",
+      "They rely on the commit graph to track renames.",
+      "They never detect renames; you must use --find-renames."
+    ],
+    "correctAnswer": "They compare the contents of files and use a similarity threshold to decide if a file was renamed.",
+    "explanation": "Git calculates similarity between old and new file contents; if it exceeds a threshold, it treats it as a rename."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the git merge -X ours and -X theirs options, and how do they differ from --strategy ours?",
+    "options": [
+      "They resolve conflicts by preferring the current branch’s changes; --strategy ours discards all changes from the other branch.",
+      "They resolve conflicts by preferring the other branch’s changes; --strategy ours keeps the current branch’s changes.",
+      "They are identical to --strategy ours.",
+      "They abort the merge if any conflict occurs."
+    ],
+    "correctAnswer": "They resolve conflicts by preferring the current branch’s changes; --strategy ours discards all changes from the other branch.",
+    "explanation": "The -X ours/theirs options only affect conflict resolution, keeping the other branch’s changes otherwise; --strategy ours replaces the entire merge with the current branch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the performance challenges of very large Git repositories, and how do partial clone and sparse checkout help?",
+    "options": [
+      "They reduce the amount of data transferred and stored locally by fetching only necessary objects and files.",
+      "They automatically compress all files in the repository to save space.",
+      "They convert the repository into a single large file for faster access.",
+      "They remove all history older than one year to lighten the repo."
+    ],
+    "correctAnswer": "They reduce the amount of data transferred and stored locally by fetching only necessary objects and files.",
+    "explanation": "Partial clone and sparse checkout limit the data that is downloaded and kept locally, reducing bandwidth and disk usage."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a shallow clone, a partial clone, and a sparse checkout?",
+    "options": [
+      "Shallow clone limits history depth, partial clone fetches only selected objects, sparse checkout limits working tree files.",
+      "Shallow clone fetches all history, partial clone removes history, sparse checkout deletes files.",
+      "Shallow clone is same as partial clone, sparse checkout is same as shallow clone.",
+      "Shallow clone, partial clone, and sparse checkout all do the same thing."
+    ],
+    "correctAnswer": "Shallow clone limits history depth, partial clone fetches only selected objects, sparse checkout limits working tree files.",
+    "explanation": "Each feature targets a different aspect: history depth, object selection, or working tree contents."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git's sparse-checkout feature let you work with only part of a large repository?",
+    "options": [
+      "By specifying a pattern of directories/files to include in the working tree while the rest remains untracked.",
+      "By deleting all files not listed in the .gitignore file.",
+      "By converting the repo into a zip file and extracting only needed parts.",
+      "By automatically moving unneeded files to a separate branch."
+    ],
+    "correctAnswer": "By specifying a pattern of directories/files to include in the working tree while the rest remains untracked.",
+    "explanation": "Sparse checkout uses a list of paths to populate the working tree, keeping other files out of the checkout."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Git LFS (Large File Storage) and how does it change how binary files are tracked?",
+    "options": [
+      "Git LFS stores large binary files as pointers in Git and keeps the actual files in a separate storage, reducing repo size.",
+      "Git LFS compresses binary files into text blobs for storage in Git.",
+      "Git LFS replaces Git entirely for binary files.",
+      "Git LFS deletes binary files from the repo after commit."
+    ],
+    "correctAnswer": "Git LFS stores large binary files as pointers in Git and keeps the actual files in a separate storage, reducing repo size.",
+    "explanation": "LFS replaces large blobs with lightweight pointer objects, storing the real data elsewhere."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git LFS store and retrieve large files compared to normal Git objects?",
+    "options": [
+      "It stores large files in a separate server and references them with lightweight pointer objects in the repo.",
+      "It stores large files directly in the Git database as normal blobs.",
+      "It converts large files into ASCII art for storage.",
+      "It deletes large files after each commit."
+    ],
+    "correctAnswer": "It stores large files in a separate server and references them with lightweight pointer objects in the repo.",
+    "explanation": "LFS keeps the actual file data outside the Git repository and uses pointers to fetch them when needed."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of using Git LFS versus a separate artifact storage system?",
+    "options": [
+      "Git LFS reduces repo size but adds network overhead",
+      "Git LFS stores large files in the repo, making history huge",
+      "Separate artifact storage keeps binary artifacts out of Git, simplifying history but requires extra tooling",
+      "Both A and C"
+    ],
+    "correctAnswer": "Both A and C",
+    "explanation": "Git LFS keeps large files out of the main repository but still stores them in Git, which reduces repo size but adds network overhead; a separate artifact store keeps binaries completely out of Git, simplifying history but requires extra tooling."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect a CI/CD pipeline that uses Git tags to trigger production deployments?",
+    "options": [
+      "Use a webhook on tag push to trigger the pipeline",
+      "Use branch protection to block tags",
+      "Use manual approval only",
+      "Use pull request merge to main"
+    ],
+    "correctAnswer": "Use a webhook on tag push to trigger the pipeline",
+    "explanation": "Tag pushes can trigger a webhook that starts the CI/CD pipeline, ensuring deployments only happen when a tag is created."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between semantic-release automation and manually tagging releases in Git?",
+    "options": [
+      "semantic-release automatically calculates the next version and publishes it",
+      "manual tagging requires a version bump and publishing step",
+      "semantic-release uses commit messages to determine the version",
+      "All of the above"
+    ],
+    "correctAnswer": "All of the above",
+    "explanation": "semantic-release automates version calculation, publishing, and uses commit messages, whereas manual tagging requires manual steps."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a protected branch strategy with required status checks and reviews?",
+    "options": [
+      "Set branch protection rules requiring status checks and reviews",
+      "Use merge commits",
+      "Disable all checks",
+      "Use rebase"
+    ],
+    "correctAnswer": "Set branch protection rules requiring status checks and reviews",
+    "explanation": "Branch protection rules enforce status checks and required reviews before merges, ensuring quality."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of CODEOWNERS files and how do they integrate with pull request workflows?",
+    "options": [
+      "Assign reviewers automatically",
+      "Block merges",
+      "Delete branches",
+      "Track issues"
+    ],
+    "correctAnswer": "Assign reviewers automatically",
+    "explanation": "CODEOWNERS files specify who owns parts of the repo, automatically requesting review from those owners when a PR touches those files."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a Git workflow for a team practicing trunk-based development with feature flags?",
+    "options": [
+      "Use long‑lived feature branches and merge to trunk only after a release is ready.",
+      "Commit directly to the trunk, keep commits small, and hide unfinished work behind feature flags.",
+      "Adopt Git Flow with separate develop and release branches.",
+      "Use GitHub Flow with pull requests and never use feature flags."
+    ],
+    "correctAnswer": "Commit directly to the trunk, keep commits small, and hide unfinished work behind feature flags.",
+    "explanation": "Trunk‑based development encourages frequent, small commits to the main branch; feature flags allow incomplete features to coexist in the trunk without breaking production."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between rebase‑and‑merge, squash‑and‑merge, and merge‑commit strategies on GitHub, and when would you choose each?",
+    "options": [
+      "Rebase‑and‑merge rewrites history, squash‑and‑merge condenses commits, merge‑commit preserves history; choose rebase for a linear history, squash for a clean PR history, merge‑commit for preserving context.",
+      "Rebase‑and‑merge keeps all commits, squash‑and‑merge deletes them, merge‑commit creates a new branch.",
+      "Rebase‑and‑merge is only for fast‑forward merges, squash‑and‑merge is for pull requests, merge‑commit is for tags.",
+      "All three strategies are identical; the names are just cosmetic."
+    ],
+    "correctAnswer": "Rebase‑and‑merge rewrites history, squash‑and‑merge condenses commits, merge‑commit preserves history; choose rebase for a linear history, squash for a clean PR history, merge‑commit for preserving context.",
+    "explanation": "Rebase‑and‑merge rewrites the feature branch onto the tip of main, giving a straight line; squash‑and‑merge collapses all commits into one, simplifying the log; merge‑commit creates a merge commit that keeps the original commit graph."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does git bisect run automate bisecting using a test script?",
+    "options": [
+      "It runs the script on each candidate commit and automatically marks the commit as good or bad based on the script’s exit status.",
+      "It requires the user to manually mark each commit after the script finishes.",
+      "It only works with unit test frameworks and cannot be used with custom scripts.",
+      "It performs a binary search on commit messages instead of code changes."
+    ],
+    "correctAnswer": "It runs the script on each candidate commit and automatically marks the commit as good or bad based on the script’s exit status.",
+    "explanation": "`git bisect run` executes the provided script for every commit in the bisect range; a zero exit code is treated as good, non‑zero as bad, automating the process."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use git bisect to find a performance regression rather than a functional bug?",
+    "options": [
+      "Write a custom script that measures performance (e.g., latency or memory) and exits with 0 if the metric is within an acceptable range, otherwise exits non‑zero.",
+      "Use `git bisect run` with a script that simply prints the commit hash; performance is inferred from the output.",
+      "Invoke `git bisect` with a special `--performance` flag that automatically benchmarks each commit.",
+      "Performance regressions cannot be found with git bisect; it only works for functional bugs."
+    ],
+    "correctAnswer": "Write a custom script that measures performance (e.g., latency or memory) and exits with 0 if the metric is within an acceptable range, otherwise exits non‑zero.",
+    "explanation": "`git bisect run` can run any script; by having the script exit with a status code that reflects whether the performance metric meets the threshold, bisect can automatically classify commits."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git bisect skip and marking a commit as bad/good?",
+    "options": [
+      "Skip tells bisect to ignore a commit and continue the search, while marking good or bad tells bisect to treat the commit as a boundary for the binary search.",
+      "Skip marks the commit as bad.",
+      "Skip marks the commit as good.",
+      "Skip is the same as marking a commit good."
+    ],
+    "correctAnswer": "Skip tells bisect to ignore a commit and continue the search, while marking good or bad tells bisect to treat the commit as a boundary for the binary search.",
+    "explanation": "`git bisect skip` is used when a commit cannot be tested (e.g., missing dependencies); it removes that commit from consideration. Marking good or bad defines the search boundaries."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you use git blame -w to ignore whitespace changes when tracing history?",
+    "options": [
+      "Run git blame -w <file>",
+      "Run git blame --ignore-space-at-eol <file>",
+      "Run git blame -w --ignore-all-space <file>",
+      "Run git blame -w --ignore-space-change <file>"
+    ],
+    "correctAnswer": "Run git blame -w <file>",
+    "explanation": "The -w flag tells git blame to ignore whitespace when assigning blame, so simply using git blame -w <file> skips whitespace‑only changes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of git log --follow and how does it handle renamed files?",
+    "options": [
+      "It shows the commit history of a single file, following it across renames",
+      "It displays the log of all branches in the repository",
+      "It limits the log output to merge commits only",
+      "It shows the log with full diffs for each commit"
+    ],
+    "correctAnswer": "It shows the commit history of a single file, following it across renames",
+    "explanation": "git log --follow tracks a path through history and continues to show commits even after the file has been renamed."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git detect file renames without explicit tracking, and what heuristics does it use?",
+    "options": [
+      "It compares file contents and uses a similarity index (default 50%) to infer renames",
+      "It relies on file timestamps stored in the index",
+      "It reads rename information from .gitattributes files",
+      "It uses commit message keywords like \"rename\" to detect moves"
+    ],
+    "correctAnswer": "It compares file contents and uses a similarity index (default 50%) to infer renames",
+    "explanation": "During diff operations Git computes a similarity score between deleted and added files; if the score exceeds the configured threshold (default 50%), Git treats the change as a rename."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git diff --find-renames and default diff behavior?",
+    "options": [
+      "--find-renames explicitly enables rename detection, which the default diff does not perform unless configured",
+      "--find-renames shows only added lines, while default diff shows deletions as well",
+      "The default diff always detects renames, so --find-renames has no effect",
+      "--find-renames disables rename detection and treats all changes as additions/deletions"
+    ],
+    "correctAnswer": "--find-renames explicitly enables rename detection, which the default diff does not perform unless configured",
+    "explanation": "By default git diff shows added/deleted files; the --find-renames option tells diff to look for similar files and report them as renames."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you audit a repository for accidentally committed secrets across its entire history?",
+    "options": [
+      "Run a secret‑scanning tool (e.g., truffleHog, git‑secret) over the full history using git rev-list --all",
+      "Search only the current HEAD with git grep for the word \"secret\"",
+      "Check the .gitignore file for entries that might contain secrets",
+      "Use git log --stat to view file size changes and infer secret leaks"
+    ],
+    "correctAnswer": "Run a secret‑scanning tool (e.g., truffleHog, git‑secret) over the full history using git rev-list --all",
+    "explanation": "Scanning every commit (git rev-list --all) with a dedicated secret‑detection tool ensures that secrets hidden in any past revision are identified."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of pre-receive and update hooks on a Git server for enforcing policy?",
+    "options": [
+      "They run after a push to update logs",
+      "They run before changes are accepted to enforce rules",
+      "They modify the repository history",
+      "They are client-side scripts"
+    ],
+    "correctAnswer": "They run before changes are accepted to enforce rules",
+    "explanation": "Pre-receive and update hooks execute on the server before the new references are stored, allowing the server to reject or modify pushes that violate policy."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement server-side hooks to reject force-pushes to protected branches?",
+    "options": [
+      "Use a pre-receive hook to check ref updates and reject if force",
+      "Use a client-side pre-push hook",
+      "Set branch.protected in git config",
+      "Use a merge strategy"
+    ],
+    "correctAnswer": "Use a pre-receive hook to check ref updates and reject if force",
+    "explanation": "A pre-receive hook can inspect the incoming ref updates; if a ref is being updated with a non-fast-forward (force) it can return a non-zero exit code to reject the push."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between client-side hooks and server-side hooks in terms of what they can enforce?",
+    "options": [
+      "Client hooks run on the server, server hooks run on the client",
+      "Client hooks enforce policies on the local repo, server hooks enforce on the remote",
+      "Both enforce the same policies",
+      "Server hooks cannot reject pushes"
+    ],
+    "correctAnswer": "Client hooks enforce policies on the local repo, server hooks enforce on the remote",
+    "explanation": "Client-side hooks run locally before a push, so they can warn or abort locally; server-side hooks run on the remote and can reject the push, enforcing policies centrally."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do signed tags and commit signing verification work with GPG or SSH keys in Git?",
+    "options": [
+      "Git verifies signatures using public keys stored in the keychain",
+      "Git ignores signatures",
+      "Git only supports GPG",
+      "Git uses SSH keys for commit signing"
+    ],
+    "correctAnswer": "Git verifies signatures using public keys stored in the keychain",
+    "explanation": "Git checks the signature against the public key in the keyring (GPG or SSH) and reports verification status; it does not ignore signatures."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between GPG-based and SSH-based commit signing in modern Git?",
+    "options": [
+      "GPG uses public key infrastructure, SSH uses SSH keys; GPG is more secure",
+      "SSH signing is deprecated",
+      "GPG signing uses SSH keys",
+      "Both are identical"
+    ],
+    "correctAnswer": "GPG uses public key infrastructure, SSH uses SSH keys; GPG is more secure",
+    "explanation": "GPG signing relies on separate GPG keys and a full PKI, while SSH signing uses the SSH key pair; GPG is generally considered more robust for signing."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you set up an organization-wide policy requiring all commits to be signed and verified?",
+    "options": [
+      "Use git config --global commit.gpgSign true",
+      "Enforce via a pre-receive hook on all repositories",
+      "Use GitHub branch protection rules that require signed commits",
+      "Use git commit -S each time before pushing"
+    ],
+    "correctAnswer": "Use GitHub branch protection rules that require signed commits",
+    "explanation": "Branch protection rules in GitHub Enterprise or GitHub.com can enforce that every push contains a GPG-signed commit, providing an organization-wide policy."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git worktree and maintaining multiple clones of the same repository?",
+    "options": [
+      "Worktrees share the same .git directory while clones have separate copies",
+      "Worktrees allow multiple branches in the same working tree, clones cannot",
+      "Clones are faster to create than worktrees",
+      "Worktrees cannot be used for continuous integration"
+    ],
+    "correctAnswer": "Worktrees share the same .git directory while clones have separate copies",
+    "explanation": "A worktree uses the same repository data (.git) and simply creates a new working directory, whereas each clone duplicates the entire repository, including history."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use worktrees to work on a hotfix without disturbing your current feature branch state?",
+    "options": [
+      "Create a new worktree from master, apply the hotfix, commit, and merge back",
+      "Checkout the hotfix branch in the same worktree",
+      "Stash the current changes and apply the hotfix",
+      "Delete the feature branch and start over"
+    ],
+    "correctAnswer": "Create a new worktree from master, apply the hotfix, commit, and merge back",
+    "explanation": "A separate worktree lets you check out master (or any branch) in a new directory, so you can work on the hotfix independently of the feature branch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git subtree merge and git subtree split?",
+    "options": [
+      "Merge pulls an external repository into the current repo, split extracts a subdirectory into a new repo",
+      "Merge splits a repository into subtrees, split merges them",
+      "Both commands perform the same operation",
+      "Merge is used for tags while split is used for branches"
+    ],
+    "correctAnswer": "Merge pulls an external repository into the current repo, split extracts a subdirectory into a new repo",
+    "explanation": "git subtree merge integrates another repo into a subdirectory of the current repo, whereas git subtree split takes a subdirectory and turns it into its own repository."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you migrate a Git submodule-based project to a subtree-based or monorepo structure?",
+    "options": [
+      "Use git subtree add to import submodule contents, then delete the submodule",
+      "Remove the submodule and copy files manually",
+      "Use git filter-branch to rewrite history",
+      "Use git submodule deinit to remove the submodule"
+    ],
+    "correctAnswer": "Use git subtree add to import submodule contents, then delete the submodule",
+    "explanation": "git subtree add pulls the submodule's history into the main repository as a subdirectory, after which the submodule can be removed, effectively migrating to a subtree or monorepo layout."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you debug a Git repository corruption issue reported by git fsck?",
+    "options": [
+      "Run git gc --prune=now to clean up loose objects.",
+      "Use git fsck --full to identify corrupted objects and then replace them from a backup or re-clone.",
+      "Delete the .git/objects directory and let Git rebuild it automatically.",
+      "Run git reflog to recover lost commits."
+    ],
+    "correctAnswer": "Use git fsck --full to identify corrupted objects and then replace them from a backup or re-clone.",
+    "explanation": "git fsck --full verifies all objects and lists any that are corrupted; you can then restore them from a backup or re-clone the repository."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a repository's index (staging area) corruption versus object database corruption?",
+    "options": [
+      "Index corruption affects only the working tree, while object database corruption affects commit history.",
+      "Index corruption is temporary and can be fixed with git reset, whereas object database corruption requires re-cloning.",
+      "Index corruption means the staging area has invalid entries, while object database corruption means the actual blob/tree/commit objects are damaged.",
+      "There is no difference; both are the same."
+    ],
+    "correctAnswer": "Index corruption means the staging area has invalid entries, while object database corruption means the actual blob/tree/commit objects are damaged.",
+    "explanation": "The index is a file listing staged files; corruption means its entries are wrong. The object database holds the actual objects; corruption means those objects are damaged."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you rebuild a corrupted .git/index file without losing staged changes?",
+    "options": [
+      "Run git reset --hard to discard staged changes and rebuild index.",
+      "Use git read-tree -u HEAD to rebuild index from HEAD, then manually re-stage changes.",
+      "Delete .git/index and run git add -A to re-add all files.",
+      "Run git fsck --full to auto-rebuild the index."
+    ],
+    "correctAnswer": "Use git read-tree -u HEAD to rebuild index from HEAD, then manually re-stage changes.",
+    "explanation": "git read-tree -u HEAD restores the index to match HEAD while preserving the working tree; you can then re-stage any changes you had."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of git cat-file and how would you use it to inspect raw object data?",
+    "options": [
+      "It lists all branches in the repository.",
+      "It displays the contents of a Git object in a human-readable form.",
+      "It creates a new commit object.",
+      "It deletes objects from the object database."
+    ],
+    "correctAnswer": "It displays the contents of a Git object in a human-readable form.",
+    "explanation": "git cat-file -p <object> shows the parsed content of a blob, tree, or commit; -t shows type and -s shows size."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you manually construct a Git commit object using plumbing commands (hash-object, mktree, commit-tree)?",
+    "options": [
+      "Use git commit --amend to modify the last commit.",
+      "Create a blob with hash-object, build a tree with mktree, then create commit with commit-tree.",
+      "Run git init and then git commit to create a commit.",
+      "Use git cherry-pick to apply changes to a new commit."
+    ],
+    "correctAnswer": "Create a blob with hash-object, build a tree with mktree, then create commit with commit-tree.",
+    "explanation": "hash-object writes the file contents as a blob, mktree assembles the tree object, and commit-tree creates a commit object linking to that tree."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Git's porcelain and plumbing commands, and when would you use plumbing directly?",
+    "options": [
+      "Porcelain commands are high-level user-facing commands; plumbing commands are low-level internal commands that can be used for scripting and custom workflows.",
+      "Porcelain commands are for merging; plumbing commands are for branching.",
+      "Porcelain commands are for remote operations; plumbing commands are for local operations.",
+      "Porcelain commands are for GitHub; plumbing commands are for GitLab."
+    ],
+    "correctAnswer": "Porcelain commands are high-level user-facing commands; plumbing commands are low-level internal commands that can be used for scripting and custom workflows.",
+    "explanation": "Porcelain commands are user-friendly wrappers around plumbing commands. Plumbing commands expose Git’s internal data structures and are useful when you need fine-grained control or automation."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git implement copy-on-write style branching so that branches are lightweight pointers rather than full copies?",
+    "options": [
+      "A branch is just a ref pointing to the latest commit; objects are shared until modified.",
+      "A branch is a full copy of the repository’s objects.",
+      "A branch is stored as a separate directory in the .git folder.",
+      "A branch is stored in a separate database table."
+    ],
+    "correctAnswer": "A branch is just a ref pointing to the latest commit; objects are shared until modified.",
+    "explanation": "In Git, a branch is a lightweight reference to a commit. Only new commits create new objects; existing objects are shared across branches."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between how Git and Subversion (SVN) model branches internally?",
+    "options": [
+      "Git stores branches as refs to commits; SVN stores branches as copies of directories.",
+      "Git copies the entire repository for each branch; SVN uses pointers.",
+      "Git uses a central server; SVN uses a distributed model.",
+      "Git and SVN use the same branch model."
+    ],
+    "correctAnswer": "Git stores branches as refs to commits; SVN stores branches as copies of directories.",
+    "explanation": "Git’s branches are lightweight refs; SVN creates a copy of the directory tree for each branch, which is heavier."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a Git-based release train process for a product with multiple parallel supported versions?",
+    "options": [
+      "Maintain a single main branch and use feature flags to toggle features for each supported version.",
+      "Create a separate repository for each supported version and merge changes manually.",
+      "Use Gitflow: keep a main branch for future releases, create release branches for each supported version, and use hotfix branches for bug fixes.",
+      "Use a monorepo with subdirectories per version and merge all changes into a master branch."
+    ],
+    "correctAnswer": "Use Gitflow: keep a main branch for future releases, create release branches for each supported version, and use hotfix branches for bug fixes.",
+    "explanation": "Gitflow provides clear separation of development, release, and maintenance branches, enabling parallel version support."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between cherry-picking and rebasing when backporting a security fix to an older release branch?",
+    "options": [
+      "Cherry-picking copies commit, rebasing rewrites history.",
+      "Cherry-picking replays a single commit onto the target branch, rebasing rewrites a series of commits onto a new base.",
+      "Cherry-picking merges entire branch, rebasing creates a new branch.",
+      "Cherry-picking is only for tags, rebasing only for branches."
+    ],
+    "correctAnswer": "Cherry-picking replays a single commit onto the target branch, rebasing rewrites a series of commits onto a new base.",
+    "explanation": "Cherry-picking applies a single commit, rebasing replays a series of commits onto a new base, both used for backporting but differ in scope."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you set up automated conflict-free rebasing in CI for long-running feature branches?",
+    "options": [
+      "Use pre-commit hooks to check conflicts.",
+      "Use rebase-on-push strategy with auto-resolve.",
+      "Use a merge queue that automatically rebases onto latest main and fails if conflicts.",
+      "Use git pull --rebase on local machine."
+    ],
+    "correctAnswer": "Use a merge queue that automatically rebases onto latest main and fails if conflicts.",
+    "explanation": "Merge queue ensures rebases happen in CI, conflicts detected before merge."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a merge queue, and how does it prevent broken main branches in high-velocity teams?",
+    "options": [
+      "It queues merge requests to avoid merge conflicts.",
+      "It serializes merges, runs tests, and only merges if all checks pass.",
+      "It automatically resolves conflicts by editing code.",
+      "It merges all branches at once to speed up CI."
+    ],
+    "correctAnswer": "It serializes merges, runs tests, and only merges if all checks pass.",
+    "explanation": "Merge queue serializes merges, runs CI, ensures main stays healthy."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you troubleshoot a slow git clone or git fetch on a very large repository over a poor network connection?",
+    "options": [
+      "Use shallow clone (--depth 1) and sparse checkout.",
+      "Increase bandwidth limit.",
+      "Use git pull instead of clone.",
+      "Disable compression."
+    ],
+    "correctAnswer": "Use shallow clone (--depth 1) and sparse checkout.",
+    "explanation": "Shallow clone reduces data transferred; sparse checkout further limits what is fetched."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the --depth and --shallow-since options when cloning?",
+    "options": [
+      "--depth limits number of commits fetched; --shallow-since limits commits to those after a specific date.",
+      "--depth specifies number of branches; --shallow-since specifies number of tags.",
+      "--depth fetches all history; --shallow-since fetches only the latest commit.",
+      "--depth and --shallow-since are aliases for each other."
+    ],
+    "correctAnswer": "--depth limits number of commits fetched; --shallow-since limits commits to those after a specific date.",
+    "explanation": "--depth creates a shallow clone with a limited depth, while --shallow-since creates a shallow clone limited to commits newer than the given date."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you unshallow a shallow clone to retrieve full history later?",
+    "options": [
+      "Run git fetch --unshallow.",
+      "Run git clone --depth 0.",
+      "Run git reset --hard HEAD.",
+      "Run git pull --full-history."
+    ],
+    "correctAnswer": "Run git fetch --unshallow.",
+    "explanation": "The git fetch --unshallow command fetches the rest of the history, turning a shallow clone into a full clone."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the git maintenance command introduced in newer Git versions?",
+    "options": [
+      "Automates housekeeping tasks like repacking, pruning, and updating commit-graph.",
+      "Provides a graphical interface for Git commands.",
+      "Enables Git to run on mobile devices.",
+      "Replaces git commit with a more efficient commit command."
+    ],
+    "correctAnswer": "Automates housekeeping tasks like repacking, pruning, and updating commit-graph.",
+    "explanation": "git maintenance runs background tasks that keep the repository healthy and improve performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git's commit-graph file improve performance of history traversal commands?",
+    "options": [
+      "Stores a precomputed graph of commits to skip redundant traversals.",
+      "Compresses the repository into a single file.",
+      "Replaces the .git/objects directory.",
+      "Enables parallel execution of git commands."
+    ],
+    "correctAnswer": "Stores a precomputed graph of commits to skip redundant traversals.",
+    "explanation": "The commit-graph file contains a compact representation of commit relationships, allowing Git to traverse history faster."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of multi-pack indexes in Git, and how do they improve performance for repositories with many packfiles?",
+    "options": [
+      "Consolidate multiple packfiles into a single index for faster lookup.",
+      "Remove all packfiles and replace them with a single large packfile.",
+      "Provide a backup of packfiles for disaster recovery.",
+      "Convert packfiles into a database format."
+    ],
+    "correctAnswer": "Consolidate multiple packfiles into a single index for faster lookup.",
+    "explanation": "A multi-pack index allows Git to search across many packfiles efficiently, reducing lookup time in large repositories."
+  }
 ]

@@ -52,9 +52,9 @@ export const useFaceDetection = (webcamRefs, isActive, onViolation) => {
         let newWarningMsg = null;
 
         if (predictions.length === 0) {
-          newWarningMsg = "Face not detected. Please stay in the frame.";
+          newWarningMsg = "No face detected";
         } else if (predictions.length > 1) {
-          newWarningMsg = "Multiple faces detected. Please ensure you are alone.";
+          newWarningMsg = "Multiple faces detected";
         } else {
           // One face detected, check boundaries (optional strict check)
           const prediction = predictions[0];
@@ -71,7 +71,7 @@ export const useFaceDetection = (webcamRefs, isActive, onViolation) => {
           const isTooFarBottom = bottomRight[1] > vidH * 0.98;
           
           if (isTooFarLeft || isTooFarRight || isTooFarTop || isTooFarBottom) {
-             newWarningMsg = "Please align your face properly in the center of the camera.";
+             newWarningMsg = "Center your face";
           }
         }
 
@@ -82,20 +82,9 @@ export const useFaceDetection = (webcamRefs, isActive, onViolation) => {
             
             if (onViolation) {
               onViolation(newWarningMsg);
-            } else {
-              if (warningCountRef.current > 5) {
-                notify.error("You have been exited due to repeated proctoring violations (Face not detected/Multiple faces).");
-                navigate('/user-dashboard');
-                // Clear interval immediately
-                if (detectIntervalRef.current) {
-                  clearInterval(detectIntervalRef.current);
-                  detectIntervalRef.current = null;
-                }
-                return;
-              }
             }
           }
-          setFaceWarning(`(Warning ${warningCountRef.current}/5) ${newWarningMsg}`);
+          setFaceWarning(newWarningMsg);
         } else {
           warningActiveRef.current = false;
           setFaceWarning(null);
