@@ -29,12 +29,12 @@ const levenshtein = (a, b) => {
 };
 
 const getClosestSkill = (inputSlug, availableSkills) => {
-  let closest = inputSlug;
+  let closest = null; // Return null if no match found
   let minDistance = Infinity;
   for (const skill of availableSkills) {
     if (skill === inputSlug) return skill;
     const dist = levenshtein(inputSlug, skill);
-    if (dist < minDistance && dist <= 2) { // Allow up to 2 typos
+    if (dist < minDistance && dist <= 2) {
       minDistance = dist;
       closest = skill;
     }
@@ -42,89 +42,84 @@ const getClosestSkill = (inputSlug, availableSkills) => {
   return closest;
 };
 
-const getLocalQuestions = async (skill, count, difficulty, userId = null) => {
+const getLocalQuestions = async (jobTopic, totalNeeded, difficulty, userId = null) => {
   try {
-    if (!skill || count <= 0) return [];
+    if (!jobTopic || totalNeeded <= 0) return [];
     
-    const primarySkill = skill.split(',')[0].trim();
-    let slug = primarySkill.toLowerCase().replace(/[^a-z0-9]/g, "");
-
-    // Auto-correct typo if possible
     const availableSkills = await Question.distinct("skill");
-    slug = getClosestSkill(slug, availableSkills);
-
-    // Get questions the user has already seen (last 10 interviews)
-    let seenQuestionTexts = new Set();
-    if (userId) {
-      const recentInterviews = await Interview.find({ userId })
-        .sort({ createdAt: -1 })
-        .limit(10)
-        .select("questions")
-        .lean();
-      
-      recentInterviews.forEach(interview => {
-        (interview.questions || []).forEach(q => seenQuestionTexts.add(q));
-      });
+    
+    // Parse user input into matched skills (handles commas, spaces, and multi-word skills)
+    const tokens = jobTopic.toLowerCase().replace(/[^a-z0-9\s,]/g, "").replace(/,/g, " ").split(/\s+/).filter(Boolean);
+    const matchedSkills = new Set();
+    
+    for (let i = 0; i < tokens.length; i++) {
+      // Check for 3-word skills
+      if (i + 2 < tokens.length) {
+        const w3 = tokens[i] + tokens[i+1] + tokens[i+2];
+        if (availableSkills.includes(w3)) { matchedSkills.add(w3); i += 2; continue; }
+      }
+      // Check for 2-word skills
+      if (i + 1 < tokens.length) {
+        const w2 = tokens[i] + tokens[i+1];
+        if (availableSkills.includes(w2)) { matchedSkills.add(w2); i += 1; continue; }
+      }
+      // Check for 1-word skills (with typo auto-correction)
+      const w1 = tokens[i];
+      const closest = getClosestSkill(w1, availableSkills);
+      if (closest) matchedSkills.add(closest);
     }
 
-    // Build match query - exclude already-seen questions
-    const baseMatch = { skill: slug };
-    if (seenQuestionTexts.size > 0) {
-      baseMatch.question = { $nin: Array.from(seenQuestionTexts) };
+    const requestedSlugs = Array.from(matchedSkills);
+    if (requestedSlugs.length === 0) return [];
+
+    let seenQuestionTexts = new Set();
+    if (userId) {
+      const recentInterviews = await Interview.find({ userId }).sort({ createdAt: -1 }).limit(10).select("questions").lean();
+      recentInterviews.forEach(inv => (inv.questions || []).forEach(q => seenQuestionTexts.add(q)));
     }
 
     const validDiffs = ["easy", "medium", "hard"];
     const isValidDiff = difficulty && validDiffs.includes(difficulty.toLowerCase());
+    
+    // Distribute questions evenly among all requested skills
+    const countPerSkill = Math.ceil(totalNeeded / requestedSlugs.length);
+    let allQuestions = [];
 
-    let questions = [];
-
-    if (isValidDiff) {
-      // User selected specific difficulty
-      const matchWithDiff = { ...baseMatch, difficulty: { $regex: new RegExp(`^${difficulty}$`, "i") } };
-      questions = await Question.aggregate([
-        { $match: matchWithDiff },
-        { $sample: { size: count } }
-      ]);
-
-      // Fallback: if not enough unseen questions, allow seen ones
-      if (questions.length < count) {
-        questions = await Question.aggregate([
-          { $match: { skill: slug, difficulty: { $regex: new RegExp(`^${difficulty}$`, "i") } } },
-          { $sample: { size: count } }
-        ]);
+    for (const slug of requestedSlugs) {
+      const baseMatch = { skill: slug };
+      if (seenQuestionTexts.size > 0) {
+        baseMatch.question = { $nin: Array.from(seenQuestionTexts) };
       }
-    } else {
-      // No specific difficulty — distribute: ~40% Easy, ~40% Medium, ~20% Hard for variety
-      const easyCount   = Math.round(count * 0.4);
-      const hardCount   = Math.round(count * 0.2);
-      const mediumCount = count - easyCount - hardCount;
 
-      const fetchWithFallback = async (diff, needed) => {
-        const matchDiff = { ...baseMatch, difficulty: { $regex: new RegExp(`^${diff}$`, "i") } };
-        let res = await Question.aggregate([{ $match: matchDiff }, { $sample: { size: needed } }]);
-        if (res.length < needed) {
-          res = await Question.aggregate([
-            { $match: { skill: slug, difficulty: { $regex: new RegExp(`^${diff}$`, "i") } } },
-            { $sample: { size: needed } }
-          ]);
+      if (isValidDiff) {
+        const matchWithDiff = { ...baseMatch, difficulty: { $regex: new RegExp(`^${difficulty}$`, "i") } };
+        let qs = await Question.aggregate([{ $match: matchWithDiff }, { $sample: { size: countPerSkill } }]);
+        if (qs.length < countPerSkill) { // Fallback if not enough unseen
+          qs = await Question.aggregate([{ $match: { skill: slug, difficulty: { $regex: new RegExp(`^${difficulty}$`, "i") } } }, { $sample: { size: countPerSkill } }]);
         }
-        return res;
-      };
+        allQuestions.push(...qs);
+      } else {
+        const easyC = Math.round(countPerSkill * 0.4);
+        const hardC = Math.round(countPerSkill * 0.2);
+        const medC = countPerSkill - easyC - hardC;
 
-      const [easyQs, mediumQs, hardQs] = await Promise.all([
-        fetchWithFallback("Easy", easyCount),
-        fetchWithFallback("Medium", mediumCount),
-        fetchWithFallback("Hard", hardCount),
-      ]);
+        const fetchDiff = async (diff, needed) => {
+          let res = await Question.aggregate([{ $match: { ...baseMatch, difficulty: { $regex: new RegExp(`^${diff}$`, "i") } } }, { $sample: { size: needed } }]);
+          if (res.length < needed) { // Fallback if not enough unseen
+             res = await Question.aggregate([{ $match: { skill: slug, difficulty: { $regex: new RegExp(`^${diff}$`, "i") } } }, { $sample: { size: needed } }]);
+          }
+          return res;
+        };
 
-      questions = [...easyQs, ...mediumQs, ...hardQs]
-        .sort(() => Math.random() - 0.5)
-        .slice(0, count);
+        const [eq, mq, hq] = await Promise.all([fetchDiff("Easy", easyC), fetchDiff("Medium", medC), fetchDiff("Hard", hardC)]);
+        allQuestions.push(...eq, ...mq, ...hq);
+      }
     }
 
-    console.log(`✅ Fetched ${questions.length} questions from MongoDB for skill: ${slug} (${seenQuestionTexts.size} excluded as seen)`);
-    
-    return questions.map(q => q.question);
+    // Shuffle combined questions and slice to the exact total needed
+    allQuestions = allQuestions.sort(() => Math.random() - 0.5).slice(0, totalNeeded);
+    console.log(`✅ Fetched ${allQuestions.length} questions from DB for skills: ${requestedSlugs.join(', ')}`);
+    return allQuestions.map(q => q.question);
   } catch (error) {
     console.error("Error fetching local questions from DB:", error);
     return [];
