@@ -216,17 +216,12 @@ const Challenge100Days = () => {
         onDragStart={(e) => e.preventDefault()}
       >
         <picture className="c100-banner-picture">
-          {/* Desktop (>= 1200px): 1600x440 */}
+          {/* Web / Desktop / Laptop (>= 1024px): 1400x400 */}
           <source
-            media="(min-width: 1200px)"
-            srcSet="https://ik.imagekit.io/cjnon47kr/preepx_100_days_desktop_1600x440.png"
+            media="(min-width: 1024px)"
+            srcSet="https://ik.imagekit.io/cjnon47kr/banner1400*400.png"
           />
-          {/* Laptop (>= 900px): 1400x400 */}
-          <source
-            media="(min-width: 900px)"
-            srcSet="https://ik.imagekit.io/cjnon47kr/preepx_100_days_laptop_1400x400.png"
-          />
-          {/* Tablet (>= 600px) */}
+          {/* Tablet (>= 600px): 1024x500 */}
           <source
             media="(min-width: 600px)"
             srcSet="https://ik.imagekit.io/cjnon47kr/tablet.png?updatedAt=1787077267679"
