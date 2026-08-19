@@ -10,13 +10,48 @@ const { evaluateBadges } = require("../../../utils/badges");
 const { BadRequestError, NotFoundError } = require("../../common/exceptions/customErrors");
 const envConfig = require("../../config/env.config");
 const aiService = require("../../services/ai.service");
+// Simple Levenshtein distance for typo correction
+const levenshtein = (a, b) => {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+  const matrix = Array.from({ length: b.length + 1 }, (_, i) => [i]);
+  for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      if (b.charAt(i - 1) === a.charAt(j - 1)) {
+        matrix[i][j] = matrix[i - 1][j - 1];
+      } else {
+        matrix[i][j] = Math.min(matrix[i - 1][j - 1] + 1, matrix[i][j - 1] + 1, matrix[i - 1][j] + 1);
+      }
+    }
+  }
+  return matrix[b.length][a.length];
+};
+
+const getClosestSkill = (inputSlug, availableSkills) => {
+  let closest = inputSlug;
+  let minDistance = Infinity;
+  for (const skill of availableSkills) {
+    if (skill === inputSlug) return skill;
+    const dist = levenshtein(inputSlug, skill);
+    if (dist < minDistance && dist <= 2) { // Allow up to 2 typos
+      minDistance = dist;
+      closest = skill;
+    }
+  }
+  return closest;
+};
 
 const getLocalQuestions = async (skill, count, difficulty, userId = null) => {
   try {
     if (!skill || count <= 0) return [];
     
     const primarySkill = skill.split(',')[0].trim();
-    const slug = primarySkill.toLowerCase().replace(/\s+/g, "");
+    let slug = primarySkill.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+    // Auto-correct typo if possible
+    const availableSkills = await Question.distinct("skill");
+    slug = getClosestSkill(slug, availableSkills);
 
     // Get questions the user has already seen (last 10 interviews)
     let seenQuestionTexts = new Set();
@@ -145,10 +180,15 @@ const generateInterviewQuestions = async (userId, data) => {
   }
   
   // Fetch local questions from DB — pass userId to exclude seen questions
-  const localQuestions = await getLocalQuestions(jobTopic, targetJsonCount, difficulty, userId);
+  let localQuestions = await getLocalQuestions(jobTopic, targetJsonCount, difficulty, userId);
   const actualJsonCount = localQuestions.length;
-  const aiCount = count - actualJsonCount;
   
+  // If the skill is completely unknown (even after typo auto-correct)
+  if (actualJsonCount === 0) {
+    throw new BadRequestError(`Sorry, we couldn't find any questions for the skill "${jobTopic}". Please check the spelling or select a valid topic.`);
+  }
+
+  const aiCount = count - actualJsonCount;
   let aiQuestions = [];
 
   if (aiCount > 0) {
@@ -178,9 +218,12 @@ const generateInterviewQuestions = async (userId, data) => {
         .filter((q) => q.length > 0)
         .slice(0, aiCount);
     } catch (err) {
-      console.error("AI Generation Error:", err);
+      console.error("AI Generation Error, falling back to DB for all questions:", err);
+      // AI Failed! Gracefully fallback to fetching ALL requested questions from the Database
+      localQuestions = await getLocalQuestions(jobTopic, count, difficulty, userId);
+      
       if (localQuestions.length === 0) {
-        throw new BadRequestError("Failed to generate questions. Check API Key or usage limits.");
+        throw new BadRequestError("Failed to generate questions. AI is unavailable and no local questions were found.");
       }
     }
   }
