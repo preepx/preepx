@@ -1,12 +1,1202 @@
 [
-  { "difficulty": "Easy", "question": "What is Redis and why is it used?" },
-  { "difficulty": "Easy", "question": "What are the main data structures supported by Redis?" },
-  { "difficulty": "Medium", "question": "What is the difference between Redis caching strategies: write-through, write-back, write-around?" },
-  { "difficulty": "Medium", "question": "What is Redis Pub/Sub and how does it work?" },
-  { "difficulty": "Medium", "question": "What is Redis Persistence? Explain RDB and AOF." },
-  { "difficulty": "Medium", "question": "How do you implement session management using Redis?" },
-  { "difficulty": "Hard", "question": "What is Redis Cluster and how does it achieve horizontal scaling?" },
-  { "difficulty": "Hard", "question": "How do you implement distributed locking with Redis?" },
-  { "difficulty": "Hard", "question": "What is Redis Sentinel and how does it provide high availability?" },
-  { "difficulty": "Hard", "question": "How do you prevent cache stampede in Redis?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is Redis and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the main data structures supported by Redis?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Is Redis a SQL or NoSQL database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the acronym REDIS stand for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an in-memory database and how does Redis use this concept?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a key-value store?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default port used by Redis?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you start and stop the Redis server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Redis CLI and how is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Redis string data type used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Redis list and how does it differ from a string?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Redis hash and when would you use one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Redis set and how does it differ from a list?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Redis sorted set (ZSET)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SET command used for in Redis?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the GET command used for in Redis?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DEL command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the EXPIRE command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the TTL command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Redis and Memcached?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Is Redis single-threaded or multi-threaded?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the maximum size of a Redis string value?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Redis database index and how many databases does Redis support by default?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the FLUSHALL command and when should it be used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What license is Redis released under?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between LPUSH and RPUSH?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between LPOP and RPOP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you retrieve a range of elements from a Redis list?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SADD command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check if a member exists in a Redis set?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SINTER command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SUNION command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SDIFF command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ZADD command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you retrieve elements from a sorted set by rank?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you retrieve elements from a sorted set by score range?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the HSET command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the HGETALL command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HDEL and DEL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the INCR command and what is it commonly used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the DECR command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the MSET command and how does it differ from multiple SET calls?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the EXISTS command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the RENAME command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the TYPE command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the KEYS command and why is it discouraged in production?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SCAN command and how does it differ from KEYS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EXPIRE and PEXPIRE?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the PERSIST command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the GETSET command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SETNX command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the APPEND command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the STRLEN command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the OBJECT ENCODING command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a HyperLogLog and what command is used to add elements to it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redis Persistence? Explain RDB and AOF."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an RDB snapshot and how is it created?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SAVE command vs the BGSAVE command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AOF (Append Only File) persistence?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is AOF rewrite and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RDB and AOF in terms of durability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RDB and AOF in terms of performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different AOF fsync policies (always, everysec, no)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can you use both RDB and AOF together? What are the trade-offs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens to data if Redis crashes with only RDB enabled?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SAVE configuration directive used for in redis.conf?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a fork() system call's role in Redis persistence?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is copy-on-write and how does it relate to Redis snapshotting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you disable persistence in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the risk of data loss with the 'everysec' AOF fsync policy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you recover a Redis instance from an AOF file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you recover a Redis instance from an RDB file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is hybrid persistence (RDB preamble in AOF) in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are common causes of a corrupted AOF file and how can it be repaired?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does persistence configuration affect Redis restart time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redis replication and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a master and a replica in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does a replica synchronize with a master in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is partial resynchronization in Redis replication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is full resynchronization and when does it occur?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is replication backlog in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the replica-read-only setting used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Redis handle replication lag?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is chained replication (sub-replicas) in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is asynchronous replication and how does Redis implement it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the risks of asynchronous replication in terms of data consistency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the WAIT command used for in Redis replication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you promote a replica to a master manually?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is diskless replication in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens to write operations sent to a replica by default?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does replication interact with persistence (RDB/AOF) on replicas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of the replication ID in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you set up a master-replica Redis topology?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Redis Cluster and how does it achieve horizontal scaling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are hash slots in Redis Cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How many hash slots does Redis Cluster use in total?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Redis Cluster determine which node owns a given key?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a hash tag in Redis Cluster and why is it used?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Redis Cluster handle node failure?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the gossip protocol in Redis Cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is cluster resharding and how is it performed?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the minimum recommended number of master nodes in a Redis Cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Redis Cluster differ from Redis Sentinel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What happens when a client sends a command for a key on a different node in Redis Cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a MOVED redirection error in Redis Cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is an ASK redirection error in Redis Cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Can Redis Cluster perform multi-key operations across different hash slots?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is cluster-require-full-coverage and what does it control?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Redis Cluster achieve high availability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Redis Cluster and client-side sharding?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are smart clients and how do they optimize Redis Cluster interactions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the limitations of Redis Cluster compared to a single Redis instance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you add or remove a node from a running Redis Cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Redis Sentinel and how does it provide high availability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Sentinel detect that a master has failed?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the quorum configuration in Redis Sentinel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Sentinel perform automatic failover?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between subjective down (SDOWN) and objective down (ODOWN) in Sentinel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How many Sentinel instances are recommended for a production deployment and why?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a client discover the current master through Sentinel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What happens to existing replicas when Sentinel promotes a new master?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is split-brain in the context of Redis Sentinel and how is it mitigated?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the Sentinel configuration file?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Sentinel notify applications of a failover event?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the down-after-milliseconds setting in Sentinel used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Can Sentinel manage a Redis Cluster deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the differences between Sentinel-based HA and Cluster-based HA?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are common pitfalls when deploying Redis Sentinel in production?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis caching strategies: write-through, write-back, write-around?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache-aside (lazy loading) and how is it implemented with Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a cache hit vs a cache miss?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache invalidation and why is it considered a hard problem?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TTL-based cache expiration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between eager and lazy cache expiration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement session management using Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis to cache database query results?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a read-through cache?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is negative caching and when is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you design a Redis caching layer for a high-traffic web application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache warming and why might you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the thundering herd problem in caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you prevent cache stampede in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is probabilistic early expiration and how does it help with cache stampede?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement rate limiting using Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the sliding window algorithm for rate limiting and how can Redis implement it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the token bucket algorithm and how can Redis be used to implement it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis to implement a leaderboard?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis sorted sets to implement a leaderboard?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis to implement a job queue?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis to implement a distributed cache for microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is write-behind caching and what are its risks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you keep a Redis cache consistent with an underlying database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache-aside vs read-through in terms of who manages cache population?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you handle stale data in a Redis cache?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a multi-level caching architecture and where does Redis fit in?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redis Pub/Sub and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between PUBLISH and SUBSCRIBE commands?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Redis channel?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is pattern-based subscription (PSUBSCRIBE) in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens to a message if no subscriber is listening when it is published?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the limitations of Redis Pub/Sub compared to a dedicated message queue?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redis Streams and how does it differ from Pub/Sub?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a consumer group in Redis Streams?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the XADD command used for in Redis Streams?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the XREAD command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the XACK command used for in a consumer group?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Redis Streams provide message persistence compared to Pub/Sub?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis Streams and Kafka?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the pending entries list (PEL) in Redis Streams?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you handle a failed consumer in a Redis Streams consumer group?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the XTRIM command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Redis Streams support at-least-once message delivery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a stream ID in Redis Streams and how is it structured?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Redis transaction and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the MULTI/EXEC command pattern used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the DISCARD command used for in a Redis transaction?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is optimistic locking in Redis using WATCH?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens if a watched key changes before EXEC is called?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Does Redis support rollback within a transaction?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Lua scripting in Redis and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the EVAL command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the EVALSHA command and how does it differ from EVAL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SCRIPT LOAD command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why are Lua scripts executed atomically in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the benefits of using Lua scripts over multiple round-trip commands?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the limitations of Lua scripting in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you pass keys and arguments to a Lua script in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redis Functions and how does it compare to Lua scripting via EVAL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Can a Redis transaction span multiple keys across a Redis Cluster?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between atomicity in Redis transactions vs traditional RDBMS transactions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a check-and-set operation using Redis transactions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why is Redis so fast?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the impact of Redis being single-threaded on performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redis I/O threading and how does it improve performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is memory fragmentation in Redis and how can it be reduced?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the maxmemory configuration setting used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Redis eviction policies and when do they apply?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between allkeys-lru and volatile-lru eviction policies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the LFU (Least Frequently Used) eviction policy in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you monitor Redis memory usage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the MEMORY USAGE command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the INFO command and what kind of data does it provide?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is pipelining in Redis and how does it improve performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does pipelining differ from a Redis transaction?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the impact of large keys on Redis performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a 'hot key' problem in Redis and how can it be mitigated?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Redis handle concurrent client connections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection pooling and why is it important when using Redis clients?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SLOWLOG command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you benchmark Redis performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is redis-benchmark and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does data structure choice (e.g., hash vs multiple strings) affect Redis memory efficiency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is active memory defragmentation in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does key expiration work internally in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is passive (lazy) expiration in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is active expiration and how does the Redis expiration cycle work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the noeviction policy and when would it be used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the volatile-ttl eviction policy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between volatile and allkeys eviction policies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens when Redis reaches its maxmemory limit with noeviction set?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set a key to never expire after it had a TTL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the OBJECT IDLETIME command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does replication handle key expiration between master and replicas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the risk of relying on client-side TTL management instead of Redis-native expiration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a sliding expiration pattern in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the PTTL command and how does it differ from TTL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does AOF persist expired key deletions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement distributed locking with Redis?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Redlock algorithm and how does it work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the criticisms of the Redlock algorithm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the SET command's NX and PX options used for in implementing locks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle lock release safely to avoid releasing another client's lock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a lock timeout and why is it necessary in distributed locking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the risk of clock drift in distributed locking algorithms like Redlock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a reentrant lock using Redis?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a fencing token and how does it help prevent race conditions with distributed locks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you handle a client crash while holding a Redis-based lock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is optimistic concurrency control and how can Redis support it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a semaphore using Redis?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are alternatives to Redis-based distributed locking (e.g., Zookeeper, etcd)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of using Redis for distributed locking versus a dedicated coordination service?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you secure a Redis instance in production?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the requirepass configuration directive used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redis ACL (Access Control List) and how does it improve security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you restrict a Redis user to specific commands using ACL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the risk of exposing Redis directly to the internet?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you enable TLS/SSL encryption for Redis connections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is command renaming in Redis and why might you use it for security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you disable dangerous commands like FLUSHALL in production?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the protected-mode setting in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you restrict Redis network access using bind and firewall rules?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the risk of running Redis without authentication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Redis handle authentication for replica connections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are best practices for securing Redis in a cloud/containerized environment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What tools can be used to monitor Redis in production?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the MONITOR command and why should it be used carefully?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the LATENCY command used for in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you set up alerting for high memory usage in Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CLIENT LIST command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you gracefully restart a Redis server without losing data?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Redis backup strategy and how would you implement one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you upgrade a Redis instance with minimal downtime?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of the Redis configuration file (redis.conf)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you scale Redis vertically vs horizontally?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CONFIG GET/SET command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you perform capacity planning for a Redis deployment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What metrics are most important to track for Redis health?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are common real-world use cases for Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How is Redis used for session storage in web applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How is Redis used for real-time analytics?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How is Redis used to implement a message broker?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How is Redis used in a microservices architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis Geo commands to implement location-based features?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the GEOADD command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the GEODIST command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis to implement a real-time chat application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis for full-text search-like functionality?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RedisJSON and what does it add to Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RedisSearch and how does it extend Redis capabilities?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RedisTimeSeries and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RedisBloom and what data structures does it provide?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis as a primary database instead of just a cache?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the risks of using Redis as a system of record rather than a cache?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you design a Redis-backed notification system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use Redis to deduplicate events in a streaming pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis and Memcached in terms of features?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis and MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis and a traditional relational database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When would you choose Redis over Memcached for caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis and Kafka for message streaming?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis and Apache Cassandra?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When is Redis not a good fit for a use case?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis Cluster and a sharded relational database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Amazon ElastiCache and self-hosted Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Redis Enterprise and how does it differ from open-source Redis?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis persistence and a traditional database's durability guarantees?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Redis compare to etcd for configuration/coordination use cases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Redis and DynamoDB Accelerator (DAX)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Redis compare to an embedded cache like Caffeine or Guava Cache?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What factors should be considered when choosing between Redis and Memcached for a new project?"
+  }
 ]

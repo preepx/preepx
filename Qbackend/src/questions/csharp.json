@@ -1,12 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is C# and what platform is it primarily used on?" },
-  { "difficulty": "Easy", "question": "What is the difference between value types and reference types in C#?" },
-  { "difficulty": "Medium", "question": "What is LINQ in C# and how is it used?" },
-  { "difficulty": "Medium", "question": "What is async/await in C# and how does it work?" },
-  { "difficulty": "Medium", "question": "What is the difference between IEnumerable and IQueryable in C#?" },
-  { "difficulty": "Medium", "question": "What are delegates and events in C#?" },
-  { "difficulty": "Hard", "question": "What is the garbage collector in .NET and how does it work?" },
-  { "difficulty": "Hard", "question": "What is dependency injection in ASP.NET Core?" },
-  { "difficulty": "Hard", "question": "Explain the Entity Framework Core lifecycle." },
-  { "difficulty": "Hard", "question": "What is the difference between Task and Thread in C#?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is C# and what platform is it primarily used on?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between value types and reference types in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the .NET Framework?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is .NET Core and how does it differ from the .NET Framework?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Common Language Runtime (CLR)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between C# and Java?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a namespace in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the using directive in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Main method in a C# program?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between int and Int32 in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a class in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an object in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a class and a struct in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a constructor in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a default constructor in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method overloading in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is method overriding in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between var and dynamic in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the const keyword in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between const and readonly in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is boxing and unboxing in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between == and .Equals() in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are access modifiers in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between public, private, and protected access modifiers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is inheritance in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is polymorphism in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is encapsulation in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is abstraction in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an interface in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an abstract class and an interface in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a property in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a field and a property in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are auto-implemented properties in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the this keyword used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the base keyword used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static class in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a static method in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between static and instance members in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an array in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an array and a List in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a string in C#, and is it a value type or reference type?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string immutability in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between String and StringBuilder in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a nullable type in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the null-coalescing operator (??) in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the null-conditional operator (?.) in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is exception handling in C# and what keywords are used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between throw and throw ex in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a try-catch-finally block used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the finally block in exception handling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is LINQ in C# and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is async/await in C# and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between IEnumerable and IQueryable in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are delegates and events in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a delegate and an event in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a lambda expression in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an anonymous method in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Func, Action, and Predicate delegates?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between IEnumerable and IList in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is deferred execution in LINQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between LINQ to Objects and LINQ to SQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the yield keyword used for in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an extension method in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is generics in C# and why are they used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between generic and non-generic collections in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between List<T> and Dictionary<TKey, TValue>?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface and an abstract class in terms of multiple inheritance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the sealed keyword in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between overloading and overriding in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the virtual keyword used for in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the override keyword used for in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is method hiding using the new keyword in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shallow copy and deep copy in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is serialization and deserialization in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between JSON serialization and XML serialization in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is reflection in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of attributes in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom attribute in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Task and async Task in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Task.Run() and Task.Factory.StartNew()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a ConfigureAwait(false) used for in async programming?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous programming in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a race condition and how can it be avoided in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the lock keyword used for in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is thread safety and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Monitor and Mutex in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the volatile keyword in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dependency injection and why is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between constructor injection and property injection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Repository pattern and how is it used in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Singleton design pattern and how is it implemented in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Factory design pattern in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ADO.NET and Entity Framework?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a connection string in ADO.NET?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between DataSet and DataReader in ADO.NET?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Entity Framework and Entity Framework Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a migration in Entity Framework Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between eager loading and lazy loading in Entity Framework?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between code-first and database-first approaches in Entity Framework?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the DbContext class in Entity Framework?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the garbage collector in .NET and how does it work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is dependency injection in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the Entity Framework Core lifecycle."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Task and Thread in C#?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the generational garbage collection model used in .NET."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Gen0, Gen1, and Gen2 garbage collection in .NET?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the finalizer (destructor) in C# and when should it be used?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between IDisposable and a finalizer in C#?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the dispose pattern in C# and why it's important for unmanaged resources."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between weak references and strong references in .NET?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET runtime handles memory allocation on the managed heap."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Large Object Heap (LOH) in .NET and how does it affect performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the middleware pipeline in ASP.NET Core."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between built-in DI container and third-party DI containers like Autofac?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Transient, Scoped, and Singleton service lifetimes in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how ASP.NET Core Web API model binding works."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between action filters and middleware in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how ASP.NET Core implements the options pattern for configuration."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between appsettings.json environments and how are they loaded in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the async/await state machine works internally in C#."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a deadlock in async programming and how does ConfigureAwait help prevent it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between CPU-bound and I/O-bound asynchronous operations in C#?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Task.WhenAll and Task.WhenAny differ and when to use each."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a SemaphoreSlim and how is it used for throttling asynchronous operations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between the Task Parallel Library (TPL) and PLINQ."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a CancellationToken and manually stopping a thread in C#?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Entity Framework Core tracks changes to entities."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between AsNoTracking() and normal tracked queries in EF Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how EF Core handles concurrency conflicts using concurrency tokens."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the N+1 query problem in Entity Framework and how do you avoid it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a compile-time error and a runtime error in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the switch statement in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a switch expression in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the foreach loop used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between for and foreach loops in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between while and do-while loops in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the break statement used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the continue statement used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ref keyword in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the out keyword in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between ref and out parameters in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the params keyword used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an enum in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a tuple in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a tuple and an anonymous type in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the is keyword in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the as keyword in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between implicit and explicit type conversion in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is casting in C# and how is it performed?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Convert.ToInt32() and (int) casting in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between abstract methods and virtual methods in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is operator overloading in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is indexers in C# and how are they used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a struct and a class in terms of memory allocation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between pass by value and pass by reference in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a shallow clone using MemberwiseClone and a custom deep clone?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the IComparable interface in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the IComparer interface and when is it used instead of IComparable?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between IEquatable<T> and overriding Equals()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a checked and unchecked context in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the nameof operator in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is pattern matching in C# and how has it evolved with newer versions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a record type in C# and how does it differ from a class?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between init-only setters and regular setters in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is nullable reference types feature in C# and why was it introduced?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a local function and a lambda expression in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the in keyword for parameters in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is span<T> in C# and why is it useful for performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between StringBuilder.Append and string concatenation in a loop?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the using statement for resource management in C#?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET JIT compiler works and the difference between JIT and AOT compilation."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between ReadyToRun and Native AOT compilation in .NET?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the ASP.NET Core hosting model works with Kestrel and reverse proxies like IIS or Nginx."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between in-process and out-of-process hosting in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how ASP.NET Core implements authentication and authorization middleware pipelines."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between JWT bearer authentication and cookie authentication in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how SignalR works for real-time communication in ASP.NET Core."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between gRPC and REST APIs in the context of .NET services?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET garbage collector handles server GC versus workstation GC modes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between concurrent and non-concurrent garbage collection in .NET?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how EF Core's compiled queries improve performance for repeated queries."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between raw SQL queries and LINQ queries in Entity Framework Core in terms of performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database transactions are managed in Entity Framework Core with TransactionScope."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between optimistic and pessimistic concurrency control in EF Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET dependency injection container resolves services with multiple constructors."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between IHostedService and BackgroundService in .NET?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how .NET's memory-mapped files can be used for high-performance data processing."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Span<T> and Memory<T> in high-performance C# code?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how source generators work in modern C# and their performance benefits over reflection."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between compiled expression trees and regular delegates in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a namespace collision in C# and how is it resolved?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local variable and a member variable in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the scope of a variable in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the readonly keyword for fields in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a nested class in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a partial class in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the partial keyword in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an anonymous type in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Console.Write and Console.WriteLine in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Main method's string[] args parameter?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a comment in C# and what are the different comment styles?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an XML documentation comment in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a compiler warning and a compiler error?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between .exe and .dll files in a .NET project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the App.config or appsettings.json file in a .NET project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is NuGet and what is it used for in .NET development?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a solution versus a project in Visual Studio terminology?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the bin folder used for in a .NET project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the obj folder used for in a .NET project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Debug and Release build configurations in .NET?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is middleware in ASP.NET Core and how do you create custom middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between UseMiddleware and Run in the ASP.NET Core pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is routing in ASP.NET Core and how does attribute routing work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between conventional routing and attribute routing in ASP.NET Core MVC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is model validation in ASP.NET Core and how are data annotations used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the [ApiController] attribute in ASP.NET Core Web API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ViewResult and JsonResult in ASP.NET Core MVC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of ViewModels in ASP.NET Core MVC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between TempData, ViewData, and ViewBag in ASP.NET Core MVC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the IActionResult return type in ASP.NET Core controllers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Razor syntax in ASP.NET Core and how is it used in views?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Razor Pages and MVC in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of Tag Helpers in ASP.NET Core Razor views?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between server-side rendering and client-side rendering in ASP.NET Core apps?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CORS and how is it configured in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of appsettings.Development.json versus appsettings.json?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the IConfiguration interface used for in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the IOptions<T> pattern in ASP.NET Core configuration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is health check middleware in ASP.NET Core and why is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of Swagger/OpenAPI integration in ASP.NET Core Web API?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how ASP.NET Core Identity handles user authentication and role management internally."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between claims-based and role-based authorization in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how policy-based authorization works in ASP.NET Core."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a custom authorization handler and a simple role check in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how distributed caching works in ASP.NET Core using Redis."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between in-memory caching and distributed caching in a scaled-out ASP.NET Core app?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how output caching differs from response caching in ASP.NET Core."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the IMemoryCache interface and its eviction policies in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET runtime handles exception filters versus try-catch blocks in ASP.NET Core."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between global exception handling middleware and exception filters in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how gRPC streaming works in .NET and its use cases compared to REST."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between unary, server streaming, client streaming, and bidirectional streaming in gRPC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how .NET's Channel<T> is used for producer-consumer patterns in asynchronous code."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between BlockingCollection<T> and Channel<T> for concurrent data processing in .NET?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET runtime implements value type boxing avoidance using generics."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between struct-based generics and class-based generics in terms of performance in C#?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how EF Core's shadow properties work and when they are useful."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a keyless entity type and a regular entity in EF Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database sharding can be implemented in an application using Entity Framework Core."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between database-per-tenant and shared-database multi-tenancy in EF Core applications?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a compiler and an interpreter in the context of C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Common Type System (CTS) in .NET?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Common Language Specification (CLS) in .NET?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Managed code versus unmanaged code in .NET?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Intermediate Language (IL) in .NET?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Just-In-Time (JIT) compilation in .NET?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an assembly in .NET?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a private assembly and a shared assembly?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Global Assembly Cache (GAC) used for in .NET Framework?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a console application and a class library in .NET?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Program.cs file in a C# console application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is top-level statements feature introduced in newer C# versions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a field's default value for value types versus reference types?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the sizeof operator in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the typeof operator used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the GetType() method used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between typeof and GetType() in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a jagged array in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a jagged array and a multidimensional array in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Array class in C# and what common methods does it provide?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the List<T> class and what common methods does it provide?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Dictionary<TKey, TValue> class used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a HashSet<T> in C# and how does it differ from a List<T>?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Queue<T> in C# and how is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Stack<T> in C# and how is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Queue<T> and Stack<T> in terms of ordering?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ArrayList class and why is it generally avoided in modern C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is boxing overhead and why should it be minimized in performance-critical code?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the object class as the base class in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ToString() method used for in C# and how can it be overridden?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between First(), FirstOrDefault(), Single(), and SingleOrDefault() in LINQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Select() and SelectMany() in LINQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Where() and OrderBy() execution order in a LINQ query chain?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between LINQ query syntax and method syntax?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the GroupBy() method used for in LINQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Join() method used for in LINQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Any() and All() in LINQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Aggregate() method in LINQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Count() and Count in terms of performance for collections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ToList() and ToArray() in LINQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Distinct() method in LINQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Skip() and Take() in LINQ pagination?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a compiler-generated closure in C# lambda expressions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is variable capture in closures and what pitfalls can it cause in loops?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between covariance and contravariance in C# generics?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the out keyword used for in generic interface declarations for covariance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the in keyword used for in generic interface declarations for contravariance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interface with default methods and an abstract class in C# 8+?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of default interface methods introduced in C# 8?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a mutable and immutable object in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the with expression for records in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between positional records and records with regular properties?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is pattern matching with switch expressions and the when clause in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a tuple deconstruction in C# and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an implicit operator and an explicit operator overload in C#?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the IDisposable interface and the Dispose method?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between using statement and using declaration in C# 8+?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom exception class in C# and how is it created?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is exception filtering using the when clause in a catch block?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between rethrowing an exception and wrapping it in a new exception?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET runtime performs escape analysis to optimize stack versus heap allocation."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between value type stack allocation and reference type heap allocation in performance-sensitive code?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how ref structs like Span<T> avoid heap allocations in C#."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between stackalloc and regular array allocation in C#?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET garbage collector handles pinned objects and their impact on performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between fixed statement usage and GCHandle.Alloc for pinning memory in C#?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how async streams (IAsyncEnumerable<T>) work in C# and their use cases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between IEnumerable<T> and IAsyncEnumerable<T> in terms of execution?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET runtime resolves method calls using virtual method tables (vtables)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between static dispatch and dynamic dispatch in C#?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how source-generated JSON serialization improves performance over reflection-based serialization in .NET."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between System.Text.Json and Newtonsoft.Json in terms of performance and features?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET runtime implements tiered compilation for JIT optimization."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Quick JIT and fully optimized JIT compilation tiers in .NET?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how ASP.NET Core minimal APIs differ architecturally from traditional controller-based APIs."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between endpoint routing and legacy MVC routing in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how distributed transactions are coordinated across multiple microservices in a .NET architecture."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the Saga pattern and two-phase commit for distributed transactions in .NET microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how .NET's Native AOT compilation affects reflection-based libraries like Entity Framework Core."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between trimming and AOT compilation in .NET deployment scenarios?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET runtime handles thread pool starvation and how to diagnose it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronization primitives like SpinLock and Monitor in high-contention scenarios?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how EF Core's global query filters work and their use cases for soft-delete or multi-tenancy."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a compiled LINQ expression tree and a runtime-interpreted LINQ query in EF Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how .NET's DiagnosticSource and EventSource APIs enable low-overhead observability in production."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between structured logging and traditional string-based logging in a high-throughput .NET service?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Equals() method and how does it differ from ReferenceEquals()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the GetHashCode() method used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the relationship between overriding Equals() and GetHashCode() in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the IComparable<T> interface for sorting custom objects?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Array.Sort() and List<T>.Sort()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Convert class in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Parse() and TryParse() methods in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the DateTime struct in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DateTime and DateTimeOffset in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the TimeSpan struct used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is string interpolation in C# and how is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between string interpolation and string.Format()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a verbatim string literal in C# and when is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of escape sequences in C# strings?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Environment class used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of command-line arguments in a C# console application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Random class used for in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Math class and what common methods does it provide in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Guid struct in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a checked exception concept in other languages and C#'s exception model?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an in-memory database and a real database for unit testing EF Core code?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Repository and Unit of Work pattern combination used for in a layered C# application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CQRS pattern and how is it implemented in a .NET application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the MediatR library used for in ASP.NET Core applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of AutoMapper in a C# application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between mapping profiles and manual mapping in AutoMapper?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of FluentValidation as an alternative to data annotations in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous controller actions in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the [FromBody], [FromQuery], and [FromRoute] attributes in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is model binding and how does ASP.NET Core resolve complex types from HTTP requests?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of custom model binders in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a filter and middleware in terms of scope in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of action filters, result filters, and exception filters in ASP.NET Core MVC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the [Authorize] attribute in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between cookie-based and token-based authentication in a C# web application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of refresh tokens in a JWT-based authentication system built with ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between symmetric and asymmetric encryption when signing JWTs in .NET?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the Data Protection API in ASP.NET Core?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between appsettings secrets and Azure Key Vault for storing sensitive configuration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of user secrets in ASP.NET Core during local development?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how .NET's ArrayPool<T> reduces garbage collection pressure in high-throughput applications."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between object pooling and array pooling in .NET performance optimization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET runtime implements the ThreadPool's work-stealing algorithm."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between IO completion ports and thread pool worker threads in async I/O on .NET?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Kestrel handles HTTP/2 and HTTP/3 connections in ASP.NET Core."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between HTTP/1.1 keep-alive and HTTP/2 multiplexing in an ASP.NET Core server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how .NET's System.Threading.Channels library supports backpressure in producer-consumer pipelines."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between bounded and unbounded channels in .NET concurrent programming?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database connection resiliency and retry policies are implemented using Polly in .NET."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a retry policy and a circuit breaker policy in Polly for .NET applications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how distributed caching invalidation is handled across multiple ASP.NET Core instances using Redis pub/sub."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between cache-aside and write-through caching strategies in a .NET application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how .NET's OpenTelemetry integration enables distributed tracing across microservices."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between metrics, logs, and traces in the context of .NET application observability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how EF Core's interceptors can be used to modify SQL commands before execution."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a database interceptor and a SaveChanges interceptor in EF Core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how .NET's Native AOT compilation impacts startup time for serverless functions."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between cold start and warm start performance for .NET Azure Functions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the .NET runtime's tiered PGO (Profile-Guided Optimization) improves long-running service performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between static PGO and dynamic PGO in .NET's JIT compilation pipeline?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the checked keyword for arithmetic overflow detection in C#?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a compiler-generated backing field and an explicit backing field for a property?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the required modifier for properties introduced in newer C# versions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a primary constructor and a traditional constructor in newer C# versions?"
+  }
 ]

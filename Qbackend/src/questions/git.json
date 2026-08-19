@@ -1,17 +1,1082 @@
 [
-  { "difficulty": "Easy", "question": "What is Git and why is version control important?" },
-  { "difficulty": "Easy", "question": "What is the difference between git pull and git fetch?" },
-  { "difficulty": "Easy", "question": "What is a branch in Git?" },
-  { "difficulty": "Easy", "question": "What is the difference between git merge and git rebase?" },
-  { "difficulty": "Easy", "question": "What is .gitignore and how do you use it?" },
-  { "difficulty": "Medium", "question": "Explain the Git branching strategy (Gitflow)." },
-  { "difficulty": "Medium", "question": "What is git cherry-pick and when would you use it?" },
-  { "difficulty": "Medium", "question": "What is git stash and how do you use it?" },
-  { "difficulty": "Medium", "question": "How do you resolve a merge conflict in Git?" },
-  { "difficulty": "Medium", "question": "What is the difference between git reset and git revert?" },
-  { "difficulty": "Hard", "question": "Explain git bisect and how it helps debug issues." },
-  { "difficulty": "Hard", "question": "What is git reflog and when is it useful?" },
-  { "difficulty": "Hard", "question": "Explain git hooks and their use cases." },
-  { "difficulty": "Hard", "question": "What is the difference between a fast-forward merge and a three-way merge?" },
-  { "difficulty": "Hard", "question": "How do you squash commits in Git and when should you do it?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is Git and why is version control important?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git pull and git fetch?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a branch in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git merge and git rebase?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is .gitignore and how do you use it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Git repository?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local and a remote repository?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git init command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git clone command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git clone and git fork?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git add command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git commit command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git status command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git log command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git diff command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git push command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the staging area (index) in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the working directory in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a commit hash (SHA)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git checkout and git switch?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is HEAD in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a detached HEAD state?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the master/main branch in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a new branch in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you delete a branch in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you rename a branch in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local branch and a remote-tracking branch?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is origin in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you add a remote repository in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the git remote -v command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Git tag?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an annotated tag and a lightweight tag?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you view the commit history of a file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a commit message?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are best practices for writing good commit messages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git rm and deleting a file manually?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git mv and renaming a file manually?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the README file in a Git repository?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a README.md file typically used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between GitHub, GitLab, and Bitbucket?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a pull request (or merge request)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of code review in a pull request workflow?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a fork in Git/GitHub terminology?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between forking and cloning a repository?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is SSH authentication in Git and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTTPS and SSH for Git remotes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Git config file used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set your username and email in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git config --global?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between local, global, and system Git config?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a commit's parent commit?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does it mean for Git to be a distributed version control system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between centralized and distributed version control systems?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the .git directory?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What happens when you run git init in a folder?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a merge commit?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between staged and unstaged changes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you unstage a file in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you discard changes in your working directory?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git show?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git blame?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does git blame tell you about a file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git log --oneline and git log?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Git branch pointer, conceptually?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default branch name in newer versions of Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check which branch you are currently on?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git help?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a shallow clone in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git pull and git pull --rebase?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the -m flag in git commit?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an empty commit and how do you create one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git commit --amend?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a merge conflict?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What causes a merge conflict in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a public and a private GitHub repository?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a GitHub Gist?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a license file in a repository?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between git checkout -- <file> and git restore <file>?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a submodule in Git?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of git log --graph?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between committing and pushing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the Git branching strategy (Gitflow)."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is git cherry-pick and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is git stash and how do you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you resolve a merge conflict in Git?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git reset and git revert?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the three modes of git reset (--soft, --mixed, --hard)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git reset --hard and git checkout on a commit?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does git rebase differ from git merge in terms of commit history?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the risks of rebasing shared branches?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an interactive rebase and what can you do with it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you squash multiple commits using interactive rebase?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git rebase --onto?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you abort a rebase that has conflicts?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you continue a rebase after resolving conflicts?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git stash pop and git stash apply?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you stash only specific files instead of all changes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git stash list and git stash drop?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a fast-forward merge and a no-fast-forward merge?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What does the --no-ff flag do during a merge?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git merge --squash?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you view the differences between two branches?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you compare two commits using git diff?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git diff --staged?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a three-way merge and how does Git perform it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the common ancestor commit in a merge, and why does it matter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you find the common ancestor of two branches?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is git merge-base and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you resolve conflicts when both branches modified the same line?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What tools can you use to visually resolve Git merge conflicts?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a .gitattributes file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure line-ending normalization using .gitattributes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between core.autocrlf settings on Windows vs. Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git fetch --all?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you update a local branch with changes from a remote branch without merging?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git pull --ff-only and a regular git pull?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of tracking branches in Git?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set up a local branch to track a remote branch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git push origin main and git push -u origin main?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What does git push --force do and why is it dangerous?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git push --force and git push --force-with-lease?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you delete a remote branch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you rename a remote branch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git remote prune?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you clean up stale remote-tracking branches?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git fsck?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git gc and git prune?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Git decide when to run automatic garbage collection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Git object (blob, tree, commit)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Git store file content internally using blobs and trees?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a commit object and a tree object?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the SHA-1 hash used for in Git objects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you find all commits that changed a specific file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you find all commits made by a specific author?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git log --author and git log --since?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you search commit history for a specific string in code (git log -S)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git log -S and git log -G?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a bisect session and how do you start one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git tag -a for annotated tags?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you push tags to a remote repository?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git describe and git tag?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle merge conflicts in a binary file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a merge driver in .gitattributes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between rebasing and merging when working on a feature branch before opening a PR?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Git worktree and when would you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create and switch between multiple worktrees?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git submodule update --init --recursive?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the challenges of working with Git submodules?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Git subtree and how does it differ from a submodule?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git filter-branch and why is it considered dangerous?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is git filter-repo and how does it improve on filter-branch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you remove a large file accidentally committed to history?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a pre-commit hook?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a pre-push hook?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set up a commit-msg hook to enforce commit message conventions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between client-side and server-side Git hooks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a .gitkeep file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle line-ending conflicts between team members on different OSes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git config core.fileMode?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure Git to ignore file permission changes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git diff --word-diff?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you view changes at the word level instead of line level?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git log -p and git show for viewing changes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a patch file from a commit and apply it elsewhere?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git format-patch and git am?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you sign commits using GPG in Git?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of verified commits on GitHub?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a lightweight tag and a signed tag?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure Git to always sign commits automatically?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is trunk-based development and how does it differ from Gitflow?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between feature branching and trunk-based development?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a release branch and how is it used in Gitflow?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hotfix branch and when is it created?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle long-lived feature branches without excessive merge conflicts?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of rebasing a feature branch onto main regularly?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between git pull --rebase and manually running fetch then rebase?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure Git to always rebase instead of merge on pull?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git config pull.rebase true?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Conventional Commits and why are they used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use Git aliases to speed up common commands?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of git reflog expire?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you recover a deleted branch using reflog?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you recover a lost commit that isn't referenced by any branch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain git bisect and how it helps debug issues."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is git reflog and when is it useful?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain git hooks and their use cases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a fast-forward merge and a three-way merge?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you squash commits in Git and when should you do it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git's internal object model (blobs, trees, commits, tags) work together to represent history?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git calculate the SHA-1 (or SHA-256) hash for a commit object?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Git's SHA-1 and the newer SHA-256 object format, and why is Git migrating?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does packfile compression work in Git, and how does it reduce repository size?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between loose objects and packed objects in Git's object database?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does git gc decide which objects to pack, prune, or keep?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a dangling commit and how do you find and recover one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you recover work after an accidental git reset --hard with no backup?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git revert on a merge commit vs. a regular commit, and why does it require specifying a parent?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle rewriting published history safely when a force-push is unavoidable?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git rebase -i and git filter-repo for rewriting multiple commits?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you split a single large commit into multiple smaller commits after the fact?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you rewrite the author information across an entire repository's history?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the security risk of exposing .git directories on a public web server, and how would you detect/prevent it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you completely purge sensitive data (like a leaked credential) from Git history and all remotes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the BFG Repo-Cleaner and how does it compare to git filter-repo for cleaning history?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git determine the merge base when there are multiple common ancestors (criss-cross merge)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a recursive merge strategy and how does it differ from the resolve strategy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the ORT and recursive merge strategies introduced in newer Git versions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do rename detection heuristics work during a Git merge or diff?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the git merge -X ours and -X theirs options, and how do they differ from --strategy ours?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a monorepo strategy using Git, and what are its trade-offs versus multiple repos?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the performance challenges of very large Git repositories, and how do partial clone and sparse checkout help?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a shallow clone, a partial clone, and a sparse checkout?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git's sparse-checkout feature let you work with only part of a large repository?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Git LFS (Large File Storage) and how does it change how binary files are tracked?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git LFS store and retrieve large files compared to normal Git objects?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of using Git LFS versus a separate artifact storage system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect a CI/CD pipeline that uses Git tags to trigger production deployments?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between semantic-release automation and manually tagging releases in Git?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a protected branch strategy with required status checks and reviews?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of CODEOWNERS files and how do they integrate with pull request workflows?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a Git workflow for a team practicing trunk-based development with feature flags?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between rebase-and-merge, squash-and-merge, and merge-commit strategies on GitHub, and when would you choose each?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does git bisect run automate bisecting using a test script?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use git bisect to find a performance regression rather than a functional bug?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git bisect skip and marking a commit as bad/good?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you use git blame -w to ignore whitespace changes when tracing history?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of git log --follow and how does it handle renamed files?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git detect file renames without explicit tracking, and what heuristics does it use?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git diff --find-renames and default diff behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you audit a repository for accidentally committed secrets across its entire history?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of pre-receive and update hooks on a Git server for enforcing policy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement server-side hooks to reject force-pushes to protected branches?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between client-side hooks and server-side hooks in terms of what they can enforce?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do signed tags and commit signing verification work with GPG or SSH keys in Git?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between GPG-based and SSH-based commit signing in modern Git?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you set up an organization-wide policy requiring all commits to be signed and verified?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git worktree and maintaining multiple clones of the same repository?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use worktrees to work on a hotfix without disturbing your current feature branch state?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git subtree merge and git subtree split?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you migrate a Git submodule-based project to a subtree-based or monorepo structure?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of git replace and how can it be used to graft or rewrite commit history non-destructively?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a grafted commit history work, and what are its risks compared to a true rewrite?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between git cherry-pick -x and a plain cherry-pick in terms of history traceability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you cherry-pick a range of commits while preserving merge relationships?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between cherry-picking a merge commit with -m 1 versus -m 2?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a backport workflow using cherry-pick across multiple release branches?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of git rerere and how does it help with recurring merge conflicts?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you enable and use rerere to automatically resolve repeated conflicts during a long rebase?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between an octopus merge and a standard two-parent merge?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "When would an octopus merge fail, and how does Git handle conflicts in that scenario?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you debug a Git repository corruption issue reported by git fsck?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a repository's index (staging area) corruption versus object database corruption?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you rebuild a corrupted .git/index file without losing staged changes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of git cat-file and how would you use it to inspect raw object data?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you manually construct a Git commit object using plumbing commands (hash-object, mktree, commit-tree)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Git's porcelain and plumbing commands, and when would you use plumbing directly?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git implement copy-on-write style branching so that branches are lightweight pointers rather than full copies?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between how Git and Subversion (SVN) model branches internally?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you migrate a large SVN repository to Git while preserving history?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of git svn and what are its limitations for a full migration?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a Git-based release train process for a product with multiple parallel supported versions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between cherry-picking and rebasing when backporting a security fix to an older release branch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you set up automated conflict-free rebasing in CI for long-running feature branches?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a merge queue, and how does it prevent broken main branches in high-velocity teams?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you troubleshoot a slow git clone or git fetch on a very large repository over a poor network connection?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the --depth and --shallow-since options when cloning?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you unshallow a shallow clone to retrieve full history later?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the git maintenance command introduced in newer Git versions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Git's commit-graph file improve performance of history traversal commands?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of multi-pack indexes in Git, and how do they improve performance for repositories with many packfiles?"
+  }
 ]

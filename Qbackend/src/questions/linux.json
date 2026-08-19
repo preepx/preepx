@@ -1,13 +1,1202 @@
 [
-  { "difficulty": "Easy", "question": "What is Linux and what is the Linux kernel?" },
-  { "difficulty": "Easy", "question": "What is the difference between a process and a thread in Linux?" },
-  { "difficulty": "Easy", "question": "What is the chmod command in Linux?" },
-  { "difficulty": "Medium", "question": "Explain the Linux file permission system (rwx)." },
-  { "difficulty": "Medium", "question": "What is a cron job in Linux and how do you schedule one?" },
-  { "difficulty": "Medium", "question": "What is the difference between hard links and soft links in Linux?" },
-  { "difficulty": "Medium", "question": "What is the Linux process management? Explain fork() and exec()." },
-  { "difficulty": "Hard", "question": "What is the Linux kernel scheduler? Explain CFS (Completely Fair Scheduler)." },
-  { "difficulty": "Hard", "question": "What are Linux namespaces and how do they enable containerization?" },
-  { "difficulty": "Hard", "question": "What are Linux cgroups and how do they work?" },
-  { "difficulty": "Hard", "question": "How does Linux virtual memory management work?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is Linux and what is the Linux kernel?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a process and a thread in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the chmod command in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Linux and Unix?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Linux distribution (distro)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are some popular Linux distributions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the root user in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the sudo command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between su and sudo?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ls command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the cd command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the pwd command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the mkdir command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the rmdir command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the rm command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between rm and rm -r?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the cp command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the mv command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the touch command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the cat command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the more and less commands?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the head and tail commands?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the grep command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the find command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between find and locate?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the man command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a shell in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between bash and sh?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a shell script?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the shebang (#!) line in a shell script?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the echo command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the export command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an environment variable in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you view all environment variables in a shell?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the PATH environment variable used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the which command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the whoami command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ps command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the top command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between top and htop?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the kill command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between kill and kill -9?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a PID in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the init process in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is systemd?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the systemctl command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Linux runlevel?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the file system hierarchy in Linux (e.g., /etc, /var, /home)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the /etc directory?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the /var directory?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the /home directory?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the /tmp directory?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the /bin and /sbin directories?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a hidden file in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you view hidden files in a directory?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the tar command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between tar and zip?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the gzip command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the chown command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between chmod and chown?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a file's owner, group, and other permissions?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the permission string -rwxr-xr-- mean?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the umask command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the df command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the du command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between df and du?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the mount command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a mount point in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ifconfig or ip command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ping command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ssh command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between SSH and Telnet?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the scp command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the wget and curl commands?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the history command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a symbolic link in Linux?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the alias command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the exit command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the clear command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a relative path and an absolute path?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the Linux file permission system (rwx)."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a cron job in Linux and how do you schedule one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hard links and soft links in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Linux process management? Explain fork() and exec()."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a foreground and background process in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you run a process in the background and bring it back to the foreground?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the nohup command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between nohup and disown?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are signals in Linux and how are they used to control processes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SIGTERM and SIGKILL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a zombie process and how does it occur?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an orphan process in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a daemon and a regular process?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check which process is using a specific port?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the netstat command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between netstat and ss?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the lsof command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you find and kill a process by name instead of PID?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the pkill and pgrep commands?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a pipe in Linux and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a pipe and redirection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between > and >> in shell redirection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of stdin, stdout, and stderr?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you redirect stderr to a file separately from stdout?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the tee command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between xargs and piping directly?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use xargs to run a command on multiple files found by find?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the sed command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the awk command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between sed and awk in typical use cases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use grep with regular expressions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between grep, egrep, and fgrep?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the cut command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the sort command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the uniq command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you count the number of lines, words, and characters in a file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the wc command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you schedule a one-time task using the at command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between cron and at?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you edit a user's crontab?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the format of a crontab entry?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a user crontab and /etc/crontab?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is anacron and how does it differ from cron?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hard links and inodes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an inode in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What information does an inode store?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why can't hard links span across different file systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens to a symbolic link if the target file is deleted?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a hard link and a symbolic link using the ln command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the stat command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does fork() create a new process in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between fork() and vfork()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does exec() replace a process's memory image?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the typical fork-exec pattern used to launch new programs in Unix-like systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a parent-child process relationship in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does a process wait for its child process to finish?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the wait() system call?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is process priority (niceness) in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the nice and renice commands?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the range of nice values in Linux and what do they mean?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check disk I/O usage per process in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the iostat command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the vmstat command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check memory usage in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between free memory and available memory in the output of the free command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is swap space in Linux and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check and configure swap usage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a hard limit and a soft limit for system resources (ulimit)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the ulimit command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set file descriptor limits for a process or user?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a runlevel/target in systemd and how does it differ from traditional SysV init?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create and enable a custom systemd service?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between systemctl start and systemctl enable?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of journalctl?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you view logs for a specific systemd service?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the /var/log directory?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is log rotation and how does logrotate work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between syslog and journald?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure a static IP address on a Linux system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the /etc/hosts file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the /etc/resolv.conf file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check open network connections on a Linux system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of iptables?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between iptables and firewalld?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check which services are listening on which ports?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of SELinux or AppArmor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check disk partitions on a Linux system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the fdisk or parted command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a primary and an extended partition?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is LVM (Logical Volume Manager) and why would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you extend a logical volume in LVM without downtime?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a logical volume snapshot in LVM?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check which kernel version a Linux system is running?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Linux kernel's mainline release and a distribution's LTS kernel?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check which shell a user is currently using?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the /etc/passwd file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the /etc/shadow file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you add a new user account in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between adduser and useradd?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you add a user to a secondary group?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the /etc/group file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you change a user's password from the command line?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the passwd command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you lock and unlock a user account in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a system user and a regular user account?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check disk usage per user or directory efficiently?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the watch command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you monitor a log file in real time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of tail -f?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you compare two text files in Linux?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the diff command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the patch command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you search and replace text across multiple files from the command line?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the rsync command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between rsync and scp for copying files?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you set up a basic rsync-based backup script?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the /etc/fstab file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure a filesystem to mount automatically at boot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ext4, xfs, and btrfs filesystems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check and repair a filesystem for errors?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the fsck command?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Linux kernel scheduler? Explain CFS (Completely Fair Scheduler)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are Linux namespaces and how do they enable containerization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are Linux cgroups and how do they work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Linux virtual memory management work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Linux kernel handle context switching between processes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between preemptive and cooperative multitasking, and which does Linux use?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the run queue in the CFS scheduler?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does CFS calculate a process's virtual runtime (vruntime) to ensure fairness?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the CFS scheduler and the older O(1) scheduler?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are real-time scheduling policies in Linux (SCHED_FIFO, SCHED_RR) and how do they differ from CFS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Linux kernel decide which CPU core to schedule a process on in a multi-core system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is CPU affinity, and how would you pin a process to a specific core?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between user space and kernel space in Linux?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a system call transition a process from user mode to kernel mode?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the Virtual File System (VFS) layer in the Linux kernel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Linux implement demand paging for virtual memory?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a page fault, and what is the difference between a minor and major page fault?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Linux kernel's page replacement algorithm decide which pages to evict under memory pressure?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the OOM (Out of Memory) killer, and how does it choose which process to terminate?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the buddy system allocator work for physical memory allocation in the kernel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the slab allocator, and why is it used for kernel object caching?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between physical memory, virtual memory, and swap in terms of address translation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Translation Lookaside Buffer (TLB) improve virtual-to-physical address translation performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is copy-on-write (COW), and how is it used when a process calls fork()?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does memory overcommit work in Linux, and what are its risks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the different Linux namespace types (PID, network, mount, UTS, IPC, user), and what does each isolate?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a PID namespace allow a process to have different process IDs inside and outside a container?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a network namespace provide isolated networking stacks for containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a mount namespace enable a process to have its own isolated filesystem view?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the relationship between user namespaces and rootless containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do cgroups v1 and cgroups v2 differ in their hierarchy model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do cgroups enforce CPU, memory, and I/O limits on a group of processes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the OOM behavior difference between a cgroup memory limit being hit versus system-wide OOM?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the kernel account for and throttle CPU usage using the CFS bandwidth controller within cgroups?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the relationship between namespaces, cgroups, and container runtimes like runc?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does overlayfs work as a union filesystem for container images?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a hypervisor-based VM and a container in terms of kernel isolation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does seccomp restrict system calls available to a process, and how is it used to sandbox containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of capabilities in Linux, and how do they provide finer-grained privilege control than root/non-root?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you drop specific Linux capabilities from a process to reduce its attack surface?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between SELinux's mandatory access control and traditional discretionary access control (DAC)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does SELinux use security contexts and policies to restrict process behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between SELinux enforcing, permissive, and disabled modes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Linux kernel implement interrupt handling, and what is the difference between top-half and bottom-half handlers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between hardware interrupts and software interrupts (traps) in Linux?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the kernel's softirq and tasklet mechanism work for deferred processing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the kernel's workqueue mechanism?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Linux I/O scheduler (e.g., CFQ, deadline, noop, mq-deadline) affect disk performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between blocking and non-blocking I/O in Linux?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does asynchronous I/O (AIO) differ from traditional synchronous I/O in Linux?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of io_uring, and how does it improve on older async I/O interfaces?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does epoll differ from select and poll for handling many file descriptors efficiently?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the C10K problem, and how does the Linux kernel's I/O model address it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the kernel implement TCP/IP networking, and what is the role of the network stack's socket buffers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the kernel's netfilter framework and userspace tools like iptables/nftables?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does network namespace isolation combined with veth pairs enable container networking (e.g., in Docker)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between bridge, NAT, and macvlan networking modes at the kernel level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you diagnose a kernel panic, and what information would you gather from the resulting stack trace?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the /proc filesystem, and how does it expose kernel and process information?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use /proc/[pid]/status or /proc/[pid]/maps to debug a misbehaving process?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the /sys filesystem, and how does it differ from /proc?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use strace to debug a process's system call behavior?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between strace and ltrace?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use perf to profile CPU usage of a running application at the kernel level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of ftrace, and how is it used for kernel-level tracing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does eBPF extend the capabilities of traditional kernel tracing tools like strace and tcpdump?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are some common use cases for eBPF in modern observability and security tooling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you diagnose high load average on a Linux server when CPU usage appears low?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between load average and CPU utilization, and why can they diverge?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you investigate a disk I/O bottleneck causing high iowait?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between buffered I/O and direct I/O, and when would you use O_DIRECT?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Linux page cache improve file I/O performance, and how would you tune it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the dirty_ratio and dirty_background_ratio kernel parameters?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you tune TCP/IP kernel parameters (e.g., via sysctl) for a high-throughput network application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the net.core.somaxconn and net.ipv4.tcp_tw_reuse sysctl settings?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you diagnose and resolve a 'too many open files' error at the kernel level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a hard limit and soft limit for file descriptors, and how are they enforced by the kernel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the Linux kernel handle NUMA (Non-Uniform Memory Access) architectures, and why does it matter for performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is NUMA node pinning, and how would you optimize a memory-intensive application for a NUMA system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a systemd unit with resource limits (CPUQuota, MemoryMax) to isolate a critical service?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between systemd's cgroup-based resource control and manually configuring cgroups?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does kernel live patching (e.g., kpatch, kgraft) allow security fixes without rebooting?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a monolithic kernel and a microkernel, and where does Linux fall on this spectrum?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How are loadable kernel modules (LKMs) used to extend kernel functionality without recompiling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the risk of loading untrusted kernel modules, and how does module signing mitigate it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you set up and troubleshoot a Linux software RAID array using mdadm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between RAID 0, RAID 1, RAID 5, and RAID 10 in terms of performance and redundancy trade-offs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you recover a degraded RAID array after a disk failure?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the boot process in Linux from BIOS/UEFI through GRUB to the kernel and init system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does an initramfs (initial RAM filesystem) fit into the Linux boot process?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you troubleshoot a system that fails to boot after a kernel update?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between GRUB legacy and GRUB2 in terms of configuration and capabilities?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you perform a live kernel memory dump for post-mortem crash analysis?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the kdump mechanism in Linux for capturing crash dumps?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the kernel's audit subsystem (auditd) track security-relevant events on a system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a container runtime's use of chroot versus pivot_root for filesystem isolation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you diagnose a fork bomb affecting a production system, and how would cgroup limits prevent it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the kernel's fair scheduling of CPU time and I/O bandwidth scheduling under cgroups v2's unified hierarchy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use ltrace and strace together to fully diagnose a hanging process interacting with libraries and the kernel?"
+  }
 ]

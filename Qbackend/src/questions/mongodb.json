@@ -1,18 +1,1202 @@
 [
-  { "difficulty": "Easy", "question": "What is MongoDB and how is it different from SQL databases?" },
-  { "difficulty": "Easy", "question": "What is a document in MongoDB?" },
-  { "difficulty": "Easy", "question": "What is a collection in MongoDB?" },
-  { "difficulty": "Easy", "question": "What is BSON in MongoDB?" },
-  { "difficulty": "Medium", "question": "What is an index in MongoDB and why is it important?" },
-  { "difficulty": "Medium", "question": "Explain the aggregation pipeline in MongoDB with an example." },
-  { "difficulty": "Medium", "question": "What is the difference between find() and findOne() in MongoDB?" },
-  { "difficulty": "Medium", "question": "What is the $lookup operator in MongoDB aggregation?" },
-  { "difficulty": "Medium", "question": "What are MongoDB transactions and when do you use them?" },
-  { "difficulty": "Medium", "question": "What is Mongoose and how does it relate to MongoDB?" },
-  { "difficulty": "Medium", "question": "What is schema validation in MongoDB?" },
-  { "difficulty": "Hard", "question": "Explain MongoDB replication and replica sets." },
-  { "difficulty": "Hard", "question": "What is MongoDB sharding and when is it needed?" },
-  { "difficulty": "Hard", "question": "How do you optimize query performance in MongoDB?" },
-  { "difficulty": "Hard", "question": "What is the WiredTiger storage engine in MongoDB?" },
-  { "difficulty": "Hard", "question": "Explain the difference between embedding and referencing documents in MongoDB." }
+  {
+    "difficulty": "Easy",
+    "question": "What is MongoDB and how is it different from SQL databases?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a document in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a collection in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is BSON in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between BSON and JSON?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a NoSQL database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different types of NoSQL databases?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the _id field in a MongoDB document?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an ObjectId in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the structure of an ObjectId?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the mongo shell used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is mongosh?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you connect to a MongoDB server using the shell?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default port MongoDB runs on?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a MongoDB database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a new database in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you switch between databases in the MongoDB shell?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you list all databases in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a new collection in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you list all collections in a database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you insert a document into a collection?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between insertOne() and insertMany()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you query all documents in a collection?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the find() method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you filter documents using a query in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a query operator in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the $eq operator do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the $ne operator do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the $gt operator do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the $lt operator do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the $in operator do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you update a document in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between updateOne() and updateMany()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the $set operator do in an update?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the $unset operator do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you delete a document in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between deleteOne() and deleteMany()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you delete an entire collection?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you delete a database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the drop() method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a schema-less database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Does MongoDB enforce a fixed schema by default?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the maximum size of a BSON document?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What data types does BSON support?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the sort() method in a query?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the limit() method in a query?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the skip() method in a query?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you count documents in a collection?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the countDocuments() method used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check if MongoDB is running?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is mongod?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between mongod and mongosh?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a primary key in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Is the _id field automatically indexed?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the projection parameter in find()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you include or exclude specific fields in query results?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an embedded document in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an array field in a MongoDB document?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you query documents based on an array field?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the $exists operator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the $or operator do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the $and operator do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of MongoDB Compass?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is MongoDB Atlas?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a self-hosted MongoDB instance and MongoDB Atlas?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a connection string in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the mongodump utility used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the mongorestore utility used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the mongoexport utility used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the mongoimport utility used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between mongoexport/mongoimport and mongodump/mongorestore?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the admin database in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the local database in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you rename a collection in MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a capped collection?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the distinct() method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check the size of a collection?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the db.stats() command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the db.collection.stats() command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a relational database's table and a MongoDB collection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an index in MongoDB and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain the aggregation pipeline in MongoDB with an example."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between find() and findOne() in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the $lookup operator in MongoDB aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are MongoDB transactions and when do you use them?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Mongoose and how does it relate to MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is schema validation in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a compound index in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a single-field index and a compound index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a unique index in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a text index used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a geospatial index used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create an index on a field in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you view the indexes on a collection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you drop an index in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the explain() method?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does explain() help you optimize a query?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a covered query in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between $match and $project in the aggregation pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $group stage in aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $sort stage in an aggregation pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $unwind stage in aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does $lookup perform a join-like operation between collections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an embedded document design and a referenced design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When should you use embedding versus referencing in schema design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is denormalization and why is it common in MongoDB schema design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $addFields stage in aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between $push and $addToSet in an update operation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What does the $inc operator do in an update?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What does the $pull operator do in an update?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the upsert option in an update operation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between replaceOne() and updateOne()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you perform a bulk write operation in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the bulkWrite() method used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a write concern in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a read concern in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a read preference in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between primary, primaryPreferred, and secondary read preferences?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Mongoose middleware (pre/post hooks)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you define a schema using Mongoose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of Mongoose virtuals?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you define relationships between models using Mongoose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the populate() method in Mongoose used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between validation at the application layer versus MongoDB's schema validation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use JSON Schema validation in MongoDB collections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $jsonSchema operator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between strict and non-strict validation levels in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are MongoDB transactions and how do they differ from single-document atomicity?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you start a multi-document transaction in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a session and a transaction in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the limitations of multi-document transactions in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle transaction retries in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $facet stage in aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $bucket stage in aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the aggregation pipeline optimizer and how does it reorder stages?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the aggregation framework and MapReduce in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why is the aggregation framework generally preferred over MapReduce today?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $merge stage in aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $out stage in aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you paginate query results efficiently in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the drawbacks of using skip() for pagination on large collections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cursor-based (keyset) pagination and why is it preferred over skip/limit at scale?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a MongoDB cursor and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the batchSize() method on a cursor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a database and a collection in terms of schema flexibility?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you enforce data types for fields using schema validation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $type query operator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between $elemMatch and dot notation when querying array fields?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you query documents where an array contains all specified values?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $all operator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between $size and $exists when querying arrays?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you update a specific element in an array using the positional $ operator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the arrayFilters option in an update operation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you perform case-insensitive queries in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of collation in MongoDB queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a partial index and a sparse index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a TTL (time-to-live) index and when would you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use a TTL index to automatically expire documents?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the background option when creating an index (in older MongoDB versions)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you monitor slow queries in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the MongoDB profiler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you enable the database profiler to log slow operations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of the docs examined vs. keys examined ratio in explain() output?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $sample stage in aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you perform a full-text search in MongoDB using a text index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between MongoDB's text search and Atlas Search?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $regex operator, and what are its performance implications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you validate that a required field is present using schema validation rules?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a discriminator in Mongoose and when would you use one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a Mongoose schema and a Mongoose model?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle schema migrations in a MongoDB application over time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the lean() method in Mongoose queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do Mongoose's built-in validators differ from custom validators?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $switch operator in aggregation expressions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you perform conditional logic within an aggregation pipeline using $cond?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between $project and $addFields when reshaping documents?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you flatten a nested array of subdocuments using aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $graphLookup stage for recursive queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you use $graphLookup to model a hierarchical or tree-like structure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the allowDiskUse option in an aggregation pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When does an aggregation pipeline stage require spilling to disk, and why?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between findOneAndUpdate() and updateOne() in terms of returned data?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the returnDocument option in findOneAndUpdate()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you perform an atomic increment-and-fetch operation in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $currentDate operator in an update?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you rename a field across all documents in a collection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $rename operator in an update operation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you validate enum values for a field using schema validation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between validationLevel 'strict' and 'moderate' in MongoDB schema validation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between validationAction 'error' and 'warn'?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you design indexes to support both equality and range queries efficiently on the same collection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a wildcard index in MongoDB?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "When would you use a wildcard index instead of defining explicit field indexes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you query documents using a case-insensitive text search without a text index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the $text operator and using $regex for search?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use aggregation to compute running totals or cumulative sums?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the $setWindowFields stage in aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you calculate a moving average using MongoDB's aggregation framework?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an aggregation pipeline executed on the server versus post-processing in application code?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle referential integrity in MongoDB given it lacks native foreign key constraints?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain MongoDB replication and replica sets."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is MongoDB sharding and when is it needed?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you optimize query performance in MongoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the WiredTiger storage engine in MongoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between embedding and referencing documents in MongoDB."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a MongoDB replica set elect a new primary during a failover?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the oplog (operations log) in MongoDB replication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MongoDB ensure data consistency across replica set members?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous and asynchronous replication in MongoDB replica sets?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a hidden member in a replica set and why would you configure one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is an arbiter in a MongoDB replica set and what role does it play?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a delayed replica set member and a standard secondary?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MongoDB handle network partitions within a replica set?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the significance of the write concern majority in ensuring durability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you choose a shard key, and what makes a good shard key?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the consequences of choosing a poor shard key in a sharded cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is chunk splitting and balancing in a sharded MongoDB cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the config servers in a sharded cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of mongos routers in a sharded cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MongoDB route queries to the correct shard(s)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a scatter-gather query in a sharded cluster, and why can it be inefficient?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between range-based sharding and hashed sharding?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is zone sharding and when would you use it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you resize or rebalance a sharded cluster with minimal downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the challenges of performing schema changes on a sharded collection?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MongoDB's storage engine architecture (WiredTiger) implement document-level locking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between WiredTiger and the deprecated MMAPv1 storage engine?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does WiredTiger use compression, and what compression algorithms does it support?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of the WiredTiger cache, and how do you tune its size?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does WiredTiger implement multi-version concurrency control (MVCC)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a checkpoint in WiredTiger, and how does it relate to crash recovery?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the journal in MongoDB relate to durability guarantees?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between write concern 'w: 1' and 'w: majority' in terms of durability and performance trade-offs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you design a schema to avoid unbounded array growth in documents?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the 16MB document size limit's impact on schema design decisions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you model a many-to-many relationship in MongoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the extended reference pattern in MongoDB schema design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the subset pattern in MongoDB schema design and when is it useful?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the bucket pattern in MongoDB schema design, and what problems does it solve?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the computed pattern in MongoDB schema design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you model time-series data efficiently in MongoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are MongoDB time series collections, and how do they differ from regular collections?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you decide between normalization and denormalization for a high-write workload?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is index selectivity, and why does it matter for query performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MongoDB choose which index to use for a given query (the query planner)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the query plan cache, and when might a cached plan become suboptimal?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you force MongoDB to use a specific index using hint()?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is index intersection, and when does MongoDB use it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a compound index's field order affect which queries it can efficiently support?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the ESR (Equality, Sort, Range) rule for designing compound indexes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you diagnose and resolve a collection scan (COLLSCAN) appearing in explain() output?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is index cardinality, and how does it affect index usefulness?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle index build operations on a large production collection without significant downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a rolling index build across a replica set, and why is it preferred for production?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MongoDB handle concurrent writes to the same document?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is optimistic concurrency control, and how can you implement it in MongoDB applications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a distributed lock using MongoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the ACID guarantees MongoDB provides at the document level versus across multiple documents?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you design an application to gracefully handle transaction conflicts and retries?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is causal consistency in MongoDB, and how do client sessions enable it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MongoDB implement snapshot isolation for transactions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the performance implications of using multi-document transactions at scale?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you migrate a large production collection to a new shard key with minimal downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the process for adding a new shard to an existing sharded cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you monitor and alert on replication lag in a MongoDB replica set?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What causes replication lag, and how would you diagnose and reduce it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you perform a rolling upgrade of MongoDB versions across a replica set with zero downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of MongoDB's change streams, and how do they work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you use change streams to build a real-time event-driven system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between change streams and tailing the oplog directly?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MongoDB handle resumability of change streams after a connection drop?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of MongoDB's Atlas Search, and how does it differ from a dedicated search engine like Elasticsearch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a disaster recovery strategy for a MongoDB deployment across multiple regions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a multi-region replica set, and what trade-offs does it introduce for latency and consistency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you configure read and write concerns to balance consistency and availability in a geographically distributed cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between backing up a MongoDB cluster using filesystem snapshots versus mongodump?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you perform a point-in-time restore of a MongoDB database using the oplog?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What security mechanisms does MongoDB provide for authentication and authorization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does role-based access control (RBAC) work in MongoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of field-level encryption (client-side field level encryption) in MongoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does MongoDB implement encryption at rest, and what are its performance implications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of TLS/SSL in securing MongoDB client-server communication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you audit database operations in a MongoDB deployment for compliance purposes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between MongoDB's built-in auditing and third-party monitoring tools?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you tune the WiredTiger cache size for a workload with a large working set relative to available RAM?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the impact of page eviction in WiredTiger on query latency under memory pressure?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you diagnose a sudden spike in lock contention in a MongoDB deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the currentOp() command, and how do you use it to identify long-running operations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you safely kill a long-running or problematic operation in MongoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the serverStatus command, and what key metrics would you monitor from it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a MongoDB schema and indexing strategy for a high-throughput analytics workload versus an OLTP workload?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of using MongoDB versus a purpose-built time-series or analytical database for large-scale analytics?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect a hybrid approach combining MongoDB with a caching layer like Redis for a high-traffic application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the impact of large indexes exceeding available RAM on query performance, and how would you address it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you plan capacity (storage, memory, IOPS) for a growing sharded MongoDB cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you troubleshoot a 'too many open connections' issue in a high-traffic MongoDB deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is connection pooling in MongoDB drivers, and how does it affect application performance under load?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a schema versioning strategy for a long-lived MongoDB application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the impact of a hot shard (uneven data distribution) on cluster performance, and how would you resolve it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you approach zero-downtime schema evolution for a collection with billions of documents?"
+  }
 ]

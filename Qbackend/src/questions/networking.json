@@ -1,14 +1,2002 @@
 [
-  { "difficulty": "Easy", "question": "What is the OSI model? Name all 7 layers." },
-  { "difficulty": "Easy", "question": "What is the difference between TCP and UDP?" },
-  { "difficulty": "Easy", "question": "What is an IP address and what is the difference between IPv4 and IPv6?" },
-  { "difficulty": "Medium", "question": "What is the three-way handshake in TCP?" },
-  { "difficulty": "Medium", "question": "What is DNS and how does it work?" },
-  { "difficulty": "Medium", "question": "What is the difference between HTTP and HTTPS?" },
-  { "difficulty": "Medium", "question": "What is a subnet mask and CIDR notation?" },
-  { "difficulty": "Medium", "question": "What is NAT (Network Address Translation)?" },
-  { "difficulty": "Hard", "question": "Explain how SSL/TLS handshake works." },
-  { "difficulty": "Hard", "question": "What is BGP and how does it work in the internet?" },
-  { "difficulty": "Hard", "question": "What is a CDN and how does Anycast routing work?" },
-  { "difficulty": "Hard", "question": "What is the difference between a router, switch, and hub?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is a computer network?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the OSI model? Name all 7 layers."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the TCP/IP model and how does it compare to the OSI model?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a protocol in networking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between LAN, MAN, and WAN?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a network topology? Name common types."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is bandwidth?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is latency?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is throughput and how does it differ from bandwidth?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a MAC address?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a MAC address and an IP address?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a port number?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a client and a server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is peer-to-peer networking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a broadcast domain?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a collision domain?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is full duplex vs half duplex communication?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is packet switching vs circuit switching?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is encapsulation in networking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a network interface card (NIC)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a hostname?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the loopback address and what is it used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a private IP address vs a public IP address?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a repeater and what does it do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is jitter in networking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between TCP and UDP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the three-way handshake in TCP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a socket in networking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between connection-oriented and connectionless protocols?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is UDP used for and why is it preferred in some applications?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a checksum and how is it used in TCP/UDP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are well-known ports? Give examples."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between ephemeral ports and well-known ports?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the four-way handshake used to terminate a TCP connection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TCP flow control?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TCP congestion control?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a TCP window size?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TCP segment structure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TCP retransmission and when does it occur?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Nagle algorithm?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TCP slow start?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TCP keepalive?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What causes TCP head-of-line blocking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the maximum segment size (MSS)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the maximum transmission unit (MTU)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What happens when a packet exceeds the MTU?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is path MTU discovery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TCP fast open?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SYN, ACK, and SYN-ACK flags?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a TCP reset (RST) packet?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the TIME_WAIT state in TCP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TCP selective acknowledgment (SACK)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why is UDP considered faster than TCP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multiplexing in the transport layer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is QUIC and how does it differ from TCP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an IP address and what is the difference between IPv4 and IPv6?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a subnet mask and CIDR notation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a default gateway?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a broadcast address?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a network address?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a public and private IP address range?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the reserved private IP address ranges (RFC 1918)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is APIPA (Automatic Private IP Addressing)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How many bits are in an IPv4 address vs an IPv6 address?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is subnetting and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is classful addressing (Class A, B, C, D, E)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is classless inter-domain routing (CIDR)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you calculate the number of usable hosts in a subnet?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DHCP and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the DORA process in DHCP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a DHCP lease and lease renewal?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DHCP relay/DHCP helper?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a loopback address in IPv4 and IPv6?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is link-local addressing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is NAT (Network Address Translation)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static NAT, dynamic NAT, and PAT (NAT overload)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is port forwarding?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a default route (0.0.0.0/0)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is IPv6 address compression (double colon notation)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dual stack in IPv6/IPv4 networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an anycast address?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a multicast address range?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is IP fragmentation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you determine if two hosts are on the same subnet?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of the /24, /16, /8 prefixes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a wildcard mask and how is it used in ACLs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is supernetting (route aggregation)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is VLSM (Variable Length Subnet Masking)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is NAT64/DNS64?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is address exhaustion and how does IPv6 solve the IPv4 exhaustion problem?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is routing?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between static and dynamic routing?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a routing table and what information does it contain?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a next-hop address?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a default route vs a static route?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an interior gateway protocol and exterior gateway protocol?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RIP (Routing Information Protocol) and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the maximum hop count in RIP and why?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is OSPF (Open Shortest Path First) and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are OSPF areas and why are they used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is EIGRP and how does it differ from OSPF?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an autonomous system (AS)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is route summarization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is administrative distance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a routing metric?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is split horizon and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is route poisoning?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a routing loop and how is it prevented?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between distance-vector and link-state routing protocols?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is convergence time in routing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is policy-based routing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is equal-cost multi-path (ECMP) routing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is route redistribution?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between forwarding and routing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is longest prefix match?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a stub network?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is unicast, multicast, broadcast, and anycast routing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is HSRP/VRRP and how do they provide gateway redundancy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Dijkstra algorithm and how is it used in OSPF?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is BGP and how does it work in the internet?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between iBGP and eBGP?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "A route reflector in BGP — what is it and why is it needed?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is BGP path selection and what attributes influence it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is an AS path prepend?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is IS-IS and how does it compare to OSPF?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a route flap and route dampening?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is multi-protocol BGP (MP-BGP)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a BGP community?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Hot Potato Routing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of a route table's null route/blackhole route?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a router, switch, and hub?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a MAC address table and how does a switch use it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is ARP (Address Resolution Protocol) and how does it work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an Ethernet frame and what fields does it contain?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a managed and unmanaged switch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a VLAN and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is VLAN tagging (802.1Q)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a trunk port vs an access port?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is inter-VLAN routing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Spanning Tree Protocol (STP) and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a root bridge in STP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Rapid Spanning Tree Protocol (RSTP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a broadcast storm and how does STP prevent it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is link aggregation (LACP)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a switching loop?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is store-and-forward vs cut-through switching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Layer 3 switch and how does it differ from a router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Power over Ethernet (PoE)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is auto-negotiation in Ethernet?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is port mirroring/SPAN and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is 802.1X authentication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a private VLAN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is VTP (VLAN Trunking Protocol)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSMA/CD and where is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CSMA/CA and where is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an uplink port on a switch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a native VLAN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a default VLAN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is gratuitous ARP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is proxy ARP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is DNS and how does it work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between authoritative and recursive DNS servers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a DNS resolver?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the different types of DNS records (A, AAAA, CNAME, MX, TXT, NS, PTR)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DNS caching and TTL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the DNS resolution process from browser to server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a root DNS server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a top-level domain (TLD) server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is reverse DNS lookup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DNS zone transfer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DNSSEC and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DNS over HTTPS (DoH) and DNS over TLS (DoT)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a DNS cache poisoning attack?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is round-robin DNS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CNAME record and when should it be used vs an A record?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a subdomain?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a stub resolver and a full resolver?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DNS load balancing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is split-horizon DNS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a glue record in DNS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between HTTP and HTTPS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the HTTP request/response cycle?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are common HTTP methods (GET, POST, PUT, DELETE, PATCH)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are HTTP status codes and what do the different classes (1xx-5xx) mean?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a cookie and how is it used in HTTP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a URL, URI, and URN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HTTP/1.1 and HTTP/2?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is HTTP/3 and how does it use QUIC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are HTTP headers and give some common examples?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between session and persistent cookies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CORS (Cross-Origin Resource Sharing)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a RESTful API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between PUT and PATCH?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is HTTP keep-alive?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is HTTP pipelining?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a proxy server and how does it work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a forward proxy and a reverse proxy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a web server vs an application server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is caching in HTTP and what headers control it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is content negotiation in HTTP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is HTTP compression (gzip)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is WebSocket and how does it differ from HTTP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a status 301 vs 302 redirect?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is HSTS (HTTP Strict Transport Security)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is chunked transfer encoding?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a firewall and how does it work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a VPN and how does it work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between SSL and TLS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a digital certificate and how is it used in TLS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a certificate authority (CA)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is public key vs private key cryptography?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is symmetric vs asymmetric encryption?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a self-signed certificate and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a stateful and stateless firewall?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a DMZ (demilitarized zone) in network security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an intrusion detection system (IDS) vs intrusion prevention system (IPS)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a man-in-the-middle attack?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a DDoS attack and how can it be mitigated?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is ARP spoofing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DNS spoofing/cache poisoning?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a SYN flood attack?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is port scanning and how is it detected?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is network segmentation and why is it important for security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an access control list (ACL)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the principle of least privilege in network security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a honeypot?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a WAF (Web Application Firewall)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between encryption and hashing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a site-to-site VPN vs a remote-access VPN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is two-factor authentication and how does it relate to network security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is packet sniffing and how can it be prevented?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a replay attack?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a botnet and how is it used in attacks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how SSL/TLS handshake works."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is mutual TLS (mTLS)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a next-generation firewall (NGFW)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between IPsec and SSL VPN?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is IPsec and what are its two main modes (transport and tunnel)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a VPN tunnel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a zero-day vulnerability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is certificate pinning?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is perfect forward secrecy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a VPN split tunneling vs full tunneling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a security zone/trust boundary in firewall design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is network access control (NAC)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a rogue access point?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Zero Trust security model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is TLS session resumption?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a certificate revocation list (CRL) or OCSP?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is an SSL/TLS cipher suite?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Wi-Fi and which IEEE standard governs it?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between 2.4GHz and 5GHz Wi-Fi bands?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an SSID?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a wireless access point (AP)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Bluetooth and how does it differ from Wi-Fi?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is NFC (Near Field Communication)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Wi-Fi 6 (802.11ax) and how does it improve on previous standards?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between WEP, WPA, WPA2, and WPA3?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ad-hoc and infrastructure wireless mode?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is roaming in Wi-Fi networks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is channel bonding in Wi-Fi?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is co-channel interference?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Zigbee and where is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is LTE and how does cellular networking work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is 5G and how does it differ from 4G?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a mesh network?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a captive portal?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is wireless site survey?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is signal-to-noise ratio (SNR) in wireless networks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between omnidirectional and directional antennas?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a wireless controller and why is it used in enterprise Wi-Fi?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is band steering?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Wi-Fi Direct?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is client isolation on a wireless network?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is MIMO (Multiple Input Multiple Output) in wireless networking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is beamforming?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a hidden node problem in wireless networks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the RTS/CTS mechanism?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is EIRP (Effective Isotropic Radiated Power)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a rogue AP detection mechanism?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a bridge and how does it differ from a switch?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a gateway in networking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a modem and how does it differ from a router?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a patch panel?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a network attached storage (NAS) device?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a load balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Layer 4 and Layer 7 load balancing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a network bridge used for in virtualization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a wireless bridge?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a media converter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a network tap?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a UTM (Unified Threat Management) device?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a proxy appliance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an edge router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a core switch vs an access switch vs a distribution switch?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hardware firewall vs a software firewall?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a wireless LAN controller (WLC)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a terminal server / console server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the three-tier network architecture (core, distribution, access)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an uplink used for connecting network devices?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a virtual private cloud (VPC)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a cloud subnet and how does it differ from a traditional subnet?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an internet gateway in a VPC?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is elastic IP addressing in cloud networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a security group vs a network ACL in cloud networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is peering in cloud networking (VPC peering)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a NAT gateway in cloud environments?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a load balancer's health check mechanism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is auto-scaling and how does it relate to networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CDN origin server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache invalidation in a CDN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is hybrid cloud networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is container networking (e.g., in Docker/Kubernetes)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Kubernetes Ingress controller?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Kubernetes Service and how does it expose pods on the network?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DNS-based load balancing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is sticky session/session persistence in load balancing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the round robin load balancing algorithm?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a reverse proxy's role in cloud architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a private endpoint/private link in cloud networking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a CDN and how does Anycast routing work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is edge computing and how does it relate to CDNs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a transit gateway?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a direct connect / express route link to the cloud?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is multi-region networking in cloud architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a service mesh?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a software-defined WAN (SD-WAN)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is global server load balancing (GSLB)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is network latency optimization in CDN edge locations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is overlay networking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the ping command do and how does it work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the traceroute (or tracert) command do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is ipconfig/ifconfig used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is ICMP and what is it used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does 'request timed out' mean when pinging a host?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the netstat command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is nslookup and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the dig command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a packet sniffer like Wireshark used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ARP command used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a ping sweep?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What does a 'destination unreachable' ICMP message mean?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you troubleshoot a 'no internet access' issue?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are common ICMP message types?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a network loopback test?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the tracepath command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is MTR (My Traceroute) and how does it combine ping and traceroute?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you diagnose high latency on a network?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you check open ports on a remote host?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is telnet and how is it used for troubleshooting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the route print / netstat -r command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you identify a duplicate IP address conflict?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the OSI model's role in structured network troubleshooting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you troubleshoot slow DNS resolution?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is packet loss and how is it measured?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What tool would you use to check bandwidth utilization on a link?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you troubleshoot an intermittent connectivity issue?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a network baseline and why is it useful for troubleshooting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a hard reboot and a soft reboot when troubleshooting network issues?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a loopback plug used for in hardware troubleshooting?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the main differences between IPv4 and IPv6?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the structure of an IPv6 address?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the significance of the IPv6 address ::1?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a global unicast address in IPv6?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is IPv6 address autoconfiguration (SLAAC)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a link-local IPv6 address and what prefix does it use?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a unique local address (ULA) in IPv6?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Neighbor Discovery Protocol (NDP) in IPv6?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What replaces ARP in IPv6 networks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is IPv6 multicast and how does it replace broadcast?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is dual-stack networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DHCPv6 and how does it differ from DHCP for IPv4?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What challenges exist in migrating from IPv4 to IPv6?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the IPv6 header structure and how does it differ from IPv4?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Why doesn't IPv6 use fragmentation at intermediate routers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a 6to4 tunnel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Teredo tunneling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is IPv6 anycast addressing used for?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is IPv6 prefix delegation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the IPv6 extension header?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Quality of Service (QoS) in networking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is bandwidth throttling?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is jitter and why does it matter for VoIP traffic?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a service level agreement (SLA) in networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is traffic shaping vs traffic policing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the DiffServ model for QoS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the IntServ model for QoS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a DSCP (Differentiated Services Code Point) value?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is packet prioritization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a queuing mechanism like FIFO, WFQ, or priority queuing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is congestion in a network and how is it managed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is admission control in QoS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the impact of latency on real-time applications like video conferencing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is bandwidth allocation and how is it enforced?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is traffic engineering?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a rate limiter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is buffer bloat?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between best-effort delivery and guaranteed delivery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is MPLS and how does it improve traffic engineering?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of QoS in Voice over IP (VoIP) networks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Software-Defined Networking (SDN)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between the control plane and data plane in networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a virtual switch (vSwitch)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is OpenFlow and how does it relate to SDN?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is network functions virtualization (NFV)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is network automation and why is it becoming important?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Infrastructure as Code (IaC) in the context of networking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a network controller in an SDN architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is intent-based networking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a virtual network function (VNF)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is network telemetry?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a programmable data plane (e.g., P4)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is network overlay vs underlay?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is VXLAN and why is it used in data center networking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is GRE tunneling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a leaf-spine data center architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is east-west traffic vs north-south traffic in a data center?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a top-of-rack (ToR) switch?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is network slicing (as used in 5G)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is API-driven network management?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is SMTP and how is it used for sending email?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between POP3 and IMAP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is FTP and how does it differ from SFTP?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Telnet and why is it considered insecure?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is SSH and how does it improve on Telnet?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SNMP and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is NTP (Network Time Protocol) and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TFTP and how does it differ from FTP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is LDAP and what is it used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Syslog and how is it used in network management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RDP (Remote Desktop Protocol)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SIP and how is it used in VoIP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is RTP and how does it relate to SIP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a mail exchange (MX) record used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an email relay?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between active and passive FTP modes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a webhook and how does it relate to HTTP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a message queue protocol like MQTT and where is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SOAP and how does it differ from REST?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is gRPC and how does it differ from REST APIs?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a bus topology?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a star topology?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a ring topology?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a mesh topology and what are its advantages?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a hybrid topology?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a point-to-point network connection?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a personal area network (PAN)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a backbone network?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is single point of failure and how is it avoided in network design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hierarchical network design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a full mesh vs partial mesh topology?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a campus area network (CAN)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a storage area network (SAN)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is redundancy in network design and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a collapsed core network design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is multicast and how does it differ from unicast and broadcast?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a multicast group address?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the broadcast domain boundary set by a router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is IGMP (Internet Group Management Protocol)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is PIM (Protocol Independent Multicast)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is IGMP snooping and why is it used on switches?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between dense mode and sparse mode multicast?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a rendezvous point in PIM sparse mode?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multicast used for in real-world applications (e.g., streaming, stock feeds)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a directed broadcast?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is source-specific multicast (SSM)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multicast routing table (MRT)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the reverse path forwarding check in multicast routing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between multicast and anycast?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the TTL field's role in limiting multicast/broadcast scope?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between NAT overload (PAT) and traditional NAT?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a NAT table and how does it track connections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is symmetric NAT vs full-cone NAT?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is NAT traversal and why is it needed for protocols like SIP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is STUN and how does it help with NAT traversal?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TURN and how does it relate to STUN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is hairpin NAT (NAT loopback)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is double NAT and what problems can it cause?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is carrier-grade NAT (CGNAT)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the impact of NAT on peer-to-peer applications?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a WAN and how does it differ from a LAN?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a leased line?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is DSL and how does it deliver internet over phone lines?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is cable internet and how does it use DOCSIS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is fiber-optic internet (FTTH) and how does it differ from copper-based connections?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is MPLS and how is it used in WAN connectivity?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a T1/E1 line?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SD-WAN and what advantages does it offer over traditional WAN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a point-to-point WAN link vs a point-to-multipoint link?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a WAN optimizer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a circuit-switched WAN connection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a packet-switched WAN connection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is satellite internet and what are its latency characteristics?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hub-and-spoke WAN topology?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a full mesh WAN topology and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is last-mile connectivity?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of a CPE (Customer Premises Equipment) device in WAN connections?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is frame relay and is it still used today?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is ATM (Asynchronous Transfer Mode) networking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a WAN accelerator?"
+  }
 ]

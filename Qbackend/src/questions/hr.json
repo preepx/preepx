@@ -1,15 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "Tell me about yourself." },
-  { "difficulty": "Easy", "question": "Why do you want to work at this company?" },
-  { "difficulty": "Easy", "question": "What are your greatest strengths?" },
-  { "difficulty": "Easy", "question": "What are your weaknesses?" },
-  { "difficulty": "Easy", "question": "Where do you see yourself in 5 years?" },
-  { "difficulty": "Medium", "question": "Describe a challenging project you worked on and how you handled it." },
-  { "difficulty": "Medium", "question": "Tell me about a time you had a conflict with a team member and how you resolved it." },
-  { "difficulty": "Medium", "question": "How do you handle tight deadlines?" },
-  { "difficulty": "Medium", "question": "Tell me about a time you failed and what you learned from it." },
-  { "difficulty": "Medium", "question": "How do you prioritize tasks when you have multiple deadlines?" },
-  { "difficulty": "Hard", "question": "Describe a situation where you had to make a difficult technical decision with limited information." },
-  { "difficulty": "Hard", "question": "How have you mentored or helped junior developers grow?" },
-  { "difficulty": "Hard", "question": "Tell me about a time you disagreed with your manager and how you handled it." }
+  {
+    "difficulty": "Easy",
+    "question": "Tell me about yourself."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why do you want to work at this company?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are your greatest strengths?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are your weaknesses?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Where do you see yourself in 5 years?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why are you looking for a new job?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why did you leave your last job?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What do you know about our company?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why should we hire you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What motivates you at work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are you passionate about?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How would your friends describe you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How would your manager describe you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your ideal work environment?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Do you prefer working independently or in a team?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are your salary expectations?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "When are you available to start?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Are you willing to relocate?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Are you open to remote or hybrid work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What type of work culture do you thrive in?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are your hobbies outside of work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you stay updated with industry trends?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your favorite part of your current/previous job?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your least favorite part of your current/previous job?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What kind of manager brings out your best work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What questions do you have for us?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How did you hear about this position?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What makes you unique compared to other candidates?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your dream job?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are you looking for in your next role?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Describe your typical workday."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define success?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does teamwork mean to you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your communication style?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle repetitive tasks?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Are you a morning person or a night owl, and how does that affect your work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What was your favorite subject in school and why?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What extracurricular activities were you involved in?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you spend your weekends?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What book are you currently reading?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is something you're proud of?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a skill you'd like to develop?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you like to receive feedback?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you like to give feedback?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's the most interesting project you've worked on?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle boredom or lack of challenge at work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does work-life balance mean to you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How many hours do you typically work in a week?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your preferred method of communication at work — email, chat, or calls?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What software tools are you most comfortable using?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you organize your daily tasks?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your favorite productivity tip?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Describe yourself in three words."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What would you do if you won the lottery tomorrow?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's a fun fact about you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you introduce yourself to a new team?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's the last thing you learned that excited you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you keep yourself motivated during routine work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What do you do to relax after a stressful day?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your favorite way to celebrate a win at work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Tell me about a goal you set and achieved."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the most rewarding part of your career so far?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you typically start your day at work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What kind of projects excite you the most?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you feel about working overtime occasionally?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your approach to learning new tools or technologies?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Do you prefer structured tasks or open-ended problems?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your favorite team you've ever worked with, and why?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How would you rate your presentation skills?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's something you wish you knew earlier in your career?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle small talk with new colleagues?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What kind of feedback have you received most often from managers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Describe your ideal team size to work in."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does a good first day at a new job look like to you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your favorite thing about your field of work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle criticism from a peer?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's a recent accomplishment you're proud of?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What would your references say about you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you make sure you meet deadlines?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your favorite way to celebrate team success?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Tell us about a time you helped a coworker."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's the first thing you do when you start a new task?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you keep your workspace organized?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does professionalism mean to you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's a value you hold strongly in your career?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Describe a typical week in your current or most recent role."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you approach onboarding at a new company?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your favorite productivity tool or app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How would you describe your leadership style in a few words?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does being a team player mean to you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle unclear instructions from a manager?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What excites you most about this role?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your favorite achievement from school or early career?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you like to be recognized for good work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's the biggest lesson your first job taught you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you decide what to prioritize each morning?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your ideal ratio of independent work to collaboration?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you typically wind down at the end of a workday?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is one thing you'd change about your last workplace?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle waiting for approval or sign-off from others?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does 'going above and beyond' mean to you at work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you build rapport with new teammates?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your favorite way to document your work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you feel about ambiguity in tasks or projects?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's a recent piece of feedback that stuck with you?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your comfort level with public speaking?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you typically prepare for a big meeting?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your favorite thing about being part of a team versus working solo?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What would make you excited to come to work every day?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you stay focused when working on long tasks?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's your approach to setting personal goals?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you usually celebrate finishing a big project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's a piece of advice you'd give to someone starting your career path?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle a slow or quiet day at work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is your favorite way to network professionally?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How would you describe your work ethic?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What kind of company culture makes you feel most productive?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What's a professional accomplishment you'd highlight on your resume, and why?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you typically respond when plans change at the last minute?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What role do you naturally take on when working in a group?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a challenging project you worked on and how you handled it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had a conflict with a team member and how you resolved it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle tight deadlines?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you failed and what you learned from it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you prioritize tasks when you have multiple deadlines?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to learn a new skill quickly to complete a task."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you went above and beyond for a project."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to give difficult feedback to a colleague."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you received negative feedback and how you responded."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a situation where you had to work with a difficult stakeholder."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to persuade someone to see things your way."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you took initiative without being asked."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a project where the requirements changed midway through."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle working with a team member who isn't pulling their weight?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to adapt to a significant change at work."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to say no to a request and how you handled it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a situation where you had to balance quality with speed."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you made a mistake at work and how you fixed it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach working on a project with unclear requirements?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to collaborate across different teams or departments."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to manage competing priorities from multiple managers."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a situation where you disagreed with a decision but had to implement it anyway."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle stress during a high-pressure situation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you identified a problem before it became critical."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe how you handled a situation where you didn't have enough resources to complete a task."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to explain a complex concept to a non-technical person."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach giving constructive criticism to a peer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you turned around a negative team dynamic."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to meet a deadline you didn't think was realistic."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a project where you had to work independently with minimal supervision."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to quickly switch priorities due to an urgent issue."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle situations where you're blocked by another team's dependencies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to onboard or train a new team member."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you improved a process at work."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you took a risk that didn't pay off."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle a situation when you don't agree with company policy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to deliver bad news to a stakeholder or client."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe how you handle working with someone whose communication style is very different from yours."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to advocate for a decision you believed was right, even when others disagreed."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach setting expectations with a new manager?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to work under a manager whose style didn't match your own."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you contributed an idea that was rejected. How did you respond?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to juggle multiple projects at once. How did you stay organized?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you keep your team motivated during a long or difficult project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you received unclear instructions and how you handled it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time your team missed a deadline. What happened and what did you learn?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle a situation where you feel undervalued at work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to push back on scope creep in a project."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe how you've handled working remotely with a distributed team."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to build trust with a new team quickly."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach delegating tasks to others?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you volunteered for a project outside your usual responsibilities."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to defend your work during a review or critique."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you stay organized when working on long-term projects?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to make a decision without approval from your manager."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time a project you led did not go as planned."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle receiving conflicting feedback from different people?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to work with incomplete or ambiguous data."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to convince your team to try a new approach."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you balance attention to detail with the need to move quickly?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time when you had to manage your own workload during a teammate's absence."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to handle a customer or client complaint."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach setting realistic timelines for a project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to say 'I don't know' to a stakeholder and what you did next."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time your work was criticized publicly. How did you react?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach cross-functional projects with competing goals between teams?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe how you've handled a situation with poor or outdated documentation."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to quickly ramp up on an unfamiliar codebase or system."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you decide when to ask for help versus figuring something out on your own?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to manage scope for a project with a fixed deadline."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you helped resolve a disagreement between two team members."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle a situation where priorities shift after you've already started work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to work with limited context on a task."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time your estimate for a task was significantly wrong. What happened?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach performance reviews, whether giving or receiving them?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to influence a decision without having direct authority."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to work extra hours to meet a commitment. How did you manage it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you evaluate trade-offs when there is no clearly 'right' answer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to rebuild trust with a teammate after a mistake."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you identified a process that was inefficient and fixed it."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle situations where you're the only one who disagrees in a meeting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to manage up to get support for your project."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to reprioritize your entire day due to an emergency."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle feedback that you think is unfair or inaccurate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to work closely with someone you didn't get along with."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you took ownership of a mistake that wasn't entirely your fault."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach knowledge sharing within your team?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to simplify a complicated process for others to follow."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time your team had low morale. What did you do?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle situations where leadership changes direction frequently?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to balance short-term wins with long-term goals."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you managed a project with a very tight budget."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you decide which tasks to delegate versus handle yourself?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to give feedback to someone more senior than you."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time a decision you made had unintended consequences."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach working with a client who keeps changing their mind?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to quickly recover from a public mistake or failure."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you led a project without formally being the 'lead.'"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you keep yourself accountable when working with minimal oversight?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to challenge an assumption that others accepted as true."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you handled a high volume of work with limited time."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach situations where you must choose between two good options?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to communicate a technical issue to executives or leadership."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time your initial plan failed and you had to pivot."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle working on a team where responsibilities aren't clearly defined?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to rebuild a process or system from scratch."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you supported a decision you personally disagreed with."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you manage stress when several urgent issues arise at the same time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to negotiate a deadline extension."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to give feedback that was received poorly."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you decide when a project is 'good enough' to ship versus needing more polish?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you spotted a risk that others had overlooked."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to work with a vendor or third party to solve a problem."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach maintaining quality when under pressure to move fast?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time your workload was reassigned unexpectedly. How did you adjust?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to coach a peer through a difficult problem."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle a situation where you're asked to do something outside your job scope?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to manage a project with stakeholders who had conflicting priorities."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you improved communication within your team."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach a task when you're not the subject-matter expert?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to hold a team member accountable for missed commitments."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time feedback from a customer changed how you approached a project."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you decide what information to escalate to leadership versus handle yourself?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to work through a significant setback on a project."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you built a strong relationship with a difficult colleague."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach balancing individual contributor work with mentoring others?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time your assumptions about a project turned out to be wrong."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to explain a delay to a client or manager."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle situations where you disagree with the direction of a project but must still contribute?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time when good communication prevented a bigger problem."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to make trade-offs between speed and thoroughness."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach staying calm when a project is falling behind schedule?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to rally a team around a shared goal."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time your team had to recover after losing a key member."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you decide whether to escalate a disagreement or resolve it yourself?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to adjust your communication style for a specific audience."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to complete a task with very little guidance."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle a situation where you're asked to cut corners to meet a deadline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you helped a struggling team member improve their performance."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to manage stakeholders with very different expectations."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time your team had to pivot strategy mid-project due to new information."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to work with a vague or evolving job description."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to manage your own onboarding at a new company with little formal support."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach building relationships with stakeholders you rarely interact with?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time a project's success depended on people outside your direct control."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to recover team momentum after a setback."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle a situation where you're asked to redo work you thought was already approved?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to manage a task with a much tighter timeline than usual."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you used data to change someone's mind about a decision."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach a disagreement about priorities between you and a peer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to fill in for a role outside your usual responsibilities."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to manage a project with a remote or asynchronous team."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you decide when a task needs more testing or validation before moving forward?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time your work depended on a decision someone else kept delaying."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you had to simplify your explanation for a skeptical audience."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle receiving credit for work that was actually a team effort?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to manage expectations around a delayed deliverable."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Describe a time you learned something from a mistake a teammate made."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you approach evaluating whether a new tool or process is actually worth adopting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Tell me about a time you had to advocate for more time on a task despite pressure to rush."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a situation where you had to make a difficult technical decision with limited information."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How have you mentored or helped junior developers grow?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you disagreed with your manager and how you handled it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to make an unpopular decision that you believed was right for the business."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about the most difficult professional decision you've ever had to make."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to lead a team through a major organizational change."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to deliver a project despite significant technical or resource constraints."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a situation where you had to balance competing interests of multiple senior stakeholders."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to fire someone or let a team member go, or support that decision."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you identified a systemic problem within your organization and drove a solution."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to rebuild a team's trust in leadership after a major failure."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How have you handled a situation where you had to challenge a decision made by senior leadership?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to manage a crisis at work with significant business impact."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to make a decision that negatively affected some team members to benefit the broader team or company."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you led a project that ultimately failed. What did you learn and how did you communicate it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to navigate a major conflict between two senior stakeholders."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you have approached succession planning or building bench strength on a team."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to influence a decision at the executive level without formal authority."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you identified and addressed a significant gap in your own skills or knowledge."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage a team through a layoff or major restructuring."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to make a call that went against data or metrics because of a strategic reason."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time your team's culture became toxic or unhealthy, and how you addressed it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to navigate ethical concerns in a business decision."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about the biggest risk you've taken in your career and its outcome."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to say no to a senior leader or executive and defend your position."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to rebuild credibility after losing the trust of your team or stakeholders."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you led a cross-functional initiative with significant organizational impact."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to make a decision under extreme time pressure with incomplete data."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you have handled underperformance in a direct report over an extended period."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to change your leadership approach for a specific team or individual."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time your strategic recommendation was rejected, and how you responded."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage a highly political situation at work."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've built or scaled a team from the ground up."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to balance innovation with maintaining a stable, reliable system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to course-correct a project that was significantly over budget or behind schedule."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you took over a failing project or team. What did you do?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to communicate a major setback to executive leadership."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to defend your team's work against significant external criticism."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you have approached diversity and inclusion within a team you've managed."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to decide between multiple strong candidates for a critical hire."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to sunset or deprecate a product, feature, or system that people were emotionally attached to."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to negotiate resources or headcount for your team."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've handled disagreements between engineering and business/product priorities."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time your organization went through a merger or acquisition and how you navigated it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to build consensus among stakeholders with fundamentally different goals."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you identified and mitigated a major risk before it became a crisis."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you approach performance management for underperforming senior team members."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to make a trade-off between short-term business needs and long-term technical health."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to advocate for significant investment in technical debt reduction."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you disagreed with a company-wide policy and how you handled it professionally."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've fostered psychological safety within a team you led."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage a high-profile incident or outage and its aftermath."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to rebuild a process after a significant compliance or security failure."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to balance the needs of your team with the demands of upper management."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you championed a controversial idea that ultimately succeeded."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to let go of a project or idea you were personally invested in."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you approach building alignment across teams with different incentives."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage a remote or distributed team through a significant challenge."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to make a decision that you knew would be unpopular but was necessary."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to coach a peer or manager on improving their leadership approach."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you have handled a situation where your values conflicted with a business decision."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage significant ambiguity at the strategic level."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to rebuild a team's roadmap after major priorities shifted."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to lead through a period of significant uncertainty for your team."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you approach making decisions when data and stakeholder opinions conflict."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage the departure of a key team member during a critical project."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to hold a peer accountable without having authority over them."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to prioritize between multiple high-impact initiatives with limited resources."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've approached building a culture of ownership and accountability on your team."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time your decision-making was challenged by a board, executive, or investor."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to manage significant scope changes on a strategic initiative."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to rebuild processes after scaling a team rapidly."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you handle situations where you must choose between two team members for a promotion."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to navigate a significant disagreement about company strategy."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to manage a team through significant attrition."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to make a build-vs-buy decision with long-term implications."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you approach evaluating and mitigating organizational risk."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to defend a controversial hiring or firing decision."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time your leadership style had to evolve significantly to match a new challenge."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage conflicting priorities between product, engineering, and design leadership."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you identified a blind spot in your own leadership and addressed it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to rebuild stakeholder confidence after a series of missed deadlines."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've approached leading a team through a significant technology migration."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to make a decision that affected employee compensation or benefits."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to balance customer commitments against internal engineering constraints."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage a highly visible failure in front of leadership or clients."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you approach setting a long-term technical or organizational vision."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to push back on unrealistic expectations from senior stakeholders."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to make a significant pivot in strategy based on new market information."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to rebuild an underperforming team's reputation within the company."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you have approached succession planning for your own role."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage significant interpersonal conflict within your leadership team."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to make a decision that balanced employee wellbeing against business demands."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to lead a difficult conversation about compensation, promotion, or role change."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've approached measuring and improving team productivity without causing burnout."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage significant technical risk in a high-stakes launch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to convince a resistant team to adopt a significant process change."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time your organization's values were tested by a difficult business decision."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you approach giving critical feedback to someone who reports to your peer, not you."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about the hardest feedback you've ever had to give, and how you delivered it."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to manage a project where success metrics were unclear or contested."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to rebuild trust with a client after a significant failure."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've approached decision-making when your team was split on the right path forward."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to advocate for a marginalized voice or perspective in a leadership discussion."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to manage a significant budget cut while maintaining team morale."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to decide whether to escalate a serious concern about a colleague or manager."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to align two teams with fundamentally different definitions of success."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to make a decision that traded off customer trust for short-term revenue."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've handled a situation where a key vendor or partner failed to deliver."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to defend your team's roadmap against a reorg or leadership change."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to decide between promoting from within or hiring externally for a critical role."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage the emotional fallout of a difficult business decision on your team."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've approached scaling processes that worked well for a small team but broke down at scale."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to rebuild a roadmap after losing executive sponsorship."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to make a call on a technical architecture that had major long-term consequences."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to manage a conflict of interest in a business decision."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe how you've approached building buy-in for a decision you couldn't fully explain due to confidentiality."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to decide whether to pursue a promising but risky opportunity."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Describe a time you had to lead a team through consecutive failures without losing morale."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Tell me about a time you had to choose between two strategically sound options with no clear right answer."
+  }
 ]

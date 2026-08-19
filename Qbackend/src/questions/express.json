@@ -1,17 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is Express.js and why is it popular?" },
-  { "difficulty": "Easy", "question": "How do you create a basic Express server?" },
-  { "difficulty": "Easy", "question": "What is routing in Express.js?" },
-  { "difficulty": "Easy", "question": "What is the purpose of app.use() in Express?" },
-  { "difficulty": "Medium", "question": "What is the difference between app.get() and app.use() in Express?" },
-  { "difficulty": "Medium", "question": "How do you implement error handling middleware in Express?" },
-  { "difficulty": "Medium", "question": "What is the difference between query params, route params, and request body in Express?" },
-  { "difficulty": "Medium", "question": "How do you implement CORS in Express?" },
-  { "difficulty": "Medium", "question": "What is Express Router and how is it used?" },
-  { "difficulty": "Medium", "question": "How do you serve static files in Express?" },
-  { "difficulty": "Hard", "question": "How do you implement JWT authentication middleware in Express?" },
-  { "difficulty": "Hard", "question": "Explain how to structure a large-scale Express application using MVC pattern." },
-  { "difficulty": "Hard", "question": "How do you implement file uploads in Express using Multer?" },
-  { "difficulty": "Hard", "question": "How would you implement rate limiting in Express?" },
-  { "difficulty": "Hard", "question": "Explain the difference between next() and next(err) in Express middleware." }
+  {
+    "difficulty": "Easy",
+    "question": "What is Express.js and why is it popular?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a basic Express server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is routing in Express.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of app.use() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is middleware in Express.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you install Express in a Node.js project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between Node.js and Express.js?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define a GET route in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define a POST route in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the listen() method in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access URL query parameters in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access route parameters in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is req in Express and what does it represent?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is res in Express and what does it represent?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you send a JSON response in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you send plain text as a response in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of res.send() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of res.json() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of res.status() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you redirect a request in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default port convention when running an Express app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you parse JSON request bodies in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is body-parser and is it still needed in modern Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of express.json() middleware?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of express.urlencoded() middleware?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle a 404 route in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between app.listen() and server.listen()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set response headers in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the next() function in Express middleware?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a simple route that returns 'Hello World' in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is nodemon and how does it help during Express development?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between GET and POST HTTP methods in Express routes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define multiple routes for the same path in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is app.all() used for in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access request headers in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of res.end() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set the response content type manually in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default view engine support in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you install and use a template engine like EJS with Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the package.json file in an Express project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between app.get() and app.use() in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement error handling middleware in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between query params, route params, and request body in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement CORS in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Express Router and how is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you serve static files in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between application-level and router-level middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you chain multiple middleware functions for a single route?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the order of execution of middleware in Express and why does it matter?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create custom middleware in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of express.static() middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle asynchronous errors in Express route handlers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous middleware in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you validate request data in Express using a library like Joi or express-validator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of environment variables in an Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use dotenv to manage configuration in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set up logging in an Express app using morgan?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between app.route() and defining separate route handlers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement session management in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between cookies and sessions in Express applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set and read cookies in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the cookie-parser middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement basic authentication in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between authentication and authorization middleware in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you connect an Express application to a MongoDB database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you connect an Express application to a SQL database like PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of connection pooling when using Express with a database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you structure routes in separate files using Express Router?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of app.param() in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle file downloads in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between res.render() and res.send() in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement pagination in an Express REST API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request rate throttling versus rate limiting in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of helmet middleware in Express security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you enable HTTPS in an Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a RESTful API and a non-RESTful API built with Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you version an API in Express (e.g., /api/v1)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the trust proxy setting in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle multiple environments (development, production) in Express configuration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between process.env.NODE_ENV values and how does Express use them?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement input sanitization in Express to prevent XSS attacks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you test Express routes using a tool like Supertest?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between unit testing and integration testing an Express API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle circular dependencies in a large Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a health check endpoint in an Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement graceful shutdown in an Express server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement JWT authentication middleware in Express?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to structure a large-scale Express application using MVC pattern."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement file uploads in Express using Multer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement rate limiting in Express?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between next() and next(err) in Express middleware."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement refresh token rotation with JWT in an Express application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement role-based access control (RBAC) in an Express application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement OAuth2 authentication in Express using Passport.js?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to design a scalable folder structure for a microservices-based Express backend."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement WebSocket communication alongside an Express HTTP server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement server-side caching in Express using Redis."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement request validation and sanitization at scale in a large Express codebase?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement centralized error handling across multiple Express microservices."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement API request/response logging and correlation IDs in Express for distributed tracing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how clustering works in Node.js/Express to utilize multiple CPU cores."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement load balancing for an Express application behind multiple server instances?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to secure an Express API against common vulnerabilities like CSRF and XSS."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement a custom rate limiter using a sliding window algorithm in Express?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement GraphQL alongside Express using Apollo Server."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement streaming responses in Express for large file downloads?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement server-sent events (SSE) in an Express application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement idempotency keys for POST requests in an Express payment API?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement database transaction rollback handling in an Express route with async/await."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement API gateway functionality using Express as a reverse proxy?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement multi-tenancy in an Express application at the database and routing level."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement zero-downtime deployment for an Express application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement distributed session storage across multiple Express instances."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you profile and optimize the performance of a slow Express route handler?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how memory leaks can occur in a long-running Express application and how to detect them."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement circuit breaker patterns when an Express service calls external APIs?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the app object in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle form submissions in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a callback function in the context of Express route handlers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return an HTML page from an Express route?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the __dirname variable when serving files in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set a custom port for an Express server using environment variables?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between res.sendFile() and res.render()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle a simple PUT request in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle a simple DELETE request in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of app.set() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check the Express version installed in a project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a favicon in an Express application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return a 500 error response manually in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between req.params and req.query?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access the request body in a POST route in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the express generator (express-generator) tool?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you restart an Express server automatically on file changes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What HTTP status code is typically returned for a successful GET request?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What HTTP status code is typically returned when a resource is not found?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Content-Type header in an Express response?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a global error handler that catches all unhandled route errors in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the express.Router() method compared to defining routes directly on app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you merge route parameters from a parent router into a nested router in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the mergeParams option in Express Router used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement conditional middleware that only runs for certain routes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a hard redirect and a soft redirect in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request timeout handling in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the compression middleware in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement API response caching using ETags in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between app.locals and res.locals in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you pass data from middleware to route handlers in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the morgan logging format tokens?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement custom 404 and 500 error pages in an Express app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous route handlers in terms of error propagation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request body size limits in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the strict routing option in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement case-sensitive routing in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between app.disable() and app.enable() in Express settings?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a proxy route in Express using http-proxy-middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the X-Powered-By header and how do you disable it in Express?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement a plugin-based architecture for extending Express middleware dynamically."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement distributed rate limiting across multiple Express instances using Redis?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to secure Express routes using short-lived access tokens and long-lived refresh tokens."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement request queuing to protect an Express backend from traffic spikes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement blue-green or canary deployments for an Express-based microservice."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement mutual TLS (mTLS) authentication between Express services?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to instrument an Express application with OpenTelemetry for distributed tracing."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement a saga pattern for distributed transactions across Express microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement backpressure handling when an Express API streams data to slow clients."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement automatic API documentation generation for an Express app using Swagger/OpenAPI?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the express.text() middleware?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle multiple HTTP methods on the same route path in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of app.use(express.static('public')) in a typical project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access the client's IP address in an Express request?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a middleware function that logs every incoming request?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return a downloadable file using res.download() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between res.status(200).send() and res.send() with default status?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you chain res.status() and res.json() together in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the app.get('env') setting in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you gracefully stop an Express server started with app.listen()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request-scoped context (like a request ID) across async operations in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between using async/await directly in route handlers versus wrapping them in a try/catch helper?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a centralized configuration module for an Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of express-async-errors package and how does it simplify error handling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement API key based authentication for internal services in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a middleware function with 3 arguments and one with 4 arguments in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement conditional CORS rules based on the request origin in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the vary header when using CORS middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request body validation schemas that can be reused across multiple routes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between throwing an error inside an async route handler and calling next(err)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement horizontal auto-scaling for an Express service based on request latency metrics."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement a dead-letter queue pattern for failed background jobs triggered from Express routes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement schema-based request/response contract testing for an Express API."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement feature flag rollouts within Express route handlers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement request deduplication for retried client requests in an Express payment service."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Express framework compared to writing a raw Node.js HTTP server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define a route that matches any HTTP method in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of app.use(express.json()) placement order in an Express app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you send an array as a JSON response in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of res.set() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access form data submitted via a multipart form in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between application/json and application/x-www-form-urlencoded content types?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define a route with an optional parameter in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a wildcard route in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you use route path patterns with regular expressions in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of res.type() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check if a request is an AJAX request in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of req.originalUrl versus req.url in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access the HTTP method of an incoming request in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of req.protocol in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you determine if a request was made over HTTPS in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of req.hostname in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you list all registered routes in an Express application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the express.Router({ caseSensitive: true }) option?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return a 204 No Content response in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a catch-all error handling middleware placed at the end of the middleware stack?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set default values for missing query parameters in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of app.route(path) chaining syntax?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle OPTIONS requests in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Access-Control-Allow-Origin header set manually in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you serve a single-page application's index.html for all unmatched routes in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a favicon.ico route handler in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you use template partials with EJS in an Express app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of app.engine() in Express when using a custom template engine?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you pass variables from an Express route to a rendered EJS template?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a request logging middleware that logs response time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between using try/catch in every route versus a wrapper function for async error handling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement input validation using express-validator's check() and validationResult()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of sanitizing user input before storing it in a database from an Express route?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a middleware that restricts access based on user roles stored in a JWT?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between storing JWTs in local storage versus HTTP-only cookies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement CSRF protection in an Express application using csurf?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the SameSite cookie attribute in an Express session setup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement API throttling per user versus per IP address in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between express-rate-limit's memory store and a Redis-backed store?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement conditional GET requests using Last-Modified and If-Modified-Since headers in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the vary('Origin') call when implementing dynamic CORS in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a health check route that verifies database connectivity in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a readiness probe versus a liveness probe in a containerized Express app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement structured JSON logging in Express using a library like winston?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between console.log and a proper logging library in a production Express app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request correlation IDs that propagate through async operations in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the async_hooks module in relation to tracking context in Express apps?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a centralized response formatting utility for consistent API responses in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a 400 and a 422 status code in an Express validation error response?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement soft rate limiting with warnings before hard blocking in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the trust proxy setting when an Express app is behind a load balancer for rate limiting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement API key rotation without downtime in an Express service?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between stateless and stateful authentication approaches in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request body compression handling (gzip) in Express?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement a token bucket algorithm for rate limiting in an Express middleware from scratch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement distributed tracing context propagation across Express microservices using trace headers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement an event-driven architecture where Express routes publish events to a message queue."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement optimistic locking for concurrent updates in an Express REST API backed by a relational database?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement a retry-with-backoff strategy for outbound API calls made from an Express service."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement request signing and verification (HMAC) for webhook endpoints in Express?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement a bulkhead pattern to isolate failures between different routes in an Express monolith."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement schema migrations safely for a database used by a zero-downtime Express deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement content negotiation in Express to serve JSON, XML, or HTML based on the Accept header."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement a custom Express middleware that measures and exposes Prometheus metrics for each route?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the res.cookie() method in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you clear a cookie in Express using res.clearCookie()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the app.use(express.static(path, options)) options parameter?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you set a maxAge for static files served by Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the etag option in express.static()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return a plain HTML string directly from an Express route without a template engine?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between res.write() and res.send() in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check the request's Accept header to determine the response format in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a 301 versus a 302 redirect in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access uploaded file information after using Multer middleware in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement nested routers for a versioned and resource-based Express API structure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of separating controllers, services, and routes in an Express MVC-like structure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement dependency injection for services used inside Express route handlers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a repository pattern and directly using an ORM inside Express controllers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement centralized validation error formatting across all Express routes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using a DTO (data transfer object) pattern in an Express API layer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request-level caching to avoid redundant database calls within a single Express request?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between in-memory caching and distributed caching for an Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement background job processing (e.g., with Bull or Agenda) triggered from an Express route?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a message queue like RabbitMQ when decoupling long-running tasks from Express routes?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the app.use('/api', router) mounting pattern in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle a simple PATCH request in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between PUT and PATCH methods in an Express REST API?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return a 201 Created status code after a successful POST request in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the res.location() method in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access the raw request body before it is parsed in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the express.raw() middleware?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle requests with no body gracefully in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of setting Content-Length manually in an Express response?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you test if an Express server is running by hitting a root route?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of app.disable('x-powered-by') for basic security?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you use a .env file to store a PORT variable for an Express app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the express.static() virtual path prefix option?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you serve multiple static directories in a single Express app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of res.attachment() when sending files in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return different responses based on Accept-Language header in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the req.is() method in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access all request cookies as an object in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the app.mountpath property in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you nest static file serving under a specific route path in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a request context using AsyncLocalStorage in a modern Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of separating route definitions from route handler logic in large Express apps?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a global 'not found' handler that runs only when no other route matches in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between placing error-handling middleware before or after route definitions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request throttling based on a sliding time window using express-rate-limit options?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of skipFailedRequests and skipSuccessfulRequests options in express-rate-limit?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a middleware that automatically converts Mongoose validation errors into API error responses?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a custom error class hierarchy (e.g., NotFoundError, ValidationError) in an Express app?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement conditional route registration based on feature flags in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of app.use() with an array of middleware functions in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a request ID middleware using a UUID library in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between morgan's combined and dev logging formats?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement response compression selectively for certain content types in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the threshold option in the compression middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement API response pagination using cursor-based pagination in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between offset-based and cursor-based pagination in an Express REST API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement search and filtering query parameters in an Express REST endpoint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a DTO validation layer separate from database schema validation in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a middleware that measures and logs slow requests exceeding a threshold?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the keep-alive timeout setting on an Express HTTP server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement request hedging to reduce tail latency when an Express service calls a slow downstream API."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement a leader-election-based scheduled job runner across multiple Express instances?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement partial response caching at the field level for a GraphQL layer built on Express."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement adaptive concurrency limits for an Express service based on real-time latency feedback?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement request replay protection using nonces for sensitive Express API endpoints."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement a shadow traffic mirroring setup to test a new Express service version safely?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement multi-region active-active deployment for a stateless Express API with data locality concerns."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement fine-grained audit logging that captures who changed what in an Express admin panel?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement a plugin system where third-party Express middleware can be sandboxed for security."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement request cost-based rate limiting (e.g., weighted endpoints) in an Express API gateway?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the express() function call itself when starting a new project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check which version of Node.js is required to run a given Express app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a .gitignore file including node_modules in an Express project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you restart an Express server manually after making code changes without nodemon?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the PORT environment variable convention in cloud-hosted Express apps?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return a simple array of JSON objects from an Express API route?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a basic ping/pong health route in an Express app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle an unknown route path in Express with a generic message?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of separating routes into a routes folder in a beginner Express project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you send query string data back as part of a JSON response in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement environment-specific CORS origin whitelisting in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using a config module instead of hardcoding values in Express route handlers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a simple in-memory rate limiter without external libraries in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between blocking and non-blocking middleware operations in Express performance terms?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request body transformation (e.g., trimming strings) middleware in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a schema validation middleware placed before the controller logic in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement API response compression testing to verify gzip is applied correctly?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of separating public and protected routes using different Express routers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a middleware that verifies a JWT and attaches the decoded user to req.user?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between verifying a JWT signature and checking token expiration in Express middleware?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of an Express route handler function's third parameter (next)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you group related routes together under a common prefix in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a controller function separated from a route definition in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access the full request URL including query string in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of using Postman or curl to test Express API endpoints?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return a simple error message with a custom status code in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a basic input check like if (!req.body.name) in an Express route?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you structure a package.json start script to run an Express app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a public folder convention for serving static assets in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you send a redirect to an external URL from an Express route?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the req.body object being undefined without body-parsing middleware?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return an empty JSON object as a placeholder response in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between app.listen(3000) and app.listen(process.env.PORT || 3000)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you log incoming request methods and paths manually without a library in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a middleware chain where later middleware depends on data set by earlier middleware?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using a service layer to keep Express controllers thin?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement consistent error response shapes (code, message, details) across an Express API?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using async wrapper utilities to avoid repetitive try/catch blocks in Express routes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request throttling that differs for authenticated versus anonymous users in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using supertest with Jest to test Express endpoints end-to-end?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you mock a database layer when writing unit tests for Express controllers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of separating integration tests from unit tests in an Express project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a middleware that blocks requests from blacklisted IP addresses in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using a reverse proxy like Nginx in front of an Express application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request/response transformation for legacy API compatibility in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of API contract versioning headers versus URL versioning in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement conditional rendering of JSON vs HTML based on the client in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a centralized constants file for status codes and messages in an Express project?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement a saga-based compensating transaction pattern for order processing in an Express service."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement dynamic request routing to different backend versions based on a feature flag in Express?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement per-tenant database connection pooling in a multi-tenant Express SaaS application."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement secure file upload validation to prevent malicious file execution in an Express app?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement a token bucket-based API gateway throttle shared across multiple Express services via Redis."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement request tracing correlation between an Express frontend-for-backend and downstream microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement graceful degradation in an Express service when a dependent service is unavailable."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement automated rollback triggers based on error rate spikes after deploying a new Express version?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how to implement encrypted field-level data storage accessed through an Express API layer."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement a consistent hashing-based routing layer in front of multiple Express service replicas?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the res.append() method in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you check if a given route path matches a request using Express's internal matching?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of installing @types/express when using TypeScript with Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define typed request and response objects in an Express app using TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of ts-node when developing an Express app in TypeScript?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you handle a simple HEAD request in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a GET request and a HEAD request in Express routing?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return a favicon response manually if no static favicon is provided in Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of setting res.locals in a middleware for use in later handlers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you use environment-based conditional logging (e.g., only log in development) in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a middleware that automatically retries a failed downstream fetch call in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using AbortController to cancel long-running requests in an Express route?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement request deduplication for identical concurrent GET requests in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a request timeout middleware that returns 408 for slow clients in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement structured validation error responses that map to specific form fields in Express?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using a linter and formatter (ESLint/Prettier) in an Express codebase?"
+  }
 ]

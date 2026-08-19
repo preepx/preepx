@@ -1,14 +1,2002 @@
 [
-  { "difficulty": "Easy", "question": "What is DBMS and what are its advantages over file systems?" },
-  { "difficulty": "Easy", "question": "What is the difference between DDL and DML in databases?" },
-  { "difficulty": "Easy", "question": "What are the ACID properties of a transaction?" },
-  { "difficulty": "Medium", "question": "What is normalization and why is it important?" },
-  { "difficulty": "Medium", "question": "What is the difference between OLTP and OLAP systems?" },
-  { "difficulty": "Medium", "question": "What are different types of database indexes?" },
-  { "difficulty": "Medium", "question": "What is a deadlock in a database and how is it resolved?" },
-  { "difficulty": "Medium", "question": "What are the different isolation levels in a DBMS?" },
-  { "difficulty": "Hard", "question": "Explain B-Tree and B+ Tree indexes and how they work." },
-  { "difficulty": "Hard", "question": "What is the two-phase locking protocol in DBMS?" },
-  { "difficulty": "Hard", "question": "What is denormalization and when should it be applied?" },
-  { "difficulty": "Hard", "question": "What is the difference between a clustered and non-clustered index?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is DBMS and what are its advantages over file systems?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DDL and DML in databases?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the ACID properties of a transaction?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a primary key in a database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a foreign key and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a candidate key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a super key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a composite key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a primary key and a unique key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database schema?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a database and a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is SQL and what are its main categories of commands?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between SQL and MySQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a relational database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a tuple in a relational database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an attribute in a database table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a relation in DBMS terms?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is data redundancy and why is it a problem?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is data integrity?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is referential integrity?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is entity integrity?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a null value in a database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between CHAR and VARCHAR data types?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DELETE, TRUNCATE, and DROP commands?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a view in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a view and a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an SQL constraint?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the common types of SQL constraints?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between WHERE and HAVING clauses?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the GROUP BY clause?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ORDER BY clause?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a subquery in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between UNION and UNION ALL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is normalization in one sentence?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is denormalization in one sentence?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an index and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a stored procedure?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a trigger in a database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a stored procedure and a function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database transaction?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between COMMIT and ROLLBACK?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a savepoint in a transaction?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is data definition language (DDL) used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is data control language (DCL) used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is transaction control language (TCL) used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between GRANT and REVOKE commands?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a many-to-many relationship in database design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a one-to-many relationship in database design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an entity in the ER model?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an attribute in the ER model?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a weak entity in ER modeling?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an ER diagram used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a relational algebra operation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the SELECT operation in relational algebra?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the PROJECT operation in relational algebra?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database management system's data dictionary?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is metadata in the context of a database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a client-server and a file-server database architecture?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is data abstraction in DBMS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the three levels of data abstraction in DBMS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between logical and physical data independence?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database instance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database catalog?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a WHERE clause in an UPDATE statement?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an alias in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the LIKE operator used for in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are wildcard characters in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between IN and BETWEEN operators?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a self join?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a cross join?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an outer join?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between INNER JOIN and OUTER JOIN?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a natural join?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the use of the DISTINCT keyword in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an auto-increment column?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the NOT NULL constraint?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CHECK constraint used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the DEFAULT constraint used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is normalization and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between OLTP and OLAP systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are different types of database indexes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a deadlock in a database and how is it resolved?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the different isolation levels in a DBMS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the First Normal Form (1NF)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Second Normal Form (2NF)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Third Normal Form (3NF)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Boyce-Codd Normal Form (BCNF)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between 3NF and BCNF?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a functional dependency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a partial dependency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a transitive dependency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multivalued dependency and Fourth Normal Form (4NF)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is join dependency and Fifth Normal Form (5NF)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a clustered index and a heap table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a covering index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a composite index and when should it be used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is index fragmentation and how is it handled?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hashing and indexing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hash index and when is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between static and dynamic hashing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is query optimization in a DBMS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a query execution plan?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of a query optimizer in a DBMS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between cost-based and rule-based query optimization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a nested loop join and a hash join?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a merge join and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is concurrency control and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a shared lock versus an exclusive lock?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is lock escalation in a database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is optimistic concurrency control?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is pessimistic concurrency control?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is timestamp ordering protocol in concurrency control?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a dirty read?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a non-repeatable read?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a phantom read?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a lost update problem in concurrency control?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a checkpoint and a savepoint?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is write-ahead logging (WAL) and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shadow paging and log-based recovery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database replication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous replication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database sharding?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical and horizontal partitioning?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a distributed database and its advantages?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CAP theorem in distributed databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is eventual consistency in distributed systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a two-phase commit protocol used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data warehousing and how does it differ from a regular database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is ETL in the context of data warehousing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a star schema in data warehousing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a snowflake schema in data warehousing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a fact table and a dimension table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data mining and how is it related to databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a database and a data lake?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a materialized view and how does it differ from a regular view?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of database normalization versus indexing trade-offs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a correlated subquery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a correlated and a non-correlated subquery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the EXISTS operator used for in SQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EXISTS and IN operators?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the CASE statement in SQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a common table expression (CTE)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a recursive CTE and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a window function in SQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RANK, DENSE_RANK, and ROW_NUMBER functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database security and what are common threats to it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SQL injection and how can it be prevented?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is role-based access control in a DBMS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data encryption at rest versus in transit?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database auditing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between backup and recovery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a full backup versus an incremental backup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is point-in-time recovery in databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database mirroring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is log shipping in database administration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection pooling and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the N+1 query problem and how is it avoided?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database migration and what challenges does it involve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is schema-on-read versus schema-on-write?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a surrogate key and how does it differ from a natural key?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a compound key?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is referential integrity enforced through foreign key constraints?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cascading delete and when should it be used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ON DELETE CASCADE and ON DELETE SET NULL?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain B-Tree and B+ Tree indexes and how they work."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the two-phase locking protocol in DBMS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is denormalization and when should it be applied?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a clustered and non-clustered index?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the difference between strict two-phase locking and conservative two-phase locking."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the wait-die scheme prevent deadlocks in concurrency control?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the wound-wait scheme prevent deadlocks in concurrency control?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain multiversion concurrency control (MVCC) and how it improves read performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does PostgreSQL implement MVCC internally?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the ARIES recovery algorithm and its phases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between physical and logical logging in recovery systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a B+ Tree handles insertion and node splitting."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a B+ Tree handles deletion and node merging."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the time complexity of search, insert, and delete operations in a B+ Tree?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a database choose between a full table scan and an index scan?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the query optimizer estimates cardinality and selectivity."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a histogram in query optimization and how is it used?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how hash joins work internally, including build and probe phases."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how sort-merge joins work internally."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a left-deep and bushy join tree in query optimization?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how distributed transactions maintain atomicity across multiple nodes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the three-phase commit protocol and how it differs from two-phase commit."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Paxos and how is it used for consensus in distributed databases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Raft consensus algorithm and how does it differ from Paxos?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how consistent hashing is used in distributed database sharding."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between strong consistency, eventual consistency, and causal consistency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems implement serializable snapshot isolation."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between serializability and linearizability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how write-ahead logging ensures durability in the presence of crashes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between logical replication and physical replication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database handles conflict resolution in multi-master replication."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a B+ Tree and a Log-Structured Merge (LSM) Tree?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do LSM Trees optimize for write-heavy workloads compared to B-Trees?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain compaction in LSM-tree based storage engines."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a bloom filter and how is it used to speed up database lookups?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems implement query result caching and cache invalidation."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between statement-level and row-level replication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the concept of a distributed lock manager and its role in concurrency control."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a phantom problem in concurrency control and how does index locking prevent it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain predicate locking and how it differs from row-level locking."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a database implement multiversion timestamp ordering?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the trade-offs between normalization and denormalization in high-throughput systems."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does sharding affect join performance and how can it be mitigated?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems handle schema evolution in a live production environment."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a covering index and an index-only scan?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how column-store databases differ from row-store databases in query performance."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is vectorized query execution and how does it improve analytical query performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database connection pooling interacts with transaction isolation under high concurrency."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between pessimistic and optimistic locking in a high-concurrency web application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a distributed database achieves linearizable reads without a single point of failure."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of vector clocks in resolving conflicts in distributed databases?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database management system used for in real-world applications?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a flat file and a relational database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the SQL SELECT statement?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between INSERT INTO and INSERT INTO SELECT?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an SQL query?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the term 'schema' mean in relation to a database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a row and a column in a table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database record?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a logical schema and a physical schema?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is meant by 'data consistency' in a database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between structured and unstructured data?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a relational database management system (RDBMS)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a WHERE clause in a SELECT statement?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between COUNT(*) and COUNT(column_name)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the AS keyword in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local and a global variable in stored procedures?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the LIMIT clause in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an aggregate function in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the common aggregate functions used in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a single-row and multi-row subquery?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database transaction log?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the BEGIN TRANSACTION statement?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database lock?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a shared and exclusive lock in simple terms?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of an ALTER TABLE statement?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between ADD COLUMN and DROP COLUMN in ALTER TABLE?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the RENAME command used for in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a temporary table and a permanent table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a global temporary table?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the CREATE INDEX statement?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between DROP INDEX and DROP TABLE?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the EXPLAIN statement in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database connection string?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a database server and a database instance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is meant by 'normal form' in database design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a super key versus a candidate key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a UNIQUE constraint?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a composite primary key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local index and a global index?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is meant by database scalability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between horizontal scaling and vertical scaling for databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is connection pooling and how does it improve database performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a database deadlock detection algorithm?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the wait-for graph method for deadlock detection?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a hot backup and a cold backup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of database indexing on foreign key columns?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a full-text index and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a spatial index used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an inverted index and a B-tree index?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is query caching and what are its limitations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical and horizontal fragmentation in distributed databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data replication lag and why does it occur?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between master-slave and master-master replication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is failover in a database cluster?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is high availability in the context of databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database clustering?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between active-active and active-passive clustering?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the role of a load balancer in a database architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a primary and a secondary database node?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of database partitioning by range?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is list partitioning in databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is hash partitioning and when is it preferred?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between partitioning and sharding?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a composite index's leftmost prefix rule?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an equi-join and a non-equi-join?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a semi-join and when is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an anti-join in SQL query processing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a lateral join and a regular join?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of database normalization in reducing update anomalies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an insertion anomaly in an unnormalized database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a deletion anomaly in an unnormalized database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an update anomaly in an unnormalized database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between logical and physical data independence with examples?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the three-schema architecture in DBMS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the external schema in the three-schema architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the conceptual schema in the three-schema architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the internal schema in the three-schema architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a database view used for in terms of security?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an updatable view and what restricts it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a simple view and a complex view?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does a database ensure isolation using strict two-phase locking versus MVCC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the phantom read anomaly and how does predicate locking prevent it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems implement snapshot isolation and its anomalies."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is write skew anomaly under snapshot isolation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a distributed database handles network partitions per the CAP theorem."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between quorum-based reads and writes in distributed databases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Google Spanner achieves external consistency using TrueTime."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a leader-based and leaderless replication architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how conflict-free replicated data types (CRDTs) resolve concurrent updates."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of gossip protocols in distributed database membership management?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database implements adaptive query optimization at runtime."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a materialized view maintenance strategy and how is incremental view maintenance done?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how columnar storage engines compress data for analytical workloads."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between row-level and page-level locking granularity trade-offs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems implement online schema migrations without downtime."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a redo log and an undo log in transaction recovery?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how checkpointing reduces recovery time after a database crash."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is fuzzy checkpointing and how does it differ from a consistent checkpoint?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems balance read and write amplification in LSM-tree storage."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager and lazy replication propagation strategies?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a NoSQL database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between SQL and NoSQL databases?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a document database and give an example?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a key-value store database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a column-family database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a graph database and when is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is MongoDB used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Redis commonly used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Cassandra commonly used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a relational and a non-relational database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an ORM (Object-Relational Mapping) tool?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a database migration tool?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database seed file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a connection timeout in database connectivity?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is JDBC used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is ODBC used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a local database and a cloud database?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Amazon RDS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between IaaS and DBaaS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database driver?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is meant by database portability?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a rollback segment?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an SQL cursor used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an implicit and explicit cursor?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database sequence used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the MERGE statement in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between UPSERT and INSERT operations?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a pivot table operation in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the COALESCE function in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between IS NULL and = NULL in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of database triggers in maintaining audit trails?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a BEFORE trigger versus an AFTER trigger?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an INSTEAD OF trigger used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a system trigger and a DML trigger?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database role and how does it differ from a user account?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the principle of least privilege in database security?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is data masking in databases?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a firewall in database security?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a honeypot in the context of database security?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between authentication and authorization in a DBMS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a graph database and a relational database for handling relationships?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a time-series database and what workloads is it optimized for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between InnoDB and MyISAM storage engines in MySQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the buffer pool in a database engine?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a redo log buffer in a database engine?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database vacuuming and why is it needed in PostgreSQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is table bloat and how does it affect performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a soft delete and a hard delete?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is optimistic locking implemented using a version column?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between application-level and database-level constraints?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a foreign key constraint's ON UPDATE CASCADE behavior?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a database trigger and an application-level event handler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is query plan caching and why can it cause parameter sniffing issues?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is parameter sniffing in SQL Server and how is it mitigated?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a scalar function and a table-valued function?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of database connection multiplexing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous database calls in an application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the N-tier architecture's relationship with database access layers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the repository pattern in relation to database access?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Unit of Work pattern in database transaction management?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database schema versioning and why is it important in CI/CD pipelines?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a blue-green deployment strategy for database schema changes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is idempotency in the context of database write operations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between eventual consistency and strong consistency with examples?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a leader election process in a database cluster?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a primary replica and a read replica?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is read-your-writes consistency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is monotonic read consistency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a circuit breaker pattern when calling a database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database throttling and why is it used?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database engine implements multi-granularity locking using intent locks."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between intention shared and intention exclusive locks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems detect and resolve distributed deadlocks across nodes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the phantom problem in range queries and how does next-key locking solve it in InnoDB?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how gap locks work in InnoDB to prevent phantom reads."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a clustering key and a partitioning key in Cassandra?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how Cassandra achieves tunable consistency using replication factor and consistency levels."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between vector clocks and Lamport timestamps in distributed systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database system implements adaptive indexing or database cracking."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager and lazy evaluation in query execution plans?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a query planner decides join order for multi-table queries using dynamic programming."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the significance of the System R query optimizer's approach to join ordering?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems implement parallel query execution across multiple cores."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between intra-query and inter-query parallelism?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a distributed SQL database like CockroachDB achieves ACID transactions across nodes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of a transaction coordinator in a distributed two-phase commit?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems handle clock skew in distributed transaction ordering."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between physical clocks, logical clocks, and hybrid logical clocks in databases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database system implements backpressure to handle write-heavy workloads."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous replication with quorum and chain replication?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a one-to-one relationship in database design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a recursive relationship in an ER diagram?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a derived attribute in the ER model?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a multivalued attribute in the ER model?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a composite attribute in the ER model?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is generalization in ER modeling?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is specialization in ER modeling?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is aggregation in ER modeling?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between strong and weak entities?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a discriminator attribute in a weak entity set?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is cardinality in the context of ER relationships?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is participation constraint in ER modeling?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is total participation versus partial participation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of converting an ER diagram to a relational schema?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a junction table used for in many-to-many relationships?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of database documentation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a data flow diagram and how does it relate to database design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between conceptual, logical, and physical database design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a use case for a self-referencing foreign key?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the SQL HAVING clause compared to WHERE?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a database trigger's row-level and statement-level execution?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of using EXPLAIN ANALYZE instead of EXPLAIN?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an anti-pattern in database schema design, such as the entity-attribute-value model?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a wide table design and a normalized multi-table design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a lookup table in database design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a bridge table and a lookup table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the star schema's advantage over a fully normalized schema for reporting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is slowly changing dimension (SCD) and what are its types?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Type 2 slowly changing dimension used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a surrogate key's role in a data warehouse dimension table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a grain and a measure in a fact table?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between additive, semi-additive, and non-additive facts?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data lineage and why is it important in data governance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a data catalog and how does it help in large organizations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between batch processing and stream processing for data pipelines?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is change data capture (CDC) and how is it used in data pipelines?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an operational data store (ODS) and a data warehouse?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database throughput and how is it measured?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database latency and what factors affect it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical partitioning and column-store databases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a query optimizer uses selectivity estimation for join order selection in complex queries."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a semi-join reduction and a bloom join in distributed query processing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database achieves exactly-once processing semantics in a distributed transaction pipeline."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between at-least-once and at-most-once delivery in database replication streams?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database system implements adaptive query re-optimization mid-execution."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of statistics collection in cost-based query optimizers, and how often should it run?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems handle hotspot partitions in a sharded architecture."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between range-based and hash-based sharding for avoiding hotspots?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database implements causal consistency using dependency tracking."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a single-leader and multi-leader replication topology's conflict handling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems use Merkle trees for anti-entropy repair in distributed replicas."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of read repair and hinted handoff in eventually consistent databases like Cassandra?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database engines implement adaptive hash indexes for frequently accessed data."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between pessimistic and optimistic replication conflict resolution strategies?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a distributed database ensures atomic visibility of multi-shard transactions."
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the SQL BETWEEN operator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the IS NULL condition in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a scalar subquery and a table subquery?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database backup schedule and why is it important?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the SQL ANY and ALL operators?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between INTERSECT and EXCEPT operators in SQL?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a database health check?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between vertical scaling and adding read replicas?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database dump used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between exporting and importing a database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a full outer join and a union of left and right joins?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the PARTITION BY clause in window functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between LEAD and LAG window functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the OVER clause in SQL window functions?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a rollup and a cube in SQL aggregation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the GROUPING SETS clause used for in SQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a database trigger and a scheduled job?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a database event scheduler used for?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of database connection retry logic in distributed applications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between horizontal and vertical database sharding strategies for a multi-tenant application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database handles long-running transactions without blocking concurrent short transactions."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a coarse-grained and fine-grained locking strategy and its performance trade-offs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how database systems implement transaction chopping to improve concurrency."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of deterministic transaction execution in systems like Calvin for distributed databases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database system balances consistency and availability during a network partition using tunable settings."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a strongly consistent index and an eventually consistent secondary index in distributed databases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how log-structured storage engines handle compaction strategies like leveled versus tiered compaction."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous multi-region replication and asynchronous cross-region replication for disaster recovery?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how a database determines the optimal number of shards for a given workload."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of a coordinator-less architecture in achieving high availability during leader failure?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the SQL EXISTS operator in a WHERE clause?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a positive and negative test case in database testing?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is database unit testing and why is it useful?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a rollback plan during database deployments?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a database administrator and a database developer role?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of database monitoring tools?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a slow query log used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of database capacity planning?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between vertical partitioning and splitting a table by columns?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the SQL RENAME TO clause?"
+  }
 ]

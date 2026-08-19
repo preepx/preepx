@@ -1,18 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is System Design?" },
-  { "difficulty": "Easy", "question": "What is the difference between horizontal and vertical scaling?" },
-  { "difficulty": "Easy", "question": "What is a load balancer and why is it used?" },
-  { "difficulty": "Easy", "question": "What is caching and why is it important in system design?" },
-  { "difficulty": "Medium", "question": "Explain CAP theorem in distributed systems." },
-  { "difficulty": "Medium", "question": "What is the difference between SQL and NoSQL databases in system design?" },
-  { "difficulty": "Medium", "question": "What is a CDN (Content Delivery Network) and when do you use it?" },
-  { "difficulty": "Medium", "question": "What is a message queue? When would you use Kafka vs RabbitMQ?" },
-  { "difficulty": "Medium", "question": "What is database sharding and when should it be used?" },
-  { "difficulty": "Medium", "question": "What is consistent hashing and how does it help in distributed systems?" },
-  { "difficulty": "Hard", "question": "Design a URL shortener like bit.ly. Walk through the architecture." },
-  { "difficulty": "Hard", "question": "Design a rate limiter for an API gateway." },
-  { "difficulty": "Hard", "question": "How would you design Twitter's news feed?" },
-  { "difficulty": "Hard", "question": "Design a distributed cache system like Redis." },
-  { "difficulty": "Hard", "question": "How would you design a notification system that handles millions of users?" },
-  { "difficulty": "Hard", "question": "Explain the SAGA pattern for distributed transactions." }
+  {
+    "difficulty": "Easy",
+    "question": "What is System Design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between horizontal and vertical scaling?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a load balancer and why is it used?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is caching and why is it important in system design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is latency and how does it differ from throughput?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is high availability in system design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is scalability and why does it matter?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a single point of failure?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is redundancy in system design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a monolithic architecture and a microservices architecture?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an API and why is it important in system design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a client-server architecture?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a database in the context of system design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between reading and writing heavy systems?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is throughput in system design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is availability and how is it typically measured (e.g., 99.9%)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is fault tolerance?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a CDN (Content Delivery Network)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is DNS and why is it relevant to system design?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a proxy server?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between synchronous and asynchronous communication?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is data replication?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a distributed system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between stateless and stateful services?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the key non-functional requirements to consider when designing a system?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between scaling up and scaling out?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are the challenges of vertical scaling?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is auto-scaling and how does it work?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a bottleneck in system design and how do you identify one?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is load testing and why is it important?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between latency and response time?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is capacity planning?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is vertical partitioning vs horizontal partitioning?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is database read replica scaling?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is connection pooling and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the N+1 query problem?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is denormalization and when is it used to improve performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a thundering herd problem?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is backpressure in a distributed system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is graceful degradation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a circuit breaker pattern and how does it improve resilience?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between throughput-oriented and latency-oriented system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is elasticity in cloud system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a stateless service and why does it scale more easily?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is session affinity (sticky sessions) and what problems can it cause at scale?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the impact of network partitioning on scalability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a rate limiter and why is it needed at scale?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is batching and how does it improve system throughput?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the trade-off between consistency and latency in scaling reads?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a read-heavy vs write-heavy system and how does design differ between them?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between SQL and NoSQL databases in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database indexing and how does it improve query performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database sharding and when should it be used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database replication and what problems does it solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between master-slave and master-master replication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a database partition key and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is vertical partitioning of a database schema?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a composite index and when should it be used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database normalization and denormalization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is eventual consistency in a database context?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is strong consistency and how does it differ from eventual consistency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a distributed transaction and why is it hard to implement?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is two-phase commit (2PC)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is optimistic vs pessimistic locking in databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a write-ahead log (WAL) and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database connection pooling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a document database and a key-value store?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a wide-column store and when would you use one (e.g., Cassandra)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a graph database and when is it appropriate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is ACID and what do each of its properties mean?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is BASE (Basically Available, Soft state, Eventual consistency)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hot partition/hot shard problem in sharded databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a range-based sharding strategy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a hash-based sharding strategy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is consistent hashing and how does it help in distributed systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a leader election process in a distributed database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multi-region database replication and what challenges does it introduce?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a change data capture (CDC) pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is database federation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between OLTP and OLAP systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a data warehouse and how does it differ from an operational database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is read/write splitting in database architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a materialized view and when is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is schema migration and how do you handle it at scale without downtime?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CAP theorem's implication for database design choices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is quorum-based replication (read/write quorum)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Lamport clock or vector clock used for in distributed databases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is idempotency and why is it important in database writes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a connection leak and how can it affect database performance at scale?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you design a schema for a multi-tenant SaaS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is caching and why is it important in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between client-side and server-side caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CDN cache and how does it reduce latency?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache eviction and what policies are commonly used (LRU, LFU, FIFO)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache invalidation and why is it considered a hard problem?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is write-through caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is write-back (write-behind) caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache-aside (lazy loading) caching pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a distributed cache and why is it needed at scale?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache stampede and how can it be prevented?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a local (in-process) cache vs a distributed cache?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache warming?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TTL-based expiration in caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the trade-off between cache consistency and performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a multi-tier caching architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is negative caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a read-through cache?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you design a caching layer for a high-traffic e-commerce website?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the impact of a cache miss storm on backend systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cache sharding and how does it relate to consistent hashing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you keep a cache consistent across multiple application servers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is browser caching and how does it fit into overall system caching strategy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is edge caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the risks of over-relying on caching in a system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you decide what data is a good candidate for caching?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a load balancer and what problems does it solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Layer 4 and Layer 7 load balancing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are common load balancing algorithms (round robin, least connections, IP hash)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a reverse proxy and how does it differ from a load balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DNS-based load balancing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is global server load balancing (GSLB)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is health checking in a load balancer and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is sticky session load balancing and what trade-offs does it introduce?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between hardware and software load balancers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a service mesh and how does it relate to load balancing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is client-side load balancing vs server-side load balancing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a CDN's role in reducing load on origin servers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Anycast routing and how is it used in networking?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is TCP connection multiplexing at a load balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is SSL/TLS termination at a load balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a network partition and how does it impact distributed systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an API Gateway and what role does it play in system architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an API Gateway and a load balancer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is throttling at the API gateway level?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a VPC (Virtual Private Cloud) and why is it relevant to system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a firewall's role in a system architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is WebSocket and when would you use it instead of HTTP polling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is long polling and how does it differ from WebSockets?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is server-sent events (SSE) and when is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the impact of geographic distribution on network latency in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Explain CAP theorem in distributed systems."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the PACELC theorem and how does it extend CAP?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is consistency in the context of distributed systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is availability in the context of distributed systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is partition tolerance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is eventual consistency and where is it commonly used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is strong consistency and when is it required?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a distributed consensus algorithm and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a quorum in distributed systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a gossip protocol and how is it used?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Paxos algorithm at a high level?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Raft algorithm and how does it achieve consensus?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a split-brain scenario and how is it prevented?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is leader election in a distributed system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is vector clock and how does it help with causality tracking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a distributed lock and why is it harder to implement than a local lock?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is idempotency in the context of distributed systems and why does it matter?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is exactly-once delivery and why is it difficult to achieve in distributed systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is at-least-once vs at-most-once delivery semantics?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous and asynchronous replication in distributed systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a two-phase commit protocol and what are its limitations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a three-phase commit protocol and how does it improve on 2PC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Byzantine fault and how do Byzantine fault-tolerant systems handle it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is clock skew and how does it affect distributed systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a heartbeat mechanism used for in distributed systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a distributed transaction coordinator?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the fallacies of distributed computing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is data locality and why does it matter in distributed system performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a consensus quorum size and how is it typically calculated?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between horizontal and vertical partitioning in a distributed system context?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a message queue? When would you use Kafka vs RabbitMQ?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a message queue and a pub/sub system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a producer and a consumer in a messaging system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is message ordering and how do different systems guarantee it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a dead letter queue and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is message acknowledgment and why is it important for reliability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between point-to-point and publish-subscribe messaging models?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is event-driven architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an event sourcing pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is CQRS (Command Query Responsibility Segregation)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a topic and a partition in Kafka?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is consumer group scaling in Kafka?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is message durability and how do systems like Kafka achieve it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is backpressure handling in a message queue system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a fan-out pattern in messaging systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous request-response and asynchronous messaging in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is exactly-once processing in a stream processing system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is stream processing and how does it differ from batch processing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a message broker's role in decoupling microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is idempotent message consumption and why is it needed?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the outbox pattern for reliable event publishing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a saga orchestrator vs choreography in event-driven systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is throughput vs latency trade-off in message queue design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Kafka's log-based storage model and how does it differ from traditional queues?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a webhook and how does it relate to event-driven system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a microservices architecture and what are its benefits?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the challenges of a microservices architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is service discovery and why is it needed in microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between client-side and server-side service discovery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an API Gateway and what responsibilities does it typically handle?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between REST and gRPC?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between REST and GraphQL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is API versioning and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a circuit breaker pattern in microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the bulkhead pattern in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is service-to-service authentication in a microservices architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is distributed tracing and why is it important in microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the strangler fig pattern for migrating a monolith to microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the database-per-service pattern in microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data consistency across microservices and how is it typically handled?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the SAGA pattern for distributed transactions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is orchestration vs choreography in a SAGA-based workflow?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is an anti-corruption layer in microservices design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a sidecar pattern and how is it used in service mesh architectures?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is domain-driven design and how does it relate to microservices boundaries?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is API rate limiting and why is it needed?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is API throttling vs rate limiting?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is backward compatibility in API design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is contract testing between microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous and asynchronous inter-service communication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a shared database anti-pattern in microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is eventual consistency's role in microservices data management?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is service mesh and what problems does it solve?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is blue-green deployment and how does it relate to microservices releases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is canary deployment and how does it reduce release risk?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is authentication vs authorization in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is OAuth 2.0 and how is it used for authorization?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is JWT (JSON Web Token) and how is it used in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is rate limiting used for from a security perspective?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is DDoS protection and how is it typically implemented in system architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is encryption at rest vs encryption in transit?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is API key management and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a Web Application Firewall (WAF) and its role in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the principle of least privilege in system architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is secure secret management (e.g., vaults) in a distributed system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a URL shortener like bit.ly. Walk through the architecture."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a rate limiter for an API gateway."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design Twitter's news feed?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed cache system like Redis."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a notification system that handles millions of users?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain the SAGA pattern for distributed transactions."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a chat application like WhatsApp."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a ride-sharing service like Uber."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a video streaming platform like YouTube."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a file storage and sharing service like Dropbox."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design an e-commerce checkout and order processing system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed task scheduler."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a web crawler for a search engine."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a search autocomplete/typeahead feature."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a payment processing system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a ticket booking system like BookMyShow or Ticketmaster."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a hotel booking system like Airbnb."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a social media platform like Instagram."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed logging and monitoring system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a real-time collaborative document editor like Google Docs."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a recommendation system for an e-commerce platform."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed job queue system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design an ad click aggregation and reporting system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a URL crawler and deduplication system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a location-based service like Yelp for nearby search."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed key-value store."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a scalable authentication service (SSO)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design an online code execution/judge system like LeetCode or HackerRank."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a live streaming platform like Twitch."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a news feed ranking system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed rate-limited API for a public developer platform."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a metrics and alerting system like Prometheus."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design an image/video upload and processing pipeline."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed unique ID generator (like Snowflake)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a URL health-check/uptime monitoring service."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a scalable email delivery system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a leaderboard system for an online game."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a stock trading system with real-time price updates."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed rate limiter that works across multiple servers."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a system for detecting duplicate content (e.g., plagiarism detection)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design an inventory management system for a large retailer."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a content moderation system for user-generated content."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a multiplayer online game's backend architecture."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a system to handle flash sale traffic spikes on an e-commerce site."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed file system like HDFS or GFS."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a global content delivery system for static assets."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a system for real-time fraud detection in financial transactions."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a scalable API for a food delivery service like DoorDash."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a system to sync data across multiple devices (like Google Drive sync)."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a URL shortening service with custom aliases and analytics."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed configuration management system."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a system for A/B testing at scale."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a scalable comment system for a social media platform."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a system for tracking user activity/analytics events at scale."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a global DNS service."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a scalable metrics dashboard for monitoring thousands of servers."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a system for handling millions of concurrent WebSocket connections."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a distributed cron job scheduler."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a system for storing and querying time-series data at scale."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Design a multi-region disaster recovery architecture for a critical application."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a distributed file system and how does it differ from a local file system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is object storage (e.g., S3) and how does it differ from block storage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is block storage and when is it used over object storage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between HDFS and a traditional file system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data partitioning in a big data system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is MapReduce and how does it process large datasets?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a data lake and how does it differ from a data warehouse?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is batch processing and how does it differ from stream processing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Apache Spark and how does it improve on MapReduce?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is columnar storage and why is it efficient for analytics?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data replication factor in a distributed storage system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is time-series data and what storage systems are optimized for it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data compaction in a log-structured storage engine?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data deduplication and how is it implemented at scale?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is cold storage vs hot storage in a data architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is erasure coding and how does it differ from replication for durability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Bloom filter and how is it used in large-scale systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a merkle tree and how is it used for data verification in distributed storage?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is an LSM tree (Log-Structured Merge Tree) and why is it used in NoSQL databases?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a B-tree and how does it differ from an LSM tree for storage indexing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is data tiering in a storage system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a write-optimized vs read-optimized storage engine?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a data pipeline and what components does it typically include?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is schema-on-read vs schema-on-write in big data systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the CAP theorem's relevance to big data storage system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is fault tolerance and how is it achieved in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is redundancy and how does it improve system reliability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a failover mechanism?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is disaster recovery and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between RTO (Recovery Time Objective) and RPO (Recovery Point Objective)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is chaos engineering and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is graceful degradation in the context of system reliability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a health check endpoint and why is it important?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is observability and how does it differ from monitoring?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the three pillars of observability (logs, metrics, traces)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is distributed tracing and how does it help debug microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an SLA, SLO, and SLI, and how do they relate to each other?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is alerting fatigue and how can it be avoided?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a runbook and why is it important for incident response?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a blameless postmortem?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is redundant multi-region deployment and how does it improve availability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is active-active vs active-passive failover architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is data durability and how is it different from availability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a retry mechanism with exponential backoff and why is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the bulkhead pattern and how does it prevent cascading failures?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is distributed consensus and why is it a fundamental problem in distributed systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the Paxos algorithm reaches consensus."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain how the Raft algorithm reaches consensus."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Paxos and Raft?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a quorum-based consensus protocol?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the FLP impossibility result and what does it imply for distributed consensus?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a distributed transaction coordinator and what role does it play in 2PC?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the failure modes of two-phase commit (2PC)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the SAGA pattern avoid the pitfalls of two-phase commit?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is compensating transaction logic in the SAGA pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is eventual consistency's trade-off compared to distributed transactions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a distributed lock manager and how does it relate to consensus algorithms?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is ZooKeeper and how is it used for distributed coordination?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is etcd and how does it compare to ZooKeeper?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is leader election using Raft and why is it important for consistency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a term/epoch in the Raft consensus algorithm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is log replication in Raft and how does it ensure consistency?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Byzantine Fault Tolerance (BFT) and where is it used in practice?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is optimistic vs pessimistic concurrency control in distributed transactions?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the trade-off between strong consistency guarantees and system availability during a network partition?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Infrastructure as Code (IaC) and why is it used in system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is containerization and how does it help with scalable system deployment?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Kubernetes and what problems does it solve in system architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is auto-scaling in a cloud environment and how is it configured?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a serverless architecture and when is it appropriate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between PaaS, IaaS, and SaaS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is multi-cloud architecture and why might a company adopt it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a content delivery network's role in cloud-based system design?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is infrastructure monitoring and how does it integrate with cloud-native systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the trade-off between managed cloud services and self-hosted infrastructure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between monolithic, service-oriented, and microservices architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an event-driven architecture and when is it appropriate?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a layered (n-tier) architecture pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is hexagonal architecture (ports and adapters)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the publish-subscribe architecture pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the peer-to-peer architecture pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a serverless architecture pattern and its trade-offs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the CQRS pattern and when is it useful?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is event sourcing and how does it relate to CQRS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the API Gateway pattern in microservices architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the Backend for Frontend (BFF) pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the strangler fig pattern for legacy system migration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the bulkhead pattern for fault isolation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the circuit breaker pattern and how does it prevent cascading failures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the sidecar pattern in a service mesh?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the ambassador pattern in microservices?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the leader-follower pattern in distributed systems?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the pipe-and-filter architecture pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a shared-nothing architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a lambda architecture for big data processing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a kappa architecture and how does it differ from lambda architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between orchestration and choreography in service architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is domain-driven design (DDD) and how does it inform system architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the repository pattern and how does it relate to data access architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is an anti-corruption layer and when is it used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the outbox pattern and what problem does it solve?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is eventual consistency architecture in a globally distributed application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between vertical slice architecture and traditional layered architecture?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the command pattern and how does it relate to CQRS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a plugin/extensible architecture pattern and when would you use it?"
+  }
 ]

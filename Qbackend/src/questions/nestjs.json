@@ -1,12 +1,1602 @@
 [
-  { "difficulty": "Easy", "question": "What is NestJS and what is it built on top of?" },
-  { "difficulty": "Easy", "question": "What are modules in NestJS?" },
-  { "difficulty": "Medium", "question": "What is the difference between @Injectable() and @Controller() in NestJS?" },
-  { "difficulty": "Medium", "question": "What are Guards in NestJS?" },
-  { "difficulty": "Medium", "question": "What are Interceptors in NestJS?" },
-  { "difficulty": "Medium", "question": "What are Pipes in NestJS and how are they used for validation?" },
-  { "difficulty": "Hard", "question": "How does NestJS implement dependency injection?" },
-  { "difficulty": "Hard", "question": "What are microservices in NestJS and how are they communicated?" },
-  { "difficulty": "Hard", "question": "How do you implement WebSocket support in NestJS?" },
-  { "difficulty": "Hard", "question": "What is CQRS pattern in NestJS?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is NestJS and what is it built on top of?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What are modules in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a controller in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a provider in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a service in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Module() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Controller() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Injectable() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Get() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Post() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Put() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Delete() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Patch() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you install the NestJS CLI?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What command creates a new NestJS project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the Nest CLI's generate command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default file structure of a NestJS application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the main.ts file used for in a NestJS project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the AppModule in a NestJS application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the bootstrap function in main.ts?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is TypeScript's role in NestJS development?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Is it possible to use plain JavaScript with NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Param() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Body() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Query() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Headers() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a DTO (Data Transfer Object) in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why are DTOs commonly used with class-validator in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Req() and @Res() decorators?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What HTTP framework does NestJS use under the hood by default?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can NestJS run on top of Fastify instead of Express?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the NestFactory.create() method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you run a NestJS application in development mode?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the package.json start:dev script in a NestJS project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a route handler in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of route parameters in a NestJS controller?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you define a route prefix for a controller?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @HttpCode() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Header() decorator for setting response headers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a NestJS middleware, at a basic level?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the exports array in a NestJS module?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the imports array in a NestJS module?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the providers array in a NestJS module?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the controllers array in a NestJS module?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is dependency injection, at a basic conceptual level?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How does NestJS know which provider to inject into a constructor?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a constructor-based injection in NestJS services?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a singleton provider in NestJS by default?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Global() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What testing framework does NestJS use by default?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the .spec.ts file naming convention in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the NestJS Swagger module?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you enable CORS in a NestJS application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ValidationPipe in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of environment variables in a NestJS app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What package is commonly used to manage configuration in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the ConfigModule in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a NestJS exception filter, at a basic level?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What built-in HTTP exceptions does NestJS provide (e.g., NotFoundException)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @UseGuards() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @UsePipes() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @UseInterceptors() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @UseFilters() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you return a custom HTTP status code from a controller method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of async/await support in NestJS route handlers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Can a NestJS route handler return a Promise?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of NestJS's built-in Logger class?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access route parameters like :id in a NestJS controller?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Version() decorator for API versioning?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What databases does NestJS commonly integrate with?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is TypeORM and how does it relate to NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Prisma and how does it relate to NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Mongoose and how is it used with NestJS for MongoDB?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @nestjs/config package?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @nestjs/platform-express package?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @nestjs/testing package?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you serve static files in a NestJS application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of global prefixes in a NestJS app (app.setGlobalPrefix)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the NestJS lifecycle hook OnModuleInit?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the NestJS lifecycle hook OnApplicationBootstrap?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a synchronous and asynchronous provider in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of NestJS's built-in pipe ParseIntPipe?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of NestJS's built-in pipe ParseUUIDPipe?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you generate a new module, controller, and service using the Nest CLI in one command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the nest-cli.json configuration file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does 'convention over configuration' mean in the context of NestJS's architecture?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a shared module in a NestJS application's structure?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access request query parameters in a controller method?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of app.listen() in a NestJS application's bootstrap function?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @All() decorator in a NestJS controller?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Redirect() decorator?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @HttpCode() decorator versus the default status codes NestJS returns?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a NestJS 'feature module' and the root 'AppModule'?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the useContainer option when integrating class-validator with NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access the underlying Express or Fastify request object inside a NestJS route handler?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @Optional() decorator in NestJS dependency injection?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an interface and an abstract class when used as an injection token in NestJS?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you disable the default NestJS request logging middleware?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the NestJS CLI's build command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between running a NestJS app with ts-node versus a compiled build?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the tsconfig.json file in a NestJS project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you enable strict TypeScript type checking in a NestJS project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the .env file when combined with @nestjs/config?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access a specific configuration value using the ConfigService?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @nestjs/platform-fastify package?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a NestJS 'application context' created without a network listener and a full HTTP application?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you create a standalone NestJS application without an HTTP server using createApplicationContext()?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the NestJS CLI's info command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @nestjs/common package in a NestJS project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @nestjs/core package versus @nestjs/common?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you view all registered routes in a NestJS application during startup?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the NO_COLOR or logger options when bootstrapping a NestJS app?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you disable the default NestJS startup banner/logs?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of a barrel file (index.ts) in organizing a NestJS module's exports?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you share a common DTO between multiple modules in a NestJS project?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @nestjs/mapped-types package's OmitType and PickType utilities?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a NestJS 'feature' folder structure and a 'layer-based' folder structure?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you access the NestJS application instance to manually configure global pipes after creation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of app.useGlobalPipes() versus registering a pipe in providers with APP_PIPE?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the @nestjs/cli generated .gitignore and eslintrc files in a new project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between @Injectable() and @Controller() in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Guards in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Interceptors in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Pipes in NestJS and how are they used for validation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Exception Filters in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Middleware in NestJS and how does it differ from Guards?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the request lifecycle in NestJS, and in what order do middleware, guards, interceptors, and pipes execute?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a global pipe and a route-level pipe?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between built-in pipes and custom pipes in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a custom validation pipe in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of class-validator decorators like @IsString() and @IsNotEmpty()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of class-transformer in conjunction with NestJS DTOs?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does the ValidationPipe use class-validator and class-transformer under the hood?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between whitelist and forbidNonWhitelisted options in ValidationPipe?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a custom Guard, and how do you implement the CanActivate interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement role-based access control using Guards in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the ExecutionContext object passed to Guards and Interceptors?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do Interceptors use RxJS operators to transform responses?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the NestInterceptor interface's intercept method?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a logging interceptor that measures request duration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a custom Exception Filter, and how do you implement the ExceptionFilter interface?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you catch and handle a specific exception type using @Catch()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a global exception filter and a controller-scoped one?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does NestJS's built-in HttpExceptionFilter format error responses by default?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a custom decorator and a built-in parameter decorator in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you create a custom parameter decorator using createParamDecorator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @SetMetadata() decorator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use Reflector to read custom metadata inside a Guard?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of composing multiple decorators using applyDecorators()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between constructor-based and property-based dependency injection in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a custom provider in NestJS, and how do you define one using useValue, useClass, or useFactory?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the useFactory provider pattern, and when would you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a provider token and a provider class in NestJS's DI system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you inject a provider using a custom token instead of a class reference?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @Inject() decorator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a dynamic module in NestJS, and how does forRoot() or forRootAsync() work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a static module and a dynamic module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure a module conditionally based on the environment using a dynamic module?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @nestjs/config package's forRoot method for loading environment variables?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you validate environment variables at application startup using Joi or class-validator with ConfigModule?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of NestJS's module re-exporting pattern?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does circular dependency occur between NestJS modules, and how do you resolve it using forwardRef()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the OnModuleDestroy lifecycle hook?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between OnApplicationBootstrap and OnModuleInit in terms of execution timing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a request-scoped provider in NestJS, and what are the performance implications?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between DEFAULT, REQUEST, and TRANSIENT provider scopes in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @Scope() decorator on an @Injectable() provider?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does NestJS handle asynchronous configuration loading before the application starts?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of NestJS's built-in caching module (CacheModule)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement response caching for a specific route using an interceptor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the NestJS Task Scheduling module (@nestjs/schedule)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you define a cron job using the @Cron() decorator in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of NestJS's built-in Passport integration for authentication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement JWT authentication in a NestJS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an AuthGuard and a custom strategy in Passport-based NestJS authentication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement refresh token rotation in a NestJS authentication system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @nestjs/jwt package's JwtService?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you protect specific routes while leaving others public using a global guard with metadata?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @Public() custom decorator pattern often used with global auth guards?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle file uploads in NestJS using the @nestjs/platform-express FileInterceptor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of Multer in the context of NestJS file upload handling?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you validate uploaded file types and sizes in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of NestJS's built-in serialization using ClassSerializerInterceptor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you exclude sensitive fields from an API response using @Exclude() from class-transformer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @nestjs/swagger module for generating API documentation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you document a DTO's properties for Swagger using @ApiProperty()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @ApiTags() and @ApiOperation() decorators in Swagger integration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set up global API versioning in a NestJS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between URI-based, header-based, and media-type-based API versioning in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you structure a NestJS project using a feature-module architecture for scalability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a shared/common module for cross-cutting concerns like logging and interceptors?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you write a unit test for a NestJS service using the Test module from @nestjs/testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of createTestingModule() in NestJS testing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you mock a provider's dependency when unit testing a NestJS service?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between unit testing and end-to-end (e2e) testing in a NestJS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you write an e2e test for a NestJS controller using supertest?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @nestjs/testing module's overrideProvider method?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you test a Guard in isolation without bootstrapping the full application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of NestJS's TerminusModule for health checks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a database health check endpoint using @nestjs/terminus?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous and asynchronous exception handling in NestJS filters?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle validation errors globally and return a consistent error response format?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the NestJS built-in pipe DefaultValuePipe?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement pagination in a NestJS REST API using query parameters?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of custom repository patterns when using TypeORM with NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you inject a TypeORM repository into a NestJS service using @InjectRepository()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of transactions in TypeORM, and how would you use them within a NestJS service?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle database migrations in a NestJS project using TypeORM or Prisma?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @Injectable() decorator's providedIn option in comparison to other DI frameworks (conceptually)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you implement a global interceptor that wraps every successful response in a standard envelope format?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the map() and catchError() RxJS operators when writing a NestJS interceptor?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a caching interceptor that stores responses keyed by the request URL?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between using a Guard versus a Middleware to restrict access to a route?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you access route-specific metadata inside an Interceptor using the Reflector?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of chaining multiple Guards on a single route, and in what order do they execute?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement an API key authentication guard for specific routes in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the PassportStrategy base class when implementing a custom authentication strategy?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a local authentication strategy (username/password) using Passport in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of session-based authentication in NestJS, and how does it differ from JWT-based authentication?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement password hashing and comparison securely in a NestJS authentication service?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a NestJS custom repository provider to encapsulate complex database queries?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle soft deletes in a NestJS application using TypeORM?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of database seeding, and how would you implement it in a NestJS project?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement optimistic locking for concurrent updates using TypeORM in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @nestjs/event-emitter package for handling in-process events?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you decouple side effects from a service method using NestJS's EventEmitter2 integration?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between synchronous event emission and asynchronous event handling in NestJS's event system?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a request timeout using an interceptor and RxJS's timeout operator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a global HTTP exception filter that logs errors before formatting the response?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a custom pipe that transforms an incoming date string into a Date object?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @nestjs/bull package for background job processing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you define and process a queued job using Bull in a NestJS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a producer and a consumer/processor in a Bull queue integration with NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement retry logic and exponential backoff for failed jobs in a NestJS Bull queue?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @Processor() and @Process() decorators in @nestjs/bull?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you monitor and manage a Bull queue's job status in a NestJS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of NestJS's built-in support for server-sent events (SSE)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a streaming endpoint using Server-Sent Events in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between REST, GraphQL, and gRPC as API styles supported by NestJS, and when would you choose each?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you structure DTOs and validation rules differently for creating versus updating a resource?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of PartialType from @nestjs/mapped-types when defining an update DTO?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement request throttling per-user versus per-IP using @nestjs/throttler?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a custom validation decorator created with registerDecorator from class-validator?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement cross-field validation (e.g., password confirmation) in a NestJS DTO?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the @Transform() decorator from class-transformer when processing DTO fields?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you handle nested DTO validation using @ValidateNested() and @Type()?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a custom ArgumentMetadata check inside a PipeTransform?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between registering a Guard, Pipe, Interceptor, or Filter globally via app.use* methods versus via the APP_GUARD/APP_PIPE/APP_INTERCEPTOR/APP_FILTER provider tokens?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement conditional validation where a field is required only if another field has a specific value?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the skipMissingProperties option in NestJS's ValidationPipe?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a custom async validator that checks for uniqueness against the database?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the transformOptions setting in ValidationPipe for controlling how DTOs are instantiated?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you handle file upload validation for multiple files using FilesInterceptor in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a custom decorator to extract the authenticated user from the request object?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement API response compression in a NestJS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the helmet middleware when securing a NestJS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement request logging middleware that captures method, URL, and response time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a NestJS interceptor to strip null or undefined fields from API responses?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you structure error codes and messages consistently across a large NestJS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing internationalization (i18n) in a NestJS application using nestjs-i18n?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a health check that verifies both database connectivity and external API availability?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a readiness probe versus a liveness probe in the context of NestJS's TerminusModule?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement soft rate limiting warnings before hard-blocking a client in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a custom guard combined with Redis to enforce distributed rate limiting across multiple NestJS instances?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement request context propagation (e.g., using AsyncLocalStorage) to track a request ID through nested service calls in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a custom validation pipe that returns field-specific error messages formatted for a frontend form library?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing conditional module imports based on the NODE_ENV in a NestJS application?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a versioned DTO strategy so multiple API versions can coexist without duplicating validation logic?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a retry interceptor using RxJS's retryWhen operator for transient downstream failures?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement request deduplication for idempotent POST requests using an interceptor and a cache store?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a custom logger provider that writes structured JSON logs instead of NestJS's default console output?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement graceful draining of in-flight requests during a NestJS application shutdown?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a circuit breaker using a library like opossum within a NestJS service layer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement schema validation for incoming webhook payloads with signature verification in NestJS?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing a custom decorator to enforce API key scopes for different route handlers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement response streaming for large file downloads in a NestJS controller?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing ETag-based caching for a NestJS REST API to reduce bandwidth usage?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement a NestJS interceptor that automatically retries a failed database query with exponential backoff?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of implementing request context isolation to prevent data leakage between concurrent requests in a request-scoped provider?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How would you implement audit logging that records who changed what and when across all mutating endpoints in a NestJS application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does NestJS implement dependency injection?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are microservices in NestJS and how are they communicated?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement WebSocket support in NestJS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is CQRS pattern in NestJS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does NestJS's IoC container resolve and instantiate a dependency graph at application startup?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between NestJS's module resolution and how a plain TypeScript DI container would work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does NestJS handle circular dependencies between providers at the DI container level, and what are the risks of using forwardRef() extensively?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager and lazy module loading in NestJS, and when would you use LazyModuleLoader?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect a NestJS application to support plugin-based extensibility using dynamic modules?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between NestJS's Express adapter and Fastify adapter in terms of performance and middleware compatibility?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you migrate a NestJS application from the Express platform to the Fastify platform, and what are the trade-offs?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of NestJS's microservices transport layer abstraction (@nestjs/microservices)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the different transport strategies supported by NestJS microservices (TCP, Redis, NATS, Kafka, gRPC, RabbitMQ)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the message pattern (@MessagePattern()) differ from the event pattern (@EventPattern()) in NestJS microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement request-response communication versus fire-and-forget event-based communication between NestJS microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a hybrid application in NestJS that combines an HTTP server with a microservice transport?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement gRPC-based communication between NestJS microservices, including defining .proto files?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of Kafka's consumer groups when integrating Kafka with NestJS microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you ensure message ordering and exactly-once processing semantics in a NestJS microservice using Kafka or RabbitMQ?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a Dead Letter Queue (DLQ), and how would you implement one in a NestJS RabbitMQ-based microservice?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement distributed tracing across multiple NestJS microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a message broker versus direct service-to-service HTTP calls in a microservices architecture built with NestJS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you handle service discovery in a NestJS microservices deployment running on Kubernetes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between synchronous inter-service communication and event-driven architecture in a NestJS-based system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does NestJS implement WebSocket gateways using the @WebSocketGateway() decorator?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the socket.io adapter and the native ws adapter for NestJS WebSockets?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement authentication for WebSocket connections in a NestJS gateway?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the @SubscribeMessage() decorator in a NestJS WebSocket gateway?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you broadcast a message to all connected WebSocket clients versus a specific room in NestJS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the OnGatewayConnection and OnGatewayDisconnect lifecycle interfaces in a WebSocket gateway?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you scale WebSocket connections across multiple NestJS instances using a Redis adapter?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the CQRS (Command Query Responsibility Segregation) pattern, and how does the @nestjs/cqrs package implement it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between a Command, a Query, and an Event in NestJS's CQRS module?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does the CommandBus route a command to its corresponding handler in NestJS's CQRS implementation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of Sagas in the @nestjs/cqrs module, and how do they orchestrate multi-step business processes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement event sourcing alongside CQRS in a NestJS application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between an event handler and a saga in terms of side effects and orchestration logic?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design aggregate roots and domain events when implementing CQRS in a NestJS-based domain-driven design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of introducing CQRS into a NestJS application versus using a traditional layered service architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement eventual consistency between the read and write models in a CQRS-based NestJS application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a read model projection, and how would you keep it in sync with write-side events?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement idempotency for command handlers in a distributed NestJS microservices system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of interceptors in implementing cross-cutting concerns like distributed tracing or metrics collection in NestJS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a custom decorator combined with an interceptor to enforce rate limiting in NestJS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the @nestjs/throttler package, and how does it implement rate limiting internally?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a custom guard that performs asynchronous authorization checks against an external service?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between AOT (ahead-of-time) metadata compilation and runtime reflection in NestJS's use of TypeScript decorators?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does NestJS use the reflect-metadata library to implement its decorator-based architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the performance impact of extensive use of request-scoped providers in a high-throughput NestJS application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you profile and optimize the startup time of a large NestJS application with many modules?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the NestJS Fastify platform's schema-based serialization for improving response performance?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a custom exception filter that integrates with an external error-tracking service like Sentry?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing a correlation ID middleware for tracing requests across a NestJS microservices architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a multi-tenant NestJS application, and what are the trade-offs of using request-scoped providers for tenant context?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between schema-per-tenant and database-per-tenant multi-tenancy strategies in a NestJS + TypeORM application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement GraphQL support in NestJS using the @nestjs/graphql module?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between the code-first and schema-first approaches in NestJS's GraphQL integration?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does NestJS's GraphQL module resolve field-level dependencies using resolvers and DataLoader to avoid N+1 query problems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of GraphQL subscriptions in NestJS, and how do they relate to WebSocket gateways?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement field-level authorization in a NestJS GraphQL resolver using Guards?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a federated GraphQL architecture, and how does NestJS support Apollo Federation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a NestJS application's module boundaries to align with Domain-Driven Design bounded contexts?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the Unit of Work pattern, and how would you implement it with TypeORM transactions in NestJS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you handle distributed transactions across multiple microservices in a NestJS-based system using the Saga pattern?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the two-phase commit problem in distributed systems, and why do NestJS microservices typically favor sagas over it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement circuit breaker logic for inter-service calls in a NestJS microservices architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a retry-with-backoff strategy for handling transient failures in NestJS microservice communication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement health checks and readiness/liveness probes for a NestJS application deployed on Kubernetes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of graceful shutdown hooks (enableShutdownHooks) in a NestJS application running in a container?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a custom logger that integrates with a structured logging platform in a production NestJS deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the NestJS ModuleRef class, and how would you use it to resolve providers dynamically at runtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a plugin system in NestJS where third-party modules can register additional providers dynamically?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between NestJS's built-in dependency injection and using a service locator anti-pattern via ModuleRef?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you secure a NestJS microservices architecture where services communicate over an internal network, including mTLS considerations?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of API gateway patterns in front of a NestJS microservices architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement request aggregation in an API gateway built with NestJS that fans out to multiple downstream microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between orchestration and choreography in a NestJS-based event-driven microservices system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you version a NestJS microservices API contract to avoid breaking downstream consumers during a schema change?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of contract testing (e.g., Pact) in a NestJS microservices ecosystem, and how does it differ from integration testing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement distributed caching (e.g., Redis) shared across multiple NestJS microservice instances?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of cache invalidation strategies when using CacheModule across a horizontally scaled NestJS deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a NestJS application to support blue-green or canary deployments with zero downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of feature flags in a NestJS application, and how would you implement dynamic feature toggling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement request validation and transformation performance optimizations for a NestJS API handling very high request volume?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement a custom transport strategy for NestJS microservices when none of the built-in transports fit your infrastructure?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the ClientProxy class, and how does it differ from directly injecting a microservice client?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement request/response correlation when using an asynchronous message broker transport in NestJS microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a NestJS custom decorator that combines @UseGuards() and @SetMetadata() into a single reusable decorator?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect shared DTOs and interfaces across multiple NestJS microservices in a monorepo using Nx or Lerna?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a shared library package in an Nx monorepo containing multiple NestJS applications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement schema validation for messages exchanged between NestJS microservices using a broker like Kafka?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing backpressure handling when a NestJS microservice consumer can't keep up with incoming message volume?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design compensating transactions for a saga when a downstream step fails in a NestJS-based distributed workflow?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing outbox pattern alongside CQRS in a NestJS application to guarantee reliable event publishing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you avoid dual-write inconsistency issues when a NestJS service both updates a database and publishes an event?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between choreography-based sagas and orchestration-based sagas in terms of NestJS module design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement multi-region failover for a NestJS microservices deployment with stateful WebSocket connections?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of sticky sessions when scaling a NestJS WebSocket gateway behind a load balancer?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement zero-downtime schema migrations for a NestJS service backed by a shared database across multiple microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a NestJS-based event-driven architecture to handle out-of-order event delivery from a message broker?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing schema evolution strategies (e.g., Avro schema registry) for Kafka-based NestJS microservices?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement mutual TLS authentication between a NestJS gRPC client and server?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing a bulkhead pattern to isolate resource pools between different downstream dependencies in a NestJS service?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a NestJS application's dependency injection graph to support hot-swapping an implementation at runtime for A/B testing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing distributed locks (e.g., via Redis Redlock) to coordinate cron jobs across multiple NestJS instances?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you prevent duplicate scheduled job execution when running multiple replicas of a NestJS application with @nestjs/schedule?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing a saga timeout mechanism to handle steps that never complete in a NestJS CQRS-based workflow?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement schema-first GraphQL federation gateway aggregation across multiple independently deployed NestJS services?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing a token bucket algorithm manually for custom rate limiting logic beyond what @nestjs/throttler offers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design cross-service correlation of distributed traces using OpenTelemetry instrumentation in a NestJS microservices architecture?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing schema compatibility checks in a CI pipeline before deploying a breaking change to a shared NestJS microservice contract?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement leader election among multiple NestJS instances to ensure only one runs a particular background task?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing a hexagonal (ports and adapters) architecture within a NestJS application's module structure?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you decide between using NestJS's built-in CQRS module versus rolling your own lightweight command/query separation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement multi-level caching (in-memory plus distributed Redis) with cache coherence across a horizontally scaled NestJS deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing a dead-letter reprocessing pipeline for failed events in a NestJS event-driven system?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you implement schema versioning for WebSocket message payloads to support backward compatibility with older connected clients?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing adaptive concurrency limits (e.g., based on latency) rather than fixed rate limits for a NestJS service under variable load?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect a NestJS-based BFF (Backend for Frontend) layer that aggregates multiple downstream microservices while isolating their failures?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of implementing a stateful reconciliation loop, similar to a Kubernetes operator pattern, within a long-running NestJS service?"
+  }
 ]

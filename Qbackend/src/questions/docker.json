@@ -1,17 +1,1202 @@
 [
-  { "difficulty": "Easy", "question": "What is Docker and what problem does it solve?" },
-  { "difficulty": "Easy", "question": "What is the difference between a Docker image and a Docker container?" },
-  { "difficulty": "Easy", "question": "What is a Dockerfile?" },
-  { "difficulty": "Easy", "question": "What is Docker Hub?" },
-  { "difficulty": "Medium", "question": "What is the difference between COPY and ADD in a Dockerfile?" },
-  { "difficulty": "Medium", "question": "What is Docker Compose and when do you use it?" },
-  { "difficulty": "Medium", "question": "What are Docker volumes and why are they used?" },
-  { "difficulty": "Medium", "question": "What is the difference between ENTRYPOINT and CMD in Dockerfile?" },
-  { "difficulty": "Medium", "question": "How do Docker networks work? Explain bridge, host, and overlay networks." },
-  { "difficulty": "Medium", "question": "What is a multi-stage build in Docker?" },
-  { "difficulty": "Hard", "question": "How do you optimize Docker image size?" },
-  { "difficulty": "Hard", "question": "Explain Docker Swarm and how it compares to Kubernetes." },
-  { "difficulty": "Hard", "question": "How do you secure a Docker container?" },
-  { "difficulty": "Hard", "question": "What is Docker layer caching and how does it work?" },
-  { "difficulty": "Hard", "question": "How would you monitor resource usage of Docker containers in production?" }
+  {
+    "difficulty": "Easy",
+    "question": "What is Docker and what problem does it solve?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a Docker image and a Docker container?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Dockerfile?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Docker Hub?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Docker registry?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a virtual machine and a Docker container?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What command is used to list running containers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What command is used to list all containers, including stopped ones?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the docker run command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the docker pull command do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the docker push command do?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the docker build command?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the docker ps command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the docker exec command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the docker stop command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between docker stop and docker kill?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the docker rm command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the docker rmi command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the docker logs command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a base image in Docker?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the FROM instruction used for in a Dockerfile?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the RUN instruction used for in a Dockerfile?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the CMD instruction used for in a Dockerfile?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the EXPOSE instruction used for in a Dockerfile?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the WORKDIR instruction used for in a Dockerfile?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the ENV instruction used for in a Dockerfile?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of the .dockerignore file?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default network driver in Docker?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a container's lifecycle?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between docker start and docker run?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Docker Desktop?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What operating systems does Docker support?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of tagging a Docker image?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you name/tag a Docker image?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the latest tag in Docker and why can it be risky?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Docker Engine?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Docker daemon?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the Docker CLI?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a container port mapping?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you map a container port to a host port?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of docker inspect?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of docker attach?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between docker attach and docker exec?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an anonymous volume?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a bind mount?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between a bind mount and a volume?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Docker Compose used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What file does Docker Compose use by default?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of docker-compose up?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of docker-compose down?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a Docker network?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the default bridge network in Docker?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of docker network ls?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is container isolation?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an image layer?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "Why are Docker images made of layers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of docker images?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an official image and a community image on Docker Hub?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the docker-compose.yml file used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a container name and how is it different from a container ID?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of docker cp?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between docker save and docker export?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between docker load and docker import?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the docker commit command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a detached container (-d flag)?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What does the -it flag do when running a container?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of restart policies in Docker?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What restart policies does Docker support?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between stopping and pausing a container?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the docker pause / docker unpause command used for?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is container orchestration?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of health checks in Docker?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the HEALTHCHECK instruction in a Dockerfile?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is a container's exit code and what does it indicate?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of environment variables in containers?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "How do you pass environment variables to a container at runtime?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is an image digest?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the difference between an image tag and an image digest?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is Docker Content Trust?"
+  },
+  {
+    "difficulty": "Easy",
+    "question": "What is the purpose of docker system prune?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between COPY and ADD in a Dockerfile?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is Docker Compose and when do you use it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are Docker volumes and why are they used?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between ENTRYPOINT and CMD in Dockerfile?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do Docker networks work? Explain bridge, host, and overlay networks."
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is a multi-stage build in Docker?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the --link flag and why is it deprecated?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Docker Compose handle service dependencies with depends_on?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker-compose up and docker-compose up -d?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you scale services using Docker Compose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between named volumes and bind mounts in terms of use cases?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Docker handle DNS resolution between containers on the same network?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker network create command and its driver options?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you persist data for a database container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker exec and docker attach in terms of process isolation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of build arguments (ARG) in a Dockerfile, and how do they differ from ENV?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you reduce the number of layers in a Dockerfile?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the significance of layer caching order in a Dockerfile?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle secrets in Docker without baking them into the image?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker-compose.yml and docker-compose.override.yml?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does the VOLUME instruction in a Dockerfile work?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a stateless and stateful container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you connect two containers running on different Docker networks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker network connect and docker network disconnect commands?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between host networking and bridge networking in terms of performance and isolation?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure a container to automatically restart on failure?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker stats and docker top?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you limit CPU and memory usage for a container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the --memory and --cpus flags in docker run?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you debug a container that keeps crashing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of build context in docker build?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How can a large build context slow down the build process?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between shell form and exec form of CMD/ENTRYPOINT?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you override the ENTRYPOINT of an image at runtime?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker-compose.yml networks section?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use environment files (.env) with Docker Compose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker-compose build and docker-compose up --build?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Docker Compose manage volumes across multiple services?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the depends_on condition: service_healthy option in Compose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you expose multiple ports for a single container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between EXPOSE in a Dockerfile and the -p flag at runtime?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of a .dockerignore file and how does it improve build performance?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use multi-stage builds to separate build and runtime dependencies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between Alpine-based and Debian-based images in terms of size and compatibility?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you copy files from a build stage to the final stage in a multi-stage Dockerfile?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker image history command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you inspect the layers of an image and their sizes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker container prune and docker system prune?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you clean up unused Docker resources safely?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of labels in Docker images and containers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you add metadata to a Docker image using the LABEL instruction?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a private and a public Docker registry?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set up and push images to a private Docker registry?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of Docker Content Trust and image signing?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure logging drivers in Docker?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the default logging driver in Docker and what are its limitations?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure log rotation for Docker containers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker events command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you troubleshoot a container that won't start?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between exit code 0, 1, and 137 for a container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Docker handle signal propagation to processes inside a container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of docker-compose logs and how do you follow logs in real time?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use Docker Compose profiles to control which services start?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker-compose.yml version 2 and version 3 syntax?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you pass secrets to a container using Docker Compose secrets?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the tmpfs mount type in Docker?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure a read-only file system for a container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker run --rm and a normal container run?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use build caching effectively in CI/CD pipelines with Docker?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the --no-cache flag in docker build?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you reduce build time using layer caching strategies?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between COPY --from in multi-stage builds vs. copying from the host?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle file permissions and ownership inside a Docker container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the USER instruction in a Dockerfile?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "Why is it recommended not to run containers as root?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you switch users inside a running container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between UID/GID mapping on the host vs. inside a container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure a container to use a non-default DNS server?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the --add-host flag in docker run?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set up container-to-container communication using Docker Compose service names?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an overlay network and a bridge network in a multi-host setup?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does Docker Swarm use overlay networks for service discovery?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker network inspect command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you troubleshoot network connectivity issues between containers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker-compose exec and docker exec?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you pass build-time variables securely without leaking them into the final image?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of BuildKit in Docker and how does it improve builds?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you enable BuildKit for Docker builds?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between docker buildx and the classic builder?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you build multi-architecture images using Docker Buildx?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the --platform flag in Docker builds?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle image versioning strategies in a CI/CD pipeline?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between semantic versioning tags and latest tag in production?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set resource limits in a Docker Compose file?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the restart: unless-stopped policy in Compose?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you use Docker health checks to determine container readiness?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between liveness and readiness in the context of Docker health checks?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure a container to wait for a dependent service to be ready before starting?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker wait command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you export environment-specific configuration using multiple Compose files?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between COPY and using a volume mount during development?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you set up hot-reloading for a development container?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker-compose.override.yml file in local development?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you debug inside a running container using docker exec -it?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker diff command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you inspect changes made to a container's filesystem since it started?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between an image's layers and a container's writable layer?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How does copy-on-write work in Docker's storage drivers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What are the common Docker storage drivers and how do they differ (overlay2, aufs, devicemapper)?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you check which storage driver Docker is currently using?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker system df command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you monitor disk usage consumed by Docker images, containers, and volumes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between a volume driver plugin and the default local volume driver?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you back up and restore data stored in a Docker volume?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of the docker volume prune command?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you share a volume between multiple containers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the difference between --volumes-from and named volumes?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you configure a container to use an external NFS volume?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "What is the purpose of init systems like tini inside containers?"
+  },
+  {
+    "difficulty": "Medium",
+    "question": "How do you handle zombie processes in Docker containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you optimize Docker image size?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Explain Docker Swarm and how it compares to Kubernetes."
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you secure a Docker container?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Docker layer caching and how does it work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you monitor resource usage of Docker containers in production?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Docker implement container isolation using namespaces and cgroups?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What Linux namespaces does Docker use and what does each isolate?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of cgroups in limiting container resource usage?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Docker's union filesystem (overlay2) work under the hood?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the security risks of running privileged containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the --cap-add and --cap-drop flags, and how do you use them to reduce a container's attack surface?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do seccomp profiles restrict system calls available to a container?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is AppArmor and how does it complement Docker's security model?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you scan Docker images for known vulnerabilities in a CI/CD pipeline?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the principle of least privilege and how does it apply to container design?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you prevent secrets from leaking into image layers during a build?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a distroless image and why might you use one?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement image signing and verification in a production pipeline?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between Docker Swarm mode and standalone Docker?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Docker Swarm handle service discovery and load balancing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is a Swarm manager node and how does leader election work?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Raft consensus algorithm's role in Docker Swarm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Kubernetes' pod networking model differ from Docker's default bridge networking?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs between using Docker Swarm and Kubernetes for orchestration?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you perform rolling updates in Docker Swarm?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of Docker stacks and how do they relate to Compose files?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement zero-downtime deployments with Docker?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the CAP theorem's relevance to distributed container orchestration systems?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you design a highly available multi-node Docker Swarm cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between horizontal and vertical scaling of containerized services?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Docker handle out-of-memory (OOM) situations for containers, and what is the OOM killer's role?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you diagnose and fix a memory leak in a containerized application?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the performance implications of running many containers on a single host?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you benchmark and profile a containerized application's resource usage?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between docker stats and external monitoring tools like Prometheus and cAdvisor for container observability?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you set up centralized logging for containers using the ELK or EFK stack?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of Fluentd or Fluent Bit in a container logging pipeline?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement distributed tracing across microservices running in containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a service mesh like Istio or Linkerd in a containerized environment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does mutual TLS (mTLS) work in a service mesh to secure container-to-container traffic?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement network segmentation between containers to limit lateral movement in case of a breach?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is container escape and how can it be mitigated?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you audit a running container for compliance with security benchmarks like CIS Docker Benchmark?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of tools like Docker Bench for Security?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement read-only root filesystems in production containers without breaking applications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between rootless Docker and running Docker with a non-root user inside the container?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does rootless Docker improve host security?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the challenges of running stateful applications like databases in containers at scale?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement leader election for a stateful service running in multiple container replicas?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of StatefulSets in Kubernetes versus how Swarm handles stateful services?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you design a CI/CD pipeline that builds, tests, scans, and deploys Docker images automatically?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of image layer squashing and when might you use it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you reduce attack surface by minimizing installed packages in a production image?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between build-time and runtime security scanning of containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement network policies to restrict traffic between services in an orchestrated environment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a bastion or jump container in securing access to a Docker environment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle certificate rotation for TLS-secured Docker daemon communication?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the Docker daemon's attack surface, and how do you secure the Docker socket (/var/run/docker.sock)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "Why is mounting the Docker socket into a container considered risky, and how would you mitigate it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement resource quotas across multiple teams sharing a Docker host or cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between docker run --pid=host and default PID namespace isolation, and what are the security implications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Docker handle IPv6 networking, and what considerations apply when enabling it?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the docker context command for managing multiple Docker environments?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you set up a Docker daemon to be accessible remotely over TLS securely?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between an image's manifest and a manifest list (multi-arch manifest)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you troubleshoot a \"no space left on device\" error caused by Docker's storage growth?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the overlay2 storage driver's upper, lower, merged, and work directories?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you migrate a running production workload from Docker Swarm to Kubernetes with minimal downtime?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of an init process (PID 1) inside a container, and why does it matter for signal handling?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement graceful shutdown for a containerized application receiving SIGTERM?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between eager and lazy pulling of image layers in large-scale deployments?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design a blue-green deployment strategy using Docker containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of canary deployments and how can they be implemented with containerized services?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle configuration drift between container images across environments (dev, staging, prod)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of immutable infrastructure principles in the context of Docker images?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement automated rollback of a failed container deployment?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the significance of image provenance and SBOM (Software Bill of Materials) in container security?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you generate and use an SBOM for a Docker image?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between vulnerability scanning at build time versus runtime for containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you secure inter-container communication when using a custom bridge network?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of network policies in a Docker Swarm overlay network with encryption enabled?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does Docker Swarm's --opt encrypted flag work for overlay networks?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What are the trade-offs of using host networking mode for performance-critical containerized applications?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle time synchronization issues between the host and containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the docker manifest command in multi-architecture image publishing?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you architect a Docker-based CI runner that safely builds untrusted code?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is Docker-in-Docker (DinD) and what are its risks compared to using the host's Docker socket?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement least-privilege IAM roles for containers that need to access cloud resources (e.g., AWS ECS/Fargate)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between ECS, EKS, and self-managed Docker Swarm for running containers in AWS?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you implement autoscaling for containerized workloads based on custom metrics?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of a container registry vulnerability scanning policy (e.g., blocking deploy on critical CVEs)?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you handle multi-tenancy security concerns when multiple teams share the same Docker hosts?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the difference between namespace-based isolation and full virtualization (e.g., Kata Containers, gVisor) for stronger container isolation?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How does gVisor provide an additional security boundary compared to standard runc containers?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of the OCI (Open Container Initiative) specifications, and how do they ensure interoperability between container runtimes?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you troubleshoot slow container startup times in a production cluster?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the role of a container's cgroup v2 versus cgroup v1 in modern Docker resource management?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How do you design a disaster recovery strategy for stateful containerized services running in production?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "What is the purpose of chaos engineering practices (e.g., killing random containers) in validating container resilience?"
+  },
+  {
+    "difficulty": "Hard",
+    "question": "How would you design an end-to-end observability stack (metrics, logs, traces) for a large-scale containerized microservices architecture?"
+  }
 ]
