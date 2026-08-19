@@ -72,8 +72,9 @@ app.use("/api/questions", questionRoutes);
 app.use("/api/public", publicLimiter, publicRoutes);
 
 // ─── Health Check ────────────────────────────────────────────────────────────
+app.get("/health", (req, res) => res.json({ status: "ok", version: "2.0" }));
 app.get("/api/health", (req, res) => {
-  res.json({ success: true, message: "QBank API is running 🚀", timestamp: new Date() });
+  res.json({ success: true, message: "chandan QBank API is running 🚀", timestamp: new Date(), status: "ok" });
 });
 
 // ─── 404 Handler ─────────────────────────────────────────────────────────────
