@@ -109,16 +109,37 @@ const getChallenge = async (userId) => {
 
   const challengeDays = Object.values(days).sort((a, b) => a.day - b.day);
 
-  // 3. Get user progress
+  // 3. Get user progress and rank
   let progress = { currentDay: 1, completedDays: [] };
+  let rank = null;
   if (userId) {
     const user = await User.findById(userId).select("challengeProgress").lean();
     if (user && user.challengeProgress) {
       progress = user.challengeProgress;
     }
+    
+    // Calculate Rank based on number of completed challenge days (coding solved)
+    const currentUserCompletedDaysCount = progress.completedDays.length;
+    const rankAggregation = await User.aggregate([
+      {
+        $project: {
+          completedDaysCount: { $size: { $ifNull: ["$challengeProgress.completedDays", []] } }
+        }
+      },
+      {
+        $match: {
+          completedDaysCount: { $gt: currentUserCompletedDaysCount }
+        }
+      },
+      {
+        $count: "higherRankedUsers"
+      }
+    ]);
+    
+    rank = (rankAggregation[0]?.higherRankedUsers || 0) + 1;
   }
 
-  return { challengeDays, progress };
+  return { challengeDays, progress, rank };
 };
 
 

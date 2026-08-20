@@ -4,10 +4,12 @@ import {
   Flame, Lock, Trophy, CheckCircle2, ChevronRight, ChevronLeft,
   Code2, TrendingUp, Zap, Target, Brain, Sparkles, Gem,
   Calendar, Clock, Star, Flag, Award, ArrowRight,
-  Crown, Rocket, Shield, Swords, Compass, Layers, Check, BarChart3
+  Crown, Rocket, Shield, Swords, Compass, Layers, Check, BarChart3,
+  Medal, Gift, Activity, LayoutList, Building2
 } from "lucide-react";
 import API from "@/utils/api";
 import "@/styles/Challenge100Days.css";
+import "@/styles/Challenge100DaysDash.css";
 
 const TOTAL_DAYS = 100;
 
@@ -19,10 +21,10 @@ const BOTTOM_FEATURES = [
 ];
 
 const PHASES = [
-  { id: 1, upTo: 25, start: 1, name: "Foundation", desc: "Arrays, Strings & Hash Maps", icon: Shield, color: "#6366f1" },
-  { id: 2, upTo: 50, start: 26, name: "Core DSA", desc: "Trees, Graphs & Recursion", icon: Swords, color: "#a78bfa" },
-  { id: 3, upTo: 75, start: 51, name: "Advanced", desc: "DP & Greedy Algorithms", icon: Rocket, color: "#c084fc" },
-  { id: 4, upTo: 100, start: 76, name: "Mastery", desc: "Hard Problems & Interview Prep", icon: Crown, color: "#f59e0b" },
+  { id: 1, upTo: 25, start: 1, name: "Foundation", desc: "Day 1-25", icon: Shield, color: "#6366f1" },
+  { id: 2, upTo: 50, start: 26, name: "Core DSA", desc: "Day 26-50", icon: Code2, color: "#0ea5e9" },
+  { id: 3, upTo: 75, start: 51, name: "Advanced", desc: "Day 51-75", icon: Rocket, color: "#10b981" },
+  { id: 4, upTo: 100, start: 76, name: "Mastery", desc: "Day 76-100", icon: Lock, color: "#f59e0b" },
 ];
 
 const MILESTONES = [
@@ -76,7 +78,7 @@ function SkeletonLoader() {
     <div className="c100-page c100-skeleton-wrap">
       <div className="c100-skeleton-hero" />
       <div className="c100-skeleton-stats">
-        {[1, 2, 3, 4].map((i) => (
+        {[1, 2, 3, 4, 5].map((i) => (
           <div key={i} className="c100-skeleton-stat" />
         ))}
       </div>
@@ -90,6 +92,7 @@ function SkeletonLoader() {
 const Challenge100Days = () => {
   const [challengeData, setChallengeData] = useState([]);
   const [progress, setProgress] = useState({ currentDay: 1, completedDays: [] });
+  const [globalRank, setGlobalRank] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedPhaseFilter, setSelectedPhaseFilter] = useState("all");
   const scrollRef = useRef(null);
@@ -98,6 +101,8 @@ const Challenge100Days = () => {
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const streak = user.streak || 0;
+  const xp = user.xp || 0;
+  const displayRank = globalRank ? `#${globalRank}` : "New";
 
   useEffect(() => {
     API.get("/coding/challenge")
@@ -105,6 +110,9 @@ const Challenge100Days = () => {
         if (res.data?.success) {
           setChallengeData(res.data.data.challengeDays || []);
           setProgress(res.data.data.progress || { currentDay: 1, completedDays: [] });
+          if (res.data.data.rank) {
+            setGlobalRank(res.data.data.rank);
+          }
         }
       })
       .catch((err) => console.error("Failed to fetch challenge data", err))
@@ -136,10 +144,10 @@ const Challenge100Days = () => {
         allAvailableDays.push(100);
       }
     } else {
+      // Dummy visual data if API fails or empty
       allAvailableDays = [1, 2, 3, 4, 5, 6, 7, 100];
     }
 
-    // Sort uniquely
     allAvailableDays = Array.from(new Set(allAvailableDays)).sort((a, b) => a - b);
 
     if (selectedPhaseFilter === "all") {
@@ -160,7 +168,7 @@ const Challenge100Days = () => {
       const text = problem.description.replace(/<[^>]*>/g, "").trim();
       return text.length > 85 ? `${text.slice(0, 82)}…` : text;
     }
-    return "Solve today's curated DSA challenge to level up and unlock the next day.";
+    return "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.";
   };
 
   const handleStart = (problemId, dayNum) => {
@@ -182,7 +190,6 @@ const Challenge100Days = () => {
     }
   };
 
-  // Scroll to active day once content loads
   useEffect(() => {
     if (!loading && challengeData.length > 0) {
       const timer = setTimeout(() => {
@@ -200,6 +207,23 @@ const Challenge100Days = () => {
 
   if (loading) return <SkeletonLoader />;
 
+  // Calendar logic dummy
+  const today = new Date();
+  const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+  const firstDay = new Date(today.getFullYear(), today.getMonth(), 1).getDay();
+  const calendarDays = [];
+  for (let i = 0; i < (firstDay === 0 ? 6 : firstDay - 1); i++) calendarDays.push(null);
+  for (let i = 1; i <= daysInMonth; i++) calendarDays.push(i);
+
+  // Get active problem from data or fallback
+  const activeDayObj = getDayData(activeDay);
+  const realActiveProblem = activeDayObj?.problems?.[0];
+  const activeProblem = {
+    title: realActiveProblem?.title || "Two Sum",
+    difficulty: realActiveProblem?.difficulty || "Easy",
+    _id: realActiveProblem?._id || "64a2f8b5f3a2a30012c4e567"
+  };
+
   return (
     <div className="c100-page">
       {/* Background ambient glow */}
@@ -210,493 +234,429 @@ const Challenge100Days = () => {
       </div>
 
       {/* ─── Responsive Adaptive Banner ─── */}
-      <div
-        className="c100-banner-wrap"
-        draggable={false}
-        onDragStart={(e) => e.preventDefault()}
-      >
+      <div className="c100-banner-wrap" draggable={false} onDragStart={(e) => e.preventDefault()}>
         <picture className="c100-banner-picture">
-          {/* Web / Desktop / Laptop (>= 1024px): 1400x400 */}
-          <source
-            media="(min-width: 1024px)"
-            srcSet="https://ik.imagekit.io/cjnon47kr/banner1400*400.png"
-          />
-          {/* Tablet (>= 600px): 1024x500 */}
-          <source
-            media="(min-width: 600px)"
-            srcSet="https://ik.imagekit.io/cjnon47kr/tablet.png?updatedAt=1787077267679"
-          />
-          {/* Mobile (< 600px): EXACT 800x420 */}
-          <img
-            src="https://ik.imagekit.io/cjnon47kr/preepx_100_days_mobile_EXACT_800x420.png"
-            alt="100 Days Challenge Banner"
-            className="c100-banner-img"
-            draggable={false}
-            onDragStart={(e) => e.preventDefault()}
-          />
+          <source media="(min-width: 1024px)" srcSet="https://ik.imagekit.io/cjnon47kr/banner1400*400.png" />
+          <source media="(min-width: 600px)" srcSet="https://ik.imagekit.io/cjnon47kr/tablet.png?updatedAt=1787077267679" />
+          <img src="https://ik.imagekit.io/cjnon47kr/preepx_100_days_mobile_EXACT_800x420.png" alt="100 Days Challenge Banner" className="c100-banner-img" draggable={false} onDragStart={(e) => e.preventDefault()} />
         </picture>
       </div>
 
-      {/* ─── Stats Row (Matching User Dashboard) ─── */}
+      {/* ─── Stats Row ─── */}
       <section className="c100-stats-section" aria-label="Your Progress Stats">
         <div className="c100-stats-grid">
-          <div className="c100-stat-card" style={{ "--accent": "#6366f1" }}>
-            <div className="c100-stat-icon"><BarChart3 size={20} /></div>
-            <div>
-              <span className="c100-stat-val"><AnimatedNumber value={completedCount} /></span>
-              <span className="c100-stat-lbl">Days Completed</span>
+          <div className="c100-stat-card" style={{ "--accent": "#ef4444" }}>
+            <div className="c100-stat-icon">
+              <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fire/3D/fire_3d.png" alt="Streak" style={{ width: 20, height: 20 }} />
             </div>
-          </div>
-
-          <div className="c100-stat-card" style={{ "--accent": "#06b6d4" }}>
-            <div className="c100-stat-icon"><Flame size={20} /></div>
-            <div>
+            <div className="c100-stat-text-block">
               <span className="c100-stat-val"><AnimatedNumber value={streak} /></span>
               <span className="c100-stat-lbl">Current Streak</span>
+              <span className="c100-stat-sub">Keep it up!</span>
             </div>
           </div>
-
-          <div className="c100-stat-card" style={{ "--accent": "#10b981" }}>
-            <div className="c100-stat-icon"><Target size={20} /></div>
-            <div>
+          <div className="c100-stat-card" style={{ "--accent": "#0ea5e9" }}>
+            <div className="c100-stat-icon"><Target size={18} /></div>
+            <div className="c100-stat-text-block">
               <span className="c100-stat-val"><AnimatedNumber value={daysRemaining} /></span>
               <span className="c100-stat-lbl">Days Remaining</span>
+              <span className="c100-stat-sub">Finish strong</span>
             </div>
           </div>
-
+          <div className="c100-stat-card" style={{ "--accent": "#8b5cf6" }}>
+            <div className="c100-stat-icon"><Zap size={18} /></div>
+            <div className="c100-stat-text-block">
+              <span className="c100-stat-val"><AnimatedNumber value={xp} /> XP</span>
+              <span className="c100-stat-lbl">Total Experience</span>
+              <span className="c100-stat-sub">Next: 55 XP</span>
+            </div>
+          </div>
+          <div className="c100-stat-card" style={{ "--accent": "#3b82f6" }}>
+            <div className="c100-stat-icon"><BarChart3 size={18} /></div>
+            <div className="c100-stat-text-block">
+              <span className="c100-stat-val"><AnimatedNumber value={completedCount} /></span>
+              <span className="c100-stat-lbl">Problems Solved</span>
+              <span className="c100-stat-sub">This Journey</span>
+            </div>
+          </div>
           <div className="c100-stat-card" style={{ "--accent": "#f59e0b" }}>
-            <div className="c100-stat-icon"><Crown size={20} /></div>
-            <div>
-              <span className="c100-stat-val">Day {activeDay}</span>
-              <span className="c100-stat-lbl">Active Challenge</span>
+            <div className="c100-stat-icon"><Crown size={18} /></div>
+            <div className="c100-stat-text-block">
+              <span className="c100-stat-val">{displayRank}</span>
+              <span className="c100-stat-lbl">Global Rank</span>
+              <span className="c100-stat-sub">Keep climbing</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Phase Roadmap ─── */}
-      <section className="c100-roadmap-section" aria-label="Curriculum Phase Roadmap">
-        <div className="c100-section-header">
-          <div className="c100-section-title-wrap">
-            <div className="c100-title-icon-badge">
-              <Rocket size={18} />
-            </div>
-            <div>
-              <h2 className="c100-section-title premium-text-gradient">Curriculum Roadmap</h2>
-              <p className="c100-section-subtitle">Structured progression from fundamentals to interview mastery</p>
-            </div>
+      {/* ─── Today's Challenge & Calendar ─── */}
+      <section className="c100-today-calendar-section">
+        <div className="c100-today-challenge">
+          <div className="c100-today-header">
+            <h3>Today's Challenge</h3>
+            <span className="c100-day-badge">DAY {activeDay}</span>
           </div>
 
-          <div className="c100-current-phase-badge">
-            <span className="c100-phase-pulse-dot" style={{ background: currentPhase.color }} />
-            <span>Currently: <strong>{currentPhase.name}</strong> (Day {currentPhase.start}–{currentPhase.upTo})</span>
-          </div>
-        </div>
-
-        <div className="c100-phases-grid">
-          {PHASES.map((phase, idx) => {
-            const PhaseIcon = phase.icon;
-            const isActive = idx === currentPhaseIdx;
-            const isDone = currentPhaseIdx > idx;
-            const isLocked = idx > currentPhaseIdx;
-
-            return (
-              <div
-                key={phase.id}
-                className={`c100-phase-box ${isActive ? "active" : ""} ${isDone ? "completed" : ""} ${isLocked ? "locked" : ""}`}
-              >
-                <div className="c100-phase-box-top">
-                  <div
-                    className="c100-phase-icon"
-                    style={{
-                      borderColor: phase.color + "44",
-                      color: phase.color,
-                      background: phase.color + "12"
-                    }}
-                  >
-                    {isDone ? <CheckCircle2 size={20} /> : <PhaseIcon size={20} />}
-                  </div>
-
-                  <span className="c100-phase-day-range">
-                    Day {phase.start}–{phase.upTo}
-                  </span>
-                </div>
-
-                <div className="c100-phase-box-body">
-                  <h3 className="c100-phase-name">{phase.name}</h3>
-                  <p className="c100-phase-desc">{phase.desc}</p>
-                </div>
-
-                <div className="c100-phase-box-footer">
-                  {isDone && (
-                    <span className="c100-phase-status-pill done">
-                      <Check size={12} /> Phase Completed
-                    </span>
-                  )}
-                  {isActive && (
-                    <span className="c100-phase-status-pill current">
-                      <span className="c100-dot-live" /> In Progress
-                    </span>
-                  )}
-                  {isLocked && (
-                    <span className="c100-phase-status-pill upcoming">
-                      <Lock size={11} /> Upcoming Phase
-                    </span>
-                  )}
-                </div>
+          <div className="c100-today-content">
+            <div className="c100-today-info">
+              <div className="c100-today-title-row">
+                <h2>{activeProblem.title}</h2>
+                <span className={`c100-difficulty-tag easy`}>{activeProblem.difficulty}</span>
               </div>
-            );
-          })}
-        </div>
+              <p className="c100-today-desc">{getShortDesc(null)}</p>
 
-        {/* Milestone Progress Bar */}
-        <div className="c100-milestone-wrapper">
-          <div className="c100-milestone-bar-container">
-            <div className="c100-milestone-bar-bg">
-              <div
-                className="c100-milestone-bar-fill"
-                style={{ width: `${progressPercent}%` }}
+              <div className="c100-today-meta">
+                <span className="meta-item"><Clock size={14} /> 20 min</span>
+                <span className="meta-item"><Zap size={14} className="text-purple" /> +5 XP</span>
+                <span className="meta-item"><TrendingUp size={14} className="text-blue" /> 90% Success Rate</span>
+              </div>
+
+              <button
+                className="c100-primary-btn start-challenge-btn"
+                onClick={() => handleStart(activeProblem._id, activeDay)}
+              >
+                Start Challenge <ChevronRight size={18} />
+              </button>
+            </div>
+
+            <div className="c100-today-graphic">
+              {/* Note: Replace this placeholder src with your actual 3D glowing code window asset URL */}
+              <img
+                src="https://ik.imagekit.io/cjnon47kr/coding-3d-graphic-placeholder.png"
+                alt="Code Challenge"
+                className="today-3d-graphic"
+                onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80'; }}
               />
             </div>
-            <div className="c100-milestone-checkpoints">
-              {MILESTONES.map(({ day, label }) => {
-                const reached = completedCount >= day || (day === 1 && completedCount >= 0);
-                const isFinal = day === 100;
-                return (
-                  <div key={day} className="c100-checkpoint-node">
-                    <div
-                      className={`c100-checkpoint-dot ${reached ? "reached" : ""} ${isFinal ? "final" : ""}`}
-                    >
-                      {reached ? (
-                        <Check size={10} strokeWidth={3} />
-                      ) : isFinal ? (
-                        <Trophy size={9} />
-                      ) : (
-                        <span className="c100-node-inner" />
-                      )}
-                    </div>
-                    <span className={`c100-checkpoint-label ${reached ? "reached" : ""}`}>
-                      {label}
-                    </span>
+          </div>
+
+          <div className="c100-today-goal">
+            <div className="goal-icon"><LayoutList size={16} /></div>
+            <div className="goal-text">
+              <strong>Today's Goal</strong>
+              <span>Solve 1 problem</span>
+            </div>
+            <div className="goal-progress">0/1 <ChevronRight size={14} /></div>
+          </div>
+          <div className="goal-progress-bar"><div className="fill" style={{ width: '10%' }}></div></div>
+        </div>
+
+        <div className="c100-sidebar-right" style={{ position: 'relative' }}>
+          <div className="sidebar-right-absolute-wrapper" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex' }}>
+          <div className="c100-company-card" style={{ width: '100%' }}>
+            <div className="company-header">
+              <div className="comp-title"><Building2 size={16} /> Top Companies</div>
+              <span className="view-all">View All</span>
+            </div>
+            <div className="company-list">
+              <button className="company-item">
+                <div className="comp-icon bg-google">G</div>
+                <div className="comp-info">
+                  <strong>Google</strong>
+                  <span>120+ Problems</span>
+                </div>
+                <ChevronRight size={16} className="text-muted" />
+              </button>
+              <button className="company-item">
+                <div className="comp-icon bg-amazon">A</div>
+                <div className="comp-info">
+                  <strong>Amazon</strong>
+                  <span>95+ Problems</span>
+                </div>
+                <ChevronRight size={16} className="text-muted" />
+              </button>
+              <button className="company-item">
+                <div className="comp-icon bg-microsoft">M</div>
+                <div className="comp-info">
+                  <strong>Microsoft</strong>
+                  <span>80+ Problems</span>
+                </div>
+                <ChevronRight size={16} className="text-muted" />
+              </button>
+              <button className="company-item">
+                <div className="comp-icon bg-meta">M</div>
+                <div className="comp-info">
+                  <strong>Meta</strong>
+                  <span>65+ Problems</span>
+                </div>
+                <ChevronRight size={16} className="text-muted" />
+              </button>
+              <button className="company-item">
+                <div className="comp-icon bg-apple">A</div>
+                <div className="comp-info">
+                  <strong>Apple</strong>
+                  <span>50+ Problems</span>
+                </div>
+                <ChevronRight size={16} className="text-muted" />
+              </button>
+              <button className="company-item">
+                <div className="comp-icon bg-netflix">N</div>
+                <div className="comp-info">
+                  <strong>Netflix</strong>
+                  <span>40+ Problems</span>
+                </div>
+                <ChevronRight size={16} className="text-muted" />
+              </button>
+              <button className="company-item">
+                <div className="comp-icon bg-uber">U</div>
+                <div className="comp-info">
+                  <strong>Uber</strong>
+                  <span>35+ Problems</span>
+                </div>
+                <ChevronRight size={16} className="text-muted" />
+              </button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Roadmap & Achievements ─── */}
+      <section className="c100-roadmap-achievements">
+        <div className="c100-roadmap-compact">
+          <div className="compact-header">
+            <h3>Curriculum Roadmap</h3>
+            <span className="view-all">View Roadmap <ArrowRight size={14} /></span>
+          </div>
+
+          <div className="c100-phases-compact">
+            {PHASES.map((phase, idx) => {
+              const PhaseIcon = phase.icon;
+              const isActive = idx === currentPhaseIdx;
+              const isDone = currentPhaseIdx > idx;
+              const isLocked = idx > currentPhaseIdx;
+
+              return (
+                <div key={phase.id} className={`phase-compact-box ${isActive ? 'active' : ''} ${isDone ? 'done' : ''} ${isLocked ? 'locked' : ''}`}>
+                  <div className="phase-icon" style={{ background: isActive ? '#6366f1' : 'rgba(255,255,255,0.05)', color: isActive ? '#fff' : phase.color }}>
+                    <PhaseIcon size={20} />
                   </div>
-                );
-              })}
+                  <div className="phase-info">
+                    <strong>{phase.name}</strong>
+                    <span>{phase.desc}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="roadmap-progress-line">
+            <div className="line-bg">
+              <div className="line-fill" style={{ width: '25%' }}></div>
+            </div>
+            <div className="line-nodes">
+              <div className="node active"><Check size={12} /></div>
+              <div className="node"><Lock size={12} /></div>
+              <div className="node"><Lock size={12} /></div>
+              <div className="node"><Lock size={12} /></div>
+            </div>
+          </div>
+        </div>
+
+        <div className="c100-achievements-card">
+          <div className="achievements-header">
+            <div className="title"><Award size={16} /> Achievements</div>
+            <span className="view-all">View All</span>
+          </div>
+
+          <div className="achievements-list">
+            <div className="achievement-item">
+              <div className="achiev-icon bg-orange"><Medal size={16} /></div>
+              <div className="achiev-text">
+                <strong>First Steps</strong>
+                <span>Complete Day 1</span>
+              </div>
+              <div className="achiev-status done"><CheckCircle2 size={16} /></div>
+            </div>
+            <div className="achievement-item">
+              <div className="achiev-icon bg-green"><Flame size={16} /></div>
+              <div className="achiev-text">
+                <strong>2 Day Streak</strong>
+                <span>Maintain streak for 2 days</span>
+              </div>
+              <div className="achiev-status done"><CheckCircle2 size={16} /></div>
+            </div>
+            <div className="achievement-item">
+              <div className="achiev-icon bg-purple"><Star size={16} /></div>
+              <div className="achiev-text">
+                <strong>Problem Solver</strong>
+                <span>Solve 10 problems</span>
+              </div>
+              <div className="achiev-progress">12/10</div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Daily Challenge Journey ─── */}
-      {challengeData.length === 0 ? (
-        <div className="c100-empty-card">
-          <div className="c100-empty-icon-wrap">
-            <Code2 size={32} />
+      {/* ─── 100-Day Journey (Carousel) ─── */}
+      <section className="c100-journey-section" aria-label="Daily Coding Challenges">
+        <div className="c100-journey-header-row">
+          <div>
+            <h3 style={{ margin: 0, fontSize: '18px', fontWeight: 700 }}>100-Day Journey</h3>
+            <p style={{ margin: 0, fontSize: '13px', color: 'var(--c100-text-muted)' }}>Your daily progress</p>
           </div>
-          <h3>Daily Challenges Loading</h3>
-          <p>We are syncing the curated 100-day problems for your account. Please check back shortly.</p>
-        </div>
-      ) : (
-        <section className="c100-journey-section" aria-label="Daily Coding Challenges">
-          {/* Header with Phase Filters and Navigation Controls */}
-          <div className="c100-journey-header-row">
-            <div className="c100-section-title-wrap">
-              <div className="c100-title-icon-badge gold">
-                <Trophy size={18} />
-              </div>
-              <div>
-                <h2 className="c100-section-title premium-text-gradient">The 100-Day Journey</h2>
-                <p className="c100-section-subtitle">
-                  Complete challenges in sequential order. Solve each to unlock the next.
-                </p>
-              </div>
-            </div>
-
-            <div className="c100-journey-controls">
-              <button
-                type="button"
-                className="c100-jump-btn"
-                onClick={scrollToActiveDay}
-                title="Scroll directly to today's challenge"
-              >
-                <Target size={15} />
-                <span>Jump to Day {activeDay}</span>
-              </button>
-
-              <div className="c100-scroll-arrows">
-                <button
-                  type="button"
-                  className="c100-scroll-arrow-btn"
-                  onClick={() => scrollJourney(-1)}
-                  aria-label="Scroll challenges left"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-                <button
-                  type="button"
-                  className="c100-scroll-arrow-btn"
-                  onClick={() => scrollJourney(1)}
-                  aria-label="Scroll challenges right"
-                >
-                  <ChevronRight size={18} />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Phase Filter Tabs */}
-          <div className="c100-filter-tabs">
-            <button
-              type="button"
-              className={`c100-filter-tab ${selectedPhaseFilter === "all" ? "active" : ""}`}
-              onClick={() => setSelectedPhaseFilter("all")}
-            >
-              <Layers size={14} />
-              <span>All Challenges</span>
-              <span className="c100-tab-count">{challengeData.length || 100}</span>
+          <div className="c100-scroll-arrows">
+            <button type="button" className="c100-scroll-arrow-btn" onClick={() => scrollJourney(-1)}>
+              <ChevronLeft size={16} />
             </button>
-
-            {PHASES.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                className={`c100-filter-tab ${selectedPhaseFilter === String(p.id) ? "active" : ""}`}
-                onClick={() => setSelectedPhaseFilter(String(p.id))}
-              >
-                <span>Phase {p.id}: {p.name}</span>
-                <span className="c100-tab-sub">({p.start}–{p.upTo})</span>
-              </button>
-            ))}
-          </div>
-
-          {/* Horizontal Scroll Track Container */}
-          <div className="c100-journey-scroll-area" ref={scrollRef}>
-            <div className="c100-journey-inner-track">
-              {/* Timeline Header Row */}
-              <div className="c100-timeline-track">
-                <div className="c100-timeline-connecting-line" />
-                {visibleDays.map((dayNum) => {
-                  const isFinal = dayNum === 100;
-                  const unlocked = isUnlocked(dayNum);
-                  const completed = isCompleted(dayNum);
-                  const inProgress = unlocked && !completed && dayNum === activeDay;
-                  const allPrevDone = completedCount >= 99;
-
-                  return (
-                    <div
-                      key={`timeline-step-${dayNum}`}
-                      className={`c100-timeline-item ${isFinal ? "is-final" : ""}`}
-                    >
-                      <div className="c100-step-indicator-wrapper">
-                        {inProgress && <span className="c100-step-badge in-progress">Active</span>}
-                        {completed && <span className="c100-step-badge completed">Done</span>}
-                        {!inProgress && !completed && <span className="c100-step-badge placeholder">Day {dayNum}</span>}
-
-                        {isFinal ? (
-                          <div className={`c100-step-node finale ${allPrevDone ? "unlocked" : "locked"}`}>
-                            <span>100</span>
-                            <Trophy size={14} />
-                          </div>
-                        ) : (
-                          <div
-                            className={`c100-step-node ${completed ? "completed" : unlocked ? "active" : "locked"}`}
-                          >
-                            {completed ? (
-                              <CheckCircle2 size={20} />
-                            ) : unlocked ? (
-                              <span>{dayNum}</span>
-                            ) : (
-                              <Lock size={15} />
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* Challenge Day Cards Row */}
-              <div className="c100-challenge-cards-row">
-                {visibleDays.map((dayNum) => {
-                  const isFinal = dayNum === 100;
-                  const dayObj = getDayData(dayNum);
-                  const problem = dayObj?.problems?.[0];
-                  const unlocked = isUnlocked(dayNum);
-                  const completed = isCompleted(dayNum);
-                  const inProgress = unlocked && !completed && dayNum === activeDay;
-                  const diff = problem?.difficulty?.toLowerCase() || "medium";
-                  const xp = DIFFICULTY_XP[diff] || 10;
-                  const isTargetActive = dayNum === activeDay;
-
-                  if (isFinal) {
-                    const allDone = completedCount >= 99;
-                    return (
-                      <div
-                        key={`challenge-card-${dayNum}`}
-                        ref={isTargetActive ? activeCardRef : null}
-                        className={`c100-challenge-card final-card ${allDone ? "unlocked" : ""}`}
-                      >
-                        <div className="c100-card-header">
-                          <span className="c100-card-day-tag finale">Day 100 Finale</span>
-                          <span className="c100-difficulty-tag finale">
-                            <Gem size={12} /> Legend
-                          </span>
-                        </div>
-
-                        <div className="c100-finale-icon-badge">
-                          <Trophy size={28} />
-                        </div>
-
-                        <h3 className="c100-card-title">The Grand Finale Challenge</h3>
-
-                        <p className="c100-card-description">
-                          Complete all 99 daily DSA problems to unlock the grand finale examination.
-                          Earn verified certificate badge & master rewards.
-                        </p>
-
-                        <div className="c100-finale-rewards-box">
-                          <Crown size={16} />
-                          <span>{allDone ? "Unlocked: Ready for Finale" : "Unlock by finishing Day 99"}</span>
-                        </div>
-
-                        <button
-                          type="button"
-                          className="c100-challenge-action-btn finale"
-                          disabled={!allDone || !problem}
-                          onClick={() => problem && handleStart(problem._id, 100)}
-                        >
-                          <span>{allDone ? "Enter Finale Exam" : "Locked Finale"}</span>
-                          <Lock size={15} />
-                        </button>
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <div
-                      key={`challenge-card-${dayNum}`}
-                      ref={isTargetActive ? activeCardRef : null}
-                      className={`c100-challenge-card ${inProgress ? "is-active-day" : ""} ${completed ? "is-completed-day" : ""} ${!unlocked ? "is-locked-day" : ""}`}
-                    >
-                      {/* Top Bar with Day Tag & Difficulty */}
-                      <div className="c100-card-header">
-                        <span className={`c100-card-day-tag ${inProgress ? "active" : completed ? "done" : ""}`}>
-                          Day {dayNum < 10 ? `0${dayNum}` : dayNum}
-                        </span>
-                        {unlocked && (
-                          <span className={`c100-difficulty-tag ${diff}`}>
-                            {problem?.difficulty || "Medium"}
-                          </span>
-                        )}
-                      </div>
-
-                      {!unlocked ? (
-                        <div className="c100-card-locked-body">
-                          <div className="c100-lock-bubble">
-                            <Lock size={22} />
-                          </div>
-                          <h4 className="c100-lock-title">Challenge Locked</h4>
-                          <p className="c100-lock-text">
-                            Complete Day {dayNum - 1} challenge to unlock this problem.
-                          </p>
-                          <div className="c100-lock-requirement-pill">
-                            <span>Requires Day {dayNum - 1} Completion</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <>
-                          <h3 className="c100-card-title" title={problem?.title}>
-                            {problem?.title || `Day ${dayNum} DSA Challenge`}
-                          </h3>
-
-                          {problem?.topics && problem.topics.length > 0 && (
-                            <div className="c100-card-topics">
-                              {problem.topics.slice(0, 2).map((t) => (
-                                <span key={t} className="c100-topic-chip">
-                                  {t}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-
-                          <p className="c100-card-description">{getShortDesc(problem)}</p>
-
-                          <div className="c100-card-meta-row">
-                            <div className="c100-meta-item xp">
-                              <Zap size={13} />
-                              <span>+{xp} XP</span>
-                            </div>
-                            <div className="c100-meta-item time">
-                              <Clock size={13} />
-                              <span>~30 mins</span>
-                            </div>
-                          </div>
-
-                          <div className="c100-card-progress-section">
-                            <div className="c100-card-progress-labels">
-                              <span>Status</span>
-                              <strong>{completed ? "Completed" : inProgress ? "In Progress" : "Not Started"}</strong>
-                            </div>
-                            <div className="c100-card-progress-track">
-                              <div
-                                className={`c100-card-progress-bar ${completed ? "full" : inProgress ? "half" : ""}`}
-                              />
-                            </div>
-                          </div>
-
-                          <button
-                            type="button"
-                            className={`c100-challenge-action-btn ${completed ? "review" : "start"}`}
-                            onClick={() => problem && handleStart(problem._id, dayNum)}
-                            disabled={!problem}
-                          >
-                            <span>{completed ? "Review Solution" : "Start Challenge"}</span>
-                            {completed ? <CheckCircle2 size={16} /> : <ChevronRight size={16} />}
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* ─── Bottom Motivation & Consistency Card ─── */}
-      <section className="c100-bottom-motivation-bar" aria-label="Consistency motivation">
-        <div className="c100-motivation-left">
-          <div className="c100-motivation-badge">
-            <Zap size={14} />
-            <span>Consistency Formula</span>
-          </div>
-          <h3 className="c100-motivation-title">
-            Small daily coding habits compound into massive career breakthroughs.
-          </h3>
-          <div className="c100-motivation-chips">
-            {BOTTOM_FEATURES.map(({ icon: Icon, label }) => (
-              <div key={label} className="c100-motivation-chip">
-                <Icon size={14} />
-                <span>{label}</span>
-              </div>
-            ))}
+            <button type="button" className="c100-scroll-arrow-btn" onClick={() => scrollJourney(1)}>
+              <ChevronRight size={16} />
+            </button>
           </div>
         </div>
 
-        <div className="c100-motivation-right">
-          <div className="c100-streak-highlight-card">
-            <div className="c100-streak-flame-wrap">
-              <Flame size={24} className="c100-flame-bounce" />
+        <div className="c100-journey-scroll-area" ref={scrollRef}>
+          <div className="c100-journey-inner-track" style={{ flexDirection: 'row' }}>
+            {visibleDays.slice(0, 7).map((dayNum) => {
+              const unlocked = isUnlocked(dayNum);
+              const completed = isCompleted(dayNum);
+              const inProgress = unlocked && !completed && dayNum === activeDay;
+
+              const fakeData = [
+                { title: 'Two Sum', diff: 'Easy', status: 'Completed' },
+                { title: 'Valid Parentheses', diff: 'Easy', status: 'In Progress' },
+                { title: 'Merge Strings', diff: 'Easy', status: 'Locked' },
+                { title: 'Remove Duplicates', diff: 'Easy', status: 'Locked' },
+                { title: 'Maximum Subarray', diff: 'Medium', status: 'Locked' },
+                { title: 'Longest Substring', diff: 'Medium', status: 'Locked' },
+                { title: 'Reverse Integer', diff: 'Easy', status: 'Locked' },
+              ];
+
+              const fd = fakeData[dayNum - 1] || fakeData[0];
+              const isLocked = fd.status === 'Locked';
+              const isDone = fd.status === 'Completed';
+              const isActiveCard = fd.status === 'In Progress';
+
+              return (
+                <div key={dayNum} className={`c100-compact-day-card ${isActiveCard ? 'active' : ''}`}>
+                  <div className="day-header">DAY {dayNum}</div>
+                  <h4 className="day-title">{fd.title}</h4>
+                  <span className={`day-diff ${fd.diff.toLowerCase()}`}>{fd.diff}</span>
+
+                  <div className="day-footer">
+                    {isDone && <span className="status done"><CheckCircle2 size={12} /> Completed</span>}
+                    {isActiveCard && <span className="status active"><Activity size={12} /> In Progress</span>}
+                    {isLocked && <span className="status locked"><Lock size={12} /> Locked</span>}
+                    <span className="xp-val"><Zap size={10} /> +{fd.diff === 'Easy' ? 5 : 10} XP</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Bottom Dash (XP, Heatmap, Leaderboard, Rewards) ─── */}
+      <section className="c100-bottom-dash-grid">
+        <div className="c100-dash-card xp-card">
+          <h4 className="dash-card-title">XP Progress</h4>
+          <div className="xp-center">
+            <div className="level-info">Level 1</div>
+            <div className="hex-badge"><span>1</span></div>
+          </div>
+          <div className="xp-bar-container">
+            <span className="xp-text">45 / 100 XP</span>
+            <div className="xp-bar-bg"><div className="xp-bar-fill" style={{ width: '45%' }}></div></div>
+          </div>
+          <p className="keep-solving-text">Keep solving to level up!</p>
+        </div>
+
+        <div className="c100-dash-card heatmap-card">
+          <h4 className="dash-card-title">Activity Heatmap</h4>
+          <div className="heatmap-days-labels">
+            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+          </div>
+          <div className="heatmap-grid">
+            {Array.from({ length: 28 }).map((_, i) => (
+              <div key={i} className={`heatmap-cell ${i === 0 || i === 1 ? 'lvl-3' : i === 4 ? 'lvl-1' : i === 8 ? 'lvl-2' : ''}`}></div>
+            ))}
+          </div>
+          <div className="heatmap-legend">
+            <span>Less</span>
+            <div className="legend-colors">
+              <span className="lvl-0"></span><span className="lvl-1"></span><span className="lvl-2"></span><span className="lvl-3"></span>
             </div>
-            <div className="c100-streak-info">
-              <span className="c100-streak-tag">Streak Status</span>
-              <strong>
-                {streak > 0 ? `${streak} Day Streak! 🔥` : "Start Your Streak Today"}
-              </strong>
+            <span>More</span>
+          </div>
+        </div>
+
+        <div className="c100-dash-card leaderboard-card">
+          <div className="dash-header-row">
+            <h4 className="dash-card-title">Leaderboard</h4>
+            <span className="view-all">View All</span>
+          </div>
+          <div className="leaderboard-list">
+            <div className="lb-item">
+              <span className="lb-rank gold"><Trophy size={12} /></span>
+              <div className="lb-user"><div className="avatar">RS</div> Rahul Sharma</div>
+              <span className="lb-score">620 XP</span>
+            </div>
+            <div className="lb-item">
+              <span className="lb-rank silver"><Medal size={12} /></span>
+              <div className="lb-user"><div className="avatar">AV</div> Aman Verma</div>
+              <span className="lb-score">600 XP</span>
+            </div>
+            <div className="lb-item current-user">
+              <span className="lb-rank">#234</span>
+              <div className="lb-user"><div className="avatar">You</div> You (Chandan)</div>
+              <span className="lb-score">550 XP</span>
+            </div>
+            <div className="lb-item">
+              <span className="lb-rank">4</span>
+              <div className="lb-user"><div className="avatar">PS</div> Priya Singh</div>
+              <span className="lb-score">520 XP</span>
+            </div>
+            <div className="lb-item">
+              <span className="lb-rank">5</span>
+              <div className="lb-user"><div className="avatar">KG</div> Karan Gupta</div>
+              <span className="lb-score">480 XP</span>
             </div>
           </div>
         </div>
+
+        <div className="c100-dash-card rewards-card">
+          <div className="dash-header-row">
+            <h4 className="dash-card-title">Rewards</h4>
+            <span className="view-all">View All</span>
+          </div>
+          <div className="rewards-list">
+            <div className="reward-item">
+              <div className="reward-icon bg-gold"><Trophy size={14} /></div>
+              <div className="reward-info">
+                <strong>Completion Certificate</strong>
+                <span>Complete 100 days</span>
+              </div>
+              <Lock size={14} className="text-muted" />
+            </div>
+            <div className="reward-item">
+              <div className="reward-icon bg-green"><Shield size={14} /></div>
+              <div className="reward-info">
+                <strong>Interview Ready Badge</strong>
+                <span>Solve 200 problems</span>
+              </div>
+              <Lock size={14} className="text-muted" />
+            </div>
+            <div className="reward-item">
+              <div className="reward-icon bg-purple"><Gift size={14} /></div>
+              <div className="reward-info">
+                <strong>Premium Access</strong>
+                <span>Unlock premium content</span>
+              </div>
+              <Lock size={14} className="text-muted" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Bottom Motivation Bar ─── */}
+      <section className="c100-motivation-bottom">
+        <div className="mot-icon-wrap"><Trophy size={24} className="text-orange" /></div>
+        <div className="mot-text">
+          <h3>Consistency today builds your success tomorrow!</h3>
+          <p>You're just 1% away from becoming unstoppable.</p>
+        </div>
+        <button className="c100-primary-btn">Continue Day 1 Challenge <ArrowRight size={16} /></button>
       </section>
     </div>
   );
