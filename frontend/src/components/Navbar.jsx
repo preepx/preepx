@@ -38,6 +38,13 @@ function Navbar({ landingRole, setLandingRole }) {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
+  const navLinks = [
+    { to: "/user-dashboard", label: "Dashboard" },
+    { to: "/practice", label: "Practice" },
+    { to: "/mock-test", label: "Mock Tests" },
+    { to: "/leaderboard", label: "Leaderboard" },
+  ];
+
   const landingNavLinks = [
     { targetId: "how-it-works", label: "How It Works" },
     { targetId: "journeys", label: "Why PreepX?" },
