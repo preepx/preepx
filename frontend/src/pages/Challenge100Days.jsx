@@ -93,6 +93,7 @@ const Challenge100Days = () => {
   const [challengeData, setChallengeData] = useState([]);
   const [progress, setProgress] = useState({ currentDay: 1, completedDays: [] });
   const [globalRank, setGlobalRank] = useState(null);
+  const [leaderboard, setLeaderboard] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedPhaseFilter, setSelectedPhaseFilter] = useState("all");
   const scrollRef = useRef(null);
@@ -117,6 +118,14 @@ const Challenge100Days = () => {
       })
       .catch((err) => console.error("Failed to fetch challenge data", err))
       .finally(() => setLoading(false));
+
+    API.get("/users/leaderboard")
+      .then((res) => {
+        if (Array.isArray(res.data)) {
+          setLeaderboard(res.data.slice(0, 5));
+        }
+      })
+      .catch((err) => console.error("Failed to fetch leaderboard", err));
   }, []);
 
   const isCompleted = (day) => (progress.completedDays || []).includes(day);
@@ -342,9 +351,8 @@ const Challenge100Days = () => {
           <div className="goal-progress-bar"><div className="fill" style={{ width: '10%' }}></div></div>
         </div>
 
-        <div className="c100-sidebar-right" style={{ position: 'relative' }}>
-          <div className="sidebar-right-absolute-wrapper" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex' }}>
-          <div className="c100-company-card" style={{ width: '100%' }}>
+        <div className="c100-sidebar-right">
+          <div className="c100-company-card">
             <div className="company-header">
               <div className="comp-title"><Building2 size={16} /> Top Companies</div>
               <span className="view-all">View All</span>
@@ -408,7 +416,6 @@ const Challenge100Days = () => {
               </button>
             </div>
           </div>
-          </div>
         </div>
       </section>
 
@@ -456,34 +463,34 @@ const Challenge100Days = () => {
 
         <div className="c100-achievements-card">
           <div className="achievements-header">
-            <div className="title"><Award size={16} /> Achievements</div>
+            <div className="title"><Trophy size={16} /> Rewards</div>
             <span className="view-all">View All</span>
           </div>
 
           <div className="achievements-list">
             <div className="achievement-item">
-              <div className="achiev-icon bg-orange"><Medal size={16} /></div>
+              <div className="achiev-icon bg-gold"><Trophy size={16} /></div>
               <div className="achiev-text">
-                <strong>First Steps</strong>
-                <span>Complete Day 1</span>
+                <strong>Completion Certificate</strong>
+                <span>Complete 100 days</span>
               </div>
-              <div className="achiev-status done"><CheckCircle2 size={16} /></div>
+              <div className="achiev-status"><Lock size={16} /></div>
             </div>
             <div className="achievement-item">
-              <div className="achiev-icon bg-green"><Flame size={16} /></div>
+              <div className="achiev-icon bg-green"><Shield size={16} /></div>
               <div className="achiev-text">
-                <strong>2 Day Streak</strong>
-                <span>Maintain streak for 2 days</span>
+                <strong>Interview Ready Badge</strong>
+                <span>Solve 200 problems</span>
               </div>
-              <div className="achiev-status done"><CheckCircle2 size={16} /></div>
+              <div className="achiev-status"><Lock size={16} /></div>
             </div>
             <div className="achievement-item">
-              <div className="achiev-icon bg-purple"><Star size={16} /></div>
+              <div className="achiev-icon bg-purple"><Gift size={16} /></div>
               <div className="achiev-text">
-                <strong>Problem Solver</strong>
-                <span>Solve 10 problems</span>
+                <strong>Premium Access</strong>
+                <span>Unlock premium content</span>
               </div>
-              <div className="achiev-progress">12/10</div>
+              <div className="achiev-status"><Lock size={16} /></div>
             </div>
           </div>
         </div>
@@ -587,61 +594,83 @@ const Challenge100Days = () => {
             <span className="view-all">View All</span>
           </div>
           <div className="leaderboard-list">
-            <div className="lb-item">
-              <span className="lb-rank gold"><Trophy size={12} /></span>
-              <div className="lb-user"><div className="avatar">RS</div> Rahul Sharma</div>
-              <span className="lb-score">620 XP</span>
-            </div>
-            <div className="lb-item">
-              <span className="lb-rank silver"><Medal size={12} /></span>
-              <div className="lb-user"><div className="avatar">AV</div> Aman Verma</div>
-              <span className="lb-score">600 XP</span>
-            </div>
-            <div className="lb-item current-user">
-              <span className="lb-rank">#234</span>
-              <div className="lb-user"><div className="avatar">You</div> You (Chandan)</div>
-              <span className="lb-score">550 XP</span>
-            </div>
-            <div className="lb-item">
-              <span className="lb-rank">4</span>
-              <div className="lb-user"><div className="avatar">PS</div> Priya Singh</div>
-              <span className="lb-score">520 XP</span>
-            </div>
-            <div className="lb-item">
-              <span className="lb-rank">5</span>
-              <div className="lb-user"><div className="avatar">KG</div> Karan Gupta</div>
-              <span className="lb-score">480 XP</span>
-            </div>
+            {leaderboard.map((u, idx) => {
+              const isCurrentUser = u._id === user._id;
+              const rank = idx + 1;
+              let rankElem = <span className="lb-rank">{rank}</span>;
+              if (rank === 1) rankElem = <span className="lb-rank gold"><Trophy size={12} /></span>;
+              else if (rank === 2) rankElem = <span className="lb-rank silver"><Medal size={12} /></span>;
+
+              const initials = u.fullName ? u.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'U';
+
+              return (
+                <div key={u._id} className={`lb-item ${isCurrentUser ? 'current-user' : ''}`}>
+                  {rankElem}
+                  <div className="lb-user">
+                    <div className="avatar">
+                      {u.profilePic ? (
+                        <img src={u.profilePic} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ) : (
+                        initials
+                      )}
+                    </div>
+                    <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1 }}>
+                      {isCurrentUser ? `You (${u.fullName})` : u.fullName}
+                    </span>
+                  </div>
+                  <span className="lb-score">{u.points || 0} XP</span>
+                </div>
+              );
+            })}
+
+            {user && user._id && !leaderboard.some(u => u._id === user._id) && (
+              <div className="lb-item current-user">
+                <span className="lb-rank">#{globalRank || "?"}</span>
+                <div className="lb-user">
+                  <div className="avatar">
+                    {user.profilePic ? (
+                      <img src={user.profilePic} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      user.fullName ? user.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'U'
+                    )}
+                  </div>
+                  <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1 }}>
+                    You ({user.fullName || 'User'})
+                  </span>
+                </div>
+                <span className="lb-score">{user.points || user.xp || 0} XP</span>
+              </div>
+            )}
           </div>
         </div>
 
-        <div className="c100-dash-card rewards-card">
+        <div className="c100-dash-card achievements-card">
           <div className="dash-header-row">
-            <h4 className="dash-card-title">Rewards</h4>
+            <h4 className="dash-card-title">Achievements</h4>
             <span className="view-all">View All</span>
           </div>
           <div className="rewards-list">
             <div className="reward-item">
-              <div className="reward-icon bg-gold"><Trophy size={14} /></div>
+              <div className="reward-icon bg-green"><Flag size={14} /></div>
               <div className="reward-info">
-                <strong>Completion Certificate</strong>
-                <span>Complete 100 days</span>
+                <strong>First Steps</strong>
+                <span>Complete Day 1</span>
+              </div>
+              <CheckCircle2 size={14} className="text-muted" />
+            </div>
+            <div className="reward-item">
+              <div className="reward-icon bg-orange"><Flame size={14} /></div>
+              <div className="reward-info">
+                <strong>2 Day Streak</strong>
+                <span>Maintain streak for 2 days</span>
               </div>
               <Lock size={14} className="text-muted" />
             </div>
             <div className="reward-item">
-              <div className="reward-icon bg-green"><Shield size={14} /></div>
+              <div className="reward-icon bg-purple"><Code2 size={14} /></div>
               <div className="reward-info">
-                <strong>Interview Ready Badge</strong>
-                <span>Solve 200 problems</span>
-              </div>
-              <Lock size={14} className="text-muted" />
-            </div>
-            <div className="reward-item">
-              <div className="reward-icon bg-purple"><Gift size={14} /></div>
-              <div className="reward-info">
-                <strong>Premium Access</strong>
-                <span>Unlock premium content</span>
+                <strong>Problem Solver</strong>
+                <span>Solve 10 problems</span>
               </div>
               <Lock size={14} className="text-muted" />
             </div>

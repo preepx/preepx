@@ -333,17 +333,20 @@
   overflow-y: auto;
   padding-right: 4px;
   min-height: 0;
+  max-height: 365px;
 }
 
 .company-list::-webkit-scrollbar {
-  width: 4px;
+  width: 0;
+  display: none;
 }
+
 .company-list::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
+  background: transparent;
 }
+
 .company-list::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  background: transparent;
 }
 
 .company-item {
@@ -885,7 +888,7 @@
 }
 
 .lb-item.current-user {
-  background: rgba(99, 102, 241, 0.1);
+  background: transparent;
   padding: 8px;
   border-radius: 8px;
   margin: -8px;
@@ -910,6 +913,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
 }
 
 .lb-user .avatar {
@@ -921,11 +925,20 @@
   align-items: center;
   justify-content: center;
   font-size: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 .lb-score {
-  color: var(--c100-text-muted);
+  color: #a5b4fc;
   font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+  background: rgba(99, 102, 241, 0.1);
+  padding: 2px 8px;
+  border-radius: 20px;
 }
 
 .rewards-list {
@@ -1031,5 +1044,162 @@
 
   100% {
     transform: translateY(0px);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════
+   MOBILE RESPONSIVE - Challenge 100 Days
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── Today's Challenge + Sidebar ── */
+  .c100-today-calendar-section {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .c100-today-challenge {
+    flex: none;
+    width: 100%;
+  }
+
+  .c100-sidebar-right {
+    flex: none;
+    width: 100%;
+  }
+
+  /* Hide the 3D graphic on mobile */
+  .c100-today-graphic {
+    display: none;
+  }
+
+  .c100-today-content {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .c100-today-title-row h2 {
+    font-size: 18px;
+  }
+
+  /* ── Roadmap & Rewards/Achievements section ── */
+  .c100-roadmap-achievements {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .c100-roadmap-compact {
+    flex: none;
+    width: 100%;
+  }
+
+  .c100-achievements-card {
+    flex: none;
+    width: 100%;
+  }
+
+  /* Phases grid: 2 cols on mobile */
+  .c100-phases-compact {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* ── Bottom Dash Grid ── */
+  .c100-bottom-dash-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* ── Motivation Bar ── */
+  .c100-motivation-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+    padding: 20px 16px;
+  }
+
+  .c100-motivation-bottom .c100-primary-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mot-text {
+    text-align: center;
+  }
+
+  /* ── Journey Section ── */
+  .c100-journey-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* ── Stats Strip ── */
+  .c100-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px;
+  }
+
+  /* ── Heatmap ── */
+  .heatmap-grid {
+    gap: 3px;
+  }
+
+  /* ── Compact day cards in journey ── */
+  .c100-compact-day-card {
+    min-width: 140px;
+    padding: 12px;
+  }
+
+  /* ── Leaderboard item text ── */
+  .lb-user {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* Single column bottom grid on very small screens */
+  .c100-bottom-dash-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .c100-stats-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .c100-today-challenge {
+    padding: 16px;
+  }
+
+  .c100-today-title-row h2 {
+    font-size: 16px;
+  }
+
+  .c100-roadmap-compact,
+  .c100-achievements-card {
+    padding: 16px;
+  }
+
+  .c100-phases-compact {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .c100-dash-card {
+    padding: 16px;
+  }
+
+  .phase-compact-box {
+    padding: 10px 8px;
+  }
+
+  .phase-info strong {
+    font-size: 11px;
+  }
+
+  .phase-info span {
+    font-size: 10px;
   }
 }
