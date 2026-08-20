@@ -5,9 +5,12 @@
 
 /* ── MODULAR IMPORTS ── */
 @import "./landing/HeroLanding.css";
+@import "./landing/HowItWorksLanding.css";
 @import "./landing/JourneysLanding.css";
 @import "./landing/FeaturesLanding.css";
 @import "./landing/TrustedStatsLanding.css";
+@import "./landing/TestimonialsLanding.css";
+@import "./landing/PricingLanding.css";
 @import "./landing/FaqCtaLanding.css";
 @import "./landing/LandingFooter.css";
 @import "./landing/LandingLightTheme.css";
@@ -20,9 +23,11 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 85px;
 }
 
-html, body {
+html,
+body {
   overflow-x: clip;
   max-width: 100vw;
   background-color: #030712;
@@ -36,23 +41,47 @@ html, body {
   color: #ffffff;
 }
 
-.section {
+.section,
+section[id],
+div[id] {
   position: relative;
   width: 100%;
+  scroll-margin-top: 85px;
 }
 
 /* ── GLOBAL KEYFRAME ANIMATIONS ── */
 @keyframes orb1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-30px, 40px) scale(1.08); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-30px, 40px) scale(1.08);
+  }
 }
 
 @keyframes orb2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(40px, -30px) scale(1.1); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(40px, -30px) scale(1.1);
+  }
 }
 
 @keyframes orb3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-20px, -20px) scale(0.95); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-20px, -20px) scale(0.95);
+  }
 }

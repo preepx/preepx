@@ -25,7 +25,7 @@ function TrustedBySection() {
   return (
     <section className="prepx-trusted section">
       <div className="trusted-card-container">
-        <p className="trusted-header-text">Trusted by candidates and recruiters from</p>
+        <p className="trusted-header-text">Prepare for opportunities at companies like</p>
         <div className="company-logos-wrapper">
           <div className="company-logos">
             {companies.map((c, i) => (

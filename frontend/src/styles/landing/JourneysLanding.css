@@ -7,6 +7,284 @@
   padding: 30px 24px 30px;
 }
 
+/* ═══════════════════════════════════════════════════════════
+   PREPARATION TO HIRING WORKFLOW BAR
+═══════════════════════════════════════════════════════════ */
+.prep-hiring-section {
+  max-width: 1200px;
+  margin: 0 auto 52px;
+  position: relative;
+  z-index: 5;
+}
+
+.prep-hiring-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.prep-hiring-title {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  display: inline-block;
+  background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 50%, #94a3b8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.prep-hiring-subtitle {
+  font-size: 14.5px;
+  color: #8e9cb2;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: -0.1px;
+}
+
+/* Master Pipeline Card (Transparent container) */
+.prep-hiring-card-container {
+  width: 100%;
+}
+
+.prep-hiring-card {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 14px;
+  box-shadow: none;
+  backdrop-filter: none;
+  position: relative;
+}
+
+/* Individual Step Card Item - Equal Sizing */
+.prep-step-item {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 94px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: linear-gradient(165deg, rgba(15, 23, 42, 0.82) 0%, rgba(8, 12, 24, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(12px);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Glowing top edge shimmer indicator */
+.prep-step-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.prep-step-blue::after {
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+}
+
+.prep-step-green::after {
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+}
+
+.prep-step-amber::after {
+  background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+}
+
+.prep-step-purple::after {
+  background: linear-gradient(90deg, transparent, #c084fc, transparent);
+}
+
+.prep-step-item:hover::after {
+  opacity: 1;
+}
+
+.prep-step-item:hover {
+  transform: translateY(-6px);
+}
+
+/* Specific step card borders and animated glows */
+.prep-step-blue {
+  border-color: rgba(59, 130, 246, 0.22);
+}
+
+.prep-step-blue:hover {
+  border-color: rgba(59, 130, 246, 0.65);
+  background: linear-gradient(165deg, rgba(15, 28, 54, 0.9) 0%, rgba(8, 14, 28, 0.95) 100%);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(59, 130, 246, 0.22);
+}
+
+.prep-step-green {
+  border-color: rgba(16, 185, 129, 0.22);
+}
+
+.prep-step-green:hover {
+  border-color: rgba(16, 185, 129, 0.65);
+  background: linear-gradient(165deg, rgba(10, 35, 28, 0.9) 0%, rgba(6, 18, 14, 0.95) 100%);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(16, 185, 129, 0.22);
+}
+
+.prep-step-amber {
+  border-color: rgba(245, 158, 11, 0.22);
+}
+
+.prep-step-amber:hover {
+  border-color: rgba(245, 158, 11, 0.65);
+  background: linear-gradient(165deg, rgba(38, 26, 10, 0.9) 0%, rgba(18, 12, 5, 0.95) 100%);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(245, 158, 11, 0.22);
+}
+
+.prep-step-purple {
+  border-color: rgba(168, 85, 247, 0.22);
+}
+
+.prep-step-purple:hover {
+  border-color: rgba(168, 85, 247, 0.65);
+  background: linear-gradient(165deg, rgba(30, 16, 48, 0.9) 0%, rgba(14, 8, 24, 0.95) 100%);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(168, 85, 247, 0.22);
+}
+
+/* Icon Box */
+.prep-step-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.prep-step-item:hover .prep-step-icon-box {
+  transform: scale(1.12) rotate(4deg);
+}
+
+.icon-box-blue {
+  background: rgba(59, 130, 246, 0.14);
+  border: 1.5px solid rgba(59, 130, 246, 0.35);
+  color: #60a5fa;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.22);
+}
+
+.icon-box-green {
+  background: rgba(16, 185, 129, 0.14);
+  border: 1.5px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.22);
+}
+
+.icon-box-amber {
+  background: rgba(245, 158, 11, 0.14);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  color: #fbbf24;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.22);
+}
+
+.icon-box-purple {
+  background: rgba(168, 85, 247, 0.14);
+  border: 1.5px solid rgba(168, 85, 247, 0.35);
+  color: #c084fc;
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.22);
+}
+
+/* Step Content */
+.prep-step-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.prep-step-name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.step-name-blue {
+  color: #60a5fa;
+}
+
+.step-name-green {
+  color: #34d399;
+}
+
+.step-name-amber {
+  color: #fbbf24;
+}
+
+.step-name-purple {
+  color: #c084fc;
+}
+
+.prep-step-desc {
+  font-size: 11.5px;
+  color: #8e9cb2;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Connector Arrow */
+.prep-step-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  transition: all 0.25s ease;
+}
+
+.prep-connector-arrow {
+  animation: arrowPulse 2s ease-in-out infinite;
+}
+
+.arrow-teal {
+  color: #34d399;
+}
+
+.arrow-amber {
+  color: #fbbf24;
+}
+
+.arrow-purple {
+  color: #c084fc;
+}
+
+@keyframes arrowPulse {
+
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.65;
+  }
+
+  50% {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+}
+
 .journeys-section-header {
   text-align: center;
   max-width: 800px;
@@ -18,7 +296,15 @@
   font-weight: 800;
   letter-spacing: -0.8px;
   color: #ffffff;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
+}
+
+.journeys-section-subtitle {
+  font-size: 14px;
+  color: #8e9cb2;
+  margin: 0 0 10px 0;
+  font-weight: 500;
+  letter-spacing: -0.1px;
 }
 
 .gradient-text-one-goal {
@@ -220,17 +506,43 @@
 }
 
 @keyframes pulseWaveCyan {
-  0% { stroke-dashoffset: 185; opacity: 0.2; }
-  30% { opacity: 1; }
-  70% { opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 0.2; }
+  0% {
+    stroke-dashoffset: 185;
+    opacity: 0.2;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.2;
+  }
 }
 
 @keyframes pulseWavePurple {
-  0% { stroke-dashoffset: 185; opacity: 0.2; }
-  30% { opacity: 1; }
-  70% { opacity: 1; }
-  100% { stroke-dashoffset: 0; opacity: 0.2; }
+  0% {
+    stroke-dashoffset: 185;
+    opacity: 0.2;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.2;
+  }
 }
 
 .mobile-circuit-traces {
@@ -256,6 +568,7 @@
   0% {
     stroke-dashoffset: 100;
   }
+
   100% {
     stroke-dashoffset: 0;
   }
@@ -266,6 +579,7 @@
     transform: scale(0.9);
     opacity: 0.7;
   }
+
   100% {
     transform: scale(1.2);
     opacity: 1;
@@ -301,9 +615,11 @@
     opacity: 0.9;
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
   }
+
   60% {
     opacity: 0.4;
   }
+
   100% {
     transform: scale(1.6);
     opacity: 0;
@@ -330,8 +646,15 @@
 }
 
 @keyframes glowPulse {
-  0% { transform: scale(0.9); opacity: 0.7; }
-  100% { transform: scale(1.15); opacity: 1; }
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
 }
 
 .ecosystem-orb-ring {
@@ -378,8 +701,15 @@
 }
 
 @keyframes orbBreathe {
-  0% { box-shadow: 0 0 35px rgba(0, 0, 0, 0.95), 0 0 15px rgba(56, 189, 248, 0.3); border-color: rgba(56, 189, 248, 0.3); }
-  100% { box-shadow: 0 0 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(192, 132, 252, 0.45); border-color: rgba(192, 132, 252, 0.4); }
+  0% {
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.95), 0 0 15px rgba(56, 189, 248, 0.3);
+    border-color: rgba(56, 189, 248, 0.3);
+  }
+
+  100% {
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.95), 0 0 25px rgba(192, 132, 252, 0.45);
+    border-color: rgba(192, 132, 252, 0.4);
+  }
 }
 
 .ecosystem-logo-img {
@@ -393,8 +723,13 @@
 }
 
 @keyframes logoFloat {
-  0% { transform: translateY(0px) scale(1); }
-  100% { transform: translateY(-2px) scale(1.02); }
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+
+  100% {
+    transform: translateY(-2px) scale(1.02);
+  }
 }
 
 .ecosystem-tagline {
@@ -411,17 +746,45 @@
 }
 
 @keyframes rotateClockwise {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes rotateCounterClockwise {
-  from { transform: rotate(360deg); }
-  to { transform: rotate(0deg); }
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
 }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
+  .prep-hiring-section {
+    margin-bottom: 36px;
+  }
+
+  .prep-hiring-card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .prep-step-connector {
+    display: none;
+  }
+
   .journeys-unified-card {
     flex-direction: column;
     align-items: center;
@@ -520,6 +883,46 @@
 @media (max-width: 768px) {
   .prepx-journeys {
     padding: 16px 12px 24px;
+  }
+
+  .prep-hiring-section {
+    margin-bottom: 28px;
+  }
+
+  .prep-hiring-title {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .prep-hiring-subtitle {
+    font-size: 12.5px;
+  }
+
+  .prep-hiring-card {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 12px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .prep-step-item {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .prep-step-icon-box {
+    width: 40px;
+    height: 40px;
+  }
+
+  .prep-step-name {
+    font-size: 14px;
+  }
+
+  .prep-step-desc {
+    font-size: 11px;
   }
 
   .prepx-journeys-title {

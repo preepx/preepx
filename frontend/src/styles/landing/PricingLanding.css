@@ -1,0 +1,504 @@
+/* ═══════════════════════════════════════════════════════════
+   PREEPX PRICING & PLANS STYLES
+   Dual Ecosystem (Candidate & Recruiter) · PreepX
+═══════════════════════════════════════════════════════════ */
+
+.prepx-pricing-section {
+  padding: 35px 18px 50px;
+  position: relative;
+  width: 100%;
+}
+
+/* ── HEADER ── */
+.pricing-title-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.pricing-main-title {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.pricing-header-subtitle {
+  font-size: 13.5px;
+  color: #94a3b8;
+  margin: 8px 0 0 0;
+  font-weight: 500;
+}
+
+/* ── 2-WING MASTER CONTAINER ── */
+.pricing-wings-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 22px;
+  max-width: 1440px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+/* ── SINGLE WING CARD ── */
+.pricing-wing {
+  background: linear-gradient(165deg, rgba(12, 18, 36, 0.94) 0%, rgba(6, 10, 22, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(14px);
+}
+
+/* Wing Top Header */
+.wing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.wing-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wing-icon-circle {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.circle-purple {
+  background: rgba(168, 85, 247, 0.16);
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  color: #c084fc;
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.3);
+}
+
+.circle-green {
+  background: rgba(16, 185, 129, 0.16);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+}
+
+.wing-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wing-main-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+
+.title-purple {
+  color: #c084fc;
+}
+
+.title-green {
+  color: #34d399;
+}
+
+.wing-sub-text {
+  font-size: 11px;
+  color: #8e9cb2;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* ── INCLUDED IN ALL HORIZONTAL BAR ── */
+.wing-included-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.inc-bar-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.inc-bar-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.inc-tag {
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.tag-p-pill {
+  background: rgba(168, 85, 247, 0.12);
+  color: #d8b4fe;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.tag-g-pill {
+  background: rgba(16, 185, 129, 0.12);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+/* ── CANDIDATE CARDS GRID (2 Cards) ── */
+.candidate-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 14px;
+  align-items: stretch;
+  flex: 1;
+}
+
+/* ── RECRUITER CARDS GRID (3 Cards) ── */
+.recruiter-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  align-items: stretch;
+  flex: 1;
+}
+
+/* ── TIER CARDS ── */
+.pricing-tier-card {
+  background: rgba(10, 16, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.pricing-tier-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tier-card-popular {
+  border-width: 1.5px;
+}
+
+.cand-pro-card {
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+}
+
+.cand-pro-card:hover {
+  border-color: rgba(168, 85, 247, 0.8);
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
+}
+
+.rec-growth-card {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+}
+
+.rec-growth-card:hover {
+  border-color: rgba(16, 185, 129, 0.8);
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+}
+
+/* Popular Badges */
+.tier-popular-tag {
+  align-self: center;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 2.5px 9px;
+  border-radius: 10px;
+  letter-spacing: 0.2px;
+}
+
+.tag-purple {
+  background: rgba(168, 85, 247, 0.25);
+  color: #e9d5ff;
+  border: 1px solid rgba(168, 85, 247, 0.6);
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.3);
+}
+
+.tag-green {
+  background: rgba(16, 185, 129, 0.25);
+  color: #a7f3d0;
+  border: 1px solid rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+/* Header inside tier */
+.tier-header-info {
+  text-align: center;
+}
+
+.tier-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 2px 0;
+}
+
+.tier-tagline {
+  font-size: 9.5px;
+  color: #8e9cb2;
+  margin: 0;
+}
+
+/* Price */
+.tier-price-box {
+  text-align: center;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 3px;
+  margin: 2px 0;
+}
+
+.tier-price {
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.tier-price-purple {
+  color: #c084fc;
+}
+
+.tier-price-green {
+  color: #34d399;
+}
+
+.tier-period {
+  font-size: 10px;
+  color: #8e9cb2;
+  font-weight: 500;
+}
+
+/* Tier Buttons */
+.tier-btn {
+  width: 100%;
+  padding: 8.5px 12px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  border: none;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tier-btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.tier-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.tier-btn-purple {
+  background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(147, 51, 234, 0.4);
+}
+
+.tier-btn-purple:hover {
+  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(147, 51, 234, 0.6);
+}
+
+.tier-btn-green {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.tier-btn-green:hover {
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+}
+
+.tier-btn-outline-green {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+}
+
+.tier-btn-outline-green:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.7);
+  transform: translateY(-1px);
+}
+
+/* Feature list inside Tier Card */
+.tier-features-ul {
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tier-feat-li {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.chk-icon-wrap {
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.chk-purple {
+  background: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+}
+
+.chk-green {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+.tier-feat-text {
+  font-size: 9.5px;
+  color: #cbd5e1;
+  line-height: 1.35;
+}
+
+/* ── BOTTOM FEATURE STRIP (CANDIDATE WING) ── */
+.wing-bottom-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 8px 10px;
+}
+
+.bottom-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.strip-icon-box {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.strip-purple {
+  background: rgba(168, 85, 247, 0.16);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+.strip-green {
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.strip-text-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.strip-title {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.strip-desc {
+  font-size: 8px;
+  color: #8e9cb2;
+  margin: 0;
+  line-height: 1.2;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE DESIGN
+══════════════════════════════════════════════ */
+@media (max-width: 1200px) {
+  .pricing-wings-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .prepx-pricing-section {
+    padding: 28px 14px 40px;
+  }
+
+  .pricing-main-title {
+    font-size: 26px;
+  }
+
+  .candidate-cards-grid,
+  .recruiter-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .wing-bottom-strip {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}

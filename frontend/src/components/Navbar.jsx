@@ -38,12 +38,45 @@ function Navbar({ landingRole, setLandingRole }) {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
-  const navLinks = user
-    ? [
-      { to: "/user-dashboard", label: "Dashboard" },
-      { to: "/profile", label: "Profile" },
-    ]
-    : [];
+  const landingNavLinks = [
+    { targetId: "how-it-works", label: "How It Works" },
+    { targetId: "journeys", label: "Why PreepX?" },
+    { targetId: "features", label: "Features" },
+    { targetId: "pricing", label: "Pricing" },
+    { targetId: "faq", label: "FAQ" },
+  ];
+
+  const scrollToSectionWithOffset = (targetId) => {
+    const el = document.getElementById(targetId);
+    if (el) {
+      const navOffset = 80;
+      const elementPosition = el.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navOffset;
+
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const handleLandingNavClick = (e, targetId) => {
+    e.preventDefault();
+    if (location.pathname === "/") {
+      scrollToSectionWithOffset(targetId);
+    } else {
+      navigate(`/#${targetId}`);
+    }
+  };
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace("#", "");
+      setTimeout(() => {
+        scrollToSectionWithOffset(id);
+      }, 150);
+    }
+  }, [location]);
 
   useEffect(() => {
     setShowMenu(false);
@@ -78,15 +111,26 @@ function Navbar({ landingRole, setLandingRole }) {
         </Link>
 
         <div className="navbar-center">
-          {navLinks.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className={`nav-link ${isActive(link.to) ? "active" : ""}`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {user
+            ? navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`nav-link ${isActive(link.to) ? "active" : ""}`}
+                >
+                  {link.label}
+                </Link>
+              ))
+            : landingNavLinks.map((link) => (
+                <a
+                  key={link.targetId}
+                  href={`#${link.targetId}`}
+                  onClick={(e) => handleLandingNavClick(e, link.targetId)}
+                  className="nav-link"
+                >
+                  {link.label}
+                </a>
+              ))}
         </div>
 
         <div className="navbar-right">

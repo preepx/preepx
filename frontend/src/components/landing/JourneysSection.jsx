@@ -10,6 +10,9 @@ import {
   Users,
   Mic,
   UserCheck,
+  ShieldCheck,
+  Search,
+  ArrowRight,
 } from "lucide-react";
 import "@/styles/landing/JourneysLanding.css";
 
@@ -53,8 +56,11 @@ function JourneysSection() {
       {/* Title */}
       <div className="section-header journeys-section-header">
         <h2 className="prepx-journeys-title">
-          One Platform. Two Journeys. <span className="gradient-text-one-goal">One Goal.</span>
+          Why <span className="gradient-text-one-goal">PreepX?</span>
         </h2>
+        <p className="journeys-section-subtitle">
+          One Platform. Two Journeys. One Goal.
+        </p>
       </div>
 
       {/* Unified Master Card Container */}

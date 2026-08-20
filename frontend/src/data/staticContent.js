@@ -91,21 +91,34 @@ export const staticContent = {
     ]
   },
   "/about-us": {
-    title: "About Us",
-    subtitle: "Empowering professionals to land their dream jobs with AI-driven interview prep.",
+    title: "About PreepX",
+    subtitle: "Empowering millions of candidates to prove their skills and enabling top companies to hire smarter.",
     sections: [
-      { heading: "Our Mission", content: "At PreepX, our mission is to democratize access to high-quality interview preparation. We believe that everyone deserves a fair shot at their dream job, regardless of their background or resources. By leveraging cutting-edge Artificial Intelligence, we provide personalized, accessible, and highly effective mock interviews to candidates worldwide." },
-      { heading: "Why PreepX?", content: "Traditional interview preparation often involves expensive coaches or relying on friends for mock interviews. PreepX changes the game by offering a 24/7 AI-powered interviewer that evaluates your technical knowledge, communication skills, and confidence." },
-      { heading: "Our Story", content: "PreepX was built by a passionate team of engineers and designers who recognized the anxiety and challenges associated with job interviews. We combined our expertise in AI and software development to create a platform that simulates real-world interview scenarios. Today, PreepX is trusted by thousands of candidates preparing for top tech companies." },
-      { heading: "Join Us on Our Journey", content: "We are constantly innovating and expanding our platform. Whether you're a recent graduate or a seasoned professional, PreepX is here to support you in every step of your career journey." }
+      { heading: "Our Mission", content: "At PreepX, our mission is to build the world's most intelligent, unbiased, and accessible talent ecosystem. We bridge the gap between candidate preparation and recruiter discovery by providing AI-driven real-time interview simulations, standardized objective skill assessments, and direct hiring pipelines." },
+      { heading: "The Two-Way Ecosystem", content: "PreepX is engineered for both sides of the hiring table:\n• For Candidates: Practice realistic AI mock interviews, earn verified skill certificates, conquer the 100 Days Challenge, and get discovered by top tech employers.\n• For Recruiters: Create tailored role-based assessments, evaluate candidate responses with AI scoring, and fast-track shortlists with verified talent data." },
+      { heading: "Our Technology", content: "Powered by modern LLMs, real-time voice synthesis, anti-cheat video intelligence, and advanced semantic ATS scoring, PreepX delivers precision analytics that accurately measure technical competence, problem-solving, and communication clarity." },
+      { heading: "Get in Touch", content: "Have questions, partnership inquiries, or media requests? Reach out to our team at contact@preepx.in." }
     ]
   },
   "/careers": {
-    title: "Careers",
-    subtitle: "Help us build the future of hiring.",
+    title: "Careers at PreepX",
+    subtitle: "Join our mission to revolutionize tech preparation and recruitment worldwide.",
     sections: [
-      { heading: "Campus Ambassador Program (Freshers/Students)", content: "We are actively hiring freshers and college students for our Campus Ambassador Program! As an ambassador, you will represent PreepX at your campus, spread awareness, and help your peers prepare for their dream jobs. This is a great opportunity to gain leadership experience, build a strong network, and earn exciting perks and certificates.\n\nTo apply, send your resume and a brief introduction to: career@preepx.in" },
-      { heading: "Other Open Roles", content: "We are always on the lookout for exceptional talent. If you don't see a perfect fit but want to join us, send your resume to career@preepx.in." }
+      { heading: "Why Work With Us?", content: "At PreepX, you'll work on cutting-edge generative AI, distributed real-time systems, and high-impact educational products used by thousands of aspiring developers and top hiring teams." },
+      { heading: "Open Role: Frontend Engineer (React / Next.js)", content: "We are looking for a creative Frontend Engineer experienced in React, modern animations, CSS architecture, and high-performance WebRTC applications.\n\nTo apply, send your portfolio and resume to: career@preepx.in" },
+      { heading: "Open Role: AI / Fullstack Engineer (Node.js & Python)", content: "Build low-latency LLM orchestration pipelines, vector embeddings, and real-time audio evaluation services.\n\nTo apply, email: career@preepx.in" },
+      { heading: "Campus Ambassador Program (Students & Freshers)", content: "Represent PreepX at your university campus! Spread awareness, organize coding competitions, help your peers prepare for placements, and earn exclusive stipends, certificates, and PreepX Pro coins.\n\nApply with your college details to: career@preepx.in" }
+    ]
+  },
+  "/security": {
+    title: "Trust & Security",
+    subtitle: "Enterprise-grade data protection, ethical AI, and privacy at our core.",
+    sections: [
+      { heading: "1. End-to-End Data Encryption", content: "All candidate audio streams, video recordings, resumes, and recruiter assessments are encrypted both in transit (TLS 1.3) and at rest (AES-256) using industry-leading cloud infrastructure." },
+      { heading: "2. Privacy-First AI Processing", content: "Audio transcripts and video proctoring frames are processed in secure, isolated memory enclaves solely for evaluation scoring. We never sell, rent, or use candidate data to train public foundation models without explicit consent." },
+      { heading: "3. Unbiased & Fair Evaluation", content: "Our scoring algorithms evaluate candidates strictly on technical correctness, conceptual clarity, and problem-solving rubrics—preventing unconscious bias based on age, gender, accent, or background." },
+      { heading: "4. Infrastructure & Compliance", content: "Hosted in Tier-4 SOC-2 certified cloud data centers with 99.9% uptime SLAs, daily automated backups, and strict role-based access control (RBAC)." },
+      { heading: "5. Responsible Vulnerability Disclosure", content: "If you believe you have discovered a security vulnerability in our platform, please report it immediately to security@preepx.in. We review all submissions promptly." }
     ]
   },
   "/privacy-policy": {
@@ -113,10 +126,10 @@ export const staticContent = {
     subtitle: "Last updated: September 2026",
     sections: [
       { heading: "1. Introduction", content: "Welcome to PreepX. We respect your privacy and are committed to protecting your personal data. This privacy policy will inform you about how we look after your personal data when you visit our website and tell you about your privacy rights." },
-      { heading: "2. Data We Collect", content: "We may collect, use, store, and transfer different kinds of personal data about you, including:\n\nIdentity Data: First name, last name, username.\nContact Data: Email address.\nTechnical Data: IP address, browser type and version, time zone setting.\nUsage Data: Information about how you use our website, including interview transcripts and AI feedback." },
-      { heading: "3. How We Use Your Data", content: "We will only use your personal data when the law allows us to. Most commonly, we use it for the following purposes:\n\nTo register you as a new user.\nTo process and evaluate your interview responses using AI models.\nTo manage our relationship with you and provide customer support.\nTo improve our platform, products, and services." },
+      { heading: "2. Data We Collect", content: "We may collect, use, store, and transfer different kinds of personal data about you, including:\n\n• Identity Data: First name, last name, username, profile photo.\n• Contact Data: Email address and phone number.\n• Technical Data: IP address, browser type and version, time zone setting.\n• Usage Data: Information about how you use our website, including interview transcripts and AI feedback." },
+      { heading: "3. How We Use Your Data", content: "We will only use your personal data when the law allows us to. Most commonly, we use it for the following purposes:\n\n• To register you as a new user and manage your profile.\n• To process and evaluate your interview responses using AI models.\n• To facilitate candidate discovery and job matching with recruiters.\n• To manage our relationship with you and provide customer support." },
       { heading: "4. Data Security", content: "We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used, or accessed in an unauthorized way, altered, or disclosed. Access to your personal data is limited to those employees, agents, and contractors who have a business need to know." },
-      { heading: "5. Your Legal Rights", content: "Under certain circumstances, you have rights under data protection laws in relation to your personal data, including the right to request access, correction, or deletion of your personal data. If you wish to exercise any of these rights, please contact us." }
+      { heading: "5. Your Legal Rights", content: "Under data protection regulations, you have rights to access, rectify, or delete your personal data. Contact contact@preepx.in for any inquiries." }
     ]
   },
   "/terms-of-service": {

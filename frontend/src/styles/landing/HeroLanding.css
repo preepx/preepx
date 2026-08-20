@@ -151,12 +151,20 @@
   text-align: left;
 }
 
-.prepx-hero-actions {
+.hero-actions-container {
   display: flex;
-  gap: 14px;
+  gap: 16px;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: nowrap;
+  margin-bottom: 24px;
+}
+
+.hero-action-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
 }
 
 /* Primary Button with Shimmer sweep */
@@ -235,6 +243,53 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(192, 132, 252, 0.3);
 }
+
+.hero-action-sub {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 400;
+  padding-left: 2px;
+  white-space: nowrap;
+}
+
+/* 4 Feature Tags Below Buttons */
+.hero-feature-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hero-tag-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  font-weight: 600;
+  color: #cbd5e1;
+  transition: all 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: default;
+}
+
+.hero-tag-item:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+}
+
+.tag-icon {
+  flex-shrink: 0;
+}
+
+.tag-cyan { color: #38bdf8; }
+.tag-amber { color: #fbbf24; }
+.tag-purple { color: #c084fc; }
+.tag-green { color: #34d399; }
 
 /* ── RIGHT COLUMN: HERO MOCKUP WITH 3D TILT & AURA ── */
 .prepx-hero-right {
@@ -628,6 +683,99 @@
   text-decoration: underline;
 }
 
+/* ── JOURNEY / INTERNSHIP BANNER IN MOCKUP ── */
+.mockup-journey-banner {
+  margin-top: 10px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(147, 51, 234, 0.14) 100%);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 12px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.mockup-journey-banner:hover {
+  transform: translateY(-2px);
+  border-color: rgba(56, 189, 248, 0.6);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(147, 51, 234, 0.22) 100%);
+  box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25);
+}
+
+.journey-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.journey-banner-icon-wrap {
+  width: 26px;
+  height: 26px;
+  min-width: 26px;
+  border-radius: 7px;
+  background: rgba(56, 189, 248, 0.16);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.journey-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.journey-banner-title {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.journey-banner-desc {
+  font-size: 8px;
+  color: #8e9cb2;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.journey-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 9px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.4);
+}
+
+.journey-banner-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.6);
+}
+
 /* Floating Profile Card */
 .mockup-floating-card {
   position: absolute;
@@ -962,41 +1110,115 @@
   }
 }
 
-@media (max-width: 480px) {
-  .prepx-hero {
-    padding: 28px 14px 20px;
-  }
-
-  .hero-inner.prepx-hero-2col {
-    margin: 0 auto;
-    gap: 20px;
-  }
-
-  .prepx-hero-title {
-    font-size: 27px;
-    margin-bottom: 6px;
-  }
-
-  .prepx-hero-desc {
-    font-size: 12px;
-    margin-bottom: 14px;
-    line-height: 1.45;
-  }
-
-  .prepx-hero-actions {
+@media (max-width: 768px) {
+  .hero-actions-container {
+    display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 10px;
     width: 100%;
-    margin-bottom: 6px;
+    margin-bottom: 16px;
+  }
+
+  .hero-action-group {
+    flex: 1;
+    min-width: 0;
+    align-items: center;
+    text-align: center;
   }
 
   .btn-hero-primary,
   .btn-hero-secondary {
-    flex: 1;
-    padding: 9px 8px;
-    font-size: 11.5px;
+    width: 100%;
     justify-content: center;
+    padding: 10px 10px;
+    font-size: 12.5px;
+  }
+
+  .hero-action-sub {
+    font-size: 9.5px;
+    text-align: center;
+    white-space: normal;
+    padding: 0;
+  }
+
+  .hero-feature-tags {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: 100%;
+    gap: 6px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-tag-item {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 6px 4px;
+    font-size: 9.5px;
+    justify-content: center;
+    white-space: nowrap;
+    gap: 4px;
+    border-radius: 8px;
+  }
+
+  .hero-tag-item .tag-icon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .prepx-hero {
+    padding: 24px 12px 18px;
+  }
+
+  .hero-inner.prepx-hero-2col {
+    margin: 0 auto;
+    gap: 18px;
+  }
+
+  .prepx-hero-title {
+    font-size: 26px;
+    margin-bottom: 6px;
+  }
+
+  .prepx-hero-desc {
+    font-size: 11.5px;
+    margin-bottom: 12px;
+    line-height: 1.45;
+  }
+
+  .hero-actions-container {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    padding: 9px 6px;
+    font-size: 11.5px;
     gap: 5px;
+  }
+
+  .hero-action-sub {
+    font-size: 8.5px;
+    line-height: 1.25;
+  }
+
+  .hero-feature-tags {
+    gap: 4px;
+  }
+
+  .hero-tag-item {
+    padding: 5px 3px;
+    font-size: 8.5px;
+    letter-spacing: -0.3px;
+    gap: 3px;
+  }
+
+  .hero-tag-item .tag-icon {
+    width: 10px;
+    height: 10px;
   }
 
   .new-hero-mockup-wrapper {

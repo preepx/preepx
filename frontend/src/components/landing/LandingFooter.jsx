@@ -109,12 +109,12 @@ function LandingFooter({ onRecruiterClick }) {
           <div className="footer-nav-col">
             <h4>Platform</h4>
             <ul className="footer-nav-list">
-              <li><a href="#journeys">How PreepX Works</a></li>
-              <li><a href="#features">Features Overview</a></li>
+              <li><a href="/#how-it-works">How PreepX Works</a></li>
+              <li><a href="/#features">Features Overview</a></li>
               <li><Link to="/user-guide">User Guide & Docs</Link></li>
-              <li><Link to="/btech-notes">Knowledge Hub</Link></li>
-              <li><a href="#faq">Frequently Asked Questions</a></li>
-              <li><Link to="/feedback">Product Feedback</Link></li>
+              <li><Link to="/interview-tips">Knowledge Hub</Link></li>
+              <li><a href="/#faq">Frequently Asked Questions</a></li>
+              <li><Link to="/help-center">Product Feedback</Link></li>
             </ul>
           </div>
 
@@ -126,7 +126,7 @@ function LandingFooter({ onRecruiterClick }) {
               <li><Link to="/careers">Careers <span className="footer-hiring-tag">Hiring</span></Link></li>
               <li><Link to="/privacy-policy">Privacy Policy</Link></li>
               <li><Link to="/terms-of-service">Terms of Service</Link></li>
-              <li><Link to="/privacy-policy">Trust & Security</Link></li>
+              <li><Link to="/security">Trust & Security</Link></li>
               <li><Link to="/help-center">Help Center & Support</Link></li>
             </ul>
           </div>
@@ -138,6 +138,7 @@ function LandingFooter({ onRecruiterClick }) {
           <ul className="footer-bottom-links">
             <li><Link to="/privacy-policy">Privacy Policy</Link></li>
             <li><Link to="/terms-of-service">Terms of Service</Link></li>
+            <li><Link to="/security">Security</Link></li>
             <li><Link to="/help-center">Help Center</Link></li>
           </ul>
         </div>

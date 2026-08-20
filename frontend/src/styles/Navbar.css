@@ -10,10 +10,10 @@
 }
 
 .navbar-inner {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 24px;
-  height: 64px;
+  padding: 0 28px;
+  height: 66px;
   display: flex;
   align-items: center;
   gap: 16px;

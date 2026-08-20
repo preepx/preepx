@@ -1,7 +1,28 @@
 import React from "react";
-import { User, FileText, Mic, BarChart2, Award, Briefcase, Settings } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import {
+  User,
+  FileText,
+  Mic,
+  BarChart2,
+  Award,
+  Briefcase,
+  Settings,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
 
 function HeroMockup() {
+  const navigate = useNavigate();
+
+  const handleApplyJobsClick = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/apply-jobs");
+    } else {
+      navigate("/auth?role=candidate&redirect=/apply-jobs");
+    }
+  };
   return (
     <div className="new-hero-mockup-wrapper">
       <div className="new-hero-mockup">
@@ -148,6 +169,34 @@ function HeroMockup() {
                 <div className="stat-val">3</div>
                 <div className="stat-link">View all</div>
               </div>
+            </div>
+
+            {/* Quick Internship / Career CTA Banner */}
+            <div
+              className="mockup-journey-banner"
+              onClick={handleApplyJobsClick}
+            >
+              <div className="journey-banner-content">
+                <div className="journey-banner-icon-wrap">
+                  <Briefcase size={14} className="journey-banner-icon" />
+                </div>
+                <div className="journey-banner-text">
+                  <h5 className="journey-banner-title">
+                    Start Your Journey. Get Internships
+                  </h5>
+                  <p className="journey-banner-desc">
+                    Apply directly to top verified tech companies
+                  </p>
+                </div>
+              </div>
+              <button
+                className="journey-banner-btn"
+                type="button"
+                onClick={handleApplyJobsClick}
+              >
+                <span>Apply Jobs</span>
+                <ArrowRight size={11} />
+              </button>
             </div>
           </div>
         </div>

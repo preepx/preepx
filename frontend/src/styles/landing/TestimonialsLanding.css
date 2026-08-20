@@ -1,0 +1,346 @@
+/* ═══════════════════════════════════════════════════════════
+   PREEPX TRIO SECTION (WHAT PEOPLE SAY | TRUST & SECURITY | EXPLORE TECH JOBS)
+   PreepX · AI Interview Platform
+═══════════════════════════════════════════════════════════ */
+
+.prepx-trio-section {
+  padding: 30px 20px 45px;
+  position: relative;
+  width: 100%;
+}
+
+.trio-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+/* Master Card Styles */
+.trio-card {
+  background: linear-gradient(165deg, rgba(13, 19, 36, 0.94) 0%, rgba(7, 11, 24, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+}
+
+.trio-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65), 0 0 20px rgba(56, 189, 248, 0.12);
+}
+
+.trio-card-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.2px;
+}
+
+/* ══════════════════════════════════════════════
+   CARD 1: WHAT PEOPLE SAY
+══════════════════════════════════════════════ */
+.trio-testimonials-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.trio-testimonial-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  animation: trioFadeIn 0.4s ease;
+}
+
+@keyframes trioFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.trio-avatar-wrap {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+  flex-shrink: 0;
+}
+
+.trio-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.trio-quote-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trio-quote-text {
+  font-size: 11.5px;
+  color: #cbd5e1;
+  line-height: 1.45;
+  margin: 0;
+  font-weight: 500;
+}
+
+.trio-author-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.trio-author-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.trio-author-role {
+  font-size: 9.5px;
+  color: #8e9cb2;
+}
+
+.trio-dots-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.trio-mini-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.trio-mini-dot.active {
+  width: 16px;
+  border-radius: 8px;
+  background: #38bdf8;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+/* ══════════════════════════════════════════════
+   CARD 2: TRUST & SECURITY
+══════════════════════════════════════════════ */
+.trio-security-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.trio-security-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.trio-sec-icon-box {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+.trio-sec-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.trio-sec-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.trio-sec-desc {
+  font-size: 9.5px;
+  color: #8e9cb2;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.trio-sec-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #38bdf8;
+  font-size: 11px;
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: 14px;
+  padding: 4px 0;
+  transition: all 0.2s ease;
+}
+
+.trio-sec-link-btn:hover {
+  color: #7dd3fc;
+  transform: translateX(3px);
+}
+
+/* ══════════════════════════════════════════════
+   CARD 3: EXPLORE TECH JOBS
+══════════════════════════════════════════════ */
+.trio-jobs-box {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.22);
+  padding: 8px 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trio-job-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.trio-job-row:last-child {
+  border-bottom: none;
+}
+
+.trio-job-row:hover {
+  transform: translateX(3px);
+}
+
+.trio-job-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.trio-job-role {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.job-role-blue {
+  color: #38bdf8 !important;
+}
+
+.trio-job-skills {
+  font-size: 9.5px;
+  color: #8e9cb2;
+}
+
+.trio-job-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.trio-job-loc {
+  font-size: 9.5px;
+  color: #64748b;
+}
+
+.trio-job-match {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: #34d399;
+}
+
+.trio-explore-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+  margin-top: 14px;
+}
+
+.trio-explore-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE DESIGN
+══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .trio-container {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .prepx-trio-section {
+    padding: 24px 14px 35px;
+  }
+
+  .trio-card {
+    padding: 18px 16px;
+    border-radius: 18px;
+  }
+
+  .trio-card-title {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+}

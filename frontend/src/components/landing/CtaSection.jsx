@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { User, Briefcase } from "lucide-react";
+import { User, Briefcase, Mic, ClipboardList, Code2, ShieldCheck } from "lucide-react";
 import "@/styles/landing/FaqCtaLanding.css";
 
 function CtaSection({ onRecruiterClick }) {
@@ -21,43 +21,51 @@ function CtaSection({ onRecruiterClick }) {
         <div className="cta-left-content">
           <h2 className="cta-heading">
             Whether you're building your career <br />
-            or your team, start with <span className="gradient-text-blue">PreepX.</span>
+            or your team, start with <span className="gradient-text-preepx">PreepX.</span>
           </h2>
 
-          <div className="cta-buttons-row">
-            {/* Candidate Button */}
-            <button
-              className="cta-action-btn cta-candidate-btn"
-              onClick={() => navigate("/auth?role=candidate")}
-            >
-              <div className="cta-btn-icon">
-                <User size={18} />
-              </div>
-              <div className="cta-btn-text">
-                <div className="cta-btn-main">
-                  <span>I'm a Candidate</span>
-                  <span className="cta-arrow">→</span>
-                </div>
-                <div className="cta-btn-sub">Start preparing for your dream role</div>
-              </div>
-            </button>
+          <div className="cta-buttons-container">
+            {/* Candidate Button Group */}
+            <div className="cta-action-group">
+              <button
+                className="cta-action-btn cta-candidate-btn"
+                onClick={() => navigate("/auth?role=candidate")}
+              >
+                <User size={16} />
+                <span>I'm a Candidate</span>
+                <span className="cta-arrow">→</span>
+              </button>
+              <span className="cta-btn-sub">Start preparing for your dream role</span>
+            </div>
 
-            {/* Recruiter Button */}
-            <button
-              className="cta-action-btn cta-recruiter-btn"
-              onClick={handleRecruiterClick}
-            >
-              <div className="cta-btn-icon">
-                <Briefcase size={18} />
-              </div>
-              <div className="cta-btn-text">
-                <div className="cta-btn-main">
-                  <span>I'm a Recruiter</span>
-                  <span className="cta-arrow">→</span>
-                </div>
-                <div className="cta-btn-sub">Find and hire the best talent</div>
-              </div>
-            </button>
+            {/* Recruiter Button Group */}
+            <div className="cta-action-group">
+              <button
+                className="cta-action-btn cta-recruiter-btn"
+                onClick={handleRecruiterClick}
+              >
+                <Briefcase size={16} />
+                <span>I'm a Recruiter</span>
+                <span className="cta-arrow">→</span>
+              </button>
+              <span className="cta-btn-sub">Find and hire the best talent</span>
+            </div>
+          </div>
+
+          {/* 3 Feature Tags Below Buttons */}
+          <div className="cta-feature-tags">
+            <div className="cta-tag-item">
+              <Mic size={13} className="tag-icon tag-cyan" />
+              <span>AI Mock Interviews</span>
+            </div>
+            <div className="cta-tag-item">
+              <ClipboardList size={13} className="tag-icon tag-amber" />
+              <span>Objective Exams</span>
+            </div>
+            <div className="cta-tag-item">
+              <Code2 size={13} className="tag-icon tag-purple" />
+              <span>Coding Challenges</span>
+            </div>
           </div>
         </div>
 
