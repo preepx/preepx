@@ -279,7 +279,7 @@ function AppLayout({ children }) {
 
           <div className="sidebar-bottom" style={{ padding: collapsed ? "12px 8px" : "12px 16px" }}>
             <div className={`sidebar-bottom-actions ${collapsed ? "collapsed" : ""}`}>
-              <Link to="/settings" className="sidebar-action-btn" data-tooltip="Settings" title="Settings">
+              <Link to="/settings" className="sidebar-action-btn" data-tooltip="Settings" title="Settings" onClick={() => setMobileOpen(false)}>
                 <Settings size={20} />
               </Link>
 
