@@ -28,7 +28,6 @@ const NAV_ITEMS = [
   { to: "/rewards", icon: Zap, label: "My Rewards" },
   { to: "/achievements", icon: Award, label: "Redeem XP" },
   { to: "/profile", icon: User, label: "Profile" },
-  { to: "/settings", icon: Settings, label: "Settings" },
 ];
 
 const initialNotifications = [
@@ -230,14 +229,33 @@ function AppLayout({ children }) {
         <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
           <div className="sidebar-top">
             <Link to="/interview" className="sidebar-brand">
-              {collapsed ? (
+              {collapsed && !mobileOpen ? (
                 <img src="/logo.png" alt="PreepX" style={{ height: '32px', objectFit: 'contain', marginLeft: '4px' }} />
               ) : (
                 <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
               )}
             </Link>
-            <button className="sidebar-toggle desktop-only" onClick={() => setCollapsed(!collapsed)}><Menu size={20} /></button>
-            <button className="sidebar-toggle mobile-only" onClick={() => setMobileOpen(false)}><X size={20} /></button>
+            <button
+              type="button"
+              className="sidebar-toggle desktop-only"
+              onClick={() => setCollapsed(!collapsed)}
+              aria-label="Toggle Sidebar"
+              title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+            >
+              <div className="hamburger-box">
+                <span className="ham-bar top-bar" />
+                <span className="ham-bar mid-bar" />
+                <span className="ham-bar bot-bar" />
+              </div>
+            </button>
+            <button
+              type="button"
+              className="sidebar-close-btn mobile-only"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close Sidebar"
+            >
+              <X size={19} />
+            </button>
           </div>
 
           <nav className="sidebar-nav">
@@ -246,7 +264,7 @@ function AppLayout({ children }) {
               return (
                 <Link key={to} to={to} className={`sidebar-link ${isActive ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
                   <Icon size={20} style={{ flexShrink: 0 }} />
-                  {!collapsed && (
+                  {(!collapsed || mobileOpen) && (
                     <>
                       <span className="sidebar-link-label">{label}</span>
                       {isFree && <span className="nav-free-badge">Free</span>}
@@ -255,21 +273,21 @@ function AppLayout({ children }) {
                   )}
                   {isActive && <span className="nav-indicator" />}
                 </Link>
-              )
+              );
             })}
           </nav>
 
           <div className="sidebar-bottom" style={{ padding: collapsed ? "12px 8px" : "12px 16px" }}>
             <div className={`sidebar-bottom-actions ${collapsed ? "collapsed" : ""}`}>
-              <Link to="/profile" className="sidebar-profile-link" title="Profile">
-                <img src={avatar} alt="Profile" />
+              <Link to="/settings" className="sidebar-action-btn" data-tooltip="Settings" title="Settings">
+                <Settings size={20} />
               </Link>
 
-              <button className="sidebar-action-btn" onClick={toggleTheme} title={isDark ? "Light Mode" : "Dark Mode"}>
+              <button className="sidebar-action-btn" onClick={toggleTheme} data-tooltip={isDark ? "Light Mode" : "Dark Mode"} title={isDark ? "Light Mode" : "Dark Mode"}>
                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
 
-              <button className="sidebar-action-btn danger" onClick={handleLogout} title="Sign Out">
+              <button className="sidebar-action-btn danger" onClick={handleLogout} data-tooltip="Sign Out" title="Sign Out">
                 <LogOut size={20} />
               </button>
             </div>
@@ -281,18 +299,26 @@ function AppLayout({ children }) {
         <div className="app-content">
           {!location.pathname.includes("/pdf") && (
             <header className="topbar">
-              <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)}><Menu size={20} /></button>
+              <button
+                type="button"
+                className="mobile-menu-btn"
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open Navigation Menu"
+              >
+                <div className="hamburger-box">
+                  <span className="ham-bar top-bar" />
+                  <span className="ham-bar mid-bar" />
+                  <span className="ham-bar bot-bar" />
+                </div>
+              </button>
 
-              <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '20px', marginLeft: '4px' }}>
+              <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <Link
-                  to="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setShowComingSoon(true);
-                  }}
-                  className="topbar-apply-jobs-link"
+                  to="/apply-jobs"
+                  className="topbar-apply-jobs-btn"
                 >
-                  Apply Jobs
+                  <Briefcase size={15} />
+                  <span>Apply Jobs</span>
                 </Link>
               </div>
 
@@ -301,7 +327,12 @@ function AppLayout({ children }) {
               </div>
 
               <div className="topbar-right">
-                <button aria-label="Notifications" onClick={() => setShowNotifications(true)} style={{ position: 'relative', background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '4px', flexShrink: 0, transition: 'color 0.2s ease' }} onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text)'} onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}>
+                <button
+                  type="button"
+                  aria-label="Notifications"
+                  className="topbar-notif-btn"
+                  onClick={() => setShowNotifications(true)}
+                >
                   <Bell size={22} />
                   {unreadCount > 0 && (
                     <span className="notification-badge">
@@ -309,9 +340,22 @@ function AppLayout({ children }) {
                     </span>
                   )}
                 </button>
-                {user.streak > 0 && <span className="streak-badge">🔥 {user.streak}<span className="badge-text"> day streak</span></span>}
 
-                <span className="points-badge" style={{ display: 'flex', alignItems: 'center', gap: '0px' }}><img src="/logo.png" alt="XP" style={{ width: '32px', height: '32px', margin: '-8px -6px -8px -8px', objectFit: 'contain' }} />{user.points || 0}<span className="badge-text" style={{ marginLeft: '2px' }}>XP</span></span>
+                {user.streak > 0 && (
+                  <span className="streak-badge">
+                    <span className="badge-icon">🔥</span>
+                    <span>{user.streak} day streak</span>
+                  </span>
+                )}
+
+                <span className="points-badge">
+                  <img src="/logo.png" alt="XP" className="xp-logo-icon" />
+                  <span>{user.points || 0} XP</span>
+                </span>
+
+                <Link to="/profile" className="topbar-profile-link" title="My Profile">
+                  <img src={avatar} alt="Profile" className="topbar-avatar-img" />
+                </Link>
               </div>
             </header>
           )}
