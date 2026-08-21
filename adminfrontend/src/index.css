@@ -16,6 +16,24 @@
   --glass-shadow: 0 4px 16px rgba(236, 72, 153, 0.05); /* Simplified shadow for performance */
 }
 
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-primary: #ec4899;
+  --accent-secondary: #f97316;
+  --accent-hover: #db2777;
+  --danger: #ef4444;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(30, 41, 59, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -80,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
 .input-field {
   width: 100%;
   padding: 0.875rem 1rem;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--glass-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
   color: var(--text-primary);
@@ -93,7 +111,7 @@ h1, h2, h3, h4, h5, h6 {
   outline: none;
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2), inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
-  background: rgba(255, 255, 255, 1);
+  background: var(--bg-secondary);
 }
 
 .btn-primary {
@@ -218,7 +236,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.5rem 1rem;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.4);
+  background: var(--glass-bg);
   color: var(--text-secondary);
   cursor: pointer;
   font-size: 0.85rem;
@@ -227,7 +245,7 @@ h1, h2, h3, h4, h5, h6 {
   backdrop-filter: blur(4px);
 }
 .filter-btn:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--bg-secondary);
   color: var(--text-primary);
 }
 .filter-btn.active {
@@ -278,7 +296,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 6px 12px;
   border-radius: 8px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--glass-bg);
   color: var(--text-secondary);
   cursor: pointer;
   font-size: 0.85rem;
@@ -297,7 +315,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0.875rem 1.75rem;
   border-radius: 10px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--glass-bg);
   color: var(--text-secondary);
   cursor: pointer;
   font-size: 1rem;
@@ -305,7 +323,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.2s;
 }
 .btn-secondary:hover {
-  background: white;
+  background: var(--bg-secondary);
   color: var(--text-primary);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
@@ -361,7 +379,7 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 20px;
   max-height: 90vh;
   overflow-y: auto;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);

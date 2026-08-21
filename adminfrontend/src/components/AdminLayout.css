@@ -21,7 +21,7 @@
   border-top: none;
   border-bottom: none;
   border-left: none;
-  background: rgba(255, 255, 255, 0.6); /* Slightly more transparent to let global background shine */
+  background: var(--glass-bg); /* Use theme variable */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 100;
@@ -112,7 +112,7 @@
 }
 
 .nav-item:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--glass-bg);
   color: var(--text-primary);
   border-color: rgba(236, 72, 153, 0.2);
   transform: translateX(4px);
@@ -173,7 +173,7 @@
   padding: 0 2rem;
   margin: 1rem 2rem 0;
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--glass-bg);
   backdrop-filter: blur(12px);
   flex-shrink: 0;
   z-index: 90;
@@ -211,7 +211,7 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--bg-secondary);
   padding: 0.4rem 1.2rem 0.4rem 0.4rem;
   border-radius: 999px;
   border: 1px solid var(--border);
@@ -314,7 +314,7 @@
     left: -280px;
     width: 280px;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--glass-bg);
     backdrop-filter: blur(20px);
     z-index: 1000;
     transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);

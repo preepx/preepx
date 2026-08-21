@@ -126,8 +126,10 @@ const Challenge100Days = () => {
 
     API.get("/users/leaderboard")
       .then((res) => {
-        if (Array.isArray(res.data)) {
-          setLeaderboard(res.data.slice(0, 5));
+        if (res.data && Array.isArray(res.data.leaderboard)) {
+          setLeaderboard(res.data.leaderboard.slice(0, 6));
+        } else if (Array.isArray(res.data)) {
+          setLeaderboard(res.data.slice(0, 6));
         }
       })
       .catch((err) => console.error("Failed to fetch leaderboard", err));
@@ -308,7 +310,7 @@ const Challenge100Days = () => {
             <div className="c100-stat-icon"><Zap size={18} /></div>
             <div className="c100-stat-text-block">
               <span className="c100-stat-val"><AnimatedNumber value={xp} /> XP</span>
-              <span className="c100-stat-lbl">Total Experience</span>
+              <span className="c100-stat-lbl">XP Points</span>
               <span className="c100-stat-sub">Next: 55 XP</span>
             </div>
           </div>
@@ -577,12 +579,12 @@ const Challenge100Days = () => {
         <div className="c100-dash-card leaderboard-card">
           <div className="dash-header-row">
             <h4 className="dash-card-title">Leaderboard</h4>
-            <span className="view-all">View All</span>
+            <span className="view-all" onClick={() => navigate('/leaderboard')} style={{ cursor: 'pointer' }}>View All</span>
           </div>
           <div className="leaderboard-list">
             {leaderboard.map((u, idx) => {
-              const isCurrentUser = u._id === user._id;
-              const rank = idx + 1;
+              const isCurrentUser = u.isCurrentUser || (u._id && u._id === user._id);
+              const rank = u.rank || idx + 1;
               let rankElem = <span className="lb-rank">{rank}</span>;
               if (rank === 1) rankElem = <span className="lb-rank gold"><Trophy size={12} /></span>;
               else if (rank === 2) rankElem = <span className="lb-rank silver"><Medal size={12} /></span>;
@@ -590,7 +592,7 @@ const Challenge100Days = () => {
               const initials = u.fullName ? u.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'U';
 
               return (
-                <div key={u._id} className={`lb-item ${isCurrentUser ? 'current-user' : ''}`}>
+                <div key={u._id || idx} className={`lb-item ${isCurrentUser ? 'current-user' : ''}`}>
                   {rankElem}
                   <div className="lb-user">
                     <div className="avatar">
@@ -609,7 +611,7 @@ const Challenge100Days = () => {
               );
             })}
 
-            {user && user._id && !leaderboard.some(u => u._id === user._id) && (
+            {user && user._id && !leaderboard.some(u => u.isCurrentUser || (u._id && u._id === user._id)) && (
               <div className="lb-item current-user">
                 <span className="lb-rank">#{globalRank || "?"}</span>
                 <div className="lb-user">

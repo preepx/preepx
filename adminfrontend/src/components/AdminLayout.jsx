@@ -1,13 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate, Navigate } from 'react-router-dom';
-import { LayoutDashboard, Users, CreditCard, LogOut, Menu, X, BookOpen, HelpCircle, FileUp, IndianRupee, Briefcase, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, Users, CreditCard, LogOut, Menu, X, BookOpen, HelpCircle, FileUp, IndianRupee, Briefcase, ChevronRight, Sun, Moon } from 'lucide-react';
 import preepxLogo from '../../../frontend/public/preepx_logo.png';
 import './AdminLayout.css';
 
 const AdminLayout = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDark, setIsDark] = useState(document.documentElement.dataset.theme !== "light");
   const navigate = useNavigate();
   const token = localStorage.getItem('adminToken');
+
+  useEffect(() => {
+    const theme = localStorage.getItem("adminTheme") || "dark";
+    setIsDark(theme === "dark");
+    document.documentElement.dataset.theme = theme;
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = isDark ? "light" : "dark";
+    setIsDark(!isDark);
+    document.documentElement.dataset.theme = nextTheme;
+    localStorage.setItem("adminTheme", nextTheme);
+  };
 
   if (!token) {
     return <Navigate to="/login" replace />;
@@ -102,6 +116,9 @@ const AdminLayout = () => {
             </div>
           </div>
           <div className="header-right">
+            <button onClick={toggleTheme} className="mobile-menu-btn" style={{ display: 'flex' }} title="Toggle Theme">
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
             <div className="admin-profile-pill">
               <div className="admin-profile-avatar">A</div>
               <span className="admin-profile-name">Admin</span>
