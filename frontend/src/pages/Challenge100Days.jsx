@@ -377,8 +377,13 @@ const Challenge100Days = () => {
               <style>{`
                 @keyframes floatImage {
                   0% { transform: translateY(0px); }
-                  50% { transform: translateY(-12px); }
+                  50% { transform: translateY(-10px); }
                   100% { transform: translateY(0px); }
+                }
+                @media (max-width: 768px) {
+                  .c100-today-graphic {
+                    display: none !important;
+                  }
                 }
               `}</style>
             </div>
