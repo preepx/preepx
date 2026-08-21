@@ -26,11 +26,8 @@ function Leaderboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  const maskName = (name, isCurrentUser) => {
-    const defaultName = name || "Anonymous";
-    if (isCurrentUser || defaultName === "Anonymous") return defaultName;
-    const firstWord = defaultName.split(" ")[0];
-    return firstWord.substring(0, 3) + "***";
+  const maskName = (name) => {
+    return name || "Anonymous";
   };
 
   if (loading) return <Loader />;

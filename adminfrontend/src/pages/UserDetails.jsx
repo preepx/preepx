@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X, Gift, Calendar } from 'lucide-react';
 import api from '../utils/api';
 import './UserDetails.css';
+import Pagination from '../components/Pagination';
 
 const UserDetails = () => {
   const { id } = useParams();
@@ -20,6 +21,9 @@ const UserDetails = () => {
   const [referrals, setReferrals] = useState([]);
   const [showReferralsModal, setShowReferralsModal] = useState(false);
   const [loadingReferrals, setLoadingReferrals] = useState(false);
+
+  const [interviewPage, setInterviewPage] = useState(1);
+  const interviewsPerPage = 10;
 
   const fetchReferrals = async () => {
     try {
@@ -53,6 +57,10 @@ const UserDetails = () => {
   if (!data) return null;
 
   const { user, wallet, interviews, mcqResults, codingResults = [], recentTransactions } = data;
+
+  const indexOfLastInterview = interviewPage * interviewsPerPage;
+  const indexOfFirstInterview = indexOfLastInterview - interviewsPerPage;
+  const currentInterviews = interviews.slice(indexOfFirstInterview, indexOfLastInterview);
 
   return (
     <div className="user-details-page animate-fade-in">
@@ -335,19 +343,25 @@ const UserDetails = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {interviews.map(inv => (
+                  {currentInterviews.map(inv => (
                     <tr key={inv._id}>
                       <td>{inv.jobTitle || 'N/A'}</td>
                       <td>{inv.company || 'N/A'}</td>
                       <td>{new Date(inv.createdAt).toLocaleDateString()}</td>
                     </tr>
                   ))}
-                  {interviews.length === 0 && (
+                  {currentInterviews.length === 0 && (
                     <tr><td colSpan="3" className="text-secondary text-center">No interviews found.</td></tr>
                   )}
                 </tbody>
               </table>
             </div>
+            <Pagination 
+              currentPage={interviewPage}
+              totalItems={interviews.length}
+              itemsPerPage={interviewsPerPage}
+              onPageChange={setInterviewPage}
+            />
           </div>
 
           <div className="glass-panel content-card">

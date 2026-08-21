@@ -219,6 +219,12 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1.5rem;
 }
 
+@media (max-width: 768px) {
+  .content-card {
+    padding: 1rem;
+  }
+}
+
 .card-header {
   display: flex;
   align-items: center;
