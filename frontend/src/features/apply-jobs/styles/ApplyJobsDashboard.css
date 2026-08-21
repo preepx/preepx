@@ -1,0 +1,819 @@
+/* =========================================================
+   ApplyJobsDashboard.css — Pixel-perfect match to mockup
+   ========================================================= */
+
+.ajd-root {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 20px;
+    align-items: start;
+}
+
+.ajd-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* =========================================================
+   HERO BANNER (MINIMAL)
+   ========================================================= */
+.ajd-hero-minimal {
+    padding: 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.ajd-hm-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0 0 10px;
+    letter-spacing: -0.5px;
+}
+
+.ajd-hm-sub {
+    font-size: 15px;
+    color: #64748b;
+    font-weight: 500;
+    margin: 0 0 32px;
+}
+
+.ajd-hm-search {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 999px;
+    padding: 6px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 800px;
+}
+
+.ajd-hms-seg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    flex: 2;
+}
+
+.ajd-hms-seg--mid {
+    flex: 1.2;
+}
+
+.ajd-hms-icon {
+    color: #94a3b8;
+    flex-shrink: 0;
+}
+
+.ajd-hms-seg input,
+.ajd-hms-seg select {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #1e293b;
+    width: 100%;
+    font-family: inherit;
+}
+
+.ajd-hms-seg input::placeholder {
+    color: #94a3b8;
+}
+
+.ajd-hms-seg select {
+    color: #94a3b8;
+    cursor: pointer;
+}
+
+.ajd-hms-div {
+    width: 1px;
+    height: 24px;
+    background: #e2e8f0;
+    flex-shrink: 0;
+}
+
+.ajd-hms-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 32px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 8px;
+    transition: background 0.15s;
+}
+
+.ajd-hms-btn:hover {
+    background: #1d4ed8;
+}
+
+/* =========================================================
+   RIGHT SIDEBAR
+   ========================================================= */
+.ajd-right-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ajd-rcard {
+    background: #fff;
+    border: 1px solid #e4e8ef;
+    border-radius: 12px;
+    padding: 18px 18px 14px;
+}
+
+.ajd-rcard-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.ajd-rcard-head h3,
+.ajd-rcard>h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+.ajd-view-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.ajd-view-link:hover {
+    text-decoration: underline;
+}
+
+.ajd-rcard-sub {
+    font-size: 12px;
+    color: #64748b;
+    margin: 0 0 14px;
+    line-height: 1.5;
+}
+
+/* Recommended items */
+.ajd-rec-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.ajd-rec-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.ajd-rec-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.ajd-rec-item:first-child {
+    padding-top: 0;
+}
+
+.ajd-rec-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    padding: 6px;
+}
+
+.ajd-rec-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+}
+
+.ajd-rec-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.ajd-rec-info h4 {
+    margin: 0 0 2px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ajd-rec-info p {
+    margin: 0 0 3px;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.ajd-rec-info strong {
+    font-size: 12px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.ajd-rec-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.ajd-time {
+    font-size: 10.5px;
+    color: #94a3b8;
+    white-space: nowrap;
+}
+
+.ajd-bm-btn {
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    padding: 3px;
+    display: flex;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.ajd-bm-btn:hover {
+    color: #475569;
+    background: #f1f5f9;
+}
+
+.ajd-see-more {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+    padding-top: 10px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.ajd-see-more:hover {
+    text-decoration: underline;
+}
+
+/* ─── STAND OUT CARD ─── */
+.ajd-boost-card {
+    background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ajd-boost-text {
+    flex: 1;
+    z-index: 2;
+}
+
+.ajd-boost-text h3 {
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 5px;
+}
+
+.ajd-boost-text p {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+
+.ajd-boost-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.ajd-boost-progress span {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.7);
+    white-space: nowrap;
+}
+
+.ajd-bp-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.ajd-bp-fill {
+    height: 100%;
+    background: #fff;
+    border-radius: 999px;
+}
+
+.ajd-bp-pct {
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+.ajd-boost-btn {
+    display: inline-block;
+    background: #fff;
+    color: #2563eb;
+    padding: 8px 16px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.15s;
+}
+
+.ajd-boost-btn:hover {
+    opacity: 0.92;
+}
+
+.ajd-boost-art {
+    width: 80px;
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.ajd-boost-art img {
+    width: 100%;
+    object-fit: contain;
+}
+
+/* Job Alerts btn */
+.ajd-alert-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    width: 100%;
+    padding: 9px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    color: #2563eb;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s;
+}
+
+.ajd-alert-btn:hover {
+    background: #f8fafc;
+}
+
+/* =========================================================
+   STAT CARDS ROW
+   ========================================================= */
+.ajd-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.ajd-stat-card {
+    background: #fff;
+    border: 1px solid #e4e8ef;
+    border-radius: 12px;
+    padding: 16px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.ajd-stat-card>div:last-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+}
+
+.ajd-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.ajd-stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ajd-stat-val {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1;
+    margin-bottom: 4px;
+    white-space: nowrap;
+}
+
+.ajd-stat-lbl {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 500;
+    margin-bottom: 4px;
+    white-space: nowrap;
+}
+
+.ajd-stat-sub {
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* =========================================================
+   CARDS (featured jobs, companies)
+   ========================================================= */
+.ajd-card {
+    background: #fff;
+    border: 1px solid #e4e8ef;
+    border-radius: 12px;
+    padding: 22px 24px;
+}
+
+.ajd-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.ajd-card-head h2 {
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0;
+}
+
+/* ─── FEATURED JOB ROWS ─── */
+.ajd-job-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.ajd-job-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.ajd-job-row:first-child {
+    padding-top: 0;
+}
+
+.ajd-job-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.ajd-jlogo {
+    width: 44px;
+    height: 44px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    padding: 7px;
+}
+
+.ajd-jlogo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.ajd-jinfo {
+    flex: 1;
+    min-width: 0;
+}
+
+.ajd-jinfo h4 {
+    margin: 0 0 3px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.ajd-jinfo p {
+    margin: 0 0 7px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+.ajd-tags {
+    display: flex;
+    gap: 6px;
+}
+
+.ajd-tag {
+    font-size: 11px;
+    padding: 2px 9px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.ajd-tag--green {
+    background: #ecfdf5;
+    color: #059669;
+}
+
+.ajd-tag--blue {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.ajd-jright {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+    margin-right: 6px;
+    flex-shrink: 0;
+}
+
+.ajd-jright strong {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0f172a;
+    white-space: nowrap;
+}
+
+.ajd-jright span {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.ajd-view-all-wrap {
+    text-align: center;
+    padding-top: 16px;
+    margin-top: 14px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.ajd-view-all-btn {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.ajd-view-all-btn:hover {
+    text-decoration: underline;
+}
+
+/* ─── TOP COMPANIES ─── */
+.ajd-co-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+}
+
+.ajd-co-box {
+    border: 1px solid #e4e8ef;
+    border-radius: 10px;
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+.ajd-co-box:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    border-color: #c7d2fe;
+}
+
+.ajd-co-box img {
+    height: 28px;
+    object-fit: contain;
+    max-width: 100%;
+}
+
+.ajd-co-box span {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #475569;
+    text-align: center;
+}
+
+.ajd-co-jobs {
+    font-size: 10.5px !important;
+    color: #94a3b8 !important;
+    font-weight: 500 !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1280px) {
+    .ajd-root {
+        grid-template-columns: 1fr 300px;
+    }
+
+    .ajd-co-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .ajd-root {
+        grid-template-columns: 1fr;
+    }
+
+    .ajd-hero-art {
+        display: none;
+    }
+
+    .ajd-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .ajd-co-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .ajd-hero {
+        padding: 22px 18px;
+    }
+
+    .ajd-hero-title {
+        font-size: 20px;
+    }
+
+    .ajd-search-box {
+        flex-direction: column;
+        padding: 10px;
+        gap: 4px;
+    }
+
+    .ajd-sb-divider {
+        width: 100%;
+        height: 1px;
+        margin: 2px 0;
+    }
+
+    .ajd-sb-seg {
+        height: 40px;
+        width: 100%;
+    }
+
+    .ajd-sb-btn {
+        width: 100%;
+        padding: 10px;
+        margin-top: 4px;
+    }
+
+    .ajd-stats-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .ajd-co-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* =========================================================
+   FORCE LIGHT THEME — always light mode for jobs portal
+   ========================================================= */
+.ajd-root {
+    background: #f0f2f5;
+}
+
+.ajd-stat-card,
+.ajd-card,
+.ajd-rcard,
+.ajd-co-box {
+    background: #ffffff !important;
+    border-color: #e4e8ef !important;
+    color: #1e293b !important;
+}
+
+.ajd-stat-val {
+    color: #0f172a !important;
+}
+
+.ajd-stat-lbl {
+    color: #64748b !important;
+}
+
+.ajd-card-head h2,
+.ajd-rcard-head h3,
+.ajd-rcard>h3 {
+    color: #0f172a !important;
+}
+
+.ajd-jinfo h4,
+.ajd-rec-info h4,
+.ajd-jright strong,
+.ajd-rec-info strong {
+    color: #1e293b !important;
+}
+
+.ajd-jinfo p,
+.ajd-rec-info p,
+.ajd-jright span,
+.ajd-time {
+    color: #64748b !important;
+}
+
+.ajd-job-row {
+    border-bottom-color: #f1f5f9 !important;
+}
+
+.ajd-rec-item {
+    border-bottom-color: #f1f5f9 !important;
+}
+
+.ajd-view-all-wrap {
+    border-top-color: #f1f5f9 !important;
+}
+
+.ajd-sb-seg input {
+    color: #1e293b;
+}
+
+.ajd-sb-seg select {
+    color: #475569;
+}
+
+.ajd-search-box {
+    background: #ffffff !important;
+}
+
+.ajd-co-box span {
+    color: #475569 !important;
+}
+
+.ajd-co-jobs {
+    color: #94a3b8 !important;
+}
+
+.ajd-rcard-sub {
+    color: #64748b !important;
+}
+
+.ajd-see-more {
+    border-top-color: #f1f5f9 !important;
+}
+
+.ajd-bm-btn {
+    color: #cbd5e1;
+}
+
+.ajd-bm-btn:hover {
+    color: #475569 !important;
+    background: #f1f5f9 !important;
+}
+
+.ajd-view-link {
+    color: #2563eb !important;
+}
+
+.ajd-view-all-btn {
+    color: #2563eb !important;
+}

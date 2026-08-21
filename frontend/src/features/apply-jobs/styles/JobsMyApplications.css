@@ -139,7 +139,6 @@
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  font-family: inherit;
   transition: all 0.15s;
 }
 
@@ -229,7 +228,6 @@
   align-items: center;
   justify-content: center;
   color: #fff;
-  flex-shrink: 0;
 }
 
 .jma-card-body {
@@ -243,7 +241,6 @@
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 12px;
-  flex-wrap: wrap;
 }
 
 .jma-job-title {
@@ -279,7 +276,6 @@
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .jma-card-bottom-row {
@@ -312,12 +308,10 @@
 .jma-action-btn--assessment {
   background: linear-gradient(135deg, #8b5cf6, #6366f1);
   color: #fff;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .jma-action-btn--assessment:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
 }
 
 .jma-shortlisted-banner {
@@ -383,8 +377,6 @@
   color: #fff;
   font-weight: 700;
   font-size: 14px;
-  text-decoration: none;
-  transition: background 0.15s;
 }
 
 .jma-browse-btn:hover {

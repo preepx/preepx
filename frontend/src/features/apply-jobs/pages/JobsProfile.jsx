@@ -7,7 +7,7 @@ import {
 import { getProfile, updateProfileDetails, uploadProfilePhoto, uploadResume, syncUserToStorage } from "@/services/userAPI";
 import notify from "@/utils/notify";
 import Loader from "@/components/Loader";
-import '@/styles/JobsProfile.css';
+import '../styles/JobsProfile.css';
 
 // Profile completion calculator
 function calcCompletion(user) {
