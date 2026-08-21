@@ -516,36 +516,37 @@ const Challenge100Days = () => {
         <div className="c100-journey-scroll-area" ref={scrollRef}>
           <div className="c100-journey-inner-track" style={{ flexDirection: 'row' }}>
             {visibleDays.slice(0, 7).map((dayNum) => {
+              // ✅ Real user progress – no hardcoded fakeData
               const unlocked = isUnlocked(dayNum);
               const completed = isCompleted(dayNum);
-              const inProgress = unlocked && !completed && dayNum === activeDay;
+              const isActiveCard = unlocked && !completed && dayNum === activeDay;
+              const isLocked = !unlocked;
+              const isDone = completed;
 
-              const fakeData = [
-                { title: 'Two Sum', diff: 'Easy', status: 'Completed' },
-                { title: 'Valid Parentheses', diff: 'Easy', status: 'In Progress' },
-                { title: 'Merge Strings', diff: 'Easy', status: 'Locked' },
-                { title: 'Remove Duplicates', diff: 'Easy', status: 'Locked' },
-                { title: 'Maximum Subarray', diff: 'Medium', status: 'Locked' },
-                { title: 'Longest Substring', diff: 'Medium', status: 'Locked' },
-                { title: 'Reverse Integer', diff: 'Easy', status: 'Locked' },
-              ];
-
-              const fd = fakeData[dayNum - 1] || fakeData[0];
-              const isLocked = fd.status === 'Locked';
-              const isDone = fd.status === 'Completed';
-              const isActiveCard = fd.status === 'In Progress';
+              // Get real problem data from API
+              const dayObj = getDayData(dayNum);
+              const problem = dayObj?.problems?.[0];
+              const title = problem?.title || `Day ${dayNum}`;
+              const diff = problem?.difficulty || 'Easy';
+              const xpVal = DIFFICULTY_XP[diff?.toLowerCase()] || 5;
 
               return (
-                <div key={dayNum} className={`c100-compact-day-card ${isActiveCard ? 'active' : ''}`}>
+                <div
+                  key={dayNum}
+                  ref={isActiveCard ? activeCardRef : null}
+                  className={`c100-compact-day-card ${isActiveCard ? 'active' : ''}`}
+                  onClick={() => !isLocked && problem?._id && handleStart(problem._id, dayNum)}
+                  style={{ cursor: isLocked ? 'not-allowed' : 'pointer' }}
+                >
                   <div className="day-header">DAY {dayNum}</div>
-                  <h4 className="day-title">{fd.title}</h4>
-                  <span className={`day-diff ${fd.diff.toLowerCase()}`}>{fd.diff}</span>
+                  <h4 className="day-title">{title}</h4>
+                  <span className={`day-diff ${diff.toLowerCase()}`}>{diff}</span>
 
                   <div className="day-footer">
                     {isDone && <span className="status done"><CheckCircle2 size={12} /> Completed</span>}
                     {isActiveCard && <span className="status active"><Activity size={12} /> In Progress</span>}
                     {isLocked && <span className="status locked"><Lock size={12} /> Locked</span>}
-                    <span className="xp-val"><Zap size={10} /> +{fd.diff === 'Easy' ? 5 : 10} XP</span>
+                    <span className="xp-val"><Zap size={10} /> +{xpVal} XP</span>
                   </div>
                 </div>
               );
