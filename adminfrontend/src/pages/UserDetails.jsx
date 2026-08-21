@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X, Gift } from 'lucide-react';
+import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X, Gift, Calendar } from 'lucide-react';
 import api from '../utils/api';
 import './UserDetails.css';
 
@@ -248,6 +248,47 @@ const UserDetails = () => {
                   ) : (
                     <p className="text-secondary" style={{ fontSize: '0.85rem' }}>No rewards claimed yet.</p>
                   )}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="glass-panel content-card mb-4">
+            <div className="card-header">
+              <Calendar size={20} className="accent-icon" />
+              <h3 className="gradient-text">100 Days Coding Challenge</h3>
+            </div>
+            <div className="coding-challenge-info" style={{ marginTop: '1rem' }}>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <p className="text-secondary" style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>Current Progress</p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                  <div style={{ flex: 1, background: 'rgba(255,255,255,0.4)', borderRadius: '999px', height: '12px', overflow: 'hidden', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}>
+                    <div style={{ 
+                      width: `${Math.min(((user.challengeProgress?.completedDays?.length || 0) / 100) * 100, 100)}%`, 
+                      background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))', 
+                      height: '100%',
+                      borderRadius: '999px',
+                      transition: 'width 0.5s ease-out'
+                    }}></div>
+                  </div>
+                  <span style={{ fontWeight: 'bold', fontSize: '1.1rem', color: 'var(--text-primary)' }}>
+                    {user.challengeProgress?.completedDays?.length || 0}/100
+                  </span>
+                </div>
+              </div>
+              
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <div>
+                  <p className="text-secondary" style={{ fontSize: '0.85rem', margin: 0 }}>Current Day</p>
+                  <p style={{ fontWeight: 'bold', fontSize: '1.25rem', margin: '4px 0 0 0', color: 'var(--accent-primary)' }}>
+                    Day {user.challengeProgress?.currentDay || 1}
+                  </p>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                  <p className="text-secondary" style={{ fontSize: '0.85rem', margin: 0 }}>Streak</p>
+                  <p style={{ fontWeight: 'bold', fontSize: '1.25rem', margin: '4px 0 0 0', color: 'var(--warning)' }}>
+                    {user.streak || 0} 🔥
+                  </p>
                 </div>
               </div>
             </div>

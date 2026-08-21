@@ -209,23 +209,6 @@ const Recruiters = () => {
         </div>
       )}
 
-      <style>{`
-        .filter-btn { padding: 6px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-secondary); cursor: pointer; font-size: 13px; }
-        .filter-btn.active { background: rgba(99,102,241,0.2); color: #818cf8; border-color: rgba(99,102,241,0.4); }
-        .status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; }
-        .badge-pending { background: rgba(245,158,11,0.15); color: #f59e0b; }
-        .badge-verified { background: rgba(16,185,129,0.15); color: #10b981; }
-        .badge-rejected { background: rgba(239,68,68,0.15); color: #ef4444; }
-        .badge-suspended { background: rgba(148,163,184,0.15); color: #94a3b8; }
-        .stat-icon-wrapper.amber { background: rgba(245,158,11,0.15); color: #f59e0b; }
-        .btn-icon { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(99,102,241,0.1); color: #818cf8; cursor: pointer; font-size: 13px; }
-        .btn-primary { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 8px; border: none; background: #10b981; color: #fff; cursor: pointer; font-weight: 600; }
-        .btn-danger { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 8px; border: none; background: #ef4444; color: #fff; cursor: pointer; font-weight: 600; }
-        .btn-secondary { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border-radius: 8px; border: none; background: #64748b; color: #fff; cursor: pointer; }
-        .btn-ghost { padding: 10px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: transparent; color: var(--text-secondary); cursor: pointer; }
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
-        .modal-content { padding: 24px; width: 100%; border-radius: 16px; max-height: 90vh; overflow-y: auto; }
-      `}</style>
     </div>
   );
 };

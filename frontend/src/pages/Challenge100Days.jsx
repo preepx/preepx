@@ -107,7 +107,7 @@ const Challenge100Days = () => {
 
   const user = JSON.parse(localStorage.getItem("user") || "{}");
   const streak = user.streak || 0;
-  const xp = user.xp || 0;
+  const xp = user.points || user.xp || 0;
   const displayRank = globalRank ? `#${globalRank}` : "New";
 
   useEffect(() => {
