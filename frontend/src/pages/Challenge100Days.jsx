@@ -8,6 +8,9 @@ import {
   Medal, Gift, Activity, LayoutList, Building2
 } from "lucide-react";
 import API from "@/utils/api";
+import notify from "@/utils/notify";
+import PreChallengeSetupModal from "@/components/PreChallengeSetupModal";
+import TopCompaniesWidget from "@/components/TopCompaniesWidget";
 import "@/styles/Challenge100Days.css";
 import "@/styles/Challenge100DaysDash.css";
 
@@ -96,6 +99,8 @@ const Challenge100Days = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedPhaseFilter, setSelectedPhaseFilter] = useState("all");
+  const [showSetupModal, setShowSetupModal] = useState(false);
+  const [pendingChallenge, setPendingChallenge] = useState(null);
   const scrollRef = useRef(null);
   const activeCardRef = useRef(null);
   const navigate = useNavigate();
@@ -181,7 +186,26 @@ const Challenge100Days = () => {
   };
 
   const handleStart = (problemId, dayNum) => {
-    navigate(`/coding-exam/${problemId}?source=challenge&day=${dayNum}`);
+    setPendingChallenge({ problemId, dayNum });
+    setShowSetupModal(true);
+  };
+
+  const handleSetupProceed = async () => {
+    if (!pendingChallenge) return;
+    const { problemId, dayNum } = pendingChallenge;
+    setShowSetupModal(false);
+    try {
+      const res = await API.post('/coding/start', { challengeDay: dayNum });
+      if (res.data?.success) {
+        window.dispatchEvent(new Event("walletUpdated"));
+        navigate(`/coding-exam/${problemId}?source=challenge&day=${dayNum}`);
+      } else {
+        notify.error(res.data?.message || "Could not start challenge");
+      }
+    } catch (err) {
+      notify.error(err.response?.data?.message || "Insufficient coins to start challenge");
+    }
+    setPendingChallenge(null);
   };
 
   const scrollJourney = (dir) => {
@@ -337,14 +361,26 @@ const Challenge100Days = () => {
               </button>
             </div>
 
-            <div className="c100-today-graphic">
-              {/* Note: Replace this placeholder src with your actual 3D glowing code window asset URL */}
+            <div className="c100-today-graphic" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
-                src="https://ik.imagekit.io/cjnon47kr/coding-3d-graphic-placeholder.png"
+                src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Laptop.png"
                 alt="Code Challenge"
                 className="today-3d-graphic"
-                onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80'; }}
+                style={{
+                  width: '160px',
+                  height: '160px',
+                  objectFit: 'contain',
+                  animation: 'floatImage 4s ease-in-out infinite',
+                  filter: 'drop-shadow(0 15px 25px rgba(0,0,0,0.5))'
+                }}
               />
+              <style>{`
+                @keyframes floatImage {
+                  0% { transform: translateY(0px); }
+                  50% { transform: translateY(-12px); }
+                  100% { transform: translateY(0px); }
+                }
+              `}</style>
             </div>
           </div>
 
@@ -359,72 +395,8 @@ const Challenge100Days = () => {
           <div className="goal-progress-bar"><div className="fill" style={{ width: '10%' }}></div></div>
         </div>
 
-        <div className="c100-sidebar-right">
-          <div className="c100-company-card">
-            <div className="company-header">
-              <div className="comp-title"><Building2 size={16} /> Top Companies</div>
-              <span className="view-all">View All</span>
-            </div>
-            <div className="company-list">
-              <button className="company-item">
-                <div className="comp-icon bg-google">G</div>
-                <div className="comp-info">
-                  <strong>Google</strong>
-                  <span>120+ Problems</span>
-                </div>
-                <ChevronRight size={16} className="text-muted" />
-              </button>
-              <button className="company-item">
-                <div className="comp-icon bg-amazon">A</div>
-                <div className="comp-info">
-                  <strong>Amazon</strong>
-                  <span>95+ Problems</span>
-                </div>
-                <ChevronRight size={16} className="text-muted" />
-              </button>
-              <button className="company-item">
-                <div className="comp-icon bg-microsoft">M</div>
-                <div className="comp-info">
-                  <strong>Microsoft</strong>
-                  <span>80+ Problems</span>
-                </div>
-                <ChevronRight size={16} className="text-muted" />
-              </button>
-              <button className="company-item">
-                <div className="comp-icon bg-meta">M</div>
-                <div className="comp-info">
-                  <strong>Meta</strong>
-                  <span>65+ Problems</span>
-                </div>
-                <ChevronRight size={16} className="text-muted" />
-              </button>
-              <button className="company-item">
-                <div className="comp-icon bg-apple">A</div>
-                <div className="comp-info">
-                  <strong>Apple</strong>
-                  <span>50+ Problems</span>
-                </div>
-                <ChevronRight size={16} className="text-muted" />
-              </button>
-              <button className="company-item">
-                <div className="comp-icon bg-netflix">N</div>
-                <div className="comp-info">
-                  <strong>Netflix</strong>
-                  <span>40+ Problems</span>
-                </div>
-                <ChevronRight size={16} className="text-muted" />
-              </button>
-              <button className="company-item">
-                <div className="comp-icon bg-uber">U</div>
-                <div className="comp-info">
-                  <strong>Uber</strong>
-                  <span>35+ Problems</span>
-                </div>
-                <ChevronRight size={16} className="text-muted" />
-              </button>
-            </div>
-          </div>
-        </div>
+        {/* ─── Top Companies Widget ─── */}
+        <TopCompaniesWidget />
       </section>
 
       {/* ─── Roadmap & Achievements ─── */}
@@ -696,6 +668,13 @@ const Challenge100Days = () => {
         </div>
         <button className="c100-primary-btn">Continue Day 1 Challenge <ArrowRight size={16} /></button>
       </section>
+
+      {showSetupModal && (
+        <PreChallengeSetupModal
+          onProceed={handleSetupProceed}
+          onCancel={() => { setShowSetupModal(false); setPendingChallenge(null); }}
+        />
+      )}
     </div>
   );
 };

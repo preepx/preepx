@@ -748,18 +748,12 @@
   overflow-x: auto;
   scroll-behavior: smooth;
   padding-bottom: 12px;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(99, 102, 241, 0.35) transparent;
+  scrollbar-width: none; /* Hide in Firefox */
   -webkit-overflow-scrolling: touch;
 }
 
 .c100-journey-scroll-area::-webkit-scrollbar {
-  height: 6px;
-}
-
-.c100-journey-scroll-area::-webkit-scrollbar-thumb {
-  background: rgba(99, 102, 241, 0.35);
-  border-radius: 999px;
+  display: none; /* Hide in Chrome/Safari/Edge */
 }
 
 .c100-journey-inner-track {

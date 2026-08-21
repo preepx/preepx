@@ -28,7 +28,7 @@ const saveCodingResult = async (data) => {
     if (difficulty === "easy" || difficulty === "Easy") diffBonus = 5;
     else if (difficulty === "medium" || difficulty === "Medium") diffBonus = 10;
     else if (difficulty === "hard" || difficulty === "Hard") diffBonus = 15;
-    
+
     pointsEarned = diffBonus;
 
     const user = await User.findById(userId);
@@ -67,14 +67,14 @@ const getProblems = async (filters, page = 1, limit = 10) => {
   if (filters.topics && filters.topics.length > 0) {
     query.topics = { $in: filters.topics };
   }
-  
+
   const skip = (page - 1) * limit;
-  
+
   const [problems, total] = await Promise.all([
     CodingProblem.find(query).skip(skip).limit(limit).lean(),
     CodingProblem.countDocuments(query)
   ]);
-  
+
   return {
     problems,
     total,
@@ -117,7 +117,7 @@ const getChallenge = async (userId) => {
     if (user && user.challengeProgress) {
       progress = user.challengeProgress;
     }
-    
+
     // Calculate Rank based on number of completed challenge days (coding solved)
     const currentUserCompletedDaysCount = progress.completedDays.length;
     const rankAggregation = await User.aggregate([
@@ -135,7 +135,7 @@ const getChallenge = async (userId) => {
         $count: "higherRankedUsers"
       }
     ]);
-    
+
     rank = (rankAggregation[0]?.higherRankedUsers || 0) + 1;
   }
 

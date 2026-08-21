@@ -299,7 +299,7 @@ const CodingExam = () => {
               <h3>Information</h3>
               <XCircle size={20} className="ce-info-close" onClick={() => setShowInfoModal(false)} />
             </div>
-            
+
             <div className="ce-info-tabs">
               <div className={`ce-info-tab ${infoTab === 'shortcuts' ? 'active' : ''}`} onClick={() => setInfoTab('shortcuts')}>
                 Shortcuts Guide
@@ -314,7 +314,7 @@ const CodingExam = () => {
                 <>
                   <h4>The options below will help you explore keyboard shortcuts.</h4>
                   <p>Master these keyboard shortcuts to navigate seamlessly and enhance your productivity throughout your workflow.</p>
-                  
+
                   <div className="ce-shortcut-list">
                     <div className="ce-shortcut-item">
                       <span>1. Run / Save & Compile Code:</span>
@@ -331,31 +331,31 @@ const CodingExam = () => {
                   </div>
                 </>
               ) : (
-                  <div className="ce-env-list-wrap">
-                    <ul className="ce-env-bullets" style={{ margin: '0 0 20px 20px', padding: 0 }}>
-                      <li style={{ marginBottom: '8px' }}>Submissions run on an Ubuntu 18.04 (LTS) AMD64 virtualized EC2 instance.</li>
-                      <li>There is a limit set on the size of the code submission which is 100kB</li>
-                    </ul>
+                <div className="ce-env-list-wrap">
+                  <ul className="ce-env-bullets" style={{ margin: '0 0 20px 20px', padding: 0 }}>
+                    <li style={{ marginBottom: '8px' }}>Submissions run on an Ubuntu 18.04 (LTS) AMD64 virtualized EC2 instance.</li>
+                    <li>There is a limit set on the size of the code submission which is 100kB</li>
+                  </ul>
 
-                    <div className="ce-env-table-header" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 16px 12px 16px', fontWeight: 600, fontSize: '14px', color: '#f8fafc' }}>
-                      <span>Language</span>
-                      <span>Version</span>
-                    </div>
-
-                    <div className="ce-shortcut-list">
-                      {LANGUAGES.map((lang, idx) => {
-                        const match = lang.label.match(/(.*?)\s*\((.*?)\)/);
-                        const langName = match ? match[1].trim() : lang.label;
-                        const langVersion = match ? match[2].trim() : '';
-                        return (
-                          <div key={idx} className="ce-shortcut-item">
-                            <span>{langName}</span>
-                            <strong>{langVersion}</strong>
-                          </div>
-                        );
-                      })}
-                    </div>
+                  <div className="ce-env-table-header" style={{ display: 'flex', justifyContent: 'space-between', padding: '0 16px 12px 16px', fontWeight: 600, fontSize: '14px', color: '#f8fafc' }}>
+                    <span>Language</span>
+                    <span>Version</span>
                   </div>
+
+                  <div className="ce-shortcut-list">
+                    {LANGUAGES.map((lang, idx) => {
+                      const match = lang.label.match(/(.*?)\s*\((.*?)\)/);
+                      const langName = match ? match[1].trim() : lang.label;
+                      const langVersion = match ? match[2].trim() : '';
+                      return (
+                        <div key={idx} className="ce-shortcut-item">
+                          <span>{langName}</span>
+                          <strong>{langVersion}</strong>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               )}
             </div>
           </div>
@@ -397,14 +397,14 @@ const CodingExam = () => {
                   <span>Others</span>
                 </label>
               </div>
-              <textarea 
-                className="ce-report-textarea" 
-                placeholder="Details" 
+              <textarea
+                className="ce-report-textarea"
+                placeholder="Details"
                 value={reportDetails}
                 onChange={e => setReportDetails(e.target.value)}
               />
-              <button 
-                className="ce-compile-btn" 
+              <button
+                className="ce-compile-btn"
                 style={{ width: '100%', marginTop: '16px' }}
                 onClick={() => {
                   if (!reportIssueType) {
@@ -694,7 +694,7 @@ const CodingExam = () => {
                         e.preventDefault(); e.stopPropagation();
                         notify.warning("Copy/Paste disabled during exam.");
                       }
-                      
+
                       if (cmdKey && e.browserEvent.key === 'Enter') {
                         e.preventDefault(); e.stopPropagation();
                         if (e.shiftKey) {
