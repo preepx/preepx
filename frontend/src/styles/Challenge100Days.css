@@ -33,10 +33,19 @@
   -webkit-text-fill-color: transparent;
   animation: premiumGradientAnim 8s ease infinite;
 }
+
 @keyframes premiumGradientAnim {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* ── Light Mode Override ── */
@@ -74,6 +83,7 @@
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -149,14 +159,12 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(
-    115deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.04) 45%,
-    rgba(255, 255, 255, 0.12) 50%,
-    rgba(255, 255, 255, 0.04) 55%,
-    transparent 80%
-  );
+  background: linear-gradient(115deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.04) 45%,
+      rgba(255, 255, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.04) 55%,
+      transparent 80%);
   transform: translateX(-100%);
   transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 2;
@@ -362,8 +370,17 @@
 }
 
 @keyframes c100PulseDot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.6; }
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
 }
 
 /* Phase Cards Grid */
@@ -768,12 +785,10 @@
   right: 40px;
   height: 2px;
   transform: translateY(-50%);
-  background: linear-gradient(
-    90deg,
-    rgba(99, 102, 241, 0.4) 0%,
-    rgba(139, 92, 246, 0.25) 50%,
-    rgba(245, 158, 11, 0.3) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(99, 102, 241, 0.4) 0%,
+      rgba(139, 92, 246, 0.25) 50%,
+      rgba(245, 158, 11, 0.3) 100%);
   z-index: 0;
 }
 
@@ -1449,7 +1464,7 @@
 .c100-skeleton-hero {
   height: 220px;
   border-radius: var(--c100-radius-xl);
-  background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%);
   background-size: 200% 100%;
 }
 
@@ -1462,27 +1477,32 @@
 .c100-skeleton-stat {
   height: 110px;
   border-radius: var(--c100-radius-lg);
-  background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%);
   background-size: 200% 100%;
 }
 
 .c100-skeleton-roadmap {
   height: 260px;
   border-radius: var(--c100-radius-xl);
-  background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%);
   background-size: 200% 100%;
 }
 
 .c100-skeleton-journey {
   height: 380px;
   border-radius: var(--c100-radius-xl);
-  background: linear-gradient(90deg, rgba(255,255,255,0.03) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.03) 75%);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%);
   background-size: 200% 100%;
 }
 
 @keyframes c100Shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .c100-empty-card {

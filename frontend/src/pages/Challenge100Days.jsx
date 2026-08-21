@@ -199,15 +199,23 @@ const Challenge100Days = () => {
     }
   };
 
+  // Reset page scroll to top on mount — prevents auto-scroll to active card
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+
   useEffect(() => {
     if (!loading && challengeData.length > 0) {
       const timer = setTimeout(() => {
+        // Scroll only the horizontal carousel — NOT the whole page
         if (activeCardRef.current && scrollRef.current) {
-          activeCardRef.current.scrollIntoView({
-            behavior: "smooth",
-            inline: "center",
-            block: "nearest"
-          });
+          const container = scrollRef.current;
+          const card = activeCardRef.current;
+          const cardLeft = card.offsetLeft;
+          const cardWidth = card.offsetWidth;
+          const containerWidth = container.offsetWidth;
+          // Center the active card inside the scroll area
+          container.scrollLeft = cardLeft - (containerWidth / 2) + (cardWidth / 2);
         }
       }, 400);
       return () => clearTimeout(timer);

@@ -313,13 +313,14 @@ function AppLayout({ children }) {
               </button>
 
               <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <Link
-                  to="/apply-jobs"
+                <button
+                  type="button"
                   className="topbar-apply-jobs-btn"
+                  onClick={() => setShowComingSoon(true)}
                 >
                   <Briefcase size={15} />
                   <span>Apply Jobs</span>
-                </Link>
+                </button>
               </div>
 
               <div className="topbar-center">
