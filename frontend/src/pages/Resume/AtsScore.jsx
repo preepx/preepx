@@ -1,9 +1,31 @@
 import React, { useState } from "react";
-import { Upload, FileText, CheckCircle, AlertTriangle, Lightbulb, Activity, ArrowRight, RefreshCw } from "lucide-react";
+import {
+  Upload, FileText, CheckCircle, AlertTriangle, Lightbulb,
+  Activity, ArrowRight, RefreshCw, ScanLine, Target,
+  ShieldCheck, Briefcase, Zap
+} from "lucide-react";
 import { getAtsScore } from "@/services/atsAPI";
 import notify from "@/utils/notify";
 import { showAppError } from "@/utils/appAlert";
 import '@/styles/AtsScore.css';
+
+const ALLOWED_EXTS = [".pdf"];
+const FILE_ACCEPT = ".pdf,application/pdf";
+const FILE_TYPE_HINT = "PDF only · Max 10MB";
+const FILE_TYPE_ERROR = "Invalid file type. Only PDF files are allowed.";
+
+const SCAN_STEPS = [
+  { icon: Upload, title: "Upload Resume", desc: "PDF format only · Max 10MB" },
+  { icon: ScanLine, title: "AI ATS Scan", desc: "PreepX AI checks keywords, formatting, sections & impact" },
+  { icon: Target, title: "Actionable Report", desc: "Get your score plus tips to stand out to recruiters" },
+];
+
+const SCAN_CHECKS = [
+  { icon: Zap, label: "Keyword Match", desc: "Role-relevant skills & terms" },
+  { icon: FileText, label: "Formatting", desc: "ATS-readable layout & structure" },
+  { icon: ShieldCheck, label: "Sections", desc: "Contact, experience, education" },
+  { icon: Briefcase, label: "Impact", desc: "Action verbs & measurable results" },
+];
 
 const AtsScore = () => {
   const [uploading, setUploading] = useState(false);
@@ -12,15 +34,15 @@ const AtsScore = () => {
 
   const processFile = async (file) => {
     if (!file) return;
-    const validExts = [".pdf", ".png", ".jpg", ".jpeg"];
+    const validExts = ALLOWED_EXTS;
     const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
     if (!validExts.includes(ext)) {
-      showAppError("Unsupported file type. Please upload a PDF or Image (JPG/PNG).", "Invalid file type");
+      showAppError(FILE_TYPE_ERROR, "Invalid file type");
       return;
     }
     try {
       setUploading(true);
-      setResult(null); // reset previous result
+      setResult(null);
       const res = await getAtsScore(file);
       setResult(res);
       window.dispatchEvent(new Event("walletUpdated"));
@@ -41,112 +63,185 @@ const AtsScore = () => {
   };
 
   const getScoreColor = (score) => {
-    if (score >= 80) return "var(--success, #10b981)";
-    if (score >= 50) return "var(--warning, #f59e0b)";
-    return "var(--danger, #ef4444)";
+    if (score >= 80) return "#10b981";
+    if (score >= 50) return "#f59e0b";
+    return "#ef4444";
+  };
+
+  const getScoreLabel = (score) => {
+    if (score >= 80) return "Excellent";
+    if (score >= 50) return "Good";
+    return "Needs Work";
   };
 
   const getScoreMessage = (score) => {
-    if (score >= 80) return "Excellent! Your resume is highly optimized for ATS.";
-    if (score >= 50) return "Good, but could be better. Needs some tweaks.";
-    return "Needs significant improvement to pass ATS filters.";
+    if (score >= 80) return "Your resume is highly optimized for ATS systems.";
+    if (score >= 50) return "Solid foundation — a few tweaks can boost your score.";
+    return "Your resume needs improvement to pass ATS filters.";
   };
 
   return (
     <div className="ats-page">
-      <div className="ats-header">
+      <div className="ats-bg-glow ats-bg-glow-1" aria-hidden="true" />
+      <div className="ats-bg-glow ats-bg-glow-2" aria-hidden="true" />
+
+      <header className="ats-hero">
         <div className="ats-header-title">
-          <h1 style={{ margin: 0 }}>ATS Resume Score</h1>
+          <h1>ATS Resume Score</h1>
           <div className="ats-coin-badge">
-            1 <span>🪙</span> per session
+            <span className="ats-coin-icon">🪙</span>
+            1 coin per scan
           </div>
         </div>
-        <p style={{ marginTop: '8px' }}>Find out how well your resume matches Applicant Tracking Systems and get actionable feedback.</p>
-      </div>
+
+        <p className="ats-hero-desc">
+          See how recruiters&apos; Applicant Tracking Systems read your resume — before you apply on
+          {" "}<strong>PreepX Jobs</strong> or start a mock interview. Get instant, actionable feedback.
+        </p>
+      </header>
 
       {!result && (
-        <div
-          className={`drop-zone ats-drop ${dragOver ? "drag-over" : ""} ${uploading ? "uploading" : ""}`}
-          onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-          onDragLeave={() => setDragOver(false)}
-          onDrop={handleDrop}
-        >
-          {uploading ? (
-            <div className="uploading-state">
-              <Activity className="spinner-icon" size={48} />
-              <h2>Analyzing your resume...</h2>
-              <p>Evaluating keywords, formatting, and impact.</p>
+        <>
+          <div className="ats-steps">
+            {SCAN_STEPS.map((step, i) => (
+              <div key={step.title} className="ats-step-card">
+                <span className="ats-step-num">{i + 1}</span>
+                <div className="ats-step-icon">
+                  <step.icon size={20} />
+                </div>
+                <h3>{step.title}</h3>
+                <p>{step.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div
+            className={`ats-drop-zone ${dragOver ? "drag-over" : ""} ${uploading ? "uploading" : ""}`}
+            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+            onDragLeave={() => setDragOver(false)}
+            onDrop={handleDrop}
+          >
+            {uploading ? (
+              <div className="ats-uploading-state">
+                <div className="ats-scan-ring">
+                  <Activity className="ats-spinner-icon" size={32} />
+                </div>
+                <h2>Analyzing your resume…</h2>
+                <p>PreepX AI is scanning keywords, formatting, sections & impact.</p>
+                <div className="ats-scan-progress">
+                  <div className="ats-scan-progress-bar" />
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className="ats-drop-icon-wrap">
+                  <FileText size={36} />
+                </div>
+                <h2>Drop your resume here</h2>
+                <p className="ats-drop-hint">{FILE_TYPE_HINT}</p>
+                <label className="ats-browse-btn">
+                  <Upload size={18} />
+                  Browse Files
+                  <input type="file" accept={FILE_ACCEPT} hidden onChange={handleUpload} disabled={uploading} />
+                </label>
+              </>
+            )}
+          </div>
+
+          <div className="ats-checks">
+            <p className="ats-checks-label">What PreepX scans</p>
+            <div className="ats-checks-grid">
+              {SCAN_CHECKS.map((check) => (
+                <div key={check.label} className="ats-check-item">
+                  <div className="ats-check-icon">
+                    <check.icon size={16} />
+                  </div>
+                  <div>
+                    <strong>{check.label}</strong>
+                    <span>{check.desc}</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ) : (
-            <>
-              <FileText size={48} className="drop-icon" />
-              <h2>Drop your resume here</h2>
-              <p>PDF or Image (JPG/PNG) · Max 10MB</p>
-              <label className="drop-btn">
-                <Upload size={18} />
-                Browse Files
-                <input type="file" accept=".pdf,image/png,image/jpeg" hidden onChange={handleUpload} disabled={uploading} />
-              </label>
-            </>
-          )}
-        </div>
+          </div>
+        </>
       )}
 
       {result && (
         <div className="ats-results animate-fade-in">
-          <div className="score-overview">
-            <div className="score-circle-container">
-              <svg viewBox="0 0 36 36" className="circular-chart">
-                <path
-                  className="circle-bg"
-                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                />
-                <path
-                  className="circle"
-                  strokeDasharray={`${result.score}, 100`}
-                  style={{ stroke: getScoreColor(result.score) }}
-                  d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                />
-                <text x="18" y="20.35" className="percentage">{result.score}%</text>
-              </svg>
+          <div className="ats-score-card">
+            <div className="ats-score-visual">
+              <div className="score-circle-container">
+                <svg viewBox="0 0 36 36" className="circular-chart">
+                  <path
+                    className="circle-bg"
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                  <path
+                    className="circle"
+                    strokeDasharray={`${result.score}, 100`}
+                    style={{ stroke: getScoreColor(result.score) }}
+                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                  />
+                  <text x="18" y="20.35" className="percentage">{result.score}%</text>
+                </svg>
+              </div>
+              <span
+                className="ats-score-badge"
+                style={{ color: getScoreColor(result.score), borderColor: `${getScoreColor(result.score)}40` }}
+              >
+                {getScoreLabel(result.score)}
+              </span>
             </div>
-            <div className="score-text">
+
+            <div className="ats-score-text">
               <h2>{getScoreMessage(result.score)}</h2>
               <p>{result.summary}</p>
-              <button className="reupload-btn" onClick={() => setResult(null)}>
-                <RefreshCw size={16} /> Analyze Another Resume
+              <button className="ats-reupload-btn" onClick={() => setResult(null)}>
+                <RefreshCw size={16} />
+                Scan Another Resume
               </button>
             </div>
           </div>
 
-          <div className="feedback-grid">
-            <div className="feedback-card improvements-card">
-              <div className="card-header">
-                <AlertTriangle className="icon-warning" size={24} />
-                <h3>What to Improve</h3>
+          <div className="ats-feedback-grid">
+            <div className="ats-feedback-card ats-feedback-improve">
+              <div className="ats-card-header">
+                <div className="ats-card-icon ats-card-icon-warn">
+                  <AlertTriangle size={20} />
+                </div>
+                <div>
+                  <h3>What to Improve</h3>
+                  <span>Fix these to boost your ATS score</span>
+                </div>
               </div>
-              <ul className="feedback-list">
+              <ul className="ats-feedback-list">
                 {result.improvements?.map((item, idx) => (
                   <li key={idx}>
-                    <ArrowRight size={16} className="bullet-icon warning-text" />
+                    <ArrowRight size={15} className="ats-bullet-warn" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
               {(!result.improvements || result.improvements.length === 0) && (
-                <p className="empty-state">No major formatting or content issues found.</p>
+                <p className="ats-empty-feedback">No major formatting or content issues found.</p>
               )}
             </div>
 
-            <div className="feedback-card suggestions-card">
-              <div className="card-header">
-                <Lightbulb className="icon-success" size={24} />
-                <h3>Actionable Suggestions</h3>
+            <div className="ats-feedback-card ats-feedback-suggest">
+              <div className="ats-card-header">
+                <div className="ats-card-icon ats-card-icon-success">
+                  <Lightbulb size={20} />
+                </div>
+                <div>
+                  <h3>Actionable Suggestions</h3>
+                  <span>Tips to get recruiter-ready on PreepX</span>
+                </div>
               </div>
-              <ul className="feedback-list">
+              <ul className="ats-feedback-list">
                 {result.suggestions?.map((item, idx) => (
                   <li key={idx}>
-                    <CheckCircle size={16} className="bullet-icon success-text" />
+                    <CheckCircle size={15} className="ats-bullet-success" />
                     <span>{item}</span>
                   </li>
                 ))}
