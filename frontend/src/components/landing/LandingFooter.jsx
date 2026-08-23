@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Linkedin, Instagram, Github, Mail } from "lucide-react";
+import { Linkedin, Instagram, Facebook, Github, Mail } from "lucide-react";
 import "@/styles/landing/LandingFooter.css";
 
 function LandingFooter({ onRecruiterClick }) {
@@ -62,6 +62,9 @@ function LandingFooter({ onRecruiterClick }) {
             <div className="footer-social-links">
               <a href="https://www.linkedin.com/company/preepx" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="LinkedIn">
                 <Linkedin size={16} />
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61593744627935" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Facebook">
+                <Facebook size={16} />
               </a>
               <a href="https://www.instagram.com/preepx" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Instagram">
                 <Instagram size={16} />

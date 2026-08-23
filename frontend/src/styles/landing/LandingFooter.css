@@ -430,3 +430,115 @@
     gap: 12px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHT THEME OVERRIDES FOR PREPX FOOTER
+═══════════════════════════════════════════════════════════ */
+[data-theme="light"] .prepx-landing-footer {
+  background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%) !important;
+  border-top: 1px solid #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .prepx-landing-footer::before {
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.4) 30%, rgba(99, 102, 241, 0.4) 70%, transparent) !important;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.2) !important;
+}
+
+[data-theme="light"] .footer-top-strip {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06) !important;
+}
+
+[data-theme="light"] .footer-strip-left h3 {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .footer-strip-left p {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .footer-email-input {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .footer-email-input:focus {
+  background: #ffffff !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25) !important;
+}
+
+[data-theme="light"] .footer-email-input::placeholder {
+  color: #94a3b8 !important;
+}
+
+[data-theme="light"] .footer-brand-logo {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.08)) !important;
+}
+
+[data-theme="light"] .footer-brand-desc {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .footer-status-pill {
+  background: #ecfdf5 !important;
+  border-color: #a7f3d0 !important;
+  color: #059669 !important;
+}
+
+[data-theme="light"] .footer-social-icon {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #475569 !important;
+}
+
+[data-theme="light"] .footer-social-icon:hover {
+  background: #e0f2fe !important;
+  border-color: #38bdf8 !important;
+  color: #0284c7 !important;
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25) !important;
+}
+
+[data-theme="light"] .footer-nav-col h4 {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .badge-candidate {
+  background: #e0f2fe !important;
+  border-color: #bae6fd !important;
+  color: #0284c7 !important;
+}
+
+[data-theme="light"] .badge-recruiter {
+  background: #f3e8ff !important;
+  border-color: #e9d5ff !important;
+  color: #7e22ce !important;
+}
+
+[data-theme="light"] .footer-nav-list li a {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .footer-nav-list li a:hover {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .footer-bottom-bar {
+  border-top-color: #cbd5e1 !important;
+  color: #64748b !important;
+}
+
+[data-theme="light"] .footer-bottom-links a {
+  color: #64748b !important;
+}
+
+[data-theme="light"] .footer-bottom-links a:hover {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] .footer-made-with {
+  color: #64748b !important;
+}
