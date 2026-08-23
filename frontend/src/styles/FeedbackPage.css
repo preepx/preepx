@@ -6,6 +6,10 @@
   font-family: 'Inter', sans-serif;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .feedback-empty {
   text-align: center;
   padding: 80px 24px;

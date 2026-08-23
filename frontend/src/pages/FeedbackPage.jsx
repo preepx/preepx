@@ -80,7 +80,7 @@ const FeedbackPage = () => {
             </div>
           </div>
           {pointsEarned > 0 && (
-            <div className="score-stat">
+            <div className="score-stat hidden">
               <Trophy size={20} />
               <div>
                 <span className="stat-val">+{pointsEarned}</span>
@@ -89,7 +89,7 @@ const FeedbackPage = () => {
             </div>
           )}
           {duration > 0 && (
-            <div className="score-stat">
+            <div className="score-stat hidden">
               <Trophy size={20} />
               <div>
                 <span className="stat-val">{Math.floor(duration / 60)}m {duration % 60}s</span>
@@ -101,7 +101,7 @@ const FeedbackPage = () => {
       </div>
 
       {newBadges?.length > 0 && (
-        <div className="new-badges-banner">
+        <div className="new-badges-banner hidden">
           <h3>🎉 New Badges Unlocked!</h3>
           <div className="new-badges-list">
             {newBadges.map((b) => (
@@ -111,7 +111,7 @@ const FeedbackPage = () => {
         </div>
       )}
 
-      <div className="answers-review">
+      <div className="answers-review hidden">
         <h2>Question Breakdown</h2>
         {results.map((a, i) => (
           <div key={i} className={`review-card ${a.correct ? "correct" : "incorrect"}`}>
@@ -137,7 +137,7 @@ const FeedbackPage = () => {
         ))}
       </div>
 
-      <div className="feedback-actions">
+      <div className="feedback-actions hidden">
         <button className="btn-secondary" onClick={() => navigate("/interview")}>
           <ArrowLeft size={18} /> Back to Dashboard
         </button>
@@ -150,3 +150,4 @@ const FeedbackPage = () => {
 };
 
 export default FeedbackPage;
+

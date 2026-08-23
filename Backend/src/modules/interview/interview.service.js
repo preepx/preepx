@@ -240,35 +240,36 @@ const generateInterviewQuestions = async (userId, data) => {
 };
 
 const evaluateUserAnswer = async (question, userAnswer) => {
-  const prompt = `You are an expert, supportive yet rigorous technical and behavioral interviewer. Your goal is to evaluate the candidate's answer and provide highly constructive, actionable feedback. The answer was transcribed from speech, so ignore minor grammar or transcription errors.
+  const prompt = `You are an encouraging, supportive, and fair technical and behavioral interviewer. Your goal is to evaluate the candidate's answer constructively and be generous with your scoring when the candidate makes a genuine attempt or demonstrates understanding of core concepts. The answer was transcribed from speech, so ignore speech-to-text glitches, filler words, accents, and minor grammar errors.
 
 Question: "${question}"
 Candidate's Answer: "${userAnswer}"
 
-INSTRUCTIONS FOR FEEDBACK:
-1. Start with a brief acknowledgement of what they got right (if anything).
-2. Clearly point out any technical inaccuracies, missing key concepts, or logical flaws.
-3. Provide a short suggestion on how to improve or complete the answer next time.
-4. If the answer is completely irrelevant (e.g., "hello", "I don't know"), state that the answer didn't address the question and explain what was expected.
+INSTRUCTIONS FOR EVALUATION & FEEDBACK:
+1. Be generous and positive in scoring. If the candidate mentions key terms, correct ideas, or understands the general concept, award good marks.
+2. Start feedback with positive encouragement on what they did well.
+3. Provide brief, actionable tips on how they can make their answer even stronger.
+4. Only give very low marks (1-2) if the answer is completely blank, nonsensical, or totally unrelated to the question topic.
 
-Scoring Rules:
-- 9-10: Exceptional. Accurate, comprehensive, and well-structured.
-- 7-8: Solid. Mostly correct but lacks depth or misses minor details.
-- 4-6: Needs Improvement. Vague, incomplete, or contains notable errors.
-- 1-3: Incorrect or Irrelevant. Fails to answer the question or demonstrates fundamental misunderstanding.
+Scoring Rules (1-10 Scale):
+- 9-10: Excellent. Clear understanding, relevant explanation, and great communication.
+- 7-8: Good & Solid. Covers the main points/concepts well, even if brief or missing some finer details.
+- 5-6: Fair & Decent Attempt. Demonstrates basic understanding or mentions the right direction/keywords.
+- 3-4: Partial / Weak Attempt. Touched upon the topic slightly but mostly incomplete.
+- 1-2: Irrelevant or Blank. Completely off-topic, gibberish, or no real attempt.
 
 Respond ONLY with valid JSON (no markdown block formatting, no extra text):
-{"correct": true or false, "score": number 1-10, "feedback": "Detailed, constructive feedback following the instructions above."}`;
+{"correct": true or false, "score": number 1-10, "feedback": "Constructive, encouraging feedback."}`;
 
   try {
     const parsed = await aiService.generateJson(prompt, {
-      temperature: 0.3,
+      temperature: 0.2,
       max_tokens: 300,
     });
 
-    const finalScore = Math.max(1, Math.min(10, parsed.score ?? 1));
+    const finalScore = Math.max(1, Math.min(10, Number(parsed.score) || 1));
     return {
-      correct: finalScore >= 5,
+      correct: finalScore >= 4,
       score: finalScore,
       feedback: parsed.feedback || "Good effort! Keep practicing.",
     };
