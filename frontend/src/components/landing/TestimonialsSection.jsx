@@ -16,46 +16,46 @@ const allTestimonials = [
   // Pair 1
   [
     {
-      name: "Sneha Patel",
-      role: "Software Developer",
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=160&h=160&auto=format&fit=crop&q=80",
-      quote: "PreepX helped me identify exactly where I was weak before my interview. The AI mock interviews are amazing!",
+      name: "Urooj Khan",
+      role: "AI Developer, Capgemini",
+      avatar: "/testonomial/urooj_khan.png",
+      quote: "I had a great experience using PreepX AI-powered hiring platform. It added a productive layer to improve interview skills, and understand what to expect during the hiring process. Highly recommended for landing dream opportunities.",
     },
     {
-      name: "Rohit Verma",
-      role: "Talent Acquisition Manager",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&h=160&auto=format&fit=crop&q=80",
-      quote: "We can evaluate candidates based on actual skills instead of relying only on resumes. Hiring has become 10x faster.",
+      name: "Sameer Vishwakarma",
+      role: "Data Science, Skill Nexis",
+      avatar: "/testonomial/sameer_vishwakarma.JPG",
+      quote: "Using PreepX changed how I approach technical assessments. The simulation environment is so close to actual product company rounds that when I sat for my interviews, nothing felt out of place.",
     },
   ],
   // Pair 2
   [
     {
-      name: "Aditya Deshmukh",
-      role: "Backend Engineer",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160&h=160&auto=format&fit=crop&q=80",
-      quote: "The objective exams and coding challenge simulator matched the real hiring bar of top product companies.",
+      name: "Riya Rajput",
+      role: "Software Developer, SmartED",
+      avatar: "/testonomial/riya_rajput.png",
+      quote: "I got selected through my campus placement with the help of PreepX. The structured assessments and mock interview preparation gave me the confidence to crack the hiring process smoothly.",
     },
     {
-      name: "Kavita Rao",
-      role: "Technical Recruiter",
-      avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=160&h=160&auto=format&fit=crop&q=80",
-      quote: "PreepX's verified certificates give us instant trust. We fast-tracked certified candidates directly to finals.",
+      name: "Gopal Kumar",
+      role: "Backend Developer, Axepert Exhibits",
+      avatar: "/testonomial/gopal_kumar.jpeg",
+      quote: "PreepX significantly improved my interview preparation. The mock interviews, real-time feedback, and technical questions helped me identify my weak areas and build confidence for actual interviews.",
     },
   ],
   // Pair 3
   [
     {
-      name: "Vikram Sengupta",
-      role: "Full Stack Developer",
-      avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=160&h=160&auto=format&fit=crop&q=80",
-      quote: "The voice AI interview felt like talking to a real engineering director. The system design tips were spot on.",
+      name: "Ritika Chourasiya",
+      role: "Associate Developer, SmartED",
+      avatar: "/testonomial/ritika_chaurasiya.jpeg",
+      quote: "I got selected through campus placement with the support of PreepX. The assessments and interview preparation helped me build strong confidence and perform better throughout the hiring process.",
     },
     {
-      name: "Anjali Mehta",
-      role: "HR Lead, TechCorp",
-      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=160&h=160&auto=format&fit=crop&q=80",
-      quote: "The assessments are accurate and the candidate quality we get here is much better than traditional job boards.",
+      name: "Anshu Vats",
+      role: "AI/ML Developer",
+      avatar: "/testonomial/anshu_vats.jpg",
+      quote: "PreepX's rigorous evaluation environment pushed me to sharpen my problem-solving skills under time constraints. The detailed performance analytics after every mock test helped me pinpoint my exact weak spots.",
     },
   ],
 ];
@@ -158,7 +158,7 @@ function TestimonialsSection() {
                     "{item.quote}"
                   </p>
                   <div className="trio-author-info">
-                    <span className="trio-author-name">— {item.name}</span>
+                    <span className="trio-author-name">{item.name}</span>
                     <span className="trio-author-role">{item.role}</span>
                   </div>
                 </div>

@@ -206,24 +206,24 @@ function HeroMockup() {
           <div className="floating-header">
             <div className="floating-avatar-wrap">
               <img
-                src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop"
-                alt="Aarav Sharma"
+                src="/testonomial/saloni_rajput.JPG"
+                alt="Saloni Rajput"
                 className="floating-avatar"
               />
             </div>
             <div className="floating-info">
-              <h4>Aarav Sharma</h4>
-              <p>Frontend Developer</p>
+              <h4>Saloni Rajput</h4>
+              <p>Software Developer</p>
             </div>
           </div>
 
           <div className="floating-skills">
             <div className="card-section-title">Skills</div>
             <div className="skills-tags">
-              <span>JavaScript</span>
-              <span>React</span>
-              <span>Node.js</span>
-              <span>MongoDB</span>
+              <span>Python</span>
+              <span>AI/ML</span>
+              <span>FastAPI</span>
+              <span>PyTorch</span>
             </div>
           </div>
 

@@ -84,44 +84,44 @@ function HowItWorksSection({ onRecruiterClick }) {
 
   const candidatesList = [
     {
-      name: "Aarav Sharma",
-      avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop",
-      skillMatch: "92%",
-      assessment: "89%",
-      interview: "91%",
-      overall: "92%",
-      status: "Shortlisted",
-      statusClass: "status-shortlisted",
-    },
-    {
-      name: "Priya Singh",
-      avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=120&h=120&auto=format&fit=crop&q=80",
+      name: "Saloni Rajput",
+      avatar: "/testonomial/saloni_rajput.JPG",
       skillMatch: "96%",
       assessment: "94%",
-      interview: "93%",
+      interview: "95%",
       overall: "95%",
       status: "Top Match",
       statusClass: "status-top",
     },
     {
-      name: "Rahul Kumar",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=120&h=120&auto=format&fit=crop&q=80",
-      skillMatch: "84%",
-      assessment: "81%",
-      interview: "78%",
-      overall: "81%",
-      status: "Review",
-      statusClass: "status-review",
+      name: "Sameer",
+      avatar: "/testonomial/sameer_vishwakarma.JPG",
+      skillMatch: "92%",
+      assessment: "90%",
+      interview: "91%",
+      overall: "91%",
+      status: "Shortlisted",
+      statusClass: "status-shortlisted",
     },
     {
-      name: "Neha Verma",
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&auto=format&fit=crop&q=80",
+      name: "Anshu Vats",
+      avatar: "/testonomial/anshu_vats.jpg",
       skillMatch: "88%",
       assessment: "86%",
       interview: "85%",
       overall: "87%",
       status: "Shortlisted",
       statusClass: "status-shortlisted",
+    },
+    {
+      name: "Onam Paswan",
+      avatar: "/testonomial/onam_paswan.jpeg",
+      skillMatch: "84%",
+      assessment: "82%",
+      interview: "81%",
+      overall: "82%",
+      status: "Review",
+      statusClass: "status-review",
     },
   ];
 
@@ -169,7 +169,7 @@ function HowItWorksSection({ onRecruiterClick }) {
             {/* Question */}
             <div className="hiw-question-content">
               <h3 className="hiw-question-text">
-                Explain the difference between useMemo and useCallback in React.
+                Explain how memory management and the GIL work in Python AI applications.
               </h3>
             </div>
 
@@ -193,7 +193,7 @@ function HowItWorksSection({ onRecruiterClick }) {
 
               <div className="hiw-candidate-portrait">
                 <img
-                  src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&auto=format&fit=crop"
+                  src="/testonomial/saloni_rajput.JPG"
                   alt="Candidate"
                   className="hiw-portrait-img"
                 />
