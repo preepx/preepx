@@ -350,6 +350,7 @@
   white-space: nowrap;
   animation: applyJobsBlink 2s infinite ease-in-out;
   position: relative;
+  cursor: pointer;
 }
 
 .topbar-apply-jobs-btn:hover {
@@ -358,6 +359,11 @@
   transform: translateY(-1px);
   box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
   animation-play-state: paused;
+}
+
+.topbar-apply-jobs-btn:active {
+  transform: translateY(1px) scale(0.96);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
 @keyframes applyJobsBlink {
