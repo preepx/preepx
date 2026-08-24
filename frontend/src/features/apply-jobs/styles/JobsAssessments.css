@@ -1,0 +1,434 @@
+/* =========================================================
+   JobsAssessments.css — Premium Assessment Page Styles
+   ========================================================= */
+
+/* ── PAGE ROOT ── */
+.jas-root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* =========================================================
+   HERO BANNER
+   ========================================================= */
+.jas-hero {
+  position: relative;
+  background: linear-gradient(135deg, #1a0938 0%, #0d1b4b 45%, #0a1833 70%, #06102a 100%);
+  border-radius: 18px;
+  padding: 30px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  overflow: hidden;
+  min-height: 150px;
+}
+
+.jas-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 10% 40%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 85% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.jas-hero-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.jas-hero-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.jas-hero-text h1 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 6px;
+}
+
+.jas-hero-text p {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  max-width: 380px;
+}
+
+.jas-hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 14px 24px;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.jas-hstat {
+  text-align: center;
+  padding: 0 20px;
+}
+
+.jas-hstat:first-child {
+  padding-left: 0;
+}
+
+.jas-hstat:last-child {
+  padding-right: 0;
+}
+
+.jas-hstat-val {
+  display: block;
+  font-size: 26px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+}
+
+.jas-hstat-lbl {
+  display: block;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.jas-hstat-div {
+  width: 1px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* =========================================================
+   ALERT BANNER
+   ========================================================= */
+.jas-alert {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 12px;
+  color: #b45309;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .jas-alert {
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.08);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.jas-alert svg {
+  color: #f59e0b;
+  flex-shrink: 0;
+}
+
+.jas-alert strong {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.jas-alert p {
+  margin: 0;
+  font-size: 12.5px;
+  opacity: 0.85;
+}
+
+/* =========================================================
+   TABS
+   ========================================================= */
+.jas-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jas-tab {
+  padding: 9px 20px;
+  border-radius: 10px;
+  border: 1.5px solid #e2e8f0;
+  background: #fff;
+  color: #64748b;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+[data-theme="dark"] .jas-tab {
+  background: #0c1631;
+  border-color: #334155;
+  color: #94a3b8;
+}
+
+.jas-tab:hover {
+  border-color: #6366f1;
+  color: #6366f1;
+}
+
+.jas-tab.active {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: #fff;
+}
+
+/* =========================================================
+   CARDS GRID
+   ========================================================= */
+.jas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.jas-card {
+  background: #fff;
+  border: 1.5px solid #e8edf5;
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+[data-theme="dark"] .jas-card {
+  background: #0c1631;
+  border-color: #1e293b;
+}
+
+.jas-card:hover {
+  border-color: #6366f1;
+  box-shadow: 0 6px 28px rgba(99, 102, 241, 0.13);
+  transform: translateY(-2px);
+}
+
+.jas-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.jas-card-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.jas-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.jas-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.jas-job-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+[data-theme="dark"] .jas-job-title {
+  color: #f1f5f9;
+}
+
+.jas-job-role {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+}
+
+.jas-job-co {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  color: #94a3b8;
+  margin: 0;
+}
+
+/* PROGRESS BAR */
+.jas-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0 0;
+}
+
+.jas-progress-bar {
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .jas-progress-bar {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.jas-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  border-radius: 999px;
+}
+
+.jas-progress-lbl {
+  font-size: 12px;
+  color: #64748b;
+}
+
+/* SCORES */
+.jas-scores {
+  display: flex;
+  gap: 16px;
+  padding: 12px 14px;
+  background: #f8fafc;
+  border-radius: 10px;
+  flex-wrap: wrap;
+}
+
+[data-theme="dark"] .jas-scores {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.jas-score-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+[data-theme="dark"] .jas-score-item {
+  color: #94a3b8;
+}
+
+.jas-score-item strong {
+  color: #1e293b;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .jas-score-item strong {
+  color: #f1f5f9;
+}
+
+/* CARD FOOTER */
+.jas-card-footer {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.jas-start-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.jas-start-btn:hover {
+  opacity: 0.9;
+}
+
+.jas-done-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+.jas-empty-wrap {
+  grid-column: 1 / -1;
+}
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+[data-theme="dark"] .jas-root {
+  color: #f8fafc;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 768px) {
+  .jas-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+  }
+
+  .jas-hero-stats {
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .jas-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,878 @@
+/* =========================================================
+   JobsLayout.css — Apply Jobs portal layout
+   Matches the Naukri-style mockup exactly
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Override global body theme for Jobs portal */
+body:has(.jl-root) {
+    background: #f0f2f5 !important;
+    color: #1e293b !important;
+}
+
+[data-theme="dark"] body:has(.jl-root),
+body:has(.jl-root) {
+    background: #f0f2f5;
+}
+
+.jl-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f0f2f5;
+    font-family: 'Inter', sans-serif;
+    color: #1e293b;
+}
+
+/* =========================================================
+   TOP NAVBAR
+   ========================================================= */
+.jl-topbar {
+    height: 60px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid #e4e8ef;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+}
+
+.jl-hiring-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #059669;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 999px;
+    padding: 5px 10px;
+    white-space: nowrap;
+}
+
+.jl-topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.jl-ham-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #64748b;
+    padding: 4px;
+}
+
+.jl-logo-link {
+    display: flex;
+    align-items: center;
+}
+
+.jl-logo {
+    height: 40px;
+    transform: scale(1.8);
+    transform-origin: left center;
+    object-fit: contain;
+}
+
+/* Center nav + search */
+.jl-topbar-center {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 32px;
+    margin-left: 20px;
+}
+
+.jl-top-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.jl-tlink {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1e293b;
+    text-decoration: none;
+    position: relative;
+    transition: color 0.15s;
+}
+
+.jl-tlink:hover {
+    color: #2563eb;
+}
+
+.jl-tbadge {
+    position: absolute;
+    top: -8px;
+    right: -14px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 5px;
+    border-radius: 12px;
+    line-height: 1.2;
+}
+
+/* =========================================================
+   MEGA MENU
+   ========================================================= */
+.jl-mega-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.jl-tlink-services {
+    cursor: pointer;
+    padding: 20px 0;
+    /* Creates invisible hover bridge */
+}
+
+.jl-mega-menu {
+    position: absolute;
+    top: 100%;
+    left: -200px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 30px;
+    width: 750px;
+    z-index: 1000;
+    border: 1px solid #e2e8f0;
+    cursor: default;
+    margin-top: -10px;
+    /* Offset to cover the bridge */
+}
+
+/* Pointer arrow */
+.jl-mega-menu::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 232px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    transform: rotate(45deg);
+    border-left: 1px solid #e2e8f0;
+    border-top: 1px solid #e2e8f0;
+}
+
+.jl-mega-col {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 0 24px;
+}
+
+.jl-mega-col:first-child {
+    padding-left: 0;
+}
+
+.jl-mega-col:last-child {
+    padding-right: 0;
+}
+
+.jl-mega-col:not(:last-child) {
+    border-right: 1px solid #f1f5f9;
+}
+
+.jl-mega-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.jl-mega-section h4 {
+    margin: 0;
+    font-size: 15.5px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.jl-mega-section a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #475569;
+    font-weight: 500;
+    transition: color 0.15s;
+}
+
+.jl-mega-section a:hover {
+    color: #2563eb;
+}
+
+.jl-mega-promo {
+    font-size: 13.5px;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.jl-top-search {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 999px;
+    padding: 4px 4px 4px 16px;
+    width: 260px;
+    transition: border-color 0.15s;
+}
+
+.jl-top-search:focus-within {
+    border-color: #2563eb;
+}
+
+.jl-top-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    color: #334155;
+    outline: none;
+    min-width: 0;
+}
+
+.jl-top-search input::placeholder {
+    color: #64748b;
+}
+
+.jl-top-search button {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.15s;
+}
+
+.jl-top-search button:hover {
+    background: #1d4ed8;
+}
+
+/* Right icons */
+.jl-topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.jl-tb-icon-btn {
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    position: relative;
+    transition: background 0.15s;
+}
+
+.jl-tb-icon-btn:hover {
+    background: #f1f5f9;
+}
+
+.jl-tb-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background: #ef4444;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jl-user-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px 5px 5px;
+    border-radius: 24px;
+    border: 1px solid #e2e8f0;
+    background: #fff;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-left: 4px;
+}
+
+.jl-user-chip:hover {
+    background: #f8fafc;
+}
+
+.jl-user-chip img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.jl-user-chip div {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.jl-user-chip strong {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.jl-user-chip span {
+    font-size: 11px;
+    color: #64748b;
+}
+
+.jl-user-chip svg {
+    color: #94a3b8;
+}
+
+/* =========================================================
+   BODY (sidebar + main)
+   ========================================================= */
+.jl-body {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+.jl-sidebar {
+    width: 220px;
+    background: #ffffff;
+    border-right: 1px solid #e4e8ef;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.jl-sb-scroll {
+    padding: 20px 14px 24px;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+    position: sticky;
+    top: 60px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.jl-sb-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+
+.jl-nav-section {
+    margin-bottom: 4px;
+}
+
+.jl-nav-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+    padding-left: 10px;
+}
+
+.jl-nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.jl-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 7px;
+    text-decoration: none;
+    color: #475569;
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: all 0.15s;
+    position: relative;
+}
+
+.jl-nav-item:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.jl-nav-item svg {
+    color: #94a3b8;
+    flex-shrink: 0;
+    transition: color 0.15s;
+}
+
+.jl-nav-item.active {
+    background: rgba(37, 99, 235, 0.08);
+    color: #2563eb;
+    font-weight: 700;
+}
+
+.jl-nav-item.active svg {
+    color: #2563eb;
+}
+
+/* Badges */
+.jl-badge-pill {
+    margin-left: auto;
+    background: #2563eb;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 1px 7px;
+    border-radius: 10px;
+}
+
+.jl-badge-circle {
+    margin-left: auto;
+    background: #2563eb;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    width: 19px;
+    height: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* Logout */
+.jl-logout-btn {
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+}
+
+.jl-logout-btn:hover {
+    color: #ef4444 !important;
+    background: #fef2f2 !important;
+}
+
+.jl-logout-btn:hover svg {
+    color: #ef4444 !important;
+}
+
+/* ──────────────────────────────────────
+   Profile Widget
+────────────────────────────────────── */
+.jl-profile-widget {
+    margin-top: 16px;
+    background: #f8faff;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #e2eaf8;
+    text-align: center;
+}
+
+.jl-pw-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2563eb;
+    margin: 0 0 4px;
+}
+
+.jl-pw-sub {
+    font-size: 11px;
+    color: #64748b;
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+
+.jl-pw-ring-wrap {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 12px;
+}
+
+.jl-ring-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.jl-ring-bg {
+    fill: none;
+    stroke: #e2e8f0;
+    stroke-width: 3;
+}
+
+.jl-ring-fill {
+    fill: none;
+    stroke: #10b981;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.jl-ring-txt {
+    fill: #0f172a;
+    font-size: 8px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-family: inherit;
+}
+
+.jl-pw-btn {
+    display: block;
+    width: 100%;
+    background: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 9px;
+    border-radius: 7px;
+    transition: background 0.15s;
+}
+
+.jl-pw-btn:hover {
+    background: #1d4ed8;
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+.jl-main {
+    flex: 1;
+    min-width: 0;
+    padding: 24px;
+    overflow-x: clip;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+@media (max-width: 1024px) {
+    .jl-topbar-center {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .jl-ham-btn {
+        display: flex;
+    }
+
+    .jl-sidebar {
+        position: fixed;
+        top: 60px;
+        left: -240px;
+        bottom: 0;
+        z-index: 50;
+        transition: left 0.3s ease;
+        width: 240px;
+    }
+
+    .jl-sidebar.open {
+        left: 0;
+    }
+
+    .jl-overlay {
+        position: fixed;
+        inset: 0;
+        top: 60px;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 40;
+    }
+
+    .jl-topbar-search {
+        max-width: 180px;
+    }
+
+    .jl-kbd {
+        display: none;
+    }
+
+    .jl-user-chip div,
+    .jl-user-chip svg {
+        display: none;
+    }
+
+    .jl-topbar-search {
+        max-width: 180px;
+    }
+
+    .jl-kbd {
+        display: none;
+    }
+
+    .jl-user-chip div,
+    .jl-user-chip svg {
+        display: none;
+    }
+
+    .jl-user-chip {
+        padding: 4px;
+        border: none;
+    }
+
+    .jl-main {
+        padding: 16px;
+    }
+
+    .jl-hiring-live {
+        display: none;
+    }
+}
+
+/* =========================================================
+   DARK THEME SUPPORT
+   ========================================================= */
+[data-theme="dark"] body:has(.jl-root) {
+    background: #040B1D !important;
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-root,
+[data-theme="dark"] .jl-main {
+    background: #040B1D !important;
+}
+
+[data-theme="dark"] .jl-topbar,
+[data-theme="dark"] .jl-sidebar,
+[data-theme="dark"] .jl-sb-scroll,
+[data-theme="dark"] .jl-nav-item,
+[data-theme="dark"] .jl-profile-widget,
+[data-theme="dark"] .jl-top-search {
+    background-color: #0c1631 !important;
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-user-chip {
+    background-color: #0c1631 !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+}
+
+[data-theme="dark"] .jl-user-chip:hover {
+    background-color: #334155 !important;
+}
+
+[data-theme="dark"] .jl-user-chip strong {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-topbar {
+    border-bottom-color: #334155 !important;
+}
+
+[data-theme="dark"] .jl-sidebar {
+    border-right-color: #334155 !important;
+}
+
+[data-theme="dark"] .jl-nav-item:hover {
+    background-color: #334155 !important;
+    color: #fff !important;
+}
+
+[data-theme="dark"] .jl-nav-item.active {
+    background-color: rgba(96, 165, 250, 0.15) !important;
+    color: #60a5fa !important;
+}
+
+/* Dark Mode Inputs */
+[data-theme="dark"] .jl-top-search {
+    background: #1e293b;
+    border-color: #334155;
+}
+[data-theme="dark"] .jl-top-search input {
+    color: #f8fafc;
+    background: transparent;
+}
+[data-theme="dark"] .jl-top-search input::placeholder {
+    color: #94a3b8;
+}
+[data-theme="dark"] .jl-top-search:focus-within {
+    border-color: #3b82f6;
+    background: #0f172a;
+}
+
+/* Sidebar Footer Icons */
+.jl-sb-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 16px 0 0 0;
+    margin-top: auto;
+    border-top: 1px solid #e4e8ef;
+}
+.jl-sb-f-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    color: #64748b;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.jl-sb-f-icon:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+.jl-sb-logout {
+    color: #ef4444;
+}
+.jl-sb-logout:hover {
+    background: #fef2f2;
+    color: #dc2626;
+}
+[data-theme="dark"] .jl-sb-footer {
+    border-color: #334155;
+}
+[data-theme="dark"] .jl-sb-f-icon:hover {
+    background: #1e293b;
+    color: #f8fafc;
+}
+[data-theme="dark"] .jl-sb-logout:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+[data-theme="dark"] .jl-nav-item.active svg {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-nav-item svg {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .jl-top-search {
+    border-color: #334155 !important;
+    background: #040B1D !important;
+}
+
+[data-theme="dark"] .jl-tb-icon-btn {
+    background: none;
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .jl-tb-icon-btn:hover {
+    background: #334155 !important;
+    color: #fff !important;
+}
+
+[data-theme="dark"] .jl-nav-label {
+    color: #64748b !important;
+}
+
+[data-theme="dark"] .jl-profile-widget {
+    background: #0c1631 !important;
+    border-color: #334155 !important;
+}
+
+[data-theme="dark"] .jl-pw-title {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-pw-sub {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .jl-ring-txt {
+    fill: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-tlink {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .jl-tlink:hover {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-hiring-live {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #34d399;
+}
+
+[data-theme="dark"] .jl-mega-menu {
+    background: #0c1631 !important;
+    border-color: #334155 !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .jl-mega-menu::before {
+    background: #0c1631 !important;
+    border-top-color: #334155 !important;
+    border-left-color: #334155 !important;
+}
+
+[data-theme="dark"] .jl-mega-section h4 {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-mega-section a {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .jl-mega-section a:hover {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-mega-col:not(:last-child) {
+    border-right-color: #334155 !important;
+}

@@ -6,7 +6,7 @@ const GuestRoute = lazy(() => import("./components/GuestRoute"));
 const Navbar = lazy(() => import("./components/Navbar"));
 const Loader = lazy(() => import("./components/Loader"));
 const AppLayout = lazy(() => import("./layouts/AppLayout"));
-const JobsLayout = lazy(() => import("./layouts/JobsLayout"));
+const JobsLayout = lazy(() => import("./features/apply-jobs/layout/JobsLayout"));
 const Footer = lazy(() => import("./components/Footer"));
 
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -15,8 +15,8 @@ const RecruiterDashboard = lazy(() => import("./pages/RecruiterDashboard"));
 const RecruiterJobs = lazy(() => import("./pages/recruiter/RecruiterJobs"));
 const CreateJob = lazy(() => import("./pages/recruiter/CreateJob"));
 const RecruiterJobDetail = lazy(() => import("./pages/recruiter/RecruiterJobDetail"));
-const JobBoard = lazy(() => import("./pages/JobBoard"));
-const ApplyJobsDashboard = lazy(() => import("./pages/ApplyJobsDashboard"));
+const JobBoard = lazy(() => import("./features/apply-jobs/pages/JobBoard"));
+const ApplyJobsDashboard = lazy(() => import("./features/apply-jobs/pages/ApplyJobsDashboard"));
 const MyAssessments = lazy(() => import("./pages/MyAssessments"));
 const RecruiterOnboarding = lazy(() => import("./pages/recruiter/RecruiterOnboarding"));
 const CandidateDiscovery = lazy(() => import("./pages/recruiter/CandidateDiscovery"));
@@ -60,9 +60,9 @@ const Challenge100Days = lazy(() => import("./pages/Challenge100Days"));
 
 const UserGuide = lazy(() => import("./pages/UserGuide"));
 const CertificateVerifyPage = lazy(() => import("@/pages/Interview/CertificateVerifyPage"));
-const JobsMyApplications = lazy(() => import("./pages/jobs/JobsMyApplications"));
-const JobsAssessments = lazy(() => import("./pages/jobs/JobsAssessments"));
-const JobsProfile = lazy(() => import("./pages/jobs/JobsProfile"));
+const JobsMyApplications = lazy(() => import("./features/apply-jobs/pages/JobsMyApplications"));
+const JobsAssessments = lazy(() => import("./features/apply-jobs/pages/JobsAssessments"));
+const JobsProfile = lazy(() => import("./features/apply-jobs/pages/JobsProfile"));
 
 const PreInterviewSetup = lazy(() => import("@/pages/Interview/PreInterviewSetup"));
 const InterviewLobby = lazy(() => import("@/pages/Interview/InterviewLobby"));

@@ -36,13 +36,25 @@ const {
 
 const { uploadPdf, uploadImage } = require("../config/cloudinary");
 
+const {
+  getAdminJobs,
+  createAdminJob,
+  updateAdminJob,
+  deleteAdminJob
+} = require("../controllers/adminJobController");
+
 // Public admin login route
 router.post("/login", adminLogin);
 
-
-
 // Protect all other admin routes
 router.use(adminProtect);
+
+// Admin Jobs
+router.get("/jobs", getAdminJobs);
+router.post("/jobs/fetch-ai", require("./../controllers/adminJobController").fetchAIJobs);
+router.post("/jobs", createAdminJob);
+router.put("/jobs/:id", updateAdminJob);
+router.delete("/jobs/:id", deleteAdminJob);
 
 router.get("/dashboard", getDashboardStats);
 router.get("/users", getUsers);

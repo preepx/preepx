@@ -7,7 +7,7 @@ const { NotFoundError, BadRequestError, ForbiddenError } = require("../../common
 
 const PUBLISHED_STATUSES = ["published", "open"];
 
-const listPublishedJobs = async ({ search = "", page = 1, limit = 20, userId } = {}) => {
+const listPublishedJobs = async ({ search = "", page = 1, limit = 50, userId } = {}) => {
   const filter = { status: { $in: PUBLISHED_STATUSES } };
   if (search.trim()) {
     const q = search.trim();
@@ -171,6 +171,18 @@ const getApplicationStats = async (userId) => {
   const isInterview = (s) => ["ai_interview", "interview"].includes(s);
   const isActive = (s) => !["rejected", "archived"].includes(s);
 
+  let totalActiveJobs = 0;
+  let totalCompanies = 0;
+  
+  try {
+    totalActiveJobs = await Job.countDocuments({ status: { $in: PUBLISHED_STATUSES } });
+    const distinctRecruiters = await Job.distinct("recruiterId", { status: { $in: PUBLISHED_STATUSES }, isThirdParty: false });
+    const distinctExternal = await Job.distinct("externalCompanyName", { status: { $in: PUBLISHED_STATUSES }, isThirdParty: true });
+    totalCompanies = distinctRecruiters.length + distinctExternal.length;
+  } catch (err) {
+    console.error("Error calculating dashboard stats:", err);
+  }
+
   return {
     total: apps.length,
     applied: apps.filter((a) => ["applied", "matched"].includes(a.status)).length,
@@ -181,6 +193,8 @@ const getApplicationStats = async (userId) => {
     rejected: apps.filter((a) => a.status === "rejected").length,
     hired: apps.filter((a) => ["hired", "selected", "offered"].includes(a.status)).length,
     inProgress: apps.filter((a) => isActive(a.status) && a.status !== "applied" && a.status !== "matched").length,
+    totalActiveJobs,
+    totalCompanies
   };
 };
 
