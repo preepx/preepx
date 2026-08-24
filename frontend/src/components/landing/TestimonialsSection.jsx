@@ -22,13 +22,28 @@ const allTestimonials = [
       quote: "I had a great experience using PreepX AI-powered hiring platform. It added a productive layer to improve interview skills, and understand what to expect during the hiring process. Highly recommended for landing dream opportunities.",
     },
     {
+      name: "Sumit Sahu",
+      role: "Data Science Associate, Impactsure",
+      avatar: "/testonomial/sumit_sahu.jpeg",
+      quote: "PreepX offers a smart and effective approach to data science interview preparation.For anyone preparing for data science roles, PreepX is a valuable platform for making interview preparation more structured and impactful.",
+    },
+  ],
+  // Pair 2
+  [
+    {
+      name: "Akhilesh Ranjan",
+      role: "Senior DevOps Engineer, Capgemini",
+      avatar: "/testonomial/akhilesh_ranjan.jpg",
+      quote: "I had a great experience using PreepX AI-powered platform. It provides a practical way to sharpen DevOps interview skills, strengthen technical concepts, and get thoroughly prepared for real-world hiring rounds.",
+    },
+    {
       name: "Sameer Vishwakarma",
       role: "Data Science, Skill Nexis",
       avatar: "/testonomial/sameer_vishwakarma.JPG",
       quote: "Using PreepX changed how I approach technical assessments. The simulation environment is so close to actual product company rounds that when I sat for my interviews, nothing felt out of place.",
     },
   ],
-  // Pair 2
+  // Pair 3
   [
     {
       name: "Riya Rajput",
@@ -43,7 +58,7 @@ const allTestimonials = [
       quote: "PreepX significantly improved my interview preparation. The mock interviews, real-time feedback, and technical questions helped me identify my weak areas and build confidence for actual interviews.",
     },
   ],
-  // Pair 3
+  // Pair 4
   [
     {
       name: "Ritika Chourasiya",
@@ -112,12 +127,12 @@ function TestimonialsSection() {
   const [currentPairIndex, setCurrentPairIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-scroll testimonials pairs every 5 seconds
+  // Auto-scroll testimonials pairs every 2 seconds
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
       setCurrentPairIndex((prev) => (prev + 1) % allTestimonials.length);
-    }, 5000);
+    }, 2000);
     return () => clearInterval(interval);
   }, [isPaused]);
 
