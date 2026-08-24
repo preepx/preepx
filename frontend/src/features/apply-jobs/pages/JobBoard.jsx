@@ -93,24 +93,21 @@ export default function JobBoard() {
   const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
-    Promise.all([
-      getPublishedJobs({}),
-      getProfile().catch(() => null)
-    ])
-      .then(([d, p]) => {
-        const list = d.jobs || [];
-        const titles = list.map(j => j.title).filter(Boolean);
-        const roles = list.map(j => j.role).filter(Boolean);
-        const skills = list.flatMap(j => j.skills || []);
-        setAllTags([...new Set([...titles, ...roles, ...skills])]);
-
-        const locs = list.map(j => j.location).filter(Boolean);
-        setAllLocations([...new Set(locs)]);
-
-        setProfileData(p);
-      })
+    getProfile()
+      .then(p => setProfileData(p))
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    const list = jobs || [];
+    const titles = list.map(j => j.title).filter(Boolean);
+    const roles = list.map(j => j.role).filter(Boolean);
+    const skills = list.flatMap(j => j.skills || []);
+    setAllTags(prev => [...new Set([...prev, ...titles, ...roles, ...skills])]);
+
+    const locs = list.map(j => j.location).filter(Boolean);
+    setAllLocations(prev => [...new Set([...prev, ...locs])]);
+  }, [jobs]);
 
   const [experience, setExperience] = useState(searchParams.get("exp") || "");
   const [showExpDropdown, setShowExpDropdown] = useState(false);
