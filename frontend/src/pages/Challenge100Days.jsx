@@ -10,7 +10,7 @@ import {
 import API from "@/utils/api";
 import notify from "@/utils/notify";
 import PreChallengeSetupModal from "@/components/PreChallengeSetupModal";
-import TopCompaniesWidget from "@/components/TopCompaniesWidget";
+import TopCompaniesWidget from "@/features/apply-jobs/components/TopCompaniesWidget";
 import "@/styles/Challenge100Days.css";
 import "@/styles/Challenge100DaysDash.css";
 

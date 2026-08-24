@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Briefcase, Search, ClipboardCheck, User, LogOut,
-  Bell, ChevronDown, Building2, Bookmark, BellRing, Video, FileText,
-  Settings, Moon, MessageSquare, Menu, X
+  Bell, ChevronDown, Bookmark, Video, FileText,
+  Settings, Moon, Sun, MessageSquare, Menu, X, CalendarDays, Zap, Globe
 } from "lucide-react";
 import API from "@/utils/api";
 import { getMyApplications } from "../services/candidateJobsAPI";
@@ -15,14 +15,13 @@ import '../styles/JobsLayout.css';
 const NAV_MAIN = [
   { to: "/apply-jobs", icon: LayoutDashboard, label: "Dashboard", exact: true },
   { to: "/apply-jobs/browse", icon: Search, label: "Browse Jobs" },
+  { to: "/apply-jobs#ajd-events", icon: CalendarDays, label: "Events" },
   { to: "/apply-jobs/assessments", icon: ClipboardCheck, label: "Assessments", badge: "New", badgePill: true },
-  { to: "/apply-jobs/saved", icon: Bookmark, label: "Saved Jobs" },
+  { to: "/apply-jobs/browse?saved=true", icon: Bookmark, label: "Saved Jobs" },
 ];
 
 const NAV_APPS = [
   { to: "/apply-jobs/my-applications", icon: Briefcase, label: "My Applications", badgeKey: "applications" },
-  { to: "/apply-jobs/interviews", icon: Video, label: "Interviews" },
-  { to: "/apply-jobs/tests", icon: FileText, label: "Tests" },
 ];
 
 const NAV_ACCOUNT = [
@@ -40,6 +39,17 @@ function JobsLayout({ children }) {
   const [showServicesMenu, setShowServicesMenu] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
 
   const safeGetUser = () => {
     try { return JSON.parse(localStorage.getItem("user") || "{}"); } catch { return {}; }
@@ -70,6 +80,12 @@ function JobsLayout({ children }) {
 
   const isActive = (to, exact) => {
     if (exact || to === "/apply-jobs") return location.pathname === to;
+    if (to.includes("?")) {
+      return location.pathname + location.search === to;
+    }
+    if (location.pathname === "/apply-jobs/browse" && location.search.includes("saved=true") && to === "/apply-jobs/browse") {
+      return false;
+    }
     return location.pathname === to || location.pathname.startsWith(to + "/");
   };
 
@@ -85,7 +101,7 @@ function JobsLayout({ children }) {
         const dynBadge = badgeKey === "applications" ? applicationBadge : 0;
         return (
           <Link
-            key={to}
+            key={`${to}-${label}`}
             to={to}
             className={`jl-nav-item ${isActive(to, exact) ? "active" : ""}`}
             onClick={() => setMobileOpen(false)}
@@ -118,10 +134,11 @@ function JobsLayout({ children }) {
         <div className="jl-topbar-center">
           <nav className="jl-top-links">
             <Link to="/apply-jobs/browse" className="jl-tlink">
-              Jobs <span className="jl-tbadge">2</span>
+              Jobs <span className="jl-tbadge">Live</span>
             </Link>
-            <Link to="/apply-jobs/companies" className="jl-tlink">
-              Companies
+
+            <Link to="/apply-jobs#ajd-events" className="jl-tlink">
+              Events
             </Link>
             <div
               className="jl-mega-wrapper"
@@ -187,10 +204,10 @@ function JobsLayout({ children }) {
             <input
               value={searchVal}
               onChange={e => setSearchVal(e.target.value)}
-              onKeyDown={e => { if (e.key === "Enter" && searchVal) navigate(`/apply-jobs/browse?q=${encodeURIComponent(searchVal)}`); }}
-              placeholder="Search jobs here"
+              onKeyDown={e => { if (e.key === "Enter" && searchVal) navigate(`/apply-jobs/browse?search=${encodeURIComponent(searchVal)}`); }}
+              placeholder="Search jobs, skills, companies"
             />
-            <button onClick={() => { if (searchVal) navigate(`/apply-jobs/browse?q=${encodeURIComponent(searchVal)}`); }}>
+            <button onClick={() => { if (searchVal) navigate(`/apply-jobs/browse?search=${encodeURIComponent(searchVal)}`); }}>
               <Search size={15} />
             </button>
           </div>
@@ -198,12 +215,13 @@ function JobsLayout({ children }) {
 
         {/* Right: icons + user */}
         <div className="jl-topbar-right">
-          <button className="jl-tb-icon-btn" title="Dark mode"><Moon size={19} /></button>
+          <div className="jl-hiring-live" title="Live hiring activity">
+            <Zap size={13} /> Hiring live
+          </div>
           <button className="jl-tb-icon-btn jl-tb-notif" onClick={() => setShowNotifications(true)}>
             <Bell size={19} />
             {unreadCount > 0 && <span className="jl-tb-badge">{unreadCount > 9 ? "9+" : unreadCount}</span>}
           </button>
-          <button className="jl-tb-icon-btn"><MessageSquare size={19} /></button>
           <Link to="/apply-jobs/profile" className="jl-user-chip">
             <img src={avatar} alt="avatar" />
             <div>
@@ -220,20 +238,26 @@ function JobsLayout({ children }) {
         <aside className={`jl-sidebar ${mobileOpen ? "open" : ""}`}>
           <div className="jl-sb-scroll">
             <div className="jl-nav-section">
-              <span className="jl-nav-label">MAIN</span>
               {renderGroup(NAV_MAIN)}
             </div>
 
             <div className="jl-nav-section">
-              <span className="jl-nav-label">APPLICATIONS</span>
               {renderGroup(NAV_APPS)}
             </div>
 
             <div className="jl-nav-section">
-              <span className="jl-nav-label">ACCOUNT</span>
               {renderGroup(NAV_ACCOUNT)}
-              <button className="jl-nav-item jl-logout-btn" onClick={handleLogout}>
-                <LogOut size={17} /><span>Logout</span>
+            </div>
+
+            <div className="jl-sb-footer">
+              <button className="jl-sb-f-icon" title="Toggle theme" onClick={toggleTheme}>
+                {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+              </button>
+              <Link to="/" className="jl-sb-f-icon" title="Back to Main Website">
+                <Globe size={20} />
+              </Link>
+              <button className="jl-sb-f-icon jl-sb-logout" onClick={handleLogout} title="Logout">
+                <LogOut size={20} />
               </button>
             </div>
 

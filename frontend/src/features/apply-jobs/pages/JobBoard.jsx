@@ -1,12 +1,32 @@
 import React, { useEffect, useState, useMemo, useRef } from "react";
-import { Link } from "react-router-dom";
-import { Briefcase, MapPin, Sparkles, Search, Building2, ChevronRight, CheckCircle, ChevronDown, FileText, Bookmark, Bell } from "lucide-react";
+import { createPortal } from "react-dom";
+import { Link, useSearchParams } from "react-router-dom";
+import { Briefcase, MapPin, Sparkles, Search, Building2, ChevronRight, CheckCircle, ChevronDown, FileText, Bookmark, Bell, Loader2 } from "lucide-react";
 import { getPublishedJobs, applyToJob } from "../services/candidateJobsAPI";
-import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
+import { getProfile } from "@/services/userAPI";
+import Loader from "@/components/Loader";
 import EmptyState from "@/components/recruiter/EmptyState";
 import notify from "@/utils/notify";
 import '../styles/JobBoard.css'; // Keep for overrides
 import '../styles/ApplyJobsDashboard.css'; // Reuse premium styles
+
+// Profile completion calculator matching JobsProfile.jsx
+function calcCompletion(user) {
+  if (!user) return 0;
+  const checks = [
+    !!user.fullName,
+    !!user.email,
+    !!user.phone,
+    !!user.city,
+    !!user.headline,
+    (user.skills || []).length > 0,
+    (user.experience || []).length > 0,
+    (user.education || []).length > 0,
+    !!user.resumeUrl,
+    !!user.profilePic,
+  ];
+  return Math.round((checks.filter(Boolean).length / checks.length) * 100);
+}
 
 const getLastTerm = (str) => {
   const parts = str.split(",");
@@ -20,20 +40,64 @@ const appendSuggestion = (currentStr, newSug) => {
   return parts.join(",") + ", ";
 };
 
+const JobLogo = ({ job, className, style }) => {
+  const [error, setError] = useState(false);
+  const compName = job.isThirdParty ? job.externalCompanyName : job.companyName;
+
+  if (error || (!job.externalCompanyLogo && !["Google", "Microsoft", "Zomato", "Swiggy", "Paytm", "Adobe"].includes(job.companyName))) {
+    return (
+      <div className={className} style={{ ...style, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f1f5f9', color: '#64748b', fontWeight: 'bold' }}>
+        {(compName || 'C').charAt(0).toUpperCase()}
+      </div>
+    );
+  }
+
+  let src = job.externalCompanyLogo;
+  if (!job.isThirdParty) {
+    if (job.companyName === "Google") src = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";
+    else if (job.companyName === "Microsoft") src = "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg";
+    else if (job.companyName === "Zomato") src = "https://upload.wikimedia.org/wikipedia/commons/b/bd/Zomato_Logo.svg";
+    else if (job.companyName === "Swiggy") src = "https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg";
+    else if (job.companyName === "Paytm") src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg";
+    else if (job.companyName === "Adobe") src = "https://upload.wikimedia.org/wikipedia/commons/4/42/Adobe_Acrobat_DC_logo_2020.svg";
+  }
+
+  return (
+    <img
+      src={src}
+      alt={compName}
+      className={className}
+      style={style}
+      onError={() => setError(true)}
+      onLoad={(e) => {
+        if (e.target.naturalWidth <= 10) {
+          setError(true);
+        }
+      }}
+    />
+  );
+};
+
 export default function JobBoard() {
+  const [searchParams] = useSearchParams();
   const [jobs, setJobs] = useState([]);
+  const [selectedJob, setSelectedJob] = useState(null);
   const [initialLoading, setInitialLoading] = useState(true);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(searchParams.get("search") || "");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const searchContainerRef = useRef(null);
 
   // Fetch all unique data once for suggestions
   const [allTags, setAllTags] = useState([]);
   const [allLocations, setAllLocations] = useState([]);
+  const [profileData, setProfileData] = useState(null);
 
   useEffect(() => {
-    getPublishedJobs({})
-      .then((d) => {
+    Promise.all([
+      getPublishedJobs({}),
+      getProfile().catch(() => null)
+    ])
+      .then(([d, p]) => {
         const list = d.jobs || [];
         const titles = list.map(j => j.title).filter(Boolean);
         const roles = list.map(j => j.role).filter(Boolean);
@@ -42,15 +106,17 @@ export default function JobBoard() {
 
         const locs = list.map(j => j.location).filter(Boolean);
         setAllLocations([...new Set(locs)]);
+
+        setProfileData(p);
       })
       .catch(console.error);
   }, []);
 
-  const [experience, setExperience] = useState("");
+  const [experience, setExperience] = useState(searchParams.get("exp") || "");
   const [showExpDropdown, setShowExpDropdown] = useState(false);
   const expContainerRef = useRef(null);
 
-  const [locationSearch, setLocationSearch] = useState("");
+  const [locationSearch, setLocationSearch] = useState(searchParams.get("loc") || "");
   const [showLocSuggestions, setShowLocSuggestions] = useState(false);
   const locContainerRef = useRef(null);
 
@@ -102,6 +168,8 @@ export default function JobBoard() {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [applying, setApplying] = useState(null);
   const [filter, setFilter] = useState("all");
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [isSearching, setIsSearching] = useState(false);
 
   // Close suggestions when clicking outside
   useEffect(() => {
@@ -166,19 +234,48 @@ export default function JobBoard() {
 
 
 
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [recommendedJobs, setRecommendedJobs] = useState([]);
+
   useEffect(() => {
     const handler = setTimeout(() => {
-      setDebouncedSearch(search);
+      const cleanSearch = search.replace(/^[,\s]+|[,\s]+$/g, '');
+      setDebouncedSearch(cleanSearch);
+      setPage(1); // Reset page on new search
+      setJobs([]); // Clear jobs on new search
+      setHasMore(true);
     }, 500);
     return () => clearTimeout(handler);
   }, [search]);
 
   useEffect(() => {
-    getPublishedJobs({ search: debouncedSearch })
-      .then((d) => setJobs(d.jobs || []))
-      .catch(() => notify.error("Could not load jobs"))
-      .finally(() => setInitialLoading(false));
-  }, [debouncedSearch]);
+    const fetchJobs = async () => {
+      if (isFirstLoad) setInitialLoading(true);
+      else if (page === 1) setIsSearching(true);
+      else setLoadingMore(true);
+
+      try {
+        const d = await getPublishedJobs({ search: debouncedSearch, page });
+        const newJobs = d.jobs || [];
+
+        setJobs(prev => page === 1 ? newJobs : [...prev, ...newJobs]);
+        setHasMore(d.page < d.pages); // Or newJobs.length > 0 if pages isn't perfectly returned
+      } catch (e) {
+        notify.error("Could not load jobs");
+      } finally {
+        setIsFirstLoad(false);
+        setInitialLoading(false);
+        setIsSearching(false);
+        setLoadingMore(false);
+      }
+    };
+
+    if (hasMore || page === 1) {
+      fetchJobs();
+    }
+  }, [debouncedSearch, page]);
 
   const displayedJobs = useMemo(() => {
     const list = [...jobs];
@@ -189,6 +286,35 @@ export default function JobBoard() {
     }
     return list.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
   }, [jobs, filter]);
+
+  useEffect(() => {
+    getPublishedJobs({ limit: 50 }).then(d => {
+      const list = d.jobs || [];
+      let recommended = [];
+
+      // 1. Profile Matching (Match Score >= 35)
+      const profileMatches = list.filter(j => (j.matchScore ?? 0) >= 35).sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
+      recommended.push(...profileMatches);
+
+      // 2. Trending / Hot Jobs (isHot flag or top tier companies)
+      if (recommended.length < 4) {
+        const topCompanies = ['Google', 'Microsoft', 'Adobe', 'Amazon', 'Meta', 'Paytm', 'Zomato', 'Swiggy'];
+        const hotJobs = list.filter(j => {
+          if (recommended.find(r => r._id === j._id)) return false;
+          return j.isHot || topCompanies.includes(j.companyName);
+        });
+        recommended.push(...hotJobs);
+      }
+
+      // 3. Fallback Logic (Whatever has the highest match score or just newly fetched)
+      if (recommended.length < 4) {
+        const remaining = list.filter(j => !recommended.find(r => r._id === j._id)).sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
+        recommended.push(...remaining);
+      }
+
+      setRecommendedJobs(recommended.slice(0, 4));
+    }).catch(console.error);
+  }, []);
 
   const handleApply = async (jobId) => {
     setApplying(jobId);
@@ -203,114 +329,136 @@ export default function JobBoard() {
     }
   };
 
-  if (initialLoading) return <DashboardSkeleton />;
+  if (initialLoading) return <Loader />;
 
   return (
     <div className="bj-root">
+      <style>{`
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
       {/* ── MAIN TWO-COLUMN LAYOUT ── */}
       <div className="bj-main">
 
-        {/* LEFT COLUMN: Header + Results Header + Job Cards */}
-        <div className="bj-left-col">
+        {/* ── HEADER & SEARCH (Grid Row 1, Col 1-2) ── */}
+        <header className="bj-header" style={{ gridColumn: '1 / -1', position: 'relative', zIndex: 50 }}>
+          <div className="bj-header-inner">
+            <div className="bj-kicker"><span className="bj-live-dot" /> Live job board · verified employers</div>
+            <h1 className="bj-title">Find your next role</h1>
+            <p className="bj-subtitle">Search 5 lakh+ openings across MNCs, startups, remote and walk-in drives</p>
 
-          {/* ── HEADER & SEARCH ── */}
-          <header className="bj-header">
-            <div className="bj-header-inner">
-              <h1 className="bj-title">Browse Jobs</h1>
-              <p className="bj-subtitle">Explore 5,00,000+ jobs and find the perfect match for your career</p>
-
-              <div className="bj-search-box">
-                <div className="bj-sb-seg" ref={searchContainerRef}>
-                  <Search className="bj-icon" size={16} />
-                  <input
-                    type="text"
-                    placeholder="Enter skills / designations / companies"
-                    value={search}
-                    onChange={(e) => {
-                      setSearch(e.target.value);
-                      setShowSuggestions(true);
-                    }}
-                    onFocus={() => setShowSuggestions(true)}
-                  />
-                  {/* Existing Suggestions dropdown logic */}
-                  {showSuggestions && suggestions.length > 0 && (
-                    <div className="ns-suggestions-dropdown">
-                      {suggestions.map((sug, idx) => (
-                        <div
-                          key={idx}
-                          className="ns-suggestion-item"
-                          onClick={() => {
-                            setSearch(appendSuggestion(search, sug));
-                            setShowSuggestions(false);
-                          }}
-                        >
-                          <Search size={14} className="ns-suggestion-icon" /> {sug}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <div className="bj-divider" />
-
-                <div className="bj-sb-seg" ref={expContainerRef} onClick={() => setShowExpDropdown(!showExpDropdown)} style={{ cursor: 'pointer' }}>
-                  <span style={{ flex: 1, color: experience === "" ? "#94a3b8" : "#1e293b", fontSize: "14px" }}>
-                    {experience === "" ? "Select experience" : experience === "0" ? "Fresher" : `${experience} years`}
-                  </span>
-                  <ChevronDown size={16} className="bj-icon" />
-                  {showExpDropdown && (
-                    <div className="ns-suggestions-dropdown ns-exp-dropdown" style={{ border: "none", boxShadow: "0 4px 12px rgba(0,0,0,0.15)", borderRadius: "8px", top: "calc(100% + 8px)", maxHeight: "250px", overflowY: "auto" }}>
-                      <div className="ns-suggestion-item" onClick={() => setExperience("0")}>
-                        Fresher <span style={{ color: "#6b7280", marginLeft: "6px", fontSize: "13px" }}>(less than 1 year)</span>
+            <div className="ajd-hb-search" style={{ marginTop: '28px' }}>
+              <div className="ajd-hbs-seg" ref={searchContainerRef}>
+                <Search className="ajd-hbs-icon" size={16} />
+                <input
+                  type="text"
+                  placeholder="Enter skills / designations / companies"
+                  value={search}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                    setShowSuggestions(true);
+                  }}
+                  onFocus={() => setShowSuggestions(true)}
+                />
+                {/* Existing Suggestions dropdown logic */}
+                {showSuggestions && suggestions.length > 0 && (
+                  <div className="ns-suggestions-dropdown">
+                    {suggestions.map((sug, idx) => (
+                      <div
+                        key={idx}
+                        className="ns-suggestion-item"
+                        onClick={() => {
+                          setSearch(appendSuggestion(search, sug));
+                          setShowSuggestions(false);
+                        }}
+                      >
+                        <Search size={14} className="ns-suggestion-icon" /> {sug}
                       </div>
-                      {Array.from({ length: 30 }, (_, i) => i + 1).map(y => (
-                        <div key={y} className="ns-suggestion-item" onClick={() => setExperience(y.toString())}>
-                          {y} {y === 1 ? "year" : "years"}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <div className="bj-divider" />
-
-                <div className="bj-sb-seg" ref={locContainerRef}>
-                  <MapPin className="bj-icon" size={16} />
-                  <input
-                    type="text"
-                    placeholder="Enter location"
-                    value={locationSearch}
-                    onChange={(e) => {
-                      setLocationSearch(e.target.value);
-                      setShowLocSuggestions(true);
-                    }}
-                    onFocus={() => setShowLocSuggestions(true)}
-                  />
-                  {showLocSuggestions && locSuggestions.length > 0 && (
-                    <div className="ns-suggestions-dropdown">
-                      {locSuggestions.map((sug, idx) => (
-                        <div
-                          key={idx}
-                          className="ns-suggestion-item"
-                          onClick={() => {
-                            setLocationSearch(appendSuggestion(locationSearch, sug));
-                            setShowLocSuggestions(false);
-                          }}
-                        >
-                          <MapPin size={14} className="ns-suggestion-icon" /> {sug}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <button className="bj-search-btn">Search Jobs</button>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
-          </header>
 
-          <div className="bj-jobs-list">
-            {displayedJobs.length === 0 ? (
+              <div className="ajd-hbs-div" />
+
+              <div className="ajd-hbs-seg ajd-hbs-seg--mid" ref={expContainerRef} onClick={() => setShowExpDropdown(!showExpDropdown)} style={{ cursor: 'pointer' }}>
+                <span style={{ flex: 1, fontSize: "13px", opacity: experience === "" ? 0.6 : 1 }}>
+                  {experience === "" ? "Select experience" : experience === "0" ? "Fresher" : `${experience} years`}
+                </span>
+                <ChevronDown size={16} className="ajd-hbs-icon" />
+                {showExpDropdown && (
+                  <div className="ns-suggestions-dropdown ns-exp-dropdown" style={{ border: "none", boxShadow: "0 4px 12px rgba(0,0,0,0.15)", borderRadius: "8px", top: "calc(100% + 8px)", maxHeight: "250px", overflowY: "auto" }}>
+                    <div className="ns-suggestion-item" onClick={() => setExperience("0")}>
+                      Fresher <span style={{ color: "#6b7280", marginLeft: "6px", fontSize: "13px" }}>(less than 1 year)</span>
+                    </div>
+                    {Array.from({ length: 30 }, (_, i) => i + 1).map(y => (
+                      <div key={y} className="ns-suggestion-item" onClick={() => setExperience(y.toString())}>
+                        {y} {y === 1 ? "year" : "years"}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="ajd-hbs-div" />
+
+              <div className="ajd-hbs-seg" ref={locContainerRef}>
+                <MapPin className="ajd-hbs-icon" size={16} />
+                <input
+                  type="text"
+                  placeholder="Enter location"
+                  value={locationSearch}
+                  onChange={(e) => {
+                    setLocationSearch(e.target.value);
+                    setShowLocSuggestions(true);
+                  }}
+                  onFocus={() => setShowLocSuggestions(true)}
+                />
+                {/* Location Suggestions dropdown logic */}
+                {showLocSuggestions && locSuggestions.length > 0 && (
+                  <div className="ns-suggestions-dropdown ns-loc-dropdown">
+                    {locSuggestions.map((loc, idx) => (
+                      <div
+                        key={idx}
+                        className="ns-suggestion-item"
+                        onClick={() => {
+                          setLocationSearch(appendSuggestion(locationSearch, loc));
+                          setShowLocSuggestions(false);
+                        }}
+                      >
+                        <MapPin size={14} className="ns-suggestion-icon" /> {loc}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <button className="ajd-hbs-btn">Search Jobs</button>
+            </div>
+
+            <div className="bj-quick-cats">
+              {["Remote", "Internship", "Fresher", "Backend", "Frontend", "Data Science", "Product"].map((c) => (
+                <button
+                  type="button"
+                  key={c}
+                  className="bj-quick-cat"
+                  onClick={() => setSearch(c)}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+          </div>
+        </header>
+
+        {/* LEFT COLUMN: Job Cards (Grid Row 2, Col 1) */}
+        <div className="bj-left-col" style={{ gridColumn: '1 / 2' }}>
+
+          <div className="bj-jobs-list" style={{ transition: 'opacity 0.2s' }}>
+            {isSearching ? (
+              <Loader />
+            ) : displayedJobs.length === 0 ? (
               <EmptyState
                 icon={Briefcase}
                 title={filter === "match" ? "No strong matches yet" : "No open jobs right now"}
@@ -320,100 +468,130 @@ export default function JobBoard() {
               />
             ) : (
               displayedJobs.map((job) => (
-                <article key={job._id} className="bj-card">
+                <article key={job._id} className="bj-card" onClick={() => setSelectedJob(job)} style={{ cursor: 'pointer' }}>
 
                   <div className="bjc-left-col">
                     <div className="bjc-logo">
-                      {job.companyName === "Google" ? <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="G" /> :
-                        job.companyName === "Microsoft" ? <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="M" /> :
-                          job.companyName === "Zomato" ? <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Zomato_Logo.svg" alt="Z" /> :
-                            job.companyName === "Swiggy" ? <img src="https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg" alt="S" /> :
-                              job.companyName === "Paytm" ? <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" alt="P" /> :
-                                <span>{job.companyName?.charAt(0) || 'C'}</span>}
+                      <JobLogo job={job} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                     </div>
                   </div>
 
                   <div className="bjc-mid-col">
                     <div className="bjc-tags-top">
                       {job.isHot && <span className="bjc-tag-hot"><Sparkles size={12} /> Hot</span>}
+                      {job.isThirdParty && <span className="bjc-tag-hot" style={{ background: '#f8fafc', color: '#64748b' }}>External</span>}
                     </div>
                     <h3 className="bjc-title">
                       {job.title} <CheckCircle size={14} className="bjc-verified" />
                     </h3>
                     <div className="bjc-company-loc">
-                      <span className="bjc-cname">{job.companyName}</span>
+                      <span className="bjc-cname">{job.isThirdParty ? job.externalCompanyName : job.companyName}</span>
                       <span className="bjc-dot">•</span>
                       <span className="bjc-loc">{job.location || "Remote"}</span>
                     </div>
 
                     <div className="bjc-pills">
-                      <span className="bjc-pill bjc-pill-ft">Full-time</span>
-                      <span className="bjc-pill bjc-pill-rem">{job.location?.toLowerCase().includes('remote') ? 'Remote' : 'Hybrid'}</span>
+                      <span className="bjc-pill bjc-pill-ft">{job.employmentType === 'full_time' ? 'Full-time' : job.employmentType || 'Full-time'}</span>
+                      <span className="bjc-pill bjc-pill-rem">{job.location?.toLowerCase().includes('remote') || job.workMode === 'remote' ? 'Remote' : 'Hybrid'}</span>
                     </div>
 
                     <div className="bjc-footer-meta">
-                      <span><Briefcase size={14} /> {job.experienceMin ?? 1}-{job.experienceMax ?? 3} Yrs</span>
+                      {(job.experienceMin > 0 || job.experienceMax > 0) ? (
+                        <span><Briefcase size={14} /> {job.experienceMin}-{job.experienceMax} Yrs</span>
+                      ) : (
+                        <span><Briefcase size={14} /> Not Specified</span>
+                      )}
                       <span><Search size={14} /> Posted {Math.floor(Math.random() * 10) + 1}h ago</span>
                     </div>
                   </div>
 
                   <div className="bjc-right-col">
                     <div className="bjc-salary-book">
-                      <div className="bjc-salary">₹{job.salaryMin || 10} - {job.salaryMax || 20} LPA</div>
-                      <button className="bjc-bookmark"><Bookmark size={18} /></button>
+                      {(job.salaryMin > 0 || job.salaryMax > 0) && (
+                        <div className="bjc-salary">₹{job.salaryMin || ''} - {job.salaryMax || ''} LPA</div>
+                      )}
+                      <button className="bjc-bookmark" onClick={(e) => e.stopPropagation()}><Bookmark size={18} /></button>
                     </div>
-                    <button className="bjc-view-btn" onClick={() => handleApply(job._id)}>Apply</button>
+                    {job.isThirdParty ? (
+                      <button className="bjc-view-btn" onClick={(e) => { e.stopPropagation(); window.open(job.applyLink, '_blank'); }} style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
+                        Apply <ChevronRight size={16} />
+                      </button>
+                    ) : (
+                      <button className="bjc-view-btn" onClick={(e) => { e.stopPropagation(); handleApply(job._id); }}>Apply</button>
+                    )}
                   </div>
 
                 </article>
               ))
             )}
           </div>
+
+          {hasMore && (
+            <div className="bj-load-more" style={{ textAlign: 'center', marginTop: '30px' }}>
+              <button
+                onClick={() => setPage(p => p + 1)}
+                disabled={loadingMore}
+                style={{
+                  padding: '10px 24px',
+                  background: '#f1f5f9',
+                  color: '#475569',
+                  border: 'none',
+                  borderRadius: '6px',
+                  cursor: loadingMore ? 'not-allowed' : 'pointer',
+                  fontWeight: '500'
+                }}
+              >
+                {loadingMore ? 'Loading...' : 'Load More Jobs'}
+              </button>
+            </div>
+          )}
         </div>
 
-        {/* RIGHT COLUMN: Widgets */}
-        <div className="bj-right-col">
+        {/* RIGHT COLUMN: Widgets (Grid Row 2, Col 2) */}
+        <div className="bj-right-col" style={{ gridColumn: '2 / 3', gridRow: '2 / 3' }}>
 
-          {/* Widget 1: Recommended */}
+          {/* Widget 1: Profile Complete */}
+          <div className="bj-widget bj-profile-card">
+            <h3 className="bjp-title">Complete Your Profile</h3>
+            <p className="bjp-subtitle">Increase your visibility to recruiters by completing your profile.</p>
+            <div className="bjp-progress-ring" style={{ '--progress-pct': `${calcCompletion(profileData)}%` }}>
+              <div className="bjp-progress-inner">
+                {calcCompletion(profileData)}%
+              </div>
+            </div>
+            <Link to="/apply-jobs/profile" className="bjp-btn" style={{ display: 'inline-block', textAlign: 'center', textDecoration: 'none' }}>Complete Profile &rarr;</Link>
+          </div>
+
+          {/* Widget 2: Recommended */}
           <div className="bj-widget bj-recs">
             <div className="bjw-header">
               <h3>Recommended for you</h3>
               <a href="#">View all</a>
             </div>
             <div className="bjw-rec-list">
-              {[
-                { title: "Frontend Developer", comp: "Adobe", loc: "Noida, India", sal: "₹12 - 18 LPA", ago: "1d ago", logo: "https://upload.wikimedia.org/wikipedia/commons/4/42/Adobe_Acrobat_DC_logo_2020.svg" },
-                { title: "Backend Developer", comp: "Paytm", loc: "Bangalore, India", sal: "₹10 - 15 LPA", ago: "2d ago", logo: "https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg" },
-                { title: "Full Stack Engineer", comp: "Groww", loc: "Mumbai, India", sal: "₹9 - 14 LPA", ago: "2d ago", logo: "https://upload.wikimedia.org/wikipedia/commons/a/ac/Groww_app_logo.png" },
-                { title: "UI/UX Designer", comp: "Google", loc: "Remote", sal: "₹15 - 22 LPA", ago: "4d ago", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" }
-              ].map((rec, i) => (
-                <div key={i} className="bjw-rec-item">
-                  <img src={rec.logo} alt="logo" className="bjw-rec-logo" />
-                  <div className="bjw-rec-info">
-                    <h4>{rec.title}</h4>
-                    <p>{rec.comp} • {rec.loc}</p>
-                    <span className="bjw-rec-sal">{rec.sal}</span>
+              {recommendedJobs.length > 0 ? recommendedJobs.map((job) => {
+                const compName = job.isThirdParty ? job.externalCompanyName : job.companyName;
+                const salStr = (job.salaryMin > 0 || job.salaryMax > 0) ? `₹${job.salaryMin} - ${job.salaryMax} LPA` : 'Not Disclosed';
+
+                return (
+                  <div key={job._id} className="bjw-rec-item" onClick={() => setSelectedJob(job)} style={{ cursor: 'pointer' }}>
+                    <JobLogo job={job} className="bjw-rec-logo" style={{ objectFit: 'contain' }} />
+                    <div className="bjw-rec-info" style={{ overflow: 'hidden' }}>
+                      <h4 style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}>{job.title}</h4>
+                      <p style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}>{compName} • {job.location || 'Remote'}</p>
+                      <span className="bjw-rec-sal">{salStr}</span>
+                    </div>
+                    <div className="bjw-rec-actions">
+                      <Bookmark size={14} className="bjw-rec-book" onClick={(e) => e.stopPropagation()} />
+                      <span className="bjw-rec-time">{`${(parseInt(job._id.slice(-5), 16) % 24) + 1}h ago`}</span>
+                    </div>
                   </div>
-                  <div className="bjw-rec-actions">
-                    <Bookmark size={14} className="bjw-rec-book" />
-                    <span className="bjw-rec-time">{rec.ago}</span>
-                  </div>
-                </div>
-              ))}
+                );
+              }) : (
+                <p style={{ fontSize: '13px', color: '#64748b', textAlign: 'center', padding: '20px 0' }}>No recommendations found</p>
+              )}
             </div>
             <a href="#" className="bjw-more-link">View More Recommendations &rarr;</a>
-          </div>
-
-          {/* Widget 2: Profile Complete */}
-          <div className="bj-widget bj-profile-card">
-            <h3 className="bjp-title">Complete Your Profile</h3>
-            <p className="bjp-subtitle">Increase your visibility to recruiters by completing your profile.</p>
-            <div className="bjp-progress-ring">
-              <div className="bjp-progress-inner">
-                80%
-              </div>
-            </div>
-            <button className="bjp-btn">Complete Profile &rarr;</button>
           </div>
 
           {/* Widget 3: Job Alerts */}
@@ -426,6 +604,58 @@ export default function JobBoard() {
         </div>
 
       </div>
+
+      {/* Details Modal (Candidate Side) */}
+      {selectedJob && createPortal(
+        <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={(e) => { if (e.target === e.currentTarget) setSelectedJob(null); }}>
+          <div className="modal-content bj-modal" style={{ borderRadius: '12px', width: '100%', maxWidth: '800px', padding: '2rem', maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
+            <button
+              onClick={() => setSelectedJob(null)}
+              className="bj-modal-close"
+              style={{ position: 'absolute', top: '24px', right: '24px', background: 'transparent', border: 'none', cursor: 'pointer' }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+
+            <h1 className="bj-modal-title" style={{ fontSize: '1.8rem', marginBottom: '0.5rem', marginTop: 0 }}>{selectedJob.title}</h1>
+            <p className="bj-modal-meta" style={{ fontSize: '1.1rem', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <a href={selectedJob.isThirdParty ? selectedJob.applyLink : '#'} target={selectedJob.isThirdParty ? "_blank" : "_self"} rel="noreferrer" style={{ color: '#2563eb', textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+                {selectedJob.isThirdParty ? selectedJob.externalCompanyName : selectedJob.companyName}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: '4px' }}><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            </p>
+            <p className="bj-modal-meta" style={{ marginBottom: '1.5rem' }}>{selectedJob.location || 'Remote'}</p>
+
+            <div className="bj-modal-actions" style={{ display: 'flex', gap: '12px', marginBottom: '2rem', paddingBottom: '2rem', borderBottom: '1px solid var(--bj-border, #e2e8f0)' }}>
+              {selectedJob.isThirdParty ? (
+                <a href={selectedJob.applyLink} target="_blank" rel="noreferrer" style={{ background: '#2563eb', color: '#fff', textDecoration: 'none', padding: '10px 24px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 500 }}>
+                  Apply on company site
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>
+              ) : (
+                <button onClick={() => { handleApply(selectedJob._id); setSelectedJob(null); }} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '8px', fontWeight: 500, cursor: 'pointer' }}>
+                  Apply Now
+                </button>
+              )}
+              <button className="bj-modal-icon-btn" style={{ padding: '10px', borderRadius: '8px', cursor: 'pointer' }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+              <button className="bj-modal-icon-btn" style={{ padding: '10px', borderRadius: '8px', cursor: 'pointer' }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"></path></svg></button>
+              <button className="bj-modal-icon-btn" style={{ padding: '10px', borderRadius: '8px', cursor: 'pointer' }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></button>
+            </div>
+
+            <h3 className="bj-modal-heading" style={{ fontSize: '1.2rem', marginBottom: '1rem' }}>Location</h3>
+            <p className="bj-modal-meta" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '2rem', paddingBottom: '2rem', borderBottom: '1px solid var(--bj-border, #e2e8f0)' }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              {selectedJob.location || 'Remote'}
+            </p>
+
+            <h3 className="bj-modal-heading" style={{ fontSize: '1.4rem', marginBottom: '1rem' }}>Full job description</h3>
+            <h4 className="bj-modal-heading" style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>Summary</h4>
+            <div className="bj-modal-desc" style={{ lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>
+              {selectedJob.description}
+            </div>
+          </div>
+        </div>
+        , document.body)}
     </div>
   );
 }

@@ -15,6 +15,7 @@ const BtecQuestions = lazy(() => import('./pages/BtecQuestions'));
 const BtecPdfNotes = lazy(() => import('./pages/BtecPdfNotes'));
 const Recruiters = lazy(() => import('./pages/Recruiters'));
 const RecruiterDetails = lazy(() => import('./pages/RecruiterDetails'));
+const AdminJobs = lazy(() => import('./pages/AdminJobs'));
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             <Route path="btec-pdf-notes" element={<BtecPdfNotes />} />
             <Route path="btec-pdf-notes/new" element={<BtecNoteForm />} />
             <Route path="btec-pdf-notes/:id/edit" element={<BtecNoteForm />} />
+            <Route path="jobs" element={<AdminJobs />} />
           </Route>
         </Routes>
       </Suspense>

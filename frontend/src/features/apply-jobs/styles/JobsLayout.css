@@ -36,7 +36,8 @@ body:has(.jl-root) {
    ========================================================= */
 .jl-topbar {
     height: 60px;
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
     border-bottom: 1px solid #e4e8ef;
     display: flex;
     align-items: center;
@@ -45,6 +46,23 @@ body:has(.jl-root) {
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+}
+
+.jl-hiring-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #059669;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-radius: 999px;
+    padding: 5px 10px;
+    white-space: nowrap;
 }
 
 .jl-topbar-left {
@@ -70,7 +88,9 @@ body:has(.jl-root) {
 }
 
 .jl-logo {
-    height: 32px;
+    height: 40px;
+    transform: scale(1.8);
+    transform-origin: left center;
     object-fit: contain;
 }
 
@@ -379,10 +399,19 @@ body:has(.jl-root) {
     height: calc(100vh - 60px);
     position: sticky;
     top: 60px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
 }
 
+.jl-sb-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+
 .jl-nav-section {
-    margin-bottom: 22px;
+    margin-bottom: 4px;
 }
 
 .jl-nav-label {
@@ -565,7 +594,7 @@ body:has(.jl-root) {
     flex: 1;
     min-width: 0;
     padding: 24px;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 /* =========================================================
@@ -638,100 +667,212 @@ body:has(.jl-root) {
     .jl-main {
         padding: 16px;
     }
+
+    .jl-hiring-live {
+        display: none;
+    }
 }
 
 /* =========================================================
-   FORCE LIGHT THEME — jobs portal is always light mode
-   Override any dark-mode CSS vars that may bleed in
+   DARK THEME SUPPORT
    ========================================================= */
-.jl-root,
-.jl-root * {
-    --bg: #f0f2f5;
-    --surface: #ffffff;
-    --text: #1e293b;
-    --text-muted: #64748b;
-    --border: #e4e8ef;
+[data-theme="dark"] body:has(.jl-root) {
+    background: #040B1D !important;
+    color: #f8fafc !important;
 }
 
-.jl-topbar,
-.jl-sidebar,
-.jl-sb-scroll,
-.jl-nav-item,
-.jl-profile-widget,
-.jl-top-search {
-    background-color: #ffffff;
-    color: #1e293b;
+[data-theme="dark"] .jl-root,
+[data-theme="dark"] .jl-main {
+    background: #040B1D !important;
 }
 
-.jl-user-chip {
-    background-color: #ffffff;
-    color: #1e293b;
+[data-theme="dark"] .jl-topbar,
+[data-theme="dark"] .jl-sidebar,
+[data-theme="dark"] .jl-sb-scroll,
+[data-theme="dark"] .jl-nav-item,
+[data-theme="dark"] .jl-profile-widget,
+[data-theme="dark"] .jl-top-search {
+    background-color: #0c1631 !important;
+    color: #f8fafc !important;
 }
 
-.jl-topbar {
-    border-bottom-color: #e4e8ef !important;
+[data-theme="dark"] .jl-user-chip {
+    background-color: #0c1631 !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
 }
 
-.jl-sidebar {
-    border-right-color: #e4e8ef !important;
+[data-theme="dark"] .jl-user-chip:hover {
+    background-color: #334155 !important;
 }
 
-.jl-nav-item:hover {
-    background-color: #f1f5f9 !important;
-    color: #0f172a !important;
+[data-theme="dark"] .jl-user-chip strong {
+    color: #f8fafc !important;
 }
 
-.jl-nav-item.active {
-    background-color: rgba(37, 99, 235, 0.08) !important;
-    color: #2563eb !important;
+[data-theme="dark"] .jl-topbar {
+    border-bottom-color: #334155 !important;
 }
 
-.jl-nav-item.active svg {
-    color: #2563eb !important;
+[data-theme="dark"] .jl-sidebar {
+    border-right-color: #334155 !important;
 }
 
-.jl-nav-item svg {
+[data-theme="dark"] .jl-nav-item:hover {
+    background-color: #334155 !important;
+    color: #fff !important;
+}
+
+[data-theme="dark"] .jl-nav-item.active {
+    background-color: rgba(96, 165, 250, 0.15) !important;
+    color: #60a5fa !important;
+}
+
+/* Dark Mode Inputs */
+[data-theme="dark"] .jl-top-search {
+    background: #1e293b;
+    border-color: #334155;
+}
+[data-theme="dark"] .jl-top-search input {
+    color: #f8fafc;
+    background: transparent;
+}
+[data-theme="dark"] .jl-top-search input::placeholder {
+    color: #94a3b8;
+}
+[data-theme="dark"] .jl-top-search:focus-within {
+    border-color: #3b82f6;
+    background: #0f172a;
+}
+
+/* Sidebar Footer Icons */
+.jl-sb-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 16px 0 0 0;
+    margin-top: auto;
+    border-top: 1px solid #e4e8ef;
+}
+.jl-sb-f-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    color: #64748b;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.jl-sb-f-icon:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+.jl-sb-logout {
+    color: #ef4444;
+}
+.jl-sb-logout:hover {
+    background: #fef2f2;
+    color: #dc2626;
+}
+[data-theme="dark"] .jl-sb-footer {
+    border-color: #334155;
+}
+[data-theme="dark"] .jl-sb-f-icon:hover {
+    background: #1e293b;
+    color: #f8fafc;
+}
+[data-theme="dark"] .jl-sb-logout:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+[data-theme="dark"] .jl-nav-item.active svg {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-nav-item svg {
     color: #94a3b8;
 }
 
-.jl-top-search {
-    border-color: #e2e8f0 !important;
+[data-theme="dark"] .jl-top-search {
+    border-color: #334155 !important;
+    background: #040B1D !important;
 }
 
-.jl-top-search input {
-    color: #334155 !important;
-}
-
-.jl-tb-icon-btn {
+[data-theme="dark"] .jl-tb-icon-btn {
     background: none;
-    color: #64748b;
+    color: #94a3b8;
 }
 
-.jl-tb-icon-btn:hover {
-    background: #f1f5f9 !important;
+[data-theme="dark"] .jl-tb-icon-btn:hover {
+    background: #334155 !important;
+    color: #fff !important;
 }
 
-.jl-nav-label {
-    color: #94a3b8 !important;
-}
-
-.jl-profile-widget {
-    background: #f8faff !important;
-    border-color: #e2eaf8 !important;
-}
-
-.jl-pw-title {
-    color: #2563eb !important;
-}
-
-.jl-pw-sub {
+[data-theme="dark"] .jl-nav-label {
     color: #64748b !important;
 }
 
-.jl-ring-txt {
-    fill: #0f172a !important;
+[data-theme="dark"] .jl-profile-widget {
+    background: #0c1631 !important;
+    border-color: #334155 !important;
 }
 
-.jl-main {
-    background: #f0f2f5 !important;
+[data-theme="dark"] .jl-pw-title {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-pw-sub {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .jl-ring-txt {
+    fill: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-tlink {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .jl-tlink:hover {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-hiring-live {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #34d399;
+}
+
+[data-theme="dark"] .jl-mega-menu {
+    background: #0c1631 !important;
+    border-color: #334155 !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .jl-mega-menu::before {
+    background: #0c1631 !important;
+    border-top-color: #334155 !important;
+    border-left-color: #334155 !important;
+}
+
+[data-theme="dark"] .jl-mega-section h4 {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-mega-section a {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .jl-mega-section a:hover {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-mega-col:not(:last-child) {
+    border-right-color: #334155 !important;
 }
