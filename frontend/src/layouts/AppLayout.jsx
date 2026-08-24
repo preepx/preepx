@@ -316,7 +316,7 @@ function AppLayout({ children }) {
                 <button
                   type="button"
                   className="topbar-apply-jobs-btn"
-                  onClick={() => navigate('/apply-jobs')}
+                  onClick={() => setShowComingSoon(true)}
                 >
                   <Briefcase size={15} />
                   <span>Apply Jobs</span>
