@@ -604,9 +604,7 @@ body:has(.jl-root) {
     .jl-topbar-center {
         display: none;
     }
-}
 
-@media (max-width: 768px) {
     .jl-ham-btn {
         display: flex;
     }
@@ -631,19 +629,6 @@ body:has(.jl-root) {
         top: 60px;
         background: rgba(0, 0, 0, 0.45);
         z-index: 40;
-    }
-
-    .jl-topbar-search {
-        max-width: 180px;
-    }
-
-    .jl-kbd {
-        display: none;
-    }
-
-    .jl-user-chip div,
-    .jl-user-chip svg {
-        display: none;
     }
 
     .jl-topbar-search {

@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Link, useSearchParams } from "react-router-dom";
 import { Briefcase, MapPin, Sparkles, Search, Building2, ChevronRight, CheckCircle, ChevronDown, FileText, Bookmark, Bell, Loader2 } from "lucide-react";
-import { getPublishedJobs, applyToJob } from "../services/candidateJobsAPI";
+import { getPublishedJobs, applyToJob, toggleSaveJob, getSavedJobs } from "../services/candidateJobsAPI";
 import { getProfile } from "@/services/userAPI";
 import Loader from "@/components/Loader";
 import EmptyState from "@/components/recruiter/EmptyState";
@@ -91,12 +91,35 @@ export default function JobBoard() {
   const [allTags, setAllTags] = useState([]);
   const [allLocations, setAllLocations] = useState([]);
   const [profileData, setProfileData] = useState(null);
+  const [savedIds, setSavedIds] = useState([]);
 
   useEffect(() => {
     getProfile()
       .then(p => setProfileData(p))
       .catch(console.error);
+
+    getSavedJobs()
+      .then(saved => {
+        if (saved && saved.length > 0) {
+          setSavedIds(saved.map(sj => sj._id || sj));
+        }
+      })
+      .catch(console.error);
   }, []);
+
+  const handleToggleSave = async (jobId, e) => {
+    e?.stopPropagation();
+    try {
+      const res = await toggleSaveJob(jobId);
+      setSavedIds(prev => {
+        const next = res.saved ? [...prev, jobId] : prev.filter(x => x !== jobId);
+        notify.success(res.saved ? "Saved to your list" : "Removed from saved jobs");
+        return next;
+      });
+    } catch (err) {
+      notify.error("Failed to save job");
+    }
+  };
 
   useEffect(() => {
     const list = jobs || [];
@@ -237,11 +260,11 @@ export default function JobBoard() {
   const [recommendedJobs, setRecommendedJobs] = useState([]);
 
   useEffect(() => {
+    setIsSearching(true);
     const handler = setTimeout(() => {
       const cleanSearch = search.replace(/^[,\s]+|[,\s]+$/g, '');
       setDebouncedSearch(cleanSearch);
       setPage(1); // Reset page on new search
-      setJobs([]); // Clear jobs on new search
       setHasMore(true);
     }, 500);
     return () => clearTimeout(handler);
@@ -254,7 +277,7 @@ export default function JobBoard() {
       else setLoadingMore(true);
 
       try {
-        const d = await getPublishedJobs({ search: debouncedSearch, page });
+        const d = await getPublishedJobs({ search: debouncedSearch, page, limit: 14 });
         const newJobs = d.jobs || [];
 
         setJobs(prev => page === 1 ? newJobs : [...prev, ...newJobs]);
@@ -449,11 +472,11 @@ export default function JobBoard() {
           </div>
         </header>
 
-        {/* LEFT COLUMN: Job Cards (Grid Row 2, Col 1) */}
-        <div className="bj-left-col" style={{ gridColumn: '1 / 2' }}>
+        {/* LEFT COLUMN: Job Cards */}
+        <div className="bj-left-col">
 
           <div className="bj-jobs-list" style={{ transition: 'opacity 0.2s' }}>
-            {isSearching ? (
+            {(initialLoading || isSearching) ? (
               <Loader />
             ) : displayedJobs.length === 0 ? (
               <EmptyState
@@ -507,7 +530,9 @@ export default function JobBoard() {
                       {(job.salaryMin > 0 || job.salaryMax > 0) && (
                         <div className="bjc-salary">₹{job.salaryMin || ''} - {job.salaryMax || ''} LPA</div>
                       )}
-                      <button className="bjc-bookmark" onClick={(e) => e.stopPropagation()}><Bookmark size={18} /></button>
+                      <button className="bjc-bookmark" onClick={(e) => handleToggleSave(job._id, e)}>
+                        <Bookmark size={18} fill={savedIds.includes(job._id) ? "currentColor" : "none"} />
+                      </button>
                     </div>
                     {job.isThirdParty ? (
                       <button className="bjc-view-btn" onClick={(e) => { e.stopPropagation(); window.open(job.applyLink, '_blank'); }} style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
@@ -523,7 +548,7 @@ export default function JobBoard() {
             )}
           </div>
 
-          {hasMore && (
+          {hasMore && !isSearching && !initialLoading && displayedJobs.length > 0 && (
             <div className="bj-load-more" style={{ textAlign: 'center', marginTop: '30px' }}>
               <button
                 onClick={() => setPage(p => p + 1)}
@@ -544,8 +569,8 @@ export default function JobBoard() {
           )}
         </div>
 
-        {/* RIGHT COLUMN: Widgets (Grid Row 2, Col 2) */}
-        <div className="bj-right-col" style={{ gridColumn: '2 / 3', gridRow: '2 / 3' }}>
+        {/* RIGHT COLUMN: Widgets */}
+        <div className="bj-right-col">
 
           {/* Widget 1: Profile Complete */}
           <div className="bj-widget bj-profile-card">

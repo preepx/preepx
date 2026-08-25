@@ -19,3 +19,9 @@ export const getMyApplications = () =>
 
 export const getApplicationStats = () =>
   API.get(`${BASE}/applications/stats`).then((r) => r.data.data);
+
+export const toggleSaveJob = (jobId) =>
+  API.post(`${BASE}/${jobId}/save`).then((r) => r.data);
+
+export const getSavedJobs = () =>
+  API.get(`${BASE}/saved`).then((r) => r.data.data);

@@ -6,7 +6,7 @@ import {
   Loader2, Sparkles, Wifi, GraduationCap, Home, Layers, TrendingUp,
   CalendarDays, Flame, Zap, Eye, Star, Bell, Code2, BrainCircuit, Target
 } from "lucide-react";
-import { getApplicationStats, getPublishedJobs, applyToJob } from "../services/candidateJobsAPI";
+import { getApplicationStats, getPublishedJobs, applyToJob, toggleSaveJob, getSavedJobs } from "../services/candidateJobsAPI";
 import Loader from "@/components/Loader";
 import notify from "@/utils/notify";
 import { getProfile } from "@/services/userAPI";
@@ -270,12 +270,18 @@ export default function ApplyJobsDashboard() {
   useEffect(() => {
     Promise.all([
       getApplicationStats().catch(() => ({})),
-      getPublishedJobs({ limit: 50 }).catch(() => ({ jobs: [] })),
-      getProfile().catch(() => null)
-    ]).then(([s, j, p]) => {
+      getPublishedJobs({ limit: 14 }).catch(() => ({ jobs: [] })),
+      getProfile().catch(() => null),
+      getSavedJobs().catch(() => [])
+    ]).then(([s, j, p, saved]) => {
       setStats(s);
       setJobs(j.jobs || []);
       setProfileData(p);
+      if (saved && saved.length > 0) {
+        const ids = saved.map(sj => sj._id || sj);
+        setSavedIds(ids);
+        localStorage.setItem("ajd_saved", JSON.stringify(ids));
+      }
       setLoading(false);
     });
   }, []);
@@ -302,15 +308,19 @@ export default function ApplyJobsDashboard() {
     }
   };
 
-  const toggleSave = (id, e) => {
+  const toggleSave = async (id, e) => {
     e?.stopPropagation();
-    setSavedIds((prev) => {
-      const exists = prev.includes(id);
-      const next = exists ? prev.filter((x) => x !== id) : [...prev, id];
-      localStorage.setItem("ajd_saved", JSON.stringify(next));
-      notify.success(exists ? "Removed from saved jobs" : "Saved to your list");
-      return next;
-    });
+    try {
+      const res = await toggleSaveJob(id);
+      setSavedIds((prev) => {
+        const next = res.saved ? [...prev, id] : prev.filter(x => x !== id);
+        localStorage.setItem("ajd_saved", JSON.stringify(next));
+        notify.success(res.saved ? "Saved to your list" : "Removed from saved jobs");
+        return next;
+      });
+    } catch (err) {
+      notify.error("Failed to save job");
+    }
   };
 
   const toggleFollow = (name) => {

@@ -63,6 +63,7 @@ const CertificateVerifyPage = lazy(() => import("@/pages/Interview/CertificateVe
 const JobsMyApplications = lazy(() => import("./features/apply-jobs/pages/JobsMyApplications"));
 const JobsAssessments = lazy(() => import("./features/apply-jobs/pages/JobsAssessments"));
 const JobsProfile = lazy(() => import("./features/apply-jobs/pages/JobsProfile"));
+const SavedJobs = lazy(() => import("./features/apply-jobs/pages/SavedJobs"));
 
 const PreInterviewSetup = lazy(() => import("@/pages/Interview/PreInterviewSetup"));
 const InterviewLobby = lazy(() => import("@/pages/Interview/InterviewLobby"));
@@ -203,6 +204,7 @@ function AppContent() {
           <Route path="/apply-jobs/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsMyApplications /></ProtectedRoute>} />
           <Route path="/apply-jobs/assessments" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsAssessments /></ProtectedRoute>} />
           <Route path="/apply-jobs/profile" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsProfile /></ProtectedRoute>} />
+          <Route path="/apply-jobs/saved" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><SavedJobs /></ProtectedRoute>} />
           <Route path="/apply-jobs/settings" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><Settings /></ProtectedRoute>} />
           <Route path="/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsMyApplications /></ProtectedRoute>} />
           <Route path="/assessment/:id" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><TakeAssessment /></ProtectedRoute>} />

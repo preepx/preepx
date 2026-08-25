@@ -2490,3 +2490,179 @@
     50% { opacity: 0.4; }
     100% { opacity: 1; }
 }
+
+/* =========================================================
+   MOBILE OVERRIDES FOR NEW DESIGN & JOB ROWS
+   ========================================================= */
+@media (max-width: 1024px) {
+    .ajd-hn-art {
+        display: none;
+    }
+    .ajd-hn-left {
+        max-width: 100%;
+    }
+    .ajd-blogs-sec {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Hero new design overrides */
+    .ajd-hero-new {
+        padding: 24px 20px 220px 20px;
+    }
+    .ajd-hn-title {
+        font-size: 24px;
+    }
+    .ajd-hn-search {
+        flex-direction: column;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        height: auto;
+        padding: 10px;
+        gap: 8px;
+        border-radius: 12px;
+    }
+    .ajd-hns-seg {
+        width: 100%;
+        padding: 10px;
+        height: auto;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .ajd-hns-seg:last-of-type {
+        border-bottom: none;
+    }
+    .ajd-hns-div {
+        display: none;
+    }
+    .ajd-hns-btn {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    /* Blogs mobile scroll */
+    .ajd-blogs-scroll {
+        flex-direction: column;
+        overflow-x: visible;
+    }
+    .ajd-blog-card {
+        width: 100%;
+        min-width: unset;
+    }
+
+    /* Fix: Job rows on Dashboard */
+    .ajd-job-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .ajd-jright {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-right: 0;
+        flex-wrap: wrap;
+    }
+    .ajd-jactions {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+        gap: 10px;
+    }
+    .ajd-apply-btn {
+        flex-grow: 1;
+        text-align: center;
+        padding: 10px;
+    }
+
+    /* Fix: Old Hero Search Box (Used in Job Board) */
+    .ajd-hb-search {
+        flex-direction: column;
+        padding: 12px;
+        gap: 8px;
+        border-radius: 12px;
+    }
+    .ajd-hbs-seg {
+        width: 100%;
+        padding: 8px 10px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    [data-theme="dark"] .ajd-hbs-seg {
+        border-color: #334155;
+    }
+    .ajd-hbs-seg:last-of-type {
+        border-bottom: none;
+    }
+    .ajd-hbs-div {
+        display: none;
+    }
+    .ajd-hbs-btn {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 4px;
+        padding: 12px;
+    }
+}
+
+/* =========================================================
+   MOBILE OVERRIDES FOR NEW DESIGN
+   ========================================================= */
+@media (max-width: 1024px) {
+    .ajd-hn-art {
+        display: none;
+    }
+    .ajd-hn-left {
+        max-width: 100%;
+    }
+    .ajd-blogs-sec {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .ajd-hero-new {
+        padding: 24px 20px 220px 20px;
+    }
+    .ajd-hn-title {
+        font-size: 24px;
+    }
+    .ajd-hn-search {
+        flex-direction: column;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+        height: auto;
+        padding: 10px;
+        gap: 8px;
+        border-radius: 12px;
+    }
+    .ajd-hns-seg {
+        width: 100%;
+        padding: 10px;
+        height: auto;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .ajd-hns-seg:last-of-type {
+        border-bottom: none;
+    }
+    .ajd-hns-div {
+        display: none;
+    }
+    .ajd-hns-btn {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    .ajd-blogs-scroll {
+        flex-direction: column;
+        overflow-x: visible;
+    }
+    .ajd-blog-card {
+        width: 100%;
+        min-width: unset;
+    }
+}

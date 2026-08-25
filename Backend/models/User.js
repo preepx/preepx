@@ -84,6 +84,7 @@ const userSchema = mongoose.Schema(
       currentDay: { type: Number, default: 1 },
       completedDays: [{ type: Number }]
     },
+    savedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
   },
   { timestamps: true }
 );

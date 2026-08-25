@@ -198,6 +198,35 @@ const getApplicationStats = async (userId) => {
   };
 };
 
+const getSavedJobs = async (userId) => {
+  const user = await User.findById(userId).populate({
+    path: "savedJobs",
+    select: "title role location workMode experienceMin experienceMax requiredSkills skills status companyName externalCompanyName isThirdParty externalCompanyLogo salaryMin salaryMax createdAt postedAt"
+  }).lean();
+  if (!user) throw new NotFoundError("User not found");
+  return user.savedJobs || [];
+};
+
+const toggleSaveJob = async (userId, jobId) => {
+  const user = await User.findById(userId);
+  if (!user) throw new NotFoundError("User not found");
+  
+  // ensure job exists
+  const job = await Job.findById(jobId);
+  if (!job) throw new NotFoundError("Job not found");
+
+  const idx = user.savedJobs.indexOf(jobId);
+  let saved = false;
+  if (idx > -1) {
+    user.savedJobs.splice(idx, 1);
+  } else {
+    user.savedJobs.push(jobId);
+    saved = true;
+  }
+  await user.save();
+  return { saved, jobId };
+};
+
 module.exports = {
   listPublishedJobs,
   listMatchedJobs,
@@ -205,4 +234,6 @@ module.exports = {
   applyToJob,
   getMyApplications,
   getApplicationStats,
+  getSavedJobs,
+  toggleSaveJob,
 };

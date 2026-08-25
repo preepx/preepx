@@ -26,6 +26,11 @@ router.get("/applications/me", catchAsync(async (req, res) => {
   res.json({ success: true, data });
 }));
 
+router.get("/saved", catchAsync(async (req, res) => {
+  const data = await applicationService.getSavedJobs(req.user);
+  res.json({ success: true, data });
+}));
+
 router.get("/:jobId", catchAsync(async (req, res) => {
   const data = await applicationService.getPublishedJob(req.params.jobId);
   res.json({ success: true, data });
@@ -38,6 +43,11 @@ router.post("/:jobId/apply", catchAsync(async (req, res) => {
     data,
     message: `Application submitted! ${data.matchScore}% match with this role.`,
   });
+}));
+
+router.post("/:jobId/save", catchAsync(async (req, res) => {
+  const data = await applicationService.toggleSaveJob(req.user, req.params.jobId);
+  res.json({ success: true, data });
 }));
 
 module.exports = router;

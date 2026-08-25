@@ -17,7 +17,7 @@ const NAV_MAIN = [
   { to: "/apply-jobs/browse", icon: Search, label: "Browse Jobs" },
   { to: "/apply-jobs#ajd-events", icon: CalendarDays, label: "Events" },
   { to: "/apply-jobs/assessments", icon: ClipboardCheck, label: "Assessments", badge: "New", badgePill: true },
-  { to: "/apply-jobs/browse?saved=true", icon: Bookmark, label: "Saved Jobs" },
+  { to: "/apply-jobs/saved", icon: Bookmark, label: "Saved Jobs" },
 ];
 
 const NAV_APPS = [
@@ -82,9 +82,6 @@ function JobsLayout({ children }) {
     if (exact || to === "/apply-jobs") return location.pathname === to;
     if (to.includes("?")) {
       return location.pathname + location.search === to;
-    }
-    if (location.pathname === "/apply-jobs/browse" && location.search.includes("saved=true") && to === "/apply-jobs/browse") {
-      return false;
     }
     return location.pathname === to || location.pathname.startsWith(to + "/");
   };
