@@ -242,7 +242,7 @@ function UserDashboard() {
 
       {/* APPLY JOBS CTA */}
       <section className="ud-section">
-        <button type="button" className="ud-apply-banner" onClick={() => navigate('/apply-jobs')}>
+        <button type="button" className="ud-apply-banner" onClick={() => setShowComingSoon(true)}>
           <div className="ud-apply-banner-icon"><Briefcase size={28} /></div>
           <div className="ud-apply-banner-text">
             <h2>Apply Jobs</h2>
