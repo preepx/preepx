@@ -1,0 +1,201 @@
+{
+  "slug": "hyundai",
+  "company_name": "Hyundai",
+  "questions": [
+    {
+      "id": "hyundai-mcq-1",
+      "type": "mcq",
+      "title": "Time complexity of binary search",
+      "difficulty": "Easy",
+      "topic": "DSA",
+      "options": [
+        "O(n)",
+        "O(log n)",
+        "O(n log n)",
+        "O(1)"
+      ],
+      "answer": 1,
+      "explanation": "Binary search halves the search space each step, so it runs in O(log n)."
+    },
+    {
+      "id": "hyundai-mcq-2",
+      "type": "mcq",
+      "title": "Which data structure is best for LRU cache?",
+      "difficulty": "Medium",
+      "topic": "System Design",
+      "options": [
+        "Array + HashMap",
+        "HashMap + Doubly Linked List",
+        "Binary Heap",
+        "Stack only"
+      ],
+      "answer": 1,
+      "explanation": "An LRU cache needs O(1) get/put. HashMap plus a doubly linked list supports both."
+    },
+    {
+      "id": "hyundai-mcq-3",
+      "type": "mcq",
+      "title": "HTTP 429 typically means",
+      "difficulty": "Easy",
+      "topic": "Web",
+      "options": [
+        "Unauthorized",
+        "Not Found",
+        "Too Many Requests",
+        "Gateway Timeout"
+      ],
+      "answer": 2,
+      "explanation": "429 Too Many Requests is returned when rate limits are exceeded."
+    },
+    {
+      "id": "hyundai-code-1",
+      "type": "coding",
+      "title": "Two Sum",
+      "difficulty": "Easy",
+      "topic": "Arrays",
+      "statement": "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. Assume exactly one solution exists. This is a common Hyundai screening question.",
+      "examples": [
+        {
+          "input": "nums = [2,7,11,15], target = 9",
+          "output": "[0,1]"
+        },
+        {
+          "input": "nums = [3,2,4], target = 6",
+          "output": "[1,2]"
+        }
+      ],
+      "constraints": "2 <= nums.length <= 10^4. You may not use the same element twice.",
+      "starterCode": {
+        "javascript": "function twoSum(nums, target) {\n  // write your solution\n}\n",
+        "python": "def two_sum(nums, target):\n    # write your solution\n    pass\n"
+      },
+      "hints": [
+        "Use a hashmap from value -> index.",
+        "For each number x, look up target - x."
+      ]
+    },
+    {
+      "id": "hyundai-code-2",
+      "type": "coding",
+      "title": "Valid Parentheses",
+      "difficulty": "Easy",
+      "topic": "Stack",
+      "statement": "Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid. Open brackets must be closed in the correct order.",
+      "examples": [
+        {
+          "input": "s = \"()\"",
+          "output": "true"
+        },
+        {
+          "input": "s = \"()[]{}\"",
+          "output": "true"
+        },
+        {
+          "input": "s = \"(]\"",
+          "output": "false"
+        }
+      ],
+      "constraints": "1 <= s.length <= 10^4",
+      "starterCode": {
+        "javascript": "function isValid(s) {\n  // write your solution\n}\n",
+        "python": "def is_valid(s):\n    # write your solution\n    pass\n"
+      },
+      "hints": [
+        "Use a stack.",
+        "Push opening brackets and pop on matching close."
+      ]
+    },
+    {
+      "id": "hyundai-code-3",
+      "type": "coding",
+      "title": "Longest Substring Without Repeating Characters",
+      "difficulty": "Medium",
+      "topic": "Sliding Window",
+      "statement": "Given a string s, find the length of the longest substring without repeating characters.",
+      "examples": [
+        {
+          "input": "s = \"abcabcbb\"",
+          "output": "3"
+        },
+        {
+          "input": "s = \"bbbbb\"",
+          "output": "1"
+        }
+      ],
+      "constraints": "0 <= s.length <= 5 * 10^4",
+      "starterCode": {
+        "javascript": "function lengthOfLongestSubstring(s) {\n  // write your solution\n}\n",
+        "python": "def length_of_longest_substring(s):\n    # write your solution\n    pass\n"
+      },
+      "hints": [
+        "Sliding window + set/map of last seen index."
+      ]
+    },
+    {
+      "id": "hyundai-code-4",
+      "type": "coding",
+      "title": "Merge K Sorted Lists",
+      "difficulty": "Hard",
+      "topic": "Heaps",
+      "statement": "You are given an array of k linked-lists, each sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.",
+      "examples": [
+        {
+          "input": "lists = [[1,4,5],[1,3,4],[2,6]]",
+          "output": "[1,1,2,3,4,4,5,6]"
+        }
+      ],
+      "constraints": "k == lists.length, 0 <= k <= 10^4",
+      "starterCode": {
+        "javascript": "function mergeKLists(lists) {\n  // write your solution\n}\n",
+        "python": "def merge_k_lists(lists):\n    # write your solution\n    pass\n"
+      },
+      "hints": [
+        "Min-heap of current heads.",
+        "Divide and conquer merge."
+      ]
+    },
+    {
+      "id": "hyundai-th-1",
+      "type": "theory",
+      "title": "How would you design a URL shortener like those used at Hyundai?",
+      "difficulty": "Medium",
+      "topic": "System Design",
+      "prompt": "Walk through requirements, API, data model, hashing/encoding, scale (reads vs writes), and how you handle collisions and analytics.",
+      "keyPoints": [
+        "Clarify functional vs non-functional requirements",
+        "Base62 encoding of a unique id",
+        "Cache hot URLs, shard by key",
+        "301 vs 302 redirect tradeoff"
+      ],
+      "modelAnswer": "Start with create/redirect APIs and a mapping of shortCode -> longUrl. Generate unique IDs (Snowflake or DB sequence) and encode in Base62. Put a cache in front of the DB for hot keys, replicate for read-heavy traffic, and store analytics asynchronously. Handle collisions by retrying with a new id."
+    },
+    {
+      "id": "hyundai-th-2",
+      "type": "theory",
+      "title": "Explain REST vs GraphQL",
+      "difficulty": "Easy",
+      "topic": "Backend",
+      "prompt": "When would you pick REST, and when GraphQL, in a large product company?",
+      "keyPoints": [
+        "REST is resource-oriented and cache-friendly",
+        "GraphQL reduces over/under fetching",
+        "GraphQL needs query cost limits"
+      ],
+      "modelAnswer": "REST fits public APIs, HTTP caching, and simple CRUD. GraphQL fits complex client views that need nested data without multiple round trips. At scale you still version carefully, add persisted queries, and protect the graph with depth/cost limits."
+    },
+    {
+      "id": "hyundai-th-3",
+      "type": "theory",
+      "title": "CAP theorem in interviews",
+      "difficulty": "Hard",
+      "topic": "Distributed Systems",
+      "prompt": "Explain CAP and give a real example of CP vs AP systems.",
+      "keyPoints": [
+        "Network partitions force a consistency vs availability choice",
+        "CP example: ZooKeeper, etcd",
+        "AP example: Dynamo-style stores with eventual consistency"
+      ],
+      "modelAnswer": "During a partition you cannot have both linearizable consistency and full availability. CP systems refuse some requests to stay consistent. AP systems keep serving and reconcile later. Most product systems mix both: strong consistency for payments, eventual for feeds."
+    }
+  ]
+}

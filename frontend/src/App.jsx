@@ -57,6 +57,9 @@ const WalletPage = lazy(() => import("@/pages/WalletPage"));
 
 const CodingExam = lazy(() => import("./pages/CodingExam"));
 const Challenge100Days = lazy(() => import("./pages/Challenge100Days"));
+const CompanyPrepHub = lazy(() => import("./pages/CompanyPrepHub"));
+const CompanyQuestionBank = lazy(() => import("./pages/CompanyQuestionBank"));
+const CompanyQuestionPractice = lazy(() => import("./pages/CompanyQuestionPractice"));
 
 const UserGuide = lazy(() => import("./pages/UserGuide"));
 const CertificateVerifyPage = lazy(() => import("@/pages/Interview/CertificateVerifyPage"));
@@ -85,10 +88,11 @@ function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements", "/rewards",
     "/settings", "/profile", "/resume-interview", "/ats-score", "/btech-notes", "/objective-exam", "/wallet",
-    "/my-assessments", "/my-applications", "/100-days-challenge"
+    "/my-assessments", "/my-applications", "/100-days-challenge", "/company-prep"
   ];
   return sidebarRoutes.includes(pathname)
     || pathname.startsWith("/btech-notes/")
+    || pathname.startsWith("/company-prep/")
     || (pathname.startsWith("/objective-exam/") && !FULLSCREEN_ROUTES.includes(pathname));
 }
 
@@ -232,6 +236,9 @@ function AppContent() {
 
           <Route path="/coding-exam/:id" element={<ProtectedRoute><CodingExam /></ProtectedRoute>} />
           <Route path="/100-days-challenge" element={<ProtectedRoute><Challenge100Days /></ProtectedRoute>} />
+          <Route path="/company-prep" element={<ProtectedRoute><CompanyPrepHub /></ProtectedRoute>} />
+          <Route path="/company-prep/:slug" element={<ProtectedRoute><CompanyQuestionBank /></ProtectedRoute>} />
+          <Route path="/company-prep/:slug/:questionId" element={<ProtectedRoute><CompanyQuestionPractice /></ProtectedRoute>} />
 
           {/* Public Certificate Verification — no auth required */}
           <Route path="/verify/:certificateId" element={<CertificateVerifyPage />} />

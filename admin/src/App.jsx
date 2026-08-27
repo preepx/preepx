@@ -17,6 +17,7 @@ import Questions from './pages/Questions';
 import McqQuestions from './pages/McqQuestions';
 import Upload from './pages/Upload';
 import Settings from './pages/Settings';
+import CompanyPrep from './pages/CompanyPrep';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -45,6 +46,7 @@ export default function App() {
               <Route path="/questions/:skill" element={<Questions />} />
               <Route path="/mcq-questions" element={<McqQuestions />} />
               <Route path="/mcq-questions/:skill" element={<McqQuestions />} />
+              <Route path="/company-prep" element={<CompanyPrep />} />
               <Route path="/upload" element={<Upload />} />
               <Route path="/settings" element={<Settings />} />
             </Route>

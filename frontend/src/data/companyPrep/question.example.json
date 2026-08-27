@@ -1,0 +1,21 @@
+{
+  "id": "unique-id",
+  "type": "mcq | coding | theory",
+  "title": "Question title",
+  "difficulty": "Easy | Medium | Hard",
+  "topic": "DSA",
+  "options": ["A", "B", "C", "D"],
+  "answer": 1,
+  "explanation": "Why the answer is correct (MCQ)",
+  "statement": "Problem statement (coding)",
+  "examples": [{ "input": "...", "output": "..." }],
+  "constraints": "...",
+  "starterCode": {
+    "javascript": "function solve() {}",
+    "python": "def solve():\n    pass"
+  },
+  "hints": ["hint 1"],
+  "prompt": "Theory prompt",
+  "keyPoints": ["point 1"],
+  "modelAnswer": "Full written answer"
+}
