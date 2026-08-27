@@ -38,7 +38,7 @@ export default function CompanyQuestionPractice() {
   const [code, setCode] = useState("");
 
   const neighbors = useMemo(() => {
-    const list = questionsData;
+    const list = Array.isArray(questionsData) ? questionsData : [];
     const idx = list.findIndex((q) => String(q.id || q._id) === String(questionId));
     return {
       prev: idx > 0 ? list[idx - 1] : null,

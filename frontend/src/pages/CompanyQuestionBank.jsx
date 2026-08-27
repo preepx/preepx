@@ -42,6 +42,7 @@ export default function CompanyQuestionBank() {
   const [search, setSearch] = useState("");
 
   const questions = useMemo(() => {
+    if (!Array.isArray(questionsData)) return [];
     const q = search.trim().toLowerCase();
     return questionsData.filter((item) => {
       if (type !== "all" && item.type !== type) return false;
