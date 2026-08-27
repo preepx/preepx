@@ -35,6 +35,8 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174", // Admin panel
   "http://localhost:3000",
+  "https://www.preepx.in",
+  "https://preepx.in",
 ].filter(Boolean);
 
 app.use(
