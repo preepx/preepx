@@ -27,16 +27,19 @@ export function markQuestionSolved(slug, questionId) {
 }
 
 export function computeBankStats(questions = [], solvedIds = []) {
-  const solvedSet = new Set(solvedIds);
+  if (!Array.isArray(questions)) questions = [];
+  const solvedSet = new Set(solvedIds.map(String));
   const byDiff = { Easy: 0, Medium: 0, Hard: 0 };
   const byType = { coding: 0, mcq: 0, theory: 0 };
   let solved = 0;
 
   for (const q of questions) {
+    if (!q) continue;
     const diff = q.difficulty || "Easy";
     if (byDiff[diff] != null) byDiff[diff] += 1;
     if (byType[q.type] != null) byType[q.type] += 1;
-    if (solvedSet.has(q.id)) solved += 1;
+    const qId = q.id || q._id;
+    if (solvedSet.has(String(qId))) solved += 1;
   }
 
   const total = questions.length;

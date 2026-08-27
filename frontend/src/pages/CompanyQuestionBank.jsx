@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft, Search, Code2, ListChecks, BookOpen, CheckCircle2,
-  Circle, Star, Filter, ChevronRight, Lock
+  Circle, Star, Filter, ChevronRight, Lock, Bookmark, ArrowRight, LayoutGrid, LayoutList, Trophy, ChevronDown, MonitorPlay, Users, Rocket, FileText, Target, BarChart3
 } from "lucide-react";
 import { getCompanyBySlug } from "@/data/companyPrep/companies";
 import { computeBankStats, getSolvedIds } from "@/data/companyPrep/progress";
@@ -34,7 +34,7 @@ export default function CompanyQuestionBank() {
       .finally(() => setLoading(false));
   }, [slug]);
 
-  const stats = useMemo(() => computeBankStats(questionsData, solvedIds), [questionsData, solvedIds]);
+  const stats = useMemo(() => computeBankStats(Array.isArray(questionsData) ? questionsData : [], solvedIds), [questionsData, solvedIds]);
 
   const [type, setType] = useState("all");
   const [difficulty, setDifficulty] = useState("all");
@@ -48,7 +48,7 @@ export default function CompanyQuestionBank() {
       if (type !== "all" && item.type !== type) return false;
       if (difficulty !== "all" && item.difficulty !== difficulty) return false;
       // Database uses _id, but progress system currently uses id which was a string
-      const qId = item.id || item._id; 
+      const qId = item.id || item._id;
       const solved = solvedIds.includes(String(qId));
       if (status === "solved" && !solved) return false;
       if (status === "unsolved" && solved) return false;
@@ -77,133 +77,230 @@ export default function CompanyQuestionBank() {
   }
 
   return (
-    <div className="cp-page">
-      <button type="button" className="cp-back" onClick={() => navigate("/company-prep")}>
-        <ArrowLeft size={16} /> All companies
-      </button>
+    <div className="cp-ambient-wrapper" style={{ "--ambient-color": company.pColor1 || "#a855f7", "--ambient-color-2": company.pColor2 || "#7c3aed" }}>
+      <div className="cp-ambient-glow" />
+      <div className="cp-page">
+        <button type="button" className="cp-back-top" onClick={() => navigate("/company-prep")}>
+          <ArrowLeft size={16} /> Back to All Companies
+        </button>
 
-      <section
-        className="cp-company-hero"
-        style={{ "--accent": company.pColor1, "--accent-2": company.pColor2 }}
-      >
-        <div className="cp-company-hero-main">
-          <div className="cp-logo-lg">
-            <img src={company.logo} alt={company.name} />
-          </div>
-          <div>
-            <div className="cp-name-row">
-              <h1>{company.name} Interview Bank</h1>
-              <span className="tc-badge" style={{ color: company.badgeColor, background: `${company.badgeColor}1a` }}>
-                {company.badge}
-              </span>
+        <section className="cp-company-hero">
+          <div className="cp-company-hero-main">
+            <div>
+              <div className="cp-name-row">
+                <h1>{company.name} Interview Bank</h1>
+                <span className="cp-focus-badge">Focus</span>
+              </div>
+              <p>Curated coding, MCQ and theory questions asked in {company.name} style interviews.<br />Practice and master the most important concepts.</p>
+              <div className="cp-hero-stats-pills">
+                <span>{stats.total} Problems</span>
+                <span><Star size={14} fill="#fbbf24" color="#fbbf24" /> {company.rating} (245 reviews)</span>
+                <span><CheckCircle2 size={14} /> {stats.progress}% Solved</span>
+              </div>
             </div>
-            <p>Coding, MCQ and theory questions used in {company.name} style interviews. Add more in JSON — they appear here automatically.</p>
-            <div className="tc-stats-row cp-hero-stats">
-              <span>{stats.total} Problems</span>
-              <span className="tc-rating"><Star size={12} fill="#fbbf24" color="#fbbf24" /> {company.rating}</span>
-              <span>{stats.solved} solved</span>
+            <div className="cp-logo-float">
+              <img src={company.logo} alt={company.name} />
             </div>
           </div>
-        </div>
-        <div className="cp-hero-progress">
-          <div className="cp-progress-ring-meta">
-            <strong>{stats.progress}%</strong>
-            <span>Solved</span>
+          <div className="cp-hero-progress">
+            <h4 style={{ margin: "0 0 12px", fontWeight: 500, color: "#fff", fontSize: "14px" }}>Your Progress</h4>
+            <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+              <div className="cp-radial-chart">
+                <svg viewBox="0 0 70 70">
+                  <circle cx="35" cy="35" r="30" className="cp-radial-bg" />
+                  <circle cx="35" cy="35" r="30" className="cp-radial-fill" style={{ strokeDashoffset: 188 - (188 * stats.progress) / 100 }} />
+                </svg>
+                <div className="cp-radial-text" style={{ position: "absolute" }}>
+                  <strong>{stats.progress}%</strong>
+                  <span>Solved</span>
+                </div>
+              </div>
+              <div className="cp-progress-stats">
+                <div className="cp-p-stat">
+                  <span className="cp-p-stat-label"><div className="cp-dot" style={{ background: "#22c55e" }} /> Easy</span>
+                  <span className="cp-p-stat-val">{stats.byDiff.Easy}</span>
+                </div>
+                <div className="cp-p-stat">
+                  <span className="cp-p-stat-label"><div className="cp-dot" style={{ background: "#f59e0b" }} /> Medium</span>
+                  <span className="cp-p-stat-val">{stats.byDiff.Medium}</span>
+                </div>
+                <div className="cp-p-stat">
+                  <span className="cp-p-stat-label"><div className="cp-dot" style={{ background: "#ef4444" }} /> Hard</span>
+                  <span className="cp-p-stat-val">{stats.byDiff.Hard}</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="tc-progress-bar">
-            <div
-              className="tc-progress-fill"
-              style={{ width: `${stats.progress}%`, background: `linear-gradient(90deg, ${company.pColor1}, ${company.pColor2})` }}
-            />
-          </div>
-          <div className="tc-diff-stats">
-            <span className="tc-easy"><CheckCircle2 size={12} /> Easy {stats.byDiff.Easy}</span>
-            <span className="tc-medium"><CheckCircle2 size={12} /> Medium {stats.byDiff.Medium}</span>
-            <span className="tc-hard"><CheckCircle2 size={12} /> Hard {stats.byDiff.Hard}</span>
-          </div>
-        </div>
-      </section>
+        </section>
 
-      <div className="cp-type-tabs">
-        {[
-          { id: "all", label: `All (${stats.total})` },
-          { id: "coding", label: `Coding (${stats.byType.coding})` },
-          { id: "mcq", label: `MCQ (${stats.byType.mcq})` },
-          { id: "theory", label: `Theory (${stats.byType.theory})` },
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            type="button"
-            className={type === tab.id ? "active" : ""}
-            onClick={() => setType(tab.id)}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+        <div className="cp-main-layout">
+          <aside className="cp-sidebar">
+            <div className="cp-sidebar-header">
+              <h3>Filters</h3>
+              <button type="button" className="cp-btn-reset" onClick={() => { setType("all"); setDifficulty("all"); setStatus("all"); setSearch(""); }}>Reset</button>
+            </div>
 
-      <div className="cp-filters">
-        <div className="cp-search">
-          <Search size={16} />
-          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search questions or topics" />
-        </div>
-        <div className="cp-filter-group">
-          <Filter size={14} />
-          {["all", "Easy", "Medium", "Hard"].map((d) => (
-            <button key={d} type="button" className={difficulty === d ? "active" : ""} onClick={() => setDifficulty(d)}>
-              {d === "all" ? "All levels" : d}
-            </button>
-          ))}
-        </div>
-        <div className="cp-filter-group">
-          {[
-            ["all", "All status"],
-            ["unsolved", "Unsolved"],
-            ["solved", "Solved"],
-          ].map(([id, label]) => (
-            <button key={id} type="button" className={status === id ? "active" : ""} onClick={() => setStatus(id)}>
-              {label}
-            </button>
-          ))}
-        </div>
-      </div>
+            <div className="cp-filter-section">
+              <h4>Search</h4>
+              <div className="cp-search">
+                <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search topics or questions..." />
+                <Search size={14} />
+              </div>
+            </div>
 
-      <div className="cp-q-list">
-        {questions.length === 0 && (
-          <div className="cp-empty">
-            No questions match these filters. Add more in <code>frontend/src/data/companyPrep/banks/{slug}.json</code>
+            <div className="cp-filter-section">
+              <h4>Difficulty</h4>
+              <label className="cp-checkbox c-easy">
+                <input type="checkbox" checked={difficulty === "Easy"} onChange={() => setDifficulty(difficulty === "Easy" ? "all" : "Easy")} /> Easy
+              </label>
+              <label className="cp-checkbox c-medium">
+                <input type="checkbox" checked={difficulty === "Medium"} onChange={() => setDifficulty(difficulty === "Medium" ? "all" : "Medium")} /> Medium
+              </label>
+              <label className="cp-checkbox c-hard">
+                <input type="checkbox" checked={difficulty === "Hard"} onChange={() => setDifficulty(difficulty === "Hard" ? "all" : "Hard")} /> Hard
+              </label>
+            </div>
+
+            <div className="cp-filter-section">
+              <h4>Status</h4>
+              <label className="cp-radio">
+                <input type="radio" name="status" checked={status === "all"} onChange={() => setStatus("all")} /> All Status
+              </label>
+              <label className="cp-radio">
+                <input type="radio" name="status" checked={status === "unsolved"} onChange={() => setStatus("unsolved")} /> Unsolved
+              </label>
+              <label className="cp-radio">
+                <input type="radio" name="status" checked={status === "solved"} onChange={() => setStatus("solved")} /> Solved
+              </label>
+            </div>
+
+            <div className="cp-filter-section">
+              <h4>Topics</h4>
+              <select className="cp-select">
+                <option>Select Topic</option>
+                <option>Arrays</option>
+                <option>System Design</option>
+                <option>Dynamic Programming</option>
+              </select>
+            </div>
+
+            <button className="cp-btn-apply">Apply Filters</button>
+          </aside>
+
+          <main className="cp-content">
+            <div className="cp-top-bar">
+              <div className="cp-type-tabs">
+                {[
+                  { id: "all", label: `All (${stats.total})`, icon: null },
+                  { id: "coding", label: `Coding (${stats.byType.coding})`, icon: Code2 },
+                  { id: "mcq", label: `MCQ (${stats.byType.mcq})`, icon: ListChecks },
+                  { id: "theory", label: `Theory (${stats.byType.theory})`, icon: BookOpen },
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    className={type === tab.id ? "active" : ""}
+                    onClick={() => setType(tab.id)}
+                  >
+                    {tab.icon && <tab.icon size={14} />}
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+              <button className="cp-insight-btn">
+                <Users size={14} /> Company Insights
+              </button>
+            </div>
+
+            <div className="cp-toolbar">
+              <div className="cp-toolbar-left">
+                Sort by: Newest <ChevronDown size={14} />
+              </div>
+              <div className="cp-toolbar-right">
+                <button className="cp-view-btn active"><LayoutList size={14} /> List View</button>
+                <button className="cp-view-btn"><LayoutGrid size={14} /> Grid View</button>
+              </div>
+            </div>
+
+            <div className="cp-q-list">
+              {questions.length === 0 && (
+                <div className="cp-empty">
+                  No questions match these filters.
+                </div>
+              )}
+              {questions.map((item, index) => {
+                const meta = TYPE_META[item.type] || TYPE_META.theory;
+                const Icon = meta.icon;
+                const qId = item.id || item._id;
+                const solved = solvedIds.includes(String(qId));
+                const estTime = item.difficulty === "Easy" ? "5 min" : item.difficulty === "Hard" ? "8 min" : "35 min";
+
+                return (
+                  <button
+                    key={qId}
+                    type="button"
+                    className="cp-q-row"
+                    onClick={() => navigate(`/company-prep/${slug}/${qId}`)}
+                  >
+                    <span className="cp-q-index">{String(index + 1).padStart(2, "0")}</span>
+                    <span className={`cp-chip ${meta.className}`}>
+                      <Icon size={12} /> {meta.label}
+                    </span>
+                    <div className="cp-q-main">
+                      <h4>{item.title}</h4>
+                      <div className="cp-q-tags">
+                        <span>{item.type === "theory" ? "Backend" : "Design"}</span>
+                        <span>•</span>
+                        <span>{item.topic || "API Design"}</span>
+                      </div>
+                    </div>
+                    <div className="cp-q-diff">
+                      <strong className={`c-${item.difficulty?.toLowerCase()}`}>{item.difficulty}</strong>
+                      <span>{solved ? "100%" : "0%"} Solved</span>
+                    </div>
+                    <span className="cp-q-time">{estTime}</span>
+                    <button type="button" className="cp-bookmark" onClick={(e) => { e.stopPropagation(); }}><Bookmark size={16} /></button>
+                    <button type="button" className="cp-btn-start">
+                      Start <ArrowRight size={14} />
+                    </button>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="cp-bottom-banner">
+              <div className="cp-banner-left">
+                <span className="cp-banner-icon"><Trophy size={20} /></span>
+                <div>
+                  <h4>Consistent practice leads to success!</h4>
+                  <p>Solve more problems to improve your skills and increase your streak.</p>
+                </div>
+              </div>
+              <button className="cp-btn-mock">
+                <MonitorPlay size={16} /> Start Mock Interview
+              </button>
+            </div>
+          </main>
+        </div>
+
+        {/* Coming Soon Modal */}
+        {showComingSoon && (
+          <div className="cp-modal-overlay" onClick={() => setShowComingSoon(false)}>
+            <div className="cp-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="cp-modal-icon-circle">
+                <Rocket size={20} color="#a855f7" />
+              </div>
+              <h2>Coming Soon!</h2>
+              <p>We're working hard to bring you an amazing practice experience.</p>
+              <div className="cp-modal-pills">
+                <span><FileText size={12} /> Solutions</span>
+                <span><Target size={12} /> Mock Interviews</span>
+                <span><BarChart3 size={12} /> Analytics</span>
+              </div>
+              <button className="cp-modal-close" onClick={() => setShowComingSoon(false)}>Got it!</button>
+            </div>
           </div>
         )}
-        {questions.map((item, index) => {
-          const meta = TYPE_META[item.type] || TYPE_META.theory;
-          const Icon = meta.icon;
-          const qId = item.id || item._id;
-          const solved = solvedIds.includes(String(qId));
-          return (
-            <button
-              key={qId}
-              type="button"
-              className={`cp-q-row ${solved ? "solved" : ""}`}
-              onClick={() => navigate(`/company-prep/${slug}/${qId}`)}
-            >
-              <span className="cp-q-index">{String(index + 1).padStart(2, "0")}</span>
-              <span className={`cp-chip ${meta.className}`}>
-                <Icon size={12} /> {meta.label}
-              </span>
-              <div className="cp-q-main">
-                <h4>{item.title}</h4>
-                <span>{item.topic || "General"}</span>
-              </div>
-              <span className={`cp-diff ${item.difficulty?.toLowerCase()}`}>{item.difficulty}</span>
-              {solved ? (
-                <span className="cp-solved"><CheckCircle2 size={16} /> Solved</span>
-              ) : (
-                <span className="cp-unsolved"><Circle size={14} /> Start</span>
-              )}
-              <ChevronRight size={16} className="cp-chevron" />
-            </button>
-          );
-        })}
       </div>
 
       <p className="cp-json-hint">

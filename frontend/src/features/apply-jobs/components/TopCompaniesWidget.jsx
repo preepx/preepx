@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Building2, ChevronRight, Star, CheckCircle2 } from "lucide-react";
+import { Building2, ChevronRight, Star, CheckCircle2, Rocket, FileText, Target, BarChart3 } from "lucide-react";
 import { TOP_COMPANIES } from "@/data/companyPrep/companies";
 import { getCompanyBank } from "@/data/companyPrep/loadBank";
 import { computeBankStats, getSolvedIds } from "@/data/companyPrep/progress";
@@ -8,6 +8,7 @@ import { computeBankStats, getSolvedIds } from "@/data/companyPrep/progress";
 export default function TopCompaniesWidget() {
   const tcListRef = useRef(null);
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
   const companies = useMemo(() => TOP_COMPANIES.map((company) => {
     const bank = getCompanyBank(company.slug);
     const stats = computeBankStats(bank.questions, getSolvedIds(company.slug));
@@ -75,7 +76,7 @@ export default function TopCompaniesWidget() {
                 key={`${company.id}-${index}`} 
                 className="tc-item" 
                 style={{ '--border-gradient': `linear-gradient(180deg, ${company.pColor1}, ${company.pColor2})`, cursor: 'pointer' }}
-                onClick={() => navigate(`/company-prep/${company.slug}`)}
+                onClick={() => setShowModal(true)}
               >
                 <div className="tc-item-left">
                   <div className="tc-logo-box">
@@ -112,7 +113,7 @@ export default function TopCompaniesWidget() {
                 <button
                   type="button"
                   className="tc-explore-btn"
-                  onClick={(e) => { e.stopPropagation(); navigate(`/company-prep/${company.slug}`); }}
+                  onClick={(e) => { e.stopPropagation(); setShowModal(true); }}
                 >
                   Open
                 </button>
@@ -127,6 +128,51 @@ export default function TopCompaniesWidget() {
         </div>
 
       </div>
+
+      {/* Coming Soon Modal */}
+      {showModal && (
+        <div
+          style={{
+            position: "fixed", inset: 0, background: "rgba(0,0,0,0.65)",
+            backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)",
+            display: "grid", placeItems: "center", zIndex: 9999,
+            animation: "cp-fade-in 0.2s ease"
+          }}
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            style={{
+              background: "#0f1423", border: "1px solid rgba(168,85,247,0.3)",
+              borderRadius: 20, padding: "28px 28px", textAlign: "center",
+              maxWidth: 320, width: "90%",
+              boxShadow: "0 0 40px rgba(168,85,247,0.2), 0 16px 40px rgba(0,0,0,0.5)",
+              animation: "cp-modal-in 0.3s cubic-bezier(0.34,1.56,0.64,1)"
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(168,85,247,0.15)", border: "1px solid rgba(168,85,247,0.3)", display: "grid", placeItems: "center", margin: "0 auto 14px" }}>
+              <Rocket size={20} color="#a855f7" />
+            </div>
+            <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 8px", background: "linear-gradient(90deg,#c084fc,#818cf8)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>Coming Soon!</h2>
+            <p style={{ color: "#9ca3af", fontSize: 13, lineHeight: 1.5, margin: "0 0 16px" }}>We're working hard to bring you an amazing practice experience.</p>
+            <div style={{ display: "flex", justifyContent: "center", gap: 8, flexWrap: "wrap", marginBottom: 20 }}>
+              {[
+                { icon: FileText, label: "Solutions" },
+                { icon: Target, label: "Mock Interviews" },
+                { icon: BarChart3, label: "Analytics" }
+              ].map(({ icon: Icon, label }) => (
+                <span key={label} style={{ background: "rgba(168,85,247,0.1)", border: "1px solid rgba(168,85,247,0.25)", color: "#c084fc", padding: "4px 10px", borderRadius: 999, fontSize: 12, fontWeight: 500, display: "flex", alignItems: "center", gap: 5 }}>
+                  <Icon size={11} />{label}
+                </span>
+              ))}
+            </div>
+            <button
+              onClick={() => setShowModal(false)}
+              style={{ background: "linear-gradient(135deg,#a855f7,#7c3aed)", border: "none", color: "#fff", padding: "10px 32px", borderRadius: 10, fontSize: 14, fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 16px rgba(168,85,247,0.4)" }}
+            >Got it!</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
