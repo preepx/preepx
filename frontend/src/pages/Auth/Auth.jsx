@@ -48,16 +48,14 @@ function MaintenanceModal({ onClose }) {
           <X size={16} />
         </button>
 
-        {/* Animated Icon */}
-        <div className="maint-icon-wrap">
-          <div className="maint-icon-ring" />
-          <div className="maint-icon-ring maint-icon-ring--2" />
-          <div className="maint-icon-core">
-            <Wrench size={28} className="maint-wrench" />
-          </div>
-        </div>
+        {/* Logo */}
+        <img src="/preepx_logo.png" alt="PreepX" className="maint-logo" />
 
-        <div className="maint-badge">Scheduled Maintenance</div>
+        {/* Wrench badge */}
+        <div className="maint-badge">
+          <Wrench size={11} className="maint-wrench" />
+          Scheduled Maintenance
+        </div>
 
         <h2 className="maint-title">
           We'll be back on
@@ -65,30 +63,25 @@ function MaintenanceModal({ onClose }) {
         </h2>
 
         <p className="maint-desc">
-          Our servers are currently undergoing maintenance to bring you a faster
-          and more reliable experience. Everything will be fully live on
-          <strong> 1st September 2026</strong>.
+          Our servers are undergoing maintenance for a faster experience.
+          Everything will be fully live on <strong>1st September 2026</strong>.
         </p>
 
         <div className="maint-info-row">
           <div className="maint-info-card">
-            <Clock size={16} />
+            <Clock size={14} />
             <span>Back Online</span>
             <strong>Sept 1, 2026</strong>
           </div>
           <div className="maint-info-card">
-            <Bell size={16} />
+            <Bell size={14} />
             <span>Status</span>
             <strong>In Progress</strong>
           </div>
         </div>
 
-        <p className="maint-footer-note">
-          Thank you for your patience. PreepX will be better than ever! 💜
-        </p>
-
         <button className="maint-ok-btn" onClick={onClose}>
-          Got it!
+          Got it! 💜
         </button>
       </div>
     </div>
