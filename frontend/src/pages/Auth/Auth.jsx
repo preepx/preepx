@@ -59,7 +59,7 @@ function MaintenanceModal({ onClose }) {
 
         <h2 className="maint-title">
           We'll be back on
-          <span className="maint-date"> September 1<sup>st</sup></span> 🚀
+          <span className="maint-date"> September 1<sup>st</sup></span>
         </h2>
 
         <p className="maint-desc">
