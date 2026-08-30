@@ -7,11 +7,17 @@ import { triggerAnnouncement } from "@/utils/announcement";
 import {
   Mail, Lock, User, Eye, EyeOff,
   ArrowRight, Shield, Sparkles, KeyRound, CheckCircle,
-  Building, Globe, X, ArrowLeft, BarChart3, Briefcase
+  Building, Globe, X, ArrowLeft, BarChart3, Briefcase,
+  Wrench, Clock, Bell
 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 import RecruiterComingSoonModal from "@/components/landing/RecruiterComingSoonModal";
 import "@/styles/ModernAuth.css";
+
+// ─────────────────────────────────────────────────────────
+// 🔧 MAINTENANCE MODE — Set to false when backend is ready
+// ─────────────────────────────────────────────────────────
+const MAINTENANCE_MODE = true;
 
 const EMPTY_CANDIDATE_REG = {
   fullName: "",
@@ -31,9 +37,69 @@ const EMPTY_RECRUITER_REG = {
   confirmPassword: ""
 };
 
+// ─────────────────────────────────────────────────────────
+// Maintenance Modal Component
+// ─────────────────────────────────────────────────────────
+function MaintenanceModal({ onClose }) {
+  return (
+    <div className="maint-overlay" onClick={onClose}>
+      <div className="maint-modal" onClick={(e) => e.stopPropagation()}>
+        <button className="maint-close" onClick={onClose} aria-label="Close">
+          <X size={16} />
+        </button>
+
+        {/* Animated Icon */}
+        <div className="maint-icon-wrap">
+          <div className="maint-icon-ring" />
+          <div className="maint-icon-ring maint-icon-ring--2" />
+          <div className="maint-icon-core">
+            <Wrench size={28} className="maint-wrench" />
+          </div>
+        </div>
+
+        <div className="maint-badge">Scheduled Maintenance</div>
+
+        <h2 className="maint-title">
+          We'll be back on
+          <span className="maint-date"> September 1<sup>st</sup></span> 🚀
+        </h2>
+
+        <p className="maint-desc">
+          Our servers are currently undergoing maintenance to bring you a faster
+          and more reliable experience. Everything will be fully live on
+          <strong> 1st September 2026</strong>.
+        </p>
+
+        <div className="maint-info-row">
+          <div className="maint-info-card">
+            <Clock size={16} />
+            <span>Back Online</span>
+            <strong>Sept 1, 2026</strong>
+          </div>
+          <div className="maint-info-card">
+            <Bell size={16} />
+            <span>Status</span>
+            <strong>In Progress</strong>
+          </div>
+        </div>
+
+        <p className="maint-footer-note">
+          Thank you for your patience. PreepX will be better than ever! 💜
+        </p>
+
+        <button className="maint-ok-btn" onClick={onClose}>
+          Got it!
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function Auth({ defaultRole }) {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [showMaintenance, setShowMaintenance] = useState(false);
 
   // Role: candidate | recruiter
   const queryRole = new URLSearchParams(location.search).get("role");
@@ -130,6 +196,7 @@ function Auth({ defaultRole }) {
   };
 
   const handleGoogleLogin = () => {
+    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     const apiBase = API.defaults.baseURL;
     let url = `${apiBase.replace(/\/api$/, "")}/api/auth/google`;
     if (candidateReg.referralCode) {
@@ -184,6 +251,7 @@ function Auth({ defaultRole }) {
   // ══════════════════════════════════════════════════════
   const handleCandidateLogin = async (e) => {
     e.preventDefault();
+    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     setLoading(true);
     try {
       const res = await API.post("/users/login", {
@@ -204,6 +272,7 @@ function Auth({ defaultRole }) {
 
   const handleCandidateRegister = async (e) => {
     e.preventDefault();
+    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     if (candidateReg.password.length < 6) {
       showAppError("Password must be at least 6 characters.", "Password too short");
       return;
@@ -291,6 +360,7 @@ function Auth({ defaultRole }) {
   // ══════════════════════════════════════════════════════
   const handleRecruiterLogin = async (e) => {
     e.preventDefault();
+    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     setLoading(true);
     try {
       const { data } = await API.post("/recruiter/login", {
@@ -311,6 +381,7 @@ function Auth({ defaultRole }) {
 
   const handleRecruiterRegister = async (e) => {
     e.preventDefault();
+    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     if (recruiterReg.password !== recruiterReg.confirmPassword) {
       showAppError("Passwords do not match", "Error");
       return;
@@ -464,6 +535,8 @@ function Auth({ defaultRole }) {
   );
 
   return (
+    <>
+    {showMaintenance && <MaintenanceModal onClose={() => setShowMaintenance(false)} />}
     <div className="modern-auth-overlay" onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}>
       <div className="modern-auth-modal" onClick={(e) => e.stopPropagation()}>
         {/* Desktop Close Button */}
@@ -1133,6 +1206,7 @@ function Auth({ defaultRole }) {
         />
       )}
     </div>
+    </>
   );
 }
 
