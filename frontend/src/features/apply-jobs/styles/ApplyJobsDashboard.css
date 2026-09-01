@@ -2566,12 +2566,14 @@
     margin: 0 0 8px;
     background: linear-gradient(135deg, #a855f7, #3b82f6);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 [data-theme="light"] .ajd-eco-head h2 {
     background: linear-gradient(135deg, #7e22ce, #2563eb);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 

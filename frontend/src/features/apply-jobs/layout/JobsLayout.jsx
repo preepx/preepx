@@ -25,7 +25,7 @@ const NAV_APPS = [
 ];
 
 const NAV_ACCOUNT = [
-  { to: "/apply-jobs/profile", icon: User, label: "Profile" },
+  { to: "/profile", icon: User, label: "Profile" },
   { to: "/apply-jobs/settings", icon: Settings, label: "Settings" },
 ];
 
@@ -97,15 +97,17 @@ function JobsLayout({ children }) {
     <div className="jl-nav-group">
       {items.map(({ to, icon: Icon, label, badge, badgePill, badgeKey, exact }) => {
         const dynBadge = badgeKey === "applications" ? applicationBadge : 0;
+        const active = isActive(to, exact);
         return (
           <Link
             key={`${to}-${label}`}
             to={to}
-            className={`jl-nav-item ${isActive(to, exact) ? "active" : ""}`}
+            className={`jl-nav-item ${active ? "active" : ""}`}
             onClick={() => setMobileOpen(false)}
           >
-            <Icon size={17} />
-            <span>{label}</span>
+            {active && <span className="jl-nav-indicator" />}
+            <Icon size={20} style={{ flexShrink: 0 }} />
+            <span className="jl-nav-text">{label}</span>
             {badgePill && <span className="jl-badge-pill">New</span>}
             {dynBadge > 0 && <span className="jl-badge-circle">{dynBadge}</span>}
           </Link>
@@ -231,7 +233,7 @@ function JobsLayout({ children }) {
                           <h4>ATS & Resume</h4>
                           <Link to="/apply-jobs/resume">Resume Builder</Link>
                           <Link to="/ats-score">ATS Score Checker</Link>
-                          <Link to="/apply-jobs/profile">Optimize Profile</Link>
+                          <Link to="/profile">Optimize Profile</Link>
                         </div>
                         <div className="jl-mega-section">
                           <h4>Career Resources</h4>
@@ -292,7 +294,7 @@ function JobsLayout({ children }) {
               <Bell size={19} />
               {unreadCount > 0 && <span className="jl-tb-badge">{unreadCount > 9 ? "9+" : unreadCount}</span>}
             </button>
-            <Link to="/apply-jobs/profile" className="jl-user-chip">
+            <Link to="/profile" className="jl-user-chip">
               <img src={avatar} alt="avatar" />
               <div>
                 <strong>{user.fullName || "Candidate"}</strong>

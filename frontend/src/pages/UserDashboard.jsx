@@ -242,7 +242,7 @@ function UserDashboard() {
 
       {/* APPLY JOBS CTA */}
       <section className="ud-section">
-        <button type="button" className="ud-apply-banner" onClick={() => setShowComingSoon(true)}>
+        <button type="button" className="ud-apply-banner" onClick={() => navigate("/apply-jobs")}>
           <div className="ud-apply-banner-icon"><Briefcase size={28} /></div>
           <div className="ud-apply-banner-text">
             <h2>Apply Jobs</h2>
@@ -397,7 +397,8 @@ function UserDashboard() {
       </section>
 
       {/* Coming Soon Modal */}
-      {showComingSoon && (
+      {/* Coming Soon Modal - Commented out (redirected to /apply-jobs) */}
+      {/* {showComingSoon && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           background: 'rgba(0, 0, 0, 0.7)',
@@ -449,7 +450,7 @@ function UserDashboard() {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

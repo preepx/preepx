@@ -846,7 +846,7 @@ export default function ApplyJobsDashboard() {
                 {profileData?.profilePic ? <Check size={14} color="#10b981" /> : <Circle size={14} />} Photo
               </div>
             </div>
-            <button type="button" className="ajd-card-cta ajd-cta-solid ajd-cta-row" onClick={() => navigate("/apply-jobs/profile")}>
+            <button type="button" className="ajd-card-cta ajd-cta-solid ajd-cta-row" onClick={() => navigate("/profile")}>
               Improve profile <ArrowRight size={14} />
             </button>
           </div>
@@ -913,7 +913,7 @@ export default function ApplyJobsDashboard() {
                   <span className="ajd-bp-pct">{completion}%</span>
                 </div>
                 <div className="ajd-bp-bar"><div className="ajd-bp-fill" style={{ width: `${completion}%` }} /></div>
-                <Link to="/apply-jobs/profile" className="ajd-boost-btn">Boost profile →</Link>
+                <Link to="/profile" className="ajd-boost-btn">Boost profile →</Link>
               </div>
             </div>
           )}

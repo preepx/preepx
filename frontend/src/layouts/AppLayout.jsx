@@ -316,7 +316,7 @@ function AppLayout({ children }) {
                 <button
                   type="button"
                   className="topbar-apply-jobs-btn"
-                  onClick={() => setShowComingSoon(true)}
+                  onClick={() => navigate("/apply-jobs")}
                 >
                   <Briefcase size={15} />
                   <span>Apply Jobs</span>
@@ -372,8 +372,8 @@ function AppLayout({ children }) {
         setNotifs={setNotifs}
       />
 
-      {/* Coming Soon Modal */}
-      {showComingSoon && (
+      {/* Coming Soon Modal - Commented out (redirected to /apply-jobs) */}
+      {/* {showComingSoon && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           background: 'rgba(0, 0, 0, 0.7)',
@@ -425,7 +425,7 @@ function AppLayout({ children }) {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 }
