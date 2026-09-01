@@ -28,7 +28,8 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+    z-index: 25;
 }
 
 [data-theme="dark"] .ajd-hero-banner {
@@ -79,10 +80,190 @@
     padding: 8px 16px;
     flex: 2;
     min-width: 0;
+    position: relative;
 }
 
 .ajd-hbs-seg--mid {
     flex: 1.2;
+}
+
+.ajd-hbs-seg--dropdown {
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s ease;
+}
+
+.ajd-hbs-select-value {
+    font-size: 13px;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+[data-theme="dark"] .ajd-hbs-select-value {
+    color: #64748b;
+}
+
+.ajd-hbs-select-value.has-value {
+    color: #1e293b;
+    font-weight: 500;
+}
+
+[data-theme="dark"] .ajd-hbs-select-value.has-value {
+    color: #f1f5f9;
+}
+
+.ajd-hbs-chevron {
+    color: #94a3b8;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    flex-shrink: 0;
+}
+
+.ajd-hbs-chevron.is-rotated {
+    transform: rotate(180deg);
+}
+
+[data-theme="dark"] .ajd-hbs-chevron {
+    color: #64748b;
+}
+
+/* Custom Experience Dropdown Menu */
+.ajd-exp-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 200px;
+    width: max-content;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 6px;
+    z-index: 1000;
+    animation: ajdExpFadeIn 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="dark"] .ajd-exp-menu {
+    background: #0f172a;
+    border-color: #334155;
+    box-shadow: 0 16px 40px -5px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+@keyframes ajdExpFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.ajd-exp-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px 6px;
+    border-bottom: 1px solid #f1f5f9;
+    margin-bottom: 4px;
+}
+
+[data-theme="dark"] .ajd-exp-menu-header {
+    border-bottom-color: #1e293b;
+}
+
+.ajd-exp-menu-header span {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .ajd-exp-menu-header span {
+    color: #64748b;
+}
+
+.ajd-exp-clear-btn {
+    background: transparent;
+    border: none;
+    font-size: 11px;
+    font-weight: 600;
+    color: #6366f1;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+
+.ajd-exp-clear-btn:hover {
+    color: #4f46e5;
+    background: rgba(99, 102, 241, 0.08);
+}
+
+[data-theme="dark"] .ajd-exp-clear-btn {
+    color: #818cf8;
+}
+
+[data-theme="dark"] .ajd-exp-clear-btn:hover {
+    color: #a5b4fc;
+    background: rgba(129, 140, 248, 0.12);
+}
+
+.ajd-exp-menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.ajd-exp-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #334155;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+[data-theme="dark"] .ajd-exp-item {
+    color: #cbd5e1;
+}
+
+.ajd-exp-item:hover {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+[data-theme="dark"] .ajd-exp-item:hover {
+    background: #1e293b;
+    color: #f8fafc;
+}
+
+.ajd-exp-item.is-selected {
+    background: #eef2ff !important;
+    color: #4f46e5 !important;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .ajd-exp-item.is-selected {
+    background: rgba(99, 102, 241, 0.16) !important;
+    color: #a5b4fc !important;
+}
+
+.ajd-exp-check-icon {
+    color: #6366f1;
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .ajd-exp-check-icon {
+    color: #818cf8;
 }
 
 .ajd-hbs-icon {
@@ -559,10 +740,10 @@
     background: #fff;
     border: 1px solid #e4e8ef;
     border-radius: 12px;
-    padding: 16px 14px;
+    padding: 12px 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     min-width: 0;
     transition: box-shadow 0.2s, transform 0.2s;
 }
@@ -580,34 +761,39 @@
 }
 
 .ajd-stat-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 
+.ajd-stat-icon svg {
+    width: 16px !important;
+    height: 16px !important;
+}
+
 .ajd-stat-val {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     color: #0f172a;
     line-height: 1;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     white-space: nowrap;
 }
 
 .ajd-stat-lbl {
-    font-size: 12px;
+    font-size: 11.5px;
     color: #64748b;
     font-weight: 500;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     white-space: nowrap;
 }
 
 .ajd-stat-sub {
-    font-size: 11px;
+    font-size: 10.5px;
     font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
@@ -1729,8 +1915,13 @@
 }
 
 @keyframes ajd-pulse {
-    70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    70% {
+        box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
 }
 
 .ajd-hb-tag {
@@ -1808,8 +1999,13 @@
 }
 
 @keyframes ajd-ticker {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
 }
 
 .ajd-cats {
@@ -1835,6 +2031,12 @@
     cursor: pointer;
     font-family: inherit;
     transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.ajd-cat svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 
 .ajd-cat:hover {
@@ -1950,7 +2152,9 @@
 }
 
 @keyframes ajd-spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .ajd-empty {
@@ -2323,9 +2527,11 @@
     .ajd-insights {
         grid-template-columns: 1fr;
     }
+
     .ajd-event {
         grid-template-columns: 1fr;
     }
+
     .ajd-hero-profile-hint {
         display: none;
     }
@@ -2433,7 +2639,7 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 16px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .ajd-eco-card h3 {
@@ -2486,183 +2692,758 @@
 }
 
 @keyframes ajdPulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.4; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 /* =========================================================
-   MOBILE OVERRIDES FOR NEW DESIGN & JOB ROWS
+   COMPREHENSIVE MOBILE RESPONSIVE OVERRIDES (<= 768px)
+   Keeps desktop/web view 100% untouched while making mobile
+   sleek, compact, and perfectly fitted without overflow.
    ========================================================= */
 @media (max-width: 1024px) {
     .ajd-hn-art {
         display: none;
     }
+
     .ajd-hn-left {
         max-width: 100%;
     }
+
     .ajd-blogs-sec {
         overflow-x: auto;
     }
 }
 
 @media (max-width: 768px) {
-    /* Hero new design overrides */
-    .ajd-hero-new {
-        padding: 24px 20px 220px 20px;
-    }
-    .ajd-hn-title {
-        font-size: 24px;
-    }
-    .ajd-hn-search {
-        flex-direction: column;
-        bottom: 15px;
-        left: 15px;
-        right: 15px;
-        height: auto;
-        padding: 10px;
-        gap: 8px;
-        border-radius: 12px;
-    }
-    .ajd-hns-seg {
+
+    /* Main Layout */
+    .ajd-page-wrapper.ajd-premium {
+        gap: 14px;
         width: 100%;
-        padding: 10px;
-        height: auto;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        max-width: 100%;
+        overflow-x: hidden;
     }
-    .ajd-hns-seg:last-of-type {
-        border-bottom: none;
+
+    .ajd-root {
+        grid-template-columns: 1fr;
+        gap: 14px;
     }
-    .ajd-hns-div {
+
+    .ajd-left-col {
+        gap: 14px;
+        min-width: 0;
+    }
+
+    /* Hero Banner */
+    .ajd-hero-banner {
+        padding: 18px 14px;
+        border-radius: 14px;
+        flex-direction: column;
+        align-items: stretch;
+        overflow: visible;
+        z-index: 25;
+    }
+
+    .ajd-hero-glow {
+        width: 240px;
+        height: 240px;
+    }
+
+    .ajd-hb-left {
+        max-width: 100%;
+        padding-right: 0;
+        width: 100%;
+    }
+
+    .ajd-hb-right {
         display: none;
     }
-    .ajd-hns-btn {
-        width: 100%;
-        margin-left: 0;
-        margin-top: 5px;
+
+    .ajd-live-chip {
+        font-size: 10.5px;
+        padding: 3px 9px;
+        margin-bottom: 8px;
+        max-width: 100%;
+        line-height: 1.3;
     }
 
-    /* Blogs mobile scroll */
-    .ajd-blogs-scroll {
-        flex-direction: column;
-        overflow-x: visible;
-    }
-    .ajd-blog-card {
-        width: 100%;
-        min-width: unset;
+    .ajd-hb-title {
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 1.25;
+        margin-bottom: 5px;
     }
 
-    /* Fix: Job rows on Dashboard */
-    .ajd-job-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-    .ajd-jright {
-        width: 100%;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        margin-right: 0;
-        flex-wrap: wrap;
-    }
-    .ajd-jactions {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        margin-top: 8px;
-        gap: 10px;
-    }
-    .ajd-apply-btn {
-        flex-grow: 1;
-        text-align: center;
-        padding: 10px;
+    .ajd-hb-sub {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-bottom: 12px;
     }
 
-    /* Fix: Old Hero Search Box (Used in Job Board) */
+    /* Hero Search Bar */
     .ajd-hb-search {
         flex-direction: column;
-        padding: 12px;
-        gap: 8px;
+        padding: 8px;
+        gap: 4px;
         border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
     }
+
     .ajd-hbs-seg {
         width: 100%;
         padding: 8px 10px;
         border-bottom: 1px solid #e2e8f0;
+        gap: 8px;
     }
+
     [data-theme="dark"] .ajd-hbs-seg {
-        border-color: #334155;
+        border-bottom-color: #334155;
     }
+
     .ajd-hbs-seg:last-of-type {
         border-bottom: none;
     }
+
     .ajd-hbs-div {
         display: none;
     }
+
+    .ajd-hbs-seg input,
+    .ajd-hbs-seg select,
+    .ajd-hbs-select-value {
+        font-size: 13.5px;
+    }
+
+    .ajd-exp-menu {
+        left: 0;
+        right: 0;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        top: calc(100% + 4px);
+    }
+
     .ajd-hbs-btn {
         width: 100%;
-        margin-left: 0;
-        margin-top: 4px;
-        padding: 12px;
+        margin: 4px 0 0 0;
+        padding: 10px;
+        font-size: 13.5px;
+        border-radius: 8px;
     }
-}
 
-/* =========================================================
-   MOBILE OVERRIDES FOR NEW DESIGN
-   ========================================================= */
-@media (max-width: 1024px) {
-    .ajd-hn-art {
+    .ajd-hb-tags {
+        gap: 6px;
+        margin-top: 12px;
+        align-items: center;
+    }
+
+    .ajd-hb-tags span {
+        font-size: 11px;
+    }
+
+    .ajd-hb-tag {
+        font-size: 10.5px;
+        padding: 3px 8px;
+    }
+
+    /* Live Ticker */
+    .ajd-ticker {
+        padding: 6px 8px;
+        gap: 8px;
+        border-radius: 10px;
+    }
+
+    .ajd-ticker-label {
+        padding: 4px 7px;
+        font-size: 10px;
+        border-radius: 6px;
+        gap: 4px;
+    }
+
+    .ajd-ticker-label svg {
+        width: 11px;
+        height: 11px;
+    }
+
+    .ajd-ticker-item {
+        font-size: 11.5px;
+    }
+
+    .ajd-ticker-inner {
+        gap: 20px;
+    }
+
+    /* Category Filter Pills */
+    .ajd-cats {
+        gap: 7px;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .ajd-cats::-webkit-scrollbar {
         display: none;
     }
-    .ajd-hn-left {
-        max-width: 100%;
-    }
-    .ajd-blogs-sec {
-        overflow-x: auto;
-    }
-}
 
-@media (max-width: 768px) {
-    .ajd-hero-new {
-        padding: 24px 20px 220px 20px;
+    .ajd-cat {
+        padding: 6px 11px;
+        font-size: 11.5px;
+        gap: 5px;
+        border-radius: 999px;
+        flex-shrink: 0;
     }
-    .ajd-hn-title {
-        font-size: 24px;
+
+    .ajd-cat svg {
+        width: 13px;
+        height: 13px;
     }
-    .ajd-hn-search {
-        flex-direction: column;
-        bottom: 15px;
-        left: 15px;
-        right: 15px;
-        height: auto;
-        padding: 10px;
+
+    /* Stats Cards Grid (2x2 on mobile) */
+    .ajd-stats-row {
+        grid-template-columns: repeat(2, 1fr);
         gap: 8px;
+    }
+
+    .ajd-stat-card {
+        padding: 11px 9px;
+        gap: 8px;
+        border-radius: 10px;
+    }
+
+    .ajd-stat-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+    }
+
+    .ajd-stat-icon svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    .ajd-stat-val {
+        font-size: 17px;
+        margin-bottom: 2px;
+    }
+
+    .ajd-stat-lbl {
+        font-size: 11px;
+        margin-bottom: 2px;
+    }
+
+    .ajd-stat-sub {
+        font-size: 10px;
+    }
+
+    /* Featured Openings Card */
+    .ajd-card {
+        padding: 16px 12px;
         border-radius: 12px;
     }
-    .ajd-hns-seg {
+
+    .ajd-card-head {
+        margin-bottom: 12px;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .ajd-card-head h2 {
+        font-size: 14.5px;
+    }
+
+    .ajd-card-kicker {
+        font-size: 11px;
+    }
+
+    .ajd-view-link {
+        font-size: 11.5px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    /* Clean Mobile Job Row Layout */
+    .ajd-job-row {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        grid-template-areas:
+            "logo info"
+            "right right";
+        gap: 8px 10px;
+        padding: 13px 0;
+        border-bottom: 1px solid #f1f5f9;
+        align-items: start;
+    }
+
+    [data-theme="dark"] .ajd-job-row {
+        border-bottom-color: #1e293b !important;
+    }
+
+    .ajd-jlogo {
+        grid-area: logo;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        padding: 4px;
+    }
+
+    .ajd-jinfo {
+        grid-area: info;
+        min-width: 0;
+    }
+
+    .ajd-jinfo h4 {
+        font-size: 13.5px;
+        line-height: 1.3;
+        margin: 0 0 3px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+
+    .ajd-pill-hot,
+    .ajd-pill-match {
+        font-size: 9px;
+        padding: 1px 5px;
+    }
+
+    .ajd-jinfo p {
+        font-size: 11.5px;
+        margin: 0 0 6px;
+        line-height: 1.3;
+    }
+
+    .ajd-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .ajd-tag {
+        font-size: 10px;
+        padding: 2px 7px;
+        border-radius: 6px;
+    }
+
+    .ajd-jright {
+        grid-area: right;
         width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 4px;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-right: 0;
+    }
+
+    .ajd-jright strong {
+        font-size: 12.5px;
+        color: #0f172a;
+    }
+
+    [data-theme="dark"] .ajd-jright strong {
+        color: #f1f5f9;
+    }
+
+    .ajd-jright span {
+        font-size: 10.5px;
+        color: #94a3b8;
+    }
+
+    .ajd-jactions {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .ajd-icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+
+    .ajd-apply-btn {
+        flex: 1;
+        height: 36px;
+        padding: 0 12px;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ajd-view-all-wrap {
+        padding-top: 12px;
+        margin-top: 10px;
+    }
+
+    .ajd-view-all-btn {
+        font-size: 12.5px;
+    }
+
+    /* Hiring Events & Walk-ins */
+    .ajd-events {
+        gap: 10px;
+    }
+
+    .ajd-event {
+        display: grid;
+        grid-template-columns: 66px 1fr;
+        grid-template-areas:
+            "date body"
+            "cta  cta";
+        gap: 8px 10px;
         padding: 10px;
-        height: auto;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
     }
-    .ajd-hns-seg:last-of-type {
-        border-bottom: none;
+
+    .ajd-event-date {
+        grid-area: date;
+        padding: 6px 4px;
+        border-radius: 8px;
     }
-    .ajd-hns-div {
-        display: none;
+
+    .ajd-event-date strong {
+        font-size: 12px;
     }
-    .ajd-hns-btn {
+
+    .ajd-event-date span {
+        font-size: 8.5px;
+    }
+
+    .ajd-event-body {
+        grid-area: body;
+        min-width: 0;
+    }
+
+    .ajd-event-body h3 {
+        font-size: 12.5px;
+        line-height: 1.3;
+        margin: 0 0 3px;
+    }
+
+    .ajd-event-body p {
+        font-size: 11px;
+        margin: 0 0 5px;
+    }
+
+    .ajd-event-meta {
+        flex-wrap: wrap;
+        gap: 6px 10px;
+        font-size: 10px;
+    }
+
+    .ajd-event-cta {
+        grid-area: cta;
         width: 100%;
-        margin-left: 0;
-        margin-top: 5px;
+        padding: 8px;
+        font-size: 11.5px;
+        border-radius: 8px;
+        text-align: center;
     }
+
+    /* Salary Pulse & Insights */
+    .ajd-insights {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .ajd-insight {
+        padding: 14px 12px;
+        border-radius: 10px;
+    }
+
+    .ajd-insight h3 {
+        font-size: 12.5px;
+    }
+
+    .ajd-insight p {
+        font-size: 11px;
+        margin: 2px 0 8px;
+    }
+
+    .ajd-insight strong {
+        font-size: 22px;
+    }
+
+    .ajd-skill-row {
+        gap: 6px;
+    }
+
+    .ajd-skill-row button {
+        padding: 4px 8px;
+        font-size: 10.5px;
+    }
+
+    /* Right Sidebar in mobile flow */
+    .ajd-right-sidebar {
+        gap: 12px;
+    }
+
+    .ajd-rcard {
+        padding: 14px 12px;
+        border-radius: 10px;
+    }
+
+    .ajd-sec-title-row {
+        margin-bottom: 12px;
+    }
+
+    .ajd-chart-row {
+        gap: 14px;
+        align-items: center;
+    }
+
+    .ajd-donut-wrapper {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+    }
+
+    .ajd-donut-inner {
+        width: 60px;
+        height: 60px;
+    }
+
+    .ajd-donut-inner strong {
+        font-size: 17px;
+    }
+
+    .ajd-legend {
+        gap: 5px;
+    }
+
+    .ajd-legend-item {
+        font-size: 10.5px;
+    }
+
+    /* Views */
+    .ajd-views {
+        padding: 12px 10px;
+        gap: 10px;
+    }
+
+    .ajd-views-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .ajd-views strong {
+        font-size: 17px;
+    }
+
+    .ajd-views p {
+        font-size: 11px;
+    }
+
+    /* Profile Improvement Card */
+    .ajd-profile-top {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .ajd-profile-text h2 {
+        font-size: 13.5px;
+    }
+
+    .ajd-profile-text p {
+        font-size: 10.5px;
+    }
+
+    .ajd-circle-progress {
+        width: 44px;
+        height: 44px;
+    }
+
+    .ajd-circle-inner {
+        width: 36px;
+        height: 36px;
+        font-size: 11px;
+    }
+
+    .ajd-checklist {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 8px;
+        margin-bottom: 12px;
+    }
+
+    .ajd-check-item {
+        font-size: 10.5px;
+    }
+
+    /* Recommended Jobs */
+    .ajd-rec-item {
+        gap: 8px;
+        padding: 8px 0;
+    }
+
+    .ajd-rec-logo {
+        width: 34px;
+        height: 34px;
+    }
+
+    .ajd-rec-info h4 {
+        font-size: 12px;
+    }
+
+    .ajd-rec-info p {
+        font-size: 10px;
+    }
+
+    .ajd-rec-info strong {
+        font-size: 11px;
+    }
+
+    .ajd-see-more {
+        font-size: 11.5px;
+        padding-top: 8px;
+        margin-top: 8px;
+    }
+
+    /* Boost Card */
+    .ajd-boost-card {
+        padding: 14px;
+        border-radius: 10px;
+    }
+
+    .ajd-boost-text h3 {
+        font-size: 13px;
+    }
+
+    .ajd-boost-text p {
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+
+    .ajd-boost-btn {
+        width: 100%;
+        text-align: center;
+        padding: 8px;
+        font-size: 11.5px;
+    }
+
+    /* Ecosystem */
+    .ajd-ecosystem {
+        padding: 18px 14px;
+        border-radius: 12px;
+        margin-bottom: 16px;
+    }
+
+    .ajd-eco-head {
+        margin-bottom: 16px;
+    }
+
+    .ajd-eco-head h2 {
+        font-size: 17px;
+    }
+
+    .ajd-eco-head p {
+        font-size: 12px;
+    }
+
+    .ajd-eco-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .ajd-eco-card {
+        padding: 14px;
+        border-radius: 10px;
+    }
+
+    .ajd-eco-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    .ajd-eco-card h3 {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .ajd-eco-card p {
+        font-size: 11.5px;
+        margin-bottom: 12px;
+    }
+
+    /* Modal */
+    .ajd-modal {
+        max-width: 92vw;
+        padding: 18px 14px;
+        border-radius: 12px;
+    }
+
+    .ajd-modal input,
+    .ajd-modal select {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    /* Blogs scroll */
     .ajd-blogs-scroll {
         flex-direction: column;
         overflow-x: visible;
     }
+
     .ajd-blog-card {
         width: 100%;
         min-width: unset;
+    }
+}
+
+/* Extra small mobile devices (<= 480px) */
+@media (max-width: 480px) {
+    .ajd-hb-title {
+        font-size: 18px;
+    }
+
+    .ajd-stat-card {
+        padding: 9px 8px;
+        gap: 6px;
+    }
+
+    .ajd-stat-val {
+        font-size: 16px;
+    }
+
+    .ajd-stat-lbl {
+        font-size: 10.5px;
+    }
+
+    .ajd-stat-sub {
+        font-size: 9.5px;
+    }
+
+    .ajd-card-head h2 {
+        font-size: 13.5px;
+    }
+
+    .ajd-chart-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .ajd-legend {
+        width: 100%;
     }
 }

@@ -570,12 +570,15 @@
 .bj-modal {
   background: #fff !important;
   color: #0f172a;
-  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
-  scrollbar-width: none;    /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none;
+  /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;
+  /* Hide scrollbar for Firefox */
 }
 
 .bj-modal::-webkit-scrollbar {
-  display: none;            /* Hide scrollbar for Chrome, Safari and Opera */
+  display: none;
+  /* Hide scrollbar for Chrome, Safari and Opera */
 }
 
 .bj-modal-close {
@@ -932,6 +935,7 @@
   .bj-main {
     grid-template-columns: 1fr;
   }
+
   .bj-right-col {
     position: static;
   }
@@ -943,34 +947,42 @@
     padding: 12px;
     gap: 8px;
   }
+
   .bj-sb-seg {
     padding: 8px 12px;
   }
+
   .bj-divider {
     display: none;
   }
+
   .bj-search-btn {
     padding: 12px;
     width: 100%;
     margin-left: 0;
   }
+
   .bj-card {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 12px;
     padding: 16px;
   }
+
   .bjc-left-col {
     width: 48px;
   }
+
   .bjc-logo {
     width: 48px;
     height: 48px;
   }
+
   .bjc-mid-col {
     width: calc(100% - 60px);
     flex: none;
   }
+
   .bjc-right-col {
     width: 100%;
     flex-direction: row;
@@ -980,15 +992,18 @@
     padding-top: 16px;
     border-top: 1px solid #e2e8f0;
   }
+
   [data-theme="dark"] .bjc-right-col {
     border-top-color: #334155;
   }
+
   .bjc-footer-meta {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     gap: 12px;
   }
+
   .bjc-pills {
     flex-wrap: wrap;
   }
