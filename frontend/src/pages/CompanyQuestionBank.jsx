@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   ArrowLeft, Search, Code2, ListChecks, BookOpen, CheckCircle2,
-  Circle, Star, Filter, ChevronRight, Lock, Bookmark, ArrowRight, LayoutGrid, LayoutList, Trophy, ChevronDown, MonitorPlay, Users, Rocket, FileText, Target, BarChart3
+  Star, Lock, Bookmark, ArrowRight, LayoutGrid, LayoutList, Trophy, ChevronDown, MonitorPlay, Users
 } from "lucide-react";
 import { getCompanyBySlug } from "@/data/companyPrep/companies";
 import { computeBankStats, getSolvedIds } from "@/data/companyPrep/progress";
@@ -236,11 +236,13 @@ export default function CompanyQuestionBank() {
                 const estTime = item.difficulty === "Easy" ? "5 min" : item.difficulty === "Hard" ? "8 min" : "35 min";
 
                 return (
-                  <button
+                  <div
                     key={qId}
-                    type="button"
+                    role="button"
+                    tabIndex={0}
                     className="cp-q-row"
                     onClick={() => navigate(`/company-prep/${slug}/${qId}`)}
+                    onKeyDown={(e) => e.key === "Enter" && navigate(`/company-prep/${slug}/${qId}`)}
                   >
                     <span className="cp-q-index">{String(index + 1).padStart(2, "0")}</span>
                     <span className={`cp-chip ${meta.className}`}>
@@ -260,12 +262,13 @@ export default function CompanyQuestionBank() {
                     </div>
                     <span className="cp-q-time">{estTime}</span>
                     <button type="button" className="cp-bookmark" onClick={(e) => { e.stopPropagation(); }}><Bookmark size={16} /></button>
-                    <button type="button" className="cp-btn-start">
+                    <button type="button" className="cp-btn-start" onClick={(e) => { e.stopPropagation(); navigate(`/company-prep/${slug}/${qId}`); }}>
                       Start <ArrowRight size={14} />
                     </button>
-                  </button>
+                  </div>
                 );
               })}
+
             </div>
 
             <div className="cp-bottom-banner">
@@ -283,24 +286,6 @@ export default function CompanyQuestionBank() {
           </main>
         </div>
 
-        {/* Coming Soon Modal */}
-        {showComingSoon && (
-          <div className="cp-modal-overlay" onClick={() => setShowComingSoon(false)}>
-            <div className="cp-modal" onClick={(e) => e.stopPropagation()}>
-              <div className="cp-modal-icon-circle">
-                <Rocket size={20} color="#a855f7" />
-              </div>
-              <h2>Coming Soon!</h2>
-              <p>We're working hard to bring you an amazing practice experience.</p>
-              <div className="cp-modal-pills">
-                <span><FileText size={12} /> Solutions</span>
-                <span><Target size={12} /> Mock Interviews</span>
-                <span><BarChart3 size={12} /> Analytics</span>
-              </div>
-              <button className="cp-modal-close" onClick={() => setShowComingSoon(false)}>Got it!</button>
-            </div>
-          </div>
-        )}
       </div>
 
       <p className="cp-json-hint">
