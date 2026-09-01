@@ -484,7 +484,7 @@ export default function JobBoard() {
                 title={filter === "match" ? "No strong matches yet" : "No open jobs right now"}
                 description={filter === "match" ? "Add skills on Profile or upload your resume to improve matching." : "Check back soon — recruiters are posting new roles."}
                 actionLabel={filter === "match" ? "Complete Profile" : null}
-                actionTo={filter === "match" ? "/apply-jobs/profile" : null}
+                actionTo={filter === "match" ? "/profile" : null}
               />
             ) : (
               displayedJobs.map((job) => (
@@ -581,7 +581,7 @@ export default function JobBoard() {
                 {calcCompletion(profileData)}%
               </div>
             </div>
-            <Link to="/apply-jobs/profile" className="bjp-btn" style={{ display: 'inline-block', textAlign: 'center', textDecoration: 'none' }}>Complete Profile &rarr;</Link>
+            <Link to="/profile" className="bjp-btn" style={{ display: 'inline-block', textAlign: 'center', textDecoration: 'none' }}>Complete Profile &rarr;</Link>
           </div>
 
           {/* Widget 2: Recommended */}

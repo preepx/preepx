@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Briefcase, Search, MapPin, Building2, Bookmark, CheckCircle, Clock,
   Video, FileText, BellRing, ArrowRight, BadgeCheck, X, Check, Circle,
   Loader2, Sparkles, Wifi, GraduationCap, Home, Layers, TrendingUp,
-  CalendarDays, Flame, Zap, Eye, Star, Bell, Code2, BrainCircuit, Target
+  CalendarDays, Flame, Zap, Eye, Star, Bell, Code2, BrainCircuit, Target,
+  ChevronDown
 } from "lucide-react";
 import { getApplicationStats, getPublishedJobs, applyToJob, toggleSaveJob, getSavedJobs } from "../services/candidateJobsAPI";
 import Loader from "@/components/Loader";
@@ -77,6 +78,14 @@ const CATEGORIES = [
   { label: "Work from home", q: "work from home", icon: Home },
   { label: "Product", q: "product", icon: Layers },
   { label: "Data / AI", q: "data", icon: TrendingUp },
+];
+
+const EXP_OPTIONS = [
+  { value: "", label: "Experience" },
+  { value: "0", label: "Fresher" },
+  { value: "1", label: "1–3 years" },
+  { value: "3", label: "3–5 years" },
+  { value: "5", label: "5+ years" },
 ];
 
 const EVENTS = [
@@ -217,6 +226,27 @@ export default function ApplyJobsDashboard() {
   const [alertFreq, setAlertFreq] = useState("daily");
   const [boostHidden, setBoostHidden] = useState(false);
   const [livePulse, setLivePulse] = useState(0);
+  const [expOpen, setExpOpen] = useState(false);
+  const expRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (expRef.current && !expRef.current.contains(e.target)) {
+        setExpOpen(false);
+      }
+    };
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") setExpOpen(false);
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const [search, setSearch] = useState("");
   const [experience, setExperience] = useState("");
@@ -444,14 +474,64 @@ export default function ApplyJobsDashboard() {
               />
             </div>
             <div className="ajd-hbs-div" />
-            <div className="ajd-hbs-seg ajd-hbs-seg--mid">
-              <select value={experience} onChange={(e) => setExperience(e.target.value)}>
-                <option value="">Experience</option>
-                <option value="0">Fresher</option>
-                <option value="1">1–3 years</option>
-                <option value="3">3–5 years</option>
-                <option value="5">5+ years</option>
-              </select>
+            <div
+              className={`ajd-hbs-seg ajd-hbs-seg--mid ajd-hbs-seg--dropdown ${expOpen ? "is-open" : ""}`}
+              ref={expRef}
+              onClick={() => setExpOpen((prev) => !prev)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setExpOpen((prev) => !prev);
+                }
+              }}
+            >
+              <Briefcase size={16} className="ajd-hbs-icon" />
+              <span className={`ajd-hbs-select-value ${experience !== "" ? "has-value" : ""}`}>
+                {EXP_OPTIONS.find((o) => o.value === experience)?.label || "Experience"}
+              </span>
+              <ChevronDown size={14} className={`ajd-hbs-chevron ${expOpen ? "is-rotated" : ""}`} />
+
+              {expOpen && (
+                <div className="ajd-exp-menu" onClick={(e) => e.stopPropagation()}>
+                  <div className="ajd-exp-menu-header">
+                    <span>Experience Level</span>
+                    {experience !== "" && (
+                      <button
+                        type="button"
+                        className="ajd-exp-clear-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setExperience("");
+                          setExpOpen(false);
+                        }}
+                      >
+                        Reset
+                      </button>
+                    )}
+                  </div>
+                  <div className="ajd-exp-menu-list">
+                    {EXP_OPTIONS.map((opt) => {
+                      const isSelected = experience === opt.value;
+                      return (
+                        <div
+                          key={opt.value}
+                          className={`ajd-exp-item ${isSelected ? "is-selected" : ""}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setExperience(opt.value);
+                            setExpOpen(false);
+                          }}
+                        >
+                          <span>{opt.label === "Experience" ? "All Experience" : opt.label}</span>
+                          {isSelected && <Check size={14} className="ajd-exp-check-icon" />}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
             <div className="ajd-hbs-div" />
             <div className="ajd-hbs-seg">
@@ -535,7 +615,7 @@ export default function ApplyJobsDashboard() {
             ].map(({ icon: Icon, color, bg, label, val, sub, to }) => (
               <button type="button" key={label} className="ajd-stat-card" onClick={() => navigate(to)}>
                 <div className="ajd-stat-icon" style={{ background: bg }}>
-                  <Icon size={22} color={color} />
+                  <Icon size={16} color={color} />
                 </div>
                 <div>
                   <div className="ajd-stat-val">{val}</div>
@@ -766,7 +846,7 @@ export default function ApplyJobsDashboard() {
                 {profileData?.profilePic ? <Check size={14} color="#10b981" /> : <Circle size={14} />} Photo
               </div>
             </div>
-            <button type="button" className="ajd-card-cta ajd-cta-solid ajd-cta-row" onClick={() => navigate("/apply-jobs/profile")}>
+            <button type="button" className="ajd-card-cta ajd-cta-solid ajd-cta-row" onClick={() => navigate("/profile")}>
               Improve profile <ArrowRight size={14} />
             </button>
           </div>
@@ -833,7 +913,7 @@ export default function ApplyJobsDashboard() {
                   <span className="ajd-bp-pct">{completion}%</span>
                 </div>
                 <div className="ajd-bp-bar"><div className="ajd-bp-fill" style={{ width: `${completion}%` }} /></div>
-                <Link to="/apply-jobs/profile" className="ajd-boost-btn">Boost profile →</Link>
+                <Link to="/profile" className="ajd-boost-btn">Boost profile →</Link>
               </div>
             </div>
           )}

@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
 const GuestRoute = lazy(() => import("./components/GuestRoute"));
@@ -207,7 +207,7 @@ function AppContent() {
           <Route path="/apply-jobs/browse" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobBoard /></ProtectedRoute>} />
           <Route path="/apply-jobs/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsMyApplications /></ProtectedRoute>} />
           <Route path="/apply-jobs/assessments" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsAssessments /></ProtectedRoute>} />
-          <Route path="/apply-jobs/profile" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsProfile /></ProtectedRoute>} />
+          <Route path="/apply-jobs/profile" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><Navigate to="/profile" replace /></ProtectedRoute>} />
           <Route path="/apply-jobs/saved" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><SavedJobs /></ProtectedRoute>} />
           <Route path="/apply-jobs/settings" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><Settings /></ProtectedRoute>} />
           <Route path="/my-applications" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsMyApplications /></ProtectedRoute>} />
@@ -228,7 +228,7 @@ function AppContent() {
           <Route path="/btech-notes/:id" element={<ProtectedRoute><BtechNoteDetail /></ProtectedRoute>} />
           <Route path="/btech-notes/:id/pdf" element={<ProtectedRoute><BtechPdfViewer /></ProtectedRoute>} />
           <Route path="/feedback" element={<ProtectedRoute><FeedbackPage /></ProtectedRoute>} />
-          <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute allowedRoles={["candidate", undefined]}><JobsProfile /></ProtectedRoute>} />
           <Route path="/objective-exam" element={<ProtectedRoute><ObjectiveExamPage /></ProtectedRoute>} />
           <Route path="/wallet" element={<ProtectedRoute><WalletPage /></ProtectedRoute>} />
           <Route path="/objective-exam/take" element={<ProtectedRoute><ObjectiveExam /></ProtectedRoute>} />
