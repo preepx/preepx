@@ -375,9 +375,6 @@ function AppLayout({ children }) {
         notifs={notifs}
         setNotifs={setNotifs}
       />
-<<<<<<< HEAD
-=======
-
       {/* Coming Soon Modal - Commented out (redirected to /apply-jobs) */}
       {/* {showComingSoon && (
         <div style={{
@@ -432,7 +429,6 @@ function AppLayout({ children }) {
           </div>
         </div>
       )} */}
->>>>>>> main
     </>
 
   );
