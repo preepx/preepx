@@ -8,16 +8,16 @@ import {
   Mail, Lock, User, Eye, EyeOff,
   ArrowRight, Shield, Sparkles, KeyRound, CheckCircle,
   Building, Globe, X, ArrowLeft, BarChart3, Briefcase,
-  Wrench, Clock, Bell
+  // Wrench, Clock, Bell
 } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 import RecruiterComingSoonModal from "@/components/landing/RecruiterComingSoonModal";
 import "@/styles/ModernAuth.css";
 
 // ─────────────────────────────────────────────────────────
-// 🔧 MAINTENANCE MODE — Set to false when backend is ready
+// 🔧 MAINTENANCE MODE — Set to false / commented out
 // ─────────────────────────────────────────────────────────
-const MAINTENANCE_MODE = true;
+// const MAINTENANCE_MODE = true;
 
 const EMPTY_CANDIDATE_REG = {
   fullName: "",
@@ -38,61 +38,61 @@ const EMPTY_RECRUITER_REG = {
 };
 
 // ─────────────────────────────────────────────────────────
-// Maintenance Modal Component
+// Maintenance Modal Component (Commented out)
 // ─────────────────────────────────────────────────────────
-function MaintenanceModal({ onClose }) {
-  return (
-    <div className="maint-overlay" onClick={onClose}>
-      <div className="maint-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="maint-close" onClick={onClose} aria-label="Close">
-          <X size={16} />
-        </button>
-
-        {/* Logo */}
-        <img src="/preepx_logo.png" alt="PreepX" className="maint-logo" />
-
-        {/* Wrench badge */}
-        <div className="maint-badge">
-          <Wrench size={11} className="maint-wrench" />
-          Scheduled Maintenance
-        </div>
-
-        <h2 className="maint-title">
-          We'll be back on
-          <span className="maint-date"> September 1<sup>st</sup></span>
-        </h2>
-
-        <p className="maint-desc">
-          Our servers are undergoing maintenance for a faster experience.
-          Everything will be fully live on <strong>1st September 2026</strong>.
-        </p>
-
-        <div className="maint-info-row">
-          <div className="maint-info-card">
-            <Clock size={14} />
-            <span>Back Online</span>
-            <strong>Sept 1, 2026</strong>
-          </div>
-          <div className="maint-info-card">
-            <Bell size={14} />
-            <span>Status</span>
-            <strong>In Progress</strong>
-          </div>
-        </div>
-
-        <button className="maint-ok-btn" onClick={onClose}>
-          Got it! 💜
-        </button>
-      </div>
-    </div>
-  );
-}
+// function MaintenanceModal({ onClose }) {
+//   return (
+//     <div className="maint-overlay" onClick={onClose}>
+//       <div className="maint-modal" onClick={(e) => e.stopPropagation()}>
+//         <button className="maint-close" onClick={onClose} aria-label="Close">
+//           <X size={16} />
+//         </button>
+// 
+//         {/* Logo */}
+//         <img src="/preepx_logo.png" alt="PreepX" className="maint-logo" />
+// 
+//         {/* Wrench badge */}
+//         <div className="maint-badge">
+//           <Wrench size={11} className="maint-wrench" />
+//           Scheduled Maintenance
+//         </div>
+// 
+//         <h2 className="maint-title">
+//           We'll be back on
+//           <span className="maint-date"> September 1<sup>st</sup></span>
+//         </h2>
+// 
+//         <p className="maint-desc">
+//           Our servers are undergoing maintenance for a faster experience.
+//           Everything will be fully live on <strong>1st September 2026</strong>.
+//         </p>
+// 
+//         <div className="maint-info-row">
+//           <div className="maint-info-card">
+//             <Clock size={14} />
+//             <span>Back Online</span>
+//             <strong>Sept 1, 2026</strong>
+//           </div>
+//           <div className="maint-info-card">
+//             <Bell size={14} />
+//             <span>Status</span>
+//             <strong>In Progress</strong>
+//           </div>
+//         </div>
+// 
+//         <button className="maint-ok-btn" onClick={onClose}>
+//           Got it! 💜
+//         </button>
+//       </div>
+//     </div>
+//   );
+// }
 
 function Auth({ defaultRole }) {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [showMaintenance, setShowMaintenance] = useState(false);
+  // const [showMaintenance, setShowMaintenance] = useState(false);
 
   // Role: candidate | recruiter
   const queryRole = new URLSearchParams(location.search).get("role");
@@ -189,7 +189,7 @@ function Auth({ defaultRole }) {
   };
 
   const handleGoogleLogin = () => {
-    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
+    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     const apiBase = API.defaults.baseURL;
     let url = `${apiBase.replace(/\/api$/, "")}/api/auth/google`;
     if (candidateReg.referralCode) {
@@ -244,7 +244,7 @@ function Auth({ defaultRole }) {
   // ══════════════════════════════════════════════════════
   const handleCandidateLogin = async (e) => {
     e.preventDefault();
-    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
+    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     setLoading(true);
     try {
       const res = await API.post("/users/login", {
@@ -265,7 +265,7 @@ function Auth({ defaultRole }) {
 
   const handleCandidateRegister = async (e) => {
     e.preventDefault();
-    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
+    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     if (candidateReg.password.length < 6) {
       showAppError("Password must be at least 6 characters.", "Password too short");
       return;
@@ -353,7 +353,7 @@ function Auth({ defaultRole }) {
   // ══════════════════════════════════════════════════════
   const handleRecruiterLogin = async (e) => {
     e.preventDefault();
-    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
+    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     setLoading(true);
     try {
       const { data } = await API.post("/recruiter/login", {
@@ -374,7 +374,7 @@ function Auth({ defaultRole }) {
 
   const handleRecruiterRegister = async (e) => {
     e.preventDefault();
-    if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
+    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     if (recruiterReg.password !== recruiterReg.confirmPassword) {
       showAppError("Passwords do not match", "Error");
       return;
@@ -529,7 +529,7 @@ function Auth({ defaultRole }) {
 
   return (
     <>
-    {showMaintenance && <MaintenanceModal onClose={() => setShowMaintenance(false)} />}
+    {/* {showMaintenance && <MaintenanceModal onClose={() => setShowMaintenance(false)} />} */}
     <div className="modern-auth-overlay" onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}>
       <div className="modern-auth-modal" onClick={(e) => e.stopPropagation()}>
         {/* Desktop Close Button */}
