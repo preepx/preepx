@@ -36,7 +36,7 @@ export default function CompanyQuestionBank() {
 
   const stats = useMemo(() => computeBankStats(Array.isArray(questionsData) ? questionsData : [], solvedIds), [questionsData, solvedIds]);
 
-  const [type, setType] = useState("all");
+  const [type, setType] = useState("coding");
   const [difficulty, setDifficulty] = useState("all");
   const [status, setStatus] = useState("all");
   const [search, setSearch] = useState("");
@@ -191,7 +191,7 @@ export default function CompanyQuestionBank() {
             <div className="cp-top-bar">
               <div className="cp-type-tabs">
                 {[
-                  { id: "all", label: `All (${stats.total})`, icon: null },
+
                   { id: "coding", label: `Coding (${stats.byType.coding})`, icon: Code2 },
                   { id: "mcq", label: `MCQ (${stats.byType.mcq})`, icon: ListChecks },
                   { id: "theory", label: `Theory (${stats.byType.theory})`, icon: BookOpen },
@@ -287,10 +287,6 @@ export default function CompanyQuestionBank() {
         </div>
 
       </div>
-
-      <p className="cp-json-hint">
-        <Lock size={12} /> Question bank is driven by JSON. Drop new items into the company file and they show up here.
-      </p>
     </div>
   );
 }

@@ -223,9 +223,12 @@ function AppLayout({ children }) {
   const avatar = user.profilePic ||
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName || "U")}&background=4f46e5&color=fff`;
 
+  const hideSidebar = location.pathname.startsWith("/company-prep/") && location.pathname !== "/company-prep";
+
   return (
     <>
-      <div className={`app-layout ${collapsed ? "collapsed" : ""}`}>
+      <div className={`app-layout ${collapsed ? "collapsed" : ""} ${hideSidebar ? "hide-sidebar" : ""}`}>
+        {!hideSidebar && (
         <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
           <div className="sidebar-top">
             <Link to="/interview" className="sidebar-brand">
@@ -293,6 +296,7 @@ function AppLayout({ children }) {
             </div>
           </div>
         </aside>
+        )}
 
         {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
 
