@@ -395,8 +395,6 @@ function UserDashboard() {
         </button>
       </section>
 
-<<<<<<< HEAD
-=======
       {/* Coming Soon Modal */}
       {/* Coming Soon Modal - Commented out (redirected to /apply-jobs) */}
       {/* {showComingSoon && (
@@ -452,7 +450,6 @@ function UserDashboard() {
           </div>
         </div>
       )} */}
->>>>>>> main
     </div>
   );
 }
