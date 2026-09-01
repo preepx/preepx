@@ -149,9 +149,17 @@
   gap: 4px;
 }
 
-.tc-easy { color: #22c55e; }
-.tc-medium { color: #f59e0b; }
-.tc-hard { color: #ef4444; }
+.tc-easy {
+  color: #22c55e;
+}
+
+.tc-medium {
+  color: #f59e0b;
+}
+
+.tc-hard {
+  color: #ef4444;
+}
 
 .cp-back-top {
   display: inline-flex;
@@ -186,7 +194,7 @@
   text-align: center;
   max-width: 320px;
   width: 90%;
-  box-shadow: 0 0 40px rgba(168, 85, 247, 0.2), 0 16px 40px rgba(0,0,0,0.5);
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.2), 0 16px 40px rgba(0, 0, 0, 0.5);
   animation: cp-modal-in 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   position: relative;
 }
@@ -206,14 +214,14 @@
   background: #0f1423;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
-  padding: 24px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   position: sticky;
-  top: 24px;
+  top: 16px;
   height: fit-content;
-  max-height: calc(100vh - 48px);
+  max-height: calc(100vh - 32px);
   overflow-y: auto;
 }
 
@@ -247,7 +255,7 @@
 .cp-filter-section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .cp-filter-section h4 {
@@ -261,9 +269,9 @@
 .cp-radio {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   color: #e5e7eb;
 }
 
@@ -344,6 +352,11 @@
   background: rgba(0, 0, 0, 0.2);
   min-width: unset;
   border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.cp-sidebar .cp-search input {
+  font-size: 13px;
 }
 
 .cp-select {
@@ -351,7 +364,7 @@
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #e5e7eb;
-  padding: 10px 12px;
+  padding: 8px 10px;
   border-radius: 8px;
   font-size: 13px;
   outline: none;
@@ -361,12 +374,13 @@
   background: linear-gradient(90deg, #a855f7, #7c3aed);
   color: white;
   border: none;
-  padding: 12px;
+  padding: 10px;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  margin-top: 8px;
+  margin-top: 4px;
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  font-size: 13px;
 }
 
 .cp-content {
@@ -663,6 +677,59 @@
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   transition: background 0.2s;
+}
+
+.cp-q-list.grid-view {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  background: transparent;
+  border: none;
+}
+
+.cp-q-list.grid-view .cp-q-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+}
+
+.cp-q-list.grid-view .cp-q-index {
+  display: none;
+}
+
+.cp-q-list.grid-view .cp-q-main {
+  width: 100%;
+}
+
+.cp-q-list.grid-view .cp-q-diff {
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 12px;
+  margin-top: 4px;
+}
+
+.cp-q-list.grid-view .cp-q-time {
+  display: none;
+}
+
+.cp-q-list.grid-view .cp-bookmark {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.cp-q-list.grid-view .cp-btn-start {
+  width: 100%;
+  justify-content: center;
+  margin-top: 4px;
 }
 
 .cp-q-row:last-child {
@@ -1106,12 +1173,27 @@
   z-index: 9999;
   animation: cp-fade-in 0.2s ease;
 }
+
 @keyframes cp-fade-in {
-  from { opacity: 0; } to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
+
 @keyframes cp-modal-in {
-  from { opacity: 0; transform: scale(0.85) translateY(20px); }
-  to   { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.85) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .cp-modal h2 {
@@ -1123,12 +1205,14 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
 .cp-modal p {
   color: #9ca3af;
   font-size: 13px;
   line-height: 1.5;
   margin: 0 0 16px;
 }
+
 .cp-modal-pills {
   display: flex;
   justify-content: center;
@@ -1136,6 +1220,7 @@
   flex-wrap: wrap;
   margin-bottom: 20px;
 }
+
 .cp-modal-pills span {
   background: rgba(168, 85, 247, 0.1);
   border: 1px solid rgba(168, 85, 247, 0.25);
@@ -1148,6 +1233,7 @@
   align-items: center;
   gap: 5px;
 }
+
 .cp-modal-close {
   background: linear-gradient(135deg, #a855f7, #7c3aed);
   border: none;
@@ -1160,6 +1246,7 @@
   transition: transform 0.15s, box-shadow 0.15s;
   box-shadow: 0 4px 16px rgba(168, 85, 247, 0.4);
 }
+
 .cp-modal-close:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(168, 85, 247, 0.5);

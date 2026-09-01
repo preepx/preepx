@@ -10,6 +10,7 @@ import {
 import notify from "@/utils/notify";
 import { useFaceDetection } from "@/hooks/useFaceDetection";
 import API from "@/utils/api";
+import { getCompanyBySlug } from "@/data/companyPrep/companies";
 import '@/styles/CodingExam.css';
 
 const LANGUAGES = [
@@ -91,11 +92,35 @@ const CodingExam = () => {
         return;
       }
       try {
-        const res = await API.get(`/coding/problems/${problemId}`);
-        if (res.data.success) {
-          setQuestion(res.data.data);
-          const diff = res.data.data.difficulty?.toLowerCase();
-          setTimeLeft(diff === 'hard' ? 1800 : diff === 'medium' ? 1500 : 1200);
+        if (source === 'company') {
+           const slug = searchParams.get('company');
+           const qapiModule = await import('@/utils/qapi');
+           const qapi = qapiModule.default;
+           const res = await qapi.get(`/company-prep?company=${slug}`);
+           const q = res.data.find(item => String(item.id || item._id) === String(problemId));
+           if (q) {
+             let examplesStr = '';
+             if (q.examples?.length > 0) {
+               examplesStr = '\n\n**Examples**\n' + q.examples.map((ex, i) => `*Example ${i + 1}*\nInput: \n${ex.input}\nOutput: \n${ex.output}\n`).join('\n');
+             }
+             const desc = `**Problem Statement**\n${q.statement || q.title}\n\n**Input Format**\n${q.inputFormat || 'N/A'}\n\n**Output Format**\n${q.outputFormat || 'N/A'}\n\n**Constraints**\n${q.constraints || 'N/A'}${examplesStr}`;
+             setQuestion({
+               ...q,
+               description: desc,
+               boilerplateCode: q.starterCode || {},
+             });
+             const diff = q.difficulty?.toLowerCase();
+             setTimeLeft(diff === 'hard' ? 1800 : diff === 'medium' ? 1500 : 1200);
+           } else {
+             notify.error("Company problem not found");
+           }
+        } else {
+          const res = await API.get(`/coding/problems/${problemId}`);
+          if (res.data.success) {
+            setQuestion(res.data.data);
+            const diff = res.data.data.difficulty?.toLowerCase();
+            setTimeLeft(diff === 'hard' ? 1800 : diff === 'medium' ? 1500 : 1200);
+          }
         }
       } catch (err) {
         notify.error("Failed to load question");
@@ -252,6 +277,16 @@ const CodingExam = () => {
         notify.success(`🏆 Day ${challengeDay} completed! +10 XP`);
       } catch (err) {
         console.error("Failed to save challenge progress:", err);
+      }
+    }
+
+    if (source === 'company' && testResults === 'pass') {
+      try {
+        const progressMod = await import("@/data/companyPrep/progress");
+        progressMod.markQuestionSolved(searchParams.get('company'), problemId);
+        notify.success("Marked as solved for company prep!");
+      } catch(err) {
+        console.error(err);
       }
     }
 
@@ -475,7 +510,11 @@ const CodingExam = () => {
                 <img src="/preepx_logo.png" alt="PreepX Logo" style={{ height: '48px', objectFit: 'contain' }} />
               </div>
               <div className="ce-nav-divider"></div>
-              <Bookmark size={16} className="ce-icon-muted" />
+              {source === 'company' && searchParams.get('company') ? (
+                <img src={getCompanyBySlug(searchParams.get('company'))?.logo} alt="Company" style={{ height: '24px', objectFit: 'contain', marginRight: '8px' }} />
+              ) : (
+                <Bookmark size={16} className="ce-icon-muted" style={{ marginRight: '8px' }} />
+              )}
               <div className="ce-nav-title">{question.title}</div>
             </div>
 

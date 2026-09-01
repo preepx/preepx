@@ -40,6 +40,7 @@ export default function CompanyQuestionBank() {
   const [difficulty, setDifficulty] = useState("all");
   const [status, setStatus] = useState("all");
   const [search, setSearch] = useState("");
+  const [viewMode, setViewMode] = useState("list");
 
   const questions = useMemo(() => {
     if (!Array.isArray(questionsData)) return [];
@@ -217,12 +218,12 @@ export default function CompanyQuestionBank() {
                 Sort by: Newest <ChevronDown size={14} />
               </div>
               <div className="cp-toolbar-right">
-                <button className="cp-view-btn active"><LayoutList size={14} /> List View</button>
-                <button className="cp-view-btn"><LayoutGrid size={14} /> Grid View</button>
+                <button className={`cp-view-btn ${viewMode === "list" ? "active" : ""}`} onClick={() => setViewMode("list")}><LayoutList size={14} /> List View</button>
+                <button className={`cp-view-btn ${viewMode === "grid" ? "active" : ""}`} onClick={() => setViewMode("grid")}><LayoutGrid size={14} /> Grid View</button>
               </div>
             </div>
 
-            <div className="cp-q-list">
+            <div className={`cp-q-list ${viewMode === "grid" ? "grid-view" : ""}`}>
               {questions.length === 0 && (
                 <div className="cp-empty">
                   No questions match these filters.
@@ -241,8 +242,8 @@ export default function CompanyQuestionBank() {
                     role="button"
                     tabIndex={0}
                     className="cp-q-row"
-                    onClick={() => navigate(`/company-prep/${slug}/${qId}`)}
-                    onKeyDown={(e) => e.key === "Enter" && navigate(`/company-prep/${slug}/${qId}`)}
+                    onClick={() => item.type === 'coding' ? navigate(`/coding-exam/${qId}?source=company&company=${slug}`) : navigate(`/company-prep/${slug}/${qId}`)}
+                    onKeyDown={(e) => e.key === "Enter" && (item.type === 'coding' ? navigate(`/coding-exam/${qId}?source=company&company=${slug}`) : navigate(`/company-prep/${slug}/${qId}`))}
                   >
                     <span className="cp-q-index">{String(index + 1).padStart(2, "0")}</span>
                     <span className={`cp-chip ${meta.className}`}>
@@ -262,7 +263,14 @@ export default function CompanyQuestionBank() {
                     </div>
                     <span className="cp-q-time">{estTime}</span>
                     <button type="button" className="cp-bookmark" onClick={(e) => { e.stopPropagation(); }}><Bookmark size={16} /></button>
-                    <button type="button" className="cp-btn-start" onClick={(e) => { e.stopPropagation(); navigate(`/company-prep/${slug}/${qId}`); }}>
+                    <button type="button" className="cp-btn-start" onClick={(e) => { 
+                      e.stopPropagation(); 
+                      if (item.type === 'coding') {
+                        navigate(`/coding-exam/${qId}?source=company&company=${slug}`);
+                      } else {
+                        navigate(`/company-prep/${slug}/${qId}`);
+                      }
+                    }}>
                       Start <ArrowRight size={14} />
                     </button>
                   </div>
