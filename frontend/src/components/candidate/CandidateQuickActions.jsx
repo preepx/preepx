@@ -23,7 +23,7 @@ const ACTIONS = [
     desc: "Complete skill tests from recruiters",
   },
   {
-    to: "/apply-jobs/profile",
+    to: "/profile",
     icon: User,
     title: "Job Profile",
     desc: "Update skills & experience for matching",
