@@ -1,0 +1,213 @@
+/* =========================================================
+   DARK THEME SUPPORT
+   ========================================================= */
+[data-theme="dark"] body:has(.jl-root) {
+    background: #040B1D !important;
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-root,
+[data-theme="dark"] .jl-body,
+[data-theme="dark"] .jl-content-area,
+[data-theme="dark"] .jl-main {
+    background: #040B1D !important;
+}
+
+[data-theme="dark"] .jl-topbar,
+[data-theme="dark"] .jl-sidebar {
+    background: #040B1D !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .jl-sb-scroll {
+    background: transparent !important;
+}
+
+[data-theme="dark"] .jl-sidebar .sidebar-top,
+[data-theme="dark"] .jl-sidebar .sidebar-bottom {
+    background: #040B1D !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="dark"] .jl-nav-item {
+    background: transparent !important;
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .jl-nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .jl-nav-item:hover svg {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .jl-nav-item.active {
+    background-color: rgba(96, 165, 250, 0.15) !important;
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-nav-item.active svg {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-nav-item.active .jl-nav-text {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-nav-indicator {
+    background: #60a5fa !important;
+    box-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+}
+
+[data-theme="dark"] .jl-user-chip {
+    background-color: #0d1527 !important;
+    color: #f8fafc !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+[data-theme="dark"] .jl-user-chip:hover {
+    background-color: #1e293b !important;
+}
+
+[data-theme="dark"] .jl-user-chip strong {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-profile-widget {
+    background-color: #0d1527 !important;
+    color: #f8fafc !important;
+}
+
+/* Dark Mode Inputs */
+[data-theme="dark"] .jl-top-search {
+    border-color: #334155 !important;
+    background: #040B1D !important;
+}
+
+[data-theme="dark"] .jl-top-search input {
+    color: #f8fafc;
+    background: transparent;
+}
+
+[data-theme="dark"] .jl-top-search input::placeholder {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .jl-top-search:focus-within {
+    border-color: #3b82f6;
+    background: #0f172a;
+}
+
+[data-theme="dark"] .sidebar-top {
+    border-bottom-color: #334155;
+}
+
+[data-theme="dark"] .sidebar-bottom {
+    border-top-color: #334155;
+}
+
+[data-theme="dark"] .sidebar-action-btn {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .sidebar-action-btn:hover {
+    background: #1e293b;
+    color: #f8fafc;
+}
+
+[data-theme="dark"] .jl-sb-footer {
+    border-color: #334155;
+}
+
+[data-theme="dark"] .jl-sb-f-icon:hover {
+    background: #1e293b;
+    color: #f8fafc;
+}
+
+[data-theme="dark"] .jl-sb-logout:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+[data-theme="dark"] .jl-nav-item.active svg {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-nav-item svg {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .jl-tb-icon-btn {
+    background: none;
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .jl-tb-icon-btn:hover {
+    background: #334155 !important;
+    color: #fff !important;
+}
+
+[data-theme="dark"] .jl-nav-label {
+    color: #64748b !important;
+}
+
+[data-theme="dark"] .jl-profile-widget {
+    background: #0c1631 !important;
+    border-color: #334155 !important;
+}
+
+[data-theme="dark"] .jl-pw-title {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-pw-sub {
+    color: #94a3b8 !important;
+}
+
+[data-theme="dark"] .jl-ring-txt {
+    fill: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-tlink {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .jl-tlink:hover {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-hiring-live {
+    background: rgba(16, 185, 129, 0.12);
+    border-color: rgba(16, 185, 129, 0.35);
+    color: #34d399;
+}
+
+[data-theme="dark"] .jl-mega-menu {
+    background: #0c1631 !important;
+    border-color: #334155 !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .jl-mega-menu::before {
+    background: #0c1631 !important;
+    border-top-color: #334155 !important;
+    border-left-color: #334155 !important;
+}
+
+[data-theme="dark"] .jl-mega-section h4 {
+    color: #f8fafc !important;
+}
+
+[data-theme="dark"] .jl-mega-section a {
+    color: #cbd5e1 !important;
+}
+
+[data-theme="dark"] .jl-mega-section a:hover {
+    color: #60a5fa !important;
+}
+
+[data-theme="dark"] .jl-mega-col:not(:last-child) {
+    border-right-color: #334155 !important;
+}

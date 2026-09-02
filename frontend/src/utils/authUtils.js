@@ -19,7 +19,7 @@ export function getStoredToken() {
     const token = localStorage.getItem("token");
     if (!token || token === "undefined" || token === "null") return null;
     return token;
-  } catch (e) {
+  } catch {
     return null;
   }
 }
@@ -54,7 +54,7 @@ export function clearAuth() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("user_notifications");
-  } catch (e) {
+  } catch {
     // Ignore storage errors during cleanup
   }
 }

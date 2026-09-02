@@ -1,0 +1,300 @@
+/* =========================================================
+   RESPONSIVE LAYOUT & MOBILE DRAWER
+   ========================================================= */
+
+@media (min-width: 768px) {
+    .jl-root.collapsed .jl-sidebar {
+        width: 68px;
+    }
+
+    .jl-root.collapsed .sidebar-top {
+        justify-content: center;
+        padding: 12px 0;
+        align-items: center;
+        min-height: 60px;
+    }
+
+    .jl-root.collapsed .jl-nav-item span,
+    .jl-root.collapsed .jl-badge-pill,
+    .jl-root.collapsed .jl-badge-circle,
+    .jl-root.collapsed .jl-nav-label,
+    .jl-root.collapsed .jl-profile-widget,
+    .jl-sidebar.collapsed .jl-nav-item span,
+    .jl-sidebar.collapsed .jl-badge-pill,
+    .jl-sidebar.collapsed .jl-badge-circle,
+    .jl-sidebar.collapsed .jl-nav-label,
+    .jl-sidebar.collapsed .jl-profile-widget {
+        display: none !important;
+    }
+
+    .jl-root.collapsed .jl-nav-item,
+    .jl-sidebar.collapsed .jl-nav-item {
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+    .jl-root.collapsed .sidebar-brand,
+    .jl-sidebar.collapsed .sidebar-brand {
+        display: none !important;
+    }
+
+    .jl-root.collapsed .sidebar-top,
+    .jl-sidebar.collapsed .sidebar-top {
+        justify-content: center !important;
+        padding: 12px 0 !important;
+        min-height: 60px !important;
+    }
+}
+
+.mobile-only {
+    display: none !important;
+}
+
+.desktop-only {
+    display: inline-flex !important;
+}
+
+@media (max-width: 1024px) {
+    .jl-topbar-center {
+        display: none;
+    }
+
+    .desktop-only {
+        display: none !important;
+    }
+
+    .mobile-only {
+        display: flex !important;
+    }
+
+    .mobile-menu-btn {
+        display: flex !important;
+        width: 34px;
+        height: 34px;
+    }
+
+    .sidebar-top {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        border-bottom: 1px solid #e4e8ef;
+        min-height: 58px;
+    }
+
+    .sidebar-brand {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .sidebar-close-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 10px;
+        color: #cbd5e1;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    .sidebar-close-btn:hover {
+        background: rgba(239, 68, 68, 0.15);
+        border-color: rgba(239, 68, 68, 0.4);
+        color: #ef4444;
+    }
+
+    [data-theme="light"] .sidebar-close-btn {
+        background: #f1f5f9;
+        border-color: #e2e8f0;
+        color: #475569;
+    }
+
+    [data-theme="light"] .sidebar-close-btn:hover {
+        background: #fee2e2;
+        border-color: #fca5a5;
+        color: #ef4444;
+    }
+
+    /* Full screen height drawer like user-dashboard */
+    .jl-sidebar,
+    .jl-root.collapsed .jl-sidebar,
+    .jl-sidebar.collapsed {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        height: 100dvh !important;
+        width: 280px !important;
+        transform: translateX(-100%) !important;
+        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+        z-index: 1000 !important;
+        box-shadow: none;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    .jl-sidebar.open,
+    .jl-root.collapsed .jl-sidebar.open,
+    .jl-sidebar.collapsed.open {
+        transform: translateX(0) !important;
+        box-shadow: 10px 0 35px rgba(0, 0, 0, 0.7) !important;
+    }
+
+    /* In mobile drawer, brand logo & labels are ALWAYS visible */
+    .jl-sidebar .sidebar-brand,
+    .jl-root.collapsed .jl-sidebar .sidebar-brand {
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    .jl-sidebar .brand-logo-img,
+    .jl-root.collapsed .jl-sidebar .brand-logo-img {
+        height: 100px !important;
+        width: auto !important;
+        margin: -28px 0 -28px 10px !important;
+        object-fit: contain !important;
+    }
+
+    .jl-mobile-logo-link {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .jl-mobile-logo {
+        height: 76px;
+        width: auto;
+        margin: -16px 0 -22px 0;
+        object-fit: contain;
+        display: block;
+    }
+
+    .jl-sidebar .sidebar-top,
+    .jl-root.collapsed .jl-sidebar .sidebar-top {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 12px 16px !important;
+        min-height: 64px !important;
+    }
+
+    .jl-sidebar .jl-nav-item .jl-nav-text,
+    .jl-sidebar .jl-nav-item .jl-nav-label,
+    .jl-sidebar .jl-nav-label,
+    .jl-root.collapsed .jl-sidebar .jl-nav-item .jl-nav-text,
+    .jl-root.collapsed .jl-sidebar .jl-nav-item .jl-nav-label,
+    .jl-root.collapsed .jl-sidebar .jl-nav-label {
+        display: inline-block !important;
+    }
+
+    .jl-sidebar .jl-nav-item,
+    .jl-root.collapsed .jl-sidebar .jl-nav-item {
+        justify-content: flex-start !important;
+        padding: 10px 14px !important;
+        gap: 12px !important;
+    }
+
+    .jl-sidebar .sidebar-bottom-actions,
+    .jl-root.collapsed .jl-sidebar .sidebar-bottom-actions {
+        flex-direction: row !important;
+        justify-content: space-around !important;
+        width: 100% !important;
+        gap: 8px !important;
+    }
+
+    .jl-sidebar .sidebar-bottom,
+    .jl-root.collapsed .jl-sidebar .sidebar-bottom {
+        padding: 12px 16px !important;
+    }
+
+    .jl-overlay {
+        display: block !important;
+        position: fixed !important;
+        inset: 0 !important;
+        top: 0 !important;
+        background: rgba(0, 0, 0, 0.65) !important;
+        backdrop-filter: blur(4px) !important;
+        z-index: 999 !important;
+    }
+
+    .jl-sb-scroll {
+        height: auto !important;
+        flex: 1;
+        overflow-y: auto;
+        position: static !important;
+        padding: 12px 10px 20px !important;
+    }
+
+    .jl-topbar-search {
+        max-width: 180px;
+    }
+
+    .jl-kbd {
+        display: none;
+    }
+
+    .jl-user-chip div,
+    .jl-user-chip svg {
+        display: none;
+    }
+
+    .jl-user-chip {
+        padding: 4px;
+        border: none;
+    }
+
+    .jl-main {
+        padding: 16px;
+    }
+
+    .jl-hiring-live {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .jl-topbar {
+        height: 54px;
+        padding: 0 12px;
+        gap: 8px;
+    }
+
+    .jl-topbar-left {
+        width: auto;
+        gap: 8px;
+    }
+
+    .jl-logo,
+    .jl-mobile-logo {
+        height: 74px;
+        width: auto;
+        margin: -15px 0 -21px 0;
+        object-fit: contain;
+        display: block;
+    }
+
+    .jl-main {
+        padding: 12px 10px;
+    }
+
+    .jl-topbar-right {
+        gap: 4px;
+    }
+
+    .jl-tb-icon-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .jl-user-chip img {
+        width: 28px;
+        height: 28px;
+    }
+}

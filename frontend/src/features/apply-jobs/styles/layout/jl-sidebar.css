@@ -1,0 +1,431 @@
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+.jl-sidebar {
+    width: 240px;
+    background: #ffffff;
+    border-right: 1px solid #e4e8ef;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    flex-shrink: 0;
+    z-index: 110;
+    transition: width 0.25s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.brand-logo-img {
+    height: 100px;
+    object-fit: contain;
+    margin: -28px 0 -28px 10px;
+}
+
+.sidebar-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid #e4e8ef;
+    min-height: 60px;
+    box-sizing: border-box;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.sidebar-close-btn {
+    display: none;
+}
+
+/* Exact hamburger & toggle styles */
+.sidebar-toggle {
+    background: #090e1a;
+    border: 1.5px solid rgba(148, 163, 184, 0.3);
+    color: #94a3b8;
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+    flex-shrink: 0;
+}
+
+.sidebar-toggle:hover {
+    background: #0d1527;
+    border-color: #38bdf8;
+    box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
+    transform: scale(1.05);
+}
+
+.sidebar-toggle:hover .ham-bar {
+    background: #38bdf8;
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.6);
+}
+
+.sidebar-toggle:hover .top-bar {
+    width: 12px;
+    transform: translateX(-2px);
+}
+
+.sidebar-toggle:hover .mid-bar {
+    width: 16px;
+    transform: scaleX(1.1);
+}
+
+.sidebar-toggle:hover .bot-bar {
+    width: 12px;
+    transform: translateX(2px);
+}
+
+[data-theme="light"] .sidebar-toggle {
+    background: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+[data-theme="light"] .sidebar-toggle .ham-bar {
+    background: #475569 !important;
+}
+
+[data-theme="light"] .sidebar-toggle:hover {
+    border-color: #0284c7 !important;
+    box-shadow: 0 0 12px rgba(2, 132, 199, 0.3) !important;
+}
+
+[data-theme="light"] .sidebar-toggle:hover .ham-bar {
+    background: #0284c7 !important;
+}
+
+.jl-sb-scroll {
+    padding: 16px 12px;
+    overflow-y: auto;
+    flex: 1;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.jl-sb-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.jl-nav-section {
+    margin-bottom: 4px;
+}
+
+.jl-nav-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 6px;
+    padding-left: 12px;
+}
+
+.jl-nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.jl-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.15s ease;
+    position: relative;
+    background: transparent !important;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.jl-nav-text {
+    font-size: 14px !important;
+    font-weight: 500;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.4;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.jl-nav-item:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+}
+
+.jl-nav-item svg {
+    color: #94a3b8;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    transition: color 0.15s ease;
+}
+
+.jl-nav-item:hover svg {
+    color: #ffffff;
+}
+
+.jl-nav-item.active {
+    background: rgba(96, 165, 250, 0.15) !important;
+    color: #60a5fa !important;
+    font-weight: 600;
+}
+
+.jl-nav-item.active svg {
+    color: #60a5fa !important;
+}
+
+.jl-nav-item.active .jl-nav-text {
+    color: #60a5fa !important;
+    font-weight: 600;
+}
+
+.jl-nav-indicator {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 18px;
+    background: #60a5fa;
+    border-radius: 0 3px 3px 0;
+    transition: all 0.2s ease;
+}
+
+/* Badges */
+.jl-badge-pill {
+    margin-left: auto;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1.2;
+    flex-shrink: 0;
+}
+
+.jl-badge-circle {
+    margin-left: auto;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 50%;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    line-height: 1 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+/* Logout */
+.jl-logout-btn {
+    background: none;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: left;
+}
+
+.jl-logout-btn:hover {
+    color: #ef4444 !important;
+    background: #fef2f2 !important;
+}
+
+.jl-logout-btn:hover svg {
+    color: #ef4444 !important;
+}
+
+/* Profile Widget */
+.jl-profile-widget {
+    margin-top: 16px;
+    background: #f8faff;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #e2eaf8;
+    text-align: center;
+}
+
+.jl-pw-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #2563eb;
+    margin: 0 0 4px;
+}
+
+.jl-pw-sub {
+    font-size: 11px;
+    color: #64748b;
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+
+.jl-pw-ring-wrap {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 12px;
+}
+
+.jl-ring-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.jl-ring-bg {
+    fill: none;
+    stroke: #e2e8f0;
+    stroke-width: 3;
+}
+
+.jl-ring-fill {
+    fill: none;
+    stroke: #10b981;
+    stroke-width: 3;
+    stroke-linecap: round;
+}
+
+.jl-ring-txt {
+    fill: #0f172a;
+    font-size: 8px;
+    font-weight: 700;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-family: inherit;
+}
+
+.jl-pw-btn {
+    display: block;
+    width: 100%;
+    background: #2563eb;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 700;
+    padding: 9px;
+    border-radius: 7px;
+    transition: background 0.15s;
+}
+
+.jl-pw-btn:hover {
+    background: #1d4ed8;
+}
+
+/* Sidebar Bottom Actions (Pinned at bottom) */
+.sidebar-bottom {
+    padding: 12px;
+    border-top: 1px solid #e4e8ef;
+    margin-top: auto;
+    background: inherit;
+    flex-shrink: 0;
+}
+
+.sidebar-bottom-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 8px;
+    width: 100%;
+}
+
+.sidebar-bottom-actions.collapsed {
+    flex-direction: column !important;
+    gap: 16px !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.sidebar-action-btn {
+    position: relative;
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    text-decoration: none;
+}
+
+.sidebar-action-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.sidebar-action-btn.danger {
+    color: #ef4444;
+}
+
+.sidebar-action-btn.danger:hover {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+}
+
+.jl-sb-f-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    color: #64748b;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.jl-sb-f-icon:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.jl-sb-logout {
+    color: #ef4444;
+}
+
+.jl-sb-logout:hover {
+    background: #fef2f2;
+    color: #dc2626;
+}
