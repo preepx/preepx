@@ -21,12 +21,7 @@ function UserDashboard() {
   const [user, setUser] = useState(getStoredUser);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-<<<<<<< HEAD
-  const [currentBanner, setCurrentBanner] = useState(0);
-  const [isBannerHovered, setIsBannerHovered] = useState(false);
-  const touchStartX = useRef(null);
-=======
->>>>>>> origin/optimised_frontend
+
   const { balance } = useWallet();
 
   const refreshData = useCallback(() => {
@@ -53,7 +48,7 @@ function UserDashboard() {
     const handleUserUpdate = () => {
       const updatedUser = getStoredUser();
       if (updatedUser) setUser(updatedUser);
-      getAnalytics().then((s) => setStats(s)).catch(() => {});
+      getAnalytics().then((s) => setStats(s)).catch(() => { });
     };
 
     window.addEventListener("user-updated", handleUserUpdate);

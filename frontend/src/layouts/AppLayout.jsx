@@ -82,7 +82,7 @@ function AppLayout({ children }) {
           window.dispatchEvent(new Event("walletUpdated"));
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   // Initial user fetch and update listener
@@ -158,102 +158,102 @@ function AppLayout({ children }) {
     <>
       <div className={`app-layout ${collapsed ? "collapsed" : ""} ${hideSidebar ? "hide-sidebar" : ""}`}>
         {!hideSidebar && (
-        <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
-          <div className="sidebar-top">
-            <Link to="/interview" className="sidebar-brand">
-              {collapsed && !mobileOpen ? (
-                <img src="/logo.png" alt="PreepX" style={{ height: "32px", objectFit: "contain", marginLeft: "4px" }} />
-              ) : (
-                <img
-                  src="/preepx_logo.png"
-                  alt="PreepX"
-                  className="brand-logo-img"
-                  style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }}
-                />
-              )}
-            </Link>
-            <button
-              type="button"
-              className="sidebar-toggle desktop-only"
-              onClick={() => setCollapsed(!collapsed)}
-              aria-label="Toggle Sidebar"
-              title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-            >
-              <div className="hamburger-box">
-                <span className="ham-bar top-bar" />
-                <span className="ham-bar mid-bar" />
-                <span className="ham-bar bot-bar" />
-              </div>
-            </button>
-            <button
-              type="button"
-              className="sidebar-close-btn mobile-only"
-              onClick={() => setMobileOpen(false)}
-              aria-label="Close Sidebar"
-            >
-              <X size={19} />
-            </button>
-          </div>
-
-          <nav className="sidebar-nav">
-            {NAV_ITEMS.map(({ to, icon: Icon, label, isFree, isNew }) => {
-              const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
-              return (
-                <Link
-                  key={to}
-                  to={to}
-                  className={`sidebar-link ${isActive ? "active" : ""}`}
-                  onClick={() => setMobileOpen(false)}
-                  title={label}
-                >
-                  <Icon size={20} style={{ flexShrink: 0 }} />
-                  {(!collapsed || mobileOpen) && (
-                    <>
-                      <span className="sidebar-link-label">{label}</span>
-                      {isFree && <span className="nav-free-badge">Free</span>}
-                      {isNew && <span className="nav-new-badge">New</span>}
-                    </>
-                  )}
-                  {isActive && <span className="nav-indicator" />}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="sidebar-bottom" style={{ padding: collapsed ? "12px 8px" : "12px 16px" }}>
-            <div className={`sidebar-bottom-actions ${collapsed ? "collapsed" : ""}`}>
-              <Link
-                to="/settings"
-                className="sidebar-action-btn"
-                data-tooltip="Settings"
-                title="Settings"
-                onClick={() => setMobileOpen(false)}
-              >
-                <Settings size={20} />
+          <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
+            <div className="sidebar-top">
+              <Link to="/interview" className="sidebar-brand">
+                {collapsed && !mobileOpen ? (
+                  <img src="/logo.png" alt="PreepX" style={{ height: "32px", objectFit: "contain", marginLeft: "4px" }} />
+                ) : (
+                  <img
+                    src="/preepx_logo.png"
+                    alt="PreepX"
+                    className="brand-logo-img"
+                    style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }}
+                  />
+                )}
               </Link>
-
               <button
                 type="button"
-                className="sidebar-action-btn"
-                onClick={toggleTheme}
-                data-tooltip={isDark ? "Light Mode" : "Dark Mode"}
-                title={isDark ? "Light Mode" : "Dark Mode"}
+                className="sidebar-toggle desktop-only"
+                onClick={() => setCollapsed(!collapsed)}
+                aria-label="Toggle Sidebar"
+                title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
               >
-                {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                <div className="hamburger-box">
+                  <span className="ham-bar top-bar" />
+                  <span className="ham-bar mid-bar" />
+                  <span className="ham-bar bot-bar" />
+                </div>
               </button>
-
               <button
                 type="button"
-                className="sidebar-action-btn danger"
-                onClick={handleLogout}
-                data-tooltip="Sign Out"
-                title="Sign Out"
+                className="sidebar-close-btn mobile-only"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close Sidebar"
               >
-                <LogOut size={20} />
+                <X size={19} />
               </button>
             </div>
-          </div>
-        </aside>
+
+            <nav className="sidebar-nav">
+              {NAV_ITEMS.map(({ to, icon: Icon, label, isFree, isNew }) => {
+                const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
+                return (
+                  <Link
+                    key={to}
+                    to={to}
+                    className={`sidebar-link ${isActive ? "active" : ""}`}
+                    onClick={() => setMobileOpen(false)}
+                    title={label}
+                  >
+                    <Icon size={20} style={{ flexShrink: 0 }} />
+                    {(!collapsed || mobileOpen) && (
+                      <>
+                        <span className="sidebar-link-label">{label}</span>
+                        {isFree && <span className="nav-free-badge">Free</span>}
+                        {isNew && <span className="nav-new-badge">New</span>}
+                      </>
+                    )}
+                    {isActive && <span className="nav-indicator" />}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="sidebar-bottom" style={{ padding: collapsed ? "12px 8px" : "12px 16px" }}>
+              <div className={`sidebar-bottom-actions ${collapsed ? "collapsed" : ""}`}>
+                <Link
+                  to="/settings"
+                  className="sidebar-action-btn"
+                  data-tooltip="Settings"
+                  title="Settings"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <Settings size={20} />
+                </Link>
+
+                <button
+                  type="button"
+                  className="sidebar-action-btn"
+                  onClick={toggleTheme}
+                  data-tooltip={isDark ? "Light Mode" : "Dark Mode"}
+                  title={isDark ? "Light Mode" : "Dark Mode"}
+                >
+                  {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                </button>
+
+                <button
+                  type="button"
+                  className="sidebar-action-btn danger"
+                  onClick={handleLogout}
+                  data-tooltip="Sign Out"
+                  title="Sign Out"
+                >
+                  <LogOut size={20} />
+                </button>
+              </div>
+            </div>
+          </aside>
         )}
 
         {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
@@ -333,9 +333,8 @@ function AppLayout({ children }) {
         notifs={notifs}
         setNotifs={setNotifs}
       />
-<<<<<<< HEAD
-      {/* Coming Soon Modal - Commented out (redirected to /apply-jobs) */}
-      {/* {showComingSoon && (
+  {/* Coming Soon Modal - Commented out (redirected to /apply-jobs) */ }
+  {/* {showComingSoon && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           background: 'rgba(0, 0, 0, 0.7)',
@@ -388,8 +387,6 @@ function AppLayout({ children }) {
           </div>
         </div>
       )} */}
-=======
->>>>>>> origin/optimised_frontend
     </>
 
   );

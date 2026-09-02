@@ -4,36 +4,6 @@ import Editor from "@monaco-editor/react";
 import { Maximize2 } from "lucide-react";
 import notify from "@/utils/notify";
 import { useFaceDetection } from "@/hooks/useFaceDetection";
-<<<<<<< HEAD
-import API from "@/utils/api";
-import { getCompanyBySlug } from "@/data/companyPrep/companies";
-import '@/styles/CodingExam.css';
-
-const LANGUAGES = [
-  { value: 'c-7', base: 'c', label: 'C (gcc 7.3.0)' },
-  { value: 'c-13', base: 'c', label: 'C (GCC 13.2.0)' },
-  { value: 'cpp-13', base: 'cpp', label: 'C++ (GCC 13.2.0)' },
-  { value: 'cpp-7', base: 'cpp', label: 'C++ (g++ 7.3.0)' },
-  { value: 'csharp', base: 'csharp', label: 'C# (mcs 5.4.0.201)' },
-  { value: 'java-7', base: 'java', label: 'Java (openjdk 1.7.0_91)' },
-  { value: 'java-8', base: 'java', label: 'Java 8 (oracle 1.8.0_91)' },
-  { value: 'java-21', base: 'java', label: 'Java (OpenJDK 21.0)' },
-  { value: 'node-24', base: 'javascript', label: 'JavaScript (Node.js 24.4.1)' },
-  { value: 'node-12', base: 'javascript', label: 'JavaScript (Node.js 12.14.0)' },
-  { value: 'python-3.12', base: 'python', label: 'Python (3.12.11)' },
-  { value: 'python-2.7', base: 'python', label: 'Python (2.7.17)' },
-  { value: 'python-3.8', base: 'python', label: 'Python (3.8.1)' },
-];
-
-const BOILERPLATES = {
-  c: `#include <stdio.h>\n#include <string.h>\n#include <math.h>\n#include <stdlib.h>\n\nint main() {\n\n    /* Enter your code here. Read input from STDIN. Print output to STDOUT */\n    return 0;\n}`,
-  cpp: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}`,
-  java: `import java.util.*;\nimport java.io.*;\n\npublic class Solution {\n    public static void main(String[] args) {\n        // Write your code here\n    }\n}`,
-  python: `# Write your code here\nimport sys\ninput = sys.stdin.readline\n`,
-  javascript: `function solve(input) {\n    // Write your code here\n}\n`,
-  csharp: `using System;\nusing System.Collections.Generic;\nusing System.IO;\nclass Solution {\n    static void Main(String[] args) {\n        /* Enter your code here. Read input from STDIN. Print output to STDOUT. */\n    }\n}`
-};
-=======
 import {
   getCodingProblem,
   evaluateCode,
@@ -52,7 +22,6 @@ import {
   CodingHelpModal,
 } from "@/components/coding";
 import "@/styles/CodingExam.css";
->>>>>>> origin/optimised_frontend
 
 const CodingExam = () => {
   const location = useLocation();
@@ -98,122 +67,8 @@ const CodingExam = () => {
 
   const camRef = useRef(null);
   const langDropdownRef = useRef(null);
-<<<<<<< HEAD
 
-  useEffect(() => {
-    const fetchQuestion = async () => {
-      if (!problemId) {
-        notify.error("No problem selected");
-        navigate(backPath);
-        return;
-      }
-      try {
-        if (source === 'company') {
-           const slug = searchParams.get('company');
-           const qapiModule = await import('@/utils/qapi');
-           const qapi = qapiModule.default;
-           const res = await qapi.get(`/company-prep?company=${slug}`);
-           const q = res.data.find(item => String(item.id || item._id) === String(problemId));
-           if (q) {
-             let examplesStr = '';
-             if (q.examples?.length > 0) {
-               examplesStr = '\n\n**Examples**\n' + q.examples.map((ex, i) => `*Example ${i + 1}*\nInput: \n${ex.input}\nOutput: \n${ex.output}\n`).join('\n');
-             }
-             const desc = `**Problem Statement**\n${q.statement || q.title}\n\n**Input Format**\n${q.inputFormat || 'N/A'}\n\n**Output Format**\n${q.outputFormat || 'N/A'}\n\n**Constraints**\n${q.constraints || 'N/A'}${examplesStr}`;
-             setQuestion({
-               ...q,
-               description: desc,
-               boilerplateCode: q.starterCode || {},
-             });
-             const diff = q.difficulty?.toLowerCase();
-             setTimeLeft(diff === 'hard' ? 1800 : diff === 'medium' ? 1500 : 1200);
-           } else {
-             notify.error("Company problem not found");
-           }
-        } else {
-          const res = await API.get(`/coding/problems/${problemId}`);
-          if (res.data.success) {
-            setQuestion(res.data.data);
-            const diff = res.data.data.difficulty?.toLowerCase();
-            setTimeLeft(diff === 'hard' ? 1800 : diff === 'medium' ? 1500 : 1200);
-          }
-        }
-      } catch (err) {
-        notify.error("Failed to load question");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchQuestion();
-  }, [problemId]);
-
-  useEffect(() => {
-    const selectedLang = LANGUAGES.find(l => l.value === currentLanguage);
-    const base = selectedLang?.base || 'cpp';
-    if (question?.boilerplateCode?.[base]) {
-      setCode(question.boilerplateCode[base]);
-    } else {
-      setCode(BOILERPLATES[base] || '// Write your code here\n');
-    }
-  }, [currentLanguage, question]);
-
-  useEffect(() => {
-    const elem = document.documentElement;
-    if (elem.requestFullscreen) elem.requestFullscreen().catch(() => { });
-
-    const timer = setInterval(() => {
-      if (isFullscreenRef.current) {
-        setTimeLeft(prev => (prev > 0 ? prev - 1 : 0));
-      }
-    }, 1000);
-
-    const handleFullscreenChange = () => {
-      const isFull = !!document.fullscreenElement;
-      setIsFullscreen(isFull);
-      isFullscreenRef.current = isFull;
-    };
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      clearInterval(timer);
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
-      window.removeEventListener('resize', handleResize);
-      if (document.fullscreenElement) document.exitFullscreen().catch(() => { });
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleGlobalKeyDown = (e) => {
-      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'h') {
-        e.preventDefault();
-        setShowInfoModal(true);
-      }
-    };
-    window.addEventListener('keydown', handleGlobalKeyDown);
-    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, []);
-
-  useEffect(() => {
-    const handler = (e) => {
-      if (langDropdownRef.current && !langDropdownRef.current.contains(e.target)) {
-        setShowLangDropdown(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, []);
-
-  const formatTime = (s) => {
-    const m = Math.floor(s / 60);
-    const sec = s % 60;
-    return `${m.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-  };
-=======
   const { warning: faceWarning } = useFaceDetection(camRef);
->>>>>>> origin/optimised_frontend
 
   const toggleTheme = () => {
     const next = isDark ? "light" : "dark";
@@ -230,11 +85,44 @@ const CodingExam = () => {
         return;
       }
       try {
-        const res = await getCodingProblem(problemId);
-        if (res?.success) {
-          setQuestion(res.data);
-          const diff = res.data.difficulty?.toLowerCase();
-          setTimeLeft(diff === "hard" ? 1800 : diff === "medium" ? 1500 : 1200);
+        if (source === "company") {
+          const slug = searchParams.get("company");
+          const qapiModule = await import("@/utils/qapi");
+          const qapi = qapiModule.default;
+          const res = await qapi.get(`/company-prep?company=${slug}`);
+          const q = res.data.find(
+            (item) => String(item.id || item._id) === String(problemId)
+          );
+          if (q) {
+            let examplesStr = "";
+            if (q.examples?.length > 0) {
+              examplesStr =
+                "\n\n**Examples**\n" +
+                q.examples
+                  .map(
+                    (ex, i) =>
+                      `*Example ${i + 1}*\nInput: \n${ex.input}\nOutput: \n${ex.output}\n`
+                  )
+                  .join("\n");
+            }
+            const desc = `**Problem Statement**\n${q.statement || q.title}\n\n**Input Format**\n${q.inputFormat || "N/A"}\n\n**Output Format**\n${q.outputFormat || "N/A"}\n\n**Constraints**\n${q.constraints || "N/A"}${examplesStr}`;
+            setQuestion({
+              ...q,
+              description: desc,
+              boilerplateCode: q.starterCode || {},
+            });
+            const diff = q.difficulty?.toLowerCase();
+            setTimeLeft(diff === "hard" ? 1800 : diff === "medium" ? 1500 : 1200);
+          } else {
+            notify.error("Company problem not found");
+          }
+        } else {
+          const res = await getCodingProblem(problemId);
+          if (res?.success) {
+            setQuestion(res.data);
+            const diff = res.data.difficulty?.toLowerCase();
+            setTimeLeft(diff === "hard" ? 1800 : diff === "medium" ? 1500 : 1200);
+          }
         }
       } catch (err) {
         notify.error("Failed to load question");
@@ -244,6 +132,21 @@ const CodingExam = () => {
     };
     fetchQuestion();
   }, [problemId, navigate, backPath]);
+
+  // Auto fullscreen on mount
+  useEffect(() => {
+    const enterFullscreen = async () => {
+      try {
+        if (!document.fullscreenElement) {
+          await document.documentElement.requestFullscreen();
+        }
+      } catch (err) {
+        // Some browsers block fullscreen without user gesture — silently ignore
+        console.warn("Fullscreen request failed:", err);
+      }
+    };
+    enterFullscreen();
+  }, []);
 
   useEffect(() => {
     const handleFullscreenChange = () => {
@@ -272,8 +175,12 @@ const CodingExam = () => {
   useEffect(() => {
     const selected = LANGUAGES.find((l) => l.value === currentLanguage);
     const base = selected ? selected.base : "cpp";
-    setCode(BOILERPLATES[base] || "");
-  }, [currentLanguage]);
+    if (question?.boilerplateCode?.[base]) {
+      setCode(question.boilerplateCode[base]);
+    } else {
+      setCode(BOILERPLATES[base] || "");
+    }
+  }, [currentLanguage, question]);
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -283,6 +190,17 @@ const CodingExam = () => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "h") {
+        e.preventDefault();
+        setShowInfoModal(true);
+      }
+    };
+    window.addEventListener("keydown", handleGlobalKeyDown);
+    return () => window.removeEventListener("keydown", handleGlobalKeyDown);
   }, []);
 
   const handleRunCode = async () => {
@@ -370,25 +288,21 @@ const CodingExam = () => {
       }
     }
 
-<<<<<<< HEAD
-    if (source === 'company' && testResults === 'pass') {
+    if (source === "company" && testResults === "pass") {
       try {
         const progressMod = await import("@/data/companyPrep/progress");
-        progressMod.markQuestionSolved(searchParams.get('company'), problemId);
+        progressMod.markQuestionSolved(searchParams.get("company"), problemId);
         notify.success("Marked as solved for company prep!");
-      } catch(err) {
+      } catch (err) {
         console.error(err);
       }
     }
 
-    setIsSubmitting(false);
-    navigate(backPath);
-=======
     notify.success("Code submitted successfully!");
+    setIsSubmitting(false);
     setTimeout(() => {
       navigate(backPath);
     }, 1500);
->>>>>>> origin/optimised_frontend
   };
 
   const selectedLang = LANGUAGES.find((l) => l.value === currentLanguage);
@@ -476,22 +390,6 @@ const CodingExam = () => {
               camRef={camRef}
             />
 
-<<<<<<< HEAD
-          {/* ── Top Navbar (Unstop Style) ── */}
-          <nav className="ce-navbar">
-            <div className="ce-nav-left">
-              <div className="ce-brand">
-                <img src="/preepx_logo.png" alt="PreepX Logo" style={{ height: '48px', objectFit: 'contain' }} />
-              </div>
-              <div className="ce-nav-divider"></div>
-              {source === 'company' && searchParams.get('company') ? (
-                <img src={getCompanyBySlug(searchParams.get('company'))?.logo} alt="Company" style={{ height: '24px', objectFit: 'contain', marginRight: '8px' }} />
-              ) : (
-                <Bookmark size={16} className="ce-icon-muted" style={{ marginRight: '8px' }} />
-              )}
-              <div className="ce-nav-title">{question.title}</div>
-            </div>
-=======
             {/* Main Workspace Split */}
             <div className="ce-main">
               {/* Left Panel */}
@@ -504,7 +402,6 @@ const CodingExam = () => {
                 inputFormat={inputFormat}
                 outputFormat={outputFormat}
               />
->>>>>>> origin/optimised_frontend
 
               {/* Right Panel */}
               <div className="ce-right">
