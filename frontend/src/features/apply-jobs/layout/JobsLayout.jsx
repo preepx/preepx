@@ -8,6 +8,8 @@ import {
 import API from "@/utils/api";
 import { getMyApplications } from "../services/candidateJobsAPI";
 import { getMyAssessments } from "@/services/assessmentAPI";
+import { useTheme } from "@/hooks/useTheme";
+import { getStoredUser, clearAuth } from "@/utils/authUtils";
 import NotificationModal from "@/components/NotificationModal";
 import Footer from "@/components/Footer";
 import '../styles/JobsLayout.css';
@@ -40,6 +42,7 @@ function JobsLayout({ children }) {
   const [showServicesMenu, setShowServicesMenu] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   // Auto-collapse sidebar on smaller screens
   useEffect(() => {
@@ -51,28 +54,12 @@ function JobsLayout({ children }) {
       }
     };
     
-    // Set initial state
     handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
-
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
-
-  const safeGetUser = () => {
-    try { return JSON.parse(localStorage.getItem("user") || "{}"); } catch { return {}; }
-  };
-  const user = safeGetUser();
+  const user = getStoredUser() || {};
   const avatar = user.profilePic ||
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName || "U")}&background=4f46e5&color=fff`;
 
@@ -86,13 +73,13 @@ function JobsLayout({ children }) {
       const n = (data || []).filter((a) =>
         ["shortlisted", "assessment_sent", "offered", "hired", "selected"].includes(a.status)
       ).length;
-      setApplicationBadge(n || 4);
-    }).catch(() => { setApplicationBadge(4); });
+      setApplicationBadge(n || 0);
+    }).catch(() => { setApplicationBadge(0); });
 
     API.get("/users/notifications").then((res) =>
       setNotifications([...(res.data || [])].reverse())
     ).catch(() => { });
-  }, [location.pathname]);
+  }, []);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
 
@@ -105,8 +92,7 @@ function JobsLayout({ children }) {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    clearAuth();
     window.location.href = "/";
   };
 

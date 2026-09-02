@@ -16,7 +16,6 @@ export default function CompanyPrepHub() {
     // Fetch stats from backend
     qapi.get("/company-prep/stats")
       .then((res) => {
-        console.log("🔥 Fetched Company Stats from Database:", res.data);
         setStatsData(res.data);
       })
       .catch((err) => console.error("Failed to load company stats", err))

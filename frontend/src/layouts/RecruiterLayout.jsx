@@ -10,6 +10,8 @@ import {
 import { getRecruiterNotifications, markRecruiterNotificationRead, markAllRecruiterNotificationsRead, getJobs, discoverCandidates } from "@/services/recruiterAPI";
 import notify from "@/utils/notify";
 import { getOnboarding } from "@/services/recruiterAPI";
+import { useTheme } from "@/hooks/useTheme";
+import { getStoredUser, clearAuth } from "@/utils/authUtils";
 import Footer from "@/components/Footer";
 import '@/styles/RecruiterLayout.css';
 
@@ -48,11 +50,11 @@ const NAV_SECTIONS = [
 export default function RecruiterLayout({ children, title = "Dashboard" }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
+  const { isDark, toggleTheme } = useTheme();
   const [notifications, setNotifications] = useState([]);
   const [showNotifs, setShowNotifs] = useState(false);
   const [companyStatus, setCompanyStatus] = useState("VERIFIED");
-  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user") || "{}"));
+  const [user, setUser] = useState(() => getStoredUser() || {});
   
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
@@ -79,10 +81,13 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
     getRecruiterNotifications().then(setNotifications).catch(() => { });
   };
 
+  const handleLogout = () => {
+    clearAuth();
+    notify.success("Signed out successfully");
+    window.location.href = "/auth/recruiter";
+  };
+
   useEffect(() => {
-    const theme = localStorage.getItem("theme") || "dark";
-    document.documentElement.dataset.theme = theme;
-    setIsDark(theme === "dark");
     loadNotifications();
 
     const fetchStatus = () => {
@@ -132,19 +137,6 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
   const isActive = (to) =>
     location.pathname === to || (to !== "/recruiter-dashboard" && location.pathname.startsWith(to));
 
-  const toggleTheme = () => {
-    const next = isDark ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem("theme", next);
-    setIsDark(!isDark);
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/auth/recruiter");
-  };
-
   return (
     <>
     <div className={`rx-root ${collapsed ? "collapsed" : ""}`}>
@@ -186,7 +178,7 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
         </nav>
 
         <div className="rx-nav-bottom">
-          <button type="button" className="rx-nav-item rx-logout" onClick={logout} title="Logout">
+          <button type="button" className="rx-nav-item rx-logout" onClick={handleLogout} title="Logout">
             <LogOut size={18} />
             {!collapsed && <span>Logout</span>}
           </button>

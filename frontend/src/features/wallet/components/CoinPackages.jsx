@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { IndianRupee, Sparkles } from "lucide-react";
 import notify from "@/utils/notify";
-import { createOrder, verifyPayment } from "@/services/walletAPI";
-import { DEFAULT_PACKAGES } from "@/constants/walletConfig";
+import { createOrder, verifyPayment } from "../services/walletAPI";
+import { DEFAULT_PACKAGES } from "../constants/walletConfig";
 import '@/styles/CoinPackages.css';
 
 function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseSuccess }) {

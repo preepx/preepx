@@ -52,7 +52,7 @@ body:has(.jl-root) {
     top: 0;
     height: 100vh;
     flex-shrink: 0;
-    z-index: 50;
+    z-index: 110;
     transition: width 0.25s ease, background-color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -111,7 +111,7 @@ body:has(.jl-root) {
     gap: 16px;
     position: sticky;
     top: 0;
-    z-index: 40;
+    z-index: 100;
     box-sizing: border-box;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }

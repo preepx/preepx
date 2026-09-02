@@ -27,7 +27,6 @@ export default function CompanyQuestionBank() {
   React.useEffect(() => {
     qapi.get(`/company-prep?company=${slug}`)
       .then(res => {
-        console.log(`🔥 Fetched ${res.data.length} questions for ${slug} from Database!`);
         setQuestionsData(res.data);
       })
       .catch(err => console.error("Error fetching bank", err))

@@ -1,18 +1,17 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import { getStoredToken, getStoredUser } from "@/utils/authUtils";
 
 export default function ProtectedRoute({ children, allowedRoles }) {
-  const token = localStorage.getItem("token");
-  let user = null;
-  try {
-    user = JSON.parse(localStorage.getItem("user") || "null");
-  } catch (e) {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-  }
+  const token = getStoredToken();
+  const user = getStoredUser();
+  const location = useLocation();
 
   if (!token || !user) {
-    return <Navigate to="/auth" replace />;
+    const redirectParam = location.pathname !== "/"
+      ? `?redirect=${encodeURIComponent(location.pathname + location.search)}`
+      : "";
+    return <Navigate to={`/auth${redirectParam}`} replace />;
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {

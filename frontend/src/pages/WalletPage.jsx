@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import { Coins, Mic, Zap, Shield, TrendingUp, Plus, X } from "lucide-react";
 import notify from "@/utils/notify";
-import { createOrder, verifyPayment } from "@/services/walletAPI";
-import { useWallet } from "@/hooks/useWallet";
-import CoinPackages from "@/components/ui/CoinPackages";
-import TransactionList from "@/components/ui/TransactionList";
-import { WALLET_PRICING } from "@/constants/walletConfig";
+import { useWallet, CoinPackages, TransactionList, createOrder, verifyPayment, WALLET_PRICING } from "@/features/wallet";
 import '@/styles/WalletPage.css';
 
 import Loader from "@/components/Loader";

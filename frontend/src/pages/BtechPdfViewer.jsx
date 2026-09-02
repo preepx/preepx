@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import notify from "@/utils/notify";
 import { AlertTriangle } from "lucide-react";
 import { Document, Page, pdfjs } from "react-pdf";
-import API from "@/utils/api";
+import { getBtecNoteById } from "@/services/btecNotesAPI";
 import Loader from "@/components/Loader";
 import '@/styles/BtechPdfViewer.css';
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -13,10 +13,7 @@ import "react-pdf/dist/Page/TextLayer.css";
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 /**
- * Protected PDF viewer using react-pdf.
- * - Loads metadata from /btec-notes/:id
- * - Fetches PDF blob with Auth token securely.
- * - Prevents zooming out by locking the scale.
+ * Renders an inline, un-downloadable PDF viewer for a single B.Tech note.
  */
 function BtechPdfViewer() {
   const { id }     = useParams();
@@ -30,12 +27,12 @@ function BtechPdfViewer() {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    API.get(`/btec-notes/${id}`)
-      .then((r) => {
-        if (r.data.format !== "pdf") {
+    getBtecNoteById(id)
+      .then((data) => {
+        if (data.format !== "pdf") {
           setError("This note is not a PDF.");
         } else {
-          setNote(r.data);
+          setNote(data);
         }
       })
       .catch(() => setError("Could not load this note."))

@@ -4,3 +4,5 @@ export * from "./pages/JobBoard";
 export * from "./pages/JobsMyApplications";
 export * from "./pages/JobsAssessments";
 export * from "./pages/JobsProfile";
+export { default as JobLogo } from "./components/JobLogo";
+export * from "./utils/jobHelpers";

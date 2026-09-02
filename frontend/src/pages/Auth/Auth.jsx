@@ -4,20 +4,18 @@ import API from "@/utils/api";
 import notify from "@/utils/notify";
 import { showAppError } from "@/utils/appAlert";
 import { triggerAnnouncement } from "@/utils/announcement";
-import {
-  Mail, Lock, User, Eye, EyeOff,
-  ArrowRight, Shield, Sparkles, KeyRound, CheckCircle,
-  Building, Globe, X, ArrowLeft, BarChart3, Briefcase,
-  // Wrench, Clock, Bell
-} from "lucide-react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { User, Briefcase, X } from "lucide-react";
 import RecruiterComingSoonModal from "@/components/landing/RecruiterComingSoonModal";
+import {
+  AuthHero,
+  LoginForm,
+  RegisterCandidateForm,
+  RegisterRecruiterForm,
+  OtpVerificationForm,
+  ForgotPasswordEmailForm,
+  ForgotPasswordNewPassForm
+} from "./components";
 import "@/styles/ModernAuth.css";
-
-// ─────────────────────────────────────────────────────────
-// 🔧 MAINTENANCE MODE — Set to false / commented out
-// ─────────────────────────────────────────────────────────
-// const MAINTENANCE_MODE = true;
 
 const EMPTY_CANDIDATE_REG = {
   fullName: "",
@@ -26,7 +24,6 @@ const EMPTY_CANDIDATE_REG = {
   confirmPassword: "",
   referralCode: ""
 };
-
 
 const EMPTY_RECRUITER_REG = {
   fullName: "",
@@ -37,62 +34,9 @@ const EMPTY_RECRUITER_REG = {
   confirmPassword: ""
 };
 
-// ─────────────────────────────────────────────────────────
-// Maintenance Modal Component (Commented out)
-// ─────────────────────────────────────────────────────────
-// function MaintenanceModal({ onClose }) {
-//   return (
-//     <div className="maint-overlay" onClick={onClose}>
-//       <div className="maint-modal" onClick={(e) => e.stopPropagation()}>
-//         <button className="maint-close" onClick={onClose} aria-label="Close">
-//           <X size={16} />
-//         </button>
-// 
-//         {/* Logo */}
-//         <img src="/preepx_logo.png" alt="PreepX" className="maint-logo" />
-// 
-//         {/* Wrench badge */}
-//         <div className="maint-badge">
-//           <Wrench size={11} className="maint-wrench" />
-//           Scheduled Maintenance
-//         </div>
-// 
-//         <h2 className="maint-title">
-//           We'll be back on
-//           <span className="maint-date"> September 1<sup>st</sup></span>
-//         </h2>
-// 
-//         <p className="maint-desc">
-//           Our servers are undergoing maintenance for a faster experience.
-//           Everything will be fully live on <strong>1st September 2026</strong>.
-//         </p>
-// 
-//         <div className="maint-info-row">
-//           <div className="maint-info-card">
-//             <Clock size={14} />
-//             <span>Back Online</span>
-//             <strong>Sept 1, 2026</strong>
-//           </div>
-//           <div className="maint-info-card">
-//             <Bell size={14} />
-//             <span>Status</span>
-//             <strong>In Progress</strong>
-//           </div>
-//         </div>
-// 
-//         <button className="maint-ok-btn" onClick={onClose}>
-//           Got it! 💜
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
 function Auth({ defaultRole }) {
   const navigate = useNavigate();
   const location = useLocation();
-
-  // const [showMaintenance, setShowMaintenance] = useState(false);
 
   // Role: candidate | recruiter
   const queryRole = new URLSearchParams(location.search).get("role");
@@ -124,7 +68,6 @@ function Auth({ defaultRole }) {
   const [otpEmail, setOtpEmail] = useState("");
   const [resendTimer, setResendTimer] = useState(0);
   const [verifiedOtp, setVerifiedOtp] = useState("");
-  const otpInputsRef = useRef([]);
   const timerRef = useRef(null);
 
   // Forgot Password State
@@ -157,7 +100,7 @@ function Auth({ defaultRole }) {
 
     const refCode = params.get("ref");
     if (refCode) {
-      setCandidateReg(prev => ({ ...prev, referralCode: refCode }));
+      setCandidateReg((prev) => ({ ...prev, referralCode: refCode }));
       setScreen("register");
     }
   }, [navigate]);
@@ -189,7 +132,6 @@ function Auth({ defaultRole }) {
   };
 
   const handleGoogleLogin = () => {
-    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     const apiBase = API.defaults.baseURL;
     let url = `${apiBase.replace(/\/api$/, "")}/api/auth/google`;
     if (candidateReg.referralCode) {
@@ -198,53 +140,11 @@ function Auth({ defaultRole }) {
     window.location.href = url;
   };
 
-  // ── OTP input helpers ──────────────────────────────────
-  const handleOtpChange = (index, value) => {
-    const digit = value.replace(/\D/g, "").slice(-1);
-    const newOtp = [...otp];
-    newOtp[index] = digit;
-    setOtp(newOtp);
-    if (digit && index < 5) {
-      setTimeout(() => otpInputsRef.current[index + 1]?.focus(), 0);
-    }
-  };
-
-  const handleOtpKeyDown = (index, e) => {
-    if (e.key === "Backspace") {
-      e.preventDefault();
-      const newOtp = [...otp];
-      if (newOtp[index]) {
-        newOtp[index] = "";
-        setOtp(newOtp);
-      } else if (index > 0) {
-        newOtp[index - 1] = "";
-        setOtp(newOtp);
-        otpInputsRef.current[index - 1]?.focus();
-      }
-    } else if (e.key === "ArrowLeft" && index > 0) {
-      otpInputsRef.current[index - 1]?.focus();
-    } else if (e.key === "ArrowRight" && index < 5) {
-      otpInputsRef.current[index + 1]?.focus();
-    }
-  };
-
-  const handleOtpPaste = (e) => {
-    e.preventDefault();
-    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
-    if (!pasted) return;
-    const newOtp = ["", "", "", "", "", ""];
-    for (let i = 0; i < pasted.length; i++) newOtp[i] = pasted[i];
-    setOtp(newOtp);
-    const focusIndex = Math.min(pasted.length, 5);
-    setTimeout(() => otpInputsRef.current[focusIndex]?.focus(), 0);
-  };
-
   // ══════════════════════════════════════════════════════
   // CANDIDATE AUTH HANDLERS
   // ══════════════════════════════════════════════════════
   const handleCandidateLogin = async (e) => {
     e.preventDefault();
-    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     setLoading(true);
     try {
       const res = await API.post("/users/login", {
@@ -265,7 +165,6 @@ function Auth({ defaultRole }) {
 
   const handleCandidateRegister = async (e) => {
     e.preventDefault();
-    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     if (candidateReg.password.length < 6) {
       showAppError("Password must be at least 6 characters.", "Password too short");
       return;
@@ -322,7 +221,6 @@ function Auth({ defaultRole }) {
     } catch (error) {
       showAppError(error.response?.data?.message || "Invalid code. Try again.", "Verification failed");
       resetOtp();
-      setTimeout(() => otpInputsRef.current[0]?.focus(), 0);
     } finally {
       setLoading(false);
     }
@@ -340,7 +238,6 @@ function Auth({ defaultRole }) {
       resetOtp();
       setResendTimer(60);
       notify.success("New code sent!");
-      otpInputsRef.current[0]?.focus();
     } catch (error) {
       showAppError("Could not resend code. Please try again.", "Resend failed");
     } finally {
@@ -353,7 +250,6 @@ function Auth({ defaultRole }) {
   // ══════════════════════════════════════════════════════
   const handleRecruiterLogin = async (e) => {
     e.preventDefault();
-    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     setLoading(true);
     try {
       const { data } = await API.post("/recruiter/login", {
@@ -374,7 +270,6 @@ function Auth({ defaultRole }) {
 
   const handleRecruiterRegister = async (e) => {
     e.preventDefault();
-    // if (MAINTENANCE_MODE) { setShowMaintenance(true); return; }
     if (recruiterReg.password !== recruiterReg.confirmPassword) {
       showAppError("Passwords do not match", "Error");
       return;
@@ -405,7 +300,7 @@ function Auth({ defaultRole }) {
     try {
       const { data } = await API.post("/recruiter/register", {
         email: otpEmail,
-        otp: otpValue
+        otp: otpValue,
       });
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
@@ -468,7 +363,6 @@ function Auth({ defaultRole }) {
     } catch (error) {
       showAppError(error.response?.data?.message || "Invalid code. Try again.", "Verification failed");
       resetOtp();
-      setTimeout(() => otpInputsRef.current[0]?.focus(), 0);
     } finally {
       setLoading(false);
     }
@@ -505,700 +399,223 @@ function Auth({ defaultRole }) {
     }
   };
 
-  // OTP Boxes JSX
-  const renderOtpBoxes = () => (
-    <div className="otp-boxes">
-      {otp.map((digit, i) => (
-        <input
-          key={i}
-          ref={(el) => (otpInputsRef.current[i] = el)}
-          type="text"
-          inputMode="numeric"
-          maxLength={1}
-          value={digit}
-          onChange={(e) => handleOtpChange(i, e.target.value)}
-          onKeyDown={(e) => handleOtpKeyDown(i, e)}
-          onPaste={handleOtpPaste}
-          onFocus={(e) => e.target.select()}
-          className={`otp-box${digit ? " otp-box--filled" : ""}`}
-          autoComplete={i === 0 ? "one-time-code" : "off"}
-        />
-      ))}
-    </div>
-  );
-
   return (
     <>
-    {/* {showMaintenance && <MaintenanceModal onClose={() => setShowMaintenance(false)} />} */}
-    <div className="modern-auth-overlay" onClick={(e) => { if (e.target === e.currentTarget) handleClose(); }}>
-      <div className="modern-auth-modal" onClick={(e) => e.stopPropagation()}>
-        {/* Desktop Close Button */}
-        <button className="modern-auth-close-btn desktop-only-close" onClick={handleClose} aria-label="Close">
-          <X size={16} />
-        </button>
+      <div
+        className="modern-auth-overlay"
+        onClick={(e) => {
+          if (e.target === e.currentTarget) handleClose();
+        }}
+      >
+        <div className="modern-auth-modal" onClick={(e) => e.stopPropagation()}>
+          {/* Desktop Close Button */}
+          <button
+            className="modern-auth-close-btn desktop-only-close"
+            onClick={handleClose}
+            aria-label="Close"
+          >
+            <X size={16} />
+          </button>
 
-        {/* ── LEFT BRANDING PANEL (Desktop only) ── */}
-        <aside className="modern-auth-left">
-          <div className="auth-radar-ring" />
-          <div className="auth-radar-ring-2" />
+          {/* ── LEFT BRANDING PANEL (Desktop only) ── */}
+          <AuthHero onRecruiterClick={() => setShowRecruiterComingSoon(true)} />
 
-          <div className="modern-auth-left-top">
-            <Link to="/" style={{ display: "inline-block" }}>
-              <img src="/preepx_logo.png" alt="PreepX" className="auth-brand-logo" />
-            </Link>
-
-            <h1 className="auth-brand-title">
-              Prepare.<br />Prove.<br />
-              <span className="gradient-text-purple">Get Hired.</span>
-            </h1>
-
-            <p className="auth-brand-desc">
-              AI-powered platform to help candidates prepare better and help recruiters hire the right talent faster.
-            </p>
-          </div>
-
-          <div className="modern-auth-left-bottom">
-            <div className="auth-value-props">
-              <div className="auth-prop-card">
-                <div className="auth-prop-icon candidate-icon">
-                  <BarChart3 size={17} />
-                </div>
-                <div className="auth-prop-info">
-                  <h4>For Candidates</h4>
-                  <p>Practice smart. Get confident. Crack every interview.</p>
-                </div>
-              </div>
-
-              <div
-                className="auth-prop-card"
-                style={{ cursor: "pointer" }}
-                onClick={() => setShowRecruiterComingSoon(true)}
-              >
-                <div className="auth-prop-icon recruiter-icon">
-                  <Briefcase size={17} />
-                </div>
-                <div className="auth-prop-info">
-                  <h4>For Recruiters</h4>
-                  <p>Find top talent faster. Hire with confidence.</p>
-                </div>
-              </div>
+          {/* ── RIGHT AUTH FORM CARD (Desktop & Mobile) ── */}
+          <div className="modern-auth-right">
+            {/* Mobile Header */}
+            <div className="modern-auth-mobile-header">
+              <Link to="/">
+                <img src="/preepx_logo.png" alt="PreepX" className="modern-auth-mobile-logo" />
+              </Link>
+              <button className="modern-auth-close-btn" onClick={handleClose} aria-label="Close">
+                <X size={16} />
+              </button>
             </div>
 
-            <div className="auth-trust-footer">
-              <Shield size={15} />
-              <span>Trusted by thousands of candidates & recruiters</span>
-            </div>
-          </div>
-        </aside>
-
-        {/* ── RIGHT AUTH FORM CARD (Desktop & Mobile) ── */}
-        <div className="modern-auth-right">
-          {/* Mobile Header */}
-          <div className="modern-auth-mobile-header">
-            <Link to="/">
-              <img src="/preepx_logo.png" alt="PreepX" className="modern-auth-mobile-logo" />
-            </Link>
-            <button className="modern-auth-close-btn" onClick={handleClose} aria-label="Close">
-              <X size={16} />
-            </button>
-          </div>
-
-          {/* Role Switcher Pill */}
-          <div className="auth-role-switcher">
-            <button
-              type="button"
-              className={`auth-role-btn ${activeRole === "candidate" ? "active" : ""}`}
-              onClick={() => handleRoleChange("candidate")}
-            >
-              <User size={15} />
-              <span>Candidate</span>
-            </button>
-            <button
-              type="button"
-              className={`auth-role-btn ${activeRole === "recruiter" ? "active" : ""}`}
-              onClick={() => handleRoleChange("recruiter")}
-            >
-              <Briefcase size={15} />
-              <span>Recruiter</span>
-            </button>
-          </div>
-
-          {/* Mode Tabs (Login / Signup) */}
-          {(screen === "login" || screen === "register") && (
-            <div className="auth-mode-tabs">
+            {/* Role Switcher Pill */}
+            <div className="auth-role-switcher">
               <button
                 type="button"
-                className={`auth-mode-tab ${screen === "login" ? "active" : ""}`}
-                onClick={() => { setScreen("login"); resetOtp(); }}
+                className={`auth-role-btn ${activeRole === "candidate" ? "active" : ""}`}
+                onClick={() => handleRoleChange("candidate")}
               >
-                Login
+                <User size={15} />
+                <span>Candidate</span>
               </button>
               <button
                 type="button"
-                className={`auth-mode-tab ${screen === "register" ? "active" : ""}`}
-                onClick={() => { setScreen("register"); resetOtp(); }}
+                className={`auth-role-btn ${activeRole === "recruiter" ? "active" : ""}`}
+                onClick={() => handleRoleChange("recruiter")}
               >
-                Signup
+                <Briefcase size={15} />
+                <span>Recruiter</span>
               </button>
             </div>
-          )}
 
-          {/* ══════════════════════════════════════════
-              SCREEN: LOGIN (Candidate & Recruiter)
-          ══════════════════════════════════════════ */}
-          {screen === "login" && (
-            <form onSubmit={activeRole === "recruiter" ? handleRecruiterLogin : handleCandidateLogin} className="auth-form-wrap">
-              <div className="auth-input-group">
-                <label>Email ID</label>
-                <div className="auth-input-box">
-                  <Mail size={16} className="input-icon" />
-                  <input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={loginData.email}
-                    onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
-                    className="auth-input"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="auth-input-group">
-                <label>Password</label>
-                <div className="auth-input-box">
-                  <Lock size={16} className="input-icon" />
-                  <input
-                    type={showLoginPass ? "text" : "password"}
-                    placeholder="Enter your password"
-                    value={loginData.password}
-                    onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-                    className="auth-input"
-                    required
-                  />
-                  <button
-                    type="button"
-                    className="auth-pass-toggle"
-                    onClick={() => setShowLoginPass(!showLoginPass)}
-                  >
-                    {showLoginPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="auth-forgot-row">
+            {/* Mode Tabs (Login / Signup) */}
+            {(screen === "login" || screen === "register") && (
+              <div className="auth-mode-tabs">
                 <button
                   type="button"
-                  className="auth-forgot-btn"
-                  onClick={() => { setForgotEmail(loginData.email); setScreen("forgot-email"); }}
+                  className={`auth-mode-tab ${screen === "login" ? "active" : ""}`}
+                  onClick={() => {
+                    setScreen("login");
+                    resetOtp();
+                  }}
                 >
-                  Forgot password?
+                  Login
                 </button>
-              </div>
-
-              <button type="submit" className="auth-submit-btn" disabled={loading}>
-                {loading ? "Signing in..." : "Login"}
-              </button>
-
-              <div className="auth-divider-line">
-                <span>or continue with</span>
-              </div>
-
-              <button
-                type="button"
-                className="auth-google-btn-full"
-                onClick={handleGoogleLogin}
-                disabled={loading}
-              >
-                <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05" />
-                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335" />
-                </svg>
-                <span>Continue with Google</span>
-              </button>
-
-              <div className="auth-switch-prompt">
-                Don't have an account?
-                <button type="button" onClick={() => { setScreen("register"); resetOtp(); }}>
+                <button
+                  type="button"
+                  className={`auth-mode-tab ${screen === "register" ? "active" : ""}`}
+                  onClick={() => {
+                    setScreen("register");
+                    resetOtp();
+                  }}
+                >
                   Signup
                 </button>
               </div>
-            </form>
-          )}
+            )}
 
-          {/* ══════════════════════════════════════════
-              SCREEN: CANDIDATE REGISTER
-          ══════════════════════════════════════════ */}
-          {screen === "register" && activeRole === "candidate" && (
-            <form onSubmit={handleCandidateRegister} className="auth-form-wrap">
-              <div className="auth-form-row">
-                <div className="auth-input-group">
-                  <label>Full Name</label>
-                  <div className="auth-input-box">
-                    <User size={16} className="input-icon" />
-                    <input
-                      type="text"
-                      placeholder="e.g. Rahul Verma"
-                      value={candidateReg.fullName}
-                      onChange={(e) => setCandidateReg({ ...candidateReg, fullName: e.target.value })}
-                      className="auth-input"
-                      required
-                    />
-                  </div>
-                </div>
+            {/* SCREEN: LOGIN */}
+            {screen === "login" && (
+              <LoginForm
+                loginData={loginData}
+                setLoginData={setLoginData}
+                showLoginPass={showLoginPass}
+                setShowLoginPass={setShowLoginPass}
+                loading={loading}
+                onSubmit={activeRole === "recruiter" ? handleRecruiterLogin : handleCandidateLogin}
+                onForgotPassword={() => {
+                  setForgotEmail(loginData.email);
+                  setScreen("forgot-email");
+                }}
+                onGoogleLogin={handleGoogleLogin}
+                onSwitchToRegister={() => {
+                  setScreen("register");
+                  resetOtp();
+                }}
+              />
+            )}
 
-                <div className="auth-input-group">
-                  <label>Email ID</label>
-                  <div className="auth-input-box">
-                    <Mail size={16} className="input-icon" />
-                    <input
-                      type="email"
-                      placeholder="you@example.com"
-                      value={candidateReg.email}
-                      onChange={(e) => setCandidateReg({ ...candidateReg, email: e.target.value })}
-                      className="auth-input"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
+            {/* SCREEN: CANDIDATE REGISTER */}
+            {screen === "register" && activeRole === "candidate" && (
+              <RegisterCandidateForm
+                candidateReg={candidateReg}
+                setCandidateReg={setCandidateReg}
+                showCandPass={showCandPass}
+                setShowCandPass={setShowCandPass}
+                showCandConfirmPass={showCandConfirmPass}
+                setShowCandConfirmPass={setShowCandConfirmPass}
+                recaptchaRef={recaptchaRef}
+                setCaptchaToken={setCaptchaToken}
+                loading={loading}
+                onSubmit={handleCandidateRegister}
+                onGoogleLogin={handleGoogleLogin}
+                onSwitchToLogin={() => {
+                  setScreen("login");
+                  resetOtp();
+                }}
+              />
+            )}
 
-              <div className="auth-form-row">
-                <div className="auth-input-group">
-                  <label>Password</label>
-                  <div className="auth-input-box">
-                    <Lock size={16} className="input-icon" />
-                    <input
-                      type={showCandPass ? "text" : "password"}
-                      placeholder="Min. 6 chars"
-                      value={candidateReg.password}
-                      onChange={(e) => setCandidateReg({ ...candidateReg, password: e.target.value })}
-                      className="auth-input"
-                      minLength={6}
-                      required
-                    />
-                    <button
-                      type="button"
-                      className="auth-pass-toggle"
-                      onClick={() => setShowCandPass(!showCandPass)}
-                    >
-                      {showCandPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                </div>
+            {/* SCREEN: RECRUITER REGISTER */}
+            {screen === "register" && activeRole === "recruiter" && (
+              <RegisterRecruiterForm
+                recruiterReg={recruiterReg}
+                setRecruiterReg={setRecruiterReg}
+                showRecPass={showRecPass}
+                setShowRecPass={setShowRecPass}
+                showRecConfirmPass={showRecConfirmPass}
+                setShowRecConfirmPass={setShowRecConfirmPass}
+                loading={loading}
+                onSubmit={handleRecruiterRegister}
+                onSwitchToLogin={() => {
+                  setScreen("login");
+                  resetOtp();
+                }}
+              />
+            )}
 
-                <div className="auth-input-group">
-                  <label>Confirm Password</label>
-                  <div className="auth-input-box">
-                    <Lock size={16} className="input-icon" />
-                    <input
-                      type={showCandConfirmPass ? "text" : "password"}
-                      placeholder="Confirm password"
-                      value={candidateReg.confirmPassword}
-                      onChange={(e) => setCandidateReg({ ...candidateReg, confirmPassword: e.target.value })}
-                      className="auth-input"
-                      minLength={6}
-                      required
-                    />
-                    <button
-                      type="button"
-                      className="auth-pass-toggle"
-                      onClick={() => setShowCandConfirmPass(!showCandConfirmPass)}
-                    >
-                      {showCandConfirmPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                </div>
-              </div>
+            {/* SCREEN: REGISTRATION OTP */}
+            {screen === "reg-otp" && (
+              <OtpVerificationForm
+                title="Verify your email"
+                subtitle="Enter the 6-digit verification code sent to"
+                email={otpEmail}
+                otp={otp}
+                setOtp={setOtp}
+                loading={loading}
+                submitLabel="Verify & Complete Signup"
+                resendTimer={resendTimer}
+                onSubmit={activeRole === "recruiter" ? handleVerifyRecruiterOtp : handleVerifyCandidateOtp}
+                onResend={activeRole === "recruiter" ? handleRecruiterRegister : handleResendCandidateOtp}
+                onBack={() => setScreen("register")}
+                backLabel="← Change details"
+              />
+            )}
 
-              <div className="auth-form-row auth-ref-captcha-row">
-                <div className="auth-input-group">
-                  <label>Referral Code (Optional)</label>
-                  <div className="auth-input-box">
-                    <Sparkles size={16} className="input-icon" />
-                    <input
-                      type="text"
-                      placeholder="e.g. REF-12345"
-                      value={candidateReg.referralCode}
-                      onChange={(e) => setCandidateReg({ ...candidateReg, referralCode: e.target.value.toUpperCase() })}
-                      className="auth-input"
-                    />
-                  </div>
-                </div>
+            {/* SCREEN: FORGOT PASSWORD (EMAIL) */}
+            {screen === "forgot-email" && (
+              <ForgotPasswordEmailForm
+                forgotEmail={forgotEmail}
+                setForgotEmail={setForgotEmail}
+                activeRole={activeRole}
+                recaptchaRef={recaptchaRef}
+                setCaptchaToken={setCaptchaToken}
+                loading={loading}
+                onSubmit={handleForgotEmailSubmit}
+                onBackToLogin={() => {
+                  setScreen("login");
+                  resetOtp();
+                }}
+              />
+            )}
 
-                <div className="auth-captcha-col">
-                  <label>Verification</label>
-                  <div className="auth-captcha-wrapper">
-                    <ReCAPTCHA
-                      ref={recaptchaRef}
-                      sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_RECAPTCHA_SITE_KEY"}
-                      onChange={(token) => setCaptchaToken(token)}
-                    />
-                  </div>
-                </div>
-              </div>
+            {/* SCREEN: FORGOT PASSWORD (OTP) */}
+            {screen === "forgot-otp" && (
+              <OtpVerificationForm
+                title="Enter reset code"
+                subtitle="Enter the 6-digit code sent to"
+                email={otpEmail}
+                otp={otp}
+                setOtp={setOtp}
+                loading={loading}
+                submitLabel="Verify Code"
+                resendTimer={resendTimer}
+                onSubmit={handleVerifyResetOtp}
+                onResend={handleForgotEmailSubmit}
+                onBack={() => setScreen("forgot-email")}
+                backLabel="← Change email"
+              />
+            )}
 
-              <button type="submit" className="auth-submit-btn" disabled={loading}>
-                {loading ? "Sending verification code..." : "Create Account"}
-              </button>
-
-              <div className="auth-divider-line">
-                <span>or continue with</span>
-              </div>
-
-              <button
-                type="button"
-                className="auth-google-btn-full"
-                onClick={handleGoogleLogin}
-                disabled={loading}
-              >
-                <svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05" />
-                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335" />
-                </svg>
-                <span>Continue with Google</span>
-              </button>
-
-              <div className="auth-switch-prompt">
-                Already have an account?
-                <button type="button" onClick={() => { setScreen("login"); resetOtp(); }}>
-                  Login
-                </button>
-              </div>
-            </form>
-          )}
-
-          {/* ══════════════════════════════════════════
-              SCREEN: RECRUITER REGISTER
-          ══════════════════════════════════════════ */}
-          {screen === "register" && activeRole === "recruiter" && (
-            <form onSubmit={handleRecruiterRegister} className="auth-form-wrap">
-              <div className="auth-form-row">
-                <div className="auth-input-group">
-                  <label>Full Name</label>
-                  <div className="auth-input-box">
-                    <User size={16} className="input-icon" />
-                    <input
-                      type="text"
-                      placeholder="e.g. Sarah Jenkins"
-                      value={recruiterReg.fullName}
-                      onChange={(e) => setRecruiterReg({ ...recruiterReg, fullName: e.target.value })}
-                      className="auth-input"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="auth-input-group">
-                  <label>Work Email</label>
-                  <div className="auth-input-box">
-                    <Mail size={16} className="input-icon" />
-                    <input
-                      type="email"
-                      placeholder="sarah@company.com"
-                      value={recruiterReg.email}
-                      onChange={(e) => setRecruiterReg({ ...recruiterReg, email: e.target.value })}
-                      className="auth-input"
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="auth-form-row">
-                <div className="auth-input-group">
-                  <label>Company Name</label>
-                  <div className="auth-input-box">
-                    <Building size={16} className="input-icon" />
-                    <input
-                      type="text"
-                      placeholder="Acme Technologies"
-                      value={recruiterReg.companyName}
-                      onChange={(e) => setRecruiterReg({ ...recruiterReg, companyName: e.target.value })}
-                      className="auth-input"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="auth-input-group">
-                  <label>Company Website</label>
-                  <div className="auth-input-box">
-                    <Globe size={16} className="input-icon" />
-                    <input
-                      type="url"
-                      placeholder="https://company.com"
-                      value={recruiterReg.companyWebsite}
-                      onChange={(e) => setRecruiterReg({ ...recruiterReg, companyWebsite: e.target.value })}
-                      className="auth-input"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="auth-form-row">
-                <div className="auth-input-group">
-                  <label>Password</label>
-                  <div className="auth-input-box">
-                    <Lock size={16} className="input-icon" />
-                    <input
-                      type={showRecPass ? "text" : "password"}
-                      placeholder="Min. 6 chars"
-                      value={recruiterReg.password}
-                      onChange={(e) => setRecruiterReg({ ...recruiterReg, password: e.target.value })}
-                      className="auth-input"
-                      minLength={6}
-                      required
-                    />
-                    <button
-                      type="button"
-                      className="auth-pass-toggle"
-                      onClick={() => setShowRecPass(!showRecPass)}
-                    >
-                      {showRecPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                </div>
-
-                <div className="auth-input-group">
-                  <label>Confirm Password</label>
-                  <div className="auth-input-box">
-                    <Lock size={16} className="input-icon" />
-                    <input
-                      type={showRecConfirmPass ? "text" : "password"}
-                      placeholder="Confirm password"
-                      value={recruiterReg.confirmPassword}
-                      onChange={(e) => setRecruiterReg({ ...recruiterReg, confirmPassword: e.target.value })}
-                      className="auth-input"
-                      minLength={6}
-                      required
-                    />
-                    <button
-                      type="button"
-                      className="auth-pass-toggle"
-                      onClick={() => setShowRecConfirmPass(!showRecConfirmPass)}
-                    >
-                      {showRecConfirmPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <button type="submit" className="auth-submit-btn" disabled={loading}>
-                {loading ? "Sending verification code..." : "Create Recruiter Account"}
-              </button>
-
-              <div className="auth-switch-prompt">
-                Already have an account?
-                <button type="button" onClick={() => { setScreen("login"); resetOtp(); }}>
-                  Login
-                </button>
-              </div>
-            </form>
-          )}
-
-          {/* ══════════════════════════════════════════
-              SCREEN: REGISTRATION OTP VERIFICATION
-          ══════════════════════════════════════════ */}
-          {screen === "reg-otp" && (
-            <form onSubmit={activeRole === "recruiter" ? handleVerifyRecruiterOtp : handleVerifyCandidateOtp} className="auth-otp-screen">
-              <div className="otp-icon-wrap">
-                <KeyRound size={26} />
-              </div>
-              <h2 className="auth-otp-title">Verify your email</h2>
-              <p className="auth-otp-sub">
-                Enter the 6-digit verification code sent to <strong>{otpEmail}</strong>
-              </p>
-
-              {renderOtpBoxes()}
-
-              <button type="submit" className="auth-submit-btn" disabled={loading}>
-                {loading ? "Verifying code..." : "Verify & Complete Signup"}
-              </button>
-
-              <div className="otp-resend-row">
-                <button type="button" className="otp-back-link" onClick={() => setScreen("register")}>
-                  ← Change details
-                </button>
-                <button
-                  type="button"
-                  className="otp-resend-btn"
-                  onClick={activeRole === "recruiter" ? handleRecruiterRegister : handleResendCandidateOtp}
-                  disabled={resendTimer > 0 || loading}
-                >
-                  {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend Code"}
-                </button>
-              </div>
-            </form>
-          )}
-
-          {/* ══════════════════════════════════════════
-              SCREEN: FORGOT PASSWORD (STEP 1 - EMAIL)
-          ══════════════════════════════════════════ */}
-          {screen === "forgot-email" && (
-            <form onSubmit={handleForgotEmailSubmit} className="auth-form-wrap">
-              <div className="auth-otp-screen">
-                <div className="otp-icon-wrap">
-                  <Lock size={26} />
-                </div>
-                <h2 className="auth-otp-title">Reset your password</h2>
-                <p className="auth-otp-sub">
-                  Enter your registered email to receive a password reset code.
-                </p>
-              </div>
-
-              <div className="auth-input-group">
-                <label>Registered Email Address</label>
-                <div className="auth-input-box">
-                  <Mail size={16} className="input-icon" />
-                  <input
-                    type="email"
-                    placeholder="you@example.com"
-                    value={forgotEmail}
-                    onChange={(e) => setForgotEmail(e.target.value)}
-                    className="auth-input"
-                    required
-                  />
-                </div>
-              </div>
-
-              {activeRole === "candidate" && (
-                <div style={{ margin: "4px 0", display: "flex", justifyContent: "center" }}>
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_RECAPTCHA_SITE_KEY"}
-                    onChange={(token) => setCaptchaToken(token)}
-                  />
-                </div>
-              )}
-
-              <button type="submit" className="auth-submit-btn" disabled={loading}>
-                {loading ? "Sending reset code..." : "Send Reset Code"}
-              </button>
-
-              <div className="auth-switch-prompt">
-                Remember your password?
-                <button type="button" onClick={() => { setScreen("login"); resetOtp(); }}>
-                  Back to Login
-                </button>
-              </div>
-            </form>
-          )}
-
-          {/* ══════════════════════════════════════════
-              SCREEN: FORGOT PASSWORD (STEP 2 - OTP)
-          ══════════════════════════════════════════ */}
-          {screen === "forgot-otp" && (
-            <form onSubmit={handleVerifyResetOtp} className="auth-otp-screen">
-              <div className="otp-icon-wrap">
-                <KeyRound size={26} />
-              </div>
-              <h2 className="auth-otp-title">Enter reset code</h2>
-              <p className="auth-otp-sub">
-                Enter the 6-digit code sent to <strong>{otpEmail}</strong>
-              </p>
-
-              {renderOtpBoxes()}
-
-              <button type="submit" className="auth-submit-btn" disabled={loading}>
-                {loading ? "Verifying..." : "Verify Code"}
-              </button>
-
-              <div className="otp-resend-row">
-                <button type="button" className="otp-back-link" onClick={() => setScreen("forgot-email")}>
-                  ← Change email
-                </button>
-                <button
-                  type="button"
-                  className="otp-resend-btn"
-                  onClick={handleForgotEmailSubmit}
-                  disabled={resendTimer > 0 || loading}
-                >
-                  {resendTimer > 0 ? `Resend in ${resendTimer}s` : "Resend Code"}
-                </button>
-              </div>
-            </form>
-          )}
-
-          {/* ══════════════════════════════════════════
-              SCREEN: FORGOT PASSWORD (STEP 3 - NEW PASS)
-          ══════════════════════════════════════════ */}
-          {screen === "forgot-newpass" && (
-            <form onSubmit={handleResetPassword} className="auth-form-wrap">
-              <div className="auth-otp-screen">
-                <div className="otp-icon-wrap" style={{ background: "rgba(16, 185, 129, 0.15)", borderColor: "rgba(16, 185, 129, 0.35)", color: "#34d399" }}>
-                  <CheckCircle size={26} />
-                </div>
-                <h2 className="auth-otp-title">Set new password</h2>
-                <p className="auth-otp-sub">
-                  Code verified! Create a secure new password for your account.
-                </p>
-              </div>
-
-              <div className="auth-input-group">
-                <label>New Password</label>
-                <div className="auth-input-box">
-                  <Lock size={16} className="input-icon" />
-                  <input
-                    type={showNewPass ? "text" : "password"}
-                    placeholder="Min. 6 characters"
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    className="auth-input"
-                    minLength={6}
-                    required
-                  />
-                  <button
-                    type="button"
-                    className="auth-pass-toggle"
-                    onClick={() => setShowNewPass(!showNewPass)}
-                  >
-                    {showNewPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="auth-input-group">
-                <label>Confirm New Password</label>
-                <div className="auth-input-box">
-                  <Lock size={16} className="input-icon" />
-                  <input
-                    type={showConfirmNewPass ? "text" : "password"}
-                    placeholder="Re-enter new password"
-                    value={confirmNewPassword}
-                    onChange={(e) => setConfirmNewPassword(e.target.value)}
-                    className="auth-input"
-                    minLength={6}
-                    required
-                  />
-                  <button
-                    type="button"
-                    className="auth-pass-toggle"
-                    onClick={() => setShowConfirmNewPass(!showConfirmNewPass)}
-                  >
-                    {showConfirmNewPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </div>
-
-              <button type="submit" className="auth-submit-btn" disabled={loading}>
-                {loading ? "Updating password..." : "Reset Password & Login"}
-              </button>
-            </form>
-          )}
+            {/* SCREEN: FORGOT PASSWORD (NEW PASSWORD) */}
+            {screen === "forgot-newpass" && (
+              <ForgotPasswordNewPassForm
+                newPassword={newPassword}
+                setNewPassword={setNewPassword}
+                confirmNewPassword={confirmNewPassword}
+                setConfirmNewPassword={setConfirmNewPassword}
+                showNewPass={showNewPass}
+                setShowNewPass={setShowNewPass}
+                showConfirmNewPass={showConfirmNewPass}
+                setShowConfirmNewPass={setShowConfirmNewPass}
+                loading={loading}
+                onSubmit={handleResetPassword}
+              />
+            )}
+          </div>
         </div>
-      </div>
 
-      {showRecruiterComingSoon && (
-        <RecruiterComingSoonModal
-          isOpen={showRecruiterComingSoon}
-          onClose={() => setShowRecruiterComingSoon(false)}
-        />
-      )}
-    </div>
+        {showRecruiterComingSoon && (
+          <RecruiterComingSoonModal
+            isOpen={showRecruiterComingSoon}
+            onClose={() => setShowRecruiterComingSoon(false)}
+          />
+        )}
+      </div>
     </>
   );
 }

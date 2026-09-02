@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useWallet } from "@/hooks/useWallet";
+import { useWallet } from "../hooks/useWallet";
 import '@/styles/WalletBadge.css';
 
 function WalletBadge() {

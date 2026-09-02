@@ -7,25 +7,9 @@ import { Link } from "react-router-dom";
 import SidebarApplicationAnalytics from "../components/SidebarApplicationAnalytics";
 import SidebarImproveProfile from "../components/SidebarImproveProfile";
 import { getProfile } from "@/services/userAPI";
+import { calcCompletion } from "../utils/jobHelpers";
 import '../styles/JobsMyApplications.css';
 import '../styles/ApplyJobsDashboard.css'; // For the shared sidebar components
-
-function calcCompletion(user) {
-  if (!user) return 0;
-  const checks = [
-    !!user.fullName,
-    !!user.email,
-    !!user.phone,
-    !!user.city,
-    !!user.headline,
-    (user.skills || []).length > 0,
-    (user.experience || []).length > 0,
-    (user.education || []).length > 0,
-    !!user.resumeUrl,
-    !!user.profilePic,
-  ];
-  return Math.round((checks.filter(Boolean).length / checks.length) * 100);
-}
 
 // --- MOCK DATA ---
 const APPS = [

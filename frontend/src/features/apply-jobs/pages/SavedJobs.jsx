@@ -11,41 +11,7 @@ import '../styles/JobBoard.css';
 import '../styles/ApplyJobsDashboard.css';
 import '../styles/JobsAssessments.css';
 
-const JobLogo = ({ job, className, style }) => {
-  const [error, setError] = useState(false);
-  const compName = job.isThirdParty ? job.externalCompanyName : job.companyName;
-
-  if (error || (!job.externalCompanyLogo && !["Google", "Microsoft", "Zomato", "Swiggy", "Paytm", "Adobe"].includes(job.companyName))) {
-    return (
-      <div className={className} style={{ ...style, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f1f5f9', color: '#64748b', fontWeight: 'bold' }}>
-        {(compName || 'C').charAt(0).toUpperCase()}
-      </div>
-    );
-  }
-
-  let src = job.externalCompanyLogo;
-  if (!job.isThirdParty) {
-    if (job.companyName === "Google") src = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";
-    else if (job.companyName === "Microsoft") src = "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg";
-    else if (job.companyName === "Zomato") src = "https://upload.wikimedia.org/wikipedia/commons/b/bd/Zomato_Logo.svg";
-    else if (job.companyName === "Swiggy") src = "https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg";
-    else if (job.companyName === "Paytm") src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg";
-    else if (job.companyName === "Adobe") src = "https://upload.wikimedia.org/wikipedia/commons/4/42/Adobe_Corporate_logo.svg";
-  }
-
-  return (
-    <img
-      src={src}
-      alt={compName}
-      className={className}
-      style={style}
-      onError={() => setError(true)}
-      onLoad={(e) => {
-        if (e.target.naturalWidth <= 10) setError(true);
-      }}
-    />
-  );
-};
+import JobLogo from "../components/JobLogo";
 
 export default function SavedJobs() {
   const navigate = useNavigate();
