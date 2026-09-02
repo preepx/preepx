@@ -54,6 +54,13 @@
     display: inline-flex !important;
 }
 
+@media (max-width: 1200px) {
+    .jl-hiring-live,
+    .jl-hiring-text {
+        display: none !important;
+    }
+}
+
 @media (max-width: 1024px) {
     .jl-topbar-center {
         display: none;
@@ -254,8 +261,9 @@
         padding: 16px;
     }
 
-    .jl-hiring-live {
-        display: none;
+    .jl-hiring-live,
+    .jl-hiring-text {
+        display: none !important;
     }
 }
 

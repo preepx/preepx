@@ -291,7 +291,8 @@ function JobsLayout({ children }) {
           {/* Right: icons + user */}
           <div className="jl-topbar-right">
             <div className="jl-hiring-live" title="Live hiring activity">
-              <Zap size={13} /> Hiring live
+              <Zap size={13} />
+              <span className="jl-hiring-text">Hiring live</span>
             </div>
             <button className="jl-tb-icon-btn jl-tb-notif" onClick={() => setShowNotifications(true)}>
               <Bell size={19} />
