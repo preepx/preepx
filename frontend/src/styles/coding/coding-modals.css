@@ -1,0 +1,174 @@
+/* ── Info Drawer (Right Side) ── */
+.ce-info-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  z-index: 20000;
+  display: flex;
+  justify-content: flex-end; /* Align drawer to the right */
+}
+
+.ce-info-modal {
+  background: #182230; /* Match coding page */
+  width: 450px;
+  max-width: 90vw;
+  height: 100vh;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  animation: slideInRight 0.3s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.ce-info-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  background: #182230;
+}
+
+.ce-info-header h3 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.ce-info-close {
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.ce-info-close:hover {
+  color: #fff;
+}
+
+.ce-info-tabs {
+  display: flex;
+  border-bottom: 1px solid #475569;
+  padding: 0 24px;
+}
+
+.ce-info-tab {
+  padding: 12px 0;
+  margin-right: 24px;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+.ce-info-tab:hover {
+  color: #cbd5e1;
+}
+.ce-info-tab.active {
+  color: #f8fafc;
+  border-bottom-color: #f8fafc;
+}
+
+.ce-info-content {
+  padding: 24px;
+  flex: 1;
+  overflow-y: auto;
+  color: #cbd5e1;
+}
+
+.ce-info-content h4 {
+  margin: 0 0 8px 0;
+  color: #f8fafc;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ce-info-content p {
+  margin: 0 0 24px 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #94a3b8;
+}
+
+.ce-shortcut-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ce-shortcut-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(15, 23, 42, 0.4);
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.ce-shortcut-item span {
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.ce-shortcut-item strong {
+  color: #f8fafc;
+  font-size: 13px;
+}
+
+/* ── Report Issue Modal ── */
+.ce-report-fieldset {
+  border: 1px solid #475569;
+  border-radius: 6px;
+  padding: 16px;
+  position: relative;
+  margin-bottom: 16px;
+  margin-top: 12px;
+}
+.ce-report-legend {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  background: #182230;
+  padding: 0 8px;
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 500;
+}
+.ce-report-radio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #e2e8f0;
+  font-size: 14px;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+.ce-report-radio:last-child {
+  margin-bottom: 0;
+}
+.ce-report-radio input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #6366f1;
+  cursor: pointer;
+}
+.ce-report-textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  padding: 12px;
+  color: #f8fafc;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 80px;
+}
+.ce-report-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+}

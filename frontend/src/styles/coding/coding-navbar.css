@@ -1,0 +1,224 @@
+/* ── Navbar ── */
+.ce-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  padding: 0 16px;
+  background: #1e293b;
+  /* Unstop topbar color */
+  border-bottom: 1px solid #334155;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.ce-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ce-brand {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+
+.ce-nav-divider {
+  width: 1px;
+  height: 24px;
+  background: #334155;
+  margin: 0 4px;
+}
+
+.ce-icon-muted {
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.ce-nav-title {
+  font-weight: 500;
+  font-size: 15px;
+  color: #f8fafc;
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ce-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ce-feature-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.ce-feature-btn:hover {
+  color: #f8fafc;
+}
+
+.ce-nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #f1f5f9;
+  cursor: pointer;
+}
+
+/* Language Dropdown */
+.ce-lang-dropdown {
+  position: relative;
+}
+
+.ce-lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #334155;
+  border: none;
+  color: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.ce-lang-btn:hover {
+  background: #475569;
+}
+
+.ce-lang-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  min-width: 180px;
+  z-index: 1000;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.ce-lang-option {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.ce-lang-option:hover {
+  background: #334155;
+}
+
+.ce-lang-option.active {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+}
+
+/* Timer */
+.ce-timer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f8fafc;
+  background: #1e293b;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #334155;
+}
+
+.ce-timer-danger {
+  color: #ef4444;
+  animation: ce-pulse 1s infinite;
+  border-color: #ef4444;
+}
+
+@keyframes ce-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.ce-nav-icon-btn {
+  background: transparent;
+  border: 1px solid #334155;
+  color: #f8fafc;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ce-nav-icon-btn:hover {
+  background: #334155;
+}
+
+.ce-exit-btn {
+  background: #f97316;
+  /* Orange exit button like unstop */
+  color: white;
+  border: none;
+  padding: 6px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.ce-exit-btn:hover {
+  background: #ea580c;
+}
+
+/* Camera */
+.ce-cam-warning {
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 600;
+  margin-right: 8px;
+  animation: ce-pulse 1.5s infinite;
+}
+
+.ce-cam-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #6366f1;
+  flex-shrink: 0;
+  transition: border-color 0.3s ease;
+}
+
+.ce-cam {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

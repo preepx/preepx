@@ -32,8 +32,7 @@ export const calculateProgress = (rewardId, user, dashboard) => {
     case "daily_login":
       return 1;
     case "complete_profile":
-      const hasProfile = user.fullName && user.email && user.mobile && user.college && user.degree;
-      return hasProfile ? 1 : 0;
+      return (user.fullName && user.email && user.mobile && user.college && user.degree) ? 1 : 0;
     case "ai_interview":
       return user.interviewsCompleted >= 1 ? 1 : 0;
     case "score_80":

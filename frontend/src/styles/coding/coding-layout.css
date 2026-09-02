@@ -1,0 +1,141 @@
+/* ── Base Layout ── */
+.ce-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: #182230;
+  /* Unstop dark blue background */
+  color: #e2e8f0;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.ce-blurred {
+  filter: blur(6px);
+  pointer-events: none;
+}
+
+/* ── Overlays ── */
+.ce-face-overlay,
+.ce-fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ce-face-overlay {
+  background: rgba(239, 68, 68, 0.92);
+}
+
+.ce-fullscreen-overlay {
+  background: rgba(15, 23, 42, 0.96);
+  z-index: 10001;
+}
+
+.ce-face-box,
+.ce-fullscreen-box {
+  background: #1e293b;
+  padding: 40px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 440px;
+  width: 90%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.ce-face-box {
+  color: #ef4444;
+}
+
+.ce-face-box h2 {
+  margin: 16px 0 8px;
+  font-size: 22px;
+  color: #f8fafc;
+}
+
+.ce-face-box p {
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.ce-fullscreen-box h2 {
+  font-size: 22px;
+  color: #ef4444;
+  margin-bottom: 12px;
+}
+
+.ce-fullscreen-box p {
+  color: #94a3b8;
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+.ce-fs-enter-btn,
+.ce-fs-exit-btn {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.ce-fs-enter-btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+}
+
+.ce-fs-enter-btn:hover {
+  background: #2563eb;
+}
+
+.ce-fs-exit-btn {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #334155;
+}
+
+.ce-fs-exit-btn:hover {
+  background: #334155;
+  color: #f8fafc;
+}
+
+/* Loading & Mobile */
+.ce-loading,
+.ce-mobile-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #0f172a;
+  color: #94a3b8;
+  gap: 16px;
+}
+
+.ce-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #334155;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: ce-spin 0.8s linear infinite;
+}
+
+@keyframes ce-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ce-mobile-block h2 {
+  color: #f8fafc;
+}

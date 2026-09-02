@@ -103,6 +103,7 @@
   padding: 12px 20px;
   position: relative;
   z-index: 2;
+  gap: 12px;
 }
 
 .jma-hstat {
@@ -152,24 +153,28 @@
   margin-bottom: 12px;
   flex-wrap: wrap;
   gap: 12px;
+  width: 100%;
+  min-width: 0;
 }
 
 .jma-tabs {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
 }
 
 .jma-tab {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: 8px;
   background: transparent;
   border: 1px solid #e2e8f0;
   color: #64748b;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
@@ -262,6 +267,9 @@
   display: flex;
   gap: 12px;
   align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
 }
 
 .jma-search-bar {
@@ -287,6 +295,7 @@
   flex: 1;
   font-size: 13.5px;
   color: #1e293b;
+  min-width: 0;
 }
 
 [data-theme="dark"] .jma-search-bar input {
@@ -631,6 +640,42 @@
   border-color: #1e293b;
 }
 
+/* SECTION TITLES & LINKS */
+.jma-sec-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jma-sec-title-row h2 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+[data-theme="dark"] .jma-sec-title-row h2 {
+  color: #f1f5f9;
+}
+
+.jma-link-blue {
+  font-size: 11px;
+  font-weight: 600;
+  color: #3b82f6;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+[data-theme="dark"] .jma-link-blue {
+  color: #60a5fa;
+}
+
+.jma-link-blue:hover {
+  text-decoration: underline;
+}
+
 /* ANALYTICS */
 .jma-chart-row {
   display: flex;
@@ -899,4 +944,157 @@
 jma-rec-time {
   font-size: 10px;
   color: #64748b;
+}
+
+/* =========================================================
+   RESPONSIVENESS (down to 320px)
+   ========================================================= */
+
+/* Adjust grid and layout for smaller screens */
+@media (max-width: 1200px) {
+  .jma-root {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .jma-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .jma-hero-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 768px) {
+  .jma-hero {
+    padding: 16px 20px;
+  }
+  
+  .jma-hero-stats {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .jma-hstat {
+    padding: 0 10px;
+  }
+
+  .jma-search-bar {
+    width: 100%;
+    flex: none;
+  }
+
+  .jma-sort-dropdown {
+    flex: 1;
+  }
+
+  .jma-chart-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .jma-checklist {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .jma-hero-stats {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .jma-hstat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .jma-hstat:last-child {
+    border-bottom: none;
+  }
+
+  .jma-hstat-div {
+    display: none;
+  }
+
+  .jma-hstat-lbl {
+    margin-top: 0;
+  }
+
+  .jma-tabs {
+    flex-wrap: wrap;
+    padding-bottom: 8px;
+  }
+
+  .jma-toolbar-bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .jma-view-toggles {
+    justify-content: flex-end;
+  }
+  
+  .jma-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   SCREENS UNDER 440px (iPhone, small Androids)
+   Guarantees zero horizontal scroll and perfectly fitted layout
+   ========================================================= */
+@media (max-width: 440px) {
+  /* Common layout constraints for all major containers */
+  .jma-page-wrapper,
+  .jma-root,
+  .jma-left-col,
+  .jma-right-col,
+  .jma-hero,
+  .jma-toolbar-bottom,
+  .jma-toolbar-top,
+  .jma-search-bar,
+  .jma-tabs,
+  .jma-card,
+  .jma-sidebar-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .jma-page-wrapper {
+    overflow-x: hidden;
+    padding: 12px;
+  }
+
+  .jma-root,
+  .jma-left-col,
+  .jma-right-col {
+    gap: 12px;
+  }
+
+  .jma-hero {
+    padding: 14px 10px;
+    border-radius: 12px;
+    overflow: hidden !important;
+  }
+
+  .jma-tabs {
+    flex-wrap: wrap;
+    padding-bottom: 8px;
+    margin-bottom: 0;
+  }
+
+  .jma-card,
+  .jma-sidebar-card {
+    padding: 12px 10px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
 }

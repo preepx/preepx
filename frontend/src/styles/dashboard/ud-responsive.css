@@ -1,0 +1,83 @@
+/* ── DARK MODE TWEAKS ── */
+[data-theme="dark"] .ud-stat-card,
+[data-theme="dark"] .ud-explore-card,
+[data-theme="dark"] .ud-panel {
+  background: var(--surface);
+}
+
+[data-theme="dark"] .ud-recent-item {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+[data-theme="dark"] .ud-practice-primary {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(124, 58, 237, 0.1));
+}
+
+[data-theme="dark"] .ud-practice-secondary {
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(244, 63, 94, 0.1));
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  .ud-stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ud-explore-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ud-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .ud-page {
+    padding: 20px 16px 40px;
+  }
+
+  .ud-hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px;
+  }
+
+  .ud-level-panel {
+    width: 100%;
+  }
+
+  .ud-practice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ud-explore-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ud-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 24px;
+  }
+
+  .ud-banner-content {
+    flex-direction: column;
+  }
+
+  .ud-banner-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .ud-stats-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ud-hero-left {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

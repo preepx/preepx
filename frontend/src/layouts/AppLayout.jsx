@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, Menu, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, Code, FileText, Bell, Briefcase
+  LogOut, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, FileText, Bell, Briefcase
 } from "lucide-react";
 import notify from "@/utils/notify";
-import { getProfile, getDashboard, syncUserToStorage, claimXpReward } from "@/services/userAPI";
+import { getProfile, syncUserToStorage } from "@/services/userAPI";
 import NotificationModal from "@/components/NotificationModal";
-import { getRewardsData, calculateProgress } from "@/utils/rewardsUtils";
-import { useWallet } from "../features/wallet/hooks/useWallet";
+import { useWallet, WalletBadge } from "@/features/wallet";
+import { useTheme } from "@/hooks/useTheme";
+import { getStoredUser, clearAuth } from "@/utils/authUtils";
 import { io } from "socket.io-client";
 import API from "@/utils/api";
-import WalletBadge from "../features/wallet/components/WalletBadge";
 import Footer from "@/components/Footer";
-import '@/styles/AppLayout.css';
+import "@/styles/AppLayout.css";
 
 const NAV_ITEMS = [
   { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
@@ -30,136 +30,68 @@ const NAV_ITEMS = [
   { to: "/profile", icon: User, label: "Profile" },
 ];
 
-const initialNotifications = [
-  {
-    id: 'daily',
-    title: 'Daily Reward',
-    message: 'You have received your daily XP points!',
-    time: 'Today',
-    timestamp: Date.now() - 3600000,
-    icon: '🎁',
-    read: false
-  },
-  {
-    id: 'referral',
-    title: 'Referral Bonus',
-    message: `You have received XP points from your successful referral(s)!`,
-    time: 'Recently',
-    timestamp: Date.now() - 86400000,
-    icon: '👥',
-    read: false
-  }
-];
-
 function AppLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const safeGetUser = () => {
-    try {
-      return JSON.parse(localStorage.getItem("user") || "{}");
-    } catch {
-      localStorage.removeItem("user");
-      return {};
-    }
-  };
-  const [user, setUser] = useState(safeGetUser());
+  const [user, setUser] = useState(getStoredUser);
   const location = useLocation();
   const navigate = useNavigate();
-  const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
+  const { isDark, toggleTheme } = useTheme();
   const { balance } = useWallet();
   const [showNotifications, setShowNotifications] = useState(false);
-  const [showComingSoon, setShowComingSoon] = useState(false);
   const [notifs, setNotifs] = useState([]);
 
-  const unreadCount = notifs.filter(n => !n.read).length;
+  const unreadCount = notifs.filter((n) => !n.read).length;
 
   useEffect(() => {
+    let isMounted = true;
     const fetchNotifs = async () => {
       try {
-        const res = await API.get('/users/notifications');
-        setNotifs([...(res.data || [])].reverse());
+        const res = await API.get("/users/notifications");
+        if (isMounted && res.data) {
+          setNotifs([...res.data].reverse());
+        }
       } catch (err) {
-        console.error("Failed to fetch notifications:", err);
+        // Silently handle notification network failure
       }
     };
     if (user && user._id) {
       fetchNotifs();
     }
-  }, [user]);
+    return () => {
+      isMounted = false;
+    };
+  }, [user?._id]);
 
   useEffect(() => {
     const handleNewNotif = (e) => {
       if (e.detail) {
-        setNotifs(prev => [e.detail, ...prev]);
+        setNotifs((prev) => [e.detail, ...prev]);
       }
     };
-    window.addEventListener('newNotification', handleNewNotif);
-    return () => window.removeEventListener('newNotification', handleNewNotif);
+    window.addEventListener("newNotification", handleNewNotif);
+    return () => window.removeEventListener("newNotification", handleNewNotif);
   }, []);
 
-  const checkAndClaimRewards = async (currentUser, currentDash) => {
-    if (!currentUser || !currentDash) return;
-    const claimedRewards = currentUser.xpRewardsClaimed || [];
-    let updated = false;
-    let newXp = currentUser.points || 0;
-    let newLevel = currentUser.level || 1;
-    let newClaims = [];
-
-    for (const reward of getRewardsData(currentUser)) {
-      if (claimedRewards.includes(reward.id)) continue;
-
-      const currentProgress = calculateProgress(reward.id, currentUser, currentDash);
-      if (currentProgress >= reward.target) {
-        try {
-          const res = await claimXpReward(reward.id, reward.xp);
-          notify.success(`🎉 Reward Unlocked: ${reward.title}! +${reward.xp} XP`);
-          newClaims.push(reward.id);
-          newXp = res.totalPoints;
-          newLevel = res.level;
-          updated = true;
-        } catch (err) {
-          console.error("Failed to claim reward:", reward.id, err);
-        }
-      }
-    }
-
-    if (updated) {
-      const allClaims = [...claimedRewards, ...newClaims];
-      const updatedUser = { ...currentUser, points: newXp, level: newLevel, xpRewardsClaimed: allClaims };
-      setUser(updatedUser);
-      syncUserToStorage(updatedUser);
-      window.dispatchEvent(new Event("user-updated"));
-    }
-  };
-
-  const refreshUser = () => {
-    Promise.all([getProfile(), getDashboard().catch(() => null)])
-      .then(([u, dash]) => {
-        const localUser = JSON.parse(localStorage.getItem("user") || "{}");
-        if (u && localUser && typeof u.points === 'number' && typeof localUser.points === 'number') {
-          if (u.points > localUser.points) {
-            // XP increased - backend will handle real notification via socket
-          }
-        }
-
-        setUser(u);
-        syncUserToStorage(u);
-        window.dispatchEvent(new Event("user-updated"));
-        window.dispatchEvent(new Event("walletUpdated"));
-
-        if (dash) {
-          checkAndClaimRewards(u, dash);
+  const refreshUser = useCallback(() => {
+    getProfile()
+      .then((u) => {
+        if (u) {
+          setUser(u);
+          syncUserToStorage(u);
+          window.dispatchEvent(new Event("walletUpdated"));
         }
       })
-      .catch(() => { });
-  };
+      .catch(() => {});
+  }, []);
 
+  // Initial user fetch and update listener
   useEffect(() => {
     refreshUser();
-    const handler = () => setUser(safeGetUser());
+    const handler = () => setUser(getStoredUser());
     window.addEventListener("user-updated", handler);
     return () => window.removeEventListener("user-updated", handler);
-  }, [location.pathname]);
+  }, [refreshUser]);
 
   // Global WebSocket for Real-Time Notifications
   useEffect(() => {
@@ -171,35 +103,33 @@ function AppLayout({ children }) {
     } catch (e) {
       SOCKET_URL = window.location.origin;
     }
-    const socket = io(SOCKET_URL, { transports: ["websocket", "polling"] });
+    const socket = io(SOCKET_URL, {
+      transports: ["websocket", "polling"],
+      autoConnect: true,
+      reconnectionAttempts: 3,
+    });
 
     const handleConnect = () => {
-      console.log("Global Socket Connected! Emitting join_room for", user._id);
-      socket.emit('join_room', user._id);
+      socket.emit("join_room", user._id);
     };
 
     if (socket.connected) {
       handleConnect();
     } else {
-      socket.on('connect', handleConnect);
+      socket.on("connect", handleConnect);
     }
 
-    socket.on('global_notification', (data) => {
-      window.dispatchEvent(new CustomEvent('newNotification', { detail: data }));
-      refreshUser(); // Background sync for XP/Coins
+    socket.on("global_notification", (data) => {
+      window.dispatchEvent(new CustomEvent("newNotification", { detail: data }));
+      refreshUser();
     });
 
-    return () => socket.disconnect();
-  }, [user?._id]);
-
-
-
-  const toggleTheme = () => {
-    const next = isDark ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem("theme", next);
-    setIsDark(!isDark);
-  };
+    return () => {
+      socket.off("connect", handleConnect);
+      socket.off("global_notification");
+      socket.disconnect();
+    };
+  }, [user?._id, refreshUser]);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -213,15 +143,14 @@ function AppLayout({ children }) {
   }, [mobileOpen]);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    localStorage.removeItem("user_notifications");
+    clearAuth();
     notify.success("Signed out successfully");
     window.location.href = "/";
   };
 
-  const avatar = user.profilePic ||
-    `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName || "U")}&background=4f46e5&color=fff`;
+  const avatar =
+    user?.profilePic ||
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.fullName || "U")}&background=4f46e5&color=fff`;
 
   const hideSidebar = location.pathname.startsWith("/company-prep/") && location.pathname !== "/company-prep";
 
@@ -233,9 +162,14 @@ function AppLayout({ children }) {
           <div className="sidebar-top">
             <Link to="/interview" className="sidebar-brand">
               {collapsed && !mobileOpen ? (
-                <img src="/logo.png" alt="PreepX" style={{ height: '32px', objectFit: 'contain', marginLeft: '4px' }} />
+                <img src="/logo.png" alt="PreepX" style={{ height: "32px", objectFit: "contain", marginLeft: "4px" }} />
               ) : (
-                <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
+                <img
+                  src="/preepx_logo.png"
+                  alt="PreepX"
+                  className="brand-logo-img"
+                  style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }}
+                />
               )}
             </Link>
             <button
@@ -265,7 +199,13 @@ function AppLayout({ children }) {
             {NAV_ITEMS.map(({ to, icon: Icon, label, isFree, isNew }) => {
               const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
               return (
-                <Link key={to} to={to} className={`sidebar-link ${isActive ? "active" : ""}`} onClick={() => setMobileOpen(false)} title={label}>
+                <Link
+                  key={to}
+                  to={to}
+                  className={`sidebar-link ${isActive ? "active" : ""}`}
+                  onClick={() => setMobileOpen(false)}
+                  title={label}
+                >
                   <Icon size={20} style={{ flexShrink: 0 }} />
                   {(!collapsed || mobileOpen) && (
                     <>
@@ -282,15 +222,33 @@ function AppLayout({ children }) {
 
           <div className="sidebar-bottom" style={{ padding: collapsed ? "12px 8px" : "12px 16px" }}>
             <div className={`sidebar-bottom-actions ${collapsed ? "collapsed" : ""}`}>
-              <Link to="/settings" className="sidebar-action-btn" data-tooltip="Settings" title="Settings" onClick={() => setMobileOpen(false)}>
+              <Link
+                to="/settings"
+                className="sidebar-action-btn"
+                data-tooltip="Settings"
+                title="Settings"
+                onClick={() => setMobileOpen(false)}
+              >
                 <Settings size={20} />
               </Link>
 
-              <button className="sidebar-action-btn" onClick={toggleTheme} data-tooltip={isDark ? "Light Mode" : "Dark Mode"} title={isDark ? "Light Mode" : "Dark Mode"}>
+              <button
+                type="button"
+                className="sidebar-action-btn"
+                onClick={toggleTheme}
+                data-tooltip={isDark ? "Light Mode" : "Dark Mode"}
+                title={isDark ? "Light Mode" : "Dark Mode"}
+              >
                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
 
-              <button className="sidebar-action-btn danger" onClick={handleLogout} data-tooltip="Sign Out" title="Sign Out">
+              <button
+                type="button"
+                className="sidebar-action-btn danger"
+                onClick={handleLogout}
+                data-tooltip="Sign Out"
+                title="Sign Out"
+              >
                 <LogOut size={20} />
               </button>
             </div>
@@ -316,7 +274,7 @@ function AppLayout({ children }) {
                 </div>
               </button>
 
-              <div className="topbar-left" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div className="topbar-left" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
                 <button
                   type="button"
                   className="topbar-apply-jobs-btn"
@@ -346,7 +304,7 @@ function AppLayout({ children }) {
                   )}
                 </button>
 
-                {user.streak > 0 && (
+                {user?.streak > 0 && (
                   <span className="streak-badge">
                     <span className="badge-icon">🔥</span>
                     <span>{user.streak} day streak</span>
@@ -355,7 +313,7 @@ function AppLayout({ children }) {
 
                 <span className="points-badge">
                   <img src="/logo.png" alt="XP" className="xp-logo-icon" />
-                  <span>{user.points || 0} XP</span>
+                  <span>{user?.points || 0} XP</span>
                 </span>
 
                 <Link to="/profile" className="topbar-profile-link" title="My Profile">
@@ -375,6 +333,7 @@ function AppLayout({ children }) {
         notifs={notifs}
         setNotifs={setNotifs}
       />
+<<<<<<< HEAD
       {/* Coming Soon Modal - Commented out (redirected to /apply-jobs) */}
       {/* {showComingSoon && (
         <div style={{
@@ -429,12 +388,11 @@ function AppLayout({ children }) {
           </div>
         </div>
       )} */}
+=======
+>>>>>>> origin/optimised_frontend
     </>
 
   );
 }
 
 export default AppLayout;
-
-
-

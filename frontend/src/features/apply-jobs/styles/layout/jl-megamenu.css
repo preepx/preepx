@@ -1,0 +1,97 @@
+/* =========================================================
+   MEGA MENU
+   ========================================================= */
+.jl-mega-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.jl-tlink-services {
+    cursor: pointer;
+    padding: 20px 0;
+    /* Creates invisible hover bridge */
+}
+
+.jl-mega-menu {
+    position: absolute;
+    top: 100%;
+    left: -200px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    padding: 30px;
+    width: 750px;
+    z-index: 1000;
+    border: 1px solid #e2e8f0;
+    cursor: default;
+    margin-top: -10px;
+    /* Offset to cover the bridge */
+}
+
+/* Pointer arrow */
+.jl-mega-menu::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 232px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    transform: rotate(45deg);
+    border-left: 1px solid #e2e8f0;
+    border-top: 1px solid #e2e8f0;
+}
+
+.jl-mega-col {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 0 24px;
+}
+
+.jl-mega-col:first-child {
+    padding-left: 0;
+}
+
+.jl-mega-col:last-child {
+    padding-right: 0;
+}
+
+.jl-mega-col:not(:last-child) {
+    border-right: 1px solid #f1f5f9;
+}
+
+.jl-mega-section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.jl-mega-section h4 {
+    margin: 0;
+    font-size: 15.5px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.jl-mega-section a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #475569;
+    font-weight: 500;
+    transition: color 0.15s;
+}
+
+.jl-mega-section a:hover {
+    color: #2563eb;
+}
+
+.jl-mega-promo {
+    font-size: 13.5px;
+    color: #64748b;
+    line-height: 1.5;
+}

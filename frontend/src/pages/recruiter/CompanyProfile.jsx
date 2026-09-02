@@ -33,7 +33,6 @@ export default function CompanyProfile() {
         companySize: existing.companySize || "",
         linkedin: existing.linkedin || "",
         description: existing.description || "",
-        description: existing.description || "",
       });
       if (!existing.website || !existing.industry) {
         setIsEditing(true);

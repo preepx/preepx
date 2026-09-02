@@ -5,11 +5,9 @@ import {
   ArrowLeft, BookOpen, FileText, Cpu, Tag,
   HelpCircle, ChevronDown, ChevronUp, Hash, ExternalLink,
 } from "lucide-react";
-import API from "@/utils/api";
+import { getBtecNoteById } from "@/services/btecNotesAPI";
 import Loader from "@/components/Loader";
 import '@/styles/BtechNoteDetail.css';
-
-
 
 function BtechNoteDetail() {
   const { id } = useParams();
@@ -21,8 +19,8 @@ function BtechNoteDetail() {
   const [openQA, setOpenQA] = useState(null); // index of expanded Q
 
   useEffect(() => {
-    API.get(`/btec-notes/${id}`)
-      .then((r) => setNote(r.data))
+    getBtecNoteById(id)
+      .then((data) => setNote(data))
       .catch(() => setError("Could not load this note."))
       .finally(() => setLoading(false));
 

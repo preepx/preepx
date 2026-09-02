@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import API from "@/utils/api";
 import notify from "@/utils/notify";
+import { getCodingChallenge, startCodingChallenge } from "@/services/codingAPI";
+import { getStoredUser } from "@/utils/authUtils";
 import PreChallengeSetupModal from "@/components/PreChallengeSetupModal";
 import TopCompaniesWidget from "@/features/apply-jobs/components/TopCompaniesWidget";
 import "@/styles/Challenge100Days.css";
@@ -105,19 +107,19 @@ const Challenge100Days = () => {
   const activeCardRef = useRef(null);
   const navigate = useNavigate();
 
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const user = getStoredUser() || {};
   const streak = user.streak || 0;
   const xp = user.points || user.xp || 0;
   const displayRank = globalRank ? `#${globalRank}` : "New";
 
   useEffect(() => {
-    API.get("/coding/challenge")
+    getCodingChallenge()
       .then((res) => {
-        if (res.data?.success) {
-          setChallengeData(res.data.data.challengeDays || []);
-          setProgress(res.data.data.progress || { currentDay: 1, completedDays: [] });
-          if (res.data.data.rank) {
-            setGlobalRank(res.data.data.rank);
+        if (res?.success) {
+          setChallengeData(res.data.challengeDays || []);
+          setProgress(res.data.progress || { currentDay: 1, completedDays: [] });
+          if (res.data.rank) {
+            setGlobalRank(res.data.rank);
           }
         }
       })
@@ -197,12 +199,12 @@ const Challenge100Days = () => {
     const { problemId, dayNum } = pendingChallenge;
     setShowSetupModal(false);
     try {
-      const res = await API.post('/coding/start', { challengeDay: dayNum });
-      if (res.data?.success) {
+      const res = await startCodingChallenge(dayNum);
+      if (res?.success) {
         window.dispatchEvent(new Event("walletUpdated"));
         navigate(`/coding-exam/${problemId}?source=challenge&day=${dayNum}`);
       } else {
-        notify.error(res.data?.message || "Could not start challenge");
+        notify.error(res?.message || "Could not start challenge");
       }
     } catch (err) {
       notify.error(err.response?.data?.message || "Insufficient coins to start challenge");

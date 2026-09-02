@@ -1,0 +1,146 @@
+/* ── LEFT BRANDING PANEL ── */
+.modern-auth-left {
+  flex: 1;
+  height: 100%;
+  background: linear-gradient(165deg, #0d1322 0%, #050811 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 20px 22px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle concentric radar art */
+.auth-radar-ring {
+  position: absolute;
+  top: 40%;
+  right: -80px;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  border: 1px dashed rgba(124, 58, 237, 0.2);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.auth-radar-ring-2 {
+  position: absolute;
+  top: 40%;
+  right: -120px;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  border: 1px solid rgba(56, 189, 248, 0.12);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.modern-auth-left-top,
+.modern-auth-left-bottom {
+  position: relative;
+  z-index: 2;
+}
+
+.auth-brand-logo {
+  height: 70px;
+  width: auto;
+  object-fit: contain;
+  margin: -10px 0 -4px -10px;
+  display: block;
+}
+
+.auth-brand-title {
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.5px;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.auth-brand-title .gradient-text-purple {
+  background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.auth-brand-desc {
+  font-size: 11px;
+  line-height: 1.4;
+  color: #94a3b8;
+  margin-bottom: 0;
+  max-width: 300px;
+}
+
+.auth-value-props {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.auth-prop-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.auth-prop-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.auth-prop-icon.candidate-icon {
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  color: #a855f7;
+}
+
+.auth-prop-icon.recruiter-icon {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+}
+
+.auth-prop-info h4 {
+  font-size: 11px;
+  font-weight: 700;
+  color: #f1f5f9;
+  margin: 0 0 1px 0;
+}
+
+.auth-prop-info p {
+  font-size: 9.5px;
+  color: #8e9cb2;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.auth-trust-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  color: #94a3b8;
+  font-weight: 500;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.auth-trust-footer svg {
+  color: #34d399;
+}

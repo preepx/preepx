@@ -21,7 +21,6 @@ export default function CompanyQuestionPractice() {
   React.useEffect(() => {
     qapi.get(`/company-prep?company=${slug}`)
       .then(res => {
-        console.log(`🔥 Fetched Data for Practice from Database!`);
         setQuestionsData(res.data);
         const q = res.data.find(item => String(item.id || item._id) === String(questionId));
         setQuestion(q || null);

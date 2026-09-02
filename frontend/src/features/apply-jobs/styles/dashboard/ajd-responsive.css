@@ -1,0 +1,1167 @@
+/* =========================================================
+   COMPREHENSIVE MOBILE RESPONSIVE OVERRIDES (<= 768px)
+   Keeps desktop/web view 100% untouched while making mobile
+   sleek, compact, and perfectly fitted without overflow.
+   ========================================================= */
+@media (max-width: 1024px) {
+    .ajd-hn-art {
+        display: none;
+    }
+
+    .ajd-hn-left {
+        max-width: 100%;
+    }
+
+    .ajd-blogs-sec {
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Main Layout */
+    .ajd-page-wrapper.ajd-premium {
+        gap: 14px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .ajd-root {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .ajd-left-col {
+        gap: 14px;
+        min-width: 0;
+    }
+
+    /* Hero Banner */
+    .ajd-hero-banner {
+        padding: 18px 14px;
+        border-radius: 14px;
+        flex-direction: column;
+        align-items: stretch;
+        overflow: hidden;
+        z-index: 25;
+    }
+
+    .ajd-hero-glow {
+        width: 240px;
+        height: 240px;
+    }
+
+    .ajd-hb-left {
+        max-width: 100%;
+        padding-right: 0;
+        width: 100%;
+    }
+
+    .ajd-hb-right {
+        display: none;
+    }
+
+    .ajd-live-chip {
+        font-size: 10.5px;
+        padding: 3px 9px;
+        margin-bottom: 8px;
+        max-width: 100%;
+        line-height: 1.3;
+    }
+
+    .ajd-hb-title {
+        font-size: 20px;
+        font-weight: 800;
+        line-height: 1.25;
+        margin-bottom: 5px;
+    }
+
+    .ajd-hb-sub {
+        font-size: 12px;
+        line-height: 1.4;
+        margin-bottom: 12px;
+    }
+
+    /* Hero Search Bar */
+    .ajd-hb-search {
+        flex-direction: column;
+        padding: 8px;
+        gap: 4px;
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .ajd-hbs-seg {
+        width: 100%;
+        padding: 8px 10px;
+        border-bottom: 1px solid #e2e8f0;
+        gap: 8px;
+    }
+
+    [data-theme="dark"] .ajd-hbs-seg {
+        border-bottom-color: #334155;
+    }
+
+    .ajd-hbs-seg:last-of-type {
+        border-bottom: none;
+    }
+
+    .ajd-hbs-div {
+        display: none;
+    }
+
+    .ajd-hbs-seg input,
+    .ajd-hbs-seg select,
+    .ajd-hbs-select-value {
+        font-size: 13.5px;
+    }
+
+    .ajd-exp-menu {
+        left: 0;
+        right: 0;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        top: calc(100% + 4px);
+    }
+
+    .ajd-hbs-btn {
+        width: 100%;
+        margin: 4px 0 0 0;
+        padding: 10px;
+        font-size: 13.5px;
+        border-radius: 8px;
+    }
+
+    .ajd-hb-tags {
+        gap: 6px;
+        margin-top: 12px;
+        align-items: center;
+    }
+
+    .ajd-hb-tags span {
+        font-size: 11px;
+    }
+
+    .ajd-hb-tag {
+        font-size: 10.5px;
+        padding: 3px 8px;
+    }
+
+    /* Live Ticker */
+    .ajd-ticker {
+        padding: 6px 8px;
+        gap: 8px;
+        border-radius: 10px;
+    }
+
+    .ajd-ticker-label {
+        padding: 4px 7px;
+        font-size: 10px;
+        border-radius: 6px;
+        gap: 4px;
+    }
+
+    .ajd-ticker-label svg {
+        width: 11px;
+        height: 11px;
+    }
+
+    .ajd-ticker-item {
+        font-size: 11.5px;
+    }
+
+    .ajd-ticker-inner {
+        gap: 20px;
+    }
+
+    /* Category Filter Pills */
+    .ajd-cats {
+        gap: 7px;
+        padding-bottom: 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .ajd-cats::-webkit-scrollbar {
+        display: none;
+    }
+
+    .ajd-cat {
+        padding: 6px 11px;
+        font-size: 11.5px;
+        gap: 5px;
+        border-radius: 999px;
+        flex-shrink: 0;
+    }
+
+    .ajd-cat svg {
+        width: 13px;
+        height: 13px;
+    }
+
+    /* Stats Cards Grid (2x2 on mobile) */
+    .ajd-stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .ajd-stat-card {
+        padding: 11px 9px;
+        gap: 8px;
+        border-radius: 10px;
+    }
+
+    .ajd-stat-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+    }
+
+    .ajd-stat-icon svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    .ajd-stat-val {
+        font-size: 17px;
+        margin-bottom: 2px;
+    }
+
+    .ajd-stat-lbl {
+        font-size: 11px;
+        margin-bottom: 2px;
+    }
+
+    .ajd-stat-sub {
+        font-size: 10px;
+    }
+
+    /* Featured Openings Card */
+    .ajd-card {
+        padding: 16px 12px;
+        border-radius: 12px;
+    }
+
+    .ajd-card-head {
+        margin-bottom: 12px;
+        gap: 8px;
+        align-items: flex-start;
+    }
+
+    .ajd-card-head h2 {
+        font-size: 14.5px;
+    }
+
+    .ajd-card-kicker {
+        font-size: 11px;
+    }
+
+    .ajd-view-link {
+        font-size: 11.5px;
+        white-space: nowrap;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    /* Clean Mobile Job Row Layout */
+    .ajd-job-row {
+        display: grid;
+        grid-template-columns: 40px 1fr;
+        grid-template-areas:
+            "logo info"
+            "right right";
+        gap: 8px 10px;
+        padding: 13px 0;
+        border-bottom: 1px solid #f1f5f9;
+        align-items: start;
+    }
+
+    [data-theme="dark"] .ajd-job-row {
+        border-bottom-color: #1e293b !important;
+    }
+
+    .ajd-jlogo {
+        grid-area: logo;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        padding: 4px;
+    }
+
+    .ajd-jinfo {
+        grid-area: info;
+        min-width: 0;
+    }
+
+    .ajd-jinfo h4 {
+        font-size: 13.5px;
+        line-height: 1.3;
+        margin: 0 0 3px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-wrap: wrap;
+    }
+
+    .ajd-pill-hot,
+    .ajd-pill-match {
+        font-size: 9px;
+        padding: 1px 5px;
+    }
+
+    .ajd-jinfo p {
+        font-size: 11.5px;
+        margin: 0 0 6px;
+        line-height: 1.3;
+    }
+
+    .ajd-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+    }
+
+    .ajd-tag {
+        font-size: 10px;
+        padding: 2px 7px;
+        border-radius: 6px;
+    }
+
+    .ajd-jright {
+        grid-area: right;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 4px;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-right: 0;
+    }
+
+    .ajd-jright strong {
+        font-size: 12.5px;
+        color: #0f172a;
+    }
+
+    [data-theme="dark"] .ajd-jright strong {
+        color: #f1f5f9;
+    }
+
+    .ajd-jright span {
+        font-size: 10.5px;
+        color: #94a3b8;
+    }
+
+    .ajd-jactions {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 4px;
+    }
+
+    .ajd-icon-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+
+    .ajd-apply-btn {
+        flex: 1;
+        height: 36px;
+        padding: 0 12px;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ajd-view-all-wrap {
+        padding-top: 12px;
+        margin-top: 10px;
+    }
+
+    .ajd-view-all-btn {
+        font-size: 12.5px;
+    }
+
+    /* Hiring Events & Walk-ins */
+    .ajd-events {
+        gap: 10px;
+    }
+
+    .ajd-event {
+        display: grid;
+        grid-template-columns: 66px 1fr;
+        grid-template-areas:
+            "date body"
+            "cta  cta";
+        gap: 8px 10px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .ajd-event-date {
+        grid-area: date;
+        padding: 6px 4px;
+        border-radius: 8px;
+    }
+
+    .ajd-event-date strong {
+        font-size: 12px;
+    }
+
+    .ajd-event-date span {
+        font-size: 8.5px;
+    }
+
+    .ajd-event-body {
+        grid-area: body;
+        min-width: 0;
+    }
+
+    .ajd-event-body h3 {
+        font-size: 12.5px;
+        line-height: 1.3;
+        margin: 0 0 3px;
+    }
+
+    .ajd-event-body p {
+        font-size: 11px;
+        margin: 0 0 5px;
+    }
+
+    .ajd-event-meta {
+        flex-wrap: wrap;
+        gap: 6px 10px;
+        font-size: 10px;
+    }
+
+    .ajd-event-cta {
+        grid-area: cta;
+        width: 100%;
+        padding: 8px;
+        font-size: 11.5px;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    /* Salary Pulse & Insights */
+    .ajd-insights {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .ajd-insight {
+        padding: 14px 12px;
+        border-radius: 10px;
+    }
+
+    .ajd-insight h3 {
+        font-size: 12.5px;
+    }
+
+    .ajd-insight p {
+        font-size: 11px;
+        margin: 2px 0 8px;
+    }
+
+    .ajd-insight strong {
+        font-size: 22px;
+    }
+
+    .ajd-skill-row {
+        gap: 6px;
+    }
+
+    .ajd-skill-row button {
+        padding: 4px 8px;
+        font-size: 10.5px;
+    }
+
+    /* Right Sidebar in mobile flow */
+    .ajd-right-sidebar {
+        gap: 12px;
+    }
+
+    .ajd-rcard {
+        padding: 14px 12px;
+        border-radius: 10px;
+    }
+
+    .ajd-sec-title-row {
+        margin-bottom: 12px;
+    }
+
+    .ajd-chart-row {
+        gap: 14px;
+        align-items: center;
+    }
+
+    .ajd-donut-wrapper {
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+    }
+
+    .ajd-donut-inner {
+        width: 60px;
+        height: 60px;
+    }
+
+    .ajd-donut-inner strong {
+        font-size: 17px;
+    }
+
+    .ajd-legend {
+        gap: 5px;
+    }
+
+    .ajd-legend-item {
+        font-size: 10.5px;
+    }
+
+    /* Views */
+    .ajd-views {
+        padding: 12px 10px;
+        gap: 10px;
+    }
+
+    .ajd-views-icon {
+        width: 36px;
+        height: 36px;
+    }
+
+    .ajd-views strong {
+        font-size: 17px;
+    }
+
+    .ajd-views p {
+        font-size: 11px;
+    }
+
+    /* Profile Improvement Card */
+    .ajd-profile-top {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .ajd-profile-text h2 {
+        font-size: 13.5px;
+    }
+
+    .ajd-profile-text p {
+        font-size: 10.5px;
+    }
+
+    .ajd-circle-progress {
+        width: 44px;
+        height: 44px;
+    }
+
+    .ajd-circle-inner {
+        width: 36px;
+        height: 36px;
+        font-size: 11px;
+    }
+
+    .ajd-checklist {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 8px;
+        margin-bottom: 12px;
+    }
+
+    .ajd-check-item {
+        font-size: 10.5px;
+    }
+
+    /* Recommended Jobs */
+    .ajd-rec-item {
+        gap: 8px;
+        padding: 8px 0;
+    }
+
+    .ajd-rec-logo {
+        width: 34px;
+        height: 34px;
+    }
+
+    .ajd-rec-info h4 {
+        font-size: 12px;
+    }
+
+    .ajd-rec-info p {
+        font-size: 10px;
+    }
+
+    .ajd-rec-info strong {
+        font-size: 11px;
+    }
+
+    .ajd-see-more {
+        font-size: 11.5px;
+        padding-top: 8px;
+        margin-top: 8px;
+    }
+
+    /* Boost Card */
+    .ajd-boost-card {
+        padding: 14px;
+        border-radius: 10px;
+    }
+
+    .ajd-boost-text h3 {
+        font-size: 13px;
+    }
+
+    .ajd-boost-text p {
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+
+    .ajd-boost-btn {
+        width: 100%;
+        text-align: center;
+        padding: 8px;
+        font-size: 11.5px;
+    }
+
+    /* Ecosystem */
+    .ajd-ecosystem {
+        padding: 18px 14px;
+        border-radius: 12px;
+        margin-bottom: 16px;
+    }
+
+    .ajd-eco-head {
+        margin-bottom: 16px;
+    }
+
+    .ajd-eco-head h2 {
+        font-size: 17px;
+    }
+
+    .ajd-eco-head p {
+        font-size: 12px;
+    }
+
+    .ajd-eco-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .ajd-eco-card {
+        padding: 14px;
+        border-radius: 10px;
+    }
+
+    .ajd-eco-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px;
+    }
+
+    .ajd-eco-card h3 {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .ajd-eco-card p {
+        font-size: 11.5px;
+        margin-bottom: 12px;
+    }
+
+    /* Modal */
+    .ajd-modal {
+        max-width: 92vw;
+        padding: 18px 14px;
+        border-radius: 12px;
+    }
+
+    .ajd-modal input,
+    .ajd-modal select {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    /* Blogs scroll */
+    .ajd-blogs-scroll {
+        flex-direction: column;
+        overflow-x: visible;
+    }
+
+    .ajd-blog-card {
+        width: 100%;
+        min-width: unset;
+    }
+}
+
+/* Extra small mobile devices (<= 480px) */
+@media (max-width: 480px) {
+    .ajd-hb-title {
+        font-size: 18px;
+    }
+
+    .ajd-stat-card {
+        padding: 9px 8px;
+        gap: 6px;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .ajd-stat-val {
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .ajd-stat-lbl {
+        font-size: 10.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .ajd-stat-sub {
+        font-size: 9px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .ajd-card-head {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .ajd-card-head h2 {
+        font-size: 13.5px;
+    }
+
+    .ajd-chart-row {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .ajd-legend {
+        width: 100%;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SCREENS UNDER 440px (iPhone 12/13/14, Galaxy, 390px, 375px, 360px, 320px)
+   Guarantees zero horizontal scroll and perfectly fitted layout
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 440px) {
+    .ajd-page-wrapper.ajd-premium {
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .ajd-root {
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .ajd-left-col,
+    .ajd-right-sidebar {
+        gap: 12px;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* Hero Banner */
+    .ajd-hero-banner {
+        padding: 14px 10px;
+        border-radius: 12px;
+        overflow: hidden !important;
+    }
+
+    .ajd-hero-glow {
+        width: 180px;
+        height: 180px;
+        max-width: 60vw;
+    }
+
+    .ajd-hb-title {
+        font-size: 16.5px;
+        line-height: 1.25;
+    }
+
+    .ajd-hb-sub {
+        font-size: 11px;
+        line-height: 1.35;
+        margin-bottom: 10px;
+    }
+
+    .ajd-hb-search {
+        padding: 6px;
+        gap: 3px;
+        border-radius: 10px;
+    }
+
+    .ajd-hbs-seg {
+        padding: 6px 8px;
+    }
+
+    .ajd-hbs-btn {
+        padding: 8px;
+        font-size: 12.5px;
+    }
+
+    /* Live Ticker */
+    .ajd-ticker {
+        padding: 5px 8px;
+        gap: 6px;
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .ajd-ticker-track {
+        min-width: 0;
+        overflow: hidden;
+        flex: 1;
+    }
+
+    .ajd-ticker-label {
+        font-size: 9px;
+        padding: 3px 6px;
+    }
+
+    .ajd-ticker-item {
+        font-size: 11px;
+    }
+
+    /* Category Filter Pills */
+    .ajd-cats {
+        max-width: 100%;
+        width: 100%;
+        gap: 5px;
+        padding-bottom: 2px;
+    }
+
+    .ajd-cat {
+        padding: 5px 9px;
+        font-size: 11px;
+        gap: 4px;
+    }
+
+    .ajd-cat svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    /* Stats Grid — Clean 2-column layout fitted to viewport */
+    .ajd-stats-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 6px !important;
+        width: 100%;
+    }
+
+    .ajd-stat-card {
+        padding: 8px 6px !important;
+        gap: 6px !important;
+        border-radius: 9px !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .ajd-stat-icon {
+        width: 24px !important;
+        height: 24px !important;
+        border-radius: 6px !important;
+        flex-shrink: 0 !important;
+    }
+
+    .ajd-stat-icon svg {
+        width: 12px !important;
+        height: 12px !important;
+    }
+
+    .ajd-stat-card > div:last-child {
+        min-width: 0 !important;
+        overflow: hidden !important;
+        flex: 1 !important;
+    }
+
+    .ajd-stat-val {
+        font-size: 14.5px !important;
+        line-height: 1.1 !important;
+        margin-bottom: 1px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .ajd-stat-lbl {
+        font-size: 10px !important;
+        line-height: 1.2 !important;
+        margin-bottom: 1px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    .ajd-stat-sub {
+        font-size: 8.5px !important;
+        line-height: 1.2 !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+    }
+
+    /* Cards */
+    .ajd-card {
+        padding: 12px 10px !important;
+        border-radius: 10px !important;
+        overflow: hidden !important;
+    }
+
+    .ajd-card-head {
+        flex-wrap: wrap !important;
+        gap: 4px 8px !important;
+        margin-bottom: 10px !important;
+    }
+
+    .ajd-card-head h2 {
+        font-size: 13px !important;
+    }
+
+    .ajd-card-kicker {
+        font-size: 10px !important;
+    }
+
+    .ajd-view-link {
+        font-size: 11px !important;
+    }
+
+    /* Featured Job Rows */
+    .ajd-job-row {
+        grid-template-columns: 36px minmax(0, 1fr) !important;
+        gap: 6px 8px !important;
+        padding: 10px 0 !important;
+    }
+
+    .ajd-jlogo {
+        width: 36px !important;
+        height: 36px !important;
+        border-radius: 7px !important;
+        padding: 3px !important;
+    }
+
+    .ajd-jinfo {
+        min-width: 0 !important;
+        overflow: hidden !important;
+    }
+
+    .ajd-jinfo h4 {
+        font-size: 12px !important;
+        gap: 4px !important;
+        line-height: 1.3 !important;
+    }
+
+    .ajd-pill-hot,
+    .ajd-pill-match {
+        font-size: 8.5px !important;
+        padding: 1px 4px !important;
+    }
+
+    .ajd-jinfo p {
+        font-size: 10.5px !important;
+        margin: 0 0 4px !important;
+    }
+
+    .ajd-tags {
+        gap: 3px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .ajd-tag {
+        font-size: 9px !important;
+        padding: 1px 5px !important;
+        border-radius: 4px !important;
+    }
+
+    .ajd-jright {
+        margin-top: 3px !important;
+        gap: 4px !important;
+        width: 100% !important;
+    }
+
+    .ajd-jright strong {
+        font-size: 11.5px !important;
+    }
+
+    .ajd-jright span {
+        font-size: 9.5px !important;
+    }
+
+    .ajd-jactions {
+        gap: 6px !important;
+        margin-top: 3px !important;
+        width: 100% !important;
+    }
+
+    .ajd-icon-btn {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    .ajd-apply-btn {
+        height: 32px !important;
+        font-size: 11px !important;
+        padding: 0 8px !important;
+    }
+
+    /* Companies Grid */
+    .ajd-co-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 6px !important;
+    }
+
+    .ajd-co-box {
+        padding: 8px 6px !important;
+    }
+
+    .ajd-co-meta strong {
+        font-size: 12px !important;
+    }
+
+    .ajd-follow-btn {
+        font-size: 10.5px !important;
+        padding: 3px 10px !important;
+    }
+
+    /* Events */
+    .ajd-event {
+        grid-template-columns: 52px minmax(0, 1fr) !important;
+        gap: 6px 8px !important;
+        padding: 8px !important;
+    }
+
+    .ajd-event-date {
+        padding: 4px 2px !important;
+    }
+
+    .ajd-event-date strong {
+        font-size: 10.5px !important;
+    }
+
+    .ajd-event-date span {
+        font-size: 7.5px !important;
+    }
+
+    .ajd-event-body h3 {
+        font-size: 11.5px !important;
+    }
+
+    .ajd-event-body p {
+        font-size: 10px !important;
+    }
+
+    .ajd-event-meta {
+        font-size: 9px !important;
+        gap: 4px 6px !important;
+    }
+
+    /* Insights */
+    .ajd-insight strong {
+        font-size: 18px !important;
+    }
+
+    /* Donut Chart */
+    .ajd-chart-row {
+        gap: 8px !important;
+    }
+
+    .ajd-donut-wrapper {
+        width: 68px !important;
+        height: 68px !important;
+    }
+
+    .ajd-donut-inner {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .ajd-donut-inner strong {
+        font-size: 14px !important;
+    }
+
+    .ajd-legend-item {
+        font-size: 9.5px !important;
+    }
+
+    /* Views */
+    .ajd-views {
+        padding: 10px 8px !important;
+        gap: 8px !important;
+    }
+
+    .ajd-views-icon {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .ajd-views strong {
+        font-size: 15px !important;
+    }
+
+    /* Checklist */
+    .ajd-checklist {
+        grid-template-columns: 1fr !important;
+        gap: 5px !important;
+    }
+
+    .ajd-check-item {
+        font-size: 10px !important;
+    }
+
+    /* Boost Card */
+    .ajd-boost-card {
+        padding: 12px 10px !important;
+    }
+
+    .ajd-boost-text h3 {
+        font-size: 12px !important;
+    }
+
+    .ajd-boost-text p {
+        font-size: 10px !important;
+    }
+
+    /* Ecosystem */
+    .ajd-ecosystem {
+        padding: 14px 10px !important;
+    }
+
+    .ajd-eco-head h2 {
+        font-size: 15px !important;
+    }
+
+    .ajd-eco-head p {
+        font-size: 11px !important;
+    }
+
+    .ajd-eco-grid {
+        grid-template-columns: 1fr !important;
+        gap: 8px !important;
+    }
+
+    .ajd-eco-card {
+        padding: 10px !important;
+    }
+}

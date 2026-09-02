@@ -7,26 +7,10 @@ import { getProfile } from "@/services/userAPI";
 import Loader from "@/components/Loader";
 import EmptyState from "@/components/recruiter/EmptyState";
 import notify from "@/utils/notify";
+import JobLogo from "../components/JobLogo";
+import { calcCompletion } from "../utils/jobHelpers";
 import '../styles/JobBoard.css'; // Keep for overrides
 import '../styles/ApplyJobsDashboard.css'; // Reuse premium styles
-
-// Profile completion calculator matching JobsProfile.jsx
-function calcCompletion(user) {
-  if (!user) return 0;
-  const checks = [
-    !!user.fullName,
-    !!user.email,
-    !!user.phone,
-    !!user.city,
-    !!user.headline,
-    (user.skills || []).length > 0,
-    (user.experience || []).length > 0,
-    (user.education || []).length > 0,
-    !!user.resumeUrl,
-    !!user.profilePic,
-  ];
-  return Math.round((checks.filter(Boolean).length / checks.length) * 100);
-}
 
 const getLastTerm = (str) => {
   const parts = str.split(",");
@@ -38,44 +22,6 @@ const appendSuggestion = (currentStr, newSug) => {
   parts.pop();
   parts.push(parts.length > 0 ? ` ${newSug}` : newSug);
   return parts.join(",") + ", ";
-};
-
-const JobLogo = ({ job, className, style }) => {
-  const [error, setError] = useState(false);
-  const compName = job.isThirdParty ? job.externalCompanyName : job.companyName;
-
-  if (error || (!job.externalCompanyLogo && !["Google", "Microsoft", "Zomato", "Swiggy", "Paytm", "Adobe"].includes(job.companyName))) {
-    return (
-      <div className={className} style={{ ...style, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f1f5f9', color: '#64748b', fontWeight: 'bold' }}>
-        {(compName || 'C').charAt(0).toUpperCase()}
-      </div>
-    );
-  }
-
-  let src = job.externalCompanyLogo;
-  if (!job.isThirdParty) {
-    if (job.companyName === "Google") src = "https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg";
-    else if (job.companyName === "Microsoft") src = "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg";
-    else if (job.companyName === "Zomato") src = "https://upload.wikimedia.org/wikipedia/commons/b/bd/Zomato_Logo.svg";
-    else if (job.companyName === "Swiggy") src = "https://upload.wikimedia.org/wikipedia/en/1/12/Swiggy_logo.svg";
-    else if (job.companyName === "Paytm") src = "https://upload.wikimedia.org/wikipedia/commons/2/24/Paytm_Logo_%28standalone%29.svg";
-    else if (job.companyName === "Adobe") src = "https://upload.wikimedia.org/wikipedia/commons/4/42/Adobe_Acrobat_DC_logo_2020.svg";
-  }
-
-  return (
-    <img
-      src={src}
-      alt={compName}
-      className={className}
-      style={style}
-      onError={() => setError(true)}
-      onLoad={(e) => {
-        if (e.target.naturalWidth <= 10) {
-          setError(true);
-        }
-      }}
-    />
-  );
 };
 
 export default function JobBoard() {
@@ -362,7 +308,7 @@ export default function JobBoard() {
       <div className="bj-main">
 
         {/* ── HEADER & SEARCH (Grid Row 1, Col 1-2) ── */}
-        <header className="bj-header" style={{ gridColumn: '1 / -1', position: 'relative', zIndex: 50 }}>
+        <header className="bj-header" style={{ gridColumn: '1 / -1', position: 'relative', zIndex: 1 }}>
           <div className="bj-header-inner">
             <div className="bj-kicker"><span className="bj-live-dot" /> Live job board · verified employers</div>
             <h1 className="bj-title">Find your next role</h1>
