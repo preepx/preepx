@@ -7,6 +7,8 @@ import {
   CalendarDays, Flame, Zap, Eye, Star, Bell, Code2, BrainCircuit, Target,
   ChevronDown
 } from "lucide-react";
+import SidebarApplicationAnalytics from "../components/SidebarApplicationAnalytics";
+import SidebarImproveProfile from "../components/SidebarImproveProfile";
 import { getApplicationStats, getPublishedJobs, applyToJob, toggleSaveJob, getSavedJobs } from "../services/candidateJobsAPI";
 import Loader from "@/components/Loader";
 import notify from "@/utils/notify";
@@ -779,34 +781,11 @@ export default function ApplyJobsDashboard() {
         </div>
 
         <aside className="ajd-right-sidebar">
-          <div className="ajd-rcard">
-            <div className="ajd-sec-title-row" style={{ marginBottom: 18 }}>
-              <h2>Application analytics</h2>
-              <span className="ajd-muted">This month</span>
-            </div>
-            <div className="ajd-chart-row">
-              <div className="ajd-donut-wrapper">
-                <div className="ajd-donut-inner">
-                  <strong>{analytics.total}</strong>
-                  <span>Total</span>
-                </div>
-              </div>
-              <div className="ajd-legend">
-                {[
-                  ["c-applied", "Applied", analytics.total],
-                  ["c-inprogress", "In progress", analytics.inProgress],
-                  ["c-shortlisted", "Shortlisted", analytics.shortlisted],
-                  ["c-offered", "Offered", analytics.offered],
-                  ["c-rejected", "Rejected", analytics.rejected],
-                ].map(([cls, label, val]) => (
-                  <div key={label} className="ajd-legend-item">
-                    <div className="ajd-legend-left"><div className={`ajd-legend-dot ${cls}`} /> {label}</div>
-                    <div className="ajd-legend-val">{val} ({analytics.pct(val)}%)</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+          <SidebarApplicationAnalytics 
+            analytics={analytics} 
+            prefix="ajd" 
+            containerClass="ajd-rcard" 
+          />
 
           <div className="ajd-rcard ajd-views">
             <div className="ajd-views-icon"><Eye size={18} /></div>
@@ -816,40 +795,12 @@ export default function ApplyJobsDashboard() {
             </div>
           </div>
 
-          <div className="ajd-rcard">
-            <div className="ajd-profile-top">
-              <div className="ajd-profile-text">
-                <h2>Improve your profile</h2>
-                <p>Complete these steps to rank higher with recruiters.</p>
-              </div>
-              <div className="ajd-circle-progress" style={{ background: `conic-gradient(#10b981 ${completion}%, #e2e8f0 0)` }}>
-                <div className="ajd-circle-inner">{completion}%</div>
-              </div>
-            </div>
-            <div className="ajd-checklist">
-              <div className={`ajd-check-item ${(profileData?.experience || []).length > 0 ? "done" : ""}`}>
-                {(profileData?.experience || []).length > 0 ? <Check size={14} color="#10b981" /> : <Circle size={14} />} Work exp.
-              </div>
-              <div className={`ajd-check-item ${profileData?.email ? "done" : ""}`}>
-                {profileData?.email ? <Check size={14} color="#10b981" /> : <Circle size={14} />} Verify email
-              </div>
-              <div className={`ajd-check-item ${profileData?.resumeUrl ? "done" : ""}`}>
-                {profileData?.resumeUrl ? <Check size={14} color="#10b981" /> : <Circle size={14} />} Resume
-              </div>
-              <div className={`ajd-check-item ${(profileData?.education || []).length > 0 ? "done" : ""}`}>
-                {(profileData?.education || []).length > 0 ? <Check size={14} color="#10b981" /> : <Circle size={14} />} Education
-              </div>
-              <div className={`ajd-check-item ${(profileData?.skills || []).length > 0 ? "done" : ""}`}>
-                {(profileData?.skills || []).length > 0 ? <Check size={14} color="#10b981" /> : <Circle size={14} />} Skills
-              </div>
-              <div className={`ajd-check-item ${profileData?.profilePic ? "done" : ""}`}>
-                {profileData?.profilePic ? <Check size={14} color="#10b981" /> : <Circle size={14} />} Photo
-              </div>
-            </div>
-            <button type="button" className="ajd-card-cta ajd-cta-solid ajd-cta-row" onClick={() => navigate("/profile")}>
-              Improve profile <ArrowRight size={14} />
-            </button>
-          </div>
+          <SidebarImproveProfile 
+            profileData={profileData} 
+            completion={completion} 
+            prefix="ajd" 
+            containerClass="ajd-rcard" 
+          />
 
           <div className="ajd-rcard">
             <div className="ajd-rcard-head">

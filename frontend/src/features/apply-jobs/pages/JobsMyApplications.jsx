@@ -4,7 +4,28 @@ import {
   Filter, Grid, List, Bookmark, CircleDot, ArrowRight, Check, Circle
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import SidebarApplicationAnalytics from "../components/SidebarApplicationAnalytics";
+import SidebarImproveProfile from "../components/SidebarImproveProfile";
+import { getProfile } from "@/services/userAPI";
 import '../styles/JobsMyApplications.css';
+import '../styles/ApplyJobsDashboard.css'; // For the shared sidebar components
+
+function calcCompletion(user) {
+  if (!user) return 0;
+  const checks = [
+    !!user.fullName,
+    !!user.email,
+    !!user.phone,
+    !!user.city,
+    !!user.headline,
+    (user.skills || []).length > 0,
+    (user.experience || []).length > 0,
+    (user.education || []).length > 0,
+    !!user.resumeUrl,
+    !!user.profilePic,
+  ];
+  return Math.round((checks.filter(Boolean).length / checks.length) * 100);
+}
 
 // --- MOCK DATA ---
 const APPS = [
@@ -70,45 +91,60 @@ const RECOMMENDED = [
 
 export default function JobsMyApplications() {
   const [activeTab, setActiveTab] = useState("All");
+  const [profileData, setProfileData] = useState(null);
+  const [analytics, setAnalytics] = useState(null);
+
+  useEffect(() => {
+    import("../services/candidateJobsAPI").then(({ getApplicationStats }) => {
+      getApplicationStats().then(setAnalytics).catch(() => setAnalytics(null));
+    });
+    getProfile()
+      .then(p => setProfileData(p))
+      .catch(() => setProfileData(null));
+  }, []);
+
+  const completion = calcCompletion(profileData);
 
   return (
-    <div className="jma-root">
-
-      {/* ── LEFT COLUMN ── */}
-      <div className="jma-left-col">
-
-        {/* HERO BANNER */}
-        <section className="jma-hero">
-          <div className="jma-hero-left">
-            <div className="jma-hero-icon"><Briefcase size={24} /></div>
-            <div className="jma-hero-text">
-              <div className="jma-kicker">Pipeline · live status</div>
-              <h1>My Applications</h1>
-              <p>Track every stage — applied, assessment, interview, offer</p>
-            </div>
+    <div className="jma-page-wrapper">
+      {/* HERO BANNER (FULL WIDTH) */}
+      <section className="jma-hero" style={{ marginBottom: 24 }}>
+        <div className="jma-hero-left">
+          <div className="jma-hero-icon"><Briefcase size={24} /></div>
+          <div className="jma-hero-text">
+            <div className="jma-kicker">Pipeline · live status</div>
+            <h1>My Applications</h1>
+            <p>Track every stage — applied, assessment, interview, offer</p>
           </div>
-          <div className="jma-hero-stats">
-            <div className="jma-hstat">
-              <span className="jma-hstat-val">4</span>
-              <span className="jma-hstat-lbl">Total Applied</span>
-            </div>
-            <div className="jma-hstat-div" />
-            <div className="jma-hstat">
-              <span className="jma-hstat-val">2</span>
-              <span className="jma-hstat-lbl">In Progress</span>
-            </div>
-            <div className="jma-hstat-div" />
-            <div className="jma-hstat">
-              <span className="jma-hstat-val">0</span>
-              <span className="jma-hstat-lbl">Offered</span>
-            </div>
-            <div className="jma-hstat-div" />
-            <div className="jma-hstat">
-              <span className="jma-hstat-val" style={{ color: '#10b981' }}>2</span>
-              <span className="jma-hstat-lbl" style={{ color: '#10b981' }}>Shortlisted</span>
-            </div>
+        </div>
+        <div className="jma-hero-stats">
+          <div className="jma-hstat">
+            <span className="jma-hstat-val">4</span>
+            <span className="jma-hstat-lbl">Total Applied</span>
           </div>
-        </section>
+          <div className="jma-hstat-div" />
+          <div className="jma-hstat">
+            <span className="jma-hstat-val">2</span>
+            <span className="jma-hstat-lbl">In Progress</span>
+          </div>
+          <div className="jma-hstat-div" />
+          <div className="jma-hstat">
+            <span className="jma-hstat-val">0</span>
+            <span className="jma-hstat-lbl">Offered</span>
+          </div>
+          <div className="jma-hstat-div" />
+          <div className="jma-hstat">
+            <span className="jma-hstat-val" style={{ color: '#10b981' }}>2</span>
+            <span className="jma-hstat-lbl" style={{ color: '#10b981' }}>Shortlisted</span>
+          </div>
+        </div>
+      </section>
+
+      <div className="jma-root">
+
+        {/* ── LEFT COLUMN ── */}
+        <div className="jma-left-col">
+
 
         {/* TOOLBAR */}
         <div className="jma-toolbar-top">
@@ -200,77 +236,8 @@ export default function JobsMyApplications() {
           ))}
         </div>
 
-        {/* BLOGS MOVED TO DASHBOARD */}
-
-      </div>
-
-      {/* ── RIGHT COLUMN ── */}
-      <aside className="jma-right-col">
-
-        {/* ANALYTICS */}
-        <div className="jma-sidebar-card">
-          <div className="jma-sec-title-row" style={{ marginBottom: 24 }}>
-            <h2>Application Analytics</h2>
-            <select style={{ background: 'transparent', border: 'none', color: '#64748b', fontSize: 11, outline: 'none' }}>
-              <option>This Month</option>
-            </select>
-          </div>
-          <div className="jma-chart-row">
-            <div className="jma-donut-wrapper">
-              <div className="jma-donut-inner">
-                <strong>4</strong>
-                <span>Total</span>
-              </div>
-            </div>
-            <div className="jma-legend">
-              <div className="jma-legend-item">
-                <div className="jma-legend-left"><div className="jma-legend-dot c-applied" /> Applied</div>
-                <div className="jma-legend-val">4 (100%)</div>
-              </div>
-              <div className="jma-legend-item">
-                <div className="jma-legend-left"><div className="jma-legend-dot c-inprogress" /> In Progress</div>
-                <div className="jma-legend-val">2 (50%)</div>
-              </div>
-              <div className="jma-legend-item">
-                <div className="jma-legend-left"><div className="jma-legend-dot c-shortlisted" /> Shortlisted</div>
-                <div className="jma-legend-val">2 (50%)</div>
-              </div>
-              <div className="jma-legend-item">
-                <div className="jma-legend-left"><div className="jma-legend-dot c-offered" /> Offered</div>
-                <div className="jma-legend-val">0 (0%)</div>
-              </div>
-              <div className="jma-legend-item">
-                <div className="jma-legend-left"><div className="jma-legend-dot c-rejected" /> Rejected</div>
-                <div className="jma-legend-val">0 (0%)</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* IMPROVE PROFILE */}
-        <div className="jma-sidebar-card">
-          <div className="jma-profile-top">
-            <div className="jma-profile-text">
-              <h2>Improve Your Profile</h2>
-              <p>Complete these steps to increase your chances of getting hired.</p>
-            </div>
-            <div className="jma-circle-progress">
-              <div className="jma-circle-inner">80%</div>
-            </div>
-          </div>
-          <div className="jma-checklist">
-            <div className="jma-check-item done"><Check size={14} color="#10b981" /> Add Work Experience</div>
-            <div className="jma-check-item done"><Check size={14} color="#10b981" /> Verify Email</div>
-            <div className="jma-check-item done"><Check size={14} color="#10b981" /> Upload Resume</div>
-            <div className="jma-check-item done"><Check size={14} color="#10b981" /> Add Education</div>
-            <div className="jma-check-item"><Circle size={14} /> Add Skills</div>
-            <div className="jma-check-item"><Circle size={14} /> Add Portfolio</div>
-          </div>
-          <button className="jma-card-cta jma-cta-solid">Improve Profile <ArrowRight size={14} /></button>
-        </div>
-
         {/* RECOMMENDED */}
-        <div className="jma-sidebar-card">
+        <div className="jma-sidebar-card" style={{ marginTop: '24px' }}>
           <div className="jma-sec-title-row" style={{ marginBottom: 20 }}>
             <h2>Recommended for you</h2>
             <Link to="/apply-jobs/browse" className="jma-link-blue">View all <ArrowRight size={14} /></Link>
@@ -296,7 +263,28 @@ export default function JobsMyApplications() {
           <button className="jma-card-cta jma-cta-solid" style={{ marginTop: 16 }}>Explore More Jobs</button>
         </div>
 
+      </div>
+
+      {/* ── RIGHT COLUMN ── */}
+      <aside className="jma-right-col">
+
+        {/* ANALYTICS */}
+        <SidebarApplicationAnalytics 
+          analytics={analytics} 
+          prefix="ajd" 
+          containerClass="ajd-rcard" 
+        />
+
+        {/* IMPROVE PROFILE */}
+        <SidebarImproveProfile 
+          profileData={profileData} 
+          completion={completion} 
+          prefix="ajd" 
+          containerClass="ajd-rcard" 
+        />
+
       </aside>
+      </div>
     </div>
   );
 }

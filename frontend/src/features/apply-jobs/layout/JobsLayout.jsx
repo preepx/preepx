@@ -41,6 +41,23 @@ function JobsLayout({ children }) {
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Auto-collapse sidebar on smaller screens
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1100) {
+        setCollapsed(true);
+      } else {
+        setCollapsed(false);
+      }
+    };
+    
+    // Set initial state
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
