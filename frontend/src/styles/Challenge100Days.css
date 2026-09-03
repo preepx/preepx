@@ -30,6 +30,7 @@
   background: linear-gradient(135deg, #a5b4fc, #6366f1, #c084fc, #fbbf24);
   background-size: 300% 300%;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: premiumGradientAnim 8s ease infinite;
 }
@@ -1041,6 +1042,7 @@
   letter-spacing: -0.01em;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1070,6 +1072,7 @@
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
