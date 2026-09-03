@@ -118,6 +118,7 @@ app.use("/api/recruiter", require("./src/modules/recruiter/recruiter.routes"));
 app.use("/api/recruiter/hiring", require("./src/modules/hiring/hiring.routes"));
 app.use("/api/assessments", require("./src/modules/hiring/assessment.routes"));
 app.use("/api/wallet", require("./src/modules/wallet/wallet.routes"));
+app.use("/api/subscription", require("./src/modules/subscription/subscription.routes"));
 app.use("/api/btec-notes", require("./src/modules/btec-notes/btecNote.routes"));
 app.use("/api/coding", require("./src/modules/coding/coding.routes"));
 app.use("/api/tts", require("./src/routes/ttsRoutes"));

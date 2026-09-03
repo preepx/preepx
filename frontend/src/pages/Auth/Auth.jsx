@@ -418,15 +418,18 @@ function Auth({ defaultRole }) {
           </button>
 
           {/* ── LEFT BRANDING PANEL (Desktop only) ── */}
-          <AuthHero onRecruiterClick={() => setShowRecruiterComingSoon(true)} />
+          <AuthHero 
+            onRecruiterClick={() => setShowRecruiterComingSoon(true)} 
+            onClose={handleClose} 
+          />
 
           {/* ── RIGHT AUTH FORM CARD (Desktop & Mobile) ── */}
           <div className="modern-auth-right">
             {/* Mobile Header */}
             <div className="modern-auth-mobile-header">
-              <Link to="/">
+              <a href="/" onClick={(e) => { e.preventDefault(); handleClose(); }} style={{ cursor: 'pointer' }}>
                 <img src="/preepx_logo.png" alt="PreepX" className="modern-auth-mobile-logo" />
-              </Link>
+              </a>
               <button className="modern-auth-close-btn" onClick={handleClose} aria-label="Close">
                 <X size={16} />
               </button>

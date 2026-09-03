@@ -27,7 +27,7 @@ function UserGuide() {
     { id: "getting-started", label: "Getting Started", icon: Zap },
     { id: "mock-interviews", label: "AI Mock Interviews", icon: Video },
     { id: "objective-exams", label: "Objective & Coding Exams", icon: Target },
-    { id: "coin-system", label: "Coins, XP & Economy", icon: Coins },
+    { id: "coin-system", label: "Money, XP & Economy", icon: Coins },
     { id: "100-days", label: "100 Days Challenge", icon: Flame },
     { id: "apply-jobs", label: "Job Board & Discovery", icon: Briefcase },
     { id: "recruiter-suite", label: "Recruiter Suite", icon: Users },
@@ -102,7 +102,7 @@ function UserGuide() {
               <div className="guide-info-card">
                 <div className="step-number-badge">Step 1</div>
                 <h3>Create an Account</h3>
-                <p>Sign up with your email to instantly receive <strong>20 Free Signup Bonus Coins</strong>.</p>
+                <p>Sign up with your email to instantly receive <strong>₹20 Free Signup Bonus</strong> in your wallet.</p>
               </div>
               <div className="guide-info-card">
                 <div className="step-number-badge">Step 2</div>
@@ -182,41 +182,41 @@ function UserGuide() {
 
           <div className="guide-divider" />
 
-          {/* Section 4: Coin System & XP */}
+          {/* Section 4: Money System & XP */}
           <section id="coin-system" className="guide-section-block">
             <div className="section-title-wrap">
               <div className="section-title-icon-box icon-green">
                 <Coins size={20} />
               </div>
               <div>
-                <h2>Coins, XP & Economy</h2>
-                <p className="section-desc">Understand how rewards, practice coins, and referrals work.</p>
+                <h2>Money, XP & Economy</h2>
+                <p className="section-desc">Understand how rewards, wallet balance, and referrals work.</p>
               </div>
             </div>
 
             <div className="guide-callout-panel">
               <div className="callout-col">
-                <h4>🪙 Coins (Practice Currency)</h4>
+                <h4>₹ Wallet Balance (Practice Currency)</h4>
                 <p>Used to unlock premium AI mock interviews, detailed PDF scorecards, and advanced candidate ranking boosts.</p>
               </div>
               <div className="callout-col">
                 <h4>⚡ XP (Experience Points)</h4>
-                <p>Earned by solving questions, maintaining daily streaks, and completing exams. XP can be converted into Coins in the Wallet.</p>
+                <p>Earned by solving questions, maintaining daily streaks, and completing exams. XP can be converted into Wallet Balance.</p>
               </div>
             </div>
 
             <div className="guide-pricing-pill-grid">
               <div className="pill-item">
                 <span className="pill-title">Signup Bonus</span>
-                <span className="pill-val">20 Free Coins</span>
+                <span className="pill-val">₹20 Free Balance</span>
               </div>
               <div className="pill-item">
                 <span className="pill-title">Referral Reward</span>
-                <span className="pill-val">20 Bonus Coins / invite</span>
+                <span className="pill-val">₹20 Bonus / invite</span>
               </div>
               <div className="pill-item popular-pill">
                 <span className="pill-title">Popular Pack</span>
-                <span className="pill-val">60 Coins for ₹49</span>
+                <span className="pill-val">₹49 Recharge</span>
               </div>
             </div>
           </section>

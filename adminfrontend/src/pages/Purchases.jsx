@@ -34,8 +34,8 @@ const Purchases = () => {
   return (
     <div className="transactions-page animate-fade-in">
       <div className="page-header">
-        <h1>Coin Purchases</h1>
-        <p className="text-secondary">View all real money transactions where users purchased coins.</p>
+        <h1>Wallet Recharges</h1>
+        <p className="text-secondary">View all real money transactions where users added balance.</p>
       </div>
 
       <div className="dashboard-stats" style={{ marginBottom: '24px' }}>
@@ -61,8 +61,8 @@ const Purchases = () => {
             <thead>
               <tr>
                 <th>User</th>
-                <th>Coins Added</th>
-                <th>Amount (Rs.)</th>
+                <th>Amount Added (₹)</th>
+                <th>Paid (₹)</th>
                 <th>Status</th>
                 <th>Date</th>
               </tr>
@@ -81,9 +81,9 @@ const Purchases = () => {
                     ) : 'Unknown User'}
                   </td>
                   <td style={{ fontWeight: 600, color: 'var(--success)' }}>
-                    +{tx.coins} Coins
+                    +₹{Math.abs(tx.coins)}
                   </td>
-                  <td style={{ fontWeight: 600 }}>Rs.{tx.metadata?.rupees || 0}</td>
+                  <td style={{ fontWeight: 600 }}>₹{tx.metadata?.rupees || 0}</td>
                   <td>
                     <span style={{ 
                       color: tx.status === 'completed' ? 'var(--success)' : 

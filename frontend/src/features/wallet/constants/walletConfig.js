@@ -1,14 +1,14 @@
 /** Frontend wallet constants — mirrors Backend/config/wallet.js */
 export const WALLET_PRICING = {
-  INTERVIEW: 5,
-  OBJECTIVE_EXAM: 1,
+  INTERVIEW: 5,     // ₹5 per interview
+  OBJECTIVE_EXAM: 1, // ₹1 per exam
 };
 
-export const RUPEE_TO_COIN_RATE = 1;
+export const RUPEE_TO_COIN_RATE = 1; // 1 rupee = 1 balance unit
 
 export const DEFAULT_PACKAGES = [
-  { id: "pack_10", rupees: 10, coins: 10, label: "Starter" },
-  { id: "pack_50", rupees: 50, coins: 50, label: "Popular", popular: true },
-  { id: "pack_100", rupees: 100, coins: 100, label: "Pro" },
-  { id: "pack_500", rupees: 500, coins: 500, label: "Ultimate" },
+  { id: "pack_20", rupees: 19, coins: 19, label: "Starter" },
+  { id: "pack_60", rupees: 49, coins: 49, label: "Popular", popular: true },
+  { id: "pack_130", rupees: 99, coins: 99, label: "Pro" },
+  { id: "pack_500", rupees: 499, coins: 499, label: "Ultimate" },
 ];

@@ -33,7 +33,7 @@ const Transactions = () => {
     <div className="transactions-page animate-fade-in">
       <div className="page-header">
         <h1>Transaction History</h1>
-        <p className="text-secondary">View all coin purchases, spends, and bonuses across the platform.</p>
+        <p className="text-secondary">View all wallet recharges, spends, and bonuses across the platform.</p>
       </div>
 
       <div className="glass-panel content-card">
@@ -48,7 +48,7 @@ const Transactions = () => {
               <tr>
                 <th>User</th>
                 <th>Type</th>
-                <th>Coins</th>
+                <th>Amount (₹)</th>
                 <th>Rupees (Rs.)</th>
                 <th>Description</th>
                 <th>Status</th>
@@ -74,7 +74,7 @@ const Transactions = () => {
                     </span>
                   </td>
                   <td style={{ fontWeight: 600, color: (tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus') ? 'var(--success)' : 'var(--danger)' }}>
-                    {(tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus') ? '+' : '-'}{tx.coins} {tx.type === 'xp_bonus' ? 'XP' : 'Coins'}
+                    {(tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus') ? '+' : '-'}₹{Math.abs(tx.coins)} {tx.type === 'xp_bonus' ? 'XP' : ''}
                   </td>
                   <td>{tx.metadata?.rupees ? `Rs.${tx.metadata.rupees}` : '-'}</td>
                   <td>{tx.description}</td>

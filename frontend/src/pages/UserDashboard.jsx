@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProfile, getAnalytics } from "@/services/userAPI";
 import { useWallet } from "@/features/wallet";
+import { useSubscription } from "@/features/subscription";
 import { getStoredUser, setStoredUser } from "@/utils/authUtils";
 import Loader from "@/components/Loader";
 import {
@@ -23,6 +24,7 @@ function UserDashboard() {
   const [loading, setLoading] = useState(true);
 
   const { balance } = useWallet();
+  const { subscribed, planName } = useSubscription();
 
   const refreshData = useCallback(() => {
     Promise.all([
@@ -64,6 +66,7 @@ function UserDashboard() {
   const coins = balance ?? user?.coins ?? 0;
   const avgScore = stats?.avgScore ?? 0;
 
+
   return (
     <div className="ud-page">
       {/* BANNER SLIDER */}
@@ -76,6 +79,8 @@ function UserDashboard() {
         avgScore={avgScore}
         coins={coins}
         badgesCount={badgesCount}
+        subscribed={subscribed}
+        planName={planName}
       />
 
       {/* APPLY JOBS CTA */}

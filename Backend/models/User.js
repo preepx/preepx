@@ -46,6 +46,16 @@ const userSchema = mongoose.Schema(
     referredBy: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     referralCount: { type: Number, default: 0 },
     hasUsedCoins: { type: Boolean, default: false },
+    // Subscription Plan
+    subscription: {
+      planId: { type: String, default: null },
+      planName: { type: String, default: null },
+      startDate: { type: Date, default: null },
+      expiresAt: { type: Date, default: null },
+      status: { type: String, enum: ["active", "expired", "none"], default: "none" },
+      razorpayOrderId: { type: String, default: null },
+      razorpayPaymentId: { type: String, default: null },
+    },
     profileCompletedBonusClaimed: { type: Boolean, default: false },
     xpRewardsClaimed: [{ type: String }],
     lastDailyRewardDate: { type: Date },

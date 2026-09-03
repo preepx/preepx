@@ -93,7 +93,7 @@ function CertificateView({ cert, performance, hasUpdates, onUpdate, updating, on
         {hasUpdates && !updating && (
           <span className="cert-btn-coin-pill">
             <span>{coinCost}</span>
-            <span>🪙</span>
+            <span>₹</span>
           </span>
         )}
       </button>
@@ -334,29 +334,29 @@ export default function ObjCertificateCard() {
         {statsPreview}
         <div className="cert-lock-section">
           <Lock size={24} className="cert-lock-icon cert-warn" />
-          <p className="cert-lock-msg">You need {CERT_COST} coins to unlock your certificate.</p>
+          <p className="cert-lock-msg">You need ₹{CERT_COST} to unlock your certificate.</p>
           <div className="cert-coin-info">
             <div className="cert-coin-row">
               <span>Unlock Cost</span>
-              <span className="cert-coin-badge">{CERT_COST} 🪙</span>
+              <span className="cert-coin-badge">₹{CERT_COST}</span>
             </div>
             <div className="cert-coin-row">
               <span>Your Balance</span>
-              <span className="cert-coin-badge insufficient">{coinBalance} 🪙</span>
+              <span className="cert-coin-badge insufficient">₹{coinBalance}</span>
             </div>
           </div>
           <button
             className="cert-action-btn cert-get-coins-btn full"
             onClick={() => navigate("/wallet")}
           >
-            <Coins size={16} /> Get More Coins
+            <Coins size={16} /> Add Money
           </button>
         </div>
       </div>
     );
   }
 
-  // ─── State 2: Eligible + sufficient coins — ready to unlock ───
+  // ─── State 2: Eligible + sufficient balance — ready to unlock ───
   return (
     <div className="panel cert-card cert-card-eligible">
       <div className="cert-card-header">
@@ -371,11 +371,11 @@ export default function ObjCertificateCard() {
         <div className="cert-coin-info">
           <div className="cert-coin-row">
             <span>Unlock Cost</span>
-            <span className="cert-coin-badge">{CERT_COST} 🪙</span>
+            <span className="cert-coin-badge">₹{CERT_COST}</span>
           </div>
           <div className="cert-coin-row">
             <span>Your Balance</span>
-            <span className="cert-coin-badge sufficient">{coinBalance} 🪙</span>
+            <span className="cert-coin-badge sufficient">₹{coinBalance}</span>
           </div>
         </div>
         <button

@@ -23,10 +23,13 @@ API.interceptors.response.use(
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       localStorage.removeItem("user_notifications");
-      if (!window.location.pathname.includes("/auth")) {
+      const currentPath = window.location.pathname;
+      const isAuthPage = currentPath.includes("/auth");
+      const targetPath = currentPath.includes("/recruiter") ? "/recruiter" : "/";
+
+      if (!isAuthPage && currentPath !== targetPath && currentPath !== "/") {
         showAppError("Your session has expired. Please sign in again.", "Session expired");
-        const wasRecruiter = window.location.pathname.includes("/recruiter");
-        window.location.href = wasRecruiter ? "/auth/recruiter" : "/auth";
+        window.location.href = targetPath;
       }
     } else if (status === 500) {
       console.error("API Error:", msg);

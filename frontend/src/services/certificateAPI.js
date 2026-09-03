@@ -1,7 +1,7 @@
 import API from "@/utils/api";
 
 /**
- * Get current certificate status + performance + coin balance.
+ * Get current certificate status + performance + wallet balance.
  * Authenticated.
  */
 export const getCertificateStatus = () =>
@@ -9,7 +9,7 @@ export const getCertificateStatus = () =>
 
 /**
  * Unlock the Objective Performance Certificate.
- * Backend will validate eligibility, deduct 5 coins, and generate the certificate.
+ * Backend will validate eligibility, deduct ₹5, and generate the certificate.
  * Idempotent — safe to call if already unlocked.
  * Authenticated.
  */

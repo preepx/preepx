@@ -2,16 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BarChart3, Briefcase, Shield } from "lucide-react";
 
-export default function AuthHero({ onRecruiterClick }) {
+export default function AuthHero({ onRecruiterClick, onClose }) {
   return (
     <aside className="modern-auth-left">
       <div className="auth-radar-ring" />
       <div className="auth-radar-ring-2" />
 
       <div className="modern-auth-left-top">
-        <Link to="/" style={{ display: "inline-block" }}>
+        <a 
+          href="/" 
+          onClick={(e) => { e.preventDefault(); onClose?.(); }} 
+          style={{ display: "inline-block", cursor: "pointer" }}
+        >
           <img src="/preepx_logo.png" alt="PreepX" className="auth-brand-logo" />
-        </Link>
+        </a>
 
         <h1 className="auth-brand-title">
           Prepare.<br />Prove.<br />

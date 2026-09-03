@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate, Navigate } from 'react-router-dom';
-import { LayoutDashboard, Users, CreditCard, LogOut, Menu, X, BookOpen, HelpCircle, FileUp, IndianRupee, Briefcase, ChevronRight, Sun, Moon } from 'lucide-react';
+import { LayoutDashboard, Users, CreditCard, LogOut, Menu, X, BookOpen, HelpCircle, FileUp, IndianRupee, Briefcase, ChevronRight, Sun, Moon, Shield } from 'lucide-react';
 import preepxLogo from '../../../frontend/public/preepx_logo.png';
 import './AdminLayout.css';
 
@@ -45,6 +45,11 @@ const AdminLayout = () => {
         <span>All Users</span>
         <ChevronRight size={16} className="nav-chevron" />
       </NavLink>
+      <NavLink to="/users/plans" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => isMobile && setIsMobileMenuOpen(false)}>
+        <Shield size={20} />
+        <span>User Plans</span>
+        <ChevronRight size={16} className="nav-chevron" />
+      </NavLink>
       <NavLink to="/recruiters" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => isMobile && setIsMobileMenuOpen(false)}>
         <Briefcase size={20} />
         <span>Recruiters</span>
@@ -63,7 +68,7 @@ const AdminLayout = () => {
       </NavLink>
       <NavLink to="/purchases" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => isMobile && setIsMobileMenuOpen(false)}>
         <IndianRupee size={20} />
-        <span>Coin Purchases</span>
+        <span>Wallet Recharges</span>
         <ChevronRight size={16} className="nav-chevron" />
       </NavLink>
       <div className="nav-section-title">Content</div>

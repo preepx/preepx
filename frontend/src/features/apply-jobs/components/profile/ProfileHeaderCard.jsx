@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import {
   Camera, Check, X, Edit2, Mail, Phone, MapPin, AlertCircle,
-  Linkedin, Github, Globe, FileText, Upload
+  Linkedin, Github, Globe, FileText, Upload, Crown
 } from "lucide-react";
+import { useSubscription } from "@/features/subscription";
 
 export default function ProfileHeaderCard({
   user,
@@ -19,6 +20,7 @@ export default function ProfileHeaderCard({
 }) {
   const photoRef = useRef(null);
   const resumeRef = useRef(null);
+  const { subscribed } = useSubscription();
 
   const avatar = user?.profilePic ||
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.fullName || "U")}&background=6366f1&color=fff&size=200`;
@@ -27,8 +29,13 @@ export default function ProfileHeaderCard({
     <div className="jp-card jp-main-card">
       {/* Photo & Main Info */}
       <div className="jp-photo-section">
-        <div className="jp-avatar-wrap">
-          <img src={avatar} alt="Profile" className="jp-avatar" />
+        <div className="jp-avatar-wrap" style={{ position: 'relative' }}>
+          <img 
+            src={avatar} 
+            alt="Profile" 
+            className="jp-avatar" 
+            style={subscribed ? { border: '3px solid #f59e0b', padding: '2px' } : {}}
+          />
           <button
             type="button"
             className="jp-photo-btn"
@@ -114,8 +121,27 @@ export default function ProfileHeaderCard({
             </div>
           ) : (
             <>
-              <div className="jp-main-name-row">
-                <h1 className="jp-name">{user?.fullName || "Your Name"}</h1>
+              <div className="jp-main-name-row" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <h1 className="jp-name" style={{ display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                  {user?.fullName || "Your Name"}
+                  {subscribed && (
+                    <span style={{ 
+                      fontSize: '12px', 
+                      background: 'linear-gradient(135deg, #f59e0b, #d97706)', 
+                      color: 'white', 
+                      padding: '3px 8px', 
+                      borderRadius: '12px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      fontWeight: 'bold',
+                      letterSpacing: '0.5px',
+                      boxShadow: '0 2px 8px rgba(245,158,11,0.4)'
+                    }}>
+                      <Crown size={12} /> PRO
+                    </span>
+                  )}
+                </h1>
                 <button
                   type="button"
                   className="jp-edit-icon-btn"
