@@ -6,6 +6,7 @@ import AdminLayout from './components/AdminLayout';
 const Login = lazy(() => import('./pages/Login'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Users = lazy(() => import('./pages/Users'));
+const UserPlans = lazy(() => import('./pages/UserPlans'));
 const UserDetails = lazy(() => import('./pages/UserDetails'));
 const Transactions = lazy(() => import('./pages/Transactions'));
 const Purchases = lazy(() => import('./pages/Purchases'));
@@ -27,6 +28,7 @@ function App() {
             <Route index element={<Navigate to="/dashboard" replace />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="users" element={<Users />} />
+            <Route path="users/plans" element={<UserPlans />} />
             <Route path="users/:id" element={<UserDetails />} />
             <Route path="recruiters" element={<Recruiters />} />
             <Route path="recruiters/:id" element={<RecruiterDetails />} />

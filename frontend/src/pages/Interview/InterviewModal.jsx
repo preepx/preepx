@@ -83,9 +83,9 @@ const InterviewModal = ({ onClose, onSuccess }) => {
       });
     } catch (err) {
       const errorMsg = err.response?.data?.message || err.response?.data?.error || "Error generating questions. Check your login & API key.";
-      if (errorMsg.toLowerCase().includes("insufficient coins") || errorMsg.toLowerCase().includes("recharge")) {
-        showAppError(errorMsg, "Insufficient Coins", {
-          label: "Add Coins",
+      if (errorMsg.toLowerCase().includes("insufficient") || errorMsg.toLowerCase().includes("recharge")) {
+        showAppError(errorMsg, "Insufficient Balance", {
+          label: "Add Money",
           onClick: () => {
             navigate("/wallet");
           }
@@ -108,7 +108,7 @@ const InterviewModal = ({ onClose, onSuccess }) => {
               <img src="/logo.png" alt="Logo" style={{ height: '56px', width: 'auto', objectFit: 'contain', marginRight: '-8px' }} />
               <h2 style={{ fontSize: '22px', lineHeight: '28px', margin: 0 }}>Create Interview Session</h2>
               <div className="im2-coin-badge" style={{ marginLeft: '8px' }}>
-                5 🪙 per session
+                ₹5 per session
               </div>
             </div>
             <p>Set up your practice session and get interview-ready.</p>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X, Gift, Calendar } from 'lucide-react';
+import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X, Gift, Calendar, Shield } from 'lucide-react';
 import api from '../utils/api';
 import './UserDetails.css';
 import Pagination from '../components/Pagination';
@@ -145,18 +145,36 @@ const UserDetails = () => {
 
           <div className="glass-panel content-card mb-4">
             <div className="card-header">
+              <Shield size={20} className="accent-icon" />
+              <h3 className="gradient-text">Subscription</h3>
+            </div>
+            <div className="profile-extra-details">
+              {user.subscription?.status === 'active' ? (
+                <>
+                  <p><strong>Plan:</strong> {user.subscription.planName || user.subscription.planId}</p>
+                  <p><strong>Status:</strong> <span style={{ color: '#10b981', fontWeight: 'bold' }}>Active</span></p>
+                  <p><strong>Expires:</strong> {user.subscription.expiresAt ? new Date(user.subscription.expiresAt).toLocaleDateString() : 'N/A'}</p>
+                </>
+              ) : (
+                <p className="text-secondary">No active subscription.</p>
+              )}
+            </div>
+          </div>
+
+          <div className="glass-panel content-card mb-4">
+            <div className="card-header">
               <Wallet size={20} className="accent-icon" />
               <h3 className="gradient-text">Wallet</h3>
             </div>
             <div className="wallet-balance" style={{ marginBottom: '1rem' }}>
-              <h2>{wallet.balance} <span className="text-secondary" style={{fontSize: '1rem'}}>Coins</span></h2>
+              <h2>₹{wallet.balance} <span className="text-secondary" style={{fontSize: '1rem'}}>Balance</span></h2>
             </div>
             
             <div className="add-coins-form">
               <input 
                 type="number" 
                 className="input-field" 
-                placeholder="Coins to add" 
+                placeholder="Amount (₹) to add" 
                 value={coinsToAdd}
                 onChange={(e) => setCoinsToAdd(e.target.value)}
                 style={{ flex: 1, padding: '0.5rem' }}
@@ -173,9 +191,9 @@ const UserDetails = () => {
                     const updatedData = await api.get(`/users/${id}`);
                     setData(updatedData.data);
                     setCoinsToAdd('');
-                    alert('Coins added successfully!');
+                    alert('₹' + coinsToAdd + ' added to wallet successfully!');
                   } catch (err) {
-                    alert('Failed to add coins');
+                    alert('Failed to add balance');
                   } finally {
                     setAddingCoins(false);
                   }
@@ -316,7 +334,7 @@ const UserDetails = () => {
                       <small className="text-secondary">{new Date(tx.createdAt).toLocaleDateString()}</small>
                     </div>
                     <div className={`tx-amount ${tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus' ? 'positive' : 'negative'}`}>
-                      {tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus' ? '+' : '-'}{tx.coins} {tx.type === 'xp_bonus' ? 'XP' : 'Coins'}
+                      {tx.type === 'purchase' || tx.type === 'bonus' || tx.type === 'xp_bonus' ? '+' : '-'}₹{Math.abs(tx.coins)} {tx.type === 'xp_bonus' ? 'XP' : ''}
                     </div>
                   </div>
                 ))

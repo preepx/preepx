@@ -24,7 +24,7 @@ const createOrder = catchAsync(async (req, res) => {
   } else {
     const pack = walletConfig.COIN_PACKAGES.find((p) => p.id === packageId);
     if (!pack) {
-      throw new BadRequestError("Invalid coin package");
+      throw new BadRequestError("Invalid package selected");
     }
     amountInRupees = pack.rupees;
   }
@@ -53,7 +53,7 @@ const verifyPayment = catchAsync(async (req, res) => {
     throw new BadRequestError("Invalid payment signature");
   }
 
-  // Payment is valid, add coins
+  // Payment is valid, add balance
   const result = await walletService.purchaseCoins(req.user, {
     packageId: packageId === "custom" ? null : packageId,
     rupees: packageId === "custom" ? customAmount : null,
@@ -61,7 +61,7 @@ const verifyPayment = catchAsync(async (req, res) => {
   });
 
   res.json({
-    message: `${result.coinsAdded} coins added to your wallet`,
+    message: `₹${result.coinsAdded} added to your wallet`,
     balance: result.wallet.balance,
     transaction: result.transaction,
   });
@@ -71,7 +71,7 @@ const purchaseCoins = catchAsync(async (req, res) => {
   const { packageId, rupees } = req.body;
   const result = await walletService.purchaseCoins(req.user, { packageId, rupees });
   res.json({
-    message: `${result.coinsAdded} coins added to your wallet`,
+    message: `₹${result.coinsAdded} added to your wallet`,
     balance: result.wallet.balance,
     transaction: result.transaction,
   });

@@ -19,7 +19,7 @@ const addBonus = async (userId, coins, description) => {
     status: "completed",
   });
 
-  await sendNotification(userId, "Coins Added", description || `You received ${coins} coins!`, "general", "🪙");
+  await sendNotification(userId, "Balance Added", description || `You received ₹${coins} in your wallet!`, "general", "💰");
 
   return wallet;
 };
@@ -89,7 +89,7 @@ const purchaseCoins = async (userId, { packageId, rupees, paymentRef }) => {
     type: "purchase",
     coins,
     balanceAfter: wallet.balance,
-    description: `Purchased ${coins} coins for ₹${amountRupees}`,
+    description: `Added ₹${amountRupees} to wallet`,
     status: "completed",
     metadata: {
       rupees: amountRupees,
@@ -99,19 +99,29 @@ const purchaseCoins = async (userId, { packageId, rupees, paymentRef }) => {
     },
   });
 
-  await sendNotification(userId, "Wallet Recharge", `Successfully added ${coins} Coins to your wallet!`, "general", "💰");
+  await sendNotification(userId, "Wallet Recharge", `Successfully added ₹${coins} to your wallet!`, "general", "💰");
 
   return { wallet, transaction, coinsAdded: coins };
 };
 
 /**
- * Deduct coins for a session. No-op when BILLING_ENABLED is false.
- * Wire into interview/MCQ controllers when billing goes live.
+ * Deduct balance for a session.
+ * - If billing is disabled → free.
+ * - If user has an active subscription → free.
+ * - Otherwise deduct from wallet balance.
  */
 const deductForSession = async (userId, sessionType) => {
   if (!walletConfig.BILLING_ENABLED) {
     return { charged: false, reason: "billing_disabled", cost: 0 };
   }
+
+  // ── Subscription check ──────────────────────────────────────────────────
+  const subscriptionService = require("../subscription/subscription.service");
+  const subscribed = await subscriptionService.isSubscribed(userId);
+  if (subscribed) {
+    return { charged: false, reason: "subscribed", cost: 0 };
+  }
+  // ────────────────────────────────────────────────────────────────────────
 
   let cost;
   if (sessionType === "objective_exam") cost = walletConfig.PRICING.OBJECTIVE_EXAM;
@@ -123,7 +133,7 @@ const deductForSession = async (userId, sessionType) => {
 
   const wallet = await getOrCreateWallet(userId);
   if (wallet.balance < cost) {
-    const err = new Error(`Insufficient coins. Need ${cost}, have ${wallet.balance}.`);
+    const err = new Error(`Insufficient balance. Need ₹${cost}, have ₹${wallet.balance}.`);
     err.code = "INSUFFICIENT_COINS";
     err.required = cost;
     err.balance = wallet.balance;
@@ -147,7 +157,7 @@ const deductForSession = async (userId, sessionType) => {
     type: "spend",
     coins: -cost,
     balanceAfter: wallet.balance,
-    description: `${labels[sessionType] || "Session"} ₹ ${cost} coin(s)`,
+    description: `${labels[sessionType] || "Session"} - ₹${cost} charged`,
     status: "completed",
     metadata: { sessionType },
   });
@@ -171,6 +181,11 @@ const deductForSession = async (userId, sessionType) => {
 
 const hasEnoughCoins = async (userId, sessionType) => {
   if (!walletConfig.BILLING_ENABLED) return { allowed: true, cost: 0, balance: null };
+
+  // Subscribed users always have access
+  const subscriptionService = require("../subscription/subscription.service");
+  const subscribed = await subscriptionService.isSubscribed(userId);
+  if (subscribed) return { allowed: true, cost: 0, balance: null, subscribed: true };
 
   let cost;
   if (sessionType === "objective_exam") cost = walletConfig.PRICING.OBJECTIVE_EXAM;
@@ -196,12 +211,12 @@ const addBonusToWallet = async (userId, coins, description) => {
     type: "bonus",
     coins,
     balanceAfter: wallet.balance,
-    description: description || `Earned ${coins} bonus coins`,
+    description: description || `Earned ₹${coins} bonus`,
     status: "completed",
     metadata: { isBonus: true },
   });
 
-  await sendNotification(userId, "Coins Added", description || `Earned ${coins} bonus coins!`, "general", "🪙");
+  await sendNotification(userId, "Balance Added", description || `Earned ₹${coins} bonus!`, "general", "💰");
 
   return { wallet, transaction, coinsAdded: coins };
 };
@@ -213,7 +228,7 @@ const addBonusToWallet = async (userId, coins, description) => {
 const spendCoins = async (userId, amount, description, metadata = {}) => {
   const wallet = await getOrCreateWallet(userId);
   if (wallet.balance < amount) {
-    const err = new Error(`Insufficient coins. Need ${amount}, have ${wallet.balance}.`);
+    const err = new Error(`Insufficient balance. Need ₹${amount}, have ₹${wallet.balance}.`);
     err.code = "INSUFFICIENT_COINS";
     err.required = amount;
     err.balance = wallet.balance;

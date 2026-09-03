@@ -22,11 +22,11 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
 
       // 2. Open Razorpay Checkout
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_TIldjHmH0HwMPb", // Fallback for testing
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_TIldjHmH0HwMPb",
         amount: orderData.amount,
         currency: orderData.currency,
         name: "PreepX AI Interview",
-        description: `Purchase ${pack.coins} Coins`,
+        description: `Add ₹${pack.rupees} to Wallet`,
         order_id: orderData.orderId,
         handler: async function (response) {
           try {
@@ -69,8 +69,8 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
   return (
     <div className="coin-packages">
       <div className="coin-packages-header">
-        <h3>Buy Coins</h3>
-        <p>₹1 = ~1 coin · AI Interview requires coins</p>
+        <h3>Add Money to Wallet</h3>
+        <p>Pay once, use for interviews & exams</p>
       </div>
 
       {!billingEnabled && (
@@ -90,7 +90,7 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
           >
             {activePack === pack.id && <span className="coin-pack-tag">{pack.label}</span>}
             <p className="coin-pack-label">{pack.label}</p>
-            <p className="coin-pack-coins">{pack.coins} <span>coins</span></p>
+            <p className="coin-pack-coins">₹{pack.rupees} <span>balance</span></p>
             <p className="coin-pack-price">
               <IndianRupee size={14} />
               {pack.rupees}
@@ -100,7 +100,7 @@ function CoinPackages({ packages = DEFAULT_PACKAGES, billingEnabled, onPurchaseS
               onClick={() => handleBuy(pack)}
               disabled={buying === pack.id}
             >
-              {buying === pack.id ? "Processing…" : "Buy Now"}
+              {buying === pack.id ? "Processing…" : "Pay Now"}
             </button>
           </div>
         ))}

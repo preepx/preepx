@@ -64,7 +64,7 @@ const CodingPractice = () => {
 
   const handleSolve = async (problem) => {
     try {
-      // Deduct coins if required, here we just do a start check
+      // Deduct balance if required, here we just do a start check
       await API.post('/coding/start', { difficulty: problem.difficulty });
       window.dispatchEvent(new Event("walletUpdated"));
       navigate(`/coding-exam?problemId=${problem._id}`);

@@ -207,7 +207,7 @@ const Challenge100Days = () => {
         notify.error(res?.message || "Could not start challenge");
       }
     } catch (err) {
-      notify.error(err.response?.data?.message || "Insufficient coins to start challenge");
+      notify.error(err.response?.data?.message || "Insufficient balance to start challenge");
     }
     setPendingChallenge(null);
   };

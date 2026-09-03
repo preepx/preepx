@@ -35,37 +35,38 @@ export const pricingData = {
     ],
     plans: [
       {
-        id: "candidate-free",
-        name: "Free",
-        tagline: "For Getting Started",
-        price: "₹0",
-        period: "Forever",
-        buttonText: "Get Started Free",
+        id: "plan_7d",
+        name: "7 DAYS",
+        tagline: "Weekly",
+        price: "₹79",
+        period: "",
+        originalPrice: "₹99",
+        buttonText: "Subscribe for ₹79",
         isPopular: false,
         buttonVariant: "secondary",
         features: [
-          "20 Signup Bonus Coins",
-          "20 Referral Bonus Coins",
-          "Standard AI Mock Interviews",
-          "Basic Performance Reports",
+          "Unlimited AI Interviews",
+          "Unlimited Objective Exams",
+          "Unlimited ATS Resume Scans",
+          "Top Companies Preparation",
         ],
       },
       {
-        id: "candidate-popular",
-        name: "60 Coins",
-        tagline: "For Serious Achievers",
-        badge: "🔥 Popular",
-        price: "₹49",
-        period: "/pack",
-        buttonText: "Get 60 Coins",
+        id: "plan_1m",
+        name: "1 MONTH",
+        tagline: "Monthly",
+        badge: "🔥 Most Popular",
+        price: "₹299",
+        period: "",
+        originalPrice: "₹349",
+        buttonText: "Subscribe for ₹299",
         isPopular: true,
         buttonVariant: "primary-purple",
         features: [
-          "60 Practice Coins Added",
-          "AI Mock Interviews & Exams",
-          "100 Days Challenge Access",
-          "Priority Recruiter Visibility",
-          "Verified Skill Certificates",
+          "Unlimited AI Interviews",
+          "Unlimited Objective Exams",
+          "Unlimited ATS Resume Scans",
+          "Top Companies Preparation",
         ],
       },
     ],
@@ -110,7 +111,7 @@ export const pricingData = {
         isPopular: false,
         buttonVariant: "outline-green",
         features: [
-          "Up to 10 Assessments/mo",
+          "Up to 5 Job Posts/mo",
           "AI Candidate Scoring",
           "Basic Hiring Pipeline",
           "Email Support",
@@ -127,7 +128,7 @@ export const pricingData = {
         isPopular: true,
         buttonVariant: "primary-green",
         features: [
-          "Unlimited Assessments",
+          "Upto 20 Job Posts/mo",
           "Advanced AI Insights",
           "Automated Screening",
           "Priority Support",
@@ -247,6 +248,11 @@ function PricingSection({ onRecruiterClick }) {
                 </div>
 
                 <div className="tier-price-box">
+                  {plan.originalPrice && (
+                    <span style={{ textDecoration: "line-through", color: "var(--text-muted)", fontSize: "16px", marginRight: "8px", fontWeight: "normal" }}>
+                      {plan.originalPrice}
+                    </span>
+                  )}
                   <span
                     className={`tier-price ${plan.isPopular ? "tier-price-purple" : ""}`}
                   >

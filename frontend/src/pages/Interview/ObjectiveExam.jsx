@@ -403,7 +403,7 @@ export default function ObjectiveExam() {
                   <div className="oe-form-header">
                     <h2 className="oe-form-title" style={{ margin: 0 }}>Configure your exam</h2>
                     <div className="oe-coin-badge">
-                      1 <span>🪙</span> per session
+                      ₹1 <span>per session</span>
                     </div>
                   </div>
                   <p className="oe-form-sub" style={{ marginTop: '4px', marginBottom: 0 }}>Enter a topic and choose the number of questions.</p>

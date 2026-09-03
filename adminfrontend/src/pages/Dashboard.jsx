@@ -63,11 +63,11 @@ const Dashboard = () => {
 
         <div className="stat-card glass-panel">
           <div className="stat-icon-wrapper yellow">
-            <Coins size={24} />
+            <IndianRupee size={24} />
           </div>
           <div className="stat-details">
-            <h3>Coins Sold (Last 7 Days)</h3>
-            <p className="stat-value">{stats.coinsSoldLast7Days}</p>
+            <h3>₹ Revenue (Last 7 Days)</h3>
+            <p className="stat-value">₹{stats.coinsSoldLast7Days}</p>
           </div>
         </div>
       </div>
@@ -133,7 +133,7 @@ const Dashboard = () => {
                     <tr>
                       <th>User</th>
                       <th>Type</th>
-                      <th>Coins</th>
+                      <th>Amount</th>
                       <th>Date</th>
                     </tr>
                   </thead>
@@ -143,7 +143,7 @@ const Dashboard = () => {
                         <td>{tx.userId?.fullName || 'Unknown User'}</td>
                         <td style={{ textTransform: 'capitalize' }}>{tx.type}</td>
                         <td style={{ color: tx.type === 'purchase' ? '#10b981' : '#f59e0b' }}>
-                          {tx.type === 'purchase' ? '+' : '-'}{tx.coins}
+                          {tx.type === 'purchase' ? '+' : '-'}₹{Math.abs(tx.coins)}
                         </td>
                         <td>{new Date(tx.createdAt).toLocaleDateString()}</td>
                       </tr>

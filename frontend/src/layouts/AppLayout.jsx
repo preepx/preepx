@@ -2,12 +2,13 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, FileText, Bell, Briefcase
+  LogOut, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, FileText, Bell, Briefcase, Crown
 } from "lucide-react";
 import notify from "@/utils/notify";
 import { getProfile, syncUserToStorage } from "@/services/userAPI";
 import NotificationModal from "@/components/NotificationModal";
 import { useWallet, WalletBadge } from "@/features/wallet";
+import { useSubscription } from "@/features/subscription";
 import { useTheme } from "@/hooks/useTheme";
 import { getStoredUser, clearAuth } from "@/utils/authUtils";
 import { io } from "socket.io-client";
@@ -38,6 +39,7 @@ function AppLayout({ children }) {
   const navigate = useNavigate();
   const { isDark, toggleTheme } = useTheme();
   const { balance } = useWallet();
+  const { subscribed } = useSubscription();
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifs, setNotifs] = useState([]);
 
@@ -316,9 +318,36 @@ function AppLayout({ children }) {
                   <span>{user?.points || 0} XP</span>
                 </span>
 
-                <Link to="/profile" className="topbar-profile-link" title="My Profile">
-                  <img src={avatar} alt="Profile" className="topbar-avatar-img" />
-                </Link>
+                <div style={{ position: 'relative', display: 'inline-flex' }}>
+                  <Link 
+                    to="/profile" 
+                    className="topbar-profile-link" 
+                    title="My Profile"
+                    style={subscribed ? { border: '2px solid #f59e0b', borderRadius: '50%', padding: '1px' } : {}}
+                  >
+                    <img src={avatar} alt="Profile" className="topbar-avatar-img" />
+                  </Link>
+                  {subscribed && (
+                    <div style={{
+                      position: 'absolute',
+                      bottom: '-4px',
+                      right: '-4px',
+                      background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                      borderRadius: '50%',
+                      width: '18px',
+                      height: '18px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '2px solid var(--surface)',
+                      boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                      pointerEvents: 'none',
+                      zIndex: 10
+                    }}>
+                      <Crown size={10} color="#fff" strokeWidth={3} />
+                    </div>
+                  )}
+                </div>
               </div>
             </header>
           )}

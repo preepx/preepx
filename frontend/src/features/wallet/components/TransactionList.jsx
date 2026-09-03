@@ -29,7 +29,7 @@ function TransactionList({ transactions = [] }) {
     return (
       <div className="txn-empty">
         <p>No transactions yet</p>
-        <span>Your coin purchase & usage history will appear here</span>
+        <span>Your wallet recharge & usage history will appear here</span>
       </div>
     );
   }
@@ -53,8 +53,8 @@ function TransactionList({ transactions = [] }) {
               <p className="txn-desc">{txn.description}</p>
               <p className="txn-date">{formatDate(txn.createdAt)}</p>
             </div>
-            <div className={`txn-amount ${isCredit ? "credit" : "debit"}`}>
-              {isCredit ? "+" : ""}{txn.coins} {txn.type === 'xp_bonus' ? 'XP' : ''}
+          <div className={`txn-amount ${isCredit ? "credit" : "debit"}`}>
+              {isCredit ? "+" : ""}₹{Math.abs(txn.coins)} {txn.type === 'xp_bonus' ? 'XP' : ''}
             </div>
           </div>
         );

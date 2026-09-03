@@ -185,12 +185,12 @@ const toggleUserBlock = async (req, res) => {
   }
 };
 
-// @desc    Add Coins to User Wallet
+// @desc    Add Money to User Wallet
 const addCoinsToWallet = async (req, res) => {
   try {
     const { coins, description } = req.body;
     if (!coins || coins <= 0) {
-      return res.status(400).json({ message: "Invalid coins amount" });
+      return res.status(400).json({ message: "Invalid amount" });
     }
 
     const wallet = await Wallet.findOne({ userId: req.params.id });
@@ -214,16 +214,16 @@ const addCoinsToWallet = async (req, res) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId: req.params.id,
-          title: "Coins Added",
-          message: description || `Admin has added ${coins} coins to your wallet!`,
-          icon: "🪙"
+          title: "Balance Added",
+          message: description || `Admin ne ₹${coins} aapke wallet mein add kiye!`,
+          icon: "💰"
         })
       });
     } catch (e) {
       console.error("Webhook notification failed:", e.message);
     }
 
-    res.json({ message: "Coins added successfully", wallet });
+    res.json({ message: "Balance added successfully", wallet });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }

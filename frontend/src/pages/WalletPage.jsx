@@ -1,16 +1,30 @@
 import React, { useState } from "react";
-import { Coins, Mic, Zap, Shield, TrendingUp, Plus, X } from "lucide-react";
+import { IndianRupee, Mic, Zap, Shield, TrendingUp, Plus, X } from "lucide-react";
 import notify from "@/utils/notify";
-import { useWallet, CoinPackages, TransactionList, createOrder, verifyPayment, WALLET_PRICING } from "@/features/wallet";
+import { useWallet, TransactionList, createOrder, verifyPayment, WALLET_PRICING } from "@/features/wallet";
+import { useSubscription, PlanCards } from "@/features/subscription";
 import '@/styles/WalletPage.css';
 
 import Loader from "@/components/Loader";
 
 function WalletPage() {
-  const { balance, transactions, config, loading, refresh } = useWallet();
+  const { balance, transactions, config, loading: walletLoading, refresh: refreshWallet } = useWallet();
+  const { 
+    subscribed, 
+    planName, 
+    expiresAt, 
+    daysLeft, 
+    plans, 
+    loading: subLoading, 
+    refresh: refreshSub,
+    rawData: currentSub 
+  } = useSubscription();
+  
   const [showAddModal, setShowAddModal] = useState(false);
   const [customAmount, setCustomAmount] = useState(1);
   const [buying, setBuying] = useState(false);
+
+  const loading = walletLoading || subLoading;
 
   if (loading && !config) {
     return <Loader />;
@@ -38,7 +52,7 @@ function WalletPage() {
         amount: orderData.amount,
         currency: orderData.currency,
         name: "PreepX AI Interview",
-        description: `Purchase ${Number(customAmount)} Coins`,
+        description: `Add ₹${Number(customAmount)} to Wallet`,
         order_id: orderData.orderId,
         handler: async function (response) {
           try {
@@ -51,7 +65,7 @@ function WalletPage() {
             });
             notify.success(verifyData.message);
             setShowAddModal(false);
-            refresh();
+            refreshWallet();
           } catch (error) {
             notify.error(error.response?.data?.message || "Payment verification failed");
           }
@@ -73,7 +87,7 @@ function WalletPage() {
       rzp1.open();
 
     } catch (err) {
-      notify.error(err.response?.data?.message || "Failed to initiate purchase");
+      notify.error(err.response?.data?.message || "Failed to initiate payment");
     } finally {
       setBuying(false);
     }
@@ -83,24 +97,35 @@ function WalletPage() {
     <div className="wallet-page">
       <div className="page-header">
         <h1>Wallet</h1>
-        <p>Manage your coins for interviews & objective exams</p>
+        <p>Manage your balance for interviews &amp; objective exams</p>
       </div>
 
       <div className="wallet-balance-card">
         <div className="wallet-balance-left">
-          <div className="wallet-balance-icon">
-            <span style={{ fontSize: '28px', lineHeight: 1 }}>🪙</span>
+          <div className="wallet-balance-icon" style={{ padding: 0, background: 'transparent' }}>
+            <div style={{
+              background: 'linear-gradient(135deg, #10b981, #059669)',
+              borderRadius: '50%',
+              width: '40px',
+              height: '40px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 4px 10px rgba(16, 185, 129, 0.4)'
+            }}>
+              <IndianRupee size={24} color="#fff" strokeWidth={3} />
+            </div>
           </div>
           <div>
             <p className="wallet-balance-label">Available Balance</p>
             <p className="wallet-balance-value">
-              {balance} <span>coins</span>
+              ₹{balance} <span>rupees</span>
             </p>
           </div>
         </div>
         {billingEnabled && (
           <button className="wallet-add-btn" onClick={() => setShowAddModal(true)}>
-            <Plus size={16} /> Add Coins
+            <Plus size={16} /> Add Money
           </button>
         )}
 
@@ -113,29 +138,32 @@ function WalletPage() {
           <Mic size={20} />
           <div>
             <p className="wp-label">Mock Interview</p>
-            <p className="wp-cost">{WALLET_PRICING.INTERVIEW} coins</p>
+            <p className="wp-cost">₹{WALLET_PRICING.INTERVIEW} per session</p>
           </div>
         </div>
         <div className="wallet-pricing-item">
           <Zap size={20} />
           <div>
             <p className="wp-label">Objective Exam</p>
-            <p className="wp-cost">{WALLET_PRICING.OBJECTIVE_EXAM} coins</p>
+            <p className="wp-cost">₹{WALLET_PRICING.OBJECTIVE_EXAM} per session</p>
           </div>
         </div>
         <div className="wallet-pricing-item">
           <TrendingUp size={20} />
           <div>
-            <p className="wp-label">Conversion Rate</p>
-            <p className="wp-cost">₹1 = 1 coin</p>
+            <p className="wp-label">Direct Recharge</p>
+            <p className="wp-cost">₹1 = ₹1 balance</p>
           </div>
         </div>
       </div>
 
-      <CoinPackages
-        packages={config?.packages}
-        billingEnabled={config?.billingEnabled}
-        onPurchaseSuccess={() => refresh()}
+      <PlanCards 
+        plans={plans} 
+        currentSub={currentSub}
+        onPurchaseSuccess={() => {
+          refreshSub();
+          refreshWallet();
+        }} 
       />
 
       <div className="wallet-txn-section">
@@ -143,7 +171,7 @@ function WalletPage() {
         <TransactionList transactions={transactions} />
       </div>
 
-      {/* Add Coins Modal */}
+      {/* Add Money Modal */}
       {showAddModal && (
         <div className="wallet-modal-overlay" onClick={() => !buying && setShowAddModal(false)}>
           <div className="wallet-modal-card" onClick={(e) => e.stopPropagation()}>
@@ -151,8 +179,8 @@ function WalletPage() {
               <X size={20} />
             </button>
             <div className="wallet-modal-header">
-              <h3>Add Coins to Wallet</h3>
-              <p>1 Rupee = 1 Coin</p>
+              <h3>Add Money to Wallet</h3>
+              <p>Enter amount in ₹ (Rupees)</p>
             </div>
 
             <div className="wallet-modal-body">
@@ -176,8 +204,8 @@ function WalletPage() {
                 </div>
               ) : (
                 <div className="wallet-coins-preview">
-                  <span style={{ fontSize: '20px' }}>🪙</span>
-                  <span>You will get <strong>{customAmount} coins</strong></span>
+                  <span style={{ fontSize: '20px' }}>₹</span>
+                  <span>₹<strong>{customAmount}</strong> will be added to your wallet</span>
                 </div>
               )}
             </div>

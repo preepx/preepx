@@ -9,9 +9,9 @@ const EXPLORE_LINKS = [
   { icon: BookOpen, label: "Btech Notes", desc: "Study resources", path: "/btech-notes", color: "#3b82f6", free: true },
   { icon: Trophy, label: "Leaderboard", desc: "Global rankings", path: "/leaderboard", color: "#f59e0b" },
   { icon: BarChart3, label: "Analytics", desc: "Score trends & insights", path: "/analytics", color: "#06b6d4" },
-  { icon: Wallet, label: "Wallet", desc: "Manage your coins", path: "/wallet", color: "#10b981" },
+  { icon: Wallet, label: "Wallet", desc: "Manage your balance", path: "/wallet", color: "#10b981" },
   { icon: Zap, label: "My Rewards", desc: "Level up with XP", path: "/rewards", color: "#f59e0b" },
-  { icon: Award, label: "Redeem XP", desc: "Redeem XP for coins", path: "/achievements", color: "#8b5cf6" },
+  { icon: Award, label: "Redeem XP", desc: "Redeem XP for money", path: "/achievements", color: "#8b5cf6" },
 ];
 
 export default function ExploreGrid() {

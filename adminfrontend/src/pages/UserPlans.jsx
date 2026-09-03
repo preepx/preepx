@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users as UsersIcon, Eye, Search, Shield } from 'lucide-react';
+import { Shield, Eye, Search } from 'lucide-react';
 import api from '../utils/api';
 import Pagination from '../components/Pagination';
 
-const Users = () => {
+const UserPlans = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -17,7 +17,9 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const response = await api.get('/users');
-        setUsers(response.data);
+        // Only keep users with an active subscription
+        const subscribedUsers = response.data.filter(u => u.subscription?.status === 'active');
+        setUsers(subscribedUsers);
       } catch (err) {
         setError('Failed to load users.');
       } finally {
@@ -32,7 +34,8 @@ const Users = () => {
     const searchLower = searchTerm.toLowerCase();
     return (
       (user.fullName && user.fullName.toLowerCase().includes(searchLower)) ||
-      (user.email && user.email.toLowerCase().includes(searchLower))
+      (user.email && user.email.toLowerCase().includes(searchLower)) ||
+      (user.subscription?.planName && user.subscription.planName.toLowerCase().includes(searchLower))
     );
   });
 
@@ -46,28 +49,28 @@ const Users = () => {
     setCurrentPage(1);
   }, [searchTerm]);
 
-  if (loading) return <div className="loading">Loading users...</div>;
+  if (loading) return <div className="loading">Loading user plans...</div>;
   if (error) return <div className="error-alert">{error}</div>;
 
   return (
     <div className="users-page animate-fade-in">
       <div className="page-header">
-        <h1>Platform Users</h1>
-        <p className="text-secondary">Manage and view details of all registered users.</p>
+        <h1>Pro Users (Subscribers)</h1>
+        <p className="text-secondary">Manage users who have active Pro Plans.</p>
       </div>
 
       <div className="glass-panel content-card">
         <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <UsersIcon size={20} className="accent-icon" />
-            <h3>All Users ({filteredUsers.length})</h3>
+            <Shield size={20} className="accent-icon" color="#10b981" />
+            <h3>Subscribers ({filteredUsers.length})</h3>
           </div>
           <div className="search-container" style={{ position: 'relative', width: '300px', maxWidth: '100%' }}>
             <Search size={18} style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-secondary)' }} />
             <input 
               type="text" 
               className="input-field" 
-              placeholder="Search by name or email..." 
+              placeholder="Search by name, email or plan..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{ paddingLeft: '35px' }}
@@ -81,10 +84,8 @@ const Users = () => {
               <tr>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Points</th>
-                <th>Plan</th>
-                <th>Interviews</th>
-                <th>Joined</th>
+                <th>Plan Name</th>
+                <th>Expiry Date</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -104,18 +105,12 @@ const Users = () => {
                     </div>
                   </td>
                   <td>{user.email}</td>
-                  <td>{user.points || 0}</td>
                   <td>
-                    {user.subscription?.status === 'active' ? (
-                      <span style={{ color: '#10b981', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <Shield size={14} /> {user.subscription.planName || 'Pro'}
-                      </span>
-                    ) : (
-                      <span style={{ color: 'var(--text-secondary)' }}>Free</span>
-                    )}
+                    <span style={{ color: '#10b981', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <Shield size={14} /> {user.subscription?.planName || 'Pro'}
+                    </span>
                   </td>
-                  <td>{user.interviewsCompleted || 0}</td>
-                  <td>{new Date(user.createdAt).toLocaleDateString()}</td>
+                  <td>{user.subscription?.expiresAt ? new Date(user.subscription.expiresAt).toLocaleDateString() : 'N/A'}</td>
                   <td>
                     <button 
                       className="btn-primary" 
@@ -129,8 +124,8 @@ const Users = () => {
               ))}
               {currentUsers.length === 0 && (
                 <tr>
-                  <td colSpan="6" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
-                    No users found
+                  <td colSpan="5" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                    No active subscribers found
                   </td>
                 </tr>
               )}
@@ -153,4 +148,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default UserPlans;

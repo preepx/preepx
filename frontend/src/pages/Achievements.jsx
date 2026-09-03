@@ -14,9 +14,9 @@ function Achievements() {
       const res = await redeemXp(pointsToRedeem);
       setPopup({
         isError: false,
-        badgeName: "Coins Redeemed",
+        badgeName: "Balance Added",
         coins: res.coinsEarned,
-        icon: "💎"
+        icon: "💰"
       });
 
       const localUser = JSON.parse(localStorage.getItem("user") || "{}");
@@ -46,8 +46,8 @@ function Achievements() {
   return (
     <div className="achievements-page">
       <div className="page-header" style={{ marginTop: "20px" }}>
-        <h1>Redeem XP for Coins</h1>
-        <p>Convert your available XP into Wallet Coins.</p>
+        <h1>Redeem XP for Money</h1>
+        <p>Convert your available XP into Wallet Balance (₹).</p>
       </div>
 
       <div className="coin-packages-grid" style={{ marginTop: "30px", marginBottom: "40px" }}>
@@ -62,7 +62,7 @@ function Achievements() {
             >
               {tier.popular && <span className="coin-pack-tag">POPULAR</span>}
               <p className="coin-pack-label">{tier.label}</p>
-              <p className="coin-pack-coins">{tier.coins} <span>coins</span></p>
+              <p className="coin-pack-coins">₹{tier.coins} <span>balance</span></p>
               <p className="coin-pack-price" style={{ display: 'flex', alignItems: 'center', justifyContent: "center", gap: '4px', color: "#f59e0b", fontSize: "14px", fontWeight: "600", marginBottom: "16px" }}>
                 <img src="/favicon.png" alt="XP" style={{ width: '14px', height: '14px', objectFit: 'contain' }} />
                 <span>{tier.xp} XP</span>
@@ -92,7 +92,7 @@ function Achievements() {
             ) : (
               <>
                 <h2>Congratulations!</h2>
-                <p>You successfully redeemed XP and earned <strong>{popup.coins} Coins</strong>!</p>
+                <p>You successfully redeemed XP and got <strong>₹{popup.coins}</strong> in your wallet!</p>
                 <button className="claim-popup-btn" onClick={() => setPopup(null)}>Awesome!</button>
               </>
             )}

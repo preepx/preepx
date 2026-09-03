@@ -89,8 +89,8 @@ const AtsScore = () => {
         <div className="ats-header-title">
           <h1>ATS Resume Score</h1>
           <div className="ats-coin-badge">
-            <span className="ats-coin-icon">🪙</span>
-            1 coin per scan
+            <span className="ats-coin-icon">₹</span>
+            ₹1 per scan
           </div>
         </div>
 
