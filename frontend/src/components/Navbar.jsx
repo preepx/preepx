@@ -184,10 +184,10 @@ function Navbar({ landingRole, setLandingRole }) {
                     </div>
                   )}
                   <div className="dropdown-divider" />
-                  <Link to="/profile" className="dropdown-item" onClick={() => setShowMenu(false)}>
-                    View Profile
+                  <Link to={user.role === 'recruiter' ? "/recruiter/company" : "/profile"} className="dropdown-item" onClick={() => setShowMenu(false)}>
+                    {user.role === 'recruiter' ? "Company Profile" : "View Profile"}
                   </Link>
-                  <Link to="/user-dashboard" className="dropdown-item" onClick={() => setShowMenu(false)}>
+                  <Link to={user.role === 'recruiter' ? "/recruiter-dashboard" : "/user-dashboard"} className="dropdown-item" onClick={() => setShowMenu(false)}>
                     Dashboard
                   </Link>
                   <button type="button" className="dropdown-item danger" onClick={handleLogout}>

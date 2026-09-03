@@ -1,5 +1,6 @@
 import React from "react";
 import { User, Mail, Building, Globe, Lock, Eye, EyeOff } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function RegisterRecruiterForm({
   recruiterReg,
@@ -8,6 +9,9 @@ export default function RegisterRecruiterForm({
   setShowRecPass,
   showRecConfirmPass,
   setShowRecConfirmPass,
+  recaptchaRef,
+  setCaptchaToken,
+  theme = "dark",
   loading,
   onSubmit,
   onSwitchToLogin
@@ -123,6 +127,21 @@ export default function RegisterRecruiterForm({
             >
               {showRecConfirmPass ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="auth-form-row auth-recruiter-captcha-row">
+        <div className="auth-captcha-col" style={{ width: "100%" }}>
+          <label>Verification</label>
+          <div className={`auth-captcha-wrapper auth-captcha-wrapper-full ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
+            <ReCAPTCHA
+              key={theme}
+              ref={recaptchaRef}
+              sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+              theme={theme === "light" ? "light" : "dark"}
+              onChange={(token) => setCaptchaToken(token)}
+            />
           </div>
         </div>
       </div>

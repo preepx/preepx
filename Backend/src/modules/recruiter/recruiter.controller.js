@@ -12,12 +12,30 @@ const { BadRequestError, NotFoundError } = require('../../common/exceptions/cust
 
 const axios = require('axios');
 
+const verifyCaptcha = async (captchaToken) => {
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  if (secretKey) {
+    try {
+      const captchaRes = await axios.post(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${captchaToken}`
+      );
+      if (!captchaRes.data.success) {
+        throw new BadRequestError("CAPTCHA verification failed. Please try again.");
+      }
+    } catch (error) {
+      if (error instanceof BadRequestError) throw error;
+      throw new BadRequestError("Error verifying CAPTCHA. Please try again later.");
+    }
+  }
+};
+
 const generateToken = (id) => {
   return jwt.sign({ id, role: 'recruiter' }, envConfig.jwt.secret, { expiresIn: '7d' });
 };
 
 exports.sendOtp = catchAsync(async (req, res) => {
-  const { fullName, email, companyName, companyWebsite, password } = req.body;
+  const { fullName, email, companyName, companyWebsite, password, captchaToken } = req.body;
+  await verifyCaptcha(captchaToken);
   const normalizedEmail = email.trim().toLowerCase();
 
   const existingRecruiter = await Recruiter.findOne({ email: normalizedEmail });

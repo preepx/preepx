@@ -10,7 +10,6 @@ import { recruiterRoutes } from "./recruiterRoutes";
 
 const Navbar = lazy(() => import("@/components/Navbar"));
 const LandingFooter = lazy(() => import("@/components/landing/LandingFooter"));
-const RecruiterComingSoonModal = lazy(() => import("@/components/landing/RecruiterComingSoonModal"));
 const AppLayout = lazy(() => import("@/layouts/AppLayout"));
 const JobsLayout = lazy(() => import("@/features/apply-jobs/layout/JobsLayout"));
 
@@ -69,7 +68,6 @@ function usesAppLayout(pathname) {
 
 function LayoutWrapper({ children, landingRole, setLandingRole }) {
   const location = useLocation();
-  const [showRecruiterModal, setShowRecruiterModal] = useState(false);
   const pathname = location.pathname;
 
   const isPublic = isPublicPath(pathname);
@@ -86,10 +84,7 @@ function LayoutWrapper({ children, landingRole, setLandingRole }) {
         {!isAuthPage && <Navbar landingRole={landingRole} setLandingRole={setLandingRole} />}
         <main style={{ flex: 1, display: "flex", flexDirection: "column" }}>{children}</main>
         {!isAuthPage && !isLandingPage && (
-          <LandingFooter onRecruiterClick={() => setShowRecruiterModal(true)} />
-        )}
-        {showRecruiterModal && (
-          <RecruiterComingSoonModal onClose={() => setShowRecruiterModal(false)} />
+          <LandingFooter />
         )}
       </div>
     );

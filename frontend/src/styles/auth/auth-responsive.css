@@ -113,7 +113,7 @@
   .auth-captcha-wrapper {
     width: 100%;
     height: 76px;
-    background: #ffffff;
+    background: #222222;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 10px;
     display: flex;

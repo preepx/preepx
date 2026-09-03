@@ -11,6 +11,7 @@ export default function RegisterCandidateForm({
   setShowCandConfirmPass,
   recaptchaRef,
   setCaptchaToken,
+  theme = "dark",
   loading,
   onSubmit,
   onGoogleLogin,
@@ -117,10 +118,12 @@ export default function RegisterCandidateForm({
 
         <div className="auth-captcha-col">
           <label>Verification</label>
-          <div className="auth-captcha-wrapper">
+          <div className={`auth-captcha-wrapper ${theme === "dark" ? "theme-dark" : "theme-light"}`}>
             <ReCAPTCHA
+              key={theme}
               ref={recaptchaRef}
-              sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_RECAPTCHA_SITE_KEY"}
+              sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+              theme={theme === "light" ? "light" : "dark"}
               onChange={(token) => setCaptchaToken(token)}
             />
           </div>
