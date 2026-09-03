@@ -771,12 +771,18 @@ export default function CandidateProfile() {
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
                 <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: 12, textAlign: "center" }}>
-                  <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-muted)" }}>QUESTIONS</div>
-                  <div style={{ fontSize: 15, fontWeight: 800, color: "var(--primary)", marginTop: 2 }}>20 MCQ + 2 Coding</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-muted)" }}>TEST FORMAT</div>
+                  <div style={{ fontSize: 14, fontWeight: 800, color: "var(--primary)", marginTop: 2 }}>
+                    {job?.assessmentConfig?.includeCoding === false || job?.assessmentConfig?.codingCount === 0
+                      ? `${job?.assessmentConfig?.mcqCount || 20} MCQ (Objective Only)`
+                      : `${job?.assessmentConfig?.mcqCount || 20} MCQ + ${job?.assessmentConfig?.codingCount || 2} Coding`}
+                  </div>
                 </div>
                 <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: 12, textAlign: "center" }}>
                   <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-muted)" }}>TIME LIMIT</div>
-                  <div style={{ fontSize: 15, fontWeight: 800, color: "#10b981", marginTop: 2 }}>60 Minutes</div>
+                  <div style={{ fontSize: 14, fontWeight: 800, color: "#10b981", marginTop: 2 }}>
+                    {job?.assessmentConfig?.durationMinutes || 60} Minutes
+                  </div>
                 </div>
               </div>
 

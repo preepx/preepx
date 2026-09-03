@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Users, Send, CheckCircle, XCircle, Sparkles, ChevronLeft, Star, FileText } from "lucide-react";
+import { Users, Send, CheckCircle, XCircle, Sparkles, ChevronLeft, Star, FileText, Layers } from "lucide-react";
 import Swal from "sweetalert2";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
@@ -98,9 +98,14 @@ export default function RecruiterJobDetail() {
           <h1>{job.title}</h1>
           <p className="rx-muted" style={{ margin: "4px 0 0" }}>{job.role} · {job.location} · {(job.requiredSkills || job.skills || []).join(", ")}</p>
         </div>
-        <button type="button" className="rx-btn rx-btn-primary" onClick={handleMatch} disabled={matching}>
-          <Sparkles size={16} /> {matching ? "Matching..." : "Auto-Match"}
-        </button>
+        <div style={{ display: "flex", gap: 10 }}>
+          <Link to={`/recruiter/assessments?tab=builder&jobId=${jobId}`} className="rx-btn rx-btn-secondary">
+            <Layers size={16} /> Assessment Builder
+          </Link>
+          <button type="button" className="rx-btn rx-btn-primary" onClick={handleMatch} disabled={matching}>
+            <Sparkles size={16} /> {matching ? "Matching..." : "Auto-Match"}
+          </button>
+        </div>
       </div>
 
       <div className="rx-stats" style={{ marginBottom: 24 }}>

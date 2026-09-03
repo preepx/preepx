@@ -76,7 +76,8 @@ Return JSON:
 async function generateQuestionsForJob(job, req) {
   const config = job.assessmentConfig || {};
   const mcqCount = config.mcqCount || 20;
-  const codingCount = config.codingCount || 2;
+  const includeCoding = config.includeCoding !== false && config.codingCount !== 0;
+  const codingCount = includeCoding ? (config.codingCount || 2) : 0;
 
   if (config.useCustomQuestions) {
     return {
@@ -85,22 +86,24 @@ async function generateQuestionsForJob(job, req) {
         userAnswer: null,
         isCorrect: null,
       })),
-      codingQuestions: (config.customCodingQuestions || []).map((q) => ({
-        title: q.title,
-        description: q.description,
-        difficulty: q.difficulty || "medium",
-        userCode: "",
-        language: "javascript",
-        passed: null,
-        feedback: "",
-        timeSpentSecs: 0,
-      })),
+      codingQuestions: includeCoding
+        ? (config.customCodingQuestions || []).map((q) => ({
+            title: q.title,
+            description: q.description,
+            difficulty: q.difficulty || "medium",
+            userCode: "",
+            language: "javascript",
+            passed: null,
+            feedback: "",
+            timeSpentSecs: 0,
+          }))
+        : [],
     };
   }
 
   const [mcqQuestions, codingQuestions] = await Promise.all([
     generateMcqQuestions(job.role, mcqCount, req),
-    generateCodingQuestions(job.role, codingCount, req),
+    includeCoding ? generateCodingQuestions(job.role, codingCount, req) : Promise.resolve([]),
   ]);
 
   return { mcqQuestions, codingQuestions };
@@ -244,6 +247,31 @@ const submitMcqAnswers = async (userId, assessmentId, answers) => {
   });
 
   assessment.mcqScore = Math.round((score / assessment.mcqQuestions.length) * 100);
+  
+  if (!assessment.codingQuestions || assessment.codingQuestions.length === 0) {
+    assessment.codingScore = 0;
+    assessment.overallScore = assessment.mcqScore;
+    assessment.status = "completed";
+    assessment.currentStep = "done";
+    assessment.completedAt = new Date();
+    await assessment.save();
+
+    await JobApplication.findByIdAndUpdate(assessment.applicationId, {
+      status: "assessment_completed",
+      aiSummary: `Objective assessment completed with a score of ${assessment.mcqScore}%.`,
+    });
+
+    return {
+      mcqScore: assessment.mcqScore,
+      codingScore: 0,
+      overallScore: assessment.mcqScore,
+      correct: score,
+      total: assessment.mcqQuestions.length,
+      currentStep: "done",
+      completed: true,
+    };
+  }
+
   assessment.status = "mcq_done";
   assessment.currentStep = "coding";
   await assessment.save();
@@ -262,28 +290,41 @@ const submitCodingSolution = async (userId, assessmentId, questionIndex, data, r
   if (assessment.userId.toString() !== userId.toString()) throw new ForbiddenError("Not authorized");
 
   const q = assessment.codingQuestions[questionIndex];
-  if (!q) throw new BadRequestError("Invalid question index");
+  if (!q) throw new BadRequestError("Invalid coding question index");
 
-  const { code, language, timeSpentSecs } = data;
-  q.userCode = code || "";
-  q.language = language || "javascript";
-  q.timeSpentSecs = timeSpentSecs || 0;
+  q.userCode = data.code || "";
+  q.language = data.language || q.language;
+  q.timeSpentSecs = data.timeSpentSecs || 0;
 
-  const prompt = `Evaluate this coding solution for "${q.title}":
-Description: ${q.description}
-Language: ${q.language}
-Code:
-\`\`\`${q.language}
+  const evaluationPrompt = `Evaluate this code for the problem: "${q.title}".
+Problem description: ${q.description}
+Submitted code (${q.language}):
 ${q.userCode}
-\`\`\`
-Return JSON: { "passed": boolean, "feedback": "detailed feedback" }`;
 
-  const aiResult = await aiService.generateJson(prompt, {}, req);
-  q.passed = !!aiResult.passed;
-  q.feedback = aiResult.feedback || "";
+Return ONLY valid JSON:
+{
+  "passed": true/false,
+  "score": 0-100,
+  "feedback": "Short evaluation of correctness, time complexity, and code quality."
+}`;
+
+  try {
+    const raw = await aiService.generateText(evaluationPrompt, { response_format: { type: "json_object" } }, req);
+    const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
+    q.passed = !!parsed.passed;
+    q.feedback = parsed.feedback || "";
+  } catch {
+    q.passed = (data.code || "").length > 50;
+    q.feedback = "Solution submitted.";
+  }
 
   await assessment.save();
-  return { passed: q.passed, feedback: q.feedback, questionIndex };
+
+  return {
+    questionIndex,
+    passed: q.passed,
+    feedback: q.feedback,
+  };
 };
 
 const completeAssessment = async (userId, assessmentId, req) => {
@@ -291,13 +332,17 @@ const completeAssessment = async (userId, assessmentId, req) => {
   if (!assessment) throw new NotFoundError("Assessment not found");
   if (assessment.userId.toString() !== userId.toString()) throw new ForbiddenError("Not authorized");
 
-  const passedCoding = assessment.codingQuestions.filter((q) => q.passed).length;
+  const passedCoding = (assessment.codingQuestions || []).filter((q) => q.passed).length;
   assessment.codingScore =
-    assessment.codingQuestions.length > 0
+    (assessment.codingQuestions || []).length > 0
       ? Math.round((passedCoding / assessment.codingQuestions.length) * 100)
       : 0;
 
-  assessment.overallScore = Math.round(assessment.mcqScore * 0.6 + assessment.codingScore * 0.4);
+  assessment.overallScore =
+    (assessment.codingQuestions || []).length > 0
+      ? Math.round(assessment.mcqScore * 0.6 + assessment.codingScore * 0.4)
+      : assessment.mcqScore;
+
   assessment.status = "completed";
   assessment.currentStep = "done";
   assessment.completedAt = new Date();
