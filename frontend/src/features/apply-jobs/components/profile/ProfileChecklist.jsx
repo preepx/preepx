@@ -2,17 +2,19 @@ import React from "react";
 import { CheckCircle2, AlertCircle } from "lucide-react";
 
 export default function ProfileChecklist({ user, form }) {
+  const merged = { ...user, ...form };
+
   const checklistItems = [
-    { label: "Full name", done: !!user?.fullName },
-    { label: "Phone number", done: !!form.phone },
-    { label: "City / Location", done: !!form.city },
-    { label: "Professional headline", done: !!form.headline },
-    { label: "Profile summary", done: !!form.summary },
-    { label: "Skills added", done: (form.skills || []).length > 0 },
-    { label: "Work experience", done: (form.experience || []).length > 0 },
-    { label: "Education details", done: (form.education || []).length > 0 },
-    { label: "Resume uploaded", done: !!user?.resumeUrl },
-    { label: "Profile photo", done: !!user?.profilePic },
+    { label: "Full name", done: !!(merged.fullName && merged.fullName.trim() !== "" && merged.fullName !== "Your Name") },
+    { label: "Phone number", done: !!(merged.phone || merged.mobile) },
+    { label: "City / Location", done: !!(merged.city || merged.location || merged.address) },
+    { label: "Professional headline", done: !!(merged.headline || merged.preferredRole) },
+    { label: "Profile summary", done: !!(merged.summary || merged.bio) },
+    { label: "Skills added", done: (merged.skills || []).length > 0 },
+    { label: "Work experience", done: (merged.experience || []).length > 0 },
+    { label: "Education details", done: (merged.education || []).length > 0 },
+    { label: "Resume uploaded", done: !!merged.resumeUrl },
+    { label: "Profile photo", done: !!merged.profilePic },
   ];
 
   return (

@@ -33,11 +33,11 @@ const safeUser = (user) => ({
   referralCode: user.referralCode || "",
   referralCount: user.referralCount || 0,
   xpRewardsClaimed: user.xpRewardsClaimed || [],
-  // Jobs Profile fields
-  headline: user.headline || "",
-  phone: user.phone || "",
-  city: user.city || "",
-  summary: user.summary || "",
+  // Jobs Profile fields with legacy fallbacks
+  headline: user.headline || user.preferredRole || "",
+  phone: user.phone || user.mobile || "",
+  city: user.city || user.location || user.address || "",
+  summary: user.summary || user.bio || "",
   portfolio: user.portfolio || "",
   experience: user.experience || [],
   education: user.education || [],

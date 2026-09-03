@@ -17,3 +17,7 @@ build/
 # Cache
 .cache/
 .next/
+
+# User Uploads
+uploads/
+*.pdf

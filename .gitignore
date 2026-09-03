@@ -5,3 +5,6 @@ dist
 .env
 .env.local
 .DS_Store
+uploads/
+Backend/uploads/
+*.pdf

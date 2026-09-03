@@ -12,6 +12,7 @@ import { calcCompletion } from "../utils/jobHelpers";
 import {
   ProfileStrengthBanner,
   ProfileHeaderCard,
+  ReferralCard,
   ExperienceSection,
   EducationSection,
   SkillsSection,
@@ -34,10 +35,10 @@ export default function JobsProfile() {
         setUser(u);
         setForm({
           fullName: u?.fullName || "",
-          phone: u?.phone || "",
-          city: u?.city || "",
-          headline: u?.headline || "",
-          summary: u?.summary || "",
+          phone: u?.phone || u?.mobile || "",
+          city: u?.city || u?.location || u?.address || "",
+          headline: u?.headline || u?.preferredRole || "",
+          summary: u?.summary || u?.bio || "",
           linkedin: u?.linkedin || "",
           github: u?.github || "",
           portfolio: u?.portfolio || "",
@@ -66,8 +67,8 @@ export default function JobsProfile() {
     }
   };
 
-  const handlePhotoUpload = async (e) => {
-    const file = e.target.files?.[0];
+  const handlePhotoUpload = async (fileOrEvent) => {
+    const file = (fileOrEvent instanceof File || fileOrEvent instanceof Blob) ? fileOrEvent : fileOrEvent?.target?.files?.[0];
     if (!file) return;
     setUploadingPhoto(true);
     try {
@@ -75,7 +76,7 @@ export default function JobsProfile() {
       setUser(updated);
       syncUserToStorage(updated);
       window.dispatchEvent(new Event("user-updated"));
-      notify.success("Photo updated!");
+      notify.success("Photo updated successfully!");
     } catch {
       notify.error("Photo upload failed");
     } finally {
@@ -90,8 +91,23 @@ export default function JobsProfile() {
     try {
       const updated = await uploadResume(file);
       setUser(updated);
+      setForm((prev) => ({
+        ...prev,
+        fullName: updated.fullName || prev.fullName,
+        phone: updated.phone || prev.phone,
+        city: updated.city || prev.city,
+        headline: updated.headline || prev.headline,
+        summary: updated.summary || prev.summary,
+        linkedin: updated.linkedin || prev.linkedin,
+        github: updated.github || prev.github,
+        portfolio: updated.portfolio || prev.portfolio,
+        skills: updated.skills || prev.skills,
+        experience: updated.experience || prev.experience,
+        education: updated.education || prev.education,
+      }));
       syncUserToStorage(updated);
-      notify.success("Resume uploaded!");
+      window.dispatchEvent(new Event("user-updated"));
+      notify.success("Resume uploaded & profile details auto-extracted!");
     } catch {
       notify.error("Resume upload failed");
     } finally {
@@ -152,6 +168,9 @@ export default function JobsProfile() {
         onPhotoUpload={handlePhotoUpload}
         onResumeUpload={handleResumeUpload}
       />
+
+      {/* REFER & EARN SECTION */}
+      <ReferralCard user={user} />
 
       {/* WORK EXPERIENCE */}
       <ExperienceSection
