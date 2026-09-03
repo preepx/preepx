@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Users, Send, CheckCircle, XCircle, Sparkles, ChevronLeft, Star, FileText } from "lucide-react";
+import Swal from "sweetalert2";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
   getJob, getApplications, runAutoMatch, sendAssessment,
@@ -58,11 +59,22 @@ export default function RecruiterJobDetail() {
   };
 
   const handleSendAssessment = async (appId) => {
+    const confirm = await Swal.fire({
+      title: "Send Technical Assessment?",
+      text: "Send assessment with 20 MCQ questions and 2 coding challenges to this candidate?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "var(--primary, #6366f1)",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: "Yes, Send Assessment",
+      cancelButtonText: "Cancel",
+    });
+    if (!confirm.isConfirmed) return;
+
     try {
       const preview = await generateQuestions(jobId);
-      if (!window.confirm("Send assessment with AI-generated questions (20 MCQ + 2 coding)?")) return;
       await sendAssessment(jobId, appId, { recruiterApproved: true, approvedQuestions: preview });
-      notify.success("Assessment sent!");
+      notify.success("Assessment sent to candidate!");
       load();
     } catch (err) {
       notify.error(err.response?.data?.message || "Failed to send assessment");

@@ -294,6 +294,70 @@ const deleteInterview = async (userId, id) => {
   return result;
 };
 
+const generateInterviewReport = async (interview, answers = []) => {
+  const qAndA = answers
+    .map(
+      (a, i) =>
+        `Q${i + 1}: ${a.question}\nA: ${a.userAnswer || "No answer"}\nScore: ${a.score || 0}/10\nFeedback: ${a.feedback || "None"}`
+    )
+    .join("\n\n");
+
+  const avgScore = answers.length
+    ? Math.round((answers.reduce((s, a) => s + (a.score || 0), 0) / (answers.length * 10)) * 100)
+    : 0;
+
+  const prompt = `You are a Senior Technical Hiring AI evaluating a candidate interview session.
+Job Title: ${interview.jobTitle || "Candidate Role"}
+Job Topic: ${interview.jobTopic || "Technical Interview"}
+
+Candidate's Answers & Feedback:
+${qAndA || "No answers recorded."}
+
+Average Score: ${avgScore}%
+
+Generate a structured evaluation report in valid JSON format:
+{
+  "technicalScore": number (0-100),
+  "problemSolvingScore": number (0-100),
+  "communicationScore": number (0-100),
+  "answerQualityScore": number (0-100),
+  "overallScore": number (0-100),
+  "strengths": ["string", "string", "string"],
+  "weaknesses": ["string", "string"],
+  "recommendation": "Strong Hire" | "Hire" | "Consider" | "Not Recommended",
+  "summary": "2-3 sentences concise executive summary for the recruiter."
+}`;
+
+  try {
+    const report = await aiService.generateJson(prompt, { temperature: 0.3 });
+    return {
+      technicalScore: Math.min(100, Math.max(0, Number(report.technicalScore) || avgScore)),
+      problemSolvingScore: Math.min(100, Math.max(0, Number(report.problemSolvingScore) || avgScore)),
+      communicationScore: Math.min(100, Math.max(0, Number(report.communicationScore) || avgScore)),
+      answerQualityScore: Math.min(100, Math.max(0, Number(report.answerQualityScore) || avgScore)),
+      overallScore: Math.min(100, Math.max(0, Number(report.overallScore) || avgScore)),
+      strengths: Array.isArray(report.strengths) && report.strengths.length ? report.strengths : ["Technical comprehension", "Good communication"],
+      weaknesses: Array.isArray(report.weaknesses) && report.weaknesses.length ? report.weaknesses : ["Could provide deeper architectural details"],
+      recommendation: report.recommendation || (avgScore >= 80 ? "Strong Hire" : avgScore >= 65 ? "Hire" : avgScore >= 50 ? "Consider" : "Not Recommended"),
+      summary: report.summary || `Candidate completed the interview with an overall score of ${avgScore}%.`,
+      completedAt: new Date(),
+    };
+  } catch (err) {
+    return {
+      technicalScore: avgScore,
+      problemSolvingScore: avgScore,
+      communicationScore: Math.min(100, avgScore + 5),
+      answerQualityScore: avgScore,
+      overallScore: avgScore,
+      strengths: ["Core subject understanding", "Problem-solving attempt"],
+      weaknesses: ["Needs broader real-world practice"],
+      recommendation: avgScore >= 80 ? "Strong Hire" : avgScore >= 65 ? "Hire" : avgScore >= 50 ? "Consider" : "Not Recommended",
+      summary: `Candidate completed the interview with an overall score of ${avgScore}%.`,
+      completedAt: new Date(),
+    };
+  }
+};
+
 const saveInterviewResult = async (userId, data) => {
   const { interviewId, jobTitle, jobTopic, questions, answers, fromResume, duration, status } = data;
   const finalStatus = status || "completed";
@@ -341,6 +405,20 @@ const saveInterviewResult = async (userId, data) => {
     if (isPerfect) user.hasPerfectScore = true;
     await user.save();
     await updateStreak(userId);
+
+    // If this interview is associated with a recruiter job application, generate detailed AI report
+    const aiReport = await generateInterviewReport(interview, answers);
+    interview.aiReport = aiReport;
+    await interview.save();
+
+    if (interview.applicationId) {
+      const JobApplication = require("../../../models/JobApplication");
+      await JobApplication.findByIdAndUpdate(interview.applicationId, {
+        aiInterviewScore: aiReport.overallScore,
+        aiInterviewReport: aiReport,
+        aiSummary: aiReport.summary,
+      });
+    }
 
     if (pointsEarned > 0) {
       await sendNotification(

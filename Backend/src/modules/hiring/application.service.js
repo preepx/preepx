@@ -161,6 +161,9 @@ const applyToJob = async (userId, jobId) => {
 const getMyApplications = async (userId) => {
   return JobApplication.find({ userId })
     .populate("jobId", "title role location workMode experienceMin experienceMax requiredSkills skills status")
+    .populate("assessmentId")
+    .populate("aiInterviewId")
+    .populate("recruiterId", "companyName")
     .sort({ createdAt: -1 })
     .lean();
 };

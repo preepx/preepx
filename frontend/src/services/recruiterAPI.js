@@ -29,6 +29,12 @@ export const getShortlisted = () => API.get(`${BASE}/shortlisted`).then((r) => r
 export const sendAssessment = (jobId, applicationId, body = {}) =>
   API.post(`${BASE}/jobs/${jobId}/applications/${applicationId}/send-assessment`, body).then((r) => r.data);
 export const generateQuestions = (jobId) => API.post(`${BASE}/jobs/${jobId}/generate-questions`).then((r) => r.data.data);
+export const generateInterviewQuestions = (jobId, body = {}) => API.post(`${BASE}/jobs/${jobId}/generate-interview-questions`, body).then((r) => r.data.data);
+export const sendAIInterview = (jobId, applicationId, body = {}) => API.post(`${BASE}/jobs/${jobId}/applications/${applicationId}/send-ai-interview`, body).then((r) => r.data);
+export const getAIInterviewReport = (applicationId) => API.get(`${BASE}/applications/${applicationId}/ai-interview-report`).then((r) => r.data.data);
+export const bulkCandidateAction = (body) => API.post(`${BASE}/applications/bulk-action`, body).then((r) => r.data.data);
+export const updateAssessmentConfig = (jobId, assessmentConfig) => API.put(`${BASE}/jobs/${jobId}/assessment-config`, { assessmentConfig }).then((r) => r.data.data);
+
 export const shortlistCandidate = (applicationId, feedback = "") =>
   API.post(`${BASE}/applications/${applicationId}/shortlist`, { feedback }).then((r) => r.data);
 export const rejectCandidate = (applicationId, feedback = "") =>
@@ -44,3 +50,4 @@ export const getRecruiterNotifications = () => API.get("/recruiter/notifications
 export const markRecruiterNotificationRead = (notifId) => API.put(`/recruiter/notifications/${notifId}/read`).then((r) => r.data.data);
 export const markAllRecruiterNotificationsRead = () => API.put("/recruiter/notifications/read-all").then((r) => r.data.data);
 export const selectPlan = (planSlug) => API.post(`${BASE}/billing/select-plan`, { planSlug }).then((r) => r.data.data);
+
