@@ -25,6 +25,7 @@ import {
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
   getCandidateProfile,
+  getJobs,
   sendAssessment,
   shortlistCandidate,
   rejectCandidate,
@@ -48,6 +49,8 @@ export default function CandidateProfile() {
   const { applicationId } = useParams();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [jobsList, setJobsList] = useState([]);
+  const [selectedAssessmentJobId, setSelectedAssessmentJobId] = useState("");
 
   // Manual Interview Modal
   const [showSchedule, setShowSchedule] = useState(false);
@@ -81,6 +84,11 @@ export default function CandidateProfile() {
       const res = await getCandidateProfile(applicationId);
       setData(res);
 
+      const jList = await getJobs();
+      setJobsList(jList || []);
+      const appliedJobId = res.application.jobId._id || res.application.jobId;
+      setSelectedAssessmentJobId(appliedJobId);
+
       if (res?.application?.aiInterviewId || res?.application?.aiInterviewScore > 0 || res?.application?.status === "ai_interview") {
         getAIInterviewReport(applicationId)
           .then((rep) => setAiReportData(rep))
@@ -100,9 +108,9 @@ export default function CandidateProfile() {
   const handleConfirmSendAssessment = async () => {
     setSendingAssessment(true);
     try {
-      const jobId = data.application.jobId._id || data.application.jobId;
-      const preview = await generateQuestions(jobId);
-      await sendAssessment(jobId, applicationId, { recruiterApproved: true, approvedQuestions: preview });
+      const jobIdToUse = selectedAssessmentJobId || data.application.jobId._id || data.application.jobId;
+      const preview = await generateQuestions(jobIdToUse);
+      await sendAssessment(jobIdToUse, applicationId, { recruiterApproved: true, approvedQuestions: preview });
       notify.success("Assessment sent to candidate successfully!");
       setShowAssessmentModal(false);
       load();
@@ -198,6 +206,8 @@ export default function CandidateProfile() {
   const resumeUrl = getAssetUrl(candidate.resumeUrl);
   const status = application.status;
   const report = aiReportData?.report || application.aiInterviewReport;
+
+  const selectedJobObj = jobsList.find(j => j._id === selectedAssessmentJobId) || job;
 
   return (
     <RecruiterLayout title="Candidate Profile">
@@ -761,27 +771,40 @@ export default function CandidateProfile() {
 
             <div style={{ marginTop: 16 }}>
               <div style={{ background: "var(--background)", border: "1px solid var(--border)", borderRadius: 12, padding: 14, marginBottom: 16 }}>
-                <div style={{ fontSize: 13, marginBottom: 6 }}>
+                <div style={{ fontSize: 13, marginBottom: 12 }}>
                   Candidate: <strong>{candidate.fullName}</strong> ({candidate.email})
                 </div>
-                <div style={{ fontSize: 13, color: "var(--text-muted)" }}>
-                  Applied Job: <strong>{job?.title}</strong> ({job?.role})
+                
+                <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", marginBottom: 6 }}>
+                  SELECT ASSESSMENT TO SEND:
                 </div>
+                <select
+                  value={selectedAssessmentJobId}
+                  onChange={(e) => setSelectedAssessmentJobId(e.target.value)}
+                  className="rx-premium-input"
+                  style={{ width: "100%", padding: "8px 12px", fontSize: 13 }}
+                >
+                  {jobsList.map(j => (
+                    <option key={j._id} value={j._id}>
+                      {j.title} ({j.role}) {j._id === (job?._id || job) ? "(Applied Job)" : ""}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
                 <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: 12, textAlign: "center" }}>
                   <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-muted)" }}>TEST FORMAT</div>
                   <div style={{ fontSize: 14, fontWeight: 800, color: "var(--primary)", marginTop: 2 }}>
-                    {job?.assessmentConfig?.includeCoding === false || job?.assessmentConfig?.codingCount === 0
-                      ? `${job?.assessmentConfig?.mcqCount || 20} MCQ (Objective Only)`
-                      : `${job?.assessmentConfig?.mcqCount || 20} MCQ + ${job?.assessmentConfig?.codingCount || 2} Coding`}
+                    {selectedJobObj?.assessmentConfig?.includeCoding === false || selectedJobObj?.assessmentConfig?.codingCount === 0
+                      ? `${selectedJobObj?.assessmentConfig?.mcqCount || 20} MCQ (Objective Only)`
+                      : `${selectedJobObj?.assessmentConfig?.mcqCount || 20} MCQ + ${selectedJobObj?.assessmentConfig?.codingCount || 2} Coding`}
                   </div>
                 </div>
                 <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: 12, textAlign: "center" }}>
                   <div style={{ fontSize: 11, fontWeight: 700, color: "var(--text-muted)" }}>TIME LIMIT</div>
                   <div style={{ fontSize: 14, fontWeight: 800, color: "#10b981", marginTop: 2 }}>
-                    {job?.assessmentConfig?.durationMinutes || 60} Minutes
+                    {selectedJobObj?.assessmentConfig?.durationMinutes || 60} Minutes
                   </div>
                 </div>
               </div>

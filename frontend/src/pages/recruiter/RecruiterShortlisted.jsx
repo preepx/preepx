@@ -13,19 +13,22 @@ import {
 } from "lucide-react";
 import Swal from "sweetalert2";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
-import { getShortlisted, sendAssessment, generateQuestions, bulkCandidateAction } from "@/services/recruiterAPI";
+import { getShortlisted, bulkCandidateAction, getJobs } from "@/services/recruiterAPI";
 import { exportCandidatesToCSV } from "@/utils/exportCSV";
 import Loader from "@/components/Loader";
 import notify from "@/utils/notify";
 import EmptyState from "@/components/recruiter/EmptyState";
+import SendTestModal from "@/components/recruiter/SendTestModal";
 import '@/styles/RecruiterLayout.css';
 
 export default function RecruiterShortlisted() {
   const [list, setList] = useState([]);
+  const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(null);
   const [selectedIds, setSelectedIds] = useState([]);
   const [bulkLoading, setBulkLoading] = useState(false);
+  const [sendTestApp, setSendTestApp] = useState(null);
 
   const load = () =>
     getShortlisted()
@@ -37,33 +40,11 @@ export default function RecruiterShortlisted() {
 
   useEffect(() => {
     load();
+    getJobs().then(setJobs);
   }, []);
 
-  const handleSend = async (app) => {
-    const jobId = app.jobId?._id || app.jobId;
-    const confirm = await Swal.fire({
-      title: "Send Technical Assessment?",
-      text: `Send assessment invitation to ${app.userId?.fullName || "candidate"}?`,
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonColor: "var(--primary, #6366f1)",
-      cancelButtonColor: "#64748b",
-      confirmButtonText: "Yes, Send Assessment",
-      cancelButtonText: "Cancel",
-    });
-    if (!confirm.isConfirmed) return;
-
-    setSending(app._id);
-    try {
-      const preview = await generateQuestions(jobId);
-      await sendAssessment(jobId, app._id, { recruiterApproved: true, approvedQuestions: preview });
-      notify.success("Assessment sent to candidate!");
-      load();
-    } catch (e) {
-      notify.error(e.response?.data?.message || "Failed to send assessment");
-    } finally {
-      setSending(null);
-    }
+  const handleSend = (app) => {
+    setSendTestApp(app);
   };
 
   const handleToggleSelectAll = () => {
@@ -295,6 +276,15 @@ export default function RecruiterShortlisted() {
           </button>
         </div>
       )}
+
+      <SendTestModal
+        isOpen={!!sendTestApp}
+        onClose={() => setSendTestApp(null)}
+        targetApp={sendTestApp}
+        targetJobId={sendTestApp?.jobId?._id || sendTestApp?.jobId}
+        jobs={jobs}
+        onSuccess={load}
+      />
     </RecruiterLayout>
   );
 }

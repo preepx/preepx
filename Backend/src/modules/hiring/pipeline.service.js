@@ -16,7 +16,7 @@ const ALLOWED_TRANSITIONS = {
 };
 
 const PIPELINE_STAGES = [
-  "matched",
+  "applied",
   "assessment_sent",
   "shortlisted",
   "ai_interview",

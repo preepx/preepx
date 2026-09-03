@@ -4,6 +4,7 @@ const companyService = require("./company.service");
 const discoveryService = require("./discovery.service");
 const interviewService = require("./interview.service");
 const billingService = require("./billing.service");
+const aiService = require("../../services/ai.service");
 const catchAsync = require("../../common/middleware/catchAsync");
 const {
   validateCreateJob, validateUpdateJob, validateRecruiterProfile,
@@ -58,6 +59,41 @@ exports.createJob = catchAsync(async (req, res) => {
   const job = await jobService.createJob(req.user, req.body, req);
   res.status(201).json({ success: true, data: job });
 });
+
+exports.generateJobDetails = catchAsync(async (req, res) => {
+  const { prompt } = req.body;
+  if (!prompt) {
+    return res.status(400).json({ success: false, message: "Prompt is required" });
+  }
+
+  const systemPrompt = `You are an expert technical recruiter and HR assistant. 
+Given a short job description or title from the user, generate a comprehensive JSON object for a job posting.
+The JSON must have the following keys:
+- title (string): The standard job title
+- role (string): Specific role (e.g., 'Java Developer')
+- department (string): The department
+- description (string): A comprehensive job description and company overview
+- responsibilities (string): What the candidate will do daily (bullet points as a single string)
+- requirements (string): Must-have criteria and qualifications (bullet points as a single string)
+- education (string): Educational requirements
+- skills (string): A comma-separated list of required skills
+- preferredSkills (string): A comma-separated list of preferred/bonus skills
+- employmentType (string): one of 'full_time', 'part_time', 'contract', 'internship'
+- workMode (string): one of 'remote', 'onsite', 'hybrid'
+- experienceLevel (string): one of 'fresher', 'junior', 'mid', 'senior', 'lead'
+- experienceMin (number): Minimum years of experience
+- experienceMax (number): Maximum years of experience
+
+Ensure the output is strictly valid JSON format without any markdown wrappers.`;
+
+  const generatedJson = await aiService.generateJson(prompt, { systemPrompt }, req);
+  
+  res.json({
+    success: true,
+    data: generatedJson
+  });
+});
+
 
 exports.getJobs = catchAsync(async (req, res) => {
   const jobs = await jobService.getJobs(req.user, req.query);

@@ -24,13 +24,24 @@ export default function CodingNavbar({
   onResetCode,
   onExit,
   faceWarning,
-  camRef
+  camRef,
+  companyName,
+  companyLogo
 }) {
   return (
     <nav className="ce-navbar">
       <div className="ce-nav-left">
-        <div className="ce-brand">
-          <img src="/preepx_logo.png" alt="PreepX Logo" style={{ height: "48px", objectFit: "contain" }} />
+        <div className="ce-brand" style={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
+          {companyName ? (
+            <>
+              {companyLogo && companyLogo !== "/logo.png" && companyLogo !== "/preepx_logo.png" ? (
+                <img src={companyLogo} alt={companyName} style={{ height: "32px", objectFit: "contain", borderRadius: "4px" }} />
+              ) : null}
+              <span style={{ marginLeft: companyLogo && companyLogo !== "/logo.png" && companyLogo !== "/preepx_logo.png" ? '10px' : '0', fontWeight: 'bold', fontSize: '16px', color: isDark ? '#f1f5f9' : '#0f172a' }}>{companyName}</span>
+            </>
+          ) : (
+            <img src="/preepx_logo.png" alt="PreepX Logo" style={{ height: "48px", objectFit: "contain" }} />
+          )}
         </div>
         <div className="ce-nav-divider" />
         <Bookmark size={16} className="ce-icon-muted" />

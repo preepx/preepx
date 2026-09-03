@@ -30,7 +30,7 @@ const NAV_SECTIONS = [
       { to: "/recruiter/assessments", icon: ClipboardCheck, label: "Assessments" },
       { to: "/recruiter/shortlisted", icon: Star, label: "Shortlisted" },
       { to: "/recruiter/interviews", icon: Video, label: "Interviews" },
-      { to: "/recruiter/pipeline", icon: GitBranch, label: "Pipeline" },
+      { to: "/recruiter/pipeline", icon: GitBranch, label: "Applications" },
     ],
   },
   {

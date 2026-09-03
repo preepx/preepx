@@ -32,7 +32,7 @@ export default function RecruiterAssessments() {
   const urlTab = searchParams.get("tab");
   const urlJobId = searchParams.get("jobId");
 
-  const [activeTab, setActiveTab] = useState(urlTab === "builder" ? "builder" : "results"); // "results" | "builder"
+  const [activeTab, setActiveTab] = useState(urlTab === "results" ? "results" : "builder"); // "builder" | "results"
   const [rows, setRows] = useState([]);
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -65,6 +65,10 @@ export default function RecruiterAssessments() {
     description: "",
     difficulty: "medium",
   });
+
+  // Manager Modals State
+  const [showMcqManagerModal, setShowMcqManagerModal] = useState(false);
+  const [showCodingManagerModal, setShowCodingManagerModal] = useState(false);
 
   const loadData = async () => {
     setLoading(true);
@@ -216,22 +220,45 @@ export default function RecruiterAssessments() {
 
   return (
     <RecruiterLayout title="Assessments">
-      {/* Header Tabs */}
-      <div style={{ display: "flex", gap: 12, marginBottom: 24, borderBottom: "1px solid var(--border)", paddingBottom: 12 }}>
-        <button
-          type="button"
-          className={`rx-btn ${activeTab === "results" ? "rx-btn-primary" : "rx-btn-secondary"}`}
-          onClick={() => setActiveTab("results")}
-        >
-          <FileCheck size={16} /> Candidate Results ({rows.length})
-        </button>
-        <button
-          type="button"
-          className={`rx-btn ${activeTab === "builder" ? "rx-btn-primary" : "rx-btn-secondary"}`}
-          onClick={() => setActiveTab("builder")}
-        >
-          <Layers size={16} /> Custom Assessment Builder
-        </button>
+      {/* Header Tabs & Job Selector */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, borderBottom: "1px solid var(--border)", paddingBottom: 12, flexWrap: "wrap", gap: 16 }}>
+        <div style={{ display: "flex", gap: 12 }}>
+          <button
+            type="button"
+            className={`rx-btn ${activeTab === "builder" ? "rx-btn-primary" : "rx-btn-secondary"}`}
+            onClick={() => setActiveTab("builder")}
+          >
+            <Layers size={16} /> Custom Assessment Builder
+          </button>
+          <button
+            type="button"
+            className={`rx-btn ${activeTab === "results" ? "rx-btn-primary" : "rx-btn-secondary"}`}
+            onClick={() => setActiveTab("results")}
+          >
+            <FileCheck size={16} /> Candidate Results ({rows.length})
+          </button>
+        </div>
+
+        {activeTab === "builder" && (
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-muted)", whiteSpace: "nowrap" }}>SELECT JOB:</span>
+            <select
+              value={selectedJobId}
+              onChange={(e) => handleJobSelectChange(e.target.value)}
+              className="rx-premium-input"
+              style={{ minWidth: 200, maxWidth: 300, padding: "8px 12px", height: "auto", fontSize: 13 }}
+            >
+              {jobs.map((j) => {
+                const hasConfig = j.assessmentConfig && (j.assessmentConfig.mcqCount > 0 || j.assessmentConfig.codingCount > 0);
+                return (
+                  <option key={j._id} value={j._id}>
+                    {j.title} ({j.role}) {hasConfig ? " ✓" : ""}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        )}
       </div>
 
       {loading ? (
@@ -295,101 +322,108 @@ export default function RecruiterAssessments() {
         /* ASSESSMENT BUILDER TAB */
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           {/* Config Bar */}
-          <div className="rx-card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap" }}>
+          <div className="rx-card" style={{ padding: 24 }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+
+              {/* Top Row: Assessment Settings */}
               <div>
-                <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", display: "block", marginBottom: 6 }}>
-                  SELECT JOB
-                </label>
-                <select
-                  value={selectedJobId}
-                  onChange={(e) => handleJobSelectChange(e.target.value)}
-                  className="rx-premium-input"
-                  style={{ minWidth: 260 }}
-                >
-                  {jobs.map((j) => (
-                    <option key={j._id} value={j._id}>
-                      {j.title} ({j.role})
-                    </option>
-                  ))}
-                </select>
+                <h4 style={{ margin: "0 0 16px 0", fontSize: 15, color: "var(--text)" }}>⚙️ Assessment Configuration</h4>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 24, flexWrap: "wrap" }}>
+                  <div>
+                    <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", display: "block", marginBottom: 6 }}>
+                      DURATION (MINS)
+                    </label>
+                    <input
+                      type="number"
+                      value={durationMinutes}
+                      onChange={(e) => setDurationMinutes(e.target.value)}
+                      className="rx-premium-input"
+                      style={{ width: 120 }}
+                    />
+                    <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 6 }}>Time limit for candidates</div>
+                  </div>
+
+                  <div>
+                    <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", display: "block", marginBottom: 6 }}>
+                      PASSING SCORE (%)
+                    </label>
+                    <input
+                      type="number"
+                      value={passingScore}
+                      onChange={(e) => setPassingScore(e.target.value)}
+                      className="rx-premium-input"
+                      style={{ width: 120 }}
+                    />
+                    <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 6 }}>Minimum score to pass</div>
+                  </div>
+
+                  <div>
+                    <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", display: "block", marginBottom: 6 }}>
+                      ASSESSMENT TYPE
+                    </label>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, background: "var(--background)", padding: "8px 14px", borderRadius: 10, border: "1px solid var(--border)" }}>
+                      <input
+                        type="checkbox"
+                        id="includeCodingCheckbox"
+                        checked={includeCoding}
+                        onChange={(e) => setIncludeCoding(e.target.checked)}
+                        style={{ width: 17, height: 17, cursor: "pointer" }}
+                      />
+                      <label htmlFor="includeCodingCheckbox" style={{ fontSize: 13, fontWeight: 700, cursor: "pointer", color: "var(--text)", margin: 0 }}>
+                        Include Coding Round
+                      </label>
+                      <span className="rx-badge" style={{ background: includeCoding ? "#eef2ff" : "#ecfdf5", color: includeCoding ? "#6366f1" : "#059669", fontSize: 11 }}>
+                        {includeCoding ? "MCQ + Coding (Hybrid)" : "⚡ Objective Only (100% MCQ)"}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", display: "block", marginBottom: 6 }}>
-                  DURATION (MINS)
-                </label>
-                <input
-                  type="number"
-                  value={durationMinutes}
-                  onChange={(e) => setDurationMinutes(e.target.value)}
-                  className="rx-premium-input"
-                  style={{ width: 100 }}
-                />
+              {/* Bottom Row: Actions */}
+              <div style={{ borderTop: "1px solid var(--border)", paddingTop: 20, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+                <div>
+                  <h4 style={{ margin: "0 0 4px 0", fontSize: 14, color: "var(--text)" }}>Actions</h4>
+                  <p style={{ margin: 0, fontSize: 13, color: "var(--text-muted)" }}>Generate questions, preview the test, and save changes.</p>
+                </div>
+
+                <div style={{ display: "flex", gap: 12 }}>
+                  <button
+                    type="button"
+                    className="rx-btn rx-btn-secondary"
+                    disabled={generatingAI}
+                    onClick={handleGenerateAI}
+                    title="Auto-create questions based on the job role"
+                  >
+                    <Sparkles size={16} /> {generatingAI ? "Generating..." : "AI Generate"}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="rx-btn rx-btn-secondary"
+                    onClick={() => setShowPreview(true)}
+                    title="See what the candidate will see"
+                  >
+                    <Eye size={16} /> Preview
+                  </button>
+
+                  <button
+                    type="button"
+                    className="rx-btn rx-btn-primary"
+                    disabled={savingConfig}
+                    onClick={handleSaveAssessmentConfig}
+                    title="Publish this assessment to candidates"
+                  >
+                    <Save size={16} /> {savingConfig ? "Saving..." : "Save Assessment"}
+                  </button>
+                </div>
               </div>
 
-              <div>
-                <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", display: "block", marginBottom: 6 }}>
-                  PASSING SCORE (%)
-                </label>
-                <input
-                  type="number"
-                  value={passingScore}
-                  onChange={(e) => setPassingScore(e.target.value)}
-                  className="rx-premium-input"
-                  style={{ width: 100 }}
-                />
-              </div>
-
-              <div style={{ display: "flex", alignItems: "center", gap: 10, background: "var(--background)", padding: "8px 14px", borderRadius: 10, border: "1px solid var(--border)", marginTop: 14 }}>
-                <input
-                  type="checkbox"
-                  id="includeCodingCheckbox"
-                  checked={includeCoding}
-                  onChange={(e) => setIncludeCoding(e.target.checked)}
-                  style={{ width: 17, height: 17, cursor: "pointer" }}
-                />
-                <label htmlFor="includeCodingCheckbox" style={{ fontSize: 13, fontWeight: 700, cursor: "pointer", color: "var(--text)", margin: 0 }}>
-                  Include Coding Round
-                </label>
-                <span className="rx-badge" style={{ background: includeCoding ? "#eef2ff" : "#ecfdf5", color: includeCoding ? "#6366f1" : "#059669", fontSize: 11 }}>
-                  {includeCoding ? "MCQ + Coding (Hybrid)" : "⚡ Objective Only (100% MCQ)"}
-                </span>
-              </div>
-            </div>
-
-            <div style={{ display: "flex", gap: 10 }}>
-              <button
-                type="button"
-                className="rx-btn rx-btn-secondary"
-                disabled={generatingAI}
-                onClick={handleGenerateAI}
-              >
-                <Sparkles size={16} /> {generatingAI ? "Generating Questions..." : "AI Generate Questions"}
-              </button>
-
-              <button
-                type="button"
-                className="rx-btn rx-btn-secondary"
-                onClick={() => setShowPreview(true)}
-              >
-                <Eye size={16} /> Preview
-              </button>
-
-              <button
-                type="button"
-                className="rx-btn rx-btn-primary"
-                disabled={savingConfig}
-                onClick={handleSaveAssessmentConfig}
-              >
-                <Save size={16} /> {savingConfig ? "Saving..." : "Save Assessment"}
-              </button>
             </div>
           </div>
-
           {/* MCQ Questions Section */}
           <div className="rx-card">
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
                 <h3 style={{ margin: 0, fontSize: 18, color: "var(--text)" }}>
                   Multiple Choice Questions ({mcqQuestions.length})
@@ -400,122 +434,45 @@ export default function RecruiterAssessments() {
               </div>
               <button
                 type="button"
-                className="rx-btn rx-btn-secondary"
-                onClick={() => setShowAddMcqModal(true)}
+                className="rx-btn rx-btn-primary"
+                onClick={() => setShowMcqManagerModal(true)}
               >
-                <Plus size={16} /> Add MCQ
+                <Eye size={16} /> View & Manage
               </button>
             </div>
-
-            {mcqQuestions.length === 0 ? (
-              <div style={{ padding: 32, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
-                No MCQ questions added. Click "AI Generate Questions" or "Add MCQ".
-              </div>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {mcqQuestions.map((q, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      background: "var(--background)",
-                      border: "1px solid var(--border)",
-                      borderRadius: 12,
-                      padding: 16,
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                      gap: 16,
-                    }}
-                  >
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: 700, fontSize: 14, color: "var(--text)", marginBottom: 8 }}>
-                        {idx + 1}. {q.question}
-                      </div>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 8 }}>
-                        {(q.options || []).map((opt, oIdx) => (
-                          <div
-                            key={oIdx}
-                            style={{
-                              fontSize: 12,
-                              padding: "4px 8px",
-                              borderRadius: 6,
-                              background: opt === q.correctAnswer ? "#ecfdf5" : "var(--surface)",
-                              border: opt === q.correctAnswer ? "1px solid #10b981" : "1px solid var(--border)",
-                              color: opt === q.correctAnswer ? "#059669" : "var(--text)",
-                              fontWeight: opt === q.correctAnswer ? 700 : 400,
-                            }}
-                          >
-                            {String.fromCharCode(65 + oIdx)}. {opt} {opt === q.correctAnswer && "✓"}
-                          </div>
-                        ))}
-                      </div>
-                      {q.explanation && (
-                        <div style={{ fontSize: 12, color: "var(--text-muted)", fontStyle: "italic" }}>
-                          Explanation: {q.explanation}
-                        </div>
-                      )}
-                    </div>
-
-                    <div style={{ display: "flex", gap: 6 }}>
-                      <button
-                        type="button"
-                        className="rx-btn rx-btn-secondary"
-                        style={{ padding: "4px 8px" }}
-                        disabled={idx === 0}
-                        onClick={() => handleMoveMcq(idx, -1)}
-                      >
-                        <MoveUp size={14} />
-                      </button>
-                      <button
-                        type="button"
-                        className="rx-btn rx-btn-secondary"
-                        style={{ padding: "4px 8px" }}
-                        disabled={idx === mcqQuestions.length - 1}
-                        onClick={() => handleMoveMcq(idx, 1)}
-                      >
-                        <MoveDown size={14} />
-                      </button>
-                      <button
-                        type="button"
-                        className="rx-btn rx-btn-danger"
-                        style={{ padding: "4px 8px" }}
-                        onClick={() => handleDeleteMcq(idx)}
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
-                  </div>
-                ))}
+            {mcqQuestions.length === 0 && (
+              <div style={{ marginTop: 16, padding: 24, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
+                No MCQ questions added. Click "AI Generate Questions" above.
               </div>
             )}
           </div>
 
           {/* Coding Challenges Section */}
           <div className="rx-card" style={{ opacity: includeCoding ? 1 : 0.75 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div>
                 <h3 style={{ margin: 0, fontSize: 18, color: "var(--text)", display: "flex", alignItems: "center", gap: 8 }}>
                   Coding Challenges ({includeCoding ? codingQuestions.length : 0})
-                  {!includeCoding && <span className="rx-badge rx-badge-gray" style={{ fontSize: 11 }}>Disabled (Objective Only)</span>}
+                  {!includeCoding && <span className="rx-badge rx-badge-gray" style={{ fontSize: 11 }}>Disabled</span>}
                 </h3>
                 <p style={{ margin: "4px 0 0 0", fontSize: 13, color: "var(--text-muted)" }}>
-                  {includeCoding ? "40% weightage in final score calculation" : "Disabled for this job. Candidates will take a 100% objective/MCQ test."}
+                  {includeCoding ? "40% weightage in final score calculation" : "Objective Only selected"}
                 </p>
               </div>
               {includeCoding && (
                 <button
                   type="button"
-                  className="rx-btn rx-btn-secondary"
-                  onClick={() => setShowAddCodingModal(true)}
+                  className="rx-btn rx-btn-primary"
+                  onClick={() => setShowCodingManagerModal(true)}
                 >
-                  <Plus size={16} /> Add Coding Problem
+                  <Eye size={16} /> View & Manage
                 </button>
               )}
             </div>
 
-            {!includeCoding ? (
-              <div style={{ padding: 24, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, background: "var(--background)", color: "var(--text-muted)" }}>
-                ⚡ <strong>Objective-Only Assessment Active:</strong> No coding round will be assigned to candidates for this job.
+            {!includeCoding && (
+              <div style={{ marginTop: 16, padding: 24, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, background: "var(--background)", color: "var(--text-muted)" }}>
+                ⚡ <strong>Objective-Only Active:</strong> No coding round.
                 <div style={{ marginTop: 8 }}>
                   <button
                     type="button"
@@ -527,52 +484,190 @@ export default function RecruiterAssessments() {
                   </button>
                 </div>
               </div>
-            ) : codingQuestions.length === 0 ? (
-              <div style={{ padding: 32, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
-                No coding challenges added. Click "Add Coding Problem" or generate with AI.
-              </div>
-            ) : (
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {codingQuestions.map((q, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      background: "var(--background)",
-                      border: "1px solid var(--border)",
-                      borderRadius: 12,
-                      padding: 16,
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                      gap: 16,
-                    }}
-                  >
-                    <div style={{ flex: 1 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                        <span style={{ fontWeight: 700, fontSize: 15, color: "var(--text)" }}>
-                          {idx + 1}. {q.title}
-                        </span>
-                        <span className="rx-badge rx-badge-blue" style={{ textTransform: "capitalize", fontSize: 11 }}>
-                          {q.difficulty || "medium"}
-                        </span>
-                      </div>
-                      <p style={{ margin: 0, fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>
-                        {q.description}
-                      </p>
-                    </div>
+            )}
 
-                    <button
-                      type="button"
-                      className="rx-btn rx-btn-danger"
-                      style={{ padding: "4px 8px" }}
-                      onClick={() => handleDeleteCoding(idx)}
-                    >
-                      <Trash2 size={14} />
-                    </button>
-                  </div>
-                ))}
+            {includeCoding && codingQuestions.length === 0 && (
+              <div style={{ marginTop: 16, padding: 24, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
+                No coding challenges added. Click "AI Generate Questions" above.
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* MCQ Manager Modal */}
+      {showMcqManagerModal && (
+        <div className="rx-modal-overlay" onClick={() => setShowMcqManagerModal(false)}>
+          <div className="rx-modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 800, maxHeight: "90vh", display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--border)", paddingBottom: 16, marginBottom: 16 }}>
+              <div>
+                <h3 style={{ margin: 0 }}>Manage MCQ Questions ({mcqQuestions.length})</h3>
+                <p style={{ margin: "4px 0 0 0", fontSize: 12, color: "var(--text-muted)" }}>Review, add, or reorder objective questions</p>
+              </div>
+              <div style={{ display: "flex", gap: 10 }}>
+                <button type="button" className="rx-btn rx-btn-primary" onClick={() => setShowAddMcqModal(true)}>
+                  <Plus size={16} /> Add MCQ
+                </button>
+                <button type="button" className="rx-btn rx-btn-secondary" onClick={() => setShowMcqManagerModal(false)}>
+                  Close
+                </button>
+              </div>
+            </div>
+
+            <div style={{ flex: 1, overflowY: "auto", paddingRight: 8 }}>
+              {mcqQuestions.length === 0 ? (
+                <div style={{ padding: 40, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
+                  No MCQ questions added yet.
+                </div>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {mcqQuestions.map((q, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        background: "var(--background)",
+                        border: "1px solid var(--border)",
+                        borderRadius: 12,
+                        padding: 16,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                        gap: 16,
+                      }}
+                    >
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontWeight: 700, fontSize: 14, color: "var(--text)", marginBottom: 8 }}>
+                          {idx + 1}. {q.question}
+                        </div>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 8 }}>
+                          {(q.options || []).map((opt, oIdx) => (
+                            <div
+                              key={oIdx}
+                              style={{
+                                fontSize: 12,
+                                padding: "4px 8px",
+                                borderRadius: 6,
+                                background: opt === q.correctAnswer ? "#ecfdf5" : "var(--surface)",
+                                border: opt === q.correctAnswer ? "1px solid #10b981" : "1px solid var(--border)",
+                                color: opt === q.correctAnswer ? "#059669" : "var(--text)",
+                                fontWeight: opt === q.correctAnswer ? 700 : 400,
+                              }}
+                            >
+                              {String.fromCharCode(65 + oIdx)}. {opt} {opt === q.correctAnswer && "✓"}
+                            </div>
+                          ))}
+                        </div>
+                        {q.explanation && (
+                          <div style={{ fontSize: 12, color: "var(--text-muted)", fontStyle: "italic" }}>
+                            Explanation: {q.explanation}
+                          </div>
+                        )}
+                      </div>
+
+                      <div style={{ display: "flex", gap: 6 }}>
+                        <button
+                          type="button"
+                          className="rx-btn rx-btn-secondary"
+                          style={{ padding: "4px 8px" }}
+                          disabled={idx === 0}
+                          onClick={() => handleMoveMcq(idx, -1)}
+                        >
+                          <MoveUp size={14} />
+                        </button>
+                        <button
+                          type="button"
+                          className="rx-btn rx-btn-secondary"
+                          style={{ padding: "4px 8px" }}
+                          disabled={idx === mcqQuestions.length - 1}
+                          onClick={() => handleMoveMcq(idx, 1)}
+                        >
+                          <MoveDown size={14} />
+                        </button>
+                        <button
+                          type="button"
+                          className="rx-btn rx-btn-danger"
+                          style={{ padding: "4px 8px" }}
+                          onClick={() => handleDeleteMcq(idx)}
+                        >
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Coding Manager Modal */}
+      {showCodingManagerModal && (
+        <div className="rx-modal-overlay" onClick={() => setShowCodingManagerModal(false)}>
+          <div className="rx-modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 800, maxHeight: "90vh", display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid var(--border)", paddingBottom: 16, marginBottom: 16 }}>
+              <div>
+                <h3 style={{ margin: 0 }}>Manage Coding Challenges ({codingQuestions.length})</h3>
+                <p style={{ margin: "4px 0 0 0", fontSize: 12, color: "var(--text-muted)" }}>Review or add programming tasks</p>
+              </div>
+              <div style={{ display: "flex", gap: 10 }}>
+                <button type="button" className="rx-btn rx-btn-primary" onClick={() => setShowAddCodingModal(true)}>
+                  <Plus size={16} /> Add Challenge
+                </button>
+                <button type="button" className="rx-btn rx-btn-secondary" onClick={() => setShowCodingManagerModal(false)}>
+                  Close
+                </button>
+              </div>
+            </div>
+
+            <div style={{ flex: 1, overflowY: "auto", paddingRight: 8 }}>
+              {codingQuestions.length === 0 ? (
+                <div style={{ padding: 40, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
+                  No coding challenges added yet.
+                </div>
+              ) : (
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {codingQuestions.map((q, idx) => (
+                    <div
+                      key={idx}
+                      style={{
+                        background: "var(--background)",
+                        border: "1px solid var(--border)",
+                        borderRadius: 12,
+                        padding: 16,
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "flex-start",
+                        gap: 16,
+                      }}
+                    >
+                      <div style={{ flex: 1 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
+                          <span style={{ fontWeight: 700, fontSize: 15, color: "var(--text)" }}>
+                            {idx + 1}. {q.title}
+                          </span>
+                          <span className="rx-badge rx-badge-blue" style={{ textTransform: "capitalize", fontSize: 11 }}>
+                            {q.difficulty || "medium"}
+                          </span>
+                        </div>
+                        <p style={{ margin: 0, fontSize: 13, color: "var(--text-muted)", lineHeight: 1.6 }}>
+                          {q.description}
+                        </p>
+                      </div>
+
+                      <button
+                        type="button"
+                        className="rx-btn rx-btn-danger"
+                        style={{ padding: "4px 8px" }}
+                        onClick={() => handleDeleteCoding(idx)}
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

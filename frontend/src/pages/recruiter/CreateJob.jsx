@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Briefcase, MapPin, DollarSign, BrainCircuit, ListChecks, Save, Send, Trash2, Plus } from "lucide-react";
+import { Briefcase, MapPin, DollarSign, BrainCircuit, ListChecks, Save, Send, Trash2, Plus, Sparkles } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
-import { createJob, getJob, updateJob } from "@/services/recruiterAPI";
+import { createJob, getJob, updateJob, generateJobDetails } from "@/services/recruiterAPI";
 import notify from "@/utils/notify";
 import '@/styles/RecruiterLayout.css';
 
@@ -42,6 +42,9 @@ export default function CreateJob() {
   const [loading, setLoading] = useState(false);
   const [initialLoading, setInitialLoading] = useState(isEdit);
   const [submitType, setSubmitType] = useState("draft");
+  
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
 
   useEffect(() => {
     if (isEdit) {
@@ -138,9 +141,75 @@ export default function CreateJob() {
     }
   };
 
+  const handleAIFill = async () => {
+    if (!aiPrompt.trim()) {
+      notify.error("Please enter a prompt (e.g. 'Software Developer with 3 years experience')");
+      return;
+    }
+    setAiLoading(true);
+    try {
+      const generated = await generateJobDetails(aiPrompt);
+      if (generated) {
+        setForm(prev => ({
+          ...prev,
+          title: generated.title || prev.title,
+          role: generated.role || prev.role,
+          description: generated.description || prev.description,
+          skills: generated.skills || prev.skills,
+          preferredSkills: generated.preferredSkills || prev.preferredSkills,
+          department: generated.department || prev.department,
+          employmentType: generated.employmentType || prev.employmentType,
+          workMode: generated.workMode || prev.workMode,
+          experienceLevel: generated.experienceLevel || prev.experienceLevel,
+          experienceMin: generated.experienceMin ?? prev.experienceMin,
+          experienceMax: generated.experienceMax ?? prev.experienceMax,
+          education: generated.education || prev.education,
+          responsibilities: generated.responsibilities || prev.responsibilities,
+          requirements: generated.requirements || prev.requirements,
+        }));
+        notify.success("Job details generated! Please review and adjust.");
+      }
+    } catch (e) {
+      notify.error("Failed to generate job details");
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   return (
     <RecruiterLayout title={isEdit ? "Edit Job" : "Post a Job"}>
       <div className="rx-premium-form">
+
+        {/* AI Auto-Fill Section */}
+        <div style={{ background: "var(--primary-light)", border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)", borderRadius: 12, padding: 20, marginBottom: 24 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
+            <Sparkles size={20} color="var(--primary)" />
+            <h3 style={{ margin: 0, color: "var(--primary)" }}>AI Job Auto-Fill</h3>
+          </div>
+          <p style={{ margin: "0 0 16px 0", fontSize: 13, color: "var(--text-muted)" }}>
+            Save time! Describe the job briefly (e.g., "Senior Frontend Developer, React, 5+ years exp") and let AI fill out the form for you.
+          </p>
+          <div style={{ display: "flex", gap: 12 }}>
+            <input
+              type="text"
+              className="rx-premium-input"
+              style={{ flex: 1 }}
+              placeholder="Enter job title or description prompt..."
+              value={aiPrompt}
+              onChange={(e) => setAiPrompt(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleAIFill()}
+            />
+            <button 
+              type="button" 
+              className="rx-btn rx-btn-primary" 
+              onClick={handleAIFill}
+              disabled={aiLoading}
+              style={{ whiteSpace: "nowrap" }}
+            >
+              {aiLoading ? "Generating..." : "✨ Auto-Fill"}
+            </button>
+          </div>
+        </div>
         
         {/* Section 1: Basic Information */}
         <div className="rx-form-section">

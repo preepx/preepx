@@ -16,6 +16,7 @@ export const getAnalytics = () => API.get(`${BASE}/analytics`).then((r) => r.dat
 export const getJobs = (params) => API.get(`${BASE}/jobs`, { params }).then((r) => r.data.data);
 export const getJob = (jobId) => API.get(`${BASE}/jobs/${jobId}`).then((r) => r.data.data);
 export const createJob = (data) => API.post(`${BASE}/jobs`, data).then((r) => r.data.data);
+export const generateJobDetails = (prompt) => API.post(`${BASE}/jobs/generate-details`, { prompt }).then((r) => r.data.data);
 export const updateJob = (jobId, data) => API.put(`${BASE}/jobs/${jobId}`, data).then((r) => r.data.data);
 export const publishJob = (jobId) => API.post(`${BASE}/jobs/${jobId}/publish`).then((r) => r.data.data);
 export const changeJobStatus = (jobId, status) => API.patch(`${BASE}/jobs/${jobId}/status`, { status }).then((r) => r.data.data);

@@ -21,6 +21,7 @@ router.get("/analytics", hiringController.getAnalytics);
 
 router.get("/jobs", hiringController.getJobs);
 router.post("/jobs", validateCreateJob, hiringController.createJob);
+router.post("/jobs/generate-details", hiringController.generateJobDetails);
 router.get("/jobs/:jobId", hiringController.getJob);
 router.put("/jobs/:jobId", validateUpdateJob, hiringController.updateJob);
 router.post("/jobs/:jobId/publish", hiringController.publishJob);

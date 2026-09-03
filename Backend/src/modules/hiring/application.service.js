@@ -32,7 +32,7 @@ const listPublishedJobs = async ({ search = "", page = 1, limit = 50, userId } =
   let appliedJobIds = new Set();
   if (userId) {
     user = await User.findById(userId).lean();
-    const apps = await JobApplication.find({ userId }).select("jobId").lean();
+    const apps = await JobApplication.find({ userId, status: { $ne: "matched" } }).select("jobId").lean();
     appliedJobIds = new Set(apps.map((a) => a.jobId.toString()));
   }
 
@@ -124,7 +124,23 @@ const applyToJob = async (userId, jobId) => {
   }
 
   const existing = await JobApplication.findOne({ jobId: job._id, userId });
-  if (existing) throw new BadRequestError("You have already applied to this job");
+  if (existing) {
+    if (existing.status === "matched") {
+      existing.status = "applied";
+      existing.source = "candidate_applied";
+      existing.statusHistory.push({ from: "matched", to: "applied", note: "Candidate explicitly applied" });
+      await existing.save();
+      return {
+        application: existing,
+        matchScore: existing.matchScore,
+        matchedSkills: existing.matchedSkills,
+        missingSkills: existing.missingSkills,
+        matchExplanation: existing.matchExplanation,
+      };
+    } else {
+      throw new BadRequestError("You have already applied to this job");
+    }
+  }
 
   const scored = await matchingService.scoreCandidate(user, job);
 
@@ -159,7 +175,7 @@ const applyToJob = async (userId, jobId) => {
 };
 
 const getMyApplications = async (userId) => {
-  return JobApplication.find({ userId })
+  return JobApplication.find({ userId, status: { $ne: "matched" } })
     .populate("jobId", "title role location workMode experienceMin experienceMax requiredSkills skills status")
     .populate("assessmentId")
     .populate("aiInterviewId")

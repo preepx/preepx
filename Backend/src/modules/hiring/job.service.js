@@ -213,12 +213,13 @@ const getPipeline = async (recruiterId, jobId) => {
   pipelineService.PIPELINE_STAGES.forEach((s) => { stages[s] = []; });
   stages.rejected = [];
   apps.forEach((a) => {
+    if (a.status === "matched") return;
     if (a.status === "rejected") {
       stages.rejected.push(a);
       return;
     }
     if (stages[a.status]) stages[a.status].push(a);
-    else stages.matched.push(a);
+    else if (stages.applied) stages.applied.push(a);
   });
   return { job, stages };
 };

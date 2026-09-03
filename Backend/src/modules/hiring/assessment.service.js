@@ -190,7 +190,14 @@ const getCandidateAssessments = async (userId) => {
 
 const getAssessmentForCandidate = async (userId, assessmentId) => {
   const assessment = await Assessment.findById(assessmentId)
-    .populate("jobId", "title role description")
+    .populate({
+      path: "jobId",
+      select: "title role description recruiterId externalCompanyName externalCompanyLogo",
+      populate: {
+        path: "recruiterId",
+        select: "companyName profileImage"
+      }
+    })
     .lean();
   if (!assessment) throw new NotFoundError("Assessment not found");
   if (assessment.userId.toString() !== userId.toString()) {

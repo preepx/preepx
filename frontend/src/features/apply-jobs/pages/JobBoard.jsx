@@ -2,7 +2,7 @@ import React, { useEffect, useState, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Link, useSearchParams } from "react-router-dom";
 import { Briefcase, MapPin, Sparkles, Search, Building2, ChevronRight, CheckCircle, ChevronDown, FileText, Bookmark, Bell, Loader2 } from "lucide-react";
-import { getPublishedJobs, applyToJob, toggleSaveJob, getSavedJobs } from "../services/candidateJobsAPI";
+import { getPublishedJobs, applyToJob, toggleSaveJob, getSavedJobs, getMyApplications } from "../services/candidateJobsAPI";
 import { getProfile } from "@/services/userAPI";
 import Loader from "@/components/Loader";
 import EmptyState from "@/components/recruiter/EmptyState";
@@ -38,6 +38,7 @@ export default function JobBoard() {
   const [allLocations, setAllLocations] = useState([]);
   const [profileData, setProfileData] = useState(null);
   const [savedIds, setSavedIds] = useState([]);
+  const [appliedIds, setAppliedIds] = useState([]);
 
   useEffect(() => {
     getProfile()
@@ -48,6 +49,14 @@ export default function JobBoard() {
       .then(saved => {
         if (saved && saved.length > 0) {
           setSavedIds(saved.map(sj => sj._id || sj));
+        }
+      })
+      .catch(console.error);
+
+    getMyApplications()
+      .then(apps => {
+        if (apps && apps.length > 0) {
+          setAppliedIds(apps.map(app => app.jobId?._id || app.jobId));
         }
       })
       .catch(console.error);
@@ -288,6 +297,7 @@ export default function JobBoard() {
       const res = await applyToJob(jobId);
       notify.success(res.message || "Application submitted!");
       setJobs((prev) => prev.map((j) => (j._id === jobId ? { ...j, applied: true } : j)));
+      setAppliedIds((prev) => [...prev, jobId]);
     } catch (e) {
       notify.error(e.response?.data?.message || "Apply failed");
     } finally {
@@ -480,12 +490,16 @@ export default function JobBoard() {
                         <Bookmark size={18} fill={savedIds.includes(job._id) ? "currentColor" : "none"} />
                       </button>
                     </div>
-                    {job.isThirdParty ? (
+                    {appliedIds.includes(job._id) || job.applied ? (
+                      <button className="bjc-view-btn" disabled style={{ opacity: 0.7, cursor: 'not-allowed' }}>Applied</button>
+                    ) : job.isThirdParty ? (
                       <button className="bjc-view-btn" onClick={(e) => { e.stopPropagation(); window.open(job.applyLink, '_blank'); }} style={{ display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center' }}>
                         Apply <ChevronRight size={16} />
                       </button>
                     ) : (
-                      <button className="bjc-view-btn" onClick={(e) => { e.stopPropagation(); handleApply(job._id); }}>Apply</button>
+                      <button className="bjc-view-btn" disabled={applying === job._id} onClick={(e) => { e.stopPropagation(); handleApply(job._id); }}>
+                        {applying === job._id ? 'Applying...' : 'Apply'}
+                      </button>
                     )}
                   </div>
 
@@ -595,14 +609,18 @@ export default function JobBoard() {
             <p className="bj-modal-meta" style={{ marginBottom: '1.5rem' }}>{selectedJob.location || 'Remote'}</p>
 
             <div className="bj-modal-actions" style={{ display: 'flex', gap: '12px', marginBottom: '2rem', paddingBottom: '2rem', borderBottom: '1px solid var(--bj-border, #e2e8f0)' }}>
-              {selectedJob.isThirdParty ? (
+              {appliedIds.includes(selectedJob._id) || selectedJob.applied ? (
+                <button disabled style={{ background: '#475569', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '8px', fontWeight: 500, cursor: 'not-allowed' }}>
+                  Applied
+                </button>
+              ) : selectedJob.isThirdParty ? (
                 <a href={selectedJob.applyLink} target="_blank" rel="noreferrer" style={{ background: '#2563eb', color: '#fff', textDecoration: 'none', padding: '10px 24px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 500 }}>
                   Apply on company site
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                 </a>
               ) : (
-                <button onClick={() => { handleApply(selectedJob._id); setSelectedJob(null); }} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '8px', fontWeight: 500, cursor: 'pointer' }}>
-                  Apply Now
+                <button disabled={applying === selectedJob._id} onClick={() => { handleApply(selectedJob._id); }} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '8px', fontWeight: 500, cursor: 'pointer' }}>
+                  {applying === selectedJob._id ? 'Applying...' : 'Apply Now'}
                 </button>
               )}
               <button className="bj-modal-icon-btn" style={{ padding: '10px', borderRadius: '8px', cursor: 'pointer' }}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
