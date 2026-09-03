@@ -63,11 +63,18 @@ export default function TakeAssessment() {
     setSubmitting(true);
     try {
       const answerArr = assessment.mcqQuestions.map((_, i) => answers[i] || "");
-      await submitMcq(id, answerArr);
-      setStep("coding");
-      setCodingIndex(0);
-      startTime.current = Date.now();
-      notify.success("MCQ submitted! Starting coding round.");
+      const res = await submitMcq(id, answerArr);
+      if (res?.completed || res?.currentStep === "done" || !assessment.codingQuestions || assessment.codingQuestions.length === 0) {
+        const finalResult = await completeAssessment(id).catch(() => res);
+        setResult(finalResult || res);
+        setStep("result");
+        notify.success("Assessment completed successfully!");
+      } else {
+        setStep("coding");
+        setCodingIndex(0);
+        startTime.current = Date.now();
+        notify.success("MCQ submitted! Starting coding round.");
+      }
     } catch (err) {
       notify.error(err.response?.data?.message || "Submit failed");
     } finally {
@@ -122,7 +129,11 @@ export default function TakeAssessment() {
           <p>{job.role} — {job.description?.slice(0, 200)}...</p>
           <div className="ta-info">
             <div><strong>{assessment.mcqQuestions?.length || 20}</strong> MCQ Questions</div>
-            <div><strong>{assessment.codingQuestions?.length || 2}</strong> Coding Questions (Medium)</div>
+            {assessment.codingQuestions?.length > 0 ? (
+              <div><strong>{assessment.codingQuestions.length}</strong> Coding Questions (Medium)</div>
+            ) : (
+              <div><strong>Objective Only</strong> (No Coding Round)</div>
+            )}
           </div>
           <button type="button" className="ta-btn" onClick={handleStart} disabled={submitting}>
             {submitting ? "Starting..." : "Start Assessment"}

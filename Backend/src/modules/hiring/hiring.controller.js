@@ -173,6 +173,31 @@ exports.updateInterview = catchAsync(async (req, res) => {
   res.json({ success: true, data });
 });
 
+exports.generateInterviewQuestions = catchAsync(async (req, res) => {
+  const questions = await jobService.generateInterviewQuestions(req.user, req.params.jobId, req.body, req);
+  res.json({ success: true, data: questions });
+});
+
+exports.sendAIInterview = catchAsync(async (req, res) => {
+  const result = await jobService.sendAIInterview(req.user, req.params.jobId, req.params.applicationId, req.body, req);
+  res.json({ success: true, data: result, message: "AI Interview invitation sent to candidate" });
+});
+
+exports.getAIInterviewReport = catchAsync(async (req, res) => {
+  const result = await jobService.getAIInterviewReport(req.user, req.params.applicationId);
+  res.json({ success: true, data: result });
+});
+
+exports.bulkAction = catchAsync(async (req, res) => {
+  const result = await jobService.handleBulkAction(req.user, req.body, req);
+  res.json({ success: true, data: result, message: `Processed ${result.successCount} candidates successfully` });
+});
+
+exports.updateAssessmentConfig = catchAsync(async (req, res) => {
+  const job = await jobService.updateJobAssessmentConfig(req.user, req.params.jobId, req.body.assessmentConfig || req.body, req);
+  res.json({ success: true, data: job, message: "Assessment configuration updated" });
+});
+
 exports.getBilling = catchAsync(async (req, res) => {
   const data = await billingService.getBilling(req.user);
   res.json({ success: true, data });
@@ -182,3 +207,4 @@ exports.selectPlan = catchAsync(async (req, res) => {
   const data = await billingService.selectPlan(req.user, req.body.planSlug);
   res.json({ success: true, data });
 });
+

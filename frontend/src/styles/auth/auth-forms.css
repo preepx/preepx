@@ -143,8 +143,33 @@
   overflow: hidden;
 }
 
+.auth-captcha-wrapper.theme-dark,
+[data-theme="dark"] .auth-captcha-wrapper {
+  background: #222222;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
 .auth-captcha-wrapper>div {
   transform: scale(0.54);
+  transform-origin: center center;
+}
+
+.auth-recruiter-captcha-row {
+  width: 100%;
+}
+
+.auth-captcha-wrapper.auth-captcha-wrapper-full {
+  background: #ffffff;
+  height: 44px;
+}
+
+.auth-captcha-wrapper.auth-captcha-wrapper-full.theme-dark,
+[data-theme="dark"] .auth-captcha-wrapper.auth-captcha-wrapper-full {
+  background: #222222;
+}
+
+.auth-captcha-wrapper.auth-captcha-wrapper-full>div {
+  transform: scale(0.66);
   transform-origin: center center;
 }
 

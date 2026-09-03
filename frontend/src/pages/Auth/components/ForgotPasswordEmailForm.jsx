@@ -8,6 +8,7 @@ export default function ForgotPasswordEmailForm({
   activeRole,
   recaptchaRef,
   setCaptchaToken,
+  theme = "dark",
   loading,
   onSubmit,
   onBackToLogin
@@ -42,8 +43,10 @@ export default function ForgotPasswordEmailForm({
       {activeRole === "candidate" && (
         <div style={{ margin: "4px 0", display: "flex", justifyContent: "center" }}>
           <ReCAPTCHA
+            key={theme}
             ref={recaptchaRef}
-            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "YOUR_RECAPTCHA_SITE_KEY"}
+            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+            theme={theme === "light" ? "light" : "dark"}
             onChange={(token) => setCaptchaToken(token)}
           />
         </div>

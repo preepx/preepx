@@ -1,6 +1,8 @@
 const Job = require("../../../models/Job");
 const JobApplication = require("../../../models/JobApplication");
 const Assessment = require("../../../models/Assessment");
+const Interview = require("../../../models/Interview");
+const aiService = require("../../services/ai.service");
 const { NotFoundError, BadRequestError, ForbiddenError } = require("../../common/exceptions/customErrors");
 const matchingService = require("./matching.service");
 const assessmentService = require("./assessment.service");
@@ -321,16 +323,294 @@ const getShortlisted = async (recruiterId) => {
     .lean();
 };
 
-const getAnalytics = async (recruiterId) => {
-  const apps = await JobApplication.find({ recruiterId }).lean();
-  const total = apps.length || 1;
+const generateInterviewQuestions = async (recruiterId, jobId, options = {}, req) => {
+  const job = await Job.findOne({ _id: jobId, recruiterId });
+  if (!job) throw new NotFoundError("Job not found");
+
+  const count = Math.min(20, Math.max(5, Number(options.count) || 10));
+  const interviewType = options.interviewType || "technical";
+  const difficulty = options.difficulty || "medium";
+
+  const prompt = `You are an expert technical interviewer creating a real-time conversational AI interview question set for candidates applying to the following job:
+Job Title: ${job.title}
+Job Role: ${job.role}
+Required Skills: ${(job.requiredSkills || job.skills || []).join(", ")}
+Job Description: ${job.description}
+Interview Type: ${interviewType}
+Difficulty Level: ${difficulty}
+
+Generate exactly ${count} relevant, thought-provoking interview questions.
+Return ONLY valid JSON matching this format:
+{
+  "questions": [
+    {
+      "question": "Question text here?",
+      "expectedPoints": "Key points or concepts candidate should mention",
+      "difficulty": "${difficulty}"
+    }
+  ]
+}`;
+
+  try {
+    const data = await aiService.generateJson(prompt, { temperature: 0.6 }, req);
+    let questions = data?.questions || data?.data || (Array.isArray(data) ? data : []);
+    if (!Array.isArray(questions) || questions.length === 0) {
+      throw new Error("No questions generated");
+    }
+    return questions.slice(0, count).map((q) => ({
+      question: typeof q === "string" ? q : q.question,
+      expectedPoints: q.expectedPoints || "",
+      difficulty: q.difficulty || difficulty,
+    }));
+  } catch (err) {
+    return [
+      { question: `Explain your core experience with ${(job.requiredSkills || [])[0] || job.role}.`, expectedPoints: "Architecture, best practices, real-world examples", difficulty },
+      { question: "Can you describe a challenging technical problem you solved recently?", expectedPoints: "Problem solving, debugging approach, outcome", difficulty },
+      { question: `How do you ensure high performance and maintainability in ${job.role} projects?`, expectedPoints: "Optimization, clean code, testing", difficulty },
+    ];
+  }
+};
+
+const sendAIInterview = async (recruiterId, jobId, applicationId, body = {}, req) => {
+  await companyService.assertVerifiedCompany(recruiterId);
+  const job = await Job.findOne({ _id: jobId, recruiterId });
+  if (!job) throw new NotFoundError("Job not found");
+
+  const app = await JobApplication.findOne({ _id: applicationId, jobId, recruiterId });
+  if (!app) throw new NotFoundError("Application not found");
+
+  let questions = body.questions || [];
+  if (!questions.length) {
+    if (job.interviewConfig?.customQuestions?.length) {
+      questions = job.interviewConfig.customQuestions.map((q) => q.question);
+    } else {
+      const generated = await generateInterviewQuestions(recruiterId, jobId, { count: 10 }, req);
+      questions = generated.map((q) => q.question);
+    }
+  } else {
+    questions = questions.map((q) => (typeof q === "string" ? q : q.question)).filter(Boolean);
+  }
+
+  let interview = null;
+  if (app.aiInterviewId) {
+    interview = await Interview.findById(app.aiInterviewId);
+  }
+  if (!interview) {
+    interview = await Interview.create({
+      userId: app.userId,
+      jobId: job._id,
+      applicationId: app._id,
+      recruiterId,
+      jobTitle: job.title,
+      jobTopic: job.role,
+      questions,
+      difficulty: body.difficulty || job.interviewConfig?.difficulty || "medium",
+      interviewType: body.interviewType || job.interviewConfig?.interviewType || "technical",
+      status: "pending",
+    });
+    app.aiInterviewId = interview._id;
+  } else {
+    interview.questions = questions;
+    interview.status = "pending";
+    await interview.save();
+  }
+
+  await pipelineService.moveApplication(app, "ai_interview", recruiterId, "AI Interview invitation sent");
+
+  const { sendNotification } = require("../../../utils/notificationService");
+  try {
+    await sendNotification(
+      app.userId,
+      "AI Interview Invitation 🎯",
+      `You have been invited to an AI-powered real-time interview for "${job.title}". Complete it at your convenience.`,
+      "interview",
+      "🎯"
+    );
+  } catch (e) {
+    console.error("Failed to notify user for AI interview", e);
+  }
+
+  logRecruiterAction(req, "AI_INTERVIEW_SENT", "SUCCESS", { applicationId, interviewId: interview._id });
+  return { interview, application: app };
+};
+
+const getAIInterviewReport = async (recruiterId, applicationId) => {
+  const app = await JobApplication.findOne({ _id: applicationId, recruiterId })
+    .populate("userId", "fullName email profilePic college degree experienceYears skills location bio")
+    .populate("jobId", "title role requiredSkills")
+    .populate("aiInterviewId")
+    .lean();
+
+  if (!app) throw new NotFoundError("Application not found");
+
+  const interview = app.aiInterviewId;
+  const report = app.aiInterviewReport?.overallScore
+    ? app.aiInterviewReport
+    : interview?.aiReport?.overallScore
+    ? interview.aiReport
+    : {
+        overallScore: app.aiInterviewScore || interview?.totalScore || 0,
+        technicalScore: 0,
+        problemSolvingScore: 0,
+        communicationScore: 0,
+        answerQualityScore: 0,
+        strengths: [],
+        weaknesses: [],
+        recommendation: interview?.status === "completed" ? "Completed" : "Pending",
+        summary: interview?.status === "completed" ? "Interview submitted." : "Candidate has not completed the AI interview yet.",
+      };
+
   return {
-    conversion: {
-      matchedToAssessment: Math.round((apps.filter((a) => !["matched"].includes(a.status)).length / total) * 100),
-      assessmentToShortlist: Math.round((apps.filter((a) => ["shortlisted", "interview", "hired", "selected", "offered"].includes(a.status)).length / total) * 100),
-      shortlistToHire: Math.round((apps.filter((a) => a.status === "hired").length / Math.max(1, apps.filter((a) => a.status === "shortlisted").length)) * 100),
+    application: app,
+    candidate: app.userId,
+    job: app.jobId,
+    interview,
+    report,
+    transcript: interview?.answers || [],
+  };
+};
+
+const handleBulkAction = async (recruiterId, { applicationIds = [], action, stage, feedback, options = {} }, req) => {
+  if (!Array.isArray(applicationIds) || applicationIds.length === 0) {
+    throw new BadRequestError("No candidates selected");
+  }
+
+  const results = [];
+  let successCount = 0;
+  let failCount = 0;
+
+  for (const appId of applicationIds) {
+    try {
+      const app = await JobApplication.findOne({ _id: appId, recruiterId });
+      if (!app) {
+        results.push({ id: appId, success: false, error: "Not found or unauthorized" });
+        failCount++;
+        continue;
+      }
+
+      if (action === "shortlist") {
+        await updateApplicationStatus(recruiterId, appId, "shortlisted", feedback, req);
+      } else if (action === "reject") {
+        await updateApplicationStatus(recruiterId, appId, "rejected", feedback, req);
+      } else if (action === "move_stage") {
+        if (!stage) throw new BadRequestError("Target stage required");
+        await movePipeline(recruiterId, appId, stage, feedback || "Bulk stage move", req);
+      } else if (action === "send_assessment") {
+        if (app.assessmentId) {
+          results.push({ id: appId, success: false, error: "Assessment already sent" });
+          failCount++;
+          continue;
+        }
+        await sendAssessment(recruiterId, app.jobId, appId, options, req);
+      } else if (action === "send_ai_interview") {
+        await sendAIInterview(recruiterId, app.jobId, appId, options, req);
+      } else {
+        throw new BadRequestError(`Unknown action: ${action}`);
+      }
+
+      results.push({ id: appId, success: true });
+      successCount++;
+    } catch (err) {
+      results.push({ id: appId, success: false, error: err.message || "Failed" });
+      failCount++;
+    }
+  }
+
+  return { successCount, failCount, total: applicationIds.length, results };
+};
+
+const updateJobAssessmentConfig = async (recruiterId, jobId, assessmentConfig, req) => {
+  const job = await Job.findOne({ _id: jobId, recruiterId });
+  if (!job) throw new NotFoundError("Job not found");
+
+  job.assessmentConfig = {
+    ...job.assessmentConfig.toObject?.() || job.assessmentConfig,
+    ...assessmentConfig,
+  };
+  await job.save();
+  logRecruiterAction(req, "ASSESSMENT_CONFIG_UPDATED", "SUCCESS", { jobId });
+  return job;
+};
+
+const getAnalytics = async (recruiterId) => {
+  const [jobs, apps, assessments, interviews] = await Promise.all([
+    Job.find({ recruiterId }).lean(),
+    JobApplication.find({ recruiterId }).lean(),
+    Assessment.find({ recruiterId }).lean(),
+    Interview.find({ recruiterId }).lean(),
+  ]);
+
+  const totalApps = apps.length;
+  const activeJobs = jobs.filter((j) => PUBLISHED_STATUSES.includes(j.status)).length;
+
+  const funnel = {
+    applied: apps.filter((a) => ["applied", "matched"].includes(a.status) || a.source === "candidate_applied").length,
+    matched: apps.filter((a) => a.status === "matched" || a.matchScore > 0).length,
+    assessmentSent: apps.filter((a) => ["assessment_sent", "assessment_in_progress", "assessment_completed"].includes(a.status) || a.assessmentId).length,
+    assessmentCompleted: assessments.filter((a) => a.status === "completed").length,
+    shortlisted: apps.filter((a) => ["shortlisted", "ai_interview", "interview", "offered", "hired"].includes(a.status)).length,
+    aiInterviewSent: apps.filter((a) => a.status === "ai_interview" || a.aiInterviewId).length,
+    aiInterviewCompleted: interviews.filter((i) => i.status === "completed").length,
+    manualInterview: apps.filter((a) => a.status === "interview").length,
+    offered: apps.filter((a) => ["offered", "hired"].includes(a.status)).length,
+    hired: apps.filter((a) => a.status === "hired").length,
+    rejected: apps.filter((a) => a.status === "rejected").length,
+  };
+
+  const completedAssessments = assessments.filter((a) => a.status === "completed");
+  const passedAssessments = completedAssessments.filter((a) => (a.overallScore || 0) >= 60);
+  const completedInterviews = interviews.filter((i) => i.status === "completed");
+  const avgInterviewScore = completedInterviews.length
+    ? Math.round(completedInterviews.reduce((sum, i) => sum + (i.aiReport?.overallScore || i.totalScore || 0), 0) / completedInterviews.length)
+    : 0;
+
+  const assessmentCompletionRate = funnel.assessmentSent > 0
+    ? Math.round((funnel.assessmentCompleted / funnel.assessmentSent) * 100)
+    : 0;
+
+  const assessmentPassRate = completedAssessments.length > 0
+    ? Math.round((passedAssessments.length / completedAssessments.length) * 100)
+    : 0;
+
+  const aiInterviewCompletionRate = funnel.aiInterviewSent > 0
+    ? Math.round((funnel.aiInterviewCompleted / funnel.aiInterviewSent) * 100)
+    : 0;
+
+  const shortlistRate = totalApps > 0
+    ? Math.round((funnel.shortlisted / totalApps) * 100)
+    : 0;
+
+  const hireRate = totalApps > 0
+    ? Math.round((funnel.hired / totalApps) * 100)
+    : 0;
+
+  return {
+    metrics: {
+      activeJobs,
+      totalJobs: jobs.length,
+      totalCandidates: totalApps,
+      assessmentCompletionRate,
+      assessmentPassRate,
+      aiInterviewCompletionRate,
+      averageInterviewScore: avgInterviewScore,
+      shortlistRate,
+      hireRate,
+      manualInterviewRate: funnel.shortlisted > 0 ? Math.round((funnel.manualInterview / funnel.shortlisted) * 100) : 0,
+      timeToHireAvgDays: 14,
     },
-    byStatus: apps.reduce((acc, a) => { acc[a.status] = (acc[a.status] || 0) + 1; return acc; }, {}),
+    funnel,
+    conversion: {
+      appliedToMatched: totalApps ? Math.round((funnel.matched / totalApps) * 100) : 0,
+      matchedToAssessment: funnel.matched ? Math.round((funnel.assessmentSent / funnel.matched) * 100) : 0,
+      assessmentToShortlist: funnel.assessmentCompleted ? Math.round((funnel.shortlisted / funnel.assessmentCompleted) * 100) : 0,
+      shortlistToAiInterview: funnel.shortlisted ? Math.round((funnel.aiInterviewSent / funnel.shortlisted) * 100) : 0,
+      aiInterviewToOffer: funnel.aiInterviewCompleted ? Math.round((funnel.offered / funnel.aiInterviewCompleted) * 100) : 0,
+      offerToHire: funnel.offered ? Math.round((funnel.hired / funnel.offered) * 100) : 0,
+    },
+    byStatus: apps.reduce((acc, a) => {
+      acc[a.status] = (acc[a.status] || 0) + 1;
+      return acc;
+    }, {}),
   };
 };
 
@@ -350,6 +630,11 @@ module.exports = {
   sendAssessment,
   updateApplicationStatus,
   generatePreviewQuestions,
+  generateInterviewQuestions,
+  sendAIInterview,
+  getAIInterviewReport,
+  handleBulkAction,
+  updateJobAssessmentConfig,
   getShortlisted,
   getAnalytics,
 };

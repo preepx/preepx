@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import HeroSection from "@/components/landing/HeroSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import JourneysSection from "@/components/landing/JourneysSection";
@@ -10,14 +11,13 @@ import PricingSection from "@/components/landing/PricingSection";
 import FaqSection from "@/components/landing/FaqSection";
 import CtaSection from "@/components/landing/CtaSection";
 import LandingFooter from "@/components/landing/LandingFooter";
-import RecruiterComingSoonModal from "@/components/landing/RecruiterComingSoonModal";
 import '@/styles/Dashboard.css';
 
 function Dashboard() {
-  const [showRecruiterModal, setShowRecruiterModal] = useState(false);
+  const navigate = useNavigate();
 
   const handleRecruiterClick = () => {
-    setShowRecruiterModal(true);
+    navigate("/auth?role=recruiter");
   };
 
   return (
@@ -33,11 +33,6 @@ function Dashboard() {
       <FaqSection />
       <CtaSection onRecruiterClick={handleRecruiterClick} />
       <LandingFooter onRecruiterClick={handleRecruiterClick} />
-
-      <RecruiterComingSoonModal
-        isOpen={showRecruiterModal}
-        onClose={() => setShowRecruiterModal(false)}
-      />
     </div>
   );
 }

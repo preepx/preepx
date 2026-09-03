@@ -68,9 +68,21 @@ const jobSchema = new mongoose.Schema(
     assessmentConfig: {
       mcqCount: { type: Number, default: 20 },
       codingCount: { type: Number, default: 2 },
+      durationMinutes: { type: Number, default: 60 },
+      passingScore: { type: Number, default: 60 },
       useCustomQuestions: { type: Boolean, default: false },
       customMcqQuestions: [customMcqSchema],
       customCodingQuestions: [customCodingSchema],
+    },
+    interviewConfig: {
+      interviewType: { type: String, enum: ["technical", "behavioral", "mixed"], default: "technical" },
+      difficulty: { type: String, enum: ["easy", "medium", "hard"], default: "medium" },
+      questionCount: { type: Number, default: 10 },
+      customQuestions: [{
+        question: { type: String, required: true },
+        expectedPoints: { type: String, default: "" },
+        difficulty: { type: String, default: "medium" },
+      }],
     },
   },
   { timestamps: true }

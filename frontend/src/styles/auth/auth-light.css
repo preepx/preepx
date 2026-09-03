@@ -139,3 +139,13 @@
 [data-theme="light"] .auth-otp-sub {
   color: #64748b;
 }
+
+[data-theme="light"] .auth-captcha-col label {
+  color: #475569;
+}
+
+[data-theme="light"] .auth-captcha-wrapper,
+[data-theme="light"] .auth-captcha-wrapper.auth-captcha-wrapper-full {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}

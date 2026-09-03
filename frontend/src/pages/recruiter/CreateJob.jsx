@@ -128,8 +128,9 @@ export default function CreateJob() {
         },
       };
       const job = isEdit ? await updateJob(jobId, payload) : await createJob(payload);
+      const targetJobId = job?._id || jobId;
       notify.success(isEdit ? "Job updated successfully!" : (type === "published" ? "Job published successfully!" : "Job draft saved successfully!"));
-      navigate(`/recruiter/jobs/${job._id || jobId}`);
+      navigate(`/recruiter/assessments?tab=builder&jobId=${targetJobId}`);
     } catch (err) {
       notify.error(err.response?.data?.message || `Failed to ${isEdit ? "update" : "create"} job`);
     } finally {

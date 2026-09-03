@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Users, Send, CheckCircle, XCircle, Sparkles, ChevronLeft, Star, FileText } from "lucide-react";
+import { Users, Send, CheckCircle, XCircle, Sparkles, ChevronLeft, Star, FileText, Layers } from "lucide-react";
+import Swal from "sweetalert2";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
   getJob, getApplications, runAutoMatch, sendAssessment,
@@ -58,11 +59,22 @@ export default function RecruiterJobDetail() {
   };
 
   const handleSendAssessment = async (appId) => {
+    const confirm = await Swal.fire({
+      title: "Send Technical Assessment?",
+      text: "Send assessment with 20 MCQ questions and 2 coding challenges to this candidate?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "var(--primary, #6366f1)",
+      cancelButtonColor: "#64748b",
+      confirmButtonText: "Yes, Send Assessment",
+      cancelButtonText: "Cancel",
+    });
+    if (!confirm.isConfirmed) return;
+
     try {
       const preview = await generateQuestions(jobId);
-      if (!window.confirm("Send assessment with AI-generated questions (20 MCQ + 2 coding)?")) return;
       await sendAssessment(jobId, appId, { recruiterApproved: true, approvedQuestions: preview });
-      notify.success("Assessment sent!");
+      notify.success("Assessment sent to candidate!");
       load();
     } catch (err) {
       notify.error(err.response?.data?.message || "Failed to send assessment");
@@ -86,9 +98,14 @@ export default function RecruiterJobDetail() {
           <h1>{job.title}</h1>
           <p className="rx-muted" style={{ margin: "4px 0 0" }}>{job.role} · {job.location} · {(job.requiredSkills || job.skills || []).join(", ")}</p>
         </div>
-        <button type="button" className="rx-btn rx-btn-primary" onClick={handleMatch} disabled={matching}>
-          <Sparkles size={16} /> {matching ? "Matching..." : "Auto-Match"}
-        </button>
+        <div style={{ display: "flex", gap: 10 }}>
+          <Link to={`/recruiter/assessments?tab=builder&jobId=${jobId}`} className="rx-btn rx-btn-secondary">
+            <Layers size={16} /> Assessment Builder
+          </Link>
+          <button type="button" className="rx-btn rx-btn-primary" onClick={handleMatch} disabled={matching}>
+            <Sparkles size={16} /> {matching ? "Matching..." : "Auto-Match"}
+          </button>
+        </div>
       </div>
 
       <div className="rx-stats" style={{ marginBottom: 24 }}>

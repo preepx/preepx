@@ -31,16 +31,21 @@ router.post("/jobs/:jobId/match", hiringController.runAutoMatch);
 router.get("/jobs/:jobId/applications", hiringController.getApplications);
 router.get("/jobs/:jobId/pipeline", hiringController.getPipeline);
 router.post("/jobs/:jobId/generate-questions", hiringController.generateQuestions);
+router.post("/jobs/:jobId/generate-interview-questions", hiringController.generateInterviewQuestions);
 router.post("/jobs/:jobId/applications/:applicationId/send-assessment", hiringController.sendAssessment);
+router.post("/jobs/:jobId/applications/:applicationId/send-ai-interview", hiringController.sendAIInterview);
+router.put("/jobs/:jobId/assessment-config", hiringController.updateAssessmentConfig);
 
 router.get("/candidates", hiringController.discoverCandidates);
 router.get("/candidates/:applicationId", hiringController.getCandidateProfile);
 router.get("/shortlisted", hiringController.getShortlisted);
 
+router.post("/applications/bulk-action", hiringController.bulkAction);
 router.post("/applications/:applicationId/shortlist", hiringController.shortlist);
 router.post("/applications/:applicationId/reject", hiringController.reject);
 router.put("/applications/:applicationId/feedback", hiringController.addFeedback);
 router.patch("/applications/:applicationId/pipeline", validatePipelineMove, hiringController.movePipeline);
+router.get("/applications/:applicationId/ai-interview-report", hiringController.getAIInterviewReport);
 
 router.get("/assessments/:assessmentId/result", hiringController.getAssessmentResult);
 

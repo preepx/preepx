@@ -5,7 +5,7 @@ import notify from "@/utils/notify";
 import { showAppError } from "@/utils/appAlert";
 import { triggerAnnouncement } from "@/utils/announcement";
 import { User, Briefcase, X } from "lucide-react";
-import RecruiterComingSoonModal from "@/components/landing/RecruiterComingSoonModal";
+import { useTheme } from "@/hooks/useTheme";
 import {
   AuthHero,
   LoginForm,
@@ -37,13 +37,14 @@ const EMPTY_RECRUITER_REG = {
 function Auth({ defaultRole }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isDark } = useTheme();
+  const currentTheme = isDark ? "dark" : "light";
 
   // Role: candidate | recruiter
   const queryRole = new URLSearchParams(location.search).get("role");
   const isRecruiterPath = location.pathname.includes("/recruiter");
   const initialRole = defaultRole || (isRecruiterPath || queryRole === "recruiter" ? "recruiter" : "candidate");
   const [activeRole, setActiveRole] = useState(initialRole);
-  const [showRecruiterComingSoon, setShowRecruiterComingSoon] = useState(false);
 
   // Screen: "login" | "register" | "reg-otp" | "forgot-email" | "forgot-otp" | "forgot-newpass"
   const [screen, setScreen] = useState("login");
@@ -83,12 +84,12 @@ function Auth({ defaultRole }) {
 
   // Sync role state from props/query
   useEffect(() => {
-    if (queryRole === "recruiter" || isRecruiterPath) {
-      setShowRecruiterComingSoon(true);
-    } else if (queryRole === "candidate") {
+    if (queryRole === "recruiter" || isRecruiterPath || defaultRole === "recruiter") {
+      setActiveRole("recruiter");
+    } else if (queryRole === "candidate" || defaultRole === "candidate") {
       setActiveRole("candidate");
     }
-  }, [queryRole, isRecruiterPath]);
+  }, [queryRole, isRecruiterPath, defaultRole]);
 
   // Server warm-up ping and param handlers
   useEffect(() => {
@@ -116,14 +117,10 @@ function Auth({ defaultRole }) {
   const resetOtp = () => setOtp(["", "", "", "", "", ""]);
 
   const handleRoleChange = (role) => {
-    if (role === "recruiter") {
-      setShowRecruiterComingSoon(true);
-      return;
-    }
     setActiveRole(role);
     setScreen("login");
     resetOtp();
-    const targetUrl = "/auth?role=candidate";
+    const targetUrl = `/auth?role=${role}`;
     navigate(targetUrl, { replace: true });
   };
 
@@ -270,13 +267,25 @@ function Auth({ defaultRole }) {
 
   const handleRecruiterRegister = async (e) => {
     e.preventDefault();
+    if (recruiterReg.password.length < 6) {
+      showAppError("Password must be at least 6 characters.", "Password too short");
+      return;
+    }
     if (recruiterReg.password !== recruiterReg.confirmPassword) {
       showAppError("Passwords do not match", "Error");
       return;
     }
+    if (!captchaToken) {
+      showAppError("Please complete the CAPTCHA to prove you are human.", "CAPTCHA Required");
+      return;
+    }
     setLoading(true);
     try {
-      await API.post("/recruiter/send-otp", recruiterReg);
+      await API.post("/recruiter/send-otp", {
+        ...recruiterReg,
+        email: recruiterReg.email.trim().toLowerCase(),
+        captchaToken,
+      });
       setOtpEmail(recruiterReg.email.trim().toLowerCase());
       notify.success("OTP sent to your email!");
       resetOtp();
@@ -286,6 +295,8 @@ function Auth({ defaultRole }) {
       showAppError(err.response?.data?.message || "Registration failed", "Error");
     } finally {
       setLoading(false);
+      if (recaptchaRef.current) recaptchaRef.current.reset();
+      setCaptchaToken("");
     }
   };
 
@@ -418,9 +429,12 @@ function Auth({ defaultRole }) {
           </button>
 
           {/* ── LEFT BRANDING PANEL (Desktop only) ── */}
-          <AuthHero 
-            onRecruiterClick={() => setShowRecruiterComingSoon(true)} 
-            onClose={handleClose} 
+<AuthHero
+            onRecruiterClick={() => {
+              if (typeof handleRoleChange === "function") handleRoleChange("recruiter");
+              setShowRecruiterComingSoon(true);
+            }}
+            onClose={handleClose}
           />
 
           {/* ── RIGHT AUTH FORM CARD (Desktop & Mobile) ── */}
@@ -513,6 +527,7 @@ function Auth({ defaultRole }) {
                 setShowCandConfirmPass={setShowCandConfirmPass}
                 recaptchaRef={recaptchaRef}
                 setCaptchaToken={setCaptchaToken}
+                theme={currentTheme}
                 loading={loading}
                 onSubmit={handleCandidateRegister}
                 onGoogleLogin={handleGoogleLogin}
@@ -532,6 +547,9 @@ function Auth({ defaultRole }) {
                 setShowRecPass={setShowRecPass}
                 showRecConfirmPass={showRecConfirmPass}
                 setShowRecConfirmPass={setShowRecConfirmPass}
+                recaptchaRef={recaptchaRef}
+                setCaptchaToken={setCaptchaToken}
+                theme={currentTheme}
                 loading={loading}
                 onSubmit={handleRecruiterRegister}
                 onSwitchToLogin={() => {
@@ -567,6 +585,7 @@ function Auth({ defaultRole }) {
                 activeRole={activeRole}
                 recaptchaRef={recaptchaRef}
                 setCaptchaToken={setCaptchaToken}
+                theme={currentTheme}
                 loading={loading}
                 onSubmit={handleForgotEmailSubmit}
                 onBackToLogin={() => {
@@ -611,13 +630,6 @@ function Auth({ defaultRole }) {
             )}
           </div>
         </div>
-
-        {showRecruiterComingSoon && (
-          <RecruiterComingSoonModal
-            isOpen={showRecruiterComingSoon}
-            onClose={() => setShowRecruiterComingSoon(false)}
-          />
-        )}
       </div>
     </>
   );

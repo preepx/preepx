@@ -22,6 +22,21 @@ const interviewSchema = new mongoose.Schema(
     difficulty: { type: String, enum: ["easy", "medium", "hard"], default: "medium" },
     interviewType: { type: String, enum: ["technical", "behavioral", "mixed"], default: "mixed" },
     duration: { type: Number, default: 0 },
+    jobId: { type: mongoose.Schema.Types.ObjectId, ref: "Job" },
+    applicationId: { type: mongoose.Schema.Types.ObjectId, ref: "JobApplication" },
+    recruiterId: { type: mongoose.Schema.Types.ObjectId, ref: "Recruiter" },
+    aiReport: {
+      technicalScore: { type: Number, default: 0 },
+      problemSolvingScore: { type: Number, default: 0 },
+      communicationScore: { type: Number, default: 0 },
+      answerQualityScore: { type: Number, default: 0 },
+      overallScore: { type: Number, default: 0 },
+      strengths: [{ type: String }],
+      weaknesses: [{ type: String }],
+      recommendation: { type: String, default: "" },
+      summary: { type: String, default: "" },
+      completedAt: { type: Date },
+    },
   },
   { timestamps: true }
 );
