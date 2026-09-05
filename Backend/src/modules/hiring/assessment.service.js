@@ -5,13 +5,13 @@ const aiService = require("../../services/ai.service");
 const { sendNotification } = require("../../../utils/notificationService");
 const { NotFoundError, BadRequestError, ForbiddenError } = require("../../common/exceptions/customErrors");
 
-async function generateMcqQuestions(topic, count, req) {
+async function generateMcqQuestions(topic, count, req, customPrompt = "") {
   const allQuestions = [];
   let attempts = 0;
 
   while (allQuestions.length < count && attempts < 5) {
     const remaining = count - allQuestions.length;
-    const prompt = `Generate exactly ${remaining} multiple choice questions for a "${topic}" job role interview assessment.
+    let prompt = `Generate exactly ${remaining} multiple choice questions for a "${topic}" job role interview assessment.
 Provide 4 options for each. Format STRICTLY as JSON:
 {
   "questions": [
@@ -24,6 +24,10 @@ Provide 4 options for each. Format STRICTLY as JSON:
   ]
 }
 The correctAnswer must exactly match one option text.`;
+    
+    if (customPrompt) {
+      prompt += `\n\nSpecific Requirements / Focus Topic from Recruiter: ${customPrompt}`;
+    }
 
     const qData = await aiService.generateJson(prompt, { temperature: 0.7 }, req);
     let parsed = qData;
@@ -44,8 +48,8 @@ The correctAnswer must exactly match one option text.`;
   }));
 }
 
-async function generateCodingQuestions(role, count, req) {
-  const prompt = `Generate exactly ${count} medium difficulty coding interview questions for a "${role}" role.
+async function generateCodingQuestions(role, count, req, customPrompt = "") {
+  let prompt = `Generate exactly ${count} medium difficulty coding interview questions for a "${role}" role.
 Return JSON:
 {
   "questions": [
@@ -56,6 +60,10 @@ Return JSON:
     }
   ]
 }`;
+
+  if (customPrompt) {
+    prompt += `\n\nSpecific Requirements / Focus Topic from Recruiter: ${customPrompt}`;
+  }
 
   const data = await aiService.generateJson(prompt, { temperature: 0.7 }, req);
   let parsed = data.questions || data.data || (Array.isArray(data) ? data : []);
@@ -73,20 +81,24 @@ Return JSON:
   }));
 }
 
-async function generateQuestionsForJob(job, req) {
+async function generateQuestionsForJob(job, options = {}, req = null) {
   const config = job.assessmentConfig || {};
-  const mcqCount = config.mcqCount || 20;
-  const includeCoding = config.includeCoding !== false && config.codingCount !== 0;
-  const codingCount = includeCoding ? (config.codingCount || 2) : 0;
+  const type = options.assessmentType || config.assessmentType || "hybrid";
+  
+  const mcqCount = options.mcqCount ?? config.mcqCount ?? 20;
+  const codingCount = options.codingCount ?? config.codingCount ?? 2;
+  
+  const doMcq = type === "mcq_only" || type === "hybrid";
+  const doCoding = type === "coding_only" || type === "hybrid";
 
-  if (config.useCustomQuestions) {
+  if (config.useCustomQuestions && !options.forceGenerate) {
     return {
-      mcqQuestions: (config.customMcqQuestions || []).map((q) => ({
+      mcqQuestions: doMcq ? (config.customMcqQuestions || []).map((q) => ({
         ...q,
         userAnswer: null,
         isCorrect: null,
-      })),
-      codingQuestions: includeCoding
+      })) : [],
+      codingQuestions: doCoding
         ? (config.customCodingQuestions || []).map((q) => ({
             title: q.title,
             description: q.description,
@@ -101,9 +113,10 @@ async function generateQuestionsForJob(job, req) {
     };
   }
 
+  const customPrompt = options.prompt || "";
   const [mcqQuestions, codingQuestions] = await Promise.all([
-    generateMcqQuestions(job.role, mcqCount, req),
-    includeCoding ? generateCodingQuestions(job.role, codingCount, req) : Promise.resolve([]),
+    doMcq && mcqCount > 0 ? generateMcqQuestions(job.role, mcqCount, req, customPrompt) : Promise.resolve([]),
+    doCoding && codingCount > 0 ? generateCodingQuestions(job.role, codingCount, req, customPrompt) : Promise.resolve([]),
   ]);
 
   return { mcqQuestions, codingQuestions };

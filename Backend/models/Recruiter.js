@@ -18,6 +18,10 @@ const recruiterSchema = mongoose.Schema(
     },
     onboardingCompleted: { type: Boolean, default: false },
     profileComplete: { type: Boolean, default: false },
+    planSlug: { type: String, default: null },
+    planName: { type: String, default: null },
+    planStatus: { type: String, default: "none" },
+    planExpiresAt: { type: Date, default: null },
     resetPasswordOtp: { type: String },
     resetPasswordExpires: { type: Date },
     notifications: [{

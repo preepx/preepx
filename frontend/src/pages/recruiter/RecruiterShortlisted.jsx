@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import { getShortlisted, bulkCandidateAction, getJobs } from "@/services/recruiterAPI";
 import { exportCandidatesToCSV } from "@/utils/exportCSV";
-import Loader from "@/components/Loader";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import notify from "@/utils/notify";
 import EmptyState from "@/components/recruiter/EmptyState";
 import SendTestModal from "@/components/recruiter/SendTestModal";
@@ -117,7 +117,7 @@ export default function RecruiterShortlisted() {
       </div>
 
       {loading ? (
-        <Loader />
+        <DashboardSkeleton />
       ) : list.length === 0 ? (
         <div className="rx-card">
           <EmptyState

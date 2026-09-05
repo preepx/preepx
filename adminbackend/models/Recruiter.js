@@ -14,6 +14,10 @@ const recruiterSchema = mongoose.Schema(
     onboardingStep: { type: String, default: "profile" },
     onboardingCompleted: { type: Boolean, default: false },
     profileComplete: { type: Boolean, default: false },
+    planSlug: { type: String, default: null },
+    planName: { type: String, default: null },
+    planStatus: { type: String, default: "none" },
+    planExpiresAt: { type: Date, default: null },
   },
   { timestamps: true }
 );

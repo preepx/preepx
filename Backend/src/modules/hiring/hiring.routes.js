@@ -56,5 +56,8 @@ router.patch("/interviews/:interviewId", hiringController.updateInterview);
 
 router.get("/billing", hiringController.getBilling);
 router.post("/billing/select-plan", hiringController.selectPlan);
+router.post("/billing/create-order", hiringController.createBillingOrder);
+router.post("/billing/verify-payment", hiringController.verifyBillingPayment);
+router.post("/billing/contact-sales", hiringController.contactSales);
 
 module.exports = router;

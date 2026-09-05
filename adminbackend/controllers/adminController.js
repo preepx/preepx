@@ -76,14 +76,21 @@ const getDashboardStats = async (req, res) => {
     const recentUsers = await User.find().select("fullName email profilePic createdAt").sort({ createdAt: -1 }).limit(5);
     const recentTransactions = await WalletTransaction.find().populate("userId", "fullName email").sort({ createdAt: -1 }).limit(5);
 
-    res.json({
-      totalUsers,
-      revenueLast7Days: totalRevenue,
-      coinsSoldLast7Days: totalCoinsSold,
-      lifetimeRevenue,
-      recentUsers,
-      recentTransactions
-    });
+    const RecruiterPayment = require("../../Backend/models/RecruiterPayment");
+    const Recruiter = require("../models/Recruiter");
+
+    let recruiterRevenue = 0;
+    try {
+      const recStats = await RecruiterPayment.aggregate([
+        { $match: { status: "completed" } },
+        { $group: { _id: null, total: { $sum: "$amountInr" } } },
+      ]);
+      recruiterRevenue = recStats[0]?.total || 0;
+    } catch (e) {
+      recruiterRevenue = 0;
+    }
+
+    const totalRecruiters = await Recruiter.countDocuments();
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }

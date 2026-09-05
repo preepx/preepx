@@ -55,10 +55,10 @@ export default function TakeAssessment() {
           setResult(data);
         } else if (data.status === "mcq_done" || data.currentStep === "coding") {
           setStep("coding");
-          setTimeLeft(data.assessmentConfig?.durationMinutes ? data.assessmentConfig.durationMinutes * 60 : 3600);
+          setTimeLeft(data.assessmentConfig?.codingDurationMinutes ? data.assessmentConfig.codingDurationMinutes * 60 : 2700);
         } else if (data.status === "in_progress") {
           setStep("mcq");
-          setTimeLeft(data.assessmentConfig?.durationMinutes ? data.assessmentConfig.durationMinutes * 60 : 3600);
+          setTimeLeft(data.assessmentConfig?.mcqDurationMinutes ? data.assessmentConfig.mcqDurationMinutes * 60 : 1800);
         }
       })
       .catch(() => notify.error("Assessment not found"))
@@ -85,12 +85,70 @@ export default function TakeAssessment() {
     return () => clearInterval(timerRef.current);
   }, [step]);
 
+  // Anti-cheat: Auto-submit on tab switch / minimize / close
+  const stateRef = useRef({});
+  useEffect(() => {
+    stateRef.current = { step, mcqIndex, answers, codingIndex, code, language, startTime: startTime.current };
+  }, [step, mcqIndex, answers, codingIndex, code, language]);
+
+  useEffect(() => {
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === "hidden") {
+        const current = stateRef.current;
+        if (current.step === "mcq" || current.step === "coding") {
+          notify.error("Tab switch detected! Auto-submitting assessment...");
+          
+          try {
+            if (current.step === "mcq" && assessment?.mcqQuestions) {
+              const answerArr = assessment.mcqQuestions.map((_, i) => current.answers[i] || "");
+              const res = await submitMcq(id, answerArr);
+              if (res?.completed || res?.currentStep === "done" || !assessment.codingQuestions || assessment.codingQuestions.length === 0) {
+                const finalResult = await completeAssessment(id).catch(() => res);
+                setResult(finalResult || res);
+                setStep("result");
+              } else {
+                setStep("coding");
+                setCodingIndex(0);
+                startTime.current = Date.now();
+                setTimeLeft(assessment?.assessmentConfig?.codingDurationMinutes ? assessment.assessmentConfig.codingDurationMinutes * 60 : 2700);
+              }
+            } else if (current.step === "coding") {
+              const timeSpent = Math.round((Date.now() - current.startTime) / 1000);
+              await submitCoding(id, current.codingIndex, { code: current.code, language: current.language, timeSpentSecs: timeSpent });
+              const finalResult = await completeAssessment(id);
+              setResult(finalResult);
+              setStep("result");
+            }
+          } catch (err) {
+            console.error("Auto-submit failed", err);
+          }
+        }
+      }
+    };
+
+    const handleBeforeUnload = (e) => {
+      if (stateRef.current.step === "mcq" || stateRef.current.step === "coding") {
+         handleVisibilityChange();
+         e.preventDefault();
+         e.returnValue = "Assessment will be auto-submitted if you leave.";
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [id, assessment]);
+
   const handleStart = async () => {
     setSubmitting(true);
     try {
       await startAssessment(id);
       setStep("mcq");
-      setTimeLeft(assessment?.assessmentConfig?.durationMinutes ? assessment.assessmentConfig.durationMinutes * 60 : 3600);
+      setTimeLeft(assessment?.assessmentConfig?.mcqDurationMinutes ? assessment.assessmentConfig.mcqDurationMinutes * 60 : 1800);
       startTime.current = Date.now();
     } catch (err) {
       notify.error(err.response?.data?.message || "Could not start");
@@ -122,6 +180,7 @@ export default function TakeAssessment() {
         setStep("coding");
         setCodingIndex(0);
         startTime.current = Date.now();
+        setTimeLeft(assessment?.assessmentConfig?.codingDurationMinutes ? assessment.assessmentConfig.codingDurationMinutes * 60 : 2700);
         notify.success("MCQ submitted! Starting coding round.");
       }
     } catch (err) {

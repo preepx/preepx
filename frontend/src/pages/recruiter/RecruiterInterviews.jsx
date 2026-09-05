@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Bot, Calendar, Video, CheckCircle2, Star, Clock, ExternalLink } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import { getInterviews, getJobs, getApplications } from "@/services/recruiterAPI";
-import Loader from "@/components/Loader";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import notify from "@/utils/notify";
 import '@/styles/RecruiterLayout.css';
 
@@ -60,7 +60,7 @@ export default function RecruiterInterviews() {
       </div>
 
       {loading ? (
-        <Loader />
+        <DashboardSkeleton />
       ) : activeTab === "ai" ? (
         /* AI Interviews List */
         aiApplications.length === 0 ? (

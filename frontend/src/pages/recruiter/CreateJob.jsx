@@ -4,6 +4,7 @@ import { Briefcase, MapPin, DollarSign, BrainCircuit, ListChecks, Save, Send, Tr
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import { createJob, getJob, updateJob, generateJobDetails } from "@/services/recruiterAPI";
 import notify from "@/utils/notify";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import '@/styles/RecruiterLayout.css';
 
 const EMPTY = {
@@ -178,6 +179,10 @@ export default function CreateJob() {
 
   return (
     <RecruiterLayout title={isEdit ? "Edit Job" : "Post a Job"}>
+      {initialLoading ? (
+        <DashboardSkeleton />
+      ) : (
+      <>
       <div className="rx-premium-form">
 
         {/* AI Auto-Fill Section */}
@@ -343,6 +348,8 @@ export default function CreateJob() {
           <Send size={16} /> {loading && submitType === "published" ? "Saving..." : (isEdit ? "Update & Publish" : "Publish Job Live")}
         </button>
       </div>
+      </>
+      )}
     </RecruiterLayout>
   );
 }

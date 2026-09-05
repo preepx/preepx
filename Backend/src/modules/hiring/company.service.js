@@ -1,7 +1,5 @@
 const Company = require("../../../models/Company");
 const Recruiter = require("../../../models/Recruiter");
-const SubscriptionPlan = require("../../../models/SubscriptionPlan");
-const RecruiterSubscription = require("../../../models/RecruiterSubscription");
 const { NotFoundError, BadRequestError, ForbiddenError } = require("../../common/exceptions/customErrors");
 
 const getRecruiterContext = async (recruiterId) => {
@@ -129,29 +127,8 @@ const submitVerification = async (recruiterId) => {
 };
 
 const completeOnboarding = async (recruiterId, planSlug = "starter") => {
-  const recruiter = await getRecruiterContext(recruiterId);
-  let plan = await SubscriptionPlan.findOne({ slug: planSlug, isActive: true });
-  if (!plan) {
-    plan = await SubscriptionPlan.findOne({ isActive: true });
-  }
-  if (!plan) throw new BadRequestError("No subscription plan available");
-
-  await RecruiterSubscription.findOneAndUpdate(
-    { recruiterId },
-    {
-      recruiterId,
-      companyId: recruiter.companyId,
-      planId: plan._id,
-      status: "trial",
-      currentPeriodStart: new Date(),
-      currentPeriodEnd: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
-    },
-    { upsert: true, new: true }
-  );
-
-  recruiter.onboardingStep = "completed";
-  recruiter.onboardingCompleted = true;
-  await recruiter.save();
+  const billingService = require("./billing.service");
+  await billingService.startTrial(recruiterId, planSlug);
   return { onboardingCompleted: true };
 };
 
@@ -189,14 +166,8 @@ const completeProfileForJobs = async (recruiterId, data) => {
 };
 
 const seedPlansIfEmpty = async () => {
-  const count = await SubscriptionPlan.countDocuments();
-  if (count > 0) return;
-  await SubscriptionPlan.insertMany([
-    { name: "Starter", slug: "starter", priceInr: 2999, limits: { activeJobs: 3, candidateViews: 100, assessmentCredits: 20, aiMatching: true, aiInterviews: false, analytics: false } },
-    { name: "Growth", slug: "growth", priceInr: 5999, limits: { activeJobs: 10, candidateViews: 500, assessmentCredits: 100, aiMatching: true, aiInterviews: true, analytics: true } },
-    { name: "Pro", slug: "pro", priceInr: 11999, limits: { activeJobs: 25, candidateViews: 2000, assessmentCredits: 500, aiMatching: true, aiInterviews: true, analytics: true } },
-    { name: "Enterprise", slug: "enterprise", priceInr: 0, limits: { activeJobs: 999, candidateViews: 99999, assessmentCredits: 9999, aiMatching: true, aiInterviews: true, analytics: true } },
-  ]);
+  const billingService = require("./billing.service");
+  await billingService.syncRecruiterPlans();
 };
 
 module.exports = {

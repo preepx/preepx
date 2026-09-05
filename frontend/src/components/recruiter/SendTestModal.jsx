@@ -34,7 +34,17 @@ export default function SendTestModal({
 
     setSending(true);
     try {
-      const preview = await generateQuestions(selectedJobId);
+      const selectedJob = jobs?.find(j => j._id === selectedJobId);
+      let preview;
+      if (selectedJob && selectedJob.assessmentConfig?.useCustomQuestions) {
+        preview = {
+          mcqQuestions: selectedJob.assessmentConfig.customMcqQuestions || [],
+          codingQuestions: selectedJob.assessmentConfig.customCodingQuestions || []
+        };
+      } else {
+        preview = await generateQuestions(selectedJobId);
+      }
+
       await sendAssessment(targetJobId, targetApp._id, {
         recruiterApproved: true,
         approvedQuestions: preview,

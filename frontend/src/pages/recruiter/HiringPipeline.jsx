@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import { getJobs, getPipeline, movePipeline } from "@/services/recruiterAPI";
-import Loader from "@/components/Loader";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import notify from "@/utils/notify";
 import SendTestModal from "@/components/recruiter/SendTestModal";
 import '@/styles/RecruiterLayout.css';
@@ -151,7 +151,7 @@ export default function HiringPipeline() {
       </div>
 
       {loading ? (
-        <Loader />
+        <DashboardSkeleton />
       ) : !pipeline ? (
         <div className="rx-card rx-empty">Please select a job to view applications.</div>
       ) : (

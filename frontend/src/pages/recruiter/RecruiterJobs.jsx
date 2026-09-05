@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { PlusCircle } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import { getJobs, changeJobStatus, deleteJob } from "@/services/recruiterAPI";
-import Loader from "@/components/Loader";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import EmptyState from "@/components/recruiter/EmptyState";
 import { Briefcase } from "lucide-react";
 import notify from "@/utils/notify";
@@ -35,12 +35,17 @@ export default function RecruiterJobs() {
     }
   };
 
-  if (loading) return <RecruiterLayout title="Jobs"><Loader /></RecruiterLayout>;
+  if (loading) return <RecruiterLayout title="Jobs"><DashboardSkeleton /></RecruiterLayout>;
 
   return (
     <RecruiterLayout title="Jobs">
       <div className="rx-section-head">
-        <div />
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <h2 style={{ margin: 0, color: "var(--text)" }}>My Jobs</h2>
+          <span className="rx-badge rx-badge-blue" style={{ fontSize: "14px", padding: "4px 10px" }}>
+            {jobs.length} Uploaded
+          </span>
+        </div>
         <Link to="/recruiter/jobs/new" className="rx-btn rx-btn-primary"><PlusCircle size={16} /> Post Job</Link>
       </div>
 

@@ -231,6 +231,9 @@
 .rx-main {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .rx-header {
@@ -326,7 +329,7 @@
 .rx-profile-text strong { display: block; font-size: 13px; color: var(--text); }
 .rx-profile-text span { display: block; font-size: 11px; color: var(--text-muted); }
 
-.rx-content { padding: 24px 28px 40px; }
+.rx-content { padding: 24px 28px 40px; flex: 1; width: 100%; box-sizing: border-box; overflow-x: hidden; }
 
 /* ── Shared components ── */
 .rx-stats {
@@ -683,4 +686,10 @@ select.rx-premium-input {
   border-radius: 4px;
 }
 
-
+@keyframes rx-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.rx-spin {
+  animation: rx-spin 1s linear infinite;
+}

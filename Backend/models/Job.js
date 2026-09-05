@@ -66,9 +66,11 @@ const jobSchema = new mongoose.Schema(
       default: "draft",
     },
     assessmentConfig: {
+      assessmentType: { type: String, enum: ["mcq_only", "coding_only", "hybrid"], default: "hybrid" },
       mcqCount: { type: Number, default: 20 },
       codingCount: { type: Number, default: 2 },
-      durationMinutes: { type: Number, default: 60 },
+      mcqDurationMinutes: { type: Number, default: 30 },
+      codingDurationMinutes: { type: Number, default: 45 },
       passingScore: { type: Number, default: 60 },
       useCustomQuestions: { type: Boolean, default: false },
       customMcqQuestions: [customMcqSchema],

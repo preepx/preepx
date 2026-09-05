@@ -18,7 +18,7 @@ import Swal from "sweetalert2";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import { discoverCandidates, getJobs, bulkCandidateAction } from "@/services/recruiterAPI";
 import { exportCandidatesToCSV } from "@/utils/exportCSV";
-import Loader from "@/components/Loader";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import notify from "@/utils/notify";
 import '@/styles/RecruiterLayout.css';
 
@@ -231,7 +231,7 @@ export default function CandidateDiscovery() {
       </div>
 
       {loading ? (
-        <Loader />
+        <DashboardSkeleton />
       ) : candidates.length === 0 ? (
         <div className="rx-card rx-empty">
           No candidates found for this job. Publish the job to attract applicants or run auto-matching.

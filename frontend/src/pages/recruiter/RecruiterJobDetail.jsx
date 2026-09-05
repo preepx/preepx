@@ -7,7 +7,7 @@ import {
   getJob, getApplications, runAutoMatch, sendAssessment,
   shortlistCandidate, rejectCandidate, getAssessmentResult, generateQuestions
 } from "@/services/recruiterAPI";
-import Loader from "@/components/Loader";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import notify from "@/utils/notify";
 import '@/styles/RecruiterLayout.css';
 
@@ -72,7 +72,15 @@ export default function RecruiterJobDetail() {
     if (!confirm.isConfirmed) return;
 
     try {
-      const preview = await generateQuestions(jobId);
+      let preview;
+      if (job.assessmentConfig?.useCustomQuestions) {
+        preview = {
+          mcqQuestions: job.assessmentConfig.customMcqQuestions || [],
+          codingQuestions: job.assessmentConfig.customCodingQuestions || []
+        };
+      } else {
+        preview = await generateQuestions(jobId);
+      }
       await sendAssessment(jobId, appId, { recruiterApproved: true, approvedQuestions: preview });
       notify.success("Assessment sent to candidate!");
       load();
@@ -81,7 +89,7 @@ export default function RecruiterJobDetail() {
     }
   };
 
-  if (loading) return <RecruiterLayout title="Job Detail"><Loader /></RecruiterLayout>;
+  if (loading) return <RecruiterLayout title="Job Detail"><DashboardSkeleton /></RecruiterLayout>;
   if (!job) return <RecruiterLayout title="Job Detail"><p>Job not found</p></RecruiterLayout>;
 
   const applicants = apps.filter((a) => ["applied", "matched"].includes(a.status));

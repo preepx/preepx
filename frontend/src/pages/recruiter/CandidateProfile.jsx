@@ -37,7 +37,7 @@ import {
   movePipeline
 } from "@/services/recruiterAPI";
 import { getAssetUrl } from "@/utils/assetUrl";
-import Loader from "@/components/Loader";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import notify from "@/utils/notify";
 import '@/styles/RecruiterLayout.css';
 
@@ -78,13 +78,16 @@ export default function CandidateProfile() {
   const [generatingQuestions, setGeneratingQuestions] = useState(false);
   const [sendingAI, setSendingAI] = useState(false);
   const [newManualQ, setNewManualQ] = useState("");
+  const [showResumeModal, setShowResumeModal] = useState(false);
 
   const load = async () => {
     try {
-      const res = await getCandidateProfile(applicationId);
-      setData(res);
+      const [res, jList] = await Promise.all([
+        getCandidateProfile(applicationId),
+        getJobs().catch(() => []) // Fallback for jobs failure
+      ]);
 
-      const jList = await getJobs();
+      setData(res);
       setJobsList(jList || []);
       const appliedJobId = res.application.jobId._id || res.application.jobId;
       setSelectedAssessmentJobId(appliedJobId);
@@ -108,9 +111,21 @@ export default function CandidateProfile() {
   const handleConfirmSendAssessment = async () => {
     setSendingAssessment(true);
     try {
-      const jobIdToUse = selectedAssessmentJobId || data.application.jobId._id || data.application.jobId;
-      const preview = await generateQuestions(jobIdToUse);
-      await sendAssessment(jobIdToUse, applicationId, { recruiterApproved: true, approvedQuestions: preview });
+      const appliedJobId = data.application.jobId._id || data.application.jobId;
+      const templateJobId = selectedAssessmentJobId || appliedJobId;
+
+      const selectedJob = jobsList.find(j => j._id === templateJobId);
+      let preview;
+      if (selectedJob && selectedJob.assessmentConfig?.useCustomQuestions) {
+        preview = {
+          mcqQuestions: selectedJob.assessmentConfig.customMcqQuestions || [],
+          codingQuestions: selectedJob.assessmentConfig.customCodingQuestions || []
+        };
+      } else {
+        preview = await generateQuestions(templateJobId);
+      }
+
+      await sendAssessment(appliedJobId, applicationId, { recruiterApproved: true, approvedQuestions: preview });
       notify.success("Assessment sent to candidate successfully!");
       setShowAssessmentModal(false);
       load();
@@ -199,7 +214,7 @@ export default function CandidateProfile() {
     }
   };
 
-  if (loading) return <RecruiterLayout title="Candidate"><Loader /></RecruiterLayout>;
+  if (loading) return <RecruiterLayout title="Candidate"><DashboardSkeleton /></RecruiterLayout>;
   if (!data) return <RecruiterLayout title="Candidate"><p>Candidate not found</p></RecruiterLayout>;
 
   const { candidate, match, scores, application, job } = data;
@@ -212,38 +227,69 @@ export default function CandidateProfile() {
   return (
     <RecruiterLayout title="Candidate Profile">
       <style>{`
-        .cp-container { max-width: 1100px; margin: 0 auto; padding-bottom: 90px; }
+        .cp-container { width: 100%; box-sizing: border-box; padding-bottom: 100px; }
         .cp-back { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; margin-bottom: 24px; transition: color 0.2s; }
         .cp-back:hover { color: var(--primary); }
         
-        .cp-header { background: var(--surface); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 24px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.02); }
-        .cp-cover { height: 120px; background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent), color-mix(in srgb, var(--primary) 4%, transparent)); position: relative; }
-        .cp-badge-top { position: absolute; top: 20px; right: 24px; background: var(--surface); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 6px; border: 1px solid var(--border); }
+        .cp-header { background: var(--surface); border-radius: 24px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 24px; box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04); }
+        .cp-cover { height: 120px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.04)); position: relative; }
+        .cp-badge-top { position: absolute; top: 16px; right: 20px; background: var(--surface); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; align-items: center; gap: 6px; border: 1px solid var(--border); z-index: 5; }
         
-        .cp-header-content { padding: 0 32px 32px 32px; display: flex; justify-content: space-between; align-items: flex-end; margin-top: -40px; flex-wrap: wrap; gap: 24px; }
-        .cp-avatar { width: 96px; height: 96px; border-radius: 24px; background: var(--surface); border: 4px solid var(--surface); display: flex; justify-content: center; align-items: center; font-size: 36px; font-weight: 800; color: var(--primary); box-shadow: 0 8px 24px rgba(0,0,0,0.08); z-index: 2; position: relative; }
-        .cp-title { font-size: 28px; font-weight: 800; color: var(--text); margin: 16px 0 6px 0; letter-spacing: -0.5px; }
-        .cp-subtitle { display: flex; align-items: center; gap: 16px; color: var(--text-muted); font-size: 15px; font-weight: 500; flex-wrap: wrap; }
+        .cp-header-content { padding: 0 32px 32px 32px; display: flex; justify-content: space-between; align-items: flex-end; margin-top: -48px; flex-wrap: wrap; gap: 24px; position: relative; z-index: 10; }
+        .cp-avatar { width: 96px; height: 96px; border-radius: 24px; background: var(--surface); border: 4px solid var(--surface); display: flex; justify-content: center; align-items: center; font-size: 36px; font-weight: 800; color: var(--primary); box-shadow: 0 8px 24px rgba(0,0,0,0.08); z-index: 2; position: relative; flex-shrink: 0; }
+        .cp-title { font-size: 28px; font-weight: 800; color: var(--text); margin: 16px 0 6px 0; letter-spacing: -0.5px; text-align: left; }
+        .cp-subtitle { display: flex; align-items: center; gap: 16px; color: var(--text-muted); font-size: 14px; font-weight: 500; flex-wrap: wrap; text-align: left; }
         .cp-subtitle-item { display: flex; align-items: center; gap: 6px; }
         
-        .cp-score-block { text-align: right; }
-        .cp-score-val { font-size: 48px; font-weight: 900; color: var(--primary); line-height: 1; letter-spacing: -2px; }
-        .cp-score-label { font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; margin-top: 4px; }
+        .cp-score-block { text-align: right; flex-shrink: 0; margin-left: auto; }
+        .cp-score-val { font-size: 48px; font-weight: 900; color: var(--primary); line-height: 1; letter-spacing: -2px; display: flex; align-items: baseline; justify-content: flex-end; gap: 2px; }
+        .cp-score-label { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px; margin-top: 6px; }
 
         .cp-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
-        @media (min-width: 900px) { .cp-grid { grid-template-columns: 2fr 1fr; } }
+        @media (min-width: 1024px) { .cp-grid { grid-template-columns: 2fr 1fr; } }
         
-        .cp-card { background: var(--surface); border-radius: 24px; padding: 28px; border: 1px solid var(--border); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02); }
-        .cp-card-title { font-size: 18px; font-weight: 700; color: var(--text); margin: 0 0 20px 0; display: flex; align-items: center; gap: 10px; }
-        
-        .cp-actions-dock { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: color-mix(in srgb, var(--surface) 90%, transparent); backdrop-filter: blur(16px); padding: 10px 20px; border-radius: 100px; border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.15); display: flex; gap: 10px; z-index: 100; align-items: center; flex-wrap: wrap; }
-        .cp-btn { padding: 10px 20px; border-radius: 100px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: transform 0.2s, box-shadow 0.2s; white-space: nowrap; }
-        .cp-btn:hover { transform: translateY(-2px); }
-        .cp-btn-primary { background: var(--primary); color: #fff; box-shadow: 0 6px 16px color-mix(in srgb, var(--primary) 30%, transparent); }
-        .cp-btn-success { background: #10b981; color: #fff; box-shadow: 0 6px 16px rgba(16,185,129,0.3); }
-        .cp-btn-purple { background: #8b5cf6; color: #fff; box-shadow: 0 6px 16px rgba(139,92,246,0.3); }
-        .cp-btn-ghost { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
-        .cp-btn-danger { background: transparent; color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent); }
+        .cp-card { background: var(--surface); border-radius: 20px; padding: 24px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04); }
+        .cp-card-title { font-size: 17px; font-weight: 700; color: var(--text); margin: 0 0 18px 0; display: flex; align-items: center; gap: 10px; }
+
+        /* Floating dock — pinned to bottom-center of the page (full page, not viewport) */
+        .cp-actions-dock {
+          position: fixed;
+          bottom: 24px;
+          left: 50%;
+          transform: translateX(calc(-50% + 130px));
+          background: color-mix(in srgb, var(--surface) 95%, transparent);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          padding: 10px 18px;
+          border-radius: 100px;
+          border: 1px solid var(--border);
+          box-shadow: 0 8px 32px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.06);
+          display: flex;
+          gap: 8px;
+          z-index: 99;
+          align-items: center;
+          flex-wrap: wrap;
+        }
+        .rx-root.collapsed .cp-actions-dock {
+          transform: translateX(calc(-50% + 36px));
+        }
+        @media (max-width: 768px) {
+          .cp-actions-dock {
+            transform: translateX(-50%);
+            bottom: 12px;
+            padding: 8px 12px;
+            gap: 6px;
+            max-width: calc(100vw - 24px);
+          }
+        }
+
+        .cp-btn { padding: 9px 18px; border-radius: 100px; font-size: 13px; font-weight: 700; border: none; cursor: pointer; display: flex; align-items: center; gap: 7px; transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s; white-space: nowrap; }
+        .cp-btn:hover { transform: translateY(-1px); opacity: 0.92; }
+        .cp-btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 12px color-mix(in srgb, var(--primary) 35%, transparent); }
+        .cp-btn-success { background: #10b981; color: #fff; box-shadow: 0 4px 12px rgba(16,185,129,0.3); }
+        .cp-btn-purple { background: #8b5cf6; color: #fff; box-shadow: 0 4px 12px rgba(139,92,246,0.3); }
+        .cp-btn-ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+        .cp-btn-danger { background: color-mix(in srgb, var(--danger) 10%, transparent); color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 25%, transparent); }
       `}</style>
 
       <div className="cp-container">
@@ -259,7 +305,7 @@ export default function CandidateProfile() {
             </div>
           </div>
           <div className="cp-header-content">
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", flex: 1, minWidth: 300 }}>
               <div className="cp-avatar">{candidate.fullName?.[0] || "C"}</div>
               <h1 className="cp-title">{candidate.fullName}</h1>
               <div className="cp-subtitle">
@@ -297,7 +343,7 @@ export default function CandidateProfile() {
         <div className="cp-grid">
           {/* Left Column */}
           <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-            
+
             {/* AI INTERVIEW REPORT CARD (if completed or has scores) */}
             {report && (report.overallScore > 0 || report.recommendation !== "Pending") && (
               <div className="cp-card" style={{ border: "2px solid color-mix(in srgb, #8b5cf6 40%, var(--border))", background: "var(--surface)" }}>
@@ -460,16 +506,59 @@ export default function CandidateProfile() {
               <h3 className="cp-card-title"><FileText size={18} color="var(--primary)" /> Candidate Resume</h3>
               {resumeUrl ? (
                 <div>
-                  <a href={resumeUrl} target="_blank" rel="noreferrer" className="cp-btn cp-btn-ghost" style={{ display: "inline-flex", marginBottom: 16 }}>
-                    <ExternalLink size={16} /> Open {candidate.resumeFileName || "Resume PDF"}
-                  </a>
-                  <div style={{ padding: 8, background: "var(--bg)", borderRadius: 16, border: "1px solid var(--border)" }}>
-                    <iframe title="Candidate Resume" src={resumeUrl} style={{ width: "100%", height: 600, border: "none", borderRadius: 10, background: "#fff" }} />
+                  {/* Action buttons */}
+                  <div style={{ display: "flex", gap: 10, marginBottom: 20, flexWrap: "wrap" }}>
+                    <button
+                      type="button"
+                      className="cp-btn cp-btn-primary"
+                      onClick={() => setShowResumeModal(true)}
+                      style={{ flex: 1, justifyContent: "center" }}
+                    >
+                      <FileText size={16} /> View Resume
+                    </button>
+                    <a
+                      href={resumeUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="cp-btn cp-btn-ghost"
+                      style={{ flex: 1, justifyContent: "center" }}
+                    >
+                      <ExternalLink size={16} /> Open in New Tab
+                    </a>
+                  </div>
+
+                  {/* Preview thumbnail */}
+                  <div
+                    style={{
+                      background: "var(--bg)",
+                      borderRadius: 16,
+                      border: "1px solid var(--border)",
+                      padding: 32,
+                      textAlign: "center",
+                      cursor: "pointer",
+                      transition: "border-color 0.2s, box-shadow 0.2s",
+                    }}
+                    onClick={() => setShowResumeModal(true)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => e.key === "Enter" && setShowResumeModal(true)}
+                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--primary)"; e.currentTarget.style.boxShadow = "0 0 0 3px color-mix(in srgb, var(--primary) 12%, transparent)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--border)"; e.currentTarget.style.boxShadow = "none"; }}
+                  >
+                    <div style={{ width: 64, height: 80, margin: "0 auto 16px", background: "color-mix(in srgb, var(--primary) 10%, transparent)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center", border: "2px solid color-mix(in srgb, var(--primary) 20%, transparent)" }}>
+                      <FileText size={32} color="var(--primary)" />
+                    </div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: "var(--text)", marginBottom: 4 }}>
+                      {candidate.resumeFileName || "Resume.pdf"}
+                    </div>
+                    <div style={{ fontSize: 12, color: "var(--text-muted)" }}>Click to view full resume</div>
                   </div>
                 </div>
               ) : (
                 <div style={{ padding: 40, textAlign: "center", background: "var(--bg)", borderRadius: 16, border: "1px dashed var(--border)", color: "var(--text-muted)" }}>
-                  No resume PDF uploaded.
+                  <FileText size={40} style={{ marginBottom: 12, opacity: 0.3 }} />
+                  <div style={{ fontWeight: 600 }}>No resume uploaded</div>
+                  <div style={{ fontSize: 13, marginTop: 4 }}>Candidate hasn't uploaded a resume yet.</div>
                 </div>
               )}
             </div>
@@ -559,6 +648,82 @@ export default function CandidateProfile() {
           </button>
         )}
       </div>
+
+      {/* ─── Resume Viewer Modal ─── */}
+      {showResumeModal && resumeUrl && (
+        <div
+          className="rx-modal-overlay"
+          onClick={() => setShowResumeModal(false)}
+          style={{ zIndex: 300, padding: 0, alignItems: "stretch" }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              maxWidth: 900,
+              height: "100vh",
+              background: "var(--surface)",
+              borderRadius: 0,
+              overflow: "hidden",
+              margin: "0 auto",
+            }}
+          >
+            {/* Modal Header */}
+            <div style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "14px 20px",
+              borderBottom: "1px solid var(--border)",
+              background: "var(--surface)",
+              flexShrink: 0,
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <FileText size={20} color="var(--primary)" />
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 15, color: "var(--text)" }}>
+                    {candidate.resumeFileName || "Resume.pdf"}
+                  </div>
+                  <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{candidate.fullName}</div>
+                </div>
+              </div>
+              <div style={{ display: "flex", gap: 8 }}>
+                <a
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="cp-btn cp-btn-ghost"
+                  style={{ padding: "7px 14px" }}
+                >
+                  <ExternalLink size={15} /> Open in New Tab
+                </a>
+                <button
+                  type="button"
+                  className="cp-btn cp-btn-ghost"
+                  onClick={() => setShowResumeModal(false)}
+                  style={{ padding: "7px 14px" }}
+                >
+                  <XCircle size={15} /> Close
+                </button>
+              </div>
+            </div>
+
+            {/* PDF Embed */}
+            <iframe
+              title="Resume Viewer"
+              src={resumeUrl}
+              style={{
+                flex: 1,
+                width: "100%",
+                border: "none",
+                background: "#f8f8f8",
+              }}
+            />
+          </div>
+        </div>
+      )}
 
       {/* AI Interview Question Configuration Modal */}
       {showAIModal && (
@@ -774,7 +939,7 @@ export default function CandidateProfile() {
                 <div style={{ fontSize: 13, marginBottom: 12 }}>
                   Candidate: <strong>{candidate.fullName}</strong> ({candidate.email})
                 </div>
-                
+
                 <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", marginBottom: 6 }}>
                   SELECT ASSESSMENT TO SEND:
                 </div>

@@ -4,17 +4,23 @@ import {
   FileCheck,
   Plus,
   Trash2,
-  Edit3,
   MoveUp,
   MoveDown,
   Sparkles,
   Eye,
   Save,
-  CheckCircle2,
-  Clock,
-  Award,
   Layers,
-  Code
+  Clock,
+  Code,
+  Target,
+  FileText,
+  Hash,
+  Lightbulb,
+  Zap,
+  Settings,
+  List,
+  Loader2,
+  Edit
 } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
@@ -23,7 +29,7 @@ import {
   generateQuestions,
   updateAssessmentConfig
 } from "@/services/recruiterAPI";
-import Loader from "@/components/Loader";
+import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import notify from "@/utils/notify";
 import '@/styles/RecruiterLayout.css';
 
@@ -44,11 +50,15 @@ export default function RecruiterAssessments() {
   const [showPreview, setShowPreview] = useState(false);
 
   // Assessment Config Form
-  const [includeCoding, setIncludeCoding] = useState(true);
+  const [assessmentType, setAssessmentType] = useState("hybrid"); // "mcq_only", "coding_only", "hybrid"
+  const [mcqCountInput, setMcqCountInput] = useState(20);
+  const [codingCountInput, setCodingCountInput] = useState(2);
   const [mcqQuestions, setMcqQuestions] = useState([]);
   const [codingQuestions, setCodingQuestions] = useState([]);
-  const [durationMinutes, setDurationMinutes] = useState(60);
+  const [mcqDurationMinutes, setMcqDurationMinutes] = useState(30);
+  const [codingDurationMinutes, setCodingDurationMinutes] = useState(45);
   const [passingScore, setPassingScore] = useState(60);
+  const [aiPrompt, setAiPrompt] = useState("");
 
   // New Question Modal State
   const [showAddMcqModal, setShowAddMcqModal] = useState(false);
@@ -65,6 +75,9 @@ export default function RecruiterAssessments() {
     description: "",
     difficulty: "medium",
   });
+
+  const [editMcqIndex, setEditMcqIndex] = useState(null);
+  const [editCodingIndex, setEditCodingIndex] = useState(null);
 
   // Manager Modals State
   const [showMcqManagerModal, setShowMcqManagerModal] = useState(false);
@@ -83,18 +96,18 @@ export default function RecruiterAssessments() {
         populateJobConfig(targetJob);
       }
 
-      const all = [];
-      for (const job of (fetchedJobs || []).slice(0, 20)) {
-        const apps = await getApplications(job._id);
-        apps
-          .filter(
-            (a) =>
-              a.assessmentId ||
-              ["assessment_sent", "assessment_in_progress", "assessment_completed"].includes(a.status)
+      const jobsToFetch = (fetchedJobs || []).slice(0, 20);
+      const appsPromises = jobsToFetch.map(job => 
+        getApplications(job._id)
+          .then(apps => apps
+            .filter(a => a.assessmentId || ["assessment_sent", "assessment_in_progress", "assessment_completed"].includes(a.status))
+            .map(a => ({ ...a, jobTitle: job.title }))
           )
-          .forEach((a) => all.push({ ...a, jobTitle: job.title }));
-      }
-      setRows(all);
+          .catch(() => []) // Fallback for individual failure
+      );
+      
+      const appsResults = await Promise.all(appsPromises);
+      setRows(appsResults.flat());
     } catch (e) {
       notify.error("Failed to load assessments");
     } finally {
@@ -110,10 +123,14 @@ export default function RecruiterAssessments() {
     if (!job) return;
     const cfg = job.assessmentConfig || {};
     const hasCoding = cfg.includeCoding !== false && ((cfg.customCodingQuestions && cfg.customCodingQuestions.length > 0) || cfg.codingCount > 0);
-    setIncludeCoding(hasCoding);
+    const type = cfg.assessmentType || (cfg.includeCoding !== false && cfg.codingCount !== 0 ? "hybrid" : "mcq_only");
+    setAssessmentType(type);
+    setMcqCountInput(cfg.mcqCount || 20);
+    setCodingCountInput(cfg.codingCount || 2);
     setMcqQuestions(cfg.customMcqQuestions || []);
     setCodingQuestions(cfg.customCodingQuestions || []);
-    setDurationMinutes(cfg.durationMinutes || 60);
+    setMcqDurationMinutes(cfg.mcqDurationMinutes || 30);
+    setCodingDurationMinutes(cfg.codingDurationMinutes || 45);
     setPassingScore(cfg.passingScore || 60);
   };
 
@@ -131,16 +148,34 @@ export default function RecruiterAssessments() {
     }
     setGeneratingAI(true);
     try {
-      const generated = await generateQuestions(selectedJobId);
+      const options = {
+        assessmentType,
+        mcqCount: Number(mcqCountInput) || 20,
+        codingCount: Number(codingCountInput) || 2,
+        prompt: aiPrompt
+      };
+      const generated = await generateQuestions(selectedJobId, options);
       if (generated) {
-        setMcqQuestions(generated.mcqQuestions || []);
-        if (includeCoding) {
-          setCodingQuestions(generated.codingQuestions || []);
-          notify.success("AI generated 20 MCQ questions and 2 Coding challenges!");
-        } else {
-          setCodingQuestions([]);
-          notify.success("AI generated 20 Objective (MCQ) questions!");
-        }
+        const newMcq = assessmentType !== "coding_only" ? (generated.mcqQuestions || []) : [];
+        const newCoding = assessmentType !== "mcq_only" ? (generated.codingQuestions || []) : [];
+
+        setMcqQuestions(newMcq);
+        setCodingQuestions(newCoding);
+
+        // Auto-save the generated questions to the job so they don't disappear
+        await updateAssessmentConfig(selectedJobId, {
+          useCustomQuestions: true,
+          assessmentType,
+          customMcqQuestions: newMcq,
+          customCodingQuestions: newCoding,
+          mcqCount: assessmentType !== "coding_only" ? newMcq.length : 0,
+          codingCount: assessmentType !== "mcq_only" ? newCoding.length : 0,
+          mcqDurationMinutes: Number(mcqDurationMinutes) || 30,
+          codingDurationMinutes: assessmentType !== "mcq_only" ? (Number(codingDurationMinutes) || 45) : 0,
+          passingScore: Number(passingScore) || 60,
+        });
+
+        notify.success("Questions generated and saved successfully!");
       }
     } catch (e) {
       notify.error(e.response?.data?.message || "AI Generation failed");
@@ -159,10 +194,24 @@ export default function RecruiterAssessments() {
       notify.warn("Correct answer is required");
       return;
     }
-    setMcqQuestions([...mcqQuestions, { ...newMcq }]);
+    if (editMcqIndex !== null) {
+      const copy = [...mcqQuestions];
+      copy[editMcqIndex] = { ...newMcq };
+      setMcqQuestions(copy);
+      notify.success("MCQ question updated");
+    } else {
+      setMcqQuestions([...mcqQuestions, { ...newMcq }]);
+      notify.success("MCQ question added");
+    }
     setNewMcq({ question: "", options: ["", "", "", ""], correctAnswer: "", explanation: "" });
     setShowAddMcqModal(false);
-    notify.success("MCQ question added");
+    setEditMcqIndex(null);
+  };
+
+  const handleEditMcqClick = (idx) => {
+    setEditMcqIndex(idx);
+    setNewMcq(mcqQuestions[idx]);
+    setShowAddMcqModal(true);
   };
 
   const handleSaveAddCoding = () => {
@@ -170,10 +219,78 @@ export default function RecruiterAssessments() {
       notify.warn("Title and description are required");
       return;
     }
-    setCodingQuestions([...codingQuestions, { ...newCoding }]);
+    if (editCodingIndex !== null) {
+      const copy = [...codingQuestions];
+      copy[editCodingIndex] = { ...newCoding };
+      setCodingQuestions(copy);
+      notify.success("Coding problem updated");
+    } else {
+      setCodingQuestions([...codingQuestions, { ...newCoding }]);
+      notify.success("Coding problem added");
+    }
     setNewCoding({ title: "", description: "", difficulty: "medium" });
     setShowAddCodingModal(false);
-    notify.success("Coding problem added");
+    setEditCodingIndex(null);
+  };
+
+  const handleEditCodingClick = (idx) => {
+    setEditCodingIndex(idx);
+    setNewCoding(codingQuestions[idx]);
+    setShowAddCodingModal(true);
+  };
+
+  const handleRegenerateMcq = async (idx) => {
+    if (!selectedJobId) return;
+    setGeneratingAI(true);
+    try {
+      const options = {
+        assessmentType: "mcq_only",
+        mcqCount: 1,
+        codingCount: 0,
+        prompt: `Regenerate a different question, similar in topic to: "${mcqQuestions[idx].question}". Make it unique.`
+      };
+      const generated = await generateQuestions(selectedJobId, options);
+      if (generated && generated.mcqQuestions && generated.mcqQuestions.length > 0) {
+        const newQ = generated.mcqQuestions[0];
+        const copy = [...mcqQuestions];
+        copy[idx] = newQ;
+        setMcqQuestions(copy);
+        notify.success("Question regenerated via AI");
+      } else {
+        notify.warn("Failed to generate question");
+      }
+    } catch (e) {
+      notify.error(e.response?.data?.message || "AI Regeneration failed");
+    } finally {
+      setGeneratingAI(false);
+    }
+  };
+
+  const handleRegenerateCoding = async (idx) => {
+    if (!selectedJobId) return;
+    setGeneratingAI(true);
+    try {
+      const options = {
+        assessmentType: "coding_only",
+        mcqCount: 0,
+        codingCount: 1,
+        prompt: `Regenerate a different coding challenge, similar in topic to: "${codingQuestions[idx].title}". Make it unique.`
+      };
+      const generated = await generateQuestions(selectedJobId, options);
+      if (generated && generated.codingQuestions && generated.codingQuestions.length > 0) {
+        const newQ = generated.codingQuestions[0];
+        const copy = [...codingQuestions];
+        copy[idx] = newQ;
+        setCodingQuestions(copy);
+        notify.success("Coding challenge regenerated via AI");
+      } else {
+        notify.warn("Failed to generate challenge");
+      }
+    } catch (e) {
+      notify.error(e.response?.data?.message || "AI Regeneration failed");
+    } finally {
+      setGeneratingAI(false);
+    }
   };
 
   const handleDeleteMcq = (idx) => {
@@ -201,12 +318,13 @@ export default function RecruiterAssessments() {
     try {
       await updateAssessmentConfig(selectedJobId, {
         useCustomQuestions: true,
-        includeCoding,
+        assessmentType,
         customMcqQuestions: mcqQuestions,
-        customCodingQuestions: includeCoding ? codingQuestions : [],
-        mcqCount: mcqQuestions.length,
-        codingCount: includeCoding ? codingQuestions.length : 0,
-        durationMinutes: Number(durationMinutes) || 60,
+        customCodingQuestions: assessmentType !== "mcq_only" ? codingQuestions : [],
+        mcqCount: assessmentType !== "coding_only" ? mcqQuestions.length : 0,
+        codingCount: assessmentType !== "mcq_only" ? codingQuestions.length : 0,
+        mcqDurationMinutes: Number(mcqDurationMinutes) || 30,
+        codingDurationMinutes: assessmentType !== "mcq_only" ? (Number(codingDurationMinutes) || 45) : 0,
         passingScore: Number(passingScore) || 60,
       });
       notify.success("Assessment configuration saved for this job!");
@@ -220,49 +338,49 @@ export default function RecruiterAssessments() {
 
   return (
     <RecruiterLayout title="Assessments">
-      {/* Header Tabs & Job Selector */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 24, borderBottom: "1px solid var(--border)", paddingBottom: 12, flexWrap: "wrap", gap: 16 }}>
-        <div style={{ display: "flex", gap: 12 }}>
-          <button
-            type="button"
-            className={`rx-btn ${activeTab === "builder" ? "rx-btn-primary" : "rx-btn-secondary"}`}
-            onClick={() => setActiveTab("builder")}
-          >
-            <Layers size={16} /> Custom Assessment Builder
-          </button>
-          <button
-            type="button"
-            className={`rx-btn ${activeTab === "results" ? "rx-btn-primary" : "rx-btn-secondary"}`}
-            onClick={() => setActiveTab("results")}
-          >
-            <FileCheck size={16} /> Candidate Results ({rows.length})
-          </button>
+      {/* Header */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: "var(--primary)", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: 8 }}>CREATE ASSESSMENT</div>
+          <h1 style={{ fontSize: 32, fontWeight: 800, margin: "0 0 8px 0", color: "var(--text)", letterSpacing: "-0.5px" }}>Set up your assessment</h1>
+          <p style={{ margin: 0, fontSize: 15, color: "var(--text-muted)" }}>Configure the test details, choose the question type and let AI generate questions for you.</p>
         </div>
 
-        {activeTab === "builder" && (
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <span style={{ fontSize: 13, fontWeight: 700, color: "var(--text-muted)", whiteSpace: "nowrap" }}>SELECT JOB:</span>
-            <select
-              value={selectedJobId}
-              onChange={(e) => handleJobSelectChange(e.target.value)}
-              className="rx-premium-input"
-              style={{ minWidth: 200, maxWidth: 300, padding: "8px 12px", height: "auto", fontSize: 13 }}
-            >
-              {jobs.map((j) => {
-                const hasConfig = j.assessmentConfig && (j.assessmentConfig.mcqCount > 0 || j.assessmentConfig.codingCount > 0);
-                return (
-                  <option key={j._id} value={j._id}>
-                    {j.title} ({j.role}) {hasConfig ? " ✓" : ""}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        )}
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          {activeTab === "builder" && (
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <span style={{ fontSize: 13, fontWeight: 600, color: "var(--text)", whiteSpace: "nowrap" }}>Select Job Role</span>
+              <select
+                value={selectedJobId}
+                onChange={(e) => handleJobSelectChange(e.target.value)}
+                className="rx-premium-input"
+                style={{ minWidth: 280, maxWidth: 350, padding: "10px 14px", height: "auto", fontSize: 14, background: "#fff", border: "1px solid var(--border)", borderRadius: 8, boxShadow: "0 2px 4px rgba(0,0,0,0.02)" }}
+              >
+                {jobs.map((j) => {
+                  const hasConfig = j.assessmentConfig && (j.assessmentConfig.mcqCount > 0 || j.assessmentConfig.codingCount > 0);
+                  return (
+                    <option key={j._id} value={j._id}>
+                      {j.title} ({j.role}) {hasConfig ? " ✓" : ""}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          )}
+          <button
+            type="button"
+            className="rx-btn"
+            style={{ background: activeTab === "results" ? "var(--primary)" : "#ede9fe", color: activeTab === "results" ? "#fff" : "var(--primary)", border: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 8, fontWeight: 600 }}
+            onClick={() => setActiveTab(activeTab === "builder" ? "results" : "builder")}
+          >
+            <FileCheck size={18} /> 
+            {activeTab === "builder" ? `Candidate Results (${rows.length})` : "Back to Builder"}
+          </button>
+        </div>
       </div>
 
       {loading ? (
-        <Loader />
+        <DashboardSkeleton />
       ) : activeTab === "results" ? (
         /* RESULTS TAB */
         rows.length === 0 ? (
@@ -321,176 +439,294 @@ export default function RecruiterAssessments() {
       ) : (
         /* ASSESSMENT BUILDER TAB */
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-          {/* Config Bar */}
-          <div className="rx-card" style={{ padding: 24 }}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-
-              {/* Top Row: Assessment Settings */}
+          {/* Main Assessment Configuration Card */}
+          <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 16, padding: "32px", boxShadow: "0 4px 24px rgba(0,0,0,0.03)", position: "relative", overflow: "hidden" }}>
+            
+            {/* Header of Card */}
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 16, marginBottom: 32, maxWidth: "60%" }}>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: "#f3f0ff", color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <Settings size={24} />
+              </div>
               <div>
-                <h4 style={{ margin: "0 0 16px 0", fontSize: 15, color: "var(--text)" }}>⚙️ Assessment Configuration</h4>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: 24, flexWrap: "wrap" }}>
-                  <div>
-                    <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", display: "block", marginBottom: 6 }}>
-                      DURATION (MINS)
-                    </label>
-                    <input
-                      type="number"
-                      value={durationMinutes}
-                      onChange={(e) => setDurationMinutes(e.target.value)}
-                      className="rx-premium-input"
-                      style={{ width: 120 }}
-                    />
-                    <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 6 }}>Time limit for candidates</div>
-                  </div>
+                <h2 style={{ margin: "0 0 6px 0", fontSize: 18, fontWeight: 700, color: "var(--text)" }}>Assessment Configuration</h2>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--text-muted)", lineHeight: 1.5 }}>Set the test parameters and structure. These settings will help us generate the right questions for your assessment.</p>
+              </div>
+            </div>
 
-                  <div>
-                    <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", display: "block", marginBottom: 6 }}>
-                      PASSING SCORE (%)
-                    </label>
-                    <input
-                      type="number"
-                      value={passingScore}
-                      onChange={(e) => setPassingScore(e.target.value)}
-                      className="rx-premium-input"
-                      style={{ width: 120 }}
-                    />
-                    <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 6 }}>Minimum score to pass</div>
+            {/* Top Row Inputs */}
+            <div style={{ display: "flex", gap: 24, flexWrap: "wrap", marginBottom: 32 }}>
+              {assessmentType !== "coding_only" && (
+                <div style={{ flex: "1 1 180px" }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 12 }}>
+                    <Clock size={16} color="var(--primary)" /> MCQ Duration (Mins)
+                  </label>
+                  <input
+                    type="number"
+                    value={mcqDurationMinutes}
+                    onChange={(e) => setMcqDurationMinutes(e.target.value)}
+                    className="rx-premium-input"
+                    style={{ background: "#fff" }}
+                  />
+                  <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>Time for MCQ round</div>
+                  <div style={{ background: "#eff6ff", color: "#2563eb", fontSize: 12, padding: "6px 12px", borderRadius: 6, marginTop: 8, display: "flex", alignItems: "center", gap: 6, fontWeight: 500 }}>
+                    <div style={{ width: 14, height: 14, border: "1px solid #2563eb", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10 }}>i</div>
+                    Recommended: 20-40 mins
                   </div>
+                </div>
+              )}
 
-                  <div>
-                    <label style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", display: "block", marginBottom: 6 }}>
-                      ASSESSMENT TYPE
-                    </label>
-                    <div style={{ display: "flex", alignItems: "center", gap: 10, background: "var(--background)", padding: "8px 14px", borderRadius: 10, border: "1px solid var(--border)" }}>
-                      <input
-                        type="checkbox"
-                        id="includeCodingCheckbox"
-                        checked={includeCoding}
-                        onChange={(e) => setIncludeCoding(e.target.checked)}
-                        style={{ width: 17, height: 17, cursor: "pointer" }}
-                      />
-                      <label htmlFor="includeCodingCheckbox" style={{ fontSize: 13, fontWeight: 700, cursor: "pointer", color: "var(--text)", margin: 0 }}>
-                        Include Coding Round
-                      </label>
-                      <span className="rx-badge" style={{ background: includeCoding ? "#eef2ff" : "#ecfdf5", color: includeCoding ? "#6366f1" : "#059669", fontSize: 11 }}>
-                        {includeCoding ? "MCQ + Coding (Hybrid)" : "⚡ Objective Only (100% MCQ)"}
-                      </span>
-                    </div>
+              {assessmentType !== "mcq_only" && (
+                <div style={{ flex: "1 1 180px" }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 12 }}>
+                    <Code size={16} color="var(--primary)" /> Coding Duration (Mins)
+                  </label>
+                  <input
+                    type="number"
+                    value={codingDurationMinutes}
+                    onChange={(e) => setCodingDurationMinutes(e.target.value)}
+                    className="rx-premium-input"
+                    style={{ background: "#fff" }}
+                  />
+                  <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>Time for Coding round</div>
+                  <div style={{ background: "#eff6ff", color: "#2563eb", fontSize: 12, padding: "6px 12px", borderRadius: 6, marginTop: 8, display: "flex", alignItems: "center", gap: 6, fontWeight: 500 }}>
+                    <div style={{ width: 14, height: 14, border: "1px solid #2563eb", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10 }}>i</div>
+                    Recommended: 45-90 mins
                   </div>
+                </div>
+              )}
+
+              <div style={{ flex: "1 1 180px" }}>
+                <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 12 }}>
+                  <Target size={16} color="var(--primary)" /> Passing Score (%)
+                </label>
+                <input
+                  type="number"
+                  value={passingScore}
+                  onChange={(e) => setPassingScore(e.target.value)}
+                  className="rx-premium-input"
+                  style={{ background: "#fff" }}
+                />
+                <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>Minimum score to pass</div>
+                <div style={{ background: "#eff6ff", color: "#2563eb", fontSize: 12, padding: "6px 12px", borderRadius: 6, marginTop: 8, display: "flex", alignItems: "center", gap: 6, fontWeight: 500 }}>
+                  <div style={{ width: 14, height: 14, border: "1px solid #2563eb", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10 }}>i</div>
+                  Recommended: 50-70%
                 </div>
               </div>
 
-              {/* Bottom Row: Actions */}
-              <div style={{ borderTop: "1px solid var(--border)", paddingTop: 20, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16 }}>
+              <div style={{ flex: "1 1 200px" }}>
+                <label style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 12 }}>
+                  <FileText size={16} color="var(--primary)" /> Assessment Type
+                </label>
+                <select
+                  value={assessmentType}
+                  onChange={(e) => setAssessmentType(e.target.value)}
+                  className="rx-premium-input"
+                  style={{ background: "#fff", paddingRight: 32 }}
+                >
+                  <option value="hybrid">MCQ + Coding (Hybrid)</option>
+                  <option value="mcq_only">Objective Only (100% MCQ)</option>
+                  <option value="coding_only">Coding Only (100% Coding)</option>
+                </select>
+                <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 8 }}>Choose the type of assessment</div>
+              </div>
+
+            </div>
+
+            {/* Actions Bar */}
+            <div style={{ borderTop: "1px solid var(--border)", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 16, marginTop: 16 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                <div style={{ color: "#f59e0b" }}><Zap size={20} fill="#f59e0b" /></div>
                 <div>
-                  <h4 style={{ margin: "0 0 4px 0", fontSize: 14, color: "var(--text)" }}>Actions</h4>
-                  <p style={{ margin: 0, fontSize: 13, color: "var(--text-muted)" }}>Generate questions, preview the test, and save changes.</p>
-                </div>
-
-                <div style={{ display: "flex", gap: 12 }}>
-                  <button
-                    type="button"
-                    className="rx-btn rx-btn-secondary"
-                    disabled={generatingAI}
-                    onClick={handleGenerateAI}
-                    title="Auto-create questions based on the job role"
-                  >
-                    <Sparkles size={16} /> {generatingAI ? "Generating..." : "AI Generate"}
-                  </button>
-
-                  <button
-                    type="button"
-                    className="rx-btn rx-btn-secondary"
-                    onClick={() => setShowPreview(true)}
-                    title="See what the candidate will see"
-                  >
-                    <Eye size={16} /> Preview
-                  </button>
-
-                  <button
-                    type="button"
-                    className="rx-btn rx-btn-primary"
-                    disabled={savingConfig}
-                    onClick={handleSaveAssessmentConfig}
-                    title="Publish this assessment to candidates"
-                  >
-                    <Save size={16} /> {savingConfig ? "Saving..." : "Save Assessment"}
-                  </button>
+                  <h4 style={{ margin: "0 0 4px 0", fontSize: 15, fontWeight: 700, color: "var(--text)" }}>Actions</h4>
+                  <p style={{ margin: 0, fontSize: 13, color: "var(--text-muted)" }}>Preview the test and save your changes.</p>
                 </div>
               </div>
 
-            </div>
-          </div>
-          {/* MCQ Questions Section */}
-          <div className="rx-card">
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div>
-                <h3 style={{ margin: 0, fontSize: 18, color: "var(--text)" }}>
-                  Multiple Choice Questions ({mcqQuestions.length})
-                </h3>
-                <p style={{ margin: "4px 0 0 0", fontSize: 13, color: "var(--text-muted)" }}>
-                  60% weightage in final score calculation
-                </p>
-              </div>
-              <button
-                type="button"
-                className="rx-btn rx-btn-primary"
-                onClick={() => setShowMcqManagerModal(true)}
-              >
-                <Eye size={16} /> View & Manage
-              </button>
-            </div>
-            {mcqQuestions.length === 0 && (
-              <div style={{ marginTop: 16, padding: 24, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
-                No MCQ questions added. Click "AI Generate Questions" above.
-              </div>
-            )}
-          </div>
+              <div style={{ display: "flex", gap: 12 }}>
 
-          {/* Coding Challenges Section */}
-          <div className="rx-card" style={{ opacity: includeCoding ? 1 : 0.75 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <div>
-                <h3 style={{ margin: 0, fontSize: 18, color: "var(--text)", display: "flex", alignItems: "center", gap: 8 }}>
-                  Coding Challenges ({includeCoding ? codingQuestions.length : 0})
-                  {!includeCoding && <span className="rx-badge rx-badge-gray" style={{ fontSize: 11 }}>Disabled</span>}
-                </h3>
-                <p style={{ margin: "4px 0 0 0", fontSize: 13, color: "var(--text-muted)" }}>
-                  {includeCoding ? "40% weightage in final score calculation" : "Objective Only selected"}
-                </p>
-              </div>
-              {includeCoding && (
                 <button
                   type="button"
-                  className="rx-btn rx-btn-primary"
-                  onClick={() => setShowCodingManagerModal(true)}
+                  style={{ background: "#f3f0ff", color: "var(--primary)", border: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 20px", borderRadius: 8, fontWeight: 600, cursor: "pointer", transition: "opacity 0.2s" }}
+                  onClick={() => setShowPreview(true)}
                 >
-                  <Eye size={16} /> View & Manage
+                  <Eye size={18} /> Preview
                 </button>
-              )}
+
+                <button
+                  type="button"
+                  style={{ background: "var(--primary)", color: "#fff", border: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 24px", borderRadius: 8, fontWeight: 600, cursor: "pointer", transition: "background 0.2s" }}
+                  disabled={savingConfig}
+                  onClick={handleSaveAssessmentConfig}
+                >
+                  <Save size={18} /> {savingConfig ? "Saving..." : "Save Assessment"}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Question Sections Layout */}
+          <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 16, padding: "32px", boxShadow: "0 4px 24px rgba(0,0,0,0.03)" }}>
+            <div style={{ display: "flex", alignItems: "flex-start", gap: 16, marginBottom: 24 }}>
+              <div style={{ width: 48, height: 48, borderRadius: 12, background: "#f3f0ff", color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <List size={24} />
+              </div>
+              <div>
+                <h2 style={{ margin: "0 0 6px 0", fontSize: 18, fontWeight: 700, color: "var(--text)" }}>Question Sections</h2>
+                <p style={{ margin: 0, fontSize: 14, color: "var(--text-muted)", lineHeight: 1.5 }}>These sections make up your assessment. Generate and manage questions for each section.</p>
+              </div>
             </div>
 
-            {!includeCoding && (
-              <div style={{ marginTop: 16, padding: 24, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, background: "var(--background)", color: "var(--text-muted)" }}>
-                ⚡ <strong>Objective-Only Active:</strong> No coding round.
-                <div style={{ marginTop: 8 }}>
-                  <button
-                    type="button"
-                    className="rx-btn rx-btn-secondary"
-                    style={{ fontSize: 12, padding: "4px 12px" }}
-                    onClick={() => setIncludeCoding(true)}
-                  >
-                    Enable Coding Section
-                  </button>
+            <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+              {/* Custom AI Prompt Input */}
+              <div style={{ marginBottom: 4 }}>
+                <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>Custom Topic/Prompt (Optional)</label>
+                <input 
+                  type="text" 
+                  value={aiPrompt} 
+                  onChange={(e) => setAiPrompt(e.target.value)} 
+                  placeholder="e.g., Focus specifically on React Hooks and Context API" 
+                  className="rx-premium-input" 
+                  style={{ background: "#fff", width: "100%" }}
+                />
+              </div>
+
+              {/* MCQ Section Row */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", border: "1px solid var(--border)", borderRadius: 12, background: "#fff", opacity: assessmentType !== "coding_only" ? 1 : 0.6 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 10, background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <List size={24} />
+                  </div>
+                  <div>
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 4 }}>
+                      <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: "var(--text)", maxWidth: 180, lineHeight: 1.4 }}>
+                        Multiple Choice Questions (MCQ)
+                      </h3>
+                      {assessmentType !== "coding_only" && (
+                        <span style={{ background: "#ffedd5", color: "#c2410c", fontSize: 10, fontWeight: 700, padding: "4px 8px", borderRadius: 999, marginTop: 2 }}>60%<br/>weightage</span>
+                      )}
+                    </div>
+                    <p style={{ margin: 0, fontSize: 13, color: "var(--text-muted)" }}>Test theoretical and conceptual knowledge.</p>
+                  </div>
+                </div>
+                
+                <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+                  <div style={{ textAlign: "center", minWidth: 50 }}>
+                    <div style={{ fontSize: 20, fontWeight: 800, color: "var(--text)", lineHeight: 1 }}>{assessmentType !== "coding_only" ? mcqQuestions.length : 0}</div>
+                    <div style={{ fontSize: 11, color: "var(--text-muted)", fontWeight: 500, marginTop: 4 }}>Questions</div>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    {assessmentType !== "coding_only" ? (
+                      <>
+                        <input
+                          type="number"
+                          value={mcqCountInput}
+                          onChange={(e) => setMcqCountInput(e.target.value)}
+                          min={1}
+                          max={100}
+                          style={{ width: 44, padding: "8px 4px", border: "1px solid #e2e8f0", borderRadius: 6, fontSize: 13, fontWeight: 600, textAlign: "center", color: "var(--text)", outline: "none" }}
+                          title="Number of MCQs to generate"
+                        />
+                        <button
+                          type="button"
+                          style={{ background: "#f3f0ff", color: "var(--primary)", border: "1px solid #ddd6fe", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "8px 12px", borderRadius: 8, fontWeight: 600, fontSize: 13, cursor: "pointer", transition: "all 0.2s", minWidth: 140, textAlign: "center", lineHeight: 1.3 }}
+                          disabled={generatingAI}
+                          onClick={handleGenerateAI}
+                        >
+                          {generatingAI ? (
+                            <Loader2 size={18} className="rx-spin" />
+                          ) : (
+                            <>
+                              <Sparkles size={14} style={{ flexShrink: 0 }} /> 
+                              <span>{mcqQuestions.length > 0 ? "Regenerate All" : <>AI Generate<br/>Questions</>}</span>
+                            </>
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          style={{ background: "#f8fafc", color: "var(--primary)", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "8px 12px", borderRadius: 8, fontWeight: 600, fontSize: 13, cursor: "pointer", minWidth: 100, textAlign: "center", lineHeight: 1.3 }}
+                          onClick={() => setShowMcqManagerModal(true)}
+                        >
+                          <Eye size={14} style={{ flexShrink: 0 }} /> 
+                          <span>View &<br/>Manage</span>
+                        </button>
+                      </>
+                    ) : (
+                      <button type="button" className="rx-btn rx-btn-secondary" onClick={() => setAssessmentType("hybrid")}>Enable</button>
+                    )}
+                    <span style={{ color: "var(--text-muted)", marginLeft: 4 }}>&gt;</span>
+                  </div>
                 </div>
               </div>
-            )}
 
-            {includeCoding && codingQuestions.length === 0 && (
-              <div style={{ marginTop: 16, padding: 24, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
-                No coding challenges added. Click "AI Generate Questions" above.
+              {/* Coding Section Row */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", border: "1px solid var(--border)", borderRadius: 12, background: "#fff", opacity: assessmentType !== "mcq_only" ? 1 : 0.6 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 10, background: "#f0fdf4", color: "#16a34a", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <Code size={24} />
+                  </div>
+                  <div>
+                    <div style={{ display: "flex", alignItems: "flex-start", gap: 10, marginBottom: 4 }}>
+                      <h3 style={{ margin: 0, fontSize: 15, fontWeight: 700, color: "var(--text)", maxWidth: 180, lineHeight: 1.4 }}>
+                        Coding Challenges
+                      </h3>
+                      {assessmentType !== "mcq_only" && (
+                        <span style={{ background: "#dcfce3", color: "#15803d", fontSize: 10, fontWeight: 700, padding: "4px 8px", borderRadius: 999, marginTop: 2 }}>40% weightage</span>
+                      )}
+                    </div>
+                    <p style={{ margin: 0, fontSize: 13, color: "var(--text-muted)", maxWidth: 280, lineHeight: 1.4 }}>Evaluate problem-solving skills with hands-on coding.</p>
+                  </div>
+                </div>
+                
+                <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
+                  <div style={{ textAlign: "center", minWidth: 50 }}>
+                    <div style={{ fontSize: 20, fontWeight: 800, color: "var(--text)", lineHeight: 1 }}>{assessmentType !== "mcq_only" ? codingQuestions.length : 0}</div>
+                    <div style={{ fontSize: 11, color: "var(--text-muted)", fontWeight: 500, marginTop: 4 }}>Questions</div>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    {assessmentType !== "mcq_only" ? (
+                      <>
+                        <input
+                          type="number"
+                          value={codingCountInput}
+                          onChange={(e) => setCodingCountInput(e.target.value)}
+                          min={1}
+                          max={10}
+                          style={{ width: 44, padding: "8px 4px", border: "1px solid #e2e8f0", borderRadius: 6, fontSize: 13, fontWeight: 600, textAlign: "center", color: "var(--text)", outline: "none" }}
+                          title="Number of Coding Questions to generate"
+                        />
+                        <button
+                          type="button"
+                          style={{ background: "#f3f0ff", color: "var(--primary)", border: "1px solid #ddd6fe", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "8px 12px", borderRadius: 8, fontWeight: 600, fontSize: 13, cursor: "pointer", transition: "all 0.2s", minWidth: 140, textAlign: "center", lineHeight: 1.3 }}
+                          disabled={generatingAI}
+                          onClick={handleGenerateAI}
+                        >
+                          {generatingAI ? (
+                            <Loader2 size={18} className="rx-spin" />
+                          ) : (
+                            <>
+                              <Sparkles size={14} style={{ flexShrink: 0 }} /> 
+                              <span>{codingQuestions.length > 0 ? "Regenerate All" : <>AI Generate<br/>Questions</>}</span>
+                            </>
+                          )}
+                        </button>
+                        <button
+                          type="button"
+                          style={{ background: "#f8fafc", color: "var(--primary)", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "8px 12px", borderRadius: 8, fontWeight: 600, fontSize: 13, cursor: "pointer", minWidth: 100, textAlign: "center", lineHeight: 1.3 }}
+                          onClick={() => setShowCodingManagerModal(true)}
+                        >
+                          <Eye size={14} style={{ flexShrink: 0 }} /> 
+                          <span>View &<br/>Manage</span>
+                        </button>
+                      </>
+                    ) : (
+                      <button type="button" className="rx-btn rx-btn-secondary" onClick={() => setAssessmentType("hybrid")}>Enable</button>
+                    )}
+                    <span style={{ color: "var(--text-muted)", marginLeft: 4 }}>&gt;</span>
+                  </div>
+                </div>
               </div>
-            )}
+
+            </div>
           </div>
         </div>
       )}
@@ -585,6 +821,24 @@ export default function RecruiterAssessments() {
                         </button>
                         <button
                           type="button"
+                          className="rx-btn rx-btn-secondary"
+                          style={{ padding: "4px 8px", color: "var(--primary)", borderColor: "#e9d5ff", background: "#faf5ff" }}
+                          onClick={() => handleRegenerateMcq(idx)}
+                          disabled={generatingAI}
+                          title="Regenerate this question with AI"
+                        >
+                          <Sparkles size={14} />
+                        </button>
+                        <button
+                          type="button"
+                          className="rx-btn rx-btn-secondary"
+                          style={{ padding: "4px 8px" }}
+                          onClick={() => handleEditMcqClick(idx)}
+                        >
+                          <Edit size={14} />
+                        </button>
+                        <button
+                          type="button"
                           className="rx-btn rx-btn-danger"
                           style={{ padding: "4px 8px" }}
                           onClick={() => handleDeleteMcq(idx)}
@@ -655,14 +909,29 @@ export default function RecruiterAssessments() {
                         </p>
                       </div>
 
-                      <button
-                        type="button"
-                        className="rx-btn rx-btn-danger"
-                        style={{ padding: "4px 8px" }}
-                        onClick={() => handleDeleteCoding(idx)}
-                      >
-                        <Trash2 size={14} />
-                      </button>
+                      <div style={{ display: "flex", gap: 6 }}>
+                        <button
+                          type="button"
+                          className="rx-btn rx-btn-secondary"
+                          style={{ padding: "4px 8px", color: "var(--primary)", borderColor: "#e9d5ff", background: "#faf5ff" }}
+                          onClick={() => handleRegenerateCoding(idx)}
+                          disabled={generatingAI}
+                          title="Regenerate this challenge with AI"
+                        >
+                          <Sparkles size={14} />
+                        </button>
+                        <button
+                          type="button"
+                          className="rx-btn rx-btn-secondary"
+                          style={{ padding: "4px 8px" }}
+                          onClick={() => handleEditCodingClick(idx)}
+                        >
+                          <Edit size={14} />
+                        </button>
+                        <button type="button" className="rx-btn rx-btn-danger" onClick={() => handleDeleteCoding(idx)}>
+                          <Trash2 size={14} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -676,7 +945,7 @@ export default function RecruiterAssessments() {
       {showAddMcqModal && (
         <div className="rx-modal-overlay" onClick={() => setShowAddMcqModal(false)}>
           <div className="rx-modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 600 }}>
-            <h3>Add Multiple Choice Question</h3>
+            <h3>{editMcqIndex !== null ? "Edit Multiple Choice Question" : "Add Multiple Choice Question"}</h3>
             <div className="rx-form" style={{ marginTop: 16 }}>
               <div>
                 <label>Question Prompt</label>
@@ -735,7 +1004,7 @@ export default function RecruiterAssessments() {
                   Cancel
                 </button>
                 <button type="button" className="rx-btn rx-btn-primary" onClick={handleSaveAddMcq}>
-                  Add Question
+                  {editMcqIndex !== null ? "Update Question" : "Add Question"}
                 </button>
               </div>
             </div>
@@ -747,7 +1016,7 @@ export default function RecruiterAssessments() {
       {showAddCodingModal && (
         <div className="rx-modal-overlay" onClick={() => setShowAddCodingModal(false)}>
           <div className="rx-modal" onClick={(e) => e.stopPropagation()} style={{ maxWidth: 600 }}>
-            <h3>Add Coding Challenge</h3>
+            <h3>{editCodingIndex !== null ? "Edit Coding Challenge" : "Add Coding Challenge"}</h3>
             <div className="rx-form" style={{ marginTop: 16 }}>
               <div>
                 <label>Problem Title</label>
@@ -786,7 +1055,7 @@ export default function RecruiterAssessments() {
                   Cancel
                 </button>
                 <button type="button" className="rx-btn rx-btn-primary" onClick={handleSaveAddCoding}>
-                  Add Challenge
+                  {editCodingIndex !== null ? "Update Challenge" : "Add Challenge"}
                 </button>
               </div>
             </div>
@@ -807,9 +1076,9 @@ export default function RecruiterAssessments() {
 
             <div style={{ marginTop: 16 }}>
               <div style={{ display: "flex", gap: 16, marginBottom: 16, background: "var(--background)", padding: 12, borderRadius: 10 }}>
-                <div>⏱️ <strong>Duration:</strong> {durationMinutes} mins</div>
+                <div>⏱️ <strong>Duration:</strong> {(assessmentType !== "coding_only" ? Number(mcqDurationMinutes) : 0) + (assessmentType !== "mcq_only" ? Number(codingDurationMinutes) : 0)} mins</div>
                 <div>🎯 <strong>Passing Score:</strong> {passingScore}%</div>
-                <div>📝 <strong>Questions:</strong> {mcqQuestions.length} MCQ {includeCoding ? `+ ${codingQuestions.length} Coding` : "(Objective Only)"}</div>
+                <div>📝 <strong>Questions:</strong> {assessmentType !== "coding_only" ? mcqQuestions.length : 0} MCQ {assessmentType !== "mcq_only" ? `+ ${codingQuestions.length} Coding` : "(Objective Only)"}</div>
               </div>
 
               <h4>Section 1: Multiple Choice Questions ({mcqQuestions.length})</h4>
@@ -827,7 +1096,7 @@ export default function RecruiterAssessments() {
                 {mcqQuestions.length > 5 && <div style={{ fontSize: 12, color: "var(--text-muted)" }}>+ {mcqQuestions.length - 5} more MCQ questions...</div>}
               </div>
 
-              {includeCoding && (
+              {assessmentType !== "mcq_only" && (
                 <>
                   <h4>Section 2: Coding Challenges ({codingQuestions.length})</h4>
                   <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>

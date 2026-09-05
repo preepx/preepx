@@ -185,7 +185,7 @@ exports.getShortlisted = catchAsync(async (req, res) => {
 });
 
 exports.generateQuestions = catchAsync(async (req, res) => {
-  const questions = await jobService.generatePreviewQuestions(req.user, req.params.jobId, req);
+  const questions = await jobService.generatePreviewQuestions(req.user, req.params.jobId, req.body, req);
   res.json({ success: true, data: questions });
 });
 
@@ -242,5 +242,24 @@ exports.getBilling = catchAsync(async (req, res) => {
 exports.selectPlan = catchAsync(async (req, res) => {
   const data = await billingService.selectPlan(req.user, req.body.planSlug);
   res.json({ success: true, data });
+});
+
+exports.createBillingOrder = catchAsync(async (req, res) => {
+  const data = await billingService.createOrder(req.user, req.body.planSlug);
+  res.json({ success: true, data });
+});
+
+exports.verifyBillingPayment = catchAsync(async (req, res) => {
+  const data = await billingService.verifyPayment(req.user, req.body);
+  res.json({
+    success: true,
+    data,
+    message: `${data.plan.name} plan activated until ${new Date(data.expiresAt).toLocaleDateString("en-IN")}`,
+  });
+});
+
+exports.contactSales = catchAsync(async (req, res) => {
+  const data = await billingService.contactSales(req.user, req.body.note || "");
+  res.json({ success: true, data, message: data.message });
 });
 

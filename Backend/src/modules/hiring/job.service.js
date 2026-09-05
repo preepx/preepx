@@ -75,11 +75,8 @@ const createJob = async (recruiterId, data, req) => {
   const payload = normalizeJobPayload(data);
   const companyId = await getRecruiterCompanyId(recruiterId);
 
-  if (PUBLISHED_STATUSES.includes(payload.status || "draft")) {
-    if (payload.status !== "draft") {
-      const canCreate = await billingService.checkLimit(recruiterId, "activeJobs");
-      if (!canCreate) throw new ForbiddenError("Active job limit reached. Upgrade your plan.");
-    }
+  if (payload.status && payload.status !== "draft" && PUBLISHED_STATUSES.includes(payload.status)) {
+    await billingService.assertJobPostAllowed(recruiterId);
   }
 
   const job = await Job.create({
@@ -145,6 +142,10 @@ const updateJob = async (recruiterId, jobId, data, req) => {
 const publishJob = async (recruiterId, jobId, req) => {
   const job = await Job.findOne({ _id: jobId, recruiterId });
   if (!job) throw new NotFoundError("Job not found");
+  const wasPublished = PUBLISHED_STATUSES.includes(job.status);
+  if (!wasPublished) {
+    await billingService.assertJobPostAllowed(recruiterId);
+  }
   job.status = "published";
   await job.save();
 
@@ -153,6 +154,7 @@ const publishJob = async (recruiterId, jobId, req) => {
   await matchingService.saveMatchedCandidates(job, matches, recruiterId, companyId);
 
   logRecruiterAction(req, "JOB_PUBLISHED", "SUCCESS", { jobId });
+  if (!wasPublished) await billingService.incrementUsage(recruiterId, "activeJobs");
   return job;
 };
 
@@ -234,8 +236,8 @@ const movePipeline = async (recruiterId, applicationId, toStatus, note, req) => 
 
 const sendAssessment = async (recruiterId, jobId, applicationId, body, req) => {
   await companyService.assertVerifiedCompany(recruiterId);
-  const canSend = await billingService.checkLimit(recruiterId, "assessmentCredits");
-  if (!canSend) throw new ForbiddenError("Assessment credit limit reached");
+  const assessmentLimit = await billingService.getLimitState(recruiterId, "assessmentCredits");
+  if (!assessmentLimit.allowed) throw new ForbiddenError(assessmentLimit.reason || "Assessment credit limit reached");
 
   const job = await Job.findOne({ _id: jobId, recruiterId });
   if (!job) throw new NotFoundError("Job not found");
@@ -309,10 +311,11 @@ const updateApplicationStatus = async (recruiterId, applicationId, status, feedb
   return app;
 };
 
-const generatePreviewQuestions = async (recruiterId, jobId, req) => {
+const generatePreviewQuestions = async (recruiterId, jobId, options, req) => {
+  const opts = options || {};
   const job = await Job.findOne({ _id: jobId, recruiterId });
   if (!job) throw new NotFoundError("Job not found");
-  return assessmentService.generateQuestionsForJob(job, req);
+  return assessmentService.generateQuestionsForJob(job, { ...opts, forceGenerate: true }, req);
 };
 
 const getShortlisted = async (recruiterId) => {
@@ -324,13 +327,14 @@ const getShortlisted = async (recruiterId) => {
     .lean();
 };
 
-const generateInterviewQuestions = async (recruiterId, jobId, options = {}, req) => {
+const generateInterviewQuestions = async (recruiterId, jobId, options, req) => {
+  const opts = options || {};
   const job = await Job.findOne({ _id: jobId, recruiterId });
   if (!job) throw new NotFoundError("Job not found");
 
-  const count = Math.min(20, Math.max(5, Number(options.count) || 10));
-  const interviewType = options.interviewType || "technical";
-  const difficulty = options.difficulty || "medium";
+  const count = Math.min(20, Math.max(5, Number(opts.count) || 10));
+  const interviewType = opts.interviewType || "technical";
+  const difficulty = opts.difficulty || "medium";
 
   const prompt = `You are an expert technical interviewer creating a real-time conversational AI interview question set for candidates applying to the following job:
 Job Title: ${job.title}
