@@ -38,6 +38,8 @@ const {
   getRecruiterPlansOverview,
   getRecruiterPayments,
   assignRecruiterPlan,
+  getSubscriptionPlans,
+  updateSubscriptionPlan,
 } = require("../controllers/recruiterBillingController");
 
 const { uploadPdf, uploadImage } = require("../config/cloudinary");
@@ -76,6 +78,8 @@ router.get("/purchases", getPurchases);
 router.get("/recruiters/stats", getVerificationStats);
 router.get("/recruiter-plans", getRecruiterPlansOverview);
 router.get("/recruiter-payments", getRecruiterPayments);
+router.get("/subscription-plans", getSubscriptionPlans);
+router.put("/subscription-plans/:planId", updateSubscriptionPlan);
 router.get("/recruiters", getRecruiters);
 router.get("/recruiters/:companyId", getRecruiterDetail);
 router.patch("/recruiters/:companyId/verification", updateVerificationStatus);

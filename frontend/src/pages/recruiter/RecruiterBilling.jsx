@@ -166,39 +166,80 @@ export default function RecruiterBilling() {
           )}
 
           <div id="rp-plans" className="rp-grid">
-            {(data?.plans || []).map((plan) => {
-              const popular = plan.highlight || plan.slug === "growth";
-              const isCurrent = live && currentSlug === plan.slug;
-              const priceLabel = plan.contactSales || plan.priceInr === 0
-                ? "Custom"
-                : `₹${Number(plan.priceInr).toLocaleString("en-IN")}`;
-              const period = plan.contactSales || plan.priceInr === 0 ? "Pricing" : "/month";
-              return (
-                <article key={plan.slug} className={`rp-card ${popular ? "featured" : ""} ${isCurrent ? "current" : ""}`}>
-                  {popular && <div className="rp-badge"><Star size={12} /> Best Value</div>}
-                  <h3>{plan.name}</h3>
-                  <p className="rp-tagline">{plan.tagline || ""}</p>
-                  <div className="rp-price">
-                    <strong>{priceLabel}</strong>
-                    <small>{period}</small>
-                  </div>
-                  <button
-                    type="button"
-                    className={`rp-btn ${popular ? "solid" : "ghost"}`}
-                    disabled={buying === plan.slug || isCurrent}
-                    onClick={() => handlePay(plan)}
-                  >
-                    {isCurrent ? "Current plan" : buying === plan.slug ? "Processing…" : (plan.ctaLabel || "Select")}
-                  </button>
-                  <ul>
-                    {(plan.features || []).map((f) => (
-                      <li key={f}><Check size={14} strokeWidth={3} /> {f}</li>
-                    ))}
-                    <li><Check size={14} strokeWidth={3} /> {formatLimit(plan.limits?.jobPostsPerMonth)} job posts / month</li>
-                  </ul>
-                </article>
-              );
-            })}
+            {(() => {
+              const STATIC_PLANS = [
+                {
+                  slug: "starter",
+                  name: "Starter",
+                  tagline: "For Small Teams",
+                  priceInr: 1999,
+                  ctaLabel: "Start Hiring",
+                  highlight: false,
+                  contactSales: false,
+                  features: ["Up to 5 Job Posts/mo", "AI Candidate Scoring", "Basic Hiring Pipeline", "Email Support"]
+                },
+                {
+                  slug: "growth",
+                  name: "Growth",
+                  tagline: "For Growing Teams",
+                  priceInr: 3999,
+                  ctaLabel: "Upgrade to Growth",
+                  highlight: true,
+                  contactSales: false,
+                  features: ["Upto 20 Job Posts/mo", "Advanced AI Insights", "Automated Screening", "Priority Support"]
+                },
+                {
+                  slug: "enterprise",
+                  name: "Enterprise",
+                  tagline: "For Large Teams",
+                  priceInr: 0,
+                  contactSales: true,
+                  ctaLabel: "Contact Sales",
+                  highlight: false,
+                  features: ["Custom Integrations & API", "Dedicated Account Manager", "SSO & Team Access", "24/7 Priority Support"]
+                }
+              ];
+
+              // Merge DB plans with static display data (DB plan has correct _id & slug for payment)
+              const dbPlans = data?.plans || [];
+              const plans = STATIC_PLANS.map((sp) => {
+                const dbPlan = dbPlans.find((p) => p.slug === sp.slug);
+                return dbPlan ? { ...sp, ...dbPlan, features: sp.features } : sp;
+              });
+
+              return plans.map((plan) => {
+                const popular = plan.highlight || plan.slug === "growth";
+                const isCurrent = live && currentSlug === plan.slug;
+                const priceLabel = plan.contactSales || plan.priceInr === 0
+                  ? "Custom"
+                  : `₹${Number(plan.priceInr).toLocaleString("en-IN")}`;
+                const period = plan.contactSales || plan.priceInr === 0 ? "Pricing" : "/month";
+                return (
+                  <article key={plan.slug} className={`rp-card ${popular ? "featured" : ""} ${isCurrent ? "current" : ""}`}>
+                    {popular && <div className="rp-badge"><Star size={12} /> Best Value</div>}
+                    <h3>{plan.name}</h3>
+                    <p className="rp-tagline">{plan.tagline || ""}</p>
+                    <div className="rp-price">
+                      <strong>{priceLabel}</strong>
+                      <small>{period}</small>
+                    </div>
+                    <button
+                      type="button"
+                      className={`rp-btn ${popular ? "solid" : "ghost"}`}
+                      disabled={buying === plan.slug || isCurrent}
+                      onClick={() => handlePay(plan)}
+                    >
+                      {isCurrent ? "✓ Current Plan" : buying === plan.slug ? "Processing…" : (plan.ctaLabel || "Select")}
+                    </button>
+                    <ul>
+                      {(plan.features || []).map((f) => (
+                        <li key={f}><Check size={14} strokeWidth={3} /> {f}</li>
+                      ))}
+                    </ul>
+                  </article>
+                );
+              });
+            })()}
           </div>
 
           <div className="rp-foot">

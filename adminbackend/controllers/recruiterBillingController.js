@@ -170,10 +170,45 @@ const attachBillingToCompany = async (company) => {
   return { subscription, payments, usage };
 };
 
+const getSubscriptionPlans = async (req, res) => {
+  try {
+    const plans = await SubscriptionPlan.find().sort({ sortOrder: 1 }).lean();
+    res.json(plans);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+const updateSubscriptionPlan = async (req, res) => {
+  try {
+    const plan = await SubscriptionPlan.findById(req.params.planId);
+    if (!plan) return res.status(404).json({ message: "Plan not found" });
+
+    const { name, tagline, priceInr, features, limits, ctaLabel, highlight, isActive, contactSales } = req.body;
+    if (name !== undefined) plan.name = name;
+    if (tagline !== undefined) plan.tagline = tagline;
+    if (priceInr !== undefined) plan.priceInr = Number(priceInr);
+    if (features !== undefined) plan.features = features;
+    if (ctaLabel !== undefined) plan.ctaLabel = ctaLabel;
+    if (highlight !== undefined) plan.highlight = highlight;
+    if (isActive !== undefined) plan.isActive = isActive;
+    if (contactSales !== undefined) plan.contactSales = contactSales;
+    if (limits && typeof limits === "object") {
+      plan.limits = { ...plan.limits.toObject?.() || plan.limits, ...limits };
+    }
+    await plan.save();
+    res.json({ message: "Plan updated", plan });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 module.exports = {
   getRecruiterPlansOverview,
   getRecruiterPayments,
   assignRecruiterPlan,
   attachBillingToCompany,
   monthRange,
+  getSubscriptionPlans,
+  updateSubscriptionPlan,
 };

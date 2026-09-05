@@ -216,56 +216,140 @@ const RecruiterDetails = () => {
           )}
 
           {tab === 'billing' && (
-            <div>
-              <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
-                <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1.25rem', borderRadius: 12 }}>
-                  <h3 style={{ marginTop: 0 }}>Active plan</h3>
-                  <p><strong>{subscription?.planName || 'None'}</strong> · {subscription?.status || 'none'}</p>
-                  <p className="text-secondary">Expires: {subscription?.currentPeriodEnd ? new Date(subscription.currentPeriodEnd).toLocaleDateString('en-IN') : '—'}</p>
-                  <p>Job posts this month: {usage.jobPostsThisMonth ?? 0}{usage.jobPostsLimit < 0 ? ' / Unlimited' : ` / ${usage.jobPostsLimit ?? '—'}`}</p>
-                  <p>Total jobs: {usage.totalJobs ?? jobs.length}</p>
-                </div>
-                <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1.25rem', borderRadius: 12 }}>
-                  <h3 style={{ marginTop: 0 }}>Assign / extend plan</h3>
-                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
-                    <select className="input-field" value={assignSlug} onChange={(e) => setAssignSlug(e.target.value)}>
-                      <option value="starter">Starter</option>
-                      <option value="growth">Growth</option>
-                      <option value="enterprise">Enterprise</option>
-                    </select>
-                    <input className="input-field" type="number" min={1} value={assignDays} onChange={(e) => setAssignDays(e.target.value)} style={{ width: 100 }} />
-                    <button type="button" className="filter-btn active" onClick={assignPlan}>Assign</button>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+
+              {/* Plan Status Card */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+                <div style={{ background: 'rgba(16,185,129,0.07)', border: '1px solid rgba(16,185,129,0.2)', padding: '1.25rem', borderRadius: 14 }}>
+                  <p style={{ fontSize: 12, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>Active Plan</p>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+                    <strong style={{ fontSize: 22, color: '#f1f5f9' }}>{subscription?.planName || 'None'}</strong>
+                    <span style={{
+                      padding: '3px 10px', borderRadius: 999, fontSize: 11, fontWeight: 700, textTransform: 'uppercase',
+                      background: subscription?.status === 'active' ? 'rgba(16,185,129,0.15)' : subscription?.status === 'trial' ? 'rgba(56,189,248,0.15)' : 'rgba(245,158,11,0.15)',
+                      color: subscription?.status === 'active' ? '#10b981' : subscription?.status === 'trial' ? '#38bdf8' : '#f59e0b',
+                    }}>
+                      {subscription?.status || 'none'}
+                    </span>
                   </div>
-                  <p className="text-secondary" style={{ fontSize: 12 }}>Used for Enterprise grants or complimentary extensions. Logged in payment history as admin grant.</p>
+                  <p style={{ fontSize: 13, color: '#94a3b8', marginBottom: 4 }}>
+                    Period: {subscription?.currentPeriodStart ? new Date(subscription.currentPeriodStart).toLocaleDateString('en-IN') : '—'}
+                    {' → '}
+                    {subscription?.currentPeriodEnd ? new Date(subscription.currentPeriodEnd).toLocaleDateString('en-IN') : '—'}
+                  </p>
+                  <p style={{ fontSize: 13, color: '#94a3b8' }}>
+                    Razorpay Payment ID: <span style={{ fontFamily: 'monospace', fontSize: 11 }}>{subscription?.razorpayPaymentId || '—'}</span>
+                  </p>
+                </div>
+
+                <div style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.06)', padding: '1.25rem', borderRadius: 14 }}>
+                  <p style={{ fontSize: 12, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>Usage This Month</p>
+                  <div style={{ marginBottom: 14 }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 6 }}>
+                      <span>Job Posts</span>
+                      <b>{usage.jobPostsThisMonth ?? 0}{usage.jobPostsLimit < 0 ? ' / ∞' : ` / ${usage.jobPostsLimit ?? '—'}`}</b>
+                    </div>
+                    <div style={{ height: 8, borderRadius: 99, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                      <div style={{
+                        height: '100%',
+                        background: 'linear-gradient(90deg, #10b981, #34d399)',
+                        width: usage.jobPostsLimit > 0
+                          ? `${Math.min(100, Math.round(((usage.jobPostsThisMonth ?? 0) / usage.jobPostsLimit) * 100))}%`
+                          : '10%'
+                      }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, marginBottom: 6 }}>
+                      <span>Assessments Sent</span>
+                      <b>{usage.assessmentsSent ?? 0}{usage.assessmentCredits != null && usage.assessmentCredits >= 0 ? ` / ${usage.assessmentCredits}` : ' / ∞'}</b>
+                    </div>
+                    <div style={{ height: 8, borderRadius: 99, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+                      <div style={{
+                        height: '100%',
+                        background: 'linear-gradient(90deg, #818cf8, #a5b4fc)',
+                        width: usage.assessmentCredits > 0
+                          ? `${Math.min(100, Math.round(((usage.assessmentsSent ?? 0) / usage.assessmentCredits) * 100))}%`
+                          : '10%'
+                      }} />
+                    </div>
+                  </div>
+                </div>
+
+                <div style={{ background: 'rgba(0,0,0,0.2)', border: '1px solid rgba(255,255,255,0.06)', padding: '1.25rem', borderRadius: 14 }}>
+                  <p style={{ fontSize: 12, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>Assign / Extend Plan</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    <select className="input-field" value={assignSlug} onChange={(e) => setAssignSlug(e.target.value)}>
+                      <option value="starter">Starter — ₹1,999/mo</option>
+                      <option value="growth">Growth — ₹3,999/mo</option>
+                      <option value="enterprise">Enterprise — Custom</option>
+                    </select>
+                    <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                      <input className="input-field" type="number" min={1} max={365} value={assignDays}
+                        onChange={(e) => setAssignDays(e.target.value)}
+                        style={{ width: 90 }} placeholder="Days" />
+                      <span style={{ fontSize: 13, color: '#94a3b8' }}>days</span>
+                    </div>
+                    <button type="button" className="filter-btn active" onClick={assignPlan}
+                      style={{ background: '#10b981', color: '#fff', border: 'none', fontWeight: 700, borderRadius: 10, padding: '10px' }}>
+                      Assign Plan
+                    </button>
+                  </div>
+                  <p className="text-secondary" style={{ fontSize: 11, marginTop: 8, lineHeight: 1.5 }}>
+                    For complimentary or enterprise grants. Logged as admin_grant in payment history.
+                  </p>
                 </div>
               </div>
-              <div className="table-responsive">
-                <table className="admin-table">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Type</th>
-                      <th>Plan</th>
-                      <th>Amount</th>
-                      <th>Status</th>
-                      <th>Payment ID</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {payments.length === 0 ? (
-                      <tr><td colSpan={6} style={{ textAlign: 'center', padding: '2rem' }}>No payments yet</td></tr>
-                    ) : payments.map((p) => (
-                      <tr key={p._id}>
-                        <td>{new Date(p.createdAt).toLocaleString('en-IN')}</td>
-                        <td>{p.type}</td>
-                        <td>{p.planName}</td>
-                        <td>{p.amountInr ? `₹${p.amountInr}` : '—'}</td>
-                        <td>{p.status}</td>
-                        <td style={{ fontSize: 12 }}>{p.razorpayPaymentId || p.notes || '—'}</td>
+
+              {/* Payment History */}
+              <div>
+                <h3 style={{ marginBottom: '1rem', fontSize: 16 }}>Payment History ({payments.length})</h3>
+                <div className="table-responsive">
+                  <table className="admin-table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Plan</th>
+                        <th>Amount</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        <th>Reference</th>
+                        <th>Valid Till</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {payments.length === 0 ? (
+                        <tr><td colSpan={7} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>No payments yet</td></tr>
+                      ) : payments.map((p) => (
+                        <tr key={p._id}>
+                          <td>{new Date(p.createdAt).toLocaleDateString('en-IN')}</td>
+                          <td><strong>{p.planName}</strong></td>
+                          <td>{p.amountInr ? `₹${Number(p.amountInr).toLocaleString('en-IN')}` : '—'}</td>
+                          <td>
+                            <span style={{
+                              padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 600,
+                              background: p.type === 'subscription' ? 'rgba(16,185,129,0.1)' : p.type === 'admin_grant' ? 'rgba(129,140,248,0.1)' : 'rgba(245,158,11,0.1)',
+                              color: p.type === 'subscription' ? '#10b981' : p.type === 'admin_grant' ? '#818cf8' : '#f59e0b',
+                            }}>{p.type?.replace('_', ' ')}</span>
+                          </td>
+                          <td>
+                            <span style={{
+                              padding: '2px 8px', borderRadius: 6, fontSize: 11, fontWeight: 700,
+                              background: p.status === 'completed' ? 'rgba(16,185,129,0.15)' : p.status === 'inquiry' ? 'rgba(56,189,248,0.15)' : 'rgba(245,158,11,0.15)',
+                              color: p.status === 'completed' ? '#10b981' : p.status === 'inquiry' ? '#38bdf8' : '#f59e0b',
+                            }}>{p.status}</span>
+                          </td>
+                          <td style={{ fontSize: 11, fontFamily: 'monospace', color: '#94a3b8', maxWidth: 140, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            {p.razorpayPaymentId || p.notes || '—'}
+                          </td>
+                          <td style={{ fontSize: 12 }}>
+                            {p.periodEnd ? new Date(p.periodEnd).toLocaleDateString('en-IN') : '—'}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           )}

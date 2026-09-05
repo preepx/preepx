@@ -77,17 +77,50 @@ const getDashboardStats = async (req, res) => {
     const recentTransactions = await WalletTransaction.find().populate("userId", "fullName email").sort({ createdAt: -1 }).limit(5);
 
     const RecruiterPayment = require("../../Backend/models/RecruiterPayment");
+    const RecruiterSubscription = require("../../Backend/models/RecruiterSubscription");
     const Recruiter = require("../models/Recruiter");
+    const Company = require("../models/Company");
+    const Job = require("../../Backend/models/Job");
 
     let recruiterRevenue = 0;
+    let recruiterMonthRevenue = 0;
+    let totalJobsPosted = 0;
+    let activeRecruiterPlans = 0;
+    let pendingVerifications = 0;
+    let recentRecruiterPayments = [];
+
     try {
-      const recStats = await RecruiterPayment.aggregate([
-        { $match: { status: "completed" } },
-        { $group: { _id: null, total: { $sum: "$amountInr" } } },
+      const now = new Date();
+      const monthStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1));
+
+      const [recStats, recMonthStats, jobCount, activePlans, pending, recentPayments] = await Promise.all([
+        RecruiterPayment.aggregate([
+          { $match: { status: "completed" } },
+          { $group: { _id: null, total: { $sum: "$amountInr" } } },
+        ]),
+        RecruiterPayment.aggregate([
+          { $match: { status: "completed", createdAt: { $gte: monthStart } } },
+          { $group: { _id: null, total: { $sum: "$amountInr" } } },
+        ]),
+        Job.countDocuments({ isThirdParty: { $ne: true } }),
+        RecruiterSubscription.countDocuments({ status: { $in: ["active", "trial"] } }),
+        Company.countDocuments({ verificationStatus: "PENDING" }),
+        RecruiterPayment.find({ status: "completed" })
+          .populate("recruiterId", "fullName email companyName")
+          .populate("companyId", "name")
+          .sort({ createdAt: -1 })
+          .limit(5)
+          .lean(),
       ]);
+
       recruiterRevenue = recStats[0]?.total || 0;
+      recruiterMonthRevenue = recMonthStats[0]?.total || 0;
+      totalJobsPosted = jobCount || 0;
+      activeRecruiterPlans = activePlans || 0;
+      pendingVerifications = pending || 0;
+      recentRecruiterPayments = recentPayments;
     } catch (e) {
-      recruiterRevenue = 0;
+      console.error("Recruiter stats error:", e.message);
     }
 
     const totalRecruiters = await Recruiter.countDocuments();
@@ -99,8 +132,13 @@ const getDashboardStats = async (req, res) => {
       coinsSoldLast7Days: totalCoinsSold,
       lifetimeRevenue,
       recruiterRevenue,
+      recruiterMonthRevenue,
+      totalJobsPosted,
+      activeRecruiterPlans,
+      pendingVerifications,
       recentUsers,
       recentTransactions,
+      recentRecruiterPayments,
     });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
