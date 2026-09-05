@@ -1,8 +1,8 @@
 const Recruiter = require("../models/Recruiter");
 const Company = require("../models/Company");
-const RecruiterSubscription = require("../../Backend/models/RecruiterSubscription");
-const RecruiterPayment = require("../../Backend/models/RecruiterPayment");
-const SubscriptionPlan = require("../../Backend/models/SubscriptionPlan");
+const RecruiterSubscription = require("../models/RecruiterSubscription");
+const RecruiterPayment = require("../models/RecruiterPayment");
+const SubscriptionPlan = require("../models/SubscriptionPlan");
 const Job = require("../models/Job");
 
 const monthRange = () => {

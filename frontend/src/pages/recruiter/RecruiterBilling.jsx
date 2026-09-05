@@ -204,7 +204,7 @@ export default function RecruiterBilling() {
               const dbPlans = data?.plans || [];
               const plans = STATIC_PLANS.map((sp) => {
                 const dbPlan = dbPlans.find((p) => p.slug === sp.slug);
-                return dbPlan ? { ...sp, ...dbPlan, features: sp.features } : sp;
+                return dbPlan ? { ...sp, ...dbPlan, priceInr: sp.priceInr, features: sp.features } : sp;
               });
 
               return plans.map((plan) => {

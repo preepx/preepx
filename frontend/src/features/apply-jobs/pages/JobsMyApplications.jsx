@@ -133,15 +133,45 @@ export default function JobsMyApplications() {
           {/* TOOLBAR */}
           <div className="jma-toolbar-top">
             <div className="jma-tabs">
-              {["All", "Shortlisted", "Assessment", "AI Interview", "Offered", "Rejected"].map((t) => (
-                <button
-                  key={t}
-                  className={`jma-tab ${activeTab === t ? 'active' : ''}`}
-                  onClick={() => setActiveTab(t)}
-                >
-                  {t}
-                </button>
-              ))}
+              {[
+                { name: "All", color: "var(--text)" }, 
+                { name: "Shortlisted", color: "#10b981" }, 
+                { name: "Assessment", color: "#f59e0b" }, 
+                { name: "AI Interview", color: "#8b5cf6" }, 
+                { name: "Offered", color: "#10b981" }, 
+                { name: "Rejected", color: "#ef4444" }
+              ].map((t) => {
+                let count = 0;
+                if (t.name === "All") count = applications.length;
+                else if (t.name === "Shortlisted") count = applications.filter((a) => a.status === "shortlisted").length;
+                else if (t.name === "Assessment") count = applications.filter((a) => ["assessment_sent", "assessment_in_progress", "assessment_completed"].includes(a.status)).length;
+                else if (t.name === "AI Interview") count = applications.filter((a) => ["ai_interview", "interview"].includes(a.status)).length;
+                else if (t.name === "Offered") count = applications.filter((a) => ["offered", "hired"].includes(a.status)).length;
+                else if (t.name === "Rejected") count = applications.filter((a) => a.status === "rejected").length;
+
+                return (
+                  <button
+                    key={t.name}
+                    className={`jma-tab ${activeTab === t.name ? 'active' : ''}`}
+                    onClick={() => setActiveTab(t.name)}
+                    style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                  >
+                    {t.name}
+                    <span 
+                      style={{ 
+                        background: activeTab === t.name ? 'rgba(255,255,255,0.2)' : 'var(--bg)', 
+                        color: activeTab === t.name ? '#fff' : t.color,
+                        padding: '2px 8px', 
+                        borderRadius: '12px', 
+                        fontSize: '12px',
+                        fontWeight: '700'
+                      }}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 

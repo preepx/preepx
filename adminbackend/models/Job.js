@@ -21,10 +21,10 @@ const customCodingSchema = new mongoose.Schema(
 
 const jobSchema = new mongoose.Schema(
   {
-    recruiterId: { 
-      type: mongoose.Schema.Types.ObjectId, 
-      ref: "Recruiter", 
-      required: function() { return !this.isThirdParty; } 
+    recruiterId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Recruiter",
+      required: function () { return !this.isThirdParty; }
     },
     companyId: { type: mongoose.Schema.Types.ObjectId, ref: "Company" },
     isThirdParty: { type: Boolean, default: false },

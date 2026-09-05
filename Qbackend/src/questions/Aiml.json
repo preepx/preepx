@@ -1,0 +1,82 @@
+[
+    {
+        "difficulty": "Easy",
+        "question": "What does the acronym 'AI' stand for?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the full form of 'ML' in the context of computer science?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "Name the type of machine learning where the model learns from labeled data."
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the term for a machine learning model that performs well on training data but poorly on new data?"
+    },
+    {
+        "difficulty": "Easy",
+        "question": "What is the name of the function commonly used to introduce non-linearity in a neural network?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "A model correctly predicts 80 out of 100 test samples. What is its accuracy?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "In a binary classification, if Precision = 0.8 and Recall = 0.6, calculate the F1 score."
+    },
+    {
+        "difficulty": "Medium",
+        "question": "A dataset has 1000 samples split into 70% training and 30% testing. How many samples are in the test set?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the term used for reducing the number of input features while preserving important information?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "Which algorithm is commonly used for classification and is based on the concept of finding a hyperplane that best separates classes?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "In K-Nearest Neighbors, if K=5 and a new point has 3 neighbors of class A and 2 of class B, what class will it be assigned?"
+    },
+    {
+        "difficulty": "Medium",
+        "question": "What is the term for a model that has high bias and low variance?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "A confusion matrix shows TP=50, FP=10, FN=5, TN=35. Calculate the precision, recall, and F1 score."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "If a neural network has 3 input neurons, 4 hidden neurons, and 2 output neurons, how many weights are there in total (excluding biases)?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain the difference between L1 and L2 regularization and their effect on model weights."
+    },
+    {
+        "difficulty": "Hard",
+        "question": "A dataset has class imbalance with 900 samples of Class A and 100 of Class B. What technique would you use to balance it, and why?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Given a learning rate that is too high, what problem might occur during gradient descent optimization?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "What is the vanishing gradient problem, and in which type of neural networks does it commonly occur?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "If the ROC curve of a model has an AUC of 0.5, what does this indicate about the model's performance?"
+    },
+    {
+        "difficulty": "Hard",
+        "question": "Explain the bias-variance tradeoff and how it affects model generalization."
+    }
+]

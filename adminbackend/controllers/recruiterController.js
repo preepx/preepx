@@ -1,6 +1,9 @@
 const Recruiter = require("../models/Recruiter");
 const Company = require("../models/Company");
-const RecruiterSubscription = require("../../Backend/models/RecruiterSubscription");
+const RecruiterSubscription = require("../models/RecruiterSubscription");
+const Job = require("../models/Job");
+const JobApplication = require("../../Backend/models/JobApplication");
+const Assessment = require("../../Backend/models/Assessment");
 const { attachBillingToCompany, monthRange } = require("./recruiterBillingController");
 
 const notifyRecruiterViaMainBackend = async (recruiterId, title, message, type, icon) => {
@@ -97,10 +100,6 @@ const getRecruiterDetail = async (req, res) => {
     let assessments = [];
 
     try {
-      const Job = require("../../Backend/models/Job");
-      const JobApplication = require("../../Backend/models/JobApplication");
-      const Assessment = require("../../Backend/models/Assessment");
-
       jobs = await Job.find({ companyId: company._id }).sort({ createdAt: -1 }).lean();
       applicationsCount = await JobApplication.countDocuments({ companyId: company._id });
       assessments = await Assessment.find({ recruiterId: company.primaryRecruiterId }).sort({ createdAt: -1 }).lean();

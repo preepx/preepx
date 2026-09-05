@@ -13,10 +13,14 @@ const rateLimit = require("express-rate-limit");
 const crypto = require("crypto");
 
 dotenv.config();
-connectDB();
 
-const companyService = require("./src/modules/hiring/company.service");
-companyService.seedPlansIfEmpty().catch(() => {});
+// Wrap startup so DB is fully connected before running any Mongoose queries
+(async () => {
+  await connectDB();
+
+  const companyService = require("./src/modules/hiring/company.service");
+  companyService.seedPlansIfEmpty().catch(() => {});
+})();
 
 require("./config/passport");
 const passport = require("passport");

@@ -6,9 +6,6 @@ const connectDB = require("./config/db");
 // Load env vars
 dotenv.config();
 
-// Connect to database
-connectDB();
-
 const app = express();
 
 // Body parser
@@ -28,6 +25,13 @@ app.use("/api/admin", require("./routes/adminRoutes"));
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Admin Server running on port ${PORT}`);
+// Connect to DB first, then start server
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Admin Server running on port ${PORT}`);
+  });
+}).catch((err) => {
+  console.error("Failed to connect to DB:", err.message);
+  process.exit(1);
 });
+

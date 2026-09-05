@@ -289,9 +289,8 @@ const UserDetails = () => {
                 <p className="text-secondary" style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>Current Progress</p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <div style={{ flex: 1, background: 'rgba(255,255,255,0.4)', borderRadius: '999px', height: '12px', overflow: 'hidden', boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)' }}>
-                    <div style={{ 
-                      width: `${Math.min(((user.challengeProgress?.completedDays?.length || 0) / 100) * 100, 100)}%`, 
-                      background: 'linear-gradient(90deg, var(--accent-primary), var(--accent-secondary))', 
+                    <div style={{ width: `${Math.min(((user.challengeProgress?.completedDays?.length || 0) / 100) * 100, 100)}%`, 
+                      background: 'linear-gradient(90deg, var(--primary), var(--accent))', 
                       height: '100%',
                       borderRadius: '999px',
                       transition: 'width 0.5s ease-out'
@@ -472,7 +471,7 @@ const UserDetails = () => {
                     {ref.profilePic ? (
                       <img src={ref.profilePic} alt={ref.fullName} style={{ width: 44, height: 44, borderRadius: '50%', objectFit: 'cover' }} />
                     ) : (
-                      <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg, var(--accent-primary), var(--accent-secondary))', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem' }}>
+                      <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'linear-gradient(135deg, var(--primary), var(--accent))', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '1.2rem' }}>
                         {ref.fullName ? ref.fullName.charAt(0).toUpperCase() : 'U'}
                       </div>
                     )}
