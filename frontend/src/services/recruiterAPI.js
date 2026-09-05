@@ -46,9 +46,15 @@ export const getAssessmentResult = (assessmentId) => API.get(`${BASE}/assessment
 export const getInterviews = () => API.get(`${BASE}/interviews`).then((r) => r.data.data);
 export const scheduleInterview = (data) => API.post(`${BASE}/interviews`, data).then((r) => r.data.data);
 export const getBilling = () => API.get(`${BASE}/billing`).then((r) => r.data.data);
+export const selectPlan = (planSlug) => API.post(`${BASE}/billing/select-plan`, { planSlug }).then((r) => r.data.data);
+export const createRecruiterPlanOrder = (planSlug) =>
+  API.post(`${BASE}/billing/create-order`, { planSlug }).then((r) => r.data.data);
+export const verifyRecruiterPlanPayment = (payload) =>
+  API.post(`${BASE}/billing/verify-payment`, payload).then((r) => r.data);
+export const contactRecruiterSales = (note = "") =>
+  API.post(`${BASE}/billing/contact-sales`, { note }).then((r) => r.data);
 
 export const getRecruiterNotifications = () => API.get("/recruiter/notifications").then((r) => r.data.data);
 export const markRecruiterNotificationRead = (notifId) => API.put(`/recruiter/notifications/${notifId}/read`).then((r) => r.data.data);
 export const markAllRecruiterNotificationsRead = () => API.put("/recruiter/notifications/read-all").then((r) => r.data.data);
-export const selectPlan = (planSlug) => API.post(`${BASE}/billing/select-plan`, { planSlug }).then((r) => r.data.data);
 

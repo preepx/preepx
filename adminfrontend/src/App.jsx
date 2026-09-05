@@ -16,6 +16,7 @@ const BtecQuestions = lazy(() => import('./pages/BtecQuestions'));
 const BtecPdfNotes = lazy(() => import('./pages/BtecPdfNotes'));
 const Recruiters = lazy(() => import('./pages/Recruiters'));
 const RecruiterDetails = lazy(() => import('./pages/RecruiterDetails'));
+const RecruiterPlans = lazy(() => import('./pages/RecruiterPlans'));
 const AdminJobs = lazy(() => import('./pages/AdminJobs'));
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="users/:id" element={<UserDetails />} />
             <Route path="recruiters" element={<Recruiters />} />
             <Route path="recruiters/:id" element={<RecruiterDetails />} />
+            <Route path="recruiter-plans" element={<RecruiterPlans />} />
             <Route path="transactions" element={<Transactions />} />
             <Route path="purchases" element={<Purchases />} />
             <Route path="btec-notes" element={<BtecNotes />} />

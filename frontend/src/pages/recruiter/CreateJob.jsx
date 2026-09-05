@@ -137,6 +137,9 @@ export default function CreateJob() {
       navigate(`/recruiter/assessments?tab=builder&jobId=${targetJobId}`);
     } catch (err) {
       notify.error(err.response?.data?.message || `Failed to ${isEdit ? "update" : "create"} job`);
+      if (err.response?.status === 403 && String(err.response?.data?.message || "").toLowerCase().includes("plan")) {
+        notify.error("Open Billing to upgrade your Recruiter Plan.");
+      }
     } finally {
       setLoading(false);
     }

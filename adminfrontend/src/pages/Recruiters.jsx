@@ -126,14 +126,16 @@ const Recruiters = () => {
                 <th>Company</th>
                 <th>Recruiter</th>
                 <th>Industry</th>
+                <th>Plan</th>
+                <th>Jobs / mo</th>
                 <th>Status</th>
                 <th>Submitted</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {filtered.length === 0 ? (
-                <tr><td colSpan={6} style={{ textAlign: 'center', padding: '2rem' }}>No recruiters found</td></tr>
+                  {filtered.length === 0 ? (
+                    <tr><td colSpan={8} style={{ textAlign: 'center', padding: '2rem' }}>No recruiters found</td></tr>
               ) : filtered.map((item) => {
                 const cfg = STATUS_CONFIG[item.verificationStatus] || STATUS_CONFIG.PENDING;
                 const Icon = cfg.icon;
@@ -147,7 +149,15 @@ const Recruiters = () => {
                       {item.recruiter?.fullName || '—'}
                       <br /><span className="text-secondary" style={{ fontSize: 12 }}>{item.recruiter?.email}</span>
                     </td>
-                    <td>{item.company?.industry || '—'}</td>
+                    <td>{item.company?.industry || "—"}</td>
+                    <td>
+                      <span style={{ color: "#10b981", fontWeight: 600 }}>{item.plan?.name || "None"}</span>
+                      <br /><span className="text-secondary" style={{ fontSize: 12 }}>{item.plan?.status || "none"}</span>
+                    </td>
+                    <td>
+                      {item.plan?.jobPostsThisMonth ?? 0}
+                      {item.plan?.jobPostsLimit < 0 ? " / Unlimited" : ` / ${item.plan?.jobPostsLimit ?? "—"}`}
+                    </td>
                     <td><span className={`status-badge ${cfg.className}`}><Icon size={12} /> {cfg.label}</span></td>
                     <td>{new Date(item.updatedAt).toLocaleDateString()}</td>
                     <td>

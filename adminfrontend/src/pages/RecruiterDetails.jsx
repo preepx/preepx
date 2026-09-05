@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import api from '../utils/api';
 import {
   ArrowLeft, Building2, User, Mail, Briefcase, MapPin, 
-  ClipboardCheck, Clock, CheckCircle, Shield, AlertTriangle
+  ClipboardCheck, Clock, CheckCircle, Shield, AlertTriangle, CreditCard
 } from 'lucide-react';
 import './Dashboard.css';
 
@@ -13,6 +13,8 @@ const RecruiterDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [tab, setTab] = useState('overview');
+  const [assignSlug, setAssignSlug] = useState('growth');
+  const [assignDays, setAssignDays] = useState(30);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -47,6 +49,20 @@ const RecruiterDetails = () => {
   const stats = data.stats || { totalJobs: 0, totalApplications: 0, totalAssessments: 0 };
   const jobs = data.jobs || [];
   const assessments = data.assessments || [];
+  const subscription = data.subscription;
+  const payments = data.payments || [];
+  const usage = data.usage || {};
+
+  const assignPlan = async () => {
+    try {
+      await api.patch(`/recruiters/${data._id}/plan`, { planSlug: assignSlug, days: Number(assignDays) });
+      alert("Plan assigned");
+      const res = await api.get(`/recruiters/${id}`);
+      setData(res.data);
+    } catch (err) {
+      alert(err.response?.data?.message || "Failed to assign plan");
+    }
+  };
 
   return (
     <div className="dashboard-container animate-fade-in">
@@ -97,11 +113,21 @@ const RecruiterDetails = () => {
             <p className="text-secondary">Assessments Created</p>
           </div>
         </div>
+        <div className="stat-card glass-panel">
+          <div className="stat-icon-wrapper blue"><CreditCard size={24} /></div>
+          <div>
+            <h3>{subscription?.planName || recruiter.planName || "None"}</h3>
+            <p className="text-secondary">
+              Jobs this month: {usage.jobPostsThisMonth ?? stats.jobPostsThisMonth ?? 0}
+              {usage.jobPostsLimit < 0 ? " / Unlimited" : ` / ${usage.jobPostsLimit ?? "—"}`}
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="glass-panel content-card" style={{ marginTop: '1.5rem' }}>
         <div className="card-header" style={{ display: 'flex', gap: '1rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '1rem' }}>
-          {['overview', 'jobs', 'assessments'].map((t) => (
+          {['overview', 'jobs', 'assessments', 'billing'].map((t) => (
             <button
               key={t}
               type="button"
@@ -129,6 +155,7 @@ const RecruiterDetails = () => {
                   </p>
                   <p style={{ marginBottom: 8 }}><strong>Phone:</strong> {recruiter.phone || 'N/A'}</p>
                   <p><strong>Designation:</strong> {recruiter.designation || 'N/A'}</p>
+                  <p style={{ marginTop: 8 }}><strong>Plan:</strong> {recruiter.planName || subscription?.planName || 'None'} ({recruiter.planStatus || subscription?.status || 'none'})</p>
                 </div>
               </div>
               
@@ -188,6 +215,60 @@ const RecruiterDetails = () => {
             </div>
           )}
 
+          {tab === 'billing' && (
+            <div>
+              <div className="grid-2col" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1.25rem', borderRadius: 12 }}>
+                  <h3 style={{ marginTop: 0 }}>Active plan</h3>
+                  <p><strong>{subscription?.planName || 'None'}</strong> · {subscription?.status || 'none'}</p>
+                  <p className="text-secondary">Expires: {subscription?.currentPeriodEnd ? new Date(subscription.currentPeriodEnd).toLocaleDateString('en-IN') : '—'}</p>
+                  <p>Job posts this month: {usage.jobPostsThisMonth ?? 0}{usage.jobPostsLimit < 0 ? ' / Unlimited' : ` / ${usage.jobPostsLimit ?? '—'}`}</p>
+                  <p>Total jobs: {usage.totalJobs ?? jobs.length}</p>
+                </div>
+                <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1.25rem', borderRadius: 12 }}>
+                  <h3 style={{ marginTop: 0 }}>Assign / extend plan</h3>
+                  <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
+                    <select className="input-field" value={assignSlug} onChange={(e) => setAssignSlug(e.target.value)}>
+                      <option value="starter">Starter</option>
+                      <option value="growth">Growth</option>
+                      <option value="enterprise">Enterprise</option>
+                    </select>
+                    <input className="input-field" type="number" min={1} value={assignDays} onChange={(e) => setAssignDays(e.target.value)} style={{ width: 100 }} />
+                    <button type="button" className="filter-btn active" onClick={assignPlan}>Assign</button>
+                  </div>
+                  <p className="text-secondary" style={{ fontSize: 12 }}>Used for Enterprise grants or complimentary extensions. Logged in payment history as admin grant.</p>
+                </div>
+              </div>
+              <div className="table-responsive">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Type</th>
+                      <th>Plan</th>
+                      <th>Amount</th>
+                      <th>Status</th>
+                      <th>Payment ID</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {payments.length === 0 ? (
+                      <tr><td colSpan={6} style={{ textAlign: 'center', padding: '2rem' }}>No payments yet</td></tr>
+                    ) : payments.map((p) => (
+                      <tr key={p._id}>
+                        <td>{new Date(p.createdAt).toLocaleString('en-IN')}</td>
+                        <td>{p.type}</td>
+                        <td>{p.planName}</td>
+                        <td>{p.amountInr ? `₹${p.amountInr}` : '—'}</td>
+                        <td>{p.status}</td>
+                        <td style={{ fontSize: 12 }}>{p.razorpayPaymentId || p.notes || '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
           {tab === 'assessments' && (
             <div className="table-responsive">
               <table className="admin-table">

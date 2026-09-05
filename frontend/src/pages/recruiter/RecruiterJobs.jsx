@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { PlusCircle } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
-import { getJobs, changeJobStatus, deleteJob } from "@/services/recruiterAPI";
+import { getJobs, changeJobStatus, deleteJob, getBilling } from "@/services/recruiterAPI";
 import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import EmptyState from "@/components/recruiter/EmptyState";
 import { Briefcase } from "lucide-react";
@@ -17,8 +17,12 @@ const STATUS_BADGE = {
 export default function RecruiterJobs() {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [usage, setUsage] = useState(null);
 
-  const load = () => getJobs().then(setJobs).finally(() => setLoading(false));
+  const load = () => {
+    getJobs().then(setJobs).finally(() => setLoading(false));
+    getBilling().then((d) => setUsage(d.usage)).catch(() => {});
+  };
   useEffect(() => { load(); }, []);
 
   const handlePublish = async (id) => {
@@ -48,6 +52,15 @@ export default function RecruiterJobs() {
         </div>
         <Link to="/recruiter/jobs/new" className="rx-btn rx-btn-primary"><PlusCircle size={16} /> Post Job</Link>
       </div>
+      {usage && (
+        <div className="rx-card" style={{ marginBottom: 16, display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+          <span style={{ fontSize: 14 }}>
+            Job posts this month: <strong>{usage.jobPostsThisMonth || 0}</strong>
+            {usage.jobPostsLimit < 0 ? " / Unlimited" : ` / ${usage.jobPostsLimit || 0}`}
+          </span>
+          <Link to="/recruiter/billing" className="rx-btn rx-btn-ghost">Manage plan</Link>
+        </div>
+      )}
 
       {jobs.length === 0 ? (
         <div className="rx-card">

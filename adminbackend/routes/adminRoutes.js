@@ -34,6 +34,12 @@ const {
   getVerificationStats,
 } = require("../controllers/recruiterController");
 
+const {
+  getRecruiterPlansOverview,
+  getRecruiterPayments,
+  assignRecruiterPlan,
+} = require("../controllers/recruiterBillingController");
+
 const { uploadPdf, uploadImage } = require("../config/cloudinary");
 
 const {
@@ -68,9 +74,12 @@ router.get("/purchases", getPurchases);
 
 // Recruiter verification
 router.get("/recruiters/stats", getVerificationStats);
+router.get("/recruiter-plans", getRecruiterPlansOverview);
+router.get("/recruiter-payments", getRecruiterPayments);
 router.get("/recruiters", getRecruiters);
 router.get("/recruiters/:companyId", getRecruiterDetail);
 router.patch("/recruiters/:companyId/verification", updateVerificationStatus);
+router.patch("/recruiters/:companyId/plan", assignRecruiterPlan);
 
 // B.Tech Notes — PDF upload MUST be registered before /:id routes
 router.post("/btec-notes/upload-pdf", uploadPdf.single("pdf"), uploadPdfNote);

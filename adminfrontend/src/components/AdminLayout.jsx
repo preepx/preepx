@@ -50,6 +50,11 @@ const AdminLayout = () => {
         <span>User Plans</span>
         <ChevronRight size={16} className="nav-chevron" />
       </NavLink>
+      <NavLink to="/recruiter-plans" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => isMobile && setIsMobileMenuOpen(false)}>
+        <CreditCard size={20} />
+        <span>Recruiter Plans</span>
+        <ChevronRight size={16} className="nav-chevron" />
+      </NavLink>
       <NavLink to="/recruiters" className={({ isActive }) => isActive ? 'nav-item active' : 'nav-item'} onClick={() => isMobile && setIsMobileMenuOpen(false)}>
         <Briefcase size={20} />
         <span>Recruiters</span>

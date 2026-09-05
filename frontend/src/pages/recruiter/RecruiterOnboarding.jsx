@@ -151,17 +151,17 @@ export default function RecruiterOnboarding() {
 
           {step === 3 && (
             <>
-              <h2 style={{ marginTop: 0 }}>Choose a Plan</h2>
-              <p className="rx-muted">Start with a 14-day trial. Upgrade anytime.</p>
+              <h2 style={{ marginTop: 0 }}>Start hiring with a trial</h2>
+              <p className="rx-muted">You get a 14-day Starter trial (up to 5 job posts). Upgrade to Growth anytime from Billing.</p>
               <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
-                {(plans.length ? plans : [{ name: "Starter", slug: "starter", priceInr: 2999 }]).map((p) => (
+                {(plans.length ? plans.filter((p) => p.slug === "starter") : [{ name: "Starter", slug: "starter", priceInr: 1999 }]).map((p) => (
                   <div key={p.slug} className="rx-card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
-                      <strong>{p.name}</strong>
-                      <p className="rx-muted" style={{ margin: "4px 0 0" }}>₹{p.priceInr?.toLocaleString()}/month</p>
+                      <strong>{p.name} trial</strong>
+                      <p className="rx-muted" style={{ margin: "4px 0 0" }}>Then ₹{p.priceInr?.toLocaleString("en-IN")}/month · 5 job posts</p>
                     </div>
-                    <button type="button" className="rx-btn rx-btn-primary" onClick={() => finish(p.slug)} disabled={loading}>
-                      <CheckCircle size={16} /> Start Trial
+                    <button type="button" className="rx-btn rx-btn-primary" onClick={() => finish("starter")} disabled={loading}>
+                      <CheckCircle size={16} /> Start 14-day trial
                     </button>
                   </div>
                 ))}

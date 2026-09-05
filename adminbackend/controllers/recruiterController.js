@@ -1,7 +1,6 @@
 const Recruiter = require("../models/Recruiter");
 const Company = require("../models/Company");
 const RecruiterSubscription = require("../../Backend/models/RecruiterSubscription");
-const RecruiterPayment = require("../../Backend/models/RecruiterPayment");
 const { attachBillingToCompany, monthRange } = require("./recruiterBillingController");
 
 const notifyRecruiterViaMainBackend = async (recruiterId, title, message, type, icon) => {

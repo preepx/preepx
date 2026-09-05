@@ -91,6 +91,17 @@ const getDashboardStats = async (req, res) => {
     }
 
     const totalRecruiters = await Recruiter.countDocuments();
+
+    res.json({
+      totalUsers,
+      totalRecruiters,
+      revenueLast7Days: totalRevenue,
+      coinsSoldLast7Days: totalCoinsSold,
+      lifetimeRevenue,
+      recruiterRevenue,
+      recentUsers,
+      recentTransactions,
+    });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }

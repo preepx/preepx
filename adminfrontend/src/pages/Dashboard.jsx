@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users, IndianRupee, Coins, TrendingUp } from 'lucide-react';
+import { Users, IndianRupee, Coins, TrendingUp, Briefcase } from 'lucide-react';
 import api from '../utils/api';
 import './Dashboard.css';
 
@@ -68,6 +68,16 @@ const Dashboard = () => {
           <div className="stat-details">
             <h3>₹ Revenue (Last 7 Days)</h3>
             <p className="stat-value">₹{stats.coinsSoldLast7Days}</p>
+          </div>
+        </div>
+
+        <div className="stat-card glass-panel">
+          <div className="stat-icon-wrapper green">
+            <Briefcase size={24} />
+          </div>
+          <div className="stat-details">
+            <h3>Recruiter Plan Revenue</h3>
+            <p className="stat-value">₹{stats.recruiterRevenue || 0}</p>
           </div>
         </div>
       </div>

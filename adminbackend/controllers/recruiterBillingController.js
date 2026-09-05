@@ -41,7 +41,12 @@ const getRecruiterPlansOverview = async (req, res) => {
         .lean(),
       RecruiterPayment.find({ status: "completed" }).lean(),
       SubscriptionPlan.find().sort({ sortOrder: 1 }).lean(),
-      RecruiterPayment.find({ type: "sales_inquiry" }).sort({ createdAt: -1 }).limit(50).lean(),
+      RecruiterPayment.find({ type: "sales_inquiry" })
+        .populate("recruiterId", "fullName email companyName")
+        .populate("companyId", "name")
+        .sort({ createdAt: -1 })
+        .limit(50)
+        .lean(),
     ]);
 
     const revenue = payments.reduce((sum, p) => sum + (p.amountInr || 0), 0);
