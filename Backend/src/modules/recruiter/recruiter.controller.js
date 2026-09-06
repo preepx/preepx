@@ -92,6 +92,7 @@ exports.registerRecruiter = catchAsync(async (req, res) => {
   // Send Welcome Email via Brevo API
   if (process.env.BREVO_API_KEY) {
     try {
+      const fromEmail = process.env.BREVO_FROM_EMAIL || process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com";
       const resMail = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
@@ -99,17 +100,36 @@ exports.registerRecruiter = catchAsync(async (req, res) => {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          sender: { name: "Preepx", email: process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com" },
+          sender: { name: "PreepX", email: fromEmail },
           to: [{ email: recruiter.email, name: recruiter.fullName || 'Recruiter' }],
-          subject: "Welcome to Preepx!",
+          subject: "Welcome to PreepX – Your Hiring Journey Begins Here!",
           htmlContent: `
-            <div style="font-family: sans-serif; padding: 20px;">
-              <h2>Welcome ${recruiter.fullName || 'Recruiter'}! 🎉</h2>
-              <p>Thank you for registering on Preepx.</p>
-              <p>Please log in and complete your company profile so our admin team can verify your account and you can start posting jobs.</p>
-              <a href="https://www.preepx.in/auth/recruiter" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">
-                Go to Dashboard
-              </a>
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 32px; border: 1px solid #e4e4e7; border-radius: 12px; line-height: 1.6;">
+              <h2 style="color: #4f46e5; text-align: center;">Welcome to PreepX! 🎉</h2>
+              <p style="font-size: 16px; color: #374151;">Hi <strong>${recruiter.fullName || 'Recruiter'}</strong>,</p>
+              <p style="font-size: 16px; color: #374151;">Thank you for registering on PreepX. We're excited to have you on board!</p>
+              <p style="font-size: 16px; color: #374151;">To get started, please complete the following steps:</p>
+              
+              <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <ol style="margin: 0; padding-left: 20px; font-size: 15px; color: #374151;">
+                  <li style="margin-bottom: 8px;">Log in to your recruiter account</li>
+                  <li style="margin-bottom: 8px;">Complete your company profile</li>
+                  <li style="margin-bottom: 8px;">Submit for admin verification</li>
+                  <li>Start posting jobs and hiring talent!</li>
+                </ol>
+              </div>
+
+              <p style="font-size: 15px; color: #6b7280;">Our admin team will verify your company account shortly. Once verified, you'll receive a confirmation email and can start posting opportunities immediately.</p>
+
+              <div style="text-align: center; margin-top: 28px; margin-bottom: 28px;">
+                <a href="https://www.preepx.in/auth/recruiter" style="background-color: #4f46e5; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
+                  Login to PreepX
+                </a>
+              </div>
+
+              <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid #e4e4e7;">
+                <p style="margin: 0; font-size: 14px; color: #6b7280;">Regards,<br><strong>Team PreepX</strong><br><em>Building opportunities. Connecting talent.</em></p>
+              </div>
             </div>
           `
         })
