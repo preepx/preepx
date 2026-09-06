@@ -379,21 +379,28 @@ export default function TakeAssessment() {
       {step === "result" && result && (
         <div className="ta-page">
           <header className="ta-header">
-            <button type="button" onClick={() => navigate("/my-assessments")} className="ta-back">
+            <button type="button" onClick={() => navigate("/dashboard")} className="ta-back">
               <ChevronLeft size={16} /> Back
             </button>
             <span>Assessment Complete</span>
           </header>
-          <div className="ta-result">
-            <CheckCircle size={56} color="#10b981" />
-            <h1>Assessment Complete!</h1>
-            <div className="ta-scores">
-              <div><span>{result.mcqScore}%</span><p>MCQ Score</p></div>
-              <div><span>{result.codingScore}%</span><p>Coding Score</p></div>
-              <div><span>{result.overallScore}%</span><p>Overall</p></div>
-            </div>
-            {result.aiFeedback && <p className="ta-feedback">{result.aiFeedback}</p>}
-            <button type="button" className="ta-btn" onClick={() => navigate("/my-assessments")}>Back to Assessments</button>
+          <div className="ta-result" style={{ textAlign: "center", maxWidth: 520, margin: "0 auto", padding: "40px 24px" }}>
+            <CheckCircle size={72} color="#10b981" style={{ marginBottom: 24 }} />
+            <h1 style={{ marginBottom: 12 }}>Thank You for Attending! 🎉</h1>
+            <p style={{ fontSize: 16, color: "var(--text-muted, #9ca3af)", lineHeight: 1.7, marginBottom: 8 }}>
+              We appreciate the time and effort you put into completing this assessment.
+            </p>
+            <p style={{ fontSize: 16, color: "var(--text-muted, #9ca3af)", lineHeight: 1.7, marginBottom: 32 }}>
+              Your responses have been recorded. Keep an eye on your dashboard — we'll keep you posted on further updates shortly.
+            </p>
+            <button
+              type="button"
+              className="ta-btn"
+              onClick={() => navigate("/dashboard")}
+              style={{ padding: "14px 36px", fontSize: 16 }}
+            >
+              Go to Dashboard
+            </button>
           </div>
         </div>
       )}
