@@ -1,9 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   Camera, Check, X, Edit2, Mail, Phone, MapPin, AlertCircle,
-  Linkedin, Github, Globe, FileText, Upload, Crown
+  Linkedin, Github, Globe, FileText, Upload, Crown, Gift, ZoomIn
 } from "lucide-react";
+import Cropper from "react-easy-crop";
+import getCroppedImg from "@/utils/cropImage";
+import notify from "@/utils/notify";
+import { getAssetUrl } from "@/utils/assetUrl";
 import { useSubscription } from "@/features/subscription";
+import "@/styles/cropper.css";
 
 export default function ProfileHeaderCard({
   user,
@@ -22,8 +27,77 @@ export default function ProfileHeaderCard({
   const resumeRef = useRef(null);
   const { subscribed } = useSubscription();
 
+  // Cropper State
+  const [imageSrc, setImageSrc] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [showCropper, setShowCropper] = useState(false);
+  const [cropping, setCropping] = useState(false);
+
   const avatar = user?.profilePic ||
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.fullName || "U")}&background=6366f1&color=fff&size=200`;
+
+  const handlePhotoSelect = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Reset input value so same file can be selected again if cancelled
+    e.target.value = "";
+
+    // 1. File Type Validation (JPG, JPEG, PNG only)
+    const validMimeTypes = ["image/jpeg", "image/jpg", "image/png"];
+    const validExtensions = [".jpg", ".jpeg", ".png"];
+    const fileExtension = file.name.substring(file.name.lastIndexOf(".")).toLowerCase();
+
+    if (!validMimeTypes.includes(file.type) && !validExtensions.includes(fileExtension)) {
+      notify.error("Invalid file format! Only PNG, JPG, and JPEG images are allowed.");
+      return;
+    }
+
+    // 2. File Size Validation (Max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      notify.error("File size too large! Please upload an image under 5MB.");
+      return;
+    }
+
+    // 3. Read image and open cropper modal
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageSrc(reader.result);
+      setCrop({ x: 0, y: 0 });
+      setZoom(1);
+      setShowCropper(true);
+    };
+    reader.onerror = () => {
+      notify.error("Failed to read image file.");
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const onCropComplete = (_croppedArea, pixels) => {
+    setCroppedAreaPixels(pixels);
+  };
+
+  const handleSaveCroppedImage = async () => {
+    if (!imageSrc || !croppedAreaPixels) return;
+    setCropping(true);
+    try {
+      const croppedFile = await getCroppedImg(imageSrc, croppedAreaPixels);
+      setShowCropper(false);
+      setImageSrc(null);
+      await onPhotoUpload(croppedFile);
+    } catch (err) {
+      notify.error("Failed to crop image. Please try again.");
+    } finally {
+      setCropping(false);
+    }
+  };
+
+  const handleCancelCrop = () => {
+    setShowCropper(false);
+    setImageSrc(null);
+  };
 
   return (
     <div className="jp-card jp-main-card">
@@ -40,17 +114,17 @@ export default function ProfileHeaderCard({
             type="button"
             className="jp-photo-btn"
             onClick={() => photoRef.current?.click()}
-            disabled={uploadingPhoto}
+            disabled={uploadingPhoto || cropping}
             aria-label="Upload profile photo"
           >
-            {uploadingPhoto ? "..." : <Camera size={16} />}
+            {uploadingPhoto || cropping ? "..." : <Camera size={16} />}
           </button>
           <input
             ref={photoRef}
             type="file"
-            accept="image/*"
+            accept=".png,.jpg,.jpeg,image/png,image/jpeg,image/jpg"
             style={{ display: "none" }}
-            onChange={onPhotoUpload}
+            onChange={handlePhotoSelect}
           />
         </div>
         <div className="jp-main-info">
@@ -80,25 +154,25 @@ export default function ProfileHeaderCard({
                   <input
                     value={form.city}
                     onChange={(e) => setForm({ ...form, city: e.target.value })}
-                    placeholder="Mumbai, Delhi..."
+                    placeholder="e.g. Bangalore, Remote"
                   />
                 </div>
                 <div className="jp-field">
-                  <label>Headline</label>
+                  <label>Headline / Tagline</label>
                   <input
                     value={form.headline}
                     onChange={(e) => setForm({ ...form, headline: e.target.value })}
-                    placeholder="Software Engineer · 3 yrs exp"
+                    placeholder="e.g. Senior Frontend Engineer | React & Node"
                   />
                 </div>
               </div>
               <div className="jp-field">
-                <label>Professional Summary</label>
+                <label>Summary</label>
                 <textarea
+                  rows={3}
                   value={form.summary}
                   onChange={(e) => setForm({ ...form, summary: e.target.value })}
-                  placeholder="Write a brief summary about yourself..."
-                  rows={3}
+                  placeholder="A brief overview of your background, expertise, and career goals..."
                 />
               </div>
               <div className="jp-form-actions">
@@ -108,7 +182,7 @@ export default function ProfileHeaderCard({
                   onClick={() => save({})}
                   disabled={saving}
                 >
-                  <Check size={16} /> {saving ? "Saving..." : "Save"}
+                  <Check size={16} /> {saving ? "Saving..." : "Save Details"}
                 </button>
                 <button
                   type="button"
@@ -156,6 +230,29 @@ export default function ProfileHeaderCard({
                 <span><Mail size={14} />{user?.email}</span>
                 {form.phone && <span><Phone size={14} />{form.phone}</span>}
                 {form.city && <span><MapPin size={14} />{form.city}</span>}
+                {user?.referralCode && (
+                  <span
+                    style={{
+                      cursor: "pointer",
+                      background: "color-mix(in srgb, var(--primary) 12%, transparent)",
+                      color: "var(--primary)",
+                      fontWeight: 700,
+                      padding: "2px 8px",
+                      borderRadius: "6px",
+                      border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
+                    }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(user.referralCode);
+                      notify.success(`Referral code ${user.referralCode} copied!`);
+                    }}
+                    title="Click to copy your referral code"
+                  >
+                    <Gift size={13} /> {user.referralCode}
+                  </span>
+                )}
               </div>
               {form.summary && <p className="jp-summary">{form.summary}</p>}
               {!form.headline && !form.phone && (
@@ -272,11 +369,74 @@ export default function ProfileHeaderCard({
           onChange={onResumeUpload}
         />
         {user?.resumeUrl && (
-          <a href={user.resumeUrl} target="_blank" rel="noreferrer" className="jp-resume-view">
+          <a href={getAssetUrl(user.resumeUrl)} target="_blank" rel="noreferrer" className="jp-resume-view">
             View
           </a>
         )}
       </div>
+
+      {/* Profile Photo Cropper Modal */}
+      {showCropper && (
+        <div className="cropper-modal-overlay" onClick={handleCancelCrop}>
+          <div className="cropper-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="cropper-header">
+              <h3>Crop Profile Photo</h3>
+              <button type="button" className="cropper-close" onClick={handleCancelCrop}>
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="cropper-container">
+              <Cropper
+                image={imageSrc}
+                crop={crop}
+                zoom={zoom}
+                aspect={1}
+                cropShape="round"
+                showGrid={false}
+                onCropChange={setCrop}
+                onCropComplete={onCropComplete}
+                onZoomChange={setZoom}
+              />
+            </div>
+
+            <div className="cropper-controls">
+              <span style={{ fontSize: 13, marginRight: 10, color: "var(--text-muted)", display: "flex", alignItems: "center", gap: 4 }}>
+                <ZoomIn size={14} /> Zoom
+              </span>
+              <input
+                type="range"
+                value={zoom}
+                min={1}
+                max={3}
+                step={0.1}
+                aria-labelledby="Zoom"
+                onChange={(e) => setZoom(Number(e.target.value))}
+                className="zoom-range"
+              />
+            </div>
+
+            <div className="cropper-footer">
+              <button
+                type="button"
+                className="cropper-btn-cancel"
+                onClick={handleCancelCrop}
+                disabled={cropping}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="cropper-btn-save"
+                onClick={handleSaveCroppedImage}
+                disabled={cropping}
+              >
+                {cropping ? "Saving..." : "Crop & Save"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

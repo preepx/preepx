@@ -5,11 +5,12 @@
 export function calcCompletion(user) {
   if (!user) return 0;
   const checks = [
-    !!user.fullName,
+    !!(user.fullName && user.fullName.trim() !== "" && user.fullName !== "Your Name"),
     !!user.email,
-    !!user.phone,
-    !!user.city,
-    !!user.headline,
+    !!(user.phone || user.mobile),
+    !!(user.city || user.location || user.address),
+    !!(user.headline || user.preferredRole),
+    !!(user.summary || user.bio),
     (user.skills || []).length > 0,
     (user.experience || []).length > 0,
     (user.education || []).length > 0,

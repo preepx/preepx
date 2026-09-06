@@ -5,6 +5,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const path = require("path");
+const fs = require("fs");
 const session = require("express-session");
 const connectDB = require("./models/db");
 const { sendNotification } = require("./utils/notificationService");
@@ -107,7 +108,37 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+const uploadsDir = path.join(__dirname, "uploads");
+app.use("/uploads", express.static(uploadsDir));
+
+// Fallback for resumes if exact filename timestamp differs or file is re-uploaded
+app.get("/uploads/resumes/:filename", (req, res) => {
+  const { filename } = req.params;
+  const resumesDir = path.join(uploadsDir, "resumes");
+  const exactPath = path.join(resumesDir, filename);
+
+  if (fs.existsSync(exactPath)) {
+    return res.sendFile(exactPath);
+  }
+
+  // Try matching by userId prefix (e.g. userId-timestamp-name.pdf)
+  const userIdPrefix = filename.split("-")[0];
+  if (userIdPrefix && fs.existsSync(resumesDir)) {
+    const files = fs.readdirSync(resumesDir);
+    const matchedFile = files.find((f) => f.startsWith(userIdPrefix));
+    if (matchedFile) {
+      return res.sendFile(path.join(resumesDir, matchedFile));
+    }
+  }
+
+  res.status(404).send(`
+    <div style="font-family: sans-serif; text-align: center; padding: 40px; color: #334155;">
+      <h2>Resume File Not Found</h2>
+      <p style="color: #64748b;">The uploaded resume file is not available locally on this server.</p>
+      <p>Please go to your <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/profile" style="color: #6366f1; font-weight: bold;">Profile</a> and click <strong>"Update Resume"</strong> to upload a fresh PDF.</p>
+    </div>
+  `);
+});
 
 app.get("/api/health", (req, res) => res.json({ status: "ok", version: "2.0" }));
 

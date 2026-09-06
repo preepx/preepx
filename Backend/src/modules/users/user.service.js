@@ -6,23 +6,85 @@ const walletService = require('../wallet/wallet.service');
 const { evaluateBadges, getBadgeDetails, getAllBadges, BADGE_RULES } = require('../../../utils/badges');
 const { NotFoundError, BadRequestError } = require('../../common/exceptions/customErrors');
 const socketManager = require("../../../socket/socketManager");
+const resumeParserService = require("./resumeParser.service");
+
+const crypto = require('crypto');
 
 const getProfile = async (userId) => {
-  const user = await User.findById(userId).lean();
+  let user = await User.findById(userId).lean();
   if (!user) throw new NotFoundError("User not found");
+  if (!user.referralCode) {
+    const code = "REF-" + crypto.randomBytes(3).toString("hex").toUpperCase();
+    await User.updateOne({ _id: user._id }, { referralCode: code });
+    user.referralCode = code;
+  }
+  user = await resumeParserService.autoExtractIfIncomplete(user);
   return await filterDailyLogin(user);
 };
 
 const filterDailyLogin = async (user) => {
   if (!user) return user;
   const today = new Date().toISOString().split("T")[0];
-  const lastClaimDateStr = user.lastDailyRewardDate ? new Date(user.lastDailyRewardDate).toISOString().split("T")[0] : null;
-  
+  const lastClaimDateStr = user.lastDailyRewardDate
+    ? new Date(user.lastDailyRewardDate).toISOString().split("T")[0]
+    : null;
+
+  // Award 5 XP automatically if not claimed today
   if (lastClaimDateStr !== today) {
-    if (user.xpRewardsClaimed && user.xpRewardsClaimed.includes("daily_login")) {
-      await User.updateOne({ _id: user._id }, { $pull: { xpRewardsClaimed: "daily_login" } });
-      user.xpRewardsClaimed = user.xpRewardsClaimed.filter(id => id !== "daily_login");
+    let newStreak = user.streak || 0;
+    if (lastClaimDateStr) {
+      const lastDate = new Date(lastClaimDateStr);
+      const currentDate = new Date(today);
+      const diffTime = Math.abs(currentDate.getTime() - lastDate.getTime());
+      const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+
+      if (diffDays === 1) {
+        newStreak += 1;
+      } else if (diffDays > 1) {
+        newStreak = 1;
+      }
+    } else {
+      newStreak = 1;
     }
+
+    const xpBonus = 5;
+    const newPoints = (user.points || 0) + xpBonus;
+    const newLifetimePoints = (user.lifetimePoints || user.points || 0) + xpBonus;
+    const newLevel = Math.floor(newLifetimePoints / 100) + 1;
+
+    let xpRewardsClaimed = Array.isArray(user.xpRewardsClaimed) ? [...user.xpRewardsClaimed] : [];
+    if (!xpRewardsClaimed.includes("daily_login")) {
+      xpRewardsClaimed.push("daily_login");
+    }
+
+    await User.updateOne(
+      { _id: user._id },
+      {
+        $set: {
+          points: newPoints,
+          lifetimePoints: newLifetimePoints,
+          level: newLevel,
+          streak: newStreak,
+          lastDailyRewardDate: new Date(),
+          xpRewardsClaimed: xpRewardsClaimed,
+        },
+      }
+    );
+
+    user.points = newPoints;
+    user.lifetimePoints = newLifetimePoints;
+    user.level = newLevel;
+    user.streak = newStreak;
+    user.lastDailyRewardDate = new Date();
+    user.xpRewardsClaimed = xpRewardsClaimed;
+
+    sendNotification(
+      user._id,
+      "Daily Login Reward",
+      `You earned ${xpBonus} XP for logging in today! 🔥 Streak: ${newStreak} ${newStreak === 1 ? 'day' : 'days'}`,
+      "xp_earned",
+      "🎁"
+    ).catch(() => {});
   }
   return user;
 };
@@ -112,33 +174,10 @@ const updateResume = async (userId, file) => {
   if (!file) throw new BadRequestError("Please upload a PDF resume");
   if (file.mimetype !== "application/pdf") throw new BadRequestError("Only PDF files are allowed");
 
-  const resumeUrl = `/uploads/resumes/${file.filename}`;
-  const update = {
-    resumeUrl,
-    resumeFileName: file.originalname,
-    resumeUploadedAt: new Date(),
-  };
+  const existingUser = await User.findById(userId);
+  if (!existingUser) throw new NotFoundError("User not found");
 
-  try {
-    const dataBuffer = fs.readFileSync(file.path);
-    const parsed = await pdf(dataBuffer);
-    const skillRegex = /(Skills|Technical Skills|Technologies|Tools|Expertise|Domain)[:\s]*(.+)/i;
-    const skillMatch = parsed.text.match(skillRegex);
-    if (skillMatch) {
-      const extracted = skillMatch[2]
-        .split(/,|\n/)
-        .map((s) => s.trim())
-        .filter((s) => s.length > 1 && s.length < 40)
-        .slice(0, 25);
-      if (extracted.length) {
-        const existing = await User.findById(userId).select("skills").lean();
-        update.skills = [...new Set([...(existing?.skills || []), ...extracted])];
-      }
-    }
-  } catch (_) {
-    // Resume saved even if skill extraction fails
-  }
-
+  const update = await resumeParserService.buildResumeProfileUpdate(existingUser, file);
   const user = await User.findByIdAndUpdate(userId, update, { new: true }).lean();
 
   if (!user) throw new NotFoundError("User not found");

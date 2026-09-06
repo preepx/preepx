@@ -92,20 +92,20 @@
 
 /* ── BASE CARD ───────────────────────────────── */
 .jp-card {
-  background: #ffffff;
-  border: 1.5px solid #e2e8f0;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
   border-radius: 20px;
   padding: 24px 28px;
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .jp-card:hover {
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
 }
 
 [data-theme="dark"] .jp-card {
-  background: #1e293b;
-  border-color: rgba(255,255,255,0.07);
+  background: var(--surface, #0f172a);
+  border-color: var(--border, rgba(255,255,255,0.08));
 }
 
 /* ── MAIN PROFILE CARD ───────────────────────── */
