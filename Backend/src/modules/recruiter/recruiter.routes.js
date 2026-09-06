@@ -14,4 +14,7 @@ router.get('/notifications', recruiterProtect, recruiterController.getNotificati
 router.put('/notifications/:notifId/read', recruiterProtect, recruiterController.markNotificationRead);
 router.put('/notifications/read-all', recruiterProtect, recruiterController.markAllNotificationsRead);
 
+// Admin route to verify a recruiter (You might want to add adminProtect middleware here later)
+router.put('/verify/:recruiterId', recruiterController.verifyRecruiter);
+
 module.exports = router;

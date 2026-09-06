@@ -2,6 +2,7 @@ const Recruiter = require('../../../models/Recruiter');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const brevo = require('@getbrevo/brevo');
 const sendResetOtpEmail = require('../../../utils/sendResetOtpEmail');
 const sendOtpEmail = require('../../../utils/sendOtpEmail');
 const Otp = require('../../../models/Otp');
@@ -87,6 +88,35 @@ exports.registerRecruiter = catchAsync(async (req, res) => {
   await Otp.deleteOne({ _id: otpRecord._id });
 
   const token = generateToken(recruiter._id);
+
+  // Send Welcome Email via Brevo API
+  if (process.env.BREVO_API_KEY) {
+    try {
+      const apiInstance = new brevo.TransactionalEmailsApi();
+      let apiKey = apiInstance.authentications['apiKey'];
+      apiKey.apiKey = process.env.BREVO_API_KEY;
+
+      const sendSmtpEmail = new brevo.SendSmtpEmail();
+      sendSmtpEmail.subject = "Welcome to Preepx!";
+      sendSmtpEmail.htmlContent = `
+        <div style="font-family: sans-serif; padding: 20px;">
+          <h2>Welcome ${recruiter.fullName || 'Recruiter'}! 🎉</h2>
+          <p>Thank you for registering on Preepx.</p>
+          <p>Please log in and complete your company profile so our admin team can verify your account and you can start posting jobs.</p>
+          <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/auth/recruiter" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">
+            Go to Dashboard
+          </a>
+        </div>
+      `;
+      sendSmtpEmail.sender = { name: "Preepx", email: process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com" };
+      sendSmtpEmail.to = [{ email: recruiter.email, name: recruiter.fullName }];
+
+      await apiInstance.sendTransacEmail(sendSmtpEmail);
+      console.log(`Welcome email sent to ${recruiter.email}`);
+    } catch (err) {
+      console.error("Failed to send welcome email:", err);
+    }
+  }
 
   res.status(201).json({
     message: 'Recruiter registered successfully.',
@@ -198,4 +228,64 @@ exports.markNotificationRead = catchAsync(async (req, res) => {
 exports.markAllNotificationsRead = catchAsync(async (req, res) => {
   const notifications = await notificationService.markAllRead(req.user);
   res.json({ success: true, data: notifications });
+});
+
+exports.verifyRecruiter = catchAsync(async (req, res) => {
+  const { recruiterId } = req.params;
+
+  // 1. Approve recruiter in the database
+  const recruiter = await Recruiter.findByIdAndUpdate(
+    recruiterId, 
+    { isVerified: true },
+    { new: true }
+  );
+
+  if (!recruiter) {
+    throw new NotFoundError("Recruiter not found");
+  }
+
+  // 2. Initialize Brevo
+  const apiInstance = new brevo.TransactionalEmailsApi();
+  let apiKey = apiInstance.authentications['apiKey'];
+  apiKey.apiKey = process.env.BREVO_API_KEY;
+
+  // 3. Prepare Email content
+  const sendSmtpEmail = new brevo.SendSmtpEmail();
+  
+  sendSmtpEmail.subject = "Account Verified - Welcome to Preepx!";
+  sendSmtpEmail.htmlContent = `
+    <div style="font-family: sans-serif; padding: 20px;">
+      <h2>Congratulations ${recruiter.name || 'Recruiter'}! 🎉</h2>
+      <p>Your recruiter account has been successfully verified by the Admin.</p>
+      <p>You can now log in, post jobs, and start hiring top talent.</p>
+      <a href="https://yourwebsite.com/login" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">
+        Login to Preepx
+      </a>
+    </div>
+  `;
+  
+  // Use verified sender email from your Brevo account
+  sendSmtpEmail.sender = { 
+    name: "Preepx Admin", 
+    email: "no-reply@preepx.com" 
+  };
+  
+  sendSmtpEmail.to = [
+    { email: recruiter.email, name: recruiter.name || 'Recruiter' }
+  ];
+
+  // 4. Send Email
+  try {
+    await apiInstance.sendTransacEmail(sendSmtpEmail);
+    console.log(`Verification email sent to ${recruiter.email}`);
+  } catch (error) {
+    console.error("Brevo email sending failed:", error);
+    // You might choose to still return success even if email fails, 
+    // but log it to fix the issue.
+  }
+
+  res.status(200).json({ 
+    success: true, 
+    message: "Recruiter verified successfully!" 
+  });
 });

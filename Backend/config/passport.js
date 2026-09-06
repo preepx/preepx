@@ -53,6 +53,9 @@ passport.use(
         const walletService = require("../src/modules/wallet/wallet.service");
         await walletService.addBonusToWallet(user._id, 20, "Signup bonus");
 
+        const sendWelcomeEmailUser = require("../utils/sendWelcomeEmailUser");
+        await sendWelcomeEmailUser(user.email, user.fullName);
+
         return done(null, user);
       } catch (err) {
         return done(err, null);

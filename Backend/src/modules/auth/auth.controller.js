@@ -38,6 +38,8 @@ const sendOtp = catchAsync(async (req, res) => {
   res.json({ message: "OTP sent to your email. Please verify to complete registration." });
 });
 
+const sendWelcomeEmailUser = require('../../../utils/sendWelcomeEmailUser');
+
 const verifyOtpAndRegister = catchAsync(async (req, res) => {
   const { email, otp } = req.body;
   const user = await authService.verifyOtpAndRegister(email, otp);
@@ -46,6 +48,9 @@ const verifyOtpAndRegister = catchAsync(async (req, res) => {
   // Attach user to req temporarily for audit logging
   req.user = user;
   logAudit(req, 'REGISTER_VERIFY_OTP', 'SUCCESS', { email });
+
+  // Send Welcome Email
+  await sendWelcomeEmailUser(user.email, user.fullName);
   
   res.json({ 
     message: "Registration successful! You earned 20 free coins.", 

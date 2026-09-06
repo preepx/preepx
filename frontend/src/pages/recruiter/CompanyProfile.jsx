@@ -21,7 +21,7 @@ export default function CompanyProfile() {
     officialEmail: "",
     description: "",
   });
-  
+
   const user = JSON.parse(localStorage.getItem("user") || "{}");
 
   useEffect(() => {
@@ -69,19 +69,19 @@ export default function CompanyProfile() {
         {/* Account Overview Card */}
         <div className="rx-card" style={{ width: "100%", padding: "28px 40px", border: "1px solid color-mix(in srgb, var(--primary) 20%, var(--border))", boxShadow: "0 12px 32px rgba(0,0,0,0.08)", borderRadius: "20px", marginBottom: "24px" }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
-             <div>
-               <h2 style={{ margin: '0 0 4px', fontSize: '20px', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                 Account Overview
-               </h2>
-               <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '14px' }}>
-                 Your current subscription and usage stats.
-               </p>
-             </div>
-             <Link to="/recruiter/billing" className="rx-btn rx-btn-secondary" style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '10px' }}>
-               Manage Billing
-             </Link>
+            <div>
+              <h2 style={{ margin: '0 0 4px', fontSize: '20px', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                Account Overview
+              </h2>
+              <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '14px' }}>
+                Your current subscription and usage stats.
+              </p>
+            </div>
+            <Link to="/recruiter/billing" className="rx-btn rx-btn-secondary" style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '10px' }}>
+              Manage Billing
+            </Link>
           </div>
-          
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
             <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '12px', padding: '16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
               <div style={{ background: 'color-mix(in srgb, var(--success) 12%, transparent)', color: 'var(--success)', padding: '12px', borderRadius: '10px' }}>
@@ -92,7 +92,7 @@ export default function CompanyProfile() {
                 <h3 style={{ margin: '4px 0 0', fontSize: '18px', fontWeight: 800 }}>{billing?.subscription?.planName || billing?.subscription?.planId?.name || 'Free Trial'}</h3>
               </div>
             </div>
-            
+
             <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '12px', padding: '16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
               <div style={{ background: 'color-mix(in srgb, var(--primary) 12%, transparent)', color: 'var(--primary)', padding: '12px', borderRadius: '10px' }}>
                 <Briefcase size={24} />
@@ -102,7 +102,7 @@ export default function CompanyProfile() {
                 <h3 style={{ margin: '4px 0 0', fontSize: '18px', fontWeight: 800 }}>{analytics?.metrics?.activeJobs || 0}</h3>
               </div>
             </div>
-            
+
             <div style={{ background: 'var(--bg)', border: '1px solid var(--border)', borderRadius: '12px', padding: '16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
               <div style={{ background: 'color-mix(in srgb, var(--warning) 12%, transparent)', color: 'var(--warning)', padding: '12px', borderRadius: '10px' }}>
                 <Users size={24} />
@@ -116,40 +116,40 @@ export default function CompanyProfile() {
         </div>
 
         <div className="rx-card" style={{ width: "100%", padding: "32px 40px", border: "1px solid color-mix(in srgb, var(--primary) 20%, var(--border))", boxShadow: "0 12px 32px rgba(0,0,0,0.12)", borderRadius: "20px" }}>
-          
+
           {/* Header Section */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px', paddingBottom: '24px', borderBottom: '1px solid var(--border)' }}>
-             <div>
-               <h2 style={{ margin: '0 0 8px', fontSize: '22px', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                 <div style={{ background: 'color-mix(in srgb, var(--primary) 12%, transparent)', color: 'var(--primary)', padding: '8px', borderRadius: '10px', display: 'flex' }}>
-                   <Building2 size={20} />
-                 </div>
-                 Company Details
-               </h2>
-               <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '14px', paddingLeft: '40px' }}>
-                 Update your company's information to help candidates understand your business.
-               </p>
-             </div>
-             <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-               {company.verificationStatus && (
-                  <div style={{ 
-                    display: 'flex', alignItems: 'center', gap: '6px', 
-                    background: company.verificationStatus === 'VERIFIED' ? 'color-mix(in srgb, var(--success) 12%, transparent)' : 'color-mix(in srgb, var(--warning) 12%, transparent)', 
-                    padding: '8px 16px', borderRadius: '100px', fontSize: '13px', fontWeight: '700', 
-                    color: company.verificationStatus === 'VERIFIED' ? 'var(--success)' : 'var(--warning)',
-                    border: `1px solid color-mix(in srgb, ${company.verificationStatus === 'VERIFIED' ? 'var(--success)' : 'var(--warning)'} 30%, transparent)`,
-                    whiteSpace: 'nowrap'
-                  }}>
-                    {company.verificationStatus === 'VERIFIED' ? <CheckCircle size={16} /> : <ShieldAlert size={16} />}
-                    {company.verificationStatus === 'VERIFIED' ? 'Verified' : 'Pending Approval'}
-                  </div>
-               )}
-               {!isEditing && (
-                 <button type="button" className="rx-btn rx-btn-primary" onClick={() => setIsEditing(true)} style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '10px', whiteSpace: 'nowrap' }}>
-                   Edit Profile
-                 </button>
-               )}
-             </div>
+            <div>
+              <h2 style={{ margin: '0 0 8px', fontSize: '22px', fontWeight: '800', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{ background: 'color-mix(in srgb, var(--primary) 12%, transparent)', color: 'var(--primary)', padding: '8px', borderRadius: '10px', display: 'flex' }}>
+                  <Building2 size={20} />
+                </div>
+                Company Details
+              </h2>
+              <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '14px', paddingLeft: '40px' }}>
+                Update your company's information to help candidates understand your business.
+              </p>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              {company.verificationStatus && (
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: '6px',
+                  background: company.verificationStatus === 'VERIFIED' ? 'color-mix(in srgb, var(--success) 12%, transparent)' : 'color-mix(in srgb, var(--warning) 12%, transparent)',
+                  padding: '8px 16px', borderRadius: '100px', fontSize: '13px', fontWeight: '700',
+                  color: company.verificationStatus === 'VERIFIED' ? 'var(--success)' : 'var(--warning)',
+                  border: `1px solid color-mix(in srgb, ${company.verificationStatus === 'VERIFIED' ? 'var(--success)' : 'var(--warning)'} 30%, transparent)`,
+                  whiteSpace: 'nowrap'
+                }}>
+                  {company.verificationStatus === 'VERIFIED' ? <CheckCircle size={16} /> : <ShieldAlert size={16} />}
+                  {company.verificationStatus === 'VERIFIED' ? 'Verified' : 'Pending Approval'}
+                </div>
+              )}
+              {!isEditing && (
+                <button type="button" className="rx-btn rx-btn-primary" onClick={() => setIsEditing(true)} style={{ padding: '8px 16px', fontSize: '13px', borderRadius: '10px', whiteSpace: 'nowrap' }}>
+                  Edit Profile
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Form Section */}
@@ -211,7 +211,7 @@ export default function CompanyProfile() {
                 )}
               </div>
             </div>
-            
+
             <div style={{ marginTop: '8px' }}>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text)' }}><FileText size={16} className="rx-muted" /> Company Description</label>
               {isEditing ? (
@@ -223,9 +223,9 @@ export default function CompanyProfile() {
 
             {isEditing && (
               <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '24px', paddingTop: '24px', borderTop: '1px solid var(--border)' }}>
-                 <button type="button" className="rx-btn rx-btn-primary" onClick={save} style={{ padding: '14px 28px', fontSize: '15px', borderRadius: '12px', boxShadow: '0 4px 12px color-mix(in srgb, var(--primary) 40%, transparent)' }}>
-                   Save Profile Details
-                 </button>
+                <button type="button" className="rx-btn rx-btn-primary" onClick={save} style={{ padding: '14px 28px', fontSize: '15px', borderRadius: '12px', boxShadow: '0 4px 12px color-mix(in srgb, var(--primary) 40%, transparent)' }}>
+                  Save Profile Details
+                </button>
               </div>
             )}
           </div>

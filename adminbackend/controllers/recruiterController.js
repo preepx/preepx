@@ -30,16 +30,23 @@ const notifyRecruiterViaMainBackend = async (recruiterId, title, message, type, 
 const getRecruiters = async (req, res) => {
   try {
     const { status } = req.query;
-    const filter = {};
-    if (status) filter.verificationStatus = status.toUpperCase();
 
-    const companies = await Company.find(filter)
-      .populate("primaryRecruiterId", "fullName email phone designation companyName profileComplete createdAt planSlug planName planStatus planExpiresAt")
-      .sort({ updatedAt: -1 })
+    let recruiters = await Recruiter.find()
+      .populate("companyId")
+      .sort({ createdAt: -1 })
       .lean();
 
+    if (status) {
+      const statusUpper = status.toUpperCase();
+      recruiters = recruiters.filter(r => {
+        const compStatus = r.companyId ? r.companyId.verificationStatus : "PENDING";
+        return compStatus === statusUpper;
+      });
+    }
+
     const { start, end } = monthRange();
-    const recruiterIds = companies.map((c) => c.primaryRecruiterId?._id).filter(Boolean);
+    const recruiterIds = recruiters.map((r) => r._id);
+    
     const [subs, jobCounts] = await Promise.all([
       RecruiterSubscription.find({ recruiterId: { $in: recruiterIds } }).populate("planId", "name slug limits").lean(),
       require("../models/Job").aggregate([
@@ -47,36 +54,42 @@ const getRecruiters = async (req, res) => {
         { $group: { _id: "$recruiterId", count: { $sum: 1 } } },
       ]),
     ]);
+    
     const subMap = Object.fromEntries(subs.map((s) => [String(s.recruiterId), s]));
     const jobMap = Object.fromEntries(jobCounts.map((j) => [String(j._id), j.count]));
 
-    const data = companies.map((c) => {
-      const rid = c.primaryRecruiterId?._id?.toString();
-      const sub = rid ? subMap[rid] : null;
+    const data = recruiters.map((r) => {
+      const c = r.companyId || {};
+      const rid = r._id.toString();
+      const sub = subMap[rid];
+      
+      const vStatus = c.verificationStatus || "PENDING";
+
       return {
-        _id: c._id,
+        _id: c._id || r._id,
+        hasCompany: !!r.companyId,
         company: {
-          name: c.name,
-          website: c.website,
-          industry: c.industry,
-          companySize: c.companySize,
-          officialEmail: c.officialEmail,
-          linkedin: c.linkedin,
-          description: c.description,
+          name: c.name || r.companyName || "Profile Not Completed",
+          website: c.website || "",
+          industry: c.industry || "",
+          companySize: c.companySize || "",
+          officialEmail: c.officialEmail || r.email,
+          linkedin: c.linkedin || "",
+          description: c.description || "",
         },
-        verificationStatus: c.verificationStatus,
-        verificationNotes: c.verificationNotes,
-        recruiter: c.primaryRecruiterId,
+        verificationStatus: vStatus,
+        verificationNotes: c.verificationNotes || "",
+        recruiter: r,
         plan: {
-          slug: c.primaryRecruiterId?.planSlug || sub?.planSlug || null,
-          name: c.primaryRecruiterId?.planName || sub?.planName || sub?.planId?.name || "None",
-          status: c.primaryRecruiterId?.planStatus || sub?.status || "none",
-          expiresAt: c.primaryRecruiterId?.planExpiresAt || sub?.currentPeriodEnd || null,
-          jobPostsThisMonth: rid ? (jobMap[rid] || 0) : 0,
+          slug: r.planSlug || sub?.planSlug || null,
+          name: r.planName || sub?.planName || sub?.planId?.name || "None",
+          status: r.planStatus || sub?.status || "none",
+          expiresAt: r.planExpiresAt || sub?.currentPeriodEnd || null,
+          jobPostsThisMonth: jobMap[rid] || 0,
           jobPostsLimit: sub?.planId?.limits?.jobPostsPerMonth ?? null,
         },
-        createdAt: c.createdAt,
-        updatedAt: c.updatedAt,
+        createdAt: c.createdAt || r.createdAt,
+        updatedAt: c.updatedAt || r.updatedAt,
       };
     });
 
@@ -185,6 +198,42 @@ const updateVerificationStatus = async (req, res) => {
         "verification",
         payload.icon
       );
+
+      // Send Email via Brevo API if VERIFIED
+      if (status === "VERIFIED" && process.env.BREVO_API_KEY) {
+        try {
+          const res = await fetch("https://api.brevo.com/v3/smtp/email", {
+            method: "POST",
+            headers: {
+              "api-key": process.env.BREVO_API_KEY,
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              sender: { name: "Preepx Admin", email: process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com" },
+              to: [{ email: recruiter.email, name: recruiter.fullName || 'Recruiter' }],
+              subject: "Account Verified - Welcome to Preepx!",
+              htmlContent: `
+                <div style="font-family: sans-serif; padding: 20px;">
+                  <h2>Congratulations ${recruiter.fullName || 'Recruiter'}! 🎉</h2>
+                  <p>Your company <strong>${company.name}</strong> has been successfully verified by the Admin.</p>
+                  <p>You can now log in, post jobs, and start hiring top talent.</p>
+                  <a href="http://localhost:5173/auth/recruiter" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">
+                    Login to Preepx
+                  </a>
+                </div>
+              `
+            })
+          });
+          
+          if (!res.ok) {
+            console.error("Brevo API error:", await res.text());
+          } else {
+            console.log(`Brevo email sent to ${recruiter.email}`);
+          }
+        } catch (err) {
+          console.error("Failed to send Brevo email:", err);
+        }
+      }
     }
 
     res.json({
