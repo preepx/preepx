@@ -92,27 +92,34 @@ exports.registerRecruiter = catchAsync(async (req, res) => {
   // Send Welcome Email via Brevo API
   if (process.env.BREVO_API_KEY) {
     try {
-      const apiInstance = new brevo.TransactionalEmailsApi();
-      let apiKey = apiInstance.authentications['apiKey'];
-      apiKey.apiKey = process.env.BREVO_API_KEY;
+      const resMail = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "api-key": process.env.BREVO_API_KEY,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          sender: { name: "Preepx", email: process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com" },
+          to: [{ email: recruiter.email, name: recruiter.fullName || 'Recruiter' }],
+          subject: "Welcome to Preepx!",
+          htmlContent: `
+            <div style="font-family: sans-serif; padding: 20px;">
+              <h2>Welcome ${recruiter.fullName || 'Recruiter'}! 🎉</h2>
+              <p>Thank you for registering on Preepx.</p>
+              <p>Please log in and complete your company profile so our admin team can verify your account and you can start posting jobs.</p>
+              <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/auth/recruiter" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">
+                Go to Dashboard
+              </a>
+            </div>
+          `
+        })
+      });
 
-      const sendSmtpEmail = new brevo.SendSmtpEmail();
-      sendSmtpEmail.subject = "Welcome to Preepx!";
-      sendSmtpEmail.htmlContent = `
-        <div style="font-family: sans-serif; padding: 20px;">
-          <h2>Welcome ${recruiter.fullName || 'Recruiter'}! 🎉</h2>
-          <p>Thank you for registering on Preepx.</p>
-          <p>Please log in and complete your company profile so our admin team can verify your account and you can start posting jobs.</p>
-          <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/auth/recruiter" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">
-            Go to Dashboard
-          </a>
-        </div>
-      `;
-      sendSmtpEmail.sender = { name: "Preepx", email: process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com" };
-      sendSmtpEmail.to = [{ email: recruiter.email, name: recruiter.fullName }];
-
-      await apiInstance.sendTransacEmail(sendSmtpEmail);
-      console.log(`Welcome email sent to ${recruiter.email}`);
+      if (!resMail.ok) {
+        console.error("Brevo API error (Recruiter Welcome):", await resMail.text());
+      } else {
+        console.log(`Welcome email sent to recruiter: ${recruiter.email}`);
+      }
     } catch (err) {
       console.error("Failed to send welcome email:", err);
     }
