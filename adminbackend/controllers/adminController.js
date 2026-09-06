@@ -76,11 +76,12 @@ const getDashboardStats = async (req, res) => {
     const recentUsers = await User.find().select("fullName email profilePic createdAt").sort({ createdAt: -1 }).limit(5);
     const recentTransactions = await WalletTransaction.find().populate("userId", "fullName email").sort({ createdAt: -1 }).limit(5);
 
-    const RecruiterPayment = require("../../Backend/models/RecruiterPayment");
-    const RecruiterSubscription = require("../../Backend/models/RecruiterSubscription");
+    const mongoose = require("mongoose");
+    const RecruiterPayment = mongoose.models.RecruiterPayment || mongoose.model("RecruiterPayment", new mongoose.Schema({}, { strict: false }));
+    const RecruiterSubscription = mongoose.models.RecruiterSubscription || mongoose.model("RecruiterSubscription", new mongoose.Schema({}, { strict: false }));
     const Recruiter = require("../models/Recruiter");
     const Company = require("../models/Company");
-    const Job = require("../../Backend/models/Job");
+    const Job = mongoose.models.Job || mongoose.model("Job", new mongoose.Schema({}, { strict: false }));
 
     let recruiterRevenue = 0;
     let recruiterMonthRevenue = 0;
