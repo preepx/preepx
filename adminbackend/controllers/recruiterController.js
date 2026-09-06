@@ -2,8 +2,12 @@ const Recruiter = require("../models/Recruiter");
 const Company = require("../models/Company");
 const RecruiterSubscription = require("../models/RecruiterSubscription");
 const Job = require("../models/Job");
-const JobApplication = require("../../Backend/models/JobApplication");
-const Assessment = require("../../Backend/models/Assessment");
+
+// Define lightweight models to avoid require path issues on Render (since Backend folder doesn't have its own node_modules when adminbackend is built)
+const mongoose = require("mongoose");
+const JobApplication = mongoose.models.JobApplication || mongoose.model("JobApplication", new mongoose.Schema({}, { strict: false }));
+const Assessment = mongoose.models.Assessment || mongoose.model("Assessment", new mongoose.Schema({}, { strict: false }));
+
 const { attachBillingToCompany, monthRange } = require("./recruiterBillingController");
 
 const notifyRecruiterViaMainBackend = async (recruiterId, title, message, type, icon) => {
