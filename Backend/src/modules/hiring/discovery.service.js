@@ -56,10 +56,12 @@ const getCandidateProfile = async (recruiterId, applicationId) => {
   }
 
   const userId = user._id;
-  const [interviews, mcqResults, codingResults] = await Promise.all([
+  const [interviews, mcqResults, codingResults, totalInterviewsCount, totalMcqCount] = await Promise.all([
     Interview.find({ userId, status: "completed" }).sort({ createdAt: -1 }).limit(5).lean(),
     MCQResult.find({ userId }).sort({ createdAt: -1 }).limit(5).lean(),
     CodingResult.find({ userId }).sort({ date: -1 }).limit(5).lean(),
+    Interview.countDocuments({ userId, status: "completed" }),
+    MCQResult.countDocuments({ userId }),
   ]);
 
   const interviewAvg = interviews.length
@@ -103,6 +105,11 @@ const getCandidateProfile = async (recruiterId, applicationId) => {
       assessment: app.assessmentId?.overallScore ?? null,
       aiInterview: interviewAvg,
       skillBreakdown: skillScores,
+    },
+    platformStats: {
+      totalInterviews: totalInterviewsCount,
+      totalMcqExams: totalMcqCount,
+      avgScore: interviewAvg ?? 0,
     },
     history: { interviews, mcqResults, codingResults },
     job: app.jobId,
