@@ -17,12 +17,15 @@ const sendWelcomeEmailUser = async (toEmail, fullName) => {
         sender: { name: "PreepX", email: fromEmail },
         to: [{ email: toEmail, name: fullName || "User" }],
         subject: "Welcome to PreepX! 🎉",
-        textContent: `Hi ${fullName || "User"},\n\nWelcome to PreepX! We are thrilled to have you on board. Let's start preparing for your next big interview!`,
+        textContent: `Welcome to PreepX! 🎉\n\nHi ${fullName || "User"},\n\nWelcome to PreepX — your AI-powered platform for interview preparation, career opportunities, and smarter hiring.\n\nYou've received 20 free coins!\nUse them to try premium AI mock interviews, practice your skills, and get personalized feedback.\n\nWhether you're here to prepare, find your next opportunity, or hire great talent, PreepX is here to help.\n\nLet’s take the next step in your career!\n\n— Team PreepX`,
         htmlContent: `<div style="font-family:Arial,sans-serif;max-width:500px;margin:auto;padding:32px;border:1px solid #e4e4e7;border-radius:12px;">
           <h2 style="color:#4f46e5; text-align: center;">Welcome to PreepX! 🎉</h2>
-          <p style="font-size: 16px; color: #374151;">Hi ${fullName || "User"},</p>
-          <p style="font-size: 16px; color: #374151;">We are absolutely thrilled to have you on board. PreepX is designed to help you prepare, practice, and ace your interviews with AI-driven insights.</p>
-          <p style="font-size: 16px; color: #374151;">You've just earned <strong>20 free coins</strong> for signing up! You can use them to take premium mock interviews.</p>
+          <p style="font-size: 16px; color: #374151;">Hi <strong>${fullName || "User"}</strong>,</p>
+          <p style="font-size: 16px; color: #374151;">Welcome to PreepX — your AI-powered platform for interview preparation, career opportunities, and smarter hiring.</p>
+          <p style="font-size: 16px; color: #374151;"><strong>You've received 20 free coins!</strong><br/>Use them to try premium AI mock interviews, practice your skills, and get personalized feedback.</p>
+          <p style="font-size: 16px; color: #374151;">Whether you're here to prepare, find your next opportunity, or hire great talent, PreepX is here to help.</p>
+          <p style="font-size: 16px; color: #374151;">Let’s take the next step in your career!</p>
+          <p style="font-size: 16px; color: #374151;">— <strong>Team PreepX</strong></p>
           <div style="text-align:center; margin-top: 24px;">
             <a href="${frontendUrl}" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Explore PreepX</a>
           </div>

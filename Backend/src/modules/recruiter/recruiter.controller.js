@@ -107,7 +107,7 @@ exports.registerRecruiter = catchAsync(async (req, res) => {
               <h2>Welcome ${recruiter.fullName || 'Recruiter'}! 🎉</h2>
               <p>Thank you for registering on Preepx.</p>
               <p>Please log in and complete your company profile so our admin team can verify your account and you can start posting jobs.</p>
-              <a href="${process.env.FRONTEND_URL || 'http://localhost:5173'}/auth/recruiter" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">
+              <a href="https://www.preepx.in/auth/recruiter" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">
                 Go to Dashboard
               </a>
             </div>

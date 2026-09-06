@@ -217,13 +217,23 @@ const updateVerificationStatus = async (req, res) => {
               to: [{ email: recruiter.email, name: recruiter.fullName || 'Recruiter' }],
               subject: "Account Verified - Welcome to Preepx!",
               htmlContent: `
-                <div style="font-family: sans-serif; padding: 20px;">
-                  <h2>Congratulations ${recruiter.fullName || 'Recruiter'}! 🎉</h2>
-                  <p>Your company <strong>${company.name}</strong> has been successfully verified by the Admin.</p>
-                  <p>You can now log in, post jobs, and start hiring top talent.</p>
-                  <a href="http://localhost:5173/auth/recruiter" style="background: #2563eb; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 15px;">
-                    Login to Preepx
-                  </a>
+                <div style="font-family: Arial, sans-serif; max-width: 500px; margin: auto; padding: 32px; border: 1px solid #e4e4e7; border-radius: 12px;">
+                  <h2 style="color: #4f46e5; text-align: center;">Congratulations, ${recruiter.fullName || 'Recruiter'}! 🎉</h2>
+                  <p style="font-size: 16px; color: #374151;">Your company account has been successfully verified by the PreepX Admin team.</p>
+                  <p style="font-size: 16px; color: #374151;">You can now log in to PreepX and start:</p>
+                  <ul style="font-size: 16px; color: #374151;">
+                    <li>Posting job & internship opportunities</li>
+                    <li>Discovering and hiring talented candidates</li>
+                    <li>Managing your hiring process</li>
+                  </ul>
+                  <p style="font-size: 16px; color: #374151;">Ready to start hiring?</p>
+                  <div style="text-align: center; margin-top: 24px; margin-bottom: 24px;">
+                    <a href="https://www.preepx.in/auth/recruiter" style="background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
+                      Login to PreepX
+                    </a>
+                  </div>
+                  <p style="font-size: 16px; color: #374151;">Welcome to the PreepX hiring community!</p>
+                  <p style="font-size: 16px; color: #374151;">— <strong>Team PreepX</strong></p>
                 </div>
               `
             })
