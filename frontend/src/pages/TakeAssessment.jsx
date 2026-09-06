@@ -385,7 +385,9 @@ export default function TakeAssessment() {
             <span>Assessment Complete</span>
           </header>
           <div className="ta-result" style={{ textAlign: "center", maxWidth: 520, margin: "0 auto", padding: "40px 24px" }}>
-            <CheckCircle size={72} color="#10b981" style={{ marginBottom: 24 }} />
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: 24 }}>
+              <CheckCircle size={72} color="#10b981" />
+            </div>
             <h1 style={{ marginBottom: 12 }}>Thank You for Attending! 🎉</h1>
             <p style={{ fontSize: 16, color: "var(--text-muted, #9ca3af)", lineHeight: 1.7, marginBottom: 8 }}>
               We appreciate the time and effort you put into completing this assessment.
