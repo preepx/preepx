@@ -23,15 +23,19 @@ const storage = new CloudinaryStorage({
 });
 const upload = multer({ storage });
 
-const resumeStorage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, resumeDir),
-  filename: (req, file, cb) => {
-    const safeName = file.originalname.replace(/[^a-zA-Z0-9._-]/g, "_");
-    cb(null, `${req.user}-${Date.now()}-${safeName}`);
+// Resume storage on Cloudinary (raw resource type for PDF support)
+const resumeCloudinaryStorage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "resumes",
+    resource_type: "raw",
+    allowed_formats: ["pdf"],
+    use_filename: true,
+    unique_filename: true,
   },
 });
 const resumeUpload = multer({
-  storage: resumeStorage,
+  storage: resumeCloudinaryStorage,
   limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (_req, file, cb) => {
     if (file.mimetype === "application/pdf") cb(null, true);

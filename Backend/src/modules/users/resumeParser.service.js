@@ -1,16 +1,40 @@
 const fs = require("fs");
 const path = require("path");
+const https = require("https");
+const http = require("http");
 const pdf = require("pdf-parse");
 const aiService = require("../../services/ai.service");
 
 /**
- * Parses raw text from a PDF resume file.
- * @param {string} filePath - Absolute path to uploaded PDF.
+ * Downloads a file from a URL and returns it as a Buffer.
+ * @param {string} url
+ * @returns {Promise<Buffer>}
+ */
+const fetchBufferFromUrl = (url) => {
+  return new Promise((resolve, reject) => {
+    const client = url.startsWith("https") ? https : http;
+    client.get(url, (res) => {
+      const chunks = [];
+      res.on("data", (chunk) => chunks.push(chunk));
+      res.on("end", () => resolve(Buffer.concat(chunks)));
+      res.on("error", reject);
+    }).on("error", reject);
+  });
+};
+
+/**
+ * Parses raw text from a PDF resume file or URL.
+ * @param {string} filePathOrUrl - Absolute local path OR Cloudinary URL to PDF.
  * @returns {Promise<string>} Extracted raw text from PDF.
  */
-const parsePdfText = async (filePath) => {
+const parsePdfText = async (filePathOrUrl) => {
   try {
-    const dataBuffer = fs.readFileSync(filePath);
+    let dataBuffer;
+    if (filePathOrUrl.startsWith("http://") || filePathOrUrl.startsWith("https://")) {
+      dataBuffer = await fetchBufferFromUrl(filePathOrUrl);
+    } else {
+      dataBuffer = fs.readFileSync(filePathOrUrl);
+    }
     const parsed = await pdf(dataBuffer);
     return (parsed.text || "").trim();
   } catch (err) {
@@ -100,14 +124,16 @@ ${resumeText.substring(0, 8000)}
  * @returns {Promise<Object>} The update payload for MongoDB.
  */
 const buildResumeProfileUpdate = async (existingUser, file) => {
-  const resumeUrl = `/uploads/resumes/${file.filename}`;
+  // Cloudinary upload: file.path = Cloudinary URL, file.secure_url also available
+  const resumeUrl = file.path || file.secure_url || `/uploads/resumes/${file.filename}`;
   const updatePayload = {
     resumeUrl,
     resumeFileName: file.originalname,
     resumeUploadedAt: new Date(),
   };
 
-  const resumeText = await parsePdfText(file.path);
+  // Parse PDF: if URL, download from Cloudinary; if local path, read from disk
+  const resumeText = await parsePdfText(resumeUrl);
   const extracted = await extractStructuredData(resumeText);
 
   if (!extracted) return updatePayload;
@@ -204,34 +230,62 @@ const autoExtractIfIncomplete = async (user) => {
 
   if (!isMissingKeyData) return user;
 
-  const uploadsDir = path.join(__dirname, "../../../uploads/resumes");
-  let filename = user.resumeUrl.replace(/^\/uploads\/resumes\//, "");
-  let filePath = path.join(uploadsDir, filename);
+  // Support both Cloudinary URLs and legacy local paths
+  const resumeUrl = user.resumeUrl;
+  const isCloudinary = resumeUrl.startsWith("http://") || resumeUrl.startsWith("https://");
 
-  if (!fs.existsSync(filePath)) {
-    if (fs.existsSync(uploadsDir)) {
-      const files = fs.readdirSync(uploadsDir);
-      const matched = files.find((f) => f.startsWith(String(user._id)));
-      if (matched) {
-        filename = matched;
-        filePath = path.join(uploadsDir, matched);
+  if (!isCloudinary) {
+    // Legacy local file path check
+    const uploadsDir = path.join(__dirname, "../../../uploads/resumes");
+    let filename = resumeUrl.replace(/^\/uploads\/resumes\//, "");
+    let filePath = path.join(uploadsDir, filename);
+
+    if (!fs.existsSync(filePath)) {
+      if (fs.existsSync(uploadsDir)) {
+        const files = fs.readdirSync(uploadsDir);
+        const matched = files.find((f) => f.startsWith(String(user._id)));
+        if (matched) filePath = path.join(uploadsDir, matched);
       }
     }
+    if (!fs.existsSync(filePath)) return user;
   }
 
-  if (!fs.existsSync(filePath)) return user;
-
   try {
-    const fakeMulterFile = {
-      filename,
-      path: filePath,
-      originalname: user.resumeFileName || filename,
-    };
+    // parsePdfText now handles both local paths and URLs
+    const resumeText = await parsePdfText(resumeUrl);
+    const extracted = await extractStructuredData(resumeText);
+    if (!extracted) return user;
 
-    const updatePayload = await buildResumeProfileUpdate(user, fakeMulterFile);
+    // Build update payload manually (no file object needed)
+    const updatePayload = { resumeUrl };
+
+    if (extracted.fullName) updatePayload.fullName = String(extracted.fullName).trim();
+    if (extracted.phone) { updatePayload.phone = String(extracted.phone).trim(); updatePayload.mobile = String(extracted.phone).trim(); }
+    if (extracted.city) { updatePayload.city = String(extracted.city).trim(); updatePayload.location = String(extracted.city).trim(); }
+    if (extracted.headline) { updatePayload.headline = String(extracted.headline).trim(); updatePayload.preferredRole = String(extracted.headline).trim(); }
+    if (extracted.summary) { updatePayload.summary = String(extracted.summary).trim(); updatePayload.bio = String(extracted.summary).trim(); }
+    if (extracted.linkedin) updatePayload.linkedin = String(extracted.linkedin).trim();
+    if (extracted.github) updatePayload.github = String(extracted.github).trim();
+    if (extracted.portfolio) updatePayload.portfolio = String(extracted.portfolio).trim();
+    if (Array.isArray(extracted.skills) && extracted.skills.length > 0) {
+      const cleanNew = extracted.skills.map((s) => String(s).trim()).filter(Boolean);
+      updatePayload.skills = Array.from(new Set([...cleanNew, ...(user.skills || [])]));
+    }
+    if (Array.isArray(extracted.experience) && extracted.experience.length > 0) {
+      const valid = extracted.experience.filter((e) => e.company || e.role);
+      if (valid.length > 0) updatePayload.experience = valid;
+    }
+    if (Array.isArray(extracted.education) && extracted.education.length > 0) {
+      const valid = extracted.education.filter((e) => e.institution || e.degree);
+      if (valid.length > 0) {
+        updatePayload.education = valid;
+        if (valid[0]?.institution) updatePayload.college = valid[0].institution;
+        if (valid[0]?.degree) updatePayload.degree = valid[0].degree;
+      }
+    }
+
     const User = require("../../../models/User");
     await User.updateOne({ _id: user._id }, { $set: updatePayload });
-
     Object.assign(user, updatePayload);
   } catch (err) {
     console.warn("[resumeParserService] autoExtractIfIncomplete error:", err.message);

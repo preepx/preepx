@@ -710,17 +710,31 @@ export default function CandidateProfile() {
               </div>
             </div>
 
-            {/* PDF Embed */}
-            <iframe
-              title="Resume Viewer"
-              src={resumeUrl}
+            {/* PDF Embed - using embed with object fallback for cross-browser support */}
+            <object
+              data={`${resumeUrl}#toolbar=1&navpanes=0`}
+              type="application/pdf"
               style={{
                 flex: 1,
                 width: "100%",
                 border: "none",
                 background: "#f8f8f8",
+                minHeight: 0,
               }}
-            />
+            >
+              {/* Fallback: Google Docs viewer for browsers that can't embed PDF */}
+              <iframe
+                title="Resume Viewer"
+                src={`https://docs.google.com/gview?embedded=true&url=${encodeURIComponent(resumeUrl)}`}
+                style={{
+                  flex: 1,
+                  width: "100%",
+                  height: "100%",
+                  border: "none",
+                  background: "#f8f8f8",
+                }}
+              />
+            </object>
           </div>
         </div>
       )}

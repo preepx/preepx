@@ -66,12 +66,12 @@ app.use(helmet({
     directives: {
       defaultSrc: ["'self'"],
       scriptSrc: ["'self'", "'unsafe-inline'", "https://www.google.com/recaptcha/", "https://www.gstatic.com/recaptcha/"],
-      frameSrc: ["'self'", "https://www.google.com/recaptcha/", "https://recaptcha.google.com/recaptcha/"],
+      frameSrc: ["'self'", "https://www.google.com/recaptcha/", "https://recaptcha.google.com/recaptcha/", process.env.BACKEND_URL].filter(Boolean),
       connectSrc: ["'self'", "https://api.cloudinary.com", "https://api.razorpay.com"],
       imgSrc: ["'self'", "data:", "https://res.cloudinary.com", "https://lh3.googleusercontent.com"],
       styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
       fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      objectSrc: ["'none'"],
+      objectSrc: ["'self'", process.env.BACKEND_URL].filter(Boolean),
       upgradeInsecureRequests: [],
     },
   },
@@ -109,7 +109,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const uploadsDir = path.join(__dirname, "uploads");
-app.use("/uploads", express.static(uploadsDir));
+// Serve uploads with CORS headers so iframe/embed can load PDFs
+app.use("/uploads", (req, res, next) => {
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+}, express.static(uploadsDir));
 
 // Fallback for resumes if exact filename timestamp differs or file is re-uploaded
 app.get("/uploads/resumes/:filename", (req, res) => {
@@ -118,6 +123,9 @@ app.get("/uploads/resumes/:filename", (req, res) => {
   const exactPath = path.join(resumesDir, filename);
 
   if (fs.existsSync(exactPath)) {
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", "inline");
     return res.sendFile(exactPath);
   }
 
@@ -127,6 +135,9 @@ app.get("/uploads/resumes/:filename", (req, res) => {
     const files = fs.readdirSync(resumesDir);
     const matchedFile = files.find((f) => f.startsWith(userIdPrefix));
     if (matchedFile) {
+      res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+      res.setHeader("Content-Type", "application/pdf");
+      res.setHeader("Content-Disposition", "inline");
       return res.sendFile(path.join(resumesDir, matchedFile));
     }
   }
