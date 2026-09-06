@@ -274,8 +274,9 @@ const updateApplicationStatus = async (recruiterId, applicationId, status, feedb
     logRecruiterAction(req, "CANDIDATE_SHORTLISTED", "SUCCESS", { applicationId });
     try {
       const { sendNotification } = require("../../../utils/notificationService");
-      const job = await Job.findById(app.jobId);
+      const job = await Job.findById(app.jobId).populate("companyId");
       if (job) {
+        const companyName = job.companyId?.name || "PreepX";
         await sendNotification(
           app.userId,
           "Application Shortlisted! 🎉",
@@ -296,10 +297,10 @@ const updateApplicationStatus = async (recruiterId, applicationId, status, feedb
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 32px; border: 1px solid #e4e4e7; border-radius: 12px; line-height: 1.6;">
               <h2 style="color: #4f46e5; text-align: center;">Application Update</h2>
               <p style="font-size: 16px; color: #374151;">Hi <strong>${user.fullName || "Candidate"}</strong>,</p>
-              <p style="font-size: 16px; color: #374151;">Thank you for your interest in the <strong>${job.title}</strong> opportunity at PreepX.</p>
+              <p style="font-size: 16px; color: #374151;">Thank you for your interest in the <strong>${job.title}</strong> opportunity at ${companyName}.</p>
               <p style="font-size: 16px; color: #374151;">We are pleased to inform you that your profile has been shortlisted for the next stage of our selection process.</p>
               <p style="font-size: 16px; color: #374151;">Your application has successfully cleared the initial screening, and our team will be in touch with you regarding the next steps in the hiring process.</p>
-              <p style="font-size: 16px; color: #374151;">We appreciate your interest in PreepX and look forward to connecting with you as the selection process progresses.</p>
+              <p style="font-size: 16px; color: #374151;">We appreciate your interest in ${companyName} and look forward to connecting with you as the selection process progresses.</p>
               
               <div style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
                 <a href="${frontendUrl}/dashboard" style="background-color: #4f46e5; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
@@ -308,7 +309,7 @@ const updateApplicationStatus = async (recruiterId, applicationId, status, feedb
               </div>
               
               <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e4e4e7;">
-                <p style="margin: 0; font-size: 14px; color: #6b7280;">Regards,<br><strong>Talent Acquisition Team</strong><br>PreepX</p>
+                <p style="margin: 0; font-size: 14px; color: #6b7280;">Regards,<br><strong>Talent Acquisition Team</strong><br>${companyName}</p>
               </div>
             </div>
           `;
@@ -341,8 +342,9 @@ const updateApplicationStatus = async (recruiterId, applicationId, status, feedb
     logRecruiterAction(req, "CANDIDATE_REJECTED", "SUCCESS", { applicationId });
     try {
       const { sendNotification } = require("../../../utils/notificationService");
-      const job = await Job.findById(app.jobId);
+      const job = await Job.findById(app.jobId).populate("companyId");
       if (job) {
+        const companyName = job.companyId?.name || "PreepX";
         await sendNotification(
           app.userId,
           "Application Update",
@@ -362,14 +364,14 @@ const updateApplicationStatus = async (recruiterId, applicationId, status, feedb
             <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 32px; border: 1px solid #e4e4e7; border-radius: 12px; line-height: 1.6;">
               <h2 style="color: #4f46e5; text-align: center;">Application Update</h2>
               <p style="font-size: 16px; color: #374151;">Hi <strong>${user.fullName || "Candidate"}</strong>,</p>
-              <p style="font-size: 16px; color: #374151;">Thank you for your interest in the <strong>${job.title}</strong> position at PreepX and for taking the time to submit your application.</p>
+              <p style="font-size: 16px; color: #374151;">Thank you for your interest in the <strong>${job.title}</strong> position at ${companyName} and for taking the time to submit your application.</p>
               <p style="font-size: 16px; color: #374151;">After carefully reviewing your application and profile, we regret to inform you that your application has not been shortlisted for the next stage of the selection process at this time.</p>
               <p style="font-size: 16px; color: #374151;">We appreciate the effort you put into your application. While your profile was reviewed, we have decided to move forward with candidates whose experience and skills more closely align with the current requirements of the role.</p>
-              <p style="font-size: 16px; color: #374151;">We encourage you to explore future opportunities at PreepX that may be a better match for your profile.</p>
-              <p style="font-size: 16px; color: #374151;">Thank you for considering PreepX, and we wish you all the best in your career journey.</p>
+              <p style="font-size: 16px; color: #374151;">We encourage you to explore future opportunities at ${companyName} that may be a better match for your profile.</p>
+              <p style="font-size: 16px; color: #374151;">Thank you for considering ${companyName}, and we wish you all the best in your career journey.</p>
               
               <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e4e4e7;">
-                <p style="margin: 0; font-size: 14px; color: #6b7280;">Regards,<br><strong>Talent Acquisition Team</strong><br>PreepX</p>
+                <p style="margin: 0; font-size: 14px; color: #6b7280;">Regards,<br><strong>Talent Acquisition Team</strong><br>${companyName}</p>
               </div>
             </div>
           `;
