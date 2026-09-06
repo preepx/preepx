@@ -35,7 +35,7 @@ const sendNotification = async (userId, title, message, type = "general", icon =
     // --- Send Email via Brevo ---
     const apiKey = process.env.BREVO_API_KEY;
     if (apiKey && user.email) {
-      const fromEmail = process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com";
+      const fromEmail = process.env.BREVO_FROM_EMAIL || process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com";
       const frontendUrl = process.env.FRONTEND_URL || "https://www.preepx.in";
       
       try {
