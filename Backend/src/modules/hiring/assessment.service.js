@@ -155,10 +155,74 @@ async function notifyCandidate(userId, job, assessment) {
   await sendNotification(
     userId,
     "New Job Assessment",
-    `You have been invited to complete an assessment for "${job.title}" at ${job.role}. Start now!`,
+    `You have a new assessment for "${job.title}".`,
     "assessment",
     "📋"
   );
+
+  try {
+    const User = require("../../../models/User");
+    const axios = require("axios");
+    const user = await User.findById(userId);
+    
+    if (user && user.email && process.env.BREVO_API_KEY) {
+      const fromEmail = process.env.BREVO_FROM_EMAIL || process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com";
+      const frontendUrl = process.env.FRONTEND_URL || "https://www.preepx.in";
+      
+      const htmlContent = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 32px; border: 1px solid #e4e4e7; border-radius: 12px; line-height: 1.6;">
+          <h2 style="color: #4f46e5; text-align: center;">Invitation to Complete Technical Assessment</h2>
+          <p style="font-size: 16px; color: #374151;">Hi <strong>${user.fullName || "Candidate"}</strong>,</p>
+          <p style="font-size: 16px; color: #374151;">Thank you for your interest in the <strong>${job.title}</strong> opportunity.</p>
+          <p style="font-size: 16px; color: #374151;">As the next step in our selection process, you are invited to complete a technical assessment designed to evaluate your knowledge and practical understanding.</p>
+          
+          <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 24px 0;">
+            <p style="margin: 0 0 10px 0; font-size: 16px; color: #374151;"><strong>Assessment Details:</strong></p>
+            <ul style="margin: 0; padding-left: 20px; font-size: 16px; color: #374151;">
+              <li><strong>Position:</strong> ${job.title}</li>
+              <li><strong>Assessment Type:</strong> Technical Assessment</li>
+              <li><strong>Platform:</strong> PreepX</li>
+              <li><strong>Next Step:</strong> Complete the assessment using the link below</li>
+            </ul>
+          </div>
+          
+          <p style="font-size: 16px; color: #374151;">Please complete the assessment within the specified timeframe to proceed to the next stage of the selection process.</p>
+          
+          <div style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
+            <a href="${frontendUrl}/apply-jobs/assessments" style="background-color: #4f46e5; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
+              View Assessment Details
+            </a>
+          </div>
+          
+          <p style="font-size: 16px; color: #374151;">We appreciate your time and interest in PreepX and wish you the best for the assessment.</p>
+          
+          <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e4e4e7;">
+            <p style="margin: 0; font-size: 14px; color: #6b7280;">Regards,<br><strong>Talent Acquisition Team</strong><br>PreepX<br><em>Building opportunities. Connecting talent.</em></p>
+          </div>
+        </div>
+      `;
+
+      await axios.post(
+        "https://api.brevo.com/v3/smtp/email",
+        {
+          sender: { name: "PreepX Talent Team", email: fromEmail },
+          to: [{ email: user.email, name: user.fullName || "Candidate" }],
+          subject: `Invitation to Complete Technical Assessment – ${job.title}`,
+          htmlContent: htmlContent
+        },
+        {
+          headers: {
+            "api-key": process.env.BREVO_API_KEY,
+            "Content-Type": "application/json",
+            "accept": "application/json",
+          },
+        }
+      );
+      console.log(`Professional assessment email sent to ${user.email}`);
+    }
+  } catch (err) {
+    console.error("Failed to send professional assessment email:", err.message);
+  }
 }
 
 function gradeMcqAnswer(question, userAnswer) {

@@ -279,10 +279,58 @@ const updateApplicationStatus = async (recruiterId, applicationId, status, feedb
         await sendNotification(
           app.userId,
           "Application Shortlisted! 🎉",
-          `Congratulations! Your application for "${job.title}" has been shortlisted. The recruiter will contact you soon.`,
-          "job_update",
+          `Your application for "${job.title}" has been shortlisted!`,
+          "job_shortlisted", // Skip generic email
           "🎉"
         );
+
+        const User = require("../../../models/User");
+        const axios = require("axios");
+        const user = await User.findById(app.userId);
+
+        if (user && user.email && process.env.BREVO_API_KEY) {
+          const fromEmail = process.env.BREVO_FROM_EMAIL || process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com";
+          const frontendUrl = process.env.FRONTEND_URL || "https://www.preepx.in";
+          
+          const htmlContent = `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 32px; border: 1px solid #e4e4e7; border-radius: 12px; line-height: 1.6;">
+              <h2 style="color: #4f46e5; text-align: center;">Application Update</h2>
+              <p style="font-size: 16px; color: #374151;">Hi <strong>${user.fullName || "Candidate"}</strong>,</p>
+              <p style="font-size: 16px; color: #374151;">Thank you for your interest in the <strong>${job.title}</strong> opportunity at PreepX.</p>
+              <p style="font-size: 16px; color: #374151;">We are pleased to inform you that your profile has been shortlisted for the next stage of our selection process.</p>
+              <p style="font-size: 16px; color: #374151;">Your application has successfully cleared the initial screening, and our team will be in touch with you regarding the next steps in the hiring process.</p>
+              <p style="font-size: 16px; color: #374151;">We appreciate your interest in PreepX and look forward to connecting with you as the selection process progresses.</p>
+              
+              <div style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
+                <a href="${frontendUrl}/dashboard" style="background-color: #4f46e5; color: white; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">
+                  View Dashboard
+                </a>
+              </div>
+              
+              <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e4e4e7;">
+                <p style="margin: 0; font-size: 14px; color: #6b7280;">Regards,<br><strong>Talent Acquisition Team</strong><br>PreepX</p>
+              </div>
+            </div>
+          `;
+
+          await axios.post(
+            "https://api.brevo.com/v3/smtp/email",
+            {
+              sender: { name: "PreepX Talent Team", email: fromEmail },
+              to: [{ email: user.email, name: user.fullName || "Candidate" }],
+              subject: `Application Update – ${job.title}`,
+              htmlContent: htmlContent
+            },
+            {
+              headers: {
+                "api-key": process.env.BREVO_API_KEY,
+                "Content-Type": "application/json",
+                "accept": "application/json",
+              },
+            }
+          );
+          console.log(`Professional shortlist email sent to ${user.email}`);
+        }
       }
     } catch (e) {
       console.error("Failed to notify user for shortlist", e);
@@ -298,10 +346,52 @@ const updateApplicationStatus = async (recruiterId, applicationId, status, feedb
         await sendNotification(
           app.userId,
           "Application Update",
-          `Thank you for applying to "${job.title}". Unfortunately, we have decided to move forward with other candidates at this time.`,
-          "job_update",
+          `Your application for "${job.title}" was not shortlisted.`,
+          "job_rejected", // Skip generic email
           "😔"
         );
+
+        const User = require("../../../models/User");
+        const axios = require("axios");
+        const user = await User.findById(app.userId);
+
+        if (user && user.email && process.env.BREVO_API_KEY) {
+          const fromEmail = process.env.BREVO_FROM_EMAIL || process.env.BREVO_SENDER_EMAIL || "no-reply@preepx.com";
+          
+          const htmlContent = `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 32px; border: 1px solid #e4e4e7; border-radius: 12px; line-height: 1.6;">
+              <h2 style="color: #4f46e5; text-align: center;">Application Update</h2>
+              <p style="font-size: 16px; color: #374151;">Hi <strong>${user.fullName || "Candidate"}</strong>,</p>
+              <p style="font-size: 16px; color: #374151;">Thank you for your interest in the <strong>${job.title}</strong> position at PreepX and for taking the time to submit your application.</p>
+              <p style="font-size: 16px; color: #374151;">After carefully reviewing your application and profile, we regret to inform you that your application has not been shortlisted for the next stage of the selection process at this time.</p>
+              <p style="font-size: 16px; color: #374151;">We appreciate the effort you put into your application. While your profile was reviewed, we have decided to move forward with candidates whose experience and skills more closely align with the current requirements of the role.</p>
+              <p style="font-size: 16px; color: #374151;">We encourage you to explore future opportunities at PreepX that may be a better match for your profile.</p>
+              <p style="font-size: 16px; color: #374151;">Thank you for considering PreepX, and we wish you all the best in your career journey.</p>
+              
+              <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e4e4e7;">
+                <p style="margin: 0; font-size: 14px; color: #6b7280;">Regards,<br><strong>Talent Acquisition Team</strong><br>PreepX</p>
+              </div>
+            </div>
+          `;
+
+          await axios.post(
+            "https://api.brevo.com/v3/smtp/email",
+            {
+              sender: { name: "PreepX Talent Team", email: fromEmail },
+              to: [{ email: user.email, name: user.fullName || "Candidate" }],
+              subject: `Application Update – ${job.title}`,
+              htmlContent: htmlContent
+            },
+            {
+              headers: {
+                "api-key": process.env.BREVO_API_KEY,
+                "Content-Type": "application/json",
+                "accept": "application/json",
+              },
+            }
+          );
+          console.log(`Professional rejection email sent to ${user.email}`);
+        }
       }
     } catch (e) {
       console.error("Failed to notify user for reject", e);
