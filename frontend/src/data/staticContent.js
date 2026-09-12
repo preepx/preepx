@@ -9,7 +9,7 @@ export const staticContent = {
     ]
   },
   "/how-it-works": {
-    title: "How It Works",
+    title: "How It Workss",
     subtitle: "Three simple steps to interview readiness.",
     sections: [
       { heading: "1. Configure Your Session", content: "Select your target role, difficulty level, and specific skills you want to practice. The AI prepares a custom question set instantly." },
