@@ -32,7 +32,7 @@
 .start-badge {
   display: inline-block;
   padding: 5px 14px;
-  background: rgba(79, 70, 229, 0.15);
+  background: rgba(31, 92, 74, 0.15);
   color: var(--primary);
   border-radius: 50px;
   font-size: 12px;

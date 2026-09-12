@@ -110,8 +110,8 @@
   gap: 4px;
 }
 .im2-role-chip.active {
-  border-color: #6366f1;
-  color: #6366f1;
+  border-color: #2f6f5b;
+  color: #2f6f5b;
   background: #e0e7ff;
 }
 
@@ -214,7 +214,7 @@
   gap: 8px;
 }
 .im2-diff-card.active {
-  border-color: #6366f1;
+  border-color: #2f6f5b;
   background: #f8fafc;
 }
 
@@ -262,7 +262,7 @@
   border-right: none;
 }
 .im2-segment.active {
-  background: #6366f1;
+  background: #2f6f5b;
   color: white;
 }
 
@@ -291,12 +291,12 @@
   color: #0f172a;
 }
 .im2-btn.start {
-  background: #6366f1;
+  background: #2f6f5b;
   color: white;
 }
 .im2-btn.start:hover:not(:disabled) {
-  background: #4f46e5;
-  box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+  background: #1f5c4a;
+  box-shadow: 0 4px 12px rgba(47,111,91,0.3);
 }
 .im2-btn.start:disabled {
   opacity: 0.5;
@@ -366,7 +366,7 @@
   border-color: #334155;
 }
 
-[data-theme="dark"] .im2-icon-box.purple { background: #312e81; }
+[data-theme="dark"] .im2-icon-box.purple { background: #24332c; }
 
 [data-theme="dark"] .im2-coin-badge {
   background: #451a03;
@@ -387,9 +387,9 @@
   color: #cbd5e1;
 }
 [data-theme="dark"] .im2-role-chip.active {
-  background: #3730a3;
-  border-color: #4f46e5;
-  color: #818cf8;
+  background: #164338;
+  border-color: #1f5c4a;
+  color: #5a9e8a;
 }
 
 [data-theme="dark"] .im2-icon-circle.purple-light { background: #3b0764; }
@@ -406,7 +406,7 @@
   color: #f8fafc;
 }
 [data-theme="dark"] .im2-input-wrapper input:focus {
-  border-color: #6366f1;
+  border-color: #2f6f5b;
 }
 
 [data-theme="dark"] .im2-skill-badge {
@@ -419,8 +419,8 @@
   border-color: #334155;
 }
 [data-theme="dark"] .im2-diff-card.active {
-  background: #1e1b4b;
-  border-color: #6366f1;
+  background: #2c2723;
+  border-color: #2f6f5b;
 }
 
 [data-theme="dark"] .im2-diff-icon.green-bg { background: #064e3b; }
@@ -436,7 +436,7 @@
   color: #cbd5e1;
 }
 [data-theme="dark"] .im2-segment.active {
-  background: #6366f1;
+  background: #2f6f5b;
   color: white;
 }
 
@@ -446,6 +446,6 @@
   color: #cbd5e1;
 }
 [data-theme="dark"] .im2-btn.start {
-  background: #6366f1;
+  background: #2f6f5b;
   color: white;
 }

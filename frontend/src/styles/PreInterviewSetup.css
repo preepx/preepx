@@ -538,7 +538,7 @@
 
 .pis-btn-warning-enter {
   padding: 12px 24px;
-  background: #818cf8;
+  background: #5a9e8a;
   color: white;
   border: none;
   border-radius: 8px;
@@ -549,7 +549,7 @@
 }
 
 .pis-btn-warning-enter:hover {
-  background: #6366f1;
+  background: #2f6f5b;
 }
 
 /* =========================================
@@ -615,5 +615,5 @@
 }
 
 [data-theme="dark"] .pis-read-more-btn {
-  color: #818cf8;
+  color: #5a9e8a;
 }

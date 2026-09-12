@@ -7,7 +7,7 @@
   --im-text-secondary: #94a3b8;
   --im-red: #ef4444;
   --im-blue: #3b82f6;
-  --im-purple: #8b5cf6;
+  --im-purple: #4a8f76;
   --im-container-bg: #1c1c24;
 }
 
@@ -78,7 +78,7 @@ html {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at bottom, #2e1065 0%, var(--im-bg-main) 40%);
+  background: radial-gradient(circle at bottom, #1a2420 0%, var(--im-bg-main) 40%);
   color: var(--im-text-primary);
   box-sizing: border-box;
   overflow: hidden;

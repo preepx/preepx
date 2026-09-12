@@ -27,7 +27,7 @@
 
 [data-theme="dark"] .sidebar,
 [data-theme="dark"] .topbar {
-  background: #040B1D;
+  background: #161412;
 }
 
 .sidebar-top {
@@ -60,7 +60,7 @@
 }
 
 .sidebar-toggle {
-  background: #090e1a;
+  background: #1a1714;
   border: 1.5px solid rgba(148, 163, 184, 0.3);
   color: var(--text-muted);
   width: 36px;
@@ -77,15 +77,15 @@
 }
 
 .sidebar-toggle:hover {
-  background: #0d1527;
-  border-color: #38bdf8;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
+  background: #221e1a;
+  border-color: #2f6f5b;
+  box-shadow: 0 0 16px rgba(47, 111, 91, 0.5);
   transform: scale(1.05);
 }
 
 .sidebar-toggle:hover .ham-bar {
-  background: #38bdf8;
-  box-shadow: 0 0 6px rgba(56, 189, 248, 0.6);
+  background: #2f6f5b;
+  box-shadow: 0 0 6px rgba(47, 111, 91, 0.6);
 }
 
 .sidebar-toggle:hover .top-bar {
@@ -340,9 +340,9 @@
   height: 34px;
   padding: 0 14px;
   border-radius: 20px;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1.5px solid rgba(56, 189, 248, 0.35);
-  color: #38bdf8;
+  background: rgba(47, 111, 91, 0.1);
+  border: 1.5px solid rgba(47, 111, 91, 0.35);
+  color: #2f6f5b;
   font-size: 13px;
   font-weight: 700;
   text-decoration: none;
@@ -354,31 +354,31 @@
 }
 
 .topbar-apply-jobs-btn:hover {
-  background: rgba(56, 189, 248, 0.25);
-  border-color: #38bdf8;
+  background: rgba(47, 111, 91, 0.25);
+  border-color: #2f6f5b;
   transform: translateY(-1px);
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.6);
+  box-shadow: 0 0 18px rgba(47, 111, 91, 0.6);
   animation-play-state: paused;
 }
 
 .topbar-apply-jobs-btn:active {
   transform: translateY(1px) scale(0.96);
-  box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 10px rgba(47, 111, 91, 0.4);
 }
 
 @keyframes applyJobsBlink {
 
   0%,
   100% {
-    border-color: rgba(56, 189, 248, 0.3);
-    background: rgba(56, 189, 248, 0.08);
-    box-shadow: 0 0 0 rgba(56, 189, 248, 0);
+    border-color: rgba(47, 111, 91, 0.3);
+    background: rgba(47, 111, 91, 0.08);
+    box-shadow: 0 0 0 rgba(47, 111, 91, 0);
   }
 
   50% {
-    border-color: #38bdf8;
-    background: rgba(56, 189, 248, 0.22);
-    box-shadow: 0 0 16px rgba(56, 189, 248, 0.55), 0 0 28px rgba(56, 189, 248, 0.25);
+    border-color: #2f6f5b;
+    background: rgba(47, 111, 91, 0.22);
+    box-shadow: 0 0 16px rgba(47, 111, 91, 0.55), 0 0 28px rgba(47, 111, 91, 0.25);
   }
 }
 
@@ -450,9 +450,9 @@
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  color: #38bdf8;
+  background: rgba(47, 111, 91, 0.1);
+  border: 1px solid rgba(47, 111, 91, 0.3);
+  color: #2f6f5b;
 }
 
 .badge-icon {
@@ -483,9 +483,9 @@
 [data-theme="dark"] .streak-badge,
 [data-theme="dark"] .points-badge,
 [data-theme="dark"] .level-badge {
-  background: rgba(56, 189, 248, 0.1);
-  border-color: rgba(56, 189, 248, 0.3);
-  color: #38bdf8;
+  background: rgba(47, 111, 91, 0.1);
+  border-color: rgba(47, 111, 91, 0.3);
+  color: #2f6f5b;
 }
 
 .topbar-profile-link {
@@ -502,15 +502,15 @@
   height: 34px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid rgba(56, 189, 248, 0.4);
+  border: 1.5px solid rgba(47, 111, 91, 0.4);
   transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
   display: block;
 }
 
 .topbar-profile-link:hover .topbar-avatar-img {
-  border-color: #38bdf8;
+  border-color: #2f6f5b;
   transform: scale(1.06);
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+  box-shadow: 0 0 12px rgba(47, 111, 91, 0.5);
 }
 
 .page-content {
@@ -526,7 +526,7 @@
   justify-content: center;
   width: 38px;
   height: 38px;
-  background: #090e1a;
+  background: #1a1714;
   border: 1.5px solid rgba(148, 163, 184, 0.3);
   border-radius: 12px;
   cursor: pointer;
@@ -537,9 +537,9 @@
 }
 
 .mobile-menu-btn:hover {
-  background: #0d1527;
-  border-color: #38bdf8;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
+  background: #221e1a;
+  border-color: #2f6f5b;
+  box-shadow: 0 0 16px rgba(47, 111, 91, 0.5);
   transform: scale(1.05);
 }
 
@@ -562,8 +562,8 @@
 }
 
 .mobile-menu-btn:hover .ham-bar {
-  background: #38bdf8;
-  box-shadow: 0 0 6px rgba(56, 189, 248, 0.6);
+  background: #2f6f5b;
+  box-shadow: 0 0 6px rgba(47, 111, 91, 0.6);
 }
 
 .mobile-menu-btn:hover .top-bar {

@@ -85,8 +85,8 @@
 .ud-banner-dot.active {
   width: 24px;
   border-radius: 6px;
-  background: #6366f1;
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.7);
+  background: #2f6f5b;
+  box-shadow: 0 0 12px rgba(47, 111, 91, 0.7);
 }
 
 @media (max-width: 768px) {
@@ -128,13 +128,13 @@
   justify-content: space-between;
   gap: 24px;
   padding: 36px 40px;
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  border: 1px solid rgba(47, 111, 91, 0.3);
 }
 
 .ud-banner-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 50%, #6d28d9 100%);
+  background: linear-gradient(135deg, #2c2723 0%, #1f3d32 50%, #2a5c4a 100%);
   background-size: 200% 200%;
   animation: udBannerShift 6s ease infinite;
 }
@@ -193,7 +193,7 @@
   gap: 6px;
   padding: 14px 28px;
   background: white;
-  color: #4c1d95;
+  color: #1f3d32;
   border: none;
   border-radius: 14px;
   font-size: 15px;

@@ -33,7 +33,7 @@
    ========================================================= */
 .jma-hero {
   position: relative;
-  background: linear-gradient(135deg, #111827 0%, #1e1b4b 45%, #1e293b 100%);
+  background: linear-gradient(135deg, #111827 0%, #2c2723 45%, #1e293b 100%);
   border-radius: 16px;
   padding: 24px 32px;
   display: flex;
@@ -47,7 +47,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 10% 40%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+  background-image: radial-gradient(circle at 10% 40%, rgba(47, 111, 91, 0.15) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -77,7 +77,7 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #a5b4fc;
+  color: #8bb9ab;
   margin-bottom: 4px;
 }
 
@@ -186,7 +186,7 @@
 }
 
 .jma-tab:hover {
-  border-color: #6366f1;
+  border-color: #2f6f5b;
   color: #1e293b;
 }
 
@@ -195,8 +195,8 @@
 }
 
 .jma-tab.active {
-  background: #4f46e5;
-  border-color: #4f46e5;
+  background: #1f5c4a;
+  border-color: #1f5c4a;
   color: #fff;
 }
 
@@ -612,13 +612,13 @@
 }
 
 .jma-cta-solid {
-  background: #4f46e5;
-  border: 1px solid #4f46e5;
+  background: #1f5c4a;
+  border: 1px solid #1f5c4a;
   color: #fff;
 }
 
 .jma-cta-solid:hover {
-  background: #4338ca;
+  background: #245c4c;
 }
 
 /* =========================================================
@@ -690,7 +690,7 @@
   border-radius: 50%;
   background: conic-gradient(#3b82f6 0% 50%,
       /* Applied */
-      #8b5cf6 50% 75%,
+      #4a8f76 50% 75%,
       /* In Progress */
       #f59e0b 75% 100%
       /* Shortlisted */
@@ -770,7 +770,7 @@
 }
 
 .jma-legend-dot.c-inprogress {
-  background: #8b5cf6;
+  background: #4a8f76;
 }
 
 .jma-legend-dot.c-shortlisted {

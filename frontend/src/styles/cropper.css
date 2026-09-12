@@ -98,7 +98,7 @@
 .zoom-range {
   flex: 1;
   max-width: 240px;
-  accent-color: var(--primary, #6366f1);
+  accent-color: var(--primary, #2f6f5b);
   cursor: pointer;
 }
 
@@ -129,7 +129,7 @@
 
 .cropper-btn-save {
   padding: 9px 20px;
-  background: var(--primary, #6366f1);
+  background: var(--primary, #2f6f5b);
   border: none;
   color: white;
   border-radius: 8px;

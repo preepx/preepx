@@ -2,7 +2,7 @@
 
 :root {
   --lobby-bg-grad-start: #0f172a; /* Slate 900 */
-  --lobby-bg-grad-end: #1e1b4b; /* Indigo 950 */
+  --lobby-bg-grad-end: #2c2723; /* Indigo 950 */
   --lobby-card-bg: #1e293b; /* Slate 800 */
   --lobby-text-primary: #f8fafc;
   --lobby-text-secondary: #94a3b8;
@@ -98,7 +98,7 @@
 
 .pis-btn-warning-enter {
   padding: 12px 24px;
-  background: #818cf8;
+  background: #5a9e8a;
   color: white;
   border: none;
   border-radius: 8px;
@@ -109,7 +109,7 @@
 }
 
 .pis-btn-warning-enter:hover {
-  background: #6366f1;
+  background: #2f6f5b;
 }
 
 /* -------------------------------------- */
@@ -259,7 +259,7 @@
 .pis-status-avatar {
   width: 32px;
   height: 32px;
-  background-color: #8b5cf6; /* Purple */
+  background-color: #4a8f76; /* Purple */
   border-radius: 50%;
   display: flex;
   justify-content: center;

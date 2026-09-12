@@ -31,7 +31,7 @@
   inset: 0;
   background-image:
     radial-gradient(circle at 10% 40%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 85% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+    radial-gradient(circle at 85% 50%, rgba(47, 111, 91, 0.15) 0%, transparent 50%);
   pointer-events: none;
 }
 
@@ -189,13 +189,13 @@
 }
 
 .jas-tab:hover {
-  border-color: #6366f1;
-  color: #6366f1;
+  border-color: #2f6f5b;
+  color: #2f6f5b;
 }
 
 .jas-tab.active {
-  background: #6366f1;
-  border-color: #6366f1;
+  background: #2f6f5b;
+  border-color: #2f6f5b;
   color: #fff;
 }
 
@@ -226,8 +226,8 @@
 }
 
 .jas-card:hover {
-  border-color: #6366f1;
-  box-shadow: 0 6px 28px rgba(99, 102, 241, 0.13);
+  border-color: #2f6f5b;
+  box-shadow: 0 6px 28px rgba(47, 111, 91, 0.13);
   transform: translateY(-2px);
 }
 
@@ -242,7 +242,7 @@
   width: 46px;
   height: 46px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, #2f6f5b, #4a8f76);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,7 +315,7 @@
 
 .jas-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  background: linear-gradient(90deg, #2f6f5b, #4a8f76);
   border-radius: 999px;
 }
 
@@ -373,7 +373,7 @@
   width: 100%;
   padding: 10px 20px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, #2f6f5b, #4a8f76);
   color: #fff;
   font-size: 14px;
   font-weight: 700;

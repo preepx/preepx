@@ -79,9 +79,9 @@
 .pv-unit {
   font-size: 11px;
   font-weight: 600;
-  color: #a5b4fc;
-  background: rgba(99, 102, 241, 0.12);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  color: #8bb9ab;
+  background: rgba(47, 111, 91, 0.12);
+  border: 1px solid rgba(47, 111, 91, 0.2);
   padding: 2px 8px;
   border-radius: 50px;
   white-space: nowrap;
@@ -238,9 +238,9 @@
   gap: 4px;
   font-size: 0.75rem;
   padding: 4px 10px;
-  background: rgba(99, 102, 241, 0.1);
-  color: #a5b4fc;
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(47, 111, 91, 0.1);
+  color: #8bb9ab;
+  border: 1px solid rgba(47, 111, 91, 0.2);
   border-radius: 50px;
 }
 

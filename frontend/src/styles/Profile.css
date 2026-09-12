@@ -16,7 +16,7 @@
 
 .profile-banner {
   height: 100px;
-  background: linear-gradient(135deg, var(--primary), #7c3aed);
+  background: linear-gradient(135deg, var(--primary), #3d7a64);
 }
 
 .profile-body {
@@ -366,7 +366,7 @@
 .form-group input:focus, .form-group textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 0 0 2px rgba(31, 92, 74, 0.1);
 }
 
 .input-with-icon {
@@ -490,7 +490,7 @@
   font-weight: 600;
   padding: 5px 10px;
   border-radius: 8px;
-  background: rgba(99, 102, 241, 0.12);
+  background: rgba(47, 111, 91, 0.12);
   color: var(--primary);
 }
 

@@ -40,7 +40,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #4f46e5, #818cf8, #06b6d4);
+  background: linear-gradient(90deg, #1f5c4a, #5a9e8a, #b45309);
   border-radius: 24px 24px 0 0;
 }
 
@@ -84,7 +84,7 @@
   justify-content: center;
   margin-bottom: 18px;
   color: var(--primary);
-  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.15);
+  box-shadow: 0 8px 24px rgba(31, 92, 74, 0.15);
 }
 
 .welcome-card h2 {
@@ -134,13 +134,13 @@
   font-family: inherit;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 4px 14px rgba(31, 92, 74, 0.35);
   letter-spacing: -0.01em;
 }
 
 .welcome-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.45);
+  box-shadow: 0 6px 20px rgba(31, 92, 74, 0.45);
 }
 
 .welcome-btn:active {
@@ -155,5 +155,5 @@
 }
 
 [data-theme="dark"] .welcome-icon {
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(79, 70, 229, 0.1));
+  background: linear-gradient(135deg, rgba(31, 92, 74, 0.25), rgba(31, 92, 74, 0.1));
 }

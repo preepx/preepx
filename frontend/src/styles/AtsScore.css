@@ -30,7 +30,7 @@
   height: 420px;
   top: -120px;
   right: -100px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.18) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(47, 111, 91, 0.18) 0%, transparent 70%);
 }
 
 .ats-bg-glow-2 {
@@ -70,7 +70,7 @@
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 800;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, var(--primary) 0%, #14b8a6 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #3d8a72 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -136,7 +136,7 @@
 
 .ats-step-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(99, 102, 241, 0.35);
+  border-color: rgba(47, 111, 91, 0.35);
   box-shadow: var(--shadow-lg);
 }
 
@@ -153,7 +153,7 @@
   font-size: 11px;
   font-weight: 700;
   color: var(--primary);
-  background: rgba(99, 102, 241, 0.12);
+  background: rgba(47, 111, 91, 0.12);
 }
 
 .ats-step-icon {
@@ -165,7 +165,7 @@
   justify-content: center;
   border-radius: 12px;
   color: var(--primary);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(20, 184, 166, 0.1));
+  background: linear-gradient(135deg, rgba(47, 111, 91, 0.15), rgba(20, 184, 166, 0.1));
 }
 
 .ats-step-card h3 {
@@ -192,8 +192,8 @@
   margin-bottom: 28px;
   text-align: center;
   border-radius: 20px;
-  border: 2px dashed rgba(99, 102, 241, 0.35);
-  background: rgba(99, 102, 241, 0.04);
+  border: 2px dashed rgba(47, 111, 91, 0.35);
+  background: rgba(47, 111, 91, 0.04);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 32px rgba(0, 0, 0, 0.08);
@@ -202,16 +202,16 @@
 }
 
 [data-theme="light"] .ats-drop-zone {
-  background: rgba(99, 102, 241, 0.03);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 8px 32px rgba(99, 102, 241, 0.06);
+  background: rgba(47, 111, 91, 0.03);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 8px 32px rgba(47, 111, 91, 0.06);
 }
 
 .ats-drop-zone:hover,
 .ats-drop-zone.drag-over {
   border-color: var(--primary);
   border-style: solid;
-  background: rgba(99, 102, 241, 0.08);
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), 0 12px 40px rgba(99, 102, 241, 0.15);
+  background: rgba(47, 111, 91, 0.08);
+  box-shadow: 0 0 0 4px rgba(47, 111, 91, 0.1), 0 12px 40px rgba(47, 111, 91, 0.15);
   transform: scale(1.005);
 }
 
@@ -231,8 +231,8 @@
   justify-content: center;
   border-radius: 18px;
   color: var(--primary);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(20, 184, 166, 0.12));
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: linear-gradient(135deg, rgba(47, 111, 91, 0.2), rgba(20, 184, 166, 0.12));
+  border: 1px solid rgba(47, 111, 91, 0.2);
   transition: transform 0.3s ease;
 }
 
@@ -263,14 +263,14 @@
   font-weight: 600;
   color: #fff;
   cursor: pointer;
-  background: linear-gradient(135deg, var(--primary) 0%, #6366f1 50%, #14b8a6 100%);
-  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.35);
+  background: linear-gradient(135deg, var(--primary) 0%, #2f6f5b 50%, #3d8a72 100%);
+  box-shadow: 0 4px 20px rgba(47, 111, 91, 0.35);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .ats-browse-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(99, 102, 241, 0.45);
+  box-shadow: 0 8px 28px rgba(47, 111, 91, 0.45);
 }
 
 /* Uploading state */
@@ -288,7 +288,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: 2px solid rgba(99, 102, 241, 0.2);
+  border: 2px solid rgba(47, 111, 91, 0.2);
   border-top-color: var(--primary);
   animation: atsSpin 1.2s linear infinite;
 }
@@ -326,7 +326,7 @@
   height: 100%;
   width: 40%;
   border-radius: 4px;
-  background: linear-gradient(90deg, var(--primary), #14b8a6);
+  background: linear-gradient(90deg, var(--primary), #3d8a72);
   animation: atsProgress 1.8s ease-in-out infinite;
 }
 
@@ -364,7 +364,7 @@
 }
 
 .ats-check-item:hover {
-  border-color: rgba(99, 102, 241, 0.3);
+  border-color: rgba(47, 111, 91, 0.3);
 }
 
 .ats-check-icon {
@@ -376,7 +376,7 @@
   justify-content: center;
   border-radius: 8px;
   color: var(--primary);
-  background: rgba(99, 102, 241, 0.1);
+  background: rgba(47, 111, 91, 0.1);
 }
 
 .ats-check-item strong {
@@ -495,7 +495,7 @@
 .ats-reupload-btn:hover {
   color: var(--primary);
   border-color: var(--primary);
-  background: rgba(99, 102, 241, 0.06);
+  background: rgba(47, 111, 91, 0.06);
 }
 
 /* Feedback cards */

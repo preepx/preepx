@@ -44,14 +44,14 @@
   color: var(--text-muted);
 }
 
-.ta-info strong { display: block; font-size: 24px; color: #6366f1; }
+.ta-info strong { display: block; font-size: 24px; color: #2f6f5b; }
 
 .ta-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: #6366f1;
+  background: #2f6f5b;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -61,14 +61,14 @@
 }
 
 .ta-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.ta-btn-secondary { background: rgba(99,102,241,0.15); color: #6366f1; padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.ta-btn-secondary { background: rgba(47,111,91,0.15); color: #2f6f5b; padding: 10px 18px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
 
 .ta-mcq, .ta-coding { text-align: left; max-width: 800px; }
 .ta-mcq h2, .ta-coding h2 { font-size: 20px; line-height: 1.5; margin: 16px 0; }
 
 .ta-progress { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
 .ta-bar { flex: 1; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
-.ta-bar div { height: 100%; background: #6366f1; transition: width 0.3s; }
+.ta-bar div { height: 100%; background: #2f6f5b; transition: width 0.3s; }
 
 .ta-options { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
 .ta-option {
@@ -90,7 +90,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(99,102,241,0.15);
+  background: rgba(47,111,91,0.15);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,7 +99,7 @@
   flex-shrink: 0;
 }
 
-.ta-option.selected { border-color: #6366f1; background: rgba(99,102,241,0.08); }
+.ta-option.selected { border-color: #2f6f5b; background: rgba(47,111,91,0.08); }
 .ta-nav { display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px; }
 
 .ta-desc { color: var(--text-muted); line-height: 1.6; white-space: pre-wrap; margin-bottom: 16px; }
@@ -108,6 +108,6 @@
 
 .ta-result h1 { margin: 16px 0; }
 .ta-scores { display: flex; justify-content: center; gap: 32px; margin: 24px 0; }
-.ta-scores span { display: block; font-size: 32px; font-weight: 700; color: #6366f1; }
+.ta-scores span { display: block; font-size: 32px; font-weight: 700; color: #2f6f5b; }
 .ta-scores p { font-size: 13px; color: var(--text-muted); margin: 4px 0 0; }
 .ta-feedback { text-align: left; background: var(--bg-secondary); padding: 16px; border-radius: 10px; line-height: 1.6; font-size: 14px; margin: 20px 0; }

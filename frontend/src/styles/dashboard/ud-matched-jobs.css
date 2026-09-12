@@ -86,9 +86,9 @@
 }
 
 .ud-match-ring.low {
-  border-color: #6366f1;
-  color: #6366f1;
-  background: rgba(99, 102, 241, 0.1);
+  border-color: #2f6f5b;
+  color: #2f6f5b;
+  background: rgba(47, 111, 91, 0.1);
 }
 
 .ud-job-role {
@@ -131,7 +131,7 @@
   padding: 10px 14px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, #2f6f5b, #4a8f76);
   color: #fff;
   font-weight: 700;
   font-size: 13px;

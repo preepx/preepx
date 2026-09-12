@@ -20,7 +20,7 @@
    HERO BANNER
    ========================================================= */
 .ajd-hero-banner {
-    background: linear-gradient(105deg, #1e1b4b 0%, #312e81 40%, #4338ca 100%);
+    background: linear-gradient(105deg, #2c2723 0%, #24332c 40%, #245c4c 100%);
     border-radius: 16px;
     padding: 24px 0 24px 32px;
     /* Remove right padding so image touches right side */
@@ -33,7 +33,7 @@
 }
 
 [data-theme="dark"] .ajd-hero-banner {
-    background: linear-gradient(105deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+    background: linear-gradient(105deg, #0f172a 0%, #2c2723 50%, #24332c 100%);
 }
 
 .ajd-hb-left {
@@ -193,7 +193,7 @@
     border: none;
     font-size: 11px;
     font-weight: 600;
-    color: #6366f1;
+    color: #2f6f5b;
     cursor: pointer;
     padding: 2px 6px;
     border-radius: 4px;
@@ -201,17 +201,17 @@
 }
 
 .ajd-exp-clear-btn:hover {
-    color: #4f46e5;
-    background: rgba(99, 102, 241, 0.08);
+    color: #1f5c4a;
+    background: rgba(47, 111, 91, 0.08);
 }
 
 [data-theme="dark"] .ajd-exp-clear-btn {
-    color: #818cf8;
+    color: #5a9e8a;
 }
 
 [data-theme="dark"] .ajd-exp-clear-btn:hover {
-    color: #a5b4fc;
-    background: rgba(129, 140, 248, 0.12);
+    color: #8bb9ab;
+    background: rgba(90, 158, 138, 0.12);
 }
 
 .ajd-exp-menu-list {
@@ -249,22 +249,22 @@
 
 .ajd-exp-item.is-selected {
     background: #eef2ff !important;
-    color: #4f46e5 !important;
+    color: #1f5c4a !important;
     font-weight: 600;
 }
 
 [data-theme="dark"] .ajd-exp-item.is-selected {
-    background: rgba(99, 102, 241, 0.16) !important;
-    color: #a5b4fc !important;
+    background: rgba(47, 111, 91, 0.16) !important;
+    color: #8bb9ab !important;
 }
 
 .ajd-exp-check-icon {
-    color: #6366f1;
+    color: #2f6f5b;
     flex-shrink: 0;
 }
 
 [data-theme="dark"] .ajd-exp-check-icon {
-    color: #818cf8;
+    color: #5a9e8a;
 }
 
 .ajd-hbs-icon {
@@ -322,7 +322,7 @@
 }
 
 .ajd-hbs-btn {
-    background: #4f46e5;
+    background: #1f5c4a;
     color: #fff;
     border: none;
     border-radius: 999px;
@@ -334,7 +334,7 @@
 }
 
 .ajd-hbs-btn:hover {
-    background: #4338ca;
+    background: #245c4c;
 }
 
 .ajd-hb-tags {
@@ -347,7 +347,7 @@
 
 .ajd-hb-tags span {
     font-size: 12px;
-    color: #a5b4fc;
+    color: #8bb9ab;
     font-weight: 500;
 }
 
@@ -613,7 +613,7 @@
 
 /* ─── STAND OUT CARD ─── */
 .ajd-boost-card {
-    background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
+    background: linear-gradient(135deg, #2563eb 0%, #1f5c4a 100%);
     border-radius: 12px;
     padding: 20px;
     display: flex;
@@ -972,7 +972,7 @@
 
 .ajd-co-box:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    border-color: #c7d2fe;
+    border-color: #d6d0c6;
 }
 
 .ajd-co-box img {
@@ -1112,7 +1112,7 @@
    DARK THEME SUPPORT
    ========================================================= */
 [data-theme="dark"] .ajd-root {
-    background: #040B1D !important;
+    background: #161412 !important;
 }
 
 [data-theme="dark"] .ajd-stat-card,

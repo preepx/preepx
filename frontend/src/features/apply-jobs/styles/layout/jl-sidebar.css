@@ -43,7 +43,7 @@
 
 /* Exact hamburger & toggle styles */
 .sidebar-toggle {
-    background: #090e1a;
+    background: #1a1714;
     border: 1.5px solid rgba(148, 163, 184, 0.3);
     color: #94a3b8;
     width: 36px;
@@ -60,15 +60,15 @@
 }
 
 .sidebar-toggle:hover {
-    background: #0d1527;
-    border-color: #38bdf8;
-    box-shadow: 0 0 16px rgba(56, 189, 248, 0.5);
+    background: #221e1a;
+    border-color: #2f6f5b;
+    box-shadow: 0 0 16px rgba(47, 111, 91, 0.5);
     transform: scale(1.05);
 }
 
 .sidebar-toggle:hover .ham-bar {
-    background: #38bdf8;
-    box-shadow: 0 0 6px rgba(56, 189, 248, 0.6);
+    background: #2f6f5b;
+    box-shadow: 0 0 6px rgba(47, 111, 91, 0.6);
 }
 
 .sidebar-toggle:hover .top-bar {
@@ -190,7 +190,7 @@
 }
 
 .jl-nav-item.active {
-    background: rgba(96, 165, 250, 0.15) !important;
+    background: rgba(111, 175, 160, 0.15) !important;
     color: #60a5fa !important;
     font-weight: 600;
 }

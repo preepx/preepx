@@ -32,8 +32,8 @@
   gap: 20px;
   padding: 22px 24px;
   border-radius: 18px;
-  border: 1px solid rgba(99, 102, 241, 0.35);
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(6, 182, 212, 0.08));
+  border: 1px solid rgba(47, 111, 91, 0.35);
+  background: linear-gradient(135deg, rgba(47, 111, 91, 0.12), rgba(180, 83, 9, 0.08));
   cursor: pointer;
   font-family: inherit;
   text-align: left;
@@ -49,8 +49,8 @@
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  background: rgba(99, 102, 241, 0.2);
-  color: #6366f1;
+  background: rgba(47, 111, 91, 0.2);
+  color: #2f6f5b;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -99,11 +99,11 @@
 }
 
 .ud-practice-primary {
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(124, 58, 237, 0.06));
+  background: linear-gradient(135deg, rgba(31, 92, 74, 0.08), rgba(61, 122, 100, 0.06));
 }
 
 .ud-practice-secondary {
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(244, 63, 94, 0.06));
+  background: linear-gradient(135deg, rgba(154, 74, 42, 0.08), rgba(244, 63, 94, 0.06));
 }
 
 .ud-practice-glow {
@@ -113,13 +113,13 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(47, 111, 91, 0.15), transparent 70%);
   pointer-events: none;
   transition: transform 0.4s ease;
 }
 
 .ud-practice-secondary .ud-practice-glow {
-  background: radial-gradient(circle, rgba(236, 72, 153, 0.15), transparent 70%);
+  background: radial-gradient(circle, rgba(154, 74, 42, 0.15), transparent 70%);
 }
 
 .ud-practice-card:hover {
@@ -146,13 +146,13 @@
 }
 
 .ud-practice-primary .ud-practice-icon {
-  background: linear-gradient(135deg, #4f46e5, #7c3aed);
-  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, #1f5c4a, #3d7a64);
+  box-shadow: 0 8px 24px rgba(31, 92, 74, 0.4);
 }
 
 .ud-practice-secondary .ud-practice-icon {
-  background: linear-gradient(135deg, #ec4899, #f43f5e);
-  box-shadow: 0 8px 24px rgba(236, 72, 153, 0.4);
+  background: linear-gradient(135deg, #9a4a2a, #b42318);
+  box-shadow: 0 8px 24px rgba(154, 74, 42, 0.4);
 }
 
 .ud-practice-body {

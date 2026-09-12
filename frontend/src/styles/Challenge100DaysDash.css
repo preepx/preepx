@@ -39,8 +39,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: color-mix(in srgb, var(--accent, #6366f1) 12%, transparent);
-  color: var(--accent, #6366f1);
+  background: color-mix(in srgb, var(--accent, #2f6f5b) 12%, transparent);
+  color: var(--accent, #2f6f5b);
   flex-shrink: 0;
 }
 
@@ -102,8 +102,8 @@
 }
 
 .c100-day-badge {
-  background: rgba(99, 102, 241, 0.2);
-  color: #a5b4fc;
+  background: rgba(47, 111, 91, 0.2);
+  color: #8bb9ab;
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 12px;
@@ -165,7 +165,7 @@
 .start-challenge-btn {
   margin-top: 16px;
   align-self: flex-start;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  background: linear-gradient(135deg, #2f6f5b, #4a8f76);
   color: #fff;
   border: none;
   padding: 10px 24px;
@@ -195,8 +195,8 @@
 .goal-icon {
   width: 32px;
   height: 32px;
-  background: rgba(99, 102, 241, 0.1);
-  color: #818cf8;
+  background: rgba(47, 111, 91, 0.1);
+  color: #5a9e8a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -235,7 +235,7 @@
 
 .goal-progress-bar .fill {
   height: 100%;
-  background: #6366f1;
+  background: #2f6f5b;
 }
 
 .c100-sidebar-right {
@@ -438,7 +438,7 @@
 
 .view-all {
   font-size: 12px;
-  color: #818cf8;
+  color: #5a9e8a;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -464,8 +464,8 @@
 }
 
 .phase-compact-box.active {
-  background: rgba(99, 102, 241, 0.1);
-  border-color: #6366f1;
+  background: rgba(47, 111, 91, 0.1);
+  border-color: #2f6f5b;
 }
 
 .phase-icon {
@@ -511,7 +511,7 @@
 
 .line-fill {
   height: 100%;
-  background: #6366f1;
+  background: #2f6f5b;
   border-radius: 4px;
 }
 
@@ -535,8 +535,8 @@
 }
 
 .line-nodes .node.active {
-  background: #6366f1;
-  border-color: #8b5cf6;
+  background: #2f6f5b;
+  border-color: #4a8f76;
   color: #fff;
 }
 
@@ -594,7 +594,7 @@
 }
 
 .bg-purple {
-  background: #8b5cf6;
+  background: #4a8f76;
 }
 
 .bg-gold {
@@ -629,7 +629,7 @@
   background: rgba(255, 255, 255, 0.1);
   padding: 2px 8px;
   border-radius: 12px;
-  color: #a5b4fc;
+  color: #8bb9ab;
 }
 
 /* 100-Day Journey overrides */
@@ -651,8 +651,8 @@
 }
 
 .c100-compact-day-card.active {
-  border-color: #6366f1;
-  box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+  border-color: #2f6f5b;
+  box-shadow: 0 0 15px rgba(47, 111, 91, 0.2);
 }
 
 .day-header {
@@ -755,8 +755,8 @@
 .hex-badge {
   width: 64px;
   height: 64px;
-  background: rgba(99, 102, 241, 0.1);
-  border: 2px solid #6366f1;
+  background: rgba(47, 111, 91, 0.1);
+  border: 2px solid #2f6f5b;
   border-radius: 16px;
   /* fake hex */
   transform: rotate(45deg);
@@ -796,7 +796,7 @@
 
 .xp-bar-fill {
   height: 100%;
-  background: #6366f1;
+  background: #2f6f5b;
   border-radius: 6px;
 }
 
@@ -827,15 +827,15 @@
 }
 
 .heatmap-cell.lvl-1 {
-  background: rgba(99, 102, 241, 0.4);
+  background: rgba(47, 111, 91, 0.4);
 }
 
 .heatmap-cell.lvl-2 {
-  background: rgba(99, 102, 241, 0.7);
+  background: rgba(47, 111, 91, 0.7);
 }
 
 .heatmap-cell.lvl-3 {
-  background: #6366f1;
+  background: #2f6f5b;
 }
 
 .heatmap-legend {
@@ -863,15 +863,15 @@
 }
 
 .legend-colors .lvl-1 {
-  background: rgba(99, 102, 241, 0.4);
+  background: rgba(47, 111, 91, 0.4);
 }
 
 .legend-colors .lvl-2 {
-  background: rgba(99, 102, 241, 0.7);
+  background: rgba(47, 111, 91, 0.7);
 }
 
 .legend-colors .lvl-3 {
-  background: #6366f1;
+  background: #2f6f5b;
 }
 
 .leaderboard-list {
@@ -930,13 +930,13 @@
 }
 
 .lb-score {
-  color: #a5b4fc;
+  color: #8bb9ab;
   font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
   margin-left: auto;
-  background: rgba(99, 102, 241, 0.1);
+  background: rgba(47, 111, 91, 0.1);
   padding: 2px 8px;
   border-radius: 20px;
 }
@@ -982,7 +982,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  background: linear-gradient(90deg, rgba(14, 18, 38, 0.8), rgba(99, 102, 241, 0.1));
+  background: linear-gradient(90deg, rgba(14, 18, 38, 0.8), rgba(47, 111, 91, 0.1));
   border: 1px solid var(--c100-border);
   padding: 24px;
   border-radius: 16px;
@@ -1266,7 +1266,7 @@
 }
 
 .tc-view-all {
-  color: #c084fc;
+  color: #8a9e90;
   font-size: 11px;
   display: flex;
   align-items: center;
@@ -1316,7 +1316,7 @@
   top: 0;
   bottom: 0;
   width: 4px;
-  background: var(--border-gradient, linear-gradient(180deg, #3b82f6, #a855f7));
+  background: var(--border-gradient, linear-gradient(180deg, #3b82f6, #3d7a64));
 }
 
 .tc-item-left {
@@ -1379,10 +1379,10 @@
   font-weight: 500;
 }
 
-.tc-badge.hot { background: rgba(236, 72, 153, 0.1); color: #ec4899; }
+.tc-badge.hot { background: rgba(154, 74, 42, 0.1); color: #9a4a2a; }
 .tc-badge.popular { background: rgba(245, 158, 11, 0.1); color: #f59e0b; }
 .tc-badge.trending { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
-.tc-badge.focus { background: rgba(168, 85, 247, 0.1); color: #a855f7; }
+.tc-badge.focus { background: rgba(168, 85, 247, 0.1); color: #3d7a64; }
 .tc-badge.new { background: rgba(16, 185, 129, 0.1); color: #10b981; }
 
 .tc-stats-row {

@@ -2,7 +2,7 @@
    DARK THEME SUPPORT
    ========================================================= */
 [data-theme="dark"] body:has(.jl-root) {
-    background: #040B1D !important;
+    background: #161412 !important;
     color: #f8fafc !important;
 }
 
@@ -10,12 +10,12 @@
 [data-theme="dark"] .jl-body,
 [data-theme="dark"] .jl-content-area,
 [data-theme="dark"] .jl-main {
-    background: #040B1D !important;
+    background: #161412 !important;
 }
 
 [data-theme="dark"] .jl-topbar,
 [data-theme="dark"] .jl-sidebar {
-    background: #040B1D !important;
+    background: #161412 !important;
     border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -25,7 +25,7 @@
 
 [data-theme="dark"] .jl-sidebar .sidebar-top,
 [data-theme="dark"] .jl-sidebar .sidebar-bottom {
-    background: #040B1D !important;
+    background: #161412 !important;
     border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -44,7 +44,7 @@
 }
 
 [data-theme="dark"] .jl-nav-item.active {
-    background-color: rgba(96, 165, 250, 0.15) !important;
+    background-color: rgba(111, 175, 160, 0.15) !important;
     color: #60a5fa !important;
 }
 
@@ -58,11 +58,11 @@
 
 [data-theme="dark"] .jl-nav-indicator {
     background: #60a5fa !important;
-    box-shadow: 0 0 10px rgba(96, 165, 250, 0.6);
+    box-shadow: 0 0 10px rgba(111, 175, 160, 0.6);
 }
 
 [data-theme="dark"] .jl-user-chip {
-    background-color: #0d1527 !important;
+    background-color: #221e1a !important;
     color: #f8fafc !important;
     border-color: rgba(255, 255, 255, 0.1) !important;
 }
@@ -76,14 +76,14 @@
 }
 
 [data-theme="dark"] .jl-profile-widget {
-    background-color: #0d1527 !important;
+    background-color: #221e1a !important;
     color: #f8fafc !important;
 }
 
 /* Dark Mode Inputs */
 [data-theme="dark"] .jl-top-search {
     border-color: #334155 !important;
-    background: #040B1D !important;
+    background: #161412 !important;
 }
 
 [data-theme="dark"] .jl-top-search input {

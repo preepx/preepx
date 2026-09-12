@@ -50,7 +50,7 @@
   font-weight: 800;
   letter-spacing: -0.5px;
   margin-bottom: 8px;
-  background: linear-gradient(to right, #60a5fa, #a78bfa);
+  background: linear-gradient(to right, #60a5fa, #7d9a8c);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -127,7 +127,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  color: #818cf8;
+  color: #5a9e8a;
 }
 
 .score-stat div {
@@ -164,7 +164,7 @@
   display: block;
   width: 4px;
   height: 24px;
-  background: #8b5cf6;
+  background: #4a8f76;
   border-radius: 4px;
 }
 
@@ -263,7 +263,7 @@
 }
 
 .q-feedback strong {
-  color: #a78bfa;
+  color: #7d9a8c;
   display: block;
   margin-bottom: 6px;
   font-size: 13px;
@@ -330,14 +330,14 @@
 }
 
 .feedback-actions .btn-primary {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  background: linear-gradient(135deg, #3b82f6, #4a8f76);
   color: white;
-  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 12px rgba(47, 111, 91, 0.3);
 }
 
 .feedback-actions .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 16px rgba(47, 111, 91, 0.4);
 }
 
 .feedback-actions .btn-secondary {

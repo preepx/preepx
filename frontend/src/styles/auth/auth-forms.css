@@ -44,9 +44,9 @@
 }
 
 .auth-role-btn.active {
-  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  background: linear-gradient(135deg, #3d7a64, #2f6f5b);
   color: #ffffff;
-  box-shadow: 0 3px 8px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 3px 8px rgba(61, 122, 100, 0.35);
 }
 
 /* Login / Signup Tabs */
@@ -75,7 +75,7 @@
 }
 
 .auth-mode-tab.active {
-  color: #a855f7;
+  color: #3d7a64;
 }
 
 .auth-mode-tab.active::after {
@@ -86,7 +86,7 @@
   width: 60%;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, #7c3aed, #a855f7);
+  background: linear-gradient(90deg, #3d7a64, #3d7a64);
   box-shadow: 0 0 10px rgba(168, 85, 247, 0.7);
 }
 
@@ -212,7 +212,7 @@
 }
 
 .auth-input:focus {
-  border-color: #a855f7;
+  border-color: #3d7a64;
   box-shadow: 0 0 8px rgba(168, 85, 247, 0.25);
   background: rgba(15, 23, 42, 0.95);
 }
@@ -247,7 +247,7 @@
 .auth-forgot-btn {
   background: transparent;
   border: none;
-  color: #a855f7;
+  color: #3d7a64;
   font-size: 10px;
   font-weight: 600;
   cursor: pointer;
@@ -255,7 +255,7 @@
 }
 
 .auth-forgot-btn:hover {
-  color: #c084fc;
+  color: #8a9e90;
   text-decoration: underline;
 }
 
@@ -265,13 +265,13 @@
   width: 100%;
   margin-top: 1px;
   border-radius: 7px;
-  background: linear-gradient(135deg, #7c3aed, #6366f1);
+  background: linear-gradient(135deg, #3d7a64, #2f6f5b);
   border: none;
   color: #ffffff;
   font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 3px 8px rgba(124, 58, 237, 0.35);
+  box-shadow: 0 3px 8px rgba(61, 122, 100, 0.35);
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
@@ -281,7 +281,7 @@
 
 .auth-submit-btn:hover:not(:disabled) {
   transform: translateY(-1px);
-  box-shadow: 0 5px 12px rgba(124, 58, 237, 0.5);
+  box-shadow: 0 5px 12px rgba(61, 122, 100, 0.5);
 }
 
 .auth-submit-btn:disabled {
@@ -346,7 +346,7 @@
 .auth-switch-prompt button {
   background: transparent;
   border: none;
-  color: #a855f7;
+  color: #3d7a64;
   font-weight: 700;
   cursor: pointer;
   margin-left: 4px;
@@ -354,5 +354,5 @@
 
 .auth-switch-prompt button:hover {
   text-decoration: underline;
-  color: #c084fc;
+  color: #8a9e90;
 }

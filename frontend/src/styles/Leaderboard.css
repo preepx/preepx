@@ -24,7 +24,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background: linear-gradient(135deg, var(--primary), #7c3aed);
+  background: linear-gradient(135deg, var(--primary), #3d7a64);
   color: white;
   border-radius: 16px;
   padding: 24px;
@@ -75,7 +75,7 @@
 }
 
 [data-theme="dark"] .lb-row.current {
-  background: rgba(79, 70, 229, 0.08);
+  background: rgba(31, 92, 74, 0.08);
 }
 
 .lb-row.gold {

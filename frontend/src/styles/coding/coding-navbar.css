@@ -129,8 +129,8 @@
 }
 
 .ce-lang-option.active {
-  background: rgba(99, 102, 241, 0.15);
-  color: #818cf8;
+  background: rgba(47, 111, 91, 0.15);
+  color: #5a9e8a;
 }
 
 /* Timer */
@@ -212,7 +212,7 @@
   height: 34px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #6366f1;
+  border: 2px solid #2f6f5b;
   flex-shrink: 0;
   transition: border-color 0.3s ease;
 }

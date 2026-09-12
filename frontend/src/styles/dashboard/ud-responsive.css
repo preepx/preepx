@@ -10,11 +10,11 @@
 }
 
 [data-theme="dark"] .ud-practice-primary {
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(124, 58, 237, 0.1));
+  background: linear-gradient(135deg, rgba(31, 92, 74, 0.15), rgba(61, 122, 100, 0.1));
 }
 
 [data-theme="dark"] .ud-practice-secondary {
-  background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(244, 63, 94, 0.1));
+  background: linear-gradient(135deg, rgba(154, 74, 42, 0.15), rgba(244, 63, 94, 0.1));
 }
 
 /* ── RESPONSIVE ── */

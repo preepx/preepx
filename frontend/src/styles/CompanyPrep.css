@@ -312,8 +312,8 @@
 
 .cp-checkbox input:checked,
 .cp-radio input:checked {
-  background: #a855f7;
-  border-color: #a855f7;
+  background: #3d7a64;
+  border-color: #3d7a64;
 }
 
 .cp-checkbox input:checked::before,
@@ -371,7 +371,7 @@
 }
 
 .cp-btn-apply {
-  background: linear-gradient(90deg, #a855f7, #7c3aed);
+  background: linear-gradient(90deg, #3d7a64, #3d7a64);
   color: white;
   border: none;
   padding: 10px;
@@ -379,7 +379,7 @@
   font-weight: 600;
   cursor: pointer;
   margin-top: 4px;
-  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  box-shadow: 0 4px 12px rgba(61, 122, 100, 0.3);
   font-size: 13px;
 }
 
@@ -414,7 +414,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 60% 50%, rgba(124, 58, 237, 0.2), transparent 50%);
+  background: radial-gradient(circle at 60% 50%, rgba(61, 122, 100, 0.2), transparent 50%);
   pointer-events: none;
 }
 
@@ -469,7 +469,7 @@
 }
 
 .cp-radial-fill {
-  stroke: var(--ambient-color, #a855f7);
+  stroke: var(--ambient-color, #3d7a64);
   stroke-dasharray: 188;
   /* 2 * pi * 30 ≈ 188.4 */
   transition: stroke-dashoffset 1s ease;
@@ -555,7 +555,7 @@
 
 .cp-focus-badge {
   background: rgba(168, 85, 247, 0.15);
-  color: #c084fc;
+  color: #8a9e90;
   font-size: 10px;
   padding: 2px 8px;
   border-radius: 999px;
@@ -795,7 +795,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #7c3aed;
+  background: #3d7a64;
   color: #fff;
   border: none;
   padding: 8px 16px;
@@ -806,12 +806,12 @@
 }
 
 .cp-btn-start:hover {
-  background: #8b5cf6;
+  background: #4a8f76;
 }
 
 .cp-bottom-banner {
   margin-top: 24px;
-  background: linear-gradient(90deg, #1e1b4b, #2e1065);
+  background: linear-gradient(90deg, #2c2723, #1a2420);
   border: 1px solid rgba(139, 92, 246, 0.3);
   border-radius: 16px;
   padding: 24px 32px;
@@ -877,7 +877,7 @@
 
 .cp-chip-mcq {
   background: rgba(168, 85, 247, 0.15);
-  color: #c084fc;
+  color: #8a9e90;
 }
 
 .cp-chip-theory {
@@ -1052,7 +1052,7 @@
 }
 
 .cp-option.picked {
-  border-color: #a855f7;
+  border-color: #3d7a64;
 }
 
 .cp-option.correct {
@@ -1066,7 +1066,7 @@
 }
 
 .cp-primary {
-  background: linear-gradient(90deg, #a855f7, #7c3aed);
+  background: linear-gradient(90deg, #3d7a64, #3d7a64);
   color: #fff;
   border: none;
   border-radius: 12px;
@@ -1200,7 +1200,7 @@
   font-size: 20px;
   font-weight: 700;
   margin: 0 0 8px;
-  background: linear-gradient(90deg, #c084fc, #818cf8);
+  background: linear-gradient(90deg, #8a9e90, #5a9e8a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1224,7 +1224,7 @@
 .cp-modal-pills span {
   background: rgba(168, 85, 247, 0.1);
   border: 1px solid rgba(168, 85, 247, 0.25);
-  color: #c084fc;
+  color: #8a9e90;
   padding: 4px 10px;
   border-radius: 999px;
   font-size: 12px;
@@ -1235,7 +1235,7 @@
 }
 
 .cp-modal-close {
-  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  background: linear-gradient(135deg, #3d7a64, #3d7a64);
   border: none;
   color: #fff;
   padding: 10px 32px;

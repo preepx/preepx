@@ -6,7 +6,7 @@
 }
 
 .static-page-hero {
-  background: linear-gradient(135deg, #4f46e5 0%, #312e81 100%);
+  background: linear-gradient(135deg, #1f5c4a 0%, #24332c 100%);
   padding: 100px 24px 60px;
   text-align: center;
   color: white;
@@ -21,7 +21,7 @@
 
 .static-page-hero p {
   font-size: 18px;
-  color: #c7d2fe;
+  color: #d6d0c6;
   max-width: 600px;
   margin: 0 auto;
 }

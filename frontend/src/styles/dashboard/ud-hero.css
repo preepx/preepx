@@ -4,13 +4,13 @@
   border-radius: 24px;
   overflow: hidden;
   margin-bottom: 24px;
-  border: 1px solid rgba(99, 102, 241, 0.25);
+  border: 1px solid rgba(47, 111, 91, 0.25);
 }
 
 .ud-hero-bg {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 45%, #312e81 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #2c2723 45%, #24332c 100%);
 }
 
 .ud-orb {
@@ -23,7 +23,7 @@
 .ud-orb-1 {
   width: 320px;
   height: 320px;
-  background: radial-gradient(circle, rgba(79, 70, 229, 0.55), transparent 70%);
+  background: radial-gradient(circle, rgba(31, 92, 74, 0.55), transparent 70%);
   top: -80px;
   right: -60px;
   animation: udOrb1 9s ease-in-out infinite;
@@ -32,7 +32,7 @@
 .ud-orb-2 {
   width: 260px;
   height: 260px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.4), transparent 70%);
+  background: radial-gradient(circle, rgba(180, 83, 9, 0.4), transparent 70%);
   bottom: -60px;
   left: 10%;
   animation: udOrb2 11s ease-in-out infinite;
@@ -113,7 +113,7 @@
   font-weight: 800;
   padding: 3px 8px;
   border-radius: 100px;
-  border: 2px solid #1e1b4b;
+  border: 2px solid #2c2723;
   box-shadow: 0 4px 12px rgba(249, 115, 22, 0.5);
 }
 
@@ -122,12 +122,12 @@
   align-items: center;
   gap: 6px;
   padding: 5px 14px;
-  background: rgba(129, 140, 248, 0.2);
-  border: 1px solid rgba(129, 140, 248, 0.35);
+  background: rgba(90, 158, 138, 0.2);
+  border: 1px solid rgba(90, 158, 138, 0.35);
   border-radius: 100px;
   font-size: 12px;
   font-weight: 600;
-  color: #c7d2fe;
+  color: #d6d0c6;
   margin-bottom: 10px;
 }
 
@@ -141,7 +141,7 @@
 }
 
 .ud-name {
-  background: linear-gradient(135deg, #818cf8, #22d3ee);
+  background: linear-gradient(135deg, #5a9e8a, #c4a574);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -187,11 +187,11 @@
 
 .ud-ring-fill {
   fill: none;
-  stroke: #818cf8;
+  stroke: #5a9e8a;
   stroke-width: 6;
   stroke-linecap: round;
   transition: stroke-dasharray 1s cubic-bezier(0.4, 0, 0.2, 1);
-  filter: drop-shadow(0 0 6px rgba(129, 140, 248, 0.6));
+  filter: drop-shadow(0 0 6px rgba(90, 158, 138, 0.6));
 }
 
 .ud-level-center {
@@ -253,10 +253,10 @@
 
 .ud-xp-fill {
   height: 100%;
-  background: linear-gradient(90deg, #6366f1, #22d3ee);
+  background: linear-gradient(90deg, #2f6f5b, #c4a574);
   border-radius: 100px;
   transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 0 12px rgba(47, 111, 91, 0.6);
 }
 
 .ud-xp-hint {

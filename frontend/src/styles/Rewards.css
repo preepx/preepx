@@ -65,7 +65,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #4f46e5, #8b5cf6, #f59e0b);
+  background: linear-gradient(90deg, #1f5c4a, #4a8f76, #f59e0b);
   border-radius: 10px;
   transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -104,7 +104,7 @@
 
 .reward-card:hover {
   transform: translateY(-2px);
-  border-color: var(--primary-light, #8b5cf6);
+  border-color: var(--primary-light, #4a8f76);
   box-shadow: var(--shadow, 0 12px 24px rgba(0, 0, 0, 0.1));
 }
 

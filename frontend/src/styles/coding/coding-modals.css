@@ -153,7 +153,7 @@
 .ce-report-radio input[type="radio"] {
   width: 16px;
   height: 16px;
-  accent-color: #6366f1;
+  accent-color: #2f6f5b;
   cursor: pointer;
 }
 .ce-report-textarea {
@@ -170,5 +170,5 @@
 }
 .ce-report-textarea:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: #2f6f5b;
 }

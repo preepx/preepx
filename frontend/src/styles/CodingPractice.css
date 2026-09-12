@@ -13,7 +13,7 @@
 .cp-header h1 {
   font-size: 2.5rem;
   margin-bottom: 16px;
-  background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+  background: linear-gradient(135deg, #fff 0%, #8bb9ab 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -110,14 +110,14 @@
 }
 
 .start-exam-btn.active {
-  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  background: linear-gradient(135deg, #1f5c4a 0%, #3d7a64 100%);
   color: white;
-  box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 8px 25px rgba(31, 92, 74, 0.4);
 }
 
 .start-exam-btn.active:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.5);
+  box-shadow: 0 12px 30px rgba(31, 92, 74, 0.5);
 }
 
 .start-exam-btn.disabled {

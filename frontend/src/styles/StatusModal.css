@@ -53,7 +53,7 @@
 }
 
 .status-modal--info::before {
-  background: linear-gradient(90deg, #4f46e5, #818cf8, #a5b4fc);
+  background: linear-gradient(90deg, #1f5c4a, #5a9e8a, #8bb9ab);
 }
 
 @keyframes statusSlideUp {
@@ -133,12 +133,12 @@
 
 .status-modal-icon--info {
   background: linear-gradient(135deg, #eef2ff, #e0e7ff);
-  color: #4f46e5;
-  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.18);
+  color: #1f5c4a;
+  box-shadow: 0 8px 24px rgba(31, 92, 74, 0.18);
 }
 
 .status-modal-icon--info::after {
-  background: linear-gradient(135deg, #4f46e5, #818cf8);
+  background: linear-gradient(135deg, #1f5c4a, #5a9e8a);
 }
 
 .status-modal-title {
@@ -200,12 +200,12 @@
 .status-modal--info .status-modal-btn {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
-  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+  box-shadow: 0 4px 14px rgba(31, 92, 74, 0.35);
 }
 
 .status-modal--info .status-modal-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+  box-shadow: 0 6px 20px rgba(31, 92, 74, 0.4);
 }
 
 .status-modal-btn:active {
@@ -252,5 +252,5 @@
 }
 
 [data-theme="dark"] .status-modal-icon--info {
-  background: linear-gradient(135deg, rgba(79, 70, 229, 0.25), rgba(79, 70, 229, 0.1));
+  background: linear-gradient(135deg, rgba(31, 92, 74, 0.25), rgba(31, 92, 74, 0.1));
 }

@@ -64,9 +64,9 @@
   width: 46px;
   height: 46px;
   border-radius: 14px;
-  background: linear-gradient(135deg, rgba(99,102,241,0.22), rgba(168,85,247,0.18));
-  border: 1px solid rgba(99,102,241,0.28);
-  color: #a5b4fc;
+  background: linear-gradient(135deg, rgba(47,111,91,0.22), rgba(168,85,247,0.18));
+  border: 1px solid rgba(47,111,91,0.28);
+  color: #8bb9ab;
 }
 
 .nd-subject-name {
@@ -83,9 +83,9 @@
   gap: 4px;
   font-size: 11px;
   font-weight: 600;
-  color: #a5b4fc;
-  background: rgba(99,102,241,0.12);
-  border: 1px solid rgba(99,102,241,0.2);
+  color: #8bb9ab;
+  background: rgba(47,111,91,0.12);
+  border: 1px solid rgba(47,111,91,0.2);
   padding: 3px 9px;
   border-radius: 50px;
   width: fit-content;
@@ -109,9 +109,9 @@
   border-radius: 50px;
 }
 .nd-type-badge.core {
-  background: rgba(99,102,241,0.15);
-  color: #a5b4fc;
-  border: 1px solid rgba(99,102,241,0.25);
+  background: rgba(47,111,91,0.15);
+  color: #8bb9ab;
+  border: 1px solid rgba(47,111,91,0.25);
 }
 .nd-type-badge.technical {
   background: rgba(16,185,129,0.12);
@@ -171,9 +171,9 @@
 .nd-topic-chip {
   font-size: 12px;
   padding: 5px 10px;
-  background: rgba(99,102,241,0.1);
-  color: #a5b4fc;
-  border: 1px solid rgba(99,102,241,0.18);
+  background: rgba(47,111,91,0.1);
+  color: #8bb9ab;
+  border: 1px solid rgba(47,111,91,0.18);
   border-radius: 7px;
   font-weight: 500;
 }
@@ -193,7 +193,7 @@
   gap: 7px;
   font-size: 13px;
   font-weight: 600;
-  color: #a5b4fc;
+  color: #8bb9ab;
   text-decoration: none;
   transition: color 0.15s;
 }
@@ -274,7 +274,7 @@
   transition: border-color 0.2s;
 }
 .nd-qa-item.open {
-  border-color: rgba(99,102,241,0.35);
+  border-color: rgba(47,111,91,0.35);
 }
 
 .nd-qa-q {
@@ -293,10 +293,10 @@
   transition: background 0.15s;
 }
 .nd-qa-q:hover {
-  background: rgba(99,102,241,0.06);
+  background: rgba(47,111,91,0.06);
 }
 .nd-qa-item.open .nd-qa-q {
-  background: rgba(99,102,241,0.08);
+  background: rgba(47,111,91,0.08);
 }
 
 .nd-qa-num {
@@ -306,8 +306,8 @@
   min-width: 24px;
   height: 24px;
   border-radius: 7px;
-  background: rgba(99,102,241,0.18);
-  color: #a5b4fc;
+  background: rgba(47,111,91,0.18);
+  color: #8bb9ab;
   font-size: 11px;
   font-weight: 700;
   flex-shrink: 0;
@@ -376,9 +376,9 @@
 }
 
 [data-theme="light"] .nd-type-badge.core {
-  background: rgba(99,102,241,0.1);
-  color: #4338ca;
-  border-color: rgba(99,102,241,0.2);
+  background: rgba(47,111,91,0.1);
+  color: #245c4c;
+  border-color: rgba(47,111,91,0.2);
 }
 [data-theme="light"] .nd-type-badge.technical {
   background: rgba(16,185,129,0.08);
@@ -386,22 +386,22 @@
   border-color: rgba(16,185,129,0.18);
 }
 [data-theme="light"] .nd-topic-chip {
-  background: rgba(99,102,241,0.08);
-  color: #4338ca;
-  border-color: rgba(99,102,241,0.15);
+  background: rgba(47,111,91,0.08);
+  color: #245c4c;
+  border-color: rgba(47,111,91,0.15);
 }
 [data-theme="light"] .nd-qa-q {
   background: rgba(0,0,0,0.01);
 }
 [data-theme="light"] .nd-qa-item.open .nd-qa-q {
-  background: rgba(99,102,241,0.05);
+  background: rgba(47,111,91,0.05);
 }
 [data-theme="light"] .nd-qa-answer {
   background: rgba(0,0,0,0.02);
 }
 [data-theme="light"] .nd-qa-num {
-  background: rgba(99,102,241,0.12);
-  color: #4338ca;
+  background: rgba(47,111,91,0.12);
+  color: #245c4c;
 }
 [data-theme="light"] .nd-subject-name {
   color: #1e293b;

@@ -25,7 +25,7 @@
   font-size: clamp(24px, 4vw, 32px);
   font-weight: 800;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #e2e8f0 0%, #a5b4fc 50%, #c084fc 100%);
+  background: linear-gradient(135deg, #e2e8f0 0%, #8bb9ab 50%, #8a9e90 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -48,8 +48,8 @@
 }
 
 .notes-search:focus-within {
-  border-color: rgba(99, 102, 241, 0.5);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border-color: rgba(47, 111, 91, 0.5);
+  box-shadow: 0 0 0 3px rgba(47, 111, 91, 0.1);
 }
 
 .notes-search input {
@@ -114,16 +114,16 @@
 }
 
 .type-tab:hover {
-  border-color: rgba(99, 102, 241, 0.4);
+  border-color: rgba(47, 111, 91, 0.4);
   color: var(--text);
-  background: rgba(99, 102, 241, 0.08);
+  background: rgba(47, 111, 91, 0.08);
 }
 
 .type-tab.active {
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(168, 85, 247, 0.2));
-  border-color: rgba(99, 102, 241, 0.5);
-  color: #a5b4fc;
-  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.2);
+  background: linear-gradient(135deg, rgba(47, 111, 91, 0.25), rgba(168, 85, 247, 0.2));
+  border-color: rgba(47, 111, 91, 0.5);
+  color: #8bb9ab;
+  box-shadow: 0 2px 12px rgba(47, 111, 91, 0.2);
 }
 
 /* ── Section Labels ──────────────────────────────────────────────────────── */
@@ -223,15 +223,15 @@
 
 .note-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(99, 102, 241, 0.3);
+  border-color: rgba(47, 111, 91, 0.3);
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(99, 102, 241, 0.1),
+    0 0 0 1px rgba(47, 111, 91, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .note-card:focus-visible {
-  outline: 2px solid rgba(99, 102, 241, 0.6);
+  outline: 2px solid rgba(47, 111, 91, 0.6);
   outline-offset: 2px;
 }
 
@@ -256,7 +256,7 @@
   width: 180px;
   height: 180px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(47, 111, 91, 0.08) 0%, transparent 70%);
   pointer-events: none;
   transition: opacity 0.3s;
 }
@@ -296,9 +296,9 @@
 }
 
 .note-type-badge.theory {
-  background: rgba(99, 102, 241, 0.15);
-  color: #a5b4fc;
-  border: 1px solid rgba(99, 102, 241, 0.25);
+  background: rgba(47, 111, 91, 0.15);
+  color: #8bb9ab;
+  border: 1px solid rgba(47, 111, 91, 0.25);
 }
 
 .note-type-badge.technical {
@@ -354,7 +354,7 @@
 
 .note-unit {
   font-size: 11.5px;
-  color: #a5b4fc;
+  color: #8bb9ab;
   font-weight: 600;
 }
 
@@ -397,9 +397,9 @@
 .note-tag {
   font-size: 10.5px;
   padding: 3px 8px;
-  background: rgba(99, 102, 241, 0.08);
-  color: #a5b4fc;
-  border: 1px solid rgba(99, 102, 241, 0.15);
+  background: rgba(47, 111, 91, 0.08);
+  color: #8bb9ab;
+  border: 1px solid rgba(47, 111, 91, 0.15);
   border-radius: 6px;
   font-weight: 500;
 }
@@ -412,7 +412,7 @@
   padding: 0;
   border: none;
   background: none;
-  color: #a5b4fc;
+  color: #8bb9ab;
   font-size: 13px;
   font-weight: 700;
   font-family: inherit;
@@ -442,14 +442,14 @@
 
 [data-theme="light"] .note-card:hover {
   background: #ffffff;
-  border-color: rgba(99, 102, 241, 0.3);
-  box-shadow: 0 16px 32px rgba(99, 102, 241, 0.08);
+  border-color: rgba(47, 111, 91, 0.3);
+  box-shadow: 0 16px 32px rgba(47, 111, 91, 0.08);
 }
 
 [data-theme="light"] .note-type-badge.core {
-  background: rgba(99, 102, 241, 0.1);
-  color: #4338ca;
-  border-color: rgba(99, 102, 241, 0.2);
+  background: rgba(47, 111, 91, 0.1);
+  color: #245c4c;
+  border-color: rgba(47, 111, 91, 0.2);
 }
 
 [data-theme="light"] .note-type-badge.technical {
@@ -465,7 +465,7 @@
 }
 
 [data-theme="light"] .notes-page-title {
-  background: linear-gradient(135deg, #1e293b 0%, #4338ca 50%, #7c3aed 100%);
+  background: linear-gradient(135deg, #1e293b 0%, #245c4c 50%, #3d7a64 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -482,19 +482,19 @@
 }
 
 [data-theme="light"] .type-tab.active {
-  background: rgba(99, 102, 241, 0.1);
-  border-color: rgba(99, 102, 241, 0.3);
-  color: #4338ca;
+  background: rgba(47, 111, 91, 0.1);
+  border-color: rgba(47, 111, 91, 0.3);
+  color: #245c4c;
 }
 
 [data-theme="light"] .note-open-btn {
-  color: #4338ca;
+  color: #245c4c;
 }
 
 [data-theme="light"] .note-tag {
-  background: rgba(99, 102, 241, 0.06);
-  color: #4338ca;
-  border-color: rgba(99, 102, 241, 0.12);
+  background: rgba(47, 111, 91, 0.06);
+  color: #245c4c;
+  border-color: rgba(47, 111, 91, 0.12);
 }
 
 /* ── Responsive ─────────────────────────────────────────────────────────── */

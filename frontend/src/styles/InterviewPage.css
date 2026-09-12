@@ -109,7 +109,7 @@
 
 .stat-icon.purple {
   background: #f5f3ff;
-  color: #8b5cf6;
+  color: #4a8f76;
 }
 
 .stat-icon.orange {
@@ -552,7 +552,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #4f46e5, #818cf8, #a5b4fc);
+  background: linear-gradient(90deg, #1f5c4a, #5a9e8a, #8bb9ab);
 }
 
 .modal-header {
@@ -800,7 +800,7 @@
 }
 
 .cert-unlock-btn:hover:not(:disabled) {
-  background: var(--primary-dark, #4338ca);
+  background: var(--primary-dark, #245c4c);
 }
 
 .cert-unlock-btn:disabled {
@@ -838,7 +838,7 @@
 }
 
 .cert-download-btn:hover {
-  background: var(--primary-dark, #4338ca);
+  background: var(--primary-dark, #245c4c);
 }
 
 /* Unlocked view */

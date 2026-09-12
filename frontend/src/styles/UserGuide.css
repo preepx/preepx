@@ -13,7 +13,7 @@
 
 /* ── HERO HEADER ── */
 .guide-hero {
-  background: radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.12) 0%, rgba(3, 7, 18, 0) 70%),
+  background: radial-gradient(circle at 50% 20%, rgba(47, 111, 91, 0.12) 0%, rgba(3, 7, 18, 0) 70%),
               linear-gradient(180deg, #070d1e 0%, #030712 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 56px 20px 48px;
@@ -25,9 +25,9 @@
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  color: #38bdf8;
+  background: rgba(47, 111, 91, 0.12);
+  border: 1px solid rgba(47, 111, 91, 0.35);
+  color: #2f6f5b;
   font-size: 11.5px;
   font-weight: 700;
   padding: 5px 14px;
@@ -122,9 +122,9 @@
 }
 
 .guide-nav-btn.active {
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.12);
-  border-color: rgba(56, 189, 248, 0.35);
+  color: #2f6f5b;
+  background: rgba(47, 111, 91, 0.12);
+  border-color: rgba(47, 111, 91, 0.35);
   font-weight: 600;
 }
 
@@ -165,14 +165,14 @@
 }
 
 .icon-blue {
-  background: rgba(56, 189, 248, 0.14);
-  color: #38bdf8;
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  background: rgba(47, 111, 91, 0.14);
+  color: #2f6f5b;
+  border: 1px solid rgba(47, 111, 91, 0.3);
 }
 
 .icon-purple {
   background: rgba(168, 85, 247, 0.14);
-  color: #c084fc;
+  color: #8a9e90;
   border: 1px solid rgba(168, 85, 247, 0.3);
 }
 
@@ -190,14 +190,14 @@
 
 .icon-red {
   background: rgba(244, 63, 94, 0.14);
-  color: #f43f5e;
+  color: #b42318;
   border: 1px solid rgba(244, 63, 94, 0.3);
 }
 
 .icon-sky {
-  background: rgba(96, 165, 250, 0.14);
+  background: rgba(111, 175, 160, 0.14);
   color: #60a5fa;
-  border: 1px solid rgba(96, 165, 250, 0.3);
+  border: 1px solid rgba(111, 175, 160, 0.3);
 }
 
 .icon-teal {
@@ -245,7 +245,7 @@
 
 .guide-info-card:hover {
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(56, 189, 248, 0.4);
+  border-color: rgba(47, 111, 91, 0.4);
   transform: translateY(-2px);
 }
 
@@ -253,8 +253,8 @@
   display: inline-block;
   font-size: 10.5px;
   font-weight: 700;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.12);
+  color: #2f6f5b;
+  background: rgba(47, 111, 91, 0.12);
   padding: 2px 8px;
   border-radius: 6px;
   margin-bottom: 10px;
@@ -293,7 +293,7 @@
   display: inline-block;
   font-size: 10px;
   font-weight: 700;
-  color: #c084fc;
+  color: #8a9e90;
   background: rgba(168, 85, 247, 0.12);
   padding: 2px 7px;
   border-radius: 5px;
@@ -325,7 +325,7 @@
 
 .highlight-purple {
   background: rgba(168, 85, 247, 0.12);
-  border-left: 4px solid #a855f7;
+  border-left: 4px solid #3d7a64;
   color: #f3e8ff;
 }
 
@@ -356,7 +356,7 @@
   position: absolute;
   left: 4px;
   top: 0;
-  color: #38bdf8;
+  color: #2f6f5b;
   font-size: 18px;
   line-height: 1.2;
 }
@@ -427,7 +427,7 @@
 }
 
 .popular-pill .pill-val {
-  color: #c084fc;
+  color: #8a9e90;
 }
 
 /* Action Links */
@@ -439,9 +439,9 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.35);
-  color: #38bdf8;
+  background: rgba(47, 111, 91, 0.12);
+  border: 1px solid rgba(47, 111, 91, 0.35);
+  color: #2f6f5b;
   padding: 8px 16px;
   border-radius: 9px;
   font-size: 13px;
@@ -451,8 +451,8 @@
 }
 
 .guide-action-link:hover {
-  background: rgba(56, 189, 248, 0.22);
-  border-color: rgba(56, 189, 248, 0.6);
+  background: rgba(47, 111, 91, 0.22);
+  border-color: rgba(47, 111, 91, 0.6);
   transform: translateX(2px);
 }
 
@@ -476,7 +476,7 @@
   align-items: center;
   padding: 9px 18px;
   border-radius: 9px;
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  background: linear-gradient(135deg, #2563eb, #3d7a64);
   color: #ffffff;
   font-size: 13px;
   font-weight: 600;
@@ -517,9 +517,9 @@
 /* Bottom CTA Banner */
 .guide-bottom-cta {
   margin-top: 48px;
-  background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.15) 0%, rgba(0, 0, 0, 0) 70%),
+  background: radial-gradient(circle at 50% 0%, rgba(47, 111, 91, 0.15) 0%, rgba(0, 0, 0, 0) 70%),
               linear-gradient(165deg, #0f172a 0%, #090e1c 100%);
-  border: 1px solid rgba(56, 189, 248, 0.3);
+  border: 1px solid rgba(47, 111, 91, 0.3);
   border-radius: 20px;
   padding: 36px 24px;
   text-align: center;
@@ -531,9 +531,9 @@
   height: 48px;
   margin: 0 auto 12px;
   border-radius: 14px;
-  background: rgba(56, 189, 248, 0.16);
-  border: 1px solid rgba(56, 189, 248, 0.4);
-  color: #38bdf8;
+  background: rgba(47, 111, 91, 0.16);
+  border: 1px solid rgba(47, 111, 91, 0.4);
+  color: #2f6f5b;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -558,18 +558,18 @@
   align-items: center;
   padding: 12px 28px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #38bdf8 0%, #6366f1 50%, #a855f7 100%);
+  background: linear-gradient(135deg, #2f6f5b 0%, #2f6f5b 50%, #3d7a64 100%);
   color: #ffffff;
   font-size: 14px;
   font-weight: 700;
   text-decoration: none;
-  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 6px 20px rgba(47, 111, 91, 0.4);
   transition: all 0.25s ease;
 }
 
 .guide-cta-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
+  box-shadow: 0 8px 25px rgba(47, 111, 91, 0.6);
 }
 
 /* ── RESPONSIVE DESIGN ── */
