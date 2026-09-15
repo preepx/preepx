@@ -21,10 +21,17 @@ const adminLogin = async (req, res) => {
     const token = jwt.sign({ role: "admin" }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
-    res.json({ token, email });
-  } else {
-    res.status(401).json({ message: "Invalid admin credentials" });
+    return res.json({ token, email, role: "admin" });
+  } 
+  
+  if (email === "read@gmail.com" && password === "read123") {
+    const token = jwt.sign({ role: "readonly_admin" }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+    return res.json({ token, email, role: "readonly_admin" });
   }
+  
+  res.status(401).json({ message: "Invalid admin credentials" });
 };
 
 // @desc    Get Admin Dashboard Stats

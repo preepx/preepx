@@ -10,7 +10,15 @@ const adminProtect = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded.role === "admin") {
+      req.admin = decoded;
       next();
+    } else if (decoded.role === "readonly_admin") {
+      if (req.method === "GET") {
+        req.admin = decoded;
+        next();
+      } else {
+        res.status(403).json({ message: "Read-only admins cannot perform this action" });
+      }
     } else {
       res.status(403).json({ message: "Not authorized as an admin" });
     }
