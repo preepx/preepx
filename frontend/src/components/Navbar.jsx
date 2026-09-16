@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import notify from "@/utils/notify";
-import { Moon, Sun, Crown } from "lucide-react";
+import { Moon, Sun, Crown, Menu, X } from "lucide-react";
 import { useSubscription } from "@/features/subscription";
-import '@/styles/Navbar.css';
 
 function Navbar({ landingRole, setLandingRole }) {
   const [showMenu, setShowMenu] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const profileRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+
   const safeGetUser = () => {
     try {
       return JSON.parse(localStorage.getItem("user") || "null");
@@ -21,7 +22,7 @@ function Navbar({ landingRole, setLandingRole }) {
 
   const [user, setUser] = useState(safeGetUser());
   const { subscribed } = useSubscription();
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {
     const handleUserUpdate = () => {
@@ -76,6 +77,7 @@ function Navbar({ landingRole, setLandingRole }) {
     } else {
       navigate(`/#${targetId}`);
     }
+    setMobileMenuOpen(false);
   };
 
   useEffect(() => {
@@ -89,6 +91,7 @@ function Navbar({ landingRole, setLandingRole }) {
 
   useEffect(() => {
     setShowMenu(false);
+    setMobileMenuOpen(false);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -112,143 +115,188 @@ function Navbar({ landingRole, setLandingRole }) {
 
   const isActive = (path) => location.pathname === path;
 
-  return (
-    <nav className="navbar">
-      <div className="navbar-inner">
-        <Link to={user ? "/user-dashboard" : "/"} className="navbar-brand">
-          <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" />
-        </Link>
+  // Determine if it's the landing page for transparent absolute layout
+  const isLanding = location.pathname === "/";
 
-        <div className="navbar-center">
-          {user
-            ? navLinks.map((link) => (
+  const navClasses = isLanding
+    ? "absolute left-0 w-full z-50 bg-transparent"
+    : "sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm";
+
+  const landingNavStyle = isLanding
+    ? { top: '0' }
+    : {};
+
+  return (
+    <nav className={navClasses} style={landingNavStyle}>
+      <div className="max-w-[1398px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-full">
+        <div className="flex items-center justify-between h-[70px]" style={{ gap: '13px' }}>
+          {/* Logo */}
+          <Link to={user ? "/user-dashboard" : "/"} className="flex-shrink-0 flex items-center">
+            <img src="/landing/image%201.svg" alt="PreepX" className="h-[45px] w-auto" />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex flex-1 justify-center gap-6">
+            {user
+              ? navLinks.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`nav-link ${isActive(link.to) ? "active" : ""}`}
+                  className={`text-sm font-semibold transition-colors ${isActive(link.to) ? "text-slate-900" : "text-slate-600 hover:text-slate-900"
+                    }`}
                 >
                   {link.label}
                 </Link>
               ))
-            : landingNavLinks.map((link) => (
+              : landingNavLinks.map((link) => (
                 <a
                   key={link.targetId}
                   href={`#${link.targetId}`}
                   onClick={(e) => handleLandingNavClick(e, link.targetId)}
-                  className="nav-link"
+                  className="text-base font-semibold text-[#000000] hover:opacity-80 transition-colors"
                 >
                   {link.label}
                 </a>
               ))}
-        </div>
+          </div>
 
-        <div className="navbar-right">
-          <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle theme">
-            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-          </button>
+          {/* Right Actions */}
+          <div className="hidden md:flex items-center gap-4 flex-shrink-0 md:-translate-x-8">
+            <button onClick={toggleTheme} className="text-slate-600 hover:text-slate-900 hover:bg-slate-100 p-2 rounded-full transition-colors">
+              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
 
-          {user ? (
-            <div className="profile-wrapper" ref={profileRef}>
-              <button
-                type="button"
-                className="profile-btn"
-                onClick={() => setShowMenu(!showMenu)}
-                aria-expanded={showMenu}
-                aria-label="Open profile menu"
-              >
-                <div style={{ position: 'relative', display: 'inline-flex' }}>
-                  <img
-                    src={user.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName)}&background=4f46e5&color=fff`}
-                    alt="Profile"
-                    className="nav-profile-avatar"
-                    style={subscribed ? { border: '2px solid #f59e0b', padding: '1px' } : {}}
-                  />
-                  {subscribed && (
-                    <div style={{
-                      position: 'absolute',
-                      bottom: '-4px',
-                      right: '-4px',
-                      background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-                      borderRadius: '50%',
-                      width: '16px',
-                      height: '16px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      border: '2px solid var(--surface)',
-                      boxShadow: '0 2px 4px rgba(0,0,0,0.2)'
-                    }}>
-                      <Crown size={9} color="#fff" strokeWidth={3} />
-                    </div>
-                  )}
-                </div>
-                <span className="profile-name">{user.fullName?.split(" ")[0]}</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="profile-chevron">
-                  <path d="M6 9l6 6 6-6" />
-                </svg>
-              </button>
+            {user ? (
+              <div className="relative" ref={profileRef}>
+                <button
+                  type="button"
+                  className="flex items-center gap-2 px-3 py-1.5 border border-slate-200 rounded-full hover:shadow-md transition-shadow bg-white"
+                  onClick={() => setShowMenu(!showMenu)}
+                >
+                  <div className="relative inline-flex">
+                    <img
+                      src={user.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName)}&background=4f46e5&color=fff`}
+                      alt="Profile"
+                      className={`w-8 h-8 rounded-full object-cover ${subscribed ? 'border-2 border-amber-500 p-[1px]' : ''}`}
+                    />
+                    {subscribed && (
+                      <div className="absolute -bottom-1 -right-1 bg-gradient-to-br from-amber-500 to-amber-700 rounded-full w-4 h-4 flex items-center justify-center border-2 border-white shadow-sm">
+                        <Crown size={9} color="#fff" strokeWidth={3} />
+                      </div>
+                    )}
+                  </div>
+                  <span className="text-sm font-medium text-slate-700">{user.fullName?.split(" ")[0]}</span>
+                </button>
 
-              {showMenu && (
-                <div className="profile-dropdown">
-                  <div className="dropdown-header">
-                    <div style={{ position: 'relative', display: 'inline-flex', marginRight: '12px' }}>
+                {showMenu && (
+                  <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-100 py-2 animate-in fade-in slide-in-from-top-2">
+                    <div className="px-4 py-3 flex items-center gap-3">
                       <img
                         src={user.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(user.fullName)}&background=4f46e5&color=fff`}
                         alt=""
-                        className="dropdown-avatar"
-                        style={subscribed ? { border: '2px solid #f59e0b', padding: '1px' } : {}}
+                        className="w-10 h-10 rounded-full object-cover"
                       />
-                      {subscribed && (
-                        <div style={{
-                          position: 'absolute',
-                          bottom: '-2px',
-                          right: '-2px',
-                          background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-                          borderRadius: '50%',
-                          width: '18px',
-                          height: '18px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          border: '2px solid var(--surface)'
-                        }}>
-                          <Crown size={10} color="#fff" strokeWidth={3} />
-                        </div>
-                      )}
+                      <div>
+                        <p className="text-sm font-semibold text-slate-900">{user.fullName}</p>
+                        <p className="text-xs text-slate-500 truncate">{user.email}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="dropdown-name">{user.fullName}</p>
-                      <p className="dropdown-email">{user.email}</p>
-                    </div>
+                    {user.points > 0 && (
+                      <div className="px-4 py-2 text-sm font-medium text-amber-600 flex items-center gap-1">
+                        <img src="/logo.png" alt="XP" className="w-5 h-5 object-contain" /> {user.points} XP
+                      </div>
+                    )}
+                    <hr className="my-1 border-slate-100" />
+                    <Link to={user.role === 'recruiter' ? "/recruiter/company" : "/profile"} className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                      {user.role === 'recruiter' ? "Company Profile" : "View Profile"}
+                    </Link>
+                    <Link to={user.role === 'recruiter' ? "/recruiter-dashboard" : "/user-dashboard"} className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                      Dashboard
+                    </Link>
+                    <button type="button" onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                      Sign Out
+                    </button>
                   </div>
-                  {user.points > 0 && (
-                    <div className="dropdown-points">
-                      <span style={{ display: 'flex', alignItems: 'center' }}><img src="/logo.png" alt="XP" style={{ width: '32px', height: '32px', marginRight: '-6px', marginLeft: '-6px', marginTop: '-8px', marginBottom: '-8px', objectFit: 'contain' }} />{user.points}XP</span>
-                    </div>
-                  )}
-                  <div className="dropdown-divider" />
-                  <Link to={user.role === 'recruiter' ? "/recruiter/company" : "/profile"} className="dropdown-item" onClick={() => setShowMenu(false)}>
-                    {user.role === 'recruiter' ? "Company Profile" : "View Profile"}
-                  </Link>
-                  <Link to={user.role === 'recruiter' ? "/recruiter-dashboard" : "/user-dashboard"} className="dropdown-item" onClick={() => setShowMenu(false)}>
-                    Dashboard
-                  </Link>
-                  <button type="button" className="dropdown-item danger" onClick={handleLogout}>
-                    Sign Out
-                  </button>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center gap-3">
+                <Link to={landingRole === 'recruiter' ? "/auth/recruiter" : "/auth"} className="text-sm font-medium text-[#000000] hover:opacity-80 transition-opacity">
+                  Sign In
+                </Link>
+                <Link
+                  to={landingRole === 'recruiter' ? "/auth/recruiter" : "/auth"}
+                  className="text-[#000000] font-medium flex items-center justify-center transition-opacity hover:opacity-90"
+                  style={{
+                    background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
+                    width: '110px',
+                    height: '36px',
+                    gap: '8px',
+                    borderRadius: '8px',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: '#1e293b',
+                    padding: '4px',
+                    boxSizing: 'border-box',
+                    fontSize: '14px',
+                    fontFamily: 'Inter, sans-serif'
+                  }}
+                >
+                  {landingRole === 'recruiter' ? 'Start Hiring' : 'Get Started'}
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-slate-600 hover:text-slate-900 p-2">
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full left-0 top-full">
+          <div className="px-4 pt-2 pb-6 space-y-1">
+            {user ? (
+              navLinks.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50"
+                >
+                  {link.label}
+                </Link>
+              ))
+            ) : (
+              landingNavLinks.map((link) => (
+                <a
+                  key={link.targetId}
+                  href={`#${link.targetId}`}
+                  onClick={(e) => handleLandingNavClick(e, link.targetId)}
+                  className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50"
+                >
+                  {link.label}
+                </a>
+              ))
+            )}
+
+            <div className="border-t border-slate-100 mt-4 pt-4 px-3">
+              {user ? (
+                <button onClick={handleLogout} className="block w-full text-left py-2 text-base font-medium text-red-600">Sign Out</button>
+              ) : (
+                <div className="flex flex-col gap-3">
+                  <Link to="/auth" className="block w-full text-center py-2 text-base font-medium text-slate-700 border border-slate-200 rounded-lg">Sign In</Link>
+                  <Link to="/auth" className="block w-full text-center py-2 text-base font-medium text-white bg-purple-700 rounded-lg">Get Started</Link>
                 </div>
               )}
             </div>
-          ) : (
-            <div className="auth-buttons" style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
-              <Link to={landingRole === 'recruiter' ? "/auth/recruiter" : "/auth"} className="btn-ghost">Sign In</Link>
-              <Link to={landingRole === 'recruiter' ? "/auth/recruiter" : "/auth"} className="btn-primary-sm">
-                {landingRole === 'recruiter' ? 'Start Hiring' : 'Get Started'}
-              </Link>
-            </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }

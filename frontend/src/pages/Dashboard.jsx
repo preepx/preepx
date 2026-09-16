@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import HeroSection from "@/components/landing/HeroSection";
 import HowItWorksSection from "@/components/landing/HowItWorksSection";
@@ -16,6 +16,10 @@ import '@/styles/Dashboard.css';
 function Dashboard() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }, []);
+
   const handleRecruiterClick = () => {
     navigate("/auth?role=recruiter");
   };
@@ -23,7 +27,7 @@ function Dashboard() {
   return (
     <div className="landing unified-landing">
       <HeroSection onRecruiterClick={handleRecruiterClick} />
-      <HowItWorksSection onRecruiterClick={handleRecruiterClick} />
+      <HowItWorksSection />
       <JourneysSection />
       <FeaturesSection />
       <TrustedBySection />
