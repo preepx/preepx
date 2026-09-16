@@ -9,6 +9,10 @@
   background: #eef2f8;
 }
 
+.hiw-board + .hiw-board {
+  margin-top: 40px;
+}
+
 .hiw-section__bg {
   position: absolute;
   inset: 0;
