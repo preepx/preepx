@@ -178,7 +178,7 @@ function HowItWorksSection() {
               </div>
 
               <div className="hiw-photo">
-                <img src="/landing/interview_scene.jpg" alt="AI mock interview session" />
+                <img src="/landing/Rectangle%209.svg" alt="AI mock interview session" />
               </div>
             </div>
 
