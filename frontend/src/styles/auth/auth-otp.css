@@ -7,9 +7,9 @@
   width: 52px;
   height: 52px;
   border-radius: 14px;
-  background: rgba(61, 122, 100, 0.15);
-  border: 1.5px solid rgba(61, 122, 100, 0.35);
-  color: #3d7a64;
+  background: rgba(61, 94, 255, 0.15);
+  border: 1.5px solid rgba(61, 94, 255, 0.35);
+  color: #3D5EFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -52,7 +52,7 @@
 
 .otp-box:focus,
 .otp-box--filled {
-  border-color: #3d7a64;
+  border-color: #3D5EFF;
   box-shadow: 0 0 12px rgba(168, 85, 247, 0.3);
 }
 
@@ -68,7 +68,7 @@
 .otp-resend-btn {
   background: transparent;
   border: none;
-  color: #3d7a64;
+  color: #3D5EFF;
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;

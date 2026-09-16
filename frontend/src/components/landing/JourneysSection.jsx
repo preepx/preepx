@@ -18,19 +18,19 @@ import "@/styles/landing/JourneysLanding.css";
 
 function JourneysSection() {
   const candidateFeatures = [
-    { icon: BookOpen, title: "Learn", desc: "Prepare with AI-powered mock interviews and tests" },
+    { iconSrc: "/landing/learn.svg", title: "Learn", desc: "Prepare with AI-powered mock interviews and tests" },
     { icon: Code, title: "Practice", desc: "Solve real-world questions and improve every day" },
     { icon: TrendingUp, title: "Assess", desc: "Get detailed performance analytics" },
-    { icon: Shield, title: "Get Certified", desc: "Earn PreepX certificates to validate your skills" },
+    { iconSrc: "/landing/getcertfied.svg", title: "Get Certified", desc: "Earn PreepX certificates to validate your skills" },
     { icon: Briefcase, title: "Get Hired", desc: "Get discovered by top recruiters" },
   ];
 
   const recruiterFeatures = [
-    { icon: Sparkles, title: "Create Assessment", desc: "Build skill-based tests and interview flows" },
-    { icon: BarChart3, title: "Evaluate", desc: "AI-powered evaluation and in-depth analytics" },
-    { icon: Users, title: "Shortlist", desc: "Shortlist the best candidates with confidence" },
-    { icon: Shield, title: "Interview", desc: "Conduct interviews seamlessly on the platform" },
-    { icon: Briefcase, title: "Hire", desc: "Hire top talent and build winning teams" },
+    { iconSrc: "/landing/creratessment.svg", title: "Create Assessment", desc: "Build skill-based tests and interview flows" },
+    { iconSrc: "/landing/evelute.svg", title: "Evaluate", desc: "AI-powered evaluation and in-depth analytics" },
+    { iconSrc: "/landing/sortlis.svg", title: "Shortlist", desc: "Shortlist the best candidates with confidence" },
+    { iconSrc: "/landing/interview.svg", title: "Interview", desc: "Conduct interviews seamlessly on the platform" },
+    { iconSrc: "/landing/hiree.svg", title: "Hire", desc: "Hire top talent and build winning teams" },
   ];
 
   // SVG circuit paths for candidates (flowing left -> center)
@@ -82,7 +82,11 @@ function JourneysSection() {
             {candidateFeatures.map((f, i) => (
               <div key={i} className="journey-step-item">
                 <div className="journey-step-icon candidate-icon-box">
-                  <f.icon size={19} />
+                  {f.iconSrc ? (
+                    <img src={f.iconSrc} alt={f.title} style={{ width: 22, height: 22 }} />
+                  ) : (
+                    <f.icon size={19} />
+                  )}
                 </div>
                 <div className="journey-step-text">
                   <h4>{f.title}</h4>
@@ -265,7 +269,11 @@ function JourneysSection() {
             {recruiterFeatures.map((f, i) => (
               <div key={i} className="journey-step-item">
                 <div className="journey-step-icon recruiter-icon-box">
-                  <f.icon size={19} />
+                  {f.iconSrc ? (
+                    <img src={f.iconSrc} alt={f.title} style={{ width: 22, height: 22 }} />
+                  ) : (
+                    <f.icon size={19} />
+                  )}
                 </div>
                 <div className="journey-step-text">
                   <h4>{f.title}</h4>

@@ -17,11 +17,10 @@
 }
 
 .gradient-text-all-in-one {
-  background: linear-gradient(135deg, #38bdf8 0%, #22d3ee 45%, #818cf8 100%);
+  background: linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.5));
   font-weight: 800;
   display: inline-block;
   padding: 0 4px;

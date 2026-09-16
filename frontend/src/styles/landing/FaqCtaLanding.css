@@ -300,10 +300,21 @@
   flex-shrink: 0;
 }
 
-.tag-cyan { color: #38bdf8; }
-.tag-amber { color: #fbbf24; }
-.tag-purple { color: #c084fc; }
-.tag-green { color: #34d399; }
+.tag-cyan {
+  color: #38bdf8;
+}
+
+.tag-amber {
+  color: #fbbf24;
+}
+
+.tag-purple {
+  color: #c084fc;
+}
+
+.tag-green {
+  color: #34d399;
+}
 
 /* Right Side AI 3D Infinity Illustration */
 .cta-right-visual {
@@ -464,6 +475,7 @@
 }
 
 @media (max-width: 540px) {
+
   .prepx-faq,
   .prepx-cta {
     padding: 15px 16px 35px;

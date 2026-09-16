@@ -9,7 +9,7 @@ import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import StatsSection from "@/components/landing/StatsSection";
 import PricingSection from "@/components/landing/PricingSection";
 import FaqSection from "@/components/landing/FaqSection";
-import CtaSection from "@/components/landing/CtaSection";
+
 import LandingFooter from "@/components/landing/LandingFooter";
 import '@/styles/Dashboard.css';
 
@@ -38,7 +38,7 @@ function Dashboard() {
       <TestimonialsSection />
       <PricingSection onRecruiterClick={handleRecruiterClick} />
       <FaqSection />
-      <CtaSection onRecruiterClick={handleRecruiterClick} />
+
       <LandingFooter onRecruiterClick={handleRecruiterClick} />
     </div>
   );

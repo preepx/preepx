@@ -129,10 +129,10 @@ function Navbar({ landingRole, setLandingRole }) {
   return (
     <nav className={navClasses} style={landingNavStyle}>
       <div className="max-w-[1398px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-full">
-        <div className="flex items-center justify-between h-[70px]" style={{ gap: '13px' }}>
+        <div className="flex items-center justify-between h-[50px] md:h-[70px]" style={{ gap: '10px' }}>
           {/* Logo */}
           <Link to={user ? "/user-dashboard" : "/"} className="flex-shrink-0 flex items-center">
-            <img src="/landing/image%201.svg" alt="PreepX" className="h-[45px] w-auto" />
+            <img src="/landing/image%201.svg" alt="PreepX" className="h-[22px] sm:h-[45px] w-auto" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -248,55 +248,38 @@ function Navbar({ landingRole, setLandingRole }) {
             )}
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="text-slate-600 hover:text-slate-900 p-2">
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {/* Mobile Right Actions */}
+          <div className="md:hidden flex items-center gap-3" style={{ marginRight: '8px' }}>
+            <button onClick={toggleTheme} className="text-slate-600 hover:text-slate-900 p-1.5 rounded-full transition-colors">
+              {theme === "light" ? <Moon size={15} /> : <Sun size={15} />}
             </button>
+            {user ? (
+              <button onClick={handleLogout} className="text-xs font-medium text-red-600 px-2 py-1">Sign Out</button>
+            ) : (
+              <>
+                <Link to="/auth" className="text-xs font-medium text-[#000000] hover:opacity-80 transition-opacity px-1">Sign In</Link>
+                <Link
+                  to="/auth"
+                  className="text-white font-medium flex items-center justify-center transition-opacity hover:opacity-90"
+                  style={{
+                    background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
+                    height: '28px',
+                    borderRadius: '7px',
+                    border: '1px solid #1e293b',
+                    padding: '3px 10px',
+                    fontSize: '11px',
+                    fontFamily: 'Inter, sans-serif',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  Get Started
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-slate-100 shadow-lg absolute w-full left-0 top-full">
-          <div className="px-4 pt-2 pb-6 space-y-1">
-            {user ? (
-              navLinks.map((link) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50"
-                >
-                  {link.label}
-                </Link>
-              ))
-            ) : (
-              landingNavLinks.map((link) => (
-                <a
-                  key={link.targetId}
-                  href={`#${link.targetId}`}
-                  onClick={(e) => handleLandingNavClick(e, link.targetId)}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:bg-slate-50"
-                >
-                  {link.label}
-                </a>
-              ))
-            )}
-
-            <div className="border-t border-slate-100 mt-4 pt-4 px-3">
-              {user ? (
-                <button onClick={handleLogout} className="block w-full text-left py-2 text-base font-medium text-red-600">Sign Out</button>
-              ) : (
-                <div className="flex flex-col gap-3">
-                  <Link to="/auth" className="block w-full text-center py-2 text-base font-medium text-slate-700 border border-slate-200 rounded-lg">Sign In</Link>
-                  <Link to="/auth" className="block w-full text-center py-2 text-base font-medium text-white bg-purple-700 rounded-lg">Get Started</Link>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </nav>
   );
 }

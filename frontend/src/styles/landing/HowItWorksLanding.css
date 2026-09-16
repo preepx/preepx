@@ -6,54 +6,29 @@
   overflow-x: hidden;
   margin-top: -40px;
   padding: 10px 32px 80px;
-  min-height: 780px;
   background: transparent;
 }
 
 .hiw-main {
   position: relative;
-  padding: 16px;
+  background: transparent !important;
   border-radius: 0;
-  background: transparent;
-  box-shadow:
-    1px 1px 0 #e2dee8,
-    2px 2px 0 #d8d3e0,
-    3px 3px 0 #cec9d8,
-    4px 4px 0 #c4bfd0,
-    5px 5px 0 #bab5c6,
-    6px 6px 0 #b0abbc,
-    10px 14px 22px rgba(48, 40, 68, 0.28);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
+  border: 1px solid #e2e8f0;
 }
 
 .hiw-main::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 0;
-  padding: 16px;
-  background: linear-gradient(
-    145deg,
-    #ffffff 0%,
-    #f6f3fa 28%,
-    #d8d3e3 68%,
-    #b4aec2 100%
-  );
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+  display: none;
 }
 
 .hiw-main__face {
   background: transparent;
   border-radius: 0;
-  padding: 22px 26px 20px;
+  padding: 44px 36px;
 }
 
-.hiw-main + .hiw-main {
-  margin-top: 40px;
+.hiw-main+.hiw-main {
+  margin-top: 16px;
 }
 
 .hiw-section__bg {
@@ -87,11 +62,9 @@
 }
 
 .hiw-section__title span {
-  background: linear-gradient(
-    90deg,
-    rgba(61, 94, 255, 0.9) 0%,
-    rgba(96, 23, 199, 0.9) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(61, 94, 255, 0.9) 0%,
+      rgba(96, 23, 199, 0.9) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -108,7 +81,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 520px;
+  gap: 12px;
+  min-height: 365px;
 }
 
 .hiw-nav {
@@ -125,8 +99,8 @@
   height: 44px;
   padding: 6px 10px;
   border-radius: 5px;
-  border: 1px solid #5f6368;
-  background: #f8f7fa;
+  border: 1px solid #cbd5e1;
+  background: transparent;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
   cursor: pointer;
   text-align: left;
@@ -135,7 +109,7 @@
 
 .hiw-nav__item:hover {
   border-color: #3b82f6;
-  background: #eef6ff;
+  background: rgba(59, 130, 246, 0.05);
 }
 
 .hiw-nav__icon {
@@ -160,17 +134,19 @@
   line-height: 1.2;
 }
 
-.hiw-nav__label--violet {
-  color: #6d28d9;
-}
-
-.hiw-nav__label--blue {
-  color: #2563eb;
+.hiw-nav__label--violet,
+.hiw-nav__label--blue,
+.hiw-nav__label-gradient {
+  background: linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
 }
 
 .hiw-help {
   width: 285px;
-  margin-top: 28px;
+  margin-top: 12px;
   padding: 14px 16px;
   background: #9ce0ff;
   border: 1px solid #4b5563;
@@ -198,8 +174,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 520px;
+  gap: 12px;
   padding: 8px 8px 4px 0;
+  min-height: 365px;
 }
 
 .hiw-interview {
@@ -232,7 +209,7 @@
 }
 
 .hiw-qcount {
-  padding-top: 4px;
+  margin-top: -10px;
   font-size: 14px;
   font-weight: 600;
   color: #111111;
@@ -248,7 +225,7 @@
 }
 
 .hiw-interview__copy p {
-  margin: 0 0 28px;
+  margin: 0 0 16px;
   font-size: 15px;
   line-height: 1.45;
   color: #111111;
@@ -279,7 +256,7 @@
 .hiw-photo {
   width: 380px;
   height: 240px;
-  margin-top: 28px;
+  margin-top: 8px;
   overflow: hidden;
   border-radius: 2px;
   border: 1px solid #d1d5db;
@@ -295,17 +272,22 @@
 }
 
 .hiw-perf {
-  margin-top: 22px;
-  padding: 16px 20px 14px;
-  background: #8bdcf8;
+  margin: 12px 0 0 0;
+  padding: 10px 16px 8px;
+  width: 100%;
+  height: 110px;
+  background: #84D4FF;
   border: 1px solid #4b5563;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .hiw-perf h4 {
-  margin: 0 0 10px;
+  margin: 0 0 6px;
+  font-family: 'Inter', sans-serif;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0;
   color: #111111;
 }
 
@@ -313,6 +295,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   text-align: center;
+  margin-top: -5px;
 }
 
 .hiw-perf__col {
@@ -326,17 +309,18 @@
 
 .hiw-perf__name {
   width: 100%;
-  padding-bottom: 6px;
+  padding-top: 4px;
+  margin-top: 2px;
   margin-bottom: 4px;
-  border-bottom: 1px solid #6b7280;
-  font-size: 13px;
+  border-top: 1px solid #6b7280;
+  font-size: 11px;
   font-weight: 500;
   color: #111111;
 }
 
 .hiw-perf__val,
 .hiw-perf__delta {
-  font-size: 14px;
+  font-size: 12px;
   color: #111111;
 }
 
@@ -371,21 +355,14 @@
   }
 
   .hiw-main {
-    padding: 10px;
-    border-radius: 0;
-    box-shadow:
-      inset 1px 1px 0 rgba(255, 255, 255, 0.95),
-      inset -2px -3px 5px rgba(70, 62, 92, 0.16),
-      1px 1px 0 #e2dee8,
-      2px 2px 0 #d4cfdd,
-      3px 3px 0 #c6c1d0,
-      4px 4px 0 #b8b3c4,
-      8px 10px 16px rgba(48, 40, 68, 0.26);
+    padding: 0;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
   }
 
   .hiw-main__face {
-    padding: 16px 14px 14px;
-    border-radius: 0;
+    padding: 24px 20px;
+    border-radius: 20px;
   }
 
   .hiw-board {
@@ -421,5 +398,24 @@
   .hiw-perf__val,
   .hiw-perf__delta {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 430px) {
+  .hiw-section {
+    padding: 10px 12px 40px;
+  }
+
+  .hiw-main__face {
+    padding: 20px 14px;
+  }
+
+  .hiw-nav__item {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .hiw-section__title {
+    font-size: 22px;
   }
 }

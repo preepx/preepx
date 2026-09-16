@@ -441,34 +441,34 @@
 
 /* ── JOURNEYS SECTION LIGHT ── */
 [data-theme="light"] .prepx-journeys-title {
-  color: #0f172a !important;
+  color: #000000 !important;
 }
 
 [data-theme="light"] .journeys-section-subtitle {
-  color: #475569 !important;
+  color: #000000 !important;
 }
 
 [data-theme="light"] .journeys-unified-card {
-  background: linear-gradient(165deg, #ffffff 0%, #f8fafc 100%) !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.08) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
 }
 
 [data-theme="light"] .journey-step-item {
-  background: #f8fafc !important;
-  border-color: #e2e8f0 !important;
+  background: transparent !important;
+  border: 1px solid #cbd5e1 !important;
 }
 
 [data-theme="light"] .journey-step-item:hover {
-  background: #ffffff !important;
+  background: rgba(255, 255, 255, 0.2) !important;
 }
 
 [data-theme="light"] .journey-step-text h4 {
-  color: #0f172a !important;
+  color: #000000 !important;
 }
 
 [data-theme="light"] .journey-step-text p {
-  color: #64748b !important;
+  color: #000000 !important;
 }
 
 [data-theme="light"] .ecosystem-orb-card {
@@ -478,9 +478,7 @@
 }
 
 [data-theme="light"] .ecosystem-tagline {
-  background: linear-gradient(135deg, #0f172a 0%, #334155 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
+  color: #000000 !important;
 }
 
 /* ── FEATURES SECTION LIGHT ── */
@@ -489,9 +487,11 @@
 }
 
 [data-theme="light"] .prepx-feature-card {
-  background: linear-gradient(165deg, #ffffff 0%, #f8fafc 100%) !important;
-  border-color: #cbd5e1 !important;
-  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06) !important;
+  background: #8bd3ff !important;
+  border-color: #7eaac9 !important;
+  box-shadow: none !important;
+  border-radius: 8px !important;
+  color: #000000 !important;
 }
 
 [data-theme="light"] .feature-card-title {
@@ -499,7 +499,7 @@
 }
 
 [data-theme="light"] .feature-card-desc {
-  color: #475569 !important;
+  color: #000000 !important;
 }
 
 /* ── TRUSTED & STATS LIGHT ── */
@@ -1094,7 +1094,8 @@
 
 /* Light Theme Hero Override */
 [data-theme="light"] .btn-hero-primary {
-  background: #7e22ce !important; /* purple */
+  background: #7e22ce !important;
+  /* purple */
   border: 1px solid #7e22ce !important;
   color: #ffffff !important;
   box-shadow: 0 4px 15px rgba(126, 34, 206, 0.4) !important;
@@ -1121,7 +1122,7 @@
   height: 400px;
   background: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   border: 1px solid #e2e8f0;
 }
 

@@ -288,7 +288,7 @@
 .journeys-section-header {
   text-align: center;
   max-width: 800px;
-  margin: 0 auto 28px;
+  margin: -100px auto 28px;
 }
 
 .prepx-journeys-title {
@@ -308,11 +308,10 @@
 }
 
 .gradient-text-one-goal {
-  background: linear-gradient(135deg, #c084fc 0%, #a855f7 40%, #38bdf8 100%);
+  background: linear-gradient(90deg, rgba(61, 94, 255, 0.9) 0%, rgba(96, 23, 199, 0.9) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.5));
   font-weight: 800;
   display: inline-block;
   padding: 0 4px;
@@ -321,8 +320,8 @@
 .journeys-unified-card {
   max-width: 1200px;
   margin: 0 auto;
-  background: linear-gradient(165deg, #090e1c 0%, #050811 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  border: 1px solid #e2e8f0;
   border-radius: 28px;
   padding: 44px 36px;
   display: flex;
@@ -331,7 +330,7 @@
   gap: 20px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 10px 25px -5px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 
 .journeys-ambient-glow {
@@ -378,16 +377,16 @@
 }
 
 .candidate-text {
-  color: #38bdf8;
+  color: #000000;
 }
 
 .recruiter-text {
-  color: #c084fc;
+  color: #000000;
 }
 
 .journey-role-sub {
   font-size: 13px;
-  color: #8e9cb2;
+  color: #000000;
   margin: 0;
   line-height: 1.45;
 }
@@ -402,26 +401,27 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: transparent;
+  border: 1px solid #e2e8f0;
   border-radius: 14px;
   padding: 12px 14px;
   transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .journey-candidate-col .journey-step-item:hover {
-  background: rgba(56, 189, 248, 0.06);
-  border-color: rgba(56, 189, 248, 0.4);
-  transform: translateX(6px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.18);
+  background: #f0f9ff;
+  border-color: #bae6fd;
+  transform: translateX(6px) translateY(-2px);
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15), 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .journey-recruiter-col .journey-step-item:hover {
-  background: rgba(168, 85, 247, 0.06);
-  border-color: rgba(168, 85, 247, 0.4);
-  transform: translateX(-6px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 15px rgba(168, 85, 247, 0.18);
+  background: #faf5ff;
+  border-color: #e9d5ff;
+  transform: translateX(-6px) translateY(-2px);
+  box-shadow: 0 10px 25px rgba(168, 85, 247, 0.15), 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 .journey-step-icon {
@@ -442,25 +442,25 @@
 .candidate-icon-box {
   background: rgba(56, 189, 248, 0.12);
   border: 1px solid rgba(56, 189, 248, 0.25);
-  color: #38bdf8;
+  color: #000000;
 }
 
 .recruiter-icon-box {
-  background: rgba(168, 85, 247, 0.12);
-  border: 1px solid rgba(168, 85, 247, 0.25);
-  color: #c084fc;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  color: #000000;
 }
 
 .journey-step-text h4 {
   font-size: 13.5px;
   font-weight: 700;
-  color: #ffffff;
+  color: #0f172a;
   margin-bottom: 2px;
 }
 
 .journey-step-text p {
   font-size: 11px;
-  color: #8e9cb2;
+  color: #64748b;
   margin: 0;
 }
 
@@ -885,6 +885,10 @@
     padding: 16px 12px 24px;
   }
 
+  .journeys-section-header {
+    margin: 0 auto 20px;
+  }
+
   .prep-hiring-section {
     margin-bottom: 28px;
   }
@@ -926,8 +930,12 @@
   }
 
   .prepx-journeys-title {
-    font-size: 25px;
+    font-size: 22px;
     margin-bottom: 8px;
+  }
+
+  .journeys-section-subtitle {
+    font-size: 13px;
   }
 
   .journeys-unified-card {
