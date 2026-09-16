@@ -111,7 +111,9 @@ function HowItWorksSection() {
       <div className="hiw-section__inner">
         <h2 className="hiw-section__title">How PreepX Works?</h2>
 
-        <div className="hiw-board">
+        <div className="hiw-main">
+          <div className="hiw-main__face">
+            <div className="hiw-board">
           <aside className="hiw-sidebar">
             <div className="hiw-nav">
               {NAV_ITEMS.map((item) => (
@@ -198,8 +200,12 @@ function HowItWorksSection() {
             </div>
           </div>
         </div>
+          </div>
+        </div>
 
-        <div className="hiw-board mt-10">
+        <div className="hiw-main">
+          <div className="hiw-main__face">
+        <div className="hiw-board">
           <aside className="flex w-full flex-col gap-[10px] min-[860px]:w-[285px]">
             {RECRUITER_NAV.map((item) => (
               <button type="button" key={item.label} className="hiw-nav__item">
@@ -260,6 +266,8 @@ function HowItWorksSection() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
           </div>
         </div>
       </div>

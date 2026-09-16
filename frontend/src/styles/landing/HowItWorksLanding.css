@@ -3,13 +3,55 @@
 .hiw-section {
   position: relative;
   width: 100%;
-  overflow: hidden;
-  padding: 48px 24px 72px;
+  overflow-x: hidden;
+  padding: 48px 32px 80px;
   min-height: 780px;
   background: #eef2f8;
 }
 
-.hiw-board + .hiw-board {
+.hiw-main {
+  position: relative;
+  padding: 16px;
+  border-radius: 0;
+  background: transparent;
+  box-shadow:
+    1px 1px 0 #e2dee8,
+    2px 2px 0 #d8d3e0,
+    3px 3px 0 #cec9d8,
+    4px 4px 0 #c4bfd0,
+    5px 5px 0 #bab5c6,
+    6px 6px 0 #b0abbc,
+    10px 14px 22px rgba(48, 40, 68, 0.28);
+}
+
+.hiw-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0;
+  padding: 16px;
+  background: linear-gradient(
+    145deg,
+    #ffffff 0%,
+    #f6f3fa 28%,
+    #d8d3e3 68%,
+    #b4aec2 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.hiw-main__face {
+  background: transparent;
+  border-radius: 0;
+  padding: 22px 26px 20px;
+}
+
+.hiw-main + .hiw-main {
   margin-top: 40px;
 }
 
@@ -29,6 +71,7 @@
   z-index: 1;
   max-width: 1180px;
   margin: 0 auto;
+  padding: 10px 8px 28px;
 }
 
 .hiw-section__title {
@@ -144,11 +187,7 @@
   flex-direction: column;
   justify-content: space-between;
   min-height: 520px;
-  padding: 28px 28px 22px;
-  border: 1px solid rgba(107, 114, 128, 0.45);
-  border-radius: 4px;
-  background: rgba(248, 250, 252, 0.42);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  padding: 8px 8px 4px 0;
 }
 
 .hiw-interview {
@@ -319,6 +358,24 @@
     margin-bottom: 24px;
   }
 
+  .hiw-main {
+    padding: 10px;
+    border-radius: 0;
+    box-shadow:
+      inset 1px 1px 0 rgba(255, 255, 255, 0.95),
+      inset -2px -3px 5px rgba(70, 62, 92, 0.16),
+      1px 1px 0 #e2dee8,
+      2px 2px 0 #d4cfdd,
+      3px 3px 0 #c6c1d0,
+      4px 4px 0 #b8b3c4,
+      8px 10px 16px rgba(48, 40, 68, 0.26);
+  }
+
+  .hiw-main__face {
+    padding: 16px 14px 14px;
+    border-radius: 0;
+  }
+
   .hiw-board {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -335,7 +392,7 @@
 
   .hiw-stage {
     min-height: 0;
-    padding: 20px 16px 16px;
+    padding: 0;
   }
 }
 
