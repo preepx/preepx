@@ -103,7 +103,9 @@ function HowItWorksSection() {
     <section className="hiw-section" id="how-it-works">
 
       <div className="hiw-section__inner">
-        <h2 className="hiw-section__title">How PreepX Works?</h2>
+        <h2 className="hiw-section__title">
+          How <span>PreepX</span> Works?
+        </h2>
 
         <div className="hiw-main">
           <div className="hiw-main__face">
