@@ -15,16 +15,7 @@ function HeroSection({ onRecruiterClick }) {
   };
 
   return (
-    <section className="relative flex items-center justify-center py-12 px-6 overflow-hidden min-h-[calc(100vh-70px)] bg-slate-50">
-      {/* Background SVG */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden">
-        <img
-          src="/landing/Clip%20path%20group.svg"
-          alt="Background"
-          className="w-full h-full object-cover opacity-100 object-center"
-        />
-      </div>
-
+    <section className="relative flex items-center justify-center py-12 px-6 overflow-hidden min-h-[calc(100vh-70px)] bg-transparent">
       <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12 text-left">
         {/* Left Column: Heading, Subtitle & Buttons */}
         <div className="flex-1 max-w-xl lg:translate-x-12">

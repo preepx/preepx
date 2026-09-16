@@ -4,10 +4,14 @@
 ═══════════════════════════════════════════════════════════ */
 
 [data-theme="light"] html,
-[data-theme="light"] body,
+[data-theme="light"] body {
+  background-color: #eef2f6 !important;
+  color: #1e293b !important;
+}
+
 [data-theme="light"] .landing,
 [data-theme="light"] .unified-landing {
-  background-color: #eef2f6 !important;
+  background-color: transparent !important;
   color: #1e293b !important;
 }
 

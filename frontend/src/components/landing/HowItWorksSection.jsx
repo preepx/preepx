@@ -101,12 +101,6 @@ function HowItWorksSection() {
 
   return (
     <section className="hiw-section" id="how-it-works">
-      <img
-        className="hiw-section__bg"
-        src="/landing/Frame.svg"
-        alt=""
-        aria-hidden="true"
-      />
 
       <div className="hiw-section__inner">
         <h2 className="hiw-section__title">How PreepX Works?</h2>

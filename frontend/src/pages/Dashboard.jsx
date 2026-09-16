@@ -26,6 +26,9 @@ function Dashboard() {
 
   return (
     <div className="landing unified-landing">
+      <div className="landing-page-bg" aria-hidden="true">
+        <img src="/landing/Clip%20path%20group.svg" alt="" />
+      </div>
       <HeroSection onRecruiterClick={handleRecruiterClick} />
       <HowItWorksSection />
       <JourneysSection />
