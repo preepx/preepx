@@ -1,0 +1,288 @@
+/* ═══════════════════════════════════════════════════════════
+   PREEPX - FEATURES PAGE
+   Same design system as HowPreepXWorks (hpw-* tokens)
+   This file only extends / overrides for the features hero
+   ═══════════════════════════════════════════════════════════ */
+
+/* Re-use all hpw-* CSS variables & layout primitives from
+   HowPreepXWorks.css — this file only adds features-specific pieces */
+
+/* ── FEATURES HERO  (same blue gradient as How-PreepX-Works) ── */
+.feat-hero {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 40%, #1e3a8a 100%);
+  padding: 80px 24px 64px;
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+}
+
+[data-theme="dark"] .feat-hero {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 50%, #0f172a 100%);
+}
+
+.feat-hero h1 {
+  font-size: clamp(32px, 4.5vw, 48px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 14px;
+  color: #ffffff;
+}
+
+.feat-hero-sub {
+  font-size: clamp(16px, 2.2vw, 20px);
+  font-weight: 500;
+  color: #bae6fd;
+  max-width: 620px;
+  margin: 0 auto 28px;
+  line-height: 1.65;
+}
+
+.feat-hero-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+.feat-hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  color: #e0f2fe;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 99px;
+  backdrop-filter: blur(6px);
+}
+
+/* ── FEATURE TAB NAV ── */
+.feat-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--hpw-border-light);
+  padding-bottom: 0;
+}
+
+.feat-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--hpw-text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+  margin-bottom: -1px;
+}
+
+.feat-tab-btn:hover {
+  color: var(--hpw-text);
+}
+
+.feat-tab-btn.active {
+  color: #0284c7;
+  border-bottom-color: #0284c7;
+}
+
+.feat-tab-btn img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+/* force icon colour in active tab */
+[data-theme="light"] .feat-tab-btn.active img {
+  filter: brightness(0) saturate(100%) invert(18%) sepia(90%) saturate(700%) hue-rotate(185deg);
+}
+[data-theme="dark"] .feat-tab-btn.active img {
+  filter: brightness(0) saturate(100%) invert(60%) sepia(80%) saturate(400%) hue-rotate(170deg);
+}
+
+/* inactive icons inherit hpw filter */
+[data-theme="light"] .feat-tab-btn:not(.active) img {
+  filter: brightness(0) saturate(100%) invert(40%) sepia(10%) saturate(300%) hue-rotate(200deg);
+}
+[data-theme="dark"] .feat-tab-btn:not(.active) img {
+  filter: brightness(0) invert(0.6);
+}
+
+/* ── COMPARISON TABLE ── */
+.feat-compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.feat-compare-table thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--hpw-text-muted);
+  border-bottom: 1px solid var(--hpw-border);
+  background: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.feat-compare-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--hpw-border-light);
+  color: var(--hpw-text);
+  vertical-align: top;
+}
+
+.feat-compare-table tr:last-child td {
+  border-bottom: none;
+}
+
+.feat-compare-table tr:hover td {
+  background: var(--hpw-item-hover);
+}
+
+.feat-check {
+  color: #0284c7;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.feat-dash {
+  color: var(--hpw-text-muted);
+}
+
+.feat-partial {
+  color: #f59e0b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ── HIGHLIGHT BANNER ── */
+.feat-highlight-banner {
+  background: var(--hpw-step-badge-bg);
+  border: 1px solid var(--hpw-icon-badge-border);
+  border-radius: 10px;
+  padding: 18px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.feat-highlight-banner p {
+  font-size: 14px;
+  color: var(--hpw-text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── CTA FOOTER BANNER ── */
+.feat-cta-banner {
+  background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 100%);
+  border-radius: 14px;
+  padding: 40px 32px;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 8px;
+}
+
+[data-theme="dark"] .feat-cta-banner {
+  background: linear-gradient(135deg, #0369a1 0%, #0f172a 100%);
+}
+
+.feat-cta-banner h2 {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.feat-cta-banner p {
+  color: #bae6fd;
+  font-size: 15px;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.feat-cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.feat-cta-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #0369a1;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 11px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.15s ease;
+}
+
+.feat-cta-btn-primary:hover {
+  background: #f0f9ff;
+  transform: translateY(-1px);
+}
+
+.feat-cta-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 11px 22px;
+  border-radius: 8px;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+  transition: all 0.15s ease;
+}
+
+.feat-cta-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .feat-hero {
+    padding: 70px 16px 50px;
+  }
+
+  .feat-tabs {
+    gap: 4px;
+  }
+
+  .feat-tab-btn {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .feat-cta-banner {
+    padding: 28px 20px;
+  }
+
+  .feat-compare-table thead th:nth-child(3),
+  .feat-compare-table td:nth-child(3) {
+    display: none;
+  }
+}

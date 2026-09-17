@@ -112,9 +112,9 @@ function Footer({ onRecruiterClick }) {
           <div className="footer-nav-col">
             <h4>Platform</h4>
             <ul className="footer-nav-list">
-              <li><a href="/#how-it-works">How PreepX Works</a></li>
-              <li><a href="/#features">Features Overview</a></li>
-              <li><Link to="/user-guide">User Guide & Docs</Link></li>
+              <li><Link to="/how-preepx-works">How PreepX Works</Link></li>
+              <li><Link to="/features">Features Overview</Link></li>
+              <li><Link to="/user-guide">User Guide &amp; Docs</Link></li>
               <li><Link to="/interview-tips">Knowledge Hub</Link></li>
               <li><a href="/#faq">Frequently Asked Questions</a></li>
               <li><Link to="/help-center">Product Feedback</Link></li>

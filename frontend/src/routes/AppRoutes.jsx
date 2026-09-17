@@ -14,7 +14,7 @@ const AppLayout = lazy(() => import("@/layouts/AppLayout"));
 const JobsLayout = lazy(() => import("@/features/apply-jobs/layout/JobsLayout"));
 
 const PUBLIC_PATH_PREFIXES = [
-  "/features", "/how-it-works", "/mock-interviews", "/user-guide",
+  "/features", "/how-it-works", "/how-preepx-works", "/mock-interviews", "/user-guide", "/docs",
   "/interview-tips", "/blog", "/help-center", "/community",
   "/about-us", "/careers", "/privacy-policy", "/terms-of-service", "/security",
   "/hiring-guide", "/recruiter-resources", "/documentation",

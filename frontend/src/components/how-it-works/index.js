@@ -1,0 +1,14 @@
+export { default as HowPreepXHero } from "./HowPreepXHero";
+export { default as PlatformOverviewSection } from "./PlatformOverviewSection";
+export { default as CandidateWorkflowSection } from "./CandidateWorkflowSection";
+export { default as MockInterviewSection } from "./MockInterviewSection";
+export { default as AiFeedbackSection } from "./AiFeedbackSection";
+export { default as ContinuousImprovementSection } from "./ContinuousImprovementSection";
+export { default as AssessmentCodingSection } from "./AssessmentCodingSection";
+export { default as ProgressTrackingSection } from "./ProgressTrackingSection";
+export { default as JobOpportunitiesSection } from "./JobOpportunitiesSection";
+export { default as RecruiterWorkflowSection } from "./RecruiterWorkflowSection";
+export { default as CompleteJourneySection } from "./CompleteJourneySection";
+export { default as AudienceSection } from "./AudienceSection";
+export { default as FaqAccordion } from "./FaqAccordion";
+export { default as HowPreepXCta } from "./HowPreepXCta";

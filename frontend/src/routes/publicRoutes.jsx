@@ -1,9 +1,12 @@
 import React, { lazy } from "react";
+import { Navigate } from "react-router-dom";
 import GuestRoute from "@/components/GuestRoute";
 
 const Dashboard = lazy(() => import("@/pages/Dashboard"));
 const StaticPage = lazy(() => import("@/pages/StaticPage"));
 const UserGuide = lazy(() => import("@/pages/UserGuide"));
+const HowPreepXWorks = lazy(() => import("@/pages/HowPreepXWorks"));
+const Features = lazy(() => import("@/pages/Features"));
 const CertificateVerifyPage = lazy(() => import("@/pages/Interview/CertificateVerifyPage"));
 const Auth = lazy(() => import("@/pages/Auth/Auth"));
 const RecruiterAuth = lazy(() => import("@/pages/Auth/RecruiterAuth"));
@@ -46,8 +49,10 @@ export const getPublicRoutes = (landingRole, setLandingRole) => [
     path: "/auth/callback",
     element: <AuthCallback />,
   },
-  { path: "/features", element: <StaticPage /> },
-  { path: "/how-it-works", element: <StaticPage /> },
+  { path: "/features", element: <Features /> },
+  { path: "/docs", element: <Navigate to="/user-guide" replace /> },
+  { path: "/how-preepx-works", element: <HowPreepXWorks /> },
+  { path: "/how-it-works", element: <Navigate to="/how-preepx-works" replace /> },
   { path: "/mock-interviews", element: <StaticPage /> },
   { path: "/user-guide", element: <UserGuide /> },
   { path: "/interview-tips", element: <StaticPage /> },

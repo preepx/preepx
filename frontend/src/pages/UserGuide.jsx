@@ -1,37 +1,98 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import {
-  BookOpen,
-  Coins,
-  Video,
-  Target,
-  Users,
-  Zap,
-  Shield,
-  HelpCircle,
-  Award,
-  Sparkles,
-  CheckCircle2,
-  Briefcase,
-  Flame,
-  ArrowRight,
-  ChevronRight,
-} from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Lightbulb, AlertTriangle, ChevronDown } from "lucide-react";
 import "@/styles/UserGuide.css";
 
-function UserGuide() {
-  const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("getting-started");
+// ── Docs Data Sources ─────────────────────────────────────────────
+import { createAccountSteps } from "@/data/docs/gettingStarted";
+import {
+  aiInterviewSteps,
+  feedbackCategories,
+  examSteps,
+  codingSteps,
+  resumeAtsSteps,
+  jobPortalSteps,
+  gamificationItems,
+  bestPractices,
+} from "@/data/docs/candidateGuide";
+import { recruiterWorkflowSteps } from "@/data/docs/recruiterGuide";
+import { troubleshootingFaqs, docsFaqs } from "@/data/docs/troubleshooting";
 
+function UserGuide() {
+  const [activeTab, setActiveTab] = useState("getting-started");
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const [faqCategory, setFaqCategory] = useState("all");
+
+  const allFaqs = [
+    ...troubleshootingFaqs.map((f) => ({ ...f, cat: "troubleshooting" })),
+    ...docsFaqs.map((f) => ({ ...f, cat: "general" })),
+  ];
+
+  const filteredFaqs = faqCategory === "all"
+    ? allFaqs
+    : allFaqs.filter((f) => f.cat === faqCategory);
+
+  const toggleFaq = (idx) => {
+    setOpenFaqIndex(openFaqIndex === idx ? null : idx);
+  };
+
+  // Real homepage icons from /landing/
   const guideSections = [
-    { id: "getting-started", label: "Getting Started", icon: Zap },
-    { id: "mock-interviews", label: "AI Mock Interviews", icon: Video },
-    { id: "objective-exams", label: "Objective & Coding Exams", icon: Target },
-    { id: "coin-system", label: "Money, XP & Economy", icon: Coins },
-    { id: "100-days", label: "100 Days Challenge", icon: Flame },
-    { id: "apply-jobs", label: "Job Board & Discovery", icon: Briefcase },
-    { id: "recruiter-suite", label: "Recruiter Suite", icon: Users },
-    { id: "support", label: "Help & Support", icon: HelpCircle },
+    {
+      id: "getting-started",
+      label: "Getting Started",
+      iconSrc: "/landing/iconamoon_profile-fill.svg",
+    },
+    {
+      id: "mock-interviews",
+      label: "AI Mock Interviews",
+      iconSrc: "/landing/aiinterview.svg",
+    },
+    {
+      id: "objective-exams",
+      label: "Objective & Coding Exams",
+      iconSrc: "/landing/objectivexam.svg",
+    },
+    {
+      id: "coin-system",
+      label: "Money, XP & Economy",
+      iconSrc: "/landing/perfomace anysis.svg",
+    },
+    {
+      id: "100-days",
+      label: "100 Days & Gamification",
+      iconSrc: "/landing/preepxcertificate.svg",
+    },
+    {
+      id: "resume-ats",
+      label: "Resume & ATS Analysis",
+      iconSrc: "/landing/fluent_notepad-edit-20-filled.svg",
+    },
+    {
+      id: "apply-jobs",
+      label: "Job Board & Discovery",
+      iconSrc: "/landing/condinateDescvery.svg",
+    },
+    {
+      id: "recruiter-suite",
+      label: "Recruiter Suite",
+      iconSrc: "/landing/smarthiring.svg",
+    },
+    {
+      id: "best-practices",
+      label: "Best Practices",
+      iconSrc: "/landing/fluent_certificate-24-filled.svg",
+    },
+    {
+      id: "troubleshooting",
+      label: "Troubleshooting & FAQs",
+      iconSrc: "/landing/hugeicons_message-programming.svg",
+    },
+    {
+      id: "support",
+      label: "Help & Support",
+      iconSrc: "/landing/fluent-mdl2_add-work.svg",
+    },
   ];
 
   const handleScrollTo = (id) => {
@@ -49,18 +110,37 @@ function UserGuide() {
   };
 
   useEffect(() => {
+    document.title = "User Guide & Documentation | PreepX";
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="user-guide-page">
-      {/* ── HERO HEADER ── */}
-      <div className="guide-hero">
-        <h1>PreepX Platform User Guide</h1>
-        <p>
-          Master AI mock interviews, earn verified skill credentials, and connect directly with top tech recruiters.
+      {/* ── HERO HEADER (Features & HowPreepXWorks Style) ── */}
+      <header className="guide-hero">
+        <h1>PreepX Platform User Guide &amp; Docs</h1>
+        <p className="guide-hero-sub">
+          Complete step-by-step guide for candidates and recruiters — master AI mock interviews, earn verified skill credentials, and connect directly with top tech employers.
         </p>
-      </div>
+        <div className="guide-hero-quick-links">
+          <button type="button" onClick={() => handleScrollTo("getting-started")} className="guide-hero-pill">
+            <img src="/landing/iconamoon_profile-fill.svg" alt="" className="guide-pill-icon" />
+            <span>Quick Start</span>
+          </button>
+          <button type="button" onClick={() => handleScrollTo("mock-interviews")} className="guide-hero-pill">
+            <img src="/landing/aiinterview.svg" alt="" className="guide-pill-icon" />
+            <span>AI Mock Interviews</span>
+          </button>
+          <button type="button" onClick={() => handleScrollTo("coin-system")} className="guide-hero-pill">
+            <img src="/landing/perfomace anysis.svg" alt="" className="guide-pill-icon" />
+            <span>Money, XP &amp; Economy</span>
+          </button>
+          <button type="button" onClick={() => handleScrollTo("recruiter-suite")} className="guide-hero-pill">
+            <img src="/landing/smarthiring.svg" alt="" className="guide-pill-icon" />
+            <span>Recruiter Suite</span>
+          </button>
+        </div>
+      </header>
 
       {/* ── 2-COLUMN LAYOUT ── */}
       <div className="guide-container">
@@ -76,7 +156,7 @@ function UserGuide() {
                   onClick={() => handleScrollTo(sec.id)}
                   className={`guide-nav-btn ${activeTab === sec.id ? "active" : ""}`}
                 >
-                  <sec.icon size={16} className="guide-nav-icon" />
+                  <img src={sec.iconSrc} alt="" className="guide-nav-icon-img" />
                   <span>{sec.label}</span>
                 </button>
               ))}
@@ -89,8 +169,8 @@ function UserGuide() {
           {/* Section 1: Getting Started */}
           <section id="getting-started" className="guide-section-block">
             <div className="section-title-wrap">
-              <div className="section-title-icon-box icon-blue">
-                <Zap size={20} />
+              <div className="section-title-icon-box">
+                <img src="/landing/iconamoon_profile-fill.svg" alt="Getting Started" className="guide-heading-icon" />
               </div>
               <div>
                 <h2>Getting Started with PreepX</h2>
@@ -115,6 +195,19 @@ function UserGuide() {
                 <p>Choose between Frontend, Backend, Fullstack, AI/ML, Data Science, or DevOps tracks.</p>
               </div>
             </div>
+
+            <h3 className="guide-subheading">Step-by-Step Account Setup</h3>
+            <div className="guide-steps-list">
+              {createAccountSteps.map((s) => (
+                <div key={s.step} className="guide-step-item">
+                  <span className="guide-step-num">{s.step}</span>
+                  <div className="guide-step-body">
+                    <h4>{s.title}</h4>
+                    <p>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </section>
 
           <div className="guide-divider" />
@@ -122,8 +215,8 @@ function UserGuide() {
           {/* Section 2: Mock Interviews */}
           <section id="mock-interviews" className="guide-section-block">
             <div className="section-title-wrap">
-              <div className="section-title-icon-box icon-purple">
-                <Video size={20} />
+              <div className="section-title-icon-box">
+                <img src="/landing/aiinterview.svg" alt="Mock Interviews" className="guide-heading-icon" />
               </div>
               <div>
                 <h2>AI Mock Interviews</h2>
@@ -148,8 +241,34 @@ function UserGuide() {
               </div>
             </div>
 
-            <div className="guide-highlight-box highlight-purple">
-              <strong>💡 Pro Tip:</strong> Upload your PDF resume in <em>Resume Interview Mode</em> to face tailored questions drilled specifically on your past projects and claimed skill stack!
+            <h3 className="guide-subheading">How to Complete an AI Interview Session</h3>
+            <div className="guide-steps-list">
+              {aiInterviewSteps.map((s) => (
+                <div key={s.step} className="guide-step-item">
+                  <span className="guide-step-num">{s.step}</span>
+                  <div className="guide-step-body">
+                    <h4>{s.title}</h4>
+                    <p>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="guide-subheading">Feedback & Evaluation Rubrics</h3>
+            <div className="guide-cards-grid">
+              {feedbackCategories.map((c) => (
+                <div key={c.title} className="guide-info-card">
+                  <h3>{c.title}</h3>
+                  <p>{c.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="guide-tip-box">
+              <Lightbulb size={18} className="flex-shrink-0" />
+              <div>
+                <strong>Pro Tip:</strong> Upload your PDF resume in <em>Resume Interview Mode</em> to face tailored questions drilled specifically on your past projects and claimed skill stack!
+              </div>
             </div>
           </section>
 
@@ -158,8 +277,8 @@ function UserGuide() {
           {/* Section 3: Objective Exams */}
           <section id="objective-exams" className="guide-section-block">
             <div className="section-title-wrap">
-              <div className="section-title-icon-box icon-amber">
-                <Target size={20} />
+              <div className="section-title-icon-box">
+                <img src="/landing/objectivexam.svg" alt="Objective Exams" className="guide-heading-icon" />
               </div>
               <div>
                 <h2>Objective & Coding Exams</h2>
@@ -178,6 +297,32 @@ function UserGuide() {
                 <strong>Verified Certificates:</strong> Score above 85% on verified tracks to earn industry-recognized digital credentials that display directly to verified recruiters.
               </li>
             </ul>
+
+            <h3 className="guide-subheading">Taking an Objective Assessment</h3>
+            <div className="guide-steps-list">
+              {examSteps.map((s) => (
+                <div key={s.step} className="guide-step-item">
+                  <span className="guide-step-num">{s.step}</span>
+                  <div className="guide-step-body">
+                    <h4>{s.title}</h4>
+                    <p>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="guide-subheading">Using the Integrated Coding Hub</h3>
+            <div className="guide-steps-list">
+              {codingSteps.map((s) => (
+                <div key={s.step} className="guide-step-item">
+                  <span className="guide-step-num">{s.step}</span>
+                  <div className="guide-step-body">
+                    <h4>{s.title}</h4>
+                    <p>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </section>
 
           <div className="guide-divider" />
@@ -185,8 +330,8 @@ function UserGuide() {
           {/* Section 4: Money System & XP */}
           <section id="coin-system" className="guide-section-block">
             <div className="section-title-wrap">
-              <div className="section-title-icon-box icon-green">
-                <Coins size={20} />
+              <div className="section-title-icon-box">
+                <img src="/landing/perfomace anysis.svg" alt="Money, XP & Economy" className="guide-heading-icon" />
               </div>
               <div>
                 <h2>Money, XP & Economy</h2>
@@ -215,38 +360,84 @@ function UserGuide() {
                 <span className="pill-val">₹20 Bonus / invite</span>
               </div>
               <div className="pill-item popular-pill">
-                <span className="pill-title">Popular Pack</span>
-                <span className="pill-val">₹49 Recharge</span>
+                <div className="pill-title-row">
+                  <span className="pill-title">Popular Pack</span>
+                  <span className="pill-badge">POPULAR</span>
+                </div>
+                <span className="pill-val">₹79 Recharge</span>
               </div>
             </div>
           </section>
 
           <div className="guide-divider" />
 
-          {/* Section 5: 100 Days Challenge */}
+          {/* Section 5: 100 Days Challenge & Gamification */}
           <section id="100-days" className="guide-section-block">
             <div className="section-title-wrap">
-              <div className="section-title-icon-box icon-red">
-                <Flame size={20} />
+              <div className="section-title-icon-box">
+                <img src="/landing/preepxcertificate.svg" alt="100 Days Challenge" className="guide-heading-icon" />
               </div>
               <div>
-                <h2>100 Days Challenge</h2>
-                <p className="section-desc">Build ironclad consistency and climb the global leaderboard.</p>
+                <h2>100 Days Challenge & Gamification</h2>
+                <p className="section-desc">Build ironclad consistency, earn XP multipliers, and climb the global leaderboard.</p>
               </div>
             </div>
 
             <p>
               The 100 Days Challenge is designed to build regular coding and interview practice habits. Complete at least one assessment or interview per day to maintain your streak, earn multiplier XP, and unlock exclusive Hall of Fame badges.
             </p>
+
+            <div className="guide-cards-grid">
+              {gamificationItems.map((g) => (
+                <div key={g.title} className="guide-info-card">
+                  <h3>{g.title}</h3>
+                  <p>{g.desc}</p>
+                </div>
+              ))}
+            </div>
           </section>
 
           <div className="guide-divider" />
 
-          {/* Section 6: Job Board & Discovery */}
+          {/* Section 6: Resume & ATS */}
+          <section id="resume-ats" className="guide-section-block">
+            <div className="section-title-wrap">
+              <div className="section-title-icon-box">
+                <img src="/landing/fluent_notepad-edit-20-filled.svg" alt="Resume & ATS" className="guide-heading-icon" />
+              </div>
+              <div>
+                <h2>Resume Review & ATS Analysis</h2>
+                <p className="section-desc">Analyze your resume against tech job descriptions to boost your shortlisting chances.</p>
+              </div>
+            </div>
+
+            <div className="guide-steps-list">
+              {resumeAtsSteps.map((s) => (
+                <div key={s.step} className="guide-step-item">
+                  <span className="guide-step-num">{s.step}</span>
+                  <div className="guide-step-body">
+                    <h4>{s.title}</h4>
+                    <p>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="guide-warning-box">
+              <AlertTriangle size={18} className="flex-shrink-0" />
+              <div>
+                <strong>Notice:</strong> ATS analysis provides data-driven suggestions based on role requirements. It serves as an advisory tool to optimize keywords and formatting.
+              </div>
+            </div>
+          </section>
+
+          <div className="guide-divider" />
+
+          {/* Section 7: Job Board & Discovery */}
           <section id="apply-jobs" className="guide-section-block">
             <div className="section-title-wrap">
-              <div className="section-title-icon-box icon-sky">
-                <Briefcase size={20} />
+              <div className="section-title-icon-box">
+                <img src="/landing/condinateDescvery.svg" alt="Job Board" className="guide-heading-icon" />
               </div>
               <div>
                 <h2>Job Board & Candidate Discovery</h2>
@@ -258,8 +449,30 @@ function UserGuide() {
               Recruiters actively browse PreepX's talent database to find pre-vetted engineers. When you score high on mock interviews and objective exams, your profile is ranked on the <strong>Recruiter Shortlist Pool</strong>.
             </p>
 
+            <div className="guide-flow-row">
+              {["Explore", "Search", "Review", "Apply", "Prepare", "Interview"].map((s, i, arr) => (
+                <React.Fragment key={s}>
+                  <span className="guide-flow-step">{s}</span>
+                  {i < arr.length - 1 && <span className="guide-flow-arrow">→</span>}
+                </React.Fragment>
+              ))}
+            </div>
+
+            <div className="guide-steps-list">
+              {jobPortalSteps.map((s) => (
+                <div key={s.step} className="guide-step-item">
+                  <span className="guide-step-num">{s.step}</span>
+                  <div className="guide-step-body">
+                    <h4>{s.title}</h4>
+                    <p>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <div className="guide-action-row">
               <Link to="/apply-jobs/browse" className="guide-action-link">
+                <img src="/landing/fluent-mdl2_add-work.svg" alt="" className="guide-nav-icon-img" />
                 <span>Browse Open Tech Jobs</span>
                 <ArrowRight size={14} />
               </Link>
@@ -268,14 +481,14 @@ function UserGuide() {
 
           <div className="guide-divider" />
 
-          {/* Section 7: Recruiter Suite */}
+          {/* Section 8: Recruiter Suite */}
           <section id="recruiter-suite" className="guide-section-block">
             <div className="section-title-wrap">
-              <div className="section-title-icon-box icon-teal">
-                <Users size={20} />
+              <div className="section-title-icon-box">
+                <img src="/landing/smarthiring.svg" alt="Recruiter Suite" className="guide-heading-icon" />
               </div>
               <div>
-                <h2>Recruiter Suite</h2>
+                <h2>Recruiter Suite & Hiring Workflow</h2>
                 <p className="section-desc">Automated candidate screening, custom test flows, and pipeline intelligence.</p>
               </div>
             </div>
@@ -285,15 +498,119 @@ function UserGuide() {
               <li><strong>AI Candidate Scoring:</strong> Evaluate hundreds of applicants automatically with standardized grading rubrics.</li>
               <li><strong>Pipeline Analytics:</strong> Track applicant funnel from Applied ➔ Assessment ➔ Shortlisted ➔ Interview ➔ Hired.</li>
             </ul>
+
+            <h3 className="guide-subheading">Recruiter Step-by-Step Workflow</h3>
+            <div className="guide-steps-list">
+              {recruiterWorkflowSteps.map((s) => (
+                <div key={s.step} className="guide-step-item">
+                  <span className="guide-step-num">{s.step}</span>
+                  <div className="guide-step-body">
+                    <h4>{s.title}</h4>
+                    <p>{s.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </section>
 
           <div className="guide-divider" />
 
-          {/* Section 8: Support */}
+          {/* Section 9: Best Practices */}
+          <section id="best-practices" className="guide-section-block">
+            <div className="section-title-wrap">
+              <div className="section-title-icon-box">
+                <img src="/landing/fluent_certificate-24-filled.svg" alt="Best Practices" className="guide-heading-icon" />
+              </div>
+              <div>
+                <h2>Candidate Best Practices</h2>
+                <p className="section-desc">Top preparation strategies to maximize placement success.</p>
+              </div>
+            </div>
+
+            <div className="guide-cards-grid">
+              {bestPractices.map((b) => (
+                <div key={b.title} className="guide-info-card">
+                  <h3>{b.title}</h3>
+                  <p>{b.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <div className="guide-divider" />
+
+          {/* Section 10: Troubleshooting & FAQs */}
+          <section id="troubleshooting" className="guide-section-block">
+            <div className="section-title-wrap">
+              <div className="section-title-icon-box">
+                <img src="/landing/hugeicons_message-programming.svg" alt="Troubleshooting" className="guide-heading-icon" />
+              </div>
+              <div>
+                <h2>Troubleshooting & FAQs</h2>
+                <p className="section-desc">Common setup questions, permission guides, and platform answers.</p>
+              </div>
+            </div>
+
+            <div className="guide-faq-wrapper">
+              <div className="guide-faq-tabs">
+                <button
+                  type="button"
+                  className={`guide-faq-tab-btn ${faqCategory === "all" ? "active" : ""}`}
+                  onClick={() => { setFaqCategory("all"); setOpenFaqIndex(null); }}
+                >
+                  All Questions ({allFaqs.length})
+                </button>
+                <button
+                  type="button"
+                  className={`guide-faq-tab-btn ${faqCategory === "troubleshooting" ? "active" : ""}`}
+                  onClick={() => { setFaqCategory("troubleshooting"); setOpenFaqIndex(null); }}
+                >
+                  Troubleshooting & Setup ({troubleshootingFaqs.length})
+                </button>
+                <button
+                  type="button"
+                  className={`guide-faq-tab-btn ${faqCategory === "general" ? "active" : ""}`}
+                  onClick={() => { setFaqCategory("general"); setOpenFaqIndex(null); }}
+                >
+                  Platform & Account ({docsFaqs.length})
+                </button>
+              </div>
+
+              <div className="guide-faq-container">
+                {filteredFaqs.map((faq, idx) => {
+                  const isOpen = openFaqIndex === idx;
+                  return (
+                    <div key={idx} className={`guide-faq-card ${isOpen ? "open" : ""}`}>
+                      <button
+                        type="button"
+                        className="guide-faq-question-btn"
+                        onClick={() => toggleFaq(idx)}
+                        aria-expanded={isOpen}
+                      >
+                        <span className="guide-faq-q-text">{faq.q}</span>
+                        <span className="guide-faq-icon-pill">
+                          <ChevronDown size={16} className={`guide-faq-chevron ${isOpen ? "rotate" : ""}`} />
+                        </span>
+                      </button>
+                      {isOpen && (
+                        <div className="guide-faq-answer">
+                          <p>{faq.a}</p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+
+          <div className="guide-divider" />
+
+          {/* Section 11: Support */}
           <section id="support" className="guide-section-block">
             <div className="section-title-wrap">
-              <div className="section-title-icon-box icon-blue">
-                <HelpCircle size={20} />
+              <div className="section-title-icon-box">
+                <img src="/landing/fluent-mdl2_add-work.svg" alt="Support" className="guide-heading-icon" />
               </div>
               <div>
                 <h2>Help & Support</h2>
@@ -319,10 +636,10 @@ function UserGuide() {
             </div>
           </section>
 
-          {/* Bottom CTA Card */}
+          {/* Bottom CTA Card (Features & HowPreepXWorks Style) */}
           <div className="guide-bottom-cta">
             <div className="cta-spark-wrap">
-              <Sparkles size={28} className="cta-spark-icon" />
+              <img src="/landing/smarthiring.svg" alt="" className="guide-heading-icon" />
             </div>
             <h3>Ready to Accelerate Your Career?</h3>
             <p>Start practicing with AI mock interviews and get discovered by top tech employers.</p>
