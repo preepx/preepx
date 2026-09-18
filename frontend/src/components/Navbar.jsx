@@ -226,7 +226,7 @@ function Navbar({ landingRole, setLandingRole }) {
                 </Link>
                 <Link
                   to={landingRole === 'recruiter' ? "/auth/recruiter" : "/auth"}
-                  className="text-[#000000] font-medium flex items-center justify-center transition-opacity hover:opacity-90"
+                  className="text-white font-medium flex items-center justify-center transition-opacity hover:opacity-90"
                   style={{
                     background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
                     width: '110px',

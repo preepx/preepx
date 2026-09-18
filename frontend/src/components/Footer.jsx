@@ -26,28 +26,7 @@ function Footer({ onRecruiterClick }) {
   return (
     <footer className="prepx-landing-footer">
       <div className="footer-container">
-        {/* Top Newsletter / Talent Ecosystem Strip */}
-        <div className="footer-top-strip">
-          <div className="footer-strip-left">
-            <h3>Join the next-generation talent ecosystem</h3>
-            <p>Get the latest AI interview prep tips & recruiter intelligence insights.</p>
-          </div>
-          <form className="footer-subscribe-form" onSubmit={handleSubscribe}>
-            <div className="footer-input-wrap">
-              <input
-                type="email"
-                placeholder={subscribed ? "✓ Subscribed successfully!" : "Enter your work or personal email"}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="footer-email-input"
-                required
-              />
-            </div>
-            <button type="submit" className="footer-subscribe-btn">
-              {subscribed ? "Joined ✓" : "Subscribe"}
-            </button>
-          </form>
-        </div>
+
 
         {/* 5-Column Navigation Grid (Candidate + Recruiter Mixup) */}
         <div className="footer-main-grid">

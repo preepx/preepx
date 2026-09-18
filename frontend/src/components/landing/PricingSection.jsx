@@ -11,7 +11,6 @@ import {
   FileCheck,
   TrendingUp,
 } from "lucide-react";
-import "@/styles/landing/PricingLanding.css";
 
 // ── DYNAMIC PRICING CONFIGURATION (EASILY EDITABLE) ──
 export const pricingData = {
@@ -72,17 +71,17 @@ export const pricingData = {
     ],
     footerFeatures: [
       {
-        icon: Award,
+        icon: "/landing/preepxcertificate.svg",
         title: "Verified Certificates",
         desc: "Industry-recognized skill certificates.",
       },
       {
-        icon: Flame,
+        icon: "/landing/100daychallenge.svg",
         title: "100 Days Challenge",
         desc: "Build consistency and earn bonus coins.",
       },
       {
-        icon: UserCheck,
+        icon: "/landing/getdescover.svg",
         title: "Get Discovered",
         desc: "Top recruiters hire you based on proven skills.",
       },
@@ -153,17 +152,17 @@ export const pricingData = {
     ],
     footerFeatures: [
       {
-        icon: Sparkles,
+        icon: "/landing/aiskillmatch.svg",
         title: "AI Skill Matching",
         desc: "Automated grading & ranking.",
       },
       {
-        icon: FileCheck,
+        icon: "/landing/customassesment.svg",
         title: "Custom Assessments",
         desc: "Tailored skill-based test flows.",
       },
       {
-        icon: TrendingUp,
+        icon: "/landing/fasttrackhiring.svg",
         title: "Fast-Track Hiring",
         desc: "Shortlist verified talent 3x faster.",
       },
@@ -187,215 +186,201 @@ function PricingSection({ onRecruiterClick }) {
   };
 
   return (
-    <section id="pricing" className="prepx-pricing-section section">
-      {/* ── HEADER ── */}
-      <div className="section-header pricing-title-header">
-        <h2 className="pricing-main-title">{pricingData.header.title}</h2>
-        <p className="pricing-header-subtitle">{pricingData.header.subtitle}</p>
+    <section id="pricing" className="relative py-24 overflow-hidden bg-transparent">
+      {/* Background blobs for aesthetics */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#E0F2FE] blur-[120px] opacity-70"></div>
+        <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#F3E8FF] blur-[120px] opacity-70"></div>
       </div>
 
-      {/* ── 2-WING MASTER WRAPPER ── */}
-      <div className="pricing-wings-container">
-        {/* ══════════════════════════════════════════════
-            WING 1: CANDIDATE PLAN (PURPLE / BLUE ACCENT)
-        ══════════════════════════════════════════════ */}
-        <div className="pricing-wing candidate-wing">
-          {/* Header */}
-          <div className="wing-header">
-            <div className="wing-header-left">
-              <div className="wing-icon-circle circle-purple">
-                <Users size={20} />
+      <div className="max-w-[1380px] mx-auto px-4 sm:px-6 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-16 max-w-[1380px] mx-auto px-4">
+          <h2
+            className="text-slate-900 mb-3 text-[26px] md:text-[36px] leading-tight md:leading-[44px]"
+            style={{
+              fontFamily: '"Inter", sans-serif',
+              fontWeight: 700,
+              letterSpacing: '0%',
+              textAlign: 'center'
+            }}
+          >
+            {pricingData.header.title}
+          </h2>
+          <p className="text-[15px] md:text-[17px] text-slate-700 font-medium">
+            {pricingData.header.subtitle}
+          </p>
+        </div>
+
+        {/* Main Content Area: Groups Title + Cards for mobile responsive stacking */}
+        <div
+          className="flex flex-col xl:flex-row gap-10 xl:gap-[10px] justify-center items-stretch mb-16"
+          style={{ marginTop: '30px' }}
+        >
+          {/* Candidate Section */}
+          <div className="flex flex-col flex-1 gap-[20px]">
+            {/* Candidate Title */}
+            <div className="flex justify-center px-4">
+              <div className="flex items-center gap-3">
+                <img src="/landing/condinateplan.svg" alt="Candidate Plan Icon" className="w-6 h-6 shrink-0" />
+                <div>
+                  <h3 className="text-[16px] font-extrabold text-slate-900">{pricingData.candidate.title}</h3>
+                  <p className="text-[11px] text-slate-600 font-medium">{pricingData.candidate.subtitle}</p>
+                </div>
               </div>
-              <div className="wing-header-text">
-                <h3 className="wing-main-title title-purple">
-                  {pricingData.candidate.title}
-                </h3>
-                <p className="wing-sub-text">
-                  {pricingData.candidate.subtitle}
-                </p>
-              </div>
+            </div>
+
+            {/* Candidate Cards */}
+            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center">
+              {pricingData.candidate.plans.map((plan, index) => {
+                const feature = pricingData.candidate.footerFeatures[index];
+                return (
+                <div key={plan.id} className="flex flex-col items-center w-full" style={{ maxWidth: '225px' }}>
+                  <div className="bg-white border border-[#BFDBFE] shadow-xl shadow-blue-500/5 relative flex flex-col hover:-translate-y-1 transition-transform w-full" style={{ background: "#B6D2FF", height: '250px', borderRadius: '10px', borderWidth: '1px', padding: '15px', gap: '10px', opacity: 1 }}>
+                    {plan.badge && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white border border-blue-200 text-blue-700 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
+                        {plan.badge}
+                      </div>
+                    )}
+                    <div className="mb-5 border-b border-blue-200/50 pb-5">
+                      <h4 className="text-[15px] md:text-[18px] font-extrabold text-slate-900 flex items-center gap-2">
+                        <span className="opacity-80">📅</span> {plan.name}
+                      </h4>
+                      <p className="text-[12px] text-slate-600 font-semibold mb-4">{plan.tagline}</p>
+                      <div className="flex items-center gap-2">
+                        {plan.originalPrice && <span className="text-[16px] text-slate-400 line-through font-bold">{plan.originalPrice}</span>}
+                        <span className="text-[22px] md:text-[28px] font-extrabold text-slate-900">{plan.price}</span>
+                      </div>
+                    </div>
+
+                    <button className="w-full py-2 px-2 md:py-3 md:px-4 rounded-[14px] bg-white border border-blue-200 hover:bg-blue-50 text-slate-800 font-bold text-[11px] md:text-[13px] mb-4 md:mb-6 transition-colors shadow-sm flex justify-center items-center gap-1 md:gap-2" onClick={() => handleCandidateAction(plan.id)}>
+                      {plan.buttonText}
+                      <span className="opacity-60">→</span>
+                    </button>
+
+                    <ul className="space-y-3.5 mt-auto">
+                      {plan.features.map(feat => (
+                        <li key={feat} className="flex items-start gap-1.5 md:gap-2.5 text-[10px] md:text-[12.5px] font-bold text-slate-700">
+                          <img src="/landing/tick.svg" alt="Tick" className="w-3.5 h-3.5 shrink-0 mt-0.5" /> <span className="leading-tight">{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  {/* Attached Footer Feature */}
+                  <div className="mt-8 hidden md:flex flex-col items-center text-center gap-1 w-full">
+                    {typeof feature.icon === 'string' ? (
+                      <img src={feature.icon} alt={feature.title} className="w-8 h-8 shrink-0 mb-1" />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mb-1">
+                        <feature.icon className="w-4 h-4 text-slate-700" />
+                      </div>
+                    )}
+                    <div>
+                      <h5 className="text-[12px] font-bold text-slate-900 leading-tight mb-1">{feature.title}</h5>
+                      <p className="text-[10px] text-slate-600 font-medium leading-snug">{feature.desc}</p>
+                    </div>
+                  </div>
+                </div>
+              )})}
             </div>
           </div>
 
-          {/* Included in all strip */}
-          <div className="wing-included-bar bar-purple">
-            <span className="inc-bar-label">All plans include:</span>
-            <div className="inc-bar-tags">
-              {pricingData.candidate.includedInAll.map((item, i) => (
-                <span key={i} className="inc-tag tag-p-pill">
-                  ✓ {item}
-                </span>
-              ))}
+          {/* Recruiter Section */}
+          <div className="flex flex-col flex-[1.5] gap-[20px]">
+            {/* Recruiter Title */}
+            <div className="flex justify-center px-4">
+              <div className="flex items-center gap-3">
+                <img src="/landing/recuirterplan.svg" alt="Recruiter Plan Icon" className="w-6 h-6 shrink-0" />
+                <div>
+                  <h3 className="text-[16px] font-extrabold text-slate-900">{pricingData.recruiter.title}</h3>
+                  <p className="text-[11px] text-slate-600 font-medium">{pricingData.recruiter.subtitle}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Recruiter Cards */}
+            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center relative">
+              {pricingData.recruiter.plans.map((plan, index) => {
+                const allFeatures = [...pricingData.candidate.footerFeatures, ...pricingData.recruiter.footerFeatures];
+                const feature = allFeatures[index + 2]; // Map to 3rd, 4th, 5th feature
+                return (
+                <div key={plan.id} className="flex flex-col items-center w-full" style={{ maxWidth: '225px' }}>
+                  <div className="bg-white border border-[#A7F3D0] shadow-xl shadow-emerald-500/5 relative flex flex-col hover:-translate-y-1 transition-transform w-full" style={{ background: "#A3F1FF", height: '250px', borderRadius: '10px', borderWidth: '1px', padding: '15px', gap: '10px', opacity: 1 }}>
+                    {plan.badge && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white border border-emerald-200 text-emerald-800 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
+                        {plan.badge}
+                      </div>
+                    )}
+                    <div className="mb-5 border-b border-emerald-200/50 pb-5">
+                      <h4 className="text-[15px] md:text-[18px] font-extrabold text-slate-900 flex items-center gap-2">
+                        <span className="opacity-80">🎬</span> {plan.name}
+                      </h4>
+                      <p className="text-[12px] text-slate-600 font-semibold mb-4">{plan.tagline}</p>
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-[22px] md:text-[28px] font-extrabold text-slate-900">{plan.price}</span>
+                        <span className="text-[12px] text-slate-500 font-semibold">{plan.period}</span>
+                      </div>
+                    </div>
+
+                    <button className="w-full py-2 px-2 md:py-3 md:px-4 rounded-[14px] bg-white border border-emerald-200 hover:bg-emerald-50 text-slate-800 font-bold text-[11px] md:text-[13px] mb-4 md:mb-6 transition-colors shadow-sm flex justify-center items-center gap-1 md:gap-2" onClick={() => handleRecruiterAction(plan.id)}>
+                      {plan.buttonText}
+                    </button>
+
+                    <ul className="space-y-3.5 mt-auto">
+                      {plan.features.map(feat => (
+                        <li key={feat} className="flex items-start gap-1.5 md:gap-2.5 text-[10px] md:text-[12.5px] font-bold text-slate-700">
+                          <img src="/landing/tick.svg" alt="Tick" className="w-3.5 h-3.5 shrink-0 mt-0.5" /> <span className="leading-tight">{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Attached Footer Feature */}
+                  <div className="mt-8 hidden md:flex flex-col items-center text-center gap-1 w-full">
+                    {typeof feature.icon === 'string' ? (
+                      <img src={feature.icon} alt={feature.title} className="w-8 h-8 shrink-0 mb-1" />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mb-1">
+                        <feature.icon className="w-4 h-4 text-slate-700" />
+                      </div>
+                    )}
+                    <div>
+                      <h5 className="text-[12px] font-bold text-slate-900 leading-tight mb-1">{feature.title}</h5>
+                      <p className="text-[10px] text-slate-600 font-medium leading-snug">{feature.desc}</p>
+                    </div>
+                  </div>
+                </div>
+
+              )})}
             </div>
           </div>
+        </div>
 
-          {/* Cards Grid: Free + Pro */}
-          <div className="candidate-cards-grid">
-            {pricingData.candidate.plans.map((plan) => (
-              <div
-                key={plan.id}
-                className={`pricing-tier-card ${plan.isPopular ? "tier-card-popular cand-pro-card" : "cand-free-card"}`}
-              >
-                {plan.badge && (
-                  <div className="tier-popular-tag tag-purple">
-                    {plan.badge}
+        {/* Footer Features Row (Mobile Only) */}
+        <div
+          className="bg-transparent p-4 md:hidden"
+          style={{ marginTop: '15px' }}
+        >
+          <div className="grid grid-cols-2 gap-4 divide-slate-200/60">
+            {[...pricingData.candidate.footerFeatures, ...pricingData.recruiter.footerFeatures].slice(0, 5).map((item, i) => (
+              <div key={i} className={`flex items-start gap-2 ${i !== 0 && i !== 1 ? 'pt-2' : ''}`}>
+                {typeof item.icon === 'string' ? (
+                  <img src={item.icon} alt={item.title} className="w-7 h-7 shrink-0" />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
+                    <item.icon className="w-3.5 h-3.5 text-slate-700" />
                   </div>
                 )}
-
-                <div className="tier-header-info">
-                  <h4 className="tier-name">{plan.name}</h4>
-                  <p className="tier-tagline">{plan.tagline}</p>
-                </div>
-
-                <div className="tier-price-box">
-                  {plan.originalPrice && (
-                    <span style={{ textDecoration: "line-through", color: "var(--text-muted)", fontSize: "16px", marginRight: "8px", fontWeight: "normal" }}>
-                      {plan.originalPrice}
-                    </span>
-                  )}
-                  <span
-                    className={`tier-price ${plan.isPopular ? "tier-price-purple" : ""}`}
-                  >
-                    {plan.price}
-                  </span>
-                  <span className="tier-period">{plan.period}</span>
-                </div>
-
-                <button
-                  className={`tier-btn ${plan.buttonVariant === "primary-purple" ? "tier-btn-purple" : "tier-btn-secondary"}`}
-                  onClick={() => handleCandidateAction(plan.id)}
-                  type="button"
-                >
-                  {plan.buttonText}
-                </button>
-
-                <ul className="tier-features-ul">
-                  {plan.features.map((feat, i) => (
-                    <li key={i} className="tier-feat-li">
-                      <span className="chk-icon-wrap chk-purple">
-                        <Check size={11} strokeWidth={3} />
-                      </span>
-                      <span className="tier-feat-text">{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Bottom Feature Strip (3 items) */}
-          <div className="wing-bottom-strip">
-            {pricingData.candidate.footerFeatures.map((item, i) => (
-              <div key={i} className="bottom-strip-item">
-                <div className="strip-icon-box strip-purple">
-                  <item.icon size={15} />
-                </div>
-                <div className="strip-text-box">
-                  <h5 className="strip-title">{item.title}</h5>
-                  <p className="strip-desc">{item.desc}</p>
+                <div>
+                  <h5 className="text-[11px] font-bold text-slate-900 mb-0.5 leading-tight">{item.title}</h5>
+                  <p className="text-[9.5px] text-slate-600 font-medium leading-snug">{item.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* ══════════════════════════════════════════════
-            WING 2: RECRUITER PLAN (EMERALD GREEN ACCENT)
-        ══════════════════════════════════════════════ */}
-        <div className="pricing-wing recruiter-wing">
-          {/* Header */}
-          <div className="wing-header">
-            <div className="wing-header-left">
-              <div className="wing-icon-circle circle-green">
-                <Briefcase size={20} />
-              </div>
-              <div className="wing-header-text">
-                <h3 className="wing-main-title title-green">
-                  {pricingData.recruiter.title}
-                </h3>
-                <p className="wing-sub-text">
-                  {pricingData.recruiter.subtitle}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Included in all strip */}
-          <div className="wing-included-bar bar-green">
-            <span className="inc-bar-label">All plans include:</span>
-            <div className="inc-bar-tags">
-              {pricingData.recruiter.includedInAll.map((item, i) => (
-                <span key={i} className="inc-tag tag-g-pill">
-                  ✓ {item}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Cards Grid: Starter + Growth + Enterprise */}
-          <div className="recruiter-cards-grid">
-            {pricingData.recruiter.plans.map((plan) => (
-              <div
-                key={plan.id}
-                className={`pricing-tier-card ${plan.isPopular ? "tier-card-popular rec-growth-card" : "rec-standard-card"}`}
-              >
-                {plan.badge && (
-                  <div className="tier-popular-tag tag-green">
-                    {plan.badge}
-                  </div>
-                )}
-
-                <div className="tier-header-info">
-                  <h4 className="tier-name">{plan.name}</h4>
-                  <p className="tier-tagline">{plan.tagline}</p>
-                </div>
-
-                <div className="tier-price-box">
-                  <span
-                    className={`tier-price ${plan.isPopular ? "tier-price-green" : ""}`}
-                  >
-                    {plan.price}
-                  </span>
-                  <span className="tier-period">{plan.period}</span>
-                </div>
-
-                <button
-                  className={`tier-btn ${plan.buttonVariant === "primary-green" ? "tier-btn-green" : "tier-btn-outline-green"}`}
-                  onClick={() => handleRecruiterAction(plan.id)}
-                  type="button"
-                >
-                  {plan.buttonText}
-                </button>
-
-                <ul className="tier-features-ul">
-                  {plan.features.map((feat, i) => (
-                    <li key={i} className="tier-feat-li">
-                      <span className="chk-icon-wrap chk-green">
-                        <Check size={11} strokeWidth={3} />
-                      </span>
-                      <span className="tier-feat-text">{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Bottom Feature Strip for Recruiters (3 items) */}
-          <div className="wing-bottom-strip">
-            {pricingData.recruiter.footerFeatures.map((item, i) => (
-              <div key={i} className="bottom-strip-item">
-                <div className="strip-icon-box strip-green">
-                  <item.icon size={15} />
-                </div>
-                <div className="strip-text-box">
-                  <h5 className="strip-title">{item.title}</h5>
-                  <p className="strip-desc">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

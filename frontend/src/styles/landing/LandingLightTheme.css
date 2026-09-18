@@ -662,14 +662,14 @@
 
 /* ── TRIO SECTION LIGHT (WHAT PEOPLE SAY | TRUST | JOBS) ── */
 [data-theme="light"] .trio-card {
-  background: #ffffff !important;
-  border-color: #e2e8f0 !important;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 [data-theme="light"] .trio-card:hover {
-  border-color: #cbd5e1 !important;
-  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.1) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 [data-theme="light"] .trio-card-title {
@@ -707,8 +707,8 @@
 }
 
 [data-theme="light"] .trio-jobs-box {
-  background: #f8fafc !important;
-  border-color: #e2e8f0 !important;
+  background: transparent !important;
+  border-color: transparent !important;
 }
 
 [data-theme="light"] .trio-job-row {

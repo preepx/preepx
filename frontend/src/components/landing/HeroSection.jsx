@@ -39,58 +39,56 @@ function HeroSection({ onRecruiterClick }) {
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-row gap-3 mb-5 justify-center lg:justify-start flex-wrap" style={{ marginTop: '16px' }}>
-            <div className="flex flex-col gap-1 items-center">
+          <div className="flex flex-row gap-2 sm:gap-3 mb-5 justify-center lg:justify-start flex-nowrap w-full max-w-[360px] lg:max-w-none mx-auto lg:mx-0 translate-x-8 sm:translate-x-0" style={{ marginTop: '16px' }}>
+            <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none">
               <button
                 onClick={() => navigate('/auth?role=candidate')}
-                className="group relative inline-flex items-center justify-center text-white transition-all transform hover:-translate-y-0.5 overflow-hidden hover:opacity-90 leading-none"
+                className="group relative inline-flex items-center justify-center text-white transition-all transform hover:-translate-y-0.5 overflow-hidden hover:opacity-90 leading-none w-full h-[40px] sm:h-[46px]"
                 style={{
                   background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
-                  height: '46px',
-                  gap: '8px',
+                  gap: '6px',
                   borderRadius: '10px',
                   border: 'none',
-                  padding: '8px 18px',
+                  padding: '6px 8px',
                   boxSizing: 'border-box',
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 500,
-                  fontSize: '15px',
+                  fontSize: 'clamp(11.5px, 3.5vw, 15px)',
                   letterSpacing: '0px',
                   whiteSpace: 'nowrap'
                 }}
               >
-                <img src="/landing/Vector.svg" alt="Candidate" className="w-[16px] h-[16px]" />
+                <img src="/landing/Vector.svg" alt="Candidate" className="w-[14px] h-[14px] sm:w-[16px] sm:h-[16px]" />
                 <span>I'm a Candidate</span>
-                <span className="ml-1">→</span>
+                <span className="ml-0.5 sm:ml-1">→</span>
               </button>
-              <span className="text-[11px] text-[#555] font-medium text-center block">Start preparing for your dream role</span>
+              <span className="text-[9.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Start preparing for your dream role</span>
             </div>
 
-            <div className="flex flex-col gap-1 items-center">
+            <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none">
               <button
                 onClick={handleRecruiterClick}
-                className="group relative inline-flex items-center justify-center transition-all transform hover:-translate-y-0.5 hover:opacity-90 leading-none"
+                className="group relative inline-flex items-center justify-center transition-all transform hover:-translate-y-0.5 hover:opacity-90 leading-none w-full h-[40px] sm:h-[46px]"
                 style={{
                   background: '#ffffff',
-                  height: '46px',
-                  gap: '8px',
+                  gap: '6px',
                   borderRadius: '10px',
                   border: '1.5px solid #cbd5e1',
-                  padding: '8px 18px',
+                  padding: '6px 8px',
                   boxSizing: 'border-box',
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 500,
-                  fontSize: '15px',
+                  fontSize: 'clamp(11.5px, 3.5vw, 15px)',
                   color: '#1e293b',
                   letterSpacing: '0px',
                   whiteSpace: 'nowrap'
                 }}
               >
-                <img src="/landing/fluent-mdl2_add-work.svg" alt="Recruiter" className="w-[16px] h-[16px]" style={{ filter: 'invert(1) brightness(0)' }} />
+                <img src="/landing/fluent-mdl2_add-work.svg" alt="Recruiter" className="w-[14px] h-[14px] sm:w-[16px] sm:h-[16px]" style={{ filter: 'invert(1) brightness(0)' }} />
                 <span>I'm a Recruiter</span>
-                <span className="ml-1">→</span>
+                <span className="ml-0.5 sm:ml-1">→</span>
               </button>
-              <span className="text-[11px] text-[#555] font-medium text-center block">Find and hire the best talent</span>
+              <span className="text-[9.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Find and hire the best talent</span>
             </div>
           </div>
 
