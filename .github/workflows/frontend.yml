@@ -28,9 +28,9 @@ jobs:
       working-directory: ./frontend
       run: npm run build
       env:
-        VITE_API_URL: ${{ secrets.VITE_API_URL }}
-        VITE_QAPI_URL: ${{ secrets.VITE_QAPI_URL }}
-        VITE_RECAPTCHA_SITE_KEY: ${{ secrets.VITE_RECAPTCHA_SITE_KEY }}
+        VITE_API_URL: https://api.preepx.in/api
+        VITE_QAPI_URL: https://api.preepx.in/api
+        VITE_RECAPTCHA_SITE_KEY: 6Le942wtAAAAAN6FuMHTa_XTaqGfu0Fl2bgOZDm7
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
