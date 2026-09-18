@@ -231,7 +231,7 @@ function PricingSection({ onRecruiterClick }) {
             </div>
 
             {/* Candidate Cards */}
-            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center">
+            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center px-6 md:px-0">
               {pricingData.candidate.plans.map((plan, index) => {
                 const feature = pricingData.candidate.footerFeatures[index];
                 return (
@@ -300,7 +300,7 @@ function PricingSection({ onRecruiterClick }) {
             </div>
 
             {/* Recruiter Cards */}
-            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center relative">
+            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center relative px-6 md:px-0">
               {pricingData.recruiter.plans.map((plan, index) => {
                 const allFeatures = [...pricingData.candidate.footerFeatures, ...pricingData.recruiter.footerFeatures];
                 const feature = allFeatures[index + 2]; // Map to 3rd, 4th, 5th feature
