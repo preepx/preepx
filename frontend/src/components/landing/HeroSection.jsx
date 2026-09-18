@@ -68,23 +68,22 @@ function HeroSection({ onRecruiterClick }) {
             <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none">
               <button
                 onClick={handleRecruiterClick}
-                className="group relative inline-flex items-center justify-center transition-all transform hover:-translate-y-0.5 hover:opacity-90 leading-none w-full h-[40px] sm:h-[46px]"
+                className="group relative inline-flex items-center justify-center text-white transition-all transform hover:-translate-y-0.5 overflow-hidden hover:opacity-90 leading-none w-full h-[40px] sm:h-[46px]"
                 style={{
-                  background: '#ffffff',
+                  background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
                   gap: '6px',
                   borderRadius: '10px',
-                  border: '1.5px solid #cbd5e1',
+                  border: 'none',
                   padding: '6px 8px',
                   boxSizing: 'border-box',
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 500,
                   fontSize: 'clamp(11.5px, 3.5vw, 15px)',
-                  color: '#1e293b',
                   letterSpacing: '0px',
                   whiteSpace: 'nowrap'
                 }}
               >
-                <img src="/landing/fluent-mdl2_add-work.svg" alt="Recruiter" className="w-[14px] h-[14px] sm:w-[16px] sm:h-[16px]" style={{ filter: 'invert(1) brightness(0)' }} />
+                <img src="/landing/fluent-mdl2_add-work.svg" alt="Recruiter" className="w-[14px] h-[14px] sm:w-[16px] sm:h-[16px]" />
                 <span>I'm a Recruiter</span>
                 <span className="ml-0.5 sm:ml-1">→</span>
               </button>

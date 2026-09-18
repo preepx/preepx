@@ -22,6 +22,7 @@ const safeUser = (user) => ({
   github: user.github || "",
   linkedin: user.linkedin || "",
   degree: user.degree || "",
+  role: user.role || "candidate",
   referralCode: user.referralCode || "",
   referralCount: user.referralCount || 0,
 });
