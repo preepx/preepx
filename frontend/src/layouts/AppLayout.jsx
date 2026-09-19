@@ -16,40 +16,56 @@ import API from "@/utils/api";
 import Footer from "@/components/Footer";
 import "@/styles/AppLayout.css";
 
+const SvgIcon = ({ src, size = 19, style = {} }) => {
+  const scaledSize = size + 4; // Increase size slightly
+  return <img src={src} alt="" style={{ width: scaledSize, height: scaledSize, objectFit: 'contain', ...style }} />;
+};
+
+const DashboardIcon = (props) => <SvgIcon src="/sidebar/dsboard.svg" {...props} />;
+const MockInterviewIcon = (props) => <SvgIcon src="/sidebar/mockintervieww.svg" {...props} />;
+const CodingHubIcon = (props) => <SvgIcon src="/sidebar/codinghub.svg" {...props} />;
+const ObjectiveExamIcon = (props) => <SvgIcon src="/sidebar/objectiveexamicon.svg" {...props} />;
+const AtsScoreIcon = (props) => <SvgIcon src="/sidebar/atsscore.svg" {...props} />;
+const NotesIcon = (props) => <SvgIcon src="/sidebar/notes.svg" {...props} />;
+const LeaderboardIcon = (props) => <SvgIcon src="/sidebar/leaderboard.svg" {...props} />;
+const AnalyticsIcon = (props) => <SvgIcon src="/sidebar/anyltics.svg" {...props} />;
+const CustomWalletIcon = (props) => <SvgIcon src="/sidebar/wallet.svg" {...props} />;
+const ProfileIcon = (props) => <SvgIcon src="/sidebar/profile.svg" {...props} />;
+
 const NAV_SECTIONS = [
   {
     label: null,
     items: [
-      { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
+      { to: "/user-dashboard", icon: DashboardIcon, label: "Dashboard" },
     ],
   },
   {
     label: "PRACTICE",
     items: [
-      { to: "/interview", icon: Video, label: "Mock Interview" },
-      { to: "/100-days-challenge", icon: Trophy, label: "Coding Hub", isNew: true },
-      { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam" },
-      { to: "/ats-score", icon: FileText, label: "ATS Score" },
+      { to: "/interview", icon: MockInterviewIcon, label: "Mock Interview" },
+      { to: "/100-days-challenge", icon: CodingHubIcon, label: "Coding Hub", isNew: true },
+      { to: "/objective-exam", icon: ObjectiveExamIcon, label: "Objective Exam" },
+      { to: "/ats-score", icon: AtsScoreIcon, label: "ATS Score" },
     ],
   },
   {
     label: "LEARNING",
     items: [
-      { to: "/btech-notes", icon: BookOpen, label: "BTech Notes", isFree: true },
+      { to: "/btech-notes", icon: NotesIcon, label: "BTech Notes", isFree: true },
     ],
   },
   {
     label: "COMMUNITY",
     items: [
-      { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
-      { to: "/analytics", icon: BarChart3, label: "Analytics" },
+      { to: "/leaderboard", icon: LeaderboardIcon, label: "Leaderboard" },
+      { to: "/analytics", icon: AnalyticsIcon, label: "Analytics" },
     ],
   },
   {
     label: "ACCOUNT",
     items: [
-      { to: "/wallet", icon: Wallet, label: "Wallet" },
-      { to: "/profile", icon: User, label: "Profile" },
+      { to: "/wallet", icon: CustomWalletIcon, label: "Wallet" },
+      { to: "/profile", icon: ProfileIcon, label: "Profile" },
     ],
   },
 ];
