@@ -79,7 +79,7 @@ export const staticContent = {
         icon: "/icons/instagram.svg",
         content: "Follow us on Instagram for daily tips and behind-the-scenes content.",
         linkText: "Follow on Instagram →",
-        linkUrl: "#"
+        linkUrl: "https://www.instagram.com/preepx.in?stkn=OWEwaTg2dWczM2Jh"
       },
       {
         heading: "Facebook",

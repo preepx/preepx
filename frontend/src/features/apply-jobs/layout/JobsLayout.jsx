@@ -13,6 +13,7 @@ import { getStoredUser, clearAuth } from "@/utils/authUtils";
 import NotificationModal from "@/components/NotificationModal";
 import Footer from "@/components/Footer";
 import '../styles/JobsLayout.css';
+import "@/styles/AppLayout.css";
 
 const NAV_MAIN = [
   { to: "/apply-jobs", icon: LayoutDashboard, label: "Dashboard", exact: true },
@@ -97,7 +98,7 @@ function JobsLayout({ children }) {
   };
 
   const renderGroup = (items) => (
-    <div className="jl-nav-group">
+    <div className="sidebar-section">
       {items.map(({ to, icon: Icon, label, badge, badgePill, badgeKey, exact }) => {
         const dynBadge = badgeKey === "applications" ? applicationBadge : 0;
         const active = isActive(to, exact);
@@ -105,14 +106,19 @@ function JobsLayout({ children }) {
           <Link
             key={`${to}-${label}`}
             to={to}
-            className={`jl-nav-item ${active ? "active" : ""}`}
+            className={`sidebar-link ${active ? "active" : ""}`}
             onClick={() => setMobileOpen(false)}
+            title={label}
           >
-            {active && <span className="jl-nav-indicator" />}
             <Icon size={20} style={{ flexShrink: 0 }} />
-            <span className="jl-nav-text">{label}</span>
-            {badgePill && <span className="jl-badge-pill">New</span>}
-            {dynBadge > 0 && <span className="jl-badge-circle">{dynBadge}</span>}
+            {(!collapsed || mobileOpen) && (
+              <>
+                <span className="sidebar-link-label">{label}</span>
+                {badgePill && <span className="nav-new-badge">New</span>}
+                {badge && !badgePill && <span className="nav-free-badge">{badge}</span>}
+                {dynBadge > 0 && <span className="nav-free-badge" style={{ background: '#2563eb', color: '#fff', border: 'none' }}>{dynBadge}</span>}
+              </>
+            )}
           </Link>
         );
       })}
@@ -120,74 +126,82 @@ function JobsLayout({ children }) {
   );
 
   return (
-    <div className={`jl-root ${collapsed ? "collapsed" : ""}`}>
+    <div className={`jl-root app-layout ${collapsed ? "collapsed" : ""}`}>
       <div className="jl-body">
         {/* ── SIDEBAR (Left column, full height) ── */}
-        <aside className={`jl-sidebar ${mobileOpen ? "open" : ""} ${collapsed && !mobileOpen ? "collapsed" : ""}`}>
-        <div className="sidebar-top">
-          {(!collapsed || mobileOpen) && (
+        <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
+          <div className="sidebar-top">
             <Link to="/apply-jobs" className="sidebar-brand" onClick={() => setMobileOpen(false)}>
-              <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
+              {collapsed && !mobileOpen ? (
+                <img src="/logo.png" alt="PreepX" style={{ height: "32px", objectFit: "contain", marginLeft: "4px" }} />
+              ) : (
+                <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
+              )}
             </Link>
-          )}
-          <button
-            type="button"
-            className="sidebar-toggle desktop-only"
-            onClick={() => setCollapsed(!collapsed)}
-            aria-label="Toggle Sidebar"
-            title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
-          >
-            <div className="hamburger-box">
-              <span className="ham-bar top-bar" />
-              <span className="ham-bar mid-bar" />
-              <span className="ham-bar bot-bar" />
-            </div>
-          </button>
-          <button
-            type="button"
-            className="sidebar-close-btn mobile-only"
-            onClick={() => setMobileOpen(false)}
-            aria-label="Close Sidebar"
-          >
-            <X size={19} />
-          </button>
-        </div>
+            <button
+              type="button"
+              className="sidebar-toggle desktop-only"
+              onClick={() => setCollapsed(!collapsed)}
+              aria-label="Toggle Sidebar"
+              title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+            >
+              <div className="hamburger-box">
+                <span className="ham-bar top-bar" />
+                <span className="ham-bar mid-bar" />
+                <span className="ham-bar bot-bar" />
+              </div>
+            </button>
+            <button
+              type="button"
+              className="sidebar-close-btn mobile-only"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close Sidebar"
+            >
+              <X size={19} />
+            </button>
+          </div>
 
-        <div className="jl-sb-scroll">
-          <div className="jl-nav-section">
+          <nav className="sidebar-nav">
             {renderGroup(NAV_MAIN)}
-          </div>
-
-          <div className="jl-nav-section">
             {renderGroup(NAV_APPS)}
-          </div>
-
-          <div className="jl-nav-section">
             {renderGroup(NAV_ACCOUNT)}
+          </nav>
+
+          <div className="sidebar-bottom">
+            {(!collapsed || mobileOpen) ? (
+              <div className="sidebar-bottom-row">
+                <Link to="/" className="sidebar-bottom-btn" title="Back to Main Website" onClick={() => setMobileOpen(false)}>
+                  <Globe size={20} />
+                  <span>Website</span>
+                </Link>
+                <button type="button" className="sidebar-bottom-btn theme-btn" onClick={toggleTheme} title={theme === "light" ? "Dark Mode" : "Light Mode"}>
+                  {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+                </button>
+                <button type="button" className="sidebar-bottom-btn logout-btn" onClick={handleLogout} title="Sign Out">
+                  <LogOut size={20} />
+                  <span>Logout</span>
+                </button>
+              </div>
+            ) : (
+              <div className="sidebar-bottom-collapsed">
+                <Link to="/" className="sidebar-action-btn" data-tooltip="Back to Main Website" onClick={() => setMobileOpen(false)}>
+                  <Globe size={20} />
+                </Link>
+                <button type="button" className="sidebar-action-btn" onClick={toggleTheme} data-tooltip={theme === "light" ? "Dark Mode" : "Light Mode"}>
+                  {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+                </button>
+                <button type="button" className="sidebar-action-btn danger" onClick={handleLogout} data-tooltip="Sign Out">
+                  <LogOut size={20} />
+                </button>
+              </div>
+            )}
           </div>
-        </div>
+        </aside>
 
-        <div className="sidebar-bottom" style={{ padding: (collapsed && !mobileOpen) ? "12px 8px" : "12px 16px" }}>
-          <div className={`sidebar-bottom-actions ${collapsed && !mobileOpen ? "collapsed" : ""}`}>
-            <Link to="/" className="sidebar-action-btn" title="Back to Main Website" onClick={() => setMobileOpen(false)}>
-              <Globe size={20} />
-            </Link>
+        {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
 
-            <button className="sidebar-action-btn" onClick={toggleTheme} title={theme === "light" ? "Dark Mode" : "Light Mode"}>
-              {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-            </button>
-
-            <button className="sidebar-action-btn danger" onClick={handleLogout} title="Sign Out">
-              <LogOut size={20} />
-            </button>
-          </div>
-        </div>
-      </aside>
-
-      {mobileOpen && <div className="jl-overlay" onClick={() => setMobileOpen(false)} />}
-
-      {/* ── CONTENT AREA (Topbar + Page Content + Footer) ── */}
-      <div className="jl-content-area">
+        {/* ── CONTENT AREA (Topbar + Page Content + Footer) ── */}
+        <div className="jl-content-area app-content">
         {/* ── TOP NAVBAR ── */}
         <header className="jl-topbar">
           <div className="mobile-only" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
