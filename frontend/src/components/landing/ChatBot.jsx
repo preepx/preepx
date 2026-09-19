@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {
   X, Send, Bot, RefreshCw, Sparkles,
   Mic, Code2, FileText, Target, BookOpen, Building2, Trophy, IndianRupee,
-  ClipboardList, BarChart2, Zap, Phone
+  ClipboardList, BarChart2, Zap, Phone, Briefcase
 } from "lucide-react";
 import "@/styles/landing/ChatBot.css";
 
@@ -13,6 +13,8 @@ const BOT_VERSION = "v1.0 Agent";
 
 // ── QUICK CHIPS BY MODE ──
 const CANDIDATE_CHIPS = [
+  { label: "Apply for Jobs", icon: <Briefcase size={14} /> },
+  { label: "Take Assessments", icon: <ClipboardList size={14} /> },
   { label: "Mock Interview", icon: <Mic size={14} /> },
   { label: "Coding Hub", icon: <Code2 size={14} /> },
   { label: "ATS Score", icon: <FileText size={14} /> },
@@ -24,9 +26,12 @@ const CANDIDATE_CHIPS = [
 ];
 
 const RECRUITER_CHIPS = [
+  { label: "Post a Job", icon: <Briefcase size={14} /> },
+  { label: "AI Resume Screening", icon: <FileText size={14} /> },
   { label: "Hiring Platform", icon: <Building2 size={14} /> },
   { label: "Custom Assessments", icon: <ClipboardList size={14} /> },
   { label: "AI Candidate Scoring", icon: <Bot size={14} /> },
+  { label: "Schedule Interviews", icon: <Mic size={14} /> },
   { label: "Hiring Pipeline", icon: <BarChart2 size={14} /> },
   { label: "Recruiter Pricing", icon: <IndianRupee size={14} /> },
   { label: "Fast-Track Hiring", icon: <Zap size={14} /> },
@@ -35,7 +40,11 @@ const RECRUITER_CHIPS = [
 
 // ── COMPLETE KNOWLEDGE BASE ──
 const KB = {
-  greeting: `Welcome to **PreepX AI Concierge**! 🤖✨\n\nI'm here to help you with everything about PreepX — India's smartest interview prep platform.\n\nYou can ask me about:\n🎤 Mock Interviews • 💻 Coding Hub • 📄 ATS Score\n🏆 Leaderboard • 📚 BTech Notes • 🏢 Company Prep\n🎯 Objective Exams • 💰 Pricing • 🎁 Rewards & XP\n\nWhat would you like to know?`,
+  greeting: `Welcome to **PreepX AI Concierge**! 🤖✨\n\nI'm here to help you with everything about PreepX — India's smartest interview prep platform.\n\nYou can ask me about:\n💼 Apply for Jobs • 📋 Assessments\n🎤 Mock Interviews • 💻 Coding Hub • 📄 ATS Score\n🏆 Leaderboard • 📚 BTech Notes • 🏢 Company Prep\n🎯 Objective Exams • 💰 Pricing • 🎁 Rewards & XP\n\nWhat would you like to know?`,
+
+  jobs: `💼 **Apply for Jobs**\n\nFind your dream role directly on PreepX!\n\n**Features:**\n• Browse open positions from top startups and MNCs\n• 1-click apply using your PreepX profile\n• Track your application status in real-time\n• Get direct invites from recruiters based on your Leaderboard rank\n\n**Tip:** Keep your ATS Resume Score high to get shortlisted faster!\n\n➡️ **View Jobs:** /jobs`,
+
+  assessments: `📋 **Candidate Assessments**\n\nProve your skills to recruiters through customized tests!\n\n**How it works:**\n• Recruiters send you Assessment links when you apply\n• Tests can include Coding, MCQ, or Video answers\n• AI evaluates and scores your performance\n• Pass the assessment to move directly to the interview round\n\n**Why it's great:**\n• Skip the resume queue\n• Stand out based entirely on your actual skills\n\n➡️ **View Pending Assessments:** /dashboard`,
 
   mock: `🎤 **AI Mock Interview**\n\nPreepX's flagship feature — practice just like real interviews!\n\n**How it works:**\n• Groq-powered AI evaluates your voice in real-time\n• Technical accuracy, completeness, and clarity are checked\n• Receive a **detailed performance report** after every session\n• Question-by-question scoring + model sample answers\n• Personalized **strengths & weaknesses report**\n\n**You can practice:**\n• Frontend, Backend, Full Stack, Data Science\n• DevOps, Mobile, Product Management\n• React, Node.js, Python, Java, AWS and more\n\n**Features:**\n• Camera-based proctoring (data is not stored)\n• Role & company-specific questions\n• Verified certificates upon completion\n• Streaks & XP rewards\n\n➡️ **Get started:** /interview`,
 
@@ -63,6 +72,12 @@ const KB = {
 
   recruiterScoring: `🤖 **AI Candidate Scoring**\n\nBias-free intelligent candidate evaluation!\n\n**AI Scores candidates on:**\n• Technical knowledge accuracy\n• Code quality & efficiency\n• Communication clarity (voice interviews)\n• Problem-solving approach\n• Time management\n\n**Smart Features:**\n• **Auto-ranking** — Automatically sorts the best candidates\n• **Skill heat maps** — Visual display of strong/weak areas\n• **Percentile scores** — Compare with the global pool\n• **Red flag detection** — Malpractice alerts\n• **Structured feedback** — Detailed evaluation reports\n\n**Output:**\n• Ranked candidate leaderboard\n• Individual score breakdowns\n• Downloadable evaluation PDFs\n• One-click shortlisting\n\nFully automated — no manual evaluation required! 🎯`,
 
+  recruiterJobs: `💼 **Post a Job**\n\nReach thousands of skilled candidates instantly!\n\n**Features:**\n• AI-assisted Job Description generation\n• One-click multi-platform posting\n• Set custom knockout questions\n• Automated initial screening\n• Direct access to PreepX's ranked talent pool\n\n➡️ **Post your first job:** /auth?role=recruiter`,
+
+  recruiterScreening: `📄 **AI Resume Screening**\n\nFilter thousands of resumes in seconds!\n\n**How it works:**\n• Upload a batch of candidate resumes\n• AI parses and matches them against your Job Description\n• Get an instant Match Percentage for every candidate\n• Highlights missing skills and exact matches\n• Completely eliminates manual screening fatigue\n\n➡️ **Try Resume Parsing:** /auth?role=recruiter`,
+
+  recruiterScheduling: `📅 **Schedule Interviews**\n\nBuilt-in seamless interview scheduling!\n\n**Features:**\n• Sync with Google Calendar / Outlook\n• Automated email invites to shortlisted candidates\n• Automated reminders and follow-ups\n• Built-in video conferencing tool\n• Shared interviewer notes and scorecards\n\n➡️ **Start Scheduling:** /auth?role=recruiter`,
+
   recruiterPipeline: `📊 **Hiring Pipeline Management**\n\nAll candidates in one place — organized and trackable!\n\n**Pipeline Stages:**\n• 📥 Applied → 🔍 Screening → 💻 Assessment → 🎤 Interview → ✅ Shortlisted → 🤝 Hired\n\n**Features:**\n• Drag-and-drop candidate management\n• Stage-wise candidate counts\n• Bulk actions (move/reject/shortlist)\n• Automated email notifications to candidates\n• Interview scheduling integration\n• Notes & feedback per candidate\n\n**Collaboration:**\n• Team member access & roles\n• Shared evaluation notes\n• Approval workflows\n• Activity logs & audit trail\n\n**Analytics:**\n• Funnel conversion rates\n• Average time-per-stage\n• Source tracking\n• Offer acceptance rates\n\n➡️ **Setup Pipeline:** /auth?role=recruiter`,
 
   recruiterPricing: `💰 **Recruiter Pricing Plans**\n\n━━━ **RECRUITER PLANS** ━━━\n\n🏢 **Starter — ₹1,999/month**\n*For Small Teams*\n• Up to **5 Job Posts/month**\n• AI Candidate Scoring\n• Basic Hiring Pipeline\n• Email Support\n\n⭐ **Growth — ₹3,999/month** *(Best Value)*\n*For Growing Teams*\n• Up to **20 Job Posts/month**\n• Advanced AI Insights\n• Automated Screening\n• Priority Support\n• Team collaboration tools\n\n🏗️ **Enterprise — Custom Pricing**\n*For Large Organizations*\n• Unlimited Job Posts\n• Custom API Integrations\n• Dedicated Account Manager\n• SSO & Team Access Control\n• 24/7 Priority Support\n• White-label options\n\n**All plans include:**\n• AI Candidate Scoring\n• Custom Assessments\n• Hiring Pipeline\n• Candidate Comparison\n\n📞 **Contact us:** support@preepx.com\n➡️ **Start Free Trial:** /auth?role=recruiter`,
@@ -83,11 +98,20 @@ const KB = {
 };
 
 // ── INTENT MATCHING ──
-function getResponse(input) {
+function getResponse(input, mode) {
   const q = input.toLowerCase();
 
   // Greetings
-  if (/^(hi|hello|hey|namaste|hii|helo|sup|yo)/.test(q)) return KB.greeting;
+  if (/^(hi|hello|hey|namaste|hii|helo|sup|yo)/.test(q)) {
+    if (mode === "recruiter") {
+      return `🏢 **Hello, Recruiter!** 👋\n\nI am the PreepX AI Concierge. I can assist you with:\n\n📋 **Custom Assessments**\n🤖 **AI Candidate Scoring**\n📊 **Hiring Pipeline**\n⚡ **Fast-Track Hiring**\n🔗 **API & Integrations**\n💰 **Recruiter Pricing**\n📞 **Contact Sales**\n\nHow can I help you streamline your hiring today?`;
+    }
+    return KB.greeting;
+  }
+
+  // Candidate Jobs & Assessments
+  if (q.includes("job") || q.includes("apply") || q.includes("career") || q.includes("vacancy") || q.includes("placement")) return KB.jobs;
+  if ((mode === "candidate" || mode === null) && (q.includes("assess") || q.includes("assignment") || q.includes("take test"))) return KB.assessments;
 
   // Mock Interview
   if (q.includes("mock") || q.includes("interview") || q.includes("voice") || q.includes("speak") || q.includes("practice interview") || q.includes("ai interview")) return KB.mock;
@@ -123,10 +147,15 @@ function getResponse(input) {
   if (q.includes("recruit") || q.includes("hire") || q.includes("hiring") || q.includes("employer") || q.includes("hiring platform")) return KB.recruiter;
 
   // Recruiter Assessments
-  if (q.includes("custom assess") || q.includes("create test") || q.includes("assessment") || q.includes("job post") || q.includes("question bank")) return KB.recruiterAssessments;
+  if (q.includes("custom assess") || q.includes("create test") || q.includes("assessment") || q.includes("question bank")) return KB.recruiterAssessments;
 
   // Recruiter AI Scoring
   if ((q.includes("ai") && q.includes("scor")) || q.includes("candidate scor") || q.includes("ranking") || q.includes("evaluat") || q.includes("grading")) return KB.recruiterScoring;
+
+  // Recruiter Jobs & Screening
+  if (mode === "recruiter" && (q.includes("job post") || q.includes("post a job") || q.includes("vacancy") || q.includes("create job"))) return KB.recruiterJobs;
+  if (mode === "recruiter" && (q.includes("screen") || q.includes("parse") || q.includes("filter resume"))) return KB.recruiterScreening;
+  if (mode === "recruiter" && (q.includes("schedul") || q.includes("calendar") || q.includes("invite"))) return KB.recruiterScheduling;
 
   // Recruiter Pipeline
   if (q.includes("pipeline") || q.includes("shortlist") || q.includes("applicant") || q.includes("funnel") || q.includes("stages")) return KB.recruiterPipeline;
@@ -155,7 +184,10 @@ function getResponse(input) {
   // Analytics
   if (q.includes("analytic") || q.includes("progress") || q.includes("performance") || q.includes("track") || q.includes("stat") || q.includes("dashboard")) return KB.analytics;
 
-  return KB.default;
+  if (mode === "recruiter") {
+    return `🤔 I didn't quite catch that. Here is how I can help you with hiring:\n\n💼 **Post a Job** — Publish open roles\n📄 **AI Resume Screening** — Filter thousands of resumes\n📋 **Custom Assessments** — Tailored tests\n🤖 **AI Candidate Scoring** — Bias-free evaluation\n📅 **Schedule Interviews** — Automated invites\n📊 **Hiring Pipeline** — End-to-end tracking\n⚡ **Fast-Track Hiring** — Hire in days\n🔗 **API & Integrations** — Connect your tools\n💰 **Recruiter Pricing** — Subscription plans\n📞 **Contact Sales** — Get enterprise support\n\nAsk me about any of these topics!`;
+  }
+  return `🤔 I didn't quite catch that, but here is how I can help you:\n\n💼 **Jobs & Assessments** — Apply and prove your skills\n🎤 **Mock Interview** — AI-powered practice\n💻 **Coding Hub** — 100 Days DSA challenge\n📄 **ATS Score** — Resume optimization\n📚 **BTech Notes** — Free study material\n💰 **Pricing** — ₹79 / ₹299 plans\n🏢 **Company Prep** — Google, Amazon, etc.\n🎯 **Objective Exam** — MCQ with certificates\n🏆 **Leaderboard** — XP & rewards\n💳 **Wallet** — Coins & subscriptions\n\nAsk me about any specific topic, and I'll provide full details!`;
 }
 
 function parseMarkdown(text) {
@@ -191,8 +223,8 @@ export default function ChatBot() {
       ? `<span style="display:inline-flex;align-items:center;gap:6px;"><img src="/landing/Vector.svg" alt="Candidate" style="width:14px;height:14px;margin-bottom:1px;" /> I'm a Candidate</span>`
       : `<span style="display:inline-flex;align-items:center;gap:6px;"><img src="/landing/fluent-mdl2_add-work.svg" alt="Recruiter" style="width:14px;height:14px;margin-bottom:1px;" /> I'm a Recruiter</span>`;
     const botReply = selectedMode === "candidate"
-      ? `🎓 **Welcome, Candidate!**\n\nGreat choice! PreepX is India's smartest interview prep platform.\n\nYou can ask about these topics:\n\n🎤 Mock Interviews • 💻 Coding Hub\n📄 ATS Score • 🎯 Objective Exams\n📚 BTech Notes • 🏢 Company Prep\n🏆 Leaderboard • 💰 Pricing Plans\n\nClick the quick options below or simply type your question! 👇`
-      : `🏢 **Welcome, Recruiter!**\n\nWelcome to PreepX — an AI-powered hiring platform!\n\nYou can ask about these topics:\n\n📋 Custom Assessments • 🤖 AI Candidate Scoring\n📊 Hiring Pipeline • ⚡ Fast-Track Hiring\n🔗 API & Integrations • 💰 Recruiter Pricing\n📞 Contact Sales\n\nClick the quick options below or simply type your question! 👇`;
+      ? `🎓 **Welcome, Candidate!**\n\nGreat choice! PreepX is India's smartest interview prep platform.\n\nYou can ask about these topics:\n\n💼 Apply for Jobs • 📋 Assessments\n🎤 Mock Interviews • 💻 Coding Hub\n📄 ATS Score • 🎯 Objective Exams\n📚 BTech Notes • 🏢 Company Prep\n🏆 Leaderboard • 💰 Pricing Plans\n\nClick the quick options below or simply type your question! 👇`
+      : `🏢 **Welcome, Recruiter!**\n\nWelcome to PreepX — an AI-powered hiring platform!\n\nYou can ask about these topics:\n\n💼 Post a Job • 📄 AI Resume Screening\n📋 Custom Assessments • 🤖 AI Candidate Scoring\n📅 Schedule Interviews • 📊 Hiring Pipeline\n⚡ Fast-Track Hiring • 🔗 API & Integrations\n💰 Recruiter Pricing • 📞 Contact Sales\n\nClick the quick options below or simply type your question! 👇`;
     setMessages((prev) => [
       ...prev.map(m => ({ ...m, isRoleSelect: false })),
       { from: "user", text: userLabel, id: Date.now() },
@@ -218,7 +250,7 @@ export default function ChatBot() {
     setMessages((prev) => [...prev, { from: "user", text: trimmed, id: Date.now() }]);
     setTyping(true);
     setTimeout(() => {
-      const res = getResponse(trimmed);
+      const res = getResponse(trimmed, mode);
       setTyping(false);
       setMessages((prev) => [...prev, { from: "bot", text: res, id: Date.now() + 1 }]);
     }, 800);
