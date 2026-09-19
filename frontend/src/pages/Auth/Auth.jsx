@@ -459,7 +459,15 @@ function Auth({ defaultRole }) {
                 className={`auth-role-btn ${activeRole === "candidate" ? "active" : ""}`}
                 onClick={() => handleRoleChange("candidate")}
               >
-                <User size={15} />
+                <img 
+                  src="/landing/Vector.svg" 
+                  alt="Candidate" 
+                  style={{ 
+                    width: 14, 
+                    height: 14,
+                    filter: activeRole === "candidate" ? "none" : "brightness(0) opacity(0.6)"
+                  }} 
+                />
                 <span>Candidate</span>
               </button>
               <button
@@ -467,7 +475,15 @@ function Auth({ defaultRole }) {
                 className={`auth-role-btn ${activeRole === "recruiter" ? "active" : ""}`}
                 onClick={() => handleRoleChange("recruiter")}
               >
-                <Briefcase size={15} />
+                <img 
+                  src="/landing/fluent-mdl2_add-work.svg" 
+                  alt="Recruiter" 
+                  style={{ 
+                    width: 14, 
+                    height: 14,
+                    filter: activeRole === "recruiter" ? "none" : "brightness(0) opacity(0.6)"
+                  }} 
+                />
                 <span>Recruiter</span>
               </button>
             </div>

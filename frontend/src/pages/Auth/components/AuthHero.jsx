@@ -31,7 +31,12 @@ export default function AuthHero({ onRecruiterClick, onClose }) {
         <div className="auth-value-props">
           <div className="auth-prop-card">
             <div className="auth-prop-icon candidate-icon">
-              <BarChart3 size={17} />
+              <div style={{
+                width: 17, height: 17,
+                backgroundColor: "currentColor",
+                mask: "url(/landing/Vector.svg) no-repeat center / contain",
+                WebkitMask: "url(/landing/Vector.svg) no-repeat center / contain"
+              }} />
             </div>
             <div className="auth-prop-info">
               <h4>For Candidates</h4>
@@ -53,7 +58,12 @@ export default function AuthHero({ onRecruiterClick, onClose }) {
             }}
           >
             <div className="auth-prop-icon recruiter-icon">
-              <Briefcase size={17} />
+              <div style={{
+                width: 17, height: 17,
+                backgroundColor: "currentColor",
+                mask: "url(/landing/fluent-mdl2_add-work.svg) no-repeat center / contain",
+                WebkitMask: "url(/landing/fluent-mdl2_add-work.svg) no-repeat center / contain"
+              }} />
             </div>
             <div className="auth-prop-info">
               <h4>For Recruiters</h4>

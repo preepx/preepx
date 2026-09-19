@@ -12,7 +12,7 @@ function ScrollToTop() {
 
 function ThemeInitializer() {
   useEffect(() => {
-    const theme = localStorage.getItem("theme") || "dark";
+    const theme = localStorage.getItem("theme") || "light";
     document.documentElement.dataset.theme = theme;
   }, []);
   return null;
