@@ -262,10 +262,10 @@ const InterviewMode = () => {
       interimRef.current = trimmedInterim;
       setInterimAnswer(trimmedInterim);
 
-      // Silence auto-next only in last 15s
+      // Silence auto-next after user stops speaking
       if (silenceRef.current) clearTimeout(silenceRef.current);
-      if (timerValRef.current > 0 && timerValRef.current <= 15) {
-        silenceRef.current = setTimeout(() => doNext(), 5000);
+      if (timerValRef.current > 0) {
+        silenceRef.current = setTimeout(() => doNext(), 3500);
       }
     };
 
