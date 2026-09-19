@@ -17,8 +17,7 @@ import Footer from "@/components/Footer";
 import "@/styles/AppLayout.css";
 
 const SvgIcon = ({ src, size = 19, style = {} }) => {
-  const scaledSize = size + 4; // Increase size slightly
-  return <img src={src} alt="" style={{ width: scaledSize, height: scaledSize, objectFit: 'contain', ...style }} />;
+  return <img src={src} alt="" style={{ width: size, height: size, objectFit: 'contain', ...style }} />;
 };
 
 const DashboardIcon = (props) => <SvgIcon src="/sidebar/dsboard.svg" {...props} />;
@@ -31,6 +30,10 @@ const LeaderboardIcon = (props) => <SvgIcon src="/sidebar/leaderboard.svg" {...p
 const AnalyticsIcon = (props) => <SvgIcon src="/sidebar/anyltics.svg" {...props} />;
 const CustomWalletIcon = (props) => <SvgIcon src="/sidebar/wallet.svg" {...props} />;
 const ProfileIcon = (props) => <SvgIcon src="/sidebar/profile.svg" {...props} />;
+const RewardIcon = (props) => <SvgIcon src="/sidebar/redeemxp.svg" {...props} />;
+const MyRewardsIcon = (props) => <SvgIcon src="/sidebar/myrewards.svg" {...props} />;
+const CustomSettingsIcon = (props) => <SvgIcon src="/sidebar/setting.svg" {...props} />;
+const CustomLogoutIcon = (props) => <SvgIcon src="/sidebar/logout.svg" {...props} />;
 
 const NAV_SECTIONS = [
   {
@@ -65,6 +68,8 @@ const NAV_SECTIONS = [
     label: "ACCOUNT",
     items: [
       { to: "/wallet", icon: CustomWalletIcon, label: "Wallet" },
+      { to: "/rewards", icon: RewardIcon, label: "Reward" },
+      { to: "/achievements", icon: MyRewardsIcon, label: "My Rewards" },
       { to: "/profile", icon: ProfileIcon, label: "Profile" },
     ],
   },
@@ -252,7 +257,7 @@ function AppLayout({ children }) {
                         onClick={() => setMobileOpen(false)}
                         title={label}
                       >
-                        <Icon size={19} style={{ flexShrink: 0 }} />
+                        <Icon size={20} style={{ flexShrink: 0 }} />
                         {(!collapsed || mobileOpen) && (
                           <>
                             <span className="sidebar-link-label">{label}</span>
@@ -276,7 +281,7 @@ function AppLayout({ children }) {
                     onClick={() => setMobileOpen(false)}
                     title="Settings"
                   >
-                    <Settings size={17} />
+                    <CustomSettingsIcon size={20} />
                     <span>Settings</span>
                   </Link>
                   <button
@@ -285,7 +290,7 @@ function AppLayout({ children }) {
                     onClick={toggleTheme}
                     title={isDark ? "Light Mode" : "Dark Mode"}
                   >
-                    {isDark ? <Sun size={17} /> : <Moon size={17} />}
+                    {isDark ? <Sun size={20} /> : <Moon size={20} />}
                   </button>
                   <button
                     type="button"
@@ -293,7 +298,7 @@ function AppLayout({ children }) {
                     onClick={handleLogout}
                     title="Sign Out"
                   >
-                    <LogOut size={17} />
+                    <CustomLogoutIcon size={20} />
                     <span>Logout</span>
                   </button>
                 </div>
@@ -305,7 +310,7 @@ function AppLayout({ children }) {
                     data-tooltip="Settings"
                     onClick={() => setMobileOpen(false)}
                   >
-                    <Settings size={20} />
+                    <CustomSettingsIcon size={20} />
                   </Link>
                   <button
                     type="button"
@@ -321,7 +326,7 @@ function AppLayout({ children }) {
                     onClick={handleLogout}
                     data-tooltip="Sign Out"
                   >
-                    <LogOut size={20} />
+                    <CustomLogoutIcon size={20} />
                   </button>
                 </div>
               )}

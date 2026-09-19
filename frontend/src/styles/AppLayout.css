@@ -226,7 +226,7 @@
   border-radius: 9px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: #000000;
   background: none;
   border: none;
   cursor: pointer;
@@ -248,7 +248,7 @@
 }
 
 .sidebar-bottom-btn.logout-btn {
-  color: var(--text-muted);
+  color: #000000;
 }
 
 .sidebar-bottom-btn.logout-btn:hover {
