@@ -49,6 +49,7 @@ const NAV_SECTIONS = [
     label: "ACCOUNT",
     items: [
       { to: "/wallet", icon: Wallet, label: "Wallet" },
+      { to: "/profile", icon: User, label: "Profile" },
     ],
   },
 ];
@@ -373,9 +374,9 @@ function AppLayout({ children }) {
                 </span>
 
                 <div style={{ position: 'relative', display: 'inline-flex' }}>
-                  <Link 
-                    to="/profile" 
-                    className="topbar-profile-link" 
+                  <Link
+                    to="/profile"
+                    className="topbar-profile-link"
                     title="My Profile"
                     style={subscribed ? { border: '2px solid #f59e0b', borderRadius: '50%', padding: '1px' } : {}}
                   >
@@ -416,8 +417,8 @@ function AppLayout({ children }) {
         notifs={notifs}
         setNotifs={setNotifs}
       />
-  {/* Coming Soon Modal - Commented out (redirected to /apply-jobs) */ }
-  {/* {showComingSoon && (
+      {/* Coming Soon Modal - Commented out (redirected to /apply-jobs) */}
+      {/* {showComingSoon && (
         <div style={{
           position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           background: 'rgba(0, 0, 0, 0.7)',
