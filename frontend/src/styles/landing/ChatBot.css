@@ -631,4 +631,15 @@
     width: 40px;
     height: 40px;
   }
+
+  .chatbot-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 8px;
+  }
+
+  .chatbot-chips::-webkit-scrollbar {
+    display: none;
+  }
 }
