@@ -329,7 +329,7 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* Footer removed per user request */}
     </>
   );
 }

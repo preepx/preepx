@@ -154,7 +154,7 @@ function Auth({ defaultRole }) {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       triggerAnnouncement();
-      notify.success("Welcome back!");
+      // notify.success("Welcome back!"); // Removed per user request
       navigate("/user-dashboard", { replace: true });
     } catch (error) {
       showAppError(error.response?.data?.message || "Something went wrong. Please try again.", "Sign in failed");

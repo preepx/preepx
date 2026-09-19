@@ -240,7 +240,7 @@ function JobsLayout({ children }) {
                         </div>
                         <div className="jl-mega-section">
                           <h4>Career Resources</h4>
-                          <Link to="/btech-notes">BTech Notes</Link>
+                          <Link to="/btech-notes">Notes</Link>
                           <Link to="/100-days-challenge">100 Days Challenge</Link>
                         </div>
                       </div>
@@ -316,8 +316,7 @@ function JobsLayout({ children }) {
       </div>
     </div>
 
-    {/* ── FULL WIDTH FOOTER ── */}
-    <Footer />
+    {/* ── FULL WIDTH FOOTER REMOVED PER USER REQUEST ── */}
 
       <NotificationModal
         isOpen={showNotifications}

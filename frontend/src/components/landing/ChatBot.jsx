@@ -238,13 +238,16 @@ export default function ChatBot() {
         setTimeout(() => inputRef.current?.focus(), 300);
       }
       setPulse(false);
-      document.body.style.overflow = "hidden"; // Lock background scroll on mobile
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
   }, [open]);
 

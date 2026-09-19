@@ -13,7 +13,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { getStoredUser, clearAuth } from "@/utils/authUtils";
 import { io } from "socket.io-client";
 import API from "@/utils/api";
-import Footer from "@/components/Footer";
+// Footer import removed
 import "@/styles/AppLayout.css";
 
 const SvgIcon = ({ src, size = 19, style = {} }) => {
@@ -54,7 +54,7 @@ const NAV_SECTIONS = [
   {
     label: "LEARNING",
     items: [
-      { to: "/btech-notes", icon: NotesIcon, label: "BTech Notes", isFree: true },
+      { to: "/btech-notes", icon: NotesIcon, label: "Notes", isFree: true },
     ],
   },
   {
@@ -430,8 +430,7 @@ function AppLayout({ children }) {
           <div className="page-content">{children}</div>
         </div>
       </div>
-      {!location.pathname.includes("/pdf") && location.pathname !== "/" && <Footer />}
-
+      {/* Footer removed per user request to only show on landing page */}
       <NotificationModal
         isOpen={showNotifications}
         onClose={() => setShowNotifications(false)}

@@ -21,7 +21,6 @@ function AuthCallback() {
       localStorage.setItem("token", token);
       localStorage.setItem("user", user);
       triggerAnnouncement();
-      notify.success("Welcome back!");
       navigate("/user-dashboard", { replace: true });
     } catch {
       navigate("/auth", { replace: true });
