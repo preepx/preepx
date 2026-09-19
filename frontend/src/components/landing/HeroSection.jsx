@@ -39,7 +39,7 @@ function HeroSection({ onRecruiterClick }) {
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-row gap-2 sm:gap-3 mb-5 justify-center lg:justify-start flex-nowrap w-full px-2 mx-auto lg:mx-0 relative left-3 sm:left-0" style={{ marginTop: '16px', maxWidth: '360px' }}>
+          <div className="flex flex-row gap-2 sm:gap-3 mb-5 justify-center lg:justify-start flex-nowrap w-full px-2 mx-auto lg:mx-0 relative left-4 sm:left-0" style={{ marginTop: '16px', maxWidth: '360px' }}>
             <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none">
               <button
                 onClick={() => navigate('/auth?role=candidate')}
