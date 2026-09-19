@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, BarChart3, Trophy, Award, Settings, User,
-  LogOut, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, FileText, Bell, Briefcase, Crown
+  LogOut, X, BookOpen, Moon, Sun, Zap, Wallet, ClipboardCheck, Video, FileText, Bell, Briefcase, Crown,
+  Code, ChevronDown, Search, Leaf
 } from "lucide-react";
 import notify from "@/utils/notify";
 import { getProfile, syncUserToStorage } from "@/services/userAPI";
@@ -203,21 +204,19 @@ function AppLayout({ children }) {
   return (
     <>
       <div className={`app-layout ${collapsed ? "collapsed" : ""} ${hideSidebar ? "hide-sidebar" : ""}`}>
-        {!hideSidebar && (
-          <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
-            <div className="sidebar-top">
-              <Link to="/interview" className="sidebar-brand">
-                {collapsed && !mobileOpen ? (
-                  <img src="/logo.png" alt="PreepX" style={{ height: "32px", objectFit: "contain", marginLeft: "4px" }} />
-                ) : (
+        {!location.pathname.includes("/pdf") && !hideSidebar && (
+          <header className="topbar new-topbar">
+            <div className="topbar-left-section">
+              {!collapsed || mobileOpen ? (
+                <Link to="/interview" className="sidebar-brand">
                   <img
                     src="/preepx_logo.png"
                     alt="PreepX"
                     className="brand-logo-img"
                     style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }}
                   />
-                )}
-              </Link>
+                </Link>
+              ) : null}
               <button
                 type="button"
                 className="sidebar-toggle desktop-only"
@@ -233,114 +232,6 @@ function AppLayout({ children }) {
               </button>
               <button
                 type="button"
-                className="sidebar-close-btn mobile-only"
-                onClick={() => setMobileOpen(false)}
-                aria-label="Close Sidebar"
-              >
-                <X size={19} />
-              </button>
-            </div>
-
-            <nav className="sidebar-nav">
-              {NAV_SECTIONS.map(({ label: sectionLabel, items }) => (
-                <div key={sectionLabel || "top"} className="sidebar-section">
-                  {sectionLabel && (!collapsed || mobileOpen) && (
-                    <span className="sidebar-section-label">{sectionLabel}</span>
-                  )}
-                  {items.map(({ to, icon: Icon, label, isFree, isNew }) => {
-                    const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
-                    return (
-                      <Link
-                        key={to}
-                        to={to}
-                        className={`sidebar-link ${isActive ? "active" : ""}`}
-                        onClick={() => setMobileOpen(false)}
-                        title={label}
-                      >
-                        <Icon size={20} style={{ flexShrink: 0 }} />
-                        {(!collapsed || mobileOpen) && (
-                          <>
-                            <span className="sidebar-link-label">{label}</span>
-                            {isFree && <span className="nav-free-badge">Free</span>}
-                            {isNew && <span className="nav-new-badge">New</span>}
-                          </>
-                        )}
-                      </Link>
-                    );
-                  })}
-                </div>
-              ))}
-            </nav>
-
-            <div className="sidebar-bottom">
-              {(!collapsed || mobileOpen) ? (
-                <div className="sidebar-bottom-row">
-                  <Link
-                    to="/settings"
-                    className="sidebar-bottom-btn"
-                    onClick={() => setMobileOpen(false)}
-                    title="Settings"
-                  >
-                    <CustomSettingsIcon size={20} />
-                    <span>Settings</span>
-                  </Link>
-                  <button
-                    type="button"
-                    className="sidebar-bottom-btn theme-btn"
-                    onClick={toggleTheme}
-                    title={isDark ? "Light Mode" : "Dark Mode"}
-                  >
-                    {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                  </button>
-                  <button
-                    type="button"
-                    className="sidebar-bottom-btn logout-btn"
-                    onClick={handleLogout}
-                    title="Sign Out"
-                  >
-                    <CustomLogoutIcon size={20} />
-                    <span>Logout</span>
-                  </button>
-                </div>
-              ) : (
-                <div className="sidebar-bottom-collapsed">
-                  <Link
-                    to="/settings"
-                    className="sidebar-action-btn"
-                    data-tooltip="Settings"
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    <CustomSettingsIcon size={20} />
-                  </Link>
-                  <button
-                    type="button"
-                    className="sidebar-action-btn"
-                    onClick={toggleTheme}
-                    data-tooltip={isDark ? "Light Mode" : "Dark Mode"}
-                  >
-                    {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                  </button>
-                  <button
-                    type="button"
-                    className="sidebar-action-btn danger"
-                    onClick={handleLogout}
-                    data-tooltip="Sign Out"
-                  >
-                    <CustomLogoutIcon size={20} />
-                  </button>
-                </div>
-              )}
-            </div>
-          </aside>
-        )}
-
-        {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
-
-        <div className="app-content">
-          {!location.pathname.includes("/pdf") && (
-            <header className="topbar">
-              <button
-                type="button"
                 className="mobile-menu-btn"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open Navigation Menu"
@@ -352,82 +243,174 @@ function AppLayout({ children }) {
                 </div>
               </button>
 
-              <div className="topbar-left" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                <button
-                  type="button"
-                  className="topbar-apply-jobs-btn"
-                  onClick={() => navigate("/apply-jobs")}
-                >
-                  <Briefcase size={15} />
-                  <span>Apply Jobs</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                className="topbar-apply-jobs-btn"
+                onClick={() => navigate("/apply-jobs")}
+              >
+                <Briefcase size={15} />
+                <span>Apply Jobs</span>
+              </button>
+            </div>
 
-              <div className="topbar-center">
-                <WalletBadge />
-              </div>
+            <div className="topbar-right-section">
+              <button
+                type="button"
+                className="tb-icon-btn theme-toggle-btn"
+                onClick={toggleTheme}
+                title={isDark ? "Light Mode" : "Dark Mode"}
+              >
+                {isDark ? <Sun size={18} /> : <Moon size={18} />}
+              </button>
 
-              <div className="topbar-right">
-                <button
-                  type="button"
-                  aria-label="Notifications"
-                  className="topbar-notif-btn"
-                  onClick={() => setShowNotifications(true)}
-                >
-                  <Bell size={22} />
-                  {unreadCount > 0 && (
-                    <span className="notification-badge">
-                      {unreadCount}
-                    </span>
-                  )}
-                </button>
-
-                {user?.streak > 0 && (
-                  <span className="streak-badge">
-                    <span className="badge-icon">🔥</span>
-                    <span>{user.streak} day streak</span>
+              <button
+                type="button"
+                className="tb-icon-btn"
+                onClick={() => setShowNotifications(true)}
+                title="Notifications"
+              >
+                <Bell size={18} />
+                {unreadCount > 0 && (
+                  <span className="tb-notif-dot">
+                    {unreadCount}
                   </span>
                 )}
+              </button>
 
-                <span className="points-badge">
-                  <img src="/logo.png" alt="XP" className="xp-logo-icon" />
-                  <span>{user?.points || 0} XP</span>
-                </span>
+              <div className="tb-divider"></div>
 
-                <div style={{ position: 'relative', display: 'inline-flex' }}>
-                  <Link
-                    to="/profile"
-                    className="topbar-profile-link"
-                    title="My Profile"
-                    style={subscribed ? { border: '2px solid #f59e0b', borderRadius: '50%', padding: '1px' } : {}}
-                  >
-                    <img src={avatar} alt="Profile" className="topbar-avatar-img" />
-                  </Link>
-                  {subscribed && (
-                    <div style={{
-                      position: 'absolute',
-                      bottom: '-4px',
-                      right: '-4px',
-                      background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-                      borderRadius: '50%',
-                      width: '18px',
-                      height: '18px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      border: '2px solid var(--surface)',
-                      boxShadow: '0 2px 4px rgba(0,0,0,0.3)',
-                      pointerEvents: 'none',
-                      zIndex: 10
-                    }}>
-                      <Crown size={10} color="#fff" strokeWidth={3} />
-                    </div>
-                  )}
-                </div>
+              <Link to="/wallet" className="tb-wallet-badge">
+                <img src="/sidebar/wallet.svg" alt="Wallet" style={{ width: 16, height: 16, objectFit: 'contain' }} />
+                <span>₹ {balance || 0}</span>
+              </Link>
+
+              <div className="tb-divider"></div>
+
+              <div className="tb-streak-badge">
+                <Leaf size={16} />
+                <span>{user?.streak || 0} day streak</span>
               </div>
-            </header>
+
+              <div className="tb-divider"></div>
+
+              <div className="tb-xp-badge">
+                <BarChart3 size={16} />
+                <span>{user?.points || 0} XP</span>
+              </div>
+
+              <div className="tb-profile">
+                <img src={avatar} alt="Profile" className="tb-avatar" />
+              </div>
+            </div>
+          </header>
+        )}
+
+        <div className="app-main-body">
+          {!hideSidebar && (
+            <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
+              {mobileOpen && (
+                <div className="sidebar-top mobile-only">
+                  <Link to="/interview" className="sidebar-brand">
+                    <img
+                      src="/preepx_logo.png"
+                      alt="PreepX"
+                      className="brand-logo-img"
+                      style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }}
+                    />
+                  </Link>
+                  <button
+                    type="button"
+                    className="sidebar-close-btn"
+                    onClick={() => setMobileOpen(false)}
+                    aria-label="Close Sidebar"
+                  >
+                    <X size={19} />
+                  </button>
+                </div>
+              )}
+
+              <nav className="sidebar-nav">
+                {NAV_SECTIONS.map(({ label: sectionLabel, items }) => (
+                  <div key={sectionLabel || "top"} className="sidebar-section">
+                    {sectionLabel && (!collapsed || mobileOpen) && (
+                      <span className="sidebar-section-label">{sectionLabel}</span>
+                    )}
+                    {items.map(({ to, icon: Icon, label, isFree, isNew }) => {
+                      const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
+                      return (
+                        <Link
+                          key={to}
+                          to={to}
+                          className={`sidebar-link ${isActive ? "active" : ""}`}
+                          onClick={() => setMobileOpen(false)}
+                          title={label}
+                        >
+                          <Icon size={20} style={{ flexShrink: 0 }} />
+                          {(!collapsed || mobileOpen) && (
+                            <>
+                              <span className="sidebar-link-label">{label}</span>
+                              {isFree && <span className="nav-free-badge">Free</span>}
+                              {isNew && <span className="nav-new-badge">New</span>}
+                            </>
+                          )}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                ))}
+              </nav>
+
+              <div className="sidebar-bottom">
+                {(!collapsed || mobileOpen) ? (
+                  <div className="sidebar-bottom-row">
+                    <Link
+                      to="/settings"
+                      className="sidebar-bottom-btn"
+                      onClick={() => setMobileOpen(false)}
+                      title="Settings"
+                    >
+                      <CustomSettingsIcon size={20} />
+                      <span>Settings</span>
+                    </Link>
+                    <button
+                      type="button"
+                      className="sidebar-bottom-btn logout-btn"
+                      onClick={handleLogout}
+                      title="Sign Out"
+                    >
+                      <CustomLogoutIcon size={20} />
+                      <span>Logout</span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="sidebar-bottom-collapsed">
+                    <Link
+                      to="/settings"
+                      className="sidebar-action-btn"
+                      data-tooltip="Settings"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <CustomSettingsIcon size={20} />
+                    </Link>
+                    <button
+                      type="button"
+                      className="sidebar-action-btn danger"
+                      onClick={handleLogout}
+                      data-tooltip="Sign Out"
+                    >
+                      <CustomLogoutIcon size={20} />
+                    </button>
+                  </div>
+                )}
+              </div>
+            </aside>
           )}
-          <div className="page-content">{children}</div>
+
+          {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
+
+          <div className="app-content">
+            <div className="page-content">{children}</div>
+          </div>
         </div>
       </div>
       {/* Footer removed per user request to only show on landing page */}
