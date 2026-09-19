@@ -12,6 +12,7 @@ const Navbar = lazy(() => import("@/components/Navbar"));
 const LandingFooter = lazy(() => import("@/components/landing/LandingFooter"));
 const AppLayout = lazy(() => import("@/layouts/AppLayout"));
 const JobsLayout = lazy(() => import("@/features/apply-jobs/layout/JobsLayout"));
+const ChatBot = lazy(() => import("@/components/landing/ChatBot"));
 
 const PUBLIC_PATH_PREFIXES = [
   "/features", "/how-it-works", "/mock-interviews", "/user-guide",
@@ -113,6 +114,8 @@ function LayoutWrapper({ children, landingRole, setLandingRole }) {
 export default function AppRoutes() {
   const [landingRole, setLandingRole] = useState("candidate");
   const publicRoutes = getPublicRoutes(landingRole, setLandingRole);
+  const location = useLocation();
+  const isFullscreen = isFullscreenPath(location.pathname);
 
   return (
     <ErrorBoundary>
@@ -138,6 +141,7 @@ export default function AppRoutes() {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </LayoutWrapper>
+        {!isFullscreen && <ChatBot />}
       </Suspense>
     </ErrorBoundary>
   );

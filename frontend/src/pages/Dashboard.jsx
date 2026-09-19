@@ -40,6 +40,7 @@ function Dashboard() {
       <FaqSection />
 
       <LandingFooter onRecruiterClick={handleRecruiterClick} />
+
     </div>
   );
 }
