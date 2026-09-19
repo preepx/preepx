@@ -95,6 +95,7 @@ const PIPELINE = [
 ];
 
 const TABLE_HEADS = ["Candidates", "Skill Match", "Assessment", "Interviews", "Overall", "Status"];
+const TABLE_HEADS_MOBILE = ["Candidates", "Skill Match", "Assessment", "Status"];
 
 function HowItWorksSection() {
   const navigate = useNavigate();
@@ -177,8 +178,8 @@ function HowItWorksSection() {
                     </button>
                   </div>
 
-                  <div className="hiw-photo">
-                    <img src="/landing/Rectangle%209.svg" alt="AI mock interview session" />
+                  <div className="hiw-photo" style={{ borderRadius: '16px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src="/landing/interviewimage.png" alt="AI mock interview session" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '16px' }} />
                   </div>
                 </div>
 
@@ -220,8 +221,9 @@ function HowItWorksSection() {
                   FrontEnd Developer - Hiring
                 </h3>
 
-                <div className="overflow-x-auto">
-                  <div className="grid min-w-[640px] grid-cols-[1.5fr_repeat(5,0.7fr)] items-center gap-y-3">
+                {/* Desktop Table */}
+                <div className="hidden min-[860px]:block overflow-x-auto">
+                  <div className="grid min-w-[540px] grid-cols-[1.5fr_repeat(5,0.7fr)] items-center gap-y-3">
                     {TABLE_HEADS.map((heading) => (
                       <div
                         key={heading}
@@ -231,7 +233,6 @@ function HowItWorksSection() {
                         {heading}
                       </div>
                     ))}
-
                     {CANDIDATES.map((c) => (
                       <React.Fragment key={c.name}>
                         <div className="flex items-center gap-2 text-left">
@@ -252,15 +253,46 @@ function HowItWorksSection() {
                   </div>
                 </div>
 
-                <div className="mt-[12px] ml-0 w-full h-[110px] rounded-[8px] border border-gray-500 bg-[#84D4FF] px-[16px] pb-[8px] pt-[10px]">
-                  <h4 className="mt-0 mb-[6px] translate-x-[20px] text-left font-sans text-[16px] font-medium leading-[24px] tracking-normal text-[#111]">Hiring Pipeline</h4>
+                {/* Mobile Table — fewer columns */}
+                <div className="block min-[860px]:hidden">
+                  <div className="grid grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr] items-center gap-y-2">
+                    {TABLE_HEADS_MOBILE.map((heading) => (
+                      <div
+                        key={heading}
+                        className={`text-[11px] font-semibold text-black ${heading === "Candidates" ? "text-left" : "text-center"
+                          }`}
+                      >
+                        {heading}
+                      </div>
+                    ))}
+                    {CANDIDATES.map((c) => (
+                      <React.Fragment key={c.name}>
+                        <div className="flex items-center gap-1.5 text-left">
+                          <img
+                            src={c.avatar}
+                            alt={c.name}
+                            className="h-6 w-6 shrink-0 rounded-full border border-gray-300 object-cover"
+                          />
+                          <span className="text-[11px] font-medium text-black truncate">{c.name.split(" ")[0]}</span>
+                        </div>
+                        <div className="text-center text-[11px] text-black">{c.skill}</div>
+                        <div className="text-center text-[11px] text-black">{c.assessment}</div>
+                        <div className="text-center text-[10px] font-semibold text-black">{c.status}</div>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Hiring Pipeline */}
+                <div className="mt-[12px] ml-0 w-full rounded-[8px] border border-gray-500 bg-[#84D4FF] px-[16px] pb-[8px] pt-[10px]" style={{ minHeight: '90px' }}>
+                  <h4 className="mt-0 mb-[4px] text-left font-sans text-[14px] min-[860px]:text-[16px] font-medium leading-[24px] tracking-normal text-[#111]">Hiring Pipeline</h4>
                   <div className="relative mt-[4px] grid grid-cols-5 text-center">
-                    <div className="pointer-events-none absolute left-[10%] right-[10%] top-[45px] h-[3px] rounded-full bg-gradient-to-r from-sky-200 via-slate-500 to-slate-800" />
+                    <div className="pointer-events-none absolute left-[10%] right-[10%] top-[42px] min-[860px]:top-[45px] h-[3px] rounded-full bg-gradient-to-r from-sky-200 via-slate-500 to-slate-800" />
                     {PIPELINE.map((step) => (
                       <div key={step.label} className="relative z-10 flex flex-col items-center">
-                        <span className="text-[11px] font-medium text-black">{step.label}</span>
-                        <span className="mb-[2px] text-[12px] font-bold text-black">{step.val}</span>
-                        <span className={`h-[22px] w-[22px] rounded-full ${step.dot}`} />
+                        <span className="text-[9px] min-[860px]:text-[11px] font-medium text-black">{step.label}</span>
+                        <span className="mb-[2px] text-[10px] min-[860px]:text-[12px] font-bold text-black">{step.val}</span>
+                        <span className={`h-[18px] w-[18px] min-[860px]:h-[22px] min-[860px]:w-[22px] rounded-full ${step.dot}`} />
                       </div>
                     ))}
                   </div>

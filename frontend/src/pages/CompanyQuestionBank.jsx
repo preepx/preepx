@@ -141,7 +141,7 @@ export default function CompanyQuestionBank() {
             </div>
 
             <div className="cp-filter-section">
-              <h4>Search</h4>
+              <h4>Searchh</h4>
               <div className="cp-search">
                 <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search topics or questions..." />
                 <Search size={14} />
@@ -262,8 +262,8 @@ export default function CompanyQuestionBank() {
                     </div>
                     <span className="cp-q-time">{estTime}</span>
                     <button type="button" className="cp-bookmark" onClick={(e) => { e.stopPropagation(); }}><Bookmark size={16} /></button>
-                    <button type="button" className="cp-btn-start" onClick={(e) => { 
-                      e.stopPropagation(); 
+                    <button type="button" className="cp-btn-start" onClick={(e) => {
+                      e.stopPropagation();
                       if (item.type === 'coding') {
                         navigate(`/coding-exam/${qId}?source=company&company=${slug}`);
                       } else {

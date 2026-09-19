@@ -41,6 +41,7 @@ const safeUser = (user) => ({
   portfolio: user.portfolio || "",
   experience: user.experience || [],
   education: user.education || [],
+  role: user.role || "candidate",
 });
 
 const getProfile = catchAsync(async (req, res) => {

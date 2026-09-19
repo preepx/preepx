@@ -148,6 +148,9 @@ function Auth({ defaultRole }) {
         email: loginData.email.trim().toLowerCase(),
         password: loginData.password,
       });
+      if (!res.data || !res.data.token) {
+        throw new Error("Invalid API response. Please check if VITE_API_URL is set correctly in production.");
+      }
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
       triggerAnnouncement();

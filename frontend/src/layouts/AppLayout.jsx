@@ -16,19 +16,41 @@ import API from "@/utils/api";
 import Footer from "@/components/Footer";
 import "@/styles/AppLayout.css";
 
-const NAV_ITEMS = [
-  { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
-  { to: "/interview", icon: Video, label: "Mock Interview" },
-  { to: "/100-days-challenge", icon: Trophy, label: "Coding Hub", isNew: true },
-  { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam" },
-  { to: "/ats-score", icon: FileText, label: "ATS Score", isNew: true },
-  { to: "/btech-notes", icon: BookOpen, label: "Btech Notes", isFree: true },
-  { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
-  { to: "/analytics", icon: BarChart3, label: "Analytics" },
-  { to: "/wallet", icon: Wallet, label: "Wallet" },
-  { to: "/rewards", icon: Zap, label: "My Rewards" },
-  { to: "/achievements", icon: Award, label: "Redeem XP" },
-  { to: "/profile", icon: User, label: "Profile" },
+const NAV_SECTIONS = [
+  {
+    label: null,
+    items: [
+      { to: "/user-dashboard", icon: LayoutDashboard, label: "Dashboard" },
+    ],
+  },
+  {
+    label: "PRACTICE",
+    items: [
+      { to: "/interview", icon: Video, label: "Mock Interview" },
+      { to: "/100-days-challenge", icon: Trophy, label: "Coding Hub", isNew: true },
+      { to: "/objective-exam", icon: ClipboardCheck, label: "Objective Exam" },
+      { to: "/ats-score", icon: FileText, label: "ATS Score" },
+    ],
+  },
+  {
+    label: "LEARNING",
+    items: [
+      { to: "/btech-notes", icon: BookOpen, label: "BTech Notes", isFree: true },
+    ],
+  },
+  {
+    label: "COMMUNITY",
+    items: [
+      { to: "/leaderboard", icon: Trophy, label: "Leaderboard" },
+      { to: "/analytics", icon: BarChart3, label: "Analytics" },
+    ],
+  },
+  {
+    label: "ACCOUNT",
+    items: [
+      { to: "/wallet", icon: Wallet, label: "Wallet" },
+    ],
+  },
 ];
 
 function AppLayout({ children }) {
@@ -198,62 +220,94 @@ function AppLayout({ children }) {
             </div>
 
             <nav className="sidebar-nav">
-              {NAV_ITEMS.map(({ to, icon: Icon, label, isFree, isNew }) => {
-                const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
-                return (
-                  <Link
-                    key={to}
-                    to={to}
-                    className={`sidebar-link ${isActive ? "active" : ""}`}
-                    onClick={() => setMobileOpen(false)}
-                    title={label}
-                  >
-                    <Icon size={20} style={{ flexShrink: 0 }} />
-                    {(!collapsed || mobileOpen) && (
-                      <>
-                        <span className="sidebar-link-label">{label}</span>
-                        {isFree && <span className="nav-free-badge">Free</span>}
-                        {isNew && <span className="nav-new-badge">New</span>}
-                      </>
-                    )}
-                    {isActive && <span className="nav-indicator" />}
-                  </Link>
-                );
-              })}
+              {NAV_SECTIONS.map(({ label: sectionLabel, items }) => (
+                <div key={sectionLabel || "top"} className="sidebar-section">
+                  {sectionLabel && (!collapsed || mobileOpen) && (
+                    <span className="sidebar-section-label">{sectionLabel}</span>
+                  )}
+                  {items.map(({ to, icon: Icon, label, isFree, isNew }) => {
+                    const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
+                    return (
+                      <Link
+                        key={to}
+                        to={to}
+                        className={`sidebar-link ${isActive ? "active" : ""}`}
+                        onClick={() => setMobileOpen(false)}
+                        title={label}
+                      >
+                        <Icon size={19} style={{ flexShrink: 0 }} />
+                        {(!collapsed || mobileOpen) && (
+                          <>
+                            <span className="sidebar-link-label">{label}</span>
+                            {isFree && <span className="nav-free-badge">Free</span>}
+                            {isNew && <span className="nav-new-badge">New</span>}
+                          </>
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
             </nav>
 
-            <div className="sidebar-bottom" style={{ padding: collapsed ? "12px 8px" : "12px 16px" }}>
-              <div className={`sidebar-bottom-actions ${collapsed ? "collapsed" : ""}`}>
-                <Link
-                  to="/settings"
-                  className="sidebar-action-btn"
-                  data-tooltip="Settings"
-                  title="Settings"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  <Settings size={20} />
-                </Link>
-
-                <button
-                  type="button"
-                  className="sidebar-action-btn"
-                  onClick={toggleTheme}
-                  data-tooltip={isDark ? "Light Mode" : "Dark Mode"}
-                  title={isDark ? "Light Mode" : "Dark Mode"}
-                >
-                  {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                </button>
-
-                <button
-                  type="button"
-                  className="sidebar-action-btn danger"
-                  onClick={handleLogout}
-                  data-tooltip="Sign Out"
-                  title="Sign Out"
-                >
-                  <LogOut size={20} />
-                </button>
-              </div>
+            <div className="sidebar-bottom">
+              {(!collapsed || mobileOpen) ? (
+                <div className="sidebar-bottom-row">
+                  <Link
+                    to="/settings"
+                    className="sidebar-bottom-btn"
+                    onClick={() => setMobileOpen(false)}
+                    title="Settings"
+                  >
+                    <Settings size={17} />
+                    <span>Settings</span>
+                  </Link>
+                  <button
+                    type="button"
+                    className="sidebar-bottom-btn theme-btn"
+                    onClick={toggleTheme}
+                    title={isDark ? "Light Mode" : "Dark Mode"}
+                  >
+                    {isDark ? <Sun size={17} /> : <Moon size={17} />}
+                  </button>
+                  <button
+                    type="button"
+                    className="sidebar-bottom-btn logout-btn"
+                    onClick={handleLogout}
+                    title="Sign Out"
+                  >
+                    <LogOut size={17} />
+                    <span>Logout</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="sidebar-bottom-collapsed">
+                  <Link
+                    to="/settings"
+                    className="sidebar-action-btn"
+                    data-tooltip="Settings"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <Settings size={20} />
+                  </Link>
+                  <button
+                    type="button"
+                    className="sidebar-action-btn"
+                    onClick={toggleTheme}
+                    data-tooltip={isDark ? "Light Mode" : "Dark Mode"}
+                  >
+                    {isDark ? <Sun size={20} /> : <Moon size={20} />}
+                  </button>
+                  <button
+                    type="button"
+                    className="sidebar-action-btn danger"
+                    onClick={handleLogout}
+                    data-tooltip="Sign Out"
+                  >
+                    <LogOut size={20} />
+                  </button>
+                </div>
+              )}
             </div>
           </aside>
         )}

@@ -31,7 +31,7 @@ export default function RecentActivityPanel({ recentScores = [] }) {
                 <div className="ud-recent-info">
                   <strong>{entry.role || "Practice Session"}</strong>
                   <span>
-                    {new Date(entry.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" })}
+                    {entry.date && !isNaN(new Date(entry.date)) ? new Date(entry.date).toLocaleDateString("en-IN", { day: "numeric", month: "short" }) : "Recent"}
                   </span>
                 </div>
                 <div className={`ud-recent-score ${pct >= 70 ? "good" : pct >= 40 ? "mid" : "low"}`}>

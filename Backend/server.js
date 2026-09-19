@@ -7,6 +7,7 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 const session = require("express-session");
+const mongoose = require("mongoose");
 const connectDB = require("./models/db");
 const { sendNotification } = require("./utils/notificationService");
 const { sendRecruiterNotification } = require("./utils/recruiterNotificationService");
@@ -151,7 +152,16 @@ app.get("/uploads/resumes/:filename", (req, res) => {
   `);
 });
 
-app.get("/api/health", (req, res) => res.json({ status: "ok", version: "2.0" }));
+app.get("/api/health", (req, res) => {
+  const dbState = mongoose.connection.readyState;
+  const dbStatus = dbState === 1 ? "connected" : dbState === 2 ? "connecting" : "disconnected";
+  res.json({
+    status: "ok",
+    backend: "running",
+    database: dbStatus,
+    version: "2.0"
+  });
+});
 
 app.use("/api/jobs", require("./src/modules/hiring/candidate-jobs.routes"));
 app.use("/api/users", require("./src/modules/users/user.routes"));
