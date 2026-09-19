@@ -566,9 +566,10 @@
 }
 
 /* Mobile */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .chatbot-panel {
-    width: 100vw;
+    width: 100%;
+    max-width: 100vw;
   }
 
   .chatbot-fab {
@@ -576,5 +577,13 @@
     right: 20px;
     width: 54px;
     height: 54px;
+  }
+  
+  .chatbot-role-btns {
+    flex-direction: column;
+  }
+  
+  .chatbot-role-btn {
+    width: 100%;
   }
 }
