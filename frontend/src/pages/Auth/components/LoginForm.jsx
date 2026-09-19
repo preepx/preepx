@@ -17,7 +17,7 @@ export default function LoginForm({
       <div className="auth-input-group">
         <label>Email ID</label>
         <div className="auth-input-box">
-          <Mail size={16} className="input-icon" />
+          <img src="/landing/email.svg" alt="Email" className="input-icon" style={{ width: 16, height: 16 }} />
           <input
             type="email"
             placeholder="Enter your email"
@@ -32,7 +32,7 @@ export default function LoginForm({
       <div className="auth-input-group">
         <label>Password</label>
         <div className="auth-input-box">
-          <Lock size={16} className="input-icon" />
+          <img src="/landing/lock.svg" alt="Lock" className="input-icon" style={{ width: 16, height: 16 }} />
           <input
             type={showLoginPass ? "text" : "password"}
             placeholder="Enter your password"

@@ -17,7 +17,7 @@ export default function ForgotPasswordEmailForm({
     <form onSubmit={onSubmit} className="auth-form-wrap">
       <div className="auth-otp-screen">
         <div className="otp-icon-wrap">
-          <Lock size={26} />
+          <img src="/landing/lock.svg" alt="Lock" style={{ width: 26, height: 26 }} />
         </div>
         <h2 className="auth-otp-title">Reset your password</h2>
         <p className="auth-otp-sub">
@@ -28,7 +28,7 @@ export default function ForgotPasswordEmailForm({
       <div className="auth-input-group">
         <label>Registered Email Address</label>
         <div className="auth-input-box">
-          <Mail size={16} className="input-icon" />
+          <img src="/landing/email.svg" alt="Email" className="input-icon" style={{ width: 16, height: 16 }} />
           <input
             type="email"
             placeholder="you@example.com"

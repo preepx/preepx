@@ -23,7 +23,7 @@ export default function RegisterCandidateForm({
         <div className="auth-input-group">
           <label>Full Name</label>
           <div className="auth-input-box">
-            <User size={16} className="input-icon" />
+            <img src="/sidebar/profile.svg" alt="Profile" className="input-icon" style={{ width: 16, height: 16 }} />
             <input
               type="text"
               placeholder="e.g. Rahul Verma"
@@ -38,7 +38,7 @@ export default function RegisterCandidateForm({
         <div className="auth-input-group">
           <label>Email ID</label>
           <div className="auth-input-box">
-            <Mail size={16} className="input-icon" />
+            <img src="/landing/email.svg" alt="Email" className="input-icon" style={{ width: 16, height: 16 }} />
             <input
               type="email"
               placeholder="you@example.com"
@@ -55,7 +55,7 @@ export default function RegisterCandidateForm({
         <div className="auth-input-group">
           <label>Password</label>
           <div className="auth-input-box">
-            <Lock size={16} className="input-icon" />
+            <img src="/landing/lock.svg" alt="Lock" className="input-icon" style={{ width: 16, height: 16 }} />
             <input
               type={showCandPass ? "text" : "password"}
               placeholder="Min. 6 chars"
@@ -79,7 +79,7 @@ export default function RegisterCandidateForm({
         <div className="auth-input-group">
           <label>Confirm Password</label>
           <div className="auth-input-box">
-            <Lock size={16} className="input-icon" />
+            <img src="/landing/lock.svg" alt="Lock" className="input-icon" style={{ width: 16, height: 16 }} />
             <input
               type={showCandConfirmPass ? "text" : "password"}
               placeholder="Confirm password"
