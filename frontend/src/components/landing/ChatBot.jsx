@@ -234,9 +234,18 @@ export default function ChatBot() {
 
   useEffect(() => {
     if (open) {
-      setTimeout(() => inputRef.current?.focus(), 300);
+      if (window.innerWidth > 768) {
+        setTimeout(() => inputRef.current?.focus(), 300);
+      }
       setPulse(false);
+      document.body.style.overflow = "hidden"; // Lock background scroll on mobile
+    } else {
+      document.body.style.overflow = "auto";
     }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [open]);
 
   useEffect(() => {
@@ -366,7 +375,7 @@ export default function ChatBot() {
           <div className="chatbot-chips">
             {(() => {
               const currentChips = mode === "recruiter" ? RECRUITER_CHIPS : CANDIDATE_CHIPS;
-              const visibleChips = showAllChips ? currentChips : currentChips.slice(0, 5);
+              const visibleChips = showAllChips ? currentChips : currentChips.slice(0, 4);
               return (
                 <>
                   {visibleChips.map((c) => (
@@ -379,12 +388,12 @@ export default function ChatBot() {
                       {c.label}
                     </button>
                   ))}
-                  {!showAllChips && currentChips.length > 5 && (
+                  {!showAllChips && currentChips.length > 4 && (
                     <button
                       className={`chatbot-chip chatbot-chip--more ${mode === "recruiter" ? "chatbot-chip--recruiter" : ""}`}
                       onClick={() => setShowAllChips(true)}
                     >
-                      +{currentChips.length - 5} More
+                      +{currentChips.length - 4} More
                     </button>
                   )}
                 </>

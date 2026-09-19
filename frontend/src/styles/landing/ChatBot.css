@@ -633,9 +633,8 @@
   }
 
   .chatbot-chips {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
+    flex-wrap: wrap;
+    overflow-x: visible;
     padding-bottom: 8px;
   }
 
