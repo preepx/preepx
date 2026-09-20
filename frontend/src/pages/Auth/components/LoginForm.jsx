@@ -1,11 +1,13 @@
 import React from "react";
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, AlertCircle } from "lucide-react";
 
 export default function LoginForm({
   loginData,
   setLoginData,
   showLoginPass,
   setShowLoginPass,
+  loginError,
+  setLoginError,
   loading,
   onSubmit,
   onForgotPassword,
@@ -22,7 +24,10 @@ export default function LoginForm({
             type="email"
             placeholder="Enter your email"
             value={loginData.email}
-            onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
+            onChange={(e) => {
+              setLoginData({ ...loginData, email: e.target.value });
+              if (loginError) setLoginError("");
+            }}
             className="auth-input"
             required
           />
@@ -31,13 +36,16 @@ export default function LoginForm({
 
       <div className="auth-input-group">
         <label>Password</label>
-        <div className="auth-input-box">
+        <div className={`auth-input-box ${loginError ? "has-error" : ""}`}>
           <img src="/landing/lock.svg" alt="Lock" className="input-icon" style={{ width: 16, height: 16 }} />
           <input
             type={showLoginPass ? "text" : "password"}
             placeholder="Enter your password"
             value={loginData.password}
-            onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
+            onChange={(e) => {
+              setLoginData({ ...loginData, password: e.target.value });
+              if (loginError) setLoginError("");
+            }}
             className="auth-input"
             required
           />
@@ -52,7 +60,15 @@ export default function LoginForm({
         </div>
       </div>
 
-      <div className="auth-forgot-row">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: '-2px', minHeight: '18px' }}>
+        <div style={{ flex: 1, paddingRight: '8px' }}>
+          {loginError && (
+            <div className="auth-inline-error" style={{ marginTop: 0 }}>
+              <AlertCircle size={14} fill="#ef4444" color="#fff" style={{ flexShrink: 0 }} />
+              <span>{loginError}</span>
+            </div>
+          )}
+        </div>
         <button
           type="button"
           className="auth-forgot-btn"

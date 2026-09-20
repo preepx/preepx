@@ -53,6 +53,7 @@ function Auth({ defaultRole }) {
   // Login Form State
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [showLoginPass, setShowLoginPass] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
   // Candidate Register State
   const [candidateReg, setCandidateReg] = useState(EMPTY_CANDIDATE_REG);
@@ -73,6 +74,7 @@ function Auth({ defaultRole }) {
 
   // Forgot Password State
   const [forgotEmail, setForgotEmail] = useState("");
+  const [forgotError, setForgotError] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [showNewPass, setShowNewPass] = useState(false);
@@ -119,6 +121,8 @@ function Auth({ defaultRole }) {
   const handleRoleChange = (role) => {
     setActiveRole(role);
     setScreen("login");
+    setLoginError("");
+    setForgotError("");
     resetOtp();
     const targetUrl = `/auth?role=${role}`;
     navigate(targetUrl, { replace: true });
@@ -157,7 +161,11 @@ function Auth({ defaultRole }) {
       // notify.success("Welcome back!"); // Removed per user request
       navigate("/user-dashboard", { replace: true });
     } catch (error) {
-      showAppError(error.response?.data?.message || "Something went wrong. Please try again.", "Sign in failed");
+      let msg = error.response?.data?.message || "Email or password is incorrect. Please try again.";
+      if (msg.toLowerCase() === "invalid credentials") {
+        msg = "Email or password is incorrect. Please try again.";
+      }
+      setLoginError(msg);
     } finally {
       setLoading(false);
     }
@@ -262,7 +270,11 @@ function Auth({ defaultRole }) {
       notify.success("Logged in successfully!");
       navigate("/recruiter-dashboard", { replace: true });
     } catch (err) {
-      showAppError(err.response?.data?.message || "Login failed", "Error");
+      let msg = err.response?.data?.message || "Email or password is incorrect. Please try again.";
+      if (msg.toLowerCase() === "invalid credentials" || msg === "Login failed") {
+        msg = "Email or password is incorrect. Please try again.";
+      }
+      setLoginError(msg);
     } finally {
       setLoading(false);
     }
@@ -350,7 +362,7 @@ function Auth({ defaultRole }) {
       setScreen("forgot-otp");
       notify.success(`Reset code sent to ${forgotEmail}`);
     } catch (error) {
-      showAppError(error.response?.data?.message || "Email not found.", "Error");
+      setForgotError("No account found with this email.\nPlease check your email or signup for a new account.");
     } finally {
       setLoading(false);
       if (recaptchaRef.current) recaptchaRef.current.reset();
@@ -521,6 +533,8 @@ function Auth({ defaultRole }) {
                 setLoginData={setLoginData}
                 showLoginPass={showLoginPass}
                 setShowLoginPass={setShowLoginPass}
+                loginError={loginError}
+                setLoginError={setLoginError}
                 loading={loading}
                 onSubmit={activeRole === "recruiter" ? handleRecruiterLogin : handleCandidateLogin}
                 onForgotPassword={() => {
@@ -601,6 +615,8 @@ function Auth({ defaultRole }) {
               <ForgotPasswordEmailForm
                 forgotEmail={forgotEmail}
                 setForgotEmail={setForgotEmail}
+                forgotError={forgotError}
+                setForgotError={setForgotError}
                 activeRole={activeRole}
                 recaptchaRef={recaptchaRef}
                 setCaptchaToken={setCaptchaToken}
