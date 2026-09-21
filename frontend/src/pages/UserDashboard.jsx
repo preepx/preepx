@@ -6,7 +6,7 @@ import { useSubscription } from "@/features/subscription";
 import { getStoredUser, setStoredUser } from "@/utils/authUtils";
 import Loader from "@/components/Loader";
 import {
-  BannerSlider,
+  PromoBannerSection,
   StatsRow,
   ApplyJobsBanner,
   PracticeGrid,
@@ -69,8 +69,8 @@ function UserDashboard() {
 
   return (
     <div className="ud-page">
-      {/* BANNER SLIDER */}
-      <BannerSlider />
+      {/* PROMO BANNER */}
+      <PromoBannerSection />
 
       {/* STATS */}
       <StatsRow

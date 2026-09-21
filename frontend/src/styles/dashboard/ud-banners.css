@@ -140,10 +140,12 @@
 }
 
 @keyframes udBannerShift {
+
   0%,
   100% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
@@ -209,3 +211,110 @@
   transform: translateY(-3px);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
 }
+
+/* ── PROMO BANNER SECTION (Image left + Features right) ── */
+.promo-banner-wrap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin: 0 0 24px 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f3f9f5;
+  height: 260px;
+}
+
+/* LEFT side — Banner image */
+.promo-banner-left {
+  flex: 1 1 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
+  background: #eaf6ef;
+}
+
+.promo-banner-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* RIGHT side — Feature list */
+.promo-banner-right {
+  flex: 0 0 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 10px 20px 10px 20px;
+  background: #fff;
+  height: 260px;
+  overflow: hidden;
+}
+
+.promo-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  border-bottom: none;
+}
+
+.promo-feature-item:last-child {
+  border-bottom: none;
+}
+
+.promo-feature-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: #e8f5ee;
+  border: 1px solid #c8e6d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f5135;
+}
+
+.promo-feature-text h3 {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f2d1e;
+  margin: 0 0 1px 0;
+  line-height: 1.3;
+}
+
+.promo-feature-text p {
+  font-size: 11px;
+  color: #5a7a68;
+  margin: 0;
+  line-height: 1.35;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .promo-banner-wrap {
+    flex-direction: column;
+    height: auto;
+    border-radius: 16px;
+    margin: 0 0 18px 0;
+  }
+
+  .promo-banner-left {
+    flex: none;
+    height: 160px;
+    border-right: none;
+    border-bottom: 1px solid #d4eadd;
+  }
+
+  .promo-banner-right {
+    flex: none;
+    padding: 20px;
+    height: auto;
+  }
+}

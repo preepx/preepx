@@ -1,4 +1,4 @@
-export { default as BannerSlider } from "./components/BannerSlider";
+export { default as PromoBannerSection } from "./components/PromoBannerSection";
 export { default as StatsRow } from "./components/StatsRow";
 export { default as ApplyJobsBanner } from "./components/ApplyJobsBanner";
 export { default as PracticeGrid } from "./components/PracticeGrid";
