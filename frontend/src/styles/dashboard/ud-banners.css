@@ -241,7 +241,7 @@
   display: block;
   pointer-events: none;
   user-select: none;
-  transform: scale(1.08) translateX(-1.5%);
+  transform: scale(1.10) translateX(-0.8%);
   transform-origin: center center;
 }
 
