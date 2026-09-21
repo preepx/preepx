@@ -3,27 +3,27 @@ import { CalendarCheck2, TrendingUp, Gift, Trophy, Lightbulb } from "lucide-reac
 
 const FEATURES = [
   {
-    icon: <CalendarCheck2 size={16} />,
+    icon: <CalendarCheck2 size={22} />,
     title: "Practice Daily",
     desc: "Build consistency to hit targets",
   },
   {
-    icon: <img src="/dsbanner/trackprogress.svg" alt="Track Progress" width={16} height={16} />,
+    icon: <img src="/dsbanner/trackprogress.svg" alt="Track Progress" width={22} height={22} />,
     title: "Track Progress",
     desc: "See how far you have advanced",
   },
   {
-    icon: <Gift size={16} />,
+    icon: <Gift size={22} />,
     title: "Earn Rewards",
     desc: "Unlock badges, rewards & more",
   },
   {
-    icon: <img src="/dsbanner/archivegoals.svg" alt="Achieve Goals" width={16} height={16} />,
+    icon: <img src="/dsbanner/archivegoals.svg" alt="Achieve Goals" width={22} height={22} />,
     title: "Achieve Goals",
     desc: "Complete missions & climb ranks",
   },
   {
-    icon: <Lightbulb size={16} />,
+    icon: <Lightbulb size={22} />,
     title: "Learn & Grow",
     desc: "Master new skills everyday",
   },
