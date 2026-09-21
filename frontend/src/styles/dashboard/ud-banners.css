@@ -310,7 +310,7 @@
   .promo-banner-left {
     flex: none;
     height: auto;
-    border-bottom: 1px solid #d4eadd;
+    border-bottom: none;
   }
 
   .promo-banner-svg {
@@ -323,5 +323,12 @@
     flex: none;
     padding: 20px;
     height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .promo-feature-item {
+    align-items: flex-start;
   }
 }
