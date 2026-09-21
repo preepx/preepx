@@ -8,7 +8,7 @@ const FEATURES = [
     desc: "Build consistency to hit targets",
   },
   {
-    icon: <TrendingUp size={16} />,
+    icon: <img src="/dsbanner/trackprogress.svg" alt="Track Progress" width={16} height={16} />,
     title: "Track Progress",
     desc: "See how far you have advanced",
   },
@@ -18,7 +18,7 @@ const FEATURES = [
     desc: "Unlock badges, rewards & more",
   },
   {
-    icon: <Trophy size={16} />,
+    icon: <img src="/dsbanner/archivegoals.svg" alt="Achieve Goals" width={16} height={16} />,
     title: "Achieve Goals",
     desc: "Complete missions & climb ranks",
   },
