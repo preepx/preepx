@@ -316,7 +316,7 @@
   .promo-banner-svg {
     height: auto;
     object-fit: contain;
-    transform: none;
+    transform: scale(1.10) translateY(-6%);
   }
 
   .promo-banner-right {
