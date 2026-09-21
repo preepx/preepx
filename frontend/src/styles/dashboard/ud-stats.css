@@ -59,7 +59,7 @@
 
 .ud-stat-lbl-inline {
   font-size: 13px; /* Keep it balanced with the number */
-  font-weight: 500;
+  font-weight: 700; /* Made bold as requested */
   color: #111;
   margin-left: 2px;
   white-space: nowrap;
