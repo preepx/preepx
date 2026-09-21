@@ -1,5 +1,5 @@
 import React from "react";
-import { CalendarCheck2, TrendingUp, Gift } from "lucide-react";
+import { CalendarCheck2, TrendingUp, Gift, Trophy, Lightbulb } from "lucide-react";
 
 const FEATURES = [
   {
@@ -16,6 +16,16 @@ const FEATURES = [
     icon: <Gift size={16} />,
     title: "Earn Rewards",
     desc: "Unlock badges, rewards & more",
+  },
+  {
+    icon: <Trophy size={16} />,
+    title: "Achieve Goals",
+    desc: "Complete missions & climb ranks",
+  },
+  {
+    icon: <Lightbulb size={16} />,
+    title: "Learn & Grow",
+    desc: "Master new skills everyday",
   },
 ];
 
