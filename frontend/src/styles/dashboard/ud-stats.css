@@ -3,8 +3,13 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-top: -28px; /* Pulled up further */
+  margin-top: 0px; /* Base state (sidebar closed) */
   margin-bottom: 32px;
+}
+
+/* Jab sidebar on (open) rahe */
+.app-layout:not(.collapsed) .ud-stats-row {
+  margin-top: -15px; /* Thoda upar */
 }
 
 /* Minimalist Stat Card */

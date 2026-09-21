@@ -259,6 +259,7 @@ function AppLayout({ children }) {
                 className="tb-icon-btn theme-toggle-btn"
                 onClick={toggleTheme}
                 title={isDark ? "Light Mode" : "Dark Mode"}
+                style={{ display: 'none' }}
               >
                 {isDark ? <Sun size={18} /> : <Moon size={18} />}
               </button>
