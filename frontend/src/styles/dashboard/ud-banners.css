@@ -221,7 +221,7 @@
   border-radius: 20px;
   overflow: hidden;
   background: transparent;
-  height: 260px;
+  height: 215px;
 }
 
 /* LEFT side — Banner image */
@@ -252,7 +252,7 @@
   gap: 12px;
   padding: 10px 20px 10px 20px;
   background: transparent;
-  height: 260px;
+  height: 215px;
   overflow: hidden;
 }
 
@@ -308,7 +308,6 @@
   .promo-banner-left {
     flex: none;
     height: 160px;
-    border-right: none;
     border-bottom: 1px solid #d4eadd;
   }
 
