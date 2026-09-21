@@ -309,8 +309,14 @@
 
   .promo-banner-left {
     flex: none;
-    height: 160px;
+    height: auto;
     border-bottom: 1px solid #d4eadd;
+  }
+
+  .promo-banner-svg {
+    height: auto;
+    object-fit: contain;
+    transform: none;
   }
 
   .promo-banner-right {
