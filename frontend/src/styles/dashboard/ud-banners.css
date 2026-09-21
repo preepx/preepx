@@ -237,16 +237,17 @@
 .promo-banner-svg {
   width: 100%;
   object-fit: cover;
-  object-position: left 15%;
+  object-position: left center;
   display: block;
   pointer-events: none;
   user-select: none;
-  transform: none;
+  transform: scale(1.08) translateY(-3%);
 }
 
 /* Adjust banner position when sidebar is closed (wide screen) to prevent bottom cutoff */
 .app-layout.collapsed .promo-banner-svg {
   object-position: left 55%;
+  transform: none;
 }
 
 /* RIGHT side — Feature list */
@@ -335,4 +336,4 @@
   .promo-feature-item {
     align-items: flex-start;
   }
-}
+}
