@@ -241,8 +241,9 @@
   display: block;
   pointer-events: none;
   user-select: none;
-  transform: scale(1.10) translate(-0.8%, -8%);
-  transform-origin: center center;
+  transform: scale(1.03);
+  object-position: left 25%;
+  transform-origin: left center;
 }
 
 /* RIGHT side — Feature list */
