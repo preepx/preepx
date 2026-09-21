@@ -236,14 +236,17 @@
 
 .promo-banner-svg {
   width: 100%;
-  height: 100%;
   object-fit: cover;
+  object-position: left 15%;
   display: block;
   pointer-events: none;
   user-select: none;
-  transform: scale(1.03);
-  object-position: left 25%;
-  transform-origin: left center;
+  transform: none;
+}
+
+/* Adjust banner position when sidebar is closed (wide screen) to prevent bottom cutoff */
+.app-layout.collapsed .promo-banner-svg {
+  object-position: left 55%;
 }
 
 /* RIGHT side — Feature list */
