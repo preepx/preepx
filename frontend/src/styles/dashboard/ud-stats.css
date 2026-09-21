@@ -6,70 +6,87 @@
   margin-bottom: 32px;
 }
 
-.ud-stat-card {
+/* Minimalist Stat Card */
+.ud-stat-card-new {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
-  transition: all 0.25s ease;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid #111; /* Dark border as per screenshot */
+  border-radius: 8px; /* Slightly sharp rounded corners */
+  padding: 12px 14px; /* Reduced padding */
+  transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
 }
 
-.ud-stat-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--accent);
-  opacity: 0;
-  transition: opacity 0.25s;
+.ud-stat-card-new:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.ud-stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
-  border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
-}
-
-.ud-stat-card:hover::before {
-  opacity: 1;
-}
-
-.ud-stat-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+.ud-stat-top {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
-  color: var(--accent);
+  gap: 6px;
+  margin-bottom: 8px; /* Reduced margin */
+  min-width: 0;
+}
+
+.ud-stat-icon-new {
+  color: #111;
   flex-shrink: 0;
 }
 
-.ud-coin-emoji {
-  font-size: 20px;
+.ud-stat-val-new {
+  font-size: 18px; /* Slightly smaller */
+  font-weight: 700;
+  color: #111;
   line-height: 1;
+  flex-shrink: 0;
 }
 
-.ud-stat-val {
-  display: block;
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text);
-  line-height: 1.1;
+.ud-stat-arrow {
+  margin-left: auto;
+  color: #111;
+  flex-shrink: 0;
 }
 
-.ud-stat-lbl {
-  display: block;
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 2px;
+.ud-stat-lbl-inline {
+  font-size: 13px; /* Keep it balanced with the number */
+  font-weight: 500;
+  color: #111;
+  margin-left: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+.ud-stat-trend {
+  font-size: 10px; /* Slightly smaller */
+  font-weight: 500;
+  color: #4b5563; /* Gray text for subtitle */
+}
+
+/* Responsive styles to fit inline text on mobile */
+@media (max-width: 480px) {
+  .ud-stat-card-new {
+    padding: 10px 8px; /* Reduce padding */
+  }
+  .ud-stat-top {
+    gap: 4px; /* Reduce gap */
+  }
+  .ud-stat-val-new {
+    font-size: 15px; /* Smaller number */
+  }
+  .ud-stat-lbl-inline {
+    font-size: 11px; /* Smaller text so it fits inline */
+    margin-left: 0;
+  }
+  .ud-stat-icon-new {
+    width: 14px;
+    height: 14px;
+  }
+  .ud-stat-arrow {
+    display: none; /* Hide arrow on small screens to save space */
+  }
+}

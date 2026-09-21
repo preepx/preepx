@@ -162,7 +162,7 @@ function Navbar({ landingRole, setLandingRole }) {
 
           {/* Right Actions */}
           <div className="hidden md:flex items-center gap-4 flex-shrink-0 md:-translate-x-8">
-            <button onClick={toggleTheme} className="text-slate-600 hover:text-slate-900 hover:bg-slate-100 p-2 rounded-full transition-colors">
+            <button onClick={toggleTheme} className="hidden text-slate-600 hover:text-slate-900 hover:bg-slate-100 p-2 rounded-full transition-colors">
               {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
             </button>
 
@@ -250,7 +250,7 @@ function Navbar({ landingRole, setLandingRole }) {
 
           {/* Mobile Right Actions */}
           <div className="md:hidden flex items-center gap-3" style={{ marginRight: '8px' }}>
-            <button onClick={toggleTheme} className="text-slate-600 hover:text-slate-900 p-1.5 rounded-full transition-colors">
+            <button onClick={toggleTheme} className="hidden text-slate-600 hover:text-slate-900 p-1.5 rounded-full transition-colors">
               {theme === "light" ? <Moon size={15} /> : <Sun size={15} />}
             </button>
             {user ? (
