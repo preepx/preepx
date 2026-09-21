@@ -220,7 +220,7 @@
   margin: 0 0 24px 0;
   border-radius: 20px;
   overflow: hidden;
-  background: #f3f9f5;
+  background: transparent;
   height: 260px;
 }
 
@@ -231,16 +231,19 @@
   align-items: stretch;
   justify-content: stretch;
   overflow: hidden;
-  background: #eaf6ef;
+  background: transparent;
 }
 
 .promo-banner-svg {
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: cover;
+  object-position: center top;
   display: block;
   pointer-events: none;
   user-select: none;
+  transform: scale(1.15) translateY(4%);
+  transform-origin: center center;
 }
 
 /* RIGHT side — Feature list */
@@ -251,7 +254,7 @@
   justify-content: flex-start;
   gap: 12px;
   padding: 10px 20px 10px 20px;
-  background: #fff;
+  background: transparent;
   height: 260px;
   overflow: hidden;
 }

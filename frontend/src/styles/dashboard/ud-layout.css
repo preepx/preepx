@@ -5,6 +5,8 @@
 .ud-page {
   padding: 28px 32px 48px;
   width: 100%;
+  background-color: #F2F3F2;
+  min-height: 100vh;
   animation: udFadeIn 0.5s ease-out;
 }
 
