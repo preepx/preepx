@@ -118,12 +118,12 @@ function HeroSection({ onRecruiterClick }) {
 
         </div>
 
-        {/* Right Column: Hidden on mobile */}
-        <div className="hidden lg:flex flex-1 w-full flex-col justify-end items-end gap-6 max-w-lg lg:translate-y-4 lg:-translate-x-8">
-          <div className="w-full h-[320px] bg-white rounded-2xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-100">
-            {/* Placeholder for future content/mockup */}
-          </div>
-        </div>
+        {/* Right Column: Landing Page Image */}
+        <img 
+          src="/landing/landingepageimage.svg" 
+          alt="PreepX Platform" 
+          className="hidden lg:block flex-1 w-full max-w-[500px] h-auto object-cover mix-blend-multiply lg:translate-y-2 lg:-translate-x-2"
+        />
       </div>
     </section>
   );
