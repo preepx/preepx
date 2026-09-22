@@ -3,13 +3,15 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  margin-top: 0px; /* Base state (sidebar closed) */
+  margin-top: 0px;
+  /* Base state (sidebar closed) */
   margin-bottom: 32px;
 }
 
 /* Jab sidebar on (open) rahe */
 .app-layout:not(.collapsed) .ud-stats-row {
-  margin-top: -15px; /* Thoda upar */
+  margin-top: -15px;
+  /* Thoda upar */
 }
 
 /* Minimalist Stat Card */
@@ -17,9 +19,11 @@
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  border: 1px solid #111; /* Dark border as per screenshot */
-  border-radius: 8px; /* Slightly sharp rounded corners */
-  padding: 12px 14px; /* Reduced padding */
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  /* Slightly sharp rounded corners */
+  padding: 12px 14px;
+  /* Reduced padding */
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
@@ -34,7 +38,8 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-bottom: 8px; /* Reduced margin */
+  margin-bottom: 8px;
+  /* Reduced margin */
   min-width: 0;
 }
 
@@ -44,7 +49,8 @@
 }
 
 .ud-stat-val-new {
-  font-size: 18px; /* Slightly smaller */
+  font-size: 18px;
+  /* Slightly smaller */
   font-weight: 700;
   color: #111;
   line-height: 1;
@@ -58,8 +64,10 @@
 }
 
 .ud-stat-lbl-inline {
-  font-size: 13px; /* Keep it balanced with the number */
-  font-weight: 700; /* Made bold as requested */
+  font-size: 14px;
+  /* Keep it balanced with the number */
+  font-weight: 700;
+  /* Made bold as requested */
   color: #111;
   margin-left: 2px;
   white-space: nowrap;
@@ -68,31 +76,43 @@
 }
 
 .ud-stat-trend {
-  font-size: 10px; /* Slightly smaller */
+  font-size: 10px;
+  /* Slightly smaller */
   font-weight: 500;
-  color: #4b5563; /* Gray text for subtitle */
+  color: #4b5563;
+  /* Gray text for subtitle */
 }
 
 /* Responsive styles to fit inline text on mobile */
 @media (max-width: 480px) {
   .ud-stat-card-new {
-    padding: 10px 8px; /* Reduce padding */
+    padding: 10px 8px;
+    /* Reduce padding */
   }
+
   .ud-stat-top {
-    gap: 4px; /* Reduce gap */
+    gap: 4px;
+    /* Reduce gap */
   }
+
   .ud-stat-val-new {
-    font-size: 15px; /* Smaller number */
+    font-size: 15px;
+    /* Smaller number */
   }
+
   .ud-stat-lbl-inline {
-    font-size: 11px; /* Smaller text so it fits inline */
+    font-size: 12px;
+    /* Slightly smaller for mobile */
     margin-left: 0;
   }
+
   .ud-stat-icon-new {
     width: 14px;
     height: 14px;
   }
+
   .ud-stat-arrow {
-    display: none; /* Hide arrow on small screens to save space */
+    display: none;
+    /* Hide arrow on small screens to save space */
   }
-}
+}
