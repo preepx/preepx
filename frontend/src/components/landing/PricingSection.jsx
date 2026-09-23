@@ -231,7 +231,7 @@ function PricingSection({ onRecruiterClick }) {
             </div>
 
             {/* Candidate Cards */}
-            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center px-6 md:px-0">
+            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center px-8 sm:px-12 md:px-0">
               {pricingData.candidate.plans.map((plan, index) => {
                 const feature = pricingData.candidate.footerFeatures[index];
                 return (
@@ -255,7 +255,6 @@ function PricingSection({ onRecruiterClick }) {
 
                     <button className="w-full py-2 px-2 md:py-3 md:px-4 rounded-[14px] bg-white border border-blue-200 hover:bg-blue-50 text-slate-800 font-bold text-[11px] md:text-[13px] mb-4 md:mb-6 transition-colors shadow-sm flex justify-center items-center gap-1 md:gap-2" onClick={() => handleCandidateAction(plan.id)}>
                       {plan.buttonText}
-                      <span className="opacity-60">→</span>
                     </button>
 
                     <ul className="space-y-3.5 mt-auto">
@@ -300,7 +299,7 @@ function PricingSection({ onRecruiterClick }) {
             </div>
 
             {/* Recruiter Cards */}
-            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center relative px-6 md:px-0">
+            <div className="grid grid-cols-2 md:flex md:flex-row gap-[10px] justify-center relative px-8 sm:px-12 md:px-0">
               {pricingData.recruiter.plans.map((plan, index) => {
                 const allFeatures = [...pricingData.candidate.footerFeatures, ...pricingData.recruiter.footerFeatures];
                 const feature = allFeatures[index + 2]; // Map to 3rd, 4th, 5th feature
