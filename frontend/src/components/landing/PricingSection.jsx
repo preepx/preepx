@@ -220,7 +220,7 @@ function PricingSection({ onRecruiterClick }) {
           {/* Candidate Section */}
           <div className="flex flex-col flex-1 gap-[20px]">
             {/* Candidate Title */}
-            <div className="flex justify-center px-4">
+            <div className="flex justify-center px-8 sm:px-12 md:px-0">
               <div className="flex items-center gap-3">
                 <img src="/landing/condinateplan.svg" alt="Candidate Plan Icon" className="w-6 h-6 shrink-0" />
                 <div>
@@ -288,7 +288,7 @@ function PricingSection({ onRecruiterClick }) {
           {/* Recruiter Section */}
           <div className="flex flex-col flex-[1.5] gap-[20px]">
             {/* Recruiter Title */}
-            <div className="flex justify-center px-4">
+            <div className="flex justify-center px-8 sm:px-12 md:px-0">
               <div className="flex items-center gap-3">
                 <img src="/landing/recuirterplan.svg" alt="Recruiter Plan Icon" className="w-6 h-6 shrink-0" />
                 <div>
