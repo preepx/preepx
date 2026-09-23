@@ -220,7 +220,7 @@ function PricingSection({ onRecruiterClick }) {
           {/* Candidate Section */}
           <div className="flex flex-col flex-1 gap-[20px]">
             {/* Candidate Title */}
-            <div className="flex justify-center px-8 sm:px-12 md:px-0">
+            <div className="flex justify-start px-8 sm:px-12 md:px-0">
               <div className="flex items-center gap-3">
                 <img src="/landing/condinateplan.svg" alt="Candidate Plan Icon" className="w-6 h-6 shrink-0" />
                 <div>
@@ -267,7 +267,7 @@ function PricingSection({ onRecruiterClick }) {
                   </div>
                   
                   {/* Attached Footer Feature */}
-                  <div className="mt-8 hidden md:flex flex-col items-center text-center gap-1 w-full">
+                  <div className="hidden md:flex flex-col items-center text-center gap-1 w-full" style={{ marginTop: '35px' }}>
                     {typeof feature.icon === 'string' ? (
                       <img src={feature.icon} alt={feature.title} className="w-8 h-8 shrink-0 mb-1" />
                     ) : (
@@ -288,7 +288,7 @@ function PricingSection({ onRecruiterClick }) {
           {/* Recruiter Section */}
           <div className="flex flex-col flex-[1.5] gap-[20px]">
             {/* Recruiter Title */}
-            <div className="flex justify-center px-8 sm:px-12 md:px-0">
+            <div className="flex justify-start px-8 sm:px-12 md:px-0">
               <div className="flex items-center gap-3">
                 <img src="/landing/recuirterplan.svg" alt="Recruiter Plan Icon" className="w-6 h-6 shrink-0" />
                 <div>
@@ -336,7 +336,7 @@ function PricingSection({ onRecruiterClick }) {
                   </div>
 
                   {/* Attached Footer Feature */}
-                  <div className="mt-8 hidden md:flex flex-col items-center text-center gap-1 w-full">
+                  <div className="hidden md:flex flex-col items-center text-center gap-1 w-full" style={{ marginTop: '35px' }}>
                     {typeof feature.icon === 'string' ? (
                       <img src={feature.icon} alt={feature.title} className="w-8 h-8 shrink-0 mb-1" />
                     ) : (
@@ -356,29 +356,7 @@ function PricingSection({ onRecruiterClick }) {
           </div>
         </div>
 
-        {/* Footer Features Row (Mobile Only) */}
-        <div
-          className="bg-transparent p-4 md:hidden"
-          style={{ marginTop: '15px' }}
-        >
-          <div className="grid grid-cols-2 gap-4 divide-slate-200/60">
-            {[...pricingData.candidate.footerFeatures, ...pricingData.recruiter.footerFeatures].slice(0, 5).map((item, i) => (
-              <div key={i} className={`flex items-start gap-2 ${i !== 0 && i !== 1 ? 'pt-2' : ''}`}>
-                {typeof item.icon === 'string' ? (
-                  <img src={item.icon} alt={item.title} className="w-7 h-7 shrink-0" />
-                ) : (
-                  <div className="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center shrink-0">
-                    <item.icon className="w-3.5 h-3.5 text-slate-700" />
-                  </div>
-                )}
-                <div>
-                  <h5 className="text-[11px] font-bold text-slate-900 mb-0.5 leading-tight">{item.title}</h5>
-                  <p className="text-[9.5px] text-slate-600 font-medium leading-snug">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Footer Features Row (Removed for Mobile) */}
 
       </div>
     </section>
