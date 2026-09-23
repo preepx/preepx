@@ -235,7 +235,7 @@ function PricingSection({ onRecruiterClick }) {
               {pricingData.candidate.plans.map((plan, index) => {
                 const feature = pricingData.candidate.footerFeatures[index];
                 return (
-                <div key={plan.id} className="flex flex-col items-center w-full" style={{ maxWidth: '225px' }}>
+                <div key={plan.id} className="flex flex-col items-center w-full max-w-[170px] sm:max-w-[200px] md:max-w-[225px]">
                   <div className="bg-white border border-[#BFDBFE] shadow-xl shadow-blue-500/5 relative flex flex-col hover:-translate-y-1 transition-transform w-full" style={{ background: "#B6D2FF", height: '250px', borderRadius: '10px', borderWidth: '1px', padding: '15px', gap: '10px', opacity: 1 }}>
                     {plan.badge && (
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white border border-blue-200 text-blue-700 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
@@ -304,7 +304,7 @@ function PricingSection({ onRecruiterClick }) {
                 const allFeatures = [...pricingData.candidate.footerFeatures, ...pricingData.recruiter.footerFeatures];
                 const feature = allFeatures[index + 2]; // Map to 3rd, 4th, 5th feature
                 return (
-                <div key={plan.id} className="flex flex-col items-center w-full" style={{ maxWidth: '225px' }}>
+                <div key={plan.id} className="flex flex-col items-center w-full max-w-[170px] sm:max-w-[200px] md:max-w-[225px]">
                   <div className="bg-white border border-[#A7F3D0] shadow-xl shadow-emerald-500/5 relative flex flex-col hover:-translate-y-1 transition-transform w-full" style={{ background: "#A3F1FF", height: '250px', borderRadius: '10px', borderWidth: '1px', padding: '15px', gap: '10px', opacity: 1 }}>
                     {plan.badge && (
                       <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white border border-emerald-200 text-emerald-800 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
