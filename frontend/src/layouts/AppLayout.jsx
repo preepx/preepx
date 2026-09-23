@@ -16,6 +16,7 @@ import { io } from "socket.io-client";
 import API from "@/utils/api";
 // Footer import removed
 import "@/styles/AppLayout.css";
+import PageTransitionLoader from "@/components/PageTransitionLoader";
 
 const SvgIcon = ({ src, size = 19, style = {} }) => {
   return <img src={src} alt="" style={{ width: size, height: size, objectFit: 'contain', ...style }} />;
@@ -410,7 +411,11 @@ function AppLayout({ children }) {
           {mobileOpen && <div className="sidebar-overlay" onClick={() => setMobileOpen(false)} />}
 
           <div className="app-content">
-            <div className="page-content">{children}</div>
+            <div className="page-content">
+              <PageTransitionLoader>
+                {children}
+              </PageTransitionLoader>
+            </div>
           </div>
         </div>
       </div>

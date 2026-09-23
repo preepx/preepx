@@ -12,6 +12,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { getStoredUser, clearAuth } from "@/utils/authUtils";
 import NotificationModal from "@/components/NotificationModal";
 import Footer from "@/components/Footer";
+import PageTransitionLoader from "@/components/PageTransitionLoader";
 import '../styles/JobsLayout.css';
 import "@/styles/AppLayout.css";
 
@@ -325,7 +326,9 @@ function JobsLayout({ children }) {
 
         {/* ── PAGE CONTENT ── */}
         <main className="jl-main">
-          {children}
+          <PageTransitionLoader>
+            {children}
+          </PageTransitionLoader>
         </main>
       </div>
     </div>

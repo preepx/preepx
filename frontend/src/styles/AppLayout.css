@@ -189,17 +189,15 @@
 }
 
 .sidebar-link.active {
-  background: color-mix(in srgb, var(--primary) 10%, transparent);
-  color: var(--primary);
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text);
   font-weight: 600;
-  border-left: 3px solid var(--primary);
-  padding-left: 9px;
+  padding-left: 12px;
 }
 
 [data-theme="light"] .sidebar-link.active {
-  background: #f0faf6;
-  color: #1f5c4a;
-  border-left-color: #1f5c4a;
+  background: #f1f5f9;
+  color: #0f172a;
 }
 
 .sidebar-link.danger {

@@ -13,6 +13,7 @@ import { getOnboarding } from "@/services/recruiterAPI";
 import { useTheme } from "@/hooks/useTheme";
 import { getStoredUser, clearAuth } from "@/utils/authUtils";
 import Footer from "@/components/Footer";
+import PageTransitionLoader from "@/components/PageTransitionLoader";
 import '@/styles/RecruiterLayout.css';
 
 const SOCKET_URL = import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, "") || "http://localhost:4000";
@@ -325,7 +326,11 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
                 </div>
               )}
             </div>
-            <main className="rx-content">{children}</main>
+            <main className="rx-content">
+              <PageTransitionLoader>
+                {children}
+              </PageTransitionLoader>
+            </main>
           </div>
         </div>
       </div>
