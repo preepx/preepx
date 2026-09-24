@@ -1426,6 +1426,61 @@
     width: 100%;
   }
   
+  /* Table - Extremely Compact for Mobile without Scrolling */
+  .interview-table-container {
+    overflow-x: hidden;
+    padding: 8px 4px;
+  }
+  
+  .interviews-table th,
+  .interviews-table td {
+    padding: 6px 4px;
+    font-size: 11px;
+    white-space: normal;
+  }
+
+  .interviews-table th:first-child,
+  .interviews-table td:first-child {
+    display: none; /* Hide the index # column to save space */
+  }
+  
+  .role-title {
+    font-size: 11px;
+    max-width: 90px;
+    white-space: normal;
+    word-break: break-word;
+  }
+  
+  .circular-score {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .percentage {
+    font-size: 10px;
+  }
+  
+  .status-pill {
+    padding: 2px 6px;
+    font-size: 9px;
+  }
+  
+  .action-view-btn {
+    padding: 4px 6px;
+    font-size: 10px;
+    gap: 4px;
+  }
+  
+  .action-delete-btn {
+    padding: 4px;
+  }
+  
+  .action-view-btn svg,
+  .action-delete-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+  
   /* Dashboard Grid */
   .dashboard-grid, .app-layout.collapsed .dashboard-grid {
     grid-template-columns: 1fr !important;
