@@ -1,9 +1,9 @@
 import React from "react";
-import { CalendarCheck2, TrendingUp, Gift, Trophy, Lightbulb } from "lucide-react";
+
 
 const FEATURES = [
   {
-    icon: <CalendarCheck2 size={22} />,
+    icon: <img src="/dsbanner/Practice%20Daily.svg" alt="Practice Daily" width={22} height={22} />,
     title: "Practice Daily",
     desc: "Build consistency to hit targets",
   },
@@ -13,7 +13,7 @@ const FEATURES = [
     desc: "See how far you have advanced",
   },
   {
-    icon: <Gift size={22} />,
+    icon: <img src="/dsbanner/Earn%20Rewards.svg" alt="Earn Rewards" width={22} height={22} />,
     title: "Earn Rewards",
     desc: "Unlock badges, rewards & more",
   },
@@ -23,7 +23,7 @@ const FEATURES = [
     desc: "Complete missions & climb ranks",
   },
   {
-    icon: <Lightbulb size={22} />,
+    icon: <img src="/dsbanner/Learn%20&%20Grow.svg" alt="Learn & Grow" width={22} height={22} />,
     title: "Learn & Grow",
     desc: "Master new skills everyday",
   },
