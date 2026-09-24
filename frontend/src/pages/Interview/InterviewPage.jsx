@@ -149,23 +149,29 @@ const InterviewPage = () => {
         />
       )}
 
-      <div className="dashboard-header">
-        <div>
-          <h1>Welcome back, {user.fullName?.split(" ")[0] || "there"}</h1>
-          <p>
-            Level {stats.level || 1} · {stats.points || 0} points
-            {stats.streak > 0 ? ` · 🔥 ${stats.streak} day streak` : " · Start your streak!"}
+      <div className="dashboard-header banner-header">
+        <div className="banner-content">
+          <h1 className="banner-welcome">Welcome Back!</h1>
+          <p className="banner-stats">
+            Level {stats.level || 1} . {stats.points || 0} Points . {stats.streak || 0} Days Streak
           </p>
+          <h2 className="banner-subtitle">
+            Ready to Nail Your Next<br />
+            <span className="banner-highlight">Interview with AI?</span>
+          </h2>
+          <div className="header-actions">
+            <button className="action-btn primary banner-btn-primary" onClick={() => setShowModal(true)}>
+              <Plus size={18} /> Start Your Interviews
+            </button>
+            <label className="action-btn secondary banner-btn-secondary">
+              <Upload size={18} />
+              {uploading ? "Uploading..." : "Upload Resume"}
+              <input type="file" accept=".pdf" hidden onChange={handleResumeUpload} disabled={uploading} />
+            </label>
+          </div>
         </div>
-        <div className="header-actions">
-          <button className="action-btn primary" onClick={() => setShowModal(true)}>
-            <Plus size={18} /> New Interview
-          </button>
-          <label className="action-btn secondary">
-            <Upload size={18} />
-            {uploading ? "Uploading..." : "Upload Resume"}
-            <input type="file" accept=".pdf" hidden onChange={handleResumeUpload} disabled={uploading} />
-          </label>
+        <div className="banner-image-wrapper">
+          <img src="/dsbanner/mockinterview.png" alt="Mock Interview" className="banner-img" />
         </div>
       </div>
 
