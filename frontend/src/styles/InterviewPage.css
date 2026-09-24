@@ -233,12 +233,14 @@
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 1fr 280px; /* Reduced width when sidebar is ON */
+  grid-template-columns: 1fr 280px;
+  /* Reduced width when sidebar is ON */
   gap: 20px;
 }
 
 .app-layout.collapsed .dashboard-grid {
-  grid-template-columns: 1fr 320px; /* Original width when sidebar is OFF */
+  grid-template-columns: 1fr 320px;
+  /* Original width when sidebar is OFF */
 }
 
 .panel {
@@ -1308,6 +1310,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -1315,7 +1318,9 @@
 
 /* Mobile Responsiveness */
 @media (max-width: 1024px) {
-  .dashboard-grid, .app-layout.collapsed .dashboard-grid {
+
+  .dashboard-grid,
+  .app-layout.collapsed .dashboard-grid {
     grid-template-columns: 1fr 250px !important;
   }
 }
@@ -1324,7 +1329,7 @@
   .mobile-only-cards {
     display: none !important;
   }
-  
+
   .interview-item {
     display: flex;
     flex-direction: column;
@@ -1336,15 +1341,15 @@
     gap: 12px;
     border-bottom: 1px solid var(--border);
   }
-  
+
   .interview-item:last-child {
     border-bottom: none;
   }
-  
+
   .interview-item:hover {
     background: var(--bg);
   }
-  
+
   .interview-info {
     width: 100%;
   }
@@ -1353,7 +1358,7 @@
     font-size: 15px;
     font-weight: 600;
   }
-  
+
   .interview-info p {
     font-size: 13px;
     color: var(--text-muted);
@@ -1361,12 +1366,12 @@
     margin-bottom: 4px;
     line-height: 1.4;
   }
-  
+
   .interview-date {
     font-size: 12px;
     color: var(--text-muted);
   }
-  
+
   .interview-meta {
     display: flex;
     align-items: center;
@@ -1374,7 +1379,7 @@
     gap: 8px;
     flex-shrink: 0;
   }
-  
+
   .interview-meta .delete-btn {
     margin-left: auto;
     background: none;
@@ -1391,17 +1396,17 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
-  
+
   .status-badge.completed {
     background: #dcfce7;
     color: #15803d;
   }
-  
+
   .status-badge.pending {
     background: #fef3c7;
     color: #d97706;
   }
-  
+
   .score-badge {
     font-size: 13px;
     font-weight: 700;
@@ -1413,25 +1418,25 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .panel-tools {
     width: 100%;
   }
-  
+
   .search-box {
     flex: 1;
   }
-  
+
   .search-box input {
     width: 100%;
   }
-  
+
   /* Table - Extremely Compact for Mobile without Scrolling */
   .interview-table-container {
     overflow-x: hidden;
     padding: 8px 4px;
   }
-  
+
   .interviews-table th,
   .interviews-table td {
     padding: 6px 4px;
@@ -1441,51 +1446,53 @@
 
   .interviews-table th:first-child,
   .interviews-table td:first-child {
-    display: none; /* Hide the index # column to save space */
+    display: none;
+    /* Hide the index # column to save space */
   }
-  
+
   .role-title {
     font-size: 11px;
     max-width: 90px;
     white-space: normal;
     word-break: break-word;
   }
-  
+
   .circular-score {
     width: 20px;
     height: 20px;
   }
-  
+
   .percentage {
     font-size: 10px;
   }
-  
+
   .status-pill {
     padding: 2px 6px;
     font-size: 9px;
   }
-  
+
   .action-view-btn {
     padding: 4px 6px;
     font-size: 10px;
     gap: 4px;
   }
-  
+
   .action-delete-btn {
     padding: 4px;
   }
-  
+
   .action-view-btn svg,
   .action-delete-btn svg {
     width: 12px;
     height: 12px;
   }
-  
+
   /* Dashboard Grid */
-  .dashboard-grid, .app-layout.collapsed .dashboard-grid {
+  .dashboard-grid,
+  .app-layout.collapsed .dashboard-grid {
     grid-template-columns: 1fr !important;
   }
-  
+
   /* Banner Header */
   .banner-header {
     flex-direction: column-reverse;
@@ -1494,30 +1501,30 @@
     text-align: center;
     gap: 0;
   }
-  
+
   .banner-content {
     padding: 0;
   }
-  
+
   .banner-actions {
     justify-content: center;
   }
-  
+
   .banner-img {
     max-height: 160px;
     -webkit-mask-image: none;
     mask-image: none;
   }
-  
+
   .banner-image-wrapper {
     max-width: 100%;
     margin-bottom: 20px;
   }
-  
+
   .app-layout.collapsed .banner-image-wrapper {
     max-width: 100%;
   }
-  
+
   /* Stats Row */
   .stats-row {
     grid-template-columns: 1fr 1fr;
@@ -1529,31 +1536,32 @@
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
+
   .stat-card {
     padding: 12px;
     gap: 8px;
   }
-  
+
   .banner-actions {
     flex-direction: column;
     width: 100%;
     gap: 12px;
   }
-  
+
   .banner-actions button {
     width: 100%;
     justify-content: center;
   }
-  
+
   .dashboard-header .banner-welcome {
     font-size: 18px;
   }
-  
+
   .banner-subtitle {
     font-size: 22px;
     line-height: 28px;
   }
-  
+
   .interview-item {
     padding: 12px;
   }
