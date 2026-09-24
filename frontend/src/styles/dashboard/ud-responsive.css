@@ -96,4 +96,48 @@
     font-size: 22px;
     line-height: 28px;
   }
+  
+  .ud-panel-head {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  
+  .ud-panel-head h3 {
+    font-size: 14px;
+  }
+  
+  .ud-panel-head a {
+    font-size: 11px;
+  }
+  
+  .ud-weekly-chart {
+    gap: 4px;
+  }
+  
+  .ud-bar-day {
+    font-size: 9px;
+  }
+  
+  .ud-bar-score {
+    font-size: 8px;
+  }
+  
+  .ud-recent-item {
+    gap: 8px;
+    padding: 10px;
+  }
+  
+  .ud-recent-type {
+    font-size: 9px;
+    padding: 3px 6px;
+  }
+  
+  .ud-recent-info strong {
+    font-size: 13px;
+  }
+  
+  .ud-recent-score {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
 }
