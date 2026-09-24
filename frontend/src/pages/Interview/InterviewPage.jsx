@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Plus, Upload, Clock, Trophy, Lightbulb, ChevronRight,
-  Search, Trash2, Target, Flame, Award,
+  Search, Trash2, Target, Flame, Award, LayoutDashboard,
 } from "lucide-react";
 import { getDashboard, syncUserToStorage } from "@/services/userAPI";
 import { deleteInterview, getInterviewById } from "@/services/interviewAPI";
@@ -177,11 +177,15 @@ const InterviewPage = () => {
 
       <div className="stats-row">
         <div className="stat-card">
-          <div className="stat-icon blue"><Clock size={20} /></div>
+          <div>
+            <img src="/dsbanner/total Sessions.svg" alt="Total Sessions" style={{ width: 28, height: 28 }} />
+          </div>
           <div><span className="stat-num">{stats.totalSessions}</span><span className="stat-lbl">Total Sessions</span></div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon green"><Trophy size={20} /></div>
+          <div>
+            <img src="/dsbanner/Completed.svg" alt="Completed" style={{ width: 28, height: 28 }} />
+          </div>
           <div><span className="stat-num">{stats.completed}</span><span className="stat-lbl">Completed</span></div>
         </div>
         <div className="stat-card">
@@ -189,7 +193,9 @@ const InterviewPage = () => {
           <div><span className="stat-num">{stats.avgScore}%</span><span className="stat-lbl">Avg Score</span></div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon orange"><Award size={20} /></div>
+          <div>
+            <img src="/dsbanner/Badges.svg" alt="Badges" style={{ width: 28, height: 28 }} />
+          </div>
           <div><span className="stat-num">{stats.badges}</span><span className="stat-lbl">Badges</span></div>
         </div>
       </div>
@@ -212,66 +218,142 @@ const InterviewPage = () => {
           </div>
 
           {filtered.length > 0 ? (
-            <div className="interview-list">
-              {filtered
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                .map((intv) => (
-                  <div
-                    key={intv._id}
-                    className="interview-item"
-                    onClick={async () => {
-                      if (intv.status === "completed") {
-                        try {
-                          // Fetch full interview including answers array
-                          const fullIntv = await getInterviewById(intv._id);
-                          navigate("/feedback", {
-                            state: {
-                              interview: fullIntv,
-                              jobTitle: fullIntv.jobTitle,
-                              jobTopic: fullIntv.jobTopic
-                            }
+            <div className="interview-table-container">
+              <table className="interviews-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Role</th>
+                    <th>Date</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered
+                    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                    .map((intv, index) => {
+                      const scorePerc = intv.maxScore > 0 ? Math.round((intv.totalScore / intv.maxScore) * 100) : 0;
+                      return (
+                        <tr key={intv._id}>
+                          <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                          <td>
+                            <span className="role-title">{intv.jobTitle}</span>
+                          </td>
+                          <td>{formatDate(intv.createdAt)}</td>
+                          <td>
+                            {intv.status === "completed" && intv.maxScore > 0 ? (
+                              <div className="circular-score">
+                                <svg viewBox="0 0 36 36" className="circular-chart green">
+                                  <path className="circle-bg"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                  />
+                                  <path className="circle"
+                                    strokeDasharray={`${scorePerc}, 100`}
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                  />
+                                  <text x="18" y="20.35" className="percentage">{scorePerc}%</text>
+                                </svg>
+                              </div>
+                            ) : (
+                              <span className="no-score">-</span>
+                            )}
+                          </td>
+                          <td>
+                            <span className={`status-pill ${intv.status}`}>
+                              {intv.status === "completed" ? "Completed" : "Pending"}
+                            </span>
+                          </td>
+                          <td>
+                            <button
+                              className="action-view-btn"
+                              onClick={async () => {
+                                if (intv.status === "completed") {
+                                  try {
+                                    const fullIntv = await getInterviewById(intv._id);
+                                    navigate("/feedback", {
+                                      state: { interview: fullIntv, jobTitle: fullIntv.jobTitle, jobTopic: fullIntv.jobTopic }
+                                    });
+                                  } catch (err) {
+                                    console.error("Failed to fetch:", err);
+                                    navigate("/feedback", { state: { interview: intv } });
+                                  }
+                                } else {
+                                  navigate("/interview-setup", {
+                                    state: { jobTitle: intv.jobTitle, jobTopic: intv.jobTopic, questions: intv.questions, interviewId: intv._id },
+                                  });
+                                }
+                              }}
+                            >
+                              <LayoutDashboard size={14} /> View
+                            </button>
+                            <button className="action-delete-btn" onClick={(e) => handleDelete(e, intv._id)}>
+                              <Trash2 size={14} />
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+
+              <div className="interview-list-mobile mobile-only-cards">
+                {filtered
+                  .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                  .map((intv) => (
+                    <div
+                      key={intv._id}
+                      className="interview-item"
+                      onClick={async () => {
+                        if (intv.status === "completed") {
+                          try {
+                            const fullIntv = await getInterviewById(intv._id);
+                            navigate("/feedback", {
+                              state: { interview: fullIntv, jobTitle: fullIntv.jobTitle, jobTopic: fullIntv.jobTopic }
+                            });
+                          } catch (err) {
+                            console.error("Failed to fetch:", err);
+                            navigate("/feedback", { state: { interview: intv } });
+                          }
+                        } else {
+                          navigate("/interview-setup", {
+                            state: { jobTitle: intv.jobTitle, jobTopic: intv.jobTopic, questions: intv.questions, interviewId: intv._id },
                           });
-                        } catch (err) {
-                          console.error("Failed to fetch full interview details:", err);
-                          navigate("/feedback", { state: { interview: intv } });
                         }
-                      } else {
-                        navigate("/interview-setup", {
-                          state: {
-                            jobTitle: intv.jobTitle,
-                            jobTopic: intv.jobTopic,
-                            questions: intv.questions,
-                            interviewId: intv._id,
-                          },
-                        });
-                      }
-                    }}
-                  >
-                    <div className="interview-info">
-                      <h3>{intv.jobTitle}</h3>
-                      <p>
-                        {intv.jobTopic} · {intv.questions?.length || 0} Qs
-                        {intv.difficulty && ` · ${intv.difficulty}`}
-                        {intv.fromResume && " · Resume"}
-                      </p>
-                      <span className="interview-date">{formatDate(intv.createdAt)}</span>
-                    </div>
-                    <div className="interview-meta">
-                      <span className={`status-badge ${intv.status}`}>
-                        {intv.status === "completed" ? "Done" : "Pending"}
-                      </span>
-                      {intv.status === "completed" && intv.maxScore > 0 && (
-                        <span className="score-badge">
-                          {Math.round((intv.totalScore / intv.maxScore) * 100)}%
+                      }}
+                    >
+                      <div className="interview-info">
+                        <h3>{intv.jobTitle}</h3>
+                        <p>
+                          {intv.jobTopic} · {intv.questions?.length || 0} Qs
+                          {intv.difficulty && ` · ${intv.difficulty}`}
+                          {intv.fromResume && " · Resume"}
+                        </p>
+                        <span className="interview-date">{formatDate(intv.createdAt)}</span>
+                      </div>
+                      <div className="interview-meta">
+                        <span className={`status-badge ${intv.status}`}>
+                          {intv.status === "completed" ? "DONE" : "PENDING"}
                         </span>
-                      )}
-                      <button className="delete-btn" onClick={(e) => handleDelete(e, intv._id)}>
-                        <Trash2 size={16} />
-                      </button>
-                      <ChevronRight size={18} className="chevron" />
+                        {intv.status === "completed" && intv.maxScore > 0 && (
+                          <span className="score-badge">
+                            {Math.round((intv.totalScore / intv.maxScore) * 100)}%
+                          </span>
+                        )}
+                        <button
+                          className="delete-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDelete(e, intv._id);
+                          }}
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+              </div>
               <Pagination
                 currentPage={currentPage}
                 totalItems={filtered.length}
