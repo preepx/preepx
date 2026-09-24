@@ -74,10 +74,26 @@
 @media (max-width: 480px) {
   .ud-stats-row {
     grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .ud-stat-card {
+    padding: 12px;
+    gap: 8px;
   }
 
   .ud-hero-left {
     flex-direction: column;
     align-items: flex-start;
+  }
+  
+  .ud-banner-btn {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+  
+  .ud-banner h1 {
+    font-size: 22px;
+    line-height: 28px;
   }
 }

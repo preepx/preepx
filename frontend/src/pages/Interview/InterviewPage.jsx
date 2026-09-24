@@ -297,63 +297,6 @@ const InterviewPage = () => {
                     })}
                 </tbody>
               </table>
-
-              <div className="interview-list-mobile mobile-only-cards">
-                {filtered
-                  .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                  .map((intv) => (
-                    <div
-                      key={intv._id}
-                      className="interview-item"
-                      onClick={async () => {
-                        if (intv.status === "completed") {
-                          try {
-                            const fullIntv = await getInterviewById(intv._id);
-                            navigate("/feedback", {
-                              state: { interview: fullIntv, jobTitle: fullIntv.jobTitle, jobTopic: fullIntv.jobTopic }
-                            });
-                          } catch (err) {
-                            console.error("Failed to fetch:", err);
-                            navigate("/feedback", { state: { interview: intv } });
-                          }
-                        } else {
-                          navigate("/interview-setup", {
-                            state: { jobTitle: intv.jobTitle, jobTopic: intv.jobTopic, questions: intv.questions, interviewId: intv._id },
-                          });
-                        }
-                      }}
-                    >
-                      <div className="interview-info">
-                        <h3>{intv.jobTitle}</h3>
-                        <p>
-                          {intv.jobTopic} · {intv.questions?.length || 0} Qs
-                          {intv.difficulty && ` · ${intv.difficulty}`}
-                          {intv.fromResume && " · Resume"}
-                        </p>
-                        <span className="interview-date">{formatDate(intv.createdAt)}</span>
-                      </div>
-                      <div className="interview-meta">
-                        <span className={`status-badge ${intv.status}`}>
-                          {intv.status === "completed" ? "DONE" : "PENDING"}
-                        </span>
-                        {intv.status === "completed" && intv.maxScore > 0 && (
-                          <span className="score-badge">
-                            {Math.round((intv.totalScore / intv.maxScore) * 100)}%
-                          </span>
-                        )}
-                        <button
-                          className="delete-btn"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDelete(e, intv._id);
-                          }}
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-              </div>
               <Pagination
                 currentPage={currentPage}
                 totalItems={filtered.length}

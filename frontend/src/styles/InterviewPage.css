@@ -1304,13 +1304,25 @@
   display: none;
 }
 
-@media (max-width: 768px) {
-  .interview-table-container {
-    display: none;
+@keyframes certSpin {
+  from {
+    transform: rotate(0deg);
   }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .dashboard-grid, .app-layout.collapsed .dashboard-grid {
+    grid-template-columns: 1fr 250px !important;
+  }
+}
+
+@media (max-width: 768px) {
   .mobile-only-cards {
-    display: block;
-    padding: 8px;
+    display: none !important;
   }
   
   .interview-item {
@@ -1364,7 +1376,7 @@
   }
   
   .interview-meta .delete-btn {
-    margin-left: auto; /* Pushes the trash icon to the far right */
+    margin-left: auto;
     background: none;
     border: none;
     color: var(--text-muted);
@@ -1395,26 +1407,25 @@
     font-weight: 700;
     color: var(--primary);
   }
-}
 
-@keyframes certSpin {
-  from {
-    transform: rotate(0deg);
+  /* Panel Header & Search on mobile */
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
   }
-
-  to {
-    transform: rotate(360deg);
+  
+  .panel-tools {
+    width: 100%;
   }
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 1024px) {
-  .dashboard-grid, .app-layout.collapsed .dashboard-grid {
-    grid-template-columns: 1fr 250px !important;
+  
+  .search-box {
+    flex: 1;
   }
-}
-
-@media (max-width: 768px) {
+  
+  .search-box input {
+    width: 100%;
+  }
+  
   /* Dashboard Grid */
   .dashboard-grid, .app-layout.collapsed .dashboard-grid {
     grid-template-columns: 1fr !important;
@@ -1428,21 +1439,26 @@
     text-align: center;
     gap: 0;
   }
+  
   .banner-content {
     padding: 0;
   }
+  
   .banner-actions {
     justify-content: center;
   }
+  
   .banner-img {
     max-height: 160px;
     -webkit-mask-image: none;
     mask-image: none;
   }
+  
   .banner-image-wrapper {
     max-width: 100%;
     margin-bottom: 20px;
   }
+  
   .app-layout.collapsed .banner-image-wrapper {
     max-width: 100%;
   }
@@ -1451,16 +1467,39 @@
   .stats-row {
     grid-template-columns: 1fr 1fr;
   }
-
-  /* Table */
-  .interview-table-container {
-    overflow-x: auto;
-    padding: 16px;
-  }
 }
 
 @media (max-width: 480px) {
   .stats-row {
     grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .stat-card {
+    padding: 12px;
+    gap: 8px;
+  }
+  
+  .banner-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+  
+  .banner-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .dashboard-header .banner-welcome {
+    font-size: 18px;
+  }
+  
+  .banner-subtitle {
+    font-size: 22px;
+    line-height: 28px;
+  }
+  
+  .interview-item {
+    padding: 12px;
   }
 }
