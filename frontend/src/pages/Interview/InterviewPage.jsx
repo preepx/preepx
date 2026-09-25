@@ -26,7 +26,7 @@ const InterviewPage = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5;
+  const itemsPerPage = 7;
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -321,19 +321,33 @@ const InterviewPage = () => {
 
           <div className="panel quick-start-panel">
             <h2>Quick Actions</h2>
-            <button className="action-btn primary full" onClick={() => setShowModal(true)}>
-              <Plus size={18} /> New Interview
+            <button className="action-btn primary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => setShowModal(true)}>
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><Plus size={18} /></span> New Interview
             </button>
             <button
               className="action-btn primary full"
-              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px' }}
+              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px', justifyContent: 'flex-start', paddingLeft: '24px' }}
               onClick={() => navigate("/objective-exam")}
             >
-              ⚡ Objective Exam
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>
+                <img src="/sidebar/objectiveexamicon.svg" alt="Objective Exam" style={{ width: 18, height: 18, filter: 'brightness(0) invert(1)' }} />
+              </span> Objective Exam
             </button>
-            <button className="action-btn secondary full" onClick={() => navigate("/analytics")}>View Analytics</button>
-            <button className="action-btn secondary full" onClick={() => navigate("/leaderboard")}>Leaderboard</button>
-            <button className="action-btn secondary full" onClick={() => navigate("/achievements")}>Achievements</button>
+            <button className="action-btn secondary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px', marginBottom: '8px' }} onClick={() => navigate("/analytics")}>
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>
+                <img src="/sidebar/anyltics.svg" alt="Analytics" style={{ width: 18, height: 18, objectFit: 'contain', opacity: 0.7 }} />
+              </span> View Analytics
+            </button>
+            <button className="action-btn secondary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px', marginBottom: '8px' }} onClick={() => navigate("/leaderboard")}>
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>
+                <img src="/sidebar/leaderboard.svg" alt="Leaderboard" style={{ width: 18, height: 18, objectFit: 'contain', opacity: 0.7 }} />
+              </span> Leaderboard
+            </button>
+            <button className="action-btn secondary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => navigate("/achievements")}>
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>
+                <img src="/sidebar/myrewards.svg" alt="Achievements" style={{ width: 18, height: 18, objectFit: 'contain', opacity: 0.7 }} />
+              </span> Achievements
+            </button>
           </div>
           <div className="panel tips-panel">
             <div className="panel-header"><Lightbulb size={18} /><h2>Pro Tips</h2></div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Plus, Clock, Trophy, Target, Search, Trash2,
-  ChevronRight, Zap, BookOpen, BarChart3, Award, Flame,
+  ChevronRight, Zap, BookOpen, BarChart3, Award, Flame, LayoutDashboard,
 } from "lucide-react";
 import { getMcqDashboard, deleteMcqResult } from "@/services/mcqAPI";
 import ObjCertificateCard from "@/components/ObjCertificateCard";
@@ -21,22 +21,13 @@ const ObjectiveExamPage = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth < 768 : false));
-  const itemsPerPage = isMobile ? 3 : 10;
+  const itemsPerPage = 13;
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
     setCurrentPage(1);
-  }, [search, filter, isMobile]);
+  }, [search, filter]);
 
   const loadDashboard = useCallback(async () => {
     try {
@@ -167,35 +158,69 @@ const ObjectiveExamPage = () => {
           </div>
 
           {filtered.length > 0 ? (
-            <div className="interview-list">
-              {filtered
-                .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
-                .map((exam) => {
-                  const accuracy = getAccuracy(exam);
-                  return (
-                    <div
-                      key={exam._id}
-                      className="interview-item"
-                      onClick={() => navigate(`/objective-exam/result/${exam._id}`)}
-                    >
-                      <div className="interview-info">
-                        <h3>{exam.topic}</h3>
-                        <p>
-                          {exam.score}/{exam.totalQuestions} correct · {exam.totalQuestions} MCQs
-                        </p>
-                        <span className="interview-date">{formatDate(exam.createdAt)}</span>
-                      </div>
-                      <div className="interview-meta">
-                        <span className="status-badge completed">Done</span>
-                        <span className="score-badge">{accuracy}%</span>
-                        <button className="delete-btn" onClick={(e) => handleDelete(e, exam._id)}>
-                          <Trash2 size={16} />
-                        </button>
-                        <ChevronRight size={18} className="chevron" />
-                      </div>
-                    </div>
-                  );
-                })}
+            <div className="interview-table-container">
+              <table className="interviews-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Topic</th>
+                    <th>Date</th>
+                    <th>Score</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered
+                    .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
+                    .map((exam, index) => {
+                      const accuracy = getAccuracy(exam);
+                      return (
+                        <tr key={exam._id}>
+                          <td>{(currentPage - 1) * itemsPerPage + index + 1}</td>
+                          <td>
+                            <span className="role-title">{exam.topic}</span>
+                          </td>
+                          <td>{formatDate(exam.createdAt)}</td>
+                          <td>
+                            {exam.totalQuestions > 0 ? (
+                              <div className="circular-score">
+                                <svg viewBox="0 0 36 36" className="circular-chart green">
+                                  <path className="circle-bg"
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                  />
+                                  <path className="circle"
+                                    strokeDasharray={`${accuracy}, 100`}
+                                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                  />
+                                  <text x="18" y="20.35" className="percentage">{accuracy}%</text>
+                                </svg>
+                              </div>
+                            ) : (
+                              <span className="no-score">-</span>
+                            )}
+                          </td>
+                          <td>
+                            <span className="status-pill completed">
+                              Completed
+                            </span>
+                          </td>
+                          <td>
+                            <button
+                              className="action-view-btn"
+                              onClick={() => navigate(`/objective-exam/result/${exam._id}`)}
+                            >
+                              <LayoutDashboard size={14} /> View
+                            </button>
+                            <button className="action-delete-btn" onClick={(e) => handleDelete(e, exam._id)}>
+                              <Trash2 size={14} />
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
               <Pagination
                 currentPage={currentPage}
                 totalItems={filtered.length}
