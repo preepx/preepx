@@ -71,23 +71,56 @@
 
 @media (max-width: 480px) {
   .ud-stats-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
   
   .ud-stat-card-new {
-    padding: 12px 16px;
+    padding: 10px 8px; /* Compact padding */
+    gap: 8px; /* Gap between icon and text */
+    flex-direction: row; /* Align horizontally like desktop */
+    align-items: center; /* Center vertically */
+    justify-content: flex-start;
+    border-radius: 8px;
+    min-height: 0; 
   }
 
   .ud-stat-icon-wrapper {
-    width: 40px;
-    height: 40px;
+    width: 32px; /* Slightly larger than 28 for row layout */
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
   }
   
+  .ud-stat-icon-wrapper img,
+  .ud-stat-icon-wrapper svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .ud-stat-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 0; /* Remove top margin */
+    min-width: 0; /* Allow text truncation */
+  }
+
   .ud-stat-val-new {
-    font-size: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.1; 
   }
   
   .ud-stat-lbl-new {
-    font-size: 12px;
+    font-size: 11px;
+    line-height: 1.2; 
+    margin-top: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
   }
 }
