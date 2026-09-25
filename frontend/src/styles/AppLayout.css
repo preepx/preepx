@@ -76,6 +76,7 @@
   align-items: center;
   justify-content: center;
   padding: 0;
+  margin-left: 12px;
   transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
   flex-shrink: 0;
@@ -406,31 +407,27 @@
   gap: 7px;
   height: 34px;
   padding: 0 14px;
-  border-radius: 20px;
-  background: rgba(47, 111, 91, 0.1);
-  border: 1.5px solid rgba(47, 111, 91, 0.35);
-  color: #2f6f5b;
-  font-size: 13px;
-  font-weight: 700;
+  border-radius: 8px;
+  background: rgba(59, 130, 246, 0.05);
+  border: 1.5px solid #3b82f6;
+  color: #3b82f6;
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
   white-space: nowrap;
-  animation: applyJobsBlink 2s infinite ease-in-out;
   position: relative;
   cursor: pointer;
 }
 
 .topbar-apply-jobs-btn:hover {
-  background: rgba(47, 111, 91, 0.25);
-  border-color: #2f6f5b;
+  background: rgba(59, 130, 246, 0.1);
   transform: translateY(-1px);
-  box-shadow: 0 0 18px rgba(47, 111, 91, 0.6);
-  animation-play-state: paused;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
 }
 
 .topbar-apply-jobs-btn:active {
   transform: translateY(1px) scale(0.96);
-  box-shadow: 0 0 10px rgba(47, 111, 91, 0.4);
 }
 
 @keyframes applyJobsBlink {
@@ -980,5 +977,22 @@
     height: 14px;
     font-size: 9px;
     transform: translate(15%, -5%);
+  }
+}
+
+@media (max-width: 400px) {
+  .topbar-apply-jobs-btn {
+    padding: 0 8px;
+    height: 28px;
+    gap: 2px;
+    margin-left: 8px !important;
+  }
+  .topbar-apply-jobs-btn span {
+    font-size: 12px;
+  }
+  .topbar-apply-jobs-btn img {
+    width: 16px !important;
+    height: 16px !important;
+    transform: translateY(1px) !important;
   }
 }

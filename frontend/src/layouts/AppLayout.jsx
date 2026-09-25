@@ -225,11 +225,7 @@ function AppLayout({ children }) {
                 aria-label="Toggle Sidebar"
                 title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
               >
-                <div className="hamburger-box">
-                  <span className="ham-bar top-bar" />
-                  <span className="ham-bar mid-bar" />
-                  <span className="ham-bar bot-bar" />
-                </div>
+                <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18 }} />
               </button>
               <button
                 type="button"
@@ -237,19 +233,16 @@ function AppLayout({ children }) {
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open Navigation Menu"
               >
-                <div className="hamburger-box">
-                  <span className="ham-bar top-bar" />
-                  <span className="ham-bar mid-bar" />
-                  <span className="ham-bar bot-bar" />
-                </div>
+                <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18 }} />
               </button>
 
               <button
                 type="button"
                 className="topbar-apply-jobs-btn"
+                style={{ marginLeft: '24px' }}
                 onClick={() => navigate("/apply-jobs")}
               >
-                <Briefcase size={15} />
+                <img src="/applyjob.svg" alt="Apply Jobs" style={{ width: 22, height: 22, display: 'block', transform: 'translateY(2px)' }} />
                 <span>Apply Jobs</span>
               </button>
             </div>
