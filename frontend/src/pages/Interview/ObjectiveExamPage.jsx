@@ -261,19 +261,31 @@ const ObjectiveExamPage = () => {
           )}
           <div className="panel quick-start-panel">
             <h2>Quick Actions</h2>
-            <button className="action-btn primary full" onClick={() => navigate("/objective-exam/take")}>
-              <Plus size={18} /> New Objective Exam
+            <button className="action-btn primary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => navigate("/objective-exam/take")}>
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><Plus size={18} /></span> New Objective Exam
             </button>
             <button
               className="action-btn primary full"
-              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px' }}
+              style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px', justifyContent: 'flex-start', paddingLeft: '24px' }}
               onClick={() => navigate("/interview")}
             >
-              ⚡ AI Interview
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>⚡</span> AI Interview
             </button>
-            <button className="action-btn secondary full" onClick={() => navigate("/analytics")}>View Analytics</button>
-            <button className="action-btn secondary full" onClick={() => navigate("/leaderboard")}>Leaderboard</button>
-            <button className="action-btn secondary full" onClick={() => navigate("/achievements")}>Achievements</button>
+            <button className="action-btn secondary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px', marginBottom: '8px' }} onClick={() => navigate("/analytics")}>
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>
+                <img src="/sidebar/anyltics.svg" alt="Analytics" style={{ width: 18, height: 18, objectFit: 'contain', opacity: 0.7 }} />
+              </span> View Analytics
+            </button>
+            <button className="action-btn secondary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px', marginBottom: '8px' }} onClick={() => navigate("/leaderboard")}>
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>
+                <img src="/sidebar/leaderboard.svg" alt="Leaderboard" style={{ width: 18, height: 18, objectFit: 'contain', opacity: 0.7 }} />
+              </span> Leaderboard
+            </button>
+            <button className="action-btn secondary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => navigate("/achievements")}>
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>
+                <img src="/sidebar/myrewards.svg" alt="Achievements" style={{ width: 18, height: 18, objectFit: 'contain', opacity: 0.7 }} />
+              </span> Achievements
+            </button>
           </div>
           <div className="panel tips-panel">
             <div className="panel-header"><Award size={18} /><h2>Pro Tips</h2></div>

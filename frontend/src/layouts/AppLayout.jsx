@@ -300,9 +300,9 @@ function AppLayout({ children }) {
                 <span>{user?.points || 0} XP</span>
               </div>
 
-              <div className="tb-profile">
+              <Link to="/profile" className="tb-profile">
                 <img src={avatar} alt="Profile" className="tb-avatar" />
-              </div>
+              </Link>
             </div>
           </header>
         )}

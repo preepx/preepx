@@ -187,7 +187,7 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 20px;
+  padding: 14px 16px;
 }
 
 .stat-icon {

@@ -177,25 +177,19 @@ const InterviewPage = () => {
 
       <div className="stats-row">
         <div className="stat-card">
-          <div>
-            <img src="/dsbanner/total Sessions.svg" alt="Total Sessions" style={{ width: 28, height: 28 }} />
-          </div>
+          <div className="stat-icon blue"><Clock size={22} /></div>
           <div><span className="stat-num">{stats.totalSessions}</span><span className="stat-lbl">Total Sessions</span></div>
         </div>
         <div className="stat-card">
-          <div>
-            <img src="/dsbanner/Completed.svg" alt="Completed" style={{ width: 28, height: 28 }} />
-          </div>
+          <div className="stat-icon green"><Trophy size={22} /></div>
           <div><span className="stat-num">{stats.completed}</span><span className="stat-lbl">Completed</span></div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon purple"><Target size={20} /></div>
+          <div className="stat-icon purple"><Target size={22} /></div>
           <div><span className="stat-num">{stats.avgScore}%</span><span className="stat-lbl">Avg Score</span></div>
         </div>
         <div className="stat-card">
-          <div>
-            <img src="/dsbanner/Badges.svg" alt="Badges" style={{ width: 28, height: 28 }} />
-          </div>
+          <div className="stat-icon orange"><Award size={22} /></div>
           <div><span className="stat-num">{stats.badges}</span><span className="stat-lbl">Badges</span></div>
         </div>
       </div>
