@@ -104,21 +104,27 @@ const ObjectiveExamPage = () => {
 
   return (
     <div className="dashboard-page">
-      <div className="dashboard-header">
-        <div>
-          <h1>Welcome back, {user.fullName?.split(" ")[0] || "there"}</h1>
-          <p>
-            Level {globalStats.level || 1} · {globalStats.points || 0} points
-            {globalStats.streak > 0 ? ` · 🔥 ${globalStats.streak} day streak` : " · Start your streak!"}
+      <div className="dashboard-header banner-header">
+        <div className="banner-content">
+          <h1 className="banner-welcome">Welcome Back!</h1>
+          <p className="banner-stats">
+            Level {globalStats.level || 1} . {globalStats.points || 0} Points . {globalStats.streak || 0} Days Streak
           </p>
+          <h2 className="banner-subtitle">
+            Test Your Knowledge with<br />
+            <span className="banner-highlight">AI Objective Exams!</span>
+          </h2>
+          <div className="header-actions">
+            <button className="action-btn primary banner-btn-primary" onClick={() => navigate("/objective-exam/take")}>
+              <Plus size={18} /> Start New Exam
+            </button>
+            <button className="action-btn secondary banner-btn-secondary" onClick={() => navigate("/interview")}>
+              Mock Interviews
+            </button>
+          </div>
         </div>
-        <div className="header-actions">
-          <button className="action-btn primary" onClick={() => navigate("/objective-exam/take")}>
-            <Plus size={18} /> New Exam
-          </button>
-          <button className="action-btn secondary" onClick={() => navigate("/interview")}>
-            Mock Interviews
-          </button>
+        <div className="banner-image-wrapper" style={{ alignItems: 'flex-end', overflow: 'hidden', maxWidth: '45%' }}>
+          <img src="/dsbanner/objective_exam_banner.jpg" alt="Objective Exam" className="banner-img obj-exam-banner-img" />
         </div>
       </div>
 

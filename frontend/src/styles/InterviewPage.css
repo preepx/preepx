@@ -95,6 +95,19 @@
   max-height: 240px;
 }
 
+/* Objective Exam banner image — wider than default */
+.obj-exam-banner-img {
+  height: 200px !important;
+  width: 420px !important;
+  max-width: none !important;
+  object-fit: cover !important;
+}
+
+.app-layout.collapsed .obj-exam-banner-img {
+  height: 240px !important;
+  width: 540px !important;
+}
+
 .banner-btn-primary {
   background: linear-gradient(90deg, #4f46e5, #7c3aed) !important;
   color: white !important;
@@ -555,176 +568,344 @@
   color: var(--primary);
 }
 
+/* ══════════════════════════════════════
+   TABLET  (≤ 900px)
+══════════════════════════════════════ */
 @media (max-width: 900px) {
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
 }
 
+/* ══════════════════════════════════════
+   MOBILE  (≤ 640px)
+══════════════════════════════════════ */
 @media (max-width: 640px) {
+
+  /* ── Page wrapper ── */
   .dashboard-page {
-    padding: 16px 12px 24px;
+    padding: 14px 14px 28px;
   }
 
+  /* ── Banner ── */
   .dashboard-header {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
 
   .banner-header {
     flex-direction: column;
-    text-align: center;
+    border-radius: 14px;
+  }
+
+  /* Hide decorative image on mobile */
+  .banner-image-wrapper {
+    display: none !important;
   }
 
   .banner-content {
-    padding: 20px 16px;
+    padding: 20px 18px 18px;
+    text-align: left;
+    width: 100%;
   }
 
   .banner-welcome {
-    font-size: 22px;
+    font-size: 20px;
+    margin-bottom: 4px;
   }
 
   .banner-stats {
-    font-size: 13px;
-    margin-bottom: 16px;
+    font-size: 12px;
+    margin-bottom: 12px;
+    line-height: 1.5;
   }
 
   .banner-subtitle {
-    font-size: 20px;
-  }
-
-  .header-actions {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .banner-image-wrapper {
-    max-width: 100%;
-    justify-content: center;
-  }
-
-  .dashboard-header h1 {
     font-size: 22px;
-  }
-
-  .dashboard-header p {
-    font-size: 13px;
+    line-height: 30px;
+    margin-bottom: 16px;
   }
 
   .header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     width: 100%;
   }
 
   .header-actions .action-btn {
-    flex: 1;
+    flex: 1 1 140px;
     min-width: 0;
     justify-content: center;
-    padding: 10px 12px;
+    padding: 10px 14px;
     font-size: 13px;
   }
 
+  /* Fallback non-banner header */
+  .dashboard-header h1 {
+    font-size: 20px;
+  }
+
+  .dashboard-header p {
+    font-size: 12px;
+  }
+
+  /* ── Stats row ── */
   .stats-row {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
 
   .stat-card {
     padding: 14px 12px;
     gap: 10px;
+    flex-direction: row;
+    align-items: center;
   }
 
   .stat-icon {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
+    flex-shrink: 0;
   }
 
   .stat-num {
     font-size: 20px;
+    line-height: 1.1;
   }
 
   .stat-lbl {
     font-size: 11px;
   }
 
+  /* ── Grid & Panels ── */
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .panel {
+    border-radius: 14px;
+  }
+
   .panel-header {
     flex-direction: column;
     align-items: stretch;
-    padding: 16px;
-    gap: 12px;
+    padding: 14px 14px 10px;
+    gap: 10px;
+  }
+
+  .panel-header h2 {
+    font-size: 15px;
   }
 
   .panel-tools {
+    display: flex;
+    gap: 8px;
     width: 100%;
   }
 
   .search-box {
     flex: 1;
-    width: 100%;
+    min-width: 0;
   }
 
   .search-box input {
     width: 100%;
     min-width: 0;
+    font-size: 13px;
   }
 
   .filter-select {
-    width: 100%;
+    width: auto;
+    flex-shrink: 0;
+    font-size: 13px;
   }
 
-  .interview-item {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 14px 12px;
-    gap: 10px;
+  /* ── Table — horizontal scroll ── */
+  .interview-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 10px;
   }
 
-  .interview-info {
-    width: 100%;
-    min-width: 0;
+  .interviews-table {
+    min-width: 480px;
+    font-size: 13px;
   }
 
-  .interview-info h3 {
-    font-size: 14px;
-    word-break: break-word;
+  .interviews-table th,
+  .interviews-table td {
+    padding: 10px 8px;
+    white-space: nowrap;
   }
 
-  .interview-info p {
+  .role-title {
+    font-size: 13px;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+  }
+
+  .status-pill {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .action-view-btn {
     font-size: 12px;
-    line-height: 1.45;
+    padding: 5px 10px;
   }
 
-  .interview-meta {
-    width: 100%;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 6px;
+  .circular-score {
+    width: 36px;
+    height: 36px;
   }
 
-  .delete-btn {
-    opacity: 1;
-    margin-left: auto;
+  /* ── Side panels ── */
+  .side-panels {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
   }
 
-  .chevron {
-    display: none;
+  .quick-start-panel h2,
+  .tips-panel h2 {
+    font-size: 15px;
   }
 
-  .quick-start-panel,
+  .quick-start-panel .action-btn.full {
+    font-size: 13px;
+    padding: 11px 16px;
+  }
+
   .tips-list {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 0 14px 14px;
   }
 
+  .tips-list li {
+    font-size: 13px;
+    padding: 6px 0;
+  }
+
+  /* ── Activity panel ── */
   .activity-item {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  /* ── Pagination ── */
+  .pagination {
+    gap: 4px;
+    padding: 10px 0;
+  }
+
+  .pagination button {
+    min-width: 30px;
+    height: 30px;
+    font-size: 12px;
   }
 }
 
-/* Modal Styles */
+/* ══════════════════════════════════════
+   SMALL MOBILE  (≤ 400px / 320px)
+══════════════════════════════════════ */
+@media (max-width: 400px) {
+
+  .dashboard-page {
+    padding: 10px 10px 24px;
+  }
+
+  .banner-content {
+    padding: 16px 14px 14px;
+  }
+
+  .banner-welcome {
+    font-size: 17px !important;
+  }
+
+  .banner-stats {
+    font-size: 11px !important;
+  }
+
+  .banner-subtitle {
+    font-size: 18px !important;
+    line-height: 26px !important;
+    margin-bottom: 14px;
+  }
+
+  /* Stack buttons fully on 320px */
+  .header-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .header-actions .action-btn {
+    flex: unset;
+    width: 100%;
+  }
+
+  /* Stats: 2 col compact */
+  .stats-row {
+    gap: 8px;
+  }
+
+  .stat-card {
+    padding: 10px 10px;
+    gap: 8px;
+  }
+
+  .stat-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .stat-num {
+    font-size: 17px !important;
+  }
+
+  .stat-lbl {
+    font-size: 10px !important;
+  }
+
+  /* Table: hide date col on tiny screens */
+  .interviews-table th:nth-child(3),
+  .interviews-table td:nth-child(3) {
+    display: none;
+  }
+
+  .interviews-table {
+    min-width: 360px;
+    font-size: 12px;
+  }
+
+  .role-title {
+    max-width: 90px;
+  }
+
+  .panel-header {
+    padding: 12px 12px 8px;
+  }
+
+  .quick-start-panel .action-btn.full {
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+
+  .tips-list li {
+    font-size: 12px;
+  }
+}
+
+
 .modal-overlay {
   position: fixed;
   inset: 0;

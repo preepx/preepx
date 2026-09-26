@@ -733,22 +733,26 @@
   }
 
   .topbar .sidebar-brand {
-    display: none !important; /* Hide logo completely on mobile inside topbar only */
+    display: none !important;
+    /* Hide logo completely on mobile inside topbar only */
   }
 
   .topbar-apply-jobs-btn {
-    padding: 0 12px !important; /* Restore padding for text */
+    padding: 0 12px !important;
+    /* Restore padding for text */
   }
-  
+
   .theme-toggle-btn {
-    display: none !important; /* Hide theme toggle */
+    display: none !important;
+    /* Hide theme toggle */
   }
 
   .tb-brand-text,
   .tb-divider,
   .tb-xp-badge,
   .tb-streak-badge {
-    display: none !important; /* Hide xp, streak, dividers */
+    display: none !important;
+    /* Hide xp, streak, dividers */
   }
 
   .topbar-center-section {
@@ -987,9 +991,11 @@
     gap: 2px;
     margin-left: 8px !important;
   }
+
   .topbar-apply-jobs-btn span {
     font-size: 12px;
   }
+
   .topbar-apply-jobs-btn img {
     width: 16px !important;
     height: 16px !important;
