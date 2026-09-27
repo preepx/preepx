@@ -859,7 +859,11 @@
 
   .tips-list li {
     font-size: 13px;
-    padding: 6px 0;
+    padding: 6px 0 6px 16px;
+  }
+
+  .tips-list li::before {
+    top: 12px;
   }
 
   /* ── Activity panel ── */
@@ -1901,13 +1905,12 @@
 
 @media (max-width: 640px) {
   .quick-start-panel {
-    padding: 14px 14px 0 !important;
+    padding: 14px !important;
   }
 
   .qa-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
-    margin-top: -8px;
   }
 
   .qa-btn {
