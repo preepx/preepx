@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
-  Plus, Clock, Trophy, Target, Search, Trash2,
+  Clock, Trophy, Target, Search, Trash2,
   ChevronRight, Zap, BookOpen, BarChart3, Award, Flame, LayoutDashboard,
 } from "lucide-react";
 import { getMcqDashboard, deleteMcqResult } from "@/services/mcqAPI";
@@ -116,7 +116,7 @@ const ObjectiveExamPage = () => {
           </h2>
           <div className="header-actions">
             <button className="action-btn primary banner-btn-primary" onClick={() => navigate("/objective-exam/take")}>
-              <Plus size={18} /> Start New Exam
+              <img src="/dsbanner/start you interview.svg" alt="Start" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /> Start New Exam
             </button>
             <button className="action-btn secondary banner-btn-secondary" onClick={() => navigate("/interview")}>
               Mock Interviews
@@ -268,7 +268,7 @@ const ObjectiveExamPage = () => {
           <div className="panel quick-start-panel">
             <h2>Quick Actions</h2>
             <button className="action-btn primary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => navigate("/objective-exam/take")}>
-              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><Plus size={18} /></span> New Objective Exam
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><img src="/dsbanner/start you interview.svg" alt="New" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /></span> New Objective Exam
             </button>
             <button
               className="action-btn primary full"
