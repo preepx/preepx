@@ -265,7 +265,7 @@ const ObjectiveExamPage = () => {
               </div>
             </div>
           )}
-          <div className="panel quick-start-panel">
+          <div className="panel quick-start-panel desktop-only">
             <h2>Quick Actions</h2>
             <button className="action-btn primary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => navigate("/objective-exam/take")}>
               <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><img src="/dsbanner/start you interview.svg" alt="New" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /></span> New Objective Exam
@@ -292,6 +292,55 @@ const ObjectiveExamPage = () => {
                 <img src="/sidebar/myrewards.svg" alt="Achievements" style={{ width: 18, height: 18, objectFit: 'contain', opacity: 0.7 }} />
               </span> Achievements
             </button>
+          </div>
+
+          <div className="panel quick-start-panel mobile-only" style={{ padding: '20px 24px' }}>
+            <h2 style={{ marginBottom: '16px', fontSize: '16px', fontWeight: '700' }}>Quick Actions</h2>
+            <div className="qa-grid">
+              <button className="qa-btn purple" onClick={() => navigate("/objective-exam/take")}>
+                <div className="qa-icon-wrapper">
+                  <img src="/dsbanner/start you interview.svg" alt="New Exam" style={{ filter: 'brightness(0) invert(1)' }} />
+                </div>
+                <div className="qa-text">
+                  <span className="qa-title">New Exam</span>
+                  <span className="qa-subtitle">Start an objective test</span>
+                </div>
+                <div className="qa-arrow"><ChevronRight size={16} /></div>
+              </button>
+
+              <button className="qa-btn violet" onClick={() => navigate("/interview")}>
+                <div className="qa-icon-wrapper">
+                  <Zap color="white" size={18} />
+                </div>
+                <div className="qa-text">
+                  <span className="qa-title">AI Interview</span>
+                  <span className="qa-subtitle">Mock interview session</span>
+                </div>
+                <div className="qa-arrow"><ChevronRight size={16} /></div>
+              </button>
+
+              <button className="qa-btn blue" onClick={() => navigate("/analytics")}>
+                <div className="qa-icon-wrapper">
+                  <img src="/sidebar/anyltics.svg" alt="Analytics" style={{ filter: 'brightness(0) invert(1)' }} />
+                </div>
+                <div className="qa-text">
+                  <span className="qa-title">View Analytics</span>
+                  <span className="qa-subtitle">Track your progress</span>
+                </div>
+                <div className="qa-arrow"><ChevronRight size={16} /></div>
+              </button>
+
+              <button className="qa-btn orange" onClick={() => navigate("/leaderboard")}>
+                <div className="qa-icon-wrapper">
+                  <img src="/sidebar/leaderboard.svg" alt="Leaderboard" style={{ filter: 'brightness(0) invert(1)' }} />
+                </div>
+                <div className="qa-text">
+                  <span className="qa-title">Leaderboard</span>
+                  <span className="qa-subtitle">See your rank</span>
+                </div>
+                <div className="qa-arrow"><ChevronRight size={16} /></div>
+              </button>
+            </div>
           </div>
           <div className="panel tips-panel">
             <div className="panel-header"><Award size={18} /><h2>Pro Tips</h2></div>
