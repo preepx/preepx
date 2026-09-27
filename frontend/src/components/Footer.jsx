@@ -95,7 +95,7 @@ function Footer({ onRecruiterClick }) {
               <li><Link to="/features">Features Overview</Link></li>
               <li><Link to="/user-guide">User Guide &amp; Docs</Link></li>
               <li><Link to="/interview-tips">Knowledge Hub</Link></li>
-              <li><a href="/#faq">Frequently Asked Questions</a></li>
+              <li><Link to="/faq">Frequently Asked Questions</Link></li>
               <li><Link to="/help-center">Product Feedback</Link></li>
             </ul>
           </div>

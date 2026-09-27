@@ -144,26 +144,6 @@ function UserGuide() {
 
       {/* ── 2-COLUMN LAYOUT ── */}
       <div className="guide-container">
-        {/* Sticky Sidebar Navigation */}
-        <aside className="guide-sidebar">
-          <div className="guide-sidebar-inner">
-            <div className="guide-sidebar-title">Table of Contents</div>
-            <nav className="guide-nav">
-              {guideSections.map((sec) => (
-                <button
-                  key={sec.id}
-                  type="button"
-                  onClick={() => handleScrollTo(sec.id)}
-                  className={`guide-nav-btn ${activeTab === sec.id ? "active" : ""}`}
-                >
-                  <img src={sec.iconSrc} alt="" className="guide-nav-icon-img" />
-                  <span>{sec.label}</span>
-                </button>
-              ))}
-            </nav>
-          </div>
-        </aside>
-
         {/* Main Content Area */}
         <main className="guide-content">
           {/* Section 1: Getting Started */}

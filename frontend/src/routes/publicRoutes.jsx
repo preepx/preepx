@@ -4,6 +4,12 @@ import GuestRoute from "@/components/GuestRoute";
 
 const Dashboard = lazy(() => import("@/pages/Dashboard"));
 const StaticPage = lazy(() => import("@/pages/StaticPage"));
+const About = lazy(() => import("@/pages/About"));
+const TermsOfService = lazy(() => import("@/pages/TermsOfService"));
+const PrivacyPolicy = lazy(() => import("@/pages/PrivacyPolicy"));
+const Security = lazy(() => import("@/pages/Security"));
+const HelpCenter = lazy(() => import("@/pages/HelpCenter"));
+const FAQ = lazy(() => import("@/pages/FAQ"));
 const UserGuide = lazy(() => import("@/pages/UserGuide"));
 const HowPreepXWorks = lazy(() => import("@/pages/HowPreepXWorks"));
 const Features = lazy(() => import("@/pages/Features"));
@@ -57,13 +63,14 @@ export const getPublicRoutes = (landingRole, setLandingRole) => [
   { path: "/user-guide", element: <UserGuide /> },
   { path: "/interview-tips", element: <StaticPage /> },
   { path: "/blog", element: <StaticPage /> },
-  { path: "/help-center", element: <StaticPage /> },
+  { path: "/help-center", element: <HelpCenter /> },
+  { path: "/faq", element: <FAQ /> },
   { path: "/community", element: <StaticPage /> },
-  { path: "/about-us", element: <StaticPage /> },
+  { path: "/about-us", element: <About /> },
   { path: "/careers", element: <StaticPage /> },
-  { path: "/privacy-policy", element: <StaticPage /> },
-  { path: "/terms-of-service", element: <StaticPage /> },
-  { path: "/security", element: <StaticPage /> },
+  { path: "/privacy-policy", element: <PrivacyPolicy /> },
+  { path: "/terms-of-service", element: <TermsOfService /> },
+  { path: "/security", element: <Security /> },
   { path: "/hiring-guide", element: <StaticPage /> },
   { path: "/recruiter-resources", element: <StaticPage /> },
   { path: "/documentation", element: <StaticPage /> },

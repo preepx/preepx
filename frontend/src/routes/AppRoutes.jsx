@@ -16,7 +16,7 @@ const ChatBot = lazy(() => import("@/components/landing/ChatBot"));
 
 const PUBLIC_PATH_PREFIXES = [
   "/features", "/how-it-works", "/how-preepx-works", "/mock-interviews", "/user-guide", "/docs",
-  "/interview-tips", "/blog", "/help-center", "/community",
+  "/interview-tips", "/blog", "/help-center", "/community", "/faq",
   "/about-us", "/careers", "/privacy-policy", "/terms-of-service", "/security",
   "/hiring-guide", "/recruiter-resources", "/documentation",
   "/ai-screening", "/job-management", "/assessments", "/interviews",

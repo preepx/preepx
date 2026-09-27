@@ -53,7 +53,7 @@ function Navbar({ landingRole, setLandingRole }) {
     { targetId: "journeys", label: "Why PreepX?" },
     { targetId: "features", label: "Features" },
     { targetId: "pricing", label: "Pricing" },
-    { targetId: "faq", label: "FAQ" },
+    { targetId: "faq", label: "FAQ", to: "/faq" },
   ];
 
   const scrollToSectionWithOffset = (targetId) => {
@@ -148,16 +148,26 @@ function Navbar({ landingRole, setLandingRole }) {
                   {link.label}
                 </Link>
               ))
-              : landingNavLinks.map((link) => (
-                <a
-                  key={link.targetId}
-                  href={`#${link.targetId}`}
-                  onClick={(e) => handleLandingNavClick(e, link.targetId)}
-                  className="text-base font-semibold text-[#000000] hover:opacity-80 transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
+              : landingNavLinks.map((link) =>
+                link.to ? (
+                  <Link
+                    key={link.targetId}
+                    to={link.to}
+                    className="text-base font-semibold text-[#000000] hover:opacity-80 transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.targetId}
+                    href={`#${link.targetId}`}
+                    onClick={(e) => handleLandingNavClick(e, link.targetId)}
+                    className="text-base font-semibold text-[#000000] hover:opacity-80 transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                )
+              )}
           </div>
 
           {/* Right Actions */}

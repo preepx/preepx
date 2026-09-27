@@ -252,6 +252,12 @@ export default function ChatBot() {
   }, [open]);
 
   useEffect(() => {
+    const handleOpenChatBot = () => setOpen(true);
+    window.addEventListener('open-chatbot', handleOpenChatBot);
+    return () => window.removeEventListener('open-chatbot', handleOpenChatBot);
+  }, []);
+
+  useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, typing]);
 
