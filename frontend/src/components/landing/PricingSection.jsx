@@ -104,7 +104,7 @@ export const pricingData = {
         id: "recruiter-starter",
         name: "Starter",
         tagline: "For Small Teams",
-        price: "₹1,999",
+        price: "₹999",
         period: "/month",
         buttonText: "Start Hiring",
         isPopular: false,

@@ -116,9 +116,10 @@ const ObjectiveExamPage = () => {
           </h2>
           <div className="header-actions">
             <button className="action-btn primary banner-btn-primary" onClick={() => navigate("/objective-exam/take")}>
-              <img src="/dsbanner/start you interview.svg" alt="Start" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /> Start New Exam
+              <img src="/sidebar/objectiveexamicon.svg" alt="Start" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /> Start New Exam
             </button>
             <button className="action-btn secondary banner-btn-secondary" onClick={() => navigate("/interview")}>
+              <img src="/sidebar/mockintervieww.svg" alt="Start" style={{ width: 20, height: 20, filter: 'brightness(0)' }} />
               Mock Interviews
             </button>
           </div>
@@ -268,14 +269,14 @@ const ObjectiveExamPage = () => {
           <div className="panel quick-start-panel desktop-only">
             <h2>Quick Actions</h2>
             <button className="action-btn primary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => navigate("/objective-exam/take")}>
-              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><img src="/dsbanner/start you interview.svg" alt="New" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /></span> New Objective Exam
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><img src="/sidebar/objectiveexamicon.svg" alt="New" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /></span> New Objective Exam
             </button>
             <button
               className="action-btn primary full"
               style={{ background: '#8b5cf6', border: 'none', marginTop: '8px', marginBottom: '8px', justifyContent: 'flex-start', paddingLeft: '24px' }}
               onClick={() => navigate("/interview")}
             >
-              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>⚡</span> AI Interview
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><img src="/sidebar/mockintervieww.svg" alt="New" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /></span> AI Interview
             </button>
             <button className="action-btn secondary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px', marginBottom: '8px' }} onClick={() => navigate("/analytics")}>
               <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}>

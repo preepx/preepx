@@ -161,7 +161,7 @@ const InterviewPage = () => {
           </h2>
           <div className="header-actions">
             <button className="action-btn primary banner-btn-primary" onClick={() => setShowModal(true)}>
-              <img src="/dsbanner/start you interview.svg" alt="Start" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /> Start Your Interviews
+              <img src="/sidebar/mockintervieww.svg" alt="Start" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /> Start Your Interviews
             </button>
             <label className="action-btn secondary banner-btn-secondary">
               <img src="/dsbanner/resumeupload.svg" alt="Upload" style={{ width: 20, height: 20 }} />
@@ -316,7 +316,7 @@ const InterviewPage = () => {
           <div className="panel quick-start-panel desktop-only">
             <h2>Quick Actions</h2>
             <button className="action-btn primary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => setShowModal(true)}>
-              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><img src="/dsbanner/start you interview.svg" alt="New" style={{ width: 18, height: 18, filter: 'brightness(0) invert(1)' }} /></span> New Interview
+              <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><img src="/sidebar/mockintervieww.svg" alt="New" style={{ width: 18, height: 18, filter: 'brightness(0) invert(1)' }} /></span> New Interview
             </button>
             <button
               className="action-btn primary full"

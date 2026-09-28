@@ -419,3 +419,48 @@
     font-size: 22px;
   }
 }
+
+@media (max-width: 360px) {
+  .hiw-section {
+    padding: 10px 4px 30px;
+  }
+  .hiw-main__face {
+    padding: 14px 8px;
+  }
+  .hiw-interview__meta {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .hiw-qcount {
+    padding-top: 0;
+    margin-top: 0;
+    font-size: 12px;
+  }
+  .hiw-badge {
+    min-width: unset;
+    width: 100%;
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  .hiw-interview__copy h3 {
+    font-size: 15px;
+  }
+  .hiw-interview__copy p {
+    font-size: 13px;
+  }
+  .hiw-start {
+    width: 100%;
+    font-size: 14px;
+  }
+  .hiw-photo {
+    height: 140px;
+  }
+  .hiw-perf__name {
+    font-size: 9px;
+  }
+  .hiw-perf__val,
+  .hiw-perf__delta {
+    font-size: 10px;
+  }
+}
