@@ -39,7 +39,7 @@ function HeroSection({ onRecruiterClick }) {
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-row gap-2 sm:gap-3 mb-5 justify-center lg:justify-start flex-nowrap w-full px-2 mx-auto lg:mx-0 relative left-4 sm:left-0" style={{ marginTop: '16px', maxWidth: '360px' }}>
+          <div className="flex flex-row gap-2 sm:gap-3 mb-5 justify-center lg:justify-start flex-nowrap w-full mx-auto lg:mx-0" style={{ marginTop: '16px', maxWidth: '100%', padding: '0 4px' }}>
             <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none">
               <button
                 onClick={() => navigate('/auth?role=candidate')}
@@ -53,16 +53,16 @@ function HeroSection({ onRecruiterClick }) {
                   boxSizing: 'border-box',
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 500,
-                  fontSize: 'clamp(10px, 2.8vw, 15px)',
+                  fontSize: 'clamp(9px, 2.5vw, 15px)',
                   letterSpacing: '0px',
                   whiteSpace: 'nowrap'
                 }}
               >
-                <img src="/landing/Vector.svg" alt="Candidate" className="w-[12px] h-[12px] sm:w-[16px] sm:h-[16px]" />
+                <img src="/landing/Vector.svg" alt="Candidate" className="w-[10px] h-[10px] min-[360px]:w-[12px] min-[360px]:h-[12px] sm:w-[16px] sm:h-[16px]" />
                 <span>I'm a Candidate</span>
                 <span className="ml-0.5 sm:ml-1">→</span>
               </button>
-              <span className="text-[8.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Start preparing for your dream role</span>
+              <span className="text-[7.5px] min-[360px]:text-[8.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Start preparing for your dream role</span>
             </div>
 
             <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none">
@@ -78,21 +78,21 @@ function HeroSection({ onRecruiterClick }) {
                   boxSizing: 'border-box',
                   fontFamily: 'Inter, sans-serif',
                   fontWeight: 500,
-                  fontSize: 'clamp(10px, 2.8vw, 15px)',
+                  fontSize: 'clamp(9px, 2.5vw, 15px)',
                   letterSpacing: '0px',
                   whiteSpace: 'nowrap'
                 }}
               >
-                <img src="/landing/fluent-mdl2_add-work.svg" alt="Recruiter" className="w-[12px] h-[12px] sm:w-[16px] sm:h-[16px]" />
+                <img src="/landing/fluent-mdl2_add-work.svg" alt="Recruiter" className="w-[10px] h-[10px] min-[360px]:w-[12px] min-[360px]:h-[12px] sm:w-[16px] sm:h-[16px]" />
                 <span>I'm a Recruiter</span>
                 <span className="ml-0.5 sm:ml-1">→</span>
               </button>
-              <span className="text-[8.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Find and hire the best talent</span>
+              <span className="text-[7.5px] min-[360px]:text-[8.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Find and hire the best talent</span>
             </div>
           </div>
 
           {/* Feature Tags */}
-          <div className="flex flex-nowrap items-center gap-1.5 justify-center lg:justify-start overflow-x-auto" style={{ marginTop: '12px' }}>
+          <div className="flex flex-wrap items-center gap-1.5 justify-center lg:justify-start" style={{ marginTop: '12px' }}>
             <div
               className="inline-flex items-center justify-center bg-[#E5E9FF] border-slate-900 font-medium text-slate-900 shadow-sm whitespace-nowrap flex-shrink-0"
               style={{ height: '32px', gap: '4px', borderRadius: '8px', borderWidth: '1.5px', padding: '0px 8px', boxSizing: 'border-box', fontSize: '10px' }}

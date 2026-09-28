@@ -254,12 +254,12 @@ function HowItWorksSection() {
                 </div>
 
                 {/* Mobile Table — fewer columns */}
-                <div className="block min-[860px]:hidden">
-                  <div className="grid grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr] items-center gap-y-2">
+                <div className="block min-[860px]:hidden overflow-x-hidden">
+                  <div className="grid grid-cols-[1.4fr_0.8fr_0.8fr_0.8fr] items-center gap-x-1 gap-y-2">
                     {TABLE_HEADS_MOBILE.map((heading) => (
                       <div
                         key={heading}
-                        className={`text-[11px] font-semibold text-black ${heading === "Candidates" ? "text-left" : "text-center"
+                        className={`text-[9.5px] min-[360px]:text-[11px] font-semibold text-black ${heading === "Candidates" ? "text-left" : "text-center"
                           }`}
                       >
                         {heading}
@@ -267,32 +267,32 @@ function HowItWorksSection() {
                     ))}
                     {CANDIDATES.map((c) => (
                       <React.Fragment key={c.name}>
-                        <div className="flex items-center gap-1.5 text-left">
+                        <div className="flex items-center gap-1 min-[360px]:gap-1.5 text-left">
                           <img
                             src={c.avatar}
                             alt={c.name}
-                            className="h-6 w-6 shrink-0 rounded-full border border-gray-300 object-cover"
+                            className="h-5 w-5 min-[360px]:h-6 min-[360px]:w-6 shrink-0 rounded-full border border-gray-300 object-cover"
                           />
-                          <span className="text-[11px] font-medium text-black truncate">{c.name.split(" ")[0]}</span>
+                          <span className="text-[9px] min-[360px]:text-[11px] font-medium text-black truncate max-w-[50px] min-[360px]:max-w-full">{c.name.split(" ")[0]}</span>
                         </div>
-                        <div className="text-center text-[11px] text-black">{c.skill}</div>
-                        <div className="text-center text-[11px] text-black">{c.assessment}</div>
-                        <div className="text-center text-[10px] font-semibold text-black">{c.status}</div>
+                        <div className="text-center text-[9px] min-[360px]:text-[11px] text-black">{c.skill}</div>
+                        <div className="text-center text-[9px] min-[360px]:text-[11px] text-black">{c.assessment}</div>
+                        <div className="text-center text-[8.5px] min-[360px]:text-[10px] font-semibold text-black">{c.status}</div>
                       </React.Fragment>
                     ))}
                   </div>
                 </div>
 
                 {/* Hiring Pipeline */}
-                <div className="mt-[12px] ml-0 w-full rounded-[8px] border border-gray-500 bg-[#84D4FF] px-[16px] pb-[8px] pt-[10px]" style={{ minHeight: '90px' }}>
-                  <h4 className="mt-0 mb-[4px] text-left font-sans text-[14px] min-[860px]:text-[16px] font-medium leading-[24px] tracking-normal text-[#111]">Hiring Pipeline</h4>
-                  <div className="relative mt-[4px] grid grid-cols-5 text-center">
+                <div className="mt-[12px] ml-0 w-full rounded-[8px] border border-gray-500 bg-[#84D4FF] px-[8px] min-[360px]:px-[16px] pb-[8px] pt-[10px] overflow-hidden" style={{ minHeight: '90px' }}>
+                  <h4 className="mt-0 mb-[4px] text-left font-sans text-[13px] min-[360px]:text-[14px] min-[860px]:text-[16px] font-medium leading-[24px] tracking-normal text-[#111]">Hiring Pipeline</h4>
+                  <div className="relative mt-[4px] grid grid-cols-5 text-center gap-x-0.5 min-[360px]:gap-x-0">
                     <div className="pointer-events-none absolute left-[10%] right-[10%] top-[42px] min-[860px]:top-[45px] h-[3px] rounded-full bg-gradient-to-r from-sky-200 via-slate-500 to-slate-800" />
                     {PIPELINE.map((step) => (
                       <div key={step.label} className="relative z-10 flex flex-col items-center">
-                        <span className="text-[9px] min-[860px]:text-[11px] font-medium text-black">{step.label}</span>
-                        <span className="mb-[2px] text-[10px] min-[860px]:text-[12px] font-bold text-black">{step.val}</span>
-                        <span className={`h-[18px] w-[18px] min-[860px]:h-[22px] min-[860px]:w-[22px] rounded-full ${step.dot}`} />
+                        <span className="text-[7.5px] min-[360px]:text-[9px] min-[860px]:text-[11px] font-medium text-black truncate max-w-full" style={{ padding: '0 1px' }}>{step.label}</span>
+                        <span className="mb-[2px] text-[8.5px] min-[360px]:text-[10px] min-[860px]:text-[12px] font-bold text-black">{step.val}</span>
+                        <span className={`h-[14px] w-[14px] min-[360px]:h-[18px] min-[360px]:w-[18px] min-[860px]:h-[22px] min-[860px]:w-[22px] rounded-full ${step.dot}`} />
                       </div>
                     ))}
                   </div>
