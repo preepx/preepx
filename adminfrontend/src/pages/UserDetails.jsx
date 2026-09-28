@@ -18,6 +18,10 @@ const UserDetails = () => {
   const [xpToAdd, setXpToAdd] = useState('');
   const [addingXp, setAddingXp] = useState(false);
 
+  const [planToAssign, setPlanToAssign] = useState('Pro Plan');
+  const [planDays, setPlanDays] = useState(30);
+  const [assigningPlan, setAssigningPlan] = useState(false);
+
   const [referrals, setReferrals] = useState([]);
   const [showReferralsModal, setShowReferralsModal] = useState(false);
   const [loadingReferrals, setLoadingReferrals] = useState(false);
@@ -158,6 +162,48 @@ const UserDetails = () => {
               ) : (
                 <p className="text-secondary">No active subscription.</p>
               )}
+            </div>
+            <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+              <h4 style={{ marginBottom: '0.5rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>Assign Pro Plan</h4>
+              <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                <input 
+                  type="text" 
+                  className="input-field" 
+                  placeholder="Plan Name (e.g. Choose Your Pro Plan)" 
+                  value={planToAssign}
+                  onChange={(e) => setPlanToAssign(e.target.value)}
+                  style={{ flex: 2, padding: '0.5rem' }}
+                />
+                <input 
+                  type="number" 
+                  className="input-field" 
+                  placeholder="Days" 
+                  value={planDays}
+                  onChange={(e) => setPlanDays(e.target.value)}
+                  style={{ flex: 1, padding: '0.5rem' }}
+                />
+              </div>
+              <button 
+                className="btn-primary" 
+                disabled={assigningPlan || !planToAssign || !planDays}
+                onClick={async () => {
+                  if (!planToAssign || !planDays || isNaN(planDays) || Number(planDays) <= 0) return;
+                  setAssigningPlan(true);
+                  try {
+                    await api.post(`/users/${id}/plan/assign`, { planName: planToAssign, days: Number(planDays) });
+                    const updatedData = await api.get(`/users/${id}`);
+                    setData(updatedData.data);
+                    alert('Pro Plan assigned successfully!');
+                  } catch (err) {
+                    alert('Failed to assign Pro Plan');
+                  } finally {
+                    setAssigningPlan(false);
+                  }
+                }}
+                style={{ padding: '0.5rem 1rem', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+              >
+                <Gift size={18} /> {assigningPlan ? 'Assigning...' : 'Assign Plan'}
+              </button>
             </div>
           </div>
 

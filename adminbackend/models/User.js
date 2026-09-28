@@ -18,6 +18,15 @@ const userSchema = mongoose.Schema(
     github: { type: String, default: "" },
     linkedin: { type: String, default: "" },
     degree: { type: String, default: "" },
+    subscription: {
+      planId: { type: String, default: null },
+      planName: { type: String, default: null },
+      startDate: { type: Date, default: null },
+      expiresAt: { type: Date, default: null },
+      status: { type: String, enum: ["active", "expired", "none"], default: "none" },
+      razorpayOrderId: { type: String, default: null },
+      razorpayPaymentId: { type: String, default: null },
+    },
   },
   { timestamps: true }
 );

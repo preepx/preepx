@@ -349,6 +349,55 @@ const getUserReferrals = async (req, res) => {
   }
 };
 
+// @desc    Assign Pro Plan to User
+const assignProPlan = async (req, res) => {
+  try {
+    const { planName, days } = req.body;
+    if (!planName || !days || days <= 0) {
+      return res.status(400).json({ message: "Invalid plan details" });
+    }
+
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const startDate = new Date();
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + Number(days));
+
+    user.subscription = {
+      planId: "custom_pro",
+      planName: planName,
+      startDate: startDate,
+      expiresAt: expiresAt,
+      status: "active",
+      razorpayOrderId: "admin_assigned",
+      razorpayPaymentId: "admin_assigned",
+    };
+
+    await user.save();
+
+    try {
+      const backendUrl = process.env.BACKEND_URL;
+      await fetch(`${backendUrl}/api/internal/notify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: req.params.id,
+          title: "Pro Plan Assigned",
+          message: `Admin has assigned you the ${planName} plan for ${days} days!`,
+          icon: "👑"
+        })
+      });
+    } catch (e) {
+      console.error("Webhook notification failed:", e.message);
+    }
+
+    res.json({ message: "Pro plan assigned successfully", user });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 module.exports = {
   adminLogin,
   getDashboardStats,
@@ -359,5 +408,6 @@ module.exports = {
   toggleUserBlock,
   addCoinsToWallet,
   addXpToUser,
-  getUserReferrals
+  getUserReferrals,
+  assignProPlan
 };

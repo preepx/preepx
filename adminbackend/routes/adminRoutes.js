@@ -13,6 +13,7 @@ const {
   addCoinsToWallet,
   addXpToUser,
   getUserReferrals,
+  assignProPlan,
 } = require("../controllers/adminController");
 
 const {
@@ -71,6 +72,7 @@ router.get("/users/:id/referrals", getUserReferrals);
 router.put("/users/:id/block", toggleUserBlock);
 router.post("/users/:id/wallet/add", addCoinsToWallet);
 router.post("/users/:id/xp/add", addXpToUser);
+router.post("/users/:id/plan/assign", assignProPlan);
 router.get("/transactions", getTransactions);
 router.get("/purchases", getPurchases);
 
