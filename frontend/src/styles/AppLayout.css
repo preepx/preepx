@@ -986,19 +986,19 @@
 
 @media (max-width: 400px) {
   .topbar-apply-jobs-btn {
-    padding: 0 8px;
-    height: 28px;
-    gap: 2px;
-    margin-left: 8px !important;
+    padding: 0 6px !important;
+    height: 26px !important;
+    gap: 2px !important;
+    margin-left: 4px !important;
   }
 
   .topbar-apply-jobs-btn span {
-    font-size: 12px;
+    font-size: 10px !important;
   }
 
   .topbar-apply-jobs-btn img {
-    width: 16px !important;
-    height: 16px !important;
+    width: 14px !important;
+    height: 14px !important;
     transform: translateY(1px) !important;
   }
 }

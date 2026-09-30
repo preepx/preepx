@@ -282,7 +282,7 @@ function AppLayout({ children }) {
               ) : (
                 <Link to="/wallet" className="tb-wallet-badge">
                   <Crown size={16} />
-                  <span>Get Pro</span>
+                  <span>Pro</span>
                 </Link>
               )}
 
