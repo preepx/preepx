@@ -31,9 +31,13 @@
 
 .ud-panel-head a {
   font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
+  font-weight: 700;
   text-decoration: none;
+  background: linear-gradient(90deg, rgb(61, 94, 255) 0%, rgb(96, 23, 199) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
   transition: opacity 0.2s;
 }
 
@@ -118,8 +122,15 @@
   padding: 4px 8px;
   border-radius: 6px;
   background: color-mix(in srgb, var(--primary) 12%, var(--surface));
-  color: var(--primary);
   flex-shrink: 0;
+}
+
+.ud-recent-type-text {
+  background: linear-gradient(90deg, rgb(61, 94, 255) 0%, rgb(96, 23, 199) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .ud-recent-info {

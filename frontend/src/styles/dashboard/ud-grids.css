@@ -181,7 +181,15 @@
   gap: 4px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--primary);
+  color: rgb(61, 94, 255);
+}
+
+.ud-practice-cta-text {
+  background: linear-gradient(90deg, rgb(61, 94, 255) 0%, rgb(96, 23, 199) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .ud-practice-play {
