@@ -47,13 +47,7 @@
     width: 100%;
   }
 
-  .ud-practice-grid {
-    grid-template-columns: 1fr;
-  }
 
-  .ud-explore-grid {
-    grid-template-columns: 1fr;
-  }
 
   .ud-banner {
     flex-direction: column;
@@ -139,5 +133,82 @@
   .ud-recent-score {
     font-size: 12px;
     padding: 4px 8px;
+  }
+
+  .ud-practice-grid {
+    gap: 8px;
+  }
+
+  .ud-practice-card {
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .ud-practice-body h3 {
+    font-size: 10.5px;
+    gap: 4px;
+  }
+
+  .ud-practice-body h3 span {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 6px !important;
+  }
+  
+  .ud-practice-body h3 img {
+    width: 11px !important;
+    height: 11px !important;
+  }
+
+  .ud-practice-body p {
+    font-size: 8.5px;
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+
+  .ud-practice-cta {
+    font-size: 9.5px;
+  }
+
+  .ud-practice-play {
+    display: none;
+  }
+
+  .ud-explore-grid {
+    gap: 8px;
+  }
+
+  .ud-explore-card {
+    padding: 8px;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ud-explore-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+  }
+
+  .ud-explore-icon img {
+    width: 12px;
+    height: 12px;
+  }
+
+  .ud-explore-card h4 {
+    font-size: 10px;
+    margin-bottom: 2px;
+  }
+
+  .ud-explore-card p {
+    font-size: 8px;
+    line-height: 1.1;
+  }
+
+  .ud-explore-arrow {
+    display: none;
   }
 }

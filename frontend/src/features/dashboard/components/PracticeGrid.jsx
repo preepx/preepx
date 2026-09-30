@@ -17,11 +17,14 @@ export default function PracticeGrid() {
           className="ud-practice-card ud-practice-primary"
           onClick={() => navigate("/interview")}
         >
-          <div className="ud-practice-glow" />
-          <div className="ud-practice-icon"><img src="/sidebar/mockintervieww.svg" alt="Mock Interview" style={{ width: 26, height: 26 }} /></div>
           <div className="ud-practice-body">
-            <h3>Start Mock Interview</h3>
-            <p>Live AI interview with webcam, voice & instant scoring</p>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: 'linear-gradient(90deg, #3D5EFF, #6017C7)', borderRadius: '8px' }}>
+                <img src="/sidebar/mockintervieww.svg" alt="Mock Interview" style={{ width: 18, height: 18, filter: 'brightness(0) invert(1)' }} />
+              </span>
+              Mock Interview
+            </h3>
+            <p>Live AI interviews with instant scoring</p>
             <span className="ud-practice-cta"><span className="ud-practice-cta-text">Start now</span> <ChevronRight size={16} /></span>
           </div>
           <PlayCircle size={28} className="ud-practice-play" />
@@ -32,12 +35,15 @@ export default function PracticeGrid() {
           className="ud-practice-card ud-practice-secondary"
           onClick={() => navigate("/objective-exam")}
         >
-          <div className="ud-practice-glow" />
-          <div className="ud-practice-icon"><img src="/sidebar/objectiveexamicon.svg" alt="Objective Exam" style={{ width: 26, height: 26 }} /></div>
           <div className="ud-practice-body">
-            <h3>Objective Exam</h3>
-            <p>Quick MCQ quizzes to test your technical knowledge</p>
-            <span className="ud-practice-cta"><span className="ud-practice-cta-text">Take quiz</span> <ChevronRight size={16} /></span>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: 'linear-gradient(90deg, #3D5EFF, #6017C7)', borderRadius: '8px' }}>
+                <img src="/sidebar/objectiveexamicon.svg" alt="Objective Exam" style={{ width: 18, height: 18, filter: 'brightness(0) invert(1)' }} />
+              </span>
+              Objective Exam
+            </h3>
+            <p>Quick MCQ quizzes to test your skills</p>
+            <span className="ud-practice-cta"><span className="ud-practice-cta-text">Start now</span> <ChevronRight size={16} /></span>
           </div>
         </button>
       </div>
