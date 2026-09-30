@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Video, FileText, PlayCircle, ChevronRight } from "lucide-react";
+import { PlayCircle, ChevronRight } from "lucide-react";
 
 export default function PracticeGrid() {
   const navigate = useNavigate();
@@ -18,11 +18,11 @@ export default function PracticeGrid() {
           onClick={() => navigate("/interview")}
         >
           <div className="ud-practice-glow" />
-          <div className="ud-practice-icon"><Video size={26} /></div>
+          <div className="ud-practice-icon"><img src="/sidebar/mockintervieww.svg" alt="Mock Interview" style={{ width: 26, height: 26 }} /></div>
           <div className="ud-practice-body">
             <h3>Start Mock Interview</h3>
             <p>Live AI interview with webcam, voice & instant scoring</p>
-            <span className="ud-practice-cta">Start now <ChevronRight size={16} /></span>
+            <span className="ud-practice-cta"><span className="ud-practice-cta-text">Start now</span> <ChevronRight size={16} /></span>
           </div>
           <PlayCircle size={28} className="ud-practice-play" />
         </button>
@@ -33,11 +33,11 @@ export default function PracticeGrid() {
           onClick={() => navigate("/objective-exam")}
         >
           <div className="ud-practice-glow" />
-          <div className="ud-practice-icon"><FileText size={26} /></div>
+          <div className="ud-practice-icon"><img src="/sidebar/objectiveexamicon.svg" alt="Objective Exam" style={{ width: 26, height: 26 }} /></div>
           <div className="ud-practice-body">
             <h3>Objective Exam</h3>
             <p>Quick MCQ quizzes to test your technical knowledge</p>
-            <span className="ud-practice-cta">Take quiz <ChevronRight size={16} /></span>
+            <span className="ud-practice-cta"><span className="ud-practice-cta-text">Take quiz</span> <ChevronRight size={16} /></span>
           </div>
         </button>
       </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Briefcase, ChevronRight } from "lucide-react";
+
 
 export default function ApplyJobsBanner() {
   const navigate = useNavigate();
@@ -12,12 +12,12 @@ export default function ApplyJobsBanner() {
         className="ud-apply-banner"
         onClick={() => navigate("/apply-jobs")}
       >
-        <div className="ud-apply-banner-icon"><Briefcase size={28} /></div>
+        <div className="ud-apply-banner-icon"><img src="/dsbanner/applyjobs.svg" alt="Apply Jobs" style={{ width: 28, height: 28 }} /></div>
         <div className="ud-apply-banner-text">
           <h2>Apply Jobs</h2>
           <p>View matched roles, track applications, shortlists & assessments</p>
         </div>
-        <ChevronRight size={24} className="ud-apply-banner-arrow" />
+
       </button>
     </section>
   );

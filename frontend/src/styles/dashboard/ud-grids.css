@@ -32,8 +32,8 @@
   gap: 20px;
   padding: 22px 24px;
   border-radius: 18px;
-  border: 1px solid rgba(47, 111, 91, 0.35);
-  background: linear-gradient(135deg, rgba(47, 111, 91, 0.12), rgba(180, 83, 9, 0.08));
+  border: 1px solid var(--border);
+  background: transparent;
   cursor: pointer;
   font-family: inherit;
   text-align: left;
@@ -99,11 +99,11 @@
 }
 
 .ud-practice-primary {
-  background: linear-gradient(135deg, rgba(31, 92, 74, 0.08), rgba(61, 122, 100, 0.06));
+  background: transparent;
 }
 
 .ud-practice-secondary {
-  background: linear-gradient(135deg, rgba(154, 74, 42, 0.08), rgba(244, 63, 94, 0.06));
+  background: transparent;
 }
 
 .ud-practice-glow {
@@ -181,7 +181,15 @@
   gap: 4px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--primary);
+  color: rgb(61, 94, 255);
+}
+
+.ud-practice-cta-text {
+  background: linear-gradient(90deg, rgb(61, 94, 255) 0%, rgb(96, 23, 199) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 .ud-practice-play {
