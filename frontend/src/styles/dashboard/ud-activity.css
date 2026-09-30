@@ -66,7 +66,7 @@
 
 .ud-bar-fill {
   width: 100%;
-  background: linear-gradient(180deg, var(--primary), var(--primary-light));
+  background: linear-gradient(180deg, rgb(61, 94, 255) 0%, rgb(96, 23, 199) 100%);
   border-radius: 6px 6px 0 0;
   min-height: 4px;
   transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1);

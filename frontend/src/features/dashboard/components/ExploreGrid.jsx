@@ -1,17 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  FileText, BookOpen, Trophy, BarChart3, Wallet, Zap, Award, ChevronRight
-} from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 const EXPLORE_LINKS = [
-  { icon: FileText, label: "ATS Score", desc: "Analyze your resume", path: "/ats-score", color: "#14b8a6", isNew: true },
-  { icon: BookOpen, label: "Btech Notes", desc: "Study resources", path: "/btech-notes", color: "#3b82f6", free: true },
-  { icon: Trophy, label: "Leaderboard", desc: "Global rankings", path: "/leaderboard", color: "#f59e0b" },
-  { icon: BarChart3, label: "Analytics", desc: "Score trends & insights", path: "/analytics", color: "#06b6d4" },
-  { icon: Wallet, label: "Wallet", desc: "Manage your balance", path: "/wallet", color: "#10b981" },
-  { icon: Zap, label: "My Rewards", desc: "Level up with XP", path: "/rewards", color: "#f59e0b" },
-  { icon: Award, label: "Redeem XP", desc: "Redeem XP for money", path: "/achievements", color: "#8b5cf6" },
+  { iconSrc: "/sidebar/atsscore.svg", label: "ATS Score", desc: "Analyze your resume", path: "/ats-score", color: "#14b8a6", isNew: true },
+  { iconSrc: "/sidebar/notes.svg", label: "Btech Notes", desc: "Study resources", path: "/btech-notes", color: "#3b82f6", free: true },
+  { iconSrc: "/sidebar/leaderboard.svg", label: "Leaderboard", desc: "Global rankings", path: "/leaderboard", color: "#f59e0b" },
+  { iconSrc: "/sidebar/anyltics.svg", label: "Analytics", desc: "Score trends & insights", path: "/analytics", color: "#06b6d4" },
+  { iconSrc: "/sidebar/wallet.svg", label: "Wallet", desc: "Manage your balance", path: "/wallet", color: "#10b981" },
+  { iconSrc: "/sidebar/myrewards.svg", label: "My Rewards", desc: "Level up with XP", path: "/rewards", color: "#f59e0b" },
+  { iconSrc: "/dsbanner/Earn%20Rewards.svg", label: "Redeem XP", desc: "Redeem XP for money", path: "/achievements", color: "#8b5cf6" },
 ];
 
 export default function ExploreGrid() {
@@ -24,7 +22,7 @@ export default function ExploreGrid() {
         <p>Everything you need to ace your interviews</p>
       </div>
       <div className="ud-explore-grid">
-        {EXPLORE_LINKS.map(({ icon: Icon, label, desc, path, color, free, isNew }) => (
+        {EXPLORE_LINKS.map(({ iconSrc, label, desc, path, color, free, isNew }) => (
           <button
             key={label}
             type="button"
@@ -32,7 +30,7 @@ export default function ExploreGrid() {
             style={{ "--accent": color }}
             onClick={() => path && navigate(path)}
           >
-            <div className="ud-explore-icon"><Icon size={22} /></div>
+            <div className="ud-explore-icon"><img src={iconSrc} alt={label} style={{ width: 22, height: 22 }} /></div>
             <div>
               <h4>
                 {label}

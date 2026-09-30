@@ -32,7 +32,7 @@ const LeaderboardIcon = (props) => <SvgIcon src="/sidebar/leaderboard.svg" {...p
 const AnalyticsIcon = (props) => <SvgIcon src="/sidebar/anyltics.svg" {...props} />;
 const CustomWalletIcon = (props) => <SvgIcon src="/sidebar/wallet.svg" {...props} />;
 const ProfileIcon = (props) => <SvgIcon src="/sidebar/profile.svg" {...props} />;
-const RewardIcon = (props) => <SvgIcon src="/sidebar/redeemxp.svg" {...props} />;
+const RewardIcon = (props) => <SvgIcon src="/dsbanner/Earn%20Rewards.svg" {...props} />;
 const MyRewardsIcon = (props) => <SvgIcon src="/sidebar/myrewards.svg" {...props} />;
 const CustomSettingsIcon = (props) => <SvgIcon src="/sidebar/setting.svg" {...props} />;
 const CustomLogoutIcon = (props) => <SvgIcon src="/sidebar/logout.svg" {...props} />;

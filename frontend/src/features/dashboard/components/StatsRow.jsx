@@ -9,7 +9,7 @@ export default function StatsRow({ totalInterviews = 0, totalMcq = 0, avgScore =
     <section className="ud-stats-row">
       <div className="ud-stat-card-new">
         <div className="ud-stat-icon-wrapper" style={{ backgroundColor: '#F0F5FF', color: '#3B82F6' }}>
-          <img src="/dsbanner/interview.svg" alt="Interviews" width={20} height={20} style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(87%) saturate(2250%) hue-rotate(206deg) brightness(98%) contrast(98%)' }} />
+          <img src="/dsbanner/totelsession.svg" alt="Total Sessions" width={20} height={20} style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(87%) saturate(2250%) hue-rotate(206deg) brightness(98%) contrast(98%)' }} />
         </div>
         <div className="ud-stat-info">
           <span className="ud-stat-val-new">{totalSessions}</span>
@@ -19,7 +19,7 @@ export default function StatsRow({ totalInterviews = 0, totalMcq = 0, avgScore =
 
       <div className="ud-stat-card-new">
         <div className="ud-stat-icon-wrapper" style={{ backgroundColor: '#F0FDF4', color: '#22C55E' }}>
-          <img src="/dsbanner/mcqexam.svg" alt="MCQ Exam" width={20} height={20} style={{ filter: 'brightness(0) saturate(100%) invert(56%) sepia(50%) saturate(1450%) hue-rotate(107deg) brightness(101%) contrast(92%)' }} />
+          <img src="/dsbanner/complete.svg" alt="Completed" width={20} height={20} style={{ filter: 'brightness(0) saturate(100%) invert(56%) sepia(50%) saturate(1450%) hue-rotate(107deg) brightness(101%) contrast(92%)' }} />
         </div>
         <div className="ud-stat-info">
           <span className="ud-stat-val-new">{totalMcq}</span>
@@ -39,7 +39,7 @@ export default function StatsRow({ totalInterviews = 0, totalMcq = 0, avgScore =
 
       <div className="ud-stat-card-new">
         <div className="ud-stat-icon-wrapper" style={{ backgroundColor: '#FFF7ED', color: '#F97316' }}>
-          <Code width={20} height={20} />
+          <img src="/dsbanner/Badges.svg" alt="Badges" width={20} height={20} style={{ filter: 'brightness(0) saturate(100%) invert(55%) sepia(80%) saturate(3015%) hue-rotate(345deg) brightness(102%) contrast(94%)' }} />
         </div>
         <div className="ud-stat-info">
           <span className="ud-stat-val-new">{badgesCount}</span>
