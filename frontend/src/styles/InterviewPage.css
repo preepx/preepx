@@ -1768,6 +1768,7 @@
 .mobile-only {
   display: none !important;
 }
+
 .desktop-only {
   display: block;
 }
@@ -1985,6 +1986,7 @@
   .desktop-only {
     display: none !important;
   }
+
   .mobile-only {
     display: block !important;
   }

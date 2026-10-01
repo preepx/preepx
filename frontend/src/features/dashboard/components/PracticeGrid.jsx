@@ -19,8 +19,8 @@ export default function PracticeGrid() {
         >
           <div className="ud-practice-body">
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: 'linear-gradient(90deg, #3D5EFF, #6017C7)', borderRadius: '8px' }}>
-                <img src="/sidebar/mockintervieww.svg" alt="Mock Interview" style={{ width: 18, height: 18, filter: 'brightness(0) invert(1)' }} />
+              <span className="ud-title-icon">
+                <img src="/sidebar/mockintervieww.svg" alt="Mock Interview" />
               </span>
               Mock Interview
             </h3>
@@ -37,8 +37,8 @@ export default function PracticeGrid() {
         >
           <div className="ud-practice-body">
             <h3 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, background: 'linear-gradient(90deg, #3D5EFF, #6017C7)', borderRadius: '8px' }}>
-                <img src="/sidebar/objectiveexamicon.svg" alt="Objective Exam" style={{ width: 18, height: 18, filter: 'brightness(0) invert(1)' }} />
+              <span className="ud-title-icon">
+                <img src="/sidebar/objectiveexamicon.svg" alt="Objective Exam" />
               </span>
               Objective Exam
             </h3>

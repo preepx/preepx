@@ -45,16 +45,8 @@
   box-shadow: var(--shadow-lg);
 }
 
-.ud-apply-banner-icon {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  background: rgba(47, 111, 91, 0.2);
-  color: #2f6f5b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+.ud-apply-banner-text {
+  flex: 1;
 }
 
 .ud-apply-banner-text h2 {
@@ -62,6 +54,39 @@
   font-size: 18px;
   font-weight: 800;
   color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ud-title-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, #3D5EFF, #6017C7);
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.ud-title-icon img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+.ud-apply-banner-text h2 .ud-title-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+
+.ud-apply-banner-text h2 .ud-title-icon img {
+  width: 20px;
+  height: 20px;
 }
 
 .ud-apply-banner-text p {
@@ -74,6 +99,7 @@
   margin-left: auto;
   color: var(--primary);
   flex-shrink: 0;
+  align-self: center;
 }
 
 /* Practice cards */

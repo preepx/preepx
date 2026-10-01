@@ -275,14 +275,14 @@ function AppLayout({ children }) {
               <div className="tb-divider"></div>
 
               {user?.subscription?.status === 'active' && user?.subscription?.expiresAt && new Date(user.subscription.expiresAt) > new Date() ? (
-                <Link to="/wallet" className="tb-wallet-badge" style={{ background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary)' }}>
-                  <Crown size={16} />
+                <Link to="/wallet" className="tb-wallet-badge" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b' }}>
+                  <Crown size={16} color="#f59e0b" />
                   <span>{Math.ceil((new Date(user.subscription.expiresAt) - new Date()) / (1000 * 60 * 60 * 24))} Days Pro</span>
                 </Link>
               ) : (
-                <Link to="/wallet" className="tb-wallet-badge">
-                  <Crown size={16} />
-                  <span>Pro</span>
+                <Link to="/wallet" className="tb-wallet-badge" style={{ color: '#f59e0b' }}>
+                  <Crown size={16} color="#f59e0b" />
+                  <span style={{ color: 'var(--text)' }}>Pro</span>
                 </Link>
               )}
 
