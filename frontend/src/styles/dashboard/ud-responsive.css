@@ -20,21 +20,27 @@
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .ud-stats-row {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .ud-explore-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .ud-main-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ud-panel {
+    padding: 16px;
+    box-sizing: border-box;
   }
 }
 
 @media (max-width: 768px) {
   .ud-page {
     padding: 16px 12px 32px;
+    box-sizing: border-box;
   }
 
   .ud-hero-inner {
