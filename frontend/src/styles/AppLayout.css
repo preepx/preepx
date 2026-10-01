@@ -650,6 +650,9 @@
   }
 
   .sidebar-top {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     height: 54px !important;
     min-height: 54px !important;
     padding: 0 10px !important;
