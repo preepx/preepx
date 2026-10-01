@@ -90,6 +90,14 @@
   color: #0f172a;
 }
 
+[data-theme="light"] .auth-input-box .input-icon {
+  color: #0f172a;
+}
+
+[data-theme="light"] .auth-input-box img.input-icon {
+  filter: brightness(0) saturate(100%) !important;
+}
+
 [data-theme="light"] .auth-input:focus {
   background: #ffffff;
   border-color: #3D5EFF;

@@ -265,21 +265,6 @@ function PricingSection({ onRecruiterClick }) {
                         ))}
                       </ul>
                     </div>
-
-                    {/* Attached Footer Feature */}
-                    <div className="hidden md:flex flex-col items-center text-center gap-1 w-full" style={{ marginTop: '35px' }}>
-                      {typeof feature.icon === 'string' ? (
-                        <img src={feature.icon} alt={feature.title} className="w-8 h-8 shrink-0 mb-1" />
-                      ) : (
-                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mb-1">
-                          <feature.icon className="w-4 h-4 text-slate-700" />
-                        </div>
-                      )}
-                      <div>
-                        <h5 className="text-[12px] font-bold text-slate-900 leading-tight mb-1">{feature.title}</h5>
-                        <p className="text-[10px] text-slate-600 font-medium leading-snug">{feature.desc}</p>
-                      </div>
-                    </div>
                   </div>
                 )
               })}
@@ -334,21 +319,6 @@ function PricingSection({ onRecruiterClick }) {
                           </li>
                         ))}
                       </ul>
-                    </div>
-
-                    {/* Attached Footer Feature */}
-                    <div className="hidden md:flex flex-col items-center text-center gap-1 w-full" style={{ marginTop: '35px' }}>
-                      {typeof feature.icon === 'string' ? (
-                        <img src={feature.icon} alt={feature.title} className="w-8 h-8 shrink-0 mb-1" />
-                      ) : (
-                        <div className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center shrink-0 mb-1">
-                          <feature.icon className="w-4 h-4 text-slate-700" />
-                        </div>
-                      )}
-                      <div>
-                        <h5 className="text-[12px] font-bold text-slate-900 leading-tight mb-1">{feature.title}</h5>
-                        <p className="text-[10px] text-slate-600 font-medium leading-snug">{feature.desc}</p>
-                      </div>
                     </div>
                   </div>
 

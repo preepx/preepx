@@ -198,6 +198,10 @@
   pointer-events: none;
 }
 
+.auth-input-box img[src*="email.svg"] {
+  filter: brightness(0) saturate(100%) !important;
+}
+
 .auth-input {
   width: 100%;
   height: 33px;
