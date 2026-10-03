@@ -29,7 +29,7 @@ export default function ExperienceSection({
     <div className="jp-card">
       <div className="jp-section-header">
         <div className="jp-section-title">
-          <Briefcase size={20} />
+          <img src="/profile/workexprince.svg" alt="" style={{ width: 20, height: 20, objectFit: 'contain' }} />
           <h2>Work Experience</h2>
         </div>
         <button
@@ -37,7 +37,7 @@ export default function ExperienceSection({
           className="jp-add-btn"
           onClick={() => setActiveSection(isAdding ? null : "exp-add")}
         >
-          <Plus size={16} /> Add Experience
+          <img src="/profile/plus.svg" alt="Add" style={{ width: 14, height: 14, objectFit: 'contain' }} /> Add Experience
         </button>
       </div>
 
@@ -114,15 +114,15 @@ export default function ExperienceSection({
       {/* Experience List */}
       {experiences.length === 0 && !isAdding ? (
         <div className="jp-empty-section">
-          <Briefcase size={32} />
+          <img src="/profile/workexprince.svg" alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />
           <p>Add your work experience — internships, full-time roles, freelance, etc.</p>
         </div>
       ) : (
         <div className="jp-exp-list">
           {experiences.map((exp, idx) => (
             <div key={exp.id || idx} className="jp-exp-item">
-              <div className="jp-exp-icon">
-                <Briefcase size={18} />
+              <div className="jp-exp-icon" style={{ background: 'transparent', boxShadow: 'none' }}>
+                <img src="/profile/workexprince.svg" alt="" style={{ width: 24, height: 24, objectFit: 'contain' }} />
               </div>
               <div className="jp-exp-details">
                 <div className="jp-exp-role">{exp.role}</div>

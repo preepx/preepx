@@ -719,6 +719,8 @@
 
   .mobile-menu-btn {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 34px;
     height: 34px;
   }
@@ -730,6 +732,8 @@
 
   .mobile-menu-btn {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 34px;
     height: 34px;
     order: -1;

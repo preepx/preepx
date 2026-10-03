@@ -18,8 +18,7 @@ export default function ProfileChecklist({ user, form }) {
   ];
 
   return (
-    <div className="jp-card jp-checklist-card">
-      <h3 className="jp-checklist-title">Profile Completion Checklist</h3>
+    <div className="jp-card jp-checklist-card" style={{ background: "transparent", border: "none", boxShadow: "none", padding: "0" }}>
       <div className="jp-checklist">
         {checklistItems.map(({ label, done }) => (
           <div key={label} className={`jp-check-item ${done ? "jp-check-item--done" : ""}`}>

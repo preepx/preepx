@@ -66,12 +66,11 @@ export default function ReferralCard({ user }) {
           width: 44px;
           height: 44px;
           border-radius: 12px;
-          background: linear-gradient(135deg, #6366f1, #8b5cf6);
-          color: white;
+          background: transparent;
+          color: #0f172a;
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
           flex-shrink: 0;
         }
         .ref-grid {
@@ -110,26 +109,16 @@ export default function ReferralCard({ user }) {
           width: 100%;
           box-sizing: border-box;
         }
-        .ref-code-text {
-          font-family: monospace;
-          font-size: 18px;
-          font-weight: 800;
-          letter-spacing: 2px;
-          color: var(--primary);
+        .ref-code-text, .ref-link-text {
+          font-family: inherit;
+          font-size: 11px;
+          font-weight: 600;
+          color: #ffffff;
+          background: linear-gradient(90deg, #3d5eff, #6017c7);
+          padding: 4px 10px;
+          border-radius: 8px;
+          border: none;
           white-space: nowrap;
-        }
-        .ref-link-text {
-          font-size: 12px;
-          color: var(--text);
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          min-width: 0;
-          flex: 1;
-          background: var(--surface);
-          padding: 6px 10px;
-          border-radius: 6px;
-          border: 1px solid var(--border);
         }
         .ref-action-btn {
           padding: 7px 14px;
@@ -254,7 +243,7 @@ export default function ReferralCard({ user }) {
       <div className="ref-card-header">
         <div className="ref-title-group">
           <div className="ref-icon-badge">
-            <Gift size={20} />
+            <img src="/dsbanner/Earn Rewards.svg" alt="Earn Rewards" style={{ width: 24, height: 24, objectFit: 'contain' }} />
           </div>
           <div style={{ minWidth: 0 }}>
             <h2 style={{ margin: 0, fontSize: "16px", fontWeight: 700, color: "var(--text)" }}>
@@ -272,14 +261,14 @@ export default function ReferralCard({ user }) {
             display: "inline-flex",
             alignItems: "center",
             gap: "6px",
-            background: "color-mix(in srgb, var(--primary) 10%, transparent)",
-            padding: "5px 12px",
-            borderRadius: "20px",
-            border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)",
+            background: "linear-gradient(90deg, #3d5eff, #6017c7)",
+            padding: "4px 10px",
+            borderRadius: "8px",
+            border: "none",
           }}
         >
-          <Users size={14} color="var(--primary)" />
-          <span style={{ fontSize: "12px", fontWeight: 700, color: "var(--primary)" }}>
+          <Users size={14} color="white" />
+          <span style={{ fontSize: "12px", fontWeight: 700, color: "white" }}>
             {referralCount} {referralCount === 1 ? "Friend" : "Friends"} Referred
           </span>
         </div>
@@ -291,13 +280,13 @@ export default function ReferralCard({ user }) {
         <div className="ref-box">
           <span className="ref-box-label">Your Referral Code</span>
           <div className="ref-box-content">
-            <span className="ref-code-text">{referralCode}</span>
+            <span className="ref-code-text">Code</span>
             <button
               type="button"
               className={`ref-action-btn ${copiedCode ? "ref-action-btn-primary" : ""}`}
               onClick={handleCopyCode}
             >
-              {copiedCode ? <Check size={14} /> : <Copy size={14} />}
+              {copiedCode ? <Check size={14} /> : <img src="/profile/copycode.svg" alt="Copy Code" style={{ width: 14, height: 14 }} />}
               {copiedCode ? "Copied" : "Copy Code"}
             </button>
           </div>
@@ -307,13 +296,13 @@ export default function ReferralCard({ user }) {
         <div className="ref-box">
           <span className="ref-box-label">Your Unique Referral Link</span>
           <div className="ref-box-content">
-            <span className="ref-link-text">{referralLink}</span>
+            <span className="ref-link-text">Link</span>
             <button
               type="button"
               className={`ref-action-btn ${copiedLink ? "ref-action-btn-primary" : ""}`}
               onClick={handleCopyLink}
             >
-              {copiedLink ? <Check size={14} /> : <Share2 size={14} />}
+              {copiedLink ? <Check size={14} /> : <img src="/profile/copylink.svg" alt="Copy Link" style={{ width: 14, height: 14 }} />}
               {copiedLink ? "Copied" : "Copy Link"}
             </button>
           </div>
@@ -339,10 +328,10 @@ export default function ReferralCard({ user }) {
             className="ref-action-btn ref-action-btn-wa"
             onClick={handleWhatsAppShare}
           >
-            <MessageCircle size={15} /> Share on WhatsApp
+            <img src="/profile/whatsapp.svg" alt="WhatsApp" style={{ width: 15, height: 15 }} /> Share on WhatsApp
           </button>
           <button type="button" className="ref-action-btn" onClick={handleCopyLink}>
-            <Share2 size={15} /> Share Link
+            <img src="/profile/copylink.svg" alt="Share Link" style={{ width: 15, height: 15 }} /> Share Link
           </button>
         </div>
 
@@ -350,9 +339,13 @@ export default function ReferralCard({ user }) {
           to="/rewards"
           className="ref-rewards-link"
           style={{
-            fontSize: "13px",
+            fontSize: "12px",
             fontWeight: 700,
-            color: "var(--primary)",
+            color: "white",
+            background: "linear-gradient(90deg, #3d5eff, #6017c7)",
+            border: "none",
+            borderRadius: "8px",
+            padding: "6px 12px",
             textDecoration: "none",
             display: "inline-flex",
             alignItems: "center",

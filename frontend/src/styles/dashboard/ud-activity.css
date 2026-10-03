@@ -200,7 +200,7 @@
 .ud-panel-empty button {
   margin-top: 6px;
   padding: 9px 20px;
-  background: var(--primary);
+  background: linear-gradient(90deg, #3D5EFF, #6017C7);
   color: white;
   border: none;
   border-radius: 10px;

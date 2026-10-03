@@ -227,7 +227,7 @@ export default function ProfileHeaderCard({
               </div>
               {form.headline && <div className="jp-headline">{form.headline}</div>}
               <div className="jp-contact-row">
-                <span><Mail size={14} />{user?.email}</span>
+                <span><img src="/icons/gmail.svg" alt="Email" style={{ width: 14, height: 14, objectFit: 'contain' }} />{user?.email}</span>
                 {form.phone && <span><Phone size={14} />{form.phone}</span>}
                 {form.city && <span><MapPin size={14} />{form.city}</span>}
                 {user?.referralCode && (
@@ -276,9 +276,9 @@ export default function ProfileHeaderCard({
           <div className="jp-edit-form">
             <div className="jp-field-row">
               <div className="jp-field">
-                <label><Linkedin size={14} /> LinkedIn URL</label>
+                <label><img src="/icons/linkedin.svg" alt="LinkedIn" style={{ width: 14, height: 14 }} /> LinkedIn URL</label>
                 <input
-                  value={form.linkedin}
+                  value={form.linkedin || ""}
                   onChange={(e) => setForm({ ...form, linkedin: e.target.value })}
                   placeholder="https://linkedin.com/in/..."
                 />
@@ -294,9 +294,27 @@ export default function ProfileHeaderCard({
               <div className="jp-field">
                 <label><Globe size={14} /> Portfolio URL</label>
                 <input
-                  value={form.portfolio}
+                  value={form.portfolio || ""}
                   onChange={(e) => setForm({ ...form, portfolio: e.target.value })}
                   placeholder="https://yoursite.com"
+                />
+              </div>
+            </div>
+            <div className="jp-field-row">
+              <div className="jp-field">
+                <label><img src="/icons/facebook.svg" alt="Facebook" style={{ width: 14, height: 14 }} /> Facebook URL</label>
+                <input
+                  value={form.facebook || ""}
+                  onChange={(e) => setForm({ ...form, facebook: e.target.value })}
+                  placeholder="https://facebook.com/..."
+                />
+              </div>
+              <div className="jp-field">
+                <label><img src="/icons/instagram.svg" alt="Instagram" style={{ width: 14, height: 14 }} /> Instagram URL</label>
+                <input
+                  value={form.instagram || ""}
+                  onChange={(e) => setForm({ ...form, instagram: e.target.value })}
+                  placeholder="https://instagram.com/..."
                 />
               </div>
             </div>
@@ -322,7 +340,7 @@ export default function ProfileHeaderCard({
           <div className="jp-social-links">
             {form.linkedin && (
               <a href={form.linkedin} target="_blank" rel="noreferrer" className="jp-social-link jp-social-link--linkedin">
-                <Linkedin size={16} /> LinkedIn
+                <img src="/icons/linkedin.svg" alt="LinkedIn" style={{ width: 16, height: 16 }} /> LinkedIn
               </a>
             )}
             {form.github && (
@@ -333,6 +351,16 @@ export default function ProfileHeaderCard({
             {form.portfolio && (
               <a href={form.portfolio} target="_blank" rel="noreferrer" className="jp-social-link jp-social-link--portfolio">
                 <Globe size={16} /> Portfolio
+              </a>
+            )}
+            {form.facebook && (
+              <a href={form.facebook} target="_blank" rel="noreferrer" className="jp-social-link jp-social-link--portfolio" style={{ background: 'rgba(24, 119, 242, 0.08)', color: '#1877f2', border: '1px solid rgba(24, 119, 242, 0.2)' }}>
+                <img src="/icons/facebook.svg" alt="Facebook" style={{ width: 16, height: 16 }} /> Facebook
+              </a>
+            )}
+            {form.instagram && (
+              <a href={form.instagram} target="_blank" rel="noreferrer" className="jp-social-link jp-social-link--portfolio" style={{ background: 'rgba(225, 48, 108, 0.08)', color: '#e1306c', border: '1px solid rgba(225, 48, 108, 0.2)' }}>
+                <img src="/icons/instagram.svg" alt="Instagram" style={{ width: 16, height: 16 }} /> Instagram
               </a>
             )}
             <button

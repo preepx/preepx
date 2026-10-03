@@ -225,7 +225,7 @@ function AppLayout({ children }) {
                 aria-label="Toggle Sidebar"
                 title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
               >
-                <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18 }} />
+                <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18, display: 'block', margin: 'auto' }} />
               </button>
               <button
                 type="button"
@@ -233,7 +233,7 @@ function AppLayout({ children }) {
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open Navigation Menu"
               >
-                <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18 }} />
+                <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18, display: 'block', margin: 'auto' }} />
               </button>
 
               <button

@@ -28,7 +28,7 @@ export default function SkillsSection({
     <div className="jp-card">
       <div className="jp-section-header">
         <div className="jp-section-title">
-          <Code2 size={20} />
+          <img src="/profile/skills.svg" alt="" style={{ width: 20, height: 20, objectFit: 'contain' }} />
           <h2>Skills</h2>
         </div>
       </div>
@@ -72,14 +72,14 @@ export default function SkillsSection({
             className="jp-add-skill-btn"
             onClick={() => setActiveSection("skill-add")}
           >
-            <Plus size={15} /> Add Skill
+            <img src="/profile/plus.svg" alt="Add" style={{ width: 14, height: 14, objectFit: 'contain' }} /> Add Skill
           </button>
         )}
       </div>
 
       {skills.length === 0 && !isAdding && (
         <div className="jp-empty-section">
-          <Code2 size={32} />
+          <img src="/profile/skills.svg" alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />
           <p>Add your technical and soft skills to improve job match score.</p>
         </div>
       )}

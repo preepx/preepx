@@ -29,7 +29,7 @@ export default function EducationSection({
     <div className="jp-card">
       <div className="jp-section-header">
         <div className="jp-section-title">
-          <GraduationCap size={20} />
+          <img src="/profile/education.svg" alt="" style={{ width: 20, height: 20, objectFit: 'contain' }} />
           <h2>Education</h2>
         </div>
         <button
@@ -37,7 +37,7 @@ export default function EducationSection({
           className="jp-add-btn"
           onClick={() => setActiveSection(isAdding ? null : "edu-add")}
         >
-          <Plus size={16} /> Add Education
+          <img src="/profile/plus.svg" alt="Add" style={{ width: 14, height: 14, objectFit: 'contain' }} /> Add Education
         </button>
       </div>
 
@@ -116,7 +116,7 @@ export default function EducationSection({
 
       {educations.length === 0 && !isAdding ? (
         <div className="jp-empty-section">
-          <GraduationCap size={32} />
+          <img src="/profile/education.svg" alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />
           <p>Add your educational qualifications — college, university, courses, etc.</p>
         </div>
       ) : (
@@ -125,9 +125,9 @@ export default function EducationSection({
             <div key={edu.id || idx} className="jp-exp-item">
               <div
                 className="jp-exp-icon"
-                style={{ background: "linear-gradient(135deg, #059669, #10b981)" }}
+                style={{ background: "transparent", boxShadow: "none" }}
               >
-                <GraduationCap size={18} />
+                <img src="/profile/education.svg" alt="" style={{ width: 24, height: 24, objectFit: 'contain' }} />
               </div>
               <div className="jp-exp-details">
                 <div className="jp-exp-role">
