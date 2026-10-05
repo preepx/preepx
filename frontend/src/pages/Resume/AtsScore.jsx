@@ -15,16 +15,16 @@ const FILE_TYPE_HINT = "PDF only · Max 10MB";
 const FILE_TYPE_ERROR = "Invalid file type. Only PDF files are allowed.";
 
 const SCAN_STEPS = [
-  { icon: Upload, title: "Upload Resume", desc: "PDF format only · Max 10MB" },
-  { icon: ScanLine, title: "AI ATS Scan", desc: "PreepX AI checks keywords, formatting, sections & impact" },
-  { icon: Target, title: "Actionable Report", desc: "Get your score plus tips to stand out to recruiters" },
+  { img: "/ats/uploade_resume1.svg", title: "Upload Resume", desc: "PDF format only · Max 10MB" },
+  { img: "/ats/uploaderesume2.svg", title: "AI ATS Scan", desc: "PreepX AI checks keywords, formatting, sections & impact" },
+  { img: "/ats/uploaderesme3.svg", title: "Actionable Report", desc: "Get your score plus tips to stand out to recruiters" },
 ];
 
 const SCAN_CHECKS = [
-  { icon: Zap, label: "Keyword Match", desc: "Role-relevant skills & terms" },
-  { icon: FileText, label: "Formatting", desc: "ATS-readable layout & structure" },
-  { icon: ShieldCheck, label: "Sections", desc: "Contact, experience, education" },
-  { icon: Briefcase, label: "Impact", desc: "Action verbs & measurable results" },
+  { img: "/ats/Keyword%20Match.svg", label: "Keyword Match", desc: "Role-relevant skills & terms" },
+  { img: "/ats/Formatting.svg", label: "Formatting", desc: "ATS-readable layout & structure" },
+  { img: "/ats/Sections.svg", label: "Sections", desc: "Contact, experience, education" },
+  { img: "/ats/Impact.svg", label: "Impact", desc: "Action verbs & measurable results" },
 ];
 
 const AtsScore = () => {
@@ -88,10 +88,6 @@ const AtsScore = () => {
       <header className="ats-hero">
         <div className="ats-header-title">
           <h1>ATS Resume Score</h1>
-          <div className="ats-coin-badge">
-            <span className="ats-coin-icon">₹</span>
-            ₹1 per scan
-          </div>
         </div>
 
         <p className="ats-hero-desc">
@@ -107,7 +103,7 @@ const AtsScore = () => {
               <div key={step.title} className="ats-step-card">
                 <span className="ats-step-num">{i + 1}</span>
                 <div className="ats-step-icon">
-                  <step.icon size={20} />
+                  <img src={step.img} alt={step.title} style={{ width: '28px', height: '28px' }} />
                 </div>
                 <h3>{step.title}</h3>
                 <p>{step.desc}</p>
@@ -135,7 +131,7 @@ const AtsScore = () => {
             ) : (
               <>
                 <div className="ats-drop-icon-wrap">
-                  <FileText size={36} />
+                  <img src="/ats/uploade_resume_here.svg" alt="Upload resume here" style={{ width: '44px', height: '44px' }} />
                 </div>
                 <h2>Drop your resume here</h2>
                 <p className="ats-drop-hint">{FILE_TYPE_HINT}</p>
@@ -154,7 +150,7 @@ const AtsScore = () => {
               {SCAN_CHECKS.map((check) => (
                 <div key={check.label} className="ats-check-item">
                   <div className="ats-check-icon">
-                    <check.icon size={16} />
+                    <img src={check.img} alt={check.label} style={{ width: '22px', height: '22px' }} />
                   </div>
                   <div>
                     <strong>{check.label}</strong>

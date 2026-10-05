@@ -7,9 +7,9 @@ import Loader from "@/components/Loader";
 import '@/styles/Leaderboard.css';
 
 const RANK_STYLES = [
-  { icon: Crown, cls: "gold" },
-  { icon: Medal, cls: "silver" },
-  { icon: Medal, cls: "bronze" },
+  { img: "/leaderbord/rank1.svg", cls: "gold" },
+  { img: "/leaderbord/rank2.svg", cls: "silver" },
+  { img: "/leaderbord/rank3.svg", cls: "bronze" },
 ];
 
 const TOP_RANK_LIMIT = 10;
@@ -39,20 +39,23 @@ function Leaderboard() {
   return (
     <div className="leaderboard-page">
       <div className="page-header">
-        <h1>Community Leaderboard</h1>
-        <p>Compete with candidates worldwide — earn points by acing interviews</p>
+        <h1>See Who's Leading</h1>
+        <p>Test your skills, earn points, and see where you stand</p>
       </div>
 
       <div className="lb-info-cards">
-        <div className="lb-info-card"><Users size={18} /><span>Top {topRanks.length} Rankings</span></div>
-        <div className="lb-info-card"><Zap size={18} /><span>Earn XP by completing challenges</span></div>
-        <div className="lb-info-card"><Trophy size={18} /><span>+50 bonus for perfect score</span></div>
+        <div className="lb-info-card"><img src="/leaderbord/Top 10 Rankings.svg" alt="" width={16} /><span>Top 10 Performers</span></div>
+        <div className="lb-info-card"><img src="/leaderbord/Earn XP by completing challenges.svg" alt="" width={16} /><span>Complete Tasks & Earn XP</span></div>
+        <div className="lb-info-card"><img src="/leaderbord/+50 bonus for perfect score.svg" alt="" width={16} /><span>Score 100% & Earn +50 XP</span></div>
       </div>
 
       <div className="your-rank-card">
-        <Trophy size={24} />
-        <div><span className="yr-label">Your Rank</span><span className="yr-value">#{data.userRank}</span></div>
-        <div className="yr-points">{data.currentUserPoints} points</div>
+        <img src="/leaderbord/Your Rank.svg" alt="" width={24} height={24} />
+        <div className="yr-text">
+          <span className="yr-label">Your Rank</span>
+          <span className="yr-value">#{data.userRank}</span>
+        </div>
+        <div className="yr-points">{data.currentUserPoints} XP</div>
       </div>
 
       {top3.length >= 3 && (
@@ -75,16 +78,22 @@ function Leaderboard() {
 
       <div className="lb-list">
         {topRanks.map((entry, i) => {
-          const RankIcon = i < 3 ? RANK_STYLES[i].icon : null;
+          const rankImg = i < 3 ? RANK_STYLES[i].img : null;
           return (
             <div key={entry.rank} className={`lb-row ${entry.isCurrentUser ? "current" : ""} ${i < 3 ? RANK_STYLES[i].cls : ""}`}>
-              <div className="lb-rank">{RankIcon ? <RankIcon size={18} /> : <span>#{entry.rank}</span>}</div>
+              <div className="lb-rank">{rankImg ? <img src={rankImg} alt={`Rank ${entry.rank}`} width={20} /> : <span>#{entry.rank}</span>}</div>
               <img src={entry.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(maskName(entry.fullName, entry.isCurrentUser))}&background=4f46e5&color=fff`} alt="" className="lb-avatar" />
               <div className="lb-info">
-                <span className="lb-name">{maskName(entry.fullName, entry.isCurrentUser)}{entry.isCurrentUser && <span className="you-tag">You</span>}</span>
-                <span className="lb-meta">Lvl {entry.level} · {entry.interviewsCompleted} interviews{entry.streak > 0 && ` · 🔥 ${entry.streak}`}</span>
+                <span className="lb-name">
+                  <span className="lb-name-text">{maskName(entry.fullName, entry.isCurrentUser)}</span>
+                  {entry.isCurrentUser && <span className="you-tag">You</span>}
+                </span>
+                <span className="lb-meta">
+                  Lvl {entry.level} · {entry.interviewsCompleted} Interviews 
+                  {entry.streak > 0 && <span className="streak-wrap" style={{display: 'flex', alignItems: 'center'}}> <span style={{margin: '0 4px'}}>·</span> <img src="/leaderbord/strik.svg" alt="" width={10} style={{margin:'0 4px'}} /> Strike</span>}
+                </span>
               </div>
-              <div className="lb-score"><span className="lb-points">{entry.points}</span><span className="lb-pts-label">XP</span></div>
+              <div className="lb-score"><span className="lb-points">{entry.points}</span></div>
             </div>
           );
         })}
