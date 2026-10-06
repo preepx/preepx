@@ -64,8 +64,8 @@ const NAV_SECTIONS = [
     items: [
       { to: "/leaderboard", icon: LeaderboardIcon, label: "Leaderboard" },
       { to: "/analytics", icon: AnalyticsIcon, label: "Analytics" },
-      { to: "/rewards", icon: RewardIcon, label: "Reward" },
-      { to: "/achievements", icon: MyRewardsIcon, label: "My Rewards" },
+      { to: "/rewards", icon: RewardIcon, label: "My Reward" },
+      { to: "/achievements", icon: MyRewardsIcon, label: "Rewards" },
     ],
   },
   {
