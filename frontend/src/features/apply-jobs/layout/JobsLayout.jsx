@@ -44,7 +44,7 @@ function JobsLayout({ children }) {
   const [showServicesMenu, setShowServicesMenu] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   // Auto-collapse sidebar on smaller screens
   useEffect(() => {
@@ -175,9 +175,6 @@ function JobsLayout({ children }) {
                   <Globe size={20} />
                   <span>Website</span>
                 </Link>
-                <button type="button" className="sidebar-bottom-btn theme-btn" onClick={toggleTheme} title={theme === "light" ? "Dark Mode" : "Light Mode"}>
-                  {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-                </button>
                 <button type="button" className="sidebar-bottom-btn logout-btn" onClick={handleLogout} title="Sign Out">
                   <LogOut size={20} />
                   <span>Logout</span>
@@ -188,9 +185,6 @@ function JobsLayout({ children }) {
                 <Link to="/" className="sidebar-action-btn" data-tooltip="Back to Main Website" onClick={() => setMobileOpen(false)}>
                   <Globe size={20} />
                 </Link>
-                <button type="button" className="sidebar-action-btn" onClick={toggleTheme} data-tooltip={theme === "light" ? "Dark Mode" : "Light Mode"}>
-                  {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-                </button>
                 <button type="button" className="sidebar-action-btn danger" onClick={handleLogout} data-tooltip="Sign Out">
                   <LogOut size={20} />
                 </button>

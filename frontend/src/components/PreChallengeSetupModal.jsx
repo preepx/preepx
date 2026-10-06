@@ -8,7 +8,7 @@ const PreChallengeSetupModal = ({ onProceed, onCancel, title = "System Permissio
   const [denied, setDenied] = useState(false);
   const [checking, setChecking] = useState(false);
   const [showAllNotes, setShowAllNotes] = useState(false);
-  const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === 'dark');
+  const isDark = false; // Theme permanently light
   
   const streamRef = useRef(null);
   const videoRef = useRef(null);
@@ -18,14 +18,8 @@ const PreChallengeSetupModal = ({ onProceed, onCancel, title = "System Permissio
       if (res.state === 'granted') requestCamera();
     }).catch(() => { });
 
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.dataset.theme === 'dark');
-    });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
     return () => {
       streamRef.current?.getTracks().forEach((track) => track.stop());
-      observer.disconnect();
     };
   }, []);
 

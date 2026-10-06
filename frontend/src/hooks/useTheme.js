@@ -1,71 +1,26 @@
-import { useState, useEffect, useCallback } from "react";
-
-const THEME_EVENT = "preepx-theme-change";
+import { useEffect } from "react";
 
 /**
- * Returns current theme from documentElement or localStorage, defaulting to dark
+ * Theme is permanently locked to light mode.
+ * Dark mode has been removed.
  */
-function getActiveTheme() {
-  if (typeof document !== "undefined" && document.documentElement.dataset.theme) {
-    return document.documentElement.dataset.theme;
-  }
-  try {
-    return localStorage.getItem("theme") || "dark";
-  } catch {
-    return "dark";
-  }
-}
-
 export function useTheme() {
-  const [theme, setThemeState] = useState(getActiveTheme);
-
-  const applyTheme = useCallback((newTheme) => {
-    const next = newTheme === "light" ? "light" : "dark";
+  useEffect(() => {
+    // Always enforce light theme
     if (typeof document !== "undefined") {
-      document.documentElement.dataset.theme = next;
+      document.documentElement.dataset.theme = "light";
     }
     try {
-      localStorage.setItem("theme", next);
+      localStorage.setItem("theme", "light");
     } catch {
       // storage unavailable
     }
-    setThemeState(next);
-    window.dispatchEvent(new CustomEvent(THEME_EVENT, { detail: next }));
   }, []);
 
-  const toggleTheme = useCallback(() => {
-    applyTheme(theme === "light" ? "dark" : "light");
-  }, [theme, applyTheme]);
-
-  useEffect(() => {
-    // Keep in sync with other components/tabs
-    const handleCustomChange = (e) => {
-      if (e.detail && e.detail !== theme) {
-        setThemeState(e.detail);
-      }
-    };
-
-    const handleStorage = (e) => {
-      if (e.key === "theme" && e.newValue && e.newValue !== theme) {
-        setThemeState(e.newValue);
-        if (typeof document !== "undefined") {
-          document.documentElement.dataset.theme = e.newValue;
-        }
-      }
-    };
-
-    window.addEventListener(THEME_EVENT, handleCustomChange);
-    window.addEventListener("storage", handleStorage);
-    return () => {
-      window.removeEventListener(THEME_EVENT, handleCustomChange);
-      window.removeEventListener("storage", handleStorage);
-    };
-  }, [theme]);
-
   return {
-    theme,
-    isDark: theme === "dark",
-    toggleTheme,
-    setTheme: applyTheme,
+    theme: "light",
+    isDark: false,
+    toggleTheme: () => {}, // no-op
+    setTheme: () => {},    // no-op
   };
 }

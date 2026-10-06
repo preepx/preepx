@@ -51,19 +51,13 @@ export default function AssessmentCoding({
   const [showHelpModal, setShowHelpModal] = useState(false);
 
   const [isFullscreen, setIsFullscreen] = useState(true);
-  const [isDark, setIsDark] = useState(() => {
-    return document.documentElement.dataset.theme === "dark";
-  });
+  const isDark = false; // Theme permanently light
 
   const camRef = useRef(null);
   const langDropdownRef = useRef(null);
   const { warning: faceWarning } = useFaceDetection(camRef);
 
-  const toggleTheme = () => {
-    const next = isDark ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    setIsDark(!isDark);
-  };
+  const toggleTheme = () => {}; // no-op, dark mode removed
 
   const selectedLang = LANGUAGES.find((l) => l.value === currentLanguage);
   const statement = question?.description || "";

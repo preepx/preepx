@@ -51,7 +51,7 @@ const NAV_SECTIONS = [
 export default function RecruiterLayout({ children, title = "Dashboard" }) {
   const [collapsed, setCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { isDark, toggleTheme } = useTheme();
+  const { isDark } = useTheme();
   const [notifications, setNotifications] = useState([]);
   const [showNotifs, setShowNotifs] = useState(false);
   const [companyStatus, setCompanyStatus] = useState("VERIFIED");
@@ -245,9 +245,6 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
                     </div>
                   )}
                 </div>
-                <button type="button" className="rx-icon-btn" onClick={toggleTheme} aria-label="Toggle theme">
-                  {isDark ? <Sun size={18} /> : <Moon size={18} />}
-                </button>
                 <button type="button" className="rx-icon-btn rx-notif-btn" aria-label="Notifications" onClick={() => setShowNotifs(!showNotifs)}>
                   <Bell size={18} />
                   {unreadCount > 0 && <span className="rx-notif-badge">{unreadCount > 9 ? "9+" : unreadCount}</span>}

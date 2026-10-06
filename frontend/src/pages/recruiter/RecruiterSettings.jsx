@@ -9,7 +9,7 @@ import '@/styles/RecruiterLayout.css';
 export default function RecruiterSettings() {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState({ fullName: "", designation: "", phone: "" });
-  const [isDark, setIsDark] = useState(document.documentElement.dataset.theme === "dark");
+  const [isDark] = useState(false); // Theme permanently light
 
   useEffect(() => {
     getOnboarding().then((d) => {
@@ -28,25 +28,12 @@ export default function RecruiterSettings() {
     }
   };
 
-  const toggleTheme = () => {
-    const next = isDark ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem("theme", next);
-    setIsDark(!isDark);
-  };
+
 
   if (loading) return <RecruiterLayout title="Settings"><Loader /></RecruiterLayout>;
 
   return (
     <RecruiterLayout title="Settings">
-      <div className="rx-card" style={{ marginBottom: 20 }}>
-        <h3 style={{ marginTop: 0 }}>Appearance</h3>
-        <p className="rx-muted" style={{ marginBottom: 12 }}>Match candidate dashboard theme (dark / light).</p>
-        <button type="button" className="rx-btn rx-btn-secondary" onClick={toggleTheme}>
-          {isDark ? <Sun size={16} /> : <Moon size={16} />}
-          {isDark ? "Switch to Light" : "Switch to Dark"}
-        </button>
-      </div>
 
       <div className="rx-card">
         <h3 style={{ marginTop: 0 }}>Recruiter Profile</h3>

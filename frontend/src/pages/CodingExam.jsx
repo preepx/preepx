@@ -61,7 +61,7 @@ const CodingExam = () => {
   const [reportDetails, setReportDetails] = useState("");
   const [showHelpModal, setShowHelpModal] = useState(false);
 
-  const [isDark, setIsDark] = useState(() => document.documentElement.dataset.theme === "dark");
+  const isDark = false; // Theme permanently light
   const [isOutputExpanded, setIsOutputExpanded] = useState(false);
   const [activeSampleTab, setActiveSampleTab] = useState(0);
 
@@ -70,12 +70,7 @@ const CodingExam = () => {
 
   const { warning: faceWarning } = useFaceDetection(camRef);
 
-  const toggleTheme = () => {
-    const next = isDark ? "light" : "dark";
-    document.documentElement.dataset.theme = next;
-    localStorage.setItem("theme", next);
-    setIsDark(!isDark);
-  };
+  const toggleTheme = () => {}; // no-op, dark mode removed
 
   useEffect(() => {
     const fetchQuestion = async () => {
