@@ -40,43 +40,34 @@ function Rewards() {
   return (
     <div className="rewards-page">
       <div className="rewards-header">
-        <h1>My Rewards</h1>
-        <p>Complete milestones to earn XP and level up!</p>
+        <div className="title-with-icon">
+          <Gift size={28} className="header-icon" />
+          <h1>My Rewards</h1>
+        </div>
+        <p>Complete goals, earn XP, and unlock the next level!</p>
       </div>
 
       <div className="xp-progress-section">
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '2px' }}>
+        <div className="xp-progress-top">
           <button 
             onClick={() => navigate('/achievements')}
-            style={{ 
-              fontSize: '13px', 
-              fontWeight: '600', 
-              padding: '6px 16px', 
-              background: 'var(--primary, #6d28d9)', 
-              color: 'white', 
-              border: 'none', 
-              borderRadius: '8px', 
-              cursor: 'pointer',
-              transition: 'background 0.2s'
-            }}
-            onMouseOver={(e) => e.target.style.background = 'var(--primary-dark, #5b21b6)'}
-            onMouseOut={(e) => e.target.style.background = 'var(--primary, #6d28d9)'}
+            className="redeem-btn"
           >
             Redeem XP
           </button>
         </div>
         <div className="xp-stats">
           <h2>Level {level}</h2>
-          <span className="xp-amount">{xp} / {maxLevelXp} XP</span>
+          <span className="xp-amount">{xp}/{maxLevelXp} XP</span>
         </div>
         <div className="progress-bar-container">
           <div className="progress-fill" style={{ width: `${progressPct}%` }}></div>
         </div>
-        <span className="level-text">Keep earning XP to reach Level {level + 1}</span>
+        <span className="level-text">Keep earning XP to unlock Level {level + 1}</span>
       </div>
 
       <div className="rewards-grid-section">
-        <h3>Ways to Earn XP</h3>
+        <h3>Explore Ways to Earn XP</h3>
         <div className="rewards-grid">
           {(() => {
             const allRewards = getRewardsData(user);
@@ -130,10 +121,13 @@ function Rewards() {
                 >
                   <div className="reward-card-header">
                     <div className="reward-title-group">
-                      <Icon size={20} color={isClaimed ? "#10b981" : "#94a3b8"} />
+                      <Icon size={20} color={isClaimed ? "#10b981" : "#4b5563"} />
                       <span className="reward-title">{reward.title}</span>
                     </div>
-                    <span className="reward-xp">+{reward.xp} XP</span>
+                    <span className="reward-xp">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '2px'}}><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      {reward.xp} XP
+                    </span>
                   </div>
                   
                   <p className="reward-desc">{reward.desc}</p>

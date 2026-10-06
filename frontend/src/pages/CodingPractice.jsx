@@ -54,8 +54,8 @@ const CodingPractice = () => {
   }, [currentPage, selectedTopics]);
 
   const handleTopicToggle = (topicName) => {
-    setSelectedTopics(prev => 
-      prev.includes(topicName) 
+    setSelectedTopics(prev =>
+      prev.includes(topicName)
         ? prev.filter(t => t !== topicName)
         : [...prev, topicName]
     );
@@ -90,7 +90,7 @@ const CodingPractice = () => {
       </div>
 
       <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-        
+
         {/* LEFT SIDEBAR: TOPIC FILTERS */}
         <div className="panel" style={{ width: '280px', flexShrink: 0, padding: '20px' }}>
           <h3 style={{ marginBottom: '16px', fontSize: '1.1rem', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '12px' }}>
@@ -99,8 +99,8 @@ const CodingPractice = () => {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', maxHeight: '600px', overflowY: 'auto' }}>
             {ALL_TOPICS.map(topic => (
               <label key={topic.name} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', color: '#cbd5e1' }}>
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   checked={selectedTopics.includes(topic.name)}
                   onChange={() => handleTopicToggle(topic.name)}
                   style={{ width: '16px', height: '16px', accentColor: '#4f46e5' }}
@@ -128,21 +128,21 @@ const CodingPractice = () => {
             ) : problems.length > 0 ? (
               <div>
                 {problems.map(problem => (
-                  <div key={problem._id} style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    padding: '20px', 
+                  <div key={problem._id} style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '20px',
                     borderBottom: '1px solid rgba(255,255,255,0.05)',
                     transition: 'background 0.2s',
                     cursor: 'default'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.02)'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.02)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                   >
                     <div style={{ marginRight: '20px', color: '#64748b' }}>
                       <Bookmark size={20} />
                     </div>
-                    
+
                     <div style={{ flex: 2 }}>
                       <h3 style={{ margin: '0 0 6px 0', fontSize: '1.1rem', color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                         {problem.title}
@@ -160,9 +160,9 @@ const CodingPractice = () => {
                       <span style={{ fontSize: '0.9rem' }}>{problem.acceptanceRate || 0}%</span>
                       {/* Simple progress bar representation */}
                       <div style={{ display: 'flex', gap: '2px' }}>
-                        {[1,2,3,4,5].map(i => (
-                          <div key={i} style={{ 
-                            width: '4px', height: '12px', 
+                        {[1, 2, 3, 4, 5].map(i => (
+                          <div key={i} style={{
+                            width: '4px', height: '12px',
                             background: i <= (problem.acceptanceRate / 20) ? '#3b82f6' : 'rgba(255,255,255,0.1)',
                             borderRadius: '2px'
                           }} />
@@ -175,12 +175,12 @@ const CodingPractice = () => {
                     </div>
 
                     <div>
-                      <button 
+                      <button
                         className="action-btn"
                         onClick={() => handleSolve(problem)}
-                        style={{ 
-                          background: 'transparent', 
-                          border: '1px solid #4f46e5', 
+                        style={{
+                          background: 'transparent',
+                          border: '1px solid #4f46e5',
                           color: '#818cf8',
                           padding: '8px 20px',
                           borderRadius: '20px',
@@ -201,7 +201,7 @@ const CodingPractice = () => {
                     </div>
                   </div>
                 ))}
-                
+
                 <div style={{ padding: '20px' }}>
                   <Pagination
                     currentPage={currentPage}

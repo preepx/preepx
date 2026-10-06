@@ -4,33 +4,21 @@
   padding: 28px 32px 48px;
 }
 
+/* ── Header ─────────────────────────────────── */
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 16px;
-}
-
-.analytics-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 18px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
+  margin-bottom: 28px;
 }
 
 .page-header h1 {
   font-size: 26px;
   font-weight: 800;
   letter-spacing: -0.5px;
+  color: var(--text);
 }
 
 .page-header p {
@@ -39,17 +27,69 @@
   margin-top: 4px;
 }
 
-.page-loading {
-  text-align: center;
-  padding: 80px;
-  color: var(--text-muted);
+.analytics-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: linear-gradient(90deg, #3D5EFF, #6017C7);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s;
 }
 
+.analytics-cta:hover {
+  opacity: 0.9;
+}
+
+/* ── Stat Cards ──────────────────────────────── */
 .analytics-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
-  margin: 24px 0;
+  margin: 0 0 24px;
+}
+
+@media (max-width: 640px) {
+  .analytics-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .a-stat-card {
+    padding: 10px;
+    gap: 8px;
+    border-radius: 10px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .a-stat-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 8px;
+  }
+
+  .a-stat-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .a-stat-val {
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .a-stat-lbl {
+    font-size: 10px;
+    margin-top: 1px;
+  }
 }
 
 .a-stat-card {
@@ -60,6 +100,11 @@
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 20px;
+  transition: box-shadow 0.2s;
+}
+
+.a-stat-card:hover {
+  box-shadow: var(--shadow);
 }
 
 .a-stat-icon {
@@ -69,24 +114,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-.a-stat-icon.blue { background: #eff6ff; color: #3b82f6; }
-.a-stat-icon.green { background: #ecfdf5; color: #10b981; }
+/* Icon bg colours matching the screenshot */
+.a-stat-icon.blue   { background: #eff6ff; color: #3b82f6; }
+.a-stat-icon.green  { background: #ecfdf5; color: #10b981; }
 .a-stat-icon.orange { background: #fff7ed; color: #f97316; }
-.a-stat-icon.purple { background: #f5f3ff; color: #4a8f76; }
+.a-stat-icon.purple { background: #f5f3ff; color: #7c3aed; }
 
 .a-stat-val {
   display: block;
   font-size: 24px;
   font-weight: 800;
+  color: var(--text);
 }
 
 .a-stat-lbl {
   font-size: 12px;
   color: var(--text-muted);
+  margin-top: 2px;
 }
 
+/* ── Chart Panels ────────────────────────────── */
 .analytics-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -108,8 +158,10 @@
   font-size: 15px;
   font-weight: 700;
   margin-bottom: 20px;
+  color: var(--text);
 }
 
+/* ── Bar Chart ───────────────────────────────── */
 .bar-chart {
   display: flex;
   align-items: flex-end;
@@ -134,7 +186,7 @@
 
 .bar-fill {
   width: 100%;
-  background: linear-gradient(180deg, var(--primary), var(--primary-light));
+  background: linear-gradient(180deg, #3D5EFF, #6017C7);
   border-radius: 6px 6px 0 0;
   min-height: 4px;
   transition: height 0.5s ease;
@@ -149,10 +201,11 @@
 
 .bar-score {
   font-size: 10px;
-  color: var(--primary);
+  color: #1f5c4a;
   font-weight: 600;
 }
 
+/* ── Roles List ──────────────────────────────── */
 .roles-list {
   display: flex;
   flex-direction: column;
@@ -166,10 +219,32 @@
   gap: 12px;
 }
 
+.role-info {
+  min-width: 0;
+}
+
+.role-icon-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.role-icon-badge {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .role-name {
   display: block;
   font-size: 14px;
   font-weight: 600;
+  color: var(--text);
 }
 
 .role-count {
@@ -179,21 +254,21 @@
 
 .role-bar-wrap {
   height: 8px;
-  background: var(--bg);
+  background: var(--border);
   border-radius: 4px;
   overflow: hidden;
 }
 
 .role-bar {
   height: 100%;
-  background: var(--primary);
+  background: linear-gradient(90deg, #3D5EFF, #6017C7);
   border-radius: 4px;
 }
 
 .role-score {
   font-size: 13px;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--text);
   text-align: right;
 }
 
@@ -202,6 +277,7 @@
   font-size: 14px;
 }
 
+/* ── Score History ───────────────────────────── */
 .scores-timeline {
   display: flex;
   flex-direction: column;
@@ -212,16 +288,17 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 12px;
+  padding: 12px 16px;
   background: var(--bg);
   border-radius: 10px;
+  border: 1px solid var(--border);
 }
 
 .score-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--primary);
+  background: linear-gradient(135deg, #3D5EFF, #6017C7);
   flex-shrink: 0;
 }
 
@@ -229,6 +306,7 @@
   display: block;
   font-size: 14px;
   font-weight: 600;
+  color: var(--text);
 }
 
 .score-date {
@@ -239,10 +317,65 @@
 .score-val {
   margin-left: auto;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--text);
 }
 
+/* ── Responsive ──────────────────────────────── */
 @media (max-width: 768px) {
-  .analytics-grid { grid-template-columns: 1fr; }
-  .role-row { grid-template-columns: 1fr; gap: 6px; }
+  .analytics-page {
+    padding: 16px 12px 40px;
+  }
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+  .role-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 400px) {
+  .analytics-page {
+    padding: 12px 8px 32px;
+  }
+
+  .analytics-stats {
+    gap: 8px;
+  }
+
+  .a-stat-card {
+    padding: 8px;
+    gap: 6px;
+    border-radius: 8px;
+  }
+
+  .a-stat-icon {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    border-radius: 6px;
+  }
+
+  .a-stat-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .a-stat-val {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .a-stat-lbl {
+    font-size: 9px;
+  }
+
+  .page-header h1 {
+    font-size: 18px;
+  }
+
+  .analytics-cta {
+    font-size: 11px;
+    padding: 8px 12px;
+  }
 }

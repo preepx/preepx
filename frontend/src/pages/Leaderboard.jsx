@@ -44,9 +44,9 @@ function Leaderboard() {
       </div>
 
       <div className="lb-info-cards">
-        <div className="lb-info-card"><img src="/leaderbord/Top 10 Rankings.svg" alt="" width={16} /><span>Top 10 Performers</span></div>
-        <div className="lb-info-card"><img src="/leaderbord/Earn XP by completing challenges.svg" alt="" width={16} /><span>Complete Tasks & Earn XP</span></div>
-        <div className="lb-info-card"><img src="/leaderbord/+50 bonus for perfect score.svg" alt="" width={16} /><span>Score 100% & Earn +50 XP</span></div>
+        <div className="lb-info-card"><Crown size={16} /><span>Top 10 Performers</span></div>
+        <div className="lb-info-card"><Zap size={16} /><span>Complete Tasks & Earn XP</span></div>
+        <div className="lb-info-card"><Users size={16} /><span>Score 100% & Earn +50 XP</span></div>
       </div>
 
       <div className="your-rank-card">
