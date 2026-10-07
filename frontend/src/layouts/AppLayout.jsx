@@ -85,7 +85,7 @@ function AppLayout({ children }) {
   const navigate = useNavigate();
   const { isDark, toggleTheme } = useTheme();
   const { balance } = useWallet();
-  const { subscribed } = useSubscription();
+  const { subscribed, daysLeft } = useSubscription();
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifs, setNotifs] = useState([]);
 
@@ -274,15 +274,15 @@ function AppLayout({ children }) {
 
               <div className="tb-divider"></div>
 
-              {user?.subscription?.status === 'active' && user?.subscription?.expiresAt && new Date(user.subscription.expiresAt) > new Date() ? (
+              {subscribed ? (
                 <Link to="/wallet" className="tb-wallet-badge" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b' }}>
                   <Crown size={16} color="#f59e0b" />
-                  <span>{Math.ceil((new Date(user.subscription.expiresAt) - new Date()) / (1000 * 60 * 60 * 24))} Days Pro</span>
+                  <span>{daysLeft ? `${daysLeft} Days Pro` : "Pro"}</span>
                 </Link>
               ) : (
-                <Link to="/wallet" className="tb-wallet-badge" style={{ color: '#f59e0b' }}>
-                  <Crown size={16} color="#f59e0b" />
-                  <span style={{ color: 'var(--text)' }}>Pro</span>
+                <Link to="/wallet" className="tb-wallet-badge" style={{ color: 'var(--text)' }}>
+                  <Wallet size={16} color="#10b981" />
+                  <span>₹{balance || 0}</span>
                 </Link>
               )}
 

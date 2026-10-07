@@ -54,6 +54,8 @@ export function clearAuth() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("user_notifications");
+    localStorage.removeItem("subscription_data");
+    localStorage.removeItem("wallet_data");
   } catch {
     // Ignore storage errors during cleanup
   }
