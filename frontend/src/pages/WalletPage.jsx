@@ -9,17 +9,17 @@ import Loader from "@/components/Loader";
 
 function WalletPage() {
   const { balance, transactions, config, loading: walletLoading, refresh: refreshWallet } = useWallet();
-  const { 
-    subscribed, 
-    planName, 
-    expiresAt, 
-    daysLeft, 
-    plans, 
-    loading: subLoading, 
+  const {
+    subscribed,
+    planName,
+    expiresAt,
+    daysLeft,
+    plans,
+    loading: subLoading,
     refresh: refreshSub,
-    rawData: currentSub 
+    rawData: currentSub
   } = useSubscription();
-  
+
   const [showAddModal, setShowAddModal] = useState(false);
   const [customAmount, setCustomAmount] = useState(1);
   const [buying, setBuying] = useState(false);
@@ -104,28 +104,27 @@ function WalletPage() {
         <div className="wallet-balance-left">
           <div className="wallet-balance-icon" style={{ padding: 0, background: 'transparent' }}>
             <div style={{
-              background: 'linear-gradient(135deg, #10b981, #059669)',
+              background: '#10b981',
               borderRadius: '50%',
-              width: '40px',
-              height: '40px',
+              width: '32px',
+              height: '32px',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 4px 10px rgba(16, 185, 129, 0.4)'
+              justifyContent: 'center'
             }}>
-              <IndianRupee size={24} color="#fff" strokeWidth={3} />
+              <IndianRupee size={18} color="#fff" strokeWidth={2.5} />
             </div>
           </div>
           <div>
-            <p className="wallet-balance-label">Available Balance</p>
-            <p className="wallet-balance-value">
-              ₹{balance} <span>rupees</span>
+            <p className="wallet-balance-label" style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', marginBottom: '2px' }}>Available Balance</p>
+            <p className="wallet-balance-value" style={{ color: '#0f172a', fontSize: '18px', fontWeight: 600 }}>
+              ₹{balance} <span style={{ fontSize: '14px', fontWeight: 500, opacity: 0.9 }}>Ruppes</span>
             </p>
           </div>
         </div>
         {billingEnabled && (
           <button className="wallet-add-btn" onClick={() => setShowAddModal(true)}>
-            <Plus size={16} /> Add Money
+            + Money
           </button>
         )}
 
@@ -157,13 +156,13 @@ function WalletPage() {
         </div>
       </div>
 
-      <PlanCards 
-        plans={plans} 
+      <PlanCards
+        plans={plans}
         currentSub={currentSub}
         onPurchaseSuccess={() => {
           refreshSub();
           refreshWallet();
-        }} 
+        }}
       />
 
       <div className="wallet-txn-section">

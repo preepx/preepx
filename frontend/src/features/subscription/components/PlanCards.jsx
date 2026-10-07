@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Check, ShieldCheck, Zap, IndianRupee } from "lucide-react";
+import { CheckCircle, ShieldCheck, Zap, IndianRupee, Calendar, ArrowRight } from "lucide-react";
 import notify from "@/utils/notify";
 import { createSubscriptionOrder, verifySubscriptionPayment } from "../services/subscriptionAPI";
 import { SUBSCRIPTION_PLANS } from "../constants/subscriptionConfig";
@@ -81,47 +81,38 @@ function PlanCards({ plans = SUBSCRIPTION_PLANS, onPurchaseSuccess, currentSub }
             onClick={() => setActivePlan(plan.id)}
             style={{ 
               cursor: "pointer", 
-              borderColor: activePlan === plan.id ? plan.color : "var(--border-color)",
-              boxShadow: activePlan === plan.id ? `0 8px 24px -8px ${plan.color}40` : "none"
+              borderColor: activePlan === plan.id ? "#f59e0b" : "var(--border)",
+              boxShadow: activePlan === plan.id ? `0 8px 24px -8px rgba(245, 158, 11, 0.4)` : "0 4px 12px rgba(0,0,0,0.05)",
+              background: activePlan === plan.id ? "#fffbeb" : "var(--surface)",
+              color: "var(--text)",
+              borderRadius: "12px",
+              padding: "20px",
+              transition: "all 0.3s ease"
             }}
           >
             {plan.badge && (
-              <span className="coin-pack-tag" style={{ background: plan.color }}>
+              <span className="coin-pack-tag" style={{ background: activePlan === plan.id ? "#f59e0b" : plan.color }}>
                 {plan.badge}
               </span>
             )}
             
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%", marginBottom: "12px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%", marginBottom: "16px" }}>
                <div>
-                  <p className="coin-pack-label" style={{ color: "var(--text-primary)", fontSize: "1.1rem", fontWeight: "600", marginBottom: "4px" }}>
-                    {plan.name}
+                  <p className="coin-pack-label" style={{ color: "var(--text)", fontSize: "1.1rem", fontWeight: "800", marginBottom: "4px", display: "flex", alignItems: "center", gap: "8px", textTransform: "uppercase" }}>
+                    <img src="/7day.svg" alt="Plan Icon" style={{ width: 28, height: 28, objectFit: "contain" }} /> {plan.name}
                   </p>
-                  <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>{plan.label}</p>
+                  <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontWeight: "700", paddingLeft: "36px" }}>{plan.label}</p>
                </div>
-               {activePlan === plan.id && <Check size={20} color={plan.color} />}
             </div>
 
-            <div style={{ display: "flex", alignItems: "flex-end", gap: "8px", margin: "16px 0", justifyContent: "center" }}>
-              <p className="coin-pack-price" style={{ margin: 0, fontSize: "2rem", display: "flex", alignItems: "center" }}>
-                <IndianRupee size={24} style={{ marginRight: "-2px" }} />
-                {plan.offerPrice}
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", margin: "16px 0", justifyContent: "center" }}>
+              <p className="coin-pack-price" style={{ margin: 0, fontSize: "1.6rem", fontWeight: "800", color: "var(--text)", display: "flex", alignItems: "center" }}>
+                ₹{plan.offerPrice}
               </p>
-              <p style={{ textDecoration: "line-through", color: "var(--text-muted)", fontSize: "1rem", marginBottom: "6px" }}>
+              <p style={{ textDecoration: "line-through", color: "var(--text-muted)", fontSize: "1rem", fontWeight: "600", marginTop: "4px" }}>
                 ₹{plan.realPrice}
               </p>
             </div>
-
-            <div style={{ background: "var(--bg-card-hover)", padding: "8px 12px", borderRadius: "8px", marginBottom: "20px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>Approx</span>
-              <span style={{ fontSize: "0.9rem", fontWeight: "600", color: plan.color }}>{plan.perMonth}</span>
-            </div>
-
-            <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px 0", textAlign: "left", fontSize: "0.9rem", color: "var(--text-secondary)" }}>
-               <li style={{ display: "flex", gap: "8px", marginBottom: "8px" }}><Check size={16} color="#10b981" style={{ flexShrink: 0 }} /> Unlimited AI Interviews</li>
-               <li style={{ display: "flex", gap: "8px", marginBottom: "8px" }}><Check size={16} color="#10b981" style={{ flexShrink: 0 }} /> Unlimited Objective Exams</li>
-               <li style={{ display: "flex", gap: "8px", marginBottom: "8px" }}><Check size={16} color="#10b981" style={{ flexShrink: 0 }} /> Unlimited ATS Resume Scans</li>
-               <li style={{ display: "flex", gap: "8px", marginBottom: "8px" }}><Check size={16} color="#10b981" style={{ flexShrink: 0 }} /> Top Companies Preparation</li>
-            </ul>
 
             <button
               className="coin-pack-btn"
@@ -131,14 +122,31 @@ function PlanCards({ plans = SUBSCRIPTION_PLANS, onPurchaseSuccess, currentSub }
               }}
               disabled={buying === plan.id}
               style={{ 
-                background: activePlan === plan.id ? plan.color : "transparent",
-                color: activePlan === plan.id ? "#fff" : plan.color,
-                border: `1px solid ${plan.color}`,
-                width: "100%"
+                background: activePlan === plan.id ? "#f59e0b" : "transparent",
+                color: activePlan === plan.id ? "#ffffff" : "var(--text)",
+                border: `1px solid ${activePlan === plan.id ? "#f59e0b" : "#3b82f6"}`,
+                width: "100%",
+                borderRadius: "8px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "8px",
+                fontSize: "0.95rem",
+                fontWeight: "700",
+                padding: "10px",
+                transition: "all 0.2s ease"
               }}
             >
               {buying === plan.id ? "Processing…" : `Subscribe for ₹${plan.offerPrice}`}
+              {!buying && <ArrowRight size={16} />}
             </button>
+
+            <ul style={{ listStyle: "none", padding: 0, margin: "24px 0 0 0", textAlign: "left", fontSize: "0.85rem", color: "var(--text)", fontWeight: "600" }}>
+               <li style={{ display: "flex", gap: "8px", marginBottom: "12px" }}><CheckCircle size={16} color="#10b981" style={{ flexShrink: 0, marginTop: "1px" }} /> Unlimited AI Interviews</li>
+               <li style={{ display: "flex", gap: "8px", marginBottom: "12px" }}><CheckCircle size={16} color="#10b981" style={{ flexShrink: 0, marginTop: "1px" }} /> Unlimited Objective Exams</li>
+               <li style={{ display: "flex", gap: "8px", marginBottom: "12px" }}><CheckCircle size={16} color="#10b981" style={{ flexShrink: 0, marginTop: "1px" }} /> Unlimited ATS Resume Scans</li>
+               <li style={{ display: "flex", gap: "8px", marginBottom: "12px" }}><CheckCircle size={16} color="#10b981" style={{ flexShrink: 0, marginTop: "1px" }} /> Top Companies Preparation</li>
+            </ul>
           </div>
         ))}
       </div>

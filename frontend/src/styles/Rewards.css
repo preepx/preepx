@@ -140,7 +140,8 @@
 }
 
 .reward-card.locked {
-  opacity: 1; /* Match the screenshot, cards are not opaque */
+  opacity: 1;
+  /* Match the screenshot, cards are not opaque */
 }
 
 .reward-card-header {
@@ -233,8 +234,15 @@
 
 /* Animations */
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .reward-card {
@@ -251,10 +259,66 @@
   .rewards-page {
     padding: 24px;
   }
+
   .rewards-header h1 {
     font-size: 2rem;
   }
+
   .rewards-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .rewards-page {
+    padding: 16px;
+  }
+
+  .rewards-header h1 {
+    font-size: 24px;
+  }
+
+  .rewards-header p {
+    font-size: 14px;
+  }
+
+  .xp-progress-section {
+    padding: 16px;
+  }
+
+  .redeem-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .xp-stats h2 {
+    font-size: 18px;
+  }
+
+  .xp-amount {
+    font-size: 14px;
+  }
+
+  .level-text {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .rewards-grid-section h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .reward-card {
+    padding: 16px;
+  }
+
+  .reward-title {
+    font-size: 14px;
+  }
+
+  .reward-desc {
+    font-size: 12px;
+    margin-bottom: 16px;
   }
 }

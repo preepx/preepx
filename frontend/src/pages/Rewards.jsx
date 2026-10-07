@@ -111,8 +111,6 @@ function Rewards() {
               else if (isClaimed) statusClass = "completed";
               else if (isInProgress && progress > 0) statusClass = "progress";
 
-              const Icon = reward.icon;
-
               return (
                 <div 
                   key={reward.id} 
@@ -121,7 +119,7 @@ function Rewards() {
                 >
                   <div className="reward-card-header">
                     <div className="reward-title-group">
-                      <Icon size={20} color={isClaimed ? "#10b981" : "#4b5563"} />
+                      <img src={reward.iconSrc} alt={reward.title} style={{ width: 24, height: 24, objectFit: 'contain' }} />
                       <span className="reward-title">{reward.title}</span>
                     </div>
                     <span className="reward-xp">

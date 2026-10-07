@@ -246,7 +246,7 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
                   )}
                 </div>
                 <button type="button" className="rx-icon-btn rx-notif-btn" aria-label="Notifications" onClick={() => setShowNotifs(!showNotifs)}>
-                  <Bell size={18} />
+                  <img src="/notification.svg" alt="Notifications" style={{ width: 32, height: 32, objectFit: 'contain' }} />
                   {unreadCount > 0 && <span className="rx-notif-badge">{unreadCount > 9 ? "9+" : unreadCount}</span>}
                 </button>
                 {showNotifs && (

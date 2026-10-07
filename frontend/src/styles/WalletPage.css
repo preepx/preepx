@@ -27,15 +27,15 @@
   gap: 16px;
   margin-top: 24px;
   padding: 24px 28px;
-  background: #312f5b;
-  border-radius: 20px;
-  border: 1px solid #484581;
-  box-shadow: 0 8px 24px rgba(49, 47, 91, 0.25);
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 [data-theme="dark"] .wallet-balance-card {
-  background: #312f5b;
-  border-color: #484581;
+  background: var(--surface);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .wallet-balance-left {
@@ -133,30 +133,31 @@
 
 .wallet-pricing-item {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 .wallet-pricing-item svg {
-  color: var(--primary);
+  color: var(--text);
   flex-shrink: 0;
 }
 
 .wp-label {
-  font-size: 12px;
-  color: var(--text-muted);
-  font-weight: 500;
+  font-size: 13px;
+  color: var(--text);
+  font-weight: 600;
 }
 
 .wp-cost {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--text);
-  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-top: 4px;
 }
 
 .wallet-txn-section {
@@ -191,23 +192,23 @@
 .wallet-add-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  background: linear-gradient(135deg, #1f5c4a, #9a4a2a);
-  color: white;
+  gap: 6px;
+  padding: 8px 20px;
+  background: linear-gradient(90deg, #3d5eff, #6017c7);
+  color: #ffffff;
   border: none;
-  border-radius: 12px;
-  font-size: 15px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   transition: transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 4px 14px rgba(31, 92, 74, 0.3);
-  margin-left: auto; /* Push to right side of the flex container */
+  margin-left: auto;
+  box-shadow: 0 4px 12px rgba(96, 23, 199, 0.3);
 }
 
 .wallet-add-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(31, 92, 74, 0.4);
+  box-shadow: 0 6px 16px rgba(96, 23, 199, 0.4);
 }
 
 .wallet-add-btn:active {
@@ -220,6 +221,7 @@
     align-items: flex-start;
     gap: 20px;
   }
+
   .wallet-add-btn {
     margin-left: 0;
     width: 100%;
@@ -294,7 +296,7 @@
   color: var(--text);
   margin-bottom: 6px;
   letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #1f5c4a, #9a4a2a);
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -323,12 +325,12 @@
   border: 2px solid transparent;
   border-radius: 20px;
   padding: 16px 24px;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05), 0 0 0 2px rgba(31, 92, 74, 0.2);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05), 0 0 0 2px rgba(79, 70, 229, 0.2);
   transition: all 0.3s;
 }
 
 .wallet-input-wrapper:focus-within {
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.05), 0 0 0 2px #1f5c4a;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05), 0 0 0 2px #4f46e5;
   background: var(--surface);
 }
 
@@ -351,10 +353,10 @@
   letter-spacing: -1px;
 }
 
-.wallet-amount-input::-webkit-inner-spin-button, 
-.wallet-amount-input::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+.wallet-amount-input::-webkit-inner-spin-button,
+.wallet-amount-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .wallet-coins-preview {
@@ -389,7 +391,7 @@
 .wallet-checkout-btn {
   width: 100%;
   padding: 18px;
-  background: linear-gradient(135deg, #1f5c4a, #7a4a32);
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
   color: white;
   border: none;
   border-radius: 16px;
@@ -397,7 +399,7 @@
   font-weight: 800;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 10px 24px rgba(31, 92, 74, 0.4);
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.4);
 }
 
 .wallet-checkout-btn:hover:not(:disabled) {
@@ -422,11 +424,69 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px) scale(0.95); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Mobile Responsive (320px) ── */
+@media (max-width: 480px) {
+  .wallet-page {
+    padding: 16px;
+  }
+
+  .wallet-balance-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .wallet-add-btn {
+    width: 100%;
+    justify-content: center;
+    margin-left: 0;
+  }
+
+  .wallet-pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wallet-modal-card {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .wallet-amount-input {
+    font-size: 28px;
+  }
+
+  .wallet-currency-symbol {
+    font-size: 24px;
+    margin-right: 12px;
+  }
+
+  .wallet-balance-left {
+    width: 100%;
+  }
+
+  .wallet-balance-value {
+    font-size: 28px;
+  }
 }

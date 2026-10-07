@@ -263,8 +263,9 @@ function AppLayout({ children }) {
                 className="tb-icon-btn"
                 onClick={() => setShowNotifications(true)}
                 title="Notifications"
+                style={{ position: 'relative' }}
               >
-                <Bell size={18} />
+                <Bell size={24} color="var(--text)" />
                 {unreadCount > 0 && (
                   <span className="tb-notif-dot">
                     {unreadCount}
@@ -275,7 +276,7 @@ function AppLayout({ children }) {
               <div className="tb-divider"></div>
 
               {subscribed ? (
-                <Link to="/wallet" className="tb-wallet-badge" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b' }}>
+                <Link to="/wallet" className="tb-wallet-badge" style={{ background: 'transparent', color: '#f59e0b' }}>
                   <Crown size={16} color="#f59e0b" />
                   <span>
                     <span className="tb-pro-days">{daysLeft ? `${daysLeft} Days ` : ""}</span>
@@ -292,7 +293,7 @@ function AppLayout({ children }) {
               <div className="tb-divider"></div>
 
               <div className="tb-streak-badge">
-                <Leaf size={16} />
+                <Leaf size={16} color="#10b981" />
                 <span>{user?.streak || 0} day streak</span>
               </div>
 
