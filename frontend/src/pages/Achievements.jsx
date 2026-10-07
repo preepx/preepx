@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { redeemXp } from "@/services/userAPI";
-import '@/styles/CoinPackages.css';
+import { RefreshCw, Wallet } from "lucide-react";
 import '@/styles/Achievements.css';
 
 function Achievements() {
   const [popup, setPopup] = useState(null);
-  const [selectedTier, setSelectedTier] = useState(2);
+  const [selectedTier, setSelectedTier] = useState(null);
   const navigate = useNavigate();
 
   const handleRedeem = async (pointsToRedeem) => {
@@ -35,48 +35,48 @@ function Achievements() {
   };
 
   const tiers = [
-    { label: "STARTER", xp: 200, coins: 20 },
-    { label: "BRONZE", xp: 300, coins: 35 },
-    { label: "POPULAR", xp: 500, coins: 60, popular: true },
-    { label: "PRO", xp: 1000, coins: 120 },
-    { label: "PREMIUM", xp: 1500, coins: 170 },
-    { label: "ULTIMATE", xp: 2000, coins: 250 }
+    { label: "Basic", xp: 200, coins: 20 },
+    { label: "Plus", xp: 300, coins: 35 },
+    { label: "Standard", xp: 500, coins: 60 },
+    { label: "Advanced", xp: 1000, coins: 120 },
+    { label: "Premium", xp: 1500, coins: 170 },
+    { label: "Elite", xp: 2000, coins: 250 }
   ];
 
   return (
     <div className="achievements-page">
-      <div className="page-header" style={{ marginTop: "20px" }}>
-        <h1>Redeem XP for Money</h1>
-        <p>Convert your available XP into Wallet Balance (₹).</p>
+      <div className="achievements-header">
+        <h1><Wallet size={32} /> Turn XP Into Cash</h1>
+        <p>Convert your XP into wallet balance and redeem it for real rewards.</p>
       </div>
 
-      <div className="coin-packages-grid" style={{ marginTop: "30px", marginBottom: "40px" }}>
-        {tiers.map((tier, idx) => {
-          const isSelected = selectedTier === idx;
-          return (
-            <div
-              key={idx}
-              className={`coin-pack ${isSelected ? "popular" : ""}`}
-              onClick={() => setSelectedTier(idx)}
-              style={{ cursor: "pointer", transition: "all 0.3s ease" }}
-            >
-              {tier.popular && <span className="coin-pack-tag">POPULAR</span>}
-              <p className="coin-pack-label">{tier.label}</p>
-              <p className="coin-pack-coins">₹{tier.coins} <span>balance</span></p>
-              <p className="coin-pack-price" style={{ display: 'flex', alignItems: 'center', justifyContent: "center", gap: '4px', color: "#f59e0b", fontSize: "14px", fontWeight: "600", marginBottom: "16px" }}>
-                <img src="/favicon.png" alt="XP" style={{ width: '14px', height: '14px', objectFit: 'contain' }} />
-                <span>{tier.xp} XP</span>
-              </p>
-              <button
-                className="coin-pack-btn"
-                onClick={(e) => { e.stopPropagation(); handleRedeem(tier.xp); }}
-                style={isSelected ? { background: "#f59e0b", color: "white" } : {}}
-              >
-                Convert
-              </button>
+      <div className="ach-cards-grid">
+        {tiers.map((tier, idx) => (
+          <div 
+            key={idx} 
+            className={`ach-card ${selectedTier === idx ? 'selected' : ''}`}
+            onClick={() => setSelectedTier(idx)}
+          >
+            <div className="ach-card-label">{tier.label}</div>
+            <div className="ach-card-reward">₹{tier.coins} <span>Reward</span></div>
+            <div className="ach-card-desc">Turn you XP into real value</div>
+            
+            <div className="ach-card-xp-wrap">
+              <img src="/favicon.png" alt="XP Logo" />
+              <span>{tier.xp} <span style={{ fontWeight: 400, fontSize: "16px" }}>XP</span></span>
             </div>
-          )
-        })}
+            
+            <button 
+              className="ach-card-btn" 
+              onClick={(e) => { 
+                e.stopPropagation();
+                handleRedeem(tier.xp); 
+              }}
+            >
+              Convert
+            </button>
+          </div>
+        ))}
       </div>
 
       {popup && (

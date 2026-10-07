@@ -114,10 +114,10 @@ function Analytics() {
       </div>
 
       <div className="analytics-stats">
-        <div className="a-stat-card"><div className="a-stat-icon blue"><BarChart3 size={20} /></div><div><span className="a-stat-val">{data.totalInterviews}</span><span className="a-stat-lbl">Completed</span></div></div>
-        <div className="a-stat-card"><div className="a-stat-icon green"><Target size={20} /></div><div><span className="a-stat-val">{data.avgScore}%</span><span className="a-stat-lbl">Avg Score</span></div></div>
-        <div className="a-stat-card"><div className="a-stat-icon orange"><Flame size={20} /></div><div><span className="a-stat-val">{data.streak}</span><span className="a-stat-lbl">Day Streak</span></div></div>
-        <div className="a-stat-card"><div className="a-stat-icon purple"><TrendingUp size={20} /></div><div><span className="a-stat-val">Lvl {data.level}</span><span className="a-stat-lbl">{data.totalPoints} XP</span></div></div>
+        <div className="a-stat-card"><div className="a-stat-icon blue"><BarChart3 size={20} /></div><div className="a-stat-info"><span className="a-stat-val">{data.totalInterviews}</span><span className="a-stat-lbl">Completed</span></div></div>
+        <div className="a-stat-card"><div className="a-stat-icon green"><Target size={20} /></div><div className="a-stat-info"><span className="a-stat-val">{data.avgScore}%</span><span className="a-stat-lbl">Avg Score</span></div></div>
+        <div className="a-stat-card"><div className="a-stat-icon orange"><Flame size={20} /></div><div className="a-stat-info"><span className="a-stat-val">{data.streak}</span><span className="a-stat-lbl">Day Streak</span></div></div>
+        <div className="a-stat-card"><div className="a-stat-icon purple"><TrendingUp size={20} /></div><div className="a-stat-info"><span className="a-stat-val">Lvl {data.level}</span><span className="a-stat-lbl">{data.totalPoints} XP</span></div></div>
       </div>
 
       {!hasData ? (

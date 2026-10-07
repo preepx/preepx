@@ -50,23 +50,31 @@
 /* ── Stat Cards ──────────────────────────────── */
 .analytics-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin: 0 0 24px;
+}
+
+@media (max-width: 1024px) {
+  .analytics-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 640px) {
   .analytics-stats {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
 
   .a-stat-card {
-    padding: 10px;
+    padding: 10px 8px;
     gap: 8px;
-    border-radius: 10px;
+    border-radius: 8px;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-start;
+    min-height: 0;
   }
 
   .a-stat-icon {
@@ -81,35 +89,53 @@
     height: 16px;
   }
 
+  .a-stat-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 0;
+    min-width: 0;
+  }
+
   .a-stat-val {
     font-size: 16px;
-    line-height: 1.2;
+    font-weight: 700;
+    line-height: 1.1;
   }
 
   .a-stat-lbl {
-    font-size: 10px;
-    margin-top: 1px;
+    font-size: 11px;
+    line-height: 1.2;
+    margin-top: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
   }
 }
 
 .a-stat-card {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px;
-  transition: box-shadow 0.2s;
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: all 0.2s ease;
 }
 
 .a-stat-card:hover {
-  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 .a-stat-icon {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -123,16 +149,24 @@
 .a-stat-icon.orange { background: #fff7ed; color: #f97316; }
 .a-stat-icon.purple { background: #f5f3ff; color: #7c3aed; }
 
+.a-stat-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .a-stat-val {
   display: block;
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 22px;
+  font-weight: 700;
   color: var(--text);
+  line-height: 1.2;
 }
 
 .a-stat-lbl {
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 500;
+  color: #6B7280;
   margin-top: 2px;
 }
 
