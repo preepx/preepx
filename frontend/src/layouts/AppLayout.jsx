@@ -277,7 +277,10 @@ function AppLayout({ children }) {
               {subscribed ? (
                 <Link to="/wallet" className="tb-wallet-badge" style={{ background: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b' }}>
                   <Crown size={16} color="#f59e0b" />
-                  <span>{daysLeft ? `${daysLeft} Days Pro` : "Pro"}</span>
+                  <span>
+                    <span className="tb-pro-days">{daysLeft ? `${daysLeft} Days ` : ""}</span>
+                    Pro
+                  </span>
                 </Link>
               ) : (
                 <Link to="/wallet" className="tb-wallet-badge" style={{ color: 'var(--text)' }}>
