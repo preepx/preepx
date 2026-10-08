@@ -21,8 +21,8 @@
    ========================================================= */
 .ajd-hero-banner {
     background: linear-gradient(105deg, #ffffff 40%, #F9FAFF 65%, #F3F0FF 85%, #FCE7F3 100%);
-    border: 1px solid #e4e8ef;
-    border-radius: 16px;
+    /* border: 1px solid #e4e8ef;
+    border-radius: 16px; */
     padding: 24px 0 24px 32px;
     /* Remove right padding so image touches right side */
     display: flex;
