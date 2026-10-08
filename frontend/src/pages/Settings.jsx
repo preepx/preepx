@@ -8,7 +8,6 @@ import '@/styles/Settings.css';
 function Settings() {
   const stored = JSON.parse(localStorage.getItem("user") || "{}");
   const [settings, setSettings] = useState({
-    darkMode: localStorage.getItem("theme") === "dark",
     emailNotifications: stored.settings?.emailNotifications ?? true,
     timerEnabled: stored.settings?.timerEnabled ?? true,
   });
@@ -50,16 +49,7 @@ function Settings() {
       </div>
 
       <div className="settings-sections">
-        <div className="settings-group">
-          <h3>Appearance</h3>
-          <div className="setting-row" onClick={() => toggle("darkMode")}>
-            <div className="setting-info">
-              {settings.darkMode ? <Moon size={18} /> : <Sun size={18} />}
-              <div><span>Dark Mode</span><p>Switch between light and dark theme</p></div>
-            </div>
-            <div className={`toggle ${settings.darkMode ? "on" : ""}`} />
-          </div>
-        </div>
+
         <div className="settings-group">
           <h3>Interview</h3>
           <div className="setting-row" onClick={() => toggle("timerEnabled")}>

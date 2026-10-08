@@ -20,7 +20,8 @@
    HERO BANNER
    ========================================================= */
 .ajd-hero-banner {
-    background: linear-gradient(105deg, #2c2723 0%, #24332c 40%, #245c4c 100%);
+    background: linear-gradient(105deg, #ffffff 40%, #F9FAFF 65%, #F3F0FF 85%, #FCE7F3 100%);
+    border: 1px solid #e4e8ef;
     border-radius: 16px;
     padding: 24px 0 24px 32px;
     /* Remove right padding so image touches right side */
@@ -33,7 +34,8 @@
 }
 
 [data-theme="dark"] .ajd-hero-banner {
-    background: linear-gradient(105deg, #0f172a 0%, #2c2723 50%, #24332c 100%);
+    background: #0f172a;
+    border-color: #334155;
 }
 
 .ajd-hb-left {
@@ -47,16 +49,31 @@
 .ajd-hb-title {
     font-size: 24px;
     font-weight: 800;
-    color: #fff;
+    color: #0f172a;
     margin: 0 0 8px;
     letter-spacing: -0.5px;
 }
 
+[data-theme="dark"] .ajd-hb-title {
+    color: #fff;
+}
+
+.ajd-hb-name-gradient {
+    background: linear-gradient(90deg, rgb(124, 58, 237) 0%, rgb(99, 102, 241) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .ajd-hb-sub {
     font-size: 13px;
-    color: #e0e7ff;
+    color: #64748b;
     font-weight: 500;
     margin: 0 0 20px;
+}
+
+[data-theme="dark"] .ajd-hb-sub {
+    color: #e0e7ff;
 }
 
 .ajd-hb-search {
@@ -322,7 +339,7 @@
 }
 
 .ajd-hbs-btn {
-    background: #1f5c4a;
+    background: #2563eb;
     color: #fff;
     border: none;
     border-radius: 999px;
@@ -334,31 +351,47 @@
 }
 
 .ajd-hbs-btn:hover {
-    background: #245c4c;
+    background: #1E339E;
 }
 
 .ajd-hb-tags {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     margin-top: 24px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.ajd-hb-tags::-webkit-scrollbar {
+    display: none;
 }
 
 .ajd-hb-tags span {
     font-size: 12px;
-    color: #8bb9ab;
-    font-weight: 500;
+    color: #334155;
+    font-weight: 600;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .ajd-hb-tag {
     font-size: 11px;
-    color: #e0e7ff;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 4px 12px;
+    color: #2B45CC;
+    background: #F3F0FF;
+    padding: 6px 14px;
     border-radius: 100px;
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    font-weight: 600;
+    border: 1px solid #EDE9FE;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.ajd-hb-tag:hover {
+    background: #EDE9FE;
 }
 
 .ajd-hb-right {

@@ -28,7 +28,7 @@ export default function JobSearchHero({
           <span className="ajd-pulse" />
           {liveOpenings}+ live openings · updated just now
         </div>
-        <h1 className="ajd-hb-title">{greeting}, {firstName}</h1>
+        <h1 className="ajd-hb-title">{greeting}, <span className="ajd-hb-name-gradient">{firstName}</span></h1>
         <p className="ajd-hb-sub">Find roles at MNCs, startups and walk-in drives — matched to your profile.</p>
 
         <div className="ajd-hb-search">
