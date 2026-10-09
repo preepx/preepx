@@ -9,9 +9,10 @@
 
     .jl-root.collapsed .sidebar-top {
         justify-content: center;
-        padding: 12px 0;
+        padding: 0;
         align-items: center;
-        min-height: 60px;
+        min-height: 58px;
+        height: 58px;
     }
 
     .jl-root.collapsed .jl-nav-item span,
@@ -41,8 +42,9 @@
     .jl-root.collapsed .sidebar-top,
     .jl-sidebar.collapsed .sidebar-top {
         justify-content: center !important;
-        padding: 12px 0 !important;
-        min-height: 60px !important;
+        padding: 0 !important;
+        min-height: 58px !important;
+        height: 58px !important;
     }
 }
 
