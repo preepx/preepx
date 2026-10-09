@@ -212,24 +212,75 @@ function JobsLayout({ children }) {
                 <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18, display: 'block', margin: 'auto' }} />
               </button>
               
-              <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
-                <span style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b', letterSpacing: '-0.3px' }}>Services</span>
-                <span style={{
-                  position: 'absolute',
-                  top: '-4px',
-                  right: '-12px',
-                  background: '#ef4444',
-                  color: '#ffffff',
-                  fontSize: '9px',
-                  fontWeight: '700',
-                  width: '14px',
-                  height: '14px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '50%',
-                  lineHeight: 1
-                }}>1</span>
+              <div 
+                className="jl-mega-wrapper"
+                onMouseEnter={() => setShowServicesMenu(true)}
+                onMouseLeave={() => setShowServicesMenu(false)}
+                onClick={() => setShowServicesMenu(!showServicesMenu)}
+              >
+                <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                  <span style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b', letterSpacing: '-0.3px' }}>Services</span>
+                  <span style={{
+                    position: 'absolute',
+                    top: '-4px',
+                    right: '-12px',
+                    background: '#ef4444',
+                    color: '#ffffff',
+                    fontSize: '9px',
+                    fontWeight: '700',
+                    width: '14px',
+                    height: '14px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '50%',
+                    lineHeight: 1
+                  }}>1</span>
+                </div>
+
+                {/* Mega Menu Dropdown */}
+                {showServicesMenu && (
+                  <div className="jl-mega-menu" style={{ left: '-10px', top: '40px' }}>
+                    <div className="jl-mega-col">
+                      <div className="jl-mega-section">
+                        <h4>ATS & Resume</h4>
+                        <Link to="/apply-jobs/resume">Resume Builder</Link>
+                        <Link to="/ats-score">ATS Score Checker</Link>
+                        <Link to="/profile">Optimize Profile</Link>
+                      </div>
+                      <div className="jl-mega-section">
+                        <h4>Career Resources</h4>
+                        <Link to="/btech-notes">Notes</Link>
+                        <Link to="/100-days-challenge">100 Days Challenge</Link>
+                      </div>
+                    </div>
+
+                    <div className="jl-mega-col">
+                      <div className="jl-mega-section">
+                        <h4>Interview Preparation</h4>
+                        <Link to="/interview">AI Mock Interview</Link>
+                        <Link to="/resume-interview">Resume Based Interview</Link>
+                      </div>
+                      <div className="jl-mega-section">
+                        <h4>Assessments & Tests</h4>
+                        <Link to="/objective-exam">Objective Exams</Link>
+                        <Link to="/my-assessments">Coding Challenges</Link>
+                      </div>
+                    </div>
+
+                    <div className="jl-mega-col">
+                      <div className="jl-mega-section">
+                        <h4>For Recruiters</h4>
+                        <Link to="/auth/recruiter">Post a Job</Link>
+                        <Link to="/auth/recruiter">Find Candidates</Link>
+                      </div>
+                      <div className="jl-mega-section">
+                        <h4>Premium Benefits 🔴</h4>
+                        <span className="jl-mega-promo">Upgrade to priority applicant to boost your chances by 3x.</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
