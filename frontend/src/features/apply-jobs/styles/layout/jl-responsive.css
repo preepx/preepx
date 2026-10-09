@@ -2,8 +2,9 @@
    RESPONSIVE LAYOUT & MOBILE DRAWER
    ========================================================= */
 
-@media (min-width: 768px) {
-    .jl-root.collapsed .jl-sidebar {
+@media (min-width: 1025px) {
+    .jl-root.collapsed .jl-sidebar,
+    .jl-root.collapsed .sidebar {
         width: 68px;
     }
 
@@ -132,9 +133,9 @@
     }
 
     /* Full screen height drawer like user-dashboard */
-    .jl-sidebar,
-    .jl-root.collapsed .jl-sidebar,
-    .jl-sidebar.collapsed {
+    .sidebar,
+    .jl-root.collapsed .sidebar,
+    .sidebar.collapsed {
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
@@ -149,22 +150,22 @@
         flex-direction: column !important;
     }
 
-    .jl-sidebar.open,
-    .jl-root.collapsed .jl-sidebar.open,
-    .jl-sidebar.collapsed.open {
+    .sidebar.mobile-open,
+    .jl-root.collapsed .sidebar.mobile-open,
+    .sidebar.collapsed.mobile-open {
         transform: translateX(0) !important;
         box-shadow: 10px 0 35px rgba(0, 0, 0, 0.7) !important;
     }
 
     /* In mobile drawer, brand logo & labels are ALWAYS visible */
-    .jl-sidebar .sidebar-brand,
-    .jl-root.collapsed .jl-sidebar .sidebar-brand {
+    .sidebar .sidebar-brand,
+    .jl-root.collapsed .sidebar .sidebar-brand {
         display: flex !important;
         align-items: center !important;
     }
 
-    .jl-sidebar .brand-logo-img,
-    .jl-root.collapsed .jl-sidebar .brand-logo-img {
+    .sidebar .brand-logo-img,
+    .jl-root.collapsed .sidebar .brand-logo-img {
         height: 100px !important;
         width: auto !important;
         margin: -28px 0 -28px 10px !important;
@@ -185,8 +186,8 @@
         display: block;
     }
 
-    .jl-sidebar .sidebar-top,
-    .jl-root.collapsed .jl-sidebar .sidebar-top {
+    .sidebar .sidebar-top,
+    .jl-root.collapsed .sidebar .sidebar-top {
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
@@ -195,32 +196,32 @@
         min-height: 64px !important;
     }
 
-    .jl-sidebar .jl-nav-item .jl-nav-text,
-    .jl-sidebar .jl-nav-item .jl-nav-label,
-    .jl-sidebar .jl-nav-label,
-    .jl-root.collapsed .jl-sidebar .jl-nav-item .jl-nav-text,
-    .jl-root.collapsed .jl-sidebar .jl-nav-item .jl-nav-label,
-    .jl-root.collapsed .jl-sidebar .jl-nav-label {
+    .sidebar .jl-nav-item .jl-nav-text,
+    .sidebar .jl-nav-item .jl-nav-label,
+    .sidebar .jl-nav-label,
+    .jl-root.collapsed .sidebar .jl-nav-item .jl-nav-text,
+    .jl-root.collapsed .sidebar .jl-nav-item .jl-nav-label,
+    .jl-root.collapsed .sidebar .jl-nav-label {
         display: inline-block !important;
     }
 
-    .jl-sidebar .jl-nav-item,
-    .jl-root.collapsed .jl-sidebar .jl-nav-item {
+    .sidebar .jl-nav-item,
+    .jl-root.collapsed .sidebar .jl-nav-item {
         justify-content: flex-start !important;
         padding: 10px 14px !important;
         gap: 12px !important;
     }
 
-    .jl-sidebar .sidebar-bottom-actions,
-    .jl-root.collapsed .jl-sidebar .sidebar-bottom-actions {
+    .sidebar .sidebar-bottom-actions,
+    .jl-root.collapsed .sidebar .sidebar-bottom-actions {
         flex-direction: row !important;
         justify-content: space-around !important;
         width: 100% !important;
         gap: 8px !important;
     }
 
-    .jl-sidebar .sidebar-bottom,
-    .jl-root.collapsed .jl-sidebar .sidebar-bottom {
+    .sidebar .sidebar-bottom,
+    .jl-root.collapsed .sidebar .sidebar-bottom {
         padding: 12px 16px !important;
     }
 
