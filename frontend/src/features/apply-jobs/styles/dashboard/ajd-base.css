@@ -359,14 +359,7 @@
     align-items: center;
     gap: 10px;
     margin-top: 24px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.ajd-hb-tags::-webkit-scrollbar {
-    display: none;
+    flex-wrap: wrap;
 }
 
 .ajd-hb-tags span {

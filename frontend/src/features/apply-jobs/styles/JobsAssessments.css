@@ -1,286 +1,319 @@
 /* =========================================================
-   JobsAssessments.css — Premium Assessment Page Styles
+   JobsAssessments.css — Redesigned Assessment Page Styles
    ========================================================= */
 
-/* ── PAGE ROOT ── */
 .jas-root {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  background: #f8fafc;
+  min-height: 100vh;
+  padding-bottom: 40px;
 }
 
-/* =========================================================
-   HERO BANNER
-   ========================================================= */
+[data-theme='dark'] .jas-root {
+  background: #0f172a;
+}
+
+/* ── HERO BANNER ── */
 .jas-hero {
-  position: relative;
-  background: linear-gradient(135deg, #1a0938 0%, #0d1b4b 45%, #0a1833 70%, #06102a 100%);
-  border-radius: 18px;
-  padding: 30px 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  overflow: hidden;
-  min-height: 150px;
-}
-
-.jas-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 10% 40%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 85% 50%, rgba(47, 111, 91, 0.15) 0%, transparent 50%);
-  pointer-events: none;
+  flex-wrap: wrap;
 }
 
 .jas-hero-left {
   display: flex;
   align-items: center;
-  gap: 18px;
-  position: relative;
-  z-index: 2;
+  gap: 16px;
 }
 
 .jas-hero-icon {
-  width: 58px;
-  height: 58px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #eef2ff;
+  color: #4f46e5;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  flex-shrink: 0;
+}
+
+[data-theme='dark'] .jas-hero-icon {
+  background: rgba(79, 70, 229, 0.15);
 }
 
 .jas-hero-text h1 {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 800;
-  color: #fff;
-  margin: 0 0 6px;
+  color: #0f172a;
+  margin: 0 0 4px;
+  letter-spacing: -0.5px;
+}
+
+[data-theme='dark'] .jas-hero-text h1 {
+  color: #f1f5f9;
 }
 
 .jas-hero-text p {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  color: #64748b;
   margin: 0;
-  max-width: 380px;
+  font-weight: 500;
 }
 
+/* ── HERO STATS ── */
 .jas-hero-stats {
   display: flex;
   align-items: center;
-  gap: 0;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
-  padding: 14px 24px;
-  position: relative;
-  z-index: 2;
-  flex-shrink: 0;
+  gap: 12px;
 }
 
-.jas-hstat {
-  text-align: center;
-  padding: 0 20px;
-}
-
-.jas-hstat:first-child {
-  padding-left: 0;
-}
-
-.jas-hstat:last-child {
-  padding-right: 0;
-}
-
-.jas-hstat-val {
-  display: block;
-  font-size: 26px;
-  font-weight: 900;
-  color: #fff;
-  line-height: 1;
-}
-
-.jas-hstat-lbl {
-  display: block;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 500;
-}
-
-.jas-hstat-div {
-  width: 1px;
-  height: 36px;
-  background: rgba(255, 255, 255, 0.15);
-}
-
-/* =========================================================
-   ALERT BANNER
-   ========================================================= */
-.jas-alert {
+.jas-hstat-card {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 20px;
-  background: rgba(245, 158, 11, 0.1);
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
-  color: #b45309;
-  font-size: 13.5px;
-  font-weight: 500;
+  padding: 14px 20px;
+  min-width: 160px;
 }
 
-[data-theme="dark"] .jas-alert {
-  color: #fbbf24;
-  background: rgba(245, 158, 11, 0.08);
-  border-color: rgba(245, 158, 11, 0.25);
+[data-theme='dark'] .jas-hstat-card {
+  background: #1e293b;
+  border-color: #334155;
 }
 
-.jas-alert svg {
-  color: #f59e0b;
-  flex-shrink: 0;
-}
-
-.jas-alert strong {
-  display: block;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
-
-.jas-alert p {
-  margin: 0;
-  font-size: 12.5px;
-  opacity: 0.85;
-}
-
-/* =========================================================
-   TABS
-   ========================================================= */
-.jas-tabs {
+.jas-hstat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   display: flex;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.jas-hstat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.jas-hstat-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+[data-theme='dark'] .jas-hstat-val {
+  color: #f1f5f9;
+}
+
+.jas-hstat-lbl {
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* ── FILTERS BAR ── */
+.jas-filters-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
-.jas-tab {
-  padding: 9px 20px;
-  border-radius: 10px;
-  border: 1.5px solid #e2e8f0;
-  background: #fff;
-  color: #64748b;
-  font-size: 13.5px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s;
-  font-family: inherit;
+.jas-tabs {
+  display: flex;
+  gap: 10px;
 }
 
-[data-theme="dark"] .jas-tab {
-  background: #0c1631;
+.jas-tab {
+  padding: 8px 24px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+[data-theme='dark'] .jas-tab {
+  background: #1e293b;
   border-color: #334155;
   color: #94a3b8;
 }
 
-.jas-tab:hover {
-  border-color: #2f6f5b;
-  color: #2f6f5b;
-}
-
 .jas-tab.active {
-  background: #2f6f5b;
-  border-color: #2f6f5b;
-  color: #fff;
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
 }
 
-/* =========================================================
-   CARDS GRID
-   ========================================================= */
+.jas-filters-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jas-search-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0 14px;
+  height: 38px;
+  width: 220px;
+}
+
+[data-theme='dark'] .jas-search-box {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.jas-search-box input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 13.5px;
+  outline: none;
+  color: #0f172a;
+}
+
+[data-theme='dark'] .jas-search-box input {
+  color: #f1f5f9;
+}
+
+.jas-filter-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0 14px;
+  height: 38px;
+  font-size: 13.5px;
+  color: #475569;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+[data-theme='dark'] .jas-filter-dropdown {
+  background: #1e293b;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+/* ── CARDS GRID ── */
 .jas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 .jas-card {
-  background: #fff;
-  border: 1.5px solid #e8edf5;
-  border-radius: 18px;
-  padding: 22px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   transition: all 0.2s ease;
   position: relative;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
 }
 
-[data-theme="dark"] .jas-card {
-  background: #0c1631;
-  border-color: #1e293b;
+[data-theme='dark'] .jas-card {
+  background: #1e293b;
+  border-color: #334155;
 }
 
 .jas-card:hover {
-  border-color: #2f6f5b;
-  box-shadow: 0 6px 28px rgba(47, 111, 91, 0.13);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
   transform: translateY(-2px);
 }
 
+/* CARD TOP */
 .jas-card-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 12px;
 }
 
-.jas-card-icon {
-  width: 46px;
-  height: 46px;
+.jas-card-icon-box {
+  width: 48px;
+  height: 48px;
   border-radius: 12px;
-  background: linear-gradient(135deg, #2f6f5b, #4a8f76);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  flex-shrink: 0;
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.jas-status-badge {
+.jas-status-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.jas-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-  padding: 5px 12px;
-  border-radius: 999px;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
   font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
+  font-weight: 600;
 }
 
+.jas-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.jas-menu-btn {
+  color: #94a3b8;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* CARD BODY */
 .jas-card-body {
-  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
 .jas-job-title {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
-  color: #1e293b;
+  color: #0f172a;
   margin: 0;
 }
 
-[data-theme="dark"] .jas-job-title {
+[data-theme='dark'] .jas-job-title {
   color: #f1f5f9;
 }
 
 .jas-job-role {
-  font-size: 13px;
+  font-size: 13.5px;
   color: #64748b;
   margin: 0;
 }
@@ -288,18 +321,18 @@
 .jas-job-co {
   display: flex;
   align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  color: #94a3b8;
-  margin: 0;
+  gap: 6px;
+  font-size: 13px;
+  color: #64748b;
+  margin: 4px 0 0;
 }
 
 /* PROGRESS BAR */
 .jas-progress-wrap {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 10px 0 0;
+  gap: 8px;
+  margin-top: 4px;
 }
 
 .jas-progress-bar {
@@ -309,126 +342,124 @@
   overflow: hidden;
 }
 
-[data-theme="dark"] .jas-progress-bar {
-  background: rgba(255, 255, 255, 0.08);
+[data-theme='dark'] .jas-progress-bar {
+  background: #334155;
 }
 
 .jas-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #2f6f5b, #4a8f76);
   border-radius: 999px;
 }
 
 .jas-progress-lbl {
   font-size: 12px;
-  color: #64748b;
+  color: #2563eb;
+  font-weight: 500;
 }
 
 /* SCORES */
 .jas-scores {
   display: flex;
-  gap: 16px;
-  padding: 12px 14px;
-  background: #f8fafc;
-  border-radius: 10px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 4px;
 }
 
-[data-theme="dark"] .jas-scores {
-  background: rgba(255, 255, 255, 0.04);
+.jas-score-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.jas-score-item {
+.jas-score-lbl {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 13px;
+  gap: 4px;
+  font-size: 12px;
   color: #64748b;
+  font-weight: 500;
 }
 
-[data-theme="dark"] .jas-score-item {
-  color: #94a3b8;
-}
-
-.jas-score-item strong {
-  color: #1e293b;
+.jas-score-val {
+  font-size: 14px;
   font-weight: 700;
+  color: #0f172a;
+  padding-left: 18px; /* aligns with text after icon */
 }
 
-[data-theme="dark"] .jas-score-item strong {
+[data-theme='dark'] .jas-score-val {
   color: #f1f5f9;
 }
 
-/* CARD FOOTER */
+/* FOOTER CTA */
 .jas-card-footer {
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: 6px;
 }
 
-.jas-start-btn {
-  display: inline-flex;
+.jas-action-btn {
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   width: 100%;
-  padding: 10px 20px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #2f6f5b, #4a8f76);
-  color: #fff;
+  padding: 10px;
+  border-radius: 8px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
-  transition: opacity 0.15s;
+  transition: opacity 0.2s;
+  border: none;
+  cursor: pointer;
 }
 
-.jas-start-btn:hover {
+.jas-action-btn:hover {
   opacity: 0.9;
 }
 
-.jas-done-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  background: rgba(16, 185, 129, 0.1);
-  color: #10b981;
-  font-size: 13.5px;
-  font-weight: 600;
+/* Button variants */
+.jas-btn-continue {
+  background: #2563eb;
+  color: #ffffff;
 }
 
-/* =========================================================
-   EMPTY STATE
-   ========================================================= */
-.jas-empty-wrap {
-  grid-column: 1 / -1;
+.jas-btn-start {
+  background: #f59e0b;
+  color: #ffffff;
 }
 
-/* =========================================================
-   DARK THEME
-   ========================================================= */
-[data-theme="dark"] .jas-root {
-  color: #f8fafc;
+.jas-btn-result {
+  background: #d1fae5;
+  color: #059669;
 }
 
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-@media (max-width: 768px) {
+[data-theme='dark'] .jas-btn-result {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
   .jas-hero {
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px 20px;
   }
-
   .jas-hero-stats {
     width: 100%;
-    justify-content: space-around;
+    overflow-x: auto;
+    padding-bottom: 8px;
   }
-
-  .jas-grid {
-    grid-template-columns: 1fr;
+  .jas-filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .jas-tabs {
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .jas-filters-right {
+    flex-wrap: wrap;
+  }
+  .jas-search-box {
+    width: 100%;
   }
 }

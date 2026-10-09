@@ -1,25 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ClipboardCheck, PlayCircle, CheckCircle2, Clock, Building2,
-  AlertCircle, Sparkles, Trophy, Timer, Star
+  ClipboardCheck, Clock, CheckCircle2,
+  Search, ChevronDown, Filter, SlidersHorizontal,
+  MoreVertical, Building2, Trophy, Star, Sparkles, PlayCircle, BarChart2
 } from "lucide-react";
 import { getMyAssessments } from "@/services/assessmentAPI";
 import Loader from "@/components/Loader";
 import EmptyState from "@/components/recruiter/EmptyState";
 import '../styles/JobsAssessments.css';
 
-const STATUS_CONFIG = {
-  pending:     { label: "Pending",      color: "#f59e0b", bg: "rgba(245,158,11,0.12)",  icon: Clock },
-  in_progress: { label: "In Progress",  color: "#6366f1", bg: "rgba(99,102,241,0.12)",  icon: Timer },
-  mcq_done:    { label: "Coding Round", color: "#8b5cf6", bg: "rgba(139,92,246,0.12)",  icon: Sparkles },
-  completed:   { label: "Completed",    color: "#10b981", bg: "rgba(16,185,129,0.12)",  icon: CheckCircle2 },
+// Mock function to return an icon component and color based on title (or fallback)
+const getTechIcon = (title) => {
+  const t = title.toLowerCase();
+  if (t.includes('java ') || t === 'java') return { text: '☕', bg: '#fce7f3', color: '#db2777' };
+  if (t.includes('js') || t.includes('javascript')) return { text: 'JS', bg: '#fef08a', color: '#854d0e' };
+  if (t.includes('react')) return { text: '⚛️', bg: '#e0f2fe', color: '#0284c7' };
+  if (t.includes('python')) return { text: '🐍', bg: '#fef3c7', color: '#d97706' };
+  if (t.includes('node')) return { text: '🟩', bg: '#dcfce3', color: '#166534' };
+  if (t.includes('software tester')) return { text: '📋', bg: '#f3e8ff', color: '#9333ea' };
+  if (t.includes('full stack') || t.includes('developer')) return { text: '💻', bg: '#e2e8f0', color: '#475569' };
+  return { text: '🚀', bg: '#ede9fe', color: '#7c3aed' };
 };
 
 export default function JobsAssessments() {
   const [assessments, setAssessments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     getMyAssessments()
@@ -27,182 +35,213 @@ export default function JobsAssessments() {
       .finally(() => setLoading(false));
   }, []);
 
-  const pending   = assessments.filter((a) => a.status !== "completed");
+  const pending = assessments.filter((a) => a.status !== "completed");
   const completed = assessments.filter((a) => a.status === "completed");
-  const displayed = filter === "pending" ? pending : filter === "completed" ? completed : assessments;
+  
+  const filtered = assessments.filter(a => {
+    if (filter === "pending" && a.status === "completed") return false;
+    if (filter === "completed" && a.status !== "completed") return false;
+    if (search && !a.jobTitle?.toLowerCase().includes(search.toLowerCase())) return false;
+    return true;
+  });
 
   if (loading) return <Loader />;
 
   return (
     <div className="jas-root">
-
-      {/* ── HERO ── */}
+      {/* ── HERO BANNER ── */}
       <section className="jas-hero">
         <div className="jas-hero-left">
           <div className="jas-hero-icon">
             <ClipboardCheck size={28} />
           </div>
           <div className="jas-hero-text">
-            <h1>Skill assessments</h1>
-            <p>Recruiter tests that move you to interview — timed, scored, and tracked live</p>
+            <h1>Skill Assessments</h1>
+            <p>Take recruiter-style tests, track your progress and improve your skills.</p>
           </div>
         </div>
 
         <div className="jas-hero-stats">
-          <div className="jas-hstat">
-            <span className="jas-hstat-val">{assessments.length}</span>
-            <span className="jas-hstat-lbl">Total</span>
+          <div className="jas-hstat-card">
+            <div className="jas-hstat-icon" style={{ background: '#e0f2fe', color: '#0284c7' }}>
+              <ClipboardCheck size={20} />
+            </div>
+            <div className="jas-hstat-info">
+              <span className="jas-hstat-val">{assessments.length}</span>
+              <span className="jas-hstat-lbl">Total Assessments</span>
+            </div>
           </div>
-          <div className="jas-hstat-div" />
-          <div className="jas-hstat">
-            <span className="jas-hstat-val">{pending.length}</span>
-            <span className="jas-hstat-lbl">Pending</span>
+          <div className="jas-hstat-card">
+            <div className="jas-hstat-icon" style={{ background: '#fef3c7', color: '#d97706' }}>
+              <Clock size={20} />
+            </div>
+            <div className="jas-hstat-info">
+              <span className="jas-hstat-val">{pending.length}</span>
+              <span className="jas-hstat-lbl">Pending</span>
+            </div>
           </div>
-          <div className="jas-hstat-div" />
-          <div className="jas-hstat">
-            <span className="jas-hstat-val">{completed.length}</span>
-            <span className="jas-hstat-lbl">Done</span>
+          <div className="jas-hstat-card">
+            <div className="jas-hstat-icon" style={{ background: '#dcfce3', color: '#166534' }}>
+              <CheckCircle2 size={20} />
+            </div>
+            <div className="jas-hstat-info">
+              <span className="jas-hstat-val">{completed.length}</span>
+              <span className="jas-hstat-lbl">Completed</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ── PENDING ALERT ── */}
-      {pending.length > 0 && (
-        <div className="jas-alert">
-          <AlertCircle size={20} />
-          <div>
-            <strong>{pending.length} pending assessment{pending.length > 1 ? "s" : ""}</strong>
-            <p>Complete them quickly to improve your chances in the hiring process!</p>
+      {/* ── FILTERS BAR ── */}
+      <div className="jas-filters-bar">
+        <div className="jas-tabs">
+          <button
+            className={`jas-tab ${filter === "all" ? "active" : ""}`}
+            onClick={() => setFilter("all")}
+          >
+            All ({assessments.length})
+          </button>
+          <button
+            className={`jas-tab ${filter === "pending" ? "active" : ""}`}
+            onClick={() => setFilter("pending")}
+          >
+            Pending ({pending.length})
+          </button>
+          <button
+            className={`jas-tab ${filter === "completed" ? "active" : ""}`}
+            onClick={() => setFilter("completed")}
+          >
+            Completed ({completed.length})
+          </button>
+        </div>
+        <div className="jas-filters-right">
+          <div className="jas-search-box">
+            <Search size={16} color="#94a3b8" />
+            <input 
+              placeholder="Search assessments..." 
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          <div className="jas-filter-dropdown">
+            <Filter size={16} /> All Categories <ChevronDown size={14} />
+          </div>
+          <div className="jas-filter-dropdown">
+            <CheckCircle2 size={16} /> All Status <ChevronDown size={14} />
+          </div>
+          <div className="jas-filter-dropdown">
+            <SlidersHorizontal size={16} /> Newest First <ChevronDown size={14} />
           </div>
         </div>
-      )}
-
-      {/* ── TABS ── */}
-      <div className="jas-tabs">
-        {[
-          { key: "all",       label: `All (${assessments.length})` },
-          { key: "pending",   label: `Pending (${pending.length})` },
-          { key: "completed", label: `Completed (${completed.length})` },
-        ].map(({ key, label }) => (
-          <button
-            key={key}
-            type="button"
-            className={`jas-tab${filter === key ? " active" : ""}`}
-            onClick={() => setFilter(key)}
-          >
-            {label}
-          </button>
-        ))}
       </div>
 
       {/* ── CARDS GRID ── */}
       <div className="jas-grid">
-        {displayed.length === 0 ? (
-          <div className="jas-empty-wrap">
-            <EmptyState
-              icon={ClipboardCheck}
-              title={`No assessments${filter !== "all" ? ` (${filter})` : ""}`}
-              description={
-                assessments.length === 0
-                  ? "Complete your profile and apply to jobs to receive skill assessments."
-                  : "No assessments in this category."
-              }
-              actionLabel={assessments.length === 0 ? "Browse Jobs" : null}
-              actionTo={assessments.length === 0 ? "/apply-jobs/browse" : null}
-            />
-          </div>
+        {filtered.length === 0 ? (
+          <EmptyState
+            icon={ClipboardCheck}
+            title="No assessments found"
+            description="You don't have any assessments matching your filters."
+          />
         ) : (
-          displayed.map((a) => {
-            const cfg    = STATUS_CONFIG[a.status] || STATUS_CONFIG.pending;
-            const StatusIcon = cfg.icon;
-            const canStart = a.status !== "completed";
+          filtered.map((a) => {
+            const isCompleted = a.status === "completed";
+            const isInProgress = a.status === "in_progress" || a.status === "mcq_done";
+            
+            const techIcon = getTechIcon(a.jobTitle || "");
+            
+            // Status pill styling
+            let pillBg = "#fef3c7";
+            let pillColor = "#d97706";
+            let pillLabel = "Pending";
+            
+            if (isCompleted) {
+              pillBg = "#dcfce3";
+              pillColor = "#059669";
+              pillLabel = "Completed";
+            } else if (isInProgress) {
+              pillBg = "#e0f2fe";
+              pillColor = "#0284c7";
+              pillLabel = "In Progress";
+            }
 
             return (
               <article key={a._id} className="jas-card">
-
-                {/* TOP ROW */}
+                {/* TOP */}
                 <div className="jas-card-top">
-                  <div className="jas-card-icon">
-                    <ClipboardCheck size={22} />
-                  </div>
-                  <span
-                    className="jas-status-badge"
-                    style={{ background: cfg.bg, color: cfg.color }}
+                  <div 
+                    className="jas-card-icon-box"
+                    style={{ background: techIcon.bg, color: techIcon.color }}
                   >
-                    <StatusIcon size={12} />
-                    {cfg.label}
-                  </span>
+                    {techIcon.text}
+                  </div>
+                  <div className="jas-status-wrap">
+                    <span className="jas-status-pill" style={{ background: pillBg, color: pillColor }}>
+                      {pillLabel}
+                    </span>
+                    <button className="jas-menu-btn">
+                      <MoreVertical size={18} />
+                    </button>
+                  </div>
                 </div>
 
                 {/* BODY */}
                 <div className="jas-card-body">
                   <h3 className="jas-job-title">{a.jobTitle || "Job Assessment"}</h3>
-                  {a.jobRole    && <p className="jas-job-role">{a.jobRole}</p>}
-                  {a.companyName && (
-                    <p className="jas-job-co">
-                      <Building2 size={13} /> {a.companyName}
-                    </p>
-                  )}
+                  <p className="jas-job-role">{a.jobRole || "Software Engineer"}</p>
+                  <p className="jas-job-co">
+                    <Building2 size={14} /> {a.companyName || "Preepx"}
+                  </p>
                 </div>
 
-                {/* PROGRESS — in_progress */}
-                {a.status === "in_progress" && (
+                {/* DYNAMIC MIDDLE CONTENT */}
+                {isCompleted ? (
+                  <div className="jas-scores">
+                    <div className="jas-score-col">
+                      <span className="jas-score-lbl"><Trophy size={14} color="#eab308" /> Overall</span>
+                      <span className="jas-score-val">{a.overallScore ?? "0"}%</span>
+                    </div>
+                    <div className="jas-score-col">
+                      <span className="jas-score-lbl"><Star size={14} color="#8b5cf6" /> MCQ</span>
+                      <span className="jas-score-val">{a.mcqScore ?? "0"}%</span>
+                    </div>
+                    <div className="jas-score-col">
+                      <span className="jas-score-lbl"><Sparkles size={14} color="#10b981" /> Coding</span>
+                      <span className="jas-score-val">{a.codingScore ?? "0"}%</span>
+                    </div>
+                  </div>
+                ) : isInProgress ? (
                   <div className="jas-progress-wrap">
                     <div className="jas-progress-bar">
-                      <div className="jas-progress-fill" style={{ width: "40%" }} />
+                      <div className="jas-progress-fill" style={{ width: "40%", background: "#3b82f6" }} />
                     </div>
                     <span className="jas-progress-lbl">MCQ in progress — 40% complete</span>
                   </div>
-                )}
-
-                {/* PROGRESS — mcq_done */}
-                {a.status === "mcq_done" && (
-                  <div className="jas-progress-wrap">
-                    <div className="jas-progress-bar">
-                      <div className="jas-progress-fill" style={{ width: "70%" }} />
-                    </div>
-                    <span className="jas-progress-lbl">MCQ done — Coding round remaining</span>
-                  </div>
-                )}
-
-                {/* SCORES — completed */}
-                {a.status === "completed" && (
-                  <div className="jas-scores">
-                    <div className="jas-score-item">
-                      <Trophy size={14} color="#f59e0b" />
-                      Overall: <strong>{a.overallScore ?? "--"}%</strong>
-                    </div>
-                    <div className="jas-score-item">
-                      <Star size={14} color="#6366f1" />
-                      MCQ: <strong>{a.mcqScore ?? "--"}%</strong>
-                    </div>
-                    <div className="jas-score-item">
-                      <Sparkles size={14} color="#10b981" />
-                      Coding: <strong>{a.codingScore ?? "--"}%</strong>
-                    </div>
-                  </div>
+                ) : (
+                  <div style={{ flex: 1 }} />
                 )}
 
                 {/* FOOTER CTA */}
                 <div className="jas-card-footer">
-                  {canStart ? (
-                    <Link to={`/assessment/${a._id}`} className="jas-start-btn">
-                      <PlayCircle size={16} />
-                      {a.status === "pending" ? "Start Assessment" : "Continue"}
+                  {isCompleted ? (
+                    <Link to={`/assessment/${a._id}/result`} className="jas-action-btn jas-btn-result">
+                      <BarChart2 size={16} /> View Result
+                    </Link>
+                  ) : isInProgress ? (
+                    <Link to={`/assessment/${a._id}`} className="jas-action-btn jas-btn-continue">
+                      <PlayCircle size={16} /> Continue
                     </Link>
                   ) : (
-                    <div className="jas-done-badge">
-                      <CheckCircle2 size={16} /> Completed
-                    </div>
+                    <Link to={`/assessment/${a._id}`} className="jas-action-btn jas-btn-start">
+                      <PlayCircle size={16} /> Start Assessment
+                    </Link>
                   )}
                 </div>
-
               </article>
             );
           })
         )}
       </div>
-
     </div>
   );
 }
