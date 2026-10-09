@@ -16,21 +16,30 @@ import PageTransitionLoader from "@/components/PageTransitionLoader";
 import '../styles/JobsLayout.css';
 import "@/styles/AppLayout.css";
 
-const NAV_MAIN = [
-  { to: "/apply-jobs", icon: LayoutDashboard, label: "Dashboard", exact: true },
-  { to: "/apply-jobs/browse", icon: Search, label: "Browse Jobs" },
-  { to: "/apply-jobs#ajd-events", icon: CalendarDays, label: "Events" },
-  { to: "/apply-jobs/assessments", icon: ClipboardCheck, label: "Assessments", badge: "New", badgePill: true },
-  { to: "/apply-jobs/saved", icon: Bookmark, label: "Saved Jobs" },
-];
-
-const NAV_APPS = [
-  { to: "/apply-jobs/my-applications", icon: Briefcase, label: "My Applications", badgeKey: "applications" },
-];
-
-const NAV_ACCOUNT = [
-  { to: "/profile", icon: User, label: "Profile" },
-  { to: "/apply-jobs/settings", icon: Settings, label: "Settings" },
+const NAV_SECTIONS = [
+  {
+    label: null,
+    items: [
+      { to: "/apply-jobs", icon: LayoutDashboard, label: "Dashboard", exact: true },
+      { to: "/apply-jobs/browse", icon: Search, label: "Browse Jobs" },
+      { to: "/apply-jobs#ajd-events", icon: CalendarDays, label: "Events" },
+    ]
+  },
+  {
+    label: "APPLICATIONS",
+    items: [
+      { to: "/apply-jobs/assessments", icon: ClipboardCheck, label: "Assessments", badge: "New", badgePill: true },
+      { to: "/apply-jobs/saved", icon: Bookmark, label: "Saved Jobs" },
+      { to: "/apply-jobs/my-applications", icon: Briefcase, label: "My Applications", badgeKey: "applications" },
+    ]
+  },
+  {
+    label: "ACCOUNT",
+    items: [
+      { to: "/profile", icon: User, label: "Profile" },
+      { to: "/apply-jobs/settings", icon: Settings, label: "Settings" },
+    ]
+  }
 ];
 
 function JobsLayout({ children }) {
@@ -55,7 +64,7 @@ function JobsLayout({ children }) {
         setCollapsed(false);
       }
     };
-    
+
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -98,34 +107,6 @@ function JobsLayout({ children }) {
     window.location.href = "/";
   };
 
-  const renderGroup = (items) => (
-    <div className="sidebar-section">
-      {items.map(({ to, icon: Icon, label, badge, badgePill, badgeKey, exact }) => {
-        const dynBadge = badgeKey === "applications" ? applicationBadge : 0;
-        const active = isActive(to, exact);
-        return (
-          <Link
-            key={`${to}-${label}`}
-            to={to}
-            className={`sidebar-link ${active ? "active" : ""}`}
-            onClick={() => setMobileOpen(false)}
-            title={label}
-          >
-            <Icon size={20} style={{ flexShrink: 0 }} />
-            {(!collapsed || mobileOpen) && (
-              <>
-                <span className="sidebar-link-label">{label}</span>
-                {badgePill && <span className="nav-new-badge">New</span>}
-                {badge && !badgePill && <span className="nav-free-badge">{badge}</span>}
-                {dynBadge > 0 && <span className="nav-free-badge" style={{ background: '#2563eb', color: '#fff', border: 'none' }}>{dynBadge}</span>}
-              </>
-            )}
-          </Link>
-        );
-      })}
-    </div>
-  );
-
   return (
     <div className={`jl-root app-layout ${collapsed ? "collapsed" : ""}`}>
       <div className="jl-body">
@@ -146,11 +127,7 @@ function JobsLayout({ children }) {
               aria-label="Toggle Sidebar"
               title={collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             >
-              <div className="hamburger-box">
-                <span className="ham-bar top-bar" />
-                <span className="ham-bar mid-bar" />
-                <span className="ham-bar bot-bar" />
-              </div>
+              <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18, display: 'block', margin: 'auto' }} />
             </button>
             <button
               type="button"
@@ -163,9 +140,36 @@ function JobsLayout({ children }) {
           </div>
 
           <nav className="sidebar-nav">
-            {renderGroup(NAV_MAIN)}
-            {renderGroup(NAV_APPS)}
-            {renderGroup(NAV_ACCOUNT)}
+            {NAV_SECTIONS.map(({ label: sectionLabel, items }) => (
+              <div key={sectionLabel || "top"} className="sidebar-section">
+                {sectionLabel && (!collapsed || mobileOpen) && (
+                  <span className="sidebar-section-label">{sectionLabel}</span>
+                )}
+                {items.map(({ to, icon: Icon, label, badge, badgePill, badgeKey, exact }) => {
+                  const dynBadge = badgeKey === "applications" ? applicationBadge : 0;
+                  const active = isActive(to, exact);
+                  return (
+                    <Link
+                      key={to}
+                      to={to}
+                      className={`sidebar-link ${active ? "active" : ""}`}
+                      onClick={() => setMobileOpen(false)}
+                      title={label}
+                    >
+                      <Icon size={20} style={{ flexShrink: 0 }} />
+                      {(!collapsed || mobileOpen) && (
+                        <>
+                          <span className="sidebar-link-label">{label}</span>
+                          {badgePill && <span className="nav-new-badge" style={{ background: '#2563eb', color: '#fff', fontSize: '10px', padding: '2px 7px', borderRadius: '10px', marginLeft: 'auto' }}>New</span>}
+                          {badge && !badgePill && <span className="nav-free-badge" style={{ marginLeft: 'auto' }}>{badge}</span>}
+                          {dynBadge > 0 && <span className="nav-free-badge" style={{ background: '#2563eb', color: '#fff', border: 'none', marginLeft: 'auto', padding: '2px 7px', borderRadius: '10px', fontSize: '10px' }}>{dynBadge}</span>}
+                        </>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            ))}
           </nav>
 
           <div className="sidebar-bottom">
@@ -197,137 +201,139 @@ function JobsLayout({ children }) {
 
         {/* ── CONTENT AREA (Topbar + Page Content + Footer) ── */}
         <div className="jl-content-area app-content">
-        {/* ── TOP NAVBAR ── */}
-        <header className="jl-topbar">
-          <div className="mobile-only" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <button
-              type="button"
-              className="mobile-menu-btn"
-              onClick={() => setMobileOpen(true)}
-              aria-label="Open Navigation Menu"
-            >
-              <div className="hamburger-box">
-                <span className="ham-bar top-bar" />
-                <span className="ham-bar mid-bar" />
-                <span className="ham-bar bot-bar" />
-              </div>
-            </button>
-            <Link to="/apply-jobs" className="jl-mobile-logo-link" style={{ display: 'flex', alignItems: 'center' }}>
-              <img src="/preepx_logo.png" alt="PreepX" className="jl-mobile-logo" />
-            </Link>
-          </div>
-
-          {/* Center: Nav links + search */}
-          <div className="jl-topbar-center">
-            <nav className="jl-top-links">
-              <Link to="/apply-jobs/browse" className="jl-tlink">
-                Jobs <span className="jl-tbadge">Live</span>
-              </Link>
-
-              <Link to="/apply-jobs#ajd-events" className="jl-tlink">
-                Events
-              </Link>
-              <div
-                className="jl-mega-wrapper"
-                onMouseEnter={() => setShowServicesMenu(true)}
-                onMouseLeave={() => setShowServicesMenu(false)}
+          {/* ── TOP NAVBAR ── */}
+          <header className="jl-topbar">
+            <div className="mobile-only" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <button
+                type="button"
+                className="mobile-menu-btn"
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open Navigation Menu"
               >
-                <div className="jl-tlink-services">
-                  <span className="jl-tlink" style={{ cursor: 'pointer' }}>
-                    Services <span className="jl-tbadge">1</span>
-                  </span>
-
-                  {/* Mega Menu Dropdown */}
-                  {showServicesMenu && (
-                    <div className="jl-mega-menu">
-                      <div className="jl-mega-col">
-                        <div className="jl-mega-section">
-                          <h4>ATS & Resume</h4>
-                          <Link to="/apply-jobs/resume">Resume Builder</Link>
-                          <Link to="/ats-score">ATS Score Checker</Link>
-                          <Link to="/profile">Optimize Profile</Link>
-                        </div>
-                        <div className="jl-mega-section">
-                          <h4>Career Resources</h4>
-                          <Link to="/btech-notes">Notes</Link>
-                          <Link to="/100-days-challenge">100 Days Challenge</Link>
-                        </div>
-                      </div>
-
-                      <div className="jl-mega-col">
-                        <div className="jl-mega-section">
-                          <h4>Interview Preparation</h4>
-                          <Link to="/interview">AI Mock Interview</Link>
-                          <Link to="/resume-interview">Resume Based Interview</Link>
-                        </div>
-                        <div className="jl-mega-section">
-                          <h4>Assessments & Tests</h4>
-                          <Link to="/objective-exam">Objective Exams</Link>
-                          <Link to="/my-assessments">Coding Challenges</Link>
-                        </div>
-                      </div>
-
-                      <div className="jl-mega-col">
-                        <div className="jl-mega-section">
-                          <h4>For Recruiters</h4>
-                          <Link to="/auth/recruiter">Post a Job</Link>
-                          <Link to="/auth/recruiter">Find Candidates</Link>
-                        </div>
-                        <div className="jl-mega-section">
-                          <h4>Premium Benefits 🔴</h4>
-                          <span className="jl-mega-promo">Upgrade to priority applicant to boost your chances by 3x.</span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </nav>
-
-            <div className="jl-top-search">
-              <input
-                value={searchVal}
-                onChange={e => setSearchVal(e.target.value)}
-                onKeyDown={e => { if (e.key === "Enter" && searchVal) navigate(`/apply-jobs/browse?search=${encodeURIComponent(searchVal)}`); }}
-                placeholder="Search jobs, skills, companies"
-              />
-              <button onClick={() => { if (searchVal) navigate(`/apply-jobs/browse?search=${encodeURIComponent(searchVal)}`); }}>
-                <Search size={15} />
+                <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18, display: 'block', margin: 'auto' }} />
               </button>
+              <span style={{ fontSize: '18px', fontWeight: '700', color: '#1e293b', letterSpacing: '-0.3px' }}>Jobs</span>
             </div>
-          </div>
 
-          {/* Right: icons + user */}
-          <div className="jl-topbar-right">
-            <div className="jl-hiring-live" title="Live hiring activity">
-              <Zap size={13} />
-              <span className="jl-hiring-text">Hiring live</span>
-            </div>
-            <button className="jl-tb-icon-btn jl-tb-notif" onClick={() => setShowNotifications(true)}>
-              <Bell size={19} />
-              {unreadCount > 0 && <span className="jl-tb-badge">{unreadCount > 9 ? "9+" : unreadCount}</span>}
-            </button>
-            <Link to="/profile" className="jl-user-chip">
-              <img src={avatar} alt="avatar" />
-              <div>
-                <strong>{user.fullName || "Candidate"}</strong>
-                <span>Job Seeker</span>
+            {/* Center: Nav links + search */}
+            <div className="jl-topbar-center">
+              <nav className="jl-top-links">
+                <Link to="/apply-jobs/browse" className="jl-tlink">
+                  Jobs <span className="jl-tbadge">Live</span>
+                </Link>
+
+                <Link to="/apply-jobs#ajd-events" className="jl-tlink">
+                  Events
+                </Link>
+                <div
+                  className="jl-mega-wrapper"
+                  onMouseEnter={() => setShowServicesMenu(true)}
+                  onMouseLeave={() => setShowServicesMenu(false)}
+                >
+                  <div className="jl-tlink-services">
+                    <span className="jl-tlink" style={{ cursor: 'pointer' }}>
+                      Services <span className="jl-tbadge">1</span>
+                    </span>
+
+                    {/* Mega Menu Dropdown */}
+                    {showServicesMenu && (
+                      <div className="jl-mega-menu">
+                        <div className="jl-mega-col">
+                          <div className="jl-mega-section">
+                            <h4>ATS & Resume</h4>
+                            <Link to="/apply-jobs/resume">Resume Builder</Link>
+                            <Link to="/ats-score">ATS Score Checker</Link>
+                            <Link to="/profile">Optimize Profile</Link>
+                          </div>
+                          <div className="jl-mega-section">
+                            <h4>Career Resources</h4>
+                            <Link to="/btech-notes">Notes</Link>
+                            <Link to="/100-days-challenge">100 Days Challenge</Link>
+                          </div>
+                        </div>
+
+                        <div className="jl-mega-col">
+                          <div className="jl-mega-section">
+                            <h4>Interview Preparation</h4>
+                            <Link to="/interview">AI Mock Interview</Link>
+                            <Link to="/resume-interview">Resume Based Interview</Link>
+                          </div>
+                          <div className="jl-mega-section">
+                            <h4>Assessments & Tests</h4>
+                            <Link to="/objective-exam">Objective Exams</Link>
+                            <Link to="/my-assessments">Coding Challenges</Link>
+                          </div>
+                        </div>
+
+                        <div className="jl-mega-col">
+                          <div className="jl-mega-section">
+                            <h4>For Recruiters</h4>
+                            <Link to="/auth/recruiter">Post a Job</Link>
+                            <Link to="/auth/recruiter">Find Candidates</Link>
+                          </div>
+                          <div className="jl-mega-section">
+                            <h4>Premium Benefits 🔴</h4>
+                            <span className="jl-mega-promo">Upgrade to priority applicant to boost your chances by 3x.</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </nav>
+
+              <div className="jl-top-search">
+                <input
+                  value={searchVal}
+                  onChange={e => setSearchVal(e.target.value)}
+                  onKeyDown={e => { if (e.key === "Enter" && searchVal) navigate(`/apply-jobs/browse?search=${encodeURIComponent(searchVal)}`); }}
+                  placeholder="Search jobs, skills, companies"
+                />
+                <button onClick={() => { if (searchVal) navigate(`/apply-jobs/browse?search=${encodeURIComponent(searchVal)}`); }}>
+                  <Search size={15} />
+                </button>
               </div>
-              <ChevronDown size={14} />
-            </Link>
-          </div>
-        </header>
+            </div>
 
-        {/* ── PAGE CONTENT ── */}
-        <main className="jl-main">
-          <PageTransitionLoader>
-            {children}
-          </PageTransitionLoader>
-        </main>
+            {/* Right: icons + user */}
+            <div className="jl-topbar-right">
+              <div className="jl-hiring-live" title="Live hiring activity">
+                <Zap size={13} />
+                <span className="jl-hiring-text">Hiring live</span>
+              </div>
+              <button
+                type="button"
+                className="tb-icon-btn"
+                onClick={() => setShowNotifications(true)}
+                title="Notifications"
+                style={{ position: 'relative' }}
+              >
+                <Bell size={24} color="var(--text)" />
+                {unreadCount > 0 && (
+                  <span className="tb-notif-dot">
+                    {unreadCount}
+                  </span>
+                )}
+              </button>
+              <Link to="/profile" className="jl-user-chip">
+                <img src={avatar} alt="avatar" />
+                <div>
+                  <strong>{user.fullName || "Candidate"}</strong>
+                  <span>Job Seeker</span>
+                </div>
+                <ChevronDown size={14} />
+              </Link>
+            </div>
+          </header>
+
+          {/* ── PAGE CONTENT ── */}
+          <main className="jl-main">
+            <PageTransitionLoader>
+              {children}
+            </PageTransitionLoader>
+          </main>
+        </div>
       </div>
-    </div>
-
-    {/* ── FULL WIDTH FOOTER REMOVED PER USER REQUEST ── */}
 
       <NotificationModal
         isOpen={showNotifications}
