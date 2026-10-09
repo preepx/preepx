@@ -22,7 +22,7 @@ class ForbiddenError extends AppError {
 }
 
 class NotFoundError extends AppError {
-  constructor(message = 'Resource not found') {
+  constructor(message = 'Resource nott found') {
     super(404, message, true);
   }
 }
