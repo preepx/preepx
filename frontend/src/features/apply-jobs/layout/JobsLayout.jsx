@@ -162,7 +162,6 @@ function JobsLayout({ children }) {
                           <span className="sidebar-link-label">{label}</span>
                           {badgePill && <span className="nav-new-badge" style={{ background: '#2563eb', color: '#fff', fontSize: '10px', padding: '2px 7px', borderRadius: '10px', marginLeft: 'auto' }}>New</span>}
                           {badge && !badgePill && <span className="nav-free-badge" style={{ marginLeft: 'auto' }}>{badge}</span>}
-                          {dynBadge > 0 && <span className="nav-free-badge" style={{ background: '#2563eb', color: '#fff', border: 'none', marginLeft: 'auto', padding: '2px 7px', borderRadius: '10px', fontSize: '10px' }}>{dynBadge}</span>}
                         </>
                       )}
                     </Link>

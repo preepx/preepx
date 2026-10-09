@@ -11,16 +11,46 @@ import EmptyState from "@/components/recruiter/EmptyState";
 import '../styles/JobsAssessments.css';
 
 // Mock function to return an icon component and color based on title (or fallback)
+// Extended tech mapping
+const techMap = [
+  { keys: ['react', 'frontend', 'front-end', 'mern'], icon: 'react/react-original.svg', bg: '#e0f2fe' },
+  { keys: ['node', 'backend', 'back-end', 'express'], icon: 'nodejs/nodejs-original.svg', bg: '#dcfce3' },
+  { keys: ['java', 'spring'], icon: 'java/java-original.svg', bg: '#fce7f3' },
+  { keys: ['python', 'django', 'flask'], icon: 'python/python-original.svg', bg: '#fef3c7' },
+  { keys: ['js', 'javascript'], icon: 'javascript/javascript-original.svg', bg: '#fef08a' },
+  { keys: ['angular'], icon: 'angularjs/angularjs-original.svg', bg: '#fee2e2' },
+  { keys: ['vue'], icon: 'vuejs/vuejs-original.svg', bg: '#dcfce3' },
+  { keys: ['php', 'laravel'], icon: 'php/php-original.svg', bg: '#e0e7ff' },
+  { keys: ['go', 'golang'], icon: 'go/go-original.svg', bg: '#e0f2fe' },
+  { keys: ['ruby', 'rails'], icon: 'ruby/ruby-original.svg', bg: '#fee2e2' },
+  { keys: ['c++', 'cpp'], icon: 'cplusplus/cplusplus-original.svg', bg: '#e0e7ff' },
+  { keys: ['c#', '.net'], icon: 'csharp/csharp-original.svg', bg: '#f3e8ff' },
+  { keys: ['sql', 'database', 'data'], icon: 'mysql/mysql-original.svg', bg: '#e0f2fe' },
+  { keys: ['aws', 'cloud', 'devops'], icon: 'amazonwebservices/amazonwebservices-original-wordmark.svg', bg: '#fef3c7' },
+  { keys: ['docker'], icon: 'docker/docker-original.svg', bg: '#e0f2fe' },
+  { keys: ['android', 'mobile'], icon: 'android/android-original.svg', bg: '#dcfce3' },
+  { keys: ['ios', 'swift'], icon: 'swift/swift-original.svg', bg: '#ffedd5' },
+  { keys: ['figma', 'ui', 'ux', 'design'], icon: 'figma/figma-original.svg', bg: '#f3e8ff' },
+  { keys: ['tester', 'qa', 'testing', 'selenium'], icon: 'selenium/selenium-original.svg', bg: '#f3e8ff' },
+];
+
 const getTechIcon = (title) => {
   const t = title.toLowerCase();
-  if (t.includes('java ') || t === 'java') return { text: '☕', bg: '#fce7f3', color: '#db2777' };
-  if (t.includes('js') || t.includes('javascript')) return { text: 'JS', bg: '#fef08a', color: '#854d0e' };
-  if (t.includes('react')) return { text: '⚛️', bg: '#e0f2fe', color: '#0284c7' };
-  if (t.includes('python')) return { text: '🐍', bg: '#fef3c7', color: '#d97706' };
-  if (t.includes('node')) return { text: '🟩', bg: '#dcfce3', color: '#166534' };
-  if (t.includes('software tester')) return { text: '📋', bg: '#f3e8ff', color: '#9333ea' };
-  if (t.includes('full stack') || t.includes('developer')) return { text: '💻', bg: '#e2e8f0', color: '#475569' };
-  return { text: '🚀', bg: '#ede9fe', color: '#7c3aed' };
+  
+  for (const tech of techMap) {
+    if (tech.keys.some(k => t.includes(k))) {
+      return { 
+        img: `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}`, 
+        bg: tech.bg 
+      };
+    }
+  }
+
+  // Dynamic fallback using ui-avatars to create an initial-based logo for ANY unknown role
+  return { 
+    img: `https://ui-avatars.com/api/?name=${encodeURIComponent(title)}&background=random&color=fff&size=64&bold=true`, 
+    bg: '#f8fafc'
+  };
 };
 
 export default function JobsAssessments() {
@@ -53,7 +83,7 @@ export default function JobsAssessments() {
       <section className="jas-hero">
         <div className="jas-hero-left">
           <div className="jas-hero-icon">
-            <ClipboardCheck size={28} />
+            <ClipboardCheck size={22} />
           </div>
           <div className="jas-hero-text">
             <h1>Skill Assessments</h1>
@@ -62,27 +92,27 @@ export default function JobsAssessments() {
         </div>
 
         <div className="jas-hero-stats">
-          <div className="jas-hstat-card">
+          <div className="jas-hstat-card" style={{ background: '#f0f9ff', borderColor: '#e0f2fe' }}>
             <div className="jas-hstat-icon" style={{ background: '#e0f2fe', color: '#0284c7' }}>
-              <ClipboardCheck size={20} />
+              <ClipboardCheck size={24} />
             </div>
             <div className="jas-hstat-info">
               <span className="jas-hstat-val">{assessments.length}</span>
               <span className="jas-hstat-lbl">Total Assessments</span>
             </div>
           </div>
-          <div className="jas-hstat-card">
+          <div className="jas-hstat-card" style={{ background: '#fffbeb', borderColor: '#fef3c7' }}>
             <div className="jas-hstat-icon" style={{ background: '#fef3c7', color: '#d97706' }}>
-              <Clock size={20} />
+              <Clock size={24} />
             </div>
             <div className="jas-hstat-info">
               <span className="jas-hstat-val">{pending.length}</span>
               <span className="jas-hstat-lbl">Pending</span>
             </div>
           </div>
-          <div className="jas-hstat-card">
+          <div className="jas-hstat-card" style={{ background: '#f0fdf4', borderColor: '#dcfce3' }}>
             <div className="jas-hstat-icon" style={{ background: '#dcfce3', color: '#166534' }}>
-              <CheckCircle2 size={20} />
+              <CheckCircle2 size={24} />
             </div>
             <div className="jas-hstat-info">
               <span className="jas-hstat-val">{completed.length}</span>
@@ -123,15 +153,7 @@ export default function JobsAssessments() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <div className="jas-filter-dropdown">
-            <Filter size={16} /> All Categories <ChevronDown size={14} />
-          </div>
-          <div className="jas-filter-dropdown">
-            <CheckCircle2 size={16} /> All Status <ChevronDown size={14} />
-          </div>
-          <div className="jas-filter-dropdown">
-            <SlidersHorizontal size={16} /> Newest First <ChevronDown size={14} />
-          </div>
+
         </div>
       </div>
 
@@ -173,7 +195,11 @@ export default function JobsAssessments() {
                     className="jas-card-icon-box"
                     style={{ background: techIcon.bg, color: techIcon.color }}
                   >
-                    {techIcon.text}
+                    {techIcon.img ? (
+                      <img src={techIcon.img} alt={a.jobTitle} style={{ width: '22px', height: '22px', objectFit: 'contain' }} />
+                    ) : (
+                      techIcon.text
+                    )}
                   </div>
                   <div className="jas-status-wrap">
                     <span className="jas-status-pill" style={{ background: pillBg, color: pillColor }}>

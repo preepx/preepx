@@ -21,19 +21,19 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .jas-hero-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .jas-hero-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   background: #eef2ff;
   color: #4f46e5;
   display: flex;
@@ -46,10 +46,10 @@
 }
 
 .jas-hero-text h1 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 800;
   color: #0f172a;
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   letter-spacing: -0.5px;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .jas-hero-text p {
-  font-size: 14px;
+  font-size: 12.5px;
   color: #64748b;
   margin: 0;
   font-weight: 500;
@@ -67,19 +67,20 @@
 /* ── HERO STATS ── */
 .jas-hero-stats {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 12px;
+  flex: 0 0 450px;
 }
 
 .jas-hstat-card {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 14px 20px;
-  min-width: 160px;
+  padding: 10px 14px;
+  flex: 1;
 }
 
 [data-theme='dark'] .jas-hstat-card {
@@ -88,9 +89,9 @@
 }
 
 .jas-hstat-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,19 +114,36 @@
 }
 
 .jas-hstat-lbl {
-  font-size: 12px;
+  font-size: 11px;
   color: #64748b;
   font-weight: 500;
   margin-top: 2px;
+  white-space: nowrap;
 }
 
-/* ── FILTERS BAR ── */
 .jas-filters-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  /* Space for scroll if needed */
+}
+
+/* Hide scrollbar for clean look */
+.jas-filters-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.jas-filters-bar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.jas-filters-bar:hover::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
 }
 
 .jas-tabs {
@@ -143,6 +161,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 [data-theme='dark'] .jas-tab {
@@ -161,6 +180,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 0 0 450px;
+  justify-content: flex-end;
 }
 
 .jas-search-box {
@@ -172,7 +193,7 @@
   border-radius: 8px;
   padding: 0 14px;
   height: 38px;
-  width: 220px;
+  width: 100%;
 }
 
 [data-theme='dark'] .jas-search-box {
@@ -206,6 +227,7 @@
   color: #475569;
   font-weight: 500;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 [data-theme='dark'] .jas-filter-dropdown {
@@ -217,21 +239,21 @@
 /* ── CARDS GRID ── */
 .jas-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 16px;
 }
 
 .jas-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 14px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
   transition: all 0.2s ease;
   position: relative;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 
 [data-theme='dark'] .jas-card {
@@ -240,7 +262,7 @@
 }
 
 .jas-card:hover {
-  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
   transform: translateY(-2px);
 }
 
@@ -252,13 +274,13 @@
 }
 
 .jas-card-icon-box {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -271,10 +293,10 @@
 .jas-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 4px 12px;
+  gap: 4px;
+  padding: 3px 10px;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
 }
 
@@ -302,7 +324,7 @@
 }
 
 .jas-job-title {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
   color: #0f172a;
   margin: 0;
@@ -313,7 +335,7 @@
 }
 
 .jas-job-role {
-  font-size: 13.5px;
+  font-size: 12.5px;
   color: #64748b;
   margin: 0;
 }
@@ -322,7 +344,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
+  font-size: 12px;
   color: #64748b;
   margin: 4px 0 0;
 }
@@ -331,12 +353,12 @@
 .jas-progress-wrap {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   margin-top: 4px;
 }
 
 .jas-progress-bar {
-  height: 6px;
+  height: 5px;
   background: #e2e8f0;
   border-radius: 999px;
   overflow: hidden;
@@ -352,7 +374,7 @@
 }
 
 .jas-progress-lbl {
-  font-size: 12px;
+  font-size: 11px;
   color: #2563eb;
   font-weight: 500;
 }
@@ -374,16 +396,17 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 12px;
+  font-size: 11px;
   color: #64748b;
   font-weight: 500;
 }
 
 .jas-score-val {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #0f172a;
-  padding-left: 18px; /* aligns with text after icon */
+  padding-left: 16px;
+  /* aligns with text after icon */
 }
 
 [data-theme='dark'] .jas-score-val {
@@ -400,11 +423,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
-  padding: 10px;
+  padding: 8px;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   transition: opacity 0.2s;
@@ -437,29 +460,212 @@
   color: #34d399;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
+/* Expand elements when sidebar is collapsed (more horizontal space) */
+.jl-root.collapsed .jas-hero-stats,
+.jl-root.collapsed .jas-filters-right {
+  flex: 0 0 600px;
+}
+
+.jl-root.collapsed .jas-search-box {
+  width: 100%;
+}
+
+/* ── MOBILE RESPONSIVENESS ── */
+@media (max-width: 768px) {
+  .jas-root {
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+
   .jas-hero {
     flex-direction: column;
     align-items: flex-start;
+    gap: 16px;
   }
-  .jas-hero-stats {
+
+  .jas-hero-stats,
+  .jl-root.collapsed .jas-hero-stats {
+    flex: none;
     width: 100%;
-    overflow-x: auto;
     padding-bottom: 8px;
+    gap: 6px; /* Smaller gap */
   }
+
+  .jas-hstat-card {
+    flex: 1 1 0px; /* Equal width, no scrolling */
+    min-width: 0;
+    padding: 8px 6px;
+    gap: 6px;
+    border-radius: 10px;
+  }
+  
+  .jas-hstat-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  
+  .jas-hstat-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .jas-hstat-val {
+    font-size: 14px;
+  }
+  
+  .jas-hstat-lbl {
+    font-size: 9px;
+    white-space: normal;
+    line-height: 1.1;
+  }
+
   .jas-filters-bar {
     flex-direction: column;
     align-items: stretch;
+    gap: 12px;
   }
+
   .jas-tabs {
-    overflow-x: auto;
+    display: flex;
+    width: 100%;
+    gap: 8px;
     padding-bottom: 4px;
   }
-  .jas-filters-right {
+  
+  .jas-tab {
+    flex: 1 1 0px; /* Equal width */
+    padding: 8px 4px;
+    font-size: 13px;
+    text-align: center;
+    min-width: 0;
+  }
+
+  .jas-filters-right,
+  .jl-root.collapsed .jas-filters-right {
+    flex: none;
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .jas-search-box,
+  .jl-root.collapsed .jas-search-box {
+    width: 100%;
+    max-width: none;
+  }
+
+  .jas-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* For extremely small screens like 320px */
+@media (max-width: 360px) {
+  .jas-root {
+    gap: 12px;
+  }
+
+  .jas-hero-left {
+    gap: 8px;
+  }
+
+  .jas-hero-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .jas-hero-text h1 {
+    font-size: 16px;
+    word-break: break-word;
+  }
+
+  .jas-hero-text p {
+    font-size: 11px;
+    word-break: break-word;
+  }
+
+  .jas-hstat-card {
+    padding: 6px 4px;
+    gap: 4px;
+    border-radius: 8px;
+    min-width: 0;
+  }
+
+  .jas-hstat-icon {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+  }
+  
+  .jas-hstat-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .jas-hstat-val {
+    font-size: 11px;
+  }
+
+  .jas-hstat-lbl {
+    font-size: 8px;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .jas-tab {
+    padding: 6px 2px;
+    font-size: 10px;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.1;
+  }
+
+  .jas-card {
+    padding: 10px;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .jas-card-icon-box {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+
+  .jas-status-pill {
+    padding: 2px 8px;
+    font-size: 10px;
+  }
+
+  .jas-job-title {
+    font-size: 14px;
+    word-break: break-word;
+  }
+
+  .jas-job-role,
+  .jas-job-co {
+    font-size: 11px;
+    word-break: break-word;
+  }
+  
+  .jas-scores {
+    gap: 4px;
     flex-wrap: wrap;
   }
-  .jas-search-box {
-    width: 100%;
+
+  .jas-score-lbl {
+    font-size: 10px;
+  }
+
+  .jas-score-val {
+    font-size: 12px;
+    padding-left: 12px;
+  }
+
+  .jas-action-btn {
+    padding: 6px;
+    font-size: 12px;
   }
 }
