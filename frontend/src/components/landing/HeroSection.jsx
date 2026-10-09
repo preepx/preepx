@@ -119,9 +119,9 @@ function HeroSection({ onRecruiterClick }) {
         </div>
 
         {/* Right Column: Landing Page Image */}
-        <img 
-          src="/landing/landingepageimage.svg" 
-          alt="PreepX Platform" 
+        <img
+          src="/landing/landingepageimage.svg"
+          alt="PreepX Platform"
           className="hidden lg:block flex-1 w-full max-w-[500px] h-auto object-cover mix-blend-multiply lg:translate-y-2 lg:-translate-x-2"
         />
       </div>
