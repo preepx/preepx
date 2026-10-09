@@ -211,7 +211,26 @@ function JobsLayout({ children }) {
               >
                 <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18, display: 'block', margin: 'auto' }} />
               </button>
-              <span style={{ fontSize: '18px', fontWeight: '700', color: '#1e293b', letterSpacing: '-0.3px' }}>Jobs</span>
+              
+              <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
+                <span style={{ fontSize: '18px', fontWeight: '600', color: '#1e293b', letterSpacing: '-0.3px' }}>Services</span>
+                <span style={{
+                  position: 'absolute',
+                  top: '-4px',
+                  right: '-12px',
+                  background: '#ef4444',
+                  color: '#ffffff',
+                  fontSize: '9px',
+                  fontWeight: '700',
+                  width: '14px',
+                  height: '14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: '50%',
+                  lineHeight: 1
+                }}>1</span>
+              </div>
             </div>
 
             {/* Center: Nav links + search */}
