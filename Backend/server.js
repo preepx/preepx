@@ -179,6 +179,9 @@ app.use("/api/btec-notes", require("./src/modules/btec-notes/btecNote.routes"));
 app.use("/api/coding", require("./src/modules/coding/coding.routes"));
 app.use("/api/tts", require("./src/routes/ttsRoutes"));
 
+const setupSwagger = require("./config/swagger");
+setupSwagger(app);
+
 // Internal Webhook for Admin Backend to trigger Socket.io events
 app.post("/api/internal/notify", express.json(), async (req, res) => {
   const { userId, title, message, icon } = req.body;
