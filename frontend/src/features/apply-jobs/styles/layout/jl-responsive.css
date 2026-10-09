@@ -327,3 +327,51 @@
         height: 28px;
     }
 }
+
+/* ── MEGA MENU RESPONSIVE (MOBILE) ── */
+@media (max-width: 1024px) {
+    .jl-mega-menu {
+        position: fixed !important;
+        width: 94vw !important;
+        max-width: none !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        top: 58px !important;
+        overflow-x: hidden !important;
+        padding: 12px 8px !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+        gap: 6px !important;
+    }
+    
+    .jl-mega-menu::before {
+        display: none;
+    }
+
+    .jl-mega-section h4 {
+        font-size: 11px !important;
+        white-space: normal;
+        word-break: break-word;
+    }
+    
+    .jl-mega-section a {
+        font-size: 10px !important;
+        white-space: normal;
+        word-break: break-word;
+        line-height: 1.3;
+    }
+    
+    .jl-mega-promo {
+        font-size: 9px !important;
+        white-space: normal;
+        word-break: break-word;
+    }
+    
+    .jl-mega-col {
+        gap: 12px !important;
+        padding: 0 4px !important;
+    }
+    
+    .jl-mega-section {
+        gap: 6px !important;
+    }
+}
