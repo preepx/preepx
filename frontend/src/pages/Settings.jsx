@@ -142,7 +142,6 @@ export default function Settings() {
       const merged = { ...stored, ...(finalUser || {}), settings };
       setStored(merged);
       setStoredUser(merged);
-      notify.success("Settings & preferences saved successfully!");
     } catch (err) {
       const errMsg =
         err.response?.data?.errors?.preferredRole ||
