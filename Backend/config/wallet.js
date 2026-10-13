@@ -8,7 +8,7 @@ module.exports = {
   BILLING_ENABLED: process.env.WALLET_BILLING_ENABLED === "true",
 
   CURRENCY: "INR",
-  RUPEE_TO_COIN_RATE: 1, // 1 rupee = 1 balance unit
+  RUPEE_TO_COIN_RATE: 1, // 1 rupee = 1 balance unitt
 
   PRICING: {
     INTERVIEW: 5,       // ₹5 per interview
