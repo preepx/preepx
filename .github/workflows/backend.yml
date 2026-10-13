@@ -31,4 +31,4 @@ jobs:
           git reset --hard origin/main
           cd Backend
           npm install --legacy-peer-deps
-          pm2 reload preepx || pm2 restart preepx || pm2 restart all
+          pm2 restart preepx --update-env || pm2 restart all --update-env
