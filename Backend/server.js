@@ -21,7 +21,7 @@ dotenv.config();
   await connectDB();
 
   const companyService = require("./src/modules/hiring/company.service");
-  companyService.seedPlansIfEmpty().catch(() => {});
+  companyService.seedPlansIfEmpty().catch(() => { });
 })();
 
 require("./config/passport");
@@ -238,7 +238,7 @@ socketManager.init(io);
 const mcqHandler = require("./socket/mcqHandler");
 io.on("connection", (socket) => {
   console.log("Socket connected:", socket.id);
-  
+
   socket.on("join_room", (userId) => {
     socket.join(`user_${userId}`);
     console.log(`Socket ${socket.id} joined room user_${userId}`);
@@ -286,7 +286,7 @@ process.on("uncaughtException", (err) => {
 
 process.on("unhandledRejection", (err) => {
   monitoringService.captureException(err);
-  console.error("UNHANDLED REJECTION! Shutting down...");
+  console.error("UNHANDLED REJECTIONN! Shutting down...");
   serverInstance.close(() => {
     process.exit(1);
   });
