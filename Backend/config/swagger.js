@@ -13,12 +13,16 @@ const setupSwagger = (app) => {
   };
 
   if (fs.existsSync(swaggerFile)) {
-    const rawSwaggerDocument = require(swaggerFile);
+    const swaggerDocument = require(swaggerFile);
+
+    // Set host to live production API host so Swagger executes on api.preepx.in
+    swaggerDocument.host = process.env.SWAGGER_HOST || 'api.preepx.in';
+    swaggerDocument.schemes = ['https', 'http'];
 
     // Sanitize any accidental "validate(req" glitch parameters from swagger-autogen
-    if (rawSwaggerDocument.paths) {
-      for (const path in rawSwaggerDocument.paths) {
-        const methods = rawSwaggerDocument.paths[path];
+    if (swaggerDocument.paths) {
+      for (const path in swaggerDocument.paths) {
+        const methods = swaggerDocument.paths[path];
         for (const method in methods) {
           if (methods[method].parameters && Array.isArray(methods[method].parameters)) {
             methods[method].parameters = methods[method].parameters.filter(
@@ -34,24 +38,8 @@ const setupSwagger = (app) => {
       }
     }
 
-    const getDynamicDoc = (req) => {
-      const forwardedHost = req.get('x-forwarded-host');
-      const host = forwardedHost || req.get('host') || 'api.preepx.in';
-      const isHttps = req.protocol === 'https' || req.get('x-forwarded-proto') === 'https' || host.includes('preepx.in');
-      return {
-        ...rawSwaggerDocument,
-        host: host,
-        schemes: [isHttps ? 'https' : 'http']
-      };
-    };
-
-    const serveDynamicSwagger = (req, res, next) => {
-      const dynamicDoc = getDynamicDoc(req);
-      swaggerUi.setup(dynamicDoc, { explorer: true })(req, res, next);
-    };
-
-    app.use('/api-docs', bypassCsp, swaggerUi.serve, serveDynamicSwagger);
-    app.use('/api/api-docs', bypassCsp, swaggerUi.serve, serveDynamicSwagger);
+    app.use('/api-docs', bypassCsp, swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
+    app.use('/api/api-docs', bypassCsp, swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
   } else {
     const notFound = (req, res) => {
       res.send(`
