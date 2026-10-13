@@ -4,7 +4,8 @@ import {
   SlidersHorizontal, User, Mail, Shield, ShieldCheck, Bell,
   Timer, Save, Briefcase, Bot, Eye, EyeOff, Sparkles,
   MapPin, Phone, CheckCircle2, RotateCcw, Loader2,
-  ExternalLink, Globe, Lock, AlertCircle, Headphones, Building2
+  ExternalLink, Globe, Lock, AlertCircle, Headphones, Building2,
+  Pencil, X
 } from "lucide-react";
 import { updateSettings, updateProfileDetails, getProfile } from "@/services/userAPI";
 import { getStoredUser, setStoredUser } from "@/utils/authUtils";
@@ -18,6 +19,7 @@ export default function Settings() {
   const [activeTab, setActiveTab] = useState("account");
   const [saving, setSaving] = useState(false);
   const [profileLoading, setProfileLoading] = useState(true);
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
 
   // Profile fields
   const [profileForm, setProfileForm] = useState({
@@ -113,6 +115,17 @@ export default function Settings() {
     }));
   };
 
+  const handleCancelEdit = () => {
+    setProfileForm({
+      fullName: stored.fullName || "",
+      headline: stored.headline || stored.preferredRole || "",
+      phone: stored.phone || stored.mobile || "",
+      location: stored.city || stored.location || stored.address || "",
+      currentCompany: stored.currentCompany || "",
+    });
+    setIsEditingProfile(false);
+  };
+
   const handleSave = async () => {
     setSaving(true);
     try {
@@ -142,6 +155,7 @@ export default function Settings() {
       const merged = { ...stored, ...(finalUser || {}), settings };
       setStored(merged);
       setStoredUser(merged);
+      setIsEditingProfile(false);
     } catch (err) {
       const errMsg =
         err.response?.data?.errors?.preferredRole ||
@@ -267,20 +281,37 @@ export default function Settings() {
                     <p>Basic information visible to employers and recruiters.</p>
                   </div>
                 </div>
-                <Link
-                  to="/profile"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    fontSize: '12.5px',
-                    fontWeight: 600,
-                    color: '#4f46e5',
-                    textDecoration: 'none'
-                  }}
-                >
-                  Full Profile <ExternalLink size={13} />
-                </Link>
+
+                <div className="prem-card-actions">
+                  <button
+                    type="button"
+                    className={`prem-btn-edit ${isEditingProfile ? "active" : ""}`}
+                    onClick={() => {
+                      if (isEditingProfile) {
+                        handleCancelEdit();
+                      } else {
+                        setIsEditingProfile(true);
+                      }
+                    }}
+                    title={isEditingProfile ? "Cancel" : "Edit"}
+                  >
+                    {isEditingProfile ? (
+                      <>
+                        <X size={13} /> Cancel
+                      </>
+                    ) : (
+                      <>
+                        <Pencil size={13} /> Edit
+                      </>
+                    )}
+                  </button>
+                  <Link
+                    to="/profile"
+                    className="prem-link-profile"
+                  >
+                    Full Profile <ExternalLink size={13} />
+                  </Link>
+                </div>
               </div>
 
               {/* User Identity Banner */}
@@ -303,52 +334,56 @@ export default function Settings() {
               <div className="prem-form-grid">
                 <div className="prem-field-group">
                   <label className="prem-label">Full Name</label>
-                  <div className="prem-input-wrap">
-                    <User size={16} color="#94a3b8" />
+                  <div className={`prem-input-wrap ${!isEditingProfile ? "is-readonly" : "is-editable"}`}>
+                    <User size={16} color={isEditingProfile ? "#6366f1" : "#94a3b8"} />
                     <input
                       className="prem-input"
                       placeholder="e.g. John Doe"
                       value={profileForm.fullName}
                       onChange={(e) => handleProfileChange("fullName", e.target.value)}
+                      disabled={!isEditingProfile}
                     />
                   </div>
                 </div>
 
                 <div className="prem-field-group">
                   <label className="prem-label">Preferred Role / Headline</label>
-                  <div className="prem-input-wrap">
-                    <Briefcase size={16} color="#94a3b8" />
+                  <div className={`prem-input-wrap ${!isEditingProfile ? "is-readonly" : "is-editable"}`}>
+                    <Briefcase size={16} color={isEditingProfile ? "#6366f1" : "#94a3b8"} />
                     <input
                       className="prem-input"
                       placeholder="e.g. Full Stack Developer"
                       value={profileForm.headline}
                       onChange={(e) => handleProfileChange("headline", e.target.value)}
+                      disabled={!isEditingProfile}
                     />
                   </div>
                 </div>
 
                 <div className="prem-field-group">
                   <label className="prem-label">Contact Phone</label>
-                  <div className="prem-input-wrap">
-                    <Phone size={16} color="#94a3b8" />
+                  <div className={`prem-input-wrap ${!isEditingProfile ? "is-readonly" : "is-editable"}`}>
+                    <Phone size={16} color={isEditingProfile ? "#6366f1" : "#94a3b8"} />
                     <input
                       className="prem-input"
                       placeholder="+91 98765 43210"
                       value={profileForm.phone}
                       onChange={(e) => handleProfileChange("phone", e.target.value)}
+                      disabled={!isEditingProfile}
                     />
                   </div>
                 </div>
 
                 <div className="prem-field-group">
                   <label className="prem-label">Current Location / City</label>
-                  <div className="prem-input-wrap">
-                    <MapPin size={16} color="#94a3b8" />
+                  <div className={`prem-input-wrap ${!isEditingProfile ? "is-readonly" : "is-editable"}`}>
+                    <MapPin size={16} color={isEditingProfile ? "#6366f1" : "#94a3b8"} />
                     <input
                       className="prem-input"
                       placeholder="e.g. Bengaluru, India"
                       value={profileForm.location}
                       onChange={(e) => handleProfileChange("location", e.target.value)}
+                      disabled={!isEditingProfile}
                     />
                   </div>
                 </div>

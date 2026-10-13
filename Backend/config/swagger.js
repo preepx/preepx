@@ -13,9 +13,26 @@ const setupSwagger = (app) => {
   };
 
   if (fs.existsSync(swaggerFile)) {
-    const swaggerDocument = require(swaggerFile);
-    app.use('/api-docs', bypassCsp, swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
-    app.use('/api/api-docs', bypassCsp, swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
+    const rawSwaggerDocument = require(swaggerFile);
+
+    const getDynamicDoc = (req) => {
+      const forwardedHost = req.get('x-forwarded-host');
+      const host = forwardedHost || req.get('host') || 'api.preepx.in';
+      const isHttps = req.protocol === 'https' || req.get('x-forwarded-proto') === 'https' || host.includes('preepx.in');
+      return {
+        ...rawSwaggerDocument,
+        host: host,
+        schemes: [isHttps ? 'https' : 'http']
+      };
+    };
+
+    const serveDynamicSwagger = (req, res, next) => {
+      const dynamicDoc = getDynamicDoc(req);
+      swaggerUi.setup(dynamicDoc, { explorer: true })(req, res, next);
+    };
+
+    app.use('/api-docs', bypassCsp, swaggerUi.serve, serveDynamicSwagger);
+    app.use('/api/api-docs', bypassCsp, swaggerUi.serve, serveDynamicSwagger);
   } else {
     const notFound = (req, res) => {
       res.send(`

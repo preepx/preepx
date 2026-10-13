@@ -5,8 +5,8 @@ const doc = {
     title: 'Preepx API',
     description: 'Auto-generated API documentation for all endpoints',
   },
-  host: 'localhost:4000',
-  schemes: ['http', 'https'],
+  host: process.env.SWAGGER_HOST || 'api.preepx.in',
+  schemes: ['https', 'http'],
   securityDefinitions: {
     bearerAuth: {
       type: 'apiKey',

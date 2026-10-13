@@ -5,11 +5,11 @@
     "description": "Auto-generated API documentation for all endpoints",
     "version": "1.0.0"
   },
-  "host": "localhost:4000",
+  "host": "api.preepx.in",
   "basePath": "/",
   "schemes": [
-    "http",
-    "https"
+    "https",
+    "http"
   ],
   "securityDefinitions": {
     "bearerAuth": {

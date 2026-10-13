@@ -1,32 +1,200 @@
 /* =========================================================
    Settings.css — Ultra-Premium Candidate Settings & Preferences
+   Fully Responsive Down to 320px Mobile Screen
    ========================================================= */
 
 .prem-settings-root {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
   background: #f8fafc;
   min-height: 100vh;
-  padding-bottom: 60px;
+  padding: 24px 20px 60px;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 [data-theme='dark'] .prem-settings-root {
   background: #0f172a;
 }
 
+/* ── OVERRIDE HERO BANNER FOR FULL RESPONSIVENESS (320px - 4K) ── */
+.prem-settings-root .jas-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.prem-settings-root .jas-hero-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+}
+
+.prem-settings-root .jas-hero-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.prem-settings-root .jas-hero-text {
+  min-width: 0;
+}
+
+.prem-settings-root .jas-hero-text h1 {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 3px;
+  letter-spacing: -0.4px;
+  line-height: 1.25;
+  word-break: break-word;
+}
+
+[data-theme='dark'] .prem-settings-root .jas-hero-text h1 {
+  color: #f1f5f9;
+}
+
+.prem-settings-root .jas-hero-text p {
+  font-size: 13px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.prem-settings-root .jas-hero-stats {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.prem-settings-root .jas-hstat-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  min-width: 130px;
+}
+
+[data-theme='dark'] .prem-settings-root .jas-hstat-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.prem-settings-root .jas-hstat-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.prem-settings-root .jas-hstat-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.prem-settings-root .jas-hstat-val {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.15;
+}
+
+[data-theme='dark'] .prem-settings-root .jas-hstat-val {
+  color: #f1f5f9;
+}
+
+.prem-settings-root .jas-hstat-lbl {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* ── HORIZONTAL SCROLLABLE TABS (320px Friendly) ── */
+.prem-settings-root .jas-filters-bar {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.prem-settings-root .jas-filters-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.prem-settings-root .jas-tabs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  width: max-content;
+}
+
+.prem-settings-root .jas-tab {
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+[data-theme='dark'] .prem-settings-root .jas-tab {
+  background: #1e293b;
+  border-color: #334155;
+  color: #94a3b8;
+}
+
+.prem-settings-root .jas-tab:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+.prem-settings-root .jas-tab.active {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+}
+
 /* ── SETTINGS GRID CONTAINER ── */
 .prem-settings-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 340px;
-  gap: 24px;
+  gap: 20px;
   align-items: start;
-}
-
-@media (max-width: 1024px) {
-  .prem-settings-grid {
-    grid-template-columns: 1fr;
-  }
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* ── SETTINGS CARD ── */
@@ -37,9 +205,11 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 [data-theme='dark'] .prem-card {
@@ -52,8 +222,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   padding-bottom: 16px;
   border-bottom: 1px solid #f1f5f9;
+  flex-wrap: wrap;
 }
 
 [data-theme='dark'] .prem-card-header {
@@ -64,11 +236,13 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+  flex: 1;
 }
 
 .prem-card-icon-box {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -81,6 +255,7 @@
   font-weight: 700;
   color: #0f172a;
   margin: 0;
+  line-height: 1.25;
 }
 
 [data-theme='dark'] .prem-card-title-wrap h2 {
@@ -91,17 +266,186 @@
   font-size: 12.5px;
   color: #64748b;
   margin: 2px 0 0;
+  line-height: 1.35;
 }
 
-/* ── USER IDENTITY HERO IN SETTINGS ── */
+/* ── EDIT PROFILE BUTTON & ACTIONS ── */
+.prem-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.prem-btn-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: #eef2ff;
+  color: #4f46e5;
+  border: 1px solid #c7d2fe;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.prem-btn-edit:hover {
+  background: #e0e7ff;
+  border-color: #818cf8;
+  color: #3730a3;
+  transform: translateY(-1px);
+}
+
+.prem-btn-edit.active {
+  background: #fef2f2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+
+.prem-btn-edit.active:hover {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+}
+
+[data-theme='dark'] .prem-btn-edit {
+  background: rgba(79, 70, 229, 0.15);
+  color: #a5b4fc;
+  border-color: #4338ca;
+}
+
+[data-theme='dark'] .prem-btn-edit:hover {
+  background: rgba(79, 70, 229, 0.25);
+  color: #ffffff;
+}
+
+[data-theme='dark'] .prem-btn-edit.active {
+  background: rgba(220, 38, 38, 0.15);
+  color: #f87171;
+  border-color: #991b1b;
+}
+
+.prem-link-profile {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #4f46e5;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 6px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.prem-link-profile:hover {
+  background: #f1f5f9;
+  color: #3730a3;
+}
+
+[data-theme='dark'] .prem-link-profile {
+  color: #818cf8;
+}
+
+[data-theme='dark'] .prem-link-profile:hover {
+  background: #334155;
+}
+
+/* ── EDIT STATUS ALERT BANNER ── */
+.prem-edit-alert {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  box-sizing: border-box;
+}
+
+.prem-edit-alert.is-locked {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+[data-theme='dark'] .prem-edit-alert.is-locked {
+  background: #0f172a;
+  border-color: #334155;
+  color: #94a3b8;
+}
+
+.prem-edit-alert.is-active {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1e40af;
+  animation: premPulseAlert 2s infinite ease-in-out;
+}
+
+[data-theme='dark'] .prem-edit-alert.is-active {
+  background: rgba(30, 64, 175, 0.15);
+  border-color: #1d4ed8;
+  color: #93c5fd;
+}
+
+@keyframes premPulseAlert {
+  0%, 100% { border-color: #bfdbfe; }
+  50% { border-color: #60a5fa; box-shadow: 0 0 10px rgba(96, 165, 250, 0.2); }
+}
+
+/* ── READONLY / EDITING BADGES ── */
+.prem-readonly-tag {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  margin-left: 6px;
+}
+
+[data-theme='dark'] .prem-readonly-tag {
+  background: #334155;
+  border-color: #475569;
+  color: #94a3b8;
+}
+
+.prem-editing-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #eef2ff;
+  color: #4f46e5;
+  border: 1px solid #c7d2fe;
+  margin-left: 6px;
+}
+
+[data-theme='dark'] .prem-editing-tag {
+  background: rgba(79, 70, 229, 0.2);
+  color: #a5b4fc;
+  border-color: #6366f1;
+}
+
+/* ── USER IDENTITY STRIP ── */
 .prem-user-strip {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
+  gap: 14px;
+  padding: 14px 16px;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
   border-radius: 14px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 [data-theme='dark'] .prem-user-strip {
@@ -110,18 +454,19 @@
 }
 
 .prem-avatar {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   border-radius: 14px;
   object-fit: cover;
   border: 2px solid #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
 }
 
 .prem-user-meta {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
   flex: 1;
   min-width: 0;
 }
@@ -130,6 +475,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .prem-user-name {
@@ -140,6 +486,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 [data-theme='dark'] .prem-user-name {
@@ -158,34 +505,34 @@
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  flex-shrink: 0;
 }
 
 .prem-user-email {
-  font-size: 12.5px;
+  font-size: 12px;
   color: #64748b;
   margin: 0;
   display: flex;
   align-items: center;
   gap: 6px;
+  word-break: break-all;
 }
 
-/* ── FORM FIELDS ── */
+/* ── FORM FIELDS & INPUTS ── */
 .prem-form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
-}
-
-@media (max-width: 640px) {
-  .prem-form-grid {
-    grid-template-columns: 1fr;
-  }
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .prem-field-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .prem-label {
@@ -195,6 +542,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
 }
 
 [data-theme='dark'] .prem-label {
@@ -208,9 +556,11 @@
   background: #ffffff;
   border: 1px solid #cbd5e1;
   border-radius: 10px;
-  padding: 0 14px;
+  padding: 0 12px;
   height: 42px;
   transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 [data-theme='dark'] .prem-input-wrap {
@@ -218,9 +568,44 @@
   border-color: #334155;
 }
 
-.prem-input-wrap:focus-within {
+/* Readonly Input State */
+.prem-input-wrap.is-readonly {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  cursor: default;
+}
+
+[data-theme='dark'] .prem-input-wrap.is-readonly {
+  background: #0f172a;
+  border-color: #1e293b;
+}
+
+.prem-input-wrap.is-readonly input {
+  color: #475569;
+  cursor: default;
+  -webkit-text-fill-color: #475569;
+}
+
+[data-theme='dark'] .prem-input-wrap.is-readonly input {
+  color: #94a3b8;
+  -webkit-text-fill-color: #94a3b8;
+}
+
+/* Editable Input State */
+.prem-input-wrap.is-editable {
+  background: #ffffff;
   border-color: #6366f1;
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+[data-theme='dark'] .prem-input-wrap.is-editable {
+  background: #1e293b;
+  border-color: #818cf8;
+}
+
+.prem-input-wrap:focus-within {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16);
 }
 
 .prem-input {
@@ -230,6 +615,7 @@
   font-size: 13.5px;
   color: #0f172a;
   outline: none;
+  min-width: 0;
 }
 
 [data-theme='dark'] .prem-input {
@@ -244,6 +630,7 @@
   color: #0f172a;
   outline: none;
   cursor: pointer;
+  min-width: 0;
 }
 
 [data-theme='dark'] .prem-select {
@@ -255,19 +642,24 @@
 .prem-toggles-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .prem-toggle-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px;
+  padding: 12px 14px;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   background: #ffffff;
   transition: all 0.2s ease;
   cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 12px;
 }
 
 [data-theme='dark'] .prem-toggle-row {
@@ -288,9 +680,9 @@
 .prem-toggle-info {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
+  gap: 12px;
   min-width: 0;
-  padding-right: 12px;
+  flex: 1;
 }
 
 .prem-toggle-icon {
@@ -308,6 +700,8 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
+  flex: 1;
 }
 
 .prem-toggle-title {
@@ -315,6 +709,7 @@
   font-weight: 600;
   color: #0f172a;
   margin: 0;
+  word-break: break-word;
 }
 
 [data-theme='dark'] .prem-toggle-title {
@@ -326,6 +721,7 @@
   color: #64748b;
   margin: 0;
   line-height: 1.4;
+  word-break: break-word;
 }
 
 /* ── SMOOTH IOS TOGGLE SWITCH ── */
@@ -366,13 +762,14 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  width: 100%;
 }
 
 .prem-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
+  padding: 8px 14px;
   border-radius: 10px;
   border: 1px solid #cbd5e1;
   background: #ffffff;
@@ -416,6 +813,8 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 [data-theme='dark'] .prem-sidebar-card {
@@ -430,6 +829,7 @@
   padding: 10px 0;
   border-bottom: 1px solid #f1f5f9;
   font-size: 13px;
+  gap: 8px;
 }
 
 [data-theme='dark'] .prem-summary-item {
@@ -445,11 +845,14 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  font-size: 12.5px;
 }
 
 .prem-summary-val {
   font-weight: 600;
   color: #0f172a;
+  font-size: 12.5px;
+  text-align: right;
 }
 
 [data-theme='dark'] .prem-summary-val {
@@ -462,11 +865,13 @@
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
-  padding: 16px 24px;
+  padding: 16px 20px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  width: 100%;
+  box-sizing: border-box;
 }
 
 [data-theme='dark'] .prem-actions-bar {
@@ -478,7 +883,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 24px;
+  padding: 10px 22px;
   background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
   color: #ffffff;
   border: none;
@@ -488,6 +893,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+  white-space: nowrap;
 }
 
 .prem-btn-save:hover:not(:disabled) {
@@ -514,6 +920,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .prem-btn-reset:hover {
@@ -530,4 +937,295 @@
 [data-theme='dark'] .prem-btn-reset:hover {
   background: #334155;
   color: #ffffff;
+}
+
+/* =========================================================
+   RESPONSIVE BREAKPOINTS (Tablets, Mobiles & Ultra-Small 320px)
+   ========================================================= */
+
+/* ── TABLETS & MID SCREENS (<= 1024px) ── */
+@media (max-width: 1024px) {
+  .prem-settings-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .prem-settings-root .jas-hero {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .prem-settings-root .jas-hero-stats {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+
+/* ── PHONES & SMALL TABLETS (<= 768px) ── */
+@media (max-width: 768px) {
+  .prem-settings-root {
+    padding: 16px 14px 50px;
+    gap: 16px;
+  }
+
+  .prem-settings-root .jas-hero-left {
+    gap: 10px;
+  }
+
+  .prem-settings-root .jas-hero-text h1 {
+    font-size: 18px;
+  }
+
+  .prem-settings-root .jas-hero-text p {
+    font-size: 12px;
+  }
+
+  .prem-settings-root .jas-hero-stats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .prem-settings-root .jas-hstat-card {
+    padding: 8px 12px;
+  }
+
+  .prem-card {
+    padding: 18px 16px;
+    border-radius: 14px;
+    gap: 16px;
+  }
+
+  .prem-sidebar-card {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .prem-form-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* ── MOBILE PHONES (<= 480px) ── */
+@media (max-width: 480px) {
+  .prem-settings-root {
+    padding: 12px 10px 40px;
+    gap: 14px;
+  }
+
+  .prem-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .prem-card-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .prem-btn-edit {
+    flex: 1;
+    justify-content: center;
+    padding: 7px 10px;
+    font-size: 12px;
+  }
+
+  .prem-user-strip {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .prem-avatar {
+    width: 46px;
+    height: 46px;
+  }
+
+  .prem-user-name {
+    font-size: 14px;
+    max-width: 150px;
+  }
+
+  .prem-user-email {
+    font-size: 11px;
+  }
+
+  .prem-toggle-row {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .prem-toggle-info {
+    gap: 8px;
+  }
+
+  .prem-toggle-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .prem-toggle-title {
+    font-size: 12.5px;
+  }
+
+  .prem-toggle-desc {
+    font-size: 11px;
+  }
+
+  .prem-switch {
+    width: 38px;
+    height: 22px;
+  }
+
+  .prem-switch-thumb {
+    width: 16px;
+    height: 16px;
+  }
+
+  .prem-switch.active .prem-switch-thumb {
+    transform: translateX(16px);
+  }
+
+  .prem-actions-bar {
+    flex-direction: column-reverse;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .prem-btn-save,
+  .prem-btn-reset {
+    width: 100%;
+    justify-content: center;
+    padding: 11px 16px;
+    font-size: 13px;
+  }
+}
+
+/* ── ULTRA-COMPACT MOBILE VIEW (<= 360px down to 320px) ── */
+@media (max-width: 360px) {
+  .prem-settings-root {
+    padding: 8px 6px 36px;
+    gap: 10px;
+  }
+
+  .prem-settings-root .jas-hero-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .prem-settings-root .jas-hero-text h1 {
+    font-size: 15px;
+    letter-spacing: -0.3px;
+  }
+
+  .prem-settings-root .jas-hero-text p {
+    font-size: 11px;
+  }
+
+  .prem-settings-root .jas-tab {
+    padding: 6px 10px;
+    font-size: 11.5px;
+    gap: 5px;
+  }
+
+  .prem-card {
+    padding: 12px 10px;
+    border-radius: 12px;
+    gap: 12px;
+  }
+
+  .prem-card-icon-box {
+    width: 32px;
+    height: 32px;
+  }
+
+  .prem-card-title-wrap h2 {
+    font-size: 13.5px;
+  }
+
+  .prem-card-title-wrap p {
+    font-size: 11px;
+  }
+
+  .prem-user-strip {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px 8px;
+    gap: 8px;
+  }
+
+  .prem-user-name-row {
+    justify-content: center;
+  }
+
+  .prem-user-email {
+    justify-content: center;
+  }
+
+  .prem-input-wrap {
+    height: 38px;
+    padding: 0 8px;
+    gap: 6px;
+  }
+
+  .prem-input,
+  .prem-select {
+    font-size: 12.5px;
+  }
+
+  .prem-label {
+    font-size: 11.5px;
+  }
+
+  .prem-chips-wrap {
+    gap: 6px;
+  }
+
+  .prem-chip {
+    padding: 6px 8px;
+    font-size: 11px;
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .prem-toggle-row {
+    padding: 8px 8px;
+    gap: 6px;
+  }
+
+  .prem-toggle-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .prem-toggle-title {
+    font-size: 12px;
+  }
+
+  .prem-toggle-desc {
+    font-size: 10.5px;
+  }
+
+  .prem-edit-alert {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .prem-sidebar-card {
+    padding: 12px 10px;
+    gap: 12px;
+  }
+
+  .prem-summary-item {
+    font-size: 11.5px;
+    padding: 8px 0;
+  }
+
+  .prem-summary-lbl,
+  .prem-summary-val {
+    font-size: 11.5px;
+  }
 }

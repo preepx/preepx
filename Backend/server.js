@@ -31,13 +31,15 @@ const app = express();
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
+  process.env.BACKEND_URL,
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
   "http://localhost:3000",
+  "http://localhost:4000",
   "https://preepx.in",
-  "https://www.preepx.in"
-
+  "https://www.preepx.in",
+  "https://api.preepx.in"
 ].filter(Boolean);
 
 app.use(cors({
@@ -48,7 +50,7 @@ app.use(cors({
     return callback(new Error(`CORS blocked: ${origin}`));
   },
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization", "x-api-key"],
+  allowedHeaders: ["Content-Type", "Authorization", "x-api-key", "Accept", "accept"],
   credentials: true,
 }));
 
