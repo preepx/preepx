@@ -30,5 +30,5 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
           cd Backend
-          npm install
+          npm install --legacy-peer-deps
           pm2 reload server || pm2 restart server || pm2 reload backend || pm2 restart backend || pm2 start server.js --name "server"
