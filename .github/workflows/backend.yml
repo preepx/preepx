@@ -7,6 +7,8 @@ on:
     paths:
       - 'backend/**'
       - 'Backend/**'
+      - '.github/workflows/backend.yml'
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -23,15 +25,9 @@ jobs:
         username: ${{ secrets.EC2_USERNAME }}
         key: ${{ secrets.EC2_SSH_KEY }}
         script: |
-          # Replace 'preepx/backend' with the actual path to your backend folder on the EC2 server
-          cd ~/preepx/backend
-          
-          # Pull the latest code from the main branch
+          set -e
+          cd /home/ubuntu/preepxbackend/preepx
           git pull origin main
-          
-          # Install dependencies
+          cd Backend
           npm install
-          
-          # Restart the PM2 process (assuming your PM2 process is named 'backend' or 'server')
-          # Update 'server' below with your actual PM2 process name
-          pm2 restart server || pm2 start server.js --name "server"
+          pm2 reload server || pm2 restart server || pm2 reload backend || pm2 restart backend || pm2 start server.js --name "server"
