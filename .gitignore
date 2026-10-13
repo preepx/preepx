@@ -8,3 +8,5 @@ dist
 uploads/
 Backend/uploads/
 *.pdf
+logs/
+*.log

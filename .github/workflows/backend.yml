@@ -27,7 +27,8 @@ jobs:
         script: |
           set -e
           cd /home/ubuntu/preepxbackend/preepx
-          git pull origin main
+          git fetch origin main
+          git reset --hard origin/main
           cd Backend
           npm install
           pm2 reload server || pm2 restart server || pm2 reload backend || pm2 restart backend || pm2 start server.js --name "server"
