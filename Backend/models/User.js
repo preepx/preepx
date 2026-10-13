@@ -17,9 +17,62 @@ const userSchema = mongoose.Schema(
     level: { type: Number, default: 1 },
     hasPerfectScore: { type: Boolean, default: false },
     settings: {
-      darkMode: { type: Boolean, default: false },
-      emailNotifications: { type: Boolean, default: true },
-      timerEnabled: { type: Boolean, default: true },
+      type: new mongoose.Schema(
+        {
+          // General & Theme
+          darkMode: { type: Boolean, default: false },
+
+          // Interview & AI Tools
+          timerEnabled: { type: Boolean, default: true },
+          aiVoiceFeedback: { type: Boolean, default: true },
+          realtimeHints: { type: Boolean, default: true },
+          autoRecordSession: { type: Boolean, default: false },
+          syntaxAssist: { type: Boolean, default: true },
+
+          // Job Alerts & Matching
+          jobAlerts: { type: Boolean, default: true },
+          remoteOnly: { type: Boolean, default: false },
+          hybridAllowed: { type: Boolean, default: true },
+          onsiteAllowed: { type: Boolean, default: true },
+          salaryExpectation: { type: String, default: "flexible" },
+          recruiterDirectOutreach: { type: Boolean, default: true },
+          immediateJoiner: { type: Boolean, default: false },
+
+          // Notifications
+          emailNotifications: { type: Boolean, default: true },
+          applicationUpdates: { type: Boolean, default: true },
+          assessmentReminders: { type: Boolean, default: true },
+          weeklyDigest: { type: Boolean, default: false },
+          notificationFrequency: { type: String, default: "instant" },
+
+          // Privacy & Security
+          profileVisibility: { type: Boolean, default: true },
+          hideCurrentEmployer: { type: Boolean, default: false },
+        },
+        { _id: false, strict: false }
+      ),
+      default: () => ({
+        darkMode: false,
+        timerEnabled: true,
+        aiVoiceFeedback: true,
+        realtimeHints: true,
+        autoRecordSession: false,
+        syntaxAssist: true,
+        jobAlerts: true,
+        remoteOnly: false,
+        hybridAllowed: true,
+        onsiteAllowed: true,
+        salaryExpectation: "flexible",
+        recruiterDirectOutreach: true,
+        immediateJoiner: false,
+        emailNotifications: true,
+        applicationUpdates: true,
+        assessmentReminders: true,
+        weeklyDigest: false,
+        notificationFrequency: "instant",
+        profileVisibility: true,
+        hideCurrentEmployer: false,
+      }),
     },
     isBlocked: { type: Boolean, default: false },
     college: { type: String, default: "" },

@@ -107,6 +107,14 @@ const updateProfileDetails = async (userId, updateData) => {
     }
   });
 
+  // Keep jobs profile and core profile aliases in sync
+  if (updateData.preferredRole !== undefined && !updateData.headline) user.headline = updateData.preferredRole;
+  if (updateData.headline !== undefined && !updateData.preferredRole) user.preferredRole = updateData.headline;
+  if (updateData.mobile !== undefined && !updateData.phone) user.phone = updateData.mobile;
+  if (updateData.phone !== undefined && !updateData.mobile) user.mobile = updateData.phone;
+  if (updateData.location !== undefined && !updateData.city) user.city = updateData.location;
+  if (updateData.city !== undefined && !updateData.location) user.location = updateData.city;
+
   // Handle experience array
   if (updateData.experience !== undefined && Array.isArray(updateData.experience)) {
     user.experience = updateData.experience;
@@ -185,11 +193,30 @@ const updateResume = async (userId, file) => {
 };
 
 const updateSettings = async (userId, settingsData) => {
+  const uid = userId?._id || userId;
+  const existingUser = await User.findById(uid);
+  if (!existingUser) throw new NotFoundError("User not found");
+
+  const currentSettings = existingUser.settings
+    ? (typeof existingUser.settings.toObject === 'function' ? existingUser.settings.toObject() : existingUser.settings)
+    : {};
+  const mergedSettings = { ...currentSettings, ...settingsData };
+
+  const updateFields = {
+    settings: mergedSettings
+  };
+
+  // Keep hiring visibility synchronized with profile visibility
+  if (settingsData.profileVisibility !== undefined) {
+    updateFields["hiringVisibility.profileVisible"] = !!settingsData.profileVisibility;
+  }
+
   const user = await User.findByIdAndUpdate(
-    userId,
-    { settings: settingsData },
+    uid,
+    { $set: updateFields },
     { new: true }
   ).lean();
+
   if (!user) throw new NotFoundError("User not found");
   return user;
 };

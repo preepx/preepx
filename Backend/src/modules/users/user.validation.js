@@ -13,19 +13,22 @@ const updateProfileSchema = Joi.object({
     Joi.string().allow(''),
     Joi.array().items(Joi.string().allow(''))
   ).optional(),
-  preferredRole: Joi.string().allow('').max(120).optional(),
+  preferredRole: Joi.string().allow('').max(500).optional(),
+  headline: Joi.string().allow('').max(500).optional(),
   experienceYears: Joi.alternatives().try(
     Joi.number().min(0).max(50),
     Joi.string().allow('')
   ).optional().allow(null),
-  location: Joi.string().allow('').max(120).optional(),
+  location: Joi.string().allow('').max(150).optional(),
+  city: Joi.string().allow('').max(150).optional(),
+  phone: Joi.string().allow('').max(50).optional(),
   graduationYear: Joi.alternatives().try(
     Joi.number().integer().min(1970).max(2035),
     Joi.string().allow('')
   ).optional().allow(null),
-  currentCompany: Joi.string().allow('').max(120).optional(),
-  currentDesignation: Joi.string().allow('').max(120).optional(),
-}).unknown(true); // allow extra fields from frontend (they are ignored by the service)
+  currentCompany: Joi.string().allow('').max(150).optional(),
+  currentDesignation: Joi.string().allow('').max(150).optional(),
+}).unknown(true);
 
 const updateSettingsSchema = Joi.object().unknown(true); // allow dynamic settings fields
 
