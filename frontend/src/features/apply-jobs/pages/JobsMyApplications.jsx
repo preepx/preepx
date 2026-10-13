@@ -134,11 +134,11 @@ export default function JobsMyApplications() {
           <div className="jma-toolbar-top">
             <div className="jma-tabs">
               {[
-                { name: "All", color: "var(--text)" }, 
-                { name: "Shortlisted", color: "#10b981" }, 
-                { name: "Assessment", color: "#f59e0b" }, 
-                { name: "AI Interview", color: "#8b5cf6" }, 
-                { name: "Offered", color: "#10b981" }, 
+                { name: "All", color: "var(--text)" },
+                { name: "Shortlisted", color: "#10b981" },
+                { name: "Assessment", color: "#f59e0b" },
+                { name: "AI Interview", color: "#8b5cf6" },
+                { name: "Offered", color: "#10b981" },
                 { name: "Rejected", color: "#ef4444" }
               ].map((t) => {
                 let count = 0;
@@ -157,12 +157,12 @@ export default function JobsMyApplications() {
                     style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                   >
                     {t.name}
-                    <span 
-                      style={{ 
-                        background: activeTab === t.name ? 'rgba(255,255,255,0.2)' : 'var(--bg)', 
+                    <span
+                      style={{
+                        background: activeTab === t.name ? 'rgba(255,255,255,0.2)' : 'var(--bg)',
                         color: activeTab === t.name ? '#fff' : t.color,
-                        padding: '2px 8px', 
-                        borderRadius: '12px', 
+                        padding: '2px 8px',
+                        borderRadius: '12px',
                         fontSize: '12px',
                         fontWeight: '700'
                       }}
