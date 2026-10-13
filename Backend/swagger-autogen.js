@@ -43,6 +43,19 @@ swaggerAutogen(outputFile, endpointsFiles, doc).then(() => {
 
             for (const method in methods) {
                 methods[method].tags = [category];
+
+                // Filter out any bogus parameters created by swagger-autogen regex glitches (like "validate(req")
+                if (methods[method].parameters && Array.isArray(methods[method].parameters)) {
+                    methods[method].parameters = methods[method].parameters.filter(p => {
+                        return p.name && !p.name.includes('validate(') && !p.name.includes('(');
+                    });
+
+                    methods[method].parameters.forEach(p => {
+                        if (p.schema && p.schema.properties) {
+                            delete p.schema.properties['validate(req'];
+                        }
+                    });
+                }
             }
         }
 

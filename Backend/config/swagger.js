@@ -15,6 +15,25 @@ const setupSwagger = (app) => {
   if (fs.existsSync(swaggerFile)) {
     const rawSwaggerDocument = require(swaggerFile);
 
+    // Sanitize any accidental "validate(req" glitch parameters from swagger-autogen
+    if (rawSwaggerDocument.paths) {
+      for (const path in rawSwaggerDocument.paths) {
+        const methods = rawSwaggerDocument.paths[path];
+        for (const method in methods) {
+          if (methods[method].parameters && Array.isArray(methods[method].parameters)) {
+            methods[method].parameters = methods[method].parameters.filter(
+              (p) => !p.name || (!p.name.includes('validate(') && !p.name.includes('('))
+            );
+            methods[method].parameters.forEach((p) => {
+              if (p.schema && p.schema.properties) {
+                delete p.schema.properties['validate(req'];
+              }
+            });
+          }
+        }
+      }
+    }
+
     const getDynamicDoc = (req) => {
       const forwardedHost = req.get('x-forwarded-host');
       const host = forwardedHost || req.get('host') || 'api.preepx.in';
