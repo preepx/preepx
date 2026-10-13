@@ -17,7 +17,7 @@ const adminProtect = (req, res, next) => {
         req.admin = decoded;
         next();
       } else {
-        res.status(403).json({ message: "Read-only admins cannot perform this action" });
+        res.status(403).json({ message: "Read-only admins cannott perform this action" });
       }
     } else {
       res.status(403).json({ message: "Not authorized as an admin" });
