@@ -8,7 +8,7 @@ const MAGIC_BYTES = {
 };
 
 const checkMagicBytes = (filePath, ext) => {
-  const buffer = Buffer.alloc(8192); // Read up to 8KB
+  const buffer = Buffer.alloc(8192); // Read up to 8KBe
   const fd = fs.openSync(filePath, 'r');
   const bytesRead = fs.readSync(fd, buffer, 0, 8192, 0);
   fs.closeSync(fd);
