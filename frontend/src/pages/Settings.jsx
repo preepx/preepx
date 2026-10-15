@@ -11,7 +11,6 @@ import { updateSettings, updateProfileDetails, getProfile } from "@/services/use
 import { getStoredUser, setStoredUser } from "@/utils/authUtils";
 import notify from "@/utils/notify";
 
-import '@/features/apply-jobs/styles/JobsAssessments.css';
 import '@/styles/Settings.css';
 
 export default function Settings() {
@@ -197,67 +196,70 @@ export default function Settings() {
 
   return (
     <div className="prem-settings-root">
-      {/* ── HERO BANNER (matching Jobs layout family) ── */}
-      <section className="jas-hero">
-        <div className="jas-hero-left">
-          <div className="jas-hero-icon" style={{ background: '#f5f3ff', color: '#7c3aed' }}>
+      {/* ── HERO BANNER ── */}
+      <section className="prem-hero">
+        <div className="prem-hero-left">
+          <div className="prem-hero-icon" style={{ background: '#f5f3ff', color: '#7c3aed' }}>
             <SlidersHorizontal size={22} />
           </div>
-          <div className="jas-hero-text">
+          <div className="prem-hero-text">
             <h1>Settings & Preferences</h1>
             <p>Customize your profile discovery, job matching alerts, and AI practice parameters.</p>
           </div>
         </div>
 
-        <div className="jas-hero-stats">
-          <div className="jas-hstat-card" style={{ background: '#f0fdf4', borderColor: '#dcfce3' }}>
-            <div className="jas-hstat-icon" style={{ background: '#dcfce3', color: '#166534' }}>
-              <ShieldCheck size={22} />
+        <div className="prem-hero-stats">
+          <div className="prem-hstat-card" style={{ background: '#f0fdf4', borderColor: '#dcfce3' }}>
+            <div className="prem-hstat-icon" style={{ background: '#dcfce3', color: '#166534' }}>
+              <ShieldCheck size={20} />
             </div>
-            <div className="jas-hstat-info">
-              <span className="jas-hstat-val">{stored._id ? "Active" : "Guest"}</span>
-              <span className="jas-hstat-lbl">Account Health</span>
-            </div>
-          </div>
-          <div className="jas-hstat-card" style={{ background: '#eff6ff', borderColor: '#dbeafe' }}>
-            <div className="jas-hstat-icon" style={{ background: '#dbeafe', color: '#1d4ed8' }}>
-              <Bell size={22} />
-            </div>
-            <div className="jas-hstat-info">
-              <span className="jas-hstat-val">{settings.jobAlerts ? "Enabled" : "Paused"}</span>
-              <span className="jas-hstat-lbl">Job Alerts</span>
+            <div className="prem-hstat-info">
+              <span className="prem-hstat-val">{stored._id ? "Active" : "Guest"}</span>
+              <span className="prem-hstat-lbl">Account Health</span>
             </div>
           </div>
-          <div className="jas-hstat-card" style={{ background: '#fffbeb', borderColor: '#fef3c7' }}>
-            <div className="jas-hstat-icon" style={{ background: '#fef3c7', color: '#d97706' }}>
-              <Eye size={22} />
+          <div className="prem-hstat-card" style={{ background: '#eff6ff', borderColor: '#dbeafe' }}>
+            <div className="prem-hstat-icon" style={{ background: '#dbeafe', color: '#1d4ed8' }}>
+              <Bell size={20} />
             </div>
-            <div className="jas-hstat-info">
-              <span className="jas-hstat-val">{settings.profileVisibility ? "Public" : "Hidden"}</span>
-              <span className="jas-hstat-lbl">Recruiter Discovery</span>
+            <div className="prem-hstat-info">
+              <span className="prem-hstat-val">{settings.jobAlerts ? "Enabled" : "Paused"}</span>
+              <span className="prem-hstat-lbl">Job Alerts</span>
+            </div>
+          </div>
+          <div className="prem-hstat-card" style={{ background: '#fffbeb', borderColor: '#fef3c7' }}>
+            <div className="prem-hstat-icon" style={{ background: '#fef3c7', color: '#d97706' }}>
+              <Eye size={20} />
+            </div>
+            <div className="prem-hstat-info">
+              <span className="prem-hstat-val">{settings.profileVisibility ? "Public" : "Hidden"}</span>
+              <span className="prem-hstat-lbl">Recruiter Discovery</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── CATEGORY TABS BAR ── */}
-      <div className="jas-filters-bar">
-        <div className="jas-tabs">
+      <div className="prem-tabs-bar">
+        <div className="prem-tabs">
           {[
-            { id: "account", label: "Account & Profile", icon: User },
-            { id: "jobs", label: "Job Alerts & Matching", icon: Briefcase },
-            { id: "interview", label: "Interview & AI Tools", icon: Bot },
-            { id: "notifications", label: "Notifications", icon: Bell },
-            { id: "security", label: "Privacy & Security", icon: Shield },
+            { id: "account", label: "Account & Profile", shortLabel: "Account", icon: User },
+            { id: "jobs", label: "Job Alerts & Matching", shortLabel: "Job Alerts", icon: Briefcase },
+            { id: "interview", label: "Interview & AI Tools", shortLabel: "AI Tools", icon: Bot },
+            { id: "notifications", label: "Notifications", shortLabel: "Alerts", icon: Bell },
+            { id: "security", label: "Privacy & Security", shortLabel: "Privacy", icon: Shield },
           ].map((tab) => (
             <button
               key={tab.id}
-              className={`jas-tab ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => setActiveTab(tab.id)}
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+              className={`prem-tab ${activeTab === tab.id ? "active" : ""}`}
+              onClick={(e) => {
+                setActiveTab(tab.id);
+                e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+              }}
             >
               <tab.icon size={15} />
-              {tab.label}
+              <span className="prem-tab-full">{tab.label}</span>
+              <span className="prem-tab-short">{tab.shortLabel}</span>
             </button>
           ))}
         </div>
@@ -266,7 +268,7 @@ export default function Settings() {
       {/* ── MAIN SETTINGS CONTENT ── */}
       <div className="prem-settings-grid">
         {/* LEFT COLUMN: ACTIVE SECTION CARDS */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div className="prem-main-col">
 
           {/* TAB 1: ACCOUNT & PROFILE */}
           {activeTab === "account" && (
@@ -754,14 +756,14 @@ export default function Settings() {
         </div>
 
         {/* RIGHT COLUMN: QUICK SUMMARY CARD & CANDIDATE TIPS */}
-        <aside style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <aside className="prem-side-col">
           <div className="prem-sidebar-card">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className="prem-sidebar-header">
               <Sparkles size={18} color="#4f46e5" />
-              <h3 style={{ fontSize: '14px', fontWeight: 700, margin: 0, color: '#0f172a' }}>Overview & Quick Status</h3>
+              <h3 className="prem-sidebar-title">Overview & Quick Status</h3>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div className="prem-summary-list">
               <div className="prem-summary-item">
                 <span className="prem-summary-lbl"><Globe size={14} /> Discovery</span>
                 <span className="prem-summary-val" style={{ color: settings.profileVisibility ? '#166534' : '#64748b' }}>
@@ -789,12 +791,12 @@ export default function Settings() {
             </div>
           </div>
 
-          <div className="prem-sidebar-card" style={{ background: '#f0fdf4', borderColor: '#dcfce3' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#166534' }}>
+          <div className="prem-sidebar-card prem-tip-card">
+            <div className="prem-tip-header">
               <CheckCircle2 size={18} />
-              <h3 style={{ fontSize: '13.5px', fontWeight: 700, margin: 0 }}>Pro Candidate Tip</h3>
+              <h3 className="prem-tip-title">Pro Candidate Tip</h3>
             </div>
-            <p style={{ fontSize: '12.5px', color: '#15803d', margin: 0, lineHeight: 1.5 }}>
+            <p className="prem-tip-desc">
               Keeping <strong>Direct Recruiter Outreach</strong> enabled gives you 3.5x more technical interview invitations from actively hiring startups and enterprises.
             </p>
           </div>
