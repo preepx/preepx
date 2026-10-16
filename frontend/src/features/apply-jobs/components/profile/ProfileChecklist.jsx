@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckCircle2, AlertCircle } from "lucide-react";
+import { CheckCircle, AlertCircle } from "lucide-react";
 
 export default function ProfileChecklist({ user, form }) {
   const merged = { ...user, ...form };
@@ -22,7 +22,7 @@ export default function ProfileChecklist({ user, form }) {
       <div className="jp-checklist">
         {checklistItems.map(({ label, done }) => (
           <div key={label} className={`jp-check-item ${done ? "jp-check-item--done" : ""}`}>
-            {done ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
+            {done ? <CheckCircle size={16} /> : <AlertCircle size={16} />}
             <span>{label}</span>
           </div>
         ))}

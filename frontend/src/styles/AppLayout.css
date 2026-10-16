@@ -459,7 +459,11 @@
   gap: 6px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: #000000;
+}
+
+[data-theme="dark"] .tb-xp-badge {
+  color: #ffffff;
 }
 
 .tb-profile {

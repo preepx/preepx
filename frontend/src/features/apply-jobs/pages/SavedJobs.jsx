@@ -52,9 +52,9 @@ export default function SavedJobs() {
     e?.stopPropagation();
     try {
       const res = await toggleSaveJob(jobId);
-      if (!res.saved) {
+      const isSaved = res?.data?.saved ?? res?.saved;
+      if (!isSaved) {
         setJobs((prev) => prev.filter((j) => j._id !== jobId));
-        notify.success("Removed from saved jobs");
 
         // Sync with localStorage for any dashboard listeners
         try {

@@ -36,7 +36,7 @@ const NAV_SECTIONS = [
   {
     label: "ACCOUNT",
     items: [
-      { to: "/profile", icon: User, label: "Profile" },
+      { to: "/apply-jobs/profile", icon: User, label: "Profile" },
       { to: "/apply-jobs/settings", icon: Settings, label: "Settings" },
     ]
   }
@@ -246,7 +246,7 @@ function JobsLayout({ children }) {
                         <h4>ATS & Resume</h4>
                         <Link to="/apply-jobs/resume">Resume Builder</Link>
                         <Link to="/ats-score">ATS Score Checker</Link>
-                        <Link to="/profile">Optimize Profile</Link>
+                        <Link to="/apply-jobs/profile">Optimize Profile</Link>
                       </div>
                       <div className="jl-mega-section">
                         <h4>Career Resources</h4>
@@ -312,7 +312,7 @@ function JobsLayout({ children }) {
                             <h4>ATS & Resume</h4>
                             <Link to="/apply-jobs/resume">Resume Builder</Link>
                             <Link to="/ats-score">ATS Score Checker</Link>
-                            <Link to="/profile">Optimize Profile</Link>
+                            <Link to="/apply-jobs/profile">Optimize Profile</Link>
                           </div>
                           <div className="jl-mega-section">
                             <h4>Career Resources</h4>
@@ -384,7 +384,7 @@ function JobsLayout({ children }) {
                   </span>
                 )}
               </button>
-              <Link to="/profile" className="jl-user-chip">
+              <Link to="/apply-jobs/profile" className="jl-user-chip">
                 <img src={avatar} alt="avatar" />
                 <div>
                   <strong>{user.fullName || "Candidate"}</strong>

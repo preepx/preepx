@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import {
   SlidersHorizontal, User, Mail, Shield, ShieldCheck, Bell,
   Timer, Save, Briefcase, Bot, Eye, EyeOff, Sparkles,
-  MapPin, Phone, CheckCircle2, RotateCcw, Loader2,
+  MapPin, Phone, CheckCircle, RotateCcw, Loader2,
   ExternalLink, Globe, Lock, AlertCircle, Headphones, Building2,
   Pencil, X
 } from "lucide-react";
@@ -323,7 +323,7 @@ export default function Settings() {
                   <div className="prem-user-name-row">
                     <h3 className="prem-user-name">{profileForm.fullName || stored.fullName || "Candidate"}</h3>
                     <span className="prem-badge-pill">
-                      <CheckCircle2 size={11} /> Verified
+                      <CheckCircle size={11} /> Verified
                     </span>
                   </div>
                   <p className="prem-user-email">
@@ -632,7 +632,7 @@ export default function Settings() {
                 <div className="prem-toggle-row" onClick={() => toggle("applicationUpdates")}>
                   <div className="prem-toggle-info">
                     <div className="prem-toggle-icon" style={{ background: '#dcfce3', color: '#166534' }}>
-                      <CheckCircle2 size={16} />
+                      <CheckCircle size={16} />
                     </div>
                     <div className="prem-toggle-text">
                       <span className="prem-toggle-title">Application Status Changes</span>
@@ -793,7 +793,7 @@ export default function Settings() {
 
           <div className="prem-sidebar-card prem-tip-card">
             <div className="prem-tip-header">
-              <CheckCircle2 size={18} />
+              <CheckCircle size={18} />
               <h3 className="prem-tip-title">Pro Candidate Tip</h3>
             </div>
             <p className="prem-tip-desc">

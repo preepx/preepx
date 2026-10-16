@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, Circle, ArrowRight } from 'lucide-react';
+import { CheckCircle, Circle, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SidebarImproveProfile({ 
@@ -39,28 +39,28 @@ export default function SidebarImproveProfile({
       </div>
       <div className={`${prefix}-checklist`}>
         <div className={`${prefix}-check-item ${hasExp ? "done" : ""}`}>
-          {hasExp ? <Check size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Work exp.' : 'Add Work Experience'}
+          {hasExp ? <CheckCircle size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Work exp.' : 'Add Work Experience'}
         </div>
         <div className={`${prefix}-check-item ${hasEmail ? "done" : ""}`}>
-          {hasEmail ? <Check size={14} color="#10b981" /> : <Circle size={14} />} Verify email
+          {hasEmail ? <CheckCircle size={14} color="#10b981" /> : <Circle size={14} />} Verify email
         </div>
         <div className={`${prefix}-check-item ${hasResume ? "done" : ""}`}>
-          {hasResume ? <Check size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Resume' : 'Upload Resume'}
+          {hasResume ? <CheckCircle size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Resume' : 'Upload Resume'}
         </div>
         <div className={`${prefix}-check-item ${hasEdu ? "done" : ""}`}>
-          {hasEdu ? <Check size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Education' : 'Add Education'}
+          {hasEdu ? <CheckCircle size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Education' : 'Add Education'}
         </div>
         <div className={`${prefix}-check-item ${hasSkills ? "done" : ""}`}>
-          {hasSkills ? <Check size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Skills' : 'Add Skills'}
+          {hasSkills ? <CheckCircle size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Skills' : 'Add Skills'}
         </div>
         <div className={`${prefix}-check-item ${hasPhoto ? "done" : ""}`}>
-          {hasPhoto ? <Check size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Photo' : 'Add Portfolio'}
+          {hasPhoto ? <CheckCircle size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Photo' : 'Add Portfolio'}
         </div>
       </div>
       <button 
         type="button" 
         className={btnClass} 
-        onClick={() => navigate("/profile")}
+        onClick={() => navigate("/apply-jobs/profile")}
       >
         Improve profile <ArrowRight size={14} />
       </button>

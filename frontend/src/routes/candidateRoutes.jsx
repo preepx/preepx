@@ -251,7 +251,7 @@ export const candidateRoutes = [
     path: "/apply-jobs/profile",
     element: (
       <ProtectedRoute allowedRoles={candidateRoles}>
-        <Navigate to="/profile" replace />
+        <JobsProfile />
       </ProtectedRoute>
     ),
   },

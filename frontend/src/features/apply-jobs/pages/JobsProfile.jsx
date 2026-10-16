@@ -8,9 +8,7 @@ import {
 } from "@/services/userAPI";
 import notify from "@/utils/notify";
 import Loader from "@/components/Loader";
-import { calcCompletion } from "../utils/jobHelpers";
 import {
-  ProfileStrengthBanner,
   ProfileHeaderCard,
   ReferralCard,
   ExperienceSection,
@@ -147,13 +145,8 @@ export default function JobsProfile() {
 
   if (loading) return <Loader />;
 
-  const completion = calcCompletion({ ...user, ...form });
-
   return (
     <div className="jp-page">
-      {/* PROFILE STRENGTH BANNER */}
-      <ProfileStrengthBanner completion={completion} />
-
       {/* MAIN PROFILE CARD */}
       <ProfileHeaderCard
         user={user}

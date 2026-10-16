@@ -234,15 +234,24 @@ export default function ProfileHeaderCard({
                   <span
                     style={{
                       cursor: "pointer",
-                      background: "color-mix(in srgb, var(--primary) 12%, transparent)",
-                      color: "var(--primary)",
+                      background: "rgba(81, 54, 224, 0.1)",
+                      color: "#5136E0",
                       fontWeight: 700,
                       padding: "2px 8px",
                       borderRadius: "6px",
-                      border: "1px solid color-mix(in srgb, var(--primary) 25%, transparent)",
+                      border: "1px solid rgba(81, 54, 224, 0.25)",
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "4px",
+                      transition: "all 0.15s ease",
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = "rgba(81, 54, 224, 0.18)";
+                      e.currentTarget.style.borderColor = "rgba(81, 54, 224, 0.4)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = "rgba(81, 54, 224, 0.1)";
+                      e.currentTarget.style.borderColor = "rgba(81, 54, 224, 0.25)";
                     }}
                     onClick={() => {
                       navigator.clipboard.writeText(user.referralCode);

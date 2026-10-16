@@ -166,11 +166,10 @@ export default function ApplyJobsDashboard() {
     e.stopPropagation();
     try {
       const res = await toggleSaveJob(jobId);
-      const isSaved = res.isSaved ?? !savedIds.includes(jobId);
+      const isSaved = res?.data?.saved ?? res?.saved ?? !savedIds.includes(jobId);
       const next = isSaved ? [...savedIds, jobId] : savedIds.filter((id) => id !== jobId);
       setSavedIds(next);
       localStorage.setItem("ajd_saved", JSON.stringify(next));
-      notify.success(res.message || (isSaved ? "Saved to your list" : "Removed from saved"));
     } catch {
       notify.error("Could not update saved job");
     }
@@ -423,7 +422,7 @@ export default function ApplyJobsDashboard() {
                   <span className="ajd-bp-pct">{completion}%</span>
                 </div>
                 <div className="ajd-bp-bar"><div className="ajd-bp-fill" style={{ width: `${completion}%` }} /></div>
-                <Link to="/profile" className="ajd-boost-btn">Boost profile →</Link>
+                <Link to="/apply-jobs/profile" className="ajd-boost-btn">Boost profile →</Link>
               </div>
             </div>
           )}
