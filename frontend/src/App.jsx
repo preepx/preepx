@@ -10,6 +10,7 @@ function ScrollToTop() {
   return null;
 }
 
+
 function ThemeInitializer() {
   useEffect(() => {
     const theme = localStorage.getItem("theme") || "light";
