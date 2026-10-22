@@ -536,6 +536,7 @@ function Auth({ defaultRole }) {
                 loginError={loginError}
                 setLoginError={setLoginError}
                 loading={loading}
+                activeRole={activeRole}
                 onSubmit={activeRole === "recruiter" ? handleRecruiterLogin : handleCandidateLogin}
                 onForgotPassword={() => {
                   setForgotEmail(loginData.email);
