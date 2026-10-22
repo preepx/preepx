@@ -251,12 +251,20 @@ export default function JobBoard() {
 
   const displayedJobs = useMemo(() => {
     const list = [...jobs];
+    const comparator = (a, b) => {
+      // Platform jobs (isThirdParty: false) get highest priority
+      const aParty = a.isThirdParty ? 1 : 0;
+      const bParty = b.isThirdParty ? 1 : 0;
+      if (aParty !== bParty) return aParty - bParty;
+      return (b.matchScore ?? 0) - (a.matchScore ?? 0);
+    };
+
     if (filter === "match") {
       return list
         .filter((j) => !j.applied && (j.matchScore ?? 0) >= 35)
-        .sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
+        .sort(comparator);
     }
-    return list.sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
+    return list.sort(comparator);
   }, [jobs, filter]);
 
   useEffect(() => {
@@ -264,8 +272,13 @@ export default function JobBoard() {
       const list = d.jobs || [];
       let recommended = [];
 
-      // 1. Profile Matching (Match Score >= 35)
-      const profileMatches = list.filter(j => (j.matchScore ?? 0) >= 35).sort((a, b) => (b.matchScore ?? 0) - (a.matchScore ?? 0));
+      // 1. Profile Matching (Match Score >= 35) with platform jobs given priority
+      const profileMatches = list.filter(j => (j.matchScore ?? 0) >= 35).sort((a, b) => {
+        const aParty = a.isThirdParty ? 1 : 0;
+        const bParty = b.isThirdParty ? 1 : 0;
+        if (aParty !== bParty) return aParty - bParty;
+        return (b.matchScore ?? 0) - (a.matchScore ?? 0);
+      });
       recommended.push(...profileMatches);
 
       // 2. Trending / Hot Jobs (isHot flag or top tier companies)

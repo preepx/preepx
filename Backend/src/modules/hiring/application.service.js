@@ -20,7 +20,7 @@ const listPublishedJobs = async ({ search = "", page = 1, limit = 50, userId } =
 
   const skip = (Math.max(1, page) - 1) * limit;
   const [jobs, total] = await Promise.all([
-    Job.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit).lean(),
+    Job.find(filter).sort({ isThirdParty: 1, createdAt: -1 }).skip(skip).limit(limit).lean(),
     Job.countDocuments(filter),
   ]);
 
@@ -69,7 +69,7 @@ const listMatchedJobs = async (userId, { minScore = 25, limit = 12 } = {}) => {
   if (!user) throw new NotFoundError("User not found");
 
   const [jobs, applications] = await Promise.all([
-    Job.find({ status: { $in: PUBLISHED_STATUSES } }).sort({ createdAt: -1 }).lean(),
+    Job.find({ status: { $in: PUBLISHED_STATUSES } }).sort({ isThirdParty: 1, createdAt: -1 }).lean(),
     JobApplication.find({ userId }).select("jobId").lean(),
   ]);
 
@@ -96,7 +96,12 @@ const listMatchedJobs = async (userId, { minScore = 25, limit = 12 } = {}) => {
     }
   }
 
-  scored.sort((a, b) => b.matchScore - a.matchScore);
+  scored.sort((a, b) => {
+    const aThirdParty = a.isThirdParty ? 1 : 0;
+    const bThirdParty = b.isThirdParty ? 1 : 0;
+    if (aThirdParty !== bThirdParty) return aThirdParty - bThirdParty;
+    return (b.matchScore || 0) - (a.matchScore || 0);
+  });
   return scored.slice(0, limit);
 };
 
