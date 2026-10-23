@@ -109,11 +109,11 @@ function Navbar({ landingRole, setLandingRole }) {
   const isActive = (path) => location.pathname === path;
 
   // Determine if it's the landing page for transparent absolute layout
-  const isLanding = location.pathname === "/";
+  const isLanding = location.pathname === "/" || location.pathname === "/dashboard";
 
   const navClasses = isLanding
-    ? "absolute left-0 w-full z-50 bg-transparent"
-    : "sticky top-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm";
+    ? "absolute top-0 inset-x-0 w-full z-50 bg-transparent flex justify-center"
+    : "sticky top-0 inset-x-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm flex justify-center";
 
   const landingNavStyle = isLanding
     ? { top: '0' }
@@ -121,15 +121,17 @@ function Navbar({ landingRole, setLandingRole }) {
 
   return (
     <nav className={navClasses} style={landingNavStyle}>
-      <div className="max-w-[1398px] w-full mx-auto px-4 sm:px-6 lg:px-8 h-full">
-        <div className="flex items-center justify-between h-[50px] md:h-[70px]" style={{ gap: '10px' }}>
+      <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 h-full">
+        <div className="flex items-center justify-between h-[50px] md:h-[70px]">
           {/* Logo */}
-          <Link to={user ? "/user-dashboard" : "/"} className="flex-shrink-0 flex items-center">
-            <img src="/landing/image%201.svg" alt="PreepX" className="h-[22px] sm:h-[45px] w-auto" />
-          </Link>
+          <div className="flex-1 flex justify-start items-center">
+            <Link to={user ? "/user-dashboard" : "/"} className="flex-shrink-0 flex items-center">
+              <img src="/landing/image%201.svg" alt="PreepX" className="h-[22px] sm:h-[45px] w-auto" />
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex flex-1 justify-center gap-6">
+          <div className="hidden md:flex items-center justify-center gap-6 lg:gap-8 flex-shrink-0">
             {user
               ? navLinks.map((link) => (
                 <Link
@@ -164,8 +166,8 @@ function Navbar({ landingRole, setLandingRole }) {
           </div>
 
           {/* Right Actions */}
-          <div className="hidden md:flex items-center gap-4 flex-shrink-0 md:-translate-x-8">
-            <button onClick={() => {}} className="hidden text-slate-600 hover:text-slate-900 hover:bg-slate-100 p-2 rounded-full transition-colors">
+          <div className="hidden md:flex flex-1 items-center justify-end gap-4">
+            <button onClick={() => { }} className="hidden text-slate-600 hover:text-slate-900 hover:bg-slate-100 p-2 rounded-full transition-colors">
               <Moon size={20} />
             </button>
 
@@ -253,7 +255,7 @@ function Navbar({ landingRole, setLandingRole }) {
 
           {/* Mobile Right Actions */}
           <div className="md:hidden flex items-center gap-3" style={{ marginRight: '8px' }}>
-            <button onClick={() => {}} className="hidden text-slate-600 hover:text-slate-900 p-1.5 rounded-full transition-colors">
+            <button onClick={() => { }} className="hidden text-slate-600 hover:text-slate-900 p-1.5 rounded-full transition-colors">
               <Moon size={15} />
             </button>
             {user ? (

@@ -697,9 +697,9 @@
 }
 
 [data-theme="light"] .trio-sec-icon-box {
-  background: #ecfdf5 !important;
-  border-color: #a7f3d0 !important;
-  color: #059669 !important;
+  background: #ffffff !important;
+  border: 1px solid #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
 }
 
 [data-theme="light"] .trio-sec-link-btn {

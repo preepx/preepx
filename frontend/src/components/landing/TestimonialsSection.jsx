@@ -77,21 +77,25 @@ const allTestimonials = [
 
 const securityPoints = [
   {
+    iconSrc: "/Secure Data.svg",
     icon: Lock,
     title: "Secure Data",
     desc: "Your data is encrypted and stored securely.",
   },
   {
+    iconSrc: "/Privacy First.svg",
     icon: EyeOff,
     title: "Privacy First",
     desc: "We never share your data without permission.",
   },
   {
+    iconSrc: "/Encrypted Interviews.svg",
     icon: Video,
     title: "Encrypted Interviews",
     desc: "Audio & video data is encrypted end-to-end.",
   },
   {
+    iconSrc: "/Transparent Evaluation.svg",
     icon: Scale,
     title: "Transparent Evaluation",
     desc: "AI evaluations are fair, unbiased and explainable.",
@@ -204,7 +208,15 @@ function TestimonialsSection() {
             {securityPoints.map((item, idx) => (
               <div key={idx} className="trio-security-item">
                 <div className="trio-sec-icon-box">
-                  <item.icon size={18} />
+                  {item.iconSrc ? (
+                    <img
+                      src={item.iconSrc}
+                      alt={item.title}
+                      className="w-6 h-6 object-contain"
+                    />
+                  ) : (
+                    <item.icon size={18} />
+                  )}
                 </div>
                 <div className="trio-sec-text">
                   <h4 className="trio-sec-title">{item.title}</h4>

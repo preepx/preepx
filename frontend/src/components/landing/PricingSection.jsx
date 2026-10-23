@@ -186,14 +186,14 @@ function PricingSection({ onRecruiterClick }) {
   };
 
   return (
-    <section id="pricing" className="relative py-24 overflow-hidden bg-transparent">
+    <section id="pricing" className="relative py-24 overflow-hidden bg-transparent w-full flex flex-col items-center justify-center">
       {/* Background blobs for aesthetics */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-[#E0F2FE] blur-[120px] opacity-70"></div>
         <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] rounded-full bg-[#F3E8FF] blur-[120px] opacity-70"></div>
       </div>
 
-      <div className="max-w-[1380px] mx-auto px-4 sm:px-6 relative z-10">
+      <div className="w-full max-w-[1380px] mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-center">
         {/* Header */}
         <div className="text-center mb-16 max-w-[1380px] mx-auto px-4">
           <h2
@@ -214,14 +214,14 @@ function PricingSection({ onRecruiterClick }) {
 
         {/* Main Content Area: Groups Title + Cards for mobile responsive stacking */}
         <div
-          className="flex flex-col xl:flex-row gap-10 xl:gap-[10px] justify-center items-stretch mb-16"
+          className="flex flex-col lg:flex-row gap-10 lg:gap-8 justify-center items-center lg:items-start mb-16 w-full"
           style={{ marginTop: '30px' }}
         >
           {/* Candidate Section */}
-          <div className="flex flex-col flex-1 gap-[20px]">
+          <div className="flex flex-col gap-[20px] items-center">
             {/* Candidate Title */}
-            <div className="flex justify-start px-8 sm:px-12 md:px-0">
-              <div className="flex items-center gap-3 relative translate-x-4 md:translate-x-8">
+            <div className="flex justify-start w-full max-w-[460px]">
+              <div className="flex items-center gap-3">
                 <img src="/landing/condinateplan.svg" alt="Candidate Plan Icon" className="w-6 h-6 shrink-0" />
                 <div>
                   <h3 className="text-[16px] font-extrabold text-slate-900">{pricingData.candidate.title}</h3>
@@ -231,12 +231,12 @@ function PricingSection({ onRecruiterClick }) {
             </div>
 
             {/* Candidate Cards */}
-            <div className="grid grid-cols-2 justify-items-center md:flex md:flex-row gap-[10px] justify-center px-8 sm:px-12 md:px-0">
+            <div className="flex flex-wrap sm:flex-nowrap gap-[10px] justify-center">
               {pricingData.candidate.plans.map((plan, index) => {
                 const feature = pricingData.candidate.footerFeatures[index];
                 return (
-                  <div key={plan.id} className="flex flex-col items-center w-full max-w-[170px] sm:max-w-[200px] md:max-w-[225px]">
-                    <div className="bg-white border border-[#BFDBFE] shadow-xl shadow-blue-500/5 relative flex flex-col hover:-translate-y-1 transition-transform w-full" style={{ background: "#B6D2FF", height: '250px', borderRadius: '10px', borderWidth: '1px', padding: '15px', gap: '10px', opacity: 1 }}>
+                  <div key={plan.id} className="flex flex-col items-center w-[165px] sm:w-[200px] md:w-[225px]">
+                    <div className="bg-white border border-[#BFDBFE] shadow-xl shadow-blue-500/5 relative flex flex-col hover:-translate-y-1 transition-transform w-full" style={{ background: "#B6D2FF", minHeight: '250px', borderRadius: '10px', borderWidth: '1px', padding: '15px', gap: '10px', opacity: 1 }}>
                       {plan.badge && (
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white border border-blue-200 text-blue-700 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
                           {plan.badge}
@@ -272,10 +272,10 @@ function PricingSection({ onRecruiterClick }) {
           </div>
 
           {/* Recruiter Section */}
-          <div className="flex flex-col flex-[1.5] gap-[20px]">
+          <div className="flex flex-col gap-[20px] items-center">
             {/* Recruiter Title */}
-            <div className="flex justify-start px-8 sm:px-12 md:px-0">
-              <div className="flex items-center gap-3 relative translate-x-4 md:translate-x-8">
+            <div className="flex justify-start w-full max-w-[700px]">
+              <div className="flex items-center gap-3">
                 <img src="/landing/recuirterplan.svg" alt="Recruiter Plan Icon" className="w-6 h-6 shrink-0" />
                 <div>
                   <h3 className="text-[16px] font-extrabold text-slate-900">{pricingData.recruiter.title}</h3>
@@ -285,13 +285,13 @@ function PricingSection({ onRecruiterClick }) {
             </div>
 
             {/* Recruiter Cards */}
-            <div className="grid grid-cols-2 justify-items-center md:flex md:flex-row gap-[10px] justify-center relative px-8 sm:px-12 md:px-0">
+            <div className="flex flex-wrap sm:flex-nowrap gap-[10px] justify-center relative">
               {pricingData.recruiter.plans.map((plan, index) => {
                 const allFeatures = [...pricingData.candidate.footerFeatures, ...pricingData.recruiter.footerFeatures];
                 const feature = allFeatures[index + 2]; // Map to 3rd, 4th, 5th feature
                 return (
-                  <div key={plan.id} className="flex flex-col items-center w-full max-w-[170px] sm:max-w-[200px] md:max-w-[225px]">
-                    <div className="bg-white border border-[#A7F3D0] shadow-xl shadow-emerald-500/5 relative flex flex-col hover:-translate-y-1 transition-transform w-full" style={{ background: "#A3F1FF", height: '250px', borderRadius: '10px', borderWidth: '1px', padding: '15px', gap: '10px', opacity: 1 }}>
+                  <div key={plan.id} className="flex flex-col items-center w-[165px] sm:w-[200px] md:w-[225px]">
+                    <div className="bg-white border border-[#A7F3D0] shadow-xl shadow-emerald-500/5 relative flex flex-col hover:-translate-y-1 transition-transform w-full" style={{ background: "#A3F1FF", minHeight: '250px', borderRadius: '10px', borderWidth: '1px', padding: '15px', gap: '10px', opacity: 1 }}>
                       {plan.badge && (
                         <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white border border-emerald-200 text-emerald-800 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm whitespace-nowrap">
                           {plan.badge}
@@ -321,7 +321,6 @@ function PricingSection({ onRecruiterClick }) {
                       </ul>
                     </div>
                   </div>
-
                 )
               })}
             </div>
