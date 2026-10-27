@@ -31,7 +31,7 @@
   align-items: center;
   gap: 20px;
   padding: 22px 24px;
-  border-radius: 18px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   background: transparent;
   cursor: pointer;
@@ -115,7 +115,7 @@
   align-items: center;
   gap: 20px;
   padding: 28px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   cursor: pointer;
   text-align: left;
@@ -262,7 +262,7 @@
   padding: 16px 20px;
   background: color-mix(in srgb, var(--accent) 8%, var(--surface));
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   cursor: pointer;
   text-align: left;
   font-family: inherit;

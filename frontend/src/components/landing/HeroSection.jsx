@@ -40,7 +40,7 @@ function HeroSection({ onRecruiterClick }) {
 
           {/* Action Buttons */}
           <div className="flex flex-row gap-2 sm:gap-3 mb-5 justify-center lg:justify-start flex-nowrap w-full mx-auto lg:mx-0" style={{ marginTop: '16px', maxWidth: '100%', padding: '0 4px' }}>
-            <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none">
+            <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none w-full sm:w-[195px] lg:w-[200px]">
               <button
                 onClick={() => navigate('/auth?role=candidate')}
                 className="group relative inline-flex items-center justify-center text-white transition-all transform hover:-translate-y-0.5 overflow-hidden hover:opacity-90 leading-none w-full h-[38px] sm:h-[46px]"
@@ -65,7 +65,7 @@ function HeroSection({ onRecruiterClick }) {
               <span className="text-[7.5px] min-[360px]:text-[8.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Start preparing for your dream role</span>
             </div>
 
-            <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none">
+            <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none w-full sm:w-[195px] lg:w-[200px]">
               <button
                 onClick={handleRecruiterClick}
                 className="group relative inline-flex items-center justify-center text-white transition-all transform hover:-translate-y-0.5 overflow-hidden hover:opacity-90 leading-none w-full h-[38px] sm:h-[46px]"

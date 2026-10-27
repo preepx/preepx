@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import notify from "@/utils/notify";
 import { getProfile, syncUserToStorage } from "@/services/userAPI";
-import NotificationModal from "@/components/NotificationModal";
+import NotificationModal, { DUMMY_NOTIFICATIONS } from "@/components/NotificationModal";
 import { useWallet, WalletBadge } from "@/features/wallet";
 import { useSubscription } from "@/features/subscription";
 import { useTheme } from "@/hooks/useTheme";
@@ -96,7 +96,7 @@ function AppLayout({ children }) {
     const fetchNotifs = async () => {
       try {
         const res = await API.get("/users/notifications");
-        if (isMounted && res.data) {
+        if (isMounted && Array.isArray(res.data)) {
           setNotifs([...res.data].reverse());
         }
       } catch (err) {

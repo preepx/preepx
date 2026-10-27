@@ -10,7 +10,7 @@ import { getMyApplications } from "../services/candidateJobsAPI";
 import { getMyAssessments } from "@/services/assessmentAPI";
 import { useTheme } from "@/hooks/useTheme";
 import { getStoredUser, clearAuth } from "@/utils/authUtils";
-import NotificationModal from "@/components/NotificationModal";
+import NotificationModal, { DUMMY_NOTIFICATIONS } from "@/components/NotificationModal";
 import Footer from "@/components/Footer";
 import PageTransitionLoader from "@/components/PageTransitionLoader";
 import '../styles/JobsLayout.css';
