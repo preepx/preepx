@@ -35,7 +35,7 @@ const CameraProctor = () => {
       width: '100%',
       height: '100%',
       backgroundColor: '#000',
-      borderRadius: '12px',
+      borderRadius: '8px',
       overflow: 'hidden',
       position: 'relative',
       display: 'flex',

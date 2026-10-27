@@ -85,7 +85,7 @@ function PlanCards({ plans = SUBSCRIPTION_PLANS, onPurchaseSuccess, currentSub }
               boxShadow: activePlan === plan.id ? `0 8px 24px -8px rgba(245, 158, 11, 0.4)` : "0 4px 12px rgba(0,0,0,0.05)",
               background: activePlan === plan.id ? "#fffbeb" : "var(--surface)",
               color: "var(--text)",
-              borderRadius: "12px",
+              borderRadius: '8px',
               padding: "20px",
               transition: "all 0.3s ease"
             }}

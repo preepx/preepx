@@ -14,7 +14,7 @@
 .resume-step {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 20px;
   text-align: center;
   position: relative;
@@ -54,7 +54,7 @@
 
 .drop-zone {
   border: 2px dashed var(--border);
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 48px 24px;
   text-align: center;
   transition: all 0.2s;
@@ -95,7 +95,7 @@
   padding: 12px 24px;
   background: var(--primary);
   color: white;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -105,7 +105,7 @@
   margin-top: 24px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 24px;
 }
 
@@ -164,7 +164,7 @@
   background: var(--primary);
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 15px;
   font-weight: 600;
   font-family: inherit;

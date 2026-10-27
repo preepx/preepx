@@ -9,7 +9,7 @@
 .start-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 40px;
   max-width: 520px;
   width: 100%;
@@ -67,7 +67,7 @@
   gap: 14px;
   padding: 14px 16px;
   background: var(--bg);
-  border-radius: 12px;
+  border-radius: 8px;
   color: var(--primary);
 }
 
@@ -90,7 +90,7 @@
 .start-tips {
   background: rgba(245, 158, 11, 0.1);
   border: 1px solid rgba(245, 158, 11, 0.3);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 14px 16px;
   margin-bottom: 28px;
 }
@@ -116,7 +116,7 @@
   background: var(--primary);
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 15px;
   font-weight: 600;
   font-family: inherit;
@@ -136,7 +136,7 @@
   background: var(--bg);
   color: var(--text);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   font-family: inherit;

@@ -87,7 +87,7 @@
   overflow-x: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 8px;
   box-shadow: 0 24px 60px -16px rgba(0, 0, 0, 0.5);
   opacity: 0;
   transform: translateY(-30px) scale(0.88);
@@ -193,7 +193,7 @@
   color: var(--text);
   padding: 7px 10px;
   background: linear-gradient(135deg, rgba(31, 92, 74, 0.08), rgba(180, 83, 9, 0.06));
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid rgba(31, 92, 74, 0.12);
 }
 
@@ -203,7 +203,7 @@
 /* Banner image */
 .idm-banner-wrap {
   margin: 12px 14px 0;
-  border-radius: 14px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(47, 111, 91, 0.2);
   box-shadow: 0 8px 24px -6px rgba(31, 92, 74, 0.25);
@@ -231,7 +231,7 @@
   padding: 8px 4px;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   text-align: center;
 }
 
@@ -260,7 +260,7 @@
   margin: 10px 14px 0;
   padding: 10px 12px;
   background: linear-gradient(135deg, rgba(255, 153, 51, 0.1), rgba(19, 136, 8, 0.06));
-  border-radius: 12px;
+  border-radius: 8px;
   border-left: 3px solid #ff9933;
 }
 
@@ -284,7 +284,7 @@
   padding: 10px 12px;
   background: linear-gradient(135deg, rgba(31, 92, 74, 0.06), rgba(255, 153, 51, 0.04));
   border: 1px solid rgba(31, 92, 74, 0.12);
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .idm-prize-icon {
@@ -294,7 +294,7 @@
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #fef3c7, #fde68a);
-  border-radius: 10px;
+  border-radius: 8px;
   color: #b45309;
   flex-shrink: 0;
 }
@@ -339,7 +339,7 @@
   margin: 10px 14px 0;
   padding: 12px;
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.04), rgba(31, 92, 74, 0.06));
-  border-radius: 14px;
+  border-radius: 8px;
   border: 1px solid var(--border);
 }
 
@@ -349,7 +349,7 @@
   align-items: center;
   gap: 2px;
   padding: 8px 10px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--bg);
   border: 1px solid var(--border);
   min-width: 72px;
@@ -375,7 +375,7 @@
   margin: 10px 14px 0;
   padding: 10px 12px;
   background: var(--bg);
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid var(--border);
 }
 
@@ -419,7 +419,7 @@
   text-align: center;
   line-height: 1.55;
   background: linear-gradient(135deg, rgba(31, 92, 74, 0.06), rgba(180, 83, 9, 0.04));
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid rgba(31, 92, 74, 0.1);
 }
 
@@ -439,7 +439,7 @@
   width: 100%;
   padding: 11px 20px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   background: linear-gradient(135deg, #1f5c4a, #164338);
   color: white;
   font-size: 13px;
@@ -459,7 +459,7 @@
   width: 100%;
   padding: 10px 20px;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 8px;
   background: transparent;
   color: var(--text-muted);
   font-size: 12px;
@@ -503,7 +503,7 @@
 
 @media (max-width: 420px) {
   .idm-overlay { padding-top: 16px; }
-  .idm-card { max-width: 100%; border-radius: 18px; }
+  .idm-card { max-width: 100%; border-radius: 8px; }
   .idm-title { font-size: 17px; }
   .idm-features { grid-template-columns: 1fr; }
   .idm-feature { flex-direction: row; text-align: left; padding: 8px 10px; }

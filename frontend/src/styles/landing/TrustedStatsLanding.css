@@ -164,14 +164,14 @@
 
   .trusted-card-container {
     padding: 18px 16px;
-    border-radius: 16px;
+    border-radius: 8px;
   }
 
   .stats-unified-card {
     grid-template-columns: 1fr 1fr;
     gap: 16px 12px;
     padding: 20px 14px;
-    border-radius: 16px;
+    border-radius: 8px;
   }
 
   .stat-num {

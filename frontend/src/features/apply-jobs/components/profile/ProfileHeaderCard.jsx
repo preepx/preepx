@@ -204,7 +204,7 @@ export default function ProfileHeaderCard({
                       background: 'linear-gradient(135deg, #f59e0b, #d97706)', 
                       color: 'white', 
                       padding: '3px 8px', 
-                      borderRadius: '12px',
+                      borderRadius: '8px',
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '4px',

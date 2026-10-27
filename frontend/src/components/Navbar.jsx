@@ -269,7 +269,7 @@ function Navbar({ landingRole, setLandingRole }) {
                   style={{
                     background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
                     height: '28px',
-                    borderRadius: '7px',
+                    borderRadius: '8px',
                     border: '1px solid #1e293b',
                     padding: '3px 10px',
                     fontSize: '11px',

@@ -183,7 +183,7 @@ const CodingPractice = () => {
                           border: '1px solid #4f46e5',
                           color: '#818cf8',
                           padding: '8px 20px',
-                          borderRadius: '20px',
+                          borderRadius: '8px',
                           fontWeight: '500',
                           transition: 'all 0.2s'
                         }}

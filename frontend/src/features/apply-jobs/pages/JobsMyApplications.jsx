@@ -162,7 +162,7 @@ export default function JobsMyApplications() {
                         background: activeTab === t.name ? 'rgba(255,255,255,0.2)' : 'var(--bg)',
                         color: activeTab === t.name ? '#fff' : t.color,
                         padding: '2px 8px',
-                        borderRadius: '12px',
+                        borderRadius: '8px',
                         fontSize: '12px',
                         fontWeight: '700'
                       }}

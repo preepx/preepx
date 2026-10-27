@@ -182,7 +182,7 @@
 .oe-setup-feature-icon {
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.15);
   display: flex;
@@ -250,7 +250,7 @@
 .oe-form-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 28px 24px;
   box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
 }
@@ -353,7 +353,7 @@
   height: 48px;
   padding: 0 16px 0 44px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   color: var(--text);
   background: var(--surface);
@@ -379,7 +379,7 @@
 .oe-q-btn {
   position: relative;
   padding: 16px 8px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 2px solid var(--border);
   background: var(--surface);
   cursor: pointer;
@@ -449,7 +449,7 @@
   height: 48px;
   margin-top: 8px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #1f5c4a;
   color: #fff;
   font-size: 15px;
@@ -655,7 +655,7 @@
   padding: 14px 16px;
   background: #fef2f2;
   border: 1px solid #fecaca;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 500;
   color: #991b1b;
@@ -678,7 +678,7 @@
 .oe-q-num-badge {
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #1f5c4a;
   color: #fff;
   font-size: 14px;
@@ -707,7 +707,7 @@
 .oe-question-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 24px;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
@@ -746,7 +746,7 @@
   align-items: center;
   gap: 14px;
   border: 2px solid var(--border);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--surface);
   text-align: left;
   cursor: pointer;
@@ -808,7 +808,7 @@
   width: 100%;
   height: 48px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   font-family: inherit;
@@ -865,7 +865,7 @@
   width: 100%;
   height: 48px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   font-family: inherit;
@@ -961,7 +961,7 @@
 
 .oe-stat {
   padding: 12px 8px;
-  border-radius: 10px;
+  border-radius: 8px;
   text-align: center;
   border: 1px solid;
 }
@@ -1023,7 +1023,7 @@
   right: 12px;
   z-index: 30;
   width: 96px;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   border: 2px solid #fff;
   box-shadow: 0 4px 20px rgba(15, 23, 42, 0.2);
@@ -1112,7 +1112,7 @@
 .oe-score-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
   margin-bottom: 32px;
@@ -1217,7 +1217,7 @@
 .oe-review-icon {
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #eef2ff;
   border: 1px solid #d6d0c6;
   display: flex;
@@ -1247,7 +1247,7 @@
 .oe-review-item {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 1px 4px rgba(15, 23, 42, 0.04);
 }
@@ -1339,7 +1339,7 @@
   padding: 14px 16px;
   background: #f8fafc;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .oe-review-expl-head {
@@ -1371,7 +1371,7 @@
   max-width: 320px;
   height: 48px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #1f5c4a;
   color: #fff;
   font-size: 14px;
@@ -1415,7 +1415,7 @@
 
   .oe-form-card {
     padding: 22px 16px;
-    border-radius: 14px;
+    border-radius: 8px;
   }
 
   .oe-mobile-hero h1 {
@@ -1443,7 +1443,7 @@
 
   .oe-question-card {
     padding: 18px 16px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .oe-question-text {
@@ -1508,7 +1508,7 @@
 
   .oe-q-btn {
     padding: 12px 6px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .oe-q-num {
@@ -1586,7 +1586,7 @@
     flex: 1;
     height: 48px;
     font-size: 14px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .oe-mobile-cam-inline {
@@ -1729,7 +1729,7 @@
   background: var(--surface, #fff);
   color: var(--text, #0f172a);
   padding: 32px;
-  border-radius: 16px;
+  border-radius: 8px;
   max-width: 440px;
   width: 90%;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
@@ -1752,7 +1752,7 @@
 
 .oe-warn-btn {
   padding: 12px 24px;
-  border-radius: 10px;
+  border-radius: 8px;
   font-weight: 600;
   border: none;
   cursor: pointer;

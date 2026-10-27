@@ -6,7 +6,7 @@
 .auth-otp-screen .otp-icon-wrap {
   width: 52px;
   height: 52px;
-  border-radius: 14px;
+  border-radius: 8px;
   background: rgba(61, 94, 255, 0.15);
   border: 1.5px solid rgba(61, 94, 255, 0.35);
   color: #3D5EFF;
@@ -44,7 +44,7 @@
   font-weight: 800;
   background: rgba(15, 23, 42, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 10px;
+  border-radius: 8px;
   color: #ffffff;
   outline: none;
   transition: all 0.2s ease;

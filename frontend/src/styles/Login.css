@@ -64,7 +64,7 @@
   height: 36px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,7 +104,7 @@
   padding: 12px 16px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(8px);
@@ -170,7 +170,7 @@
   max-width: 420px;
   background: var(--surface);
   border: 1px solid rgba(226, 232, 240, 0.8);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 16px 20px;
   box-shadow:
     0 4px 6px rgba(15, 23, 42, 0.04),
@@ -181,7 +181,7 @@
 .auth-tabs {
   display: flex;
   background: var(--bg);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 4px;
   margin-bottom: 20px;
   gap: 4px;
@@ -191,7 +191,7 @@
   flex: 1;
   padding: 10px 16px;
   border: none;
-  border-radius: 9px;
+  border-radius: 8px;
   background: transparent;
   font-size: 14px;
   font-weight: 600;
@@ -263,7 +263,7 @@
   width: 100%;
   padding: 8px 12px 8px 36px;
   border: 1.5px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 13px;
   font-family: inherit;
   background: var(--bg);
@@ -319,7 +319,7 @@
   gap: 12px;
   padding: 14px 16px;
   border: 1.5px dashed var(--border);
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
   background: #fafbfc;
@@ -334,7 +334,7 @@
   width: 40px;
   height: 40px;
   background: #eef2ff;
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -373,7 +373,7 @@
   background: linear-gradient(135deg, #1f5c4a 0%, #2f6f5b 50%, #3d7a64 100%);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   font-family: inherit;
@@ -465,7 +465,7 @@
 
   .auth-card {
     padding: 24px 20px;
-    border-radius: 20px;
+    border-radius: 8px;
     box-shadow: 0 8px 32px rgba(15, 23, 42, 0.1);
     transform: none;
   }
@@ -503,7 +503,7 @@
   width: 56px;
   height: 56px;
   background: #eef2ff;
-  border-radius: 16px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -525,7 +525,7 @@
   font-size: 24px;
   font-weight: 700;
   border: 2px solid var(--border);
-  border-radius: 12px;
+  border-radius: 8px;
   background: var(--bg);
   color: var(--text);
   font-family: inherit;
@@ -603,7 +603,7 @@
     width: 42px;
     height: 50px;
     font-size: 20px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .otp-boxes {
@@ -685,7 +685,7 @@
   padding: 8px 12px;
   background: var(--surface);
   border: 1.5px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   font-family: inherit;

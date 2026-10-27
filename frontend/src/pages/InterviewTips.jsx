@@ -121,7 +121,7 @@ export default function InterviewTips() {
               fontWeight: "700",
               fontSize: "15px",
               padding: "12px 30px",
-              borderRadius: "10px",
+              borderRadius: '8px',
               textDecoration: "none",
               boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
             }}
@@ -136,7 +136,7 @@ export default function InterviewTips() {
               fontWeight: "600",
               fontSize: "15px",
               padding: "12px 30px",
-              borderRadius: "10px",
+              borderRadius: '8px',
               textDecoration: "none",
               border: "1px solid rgba(255,255,255,0.25)",
             }}
@@ -321,7 +321,7 @@ export default function InterviewTips() {
           {/* SECTION 3 — DURING */}
           <section id="during-interview" className="guide-section-block">
             <h2>What to Do During the Interview</h2>
-            <div style={{ background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: "14px", padding: "28px 32px", marginBottom: "20px" }}>
+            <div style={{ background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: '8px', padding: "28px 32px", marginBottom: "20px" }}>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
                 {[
                   "Listen carefully before answering each question",
@@ -341,7 +341,7 @@ export default function InterviewTips() {
                 ))}
               </ul>
             </div>
-            <div style={{ padding: "16px 20px", background: "var(--hpw-item-hover)", borderRadius: "10px", borderLeft: "3px solid #10b981", fontSize: "14px", color: "var(--hpw-text-muted)", lineHeight: "1.65" }}>
+            <div style={{ padding: "16px 20px", background: "var(--hpw-item-hover)", borderRadius: '8px', borderLeft: "3px solid #10b981", fontSize: "14px", color: "var(--hpw-text-muted)", lineHeight: "1.65" }}>
               <strong style={{ color: "var(--hpw-text)" }}>Note:</strong> You do not need to know everything. Interviewers also evaluate how you think, communicate and approach unfamiliar problems.
             </div>
           </section>
@@ -354,7 +354,7 @@ export default function InterviewTips() {
             </p>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
               {MISTAKES.map((mistake, i) => (
-                <div key={i} style={{ display: "flex", gap: "14px", alignItems: "flex-start", padding: "14px 18px", background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: "10px" }}>
+                <div key={i} style={{ display: "flex", gap: "14px", alignItems: "flex-start", padding: "14px 18px", background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: '8px' }}>
                   <span style={{ color: "var(--hpw-text-muted)", fontWeight: "600", fontSize: "13px", flexShrink: 0, marginTop: "2px" }}>{i + 1}.</span>
                   <p style={{ margin: 0, fontSize: "14px", color: "var(--hpw-text)", lineHeight: "1.6" }}>{mistake}</p>
                 </div>
@@ -364,7 +364,7 @@ export default function InterviewTips() {
 
           {/* SECTION 5 — AI MOCK */}
           <section id="ai-mock-interview" className="guide-section-block">
-            <div style={{ background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: "16px", padding: "40px 36px" }}>
+            <div style={{ background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: '8px', padding: "40px 36px" }}>
               <h2 style={{ marginBottom: "16px" }}>Practice Before the Real Interview</h2>
               <p style={{ color: "var(--hpw-text-muted)", marginBottom: "24px", lineHeight: "1.7", fontSize: "15px" }}>
                 One of the most effective ways to prepare is to simulate the interview environment before the actual interview.
@@ -397,7 +397,7 @@ export default function InterviewTips() {
                   color: "#fff",
                   fontWeight: "700",
                   fontSize: "15px",
-                  borderRadius: "10px",
+                  borderRadius: '8px',
                   textDecoration: "none",
                   boxShadow: "0 4px 16px rgba(99,102,241,0.25)",
                 }}
@@ -452,7 +452,7 @@ export default function InterviewTips() {
             <h2>Quick Tips to Remember</h2>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "10px" }}>
               {QUICK_TIPS.map((tip, i) => (
-                <div key={i} style={{ display: "flex", gap: "12px", padding: "14px 18px", background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: "10px", alignItems: "flex-start" }}>
+                <div key={i} style={{ display: "flex", gap: "12px", padding: "14px 18px", background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: '8px', alignItems: "flex-start" }}>
                   <span style={{ color: "#0284c7", fontWeight: "700", flexShrink: 0, fontSize: "13px", marginTop: "2px" }}>{String(i + 1).padStart(2, "0")}</span>
                   <p style={{ margin: 0, fontSize: "14px", color: "var(--hpw-text)", lineHeight: "1.55" }}>{tip}</p>
                 </div>
@@ -464,7 +464,7 @@ export default function InterviewTips() {
           <section className="guide-section-block">
             <div style={{
               background: "linear-gradient(135deg, #0c1e3d 0%, #0e2a52 100%)",
-              borderRadius: "18px",
+              borderRadius: '8px',
               padding: "52px 40px",
               textAlign: "center",
             }}>
@@ -483,7 +483,7 @@ export default function InterviewTips() {
                     fontWeight: "700",
                     fontSize: "15px",
                     padding: "12px 32px",
-                    borderRadius: "10px",
+                    borderRadius: '8px',
                     textDecoration: "none",
                     boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
                   }}
@@ -498,7 +498,7 @@ export default function InterviewTips() {
                     fontWeight: "600",
                     fontSize: "15px",
                     padding: "12px 32px",
-                    borderRadius: "10px",
+                    borderRadius: '8px',
                     textDecoration: "none",
                     border: "1px solid rgba(255,255,255,0.2)",
                   }}

@@ -139,7 +139,7 @@
   height: 33px;
   background: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 7px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -208,7 +208,7 @@
   padding: 0 8px 0 28px;
   background: rgba(15, 23, 42, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 7px;
+  border-radius: 8px;
   color: #ffffff;
   font-size: 11.5px;
   outline: none;
@@ -283,7 +283,7 @@
   height: 33px;
   width: 100%;
   margin-top: 1px;
-  border-radius: 7px;
+  border-radius: 8px;
   background: linear-gradient(135deg, #3D5EFF, #6017C7);
   border: none;
   color: #ffffff;
@@ -338,7 +338,7 @@
   align-items: center;
   justify-content: center;
   gap: 7px;
-  border-radius: 7px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #f1f5f9;

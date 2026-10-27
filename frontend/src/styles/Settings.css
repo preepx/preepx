@@ -32,7 +32,7 @@
   box-sizing: border-box;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 20px 24px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   transition: all 0.25s ease;
@@ -55,7 +55,7 @@
 .prem-hero-icon {
   width: 48px;
   height: 48px;
-  border-radius: 14px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +111,7 @@
   align-items: center;
   gap: 10px;
   padding: 10px 14px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid #e2e8f0;
   background: #ffffff;
   min-width: 136px;
@@ -131,7 +131,7 @@
 .prem-hstat-icon {
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -200,7 +200,7 @@
   align-items: center;
   gap: 8px;
   padding: 9px 16px;
-  border-radius: 11px;
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 600;
   border: 1px solid #e2e8f0;
@@ -283,7 +283,7 @@
 .prem-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -339,7 +339,7 @@
 .prem-card-icon-box {
   width: 40px;
   height: 40px;
-  border-radius: 11px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -386,7 +386,7 @@
   background: #eef2ff;
   color: #4f46e5;
   border: 1px solid #c7d2fe;
-  border-radius: 9px;
+  border-radius: 8px;
   font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
@@ -474,7 +474,7 @@
   padding: 14px 16px;
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 14px;
+  border-radius: 8px;
   width: 100%;
   box-sizing: border-box;
 }
@@ -487,7 +487,7 @@
 .prem-avatar {
   width: 52px;
   height: 52px;
-  border-radius: 14px;
+  border-radius: 8px;
   object-fit: cover;
   border: 2px solid #ffffff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
@@ -600,7 +600,7 @@
   gap: 10px;
   background: #ffffff;
   border: 1px solid #cbd5e1;
-  border-radius: 11px;
+  border-radius: 8px;
   padding: 0 12px;
   height: 44px;
   transition: all 0.2s ease;
@@ -835,7 +835,7 @@
   justify-content: center;
   gap: 7px;
   padding: 9px 16px;
-  border-radius: 11px;
+  border-radius: 8px;
   border: 1px solid #cbd5e1;
   background: #ffffff;
   color: #475569;
@@ -876,7 +876,7 @@
 .prem-sidebar-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -1004,7 +1004,7 @@
   padding: 16px 20px;
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
+  border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
   width: 100%;
   box-sizing: border-box;
@@ -1025,7 +1025,7 @@
   background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
   color: #ffffff;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
@@ -1056,7 +1056,7 @@
   background: transparent;
   border: 1px solid #cbd5e1;
   color: #475569;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 13.5px;
   font-weight: 600;
   cursor: pointer;
@@ -1133,7 +1133,7 @@
 
   .prem-hero {
     padding: 16px;
-    border-radius: 15px;
+    border-radius: 8px;
     gap: 14px;
   }
 
@@ -1144,7 +1144,7 @@
   .prem-hero-icon {
     width: 42px;
     height: 42px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .prem-hero-text h1 {
@@ -1176,7 +1176,7 @@
 
   .prem-card {
     padding: 18px 16px;
-    border-radius: 15px;
+    border-radius: 8px;
     gap: 16px;
   }
 
@@ -1199,7 +1199,7 @@
     -webkit-backdrop-filter: blur(12px);
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.04), 0 6px 20px rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
+    border-radius: 8px;
     padding: 12px 14px;
   }
 
@@ -1303,7 +1303,7 @@
   .prem-hero-icon {
     width: 38px;
     height: 38px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .prem-hero-text h1 {
@@ -1324,7 +1324,7 @@
   .prem-hstat-card {
     padding: 8px 6px;
     gap: 6px;
-    border-radius: 10px;
+    border-radius: 8px;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -1357,20 +1357,20 @@
   .prem-tab {
     padding: 7px 12px;
     font-size: 12px;
-    border-radius: 9px;
+    border-radius: 8px;
     gap: 6px;
   }
 
   .prem-card {
     padding: 14px 12px;
-    border-radius: 14px;
+    border-radius: 8px;
     gap: 14px;
   }
 
   .prem-card-icon-box {
     width: 34px;
     height: 34px;
-    border-radius: 9px;
+    border-radius: 8px;
   }
 
   .prem-card-title-wrap h2 {
@@ -1389,7 +1389,7 @@
   .prem-avatar {
     width: 44px;
     height: 44px;
-    border-radius: 11px;
+    border-radius: 8px;
   }
 
   .prem-user-name {
@@ -1444,7 +1444,7 @@
 
   .prem-sidebar-card {
     padding: 14px 12px;
-    border-radius: 14px;
+    border-radius: 8px;
     gap: 12px;
   }
 
@@ -1470,7 +1470,7 @@
 
   .prem-hero {
     padding: 10px 8px !important;
-    border-radius: 12px !important;
+    border-radius: 8px !important;
     gap: 10px !important;
   }
 
@@ -1482,7 +1482,7 @@
     width: 34px !important;
     height: 34px !important;
     min-width: 34px !important;
-    border-radius: 9px !important;
+    border-radius: 8px !important;
   }
 
   .prem-hero-icon svg {
@@ -1567,7 +1567,7 @@
 
   .prem-card {
     padding: 12px 8px !important;
-    border-radius: 12px !important;
+    border-radius: 8px !important;
     gap: 12px !important;
   }
 
@@ -1608,13 +1608,13 @@
   .prem-link-profile {
     padding: 6px 6px !important;
     font-size: 11px !important;
-    border-radius: 7px !important;
+    border-radius: 8px !important;
   }
 
   .prem-user-strip {
     padding: 8px !important;
     gap: 8px !important;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     flex-direction: row !important;
     text-align: left !important;
   }
@@ -1622,7 +1622,7 @@
   .prem-avatar {
     width: 40px !important;
     height: 40px !important;
-    border-radius: 9px !important;
+    border-radius: 8px !important;
   }
 
   .prem-user-meta {
@@ -1732,7 +1732,7 @@
     bottom: 6px !important;
     padding: 8px !important;
     gap: 6px !important;
-    border-radius: 10px !important;
+    border-radius: 8px !important;
     flex-direction: row !important;
   }
 
@@ -1752,7 +1752,7 @@
 
   .prem-sidebar-card {
     padding: 10px 8px !important;
-    border-radius: 12px !important;
+    border-radius: 8px !important;
     gap: 8px !important;
   }
 

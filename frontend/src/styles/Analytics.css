@@ -35,7 +35,7 @@
   background: linear-gradient(90deg, #3D5EFF, #6017C7);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 600;
   font-family: inherit;
@@ -123,7 +123,7 @@
   gap: 16px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 16px 20px;
   transition: all 0.2s ease;
 }
@@ -136,7 +136,7 @@
 .a-stat-icon {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -144,10 +144,25 @@
 }
 
 /* Icon bg colours matching the screenshot */
-.a-stat-icon.blue   { background: #eff6ff; color: #3b82f6; }
-.a-stat-icon.green  { background: #ecfdf5; color: #10b981; }
-.a-stat-icon.orange { background: #fff7ed; color: #f97316; }
-.a-stat-icon.purple { background: #f5f3ff; color: #7c3aed; }
+.a-stat-icon.blue {
+  background: #eff6ff;
+  color: #3b82f6;
+}
+
+.a-stat-icon.green {
+  background: #ecfdf5;
+  color: #10b981;
+}
+
+.a-stat-icon.orange {
+  background: #fff7ed;
+  color: #f97316;
+}
+
+.a-stat-icon.purple {
+  background: #f5f3ff;
+  color: #7c3aed;
+}
 
 .a-stat-info {
   display: flex;
@@ -180,7 +195,7 @@
 .chart-panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 24px;
 }
 
@@ -324,7 +339,7 @@
   gap: 14px;
   padding: 12px 16px;
   background: var(--bg);
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--border);
 }
 
@@ -359,9 +374,11 @@
   .analytics-page {
     padding: 16px 12px 40px;
   }
+
   .analytics-grid {
     grid-template-columns: 1fr;
   }
+
   .role-row {
     grid-template-columns: 1fr;
     gap: 6px;

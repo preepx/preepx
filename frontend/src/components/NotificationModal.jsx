@@ -129,7 +129,6 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
       style={{
         transform: `translateX(${translateX}px)`,
         transition: isDragging ? 'none' : 'transform 0.3s ease, background-color 0.2s ease',
@@ -440,7 +439,7 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
           height: '575px',
           maxHeight: '84vh',
           backgroundColor: '#ffffff',
-          borderRadius: '20px',
+          borderRadius: '8px',
           boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05)',
           display: 'flex',
           flexDirection: 'column',
@@ -466,8 +465,8 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
               style={{
                 width: '36px',
                 height: '36px',
-                borderRadius: '10px',
-                backgroundColor: '#EAF2FE',
+                borderRadius: '8px',
+
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -476,9 +475,9 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
                 flexShrink: 0,
               }}
             >
-              <Bell size={18} color="#2563EB" strokeWidth={2.2} />
+              {/* <Bell size={18} color="#2563EB" strokeWidth={2.2} /> */}<Bell size={24} color="var(--text)" />
               {/* Sound waves ticks on top right */}
-              <svg
+              {/* <svg
                 width="8"
                 height="8"
                 viewBox="0 0 10 10"
@@ -487,7 +486,7 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
               >
                 <path d="M2 1C4 2 5 4 5 7" stroke="#2563EB" strokeWidth="1.6" strokeLinecap="round" />
                 <path d="M6 2C7.5 3 8.5 5 8.5 7" stroke="#2563EB" strokeWidth="1.6" strokeLinecap="round" />
-              </svg>
+              </svg> */}
             </div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>

@@ -163,7 +163,7 @@
 .guide-sidebar-inner {
   background: var(--guide-card-bg);
   border: 1px solid var(--guide-border);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 16px 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
@@ -268,7 +268,7 @@
 .guide-content {
   background: var(--guide-card-bg);
   border: 1px solid var(--guide-border);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 36px 40px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
@@ -292,7 +292,7 @@
   width: 44px;
   height: 44px;
   min-width: 44px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--guide-icon-badge-bg);
   border: 1px solid var(--guide-icon-badge-border);
   color: var(--guide-icon-badge-color);
@@ -334,7 +334,7 @@
 .guide-info-card {
   background: var(--guide-item-bg);
   border: 1px solid var(--guide-border-light);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 18px 16px;
   transition: all 0.2s ease;
 }
@@ -381,7 +381,7 @@
 .guide-feature-card {
   background: var(--guide-item-bg);
   border: 1px solid var(--guide-border-light);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 18px 16px;
 }
 
@@ -412,7 +412,7 @@
 
 /* ── HIGHLIGHT / CALLOUT BOX ── */
 .guide-highlight-box {
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 14px 18px;
   font-size: 13.5px;
   line-height: 1.6;
@@ -465,7 +465,7 @@
   gap: 16px;
   background: var(--guide-item-bg);
   border: 1px solid var(--guide-border-light);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 18px 20px;
   margin: 18px 0;
 }
@@ -584,7 +584,7 @@
 .guide-support-box {
   background: var(--guide-item-bg);
   border: 1px solid var(--guide-border-light);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 20px;
 }
 
@@ -642,7 +642,7 @@
 .guide-bottom-cta {
   margin-top: 48px;
   background: linear-gradient(135deg, #0284c7 0%, #0369a1 50%, #1e3a8a 100%);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 40px 24px;
   text-align: center;
   color: #ffffff;
@@ -657,7 +657,7 @@
   width: 44px;
   height: 44px;
   margin: 0 auto 12px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.18);
   border: 1px solid rgba(255, 255, 255, 0.35);
   display: flex;
@@ -717,7 +717,7 @@
   padding: 14px 18px;
   background: var(--guide-item-bg);
   border: 1px solid var(--guide-border-light);
-  border-radius: 10px;
+  border-radius: 8px;
   transition: all 0.15s ease;
 }
 
@@ -866,7 +866,7 @@
 .guide-faq-card {
   background: var(--guide-item-bg);
   border: 1px solid var(--guide-border-light);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }

@@ -20,9 +20,9 @@
   --c100-amber: #f59e0b;
   --c100-rose: #b42318;
   --c100-cyan: #b45309;
-  --c100-radius-xl: 20px;
-  --c100-radius-lg: 16px;
-  --c100-radius-md: 12px;
+  --c100-radius-xl: 8px;
+  --c100-radius-lg: 8px;
+  --c100-radius-md: 8px;
   --c100-radius-sm: 8px;
 }
 
@@ -224,7 +224,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--c100-border);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 20px;
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
@@ -256,7 +256,7 @@
 .c100-stat-icon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -667,7 +667,7 @@
 .c100-scroll-arrow-btn {
   width: 36px;
   height: 36px;
-  border-radius: var(--c100-radius-md);
+  border-radius: var(--c100-radius-sm);
   border: 1px solid var(--c100-border);
   background: rgba(255, 255, 255, 0.04);
   color: var(--c100-text-muted);
@@ -749,12 +749,14 @@
   overflow-x: auto;
   scroll-behavior: smooth;
   padding-bottom: 12px;
-  scrollbar-width: none; /* Hide in Firefox */
+  scrollbar-width: none;
+  /* Hide in Firefox */
   -webkit-overflow-scrolling: touch;
 }
 
 .c100-journey-scroll-area::-webkit-scrollbar {
-  display: none; /* Hide in Chrome/Safari/Edge */
+  display: none;
+  /* Hide in Chrome/Safari/Edge */
 }
 
 .c100-journey-inner-track {
@@ -1563,7 +1565,7 @@
   }
 
   .c100-banner-wrap {
-    border-radius: 16px;
+    border-radius: 8px;
     margin: 0;
   }
 
@@ -1639,7 +1641,7 @@
 /* Mobile (< 600px) */
 @media (max-width: 600px) {
   .c100-banner-wrap {
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .c100-stats-grid {

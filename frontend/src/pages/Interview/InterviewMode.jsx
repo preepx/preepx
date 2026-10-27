@@ -603,7 +603,7 @@ const InterviewMode = () => {
             <div className="im-role">{jobRole || jobTitle || role || 'Frontend Developer'}</div>
           </div>
           <div className="im-header-right" style={{ gap: '16px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.1)', padding: '6px 16px', borderRadius: '20px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255,255,255,0.1)', padding: '6px 16px', borderRadius: '8px' }}>
               <span style={{ color: '#f8fafc', fontSize: '14px', fontWeight: '600', letterSpacing: '0.5px' }}>Question {currentIndex + 1} / {questions.length}</span>
               <div style={{ width: '1px', height: '16px', background: 'rgba(255,255,255,0.2)' }}></div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: questionTimer <= 10 ? '#ef4444' : '#fbbf24' }}>
@@ -628,7 +628,7 @@ const InterviewMode = () => {
         <div className="im-main">
           <div className="im-call-container">
             {isAudioLoading && (
-              <div style={{ position: 'absolute', top: '15%', background: 'rgba(99, 102, 241, 0.15)', border: '1px solid rgba(99, 102, 241, 0.3)', color: '#818cf8', padding: '8px 20px', borderRadius: '30px', fontSize: '14px', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '10px', zIndex: 10, backdropFilter: 'blur(4px)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+              <div style={{ position: 'absolute', top: '15%', background: 'rgba(99, 102, 241, 0.15)', border: '1px solid rgba(99, 102, 241, 0.3)', color: '#818cf8', padding: '8px 20px', borderRadius: '8px', fontSize: '14px', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '10px', zIndex: 10, backdropFilter: 'blur(4px)', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
                 <style>{`
                   @keyframes pulse-dot { 0% { opacity: 0.4; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.4; transform: scale(0.8); } }
                 `}</style>
@@ -666,7 +666,7 @@ const InterviewMode = () => {
             </div>
 
             {(!aiSpeaking && !isAudioLoading && isListening) && (
-              <div style={{ position: 'absolute', bottom: '24px', right: '24px', width: '280px', background: 'rgba(16, 185, 129, 0.12)', border: '1px solid rgba(16, 185, 129, 0.4)', color: '#34d399', padding: '8px 16px', borderRadius: '24px', fontSize: '14px', fontWeight: '500', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', zIndex: 10, backdropFilter: 'blur(6px)', boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)' }}>
+              <div style={{ position: 'absolute', bottom: '24px', right: '24px', width: '280px', background: 'rgba(16, 185, 129, 0.12)', border: '1px solid rgba(16, 185, 129, 0.4)', color: '#34d399', padding: '8px 16px', borderRadius: '8px', fontSize: '14px', fontWeight: '500', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', zIndex: 10, backdropFilter: 'blur(6px)', boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)' }}>
                 <style>{`
                   @keyframes pulse-green { 0% { opacity: 0.4; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } 100% { opacity: 0.4; transform: scale(0.8); } }
                 `}</style>

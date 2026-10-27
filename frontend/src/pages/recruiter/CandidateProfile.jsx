@@ -401,8 +401,8 @@ export default function CandidateProfile() {
                     { icon: <Award size={18} color="#06b6d4" />, iconBg: "rgba(6,182,212,.15)", val: pStats.totalMcqExams ?? 0, label: "MCQ Exams" },
                     { icon: <TrendingUp size={18} color="#10b981" />, iconBg: "rgba(16,185,129,.15)", val: `${pStats.avgScore ?? 0}%`, label: "Avg Score" },
                   ].map(s => (
-                    <div key={s.label} style={{ background: "linear-gradient(135deg,#1e1b4b,#312e81)", borderRadius: 16, padding: "16px 14px", display: "flex", alignItems: "center", gap: 12, border: "1px solid rgba(99,102,241,.2)" }}>
-                      <div style={{ width: 40, height: 40, borderRadius: 12, background: s.iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{s.icon}</div>
+                    <div key={s.label} style={{ background: "linear-gradient(135deg,#1e1b4b,#312e81)", borderRadius: 8, padding: "16px 14px", display: "flex", alignItems: "center", gap: 12, border: "1px solid rgba(99,102,241,.2)" }}>
+                      <div style={{ width: 40, height: 40, borderRadius: 8, background: s.iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{s.icon}</div>
                       <div>
                         <div style={{ fontSize: 22, fontWeight: 900, color: "#fff", lineHeight: 1 }}>{s.val}</div>
                         <div style={{ fontSize: 11, color: "rgba(255,255,255,.55)", fontWeight: 600, marginTop: 3 }}>{s.label}</div>
@@ -411,7 +411,7 @@ export default function CandidateProfile() {
                   ))}
                 </div>
 
-                <div style={{ background: "var(--bg)", borderRadius: 14, padding: "14px 16px", marginBottom: 14, border: "1px solid var(--border)" }}>
+                <div style={{ background: "var(--bg)", borderRadius: 8, padding: "14px 16px", marginBottom: 14, border: "1px solid var(--border)" }}>
                   <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: ".05em", marginBottom: 6 }}>AI Executive Summary</div>
                   <p style={{ margin: 0, fontSize: 14, color: "var(--text)", lineHeight: 1.7 }}>{report.summary}</p>
                 </div>
@@ -555,7 +555,7 @@ export default function CandidateProfile() {
               </div>
             </>
           ) : (
-            <div style={{ padding: 48, textAlign: "center", background: "var(--bg)", borderRadius: 14, border: "2px dashed var(--border)" }}>
+            <div style={{ padding: 48, textAlign: "center", background: "var(--bg)", borderRadius: 8, border: "2px dashed var(--border)" }}>
               <FileText size={40} style={{ color: "var(--border)", marginBottom: 12 }} />
               <div style={{ fontWeight: 700, color: "var(--text-muted)" }}>No resume uploaded</div>
               <div style={{ fontSize: 13, marginTop: 4, color: "var(--text-muted)" }}>Candidate hasn't uploaded a resume yet.</div>
@@ -587,7 +587,7 @@ export default function CandidateProfile() {
           <div onClick={e => e.stopPropagation()} style={{ display: "flex", flexDirection: "column", width: "100%", maxWidth: 940, height: "100vh", background: "var(--surface)", overflow: "hidden", margin: "0 auto" }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 24px", borderBottom: "1px solid var(--border)", flexShrink: 0 }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <div style={{ width: 36, height: 36, borderRadius: 10, background: "rgba(79,70,229,.1)", display: "flex", alignItems: "center", justifyContent: "center" }}><FileText size={18} color="var(--primary)" /></div>
+                <div style={{ width: 36, height: 36, borderRadius: 8, background: "rgba(79,70,229,.1)", display: "flex", alignItems: "center", justifyContent: "center" }}><FileText size={18} color="var(--primary)" /></div>
                 <div>
                   <div style={{ fontWeight: 800, fontSize: 14, color: "var(--text)" }}>{candidate.resumeFileName || "Resume.pdf"}</div>
                   <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{candidate.fullName}</div>
@@ -614,7 +614,7 @@ export default function CandidateProfile() {
               </div>
               <button type="button" className="cp-btn cp-btn-ghost" style={{ padding: "7px 14px", flexShrink: 0 }} onClick={() => setShowAIModal(false)}><XCircle size={14} /> Close</button>
             </div>
-            <div style={{ background: "var(--bg)", borderRadius: 14, padding: 16, marginBottom: 16, border: "1px solid var(--border)" }}>
+            <div style={{ background: "var(--bg)", borderRadius: 8, padding: 16, marginBottom: 16, border: "1px solid var(--border)" }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: "var(--text)", marginBottom: 12 }}>AI Question Generator Settings</div>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "flex-end" }}>
                 <div style={{ flex: 1, minWidth: 120 }}>
@@ -643,7 +643,7 @@ export default function CandidateProfile() {
             <div style={{ fontSize: 13, fontWeight: 700, color: "var(--text)", marginBottom: 10 }}>Review Questions ({interviewQuestions.length})</div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8, maxHeight: 280, overflowY: "auto", paddingRight: 4 }}>
               {interviewQuestions.map((q, idx) => (
-                <div key={idx} style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 10, padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
+                <div key={idx} style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 8, padding: "10px 14px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10 }}>
                   <span style={{ fontSize: 13, color: "var(--text)" }}><strong>{idx + 1}.</strong> {q.question}</span>
                   <button type="button" className="cp-btn cp-btn-danger" style={{ padding: "4px 8px", flexShrink: 0 }} onClick={() => handleDeleteQuestion(idx)}><Trash2 size={13} /></button>
                 </div>
@@ -701,7 +701,7 @@ export default function CandidateProfile() {
           <div className="cp-modal" onClick={e => e.stopPropagation()} style={{ maxWidth: 540 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20 }}>
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
-                <div style={{ width: 40, height: 40, borderRadius: 12, background: "rgba(79,70,229,.12)", display: "flex", alignItems: "center", justifyContent: "center" }}><Send size={18} color="var(--primary)" /></div>
+                <div style={{ width: 40, height: 40, borderRadius: 8, background: "rgba(79,70,229,.12)", display: "flex", alignItems: "center", justifyContent: "center" }}><Send size={18} color="var(--primary)" /></div>
                 <div>
                   <h3 style={{ margin: 0, fontSize: 17, fontWeight: 800, color: "var(--text)" }}>Send Technical Assessment</h3>
                   <span style={{ fontSize: 12, color: "var(--text-muted)" }}>Confirm assessment invitation for candidate</span>
@@ -709,7 +709,7 @@ export default function CandidateProfile() {
               </div>
               <button type="button" className="cp-btn cp-btn-ghost" style={{ padding: "5px 10px" }} onClick={() => setShowAssessmentModal(false)}><XCircle size={16} /></button>
             </div>
-            <div style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 14, padding: 16, marginBottom: 16 }}>
+            <div style={{ background: "var(--bg)", border: "1px solid var(--border)", borderRadius: 8, padding: 16, marginBottom: 16 }}>
               <div style={{ fontSize: 13, marginBottom: 12, color: "var(--text)" }}>Candidate: <strong>{candidate.fullName}</strong> <span style={{ color: "var(--text-muted)" }}>({candidate.email})</span></div>
               <label className="cp-label">Assessment Template</label>
               <select value={selectedAssessmentJobId} onChange={e => setSelectedAssessmentJobId(e.target.value)} className="cp-input cp-select">
@@ -717,7 +717,7 @@ export default function CandidateProfile() {
               </select>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, marginBottom: 16 }}>
-              <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: 14, textAlign: "center" }}>
+              <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 8, padding: 14, textAlign: "center" }}>
                 <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".05em", color: "var(--text-muted)", marginBottom: 4 }}>Format</div>
                 <div style={{ fontSize: 13, fontWeight: 800, color: "var(--primary)" }}>
                   {selectedJobObj?.assessmentConfig?.includeCoding === false || selectedJobObj?.assessmentConfig?.codingCount === 0
@@ -725,12 +725,12 @@ export default function CandidateProfile() {
                     : `${selectedJobObj?.assessmentConfig?.mcqCount || 20} MCQ + ${selectedJobObj?.assessmentConfig?.codingCount || 2} Coding`}
                 </div>
               </div>
-              <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 12, padding: 14, textAlign: "center" }}>
+              <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 8, padding: 14, textAlign: "center" }}>
                 <div style={{ fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: ".05em", color: "var(--text-muted)", marginBottom: 4 }}>Time Limit</div>
                 <div style={{ fontSize: 13, fontWeight: 800, color: "#10b981" }}>{selectedJobObj?.assessmentConfig?.durationMinutes || 60} Minutes</div>
               </div>
             </div>
-            <div style={{ background: "rgba(59,130,246,.08)", border: "1px solid rgba(59,130,246,.2)", borderRadius: 12, padding: 12, fontSize: 13, color: "var(--text)", lineHeight: 1.5, marginBottom: 20 }}>
+            <div style={{ background: "rgba(59,130,246,.08)", border: "1px solid rgba(59,130,246,.2)", borderRadius: 8, padding: 12, fontSize: 13, color: "var(--text)", lineHeight: 1.5, marginBottom: 20 }}>
               💡 An invitation with test instructions will be automatically delivered to the candidate's dashboard and email.
             </div>
             <div style={{ display: "flex", justifyContent: "flex-end", gap: 10 }}>

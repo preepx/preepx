@@ -42,7 +42,7 @@
   align-items: center;
   gap: 10px 14px;
   padding: 16px 20px;
-  border-radius: 16px;
+  border-radius: 8px;
   background: #0b1121;
   border: 1px solid #1e293b;
   margin-bottom: 32px;
@@ -72,7 +72,7 @@
   gap: 18px;
   align-items: center;
   padding: 18px 20px;
-  border-radius: 16px;
+  border-radius: 8px;
   background: var(--surface);
   border: 1px solid var(--border);
   margin-bottom: 22px;
@@ -140,7 +140,7 @@
 .rp-card {
   position: relative;
   padding: 32px 24px;
-  border-radius: 20px;
+  border-radius: 8px;
   background: #0b1121;
   border: 1px solid #1e293b;
   display: flex;
@@ -216,7 +216,7 @@
 
 .rp-btn {
   width: 100%;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 14px 20px;
   font-weight: 600;
   font-size: 15px;
@@ -288,7 +288,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 14px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--surface);
   font-size: 13px;
@@ -299,7 +299,7 @@
 .rp-history {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 16px 18px 8px;
 }
 
@@ -338,7 +338,7 @@
   width: min(480px, 100%);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 8px;
   padding: 22px;
 }
 
@@ -347,7 +347,7 @@
 .rp-modal-card textarea {
   width: 100%;
   margin-top: 12px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--bg);
   color: var(--text);

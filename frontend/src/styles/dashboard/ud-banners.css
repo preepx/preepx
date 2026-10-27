@@ -3,7 +3,7 @@
   margin: 0 0 24px 0;
   position: relative;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 8px;
   width: 100%;
   aspect-ratio: 2168 / 740;
   background: #060913;
@@ -93,7 +93,7 @@
   .ud-banner-slider-wrap {
     height: auto;
     aspect-ratio: 1730 / 910;
-    border-radius: 14px;
+    border-radius: 8px;
     margin: 0 0 18px 0;
   }
 
@@ -121,7 +121,7 @@
 /* ── PROMOTIONAL BANNER ── */
 .ud-banner {
   position: relative;
-  border-radius: 24px;
+  border-radius: 8px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -162,7 +162,7 @@
 .ud-banner-icon {
   width: 64px;
   height: 64px;
-  border-radius: 18px;
+  border-radius: 8px;
   background: rgba(251, 191, 36, 0.15);
   border: 1px solid rgba(251, 191, 36, 0.3);
   display: flex;
@@ -197,7 +197,7 @@
   background: white;
   color: #1f3d32;
   border: none;
-  border-radius: 14px;
+  border-radius: 8px;
   font-size: 15px;
   font-weight: 700;
   font-family: inherit;
@@ -253,7 +253,7 @@
 .ud-banner-light .ud-banner-btn {
   background: linear-gradient(90deg, #3D5EFF, #6017C7);
   color: #fff;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 22px;
   font-weight: 600;
 }
@@ -269,7 +269,7 @@
   align-items: stretch;
   gap: 0;
   margin: -15px 0 24px 0;
-  border-radius: 20px;
+  border-radius: 8px;
   overflow: hidden;
   background: transparent;
   height: 230px;
@@ -359,7 +359,7 @@
   .promo-banner-wrap {
     flex-direction: column;
     height: auto;
-    border-radius: 16px;
+    border-radius: 8px;
     margin: -15px 0 18px 0;
   }
 

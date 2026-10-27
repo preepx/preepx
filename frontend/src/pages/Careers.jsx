@@ -31,7 +31,7 @@ export default function Careers() {
               fontWeight: "700",
               fontSize: "15px",
               padding: "13px 36px",
-              borderRadius: "10px",
+              borderRadius: '8px',
               textDecoration: "none",
               boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
               transition: "opacity 0.2s",
@@ -131,7 +131,7 @@ export default function Careers() {
               Before exploring opportunities, make sure your PreepX profile is complete.
             </p>
 
-            <div style={{ background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: "14px", padding: "28px 32px", marginBottom: "28px" }}>
+            <div style={{ background: "var(--hpw-card-bg)", border: "1px solid var(--hpw-border)", borderRadius: '8px', padding: "28px 32px", marginBottom: "28px" }}>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "14px" }}>
                 {[
                   "Upload your latest resume",
@@ -172,7 +172,7 @@ export default function Careers() {
                 color: "#fff",
                 fontWeight: "700",
                 fontSize: "14px",
-                borderRadius: "10px",
+                borderRadius: '8px',
                 textDecoration: "none",
               }}
             >
@@ -185,7 +185,7 @@ export default function Careers() {
             <div style={{
               background: "var(--hpw-card-bg)",
               border: "1px solid var(--hpw-border)",
-              borderRadius: "16px",
+              borderRadius: '8px',
               padding: "48px 40px",
               textAlign: "center",
             }}>
@@ -204,7 +204,7 @@ export default function Careers() {
                   color: "#fff",
                   fontWeight: "700",
                   fontSize: "16px",
-                  borderRadius: "10px",
+                  borderRadius: '8px',
                   textDecoration: "none",
                   boxShadow: "0 4px 20px rgba(99,102,241,0.3)",
                 }}
@@ -234,7 +234,7 @@ export default function Careers() {
                 color: "#fff",
                 fontWeight: "700",
                 fontSize: "15px",
-                borderRadius: "10px",
+                borderRadius: '8px',
                 textDecoration: "none",
                 boxShadow: "0 4px 20px rgba(99,102,241,0.25)",
               }}

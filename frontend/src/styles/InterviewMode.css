@@ -39,7 +39,7 @@ html {
 .global-face-warn-content {
   background: #1e293b;
   padding: 40px;
-  border-radius: 16px;
+  border-radius: 8px;
   max-width: 480px;
   text-align: center;
   color: white;
@@ -164,7 +164,7 @@ html {
   max-width: 1200px;
   height: calc(100vh - 180px);
   background-color: var(--im-container-bg);
-  border-radius: 16px;
+  border-radius: 8px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -226,7 +226,7 @@ html {
 .im-interviewer-name {
   background: var(--im-purple);
   padding: 4px 12px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
 }
@@ -279,7 +279,7 @@ html {
   width: 280px;
   height: 180px;
   background: #000;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
@@ -302,7 +302,7 @@ html {
 .im-pip-you {
   background: var(--im-blue);
   padding: 4px 10px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 0.8rem;
   font-weight: 600;
 }
@@ -380,7 +380,7 @@ html {
   color: white;
   border: none;
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 8px;
   font-size: 0.95rem;
   font-weight: 600;
   display: flex;
@@ -424,7 +424,7 @@ html {
 .im-end-call-btn {
   width: 64px;
   height: 48px;
-  border-radius: 24px;
+  border-radius: 8px;
   background: var(--im-red);
   border: none;
   color: white;
@@ -454,7 +454,7 @@ html {
 .custom-modal-content {
   background: #1e293b;
   padding: 32px;
-  border-radius: 12px;
+  border-radius: 8px;
   text-align: center;
   max-width: 400px;
   color: white;

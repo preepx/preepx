@@ -45,7 +45,7 @@ export default function FAQ() {
             marginTop: "28px",
             background: "var(--hpw-card-bg)",
             border: "1px solid var(--hpw-border)",
-            borderRadius: "12px",
+            borderRadius: '8px',
             padding: "5px",
             width: "fit-content",
           }}>
@@ -92,7 +92,7 @@ export default function FAQ() {
                     border: isOpen
                       ? "1px solid #0284c7"
                       : "1px solid var(--hpw-border)",
-                    borderRadius: "12px",
+                    borderRadius: '8px',
                     padding: "18px 22px",
                     cursor: "pointer",
                     transition: "all 0.2s ease",
@@ -146,7 +146,7 @@ export default function FAQ() {
             padding: "36px 32px",
             background: "var(--hpw-card-bg)",
             border: "1px solid var(--hpw-border)",
-            borderRadius: "16px",
+            borderRadius: '8px',
             textAlign: "center",
           }}>
             <h3 style={{ marginBottom: "10px", fontSize: "18px" }}>Still have a question?</h3>

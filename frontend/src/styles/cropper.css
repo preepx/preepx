@@ -18,7 +18,7 @@
 .cropper-modal {
   background: var(--surface, #1e293b);
   border: 1px solid var(--border, rgba(255, 255, 255, 0.12));
-  border-radius: 16px;
+  border-radius: 8px;
   width: 100%;
   max-width: 460px;
   max-height: 92vh;
@@ -161,7 +161,7 @@
 
   .cropper-modal {
     max-height: 94vh;
-    border-radius: 14px;
+    border-radius: 8px;
   }
 
   .cropper-header {

@@ -176,7 +176,7 @@
   padding: 12px 22px;
   background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 700;
   font-family: inherit;
@@ -226,7 +226,7 @@
   padding: 12px 22px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(192, 132, 252, 0.35);
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   font-family: inherit;
@@ -265,7 +265,7 @@
   align-items: center;
   gap: 6px;
   padding: 6px 11px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.028);
   border: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 11px;
@@ -347,7 +347,7 @@
   width: 100%;
   background: #080c16;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  border-radius: 8px;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(79, 70, 229, 0.15);
   overflow: visible;
   transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -401,7 +401,7 @@
   display: flex;
   min-height: 380px;
   background: #080c16;
-  border-radius: 20px;
+  border-radius: 8px;
   overflow: hidden;
   position: relative;
   z-index: 2;
@@ -484,7 +484,7 @@
 .mockup-card {
   background: #0d1322;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 12px 14px;
   text-align: left;
   transition: all 0.3s ease;
@@ -688,7 +688,7 @@
   margin-top: 10px;
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(147, 51, 234, 0.14) 100%);
   border: 1px solid rgba(56, 189, 248, 0.28);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 8px 10px;
   display: flex;
   align-items: center;
@@ -717,7 +717,7 @@
   width: 26px;
   height: 26px;
   min-width: 26px;
-  border-radius: 7px;
+  border-radius: 8px;
   background: rgba(56, 189, 248, 0.16);
   border: 1px solid rgba(56, 189, 248, 0.35);
   color: #38bdf8;
@@ -758,7 +758,7 @@
   align-items: center;
   gap: 4px;
   padding: 5px 9px;
-  border-radius: 7px;
+  border-radius: 8px;
   background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
@@ -784,7 +784,7 @@
   width: 220px;
   background: #0c1222;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 14px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.15);
   z-index: 10;
@@ -1014,7 +1014,7 @@
     transform: none !important;
     width: 100% !important;
     max-width: 100% !important;
-    border-radius: 24px;
+    border-radius: 8px;
     padding: 18px 14px;
     background: linear-gradient(170deg, #0d1222 0%, #050811 100%);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1050,7 +1050,7 @@
 
   .mockup-card {
     padding: 12px 14px !important;
-    border-radius: 14px !important;
+    border-radius: 8px !important;
     margin-bottom: 0 !important;
     background: rgba(255, 255, 255, 0.035) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
@@ -1073,7 +1073,7 @@
     max-width: 100% !important;
     margin-top: 10px !important;
     padding: 14px !important;
-    border-radius: 14px !important;
+    border-radius: 8px !important;
     background: rgba(255, 255, 255, 0.035) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
     box-shadow: none !important;
@@ -1227,6 +1227,6 @@
 
   .new-hero-mockup {
     padding: 14px 12px;
-    border-radius: 20px;
+    border-radius: 8px;
   }
 }

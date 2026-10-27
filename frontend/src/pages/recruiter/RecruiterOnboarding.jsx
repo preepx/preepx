@@ -93,7 +93,7 @@ export default function RecruiterOnboarding() {
         <div style={{ display: "flex", gap: 8, marginBottom: 32, flexWrap: "wrap" }}>
           {STEPS.map((s, i) => (
             <div key={s.id} style={{
-              flex: 1, minWidth: 140, padding: 12, borderRadius: 12,
+              flex: 1, minWidth: 140, padding: 12, borderRadius: 8,
               background: i <= step ? "color-mix(in srgb, var(--primary) 12%, transparent)" : "var(--surface)",
               border: `1px solid ${i <= step ? "var(--primary-light)" : "var(--border)"}`,
               textAlign: "center", fontSize: 13, fontWeight: 600,

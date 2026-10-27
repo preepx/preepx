@@ -81,7 +81,7 @@
 .ud-apply-banner-text h2 .ud-title-icon {
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .ud-apply-banner-text h2 .ud-title-icon img {
@@ -153,7 +153,7 @@
 .ud-practice-icon {
   width: 56px;
   height: 56px;
-  border-radius: 16px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -279,7 +279,7 @@
 .ud-explore-icon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;

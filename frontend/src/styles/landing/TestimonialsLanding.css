@@ -22,7 +22,7 @@
 .trio-card {
   background: linear-gradient(165deg, rgba(13, 19, 36, 0.94) 0%, rgba(7, 11, 24, 0.98) 100%);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 22px;
+  border-radius: 8px;
   padding: 24px 22px;
   display: flex;
   flex-direction: column;
@@ -226,7 +226,7 @@
 ══════════════════════════════════════════════ */
 .trio-jobs-box {
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
+  border-radius: 8px;
   background: rgba(0, 0, 0, 0.22);
   padding: 8px 14px;
   flex: 1;
@@ -300,7 +300,7 @@
   justify-content: center;
   gap: 8px;
   padding: 10px 16px;
-  border-radius: 12px;
+  border-radius: 8px;
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #ffffff;
@@ -335,7 +335,7 @@
 
   .trio-card {
     padding: 18px 16px;
-    border-radius: 18px;
+    border-radius: 8px;
   }
 
   .trio-card-title {

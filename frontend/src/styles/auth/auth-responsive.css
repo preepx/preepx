@@ -71,13 +71,13 @@
     width: 100%;
     margin-bottom: 16px;
     padding: 4px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .auth-role-btn {
     padding: 8px 12px;
     font-size: 13px;
-    border-radius: 9px;
+    border-radius: 8px;
   }
 
   /* Mode tabs */
@@ -115,7 +115,7 @@
     height: 76px;
     background: #222222;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -136,7 +136,7 @@
   .auth-input {
     height: 42px;
     font-size: 13.5px;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 0 12px 0 38px;
   }
 
@@ -155,14 +155,14 @@
   .auth-submit-btn {
     height: 42px;
     font-size: 13.5px;
-    border-radius: 10px;
+    border-radius: 8px;
     margin-top: 4px;
   }
 
   .auth-google-btn-full {
     height: 42px;
     font-size: 13px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .auth-divider-line {

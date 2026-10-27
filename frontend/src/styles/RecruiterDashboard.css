@@ -38,7 +38,7 @@
 /* Welcome Banner — premium hero (matches candidate dashboard) */
 .rx-hero {
   position: relative;
-  border-radius: 24px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid rgba(47, 111, 91, 0.25);
 }
@@ -220,7 +220,7 @@
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 16px 20px;
   min-width: 240px;
 }
@@ -325,7 +325,7 @@
   gap: 14px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 18px 16px;
   transition: all 0.25s ease;
   position: relative;
@@ -357,7 +357,7 @@
 .rx-stat-icon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -410,7 +410,7 @@
   padding: 16px 12px 14px;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 8px;
   position: relative;
   transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
   cursor: default;
@@ -509,7 +509,7 @@
   padding: 18px 20px;
   background: var(--surface);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  border-radius: 8px;
   text-decoration: none;
   color: inherit;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -553,7 +553,7 @@
 .rx-quick-action-icon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: 8px;
   background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent) 0%, color-mix(in srgb, var(--primary) 5%, transparent) 100%);
   border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent);
   color: var(--primary);
@@ -698,7 +698,7 @@
   padding: 24px;
   margin: 16px 0;
   background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 80%, transparent) 0%, color-mix(in srgb, var(--bg) 80%, transparent) 100%);
-  border-radius: 16px;
+  border-radius: 8px;
   border: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
   box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.05);
   font-size: 11px;
@@ -770,7 +770,7 @@
 
 .rx-ai-node {
   padding: 8px 20px;
-  border-radius: 12px;
+  border-radius: 8px;
   background: linear-gradient(135deg, color-mix(in srgb, var(--primary) 15%, transparent), color-mix(in srgb, var(--primary) 5%, transparent));
   border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
   color: var(--primary);
@@ -1081,7 +1081,7 @@
   width: 56px;
   height: 56px;
   margin: 0 auto 14px;
-  border-radius: 14px;
+  border-radius: 8px;
   background: color-mix(in srgb, var(--primary) 10%, transparent);
   color: var(--primary);
   display: flex;
@@ -1171,7 +1171,7 @@
 .rx-skeleton-icon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: 8px;
   flex-shrink: 0;
 }
 
@@ -1221,7 +1221,7 @@
 
   /* ── Hero / Welcome Banner ── */
   .rx-hero {
-    border-radius: 16px;
+    border-radius: 8px;
   }
 
   .rx-hero-inner {
@@ -1276,13 +1276,13 @@
   .rx-stat-card {
     padding: 14px 12px;
     gap: 10px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .rx-stat-icon {
     width: 38px;
     height: 38px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .rx-stat-val {
@@ -1543,7 +1543,7 @@
   /* ── Cards general ── */
   .rx-card {
     padding: 16px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   /* ── Empty state ── */
@@ -1563,7 +1563,7 @@
   .rx-empty-state-icon {
     width: 48px;
     height: 48px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   /* ── Skeleton ── */
@@ -1635,7 +1635,7 @@
   .rx-hiring-panel {
     padding: 12px;
     gap: 12px;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .rx-hiring-ring {
@@ -1695,12 +1695,12 @@
   .rx-quick-action-icon {
     width: 36px;
     height: 36px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .rx-card {
     padding: 14px 12px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .rx-section-head h2 {
@@ -1726,7 +1726,7 @@
   .rx-ai-network {
     padding: 12px;
     margin: 8px 0;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .rx-ai-branches span {

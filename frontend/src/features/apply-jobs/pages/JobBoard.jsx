@@ -600,7 +600,7 @@ export default function JobBoard() {
       {/* Details Modal (Candidate Side) */}
       {selectedJob && createPortal(
         <div className="modal-overlay" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={(e) => { if (e.target === e.currentTarget) setSelectedJob(null); }}>
-          <div className="modal-content bj-modal" style={{ borderRadius: '12px', width: '100%', maxWidth: '800px', padding: '2rem', maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
+          <div className="modal-content bj-modal" style={{ borderRadius: '8px', width: '100%', maxWidth: '800px', padding: '2rem', maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
             <button
               onClick={() => setSelectedJob(null)}
               className="bj-modal-close"

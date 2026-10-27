@@ -171,7 +171,7 @@
 .feat-highlight-banner {
   background: var(--hpw-step-badge-bg);
   border: 1px solid var(--hpw-icon-badge-border);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 18px 24px;
   display: flex;
   align-items: flex-start;
@@ -188,7 +188,7 @@
 /* ── CTA FOOTER BANNER ── */
 .feat-cta-banner {
   background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 100%);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 40px 32px;
   text-align: center;
   color: #ffffff;

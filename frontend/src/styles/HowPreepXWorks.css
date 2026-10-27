@@ -138,7 +138,7 @@
   margin: -32px auto 60px;
   background: var(--hpw-card-bg);
   border: 1px solid var(--hpw-border);
-  border-radius: 16px;
+  border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   padding: 48px;
   width: calc(100% - 48px);
@@ -181,7 +181,7 @@
 .hpw-heading-icon-badge {
   width: 42px;
   height: 42px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: var(--hpw-icon-badge-bg);
   border: 1px solid var(--hpw-icon-badge-border);
   display: inline-flex;
@@ -239,7 +239,7 @@
   padding: 16px 20px;
   background: var(--hpw-item-bg);
   border: 1px solid var(--hpw-border);
-  border-radius: 10px;
+  border-radius: 8px;
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
@@ -290,7 +290,7 @@
 .hpw-item-box {
   background: var(--hpw-item-bg);
   border: 1px solid var(--hpw-border);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 20px;
   transition: border-color 0.15s ease;
 }

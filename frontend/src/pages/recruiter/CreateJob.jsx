@@ -189,7 +189,7 @@ export default function CreateJob() {
       <div className="rx-premium-form">
 
         {/* AI Auto-Fill Section */}
-        <div style={{ background: "var(--primary-light)", border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)", borderRadius: 12, padding: 20, marginBottom: 24 }}>
+        <div style={{ background: "var(--primary-light)", border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)", borderRadius: 8, padding: 20, marginBottom: 24 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
             <Sparkles size={20} color="var(--primary)" />
             <h3 style={{ margin: 0, color: "var(--primary)" }}>AI Job Auto-Fill</h3>

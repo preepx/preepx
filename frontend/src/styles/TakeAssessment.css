@@ -78,7 +78,7 @@
   padding: 14px 16px;
   background: var(--bg-secondary);
   border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   text-align: left;
   color: inherit;
@@ -110,4 +110,4 @@
 .ta-scores { display: flex; justify-content: center; gap: 32px; margin: 24px 0; }
 .ta-scores span { display: block; font-size: 32px; font-weight: 700; color: #2f6f5b; }
 .ta-scores p { font-size: 13px; color: var(--text-muted); margin: 4px 0 0; }
-.ta-feedback { text-align: left; background: var(--bg-secondary); padding: 16px; border-radius: 10px; line-height: 1.6; font-size: 14px; margin: 20px 0; }
+.ta-feedback { text-align: left; background: var(--bg-secondary); padding: 16px; border-radius: 8px; line-height: 1.6; font-size: 14px; margin: 20px 0; }

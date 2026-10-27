@@ -440,11 +440,11 @@ export default function RecruiterAssessments() {
         /* ASSESSMENT BUILDER TAB */
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           {/* Main Assessment Configuration Card */}
-          <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 16, padding: "32px", boxShadow: "0 4px 24px rgba(0,0,0,0.03)", position: "relative", overflow: "hidden" }}>
+          <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 8, padding: "32px", boxShadow: "0 4px 24px rgba(0,0,0,0.03)", position: "relative", overflow: "hidden" }}>
             
             {/* Header of Card */}
             <div style={{ display: "flex", alignItems: "flex-start", gap: 16, marginBottom: 32, maxWidth: "60%" }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: "#f3f0ff", color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <div style={{ width: 48, height: 48, borderRadius: 8, background: "#f3f0ff", color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <Settings size={24} />
               </div>
               <div>
@@ -565,9 +565,9 @@ export default function RecruiterAssessments() {
           </div>
 
           {/* Question Sections Layout */}
-          <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 16, padding: "32px", boxShadow: "0 4px 24px rgba(0,0,0,0.03)" }}>
+          <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 8, padding: "32px", boxShadow: "0 4px 24px rgba(0,0,0,0.03)" }}>
             <div style={{ display: "flex", alignItems: "flex-start", gap: 16, marginBottom: 24 }}>
-              <div style={{ width: 48, height: 48, borderRadius: 12, background: "#f3f0ff", color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <div style={{ width: 48, height: 48, borderRadius: 8, background: "#f3f0ff", color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <List size={24} />
               </div>
               <div>
@@ -591,9 +591,9 @@ export default function RecruiterAssessments() {
               </div>
 
               {/* MCQ Section Row */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", border: "1px solid var(--border)", borderRadius: 12, background: "#fff", opacity: assessmentType !== "coding_only" ? 1 : 0.6 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", border: "1px solid var(--border)", borderRadius: 8, background: "#fff", opacity: assessmentType !== "coding_only" ? 1 : 0.6 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                  <div style={{ width: 48, height: 48, borderRadius: 10, background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 8, background: "#fff7ed", color: "#f97316", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <List size={24} />
                   </div>
                   <div>
@@ -659,9 +659,9 @@ export default function RecruiterAssessments() {
               </div>
 
               {/* Coding Section Row */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", border: "1px solid var(--border)", borderRadius: 12, background: "#fff", opacity: assessmentType !== "mcq_only" ? 1 : 0.6 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", border: "1px solid var(--border)", borderRadius: 8, background: "#fff", opacity: assessmentType !== "mcq_only" ? 1 : 0.6 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                  <div style={{ width: 48, height: 48, borderRadius: 10, background: "#f0fdf4", color: "#16a34a", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 8, background: "#f0fdf4", color: "#16a34a", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                     <Code size={24} />
                   </div>
                   <div>
@@ -752,7 +752,7 @@ export default function RecruiterAssessments() {
 
             <div style={{ flex: 1, overflowY: "auto", paddingRight: 8 }}>
               {mcqQuestions.length === 0 ? (
-                <div style={{ padding: 40, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
+                <div style={{ padding: 40, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 8, color: "var(--text-muted)" }}>
                   No MCQ questions added yet.
                 </div>
               ) : (
@@ -763,7 +763,7 @@ export default function RecruiterAssessments() {
                       style={{
                         background: "var(--background)",
                         border: "1px solid var(--border)",
-                        borderRadius: 12,
+                        borderRadius: 8,
                         padding: 16,
                         display: "flex",
                         justifyContent: "space-between",
@@ -876,7 +876,7 @@ export default function RecruiterAssessments() {
 
             <div style={{ flex: 1, overflowY: "auto", paddingRight: 8 }}>
               {codingQuestions.length === 0 ? (
-                <div style={{ padding: 40, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 12, color: "var(--text-muted)" }}>
+                <div style={{ padding: 40, textAlign: "center", border: "1px dashed var(--border)", borderRadius: 8, color: "var(--text-muted)" }}>
                   No coding challenges added yet.
                 </div>
               ) : (
@@ -887,7 +887,7 @@ export default function RecruiterAssessments() {
                       style={{
                         background: "var(--background)",
                         border: "1px solid var(--border)",
-                        borderRadius: 12,
+                        borderRadius: 8,
                         padding: 16,
                         display: "flex",
                         justifyContent: "space-between",
@@ -1075,7 +1075,7 @@ export default function RecruiterAssessments() {
             </div>
 
             <div style={{ marginTop: 16 }}>
-              <div style={{ display: "flex", gap: 16, marginBottom: 16, background: "var(--background)", padding: 12, borderRadius: 10 }}>
+              <div style={{ display: "flex", gap: 16, marginBottom: 16, background: "var(--background)", padding: 12, borderRadius: 8 }}>
                 <div>⏱️ <strong>Duration:</strong> {(assessmentType !== "coding_only" ? Number(mcqDurationMinutes) : 0) + (assessmentType !== "mcq_only" ? Number(codingDurationMinutes) : 0)} mins</div>
                 <div>🎯 <strong>Passing Score:</strong> {passingScore}%</div>
                 <div>📝 <strong>Questions:</strong> {assessmentType !== "coding_only" ? mcqQuestions.length : 0} MCQ {assessmentType !== "mcq_only" ? `+ ${codingQuestions.length} Coding` : "(Objective Only)"}</div>
@@ -1084,7 +1084,7 @@ export default function RecruiterAssessments() {
               <h4>Section 1: Multiple Choice Questions ({mcqQuestions.length})</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 24 }}>
                 {mcqQuestions.slice(0, 5).map((q, idx) => (
-                  <div key={idx} style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: 12 }}>
+                  <div key={idx} style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 8, padding: 12 }}>
                     <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 6 }}>{idx + 1}. {q.question}</div>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}>
                       {(q.options || []).map((opt, i) => (
@@ -1101,7 +1101,7 @@ export default function RecruiterAssessments() {
                   <h4>Section 2: Coding Challenges ({codingQuestions.length})</h4>
                   <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                     {codingQuestions.map((q, idx) => (
-                      <div key={idx} style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 10, padding: 12 }}>
+                      <div key={idx} style={{ background: "var(--surface)", border: "1px solid var(--border)", borderRadius: 8, padding: 12 }}>
                         <div style={{ fontWeight: 700, fontSize: 14, color: "var(--primary)" }}>{q.title} ({q.difficulty})</div>
                         <p style={{ fontSize: 12, color: "var(--text-muted)", margin: "4px 0 0 0" }}>{q.description}</p>
                       </div>

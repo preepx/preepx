@@ -178,8 +178,8 @@ function HowItWorksSection() {
                     </button>
                   </div>
 
-                  <div className="hiw-photo" style={{ borderRadius: '16px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <img src="/landing/interviewimage.png" alt="AI mock interview session" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '16px' }} />
+                  <div className="hiw-photo" style={{ borderRadius: '8px', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <img src="/landing/interviewimage.png" alt="AI mock interview session" style={{ width: '100%', height: '100%', objectFit: 'contain', borderRadius: '8px' }} />
                   </div>
                 </div>
 

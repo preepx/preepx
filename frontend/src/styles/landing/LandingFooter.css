@@ -35,7 +35,7 @@
 .footer-top-strip {
   background: linear-gradient(165deg, rgba(13, 19, 34, 0.6) 0%, rgba(6, 10, 20, 0.8) 100%);
   border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 24px 32px;
   display: flex;
   align-items: center;
@@ -76,7 +76,7 @@
   width: 100%;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 11px 16px;
   font-size: 13px;
   color: #ffffff;
@@ -98,7 +98,7 @@
   padding: 11px 20px;
   background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
+  border-radius: 8px;
   color: #ffffff;
   font-size: 13px;
   font-weight: 700;
@@ -197,7 +197,7 @@
 .footer-social-icon {
   width: 34px;
   height: 34px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
@@ -380,7 +380,7 @@
 
   .footer-top-strip {
     padding: 20px 16px;
-    border-radius: 16px;
+    border-radius: 8px;
     margin-bottom: 35px;
   }
 

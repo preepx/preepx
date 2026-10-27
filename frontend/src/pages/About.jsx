@@ -83,7 +83,7 @@ function OurStory() {
 
 function WhyWeBuiltPreepX() {
   return (
-    <section className="hpw-simple-section" style={{ background: 'var(--hpw-step-badge-bg)', padding: '48px 32px', borderRadius: '16px', border: '1px solid var(--hpw-border-light)', margin: '60px 0' }}>
+    <section className="hpw-simple-section" style={{ background: 'var(--hpw-step-badge-bg)', padding: '48px 32px', borderRadius: '8px', border: '1px solid var(--hpw-border-light)', margin: '60px 0' }}>
       <h2 className="hpw-section-heading" style={{ justifyContent: 'center', marginBottom: '32px' }}>
         Why We Built PreepX
       </h2>
@@ -203,19 +203,19 @@ function Ecosystem() {
         {/* Simplified Ecosystem representation without overly complex SVGs */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', width: '100%' }}>
           {['Candidates', 'Assessments', 'Interview Preparation', 'Coding Practice'].map(tag => (
-            <span key={tag} style={{ padding: '10px 16px', background: 'var(--hpw-item-bg)', border: '1px solid var(--hpw-border)', borderRadius: '30px', fontSize: '14px', color: 'var(--hpw-text-muted)' }}>{tag}</span>
+            <span key={tag} style={{ padding: '10px 16px', background: 'var(--hpw-item-bg)', border: '1px solid var(--hpw-border)', borderRadius: '8px', fontSize: '14px', color: 'var(--hpw-text-muted)' }}>{tag}</span>
           ))}
         </div>
         
         <div style={{ margin: '20px 0', width: '100%', display: 'flex', justifyContent: 'center' }}>
-          <div style={{ padding: '16px 32px', background: '#0284c7', color: '#fff', borderRadius: '12px', fontWeight: '800', fontSize: '20px', letterSpacing: '1px' }}>
+          <div style={{ padding: '16px 32px', background: '#0284c7', color: '#fff', borderRadius: '8px', fontWeight: '800', fontSize: '20px', letterSpacing: '1px' }}>
             PREEPX
           </div>
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'center', width: '100%' }}>
           {['Performance', 'Recruiters', 'Jobs', 'Hiring'].map(tag => (
-            <span key={tag} style={{ padding: '10px 16px', background: 'var(--hpw-item-bg)', border: '1px solid var(--hpw-border)', borderRadius: '30px', fontSize: '14px', color: 'var(--hpw-text-muted)' }}>{tag}</span>
+            <span key={tag} style={{ padding: '10px 16px', background: 'var(--hpw-item-bg)', border: '1px solid var(--hpw-border)', borderRadius: '8px', fontSize: '14px', color: 'var(--hpw-text-muted)' }}>{tag}</span>
           ))}
         </div>
       </div>
@@ -225,7 +225,7 @@ function Ecosystem() {
 
 function OurVision() {
   return (
-    <section className="hpw-simple-section" style={{ background: 'var(--hpw-step-badge-bg)', padding: '60px 40px', borderRadius: '14px', textAlign: 'center', border: '1px solid var(--hpw-border-light)', margin: '60px 0' }}>
+    <section className="hpw-simple-section" style={{ background: 'var(--hpw-step-badge-bg)', padding: '60px 40px', borderRadius: '8px', textAlign: 'center', border: '1px solid var(--hpw-border-light)', margin: '60px 0' }}>
       <p style={{ color: '#0284c7', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', fontSize: '14px', marginBottom: '20px' }}>Our Vision</p>
       <p style={{ fontSize: 'clamp(20px, 3vw, 24px)', lineHeight: '1.5', color: 'var(--hpw-text)', maxWidth: '800px', margin: '0 auto 24px', fontWeight: '700' }}>
         "We envision a career ecosystem where preparation, assessment and opportunity are connected."

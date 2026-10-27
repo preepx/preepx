@@ -256,7 +256,7 @@ export default function RecruiterAnalytics() {
             </h3>
 
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
-              <div style={{ background: "var(--bg)", padding: 16, borderRadius: 12, border: "1px solid var(--border)" }}>
+              <div style={{ background: "var(--bg)", padding: 16, borderRadius: 8, border: "1px solid var(--border)" }}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)" }}>MATCHED → ASSESSMENT</div>
                 <div style={{ fontSize: 26, fontWeight: 900, color: "#6366f1", marginTop: 4 }}>
                   {conversion.matchedToAssessment ?? 0}%
@@ -264,7 +264,7 @@ export default function RecruiterAnalytics() {
                 <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Candidates who received tests</div>
               </div>
 
-              <div style={{ background: "var(--bg)", padding: 16, borderRadius: 12, border: "1px solid var(--border)" }}>
+              <div style={{ background: "var(--bg)", padding: 16, borderRadius: 8, border: "1px solid var(--border)" }}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)" }}>ASSESSMENT → SHORTLIST</div>
                 <div style={{ fontSize: 26, fontWeight: 900, color: "#10b981", marginTop: 4 }}>
                   {conversion.assessmentToShortlist ?? 0}%
@@ -272,7 +272,7 @@ export default function RecruiterAnalytics() {
                 <div style={{ fontSize: 12, color: "var(--text-muted)", marginTop: 4 }}>Test takers passing to shortlist</div>
               </div>
 
-              <div style={{ background: "var(--bg)", padding: 16, borderRadius: 12, border: "1px solid var(--border)" }}>
+              <div style={{ background: "var(--bg)", padding: 16, borderRadius: 8, border: "1px solid var(--border)" }}>
                 <div style={{ fontSize: 12, fontWeight: 700, color: "var(--text-muted)" }}>AI INTERVIEW → OFFER</div>
                 <div style={{ fontSize: 26, fontWeight: 900, color: "#8b5cf6", marginTop: 4 }}>
                   {conversion.aiInterviewToOffer ?? 0}%

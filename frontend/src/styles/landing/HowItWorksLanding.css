@@ -201,7 +201,7 @@
   min-width: 202px;
   height: 34px;
   padding: 3px 10px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #3b82f6;
   color: #ffffff;
   font-size: 14px;
@@ -240,7 +240,7 @@
   height: 34px;
   padding: 5px 10px;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #2589ff;
   color: #ffffff;
   font-size: 15px;
@@ -356,13 +356,13 @@
 
   .hiw-main {
     padding: 0;
-    border-radius: 20px;
+    border-radius: 8px;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 10px 25px -5px rgba(0, 0, 0, 0.05) !important;
   }
 
   .hiw-main__face {
     padding: 24px 20px;
-    border-radius: 20px;
+    border-radius: 8px;
   }
 
   .hiw-board {

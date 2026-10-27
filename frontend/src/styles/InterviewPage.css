@@ -17,7 +17,7 @@
   align-items: center;
   background: var(--bg);
   /* or linear-gradient or image */
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
   padding: 0;
   /* Removed border */
@@ -151,7 +151,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 18px;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   font-family: inherit;
@@ -199,14 +199,14 @@
   gap: 14px;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 14px 16px;
 }
 
 .stat-icon {
   width: 44px;
   height: 44px;
-  border-radius: 12px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -259,7 +259,7 @@
 .panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -600,7 +600,7 @@
   .banner-header {
     display: flex !important;
     flex-direction: column;
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 12px 10px 14px;
   }
 
@@ -709,7 +709,7 @@
     align-items: center;
     justify-content: flex-start;
     min-width: 0;
-    border-radius: 12px;
+    border-radius: 8px;
   }
 
   .stat-card>div:last-child {
@@ -759,7 +759,7 @@
   }
 
   .panel {
-    border-radius: 14px;
+    border-radius: 8px;
   }
 
   .panel-header {
@@ -800,7 +800,7 @@
   .interview-table-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    border-radius: 10px;
+    border-radius: 8px;
   }
 
   .interviews-table {
@@ -998,7 +998,7 @@
 .modal-content {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 24px;
+  border-radius: 8px;
   width: 100%;
   max-width: 420px;
   box-shadow:
@@ -1068,7 +1068,7 @@
 
 .cert-card {
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 8px;
   padding: 20px;
   background: var(--surface);
   transition: box-shadow 0.2s;
@@ -1121,7 +1121,7 @@
 .cert-perf-preview {
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 12px;
   margin-bottom: 14px;
   display: flex;
@@ -1237,7 +1237,7 @@
   width: 100%;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 12px;
   display: flex;
   flex-direction: column;
@@ -1276,7 +1276,7 @@
   align-items: center;
   gap: 6px;
   padding: 9px 14px;
-  border-radius: 9px;
+  border-radius: 8px;
   font-size: 13px;
   font-weight: 600;
   font-family: inherit;
@@ -1351,7 +1351,7 @@
   gap: 10px;
   background: color-mix(in srgb, #f59e0b 8%, var(--bg));
   border: 1px solid color-mix(in srgb, #f59e0b 25%, var(--border));
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 12px;
 }
 
@@ -1414,7 +1414,7 @@
   gap: 12px;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 12px;
 }
 
@@ -1553,7 +1553,7 @@
   color: var(--primary);
   background: none;
   border: 1px solid var(--primary);
-  border-radius: 7px;
+  border-radius: 8px;
   padding: 5px 12px;
   cursor: pointer;
 }
@@ -1592,7 +1592,7 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 16px;
-    border-radius: 12px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background 0.15s;
     gap: 12px;
@@ -1785,7 +1785,7 @@
   align-items: center;
   gap: 12px;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   text-align: left;

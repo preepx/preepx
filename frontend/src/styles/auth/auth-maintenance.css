@@ -20,7 +20,7 @@
   position: relative;
   background: linear-gradient(145deg, #0d1224 0%, #0a0f1e 60%, #110820 100%);
   border: 1px solid rgba(139, 92, 246, 0.25);
-  border-radius: 20px;
+  border-radius: 8px;
   box-shadow:
     0 24px 70px rgba(0, 0, 0, 0.9),
     0 0 30px rgba(61, 122, 100, 0.12),
@@ -129,7 +129,7 @@
   flex: 1;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 10px 8px;
   display: flex;
   flex-direction: column;
@@ -160,7 +160,7 @@
   background: linear-gradient(135deg, #3d7a64 0%, #2a5c4a 100%);
   color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -180,7 +180,7 @@
 @media (max-width: 480px) {
   .maint-modal {
     padding: 24px 20px 20px;
-    border-radius: 16px;
+    border-radius: 8px;
   }
   .maint-title {
     font-size: 17px;

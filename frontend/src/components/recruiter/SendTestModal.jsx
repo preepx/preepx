@@ -62,7 +62,7 @@ export default function SendTestModal({
 
   return (
     <div className="rx-modal-overlay" onClick={onClose} style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div className="rx-modal" onClick={(e) => e.stopPropagation()} style={{ background: "var(--surface)", padding: 24, borderRadius: 12, width: "100%", maxWidth: 450, border: "1px solid var(--border)" }}>
+      <div className="rx-modal" onClick={(e) => e.stopPropagation()} style={{ background: "var(--surface)", padding: 24, borderRadius: 8, width: "100%", maxWidth: 450, border: "1px solid var(--border)" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <h3 style={{ margin: 0, color: "var(--text)" }}>Send Assessment Test</h3>
           <button onClick={onClose} style={{ background: "transparent", border: "none", color: "var(--text-muted)", cursor: "pointer" }}>

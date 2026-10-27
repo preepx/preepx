@@ -20,7 +20,7 @@
 .im2-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 8px;
   width: 100%;
   max-width: 900px;
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
@@ -61,7 +61,7 @@
   padding: 4px 10px;
   background: #cffafe;
   color: #000;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 700;
   border: none;
@@ -258,7 +258,7 @@
     align-items: flex-end;
   }
   .im2-card {
-    border-radius: 16px 16px 0 0;
+    border-radius: 8px 8px 0 0;
     max-height: 90vh;
   }
   .im2-header, .im2-body, .im2-roles, .im2-footer {

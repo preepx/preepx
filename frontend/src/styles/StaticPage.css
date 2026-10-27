@@ -30,7 +30,7 @@
   max-width: 1000px;
   margin: -30px auto 60px;
   background: var(--surface);
-  border-radius: 16px;
+  border-radius: 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   padding: 48px;
   width: calc(100% - 48px);

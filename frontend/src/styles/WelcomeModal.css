@@ -19,7 +19,7 @@
 
 .welcome-card {
   background: var(--surface);
-  border-radius: 24px;
+  border-radius: 8px;
   padding: 36px 32px 28px;
   max-width: 440px;
   width: 100%;
@@ -41,7 +41,7 @@
   right: 0;
   height: 3px;
   background: linear-gradient(90deg, #1f5c4a, #5a9e8a, #b45309);
-  border-radius: 24px 24px 0 0;
+  border-radius: 8px 8px 0 0;
 }
 
 @keyframes welcomePopIn {
@@ -55,7 +55,7 @@
   right: 16px;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 8px;
   width: 34px;
   height: 34px;
   display: flex;
@@ -78,7 +78,7 @@
   height: 64px;
   background: linear-gradient(135deg, #eef2ff, #e0e7ff);
   border: none;
-  border-radius: 18px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,7 +128,7 @@
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white;
   border: none;
-  border-radius: 14px;
+  border-radius: 8px;
   font-size: 15px;
   font-weight: 600;
   font-family: inherit;

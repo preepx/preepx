@@ -441,7 +441,7 @@ function AppLayout({ children }) {
           <div style={{
             background: 'var(--surface, #1e1e2d)',
             padding: '40px',
-            borderRadius: '16px',
+            borderRadius: '8px',
             textAlign: 'center',
             maxWidth: '400px',
             width: '90%',

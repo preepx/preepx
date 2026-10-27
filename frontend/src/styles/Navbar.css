@@ -37,7 +37,7 @@
   width: 36px;
   height: 36px;
   background: linear-gradient(135deg, var(--primary), var(--accent));
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -126,7 +126,7 @@
 
 .btn-ghost {
   padding: 8px 16px;
-  border-radius: 10px;
+  border-radius: 8px;
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -142,7 +142,7 @@
 
 .btn-primary-sm {
   padding: 8px 18px;
-  border-radius: 10px;
+  border-radius: 8px;
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
@@ -335,7 +335,7 @@
   .brand-icon {
     width: 32px;
     height: 32px;
-    border-radius: 9px;
+    border-radius: 8px;
   }
 
   .navbar-center {
@@ -360,7 +360,7 @@
   .btn-primary-sm {
     padding: 7px 14px;
     font-size: 13px;
-    border-radius: 9px;
+    border-radius: 8px;
   }
 
   .profile-name,

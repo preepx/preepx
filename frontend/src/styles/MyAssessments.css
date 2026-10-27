@@ -13,7 +13,7 @@
   padding: 18px 20px;
   background: var(--bg-secondary);
   border: 1px solid var(--border, rgba(255,255,255,0.08));
-  border-radius: 12px;
+  border-radius: 8px;
   flex-wrap: wrap;
 }
 .ma-card h3 { margin: 0 0 4px; font-size: 16px; }
