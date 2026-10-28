@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import notify from "@/utils/notify";
 import { useFaceDetection } from "@/hooks/useFaceDetection";
+import ObjectiveExamResult from './ObjectiveExamResult';
 import '@/styles/ObjectiveExam.css';
 
 let SOCKET_URL = "";
@@ -113,6 +114,7 @@ export default function ObjectiveExam() {
           totalQuestions: data.totalQuestions,
           questionsAndAnswers: data.questionsAndAnswers,
           resultId: data._id,
+          warnings: data.warnings ?? 0,
         });
         setScreen('RESULTS');
       })
@@ -627,127 +629,13 @@ export default function ObjectiveExam() {
 
   /* ── RESULTS ── */
   if (screen === 'RESULTS' && results) {
-    const pct = Math.round((results.score / results.totalQuestions) * 100);
-    const grade =
-      pct >= 90 ? { label: 'Excellent', color: '#059669', bg: '#ecfdf5', border: '#a7f3d0' } :
-        pct >= 70 ? { label: 'Good', color: '#4f46e5', bg: '#eef2ff', border: '#c7d2fe' } :
-          pct >= 50 ? { label: 'Average', color: '#d97706', bg: '#fffbeb', border: '#fde68a' } :
-            { label: 'Needs Work', color: '#dc2626', bg: '#fef2f2', border: '#fecaca' };
-
     return (
-      <div className="oe-page">
-
-        <main className="oe-results-main">
-          {pointsEarned > 0 && (
-            <div className="oe-warn-banner" style={{ background: '#ecfdf5', borderColor: '#a7f3d0', color: '#065f46', marginBottom: 20 }}>
-              <Trophy size={18} />
-              <span>You earned <strong>+{pointsEarned} points</strong> — reflected on your leaderboard rank.</span>
-            </div>
-          )}
-          <div className="oe-score-card">
-            <div className="oe-score-top">
-              <div
-                className="oe-score-topic"
-                style={{ background: grade.bg, border: `1px solid ${grade.border}`, color: grade.color }}
-              >
-                <Trophy size={13} /> {topic}
-              </div>
-              <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Final Score</p>
-              <div className="oe-score-big">
-                <span className="oe-score-num" style={{ color: grade.color }}>{results.score}</span>
-                <span className="oe-score-denom">/ {results.totalQuestions}</span>
-              </div>
-              <p className="oe-score-grade" style={{ color: grade.color }}>
-                {grade.label} · {pct}% accuracy
-              </p>
-            </div>
-
-            <div className="oe-score-stats">
-              {[
-                { val: results.score, label: 'Correct', cls: '#059669' },
-                { val: results.totalQuestions - results.score, label: 'Incorrect', cls: '#dc2626' },
-                { val: `${pct}%`, label: 'Accuracy', cls: '#4f46e5' },
-                { val: warnings, label: 'Warnings', cls: '#d97706' },
-              ].map(({ val, label, cls }) => (
-                <div key={label} className="oe-score-stat">
-                  <div className="oe-score-stat-val" style={{ color: cls }}>{val}</div>
-                  <div className="oe-score-stat-lbl">{label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="oe-review-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
-              <div className="oe-review-icon"><CheckCircle size={18} /></div>
-              <div>
-                <h2>Answer Review</h2>
-                <p>{results.questionsAndAnswers.length} questions with AI explanations</p>
-              </div>
-            </div>
-            <button
-              type="button"
-              className="oe-back-btn"
-              style={{ background: 'var(--surface)', border: '1px solid var(--border)', padding: '6px 12px', borderRadius: '8px', color: 'var(--text)' }}
-              onClick={() => navigate('/objective-exam')}
-            >
-              <ChevronLeft size={16} /> Back
-            </button>
-          </div>
-
-          <div className="oe-review-list">
-            {results.questionsAndAnswers.map((qa, i) => {
-              const ok = qa.userAnswer === qa.correctAnswer;
-              return (
-                <article key={i} className={`oe-review-item ${ok ? 'correct' : 'incorrect'}`}>
-                  <div className="oe-review-q">
-                    <div className={`oe-review-status ${ok ? 'ok' : 'bad'}`}>
-                      {ok ? <CheckCircle size={15} /> : <XCircle size={15} />}
-                    </div>
-                    <p className="oe-review-qtext">
-                      <span className="oe-review-qnum">{i + 1}.</span>
-                      {qa.question}
-                    </p>
-                  </div>
-
-                  <div className="oe-review-opts">
-                    {qa.options.map((opt, idx) => {
-                      const isRight = opt === qa.correctAnswer;
-                      const isMissed = opt === qa.userAnswer && !ok;
-                      const cls = isRight ? 'right' : isMissed ? 'missed' : 'neutral';
-                      return (
-                        <div key={idx} className={`oe-review-opt ${cls}`}>
-                          <div className="oe-review-opt-inner">
-                            <span className="oe-option-letter" style={{ width: 24, height: 24, fontSize: 10 }}>
-                              {OPTION_LETTERS[idx]}
-                            </span>
-                            <span>{opt}</span>
-                          </div>
-                          {isRight && <span className="oe-review-opt-tag">Correct</span>}
-                          {isMissed && <span className="oe-review-opt-tag">Your answer</span>}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  <div className="oe-review-expl">
-                    <div className="oe-review-expl-head">
-                      <Zap size={12} /> AI Explanation
-                    </div>
-                    <p>{qa.explanation}</p>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-
-          <div className="oe-results-cta">
-            <button type="button" onClick={() => navigate('/objective-exam')}>
-              <Target size={17} /> Back to Exam Dashboard
-            </button>
-          </div>
-        </main>
-      </div>
+      <ObjectiveExamResult
+        topic={topic}
+        results={results}
+        warnings={results.warnings ?? warnings}
+        pointsEarned={pointsEarned}
+      />
     );
   }
 

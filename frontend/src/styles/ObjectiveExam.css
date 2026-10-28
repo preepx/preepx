@@ -1808,3 +1808,35 @@
   from { opacity: 0.8; transform: scale(0.98); }
   to { opacity: 1; transform: scale(1.02); }
 }
+
+/* Print styles for Objective Exam Result report */
+@media print {
+  .oe-header,
+  .topbar,
+  .app-sidebar,
+  .sidebar,
+  .sidebar-overlay,
+  nav[aria-label="Breadcrumb"],
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .app-layout,
+  .app-content,
+  .page-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    width: 100% !important;
+  }
+
+  .oe-result-view {
+    background: #ffffff !important;
+    padding: 0 !important;
+  }
+
+  .oe-result-view article {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
