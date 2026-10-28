@@ -3,7 +3,10 @@
   width: 100%;
   margin: 0 auto;
   padding: 16px 40px 32px;
-  /* reduced top padding from 32px to 16px */
+  min-height: calc(100vh - 65px);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 .dashboard-header {
@@ -247,13 +250,14 @@
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 280px;
-  /* Reduced width when sidebar is ON */
   gap: 20px;
+  flex: 1;
+  align-items: stretch;
+  margin-bottom: 8px;
 }
 
 .app-layout.collapsed .dashboard-grid {
   grid-template-columns: 1fr 320px;
-  /* Original width when sidebar is OFF */
 }
 
 .panel {
@@ -261,6 +265,12 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
+}
+
+.interviews-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .panel-header {
@@ -337,20 +347,29 @@
 .interview-table-container {
   padding: 16px 20px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
 }
 
 .interviews-table {
   width: 100%;
+  min-width: 580px;
   border-collapse: collapse;
   text-align: left;
 }
 
 .interviews-table th {
   background: #f8fafc;
-  padding: 10px 8px;
+  padding: 11px 12px;
   font-size: 12px;
   font-weight: 600;
   color: var(--text-muted);
+  white-space: nowrap;
 }
 
 .interviews-table th:first-child {
@@ -362,23 +381,61 @@
 }
 
 .interviews-table td {
-  padding: 12px 8px;
+  padding: 12px 12px;
   background: white;
   font-size: 13px;
   color: var(--text);
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
-  white-space: normal;
-  word-break: break-word;
+}
+
+.interviews-table th:nth-child(1),
+.interviews-table td:nth-child(1) {
+  width: 48px;
+  min-width: 48px;
+  text-align: center;
+  white-space: nowrap;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.interviews-table th:nth-child(2),
+.interviews-table td:nth-child(2) {
+  min-width: 140px;
+  text-align: left;
+}
+
+.interviews-table th:nth-child(3),
+.interviews-table td:nth-child(3) {
+  width: 85px;
+  min-width: 80px;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--text-muted);
 }
 
 .interviews-table th:nth-child(4),
-.interviews-table td:nth-child(4),
+.interviews-table td:nth-child(4) {
+  width: 70px;
+  min-width: 65px;
+  text-align: center;
+  white-space: nowrap;
+}
+
 .interviews-table th:nth-child(5),
-.interviews-table td:nth-child(5),
+.interviews-table td:nth-child(5) {
+  width: 110px;
+  min-width: 105px;
+  text-align: center;
+  white-space: nowrap;
+}
+
 .interviews-table th:nth-child(6),
 .interviews-table td:nth-child(6) {
+  width: 125px;
+  min-width: 120px;
   text-align: center;
+  white-space: nowrap;
 }
 
 .interviews-table tr:hover td {
@@ -388,11 +445,15 @@
 .role-title {
   font-weight: 600;
   color: var(--text);
+  line-height: 1.4;
+  word-break: normal;
+  overflow-wrap: break-word;
 }
 
 .circular-score {
   width: 32px;
   height: 32px;
+  display: inline-block;
 }
 
 .circular-chart {
@@ -428,10 +489,12 @@
 }
 
 .status-pill {
+  display: inline-block;
   padding: 4px 10px;
   border-radius: 20px;
   font-size: 12px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .status-pill.completed {
@@ -442,6 +505,14 @@
 .status-pill.pending {
   background: #fef2f2;
   color: #ef4444;
+}
+
+.action-buttons-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
 }
 
 .action-view-btn {
@@ -456,6 +527,7 @@
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
+  white-space: nowrap;
   transition: background 0.15s;
 }
 
@@ -464,13 +536,17 @@
 }
 
 .action-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
   padding: 6px;
   border-radius: 6px;
-  margin-left: 8px;
+  margin-left: 0;
+  transition: all 0.15s;
 }
 
 .action-delete-btn:hover {
@@ -492,10 +568,14 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  height: 100%;
 }
 
 .tips-panel {
   padding-bottom: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .tips-list {
@@ -801,18 +881,18 @@
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     border-radius: 8px;
+    padding: 12px 14px;
   }
 
   .interviews-table {
     font-size: 13px;
     width: 100%;
+    min-width: 540px;
   }
 
   .interviews-table th,
   .interviews-table td {
-    padding: 8px 4px;
-    white-space: normal;
-    word-break: break-word;
+    padding: 10px 8px;
   }
 
   .role-title {
@@ -1688,50 +1768,57 @@
     width: 100%;
   }
 
-  /* Table - Extremely Compact for Mobile without Scrolling */
+  /* Table - Responsive horizontal scroll on mobile */
   .interview-table-container {
-    overflow-x: hidden;
-    padding: 8px 4px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 8px;
+    scrollbar-width: thin;
+  }
+
+  .interviews-table {
+    min-width: 520px;
   }
 
   .interviews-table th,
   .interviews-table td {
-    padding: 6px 4px;
-    font-size: 11px;
-    white-space: normal;
-  }
-
-  .interviews-table th:first-child,
-  .interviews-table td:first-child {
-    display: none;
-    /* Hide the index # column to save space */
+    padding: 8px 6px;
+    font-size: 12px;
   }
 
   .role-title {
-    font-size: 11px;
-    max-width: 90px;
-    white-space: normal;
-    word-break: break-word;
+    font-size: 12px;
+    max-width: 140px;
+    line-height: 1.3;
   }
 
   .circular-score {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
   }
 
   .percentage {
-    font-size: 10px;
-  }
-
-  .status-pill {
-    padding: 2px 6px;
     font-size: 9px;
   }
 
-  .action-view-btn {
-    padding: 4px 6px;
-    font-size: 10px;
+  .status-pill {
+    padding: 3px 8px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .action-buttons-wrap {
+    display: inline-flex;
+    align-items: center;
     gap: 4px;
+    white-space: nowrap;
+  }
+
+  .action-view-btn {
+    padding: 4px 8px;
+    font-size: 11px;
+    gap: 4px;
+    white-space: nowrap;
   }
 
   .action-delete-btn {

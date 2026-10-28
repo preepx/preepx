@@ -9,9 +9,9 @@ export default function AuthHero({ onRecruiterClick, onClose }) {
       <div className="auth-radar-ring-2" />
 
       <div className="modern-auth-left-top">
-        <a 
-          href="/" 
-          onClick={(e) => { e.preventDefault(); onClose?.(); }} 
+        <a
+          href="/"
+          onClick={(e) => { e.preventDefault(); onClose?.(); }}
           style={{ display: "inline-block", cursor: "pointer" }}
         >
           <img src="/preepx_logo.png" alt="PreepX" className="auth-brand-logo" />
@@ -73,7 +73,13 @@ export default function AuthHero({ onRecruiterClick, onClose }) {
         </div>
 
         <div className="auth-trust-footer">
-          <Shield size={15} />
+          {/* <Shield size={15} /> */}
+          <img
+            src="/icon/trust.png"
+            alt="Trust"
+            width={15}
+            height={15}
+          />
           <span>Trusted by thousands of candidates & recruiters</span>
         </div>
       </div>

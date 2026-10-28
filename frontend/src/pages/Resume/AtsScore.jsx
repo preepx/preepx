@@ -101,7 +101,7 @@ const AtsScore = () => {
           <div className="ats-steps">
             {SCAN_STEPS.map((step, i) => (
               <div key={step.title} className="ats-step-card">
-                <span className="ats-step-num">{i + 1}</span>
+                {/* <span className="ats-step-num">{i + 1}</span> */}
                 <div className="ats-step-icon">
                   <img src={step.img} alt={step.title} style={{ width: '28px', height: '28px' }} />
                 </div>

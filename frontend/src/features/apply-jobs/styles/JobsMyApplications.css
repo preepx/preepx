@@ -34,7 +34,7 @@
 .jma-hero {
   position: relative;
   background: linear-gradient(135deg, #111827 0%, #2c2723 45%, #1e293b 100%);
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 24px 32px;
   display: flex;
   align-items: center;
@@ -382,7 +382,7 @@
 .jma-card {
   background: #fff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -584,7 +584,7 @@
   gap: 4px;
   width: 100%;
   padding: 6px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
@@ -631,8 +631,9 @@
 .jma-sidebar-card {
   background: #fff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 20px;
+  margin-bottom: 10px;
 }
 
 [data-theme="dark"] .jma-sidebar-card {
@@ -962,6 +963,7 @@ jma-rec-time {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .jma-hero-stats {
     width: 100%;
     justify-content: space-between;
@@ -972,7 +974,7 @@ jma-rec-time {
   .jma-hero {
     padding: 16px 20px;
   }
-  
+
   .jma-hero-stats {
     width: 100%;
     padding: 12px;
@@ -995,7 +997,7 @@ jma-rec-time {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .jma-checklist {
     grid-template-columns: 1fr;
   }
@@ -1040,7 +1042,7 @@ jma-rec-time {
   .jma-view-toggles {
     justify-content: flex-end;
   }
-  
+
   .jma-grid {
     grid-template-columns: 1fr;
   }
@@ -1051,6 +1053,7 @@ jma-rec-time {
    Guarantees zero horizontal scroll and perfectly fitted layout
    ========================================================= */
 @media (max-width: 440px) {
+
   /* Common layout constraints for all major containers */
   .jma-page-wrapper,
   .jma-root,
@@ -1081,7 +1084,7 @@ jma-rec-time {
 
   .jma-hero {
     padding: 14px 10px;
-    border-radius: 12px;
+    border-radius: 8px;
     overflow: hidden !important;
   }
 
@@ -1094,7 +1097,8 @@ jma-rec-time {
   .jma-card,
   .jma-sidebar-card {
     padding: 12px 10px;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
+    margin-bottom: 10px;
   }
 }

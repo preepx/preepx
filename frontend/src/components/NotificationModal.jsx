@@ -224,49 +224,22 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
           }}
         >
           <h4
-            style={{
-              margin: 0,
-              fontSize: '13.5px',
-              fontWeight: 650,
-              color: '#0F172A',
-              lineHeight: 1.3,
-              fontFamily: 'Inter, sans-serif',
-            }}
+            className="m-0 text-[13.5px] max-[480px]:text-[11px] font-semibold text-[#0F172A] leading-[1.3] font-[Inter,sans-serif]"
           >
             {notif.title}
           </h4>
           <span
-            style={{
-              fontSize: '11.5px',
-              whiteSpace: 'nowrap',
-              flexShrink: 0,
-              color: recent ? '#2563EB' : '#64748B',
-              fontWeight: recent ? 600 : 400,
-              paddingTop: '1px',
-            }}
+            className={`text-[11.5px] max-[480px]:text-[9px] whitespace-nowrap shrink-0 ${recent ? "text-[#2563EB] font-semibold" : "text-[#64748B] font-normal"
+              } pt-[1px]`}
           >
             {timeText}
           </span>
         </div>
-        <p
-          style={{
-            margin: '3px 0 0 0',
-            fontSize: '12px',
-            color: '#475569',
-            lineHeight: 1.4,
-          }}
-        >
+        <p className="mt-[3px] mb-0 text-[12px] max-[480px]:text-[10px] text-[#475569] leading-[1.4]">
           {notif.message}
         </p>
         {notif.extra && (
-          <span
-            style={{
-              fontSize: '11.5px',
-              color: '#64748B',
-              marginTop: '2px',
-              display: 'block',
-            }}
-          >
+          <span className="mt-[2px] block text-[11.5px] max-[480px]:text-[9px] text-[#64748B]">
             {notif.extra}
           </span>
         )}
@@ -402,13 +375,19 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       document.documentElement.style.overflow = 'hidden';
+      document.body.classList.add('notification-modal-open');
+      window.dispatchEvent(new CustomEvent('notification-modal-toggle', { detail: { open: true } }));
     } else {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
+      document.body.classList.remove('notification-modal-open');
+      window.dispatchEvent(new CustomEvent('notification-modal-toggle', { detail: { open: false } }));
     }
     return () => {
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
+      document.body.classList.remove('notification-modal-open');
+      window.dispatchEvent(new CustomEvent('notification-modal-toggle', { detail: { open: false } }));
     };
   }, [isOpen]);
 
@@ -433,20 +412,7 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
       onClick={onClose}
     >
       <div
-        style={{
-          width: '475px',
-          maxWidth: '92vw',
-          height: '575px',
-          maxHeight: '84vh',
-          backgroundColor: '#ffffff',
-          borderRadius: '8px',
-          boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.05)',
-          display: 'flex',
-          flexDirection: 'column',
-          boxSizing: 'border-box',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
+        className="relative box-border flex h-[575px] max-h-[84vh] w-[475px] max-w-[92vw] flex-col overflow-hidden rounded-lg bg-white shadow-[0_25px_60px_-15px_rgba(0,0,0,0.2)] max-[480px]:h-[80vh] max-[480px]:max-w-[96vw]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Header */}
@@ -456,7 +422,7 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '13px 18px 11px 18px',
-            borderBottom: '1px solid #F1F5F9',
+            borderBottom: '1px solid rgb(228 228 228)',
             backgroundColor: '#ffffff',
           }}
         >
@@ -517,14 +483,7 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
                   </span>
                 )}
               </div>
-              <p
-                style={{
-                  margin: '1px 0 0 0',
-                  fontSize: '11.5px',
-                  color: '#64748B',
-                  fontWeight: 400,
-                }}
-              >
+              <p className="mt-[1px] text-[11.5px] font-normal text-[#64748B] max-[480px]:text-[9px]">
                 Stay updated with your latest activity
               </p>
             </div>
@@ -576,19 +535,18 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
                 gap: '4px',
                 padding: '4px 9px',
                 borderRadius: '6px',
-                border: '1px solid #2563EB',
-                backgroundColor: '#ffffff',
-                color: '#2563EB',
+                backgroundColor: 'rgb(235, 235, 235)',
+                color: '#000000',
                 fontSize: '11.5px',
                 fontWeight: 600,
                 cursor: 'pointer',
                 transition: 'all 0.15s ease',
               }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#EFF6FF'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#ffffff'}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgb(222, 222, 222)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'rgb(235, 235, 235)'}
               title="Clear all notifications"
             >
-              <Trash2 size={12} color="#2563EB" />
+              <Trash2 size={12} color="#000000" />
               <span>Clear all</span>
             </button>
           </div>

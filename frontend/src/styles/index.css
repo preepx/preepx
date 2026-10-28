@@ -99,7 +99,7 @@ body {
 
 .empty-action {
   padding: 11px 24px;
-  background: var(--primary);
+  background: linear-gradient(90deg, #4f46e5, #7c3aed) !important;
   color: white;
   border: none;
   border-radius: 8px;
@@ -110,7 +110,7 @@ body {
 }
 
 .empty-action:hover {
-  background: var(--primary-dark);
+  background: linear-gradient(90deg, #4338ca, #6d28d9) !important;
 }
 
 .page-loading {

@@ -21,7 +21,7 @@
         flex-direction: column;
         align-items: stretch;
     }
-    
+
     .ajd-hb-left {
         padding-right: 0;
     }
@@ -33,7 +33,7 @@
     .ajd-hb-search {
         flex-direction: column;
         padding: 8px;
-        border-radius: 12px;
+        border-radius: 8px;
     }
 
     .ajd-hbs-seg {
@@ -124,7 +124,7 @@
         flex-direction: column;
         padding: 8px;
         gap: 4px;
-        border-radius: 12px;
+        border-radius: 8px;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
     }
 
@@ -189,13 +189,13 @@
     .ajd-ticker {
         padding: 6px 8px;
         gap: 8px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .ajd-ticker-label {
         padding: 4px 7px;
         font-size: 10px;
-        border-radius: 6px;
+        border-radius: 8px;
         gap: 4px;
     }
 
@@ -246,7 +246,7 @@
     .ajd-stat-card {
         padding: 11px 9px;
         gap: 8px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .ajd-stat-icon {
@@ -277,7 +277,7 @@
     /* Featured Openings Card */
     .ajd-card {
         padding: 16px 12px;
-        border-radius: 12px;
+        border-radius: 8px;
     }
 
     .ajd-card-head {
@@ -497,7 +497,7 @@
 
     .ajd-insight {
         padding: 14px 12px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .ajd-insight h3 {
@@ -529,7 +529,7 @@
 
     .ajd-rcard {
         padding: 14px 12px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .ajd-sec-title-row {
@@ -650,7 +650,7 @@
     /* Boost Card */
     .ajd-boost-card {
         padding: 14px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .ajd-boost-text h3 {
@@ -672,7 +672,7 @@
     /* Ecosystem */
     .ajd-ecosystem {
         padding: 18px 14px;
-        border-radius: 12px;
+        border-radius: 8px;
         margin-bottom: 16px;
     }
 
@@ -695,7 +695,7 @@
 
     .ajd-eco-card {
         padding: 14px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .ajd-eco-icon {
@@ -846,7 +846,7 @@
     .ajd-hb-search {
         padding: 6px;
         gap: 3px;
-        border-radius: 10px;
+        border-radius: 8px;
     }
 
     .ajd-hbs-seg {
@@ -910,7 +910,7 @@
     .ajd-stat-card {
         padding: 8px 6px !important;
         gap: 6px !important;
-        border-radius: 9px !important;
+        border-radius: 8px !important;
         min-width: 0 !important;
         overflow: hidden !important;
     }
@@ -927,7 +927,7 @@
         height: 12px !important;
     }
 
-    .ajd-stat-card > div:last-child {
+    .ajd-stat-card>div:last-child {
         min-width: 0 !important;
         overflow: hidden !important;
         flex: 1 !important;
@@ -962,7 +962,7 @@
     /* Cards */
     .ajd-card {
         padding: 12px 10px !important;
-        border-radius: 10px !important;
+        border-radius: 8px !important;
         overflow: hidden !important;
     }
 

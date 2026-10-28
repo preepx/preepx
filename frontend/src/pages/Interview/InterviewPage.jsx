@@ -26,7 +26,7 @@ const InterviewPage = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 7;
+  const itemsPerPage = 9;
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -55,6 +55,15 @@ const InterviewPage = () => {
       );
     } finally {
       setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Clear cache when user comes to mock interview section
+    if (typeof window !== "undefined" && "caches" in window) {
+      caches.keys().then((names) => {
+        names.forEach((name) => caches.delete(name));
+      }).catch(() => { });
     }
   }, []);
 
@@ -260,31 +269,33 @@ const InterviewPage = () => {
                             </span>
                           </td>
                           <td>
-                            <button
-                              className="action-view-btn"
-                              onClick={async () => {
-                                if (intv.status === "completed") {
-                                  try {
-                                    const fullIntv = await getInterviewById(intv._id);
-                                    navigate("/feedback", {
-                                      state: { interview: fullIntv, jobTitle: fullIntv.jobTitle, jobTopic: fullIntv.jobTopic }
+                            <div className="action-buttons-wrap">
+                              <button
+                                className="action-view-btn"
+                                onClick={async () => {
+                                  if (intv.status === "completed") {
+                                    try {
+                                      const fullIntv = await getInterviewById(intv._id);
+                                      navigate("/feedback", {
+                                        state: { interview: fullIntv, jobTitle: fullIntv.jobTitle, jobTopic: fullIntv.jobTopic }
+                                      });
+                                    } catch (err) {
+                                      console.error("Failed to fetch:", err);
+                                      navigate("/feedback", { state: { interview: intv } });
+                                    }
+                                  } else {
+                                    navigate("/interview-setup", {
+                                      state: { jobTitle: intv.jobTitle, jobTopic: intv.jobTopic, questions: intv.questions, interviewId: intv._id },
                                     });
-                                  } catch (err) {
-                                    console.error("Failed to fetch:", err);
-                                    navigate("/feedback", { state: { interview: intv } });
                                   }
-                                } else {
-                                  navigate("/interview-setup", {
-                                    state: { jobTitle: intv.jobTitle, jobTopic: intv.jobTopic, questions: intv.questions, interviewId: intv._id },
-                                  });
-                                }
-                              }}
-                            >
-                              <LayoutDashboard size={14} /> View
-                            </button>
-                            <button className="action-delete-btn" onClick={(e) => handleDelete(e, intv._id)}>
-                              <Trash2 size={14} />
-                            </button>
+                                }}
+                              >
+                                <LayoutDashboard size={14} /> View
+                              </button>
+                              <button className="action-delete-btn" onClick={(e) => handleDelete(e, intv._id)} title="Delete interview">
+                                <Trash2 size={14} />
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       );

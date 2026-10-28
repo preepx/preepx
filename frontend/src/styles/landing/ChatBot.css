@@ -2,6 +2,13 @@
    PreepX ChatBot — Full Height Right Panel
    ============================================ */
 
+/* Hide ChatBot when Notification Modal is open */
+body.notification-modal-open .chatbot-fab,
+body.notification-modal-open .chatbot-panel,
+body.notification-modal-open .chatbot-overlay {
+  display: none !important;
+}
+
 /* --- FAB Button --- */
 .chatbot-fab {
   position: fixed;

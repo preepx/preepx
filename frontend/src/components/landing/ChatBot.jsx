@@ -212,6 +212,9 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [typing, setTyping] = useState(false);
   const [pulse, setPulse] = useState(true);
+  const [hiddenByModal, setHiddenByModal] = useState(() =>
+    typeof document !== "undefined" && document.body.classList.contains("notification-modal-open")
+  );
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -253,8 +256,19 @@ export default function ChatBot() {
 
   useEffect(() => {
     const handleOpenChatBot = () => setOpen(true);
+    const handleModalToggle = (e) => {
+      const isModalOpen = Boolean(e.detail?.open);
+      setHiddenByModal(isModalOpen);
+      if (isModalOpen) {
+        setOpen(false);
+      }
+    };
     window.addEventListener('open-chatbot', handleOpenChatBot);
-    return () => window.removeEventListener('open-chatbot', handleOpenChatBot);
+    window.addEventListener('notification-modal-toggle', handleModalToggle);
+    return () => {
+      window.removeEventListener('open-chatbot', handleOpenChatBot);
+      window.removeEventListener('notification-modal-toggle', handleModalToggle);
+    };
   }, []);
 
   useEffect(() => {
@@ -283,7 +297,7 @@ export default function ChatBot() {
   const chatContent = (
     <>
       {/* FAB Button */}
-      {!open && (
+      {!open && !hiddenByModal && (
         <button
           className={`chatbot-fab ${pulse ? "chatbot-fab--pulse" : ""}`}
           onClick={() => setOpen(true)}
