@@ -186,11 +186,7 @@ export const candidateRoutes = [
   },
   {
     path: "/top-companies",
-    element: (
-      <ProtectedRoute>
-        <TopCompaniesPage />
-      </ProtectedRoute>
-    ),
+    element: <Navigate to="/company-prep" replace />,
   },
   {
     path: "/coding-exam/:id",

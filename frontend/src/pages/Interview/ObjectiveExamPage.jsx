@@ -12,6 +12,7 @@ import { showAppError } from "@/utils/appAlert";
 import EmptyState from "@/components/EmptyState";
 import Loader from "@/components/Loader";
 import Pagination from "@/components/Pagination";
+import DeleteConfirmModal from "@/components/DeleteConfirmModal";
 import '@/styles/InterviewPage.css';
 
 const ObjectiveExamPage = () => {
@@ -21,6 +22,8 @@ const ObjectiveExamPage = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [deleting, setDeleting] = useState(false);
   const itemsPerPage = 13;
   const navigate = useNavigate();
   const location = useLocation();
@@ -56,15 +59,27 @@ const ObjectiveExamPage = () => {
     loadDashboard();
   }, [location.key, loadDashboard]);
 
-  const handleDelete = async (e, id) => {
+  const handleDeleteClick = (e, exam) => {
     e.stopPropagation();
-    if (!confirm("Delete this exam record?")) return;
+    setDeleteTarget({
+      id: exam._id,
+      topic: exam.topic || "Objective Exam Record",
+      score: exam.score !== undefined ? `${exam.score}/${exam.totalQuestions || 10}` : null,
+    });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget?.id) return;
+    setDeleting(true);
     try {
-      await deleteMcqResult(id);
-      notify.success("Exam deleted");
+      await deleteMcqResult(deleteTarget.id);
+      notify.success("Exam record deleted");
+      setDeleteTarget(null);
       loadDashboard();
     } catch {
       showAppError("Could not delete this exam.", "Delete failed");
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -219,7 +234,7 @@ const ObjectiveExamPage = () => {
                             >
                               <LayoutDashboard size={14} /> View
                             </button>
-                            <button className="action-delete-btn" onClick={(e) => handleDelete(e, exam._id)}>
+                            <button className="action-delete-btn" onClick={(e) => handleDeleteClick(e, exam)} title="Delete exam">
                               <Trash2 size={14} />
                             </button>
                           </td>
@@ -354,6 +369,16 @@ const ObjectiveExamPage = () => {
           </div>
         </div>
       </div>
+
+      <DeleteConfirmModal
+        isOpen={!!deleteTarget}
+        title="Delete Exam Record?"
+        description="Are you sure you want to delete this objective exam record? This action cannot be undone and your exam score will be permanently removed."
+        itemName={deleteTarget ? `${deleteTarget.topic}${deleteTarget.score ? ` (Score: ${deleteTarget.score})` : ""}` : null}
+        loading={deleting}
+        onConfirm={confirmDelete}
+        onClose={() => !deleting && setDeleteTarget(null)}
+      />
     </div>
   );
 };

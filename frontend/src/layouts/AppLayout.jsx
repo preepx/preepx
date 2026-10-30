@@ -68,7 +68,7 @@ const NAV_SECTIONS = [
     items: [
       { to: "/interview", icon: MockInterviewIcon, label: "Mock Interview" },
       { to: "/100-days-challenge", icon: CodingHubIcon, label: "Coding Hub", isNew: true },
-      { to: "/top-companies", icon: TopCompaniesIcon, label: "Top Companies", isSoon: true },
+      { to: "/company-prep", icon: TopCompaniesIcon, label: "Top Companies" },
       { to: "/objective-exam", icon: ObjectiveExamIcon, label: "Objective Exam" },
       { to: "/ats-score", icon: AtsScoreIcon, label: "ATS Score" },
     ],

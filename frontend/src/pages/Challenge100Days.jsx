@@ -675,14 +675,25 @@ const Challenge100Days = () => {
         </div>
       </section>
 
-      {/* ─── Bottom Motivation Bar ─── */}
+      {/* ─── Bottom Motivation Bar (Styled like Dashboard Leaderboard Banner) ─── */}
       <section className="c100-motivation-bottom">
-        <div className="mot-icon-wrap"><Trophy size={24} className="text-orange" /></div>
-        <div className="mot-text">
-          <h3>Consistency today builds your success tomorrow!</h3>
-          <p>You're just 1% away from becoming unstoppable.</p>
+        <div className="c100-motivation-content">
+          <div className="c100-motivation-icon">
+            <img src="/dsbanner/leaderds.svg" alt="Consistency" style={{ width: 42, height: 42 }} />
+          </div>
+          <div>
+            <h3>Consistency today builds your success tomorrow!</h3>
+            <p className="c100-motivation-subtitle">Keep Practicing. Keep Climbing.</p>
+            <p className="c100-motivation-desc">You're just 1% away from becoming unstoppable.</p>
+          </div>
         </div>
-        <button className="c100-primary-btn">Continue Day 1 Challenge <ArrowRight size={16} /></button>
+        <button
+          type="button"
+          className="c100-motivation-btn"
+          onClick={() => activeProblem?._id && handleStart(activeProblem._id, activeDay)}
+        >
+          Continue Day {activeDay || 1} Challenge <ArrowRight size={18} />
+        </button>
       </section>
 
       {showSetupModal && (

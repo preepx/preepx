@@ -269,25 +269,22 @@
 }
 
 .c100-stat-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--accent, #2f6f5b);
-  opacity: 0;
-  transition: opacity 0.25s;
+  display: none !important;
 }
 
 .c100-stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
-  border-color: color-mix(in srgb, var(--accent, #2f6f5b) 30%, var(--c100-border));
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
+}
+
+[data-theme="dark"] .c100-stat-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .c100-stat-card:hover::before {
-  opacity: 1;
+  display: none !important;
 }
 
 .c100-stat-icon {

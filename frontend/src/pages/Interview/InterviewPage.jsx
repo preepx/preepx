@@ -14,6 +14,7 @@ import WelcomeModal from "@/components/WelcomeModal";
 import EmptyState from "@/components/EmptyState";
 import Loader from "@/components/Loader";
 import Pagination from "@/components/Pagination";
+import DeleteConfirmModal from "@/components/DeleteConfirmModal";
 import '@/styles/InterviewPage.css';
 
 const InterviewPage = () => {
@@ -23,6 +24,8 @@ const InterviewPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState(null);
+  const [deleting, setDeleting] = useState(false);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
@@ -106,15 +109,27 @@ const InterviewPage = () => {
     }
   };
 
-  const handleDelete = async (e, id) => {
+  const handleDeleteClick = (e, intv) => {
     e.stopPropagation();
-    if (!confirm("Delete this interview?")) return;
+    setDeleteTarget({
+      id: intv._id,
+      title: intv.jobTitle || "Interview Session",
+      topic: intv.jobTopic,
+    });
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget?.id) return;
+    setDeleting(true);
     try {
-      await deleteInterview(id);
+      await deleteInterview(deleteTarget.id);
       notify.success("Interview deleted");
+      setDeleteTarget(null);
       loadDashboard();
     } catch {
       showAppError("Could not delete this interview. Please try again.", "Delete failed");
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -292,7 +307,7 @@ const InterviewPage = () => {
                               >
                                 <LayoutDashboard size={14} /> View
                               </button>
-                              <button className="action-delete-btn" onClick={(e) => handleDelete(e, intv._id)} title="Delete interview">
+                              <button className="action-delete-btn" onClick={(e) => handleDeleteClick(e, intv)} title="Delete interview">
                                 <Trash2 size={14} />
                               </button>
                             </div>
@@ -416,6 +431,16 @@ const InterviewPage = () => {
       </div>
 
       {showModal && <InterviewModal onClose={() => setShowModal(false)} onSuccess={loadDashboard} />}
+
+      <DeleteConfirmModal
+        isOpen={!!deleteTarget}
+        title="Delete Interview?"
+        description="Are you sure you want to delete this interview session? This action cannot be undone and your feedback and scores will be permanently removed."
+        itemName={deleteTarget ? `${deleteTarget.title}${deleteTarget.topic ? ` (${deleteTarget.topic})` : ""}` : null}
+        loading={deleting}
+        onConfirm={confirmDelete}
+        onClose={() => !deleting && setDeleteTarget(null)}
+      />
     </div>
   );
 };

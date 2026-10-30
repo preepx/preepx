@@ -6,6 +6,7 @@ import {
   RefreshCcw, Filter, ChevronRight, MessageSquare, Sparkles, Building2
 } from "lucide-react";
 import { getCompanyBySlug } from "@/data/companyPrep/companies";
+import { getCompanyBank } from "@/data/companyPrep/loadBank";
 import { computeBankStats, getSolvedIds } from "@/data/companyPrep/progress";
 import qapi from "@/utils/qapi";
 import "@/styles/CompanyPrep.css";
@@ -29,9 +30,18 @@ export default function CompanyQuestionBank() {
   React.useEffect(() => {
     qapi.get(`/company-prep?company=${slug}`)
       .then(res => {
-        setQuestionsData(res.data);
+        if (Array.isArray(res.data) && res.data.length > 0) {
+          setQuestionsData(res.data);
+        } else {
+          const fallback = getCompanyBank(slug);
+          setQuestionsData(fallback?.questions || []);
+        }
       })
-      .catch(err => console.error("Error fetching bank", err))
+      .catch(err => {
+        console.warn("Using local questions bank for", slug, err.message);
+        const fallback = getCompanyBank(slug);
+        setQuestionsData(fallback?.questions || []);
+      })
       .finally(() => setLoading(false));
   }, [slug]);
 
