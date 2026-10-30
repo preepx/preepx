@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Camera, Check, X, Edit2, Mail, Phone, MapPin, AlertCircle,
-  Linkedin, Github, Globe, FileText, Upload, Crown, Gift, ZoomIn
+  Linkedin, Github, Globe, FileText, Upload, Crown, Gift, ZoomIn,
+  Download, ExternalLink
 } from "lucide-react";
 import Cropper from "react-easy-crop";
 import getCroppedImg from "@/utils/cropImage";
@@ -34,6 +35,93 @@ export default function ProfileHeaderCard({
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [showCropper, setShowCropper] = useState(false);
   const [cropping, setCropping] = useState(false);
+
+  // Resume Modal State
+  const [showResumeModal, setShowResumeModal] = useState(false);
+  const [blobUrl, setBlobUrl] = useState(null);
+  const [resumeLoading, setResumeLoading] = useState(true);
+  const [resumeError, setResumeError] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    let objectUrl = null;
+
+    if (showResumeModal && user?.resumeUrl) {
+      setResumeLoading(true);
+      setResumeError(false);
+      setBlobUrl(null);
+      document.body.style.overflow = "hidden";
+
+      const handleKeyDown = (e) => {
+        if (e.key === "Escape") setShowResumeModal(false);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+
+      const assetUrl = getAssetUrl(user.resumeUrl);
+
+      // Fetch file and convert to Blob to avoid browser download triggers and avoid Google Docs 500
+      fetch(assetUrl)
+        .then((res) => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.blob();
+        })
+        .then((blob) => {
+          if (!active) return;
+          const pdfBlob = new Blob([blob], { type: "application/pdf" });
+          objectUrl = URL.createObjectURL(pdfBlob);
+          setBlobUrl(objectUrl);
+          setResumeLoading(false);
+        })
+        .catch((err) => {
+          console.warn("Direct blob creation error, falling back to asset URL:", err);
+          if (!active) return;
+          setBlobUrl(assetUrl);
+          setResumeLoading(false);
+        });
+
+      return () => {
+        active = false;
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+        if (objectUrl) URL.revokeObjectURL(objectUrl);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [showResumeModal, user?.resumeUrl]);
+
+  const handleDownloadResume = async () => {
+    let rawName = user?.resumeFileName || "Resume.pdf";
+    if (!rawName.toLowerCase().endsWith(".pdf") && !rawName.toLowerCase().endsWith(".docx") && !rawName.toLowerCase().endsWith(".doc")) {
+      rawName = `${rawName}.pdf`;
+    }
+
+    if (blobUrl) {
+      const a = document.createElement("a");
+      a.href = blobUrl;
+      a.download = rawName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      return;
+    }
+
+    try {
+      const assetUrl = getAssetUrl(user.resumeUrl);
+      const res = await fetch(assetUrl);
+      const blob = await res.blob();
+      const tempUrl = URL.createObjectURL(new Blob([blob], { type: "application/pdf" }));
+      const a = document.createElement("a");
+      a.href = tempUrl;
+      a.download = rawName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(tempUrl), 1000);
+    } catch {
+      window.open(getAssetUrl(user.resumeUrl), "_blank");
+    }
+  };
 
   const avatar = user?.profilePic ||
     `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.fullName || "U")}&background=6366f1&color=fff&size=200`;
@@ -406,9 +494,13 @@ export default function ProfileHeaderCard({
           onChange={onResumeUpload}
         />
         {user?.resumeUrl && (
-          <a href={getAssetUrl(user.resumeUrl)} target="_blank" rel="noreferrer" className="jp-resume-view">
+          <button
+            type="button"
+            className="jp-resume-view"
+            onClick={() => setShowResumeModal(true)}
+          >
             View
-          </a>
+          </button>
         )}
       </div>
 
@@ -470,6 +562,117 @@ export default function ProfileHeaderCard({
               >
                 {cropping ? "Saving..." : "Crop & Save"}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Resume Viewer Modal Popup */}
+      {showResumeModal && user?.resumeUrl && (
+        <div
+          className="jp-resume-modal-overlay"
+          onClick={() => setShowResumeModal(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="jp-resume-modal-title"
+        >
+          <div
+            className="jp-resume-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="jp-resume-modal-header">
+              <div className="jp-resume-modal-title-group">
+                <div className="jp-resume-modal-icon">
+                  <FileText size={20} />
+                </div>
+                <div>
+                  <h3 id="jp-resume-modal-title" className="jp-resume-modal-title">
+                    {user?.resumeFileName || "Resume.pdf"}
+                  </h3>
+                  <p className="jp-resume-modal-sub">
+                    {user?.fullName ? `${user.fullName} · Resume Preview` : "Resume Preview"}
+                  </p>
+                </div>
+              </div>
+
+              <div className="jp-resume-modal-actions">
+                <button
+                  type="button"
+                  onClick={handleDownloadResume}
+                  className="jp-resume-modal-action-btn"
+                  title="Download Resume"
+                >
+                  <Download size={15} />
+                  <span>Download</span>
+                </button>
+                <a
+                  href={getAssetUrl(user.resumeUrl)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="jp-resume-modal-action-btn"
+                  title="Open in new tab"
+                >
+                  <ExternalLink size={15} />
+                  <span>Open Tab</span>
+                </a>
+                <button
+                  type="button"
+                  className="jp-resume-modal-close-btn"
+                  onClick={() => setShowResumeModal(false)}
+                  aria-label="Close resume preview"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body with Viewer */}
+            <div className="jp-resume-modal-body">
+              {resumeLoading && (
+                <div className="jp-resume-modal-loader">
+                  <div className="jp-resume-spinner" />
+                  <span>Loading resume preview...</span>
+                </div>
+              )}
+              {resumeError ? (
+                <div className="jp-resume-error-state">
+                  <FileText size={48} color="#3d5eff" />
+                  <h4>Unable to display preview directly</h4>
+                  <p>You can view or download this resume using the buttons below.</p>
+                  <div style={{ display: "flex", gap: "10px", marginTop: "14px" }}>
+                    <a
+                      href={getAssetUrl(user.resumeUrl)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="jp-resume-modal-action-btn"
+                    >
+                      <ExternalLink size={15} /> Open in New Tab
+                    </a>
+                    <button
+                      type="button"
+                      onClick={handleDownloadResume}
+                      className="jp-resume-modal-action-btn"
+                    >
+                      <Download size={15} /> Download Resume
+                    </button>
+                  </div>
+                </div>
+              ) : blobUrl ? (
+                <object
+                  data={`${blobUrl}#toolbar=1&navpanes=0`}
+                  type="application/pdf"
+                  className="jp-resume-iframe"
+                  onError={() => setResumeError(true)}
+                >
+                  <iframe
+                    title="Resume Preview"
+                    src={`${blobUrl}#toolbar=1&navpanes=0`}
+                    className="jp-resume-iframe"
+                    onError={() => setResumeError(true)}
+                  />
+                </object>
+              ) : null}
             </div>
           </div>
         </div>

@@ -63,9 +63,8 @@ function Leaderboard() {
           {[1, 0, 2].map((idx) => {
             const entry = top3[idx];
             if (!entry) return null;
-            const heights = ["podium-2", "podium-1", "podium-3"];
             return (
-              <div key={entry.rank} className={`podium-item ${heights[idx]}`}>
+              <div key={entry.rank} className={`podium-item podium-${entry.rank}`}>
                 <img src={entry.profilePic || `https://ui-avatars.com/api/?name=${encodeURIComponent(maskName(entry.fullName, entry.isCurrentUser))}&background=4f46e5&color=fff`} alt="" />
                 <span className="podium-name">{maskName(entry.fullName, entry.isCurrentUser)}</span>
                 <span className="podium-pts">{entry.points} XP</span>

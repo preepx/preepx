@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
+import { useParams, useSearchParams, useNavigate } from "react-router-dom";
 import {
   CheckCircle,
   XCircle,
@@ -13,6 +13,7 @@ import {
   BarChart3,
   Globe,
   Star,
+  ArrowLeft,
 } from "lucide-react";
 import QRCode from "qrcode";
 import html2canvas from "html2canvas";
@@ -116,7 +117,23 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
 
           {/* Top-Right Hanging Ribbon Medal */}
           <div className="cert-top-ribbon-badge">
-            <div className="cert-ribbon-tail"></div>
+            <svg
+              width="76"
+              height="130"
+              viewBox="0 0 76 130"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="cert-ribbon-svg"
+            >
+              <defs>
+                <linearGradient id="certRibbonTailGrad" x1="0" y1="0" x2="0" y2="130" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#0f172a" />
+                  <stop offset="65%" stopColor="#2c2723" />
+                  <stop offset="100%" stopColor="#1a2420" />
+                </linearGradient>
+              </defs>
+              <path d="M0 0 H76 V107 L38 130 L0 107 Z" fill="url(#certRibbonTailGrad)" />
+            </svg>
             <div className="cert-ribbon-medal">
               <img src="/favicon.png" alt="PreepX Medal" className="cert-ribbon-logo" crossOrigin="anonymous" />
             </div>
@@ -149,11 +166,41 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
 
             {/* Achievement Ribbon Pill */}
             <div className="cert-ribbon-pill-wrapper">
-              <div className="cert-ribbon-pill-tail left"></div>
-              <div className="cert-ribbon-pill">
-                Objective Assessment Achievement
-              </div>
-              <div className="cert-ribbon-pill-tail right"></div>
+              <svg
+                width="344"
+                height="28"
+                viewBox="0 0 344 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="cert-ribbon-banner-svg"
+              >
+                <defs>
+                  <linearGradient id="certPillGrad" x1="10" y1="0" x2="334" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#1f5c4a" />
+                    <stop offset="50%" stopColor="#3d7a64" />
+                    <stop offset="100%" stopColor="#2563eb" />
+                  </linearGradient>
+                </defs>
+                {/* Left tail triangle */}
+                <polygon points="14,0 0,14 14,28" fill="#164338" />
+                {/* Right tail triangle */}
+                <polygon points="330,0 344,14 330,28" fill="#1e40af" />
+                {/* Middle pill */}
+                <rect x="10" y="0" width="324" height="28" rx="4" fill="url(#certPillGrad)" />
+                {/* Perfectly vertically & horizontally centered text */}
+                <text
+                  x="172"
+                  y="18"
+                  fill="#ffffff"
+                  fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+                  fontSize="13"
+                  fontWeight="700"
+                  letterSpacing="0.5"
+                  textAnchor="middle"
+                >
+                  Objective Assessment Achievement
+                </text>
+              </svg>
             </div>
 
             {/* Presented to text */}
@@ -351,6 +398,15 @@ CertificatePrint.displayName = "CertificatePrint";
 export default function CertificateVerifyPage() {
   const { certificateId } = useParams();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/user-dashboard");
+    }
+  };
   const shouldAutoDownload =
     searchParams.get("download") === "1" ||
     searchParams.get("print") === "1" ||
@@ -547,6 +603,19 @@ export default function CertificateVerifyPage() {
 
   return (
     <div className="cv-page cv-valid">
+      {/* Verification badge & actions */}
+      {/* Top Left Back Navigation */}
+      <div className="cv-top-nav-bar no-print">
+        <button
+          type="button"
+          className="cv-top-back-btn"
+          onClick={handleBack}
+          title="Go to previous page"
+        >
+          <ArrowLeft size={16} /> Back
+        </button>
+      </div>
+
       {/* Verification badge & actions */}
       <div className="cv-verify-badge">
         <div className="cv-badge-status">

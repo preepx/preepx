@@ -11,6 +11,40 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
+
+/* ── Top Left Back Navigation ── */
+.cv-top-nav-bar {
+  max-width: 1060px;
+  margin: 0 auto 16px auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.cv-top-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.15s ease;
+}
+
+.cv-top-back-btn:hover {
+  background: #f9fafb;
+  color: #111827;
+  border-color: #9ca3af;
+  transform: translateX(-2px);
+}
+
 /* ── Verification badge & action bar ── */
 .cv-verify-badge {
   display: flex;
@@ -51,6 +85,31 @@
   align-items: center;
   gap: 10px;
   margin-left: auto;
+}
+
+
+.cv-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8.5px 16px;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.cv-back-btn:hover {
+  background: #f9fafb;
+  color: #111827;
+  border-color: #9ca3af;
+  transform: translateY(-1px);
 }
 
 .cv-download-btn {
@@ -356,15 +415,16 @@
   height: 130px;
   z-index: 6;
   pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.25));
 }
 
-.cert-ribbon-tail {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, #0f172a 0%, #2c2723 65%, #1a2420 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 82%, 50% 100%, 0 82%);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
-  position: relative;
+.cert-ribbon-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 76px;
+  height: 130px;
+  display: block;
 }
 
 .cert-ribbon-medal {
@@ -469,32 +529,9 @@
   margin-bottom: 12px;
 }
 
-.cert-ribbon-pill {
-  background: linear-gradient(90deg, #1f5c4a 0%, #3d7a64 50%, #2563eb 100%);
-  color: #ffffff;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  padding: 6px 28px;
-  border-radius: 4px;
-  box-shadow: 0 3px 10px rgba(47, 111, 91, 0.35);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-}
-
-.cert-ribbon-pill-tail {
-  width: 14px;
-  height: 28px;
-  background: #164338;
-}
-
-.cert-ribbon-pill-tail.left {
-  clip-path: polygon(100% 0, 0 50%, 100% 100%);
-  margin-right: -4px;
-}
-
-.cert-ribbon-pill-tail.right {
-  clip-path: polygon(0 0, 100% 50%, 0 100%);
-  margin-left: -4px;
+.cert-ribbon-banner-svg {
+  display: block;
+  filter: drop-shadow(0 3px 8px rgba(31, 92, 74, 0.35));
 }
 
 /* Proudly Presented To */
@@ -1038,6 +1075,7 @@
 
   .no-print { display: none !important; }
   .cv-verify-badge { display: none !important; }
+  .cv-top-nav-bar { display: none !important; }
 
   .cert-scale-wrapper {
     max-width: 100% !important;

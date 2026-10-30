@@ -194,17 +194,21 @@
 }
 
 .podium-1 {
-  height: 180px;
+  height: 205px;
+  width: 155px;
   z-index: 2;
+  box-shadow: 0 12px 32px rgba(61, 94, 255, 0.35);
 }
 
 .podium-2 {
   height: 160px;
+  width: 135px;
   z-index: 1;
 }
 
 .podium-3 {
-  height: 140px;
+  height: 135px;
+  width: 135px;
   z-index: 1;
 }
 
@@ -213,6 +217,22 @@
   height: 48px;
   border-radius: 50%;
   margin-bottom: 8px;
+  object-fit: cover;
+}
+
+.podium-1 img {
+  width: 54px !important;
+  height: 54px !important;
+  border: 2.5px solid #fbbf24;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+}
+
+.podium-2 img {
+  border: 2px solid #e2e8f0;
+}
+
+.podium-3 img {
+  border: 2px solid #d97706;
 }
 
 .podium-name {
@@ -310,15 +330,20 @@
   }
 
   .podium-1 {
-    height: 150px;
+    height: 165px;
   }
 
   .podium-2 {
-    height: 130px;
+    height: 135px;
   }
 
   .podium-3 {
     height: 115px;
+  }
+
+  .podium-1 img {
+    width: 38px !important;
+    height: 38px !important;
   }
 
   .podium-name {

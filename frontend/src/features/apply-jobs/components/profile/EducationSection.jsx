@@ -37,7 +37,7 @@ export default function EducationSection({
           className="jp-add-btn"
           onClick={() => setActiveSection(isAdding ? null : "edu-add")}
         >
-          <img src="/profile/plus.svg" alt="Add" style={{ width: 14, height: 14, objectFit: 'contain' }} /> Add Education
+          <img src="/profile/plus.svg" alt="Add" style={{ width: 14, height: 14, objectFit: 'contain', filter: 'brightness(0) invert(1)' }} /> Add Education
         </button>
       </div>
 
@@ -127,7 +127,7 @@ export default function EducationSection({
                 className="jp-exp-icon"
                 style={{ background: "transparent", boxShadow: "none" }}
               >
-                <img src="/profile/education.svg" alt="" style={{ width: 24, height: 24, objectFit: 'contain' }} />
+                <img src="/profile/education.svg" alt="" style={{ width: 24, height: 24, objectFit: 'contain', opacity: 0.7 }} />
               </div>
               <div className="jp-exp-details">
                 <div className="jp-exp-role">

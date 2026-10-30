@@ -1408,14 +1408,19 @@
 }
 
 .cert-download-btn {
-  background: var(--primary);
-  color: #fff;
+  background: linear-gradient(90deg, rgb(61, 94, 255) 0%, rgb(96, 23, 199) 100%) !important;
+  color: #ffffff !important;
+  border: none !important;
   flex: 1;
   justify-content: center;
+  box-shadow: 0 4px 12px rgba(96, 23, 199, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
 .cert-download-btn:hover {
-  background: var(--primary-dark, #245c4c);
+  background: linear-gradient(90deg, rgb(50, 83, 245) 0%, rgb(85, 18, 185) 100%) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(96, 23, 199, 0.35);
 }
 
 /* Unlocked view */

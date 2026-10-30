@@ -37,7 +37,7 @@ export default function ExperienceSection({
           className="jp-add-btn"
           onClick={() => setActiveSection(isAdding ? null : "exp-add")}
         >
-          <img src="/profile/plus.svg" alt="Add" style={{ width: 14, height: 14, objectFit: 'contain' }} /> Add Experience
+          <img src="/profile/plus.svg" alt="Add" style={{ width: 14, height: 14, objectFit: 'contain', filter: 'brightness(0) invert(1)' }} /> Add Experience
         </button>
       </div>
 
@@ -121,7 +121,7 @@ export default function ExperienceSection({
         <div className="jp-exp-list">
           {experiences.map((exp, idx) => (
             <div key={exp.id || idx} className="jp-exp-item">
-              <div className="jp-exp-icon" style={{ background: 'transparent', boxShadow: 'none' }}>
+              <div className="jp-exp-icon" style={{ background: 'transparent', boxShadow: 'none', opacity: 0.7 }}>
                 <img src="/profile/workexprince.svg" alt="" style={{ width: 24, height: 24, objectFit: 'contain' }} />
               </div>
               <div className="jp-exp-details">

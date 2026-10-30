@@ -81,11 +81,12 @@ function LayoutWrapper({ children, landingRole, setLandingRole }) {
     const isAuthPage =
       pathname === "/auth" || pathname === "/auth/recruiter" || pathname === "/auth/callback";
     const isLandingPage = pathname === "/" || pathname === "/dashboard";
+    const isCertificatePage = pathname.startsWith("/verify");
     return (
       <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
         {!isAuthPage && <Navbar landingRole={landingRole} setLandingRole={setLandingRole} />}
         <main style={{ flex: 1, display: "flex", flexDirection: "column" }}>{children}</main>
-        {!isAuthPage && !isLandingPage && (
+        {!isAuthPage && !isLandingPage && !isCertificatePage && (
           <LandingFooter />
         )}
       </div>

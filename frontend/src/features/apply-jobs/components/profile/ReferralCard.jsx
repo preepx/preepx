@@ -205,6 +205,7 @@ export default function ReferralCard({ user }) {
             background: color-mix(in srgb, var(--primary) 8%, transparent);
             border-radius: 8px;
             border: 1px dashed var(--primary);
+            color: black;
           }
           .ref-link-text {
             white-space: normal;

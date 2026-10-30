@@ -569,7 +569,7 @@
   justify-content: space-between;
   gap: 14px;
   padding: 13px 16px;
-  border-radius: 12px;
+  border-radius: 8px;
   min-height: 50px;
   box-sizing: border-box;
   transition: all 0.15s ease;
@@ -689,7 +689,7 @@
 .oer-explanation-box {
   background: #eff6ff;
   border: 1px solid #bfdbfe;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 16px 20px;
   display: flex;
   align-items: flex-start;
