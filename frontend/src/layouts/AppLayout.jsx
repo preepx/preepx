@@ -341,7 +341,7 @@ function AppLayout({ children }) {
                       src="/preepx_logo.png"
                       alt="PreepX"
                       className="brand-logo-img"
-                      style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }}
+                      style={{ height: "46px", objectFit: "contain" }}
                     />
                   </Link>
                   <button

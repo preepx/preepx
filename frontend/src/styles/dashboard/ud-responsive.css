@@ -81,7 +81,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
-  
+
   .ud-stat-card {
     padding: 12px;
     gap: 8px;
@@ -91,56 +91,56 @@
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .ud-banner-btn {
     width: 100%;
     margin-bottom: 8px;
   }
-  
+
   .ud-banner h1 {
     font-size: 22px;
     line-height: 28px;
   }
-  
+
   .ud-panel-head {
     flex-wrap: wrap;
     gap: 4px;
   }
-  
+
   .ud-panel-head h3 {
     font-size: 14px;
   }
-  
+
   .ud-panel-head a {
     font-size: 11px;
   }
-  
+
   .ud-weekly-chart {
     gap: 4px;
   }
-  
+
   .ud-bar-day {
     font-size: 9px;
   }
-  
+
   .ud-bar-score {
     font-size: 8px;
   }
-  
+
   .ud-recent-item {
     gap: 8px;
     padding: 10px;
   }
-  
+
   .ud-recent-type {
     font-size: 9px;
     padding: 3px 6px;
   }
-  
+
   .ud-recent-info strong {
     font-size: 13px;
   }
-  
+
   .ud-recent-score {
     font-size: 12px;
     padding: 4px 8px;
@@ -182,7 +182,7 @@
     height: 20px !important;
     border-radius: 6px !important;
   }
-  
+
   .ud-practice-body h3 img {
     width: 11px !important;
     height: 11px !important;
@@ -225,8 +225,8 @@
   }
 
   .ud-explore-icon img {
-    width: 12px;
-    height: 12px;
+    width: 12px !important;
+    height: 12px !important;
   }
 
   .ud-explore-card h4 {

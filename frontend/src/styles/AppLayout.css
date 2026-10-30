@@ -36,6 +36,7 @@
 }
 
 .sidebar-top {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -656,39 +657,62 @@
   }
 
   .sidebar-top {
+    position: relative !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    height: 54px !important;
-    min-height: 54px !important;
-    padding: 0 10px !important;
+    height: 56px !important;
+    min-height: 56px !important;
+    padding: 0 14px !important;
     border-bottom: 1px solid var(--border);
+    flex-wrap: nowrap !important;
+  }
+
+  .sidebar-top .sidebar-brand {
+    display: flex !important;
+    align-items: center !important;
+    max-width: calc(100% - 46px) !important;
+    overflow: hidden !important;
   }
 
   .sidebar-top .brand-logo-img {
-    height: 70px !important;
-    margin: -8px 0 -8px 0 !important;
+    height: 44px !important;
+    width: auto !important;
+    max-width: 130px !important;
+    object-fit: contain !important;
+    margin: 0 !important;
   }
 
   .sidebar-close-btn {
+    position: absolute !important;
+    top: 50% !important;
+    right: 12px !important;
+    transform: translateY(-50%) !important;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    color: #cbd5e1;
+    color: #475569;
     cursor: pointer;
     transition: all 0.2s ease;
     flex-shrink: 0;
+    z-index: 10;
+  }
+
+  [data-theme="dark"] .sidebar-close-btn {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #cbd5e1;
   }
 
   .sidebar-close-btn:hover {
-    background: rgba(239, 68, 68, 0.15);
-    border-color: rgba(239, 68, 68, 0.4);
-    color: #ef4444;
+    background: rgba(239, 68, 68, 0.15) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    color: #ef4444 !important;
   }
 
   .sidebar-overlay {
