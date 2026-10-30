@@ -403,7 +403,8 @@ const getAnalytics = async (userId) => {
   };
 };
 
-const getLeaderboard = async (userId) => {
+const getLeaderboard = async (userOrId) => {
+  const uid = userOrId?._id ? userOrId._id.toString() : (userOrId ? userOrId.toString() : null);
   const users = await User.find()
     .sort({ points: -1 })
     .limit(10)
@@ -419,11 +420,11 @@ const getLeaderboard = async (userId) => {
     interviewsCompleted: u.interviewsCompleted || 0,
     level: u.level || 1,
     badgeCount: u.badges?.length || 0,
-    isCurrentUser: u._id.toString() === userId.toString(),
+    isCurrentUser: uid ? u._id.toString() === uid : false,
   }));
 
-  const currentUser = await User.findById(userId).lean();
-  const userRank = await User.countDocuments({ points: { $gt: currentUser?.points || 0 } }) + 1;
+  const currentUser = userOrId?.points !== undefined ? userOrId : (uid ? await User.findById(uid).lean() : null);
+  const userRank = currentUser ? await User.countDocuments({ points: { $gt: currentUser?.points || 0 } }) + 1 : 1;
 
   return { leaderboard, userRank, currentUserPoints: currentUser?.points || 0 };
 };

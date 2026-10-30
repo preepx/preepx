@@ -98,7 +98,9 @@ const Challenge100Days = () => {
   const [challengeData, setChallengeData] = useState([]);
   const [progress, setProgress] = useState({ currentDay: 1, completedDays: [] });
   const [globalRank, setGlobalRank] = useState(null);
+  const [leaderboardRank, setLeaderboardRank] = useState(null);
   const [leaderboard, setLeaderboard] = useState([]);
+  const [dashboardData, setDashboardData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedPhaseFilter, setSelectedPhaseFilter] = useState("all");
   const [showSetupModal, setShowSetupModal] = useState(false);
@@ -110,7 +112,21 @@ const Challenge100Days = () => {
   const user = getStoredUser() || {};
   const streak = user.streak || 0;
   const xp = user.points || user.xp || 0;
-  const displayRank = globalRank ? `#${globalRank}` : "New";
+
+  const userRealRank = useMemo(() => {
+    if (leaderboardRank) return leaderboardRank;
+    const idx = leaderboard.findIndex(u => 
+      u.isCurrentUser || (u._id && user._id && u._id === user._id) || (user?.fullName && u.fullName === user.fullName && Math.abs((u.points || 0) - xp) < 5)
+    );
+    if (idx !== -1) return leaderboard[idx].rank || (idx + 1);
+    const higherCount = leaderboard.filter(u => (u.points || 0) > xp).length;
+    return higherCount + 1;
+  }, [leaderboardRank, leaderboard, user, xp]);
+
+  const displayRank = userRealRank ? `#${userRealRank}` : (globalRank ? `#${globalRank}` : "New");
+  const level = user.level || Math.max(1, Math.floor(xp / 100) + 1);
+  const maxLevelXp = Math.max(100, level * 100);
+  const progressPct = Math.min(100, Math.max(3, Math.round((xp / maxLevelXp) * 100)));
 
   useEffect(() => {
     getCodingChallenge()
@@ -128,13 +144,25 @@ const Challenge100Days = () => {
 
     API.get("/users/leaderboard")
       .then((res) => {
-        if (res.data && Array.isArray(res.data.leaderboard)) {
-          setLeaderboard(res.data.leaderboard.slice(0, 6));
-        } else if (Array.isArray(res.data)) {
-          setLeaderboard(res.data.slice(0, 6));
+        if (res.data) {
+          const list = Array.isArray(res.data.leaderboard)
+            ? res.data.leaderboard
+            : (Array.isArray(res.data) ? res.data : []);
+          setLeaderboard(list);
+          if (res.data.userRank) {
+            setLeaderboardRank(res.data.userRank);
+          }
         }
       })
       .catch((err) => console.error("Failed to fetch leaderboard", err));
+
+    API.get("/users/dashboard")
+      .then((res) => {
+        if (res?.data) {
+          setDashboardData(res.data);
+        }
+      })
+      .catch((err) => console.warn("Could not fetch user activity dashboard", err));
   }, []);
 
   const isCompleted = (day) => (progress.completedDays || []).includes(day);
@@ -180,6 +208,106 @@ const Challenge100Days = () => {
   }, [challengeData, selectedPhaseFilter]);
 
   const getDayData = (dayNum) => challengeData.find((d) => d.day === dayNum);
+
+  // ─── Real Activity Heatmap Data Calculation ───
+  const heatmapCells = useMemo(() => {
+    const cells = [];
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+    const activityMap = {};
+
+    // 1. Real activity logs from user dashboard (interviews, MCQs, recentActivity)
+    const allActivities = [
+      ...(dashboardData?.recentActivity || []),
+      ...(dashboardData?.interviews || []).map(i => ({ date: i.createdAt, type: 'interview' })),
+      ...(dashboardData?.mcqResults || []).map(m => ({ date: m.createdAt, type: 'mcq' })),
+    ];
+
+    allActivities.forEach(act => {
+      if (act?.date) {
+        try {
+          const d = new Date(act.date);
+          const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+          activityMap[dStr] = (activityMap[dStr] || 0) + 1;
+        } catch {
+          // ignore date parse errors
+        }
+      }
+    });
+
+    // 2. Real challenge completed days:
+    const completedDaysList = progress.completedDays || [];
+    completedDaysList.forEach((dayNum, idx) => {
+      const d = new Date(today);
+      d.setDate(today.getDate() - idx);
+      const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      activityMap[dStr] = (activityMap[dStr] || 0) + 2;
+    });
+
+    // 3. User's active streak:
+    for (let s = 0; s < (streak || 0); s++) {
+      const d = new Date(today);
+      d.setDate(today.getDate() - s);
+      const dStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+      if (!activityMap[dStr]) {
+        activityMap[dStr] = 1;
+      }
+    }
+
+    // Align grid with days of the week:
+    // 14 columns = 2 weeks of 7 days (M T W T F S S)
+    const jsDay = today.getDay();
+    const dayOfWeek = (jsDay + 6) % 7;
+    const daysUntilSunday = 6 - dayOfWeek;
+
+    const totalCells = 112; // 14 columns x 8 rows
+    const todayIndex = (totalCells - 1) - daysUntilSunday;
+
+    for (let i = 0; i < totalCells; i++) {
+      const daysDiff = i - todayIndex;
+      const cellDate = new Date(today);
+      cellDate.setDate(today.getDate() + daysDiff);
+
+      const dStr = `${cellDate.getFullYear()}-${String(cellDate.getMonth() + 1).padStart(2, '0')}-${String(cellDate.getDate()).padStart(2, '0')}`;
+      const isFuture = daysDiff > 0;
+      const count = isFuture ? 0 : (activityMap[dStr] || 0);
+
+      let level = 'lvl-0';
+      if (count >= 3) level = 'lvl-3';
+      else if (count === 2) level = 'lvl-2';
+      else if (count === 1) level = 'lvl-1';
+
+      const dateLabel = cellDate.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+      });
+
+      let tooltip = `${dateLabel}: No activity`;
+      if (isFuture) {
+        tooltip = `${dateLabel}: Upcoming`;
+      } else if (count > 0) {
+        if (daysDiff === 0) {
+          tooltip = `${dateLabel} (Today): ${count} ${count === 1 ? 'activity' : 'activities'} · Active streak`;
+        } else if (Math.abs(daysDiff) < (streak || 0)) {
+          tooltip = `${dateLabel}: ${count} ${count === 1 ? 'activity' : 'activities'} · ${streak}d streak`;
+        } else {
+          tooltip = `${dateLabel}: ${count} ${count === 1 ? 'activity' : 'activities'}`;
+        }
+      }
+
+      cells.push({
+        id: i,
+        date: dStr,
+        level,
+        tooltip,
+        count,
+        isToday: daysDiff === 0,
+      });
+    }
+
+    return cells;
+  }, [dashboardData, progress.completedDays, streak]);
 
   const getShortDesc = (problem) => {
     if (problem?.description) {
@@ -511,7 +639,7 @@ const Challenge100Days = () => {
 
         <div className="c100-journey-scroll-area" ref={scrollRef}>
           <div className="c100-journey-inner-track" style={{ flexDirection: 'row' }}>
-            {visibleDays.slice(0, 7).map((dayNum) => {
+            {visibleDays.map((dayNum) => {
               // ✅ Real user progress – no hardcoded fakeData
               const unlocked = isUnlocked(dayNum);
               const completed = isCompleted(dayNum);
@@ -530,19 +658,21 @@ const Challenge100Days = () => {
                 <div
                   key={dayNum}
                   ref={isActiveCard ? activeCardRef : null}
-                  className={`c100-compact-day-card ${isActiveCard ? 'active' : ''}`}
+                  className={`c100-compact-day-card ${isActiveCard ? 'active' : ''} ${isDone ? 'done' : ''} ${isLocked ? 'locked' : ''}`}
                   onClick={() => !isLocked && problem?._id && handleStart(problem._id, dayNum)}
                   style={{ cursor: isLocked ? 'not-allowed' : 'pointer' }}
                 >
-                  <div className="day-header">DAY {dayNum}</div>
-                  <h4 className="day-title">{title}</h4>
-                  <span className={`day-diff ${diff.toLowerCase()}`}>{diff}</span>
+                  <div className="c100-day-card-top">
+                    <span className="day-header">DAY {dayNum}</span>
+                    <span className={`day-diff ${diff.toLowerCase()}`}>{diff}</span>
+                  </div>
+                  <h4 className="day-title" title={title}>{title}</h4>
 
                   <div className="day-footer">
-                    {isDone && <span className="status done"><CheckCircle2 size={12} /> Completed</span>}
-                    {isActiveCard && <span className="status active"><Activity size={12} /> In Progress</span>}
-                    {isLocked && <span className="status locked"><Lock size={12} /> Locked</span>}
-                    <span className="xp-val"><Zap size={10} /> +{xpVal} XP</span>
+                    {isDone && <span className="status done"><CheckCircle2 size={13} /> Completed</span>}
+                    {isActiveCard && <span className="status active"><Activity size={13} /> In Progress</span>}
+                    {isLocked && <span className="status locked"><Lock size={13} /> Locked</span>}
+                    <span className="xp-val"><Zap size={11} /> +{xpVal} XP</span>
                   </div>
                 </div>
               );
@@ -551,29 +681,68 @@ const Challenge100Days = () => {
         </div>
       </section>
 
-      {/* ─── Bottom Dash (XP, Heatmap, Leaderboard, Rewards) ─── */}
-      <section className="c100-bottom-dash-grid">
-        <div className="c100-dash-card xp-card">
-          <h4 className="dash-card-title">XP Progress</h4>
-          <div className="xp-center">
-            <div className="level-info">Level 1</div>
-            <div className="hex-badge"><span>1</span></div>
+      {/* ─── Full-Width XP Section (Built like Image 3, 100% width) ─── */}
+      <section className="c100-xp-fullwidth-card">
+        <div className="c100-xp-top-row">
+          <div className="c100-xp-badge-wrap">
+            <span className="c100-xp-tag">
+              <Zap size={14} /> XP Progress
+            </span>
+            <span className="c100-tier-pill">
+              {xp >= 500 ? "DSA Master" : xp >= 200 ? "Rising Coder" : "Novice Solver"}
+            </span>
           </div>
-          <div className="xp-bar-container">
-            <span className="xp-text">45 / 100 XP</span>
-            <div className="xp-bar-bg"><div className="xp-bar-fill" style={{ width: '45%' }}></div></div>
-          </div>
-          <p className="keep-solving-text">Keep solving to level up!</p>
+          <button
+            type="button"
+            className="c100-redeem-btn"
+            onClick={() => navigate('/achievements')}
+          >
+            Redeem XP
+          </button>
         </div>
 
+        <div className="c100-xp-stats-row">
+          <h2>Level {level}</h2>
+          <span className="c100-xp-amount">{xp}/{maxLevelXp} XP</span>
+        </div>
+
+        <div className="c100-xp-progress-bar-wrap">
+          <div className="c100-xp-progress-fill" style={{ width: `${progressPct}%` }}></div>
+        </div>
+
+        <div className="c100-xp-footer-row">
+          <span className="c100-xp-tip">
+            <Flame size={13} style={{ color: '#f59e0b' }} /> Maintain streak to earn bonus XP
+          </span>
+          <span className="c100-xp-next-level">
+            Keep earning XP to unlock Level {level + 1}
+          </span>
+        </div>
+      </section>
+
+      {/* ─── Bottom 3 Sections Grid (Activity Heatmap, Leaderboard, Achievements) ─── */}
+      <section className="c100-bottom-three-grid">
         <div className="c100-dash-card heatmap-card">
-          <h4 className="dash-card-title">Activity Heatmap</h4>
+          <div className="dash-header-row">
+            <h4 className="dash-card-title">
+              <Calendar size={16} style={{ color: '#2f6f5b' }} /> Activity Heatmap
+            </h4>
+            <span className="heatmap-streak-pill">
+              <Flame size={12} /> {streak}d streak
+            </span>
+          </div>
           <div className="heatmap-days-labels">
-            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+            {['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F', 'S', 'S'].map((d, i) => (
+              <span key={i}>{d}</span>
+            ))}
           </div>
           <div className="heatmap-grid">
-            {Array.from({ length: 28 }).map((_, i) => (
-              <div key={i} className={`heatmap-cell ${i === 0 || i === 1 ? 'lvl-3' : i === 4 ? 'lvl-1' : i === 8 ? 'lvl-2' : ''}`}></div>
+            {heatmapCells.map((cell) => (
+              <div
+                key={cell.id}
+                className={`heatmap-cell ${cell.level} ${cell.isToday ? 'is-today' : ''}`}
+                title={cell.tooltip}
+              ></div>
             ))}
           </div>
           <div className="heatmap-legend">
@@ -587,16 +756,23 @@ const Challenge100Days = () => {
 
         <div className="c100-dash-card leaderboard-card">
           <div className="dash-header-row">
-            <h4 className="dash-card-title">Leaderboard</h4>
-            <span className="view-all" onClick={() => navigate('/leaderboard')} style={{ cursor: 'pointer' }}>View All</span>
+            <h4 className="dash-card-title">
+              <Trophy size={16} style={{ color: '#f59e0b' }} /> Leaderboard
+            </h4>
+            <span className="view-all-pill" onClick={() => navigate('/leaderboard')} role="button" tabIndex={0}>
+              View All <ChevronRight size={13} />
+            </span>
           </div>
           <div className="leaderboard-list">
-            {leaderboard.map((u, idx) => {
-              const isCurrentUser = u.isCurrentUser || (u._id && u._id === user._id);
+            {leaderboard.slice(0, 5).map((u, idx) => {
+              const isCurrentUser = u.isCurrentUser || 
+                (u._id && user._id && String(u._id) === String(user._id)) || 
+                (user?.fullName && u.fullName === user.fullName && Math.abs((u.points || 0) - xp) < 5);
               const rank = u.rank || idx + 1;
               let rankElem = <span className="lb-rank">{rank}</span>;
-              if (rank === 1) rankElem = <span className="lb-rank gold"><Trophy size={12} /></span>;
-              else if (rank === 2) rankElem = <span className="lb-rank silver"><Medal size={12} /></span>;
+              if (rank === 1) rankElem = <span className="lb-rank gold"><Trophy size={13} /></span>;
+              else if (rank === 2) rankElem = <span className="lb-rank silver"><Medal size={13} /></span>;
+              else if (rank === 3) rankElem = <span className="lb-rank bronze"><Medal size={13} /></span>;
 
               const initials = u.fullName ? u.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'U';
 
@@ -611,7 +787,7 @@ const Challenge100Days = () => {
                         initials
                       )}
                     </div>
-                    <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1 }}>
+                    <span className="lb-name">
                       {isCurrentUser ? `You (${u.fullName})` : u.fullName}
                     </span>
                   </div>
@@ -620,56 +796,99 @@ const Challenge100Days = () => {
               );
             })}
 
-            {user && user._id && !leaderboard.some(u => u.isCurrentUser || (u._id && u._id === user._id)) && (
-              <div className="lb-item current-user">
-                <span className="lb-rank">#{globalRank || "?"}</span>
-                <div className="lb-user">
-                  <div className="avatar">
-                    {user.profilePic ? (
-                      <img src={user.profilePic} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    ) : (
-                      user.fullName ? user.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'U'
-                    )}
+            {/* 6th row: shows current user highlighted with real rank if not in top 5, or 6th person if user is in top 5 */}
+            {(() => {
+              const userInTop5 = leaderboard.slice(0, 5).some(u => 
+                u.isCurrentUser || (u._id && user._id && String(u._id) === String(user._id)) || 
+                (user?.fullName && u.fullName === user.fullName && Math.abs((u.points || 0) - xp) < 5)
+              );
+
+              if (userInTop5) {
+                const sixthUser = leaderboard[5];
+                if (!sixthUser) return null;
+                const initials = sixthUser.fullName ? sixthUser.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'U';
+                return (
+                  <div key={sixthUser._id || 5} className="lb-item">
+                    <span className="lb-rank">{sixthUser.rank || 6}</span>
+                    <div className="lb-user">
+                      <div className="avatar">
+                        {sixthUser.profilePic ? (
+                          <img src={sixthUser.profilePic} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ) : (
+                          initials
+                        )}
+                      </div>
+                      <span className="lb-name">{sixthUser.fullName}</span>
+                    </div>
+                    <span className="lb-score">{sixthUser.points || 0} XP</span>
                   </div>
-                  <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1 }}>
-                    You ({user.fullName || 'User'})
-                  </span>
+                );
+              }
+
+              const userInitials = user.fullName ? user.fullName.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'U';
+              return (
+                <div className="lb-item current-user">
+                  <span className="lb-rank">#{userRealRank}</span>
+                  <div className="lb-user">
+                    <div className="avatar">
+                      {user.profilePic ? (
+                        <img src={user.profilePic} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      ) : (
+                        userInitials
+                      )}
+                    </div>
+                    <span className="lb-name">
+                      You ({user.fullName || 'User'})
+                    </span>
+                  </div>
+                  <span className="lb-score">{xp} XP</span>
                 </div>
-                <span className="lb-score">{user.points || user.xp || 0} XP</span>
-              </div>
-            )}
+              );
+            })()}
           </div>
         </div>
 
         <div className="c100-dash-card achievements-card">
           <div className="dash-header-row">
-            <h4 className="dash-card-title">Achievements</h4>
-            <span className="view-all">View All</span>
+            <h4 className="dash-card-title">
+              <Award size={16} style={{ color: '#6366f1' }} /> Achievements
+            </h4>
+            <span className="view-all-pill">
+              View All <ChevronRight size={13} />
+            </span>
           </div>
           <div className="rewards-list">
             <div className="reward-item">
-              <div className="reward-icon bg-green"><Flag size={14} /></div>
+              <div className="reward-icon bg-green"><Flag size={15} /></div>
               <div className="reward-info">
                 <strong>First Steps</strong>
                 <span>Complete Day 1</span>
               </div>
-              <CheckCircle2 size={14} className="text-muted" />
+              <span className="reward-status-pill unlocked"><CheckCircle2 size={13} /> Unlocked</span>
             </div>
             <div className="reward-item">
-              <div className="reward-icon bg-orange"><Flame size={14} /></div>
+              <div className="reward-icon bg-orange"><Flame size={15} /></div>
               <div className="reward-info">
                 <strong>2 Day Streak</strong>
                 <span>Maintain streak for 2 days</span>
               </div>
-              <Lock size={14} className="text-muted" />
+              {streak >= 2 ? (
+                <span className="reward-status-pill unlocked"><CheckCircle2 size={13} /> Unlocked</span>
+              ) : (
+                <span className="reward-status-pill in-progress"><Lock size={12} /> {streak}/2</span>
+              )}
             </div>
             <div className="reward-item">
-              <div className="reward-icon bg-purple"><Code2 size={14} /></div>
+              <div className="reward-icon bg-purple"><Code2 size={15} /></div>
               <div className="reward-info">
                 <strong>Problem Solver</strong>
                 <span>Solve 10 problems</span>
               </div>
-              <Lock size={14} className="text-muted" />
+              {completedCount >= 10 ? (
+                <span className="reward-status-pill unlocked"><CheckCircle2 size={13} /> Unlocked</span>
+              ) : (
+                <span className="reward-status-pill in-progress"><Lock size={12} /> {completedCount}/10</span>
+              )}
             </div>
           </div>
         </div>
