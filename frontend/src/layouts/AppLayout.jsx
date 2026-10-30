@@ -25,6 +25,25 @@ const SvgIcon = ({ src, size = 19, style = {} }) => {
 const DashboardIcon = (props) => <SvgIcon src="/sidebar/dsboard.svg" {...props} />;
 const MockInterviewIcon = (props) => <SvgIcon src="/sidebar/mockintervieww.svg" {...props} />;
 const CodingHubIcon = (props) => <SvgIcon src="/sidebar/codinghub.svg" {...props} />;
+const TopCompaniesIcon = ({ size = 20, style = {}, ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ objectFit: 'contain', flexShrink: 0, ...style }}
+    {...props}
+  >
+    <path d="M6 34V10C6 8.5 7 7.5 8.5 7.5H23C24.5 7.5 25.5 8.5 25.5 10V34" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M25.5 17.5H31.5C33 17.5 34 18.5 34 20V34" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M4 34H36" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M12 14H13M18.5 14H19.5" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" />
+    <path d="M12 20.5H13M18.5 20.5H19.5" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" />
+    <path d="M12 27H13M18.5 27H19.5" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" />
+    <path d="M29.5 23.5H30.5M29.5 28.5H30.5" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" />
+  </svg>
+);
 const ObjectiveExamIcon = (props) => <SvgIcon src="/sidebar/objectiveexamicon.svg" {...props} />;
 const AtsScoreIcon = (props) => <SvgIcon src="/sidebar/atsscore.svg" {...props} />;
 const NotesIcon = (props) => <SvgIcon src="/sidebar/notes.svg" {...props} />;
@@ -49,6 +68,7 @@ const NAV_SECTIONS = [
     items: [
       { to: "/interview", icon: MockInterviewIcon, label: "Mock Interview" },
       { to: "/100-days-challenge", icon: CodingHubIcon, label: "Coding Hub", isNew: true },
+      { to: "/top-companies", icon: TopCompaniesIcon, label: "Top Companies", isSoon: true },
       { to: "/objective-exam", icon: ObjectiveExamIcon, label: "Objective Exam" },
       { to: "/ats-score", icon: AtsScoreIcon, label: "ATS Score" },
     ],
@@ -341,7 +361,7 @@ function AppLayout({ children }) {
                     {sectionLabel && (!collapsed || mobileOpen) && (
                       <span className="sidebar-section-label">{sectionLabel}</span>
                     )}
-                    {items.map(({ to, icon: Icon, label, isFree, isNew }) => {
+                    {items.map(({ to, icon: Icon, label, isFree, isNew, isSoon }) => {
                       const isActive = location.pathname === to || (to !== "/interview" && location.pathname.startsWith(to));
                       return (
                         <Link
@@ -357,6 +377,7 @@ function AppLayout({ children }) {
                               <span className="sidebar-link-label">{label}</span>
                               {isFree && <span className="nav-free-badge">Free</span>}
                               {isNew && <span className="nav-new-badge">New</span>}
+                              {isSoon && <span className="nav-soon-badge">Soon</span>}
                             </>
                           )}
                         </Link>

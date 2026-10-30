@@ -57,12 +57,13 @@ function usesAppLayout(pathname) {
   const sidebarRoutes = [
     "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements", "/rewards",
     "/settings", "/profile", "/resume-interview", "/ats-score", "/btech-notes", "/objective-exam", "/wallet",
-    "/my-assessments", "/my-applications", "/100-days-challenge", "/company-prep",
+    "/my-assessments", "/my-applications", "/100-days-challenge", "/company-prep", "/top-companies",
   ];
   return (
     sidebarRoutes.includes(pathname) ||
     pathname.startsWith("/btech-notes/") ||
     pathname.startsWith("/company-prep/") ||
+    pathname.startsWith("/top-companies/") ||
     (pathname.startsWith("/objective-exam/") && !isFullscreenPath(pathname))
   );
 }

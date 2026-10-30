@@ -19,6 +19,7 @@ const ObjectiveExamPage = lazy(() => import("@/pages/Interview/ObjectiveExamPage
 const ObjectiveExam = lazy(() => import("@/pages/Interview/ObjectiveExam"));
 const WalletPage = lazy(() => import("@/pages/WalletPage"));
 const Challenge100Days = lazy(() => import("@/pages/Challenge100Days"));
+const TopCompaniesPage = lazy(() => import("@/pages/TopCompaniesPage"));
 const CodingExam = lazy(() => import("@/pages/CodingExam"));
 const CompanyPrepHub = lazy(() => import("@/pages/CompanyPrepHub"));
 const CompanyQuestionBank = lazy(() => import("@/pages/CompanyQuestionBank"));
@@ -180,6 +181,14 @@ export const candidateRoutes = [
     element: (
       <ProtectedRoute>
         <Challenge100Days />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/top-companies",
+    element: (
+      <ProtectedRoute>
+        <TopCompaniesPage />
       </ProtectedRoute>
     ),
   },

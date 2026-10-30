@@ -1039,3 +1039,34 @@
     font-size: 8px !important;
   }
 }
+.nav-soon-badge {
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  color: #6366f1;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  border-radius: 100px;
+  line-height: 1.4;
+}
+
+[data-theme="dark"] .nav-soon-badge {
+  color: #a5b4fc;
+  background: rgba(99, 102, 241, 0.12);
+  border-color: rgba(99, 102, 241, 0.28);
+}
+
+.sidebar-link.active .nav-soon-badge {
+  color: #4f46e5;
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+[data-theme="dark"] .sidebar-link.active .nav-soon-badge {
+  color: #c7d2fe;
+  background: rgba(99, 102, 241, 0.2);
+  border-color: rgba(99, 102, 241, 0.4);
+}

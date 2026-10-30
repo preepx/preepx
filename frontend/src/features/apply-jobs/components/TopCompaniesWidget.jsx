@@ -67,7 +67,7 @@ export default function TopCompaniesWidget() {
                 <p>Practice from top tech companies</p>
               </div>
             </div>
-            <span className="tc-view-all" onClick={() => navigate("/company-prep")}>View All <ChevronRight size={16} /></span>
+            <span className="tc-view-all" onClick={() => navigate("/top-companies")}>View All <ChevronRight size={16} /></span>
           </div>
 
           <div className="tc-list" ref={tcListRef}>

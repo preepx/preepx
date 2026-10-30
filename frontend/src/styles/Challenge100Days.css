@@ -136,70 +136,107 @@
 }
 
 /* ══════════════════════════════════════════════════════════════
-   BANNER SECTION (Multi-Device Responsive Delivery)
+   1. 100-DAY CODING CHALLENGE HEADER
    ══════════════════════════════════════════════════════════════ */
-.c100-banner-wrap {
+.c100-header-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: 2px;
   position: relative;
-  margin: 0;
-  width: 100%;
-  height: auto;
-  border-radius: var(--c100-radius-xl);
-  overflow: hidden;
   z-index: 1;
-  border: 1px solid var(--c100-border);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-  background: #060813;
-  line-height: 0;
-  user-select: none;
-  -webkit-user-select: none;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.c100-banner-wrap::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(115deg,
-      transparent 20%,
-      rgba(255, 255, 255, 0.04) 45%,
-      rgba(255, 255, 255, 0.12) 50%,
-      rgba(255, 255, 255, 0.04) 55%,
-      transparent 80%);
-  transform: translateX(-100%);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 2;
+.c100-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.c100-banner-wrap:hover {
-  border-color: rgba(47, 111, 91, 0.45);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 25px rgba(47, 111, 91, 0.2);
+.c100-page-title {
+  font-size: clamp(24px, 2.8vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.c100-banner-wrap:hover::after {
-  transform: translateX(100%);
+.c100-title-dark {
+  color: #f1f5f9;
 }
 
-.c100-banner-picture {
-  width: 100%;
-  height: auto;
-  display: block;
-  line-height: 0;
-  pointer-events: none;
+.c100-title-gradient {
+  background: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.c100-banner-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  image-rendering: -webkit-optimize-contrast;
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-user-drag: none;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -o-user-drag: none;
-  pointer-events: none;
+.c100-day-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 50px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.c100-subtitle {
+  font-size: 14px;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Light Mode Overrides (Matches exact reference image) */
+[data-theme="light"] .c100-title-dark {
+  color: #0f172a;
+}
+
+[data-theme="light"] .c100-title-gradient {
+  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="light"] .c100-day-pill {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #059669;
+}
+
+[data-theme="light"] .c100-subtitle {
+  color: #64748b;
+}
+
+@media (max-width: 600px) {
+  .c100-page-title {
+    font-size: 22px;
+  }
+
+  .c100-day-pill {
+    font-size: 11px;
+    padding: 2.5px 8px;
+  }
+
+  .c100-subtitle {
+    font-size: 13px;
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════
@@ -1461,7 +1498,8 @@
 }
 
 .c100-skeleton-hero {
-  height: 220px;
+  height: 54px;
+  max-width: 380px;
   border-radius: var(--c100-radius-xl);
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 75%);
   background-size: 200% 100%;

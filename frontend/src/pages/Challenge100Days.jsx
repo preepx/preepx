@@ -278,13 +278,20 @@ const Challenge100Days = () => {
         <div className="c100-orb c100-orb-3" />
       </div>
 
-      {/* ─── Responsive Adaptive Banner ─── */}
-      <div className="c100-banner-wrap" draggable={false} onDragStart={(e) => e.preventDefault()}>
-        <picture className="c100-banner-picture">
-          <source media="(min-width: 1024px)" srcSet="https://ik.imagekit.io/cjnon47kr/banner1400*400.png" />
-          <source media="(min-width: 600px)" srcSet="https://ik.imagekit.io/cjnon47kr/tablet.png?updatedAt=1787077267679" />
-          <img src="https://ik.imagekit.io/cjnon47kr/preepx_100_days_mobile_EXACT_800x420.png" alt="100 Days Challenge Banner" className="c100-banner-img" draggable={false} onDragStart={(e) => e.preventDefault()} />
-        </picture>
+      {/* ─── 100-Day Coding Challenge Heading ─── */}
+      <div className="c100-header-wrap">
+        <div className="c100-title-row">
+          <h1 className="c100-page-title">
+            <span className="c100-title-dark">100-Day</span>{" "}
+            <span className="c100-title-gradient">Coding Challenge</span>
+          </h1>
+          <span className="c100-day-pill">
+            Day {activeDay} of {TOTAL_DAYS}
+          </span>
+        </div>
+        <p className="c100-subtitle">
+          Build consistency, one problem at a time.
+        </p>
       </div>
 
       {/* ─── Stats Row ─── */}
