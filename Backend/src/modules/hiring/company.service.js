@@ -24,6 +24,18 @@ const assertVerifiedCompany = async (recruiterId) => {
 const getOnboardingStatus = async (recruiterId) => {
   const recruiter = await getRecruiterContext(recruiterId);
   const company = recruiter.companyId;
+
+  // Auto-verify pending profiles by default (while preserving explicit admin rejection/suspension)
+  if (company && company.verificationStatus === "PENDING") {
+    company.verificationStatus = "VERIFIED";
+    await company.save();
+    recruiter.isVerified = true;
+    await recruiter.save();
+  } else if (!recruiter.isVerified && (!company || company.verificationStatus === "VERIFIED")) {
+    recruiter.isVerified = true;
+    await recruiter.save();
+  }
+
   return {
     onboardingStep: recruiter.onboardingStep,
     onboardingCompleted: recruiter.onboardingCompleted,
@@ -88,7 +100,9 @@ const upsertCompanyProfile = async (recruiterId, data) => {
       companySize: data.companySize ?? company.companySize,
       linkedin: data.linkedin ?? company.linkedin,
       officialEmail: data.officialEmail ?? company.officialEmail,
-      verificationStatus: "PENDING",
+      verificationStatus: ["REJECTED", "SUSPENDED"].includes(company.verificationStatus)
+        ? company.verificationStatus
+        : "VERIFIED",
     });
     await company.save();
   } else {
@@ -102,14 +116,15 @@ const upsertCompanyProfile = async (recruiterId, data) => {
       linkedin: data.linkedin || "",
       officialEmail: data.officialEmail || "",
       primaryRecruiterId: recruiterId,
-      verificationStatus: "PENDING",
+      verificationStatus: "VERIFIED",
     });
     recruiter.companyId = company._id;
     recruiter.companyName = company.name;
   }
 
-  if (recruiter.onboardingStep === "company") {
-    recruiter.onboardingStep = "verification";
+  recruiter.isVerified = true;
+  if (recruiter.onboardingStep === "company" || recruiter.onboardingStep === "verification") {
+    recruiter.onboardingStep = "subscription";
   }
   await recruiter.save();
   return company;
@@ -119,8 +134,11 @@ const submitVerification = async (recruiterId) => {
   const recruiter = await getRecruiterContext(recruiterId);
   if (!recruiter.companyId) throw new BadRequestError("Company profile required");
   const company = await Company.findById(recruiter.companyId);
-  company.verificationStatus = "PENDING";
+  if (!["REJECTED", "SUSPENDED"].includes(company.verificationStatus)) {
+    company.verificationStatus = "VERIFIED";
+  }
   await company.save();
+  recruiter.isVerified = company.verificationStatus === "VERIFIED";
   recruiter.onboardingStep = "subscription";
   await recruiter.save();
   return company;
@@ -158,7 +176,7 @@ const completeProfileForJobs = async (recruiterId, data) => {
 
   const recruiter = await Recruiter.findByIdAndUpdate(
     recruiterId,
-    { profileComplete: true, companyName: company.name },
+    { profileComplete: true, isVerified: true, companyName: company.name },
     { new: true }
   );
 

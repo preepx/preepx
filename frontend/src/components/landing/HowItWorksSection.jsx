@@ -286,15 +286,25 @@ function HowItWorksSection() {
                 {/* Hiring Pipeline */}
                 <div className="mt-[12px] ml-0 w-full rounded-[8px] border border-gray-500 bg-[#84D4FF] px-[8px] min-[360px]:px-[16px] pb-[8px] pt-[10px] overflow-hidden" style={{ minHeight: '90px' }}>
                   <h4 className="mt-0 mb-[4px] text-left font-sans text-[13px] min-[360px]:text-[14px] min-[860px]:text-[16px] font-medium leading-[24px] tracking-normal text-[#111]">Hiring Pipeline</h4>
-                  <div className="relative mt-[4px] grid grid-cols-5 text-center gap-x-0.5 min-[360px]:gap-x-0">
-                    <div className="pointer-events-none absolute left-[10%] right-[10%] top-[42px] min-[860px]:top-[45px] h-[3px] rounded-full bg-gradient-to-r from-sky-200 via-slate-500 to-slate-800" />
-                    {PIPELINE.map((step) => (
-                      <div key={step.label} className="relative z-10 flex flex-col items-center">
-                        <span className="text-[7.5px] min-[360px]:text-[9px] min-[860px]:text-[11px] font-medium text-black truncate max-w-full" style={{ padding: '0 1px' }}>{step.label}</span>
-                        <span className="mb-[2px] text-[8.5px] min-[360px]:text-[10px] min-[860px]:text-[12px] font-bold text-black">{step.val}</span>
-                        <span className={`h-[14px] w-[14px] min-[360px]:h-[18px] min-[360px]:w-[18px] min-[860px]:h-[22px] min-[860px]:w-[22px] rounded-full ${step.dot}`} />
-                      </div>
-                    ))}
+                  <div className="mt-[4px]">
+                    {/* Stage Labels & Counts */}
+                    <div className="grid grid-cols-5 text-center gap-x-0.5 min-[360px]:gap-x-0 mb-[3px] min-[860px]:mb-[4px]">
+                      {PIPELINE.map((step) => (
+                        <div key={step.label} className="flex flex-col items-center">
+                          <span className="text-[7.5px] min-[360px]:text-[9px] min-[860px]:text-[11px] font-medium text-black truncate max-w-full" style={{ padding: '0 1px' }}>{step.label}</span>
+                          <span className="text-[8.5px] min-[360px]:text-[10px] min-[860px]:text-[12px] font-bold text-black">{step.val}</span>
+                        </div>
+                      ))}
+                    </div>
+                    {/* Progress Line & Step Dots - line is centered exactly on the circles across all screen sizes */}
+                    <div className="relative grid grid-cols-5 items-center">
+                      <div className="pointer-events-none absolute left-[10%] right-[10%] top-1/2 -translate-y-1/2 h-[3px] rounded-full bg-gradient-to-r from-sky-200 via-slate-500 to-slate-800" />
+                      {PIPELINE.map((step) => (
+                        <div key={step.label} className="relative z-10 flex justify-center items-center">
+                          <span className={`h-[14px] w-[14px] min-[360px]:h-[18px] min-[360px]:w-[18px] min-[860px]:h-[22px] min-[860px]:w-[22px] rounded-full ${step.dot}`} />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -83,7 +83,19 @@ exports.registerRecruiter = catchAsync(async (req, res) => {
     companyName,
     companyWebsite,
     password,
+    isVerified: true,
   });
+
+  const Company = require('../../../models/Company');
+  const company = await Company.create({
+    name: companyName,
+    website: companyWebsite || '',
+    officialEmail: normalizedEmail,
+    primaryRecruiterId: recruiter._id,
+    verificationStatus: 'VERIFIED',
+  });
+  recruiter.companyId = company._id;
+  await recruiter.save();
 
   await Otp.deleteOne({ _id: otpRecord._id });
 
@@ -155,6 +167,7 @@ exports.registerRecruiter = catchAsync(async (req, res) => {
       companyName: recruiter.companyName,
       companyWebsite: recruiter.companyWebsite,
       role: 'recruiter',
+      isVerified: true,
       onboardingCompleted: recruiter.onboardingCompleted,
       onboardingStep: recruiter.onboardingStep,
       profileComplete: recruiter.profileComplete,
@@ -188,6 +201,7 @@ exports.loginRecruiter = catchAsync(async (req, res) => {
       companyName: recruiter.companyName,
       companyWebsite: recruiter.companyWebsite,
       role: 'recruiter',
+      isVerified: recruiter.isVerified,
       onboardingCompleted: recruiter.onboardingCompleted,
       onboardingStep: recruiter.onboardingStep,
       profileComplete: recruiter.profileComplete,

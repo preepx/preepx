@@ -10,7 +10,7 @@ const recruiterSchema = mongoose.Schema(
     companyName: { type: String, required: true },
     companyWebsite: { type: String },
     password: { type: String, required: true },
-    isVerified: { type: Boolean, default: false },
+    isVerified: { type: Boolean, default: true },
     onboardingStep: { type: String, default: "profile" },
     onboardingCompleted: { type: Boolean, default: false },
     profileComplete: { type: Boolean, default: false },

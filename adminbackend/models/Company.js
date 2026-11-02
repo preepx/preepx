@@ -13,7 +13,7 @@ const companySchema = new mongoose.Schema(
     verificationStatus: {
       type: String,
       enum: ["PENDING", "VERIFIED", "REJECTED", "SUSPENDED"],
-      default: "PENDING",
+      default: "VERIFIED",
     },
     verificationNotes: { type: String, default: "" },
     primaryRecruiterId: { type: mongoose.Schema.Types.ObjectId, ref: "Recruiter", required: true },

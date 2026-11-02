@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Briefcase, MapPin, DollarSign, BrainCircuit, ListChecks, Save, Send, Trash2, Plus, Sparkles } from "lucide-react";
+import { Briefcase, MapPin, DollarSign, BrainCircuit, ListChecks, Save, Send, Trash2, Plus, Sparkles, Crown, X, Check } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
-import { createJob, getJob, updateJob, generateJobDetails } from "@/services/recruiterAPI";
+import { createJob, getJob, updateJob, generateJobDetails, getBilling } from "@/services/recruiterAPI";
 import notify from "@/utils/notify";
 import DashboardSkeleton from "@/components/recruiter/DashboardSkeleton";
 import '@/styles/RecruiterLayout.css';
@@ -46,6 +46,9 @@ export default function CreateJob() {
   
   const [aiPrompt, setAiPrompt] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
+  const [billingData, setBillingData] = useState(null);
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+  const [modalTrigger, setModalTrigger] = useState("publish");
 
   useEffect(() => {
     if (isEdit) {
@@ -91,12 +94,42 @@ export default function CreateJob() {
   }, [jobId, isEdit]);
 
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+  useEffect(() => {
+    getBilling().then((b) => setBillingData(b)).catch(() => {});
+  }, []);
+
+  const checkSubscription = async () => {
+    try {
+      let b = billingData;
+      if (!b) {
+        b = await getBilling();
+        setBillingData(b);
+      }
+      const isLive = Boolean(b?.subscription && b?.subscription?.live);
+      const remaining = b?.usage?.remainingJobPosts;
+      if (!isLive || remaining === 0) {
+        return false;
+      }
+      return true;
+    } catch (err) {
+      return false;
+    }
+  };
+
 
   const handleSubmit = async (e, type = "draft") => {
     e?.preventDefault();
     if (!form.title || !form.role || !form.description) {
       notify.error("Title, role and description are required");
       return;
+    }
+    if (type === "published") {
+      const hasSub = await checkSubscription();
+      if (!hasSub) {
+        setModalTrigger("publish");
+        setShowSubscriptionModal(true);
+        return;
+      }
     }
     setLoading(true);
     setSubmitType(type);
@@ -138,7 +171,8 @@ export default function CreateJob() {
     } catch (err) {
       notify.error(err.response?.data?.message || `Failed to ${isEdit ? "update" : "create"} job`);
       if (err.response?.status === 403 && String(err.response?.data?.message || "").toLowerCase().includes("plan")) {
-        notify.error("Open Billing to upgrade your Recruiter Plan.");
+        setModalTrigger("publish");
+        setShowSubscriptionModal(true);
       }
     } finally {
       setLoading(false);
@@ -148,6 +182,12 @@ export default function CreateJob() {
   const handleAIFill = async () => {
     if (!aiPrompt.trim()) {
       notify.error("Please enter a prompt (e.g. 'Software Developer with 3 years experience')");
+      return;
+    }
+    const hasSub = await checkSubscription();
+    if (!hasSub) {
+      setModalTrigger("autofill");
+      setShowSubscriptionModal(true);
       return;
     }
     setAiLoading(true);
@@ -351,6 +391,184 @@ export default function CreateJob() {
           <Send size={16} /> {loading && submitType === "published" ? "Saving..." : (isEdit ? "Update & Publish" : "Publish Job Live")}
         </button>
       </div>
+
+      {/* Subscription Required Modal Popup */}
+      {showSubscriptionModal && (
+        <div
+          className="rx-modal-backdrop"
+          onClick={() => setShowSubscriptionModal(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(15, 23, 42, 0.65)",
+            backdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9999,
+            padding: 20,
+            animation: "rxFadeIn 0.2s ease",
+          }}
+        >
+          <div
+            className="rx-modal-card"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: "#ffffff",
+              border: "1px solid #e2e8f0",
+              borderRadius: 12,
+              maxWidth: 480,
+              width: "100%",
+              padding: "28px 26px 24px",
+              boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
+              position: "relative",
+              textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            {/* Close Button */}
+            <button
+              type="button"
+              onClick={() => setShowSubscriptionModal(false)}
+              style={{
+                position: "absolute",
+                top: 14,
+                right: 14,
+                background: "transparent",
+                border: "none",
+                color: "#94a3b8",
+                cursor: "pointer",
+                padding: 6,
+                borderRadius: 6,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <X size={18} />
+            </button>
+
+            {/* Icon Circle */}
+            <div
+              style={{
+                width: 60,
+                height: 60,
+                borderRadius: "50%",
+                background: "linear-gradient(135deg, rgba(61, 94, 255, 0.12), rgba(96, 23, 199, 0.12))",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "rgb(61, 94, 255)",
+                marginBottom: 16,
+                boxShadow: "0 4px 12px rgba(61, 94, 255, 0.15)",
+              }}
+            >
+              <Crown size={30} strokeWidth={2.2} />
+            </div>
+
+            {/* Title */}
+            <h3
+              style={{
+                fontSize: 20,
+                fontWeight: 700,
+                color: "#0f172a",
+                margin: "0 0 8px 0",
+                letterSpacing: "-0.3px",
+              }}
+            >
+              Subscription Plan Required
+            </h3>
+
+            {/* Subtitle Message */}
+            <p
+              style={{
+                fontSize: 13.5,
+                color: "#64748b",
+                lineHeight: 1.5,
+                margin: "0 0 20px 0",
+                maxWidth: 400,
+              }}
+            >
+              {modalTrigger === "autofill"
+                ? "You need an active subscription to use AI Auto-Fill. Purchase a subscription plan to automatically generate job descriptions and requirements with AI."
+                : "You don't have an active subscription to publish jobs live. Please visit the billing section and purchase a subscription plan to continue."}
+            </p>
+
+            {/* Features Preview Box */}
+            <div
+              style={{
+                background: "#f8fafc",
+                border: "1px solid #e2e8f0",
+                borderRadius: 8,
+                padding: "12px 16px",
+                width: "100%",
+                boxSizing: "border-box",
+                marginBottom: 24,
+                textAlign: "left",
+                display: "flex",
+                flexDirection: "column",
+                gap: 8,
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: "#334155" }}>
+                <Check size={15} style={{ color: "rgb(61, 94, 255)", flexShrink: 0 }} />
+                <span>Unlimited AI Job Auto-Fill & Description Generator</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: "#334155" }}>
+                <Check size={15} style={{ color: "rgb(61, 94, 255)", flexShrink: 0 }} />
+                <span>Publish Jobs Live & AI Candidate Matching</span>
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: "#334155" }}>
+                <Check size={15} style={{ color: "rgb(61, 94, 255)", flexShrink: 0 }} />
+                <span>Custom MCQ & Coding Assessment Tests</span>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div
+              style={{
+                display: "flex",
+                gap: 12,
+                width: "100%",
+                justifyContent: "flex-end",
+              }}
+            >
+              <button
+                type="button"
+                className="rx-btn rx-btn-secondary"
+                onClick={() => setShowSubscriptionModal(false)}
+                style={{
+                  padding: "10px 18px",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  borderRadius: 8,
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="rx-btn rx-btn-primary"
+                onClick={() => navigate("/recruiter/billing")}
+                style={{
+                  background: "linear-gradient(90deg, rgb(61, 94, 255), rgb(96, 23, 199))",
+                  color: "#ffffff",
+                  padding: "10px 22px",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  borderRadius: 8,
+                  border: "none",
+                  boxShadow: "0 4px 14px rgba(61, 94, 255, 0.35)",
+                }}
+              >
+                Go to Billing Section →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       </>
       )}
     </RecruiterLayout>

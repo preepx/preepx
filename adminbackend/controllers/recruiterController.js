@@ -43,7 +43,7 @@ const getRecruiters = async (req, res) => {
     if (status) {
       const statusUpper = status.toUpperCase();
       recruiters = recruiters.filter(r => {
-        const compStatus = r.companyId ? r.companyId.verificationStatus : "PENDING";
+        const compStatus = r.companyId ? (r.companyId.verificationStatus || "VERIFIED") : "VERIFIED";
         return compStatus === statusUpper;
       });
     }
@@ -67,7 +67,7 @@ const getRecruiters = async (req, res) => {
       const rid = r._id.toString();
       const sub = subMap[rid];
       
-      const vStatus = c.verificationStatus || "PENDING";
+      const vStatus = c.verificationStatus || "VERIFIED";
 
       return {
         _id: c._id || r._id,
@@ -156,20 +156,34 @@ const updateVerificationStatus = async (req, res) => {
       return res.status(400).json({ message: "Invalid status" });
     }
 
-    const company = await Company.findById(req.params.companyId);
-    if (!company) return res.status(404).json({ message: "Company not found" });
+    const targetId = req.params.companyId;
+    let company = await Company.findById(targetId);
+    let recruiter = null;
 
-    company.verificationStatus = status;
-    if (notes !== undefined) company.verificationNotes = notes;
-    await company.save();
+    if (company) {
+      recruiter = await Recruiter.findById(company.primaryRecruiterId);
+    } else {
+      recruiter = await Recruiter.findById(targetId);
+      if (recruiter && recruiter.companyId) {
+        company = await Company.findById(recruiter.companyId);
+      }
+    }
 
-    const recruiter = await Recruiter.findById(company.primaryRecruiterId);
+    if (!company && !recruiter) return res.status(404).json({ message: "Recruiter / Company not found" });
+
+    if (company) {
+      company.verificationStatus = status;
+      if (notes !== undefined) company.verificationNotes = notes;
+      await company.save();
+    }
+
     if (recruiter) {
       recruiter.isVerified = status === "VERIFIED";
       if (status === "VERIFIED") {
         recruiter.onboardingStep = recruiter.onboardingStep === "verification" ? "subscription" : recruiter.onboardingStep;
       }
       await recruiter.save();
+    }
 
       const messages = {
         VERIFIED: {
@@ -248,7 +262,6 @@ const updateVerificationStatus = async (req, res) => {
           console.error("Failed to send Brevo email:", err);
         }
       }
-    }
 
     res.json({
       message: `Verification status updated to ${status}`,

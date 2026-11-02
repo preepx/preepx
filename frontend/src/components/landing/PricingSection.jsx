@@ -272,7 +272,7 @@ function PricingSection({ onRecruiterClick }) {
             </div>
 
             {/* Candidate Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:flex xl:flex-nowrap gap-3 sm:gap-[10px] justify-center w-full
+            <div style={{ marginTop: "10px" }} className="grid grid-cols-1 sm:grid-cols-2 xl:flex xl:flex-nowrap gap-3 sm:gap-[10px] justify-center w-full
   max-w-[340px] sm:max-w-[460px] xl:max-w-none mx-auto">
               {pricingData.candidate.plans.map((plan) => {
                 return (
@@ -293,7 +293,29 @@ function PricingSection({ onRecruiterClick }) {
                         }}
                       >
                         {plan.badge && (
-                          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white border border-blue-200 text-blue-700 text-[9.5px] sm:text-[11px] font-bold px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-sm whitespace-nowrap">
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '-14px',
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              backgroundColor: '#ffffff',
+                              border: '1.5px solid #93c5fd',
+                              color: '#1d4ed8',
+                              fontSize: '12px',
+                              fontWeight: '700',
+                              padding: '5px 18px',
+                              borderRadius: '9999px',
+                              boxShadow: '0 2px 8px rgba(37, 99, 235, 0.12)',
+                              whiteSpace: 'nowrap',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: '4px',
+                              lineHeight: '1.2',
+                              zIndex: 10,
+                            }}
+                          >
                             {plan.badge}
                           </div>
                         )}
@@ -350,7 +372,7 @@ function PricingSection({ onRecruiterClick }) {
             </div>
 
             {/* Recruiter Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:flex xl:flex-nowrap gap-4 sm:gap-3 justify-center relative w-full max-w-[420px] sm:max-w-[700px] xl:max-w-none">
+            <div style={{ marginTop: "10px" }} className="grid grid-cols-1 sm:grid-cols-2 xl:flex xl:flex-nowrap gap-4 sm:gap-3 justify-center relative w-full max-w-[420px] sm:max-w-[700px] xl:max-w-none">
               {pricingData.recruiter.plans.map((plan) => {
                 return (
                   <div className="flex items-center mx-auto justify-center">
@@ -367,7 +389,29 @@ function PricingSection({ onRecruiterClick }) {
                         }}
                       >
                         {plan.badge && (
-                          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white border border-emerald-200 text-emerald-800 text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-sm whitespace-nowrap">
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '-14px',
+                              left: '50%',
+                              transform: 'translateX(-50%)',
+                              backgroundColor: '#ffffff',
+                              border: '1.5px solid #6ee7b7',
+                              color: '#065f46',
+                              fontSize: '12px',
+                              fontWeight: '700',
+                              padding: '5px 18px',
+                              borderRadius: '9999px',
+                              boxShadow: '0 2px 8px rgba(5, 150, 105, 0.12)',
+                              whiteSpace: 'nowrap',
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              gap: '4px',
+                              lineHeight: '1.2',
+                              zIndex: 10,
+                            }}
+                          >
                             {plan.badge}
                           </div>
                         )}

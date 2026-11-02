@@ -17,7 +17,7 @@ const Recruiters = () => {
   const [list, setList] = useState([]);
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('PENDING');
+  const [filter, setFilter] = useState('');
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState(null);
   const [notes, setNotes] = useState('');
@@ -102,7 +102,7 @@ const Recruiters = () => {
       <div className="glass-panel content-card" style={{ marginTop: '1.5rem' }}>
         <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-            {['PENDING', 'VERIFIED', 'REJECTED', 'SUSPENDED', ''].map((s) => (
+            {['', 'VERIFIED', 'PENDING', 'REJECTED', 'SUSPENDED'].map((s) => (
               <button
                 key={s || 'all'}
                 type="button"
