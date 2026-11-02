@@ -160,7 +160,7 @@ export default function CompanyPrepHub() {
                 navigate(`/company-prep/${company.slug}`);
               }}
             >
-              <Sparkles size={14} />
+              {/* <Sparkles size={14} /> */}
               <span>Open Test</span>
               <ChevronRight size={14} />
             </button>

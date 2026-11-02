@@ -1,69 +1,99 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Brain, ArrowRight } from "lucide-react";
-import ScoreRing from "./ScoreRing";
-import EmptyState from "./EmptyState";
+import { Sparkles, ArrowRight, Briefcase, Award, Code, CheckSquare } from "lucide-react";
 
 export default function AiMatchingCard({ topCandidates = [], recentJobs = [] }) {
-  const topJob = recentJobs.find((j) => ["published", "open"].includes(j.status)) || recentJobs[0];
-  const avgMatch = topCandidates.length
-    ? Math.round(topCandidates.reduce((s, c) => s + (c.matchScore || 0), 0) / topCandidates.length)
-    : 0;
-
   return (
     <section className="rx-card rx-ai-card">
-      <div className="rx-section-head">
-        <div className="rx-ai-head">
-          <Brain size={20} className="rx-ai-icon" />
-          <div>
-            <h2>AI Candidate Matching</h2>
-            <p className="rx-muted rx-section-sub">Skills · Experience · Projects · Assessment</p>
+      <div className="rx-card-header">
+        <div>
+          <div className="rx-ai-title-row">
+            <Sparkles size={16} className="rx-ai-header-sparkle" />
+            <h2 className="rx-card-title">AI-Powered Hiring</h2>
+          </div>
+          <p className="rx-card-subtitle">Skills · Experience · Projects · Assessments</p>
+        </div>
+      </div>
+
+      {/* Visual AI Flowchart / Architecture Diagram */}
+      <div className="rx-flowchart-box" aria-hidden="true">
+        {/* Top Node: Job */}
+        <div className="rx-flow-node rx-flow-node--job">
+          <div className="rx-flow-node-title">Job</div>
+          <div className="rx-flow-node-desc">Post job openings with requirements</div>
+        </div>
+
+        {/* Top Connector */}
+        <div className="rx-flow-line-vertical" />
+
+        {/* Middle Row: Skills <-> AI Matching <-> Experience */}
+        <div className="rx-flow-row rx-flow-row--mid">
+          <div className="rx-flow-node rx-flow-node--side">
+            <div className="rx-flow-node-title">Skills</div>
+            <div className="rx-flow-node-desc">Match required skills with profiles</div>
+          </div>
+
+          <div className="rx-flow-line-horizontal" />
+
+          <div className="rx-flow-hub">
+            <span className="rx-flow-hub-text">AI<br />Matching</span>
+          </div>
+
+          <div className="rx-flow-line-horizontal" />
+
+          <div className="rx-flow-node rx-flow-node--side">
+            <div className="rx-flow-node-title">Experience</div>
+            <div className="rx-flow-node-desc">Filter by relevant experience levels</div>
           </div>
         </div>
-        {avgMatch > 0 && <ScoreRing value={avgMatch} size={52} label="Average match" />}
-      </div>
 
-      <div className="rx-ai-network" aria-hidden="true">
-        <div className="rx-ai-node rx-ai-node--job">JOB</div>
-        <div className="rx-ai-branches">
-          <span>Skills</span><span>Experience</span><span>Projects</span><span>Assessment</span>
+        {/* Bottom Connector */}
+        <div className="rx-flow-line-vertical" />
+
+        {/* Bottom Row: Projects <-> Assessments */}
+        <div className="rx-flow-row rx-flow-row--bottom">
+          <div className="rx-flow-node rx-flow-node--side">
+            <div className="rx-flow-node-title">Projects</div>
+            <div className="rx-flow-node-desc">Evaluate real project work</div>
+          </div>
+
+          <div className="rx-flow-node rx-flow-node--side">
+            <div className="rx-flow-node-title">Assessments</div>
+            <div className="rx-flow-node-desc">Use AI assessments to validate skills</div>
+          </div>
         </div>
-        <div className="rx-ai-arrow">↓</div>
-        <div className="rx-ai-node rx-ai-node--engine">AI MATCHING</div>
-        <div className="rx-ai-arrow">↓</div>
-        <div className="rx-ai-node rx-ai-node--candidates">CANDIDATES</div>
       </div>
 
-      {topJob && (
-        <p className="rx-ai-job-title">
-          Top role: <strong>{topJob.title || topJob.role}</strong>
-        </p>
-      )}
-
+      {/* Candidates List or Empty State */}
       {topCandidates.length === 0 ? (
-        <EmptyState
-          title="No matches yet"
-          description="Publish a job to start AI-powered candidate matching."
-          actionLabel="View Jobs"
-          actionTo="/recruiter/jobs"
-        />
+        <div className="rx-ai-empty">
+          <h3 className="rx-empty-title">No Matches Found Yet</h3>
+          <p className="rx-empty-desc">
+            Publish your first job to find candidates with AI matching.
+          </p>
+          <Link to="/recruiter/jobs" className="rx-btn rx-btn-primary rx-btn-sm">
+            View Jobs
+          </Link>
+        </div>
       ) : (
         <ul className="rx-ai-list">
           {topCandidates.slice(0, 3).map((c) => (
-            <li key={c._id}>
+            <li key={c._id} className="rx-ai-item">
               <div>
                 <strong>{c.userId?.fullName || "Candidate"}</strong>
-                <span className="rx-muted">{c.jobId?.title || c.jobId?.role || "Matched"}</span>
+                <span className="rx-table-sub">{c.jobId?.title || c.jobId?.role || "Matched"}</span>
               </div>
-              <span className="rx-ai-score">{c.matchScore ?? 0}%</span>
+              <span className="rx-match-badge">{c.matchScore ?? 0}% match</span>
             </li>
           ))}
         </ul>
       )}
 
-      <Link to="/recruiter/candidates" className="rx-link-action">
-        Explore candidates <ArrowRight size={14} />
-      </Link>
+      <div className="rx-card-footer">
+        <Link to="/recruiter/candidates" className="rx-link-action">
+          Browse Candidates <ArrowRight size={13} />
+        </Link>
+      </div>
     </section>
   );
 }

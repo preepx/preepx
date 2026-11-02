@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from "react";
+import { UserCheck } from "lucide-react";
 
-const PERIODS = ["7D", "30D", "90D"];
+const PERIODS = ["7D", "15D", "30D"];
 
 function buildSeries(stats, funnel, period) {
-  const scale = period === "7D" ? 0.25 : period === "30D" ? 0.6 : 1;
+  const scale = period === "7D" ? 0.25 : period === "15D" ? 0.5 : 1;
   const base = [
     stats.totalCandidates ?? funnel.matched ?? 0,
     stats.assessmentsCompleted ?? funnel.assessment ?? 0,
@@ -18,9 +19,9 @@ export default function HiringAnalytics({ stats = {}, funnel = {} }) {
   const series = useMemo(() => buildSeries(stats, funnel, period), [stats, funnel, period]);
   const labels = ["Candidates", "Assessments", "Interviews", "Hires"];
   const max = Math.max(...series, 1);
-  const w = 320;
-  const h = 120;
-  const pad = 12;
+  const w = 360;
+  const h = 130;
+  const pad = 14;
 
   const points = series.map((v, i) => {
     const x = pad + (i / Math.max(series.length - 1, 1)) * (w - pad * 2);
@@ -34,11 +35,11 @@ export default function HiringAnalytics({ stats = {}, funnel = {} }) {
   const hasData = series.some((v) => v > 0);
 
   return (
-    <section className="rx-card rx-analytics-chart">
-      <div className="rx-section-head">
+    <section className="rx-card rx-analytics-card">
+      <div className="rx-card-header">
         <div>
-          <h2>Hiring Performance</h2>
-          <p className="rx-muted rx-section-sub">Pipeline metrics overview</p>
+          <h2 className="rx-card-title">Hiring Performance</h2>
+          <p className="rx-card-subtitle">Track Your Hiring Progress</p>
         </div>
         <div className="rx-period-toggle" role="tablist">
           {PERIODS.map((p) => (
@@ -47,7 +48,7 @@ export default function HiringAnalytics({ stats = {}, funnel = {} }) {
               type="button"
               role="tab"
               aria-selected={period === p}
-              className={period === p ? "active" : ""}
+              className={`rx-period-btn ${period === p ? "active" : ""}`}
               onClick={() => setPeriod(p)}
             >
               {p}
@@ -57,23 +58,34 @@ export default function HiringAnalytics({ stats = {}, funnel = {} }) {
       </div>
 
       {!hasData ? (
-        <div className="rx-chart-empty">
-          <p className="rx-muted">Not enough data yet. Post jobs and start hiring to see performance trends.</p>
+        <div className="rx-empty-state-wrap">
+          <div className="rx-empty-icon-circle">
+            <UserCheck size={32} strokeWidth={1.5} />
+          </div>
+          <h3 className="rx-empty-title">Your hiring insights will appear here</h3>
+          <p className="rx-empty-desc">Once you start posting jobs and reviewing candidates.</p>
         </div>
       ) : (
         <>
           <svg viewBox={`0 0 ${w} ${h}`} className="rx-area-chart" aria-label="Hiring performance chart">
             <defs>
-              <linearGradient id="rxChartGrad" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="var(--primary)" stopOpacity="0.25" />
-                <stop offset="100%" stopColor="var(--primary)" stopOpacity="0" />
+              <linearGradient id="rxPerfGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#6366f1" stopOpacity="0.25" />
+                <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
               </linearGradient>
             </defs>
-            <polygon points={areaPath} fill="url(#rxChartGrad)" />
-            <polyline points={linePath} fill="none" stroke="var(--primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <polygon points={areaPath} fill="url(#rxPerfGrad)" />
+            <polyline
+              points={linePath}
+              fill="none"
+              stroke="#6366f1"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
             {points.map((p) => (
               <g key={p.label}>
-                <circle cx={p.x} cy={p.y} r="4" fill="var(--surface)" stroke="var(--primary)" strokeWidth="2" />
+                <circle cx={p.x} cy={p.y} r="4" fill="#ffffff" stroke="#6366f1" strokeWidth="2" />
                 <title>{p.label}: {p.v}</title>
               </g>
             ))}
@@ -82,7 +94,7 @@ export default function HiringAnalytics({ stats = {}, funnel = {} }) {
             {points.map((p) => (
               <div key={p.label} className="rx-chart-legend-item">
                 <strong>{p.v}</strong>
-                <span className="rx-muted">{p.label}</span>
+                <span>{p.label}</span>
               </div>
             ))}
           </div>

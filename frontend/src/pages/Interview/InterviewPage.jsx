@@ -201,20 +201,40 @@ const InterviewPage = () => {
 
       <div className="stats-row">
         <div className="stat-card">
-          <div className="stat-icon blue"><Clock size={22} /></div>
-          <div><span className="stat-num">{stats.totalSessions}</span><span className="stat-lbl">Total Sessions</span></div>
+          <div className="stat-icon blue">
+            <img src="/dsbanner/totelsession.svg" alt="Total Sessions" width={20} height={20} style={{ filter: 'brightness(0) saturate(100%) invert(35%) sepia(87%) saturate(2250%) hue-rotate(206deg) brightness(98%) contrast(98%)' }} />
+          </div>
+          <div>
+            <span className="stat-num">{stats.totalSessions}</span>
+            <span className="stat-lbl">Total Sessions</span>
+          </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon green"><Trophy size={22} /></div>
-          <div><span className="stat-num">{stats.completed}</span><span className="stat-lbl">Completed</span></div>
+          <div className="stat-icon green">
+            <img src="/dsbanner/complete.svg" alt="Completed" width={20} height={20} style={{ filter: 'brightness(0) saturate(100%) invert(56%) sepia(50%) saturate(1450%) hue-rotate(107deg) brightness(101%) contrast(92%)' }} />
+          </div>
+          <div>
+            <span className="stat-num">{stats.completed}</span>
+            <span className="stat-lbl">Completed</span>
+          </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon purple"><Target size={22} /></div>
-          <div><span className="stat-num">{stats.avgScore}%</span><span className="stat-lbl">Avg Score</span></div>
+          <div className="stat-icon purple">
+            <img src="/dsbanner/avgscor.svg" alt="Avg Score" width={20} height={20} style={{ filter: 'brightness(0) saturate(100%) invert(39%) sepia(53%) saturate(3015%) hue-rotate(238deg) brightness(99%) contrast(92%)' }} />
+          </div>
+          <div>
+            <span className="stat-num">{stats.avgScore > 0 ? `${stats.avgScore}%` : "1%"}</span>
+            <span className="stat-lbl">Avg Score</span>
+          </div>
         </div>
         <div className="stat-card">
-          <div className="stat-icon orange"><Award size={22} /></div>
-          <div><span className="stat-num">{stats.badges}</span><span className="stat-lbl">Badges</span></div>
+          <div className="stat-icon orange">
+            <img src="/dsbanner/Badges.svg" alt="Badges" width={20} height={20} style={{ filter: 'brightness(0) saturate(100%) invert(55%) sepia(80%) saturate(3015%) hue-rotate(345deg) brightness(102%) contrast(94%)' }} />
+          </div>
+          <div>
+            <span className="stat-num">{stats.badges || 0}</span>
+            <span className="stat-lbl">Badges</span>
+          </div>
         </div>
       </div>
 

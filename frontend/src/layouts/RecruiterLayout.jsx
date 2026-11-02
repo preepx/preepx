@@ -18,13 +18,22 @@ import '@/styles/RecruiterLayout.css';
 
 const SOCKET_URL = import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, "") || "http://localhost:4000";
 
+const SvgIcon = ({ src, size = 19, style = {} }) => {
+  return <img src={src} alt="" style={{ width: size, height: size, objectFit: 'contain', ...style }} />;
+};
+
+const DashboardIcon = (props) => <SvgIcon src="/sidebar/dsboard.svg" {...props} />;
+const AnalyticsIcon = (props) => <SvgIcon src="/sidebar/anyltics.svg" {...props} />;
+const CustomSettingsIcon = (props) => <SvgIcon src="/sidebar/setting.svg" {...props} />;
+const CustomLogoutIcon = (props) => <SvgIcon src="/sidebar/logout.svg" {...props} />;
+
 const NAV_SECTIONS = [
   {
-    label: "Overview",
-    items: [{ to: "/recruiter-dashboard", icon: LayoutDashboard, label: "Dashboard" }],
+    label: null,
+    items: [{ to: "/recruiter-dashboard", icon: DashboardIcon, label: "Dashboard" }],
   },
   {
-    label: "Hiring",
+    label: "HIRING",
     items: [
       { to: "/recruiter/jobs", icon: Briefcase, label: "Jobs" },
       { to: "/recruiter/candidates", icon: Users, label: "Candidates" },
@@ -35,15 +44,14 @@ const NAV_SECTIONS = [
     ],
   },
   {
-    label: "Insights",
-    items: [{ to: "/recruiter/analytics", icon: BarChart3, label: "Analytics" }],
+    label: "INSIGHTS",
+    items: [{ to: "/recruiter/analytics", icon: AnalyticsIcon, label: "Analytics" }],
   },
   {
-    label: "Account",
+    label: "ACCOUNT",
     items: [
       { to: "/recruiter/billing", icon: CreditCard, label: "Billing" },
       { to: "/recruiter/company", icon: Building2, label: "Company Profile" },
-      { to: "/recruiter/settings", icon: Settings, label: "Settings" },
     ],
   },
 ];
@@ -143,47 +151,113 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
         <div className={`rx-root ${collapsed ? "collapsed" : ""}`} style={{ flex: 1 }}>
           <aside className={`rx-sidebar ${mobileOpen ? "open" : ""}`}>
-            <div className="rx-sidebar-top" style={{ padding: '8px 8px 16px', marginBottom: '12px' }}>
-              <Link to="/recruiter-dashboard" className="rx-brand" style={{ display: 'flex', alignItems: 'center' }}>
-                {collapsed ? (
-                  <img src="/logo.png" alt="PreepX" style={{ height: '32px', objectFit: 'contain', marginLeft: '4px' }} />
+            <div className="rx-sidebar-top">
+              <Link to="/recruiter-dashboard" className="rx-brand">
+                {collapsed && !mobileOpen ? (
+                  <img
+                    src="/logo.png"
+                    alt="PreepX"
+                    style={{ height: "32px", objectFit: "contain", marginLeft: "4px" }}
+                  />
                 ) : (
-                  <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: '100px', objectFit: 'contain', margin: '-28px 0 -28px 10px' }} />
+                  <img
+                    src="/preepx_logo.png"
+                    alt="PreepX"
+                    className="brand-logo-img"
+                    style={{ height: "46px", objectFit: "contain" }}
+                  />
                 )}
               </Link>
-              <button type="button" className="rx-icon-btn" onClick={() => setCollapsed(!collapsed)} aria-label="Toggle sidebar">
-                <Menu size={20} />
-              </button>
+              {(!collapsed || mobileOpen) && !mobileOpen && (
+                <button
+                  type="button"
+                  className="rx-sidebar-toggle"
+                  onClick={() => setCollapsed(!collapsed)}
+                  aria-label="Toggle Sidebar"
+                >
+                  <div className="rx-ham-box">
+                    <span className="rx-ham-bar rx-top-bar" />
+                    <span className="rx-ham-bar rx-mid-bar" />
+                    <span className="rx-ham-bar rx-bot-bar" />
+                  </div>
+                </button>
+              )}
+              {mobileOpen && (
+                <button
+                  type="button"
+                  className="rx-sidebar-close-btn"
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Close Sidebar"
+                >
+                  <X size={19} />
+                </button>
+              )}
             </div>
-
-
 
             <nav className="rx-nav">
               {NAV_SECTIONS.map(({ label, items }) => (
-                <div key={label} className="rx-nav-section">
-                  {!collapsed && <span className="rx-nav-label">{label}</span>}
+                <div key={label || "top"} className="rx-nav-section">
+                  {label && (!collapsed || mobileOpen) && (
+                    <span className="rx-nav-label">{label}</span>
+                  )}
                   {items.map(({ to, icon: Icon, label: itemLabel }) => (
                     <Link
                       key={to}
                       to={to}
-                      title={collapsed ? itemLabel : undefined}
+                      title={itemLabel}
                       className={`rx-nav-item ${isActive(to) ? "active" : ""}`}
                       onClick={() => setMobileOpen(false)}
                     >
-                      <Icon size={18} />
-                      {!collapsed && <span>{itemLabel}</span>}
-                      {isActive(to) && <span className="rx-nav-indicator" />}
+                      <Icon size={20} style={{ flexShrink: 0 }} />
+                      {(!collapsed || mobileOpen) && <span>{itemLabel}</span>}
                     </Link>
                   ))}
                 </div>
               ))}
             </nav>
 
-            <div className="rx-nav-bottom">
-              <button type="button" className="rx-nav-item rx-logout" onClick={handleLogout} title="Logout">
-                <LogOut size={18} />
-                {!collapsed && <span>Logout</span>}
-              </button>
+            <div className="rx-sidebar-bottom">
+              {(!collapsed || mobileOpen) ? (
+                <div className="rx-sidebar-bottom-row">
+                  <Link
+                    to="/recruiter/settings"
+                    className="rx-sidebar-bottom-btn"
+                    onClick={() => setMobileOpen(false)}
+                    title="Settings"
+                  >
+                    <CustomSettingsIcon size={20} />
+                    <span>Settings</span>
+                  </Link>
+                  <button
+                    type="button"
+                    className="rx-sidebar-bottom-btn rx-logout-btn"
+                    onClick={handleLogout}
+                    title="Sign Out"
+                  >
+                    <CustomLogoutIcon size={20} />
+                    <span>Logout</span>
+                  </button>
+                </div>
+              ) : (
+                <div className="rx-sidebar-bottom-collapsed">
+                  <Link
+                    to="/recruiter/settings"
+                    className="rx-sidebar-action-btn"
+                    title="Settings"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <CustomSettingsIcon size={20} />
+                  </Link>
+                  <button
+                    type="button"
+                    className="rx-sidebar-action-btn rx-danger"
+                    onClick={handleLogout}
+                    title="Sign Out"
+                  >
+                    <CustomLogoutIcon size={20} />
+                  </button>
+                </div>
+              )}
             </div>
           </aside>
 
@@ -300,7 +374,7 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
               {!user.isVerified && (
                 <div style={{
                   background: 'var(--bg)',
-                  color: companyStatus === 'PENDING' ? '#22c55e' : '#f59e0b', display: 'flex', alignItems: 'center', gap: '8px',
+                  color: companyStatus === 'PENDING' ? '#0284c7' : '#f59e0b', display: 'flex', alignItems: 'center', gap: '8px',
                   padding: '12px 28px', marginBottom: '-16px'
                 }}>
                   {companyStatus === 'PENDING' ? <CheckCircle size={18} style={{ flexShrink: 0 }} /> : <AlertTriangle size={18} style={{ flexShrink: 0 }} />}

@@ -1,3 +1,4 @@
+import { Maximize2 } from 'lucide-react';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { VideoOff, Camera } from 'lucide-react';
@@ -120,6 +121,9 @@ const InterviewLobby = () => {
       {!isFullScreen && (
         <div className="pis-fullscreen-warning">
           <div className="pis-fullscreen-warning-box">
+            <div className="pis-warning-icon-wrap">
+              <Maximize2 size={24} />
+            </div>
             <h2>Fullscreen Required</h2>
             <p>The interview must be taken in fullscreen mode to prevent distractions. Timers and recording are paused.</p>
             <div className="pis-warning-actions">

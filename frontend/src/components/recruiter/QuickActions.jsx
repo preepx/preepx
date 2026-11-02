@@ -1,44 +1,45 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { PlusCircle, Users, Send, Calendar } from "lucide-react";
+import { PlusCircle, Users, FileText, Video } from "lucide-react";
 
 const ACTIONS = [
   {
     to: "/recruiter/jobs/new",
     icon: PlusCircle,
-    title: "Create Job",
-    desc: "Post a role and start AI matching",
-    primary: true,
+    title: "Post a Job",
+    desc: "Create a job and let AI find the right talent.",
   },
   {
     to: "/recruiter/candidates",
     icon: Users,
-    title: "Find Candidates",
-    desc: "Discover talent in your pipeline",
+    title: "Explore Talent",
+    desc: "Discover Candidates in Your Pipeline",
   },
   {
     to: "/recruiter/assessments",
-    icon: Send,
-    title: "Send Assessment",
-    desc: "Evaluate skills with MCQ + coding",
+    icon: FileText,
+    title: "Assign Assessments",
+    desc: "Test Skills Through MCQs & Coding",
   },
   {
     to: "/recruiter/interviews",
-    icon: Calendar,
-    title: "Schedule Interview",
-    desc: "Book technical or AI interviews",
+    icon: Video,
+    title: "Set Up an Interview",
+    desc: "Schedule Technical & AI Interviews",
   },
 ];
 
 export default function QuickActions() {
   return (
-    <section className="rx-quick-actions">
-      {ACTIONS.map(({ to, icon: Icon, title, desc, primary }) => (
-        <Link key={to} to={to} className={`rx-quick-action ${primary ? "rx-quick-action--primary" : ""}`}>
-          <div className="rx-quick-action-icon"><Icon size={20} /></div>
-          <div>
-            <strong>{title}</strong>
-            <span>{desc}</span>
+    <section className="rx-quick-actions-row">
+      {ACTIONS.map(({ to, icon: Icon, title, desc }) => (
+        <Link key={to} to={to} className="rx-action-tile">
+          <div className="rx-action-icon">
+            <Icon size={18} strokeWidth={2} />
+          </div>
+          <div className="rx-action-body">
+            <strong className="rx-action-title">{title}</strong>
+            <span className="rx-action-desc">{desc}</span>
           </div>
         </Link>
       ))}

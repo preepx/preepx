@@ -1,6 +1,5 @@
 import React from "react";
 import { CheckCircle, Star, UserPlus, Video, Briefcase } from "lucide-react";
-import EmptyState from "./EmptyState";
 
 function timeAgo(date) {
   if (!date) return "";
@@ -23,35 +22,37 @@ const ICONS = {
 };
 
 export default function ActivityTimeline({ items = [] }) {
-  if (items.length === 0) {
-    return (
-      <section className="rx-card">
-        <div className="rx-section-head"><h2>Recent Hiring Activity</h2></div>
-        <EmptyState
-          title="No recent activity"
-          description="Activity will appear here as candidates progress through your pipeline."
-        />
-      </section>
-    );
-  }
-
   return (
-    <section className="rx-card rx-activity">
-      <div className="rx-section-head"><h2>Recent Hiring Activity</h2></div>
-      <ul className="rx-timeline">
-        {items.map((item, i) => {
-          const Icon = ICONS[item.type] || CheckCircle;
-          return (
-            <li key={item.id || i} className="rx-timeline-item">
-              <div className="rx-timeline-dot"><Icon size={12} /></div>
-              <div className="rx-timeline-content">
-                <p>{item.text}</p>
-                <time className="rx-muted">{timeAgo(item.at)}</time>
-              </div>
-            </li>
-          );
-        })}
-      </ul>
+    <section className="rx-card rx-activity-card">
+      <div className="rx-card-header">
+        <h2 className="rx-card-title">Latest Hiring Activity</h2>
+      </div>
+
+      {items.length === 0 ? (
+        <div className="rx-empty-state-wrap rx-empty-state-compact">
+          <h3 className="rx-empty-title">No hiring updates yet</h3>
+          <p className="rx-empty-desc">
+            Track candidate progress as they move through each hiring stage.
+          </p>
+        </div>
+      ) : (
+        <ul className="rx-timeline">
+          {items.map((item, i) => {
+            const Icon = ICONS[item.type] || CheckCircle;
+            return (
+              <li key={item.id || i} className="rx-timeline-item">
+                <div className="rx-timeline-dot">
+                  <Icon size={12} />
+                </div>
+                <div className="rx-timeline-content">
+                  <p className="rx-timeline-text">{item.text}</p>
+                  <time className="rx-timeline-time">{timeAgo(item.at)}</time>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </section>
   );
 }
@@ -64,7 +65,9 @@ export function buildActivityItems({ topCandidates = [], recentJobs = [], interv
       items.push({
         id: `c-${c._id}`,
         type: c.status === "shortlisted" ? "shortlisted" : "application",
-        text: `${c.userId?.fullName || "A candidate"} ${c.status === "shortlisted" ? "was shortlisted" : "was matched to a role"}`,
+        text: `${c.userId?.fullName || "A candidate"} ${
+          c.status === "shortlisted" ? "was shortlisted" : "was matched to a role"
+        }`,
         at: c.updatedAt,
       });
     }

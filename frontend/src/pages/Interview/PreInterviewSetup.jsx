@@ -7,6 +7,7 @@ import {
   VideoOff,
   Camera,
   CheckCircle2,
+  Maximize2,
 } from 'lucide-react';
 import '../../styles/PreInterviewSetup.css';
 
@@ -140,6 +141,9 @@ const PreInterviewSetup = () => {
       {!isFullScreen && (
         <div className="pis-fullscreen-warning">
           <div className="pis-fullscreen-warning-box">
+            <div className="pis-warning-icon-wrap">
+              <Maximize2 size={24} />
+            </div>
             <h2>Fullscreen Required</h2>
             <p>The interview must be taken in fullscreen mode to prevent distractions. Timers and recording are paused.</p>
             <div className="pis-warning-actions">

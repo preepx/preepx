@@ -189,12 +189,12 @@ export default function CreateJob() {
       <div className="rx-premium-form">
 
         {/* AI Auto-Fill Section */}
-        <div style={{ background: "var(--primary-light)", border: "1px solid color-mix(in srgb, var(--primary) 30%, transparent)", borderRadius: 8, padding: 20, marginBottom: 24 }}>
+        <div className="rx-ai-autofill-banner">
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12 }}>
-            <Sparkles size={20} color="var(--primary)" />
-            <h3 style={{ margin: 0, color: "var(--primary)" }}>AI Job Auto-Fill</h3>
+            <Sparkles size={20} className="rx-ai-autofill-icon" />
+            <h3 className="rx-ai-autofill-title">AI Job Auto-Fill</h3>
           </div>
-          <p style={{ margin: "0 0 16px 0", fontSize: 13, color: "var(--text-muted)" }}>
+          <p className="rx-ai-autofill-desc">
             Save time! Describe the job briefly (e.g., "Senior Frontend Developer, React, 5+ years exp") and let AI fill out the form for you.
           </p>
           <div style={{ display: "flex", gap: 12 }}>

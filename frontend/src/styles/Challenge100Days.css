@@ -302,18 +302,17 @@
 
 .c100-stat-val {
   display: block;
-  font-size: 24px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--c100-text-main);
-  line-height: 1.1;
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  line-height: 1.2;
 }
 
 .c100-stat-lbl {
   display: block;
   font-size: 13px;
-  color: var(--c100-text-muted);
-  margin-top: 4px;
+  color: #6B7280;
+  margin-top: 2px;
   font-weight: 500;
 }
 

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { ChevronRight } from "lucide-react";
+import React from "react";
 
 const STEPS = [
   { key: "applied", label: "Applied", color: "#3b82f6" },
@@ -10,58 +9,37 @@ const STEPS = [
   { key: "hired", label: "Hired", color: "#22c55e" },
 ];
 
-export default function HiringFunnel({
-  funnel = {},
-  title = "Hiring Pipeline",
-  subtitle = "Match → Assess → Shortlist → Interview → Hire",
-}) {
-  const [hovered, setHovered] = useState(null);
+export default function HiringFunnel({ funnel = {} }) {
   const values = STEPS.map((s) => funnel[s.key] ?? 0);
   const maxVal = Math.max(...values, 1);
 
   return (
-    <section className="rx-card rx-funnel-card">
-      <div className="rx-section-head">
-        <div>
-          <h2>{title}</h2>
-          <p className="rx-muted rx-section-sub">{subtitle}</p>
-        </div>
+    <section className="rx-card rx-pipeline-card">
+      <div className="rx-card-header">
+        <h2 className="rx-card-title">Hiring Pipeline</h2>
       </div>
 
-      <div className="rx-funnel-horizontal">
-        {STEPS.map(({ key, label, color }, i) => {
+      <div className="rx-pipeline-grid">
+        {STEPS.map(({ key, label, color }) => {
           const count = funnel[key] ?? 0;
-          const prev = i > 0 ? (funnel[STEPS[i - 1].key] ?? 0) : count;
-          const conv = i > 0 && prev > 0 ? Math.round((count / prev) * 100) : null;
-          const heightPct = Math.max(24, Math.round((count / maxVal) * 100));
-          const isHovered = hovered === key;
+          const heightPct = count > 0 ? Math.max(15, Math.round((count / maxVal) * 100)) : 0;
 
           return (
-            <React.Fragment key={key}>
-              <div
-                className={`rx-funnel-step ${isHovered ? "hovered" : ""}`}
-                style={{ "--step-color": color, "--bar-h": `${heightPct}%` }}
-                onMouseEnter={() => setHovered(key)}
-                onMouseLeave={() => setHovered(null)}
-                onFocus={() => setHovered(key)}
-                onBlur={() => setHovered(null)}
-                tabIndex={0}
-                role="button"
-                aria-label={`${label}: ${count}`}
-              >
-                <div className="rx-funnel-step-bar" />
-                <strong className="rx-funnel-step-val">{count.toLocaleString()}</strong>
-                <span className="rx-funnel-step-lbl">{label}</span>
-                {isHovered && conv != null && (
-                  <div className="rx-funnel-tooltip">{conv}% from previous stage</div>
+            <div key={key} className="rx-pipeline-col">
+              <div className="rx-pipeline-bar-box">
+                {heightPct > 0 && (
+                  <div
+                    className="rx-pipeline-bar-fill"
+                    style={{
+                      height: `${heightPct}%`,
+                      backgroundColor: color,
+                    }}
+                  />
                 )}
               </div>
-              {i < STEPS.length - 1 && (
-                <div className="rx-funnel-arrow-h" aria-hidden="true">
-                  <ChevronRight size={18} />
-                </div>
-              )}
-            </React.Fragment>
+              <strong className="rx-pipeline-val">{count}</strong>
+              <span className="rx-pipeline-lbl">{label}</span>
+            </div>
           );
         })}
       </div>

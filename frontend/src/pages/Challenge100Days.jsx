@@ -436,7 +436,7 @@ const Challenge100Days = () => {
             </div>
           </div>
           <div className="c100-stat-card" style={{ "--accent": "#0ea5e9" }}>
-            <div className="c100-stat-icon"><Target size={18} /></div>
+            <div className="c100-stat-icon"><Target size={20} /></div>
             <div className="c100-stat-text-block">
               <span className="c100-stat-val"><AnimatedNumber value={daysRemaining} /></span>
               <span className="c100-stat-lbl">Days Remaining</span>
@@ -444,7 +444,7 @@ const Challenge100Days = () => {
             </div>
           </div>
           <div className="c100-stat-card" style={{ "--accent": "#8b5cf6" }}>
-            <div className="c100-stat-icon"><Zap size={18} /></div>
+            <div className="c100-stat-icon"><Zap size={20} /></div>
             <div className="c100-stat-text-block">
               <span className="c100-stat-val"><AnimatedNumber value={xp} /> XP</span>
               <span className="c100-stat-lbl">XP Points</span>
@@ -452,7 +452,7 @@ const Challenge100Days = () => {
             </div>
           </div>
           <div className="c100-stat-card" style={{ "--accent": "#3b82f6" }}>
-            <div className="c100-stat-icon"><BarChart3 size={18} /></div>
+            <div className="c100-stat-icon"><BarChart3 size={20} /></div>
             <div className="c100-stat-text-block">
               <span className="c100-stat-val"><AnimatedNumber value={completedCount} /></span>
               <span className="c100-stat-lbl">Problems Solved</span>
@@ -460,7 +460,7 @@ const Challenge100Days = () => {
             </div>
           </div>
           <div className="c100-stat-card" style={{ "--accent": "#f59e0b" }}>
-            <div className="c100-stat-icon"><Crown size={18} /></div>
+            <div className="c100-stat-icon"><Crown size={20} /></div>
             <div className="c100-stat-text-block">
               <span className="c100-stat-val">{displayRank}</span>
               <span className="c100-stat-lbl">Global Rank</span>
