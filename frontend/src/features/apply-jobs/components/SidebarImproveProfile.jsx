@@ -18,9 +18,7 @@ export default function SidebarImproveProfile({
   const hasSkills = profileData ? (profileData.skills || []).length > 0 : false;
   const hasPhoto = profileData ? !!profileData.profilePic : false;
 
-  const bgStyle = prefix === 'ajd' 
-    ? { background: `conic-gradient(#10b981 ${completion}%, #e2e8f0 0)` }
-    : {}; 
+  const bgStyle = { background: `conic-gradient(#10b981 ${completion}%, #e2e8f0 0)` };
 
   const btnClass = prefix === 'ajd' 
     ? 'ajd-card-cta ajd-cta-solid ajd-cta-row'

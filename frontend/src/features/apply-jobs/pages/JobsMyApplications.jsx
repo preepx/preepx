@@ -15,7 +15,8 @@ import {
   Check,
   Circle,
   Bot,
-  FileCheck
+  FileCheck,
+  Clock
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import SidebarApplicationAnalytics from "../components/SidebarApplicationAnalytics";
@@ -98,31 +99,45 @@ export default function JobsMyApplications() {
       {/* HERO BANNER (FULL WIDTH) */}
       <section className="jma-hero" style={{ marginBottom: 24 }}>
         <div className="jma-hero-left">
-          <div className="jma-hero-icon"><Briefcase size={24} /></div>
+          <div className="jma-hero-icon">
+            <Briefcase size={22} />
+          </div>
           <div className="jma-hero-text">
-            <div className="jma-kicker">Pipeline · Live Status</div>
             <h1>My Applications</h1>
             <p>Track every stage — applied, assessment, AI interview, offer</p>
           </div>
         </div>
         <div className="jma-hero-stats">
-          <div className="jma-hstat">
-            <span className="jma-hstat-val">{applications.length}</span>
-            <span className="jma-hstat-lbl">Total Applied</span>
+          <div className="jma-hstat-card" style={{ background: '#f0f9ff', borderColor: '#e0f2fe' }}>
+            <div className="jma-hstat-icon" style={{ background: '#e0f2fe', color: '#0284c7' }}>
+              <Briefcase size={24} />
+            </div>
+            <div className="jma-hstat-info">
+              <span className="jma-hstat-val">{applications.length}</span>
+              <span className="jma-hstat-lbl">Total Applied</span>
+            </div>
           </div>
-          <div className="jma-hstat-div" />
-          <div className="jma-hstat">
-            <span className="jma-hstat-val" style={{ color: "#3b82f6" }}>
-              {applications.filter((a) => ["assessment_sent", "assessment_in_progress", "ai_interview"].includes(a.status)).length}
-            </span>
-            <span className="jma-hstat-lbl">In Action</span>
+          <div className="jma-hstat-card" style={{ background: '#fffbeb', borderColor: '#fef3c7' }}>
+            <div className="jma-hstat-icon" style={{ background: '#fef3c7', color: '#d97706' }}>
+              <Clock size={24} />
+            </div>
+            <div className="jma-hstat-info">
+              <span className="jma-hstat-val">
+                {applications.filter((a) => ["assessment_sent", "assessment_in_progress", "assessment_completed", "ai_interview", "interview"].includes(a.status)).length}
+              </span>
+              <span className="jma-hstat-lbl">In Action</span>
+            </div>
           </div>
-          <div className="jma-hstat-div" />
-          <div className="jma-hstat">
-            <span className="jma-hstat-val" style={{ color: '#10b981' }}>
-              {applications.filter((a) => ["shortlisted", "offered", "hired"].includes(a.status)).length}
-            </span>
-            <span className="jma-hstat-lbl">Shortlisted / Offers</span>
+          <div className="jma-hstat-card" style={{ background: '#f0fdf4', borderColor: '#dcfce3' }}>
+            <div className="jma-hstat-icon" style={{ background: '#dcfce3', color: '#166534' }}>
+              <CheckCircle2 size={24} />
+            </div>
+            <div className="jma-hstat-info">
+              <span className="jma-hstat-val">
+                {applications.filter((a) => ["shortlisted", "offered", "hired", "selected"].includes(a.status)).length}
+              </span>
+              <span className="jma-hstat-lbl">Shortlisted / Offers</span>
+            </div>
           </div>
         </div>
       </section>
@@ -271,8 +286,11 @@ export default function JobsMyApplications() {
 
         {/* RIGHT SIDEBAR */}
         <aside className="jma-sidebar">
-          {analytics && <SidebarApplicationAnalytics stats={analytics} />}
-          <SidebarImproveProfile completion={completion} />
+          <SidebarApplicationAnalytics
+            applications={applications}
+            analytics={analytics}
+          />
+          <SidebarImproveProfile completion={completion} profileData={profileData} />
         </aside>
       </div>
     </div>

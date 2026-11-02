@@ -29,118 +29,113 @@
 }
 
 /* =========================================================
-   HERO BANNER
+   HERO BANNER (Redesigned like Skill Assessments)
    ========================================================= */
 .jma-hero {
-  position: relative;
-  background: linear-gradient(135deg, #111827 0%, #2c2723 45%, #1e293b 100%);
-  border-radius: 8px;
-  padding: 24px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  overflow: hidden;
-}
-
-.jma-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle at 10% 40%, rgba(47, 111, 91, 0.15) 0%, transparent 50%);
-  pointer-events: none;
+  flex-wrap: nowrap;
 }
 
 .jma-hero-left {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  position: relative;
-  z-index: 2;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .jma-hero-icon {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #eef2ff;
+  color: #4f46e5;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
   flex-shrink: 0;
 }
 
-.jma-kicker {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #8bb9ab;
-  margin-bottom: 4px;
+[data-theme='dark'] .jma-hero-icon {
+  background: rgba(79, 70, 229, 0.15);
 }
 
 .jma-hero-text h1 {
   font-size: 20px;
-  font-weight: 700;
-  color: #fff;
-  margin: 0 0 4px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 2px;
+  letter-spacing: -0.5px;
+}
+
+[data-theme='dark'] .jma-hero-text h1 {
+  color: #f1f5f9;
 }
 
 .jma-hero-text p {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 12.5px;
+  color: #64748b;
   margin: 0;
+  font-weight: 500;
 }
 
+/* ── HERO STATS ── */
 .jma-hero-stats {
   display: flex;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 12px 20px;
-  position: relative;
-  z-index: 2;
+  align-items: stretch;
   gap: 12px;
+  flex: 0 0 450px;
 }
 
-.jma-hstat {
-  text-align: center;
-  padding: 0 20px;
+.jma-hstat-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  flex: 1;
 }
 
-.jma-hstat:first-child {
-  padding-left: 0;
+[data-theme='dark'] .jma-hstat-card {
+  background: #1e293b;
+  border-color: #334155;
 }
 
-.jma-hstat:last-child {
-  padding-right: 0;
+.jma-hstat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.jma-hstat-info {
+  display: flex;
+  flex-direction: column;
 }
 
 .jma-hstat-val {
-  display: block;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 800;
-  line-height: 1;
-  color: #fff;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+[data-theme='dark'] .jma-hstat-val {
+  color: #f1f5f9;
 }
 
 .jma-hstat-lbl {
-  display: block;
-  font-size: 10px;
-  color: rgba(255, 255, 255, 0.5);
-  margin-top: 4px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 600;
-}
-
-.jma-hstat-div {
-  width: 1px;
-  height: 32px;
-  background: rgba(255, 255, 255, 0.15);
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+  margin-top: 2px;
+  white-space: nowrap;
 }
 
 /* =========================================================
@@ -962,11 +957,51 @@ jma-rec-time {
   .jma-hero {
     flex-direction: column;
     align-items: flex-start;
+    gap: 16px;
   }
 
   .jma-hero-stats {
+    flex: none;
     width: 100%;
-    justify-content: space-between;
+    padding-bottom: 8px;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .jma-hero-stats {
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .jma-hstat-card {
+    flex: 1 1 0px;
+    min-width: 0;
+    padding: 8px 6px;
+    gap: 6px;
+    border-radius: 8px;
+  }
+
+  .jma-hstat-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .jma-hstat-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .jma-hstat-val {
+    font-size: 14px;
+  }
+
+  .jma-hstat-lbl {
+    font-size: 9px;
+    white-space: normal;
+    line-height: 1.1;
   }
 }
 

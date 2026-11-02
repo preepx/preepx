@@ -43,7 +43,7 @@ export default function CandidateRanking({ candidates = [] }) {
                     {c.jobId?.role || c.jobId?.title || "Matched role"}
                   </span>
                 </div>
-                <ScoreRing value={c.matchScore ?? 0} size={36} stroke={2.5} />
+                <ScoreRing value={c.matchScore ?? 0} size={38} stroke={2.5} />
                 <Link
                   to={`/recruiter/candidates/${c._id}`}
                   className="rx-btn-icon"

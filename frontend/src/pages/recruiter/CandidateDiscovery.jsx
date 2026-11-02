@@ -51,7 +51,14 @@ export default function CandidateDiscovery() {
     getJobs().then((j) => {
       setJobs(j || []);
       setJobsFetched(true);
-      if (!jobId && j && j[0]) setSearchParams({ jobId: j[0]._id });
+      if (!jobId && j && j.length > 0) {
+        const saved = sessionStorage.getItem("lastRecruiterJobId");
+        const matched = saved && j.find((x) => x._id === saved);
+        const defaultJobId = matched ? matched._id : j[0]._id;
+        setSearchParams({ jobId: defaultJobId });
+      } else if (jobId) {
+        sessionStorage.setItem("lastRecruiterJobId", jobId);
+      }
     });
   }, []);
 
@@ -187,7 +194,11 @@ export default function CandidateDiscovery() {
         <div style={{ display: "flex", gap: 12, flexWrap: "wrap", width: "100%", alignItems: "center" }}>
           <select
             value={jobId}
-            onChange={(e) => setSearchParams({ jobId: e.target.value })}
+            onChange={(e) => {
+              const newJobId = e.target.value;
+              setSearchParams(newJobId ? { jobId: newJobId } : {});
+              if (newJobId) sessionStorage.setItem("lastRecruiterJobId", newJobId);
+            }}
             className="rx-premium-input"
             style={{ width: "auto", minWidth: 220 }}
           >
@@ -313,7 +324,12 @@ export default function CandidateDiscovery() {
                       </span>
                     </td>
                     <td style={{ textAlign: "right" }}>
-                      <Link to={`/recruiter/candidates/${c._id}`} className="rx-btn rx-btn-secondary" style={{ fontSize: 12, padding: "5px 12px" }}>
+                      <Link
+                        to={jobId ? `/recruiter/candidates/${c._id}?jobId=${jobId}` : `/recruiter/candidates/${c._id}`}
+                        state={{ fromJobId: jobId }}
+                        className="rx-btn rx-btn-secondary"
+                        style={{ fontSize: 12, padding: "5px 12px" }}
+                      >
                         View Profile
                       </Link>
                     </td>

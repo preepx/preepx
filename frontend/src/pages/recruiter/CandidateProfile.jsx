@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate, useSearchParams, useLocation } from "react-router-dom";
 import {
   Send, Star, XCircle, Calendar, Sparkles, FileText, ExternalLink,
   Github, Linkedin, Briefcase, MapPin, Bot, Award, CheckCircle2,
@@ -35,6 +35,30 @@ function ProgressBar({ value = 0, color = "var(--primary)" }) {
 
 export default function CandidateProfile() {
   const { applicationId } = useParams();
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const location = useLocation();
+
+  const queryJobId =
+    searchParams.get("jobId") ||
+    location.state?.fromJobId ||
+    sessionStorage.getItem("lastRecruiterJobId") ||
+    "";
+
+  const handleBack = (e) => {
+    if (e) e.preventDefault();
+    const targetJobId =
+      queryJobId ||
+      data?.application?.jobId?._id ||
+      data?.application?.jobId ||
+      sessionStorage.getItem("lastRecruiterJobId") ||
+      "";
+    if (targetJobId) {
+      navigate(`/recruiter/candidates?jobId=${targetJobId}`);
+    } else {
+      navigate("/recruiter/candidates");
+    }
+  };
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [jobsList, setJobsList] = useState([]);
@@ -190,40 +214,300 @@ export default function CandidateProfile() {
   return (
     <RecruiterLayout title="Candidate Profile">
       <style>{`
-        .cp-page { width: 100%; box-sizing: border-box; padding-bottom: 110px; }
+        .cp-page { width: 100%; box-sizing: border-box; padding-bottom: 60px; }
 
-        /* Back link */
-        .cp-back { display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:var(--text-muted); text-decoration:none; margin-bottom:20px; padding:8px 14px; border-radius:99px; background:var(--surface); border:1px solid var(--border); transition:all .2s; box-shadow:0 1px 4px rgba(0,0,0,.04); }
-        .cp-back:hover { color:var(--primary); border-color:var(--primary); transform:translateX(-2px); }
+        /* Top Back Bar */
+        .cp-top-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 16px;
+        }
+
+        .cp-back-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13px;
+          font-weight: 700;
+          color: var(--text-muted);
+          background: var(--surface);
+          border: 1px solid var(--border);
+          padding: 8px 18px;
+          border-radius: 99px;
+          cursor: pointer;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+          font-family: inherit;
+        }
+        .cp-back-btn:hover {
+          color: var(--primary);
+          border-color: var(--primary);
+          background: var(--bg);
+          transform: translateX(-3px);
+        }
 
         /* Hero */
-        .cp-hero { background:var(--surface); border:1px solid var(--border); border-radius:24px; overflow:hidden; margin-bottom:24px; box-shadow:0 4px 32px rgba(0,0,0,.07); }
-        .cp-hero-cover { height:140px; background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 55%,#06b6d4 100%); position:relative; overflow:hidden; }
-        .cp-hero-cover::before { content:""; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(255,255,255,.07) 1px,transparent 1px); background-size:28px 28px; }
-        .cp-source-pill { position:absolute; top:18px; right:20px; background:rgba(255,255,255,.18); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:6px 14px; border-radius:99px; font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px; border:1px solid rgba(255,255,255,.28); }
-        .cp-hero-body { padding:0 32px 28px; display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:20px; margin-top:-52px; position:relative; z-index:2; }
-        @media(max-width:640px){ .cp-hero-body{padding:0 20px 24px; margin-top:-44px;} }
+        .cp-hero {
+          background: var(--surface);
+          border: 1px solid var(--border);
+          border-radius: 20px;
+          overflow: hidden;
+          margin-bottom: 24px;
+          box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+        }
 
-        .cp-avatar-wrap { position:relative; }
-        .cp-avatar { width:100px; height:100px; border-radius:28px; background:linear-gradient(135deg,#4f46e5,#7c3aed); border:4px solid var(--surface); display:flex; align-items:center; justify-content:center; font-size:38px; font-weight:900; color:#fff; box-shadow:0 8px 32px rgba(79,70,229,.35); flex-shrink:0; }
-        @media(max-width:640px){ .cp-avatar{width:80px; height:80px; font-size:28px; border-radius:22px;} }
-        .cp-avatar-dot { position:absolute; bottom:-2px; right:-2px; width:22px; height:22px; border-radius:99px; border:3px solid var(--surface); display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:900; }
+        .cp-hero-cover {
+          height: 100px;
+          background: linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #06b6d4 100%);
+          position: relative;
+          overflow: hidden;
+        }
+        .cp-hero-cover::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background-image: radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 1px);
+          background-size: 24px 24px;
+        }
 
-        .cp-hero-info { flex:1; min-width:220px; }
-        .cp-hero-name { font-size:26px; font-weight:900; color:var(--text); letter-spacing:-.6px; margin:14px 0 8px; line-height:1.1; }
-        @media(max-width:640px){ .cp-hero-name{font-size:20px; margin-top:12px;} }
-        .cp-hero-meta { display:flex; flex-wrap:wrap; gap:8px; }
-        .cp-meta-chip { display:flex; align-items:center; gap:5px; background:var(--bg); padding:4px 10px; border-radius:99px; border:1px solid var(--border); font-size:12px; color:var(--text-muted); font-weight:500; }
-        .cp-social-links { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
-        .cp-social-btn { display:inline-flex; align-items:center; gap:6px; padding:7px 14px; border-radius:10px; font-size:12px; font-weight:700; border:1px solid var(--border); background:var(--surface); color:var(--text); cursor:pointer; text-decoration:none; transition:all .2s; font-family:inherit; }
-        .cp-social-btn:hover { background:var(--bg); border-color:var(--primary); color:var(--primary); }
+        .cp-source-pill {
+          position: absolute;
+          top: 14px;
+          right: 18px;
+          background: rgba(255,255,255,0.22);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          padding: 6px 14px;
+          border-radius: 99px;
+          font-size: 12px;
+          font-weight: 700;
+          color: #fff;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          border: 1px solid rgba(255,255,255,0.3);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
 
-        /* Score widget */
-        .cp-score-widget { background:linear-gradient(135deg,rgba(79,70,229,.09),rgba(124,58,237,.06)); border:1px solid rgba(79,70,229,.2); border-radius:20px; padding:20px 24px; text-align:center; flex-shrink:0; min-width:140px; }
-        .cp-score-num { font-size:52px; font-weight:900; background:linear-gradient(135deg,#4f46e5,#7c3aed); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; letter-spacing:-3px; }
-        .cp-score-pct { font-size:22px; letter-spacing:0; }
-        .cp-score-lbl { font-size:11px; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; margin-top:4px; }
-        .cp-stage-pill { display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:99px; font-size:11px; font-weight:700; margin-top:10px; text-transform:capitalize; border:1px solid; }
+        .cp-hero-body {
+          padding: 0 28px 24px;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          gap: 20px;
+          position: relative;
+          z-index: 2;
+        }
+        @media(max-width: 640px) {
+          .cp-hero-body { padding: 0 16px 20px; }
+        }
+
+        .cp-hero-left {
+          display: flex;
+          gap: 20px;
+          align-items: flex-start;
+          flex: 1;
+          min-width: 280px;
+        }
+        @media(max-width: 640px) {
+          .cp-hero-left { flex-direction: column; gap: 12px; }
+        }
+
+        .cp-avatar-wrap {
+          position: relative;
+          margin-top: -46px;
+          flex-shrink: 0;
+        }
+
+        .cp-avatar {
+          width: 92px;
+          height: 92px;
+          border-radius: 20px;
+          background: linear-gradient(135deg, #4f46e5, #7c3aed);
+          border: 4px solid var(--surface);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 36px;
+          font-weight: 900;
+          color: #fff;
+          box-shadow: 0 8px 24px rgba(79,70,229,0.28);
+        }
+        @media(max-width: 640px) {
+          .cp-avatar { width: 76px; height: 76px; font-size: 28px; border-radius: 16px; }
+        }
+
+        .cp-avatar-dot {
+          position: absolute;
+          bottom: -2px;
+          right: -2px;
+          width: 20px;
+          height: 20px;
+          border-radius: 99px;
+          border: 3px solid var(--surface);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 9px;
+          font-weight: 900;
+        }
+
+        .cp-hero-info {
+          flex: 1;
+          min-width: 220px;
+          padding-top: 12px;
+        }
+        @media(max-width: 640px) {
+          .cp-hero-info { padding-top: 0; }
+        }
+
+        .cp-hero-name {
+          font-size: 24px;
+          font-weight: 800;
+          color: var(--text);
+          letter-spacing: -0.5px;
+          margin: 0 0 8px;
+          line-height: 1.2;
+        }
+        @media(max-width: 640px) {
+          .cp-hero-name { font-size: 20px; }
+        }
+
+        .cp-hero-meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-bottom: 12px;
+        }
+
+        .cp-meta-chip {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background: var(--bg);
+          padding: 5px 12px;
+          border-radius: 99px;
+          border: 1px solid var(--border);
+          font-size: 12px;
+          color: var(--text-muted);
+          font-weight: 600;
+        }
+
+        .cp-social-links {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+
+        .cp-social-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 14px;
+          border-radius: 10px;
+          font-size: 12px;
+          font-weight: 700;
+          border: 1px solid var(--border);
+          background: var(--surface);
+          color: var(--text);
+          cursor: pointer;
+          text-decoration: none;
+          transition: all 0.2s ease;
+          font-family: inherit;
+        }
+        .cp-social-btn:hover {
+          background: var(--bg);
+          border-color: var(--primary);
+          color: var(--primary);
+          transform: translateY(-1px);
+        }
+
+        /* Hero Right Column */
+        .cp-hero-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 12px;
+          padding-top: 12px;
+        }
+        @media(max-width: 860px) {
+          .cp-hero-right {
+            align-items: flex-start;
+            width: 100%;
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+          }
+        }
+
+        .cp-score-widget {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          background: linear-gradient(135deg, rgba(79,70,229,0.06), rgba(124,58,237,0.03));
+          border: 1.5px solid rgba(79,70,229,0.18);
+          border-radius: 16px;
+          padding: 10px 18px;
+        }
+
+        .cp-score-num {
+          font-size: 34px;
+          font-weight: 900;
+          background: linear-gradient(135deg, #4f46e5, #7c3aed);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          line-height: 1;
+          letter-spacing: -1.5px;
+        }
+        .cp-score-pct {
+          font-size: 16px;
+          letter-spacing: 0;
+        }
+
+        .cp-score-divider {
+          width: 1px;
+          height: 32px;
+          background: rgba(79,70,229,0.15);
+        }
+
+        .cp-score-details {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+        }
+
+        .cp-score-lbl {
+          font-size: 10.5px;
+          font-weight: 700;
+          color: var(--text-muted);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .cp-stage-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          padding: 3px 10px;
+          border-radius: 99px;
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: capitalize;
+          border: 1px solid;
+          width: fit-content;
+        }
+
+        .cp-hero-actions {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+        @media(max-width: 860px) {
+          .cp-hero-actions { justify-content: flex-start; }
+        }
 
         /* Two-col layout */
         .cp-layout { display:grid; grid-template-columns:1fr; gap:20px; }
@@ -237,6 +521,56 @@ export default function CandidateProfile() {
         /* AI report */
         .cp-ai-card { background:var(--surface); border:2px solid rgba(124,58,237,.3); border-radius:20px; padding:24px; box-shadow:0 0 0 4px rgba(124,58,237,.05),0 4px 24px rgba(0,0,0,.06); position:relative; overflow:hidden; }
         .cp-ai-card::before { content:""; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#7c3aed,#4f46e5,#06b6d4); }
+
+        /* Platform Stats */
+        .cp-platform-stats {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
+          margin-bottom: 20px;
+        }
+        @media(max-width: 600px) {
+          .cp-platform-stats { grid-template-columns: 1fr; }
+        }
+
+        .cp-platform-stat-card {
+          background: var(--bg);
+          border: 1px solid var(--border);
+          border-radius: 12px;
+          padding: 14px 16px;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .cp-platform-stat-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+
+        .cp-platform-stat-icon {
+          width: 42px;
+          height: 42px;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .cp-platform-stat-val {
+          font-size: 20px;
+          font-weight: 800;
+          color: var(--text);
+          line-height: 1.1;
+        }
+
+        .cp-platform-stat-lbl {
+          font-size: 11px;
+          color: var(--text-muted);
+          font-weight: 600;
+          margin-top: 4px;
+        }
 
         /* Metrics grid */
         .cp-metrics-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:20px; }
@@ -289,13 +623,8 @@ export default function CandidateProfile() {
         .cp-resume-preview:hover { border-color:var(--primary); background:rgba(79,70,229,.04); box-shadow:0 0 0 4px rgba(79,70,229,.08); }
         .cp-resume-icon { width:64px; height:80px; margin:0 auto 14px; background:linear-gradient(135deg,rgba(79,70,229,.1),rgba(124,58,237,.08)); border-radius:12px; display:flex; align-items:center; justify-content:center; border:2px solid rgba(79,70,229,.2); }
 
-        /* Floating dock */
-        .cp-dock { position:fixed; bottom:24px; left:50%; transform:translateX(calc(-50% + 130px)); background:color-mix(in srgb,var(--surface) 93%,transparent); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); padding:10px 16px; border-radius:99px; border:1px solid var(--border); box-shadow:0 8px 40px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.08); display:flex; gap:8px; align-items:center; flex-wrap:wrap; z-index:99; }
-        .rx-root.collapsed .cp-dock { transform:translateX(calc(-50% + 36px)); }
-        @media(max-width:768px){ .cp-dock{transform:translateX(-50%) !important; bottom:12px; padding:8px 12px; gap:6px; max-width:calc(100vw - 24px);} }
-
         /* Buttons */
-        .cp-btn { padding:9px 18px; border-radius:99px; font-size:13px; font-weight:700; border:none; cursor:pointer; display:flex; align-items:center; gap:7px; transition:all .2s; white-space:nowrap; font-family:inherit; }
+        .cp-btn { padding:8px 16px; border-radius:99px; font-size:12.5px; font-weight:700; border:none; cursor:pointer; display:inline-flex; align-items:center; gap:6px; transition:all .2s; white-space:nowrap; font-family:inherit; }
         .cp-btn:hover { transform:translateY(-2px); }
         .cp-btn:active { transform:translateY(0); }
         .cp-btn-primary { background:var(--primary); color:#fff; box-shadow:0 4px 14px rgba(79,70,229,.35); }
@@ -325,19 +654,23 @@ export default function CandidateProfile() {
 
       <div className="cp-page">
 
+        {/* Top Back Navigation Bar */}
+        <div className="cp-top-bar">
+          <button type="button" onClick={handleBack} className="cp-back-btn">
+            <ArrowLeft size={15} /> Back to Candidates
+          </button>
+        </div>
+
         {/* Hero Header */}
         <div className="cp-hero">
           <div className="cp-hero-cover">
-            <Link to="/recruiter/candidates" style={{ position: "absolute", top: 18, left: 20, display: "inline-flex", alignItems: "center", gap: 7, fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,.9)", textDecoration: "none", background: "rgba(255,255,255,.15)", backdropFilter: "blur(8px)", WebkitBackdropFilter: "blur(8px)", padding: "6px 14px", borderRadius: 99, border: "1px solid rgba(255,255,255,.25)", transition: "background .2s" }}>
-              <ArrowLeft size={14} /> Back to Candidates
-            </Link>
             <div className="cp-source-pill">
               <Sparkles size={13} />
               {application.source === "candidate_applied" ? "Applied Candidate" : "Auto-Matched"}
             </div>
           </div>
           <div className="cp-hero-body">
-            <div style={{ display: "flex", gap: 20, flexWrap: "wrap", flex: 1, minWidth: 260, alignItems: "flex-end" }}>
+            <div className="cp-hero-left">
               <div className="cp-avatar-wrap">
                 <div className="cp-avatar">{candidate.fullName?.[0] || "C"}</div>
                 <div className="cp-avatar-dot" style={{ background: sc.bg, color: sc.color, border: `3px solid var(--surface)` }}>●</div>
@@ -345,9 +678,9 @@ export default function CandidateProfile() {
               <div className="cp-hero-info">
                 <h1 className="cp-hero-name">{candidate.fullName}</h1>
                 <div className="cp-hero-meta">
-                  <span className="cp-meta-chip"><Briefcase size={12} /> {candidate.preferredRole || candidate.education || "Software Engineer"}</span>
-                  <span className="cp-meta-chip"><MapPin size={12} /> {candidate.location || "Remote"}</span>
-                  <span className="cp-meta-chip"><Clock size={12} /> {match.experienceYears ?? candidate.experienceYears ?? "0"} yrs exp</span>
+                  <span className="cp-meta-chip"><Briefcase size={13} color="#6366f1" /> {candidate.preferredRole || candidate.education || "Software Engineer"}</span>
+                  <span className="cp-meta-chip"><MapPin size={13} color="#06b6d4" /> {candidate.location || "Remote"}</span>
+                  <span className="cp-meta-chip"><Clock size={13} color="#f59e0b" /> {match.experienceYears ?? candidate.experienceYears ?? "0"} yrs exp</span>
                 </div>
                 <div className="cp-social-links">
                   {candidate.github && <a href={candidate.github} target="_blank" rel="noreferrer" className="cp-social-btn"><Github size={14} /> GitHub</a>}
@@ -356,10 +689,32 @@ export default function CandidateProfile() {
                 </div>
               </div>
             </div>
-            <div className="cp-score-widget">
-              <div className="cp-score-num">{match.score}<span className="cp-score-pct">%</span></div>
-              <div className="cp-score-lbl">Overall Match</div>
-              <div className="cp-stage-pill" style={{ background: sc.bg, color: sc.color, borderColor: sc.border }}>{status.replace(/_/g, " ")}</div>
+
+            <div className="cp-hero-right">
+              <div className="cp-score-widget">
+                <div className="cp-score-num">{match.score}<span className="cp-score-pct">%</span></div>
+                <div className="cp-score-divider" />
+                <div className="cp-score-details">
+                  <div className="cp-score-lbl">Overall Match</div>
+                  <div className="cp-stage-pill" style={{ background: sc.bg, color: sc.color, borderColor: sc.border }}>{status.replace(/_/g, " ")}</div>
+                </div>
+              </div>
+
+              <div className="cp-hero-actions">
+                {CAN_SHORTLIST.includes(status) && (
+                  <button type="button" className="cp-btn cp-btn-success" onClick={() => shortlistCandidate(applicationId).then(() => { notify.success("Candidate shortlisted"); load(); })}><Star size={14} /> Shortlist</button>
+                )}
+                {CAN_SEND_ASSESSMENT.includes(status) && !application.assessmentId && (
+                  <button type="button" className="cp-btn cp-btn-primary" onClick={() => setShowAssessmentModal(true)}><Send size={14} /> Send Assessment</button>
+                )}
+                {CAN_SEND_AI_INTERVIEW.includes(status) && (
+                  <button type="button" className="cp-btn cp-btn-purple" onClick={handleOpenAIModal}><Bot size={14} /> Send AI Interview</button>
+                )}
+                <button type="button" className="cp-btn cp-btn-ghost" onClick={() => setShowSchedule(true)}><Calendar size={14} /> Schedule Manual</button>
+                {status !== "rejected" && status !== "hired" && (
+                  <button type="button" className="cp-btn cp-btn-danger" onClick={() => rejectCandidate(applicationId).then(() => { notify.success("Candidate rejected"); load(); })}><XCircle size={14} /> Reject</button>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -395,17 +750,17 @@ export default function CandidateProfile() {
                 </div>
 
                 {/* Platform Stats — 3 chips */}
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12, marginBottom: 20 }}>
+                <div className="cp-platform-stats">
                   {[
-                    { icon: <BarChart3 size={18} color="#6366f1" />, iconBg: "rgba(99,102,241,.15)", val: pStats.totalInterviews ?? 0, label: "Interviews" },
-                    { icon: <Award size={18} color="#06b6d4" />, iconBg: "rgba(6,182,212,.15)", val: pStats.totalMcqExams ?? 0, label: "MCQ Exams" },
-                    { icon: <TrendingUp size={18} color="#10b981" />, iconBg: "rgba(16,185,129,.15)", val: `${pStats.avgScore ?? 0}%`, label: "Avg Score" },
+                    { icon: <BarChart3 size={18} color="#4f46e5" />, iconBg: "#eef2ff", val: pStats.totalInterviews ?? 0, label: "Interviews" },
+                    { icon: <Award size={18} color="#0891b2" />, iconBg: "#ecfeff", val: pStats.totalMcqExams ?? 0, label: "MCQ Exams" },
+                    { icon: <TrendingUp size={18} color="#16a34a" />, iconBg: "#f0fdf4", val: `${pStats.avgScore ?? 0}%`, label: "Avg Score" },
                   ].map(s => (
-                    <div key={s.label} style={{ background: "linear-gradient(135deg,#1e1b4b,#312e81)", borderRadius: 8, padding: "16px 14px", display: "flex", alignItems: "center", gap: 12, border: "1px solid rgba(99,102,241,.2)" }}>
-                      <div style={{ width: 40, height: 40, borderRadius: 8, background: s.iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{s.icon}</div>
+                    <div key={s.label} className="cp-platform-stat-card">
+                      <div className="cp-platform-stat-icon" style={{ background: s.iconBg }}>{s.icon}</div>
                       <div>
-                        <div style={{ fontSize: 22, fontWeight: 900, color: "#fff", lineHeight: 1 }}>{s.val}</div>
-                        <div style={{ fontSize: 11, color: "rgba(255,255,255,.55)", fontWeight: 600, marginTop: 3 }}>{s.label}</div>
+                        <div className="cp-platform-stat-val">{s.val}</div>
+                        <div className="cp-platform-stat-lbl">{s.label}</div>
                       </div>
                     </div>
                   ))}
@@ -564,22 +919,7 @@ export default function CandidateProfile() {
         </div>
       </div>
 
-      {/* Floating Dock */}
-      <div className="cp-dock">
-        {CAN_SHORTLIST.includes(status) && (
-          <button type="button" className="cp-btn cp-btn-success" onClick={() => shortlistCandidate(applicationId).then(() => { notify.success("Candidate shortlisted"); load(); })}><Star size={15} /> Shortlist</button>
-        )}
-        {CAN_SEND_ASSESSMENT.includes(status) && !application.assessmentId && (
-          <button type="button" className="cp-btn cp-btn-primary" onClick={() => setShowAssessmentModal(true)}><Send size={15} /> Send Assessment</button>
-        )}
-        {CAN_SEND_AI_INTERVIEW.includes(status) && (
-          <button type="button" className="cp-btn cp-btn-purple" onClick={handleOpenAIModal}><Bot size={15} /> Send AI Interview</button>
-        )}
-        <button type="button" className="cp-btn cp-btn-ghost" onClick={() => setShowSchedule(true)}><Calendar size={15} /> Schedule Manual</button>
-        {status !== "rejected" && status !== "hired" && (
-          <button type="button" className="cp-btn cp-btn-danger" onClick={() => rejectCandidate(applicationId).then(() => { notify.success("Candidate rejected"); load(); })}><XCircle size={15} /> Reject</button>
-        )}
-      </div>
+      {/* Note: All recruiter action buttons (Shortlist, Assessment, AI Interview, Schedule, Reject) are now integrated into the hero header card and decision bar */}
 
       {/* Resume Modal */}
       {showResumeModal && resumeUrl && (

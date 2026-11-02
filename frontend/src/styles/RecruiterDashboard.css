@@ -1067,3 +1067,233 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   13. Dashboard Skeleton Loader & Shimmer
+   -------------------------------------------------------------------------- */
+@keyframes rxSkeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.rx-skeleton {
+  background: linear-gradient(
+    90deg,
+    #f3f4f6 0%,
+    #e5e7eb 25%,
+    #f9fafb 50%,
+    #e5e7eb 75%,
+    #f3f4f6 100%
+  );
+  background-size: 200% 100%;
+  animation: rxSkeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 6px;
+  display: block;
+}
+
+[data-theme="dark"] .rx-skeleton {
+  background: linear-gradient(
+    90deg,
+    #1e293b 0%,
+    #334155 25%,
+    #1e293b 50%,
+    #334155 75%,
+    #1e293b 100%
+  );
+  background-size: 200% 100%;
+  animation: rxSkeletonShimmer 1.8s ease-in-out infinite;
+}
+
+.rx-skeleton--circle {
+  border-radius: 50% !important;
+}
+
+.rx-skeleton-card {
+  pointer-events: none;
+  user-select: none;
+}
+
+.rx-hero-card--skeleton {
+  min-height: 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rx-hero-chips--skeleton {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.rx-kpi-card--skeleton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 82px;
+}
+
+.rx-pipeline-skeleton-bar {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.rx-chart-skeleton-box {
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.rx-table-skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+[data-theme="dark"] .rx-table-skeleton-row {
+  border-bottom-color: #334155;
+}
+
+/* --------------------------------------------------------------------------
+   14. ScoreRing Centered Styling
+   -------------------------------------------------------------------------- */
+.rx-score-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rx-score-ring-text {
+  font-family: inherit;
+  font-weight: 700;
+  fill: #1e293b;
+}
+
+[data-theme="dark"] .rx-score-ring-text {
+  fill: #f1f5f9;
+}
+
+
+/* --------------------------------------------------------------------------
+   13. Dashboard Skeleton Loader & Shimmer
+   -------------------------------------------------------------------------- */
+@keyframes rxSkeletonShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.rx-skeleton {
+  background: linear-gradient(
+    90deg,
+    #f3f4f6 0%,
+    #e5e7eb 25%,
+    #f9fafb 50%,
+    #e5e7eb 75%,
+    #f3f4f6 100%
+  );
+  background-size: 200% 100%;
+  animation: rxSkeletonShimmer 1.8s ease-in-out infinite;
+  border-radius: 6px;
+  display: block;
+}
+
+[data-theme="dark"] .rx-skeleton {
+  background: linear-gradient(
+    90deg,
+    #1e293b 0%,
+    #334155 25%,
+    #1e293b 50%,
+    #334155 75%,
+    #1e293b 100%
+  );
+  background-size: 200% 100%;
+  animation: rxSkeletonShimmer 1.8s ease-in-out infinite;
+}
+
+.rx-skeleton--circle {
+  border-radius: 50% !important;
+}
+
+.rx-skeleton-card {
+  pointer-events: none;
+  user-select: none;
+}
+
+.rx-hero-card--skeleton {
+  min-height: 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rx-hero-chips--skeleton {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.rx-kpi-card--skeleton {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 82px;
+}
+
+.rx-pipeline-skeleton-bar {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.rx-chart-skeleton-box {
+  width: 100%;
+  height: 140px;
+  border-radius: 8px;
+  margin: 16px 0;
+}
+
+.rx-table-skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+[data-theme="dark"] .rx-table-skeleton-row {
+  border-bottom-color: #334155;
+}
+
+/* --------------------------------------------------------------------------
+   14. ScoreRing Centered Styling
+   -------------------------------------------------------------------------- */
+.rx-score-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rx-score-ring-text {
+  font-family: inherit;
+  font-weight: 700;
+  fill: #1e293b;
+}
+
+[data-theme="dark"] .rx-score-ring-text {
+  fill: #f1f5f9;
+}
