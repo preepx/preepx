@@ -1060,7 +1060,7 @@
   }
 
   .rx-content {
-    padding: 16px 12px 64px;
+    padding: 16px 12px 12px;
   }
 
   .rx-icon-btn {
@@ -1921,4 +1921,286 @@ select.rx-premium-input {
 [data-theme="dark"] .rx-decision-btn.rx-decision-nothire.active {
   background: #dc2626;
   color: #ffffff;
+}
+
+
+/* ==========================================================================
+   Candidate Discovery Card List View (Blue & Sky-Blue Theme)
+   ========================================================================== */
+
+.rx-discovery-wrap {
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.rx-discovery-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 19px;
+  background: #f0f7ff;
+  border-bottom: 1px solid #dbeafe;
+}
+
+[data-theme="dark"] .rx-discovery-header {
+  background: rgba(37, 99, 235, 0.12);
+  border-bottom-color: rgba(37, 99, 235, 0.25);
+}
+
+.rx-discovery-header-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e40af;
+  letter-spacing: -0.01em;
+}
+
+[data-theme="dark"] .rx-discovery-header-title {
+  color: #93c5fd;
+}
+
+.rx-discovery-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s ease;
+}
+
+.rx-discovery-row:last-child {
+  border-bottom: none;
+}
+
+.rx-discovery-row:hover {
+  background: color-mix(in srgb, #2563eb 2%, transparent);
+}
+
+.rx-discovery-row.selected {
+  background: color-mix(in srgb, #2563eb 5%, transparent);
+}
+
+.rx-discovery-main {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+
+.rx-discovery-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.rx-discovery-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.rx-discovery-email {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.2;
+}
+
+.rx-discovery-headline {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* Metric Badges Pill Row */
+.rx-discovery-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.rx-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+/* Match Score Pill (Sky Blue) */
+.rx-pill-match {
+  background: #e0f2fe;
+  color: #0284c7;
+  border: 1px solid #bae6fd;
+}
+
+[data-theme="dark"] .rx-pill-match {
+  background: rgba(2, 132, 199, 0.2);
+  color: #38bdf8;
+  border-color: rgba(2, 132, 199, 0.35);
+}
+
+/* Sky-Blue / Soft Blue Badges (Assessment, AI Interview -, Stage) */
+.rx-pill-blue {
+  background: #f0f7ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+}
+
+[data-theme="dark"] .rx-pill-blue {
+  background: rgba(37, 99, 235, 0.16);
+  color: #93c5fd;
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+/* AI Interview Scored Pill (Sky Blue Accent) */
+.rx-pill-ai-score {
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
+}
+
+[data-theme="dark"] .rx-pill-ai-score {
+  background: rgba(3, 105, 161, 0.22);
+  color: #38bdf8;
+  border-color: rgba(3, 105, 161, 0.35);
+}
+
+/* Key Skills Row */
+.rx-discovery-skills-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.rx-skills-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-right: 4px;
+}
+
+[data-theme="dark"] .rx-skills-label {
+  color: #93c5fd;
+}
+
+.rx-discovery-skill-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.rx-discovery-skill-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #2563eb;
+  cursor: pointer;
+  line-height: 1.2;
+  transition: all 0.15s ease;
+}
+
+.rx-discovery-skill-more:hover {
+  background: #dbeafe;
+  color: #1d4ed8;
+  border-color: #3b82f6;
+}
+
+[data-theme="dark"] .rx-discovery-skill-more {
+  background: rgba(37, 99, 235, 0.2);
+  border-color: rgba(37, 99, 235, 0.4);
+  color: #93c5fd;
+}
+
+/* View Profile Button (Soft Blue / Sky-Blue Theme) */
+.rx-btn-view-profile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.rx-btn-view-profile:hover {
+  background: linear-gradient(135deg, #3d5eff 0%, #2563eb 100%);
+  color: #ffffff;
+  border-color: #2563eb;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
+}
+
+[data-theme="dark"] .rx-btn-view-profile {
+  background: rgba(37, 99, 235, 0.16);
+  color: #93c5fd;
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
+[data-theme="dark"] .rx-btn-view-profile:hover {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rx-discovery-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 14px 16px;
+  }
+
+  .rx-discovery-actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .rx-btn-view-profile {
+    width: 100%;
+    padding: 9px 16px;
+  }
+
+  .rx-discovery-header {
+    padding: 10px 14px;
+  }
 }

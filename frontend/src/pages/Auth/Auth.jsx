@@ -267,7 +267,7 @@ function Auth({ defaultRole }) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
       window.dispatchEvent(new Event("user-updated"));
-      notify.success("Logged in successfully!");
+      // notify.success("Logged in successfully!"); // Removed popup per user request
       navigate("/recruiter-dashboard", { replace: true });
     } catch (err) {
       let msg = err.response?.data?.message || "Email or password is incorrect. Please try again.";

@@ -34,12 +34,12 @@ export default function CandidateRanking({ candidates = [] }) {
             const name = c.userId?.fullName || "Candidate";
             const initial = name[0]?.toUpperCase() || "C";
             return (
-              <li key={c._id} className="rx-candidate-row">
+              <li key={c._id} className="rx-ranking-row rx-candidate-row">
                 <span className="rx-rank-badge">{i + 1}</span>
                 <div className="rx-candidate-avatar">{initial}</div>
-                <div className="rx-candidate-info">
-                  <strong className="rx-candidate-name">{name}</strong>
-                  <span className="rx-table-sub">
+                <div className="rx-ranking-info rx-candidate-info">
+                  <strong className="rx-ranking-name rx-candidate-name">{name}</strong>
+                  <span className="rx-ranking-sub rx-table-sub">
                     {c.jobId?.role || c.jobId?.title || "Matched role"}
                   </span>
                 </div>

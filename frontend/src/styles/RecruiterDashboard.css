@@ -1311,14 +1311,19 @@
   gap: 10px;
 }
 
-.rx-candidate-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 10px;
-  background: #f9fafb;
-  border: 1px solid #f3f4f6;
-  border-radius: 6px;
+.rx-candidate-row,
+.rx-ranking-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 8px 12px !important;
+  background: var(--card-bg, #f9fafb);
+  /* border: 1px solid var(--border, #f3f4f6); */
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left !important;
 }
 
 .rx-rank-badge {
@@ -1454,7 +1459,7 @@
 
 @media (max-width: 768px) {
   .rx-dashboard {
-    padding-bottom: 80px;
+    padding-bottom: 2px;
   }
 
   .rx-hero-card {
@@ -1698,11 +1703,13 @@
 [data-theme="dark"] .rx-score-ring-text {
   fill: #f1f5f9;
 }
+
 [data-theme="dark"] .rx-hero-card {
   background: linear-gradient(135deg, #1e1b4b 0%, #311069 50%, #1e1b4b 100%);
   border-color: rgba(99, 102, 241, 0.35);
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
+
 [data-theme="dark"] .rx-hero-card--skeleton {
   background: #1e293b !important;
   border-color: #334155 !important;

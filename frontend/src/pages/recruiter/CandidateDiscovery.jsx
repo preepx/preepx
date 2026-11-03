@@ -12,7 +12,12 @@ import {
   ArrowRight,
   Filter,
   CheckCircle2,
-  FileCheck
+  FileCheck,
+  Target,
+  FileText,
+  Video,
+  Flag,
+  Layers,
 } from "lucide-react";
 import Swal from "sweetalert2";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
@@ -33,6 +38,21 @@ const STAGE_OPTIONS = [
   { value: "rejected", label: "Rejected" },
 ];
 
+const STAGE_LABELS = {
+  applied: "Applied",
+  matched: "Matched",
+  shortlisted: "Shortlisted",
+  assessment_sent: "Assessment Sent",
+  assessment_in_progress: "Assessment In Progress",
+  assessment_completed: "Assessment Completed",
+  ai_interview: "AI Interview",
+  interview: "Interview",
+  selected: "Selected",
+  offered: "Offered",
+  hired: "Hired",
+  rejected: "Rejected",
+};
+
 export default function CandidateDiscovery() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [jobs, setJobs] = useState([]);
@@ -43,6 +63,11 @@ export default function CandidateDiscovery() {
   const [selectedIds, setSelectedIds] = useState([]);
   const [bulkLoading, setBulkLoading] = useState(false);
   const [targetStage, setTargetStage] = useState("");
+  const [expandedSkills, setExpandedSkills] = useState({});
+
+  const toggleSkills = (id) => {
+    setExpandedSkills((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
   let jobId = searchParams.get("jobId") || "";
   if (jobId === "undefined" || jobId === "null") jobId = "";
@@ -248,96 +273,179 @@ export default function CandidateDiscovery() {
           No candidates found for this job. Publish the job to attract applicants or run auto-matching.
         </div>
       ) : (
-        <div className="rx-card" style={{ padding: 0, overflowX: "auto" }}>
-          <table className="rx-table">
-            <thead>
-              <tr>
-                <th style={{ width: 40, textAlign: "center" }}>
-                  <div className="rx-table-bulk-checkbox" onClick={handleToggleSelectAll}>
-                    {isAllSelected ? <CheckSquare size={18} color="var(--primary)" /> : <Square size={18} color="var(--text-muted)" />}
-                  </div>
-                </th>
-                <th>Candidate</th>
-                <th>Match Score</th>
-                <th>Key Skills</th>
-                <th>Assessment</th>
-                <th>AI Interview</th>
-                <th>Stage</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {candidates.map((c) => {
-                const isSelected = selectedIds.includes(c._id);
-                const user = c.user || c.userId || {};
+        <div className="rx-discovery-wrap">
+          {/* Header Bar (Candidate on left, Actions on right) */}
+          <div className="rx-discovery-header">
+            <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              <div
+                className="rx-table-bulk-checkbox"
+                onClick={handleToggleSelectAll}
+                title={isAllSelected ? "Deselect All" : "Select All"}
+              >
+                {isAllSelected ? (
+                  <CheckSquare size={19} color="#2563eb" strokeWidth={2.3} />
+                ) : (
+                  <Square size={19} color="#2563eb" strokeWidth={2} />
+                )}
+              </div>
+              <span className="rx-discovery-header-title">Candidate</span>
+            </div>
+            <span className="rx-discovery-header-title">Actions</span>
+          </div>
 
-                return (
-                  <tr key={c._id} style={{ background: isSelected ? "color-mix(in srgb, var(--primary) 4%, transparent)" : undefined }}>
-                    <td style={{ textAlign: "center" }}>
-                      <div className="rx-table-bulk-checkbox" onClick={() => handleToggleSelectOne(c._id)}>
-                        {isSelected ? <CheckSquare size={18} color="var(--primary)" /> : <Square size={18} color="var(--text-muted)" />}
+          {/* Candidate Rows */}
+          <div>
+            {candidates.map((c) => {
+              const isSelected = selectedIds.includes(c._id);
+              const user = c.user || c.userId || {};
+              const headline =
+                user.preferredRole ||
+                [user.degree, user.college].filter(Boolean).join(" | ") ||
+                user.bio ||
+                "";
+
+              // Assessment Label
+              const assessmentLabel =
+                c.assessmentId?.overallScore != null
+                  ? `${c.assessmentId.overallScore}%`
+                  : c.assessmentScore != null && c.assessmentScore > 0
+                  ? `${c.assessmentScore}%`
+                  : c.status === "assessment_sent" || c.status === "assessment_in_progress" || c.assessmentId
+                  ? "Sent"
+                  : "—";
+
+              // AI Interview Score
+              const hasAiScore = c.aiInterviewScore != null && c.aiInterviewScore > 0;
+
+              // Stage Label
+              const stageLabel = STAGE_LABELS[c.status] || (c.status || "Matched").replace(/_/g, " ");
+
+              // Key Skills
+              const rawSkills =
+                c.matchedSkills && c.matchedSkills.length > 0
+                  ? c.matchedSkills
+                  : user.skills && user.skills.length > 0
+                  ? user.skills
+                  : [];
+              const isExpanded = !!expandedSkills[c._id];
+              const visibleSkills = isExpanded ? rawSkills : rawSkills.slice(0, 3);
+              const hasMoreSkills = rawSkills.length > 3;
+
+              return (
+                <div
+                  key={c._id}
+                  className={`rx-discovery-row ${isSelected ? "selected" : ""}`}
+                >
+                  <div className="rx-discovery-main">
+                    {/* Checkbox */}
+                    <div
+                      className="rx-table-bulk-checkbox"
+                      onClick={() => handleToggleSelectOne(c._id)}
+                      style={{ marginTop: 2 }}
+                    >
+                      {isSelected ? (
+                        <CheckSquare size={19} color="#2563eb" strokeWidth={2.3} />
+                      ) : (
+                        <Square size={19} color="#94a3b8" strokeWidth={1.8} />
+                      )}
+                    </div>
+
+                    {/* Candidate Details */}
+                    <div className="rx-discovery-info">
+                      {/* Name */}
+                      <div className="rx-discovery-name">
+                        {user.fullName || "Candidate"}
                       </div>
-                    </td>
-                    <td>
-                      <div style={{ fontWeight: 700, color: "var(--text)" }}>{user.fullName || "Candidate"}</div>
-                      <div style={{ fontSize: 12, color: "var(--text-muted)" }}>{user.email || "No email"}</div>
-                      {user.preferredRole && <div style={{ fontSize: 11, color: "#64748b", marginTop: 2 }}>{user.preferredRole}</div>}
-                    </td>
-                    <td>
-                      <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                        <span style={{ fontSize: 14, fontWeight: 800, color: "var(--primary)" }}>{c.matchScore}%</span>
-                        <span className="rx-badge rx-badge-blue" style={{ fontSize: 10 }}>
-                          <Sparkles size={10} /> Match
+
+                      {/* Email */}
+                      <div className="rx-discovery-email">
+                        {user.email || "No email"}
+                      </div>
+
+                      {/* Headline / Title / Education */}
+                      {headline && (
+                        <div className="rx-discovery-headline">
+                          {headline}
+                        </div>
+                      )}
+
+                      {/* Badges / Metrics Row */}
+                      <div className="rx-discovery-badges">
+                        {/* Match Score */}
+                        <span className="rx-pill rx-pill-match">
+                          <Target size={13} strokeWidth={2.3} />
+                          <span>Match Score: {c.matchScore || 0}%</span>
                         </span>
-                      </div>
-                    </td>
-                    <td style={{ maxWidth: 220 }}>
-                      <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-                        {(c.matchedSkills || []).slice(0, 3).map((s, idx) => (
-                          <span key={idx} style={{ fontSize: 11, background: "var(--bg)", border: "1px solid var(--border)", padding: "2px 6px", borderRadius: 4 }}>
-                            {s}
+
+                        {/* Assessment */}
+                        <span className="rx-pill rx-pill-blue">
+                          <FileText size={13} strokeWidth={2.2} />
+                          <span>Assessment: {assessmentLabel}</span>
+                        </span>
+
+                        {/* AI Interview */}
+                        {hasAiScore ? (
+                          <span className="rx-pill rx-pill-ai-score">
+                            <Bot size={13} strokeWidth={2.2} />
+                            <span>AI Interview: {c.aiInterviewScore}%</span>
                           </span>
-                        ))}
+                        ) : (
+                          <span className="rx-pill rx-pill-blue">
+                            <Video size={13} strokeWidth={2.2} />
+                            <span>AI Interview: —</span>
+                          </span>
+                        )}
+
+                        {/* Stage */}
+                        <span className="rx-pill rx-pill-blue">
+                          <Flag size={13} strokeWidth={2.2} />
+                          <span>Stage: {stageLabel}</span>
+                        </span>
                       </div>
-                    </td>
-                    <td>
-                      {c.assessmentId?.overallScore != null ? (
-                        <span className="rx-badge rx-badge-green" style={{ fontSize: 11 }}>
-                          <FileCheck size={12} /> {c.assessmentId.overallScore}%
-                        </span>
-                      ) : (
-                        <span style={{ fontSize: 12, color: "var(--text-muted)" }}>—</span>
+
+                      {/* Key Skills Row */}
+                      {rawSkills.length > 0 && (
+                        <div className="rx-discovery-skills-row">
+                          <span className="rx-skills-label">
+                            <Layers size={13} color="#2563eb" strokeWidth={2.2} />
+                            <span>Key Skills:</span>
+                          </span>
+
+                          {visibleSkills.map((s, idx) => (
+                            <span key={idx} className="rx-discovery-skill-chip">
+                              {s}
+                            </span>
+                          ))}
+
+                          {hasMoreSkills && (
+                            <button
+                              type="button"
+                              className="rx-discovery-skill-more"
+                              onClick={() => toggleSkills(c._id)}
+                              title={isExpanded ? "Show less" : `Show ${rawSkills.length - 3} more skills`}
+                            >
+                              {isExpanded ? "✕" : "..."}
+                            </button>
+                          )}
+                        </div>
                       )}
-                    </td>
-                    <td>
-                      {c.aiInterviewScore > 0 ? (
-                        <span className="rx-badge rx-badge-blue" style={{ fontSize: 11 }}>
-                          <Bot size={12} /> {c.aiInterviewScore}%
-                        </span>
-                      ) : (
-                        <span style={{ fontSize: 12, color: "var(--text-muted)" }}>—</span>
-                      )}
-                    </td>
-                    <td>
-                      <span className="rx-badge rx-badge-gray" style={{ textTransform: "capitalize", fontSize: 11 }}>
-                        {(c.status || "matched").replace(/_/g, " ")}
-                      </span>
-                    </td>
-                    <td style={{ textAlign: "right" }}>
-                      <Link
-                        to={jobId ? `/recruiter/candidates/${c._id}?jobId=${jobId}` : `/recruiter/candidates/${c._id}`}
-                        state={{ fromJobId: jobId }}
-                        className="rx-btn rx-btn-secondary"
-                        style={{ fontSize: 12, padding: "5px 12px", width: "120px" }}
-                      >
-                        View Profile
-                      </Link>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                    </div>
+                  </div>
+
+                  {/* Actions Column */}
+                  <div className="rx-discovery-actions">
+                    <Link
+                      to={jobId ? `/recruiter/candidates/${c._id}?jobId=${jobId}` : `/recruiter/candidates/${c._id}`}
+                      state={{ fromJobId: jobId }}
+                      className="rx-btn-view-profile"
+                    >
+                      View Profile
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
 
