@@ -30,11 +30,11 @@ export function WelcomeBannerSkeleton() {
 export function KpiCardSkeleton() {
   return (
     <article className="rx-kpi-card rx-kpi-card--skeleton rx-skeleton-card">
-      <div className="rx-kpi-top" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <div className="rx-skeleton" style={{ width: 32, height: 32, borderRadius: 8 }} />
-        <div className="rx-skeleton" style={{ width: 44, height: 24 }} />
+      <div className="rx-skeleton rx-kpi-icon-box" style={{ width: 36, height: 36, borderRadius: 8 }} />
+      <div className="rx-kpi-body" style={{ display: "flex", flexDirection: "column", gap: "4px", flex: 1 }}>
+        <div className="rx-skeleton" style={{ width: 32, height: 18, borderRadius: 4 }} />
+        <div className="rx-skeleton" style={{ width: 64, height: 12, borderRadius: 4 }} />
       </div>
-      <div className="rx-skeleton" style={{ width: 70, height: 13, marginTop: 10 }} />
     </article>
   );
 }
@@ -120,12 +120,9 @@ export function JobOverviewSkeleton() {
       <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: "10px" }}>
         {[1, 2, 3, 4].map((i) => (
           <div key={i} className="rx-table-skeleton-row">
-            <div style={{ flex: 1.5, display: "flex", flexDirection: "column", gap: "4px" }}>
+            <div style={{ flex: 1.8, display: "flex", flexDirection: "column", gap: "4px" }}>
               <div className="rx-skeleton" style={{ width: "70%", height: 15 }} />
               <div className="rx-skeleton" style={{ width: "45%", height: 12 }} />
-            </div>
-            <div style={{ flex: 1 }}>
-              <div className="rx-skeleton" style={{ width: 75, height: 13 }} />
             </div>
             <div style={{ flex: 0.8 }}>
               <div className="rx-skeleton" style={{ width: 45, height: 13 }} />
@@ -133,9 +130,10 @@ export function JobOverviewSkeleton() {
             <div style={{ flex: 0.8 }}>
               <div className="rx-skeleton" style={{ width: 65, height: 22, borderRadius: 12 }} />
             </div>
-            <div style={{ display: "flex", gap: "8px" }}>
-              <div className="rx-skeleton" style={{ width: 24, height: 24, borderRadius: 4 }} />
-              <div className="rx-skeleton" style={{ width: 24, height: 24, borderRadius: 4 }} />
+            <div style={{ display: "flex", gap: "6px" }}>
+              <div className="rx-skeleton" style={{ width: 24, height: 24, borderRadius: 6 }} />
+              <div className="rx-skeleton" style={{ width: 24, height: 24, borderRadius: 6 }} />
+              <div className="rx-skeleton" style={{ width: 24, height: 24, borderRadius: 6 }} />
             </div>
           </div>
         ))}
@@ -192,6 +190,27 @@ export function UpcomingInterviewsSkeleton() {
   );
 }
 
+export function ActivityTimelineSkeleton() {
+  return (
+    <section className="rx-card rx-activity-card rx-skeleton-card">
+      <div className="rx-card-header">
+        <div className="rx-skeleton" style={{ width: 160, height: 20 }} />
+      </div>
+      <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: "10px" }}>
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
+            <div className="rx-skeleton rx-skeleton--circle" style={{ width: 22, height: 22, flexShrink: 0 }} />
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "4px" }}>
+              <div className="rx-skeleton" style={{ width: `${60 + (i * 10)}%`, height: 14 }} />
+              <div className="rx-skeleton" style={{ width: 60, height: 11 }} />
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 // Backward-compatible named exports
 export function ChartSkeleton() {
   return <HiringAnalyticsSkeleton />;
@@ -229,6 +248,7 @@ export default function DashboardSkeleton() {
         <div className="rx-dashboard-col rx-dashboard-col--wide">
           <HiringAnalyticsSkeleton />
           <JobOverviewSkeleton />
+          <ActivityTimelineSkeleton />
         </div>
         <div className="rx-dashboard-col rx-dashboard-col--side">
           <CandidateRankingSkeleton />

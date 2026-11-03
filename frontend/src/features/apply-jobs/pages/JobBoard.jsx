@@ -5,7 +5,7 @@ import { Briefcase, MapPin, Sparkles, Search, Building2, ChevronRight, CheckCirc
 import { getPublishedJobs, applyToJob, toggleSaveJob, getSavedJobs, getMyApplications } from "../services/candidateJobsAPI";
 import { getProfile } from "@/services/userAPI";
 import Loader from "@/components/Loader";
-import EmptyState from "@/components/recruiter/EmptyState";
+import EmptyState from "@/components/EmptyState";
 import notify from "@/utils/notify";
 import JobLogo from "../components/JobLogo";
 import { calcCompletion } from "../utils/jobHelpers";

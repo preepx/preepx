@@ -67,12 +67,12 @@ export default function RecruiterDashboard() {
   const activityItems = buildActivityItems({ topCandidates, recentJobs, interviews });
 
   const kpis = [
-    { label: "Active Jobs", value: stats.activeJobs, icon: Briefcase, accent: "#6366f1" },
-    { label: "Matched", value: stats.matchedCandidates ?? funnel.matched, icon: Sparkles, accent: "#8b5cf6" },
-    { label: "Assessments", value: stats.assessmentsCompleted, icon: Send, accent: "#06b6d4" },
-    { label: "Shortlisted", value: stats.shortlisted, icon: UserCheck, accent: "#10b981" },
-    { label: "Interviews", value: stats.interviews, icon: Video, accent: "#f59e0b" },
-    { label: "Hired", value: stats.hired, icon: CheckCircle, accent: "#22c55e" },
+    { label: "Active Jobs", value: stats.activeJobs, icon: Briefcase, variant: "blue" },
+    { label: "Matched", value: stats.matchedCandidates ?? funnel.matched, icon: Sparkles, variant: "purple" },
+    { label: "Assessments", value: stats.assessmentsCompleted, icon: Send, variant: "cyan" },
+    { label: "Shortlisted", value: stats.shortlisted, icon: UserCheck, variant: "emerald" },
+    { label: "Interviews", value: stats.interviews, icon: Video, variant: "amber" },
+    { label: "Hired", value: stats.hired, icon: CheckCircle, variant: "green" },
   ];
 
   return (
@@ -94,12 +94,12 @@ export default function RecruiterDashboard() {
           <div className="rx-dashboard-col rx-dashboard-col--wide">
             <HiringAnalytics stats={stats} funnel={funnel} />
             <JobOverview jobs={jobs.length ? jobs : recentJobs} />
+            <ActivityTimeline items={activityItems} />
           </div>
           <div className="rx-dashboard-col rx-dashboard-col--side">
             <AiMatchingCard topCandidates={topCandidates} recentJobs={recentJobs} />
             <CandidateRanking candidates={topCandidates} />
             <UpcomingInterviews interviews={interviews} />
-            <ActivityTimeline items={activityItems} />
           </div>
         </div>
 

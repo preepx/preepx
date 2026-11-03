@@ -23,7 +23,7 @@ const ICONS = {
 
 export default function ActivityTimeline({ items = [] }) {
   return (
-    <section className="rx-card rx-activity-card">
+    <section className="rx-card rx-activity-card" >
       <div className="rx-card-header">
         <h2 className="rx-card-title">Latest Hiring Activity</h2>
       </div>
@@ -65,9 +65,8 @@ export function buildActivityItems({ topCandidates = [], recentJobs = [], interv
       items.push({
         id: `c-${c._id}`,
         type: c.status === "shortlisted" ? "shortlisted" : "application",
-        text: `${c.userId?.fullName || "A candidate"} ${
-          c.status === "shortlisted" ? "was shortlisted" : "was matched to a role"
-        }`,
+        text: `${c.userId?.fullName || "A candidate"} ${c.status === "shortlisted" ? "was shortlisted" : "was matched to a role"
+          }`,
         at: c.updatedAt,
       });
     }

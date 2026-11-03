@@ -97,7 +97,7 @@ export default function RecruiterAssessments() {
       }
 
       const jobsToFetch = (fetchedJobs || []).slice(0, 20);
-      const appsPromises = jobsToFetch.map(job => 
+      const appsPromises = jobsToFetch.map(job =>
         getApplications(job._id)
           .then(apps => apps
             .filter(a => a.assessmentId || ["assessment_sent", "assessment_in_progress", "assessment_completed"].includes(a.status))
@@ -105,7 +105,7 @@ export default function RecruiterAssessments() {
           )
           .catch(() => []) // Fallback for individual failure
       );
-      
+
       const appsResults = await Promise.all(appsPromises);
       setRows(appsResults.flat());
     } catch (e) {
@@ -373,7 +373,7 @@ export default function RecruiterAssessments() {
             style={{ background: activeTab === "results" ? "var(--primary)" : "#ede9fe", color: activeTab === "results" ? "#fff" : "var(--primary)", border: "none", display: "flex", alignItems: "center", gap: 8, padding: "10px 16px", borderRadius: 8, fontWeight: 600 }}
             onClick={() => setActiveTab(activeTab === "builder" ? "results" : "builder")}
           >
-            <FileCheck size={18} /> 
+            <FileCheck size={18} />
             {activeTab === "builder" ? `Candidate Results (${rows.length})` : "Back to Builder"}
           </button>
         </div>
@@ -441,7 +441,7 @@ export default function RecruiterAssessments() {
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           {/* Main Assessment Configuration Card */}
           <div style={{ background: "#fff", border: "1px solid var(--border)", borderRadius: 8, padding: "32px", boxShadow: "0 4px 24px rgba(0,0,0,0.03)", position: "relative", overflow: "hidden" }}>
-            
+
             {/* Header of Card */}
             <div style={{ display: "flex", alignItems: "flex-start", gap: 16, marginBottom: 32, maxWidth: "60%" }}>
               <div style={{ width: 48, height: 48, borderRadius: 8, background: "#f3f0ff", color: "var(--primary)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -580,12 +580,12 @@ export default function RecruiterAssessments() {
               {/* Custom AI Prompt Input */}
               <div style={{ marginBottom: 4 }}>
                 <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "var(--text)", marginBottom: 8 }}>Custom Topic/Prompt (Optional)</label>
-                <input 
-                  type="text" 
-                  value={aiPrompt} 
-                  onChange={(e) => setAiPrompt(e.target.value)} 
-                  placeholder="e.g., Focus specifically on React Hooks and Context API" 
-                  className="rx-premium-input" 
+                <input
+                  type="text"
+                  value={aiPrompt}
+                  onChange={(e) => setAiPrompt(e.target.value)}
+                  placeholder="e.g., Focus specifically on React Hooks and Context API"
+                  className="rx-premium-input"
                   style={{ background: "#fff", width: "100%" }}
                 />
               </div>
@@ -602,13 +602,13 @@ export default function RecruiterAssessments() {
                         Multiple Choice Questions (MCQ)
                       </h3>
                       {assessmentType !== "coding_only" && (
-                        <span style={{ background: "#ffedd5", color: "#c2410c", fontSize: 10, fontWeight: 700, padding: "4px 8px", borderRadius: 999, marginTop: 2 }}>60%<br/>weightage</span>
+                        <span style={{ background: "#ffedd5", color: "#c2410c", fontSize: 10, fontWeight: 700, padding: "4px 8px", borderRadius: 999, marginTop: 2 }}>60% weightage</span>
                       )}
                     </div>
                     <p style={{ margin: 0, fontSize: 13, color: "var(--text-muted)" }}>Test theoretical and conceptual knowledge.</p>
                   </div>
                 </div>
-                
+
                 <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
                   <div style={{ textAlign: "center", minWidth: 50 }}>
                     <div style={{ fontSize: 20, fontWeight: 800, color: "var(--text)", lineHeight: 1 }}>{assessmentType !== "coding_only" ? mcqQuestions.length : 0}</div>
@@ -636,8 +636,8 @@ export default function RecruiterAssessments() {
                             <Loader2 size={18} className="rx-spin" />
                           ) : (
                             <>
-                              <Sparkles size={14} style={{ flexShrink: 0 }} /> 
-                              <span>{mcqQuestions.length > 0 ? "Regenerate All" : <>AI Generate<br/>Questions</>}</span>
+                              <Sparkles size={14} style={{ flexShrink: 0 }} />
+                              <span>{mcqQuestions.length > 0 ? "Regenerate All" : <>AI Generate<br />Questions</>}</span>
                             </>
                           )}
                         </button>
@@ -646,8 +646,8 @@ export default function RecruiterAssessments() {
                           style={{ background: "#f8fafc", color: "var(--primary)", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "8px 12px", borderRadius: 8, fontWeight: 600, fontSize: 13, cursor: "pointer", minWidth: 100, textAlign: "center", lineHeight: 1.3 }}
                           onClick={() => setShowMcqManagerModal(true)}
                         >
-                          <Eye size={14} style={{ flexShrink: 0 }} /> 
-                          <span>View &<br/>Manage</span>
+                          <Eye size={14} style={{ flexShrink: 0 }} />
+                          <span>View &<br />Manage</span>
                         </button>
                       </>
                     ) : (
@@ -676,7 +676,7 @@ export default function RecruiterAssessments() {
                     <p style={{ margin: 0, fontSize: 13, color: "var(--text-muted)", maxWidth: 280, lineHeight: 1.4 }}>Evaluate problem-solving skills with hands-on coding.</p>
                   </div>
                 </div>
-                
+
                 <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
                   <div style={{ textAlign: "center", minWidth: 50 }}>
                     <div style={{ fontSize: 20, fontWeight: 800, color: "var(--text)", lineHeight: 1 }}>{assessmentType !== "mcq_only" ? codingQuestions.length : 0}</div>
@@ -704,8 +704,8 @@ export default function RecruiterAssessments() {
                             <Loader2 size={18} className="rx-spin" />
                           ) : (
                             <>
-                              <Sparkles size={14} style={{ flexShrink: 0 }} /> 
-                              <span>{codingQuestions.length > 0 ? "Regenerate All" : <>AI Generate<br/>Questions</>}</span>
+                              <Sparkles size={14} style={{ flexShrink: 0 }} />
+                              <span>{codingQuestions.length > 0 ? "Regenerate All" : <>AI Generate<br />Questions</>}</span>
                             </>
                           )}
                         </button>
@@ -714,8 +714,8 @@ export default function RecruiterAssessments() {
                           style={{ background: "#f8fafc", color: "var(--primary)", border: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "center", gap: 6, padding: "8px 12px", borderRadius: 8, fontWeight: 600, fontSize: 13, cursor: "pointer", minWidth: 100, textAlign: "center", lineHeight: 1.3 }}
                           onClick={() => setShowCodingManagerModal(true)}
                         >
-                          <Eye size={14} style={{ flexShrink: 0 }} /> 
-                          <span>View &<br/>Manage</span>
+                          <Eye size={14} style={{ flexShrink: 0 }} />
+                          <span>View &<br />Manage</span>
                         </button>
                       </>
                     ) : (

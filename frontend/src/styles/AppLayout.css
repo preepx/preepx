@@ -71,7 +71,7 @@
   color: var(--text-muted);
   width: 36px;
   height: 36px;
-  border-radius: 12px;
+  border-radius: 8px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -1019,6 +1019,7 @@
     font-size: 9px;
     transform: translate(15%, -5%);
   }
+
   .tb-pro-days {
     display: none;
   }
@@ -1063,6 +1064,7 @@
     font-size: 8px !important;
   }
 }
+
 .nav-soon-badge {
   flex-shrink: 0;
   margin-left: auto;

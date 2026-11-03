@@ -2,11 +2,11 @@ import React from 'react';
 import { CheckCircle, Circle, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-export default function SidebarImproveProfile({ 
-  profileData, 
-  completion = 80, 
-  prefix = 'jma', 
-  containerClass = 'jma-sidebar-card' 
+export default function SidebarImproveProfile({
+  profileData,
+  completion = 80,
+  prefix = 'jma',
+  containerClass = 'jma-sidebar-card'
 }) {
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ export default function SidebarImproveProfile({
 
   const bgStyle = { background: `conic-gradient(#10b981 ${completion}%, #e2e8f0 0)` };
 
-  const btnClass = prefix === 'ajd' 
+  const btnClass = prefix === 'ajd'
     ? 'ajd-card-cta ajd-cta-solid ajd-cta-row'
     : 'jma-card-cta jma-cta-solid';
 
@@ -51,13 +51,13 @@ export default function SidebarImproveProfile({
         <div className={`${prefix}-check-item ${hasSkills ? "done" : ""}`}>
           {hasSkills ? <CheckCircle size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Skills' : 'Add Skills'}
         </div>
-        <div className={`${prefix}-check-item ${hasPhoto ? "done" : ""}`}>
+        {/* <div className={`${prefix}-check-item ${hasPhoto ? "done" : ""}`}>
           {hasPhoto ? <CheckCircle size={14} color="#10b981" /> : <Circle size={14} />} {prefix === 'ajd' ? 'Photo' : 'Add Portfolio'}
-        </div>
+        </div> */}
       </div>
-      <button 
-        type="button" 
-        className={btnClass} 
+      <button
+        type="button"
+        className={btnClass}
         onClick={() => navigate("/apply-jobs/profile")}
       >
         Improve profile <ArrowRight size={14} />

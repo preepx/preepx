@@ -10,6 +10,7 @@
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
+  padding-bottom: 0px;
   animation: rxFadeIn 0.3s ease;
   font-family: inherit;
 }
@@ -27,19 +28,46 @@
 }
 
 /* --------------------------------------------------------------------------
-   1. Welcome Hero Banner Card
+   1. Welcome Hero Banner Card (Gradient Background)
    -------------------------------------------------------------------------- */
 .rx-hero-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 20px 24px;
+  background: linear-gradient(135deg, #3d5eff 0%, #4f46e5 45%, #6017c7 100%);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 22px 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 10px 25px -5px rgba(61, 94, 255, 0.25), 0 8px 10px -6px rgba(96, 23, 199, 0.2);
   flex-wrap: wrap;
+  color: #ffffff;
+}
+
+.rx-hero-card::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+}
+
+.rx-hero-card::after {
+  content: "";
+  position: absolute;
+  bottom: -60px;
+  left: 25%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
 }
 
 .rx-hero-left {
@@ -47,6 +75,8 @@
   align-items: center;
   gap: 16px;
   min-width: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .rx-avatar-wrap {
@@ -57,14 +87,14 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: linear-gradient(90deg, rgb(61, 94, 255), rgb(96, 23, 199));
-  color: #ffffff;
-  font-weight: 700;
+  background: #ffffff;
+  color: #4338ca;
+  font-weight: 800;
   font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(61, 94, 255, 0.25);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 
 .rx-avatar-img {
@@ -72,7 +102,8 @@
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #e5e7eb;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
 }
 
 .rx-hero-text {
@@ -83,31 +114,38 @@
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 2px 10px;
+  padding: 3px 10px;
   border-radius: 9999px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   font-size: 11px;
-  font-weight: 500;
-  color: #4b5563;
+  font-weight: 600;
+  color: #ffffff;
   margin-bottom: 6px;
 }
 
+.rx-greeting-badge svg {
+  color: #fde047;
+}
+
 .rx-hero-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: #111827;
+  font-size: 21px;
+  font-weight: 800;
+  color: #ffffff;
   margin: 0 0 4px;
   line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 .rx-hero-title .rx-name {
-  color: #111827;
+  color: #ffffff;
 }
 
 .rx-hero-desc {
-  font-size: 12px;
-  color: #6b7280;
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.88);
   margin: 0 0 10px;
   line-height: 1.4;
 }
@@ -115,7 +153,7 @@
 .rx-hero-chips {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
@@ -123,25 +161,44 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 500;
-  color: #4b5563;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 4px 11px;
+  border-radius: 9999px;
+  transition: background 0.15s ease;
+}
+
+.rx-hero-chip:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.rx-hero-chip svg {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .rx-hero-right {
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .rx-hero-status-panel {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 12px 18px;
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 10px;
+  padding: 13px 18px;
   display: flex;
   align-items: center;
   gap: 16px;
   min-width: 280px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
 .rx-hero-ring {
@@ -159,13 +216,13 @@
 
 .rx-ring-track {
   fill: none;
-  stroke: #f3f4f6;
+  stroke: rgba(255, 255, 255, 0.2);
   stroke-width: 4.5;
 }
 
 .rx-ring-fill {
   fill: none;
-  stroke: #6366f1;
+  stroke: #38bdf8;
   stroke-width: 4.5;
   stroke-linecap: round;
   transition: stroke-dasharray 0.8s ease;
@@ -184,13 +241,13 @@
 .rx-ring-val {
   font-size: 13px;
   font-weight: 700;
-  color: #111827;
+  color: #ffffff;
 }
 
 .rx-ring-lbl {
   font-size: 8.5px;
   font-weight: 600;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
   margin-top: 2px;
 }
@@ -209,17 +266,17 @@
   gap: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: #111827;
+  color: #ffffff;
 }
 
 .rx-sparkle-icon {
-  color: #8b5cf6;
+  color: #fde047;
   flex-shrink: 0;
 }
 
 .rx-hero-progress-track {
   height: 4px;
-  background: #f3f4f6;
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 9999px;
   overflow: hidden;
   margin: 2px 0;
@@ -227,18 +284,24 @@
 
 .rx-hero-progress-fill {
   height: 100%;
-  background: #10b981;
+  background: #34d399;
   border-radius: 9999px;
   transition: width 0.6s ease;
 }
 
 .rx-hero-status-sub {
   font-size: 11px;
-  color: #6b7280;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.rx-hero-card--skeleton {
+  background: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
 }
 
 /* --------------------------------------------------------------------------
-   2. KPI Stats Row (6 Metric Cards)
+   2. KPI Stats Row (6 Metric Cards - Job Section Card Style)
    -------------------------------------------------------------------------- */
 .rx-stats-row {
   display: grid;
@@ -247,49 +310,135 @@
 }
 
 .rx-kpi-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
   border-radius: 8px;
-  padding: 12px 14px;
+  padding: 10px 14px;
+  min-height: 58px;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .rx-kpi-card:hover {
-  border-color: #d1d5db;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transform: translateY(-1px);
+  border-color: #cbd5e1;
 }
 
-.rx-kpi-top {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.rx-kpi-icon {
+.rx-kpi-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #4b5563;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.rx-kpi-card:hover .rx-kpi-icon-box {
+  transform: scale(1.05);
+}
+
+.rx-kpi-icon-box--blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.rx-kpi-icon-box--purple {
+  background: #eef2ff;
+  color: #6366f1;
+}
+
+.rx-kpi-icon-box--cyan {
+  background: #ecfeff;
+  color: #0891b2;
+}
+
+.rx-kpi-icon-box--emerald {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.rx-kpi-icon-box--amber {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.rx-kpi-icon-box--green {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.rx-kpi-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
 }
 
 .rx-kpi-val {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
-  color: #111827;
-  line-height: 1;
+  color: var(--text, #0f172a);
+  line-height: 1.2;
 }
 
 .rx-kpi-lbl {
-  font-size: 11.5px;
-  color: #6b7280;
+  font-size: 12px;
   font-weight: 500;
+  color: var(--text-muted, #64748b);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .rx-kpi-card {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .rx-kpi-val {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .rx-kpi-lbl {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .rx-kpi-icon-box--blue {
+  background: rgba(37, 99, 235, 0.16);
+  color: #60a5fa;
+}
+
+[data-theme="dark"] .rx-kpi-icon-box--purple {
+  background: rgba(99, 102, 241, 0.16);
+  color: #a5b4fc;
+}
+
+[data-theme="dark"] .rx-kpi-icon-box--cyan {
+  background: rgba(6, 182, 212, 0.16);
+  color: #67e8f9;
+}
+
+[data-theme="dark"] .rx-kpi-icon-box--emerald {
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+}
+
+[data-theme="dark"] .rx-kpi-icon-box--amber {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .rx-kpi-icon-box--green {
+  background: rgba(22, 163, 74, 0.16);
+  color: #4ade80;
 }
 
 /* --------------------------------------------------------------------------
@@ -378,12 +527,32 @@
 }
 
 .rx-action-icon {
-  color: #111827;
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+  background: #f1f5f9;
+  color: #334155;
   flex-shrink: 0;
-  margin-top: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.rx-action-tile:hover .rx-action-icon {
+  background: #eef2ff;
+  color: #4f46e5;
+  transform: scale(1.05);
+}
+
+[data-theme="dark"] .rx-action-icon {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .rx-action-tile:hover .rx-action-icon {
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
 }
 
 .rx-action-body {
@@ -806,10 +975,33 @@
 }
 
 /* --------------------------------------------------------------------------
-   11. Tables & Lists
+   11. Tables & Lists (Jobs Overview & General Tables)
    -------------------------------------------------------------------------- */
+.rx-jobs-card {
+  margin-bottom: 8px;
+}
+
+.rx-jobs-count-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+}
+
 .rx-jobs-table-wrap {
+  width: 100%;
   overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.rx-jobs-table-wrap::-webkit-scrollbar {
+  display: none;
 }
 
 .rx-table {
@@ -818,20 +1010,72 @@
   font-size: 12.5px;
 }
 
-.rx-table th {
+.rx-jobs-table {
+  table-layout: fixed;
+}
+
+.rx-jobs-table th {
   text-align: left;
-  padding: 10px 12px;
+  padding: 10px 8px;
   font-size: 11.5px;
   font-weight: 600;
   color: #6b7280;
   border-bottom: 1px solid #e5e7eb;
 }
 
-.rx-table td {
-  padding: 12px;
+.rx-jobs-table td {
+  padding: 12px 8px;
   border-bottom: 1px solid #f3f4f6;
   color: #111827;
   vertical-align: middle;
+}
+
+.rx-jobs-table .rx-th-role,
+.rx-jobs-table .rx-td-role {
+  width: 48%;
+  padding-left: 0;
+}
+
+.rx-jobs-table .rx-th-candidates,
+.rx-jobs-table .rx-td-candidates {
+  width: 17%;
+  text-align: center;
+}
+
+.rx-jobs-table .rx-th-status,
+.rx-jobs-table .rx-td-status {
+  width: 17%;
+}
+
+.rx-jobs-table .rx-th-actions,
+.rx-jobs-table .rx-td-actions {
+  width: 18%;
+  padding-right: 0;
+  text-align: right;
+}
+
+.rx-job-table-row {
+  transition: background-color 0.15s ease;
+}
+
+.rx-job-table-row:hover {
+  background-color: #f8fafc;
+}
+
+.rx-job-title-link {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s ease;
+}
+
+.rx-job-title-link:hover {
+  color: #2563eb;
 }
 
 .rx-table-title {
@@ -844,8 +1088,11 @@
 .rx-table-sub {
   display: block;
   font-size: 11px;
-  color: #6b7280;
+  color: #64748b;
   margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .rx-location-chip,
@@ -855,12 +1102,166 @@
   gap: 4px;
   font-size: 12px;
   color: #4b5563;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.rx-loc-icon {
+  color: #94a3b8;
+  flex-shrink: 0;
+}
+
+.rx-candidates-count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #334155;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.rx-candidates-count-pill:hover {
+  background: #ede9fe;
+  color: #6d28d9;
+  border-color: #ddd6fe;
+  transform: translateY(-1px);
+}
+
+.rx-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.rx-status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.rx-status-pill--published,
+.rx-status-pill--open {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.rx-status-pill--published .rx-status-dot,
+.rx-status-pill--open .rx-status-dot {
+  background: #10b981;
+}
+
+.rx-status-pill--paused {
+  background: #fffbeb;
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.rx-status-pill--paused .rx-status-dot {
+  background: #f59e0b;
+}
+
+.rx-status-pill--closed {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.rx-status-pill--closed .rx-status-dot {
+  background: #ef4444;
+}
+
+.rx-status-pill--draft,
+.rx-status-pill--archived {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.rx-status-pill--draft .rx-status-dot,
+.rx-status-pill--archived .rx-status-dot {
+  background: #94a3b8;
 }
 
 .rx-table-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.rx-action-btn-mini {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  border-radius: 6px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.rx-action-btn-mini:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+  color: #2563eb;
+  transform: translateY(-1px);
+}
+
+.rx-action-btn-mini--cand:hover {
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+  color: #7c3aed;
+}
+
+.rx-jobs-card-footer {
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: space-between;
+  padding: 12px 2px 2px;
+  margin-top: 8px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.rx-jobs-footer-text {
+  font-size: 11.5px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.rx-jobs-footer-link {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.rx-jobs-footer-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
 }
 
 .rx-badge {
@@ -1040,9 +1441,22 @@
   .rx-dashboard-main {
     grid-template-columns: 1fr;
   }
+
+  .rx-jobs-table th {
+    padding: 10px 8px;
+    font-size: 11.5px;
+  }
+
+  .rx-jobs-table td {
+    padding: 11px 8px;
+  }
 }
 
 @media (max-width: 768px) {
+  .rx-dashboard {
+    padding-bottom: 80px;
+  }
+
   .rx-hero-card {
     flex-direction: column;
     align-items: flex-start;
@@ -1066,6 +1480,111 @@
   .rx-quick-actions-row {
     grid-template-columns: 1fr;
   }
+
+  /* Tablet / Mobile Job Listings Responsiveness */
+  .rx-jobs-table th {
+    padding: 8px 6px;
+    font-size: 11px;
+  }
+
+  .rx-jobs-table td {
+    padding: 10px 6px;
+  }
+
+  .rx-job-title-link {
+    font-size: 12.5px;
+  }
+
+  .rx-table-sub {
+    font-size: 10.5px;
+  }
+
+  .rx-candidates-count-pill {
+    padding: 2.5px 6px;
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .rx-status-pill {
+    padding: 2.5px 6px;
+    font-size: 10px;
+    gap: 4px;
+  }
+
+  .rx-action-btn-mini {
+    width: 25px;
+    height: 25px;
+  }
+
+  .rx-action-btn-mini svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .rx-table-actions {
+    gap: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rx-jobs-card {
+    padding: 14px 12px;
+  }
+
+  .rx-jobs-card .rx-card-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .rx-jobs-table th {
+    padding: 6px 3px;
+    font-size: 10px;
+  }
+
+  .rx-jobs-table td {
+    padding: 8px 3px;
+  }
+
+  .rx-jobs-table .rx-th-role,
+  .rx-jobs-table .rx-td-role {
+    width: 44%;
+  }
+
+  .rx-jobs-table .rx-th-candidates,
+  .rx-jobs-table .rx-td-candidates {
+    width: 18%;
+  }
+
+  .rx-jobs-table .rx-th-status,
+  .rx-jobs-table .rx-td-status {
+    width: 18%;
+  }
+
+  .rx-jobs-table .rx-th-actions,
+  .rx-jobs-table .rx-td-actions {
+    width: 20%;
+  }
+
+  .rx-action-btn-mini {
+    width: 23px;
+    height: 23px;
+  }
+
+  .rx-action-btn-mini svg {
+    width: 11px;
+    height: 11px;
+  }
+
+  .rx-table-actions {
+    gap: 2px;
+  }
+
+  .rx-jobs-card-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding-top: 10px;
+  }
 }
 
 
@@ -1076,20 +1595,19 @@
   0% {
     background-position: -200% 0;
   }
+
   100% {
     background-position: 200% 0;
   }
 }
 
 .rx-skeleton {
-  background: linear-gradient(
-    90deg,
-    #f3f4f6 0%,
-    #e5e7eb 25%,
-    #f9fafb 50%,
-    #e5e7eb 75%,
-    #f3f4f6 100%
-  );
+  background: linear-gradient(90deg,
+      #f3f4f6 0%,
+      #e5e7eb 25%,
+      #f9fafb 50%,
+      #e5e7eb 75%,
+      #f3f4f6 100%);
   background-size: 200% 100%;
   animation: rxSkeletonShimmer 1.8s ease-in-out infinite;
   border-radius: 6px;
@@ -1097,14 +1615,12 @@
 }
 
 [data-theme="dark"] .rx-skeleton {
-  background: linear-gradient(
-    90deg,
-    #1e293b 0%,
-    #334155 25%,
-    #1e293b 50%,
-    #334155 75%,
-    #1e293b 100%
-  );
+  background: linear-gradient(90deg,
+      #1e293b 0%,
+      #334155 25%,
+      #1e293b 50%,
+      #334155 75%,
+      #1e293b 100%);
   background-size: 200% 100%;
   animation: rxSkeletonShimmer 1.8s ease-in-out infinite;
 }
@@ -1133,9 +1649,9 @@
 
 .rx-kpi-card--skeleton {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 82px;
+  align-items: center;
+  gap: 12px;
+  min-height: 58px;
 }
 
 .rx-pipeline-skeleton-bar {
@@ -1182,118 +1698,12 @@
 [data-theme="dark"] .rx-score-ring-text {
   fill: #f1f5f9;
 }
-
-
-/* --------------------------------------------------------------------------
-   13. Dashboard Skeleton Loader & Shimmer
-   -------------------------------------------------------------------------- */
-@keyframes rxSkeletonShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+[data-theme="dark"] .rx-hero-card {
+  background: linear-gradient(135deg, #1e1b4b 0%, #311069 50%, #1e1b4b 100%);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
 }
-
-.rx-skeleton {
-  background: linear-gradient(
-    90deg,
-    #f3f4f6 0%,
-    #e5e7eb 25%,
-    #f9fafb 50%,
-    #e5e7eb 75%,
-    #f3f4f6 100%
-  );
-  background-size: 200% 100%;
-  animation: rxSkeletonShimmer 1.8s ease-in-out infinite;
-  border-radius: 6px;
-  display: block;
-}
-
-[data-theme="dark"] .rx-skeleton {
-  background: linear-gradient(
-    90deg,
-    #1e293b 0%,
-    #334155 25%,
-    #1e293b 50%,
-    #334155 75%,
-    #1e293b 100%
-  );
-  background-size: 200% 100%;
-  animation: rxSkeletonShimmer 1.8s ease-in-out infinite;
-}
-
-.rx-skeleton--circle {
-  border-radius: 50% !important;
-}
-
-.rx-skeleton-card {
-  pointer-events: none;
-  user-select: none;
-}
-
-.rx-hero-card--skeleton {
-  min-height: 140px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.rx-hero-chips--skeleton {
-  display: flex;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.rx-kpi-card--skeleton {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 82px;
-}
-
-.rx-pipeline-skeleton-bar {
-  width: 100%;
-  border-radius: 4px;
-}
-
-.rx-chart-skeleton-box {
-  width: 100%;
-  height: 140px;
-  border-radius: 8px;
-  margin: 16px 0;
-}
-
-.rx-table-skeleton-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  border-bottom: 1px solid #f3f4f6;
-}
-
-[data-theme="dark"] .rx-table-skeleton-row {
-  border-bottom-color: #334155;
-}
-
-/* --------------------------------------------------------------------------
-   14. ScoreRing Centered Styling
-   -------------------------------------------------------------------------- */
-.rx-score-ring {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.rx-score-ring-text {
-  font-family: inherit;
-  font-weight: 700;
-  fill: #1e293b;
-}
-
-[data-theme="dark"] .rx-score-ring-text {
-  fill: #f1f5f9;
+[data-theme="dark"] .rx-hero-card--skeleton {
+  background: #1e293b !important;
+  border-color: #334155 !important;
 }

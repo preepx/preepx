@@ -328,7 +328,7 @@ export default function CandidateDiscovery() {
                         to={jobId ? `/recruiter/candidates/${c._id}?jobId=${jobId}` : `/recruiter/candidates/${c._id}`}
                         state={{ fromJobId: jobId }}
                         className="rx-btn rx-btn-secondary"
-                        style={{ fontSize: 12, padding: "5px 12px" }}
+                        style={{ fontSize: 12, padding: "5px 12px", width: "120px" }}
                       >
                         View Profile
                       </Link>

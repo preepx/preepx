@@ -164,12 +164,12 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 12px;
+  padding: 5px 9px;
   border-radius: 8px;
   background: transparent;
   border: 1px solid #e2e8f0;
   color: #64748b;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.15s;
@@ -181,18 +181,27 @@
 }
 
 .jma-tab:hover {
-  border-color: #2f6f5b;
-  color: #1e293b;
+  border-color: #0284c7;
+  color: #0284c7;
 }
 
 [data-theme="dark"] .jma-tab:hover {
-  color: #f1f5f9;
+  border-color: #38bdf8;
+  color: #38bdf8;
 }
 
 .jma-tab.active {
-  background: #1f5c4a;
-  border-color: #1f5c4a;
-  color: #fff;
+  background: #2563eb;
+  /* background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%); */
+  border-color: #0284c7;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.25);
+}
+
+[data-theme="dark"] .jma-tab.active {
+  background: #0284c7;
+  border-color: #0284c7;
+  color: #ffffff;
 }
 
 .jma-tab-count {

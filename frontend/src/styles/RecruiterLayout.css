@@ -124,28 +124,44 @@
 
 .rx-sidebar-close-btn {
   display: none;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
+  background: var(--card-bg, #ffffff);
+  border: 1.5px solid #cbd5e1;
   color: #475569;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  padding: 0;
+  margin-left: auto;
 }
 
 .rx-sidebar-close-btn:hover {
   background: #fef2f2;
   color: #ef4444;
-  border-color: #ef4444;
+  border-color: #fca5a5;
+  transform: scale(1.05);
+}
+
+.rx-sidebar-close-btn:active {
+  transform: scale(0.95);
 }
 
 [data-theme="dark"] .rx-sidebar-close-btn {
-  background: rgba(255, 255, 255, 0.08);
+  background: #1e293b;
   border-color: rgba(255, 255, 255, 0.15);
   color: #cbd5e1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .rx-sidebar-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border-color: rgba(239, 68, 68, 0.4);
 }
 
 .rx-brand-dot {
@@ -519,6 +535,7 @@
   width: 100%;
   box-sizing: border-box;
 }
+
 .rx-main .footer-container {
   max-width: 100%;
 }
@@ -636,7 +653,7 @@
 }
 
 .rx-content {
-  padding: 24px 28px 40px;
+  padding: 24px 28px 10px;
   flex: 1;
   width: 100%;
   box-sizing: border-box;
@@ -1008,6 +1025,14 @@
     display: block;
   }
 
+  .rx-sidebar-toggle {
+    display: none !important;
+  }
+
+  .rx-sidebar-close-btn {
+    display: flex !important;
+  }
+
   .rx-sidebar {
     position: fixed;
     transform: translateX(-100%);
@@ -1035,7 +1060,7 @@
   }
 
   .rx-content {
-    padding: 16px 12px 32px;
+    padding: 16px 12px 64px;
   }
 
   .rx-icon-btn {
@@ -1221,6 +1246,7 @@ select.rx-premium-input {
 .rx-spin {
   animation: rx-spin 1s linear infinite;
 }
+
 /* Sky Blue AI Auto-Fill Section Banner */
 .rx-ai-autofill-banner {
   background: #f0f9ff;
@@ -1728,4 +1754,171 @@ select.rx-premium-input {
 [data-theme="dark"] .rx-btn-icon:hover {
   background: rgba(255, 255, 255, 0.1);
   color: #f1f5f9;
+}
+
+/* ==========================================================================
+   Interview Decision & Status Filters (Hire / Not Hire)
+   ========================================================================== */
+
+.rx-interview-decision {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 6px;
+  background: var(--card-subtle, rgba(241, 245, 249, 0.7));
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+}
+
+.rx-decision-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+  line-height: 1;
+  font-family: inherit;
+}
+
+.rx-decision-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Hire Button Normal State */
+.rx-decision-btn.rx-decision-hire {
+  color: #059669;
+  background: rgba(5, 150, 105, 0.08);
+  border-color: rgba(5, 150, 105, 0.25);
+}
+
+.rx-decision-btn.rx-decision-hire:hover:not(:disabled) {
+  background: rgba(5, 150, 105, 0.16);
+  border-color: #059669;
+  color: #047857;
+  transform: translateY(-1px);
+}
+
+/* Hire Button Active (Hired) State */
+.rx-decision-btn.rx-decision-hire.active {
+  background: #059669;
+  color: #ffffff;
+  border-color: #059669;
+  box-shadow: 0 2px 6px rgba(5, 150, 105, 0.35);
+  font-weight: 700;
+}
+
+.rx-decision-btn.rx-decision-hire.active:hover:not(:disabled) {
+  background: #047857;
+  border-color: #047857;
+  color: #ffffff;
+}
+
+/* Not Hire Button Normal State */
+.rx-decision-btn.rx-decision-nothire {
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.08);
+  border-color: rgba(220, 38, 38, 0.25);
+}
+
+.rx-decision-btn.rx-decision-nothire:hover:not(:disabled) {
+  background: rgba(220, 38, 38, 0.16);
+  border-color: #dc2626;
+  color: #b91c1c;
+  transform: translateY(-1px);
+}
+
+/* Not Hire Button Active State */
+.rx-decision-btn.rx-decision-nothire.active {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #dc2626;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, 0.35);
+  font-weight: 700;
+}
+
+.rx-decision-btn.rx-decision-nothire.active:hover:not(:disabled) {
+  background: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+}
+
+/* Filter Section Buttons */
+.rx-decision-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.rx-decision-filter-btn:hover {
+  background: var(--bg);
+  color: var(--text);
+  border-color: var(--text-muted);
+}
+
+.rx-decision-filter-btn.active {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.rx-decision-filter-btn.rx-filter-hire.active {
+  border-color: #059669;
+  background: rgba(5, 150, 105, 0.14);
+  color: #059669;
+  font-weight: 700;
+}
+
+.rx-decision-filter-btn.rx-filter-nothire.active {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.14);
+  color: #dc2626;
+  font-weight: 700;
+}
+
+/* Dark Mode Overrides */
+[data-theme="dark"] .rx-interview-decision {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border);
+}
+
+[data-theme="dark"] .rx-decision-btn.rx-decision-hire {
+  background: rgba(5, 150, 105, 0.15);
+  color: #34d399;
+  border-color: rgba(5, 150, 105, 0.35);
+}
+
+[data-theme="dark"] .rx-decision-btn.rx-decision-hire.active {
+  background: #059669;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .rx-decision-btn.rx-decision-nothire {
+  background: rgba(220, 38, 38, 0.15);
+  color: #f87171;
+  border-color: rgba(220, 38, 38, 0.35);
+}
+
+[data-theme="dark"] .rx-decision-btn.rx-decision-nothire.active {
+  background: #dc2626;
+  color: #ffffff;
 }

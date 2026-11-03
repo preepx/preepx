@@ -45,6 +45,7 @@ export const movePipeline = (applicationId, status, note = "") =>
 export const getAssessmentResult = (assessmentId) => API.get(`${BASE}/assessments/${assessmentId}/result`).then((r) => r.data.data);
 export const getInterviews = () => API.get(`${BASE}/interviews`).then((r) => r.data.data);
 export const scheduleInterview = (data) => API.post(`${BASE}/interviews`, data).then((r) => r.data.data);
+export const updateInterview = (interviewId, data) => API.patch(`${BASE}/interviews/${interviewId}`, data).then((r) => r.data.data);
 export const getBilling = () => API.get(`${BASE}/billing`).then((r) => r.data.data);
 export const selectPlan = (planSlug) => API.post(`${BASE}/billing/select-plan`, { planSlug }).then((r) => r.data.data);
 export const createRecruiterPlanOrder = (planSlug) =>

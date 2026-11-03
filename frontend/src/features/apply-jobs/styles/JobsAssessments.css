@@ -171,9 +171,27 @@
 }
 
 .jas-tab.active {
-  background: #059669;
-  border-color: #059669;
+  background: #2563eb;
+  /* background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%); */
+  border-color: transparent;
   color: #ffffff;
+  box-shadow: 0 4px 12px rgba(61, 94, 255, 0.25);
+}
+
+[data-theme='dark'] .jas-tab.active {
+  background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.jas-tab:hover:not(.active) {
+  border-color: #3d5eff;
+  color: #3d5eff;
+}
+
+[data-theme='dark'] .jas-tab:hover:not(.active) {
+  border-color: #6017c7;
+  color: #a5b4fc;
 }
 
 .jas-filters-right {
@@ -851,4 +869,98 @@
 [data-theme='dark'] .jas-modal-footer {
   background: #0f172a;
   border-top-color: #334155;
+}
+
+/* =========================================================
+   EMPTY STATE CARD STYLES
+   ========================================================= */
+.jas-empty-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 56px 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  margin-top: 8px;
+}
+
+[data-theme='dark'] .jas-empty-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.jas-empty-card .empty-state {
+  max-width: 480px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.jas-empty-card .empty-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: #eef2ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+[data-theme='dark'] .jas-empty-card .empty-icon {
+  background: rgba(61, 94, 255, 0.15);
+  color: #a5b4fc;
+}
+
+.jas-empty-card h3 {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text, #0f172a);
+  margin: 0 0 8px;
+}
+
+[data-theme='dark'] .jas-empty-card h3 {
+  color: #f1f5f9;
+}
+
+.jas-empty-card p {
+  font-size: 14px;
+  color: var(--text-muted, #64748b);
+  margin: 0 auto 24px;
+  line-height: 1.55;
+  max-width: 380px;
+}
+
+[data-theme='dark'] .jas-empty-card p {
+  color: #94a3b8;
+}
+
+.jas-empty-card .empty-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 26px;
+  /* background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%) !important; */
+  background: #2563eb !important;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(61, 94, 255, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.jas-empty-card .empty-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(96, 23, 199, 0.45);
 }

@@ -9,7 +9,7 @@ import {
 import {
   getSavedJobs, toggleSaveJob, applyToJob, getMyApplications
 } from "../services/candidateJobsAPI";
-import EmptyState from "@/components/recruiter/EmptyState";
+import EmptyState from "@/components/EmptyState";
 import Loader from "@/components/Loader";
 import notify from "@/utils/notify";
 import JobLogo from "../components/JobLogo";
@@ -213,9 +213,9 @@ export default function SavedJobs() {
         </div>
       </div>
 
-      {/* ── CARDS GRID ── */}
-      <div className="jas-grid">
-        {filtered.length === 0 ? (
+      {/* ── CARDS GRID OR EMPTY STATE ── */}
+      {filtered.length === 0 ? (
+        <div className="jas-empty-card">
           <EmptyState
             icon={Bookmark}
             title={jobs.length === 0 ? "No saved jobs yet" : "No matching jobs found"}
@@ -228,8 +228,10 @@ export default function SavedJobs() {
             actionTo={jobs.length === 0 ? "/apply-jobs/browse" : null}
             onAction={jobs.length === 0 ? null : () => { setFilter("all"); setSearch(""); }}
           />
-        ) : (
-          filtered.map((job) => {
+        </div>
+      ) : (
+        <div className="jas-grid">
+          {filtered.map((job) => {
             const isApplied = appliedIds.includes(job._id);
             const compName = jobCompany(job);
             const isRemote = (job.workMode || "").toLowerCase() === "remote" ||
@@ -359,9 +361,9 @@ export default function SavedJobs() {
                 </div>
               </article>
             );
-          })
-        )}
-      </div>
+          })}
+        </div>
+      )}
 
       {/* ── JOB DETAILS MODAL ── */}
       {selectedJob && createPortal(

@@ -305,9 +305,9 @@ export default function ChatBot() {
           title="Chat with PreepX AI"
         >
           <Bot size={26} color="#fff" strokeWidth={2} />
-          <span className="chatbot-fab-sparkle">
+          {/* <span className="chatbot-fab-sparkle">
             <Sparkles size={12} color="#facc15" />
-          </span>
+          </span> */}
         </button>
       )}
 

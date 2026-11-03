@@ -161,14 +161,14 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
                   />
                 ) : (
                   <img
-                    src="/preepx_logo.png"
+                    src="/preepx_logo_copy.png"
                     alt="PreepX"
                     className="brand-logo-img"
-                    style={{ height: "46px", objectFit: "contain" }}
+                    style={{ height: "49px", objectFit: "contain" }}
                   />
                 )}
               </Link>
-              {(!collapsed || mobileOpen) && !mobileOpen && (
+              {!collapsed && (
                 <button
                   type="button"
                   className="rx-sidebar-toggle"
@@ -182,16 +182,15 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
                   </div>
                 </button>
               )}
-              {mobileOpen && (
-                <button
-                  type="button"
-                  className="rx-sidebar-close-btn"
-                  onClick={() => setMobileOpen(false)}
-                  aria-label="Close Sidebar"
-                >
-                  <X size={19} />
-                </button>
-              )}
+              <button
+                type="button"
+                className="rx-sidebar-close-btn"
+                onClick={() => setMobileOpen(false)}
+                aria-label="Close Sidebar"
+                title="Close sidebar"
+              >
+                <X size={20} strokeWidth={2.3} />
+              </button>
             </div>
 
             <nav className="rx-nav">

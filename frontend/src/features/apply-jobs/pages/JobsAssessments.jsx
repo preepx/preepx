@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { getMyAssessments } from "@/services/assessmentAPI";
 import Loader from "@/components/Loader";
-import EmptyState from "@/components/recruiter/EmptyState";
+import EmptyState from "@/components/EmptyState";
 import '../styles/JobsAssessments.css';
 
 // Mock function to return an icon component and color based on title (or fallback)
@@ -36,19 +36,19 @@ const techMap = [
 
 const getTechIcon = (title) => {
   const t = title.toLowerCase();
-  
+
   for (const tech of techMap) {
     if (tech.keys.some(k => t.includes(k))) {
-      return { 
-        img: `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}`, 
-        bg: tech.bg 
+      return {
+        img: `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${tech.icon}`,
+        bg: tech.bg
       };
     }
   }
 
   // Dynamic fallback using ui-avatars to create an initial-based logo for ANY unknown role
-  return { 
-    img: `https://ui-avatars.com/api/?name=${encodeURIComponent(title)}&background=random&color=fff&size=64&bold=true`, 
+  return {
+    img: `https://ui-avatars.com/api/?name=${encodeURIComponent(title)}&background=random&color=fff&size=64&bold=true`,
     bg: '#f8fafc'
   };
 };
@@ -67,7 +67,7 @@ export default function JobsAssessments() {
 
   const pending = assessments.filter((a) => a.status !== "completed");
   const completed = assessments.filter((a) => a.status === "completed");
-  
+
   const filtered = assessments.filter(a => {
     if (filter === "pending" && a.status === "completed") return false;
     if (filter === "completed" && a.status !== "completed") return false;
@@ -147,8 +147,8 @@ export default function JobsAssessments() {
         <div className="jas-filters-right">
           <div className="jas-search-box">
             <Search size={16} color="#94a3b8" />
-            <input 
-              placeholder="Search assessments..." 
+            <input
+              placeholder="Search assessments..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -157,26 +157,28 @@ export default function JobsAssessments() {
         </div>
       </div>
 
-      {/* ── CARDS GRID ── */}
-      <div className="jas-grid">
-        {filtered.length === 0 ? (
+      {/* ── CARDS GRID OR EMPTY STATE ── */}
+      {filtered.length === 0 ? (
+        <div className="jas-empty-card">
           <EmptyState
             icon={ClipboardCheck}
             title="No assessments found"
             description="You don't have any assessments matching your filters."
           />
-        ) : (
-          filtered.map((a) => {
+        </div>
+      ) : (
+        <div className="jas-grid">
+          {filtered.map((a) => {
             const isCompleted = a.status === "completed";
             const isInProgress = a.status === "in_progress" || a.status === "mcq_done";
-            
+
             const techIcon = getTechIcon(a.jobTitle || "");
-            
+
             // Status pill styling
             let pillBg = "#fef3c7";
             let pillColor = "#d97706";
             let pillLabel = "Pending";
-            
+
             if (isCompleted) {
               pillBg = "#dcfce3";
               pillColor = "#059669";
@@ -191,7 +193,7 @@ export default function JobsAssessments() {
               <article key={a._id} className="jas-card">
                 {/* TOP */}
                 <div className="jas-card-top">
-                  <div 
+                  <div
                     className="jas-card-icon-box"
                     style={{ background: techIcon.bg, color: techIcon.color }}
                   >
@@ -265,9 +267,9 @@ export default function JobsAssessments() {
                 </div>
               </article>
             );
-          })
-        )}
-      </div>
+          })}
+        </div>
+      )}
     </div>
   );
 }

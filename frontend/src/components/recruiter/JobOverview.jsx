@@ -1,15 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { MapPin, Users, Eye, Pencil, Briefcase } from "lucide-react";
-
-const STATUS_BADGE = {
-  draft: "rx-badge-gray",
-  published: "rx-badge-green",
-  open: "rx-badge-green",
-  paused: "rx-badge-amber",
-  closed: "rx-badge-red",
-  archived: "rx-badge-gray",
-};
+import { Users, Eye, Pencil, Briefcase } from "lucide-react";
 
 export default function JobOverview({ jobs = [] }) {
   const active = jobs.filter((j) => ["published", "open", "paused"].includes(j.status));
@@ -18,7 +9,12 @@ export default function JobOverview({ jobs = [] }) {
     <section className="rx-card rx-jobs-card">
       <div className="rx-card-header">
         <div>
-          <h2 className="rx-card-title">Your Job Listings</h2>
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <h2 className="rx-card-title">Your Job Listings</h2>
+            {active.length > 0 && (
+              <span className="rx-jobs-count-badge">{active.length} Active</span>
+            )}
+          </div>
           <p className="rx-card-subtitle">Track Your Hiring Progress</p>
         </div>
         {active.length > 0 && (
@@ -42,70 +38,94 @@ export default function JobOverview({ jobs = [] }) {
           </Link>
         </div>
       ) : (
-        <div className="rx-jobs-table-wrap">
-          <table className="rx-table rx-jobs-table">
-            <thead>
-              <tr>
-                <th>Role</th>
-                <th className="rx-col-location">Location</th>
-                <th>Candidates</th>
-                <th>Status</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {active.slice(0, 5).map((job) => (
-                <tr key={job._id}>
-                  <td>
-                    <strong className="rx-table-title">{job.title}</strong>
-                    <span className="rx-table-sub">
-                      {job.role} · {job.experienceMin ?? 0}–{job.experienceMax ?? 5} yrs
-                    </span>
-                  </td>
-                  <td className="rx-col-location">
-                    <span className="rx-location-chip">
-                      <MapPin size={13} /> {job.location || "Remote"}
-                    </span>
-                  </td>
-                  <td>
-                    <span className="rx-candidates-count">
-                      <Users size={13} /> {job.candidateCount ?? 0}
-                    </span>
-                  </td>
-                  <td>
-                    <span className={`rx-badge ${STATUS_BADGE[job.status] || "rx-badge-gray"}`}>
-                      {job.status}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="rx-table-actions">
-                      <Link
-                        to={`/recruiter/jobs/${job._id}`}
-                        className="rx-btn-icon"
-                        title="View"
-                      >
-                        <Eye size={14} />
-                      </Link>
-                      <Link
-                        to={`/recruiter/jobs/${job._id}`}
-                        className="rx-btn-icon"
-                        title="Edit"
-                      >
-                        <Pencil size={14} />
-                      </Link>
-                      <Link
-                        to="/recruiter/candidates"
-                        className="rx-btn rx-btn-secondary rx-btn-sm"
-                      >
-                        Candidates
-                      </Link>
-                    </div>
-                  </td>
+        <>
+          <div className="rx-jobs-table-wrap">
+            <table className="rx-table rx-jobs-table">
+              <thead>
+                <tr>
+                  <th className="rx-th-role">Role</th>
+                  <th className="rx-th-candidates">Candidates</th>
+                  <th className="rx-th-status">Status</th>
+                  <th className="rx-th-actions">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {active.slice(0, 5).map((job) => (
+                  <tr key={job._id} className="rx-job-table-row">
+                    <td className="rx-td-role">
+                      <Link
+                        to={`/recruiter/jobs/${job._id}`}
+                        className="rx-job-title-link"
+                        title={job.title}
+                      >
+                        {job.title}
+                      </Link>
+                      <span
+                        className="rx-table-sub"
+                        title={`${job.role || job.title} · ${job.experienceMin ?? 0}–${job.experienceMax ?? 5} yrs`}
+                      >
+                        {job.role || job.title} · {job.experienceMin ?? 0}–{job.experienceMax ?? 5} yrs
+                      </span>
+                    </td>
+                    <td className="rx-td-candidates">
+                      <Link
+                        to={`/recruiter/candidates?jobId=${job._id}`}
+                        className="rx-candidates-count-pill"
+                        title={`View ${job.candidateCount ?? 0} candidates`}
+                      >
+                        <Users size={12} />
+                        <span>{job.candidateCount ?? 0}</span>
+                      </Link>
+                    </td>
+                    <td className="rx-td-status">
+                      <span className={`rx-status-pill rx-status-pill--${job.status || "published"}`}>
+                        <span className="rx-status-dot" />
+                        {job.status}
+                      </span>
+                    </td>
+                    <td className="rx-td-actions">
+                      <div className="rx-table-actions">
+                        <Link
+                          to={`/recruiter/jobs/${job._id}`}
+                          className="rx-action-btn-mini"
+                          title="View Job Details"
+                          aria-label="View Job Details"
+                        >
+                          <Eye size={14} />
+                        </Link>
+                        {/* <Link
+                          to={`/recruiter/jobs/${job._id}`}
+                          className="rx-action-btn-mini"
+                          title="Edit Job"
+                          aria-label="Edit Job"
+                        >
+                          <Pencil size={13} />
+                        </Link> */}
+                        <Link
+                          to={`/recruiter/candidates?jobId=${job._id}`}
+                          className="rx-action-btn-mini rx-action-btn-mini--cand"
+                          title="View Matched Candidates"
+                          aria-label="View Matched Candidates"
+                        >
+                          <Users size={13} />
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="rx-jobs-card-footer">
+            <span className="rx-jobs-footer-text">
+              Showing {Math.min(active.length, 5)} of {active.length} active jobs
+            </span>
+            <Link to="/recruiter/jobs" className="rx-jobs-footer-link">
+              Manage all jobs →
+            </Link>
+          </div>
+        </>
       )}
     </section>
   );
