@@ -357,11 +357,11 @@ function PricingSection({ onRecruiterClick }) {
 
           {/* Recruiter Section */}
           <div
-            className={`flex flex-col gap-3 sm:gap-[20px] items-center w-full sm:w-[500px] xl:w-auto ${activeTab === "candidate" ? "hidden sm:flex" : "flex"
+            className={`flex flex-col gap-3 sm:gap-[20px] items-center w-full sm:w-[500px] min-[900px]:w-auto lg:w-auto xl:w-auto ${activeTab === "candidate" ? "hidden sm:flex" : "flex"
               }`}
           >
             {/* Recruiter Title */}
-            <div className="flex justify-start w-full max-w-[320px] sm:max-w-[700px]">
+            <div className="flex justify-start w-full max-w-[320px] sm:max-w-[465px] min-[900px]:max-w-[700px] lg:max-w-[700px] xl:max-w-none">
               <div className="flex items-center gap-3">
                 <img src="/landing/recuirterplan.svg" alt="Recruiter Plan Icon" className="w-6 h-6 shrink-0" />
                 <div>
@@ -372,13 +372,16 @@ function PricingSection({ onRecruiterClick }) {
             </div>
 
             {/* Recruiter Cards */}
-            <div style={{ marginTop: "10px" }} className="grid grid-cols-1 sm:grid-cols-2 xl:flex xl:flex-nowrap gap-4 sm:gap-3 justify-center relative w-full max-w-[420px] sm:max-w-[700px] xl:max-w-none">
+            <div style={{ marginTop: "10px" }} className="grid grid-cols-1 sm:grid-cols-2 min-[900px]:flex min-[900px]:flex-nowrap lg:flex lg:flex-nowrap xl:flex xl:flex-nowrap gap-4 sm:gap-3 justify-center relative w-full max-w-[420px] sm:max-w-[500px] min-[900px]:max-w-none xl:max-w-none">
               {pricingData.recruiter.plans.map((plan) => {
                 return (
-                  <div className="flex items-center mx-auto justify-center">
-                    <div key={plan.id} className="flex flex-col items-center w-[90vw] min-w-0 sm:w-[200px] md:w-[225px]">
+                  <div
+                    key={plan.id}
+                    className="flex items-center mx-auto min-[900px]:mx-0 justify-center h-full"
+                  >
+                    <div className="flex flex-col items-center w-[90vw] min-w-0 sm:w-[200px] md:w-[225px] shrink-0 h-full">
                       <div
-                        className="bg-white border border-[#A7F3D0] shadow-md relative flex flex-col hover:-translate-y-1 transition-transform w-full"
+                        className="bg-white border border-[#A7F3D0] shadow-md relative flex flex-col hover:-translate-y-1 transition-transform w-full h-full"
                         style={{
                           background: "#A3F1FF",
                           minHeight: '240px',
