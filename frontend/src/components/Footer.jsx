@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Linkedin, Instagram, Facebook, Github, Mail } from "lucide-react";
 import "@/styles/landing/LandingFooter.css";
 
 function Footer({ onRecruiterClick }) {
@@ -40,19 +39,19 @@ function Footer({ onRecruiterClick }) {
             </p>
             <div className="footer-social-links">
               <a href="https://www.linkedin.com/company/preepx" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="LinkedIn">
-                <Linkedin size={16} />
+                <img src="/socialicon/linkedin.png" alt="" className="footer-social-image" />
               </a>
               <a href="https://www.facebook.com/profile.php?id=61593744627935" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Facebook">
-                <Facebook size={16} />
+                <img src="/socialicon/fb.png" alt="" className="footer-social-image" />
               </a>
               <a href="https://www.instagram.com/preepx.in?stkn=OWEwaTg2dWczM2Jh" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Instagram">
-                <Instagram size={16} />
+                <img src="/socialicon/insta.png" alt="" className="footer-social-image" />
               </a>
               <a href="https://github.com/preepx" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="GitHub">
-                <Github size={16} />
+                <img src="/socialicon/github.png" alt="" className="footer-social-image" />
               </a>
               <a href="mailto:support@preepx.com" className="footer-social-icon" aria-label="Email">
-                <Mail size={16} />
+                <img src="/socialicon/gmail.png" alt="" className="footer-social-image" />
               </a>
             </div>
           </div>

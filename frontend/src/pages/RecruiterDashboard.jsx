@@ -5,7 +5,7 @@ import {
 } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
-  getRecruiterDashboard, getJobs, getInterviews, getOnboarding
+  getRecruiterDashboard, getJobs, getInterviews, getApplications, getOnboarding
 } from "@/services/recruiterAPI";
 import WelcomeBanner from "@/components/recruiter/WelcomeBanner";
 import KpiCard from "@/components/recruiter/KpiCard";
@@ -26,6 +26,7 @@ export default function RecruiterDashboard() {
   const [data, setData] = useState(null);
   const [jobs, setJobs] = useState([]);
   const [interviews, setInterviews] = useState([]);
+  const [aiInterviews, setAiInterviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -36,10 +37,38 @@ export default function RecruiterDashboard() {
       getJobs().catch(() => []),
       getInterviews().catch(() => []),
     ])
-      .then(([dash, jobsList, ivList]) => {
+      .then(async ([dash, jobsList, ivList]) => {
         setData(dash);
         setJobs(jobsList);
         setInterviews(ivList);
+
+        // Fetch real AI interview candidates across the recruiter's active jobs
+        try {
+          const appPromises = (jobsList || []).slice(0, 15).map((job) =>
+            getApplications(job._id)
+              .then((apps) =>
+                (apps || [])
+                  .filter(
+                    (a) =>
+                      a.status === "ai_interview" ||
+                      a.status === "interview" ||
+                      a.aiInterviewId ||
+                      (a.aiInterviewScore != null && a.aiInterviewScore > 0)
+                  )
+                  .map((a) => ({
+                    ...a,
+                    jobTitle: job.title || job.role || "Role",
+                  }))
+              )
+              .catch(() => [])
+          );
+          const allApps = (await Promise.all(appPromises)).flat();
+          // Sort by aiInterviewScore descending so highest scored candidates show on top
+          allApps.sort((a, b) => (b.aiInterviewScore || 0) - (a.aiInterviewScore || 0));
+          setAiInterviews(allApps);
+        } catch (e) {
+          console.warn("Could not load AI interview applications:", e);
+        }
       })
       .catch((err) => setError(err.response?.data?.message || "Failed to load dashboard"))
       .finally(() => setLoading(false));
@@ -99,7 +128,7 @@ export default function RecruiterDashboard() {
           <div className="rx-dashboard-col rx-dashboard-col--side">
             <AiMatchingCard topCandidates={topCandidates} recentJobs={recentJobs} />
             <CandidateRanking candidates={topCandidates} />
-            <UpcomingInterviews interviews={interviews} />
+            <UpcomingInterviews interviews={interviews} aiInterviews={aiInterviews} />
           </div>
         </div>
 

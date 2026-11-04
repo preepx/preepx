@@ -655,9 +655,9 @@
 }
 
 [data-theme="light"] .footer-social-icon {
-  background: #ffffff !important;
+  /* background: #ffffff !important;
   border-color: #cbd5e1 !important;
-  color: #475569 !important;
+  color: #475569 !important; */
 }
 
 /* ── TRIO SECTION LIGHT (WHAT PEOPLE SAY | TRUST | JOBS) ── */

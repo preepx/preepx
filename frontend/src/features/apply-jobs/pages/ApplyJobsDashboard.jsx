@@ -7,6 +7,7 @@ import SidebarApplicationAnalytics from "../components/SidebarApplicationAnalyti
 import SidebarImproveProfile from "../components/SidebarImproveProfile";
 import {
   getApplicationStats,
+  getMyApplications,
   getPublishedJobs,
   applyToJob,
   toggleSaveJob,
@@ -43,6 +44,7 @@ export default function ApplyJobsDashboard() {
   const firstName = (user.fullName || "there").split(" ")[0];
   const [loading, setLoading] = useState(true);
   const [stats, setStats] = useState(null);
+  const [applications, setApplications] = useState([]);
   const [jobs, setJobs] = useState([]);
   const [profileData, setProfileData] = useState(null);
   const [search, setSearch] = useState("");
@@ -124,12 +126,21 @@ export default function ApplyJobsDashboard() {
   useEffect(() => {
     Promise.all([
       getApplicationStats().catch(() => ({})),
+      getMyApplications().catch(() => []),
       getPublishedJobs({ limit: 14 }).catch(() => ({ jobs: [] })),
       getProfile().catch(() => null),
       getSavedJobs().catch(() => []),
-    ]).then(([s, j, p, saved]) => {
+    ]).then(([s, myApps, j, p, saved]) => {
       setStats(s);
-      setJobs(j.jobs || []);
+      const appList = Array.isArray(myApps) ? myApps : [];
+      setApplications(appList);
+      const appJobIds = new Set(
+        appList.map((a) => (a.jobId?._id || a.jobId || a.job || a._id)?.toString()).filter(Boolean)
+      );
+      setJobs((j.jobs || []).map((job) => ({
+        ...job,
+        applied: appJobIds.has(job._id?.toString()) || Boolean(job.applied)
+      })));
       setProfileData(p);
       if (saved && saved.length > 0) {
         const ids = saved.map((sj) => sj._id || sj);
@@ -155,6 +166,8 @@ export default function ApplyJobsDashboard() {
       const res = await applyToJob(job._id);
       notify.success(res.message || "Application submitted!");
       setJobs((prev) => prev.map((j) => (j._id === job._id ? { ...j, applied: true } : j)));
+      getMyApplications().then((res) => setApplications(Array.isArray(res) ? res : [])).catch(() => {});
+      getApplicationStats().then((res) => setStats(res)).catch(() => {});
     } catch (e) {
       notify.error(e.response?.data?.message || "Apply failed");
     } finally {
@@ -219,14 +232,27 @@ export default function ApplyJobsDashboard() {
   };
 
   const analytics = useMemo(() => {
-    const total = stats?.total || 0;
-    const inProgress = stats?.inProgress || 0;
-    const shortlisted = stats?.shortlisted || 0;
-    const offered = stats?.offered || 0;
-    const rejected = stats?.rejected || 0;
+    const total = applications.length || stats?.total || 0;
+    const applied = applications.length
+      ? applications.filter((a) => ["applied", "matched"].includes(a.status)).length
+      : (stats?.applied || 0);
+    const shortlisted = applications.length
+      ? applications.filter((a) => a.status === "shortlisted").length
+      : (stats?.shortlisted || 0);
+    const inProgress = applications.length
+      ? applications.filter((a) =>
+          ["assessment_sent", "assessment_in_progress", "assessment_completed", "ai_interview", "interview"].includes(a.status)
+        ).length
+      : (stats?.inProgress || 0);
+    const offered = applications.length
+      ? applications.filter((a) => ["offered", "hired", "selected"].includes(a.status)).length
+      : (stats?.offered || stats?.hired || 0);
+    const rejected = applications.length
+      ? applications.filter((a) => a.status === "rejected").length
+      : (stats?.rejected || 0);
     const pct = (n) => (total ? Math.round((n / total) * 100) : 0);
-    return { total, inProgress, shortlisted, offered, rejected, pct };
-  }, [stats]);
+    return { total, applied, inProgress, shortlisted, offered, rejected, pct };
+  }, [applications, stats]);
 
   const tickerItems = useMemo(() => {
     const names = [...new Set(jobs.map(jobCompany).filter(Boolean))].slice(0, 8);
@@ -303,7 +329,7 @@ export default function ApplyJobsDashboard() {
           <DashboardStatsRow
             savedCount={savedIds.length || stats?.savedJobs || 0}
             companiesCount={stats?.totalCompanies || followed.length || jobs.length}
-            applicationsCount={stats?.total || 0}
+            applicationsCount={applications.length || stats?.total || 0}
             inProgressCount={stats?.inProgress || 0}
             interviewsCount={stats?.interviews || 0}
             onNavigate={(to) => navigate(to)}
@@ -340,7 +366,9 @@ export default function ApplyJobsDashboard() {
         {/* RIGHT SIDEBAR */}
         <aside className="ajd-right-sidebar">
           <SidebarApplicationAnalytics
+            applications={applications}
             analytics={analytics}
+            stats={stats}
             prefix="ajd"
             containerClass="ajd-rcard"
           />

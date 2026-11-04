@@ -14,9 +14,9 @@ export default function SidebarApplicationAnalytics({
   let offered = 0;
   let rejected = 0;
 
-  if (Array.isArray(applications)) {
+  if (Array.isArray(applications) && applications.length > 0) {
     total = applications.length;
-    applied = applications.filter((a) => a.status === "applied").length;
+    applied = applications.filter((a) => ["applied", "matched"].includes(a.status)).length;
     inProgress = applications.filter((a) => 
       ["assessment_sent", "assessment_in_progress", "assessment_completed", "ai_interview", "interview"].includes(a.status)
     ).length;
@@ -27,10 +27,14 @@ export default function SidebarApplicationAnalytics({
     const raw = analytics || stats || {};
     total = raw.total || 0;
     applied = raw.applied !== undefined ? raw.applied : 0;
-    inProgress = raw.inProgress !== undefined ? raw.inProgress : 0;
     shortlisted = raw.shortlisted !== undefined ? raw.shortlisted : 0;
     offered = raw.offered !== undefined ? raw.offered : (raw.hired !== undefined ? raw.hired : 0);
     rejected = raw.rejected !== undefined ? raw.rejected : 0;
+    // Ensure inProgress doesn't double count shortlisted if calculated from coarse stats
+    const rawInProgress = raw.inProgress !== undefined ? raw.inProgress : 0;
+    inProgress = (applied + shortlisted + rawInProgress > total && rawInProgress >= shortlisted)
+      ? Math.max(0, rawInProgress - shortlisted)
+      : rawInProgress;
   }
 
   const getPct = (val) => (total > 0 ? Math.round((val / total) * 100) : 0);

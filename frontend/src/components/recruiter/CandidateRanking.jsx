@@ -7,7 +7,7 @@ export default function CandidateRanking({ candidates = [] }) {
   return (
     <section className="rx-card rx-ranking-card">
       <div className="rx-card-header">
-        <h2 className="rx-card-title">Top Companies</h2>
+        <h2 className="rx-card-title">Top Candidates</h2>
         {candidates.length > 0 && (
           <Link to="/recruiter/candidates" className="rx-link-action">
             View all

@@ -1714,3 +1714,17 @@
   background: #1e293b !important;
   border-color: #334155 !important;
 }
+
+[data-theme="dark"] .rx-candidate-row,
+[data-theme="dark"] .rx-ranking-row {
+  background: #1e1b18 !important;
+}
+
+[data-theme="dark"] .rx-candidate-name {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .rx-candidate-avatar {
+  background: #312e81;
+  color: #c7d2fe;
+}
