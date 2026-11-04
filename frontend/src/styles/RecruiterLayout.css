@@ -2250,60 +2250,307 @@ select.rx-premium-input {
   }
 }
 
-/* Tablet Responsive Tuning (769px to 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* ── Base Candidate Discovery Table ── */
+.rx-candidate-table-card {
+  padding: 0;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.rx-candidate-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rx-candidate-table th {
+  padding: 11px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  white-space: nowrap;
+  text-align: left;
+}
+
+.rx-candidate-table td {
+  padding: 12px 12px;
+  font-size: 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+  text-align: left;
+}
+
+.rx-candidate-table tr:last-child td {
+  border-bottom: none;
+}
+
+.rx-candidate-table .rx-col-check {
+  width: 38px;
+  text-align: center;
+  padding-left: 12px;
+  padding-right: 6px;
+}
+
+.rx-candidate-table .rx-col-cand {
+  min-width: 150px;
+}
+
+.rx-candidate-table .rx-cand-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.rx-candidate-table .rx-cand-email {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+.rx-candidate-table .rx-cand-headline {
+  font-size: 10.5px;
+  color: #64748b;
+  margin-top: 2px;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rx-candidate-table .rx-col-match {
+  white-space: nowrap;
+}
+
+.rx-candidate-table .rx-match-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.rx-candidate-table .rx-match-score-val {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.rx-candidate-table .rx-match-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+}
+
+.rx-candidate-table .rx-col-skills {
+  max-width: 200px;
+}
+
+.rx-candidate-table .rx-skills-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.rx-candidate-table .rx-table-skill-chip {
+  font-size: 10.5px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.rx-candidate-table .rx-badge {
+  font-size: 10.5px;
+  padding: 2.5px 7px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.rx-candidate-table .rx-stage-badge {
+  text-transform: capitalize;
+}
+
+.rx-candidate-table .rx-dash {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.rx-candidate-table .rx-col-actions {
+  text-align: center !important;
+  padding-left: 12px !important;
+  padding-right: 26px !important;
+  white-space: nowrap !important;
+  width: 130px;
+}
+
+.rx-candidate-table .rx-table-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  min-width: 92px;
+  border-radius: 6px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+/* ── Responsive Tuning for Mid-Screens and Laptops <= 1240px (712px to 1235px) ── */
+@media (max-width: 1240px) {
+  .rx-content {
+    padding: 16px 14px 10px;
+  }
+
   .rx-candidate-table th {
     padding: 8px 6px !important;
     font-size: 11px !important;
   }
 
   .rx-candidate-table td {
-    padding: 10px 6px !important;
-    font-size: 12px !important;
+    padding: 8px 6px !important;
+    font-size: 11px !important;
+  }
+
+  .rx-candidate-table .rx-col-check {
+    width: 30px !important;
+    padding-left: 8px !important;
+    padding-right: 4px !important;
+  }
+
+  .rx-candidate-table .rx-col-cand {
+    min-width: 120px !important;
+    max-width: 165px !important;
   }
 
   .rx-candidate-table .rx-cand-name {
-    font-size: 12.5px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
   }
 
   .rx-candidate-table .rx-cand-email {
-    font-size: 10.5px !important;
-  }
-
-  .rx-candidate-table .rx-cand-headline {
     font-size: 10px !important;
   }
 
-  .rx-candidate-table .rx-match-score-val {
-    font-size: 12.5px !important;
+  .rx-candidate-table .rx-cand-headline {
+    font-size: 9px !important;
+    max-width: 130px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
   }
 
-  .rx-candidate-table .rx-badge {
-    font-size: 9.5px !important;
-    padding: 2px 5px !important;
-    gap: 3px !important;
+  .rx-candidate-table .rx-col-match {
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+
+  .rx-candidate-table .rx-match-wrap {
+    gap: 4px !important;
+  }
+
+  .rx-candidate-table .rx-match-score-val {
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+  }
+
+  .rx-candidate-table .rx-match-badge {
+    font-size: 9px !important;
+    padding: 1.5px 4px !important;
+  }
+
+  .rx-candidate-table .rx-col-skills {
+    max-width: 130px !important;
   }
 
   .rx-candidate-table .rx-table-skill-chip {
-    font-size: 9.5px !important;
-    padding: 1px 4px !important;
+    font-size: 9px !important;
+    padding: 1.5px 4px !important;
+    border-radius: 3px !important;
+  }
+
+  .rx-candidate-table .rx-badge {
+    font-size: 9px !important;
+    padding: 2px 4px !important;
+    gap: 3px !important;
+  }
+
+  .rx-candidate-table .rx-col-actions {
+    padding-right: 22px !important;
+    padding-left: 8px !important;
+    text-align: center !important;
+    width: 115px !important;
   }
 
   .rx-candidate-table .rx-table-action-btn {
-    font-size: 11px !important;
+    font-size: 10.5px !important;
     padding: 4px 8px !important;
+    min-width: 76px !important;
+    border-radius: 5px !important;
     white-space: nowrap !important;
   }
 }
 
-.rx-candidate-table .rx-table-action-btn {
-  white-space: nowrap !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-width: 105px !important;
-  padding: 6px 14px !important;
-  font-size: 12px !important;
-  font-weight: 600 !important;
-  text-decoration: none !important;
+/* ── Extra Compact for Tighter Widths <= 980px ── */
+@media (max-width: 980px) {
+  .rx-candidate-table th,
+  .rx-candidate-table td {
+    padding: 6px 3px !important;
+    font-size: 10.5px !important;
+  }
+
+  .rx-candidate-table .rx-col-cand {
+    max-width: 115px !important;
+  }
+
+  .rx-candidate-table .rx-cand-headline {
+    display: none !important;
+  }
+
+  .rx-candidate-table .rx-col-skills {
+    max-width: 100px !important;
+  }
+
+  .rx-candidate-table .rx-col-actions {
+    padding-right: 18px !important;
+    padding-left: 6px !important;
+    text-align: center !important;
+    width: 98px !important;
+  }
+
+  .rx-candidate-table .rx-table-action-btn {
+    font-size: 10px !important;
+    padding: 3px 6px !important;
+    min-width: 66px !important;
+  }
+}
+
+/* ── Dark Theme Table Enhancements ── */
+[data-theme="dark"] .rx-candidate-table-card {
+  background: #161412;
+  border-color: #27272a;
+}
+
+[data-theme="dark"] .rx-candidate-table th {
+  background: #161412;
+  border-color: #27272a;
+}
+
+[data-theme="dark"] .rx-candidate-table td {
+  border-color: #27272a;
+}
+
+[data-theme="dark"] .rx-candidate-table .rx-table-skill-chip {
+  background: #221f1d;
+  border-color: #3f3f46;
+  color: #e2e8f0;
 }

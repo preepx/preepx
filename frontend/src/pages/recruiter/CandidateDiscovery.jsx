@@ -276,30 +276,30 @@ export default function CandidateDiscovery() {
         <>
           {/* 1. TABLE VIEW (FOR LAPTOP & TABLET - Matches Image 2) */}
           <div className="rx-discovery-table-view">
-            <div className="rx-card rx-candidate-table-card" style={{ padding: 0, overflowX: "auto" }}>
+            <div className="rx-card rx-candidate-table-card">
               <table className="rx-table rx-candidate-table">
                 <thead>
                   <tr>
-                    <th style={{ width: 44, textAlign: "center" }}>
+                    <th className="rx-col-check">
                       <div
                         className="rx-table-bulk-checkbox"
                         onClick={handleToggleSelectAll}
                         title={isAllSelected ? "Deselect All" : "Select All"}
                       >
                         {isAllSelected ? (
-                          <CheckSquare size={18} color="#0f172a" strokeWidth={2.3} />
+                          <CheckSquare size={17} color="#0f172a" strokeWidth={2.3} />
                         ) : (
-                          <Square size={18} color="#94a3b8" strokeWidth={1.8} />
+                          <Square size={17} color="#94a3b8" strokeWidth={1.8} />
                         )}
                       </div>
                     </th>
-                    <th>Candidate</th>
-                    <th>Match Score</th>
-                    <th>Key Skills</th>
-                    <th>Assessment</th>
-                    <th>AI Interview</th>
-                    <th>Stage</th>
-                    <th style={{ textAlign: "right", paddingRight: 20, width: 140, whiteSpace: "nowrap" }}>Actions</th>
+                    <th className="rx-col-cand">Candidate</th>
+                    <th className="rx-col-match">Match Score</th>
+                    <th className="rx-col-skills">Key Skills</th>
+                    <th className="rx-col-assess">Assessment</th>
+                    <th className="rx-col-ai">AI Interview</th>
+                    <th className="rx-col-stage">Stage</th>
+                    <th className="rx-col-actions">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -332,116 +332,96 @@ export default function CandidateDiscovery() {
                         : user.skills && user.skills.length > 0
                           ? user.skills
                           : [];
-                    const isExpanded = !!expandedSkills[c._id];
-                    const visibleSkills = isExpanded ? rawSkills : rawSkills.slice(0, 3);
-                    const hasMoreSkills = rawSkills.length > 3;
 
                     return (
                       <tr
                         key={c._id}
+                        className={`rx-cand-tr ${isSelected ? "selected" : ""}`}
                         style={{
                           background: isSelected
                             ? "color-mix(in srgb, #2563eb 5%, transparent)"
                             : undefined,
                         }}
                       >
-                        <td style={{ textAlign: "center" }}>
+                        <td className="rx-col-check">
                           <div
                             className="rx-table-bulk-checkbox"
                             onClick={() => handleToggleSelectOne(c._id)}
                           >
                             {isSelected ? (
-                              <CheckSquare size={18} color="#2563eb" strokeWidth={2.3} />
+                              <CheckSquare size={17} color="#2563eb" strokeWidth={2.3} />
                             ) : (
-                              <Square size={18} color="#94a3b8" strokeWidth={1.8} />
+                              <Square size={17} color="#94a3b8" strokeWidth={1.8} />
                             )}
                           </div>
                         </td>
-                        <td>
-                          <div className="rx-cand-name" style={{ fontWeight: 700, color: "var(--text)" }}>
+                        <td className="rx-col-cand">
+                          <div className="rx-cand-name">
                             {user.fullName || "Candidate"}
                           </div>
-                          <div className="rx-cand-email" style={{ fontSize: 12, color: "var(--text-muted)" }}>
+                          <div className="rx-cand-email">
                             {user.email || "No email"}
                           </div>
                           {headline && (
-                            <div className="rx-cand-headline" style={{ fontSize: 11, color: "#64748b", marginTop: 2 }}>
+                            <div className="rx-cand-headline" title={headline}>
                               {headline}
                             </div>
                           )}
                         </td>
-                        <td>
-                          <div style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
-                            <span className="rx-match-score-val" style={{ fontSize: 14, fontWeight: 800, color: "var(--primary)" }}>
+                        <td className="rx-col-match">
+                          <div className="rx-match-wrap">
+                            <span className="rx-match-score-val">
                               {c.matchScore || 0}%
                             </span>
-                            <span className="rx-badge rx-badge-blue" style={{ fontSize: 10 }}>
+                            <span className="rx-badge rx-badge-blue rx-match-badge">
                               <Sparkles size={10} /> Match
                             </span>
                           </div>
                         </td>
-                        <td style={{ maxWidth: 220 }}>
-                          <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
+                        <td className="rx-col-skills">
+                          <div className="rx-skills-chips-wrap">
                             {rawSkills.slice(0, 3).map((s, idx) => (
                               <span
                                 key={idx}
                                 className="rx-table-skill-chip"
-                                style={{
-                                  fontSize: 11,
-                                  background: "var(--bg)",
-                                  border: "1px solid var(--border)",
-                                  padding: "2px 6px",
-                                  borderRadius: 4,
-                                  whiteSpace: "nowrap",
-                                }}
                               >
                                 {s}
                               </span>
                             ))}
                           </div>
                         </td>
-                        <td>
+                        <td className="rx-col-assess">
                           {hasAssessmentScore ? (
-                            <span className="rx-badge rx-badge-green" style={{ fontSize: 11 }}>
-                              <FileCheck size={12} /> {assessmentScoreVal}%
+                            <span className="rx-badge rx-badge-green">
+                              <FileCheck size={11} /> {assessmentScoreVal}%
                             </span>
                           ) : isAssessmentSent ? (
-                            <span className="rx-badge rx-badge-blue" style={{ fontSize: 11 }}>
+                            <span className="rx-badge rx-badge-blue">
                               Sent
                             </span>
                           ) : (
-                            <span style={{ fontSize: 12, color: "var(--text-muted)" }}>—</span>
+                            <span className="rx-dash">—</span>
                           )}
                         </td>
-                        <td>
+                        <td className="rx-col-ai">
                           {hasAiScore ? (
-                            <span className="rx-badge rx-badge-blue" style={{ fontSize: 11 }}>
-                              <Bot size={12} /> {c.aiInterviewScore}%
+                            <span className="rx-badge rx-badge-blue">
+                              <Bot size={11} /> {c.aiInterviewScore}%
                             </span>
                           ) : (
-                            <span style={{ fontSize: 12, color: "var(--text-muted)" }}>—</span>
+                            <span className="rx-dash">—</span>
                           )}
                         </td>
-                        <td>
-                          <span className="rx-badge rx-badge-gray" style={{ textTransform: "capitalize", fontSize: 11 }}>
+                        <td className="rx-col-stage">
+                          <span className="rx-badge rx-badge-gray rx-stage-badge">
                             {stageLabel}
                           </span>
                         </td>
-                        <td style={{ textAlign: "right", paddingRight: 20, width: 140, whiteSpace: "nowrap" }}>
+                        <td className="rx-col-actions">
                           <Link
                             to={jobId ? `/recruiter/candidates/${c._id}?jobId=${jobId}` : `/recruiter/candidates/${c._id}`}
                             state={{ fromJobId: jobId }}
                             className="rx-btn rx-btn-secondary rx-table-action-btn"
-                            style={{
-                              fontSize: 12,
-                              padding: "6px 14px",
-                              whiteSpace: "nowrap",
-                              display: "inline-flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              minWidth: 105,
-                              textDecoration: "none",
-                            }}
                           >
                             View Profile
                           </Link>
