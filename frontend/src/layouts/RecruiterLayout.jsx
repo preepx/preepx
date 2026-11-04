@@ -152,35 +152,39 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
         <div className={`rx-root ${collapsed ? "collapsed" : ""}`} style={{ flex: 1 }}>
           <aside className={`rx-sidebar ${mobileOpen ? "open" : ""}`}>
             <div className="rx-sidebar-top">
-              <Link to="/recruiter-dashboard" className="rx-brand">
-                {collapsed && !mobileOpen ? (
-                  <img
-                    src="/logo.png"
-                    alt="PreepX"
-                    style={{ height: "32px", objectFit: "contain", marginLeft: "4px" }}
-                  />
-                ) : (
-                  <img
-                    src="/preepx_logo_copy.png"
-                    alt="PreepX"
-                    className="brand-logo-img"
-                    style={{ height: "49px", objectFit: "contain" }}
-                  />
-                )}
-              </Link>
-              {!collapsed && (
+              {collapsed && !mobileOpen ? (
                 <button
                   type="button"
-                  className="rx-sidebar-toggle"
-                  onClick={() => setCollapsed(!collapsed)}
-                  aria-label="Toggle Sidebar"
+                  className="rx-icon-btn rx-sidebar-expand-btn"
+                  onClick={() => setCollapsed(false)}
+                  aria-label="Expand sidebar"
+                  title="Expand sidebar"
                 >
-                  <div className="rx-ham-box">
-                    <span className="rx-ham-bar rx-top-bar" />
-                    <span className="rx-ham-bar rx-mid-bar" />
-                    <span className="rx-ham-bar rx-bot-bar" />
-                  </div>
+                  <PanelLeft size={18} />
                 </button>
+              ) : (
+                <>
+                  <Link to="/recruiter-dashboard" className="rx-brand">
+                    <img
+                      src="/preepx_logo_copy.png"
+                      alt="PreepX"
+                      className="brand-logo-img"
+                      style={{ height: "49px", objectFit: "contain" }}
+                    />
+                  </Link>
+                  <button
+                    type="button"
+                    className="rx-sidebar-toggle"
+                    onClick={() => setCollapsed(!collapsed)}
+                    aria-label="Toggle Sidebar"
+                  >
+                    <div className="rx-ham-box">
+                      <span className="rx-ham-bar rx-top-bar" />
+                      <span className="rx-ham-bar rx-mid-bar" />
+                      <span className="rx-ham-bar rx-bot-bar" />
+                    </div>
+                  </button>
+                </>
               )}
               <button
                 type="button"
@@ -268,11 +272,6 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
                 <button type="button" className="rx-menu-btn" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
                   {mobileOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
-                {collapsed && (
-                  <button type="button" className="rx-icon-btn" onClick={() => setCollapsed(false)} aria-label="Expand sidebar">
-                    <PanelLeft size={18} />
-                  </button>
-                )}
                 <h1 className="rx-page-title">{title}</h1>
                 <div className="rx-search" style={{ position: 'relative' }}>
                   <Search size={16} />

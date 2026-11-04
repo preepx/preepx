@@ -37,6 +37,11 @@
   width: 68px;
 }
 
+.rx-root.collapsed .rx-sidebar-top {
+  justify-content: center;
+  padding: 13px 0;
+}
+
 .rx-sidebar-top {
   position: relative;
   display: flex;
