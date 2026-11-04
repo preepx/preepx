@@ -704,9 +704,10 @@
 
 /* REDESIGN STAND OUT (PURPLE BOX) */
 .ajd-boost-card {
-    background: #1f5c4a !important;
-    color: #fff;
+    background: #2563eb !important;
+    color: #d4d4d4;
     position: relative;
+    border: 1px solid rgb(234, 234, 234);
 }
 
 .ajd-boost-close {
@@ -718,11 +719,11 @@
 }
 
 .ajd-boost-text h3 {
-    color: #fff !important;
+    color: #ffffff !important;
 }
 
 .ajd-boost-text p {
-    color: #d6d0c6 !important;
+    color: #ffffff !important;
 }
 
 .ajd-boost-progress {
@@ -738,8 +739,8 @@
 }
 
 .ajd-boost-btn {
-    background: #fff !important;
-    color: #1f5c4a !important;
+    background: #ffffff !important;
+    color: #000000 !important;
     font-weight: 600;
     border: none;
 }

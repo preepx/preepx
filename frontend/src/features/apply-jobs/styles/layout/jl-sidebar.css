@@ -91,6 +91,7 @@
     background: #ffffff !important;
     border: 1.5px solid #cbd5e1 !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+    margin-right: auto;
 }
 
 [data-theme="light"] .sidebar-toggle .ham-bar {
