@@ -842,9 +842,11 @@
   background: #ffffff;
   border: 1px solid #e5e7eb;
   border-radius: 6px;
-  padding: 6px 10px;
+  padding: 6px 8px;
   text-align: center;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .rx-flow-node--job {
@@ -862,6 +864,8 @@
   font-weight: 700;
   color: #111827;
   line-height: 1.2;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .rx-flow-node-desc {
@@ -869,6 +873,8 @@
   color: #6b7280;
   line-height: 1.25;
   margin-top: 2px;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .rx-flow-line-vertical {
@@ -951,21 +957,55 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   padding: 8px 10px;
   background: #f9fafb;
   border: 1px solid #f3f4f6;
   border-radius: 6px;
   font-size: 12px;
+  box-sizing: border-box;
+}
+
+.rx-ai-item-info,
+.rx-ai-item > div {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.rx-ai-candidate-name,
+.rx-ai-item strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #111827;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rx-ai-candidate-sub,
+.rx-ai-item .rx-table-sub {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 11px;
+  color: #6b7280;
 }
 
 .rx-match-badge {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 3px 8px;
   border-radius: 9999px;
   font-size: 11px;
   font-weight: 600;
   background: #ede9fe;
   color: #6d28d9;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .rx-card-footer {
@@ -1462,6 +1502,54 @@
     padding-bottom: 2px;
   }
 
+  .rx-card {
+    padding: 14px 14px;
+  }
+
+  /* AI Matching Flowchart Responsive (Tablet / Mobile <= 768px) */
+  .rx-flowchart-box {
+    padding: 10px 8px;
+    margin: 8px 0 12px;
+  }
+
+  .rx-flow-node {
+    padding: 5px 6px;
+    box-sizing: border-box;
+  }
+
+  .rx-flow-node-title {
+    font-size: 10.5px;
+    line-height: 1.15;
+  }
+
+  .rx-flow-node-desc {
+    font-size: 8.5px;
+    line-height: 1.15;
+    margin-top: 1px;
+  }
+
+  .rx-flow-hub {
+    width: 48px;
+    height: 48px;
+  }
+
+  .rx-flow-hub-text {
+    font-size: 9px;
+    line-height: 1.1;
+  }
+
+  .rx-flow-line-horizontal {
+    max-width: 12px;
+  }
+
+  .rx-flow-row {
+    gap: 6px;
+  }
+
+  .rx-flow-row--bottom {
+    gap: 8px;
+  }
+
   .rx-hero-card {
     flex-direction: column;
     align-items: flex-start;
@@ -1532,6 +1620,102 @@
 }
 
 @media (max-width: 480px) {
+  .rx-card {
+    padding: 12px 10px;
+  }
+
+  .rx-card-title {
+    font-size: 13.5px;
+  }
+
+  .rx-card-subtitle {
+    font-size: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  /* AI Matching Flowchart Ultra Compact (<= 480px / 320px) */
+  .rx-card.rx-ai-card {
+    padding: 12px 8px;
+  }
+
+  .rx-flowchart-box {
+    padding: 8px 4px;
+    margin: 6px 0 10px;
+  }
+
+  .rx-flow-node {
+    padding: 3px 4px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .rx-flow-node-title {
+    font-size: 9.5px;
+    letter-spacing: -0.2px;
+    line-height: 1.1;
+  }
+
+  .rx-flow-node-desc {
+    font-size: 7.5px;
+    line-height: 1.1;
+    margin-top: 1px;
+  }
+
+  .rx-flow-node--job {
+    max-width: 170px;
+  }
+
+  .rx-flow-hub {
+    width: 40px;
+    height: 40px;
+  }
+
+  .rx-flow-hub-text {
+    font-size: 7.5px;
+    line-height: 1.05;
+  }
+
+  .rx-flow-line-horizontal {
+    max-width: 6px;
+  }
+
+  .rx-flow-line-vertical {
+    height: 7px;
+    margin: 1px auto;
+  }
+
+  .rx-flow-row {
+    gap: 3px;
+  }
+
+  .rx-flow-row--bottom {
+    gap: 6px;
+  }
+
+  /* Candidate Match List in AI card */
+  .rx-ai-item {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  .rx-ai-candidate-name,
+  .rx-ai-item strong {
+    font-size: 11px;
+  }
+
+  .rx-ai-candidate-sub,
+  .rx-ai-item .rx-table-sub {
+    font-size: 9.5px;
+  }
+
+  .rx-match-badge {
+    padding: 2.5px 6px;
+    font-size: 9.5px;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
   .rx-jobs-card {
     padding: 14px 12px;
   }

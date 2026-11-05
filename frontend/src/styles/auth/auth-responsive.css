@@ -169,12 +169,17 @@
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    gap: 10px !important;
+    justify-content: center !important;
+    gap: 16px !important;
     width: 100% !important;
+    margin: 6px 0 4px 0;
   }
 
   .auth-social-icon-btn {
-    height: 42px;
+    width: 44px !important;
+    height: 44px !important;
+    flex: 0 0 44px !important;
+    aspect-ratio: 1 / 1 !important;
   }
 
   .auth-social-icon-btn svg {

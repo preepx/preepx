@@ -26,6 +26,8 @@ const safeUser = (user) => ({
   referralCount: user.referralCount || 0,
 });
 
+
+
 // Step 1: Redirect to Google
 router.get("/google", (req, res, next) => {
   const state = req.query.state;

@@ -79,9 +79,9 @@ export default function AiMatchingCard({ topCandidates = [], recentJobs = [] }) 
         <ul className="rx-ai-list">
           {topCandidates.slice(0, 3).map((c) => (
             <li key={c._id} className="rx-ai-item">
-              <div>
-                <strong>{c.userId?.fullName || "Candidate"}</strong>
-                <span className="rx-table-sub">{c.jobId?.title || c.jobId?.role || "Matched"}</span>
+              <div className="rx-ai-item-info">
+                <strong className="rx-ai-candidate-name">{c.userId?.fullName || "Candidate"}</strong>
+                <span className="rx-table-sub rx-ai-candidate-sub">{c.jobId?.title || c.jobId?.role || "Matched"}</span>
               </div>
               <span className="rx-match-badge">{c.matchScore ?? 0}% match</span>
             </li>

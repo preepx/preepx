@@ -336,15 +336,17 @@
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   align-items: center !important;
-  justify-content: space-between !important;
-  gap: 10px;
+  justify-content: center !important;
+  gap: 14px;
   width: 100%;
+  margin: 4px 0 2px 0;
 }
 
 .auth-social-icon-btn {
-  flex: 1 1 0;
-  min-width: 0;
-  height: 36px;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  aspect-ratio: 1 / 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -355,6 +357,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .auth-social-icon-btn:hover:not(:disabled) {
