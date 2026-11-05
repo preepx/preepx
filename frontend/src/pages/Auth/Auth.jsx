@@ -108,6 +108,15 @@ function Auth({ defaultRole }) {
     } else if (params.get("error") === "linkedin_no_email") {
       showAppError("Could not retrieve a verified email address from your LinkedIn account.", "No Email Provided");
       navigate("/auth", { replace: true });
+    } else if (params.get("error") === "github_failed") {
+      showAppError("Failed to authenticate with GitHub. Please try again.", "GitHub Sign-In Failed");
+      navigate("/auth", { replace: true });
+    } else if (params.get("error") === "github_not_configured") {
+      showAppError("GitHub login is not configured yet. Please configure GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET in the backend environment.", "GitHub Setup Required");
+      navigate("/auth", { replace: true });
+    } else if (params.get("error") === "github_no_email") {
+      showAppError("Could not retrieve a verified email address from your GitHub account.", "No Email Provided");
+      navigate("/auth", { replace: true });
     }
 
     const refCode = params.get("ref");
@@ -153,6 +162,15 @@ function Auth({ defaultRole }) {
   const handleLinkedInLogin = () => {
     const apiBase = API.defaults.baseURL;
     let url = `${apiBase.replace(/\/api$/, "")}/api/auth/linkedin`;
+    if (candidateReg.referralCode) {
+      url += `?state=${encodeURIComponent(candidateReg.referralCode)}`;
+    }
+    window.location.href = url;
+  };
+
+  const handleGithubLogin = () => {
+    const apiBase = API.defaults.baseURL;
+    let url = `${apiBase.replace(/\/api$/, "")}/api/auth/github`;
     if (candidateReg.referralCode) {
       url += `?state=${encodeURIComponent(candidateReg.referralCode)}`;
     }
@@ -462,7 +480,7 @@ function Auth({ defaultRole }) {
           </button>
 
           {/* ── LEFT BRANDING PANEL (Desktop only) ── */}
-<AuthHero
+          <AuthHero
             onRecruiterClick={() => {
               if (typeof handleRoleChange === "function") handleRoleChange("recruiter");
               setShowRecruiterComingSoon(true);
@@ -475,7 +493,7 @@ function Auth({ defaultRole }) {
             {/* Mobile Header */}
             <div className="modern-auth-mobile-header">
               <a href="/" onClick={(e) => { e.preventDefault(); handleClose(); }} style={{ cursor: 'pointer' }}>
-                <img src="/preepx_logo.png" alt="PreepX" className="modern-auth-mobile-logo" />
+                <img src="/preepx_logo_copy.png" alt="PreepX" className="modern-auth-mobile-logo" />
               </a>
               <button className="modern-auth-close-btn" onClick={handleClose} aria-label="Close">
                 <X size={16} />
@@ -489,14 +507,14 @@ function Auth({ defaultRole }) {
                 className={`auth-role-btn ${activeRole === "candidate" ? "active" : ""}`}
                 onClick={() => handleRoleChange("candidate")}
               >
-                <img 
-                  src="/landing/Vector.svg" 
-                  alt="Candidate" 
-                  style={{ 
-                    width: 14, 
+                <img
+                  src="/landing/Vector.svg"
+                  alt="Candidate"
+                  style={{
+                    width: 14,
                     height: 14,
                     filter: activeRole === "candidate" ? "none" : "brightness(0) opacity(0.6)"
-                  }} 
+                  }}
                 />
                 <span>Candidate</span>
               </button>
@@ -505,14 +523,14 @@ function Auth({ defaultRole }) {
                 className={`auth-role-btn ${activeRole === "recruiter" ? "active" : ""}`}
                 onClick={() => handleRoleChange("recruiter")}
               >
-                <img 
-                  src="/landing/fluent-mdl2_add-work.svg" 
-                  alt="Recruiter" 
-                  style={{ 
-                    width: 14, 
+                <img
+                  src="/landing/fluent-mdl2_add-work.svg"
+                  alt="Recruiter"
+                  style={{
+                    width: 14,
                     height: 14,
                     filter: activeRole === "recruiter" ? "none" : "brightness(0) opacity(0.6)"
-                  }} 
+                  }}
                 />
                 <span>Recruiter</span>
               </button>
@@ -562,6 +580,7 @@ function Auth({ defaultRole }) {
                 }}
                 onGoogleLogin={handleGoogleLogin}
                 onLinkedInLogin={handleLinkedInLogin}
+                onGithubLogin={handleGithubLogin}
                 onSwitchToRegister={() => {
                   setScreen("register");
                   resetOtp();
@@ -585,6 +604,7 @@ function Auth({ defaultRole }) {
                 onSubmit={handleCandidateRegister}
                 onGoogleLogin={handleGoogleLogin}
                 onLinkedInLogin={handleLinkedInLogin}
+                onGithubLogin={handleGithubLogin}
                 onSwitchToLogin={() => {
                   setScreen("login");
                   resetOtp();

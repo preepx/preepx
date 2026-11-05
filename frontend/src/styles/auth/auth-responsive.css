@@ -165,6 +165,23 @@
     border-radius: 8px;
   }
 
+  .auth-social-btns-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  .auth-social-icon-btn {
+    height: 42px;
+  }
+
+  .auth-social-icon-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+
   .auth-divider-line {
     margin: 14px 0;
     font-size: 11px;

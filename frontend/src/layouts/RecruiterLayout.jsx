@@ -160,7 +160,12 @@ export default function RecruiterLayout({ children, title = "Dashboard" }) {
                   aria-label="Expand sidebar"
                   title="Expand sidebar"
                 >
-                  <PanelLeft size={18} />
+                  {/* <PanelLeft size={18} /> */}
+                  <div className="rx-ham-box">
+                    <span className="rx-ham-bar rx-top-bar" />
+                    <span className="rx-ham-bar rx-mid-bar" />
+                    <span className="rx-ham-bar rx-bot-bar" />
+                  </div>
                 </button>
               ) : (
                 <>

@@ -39,7 +39,7 @@
 
 .rx-root.collapsed .rx-sidebar-top {
   justify-content: center;
-  padding: 13px 0;
+  padding: 22px 0;
 }
 
 .rx-sidebar-top {
@@ -2229,6 +2229,7 @@ select.rx-premium-input {
     padding: 10px 14px;
   }
 }
+
 /* ==========================================================================
    Candidate Discovery Dual-View (Table for Laptop/Tablet, Cards for Mobile)
    ========================================================================== */
@@ -2245,6 +2246,7 @@ select.rx-premium-input {
   .rx-discovery-table-view {
     display: none !important;
   }
+
   .rx-discovery-cards-view {
     display: block !important;
   }
@@ -2502,6 +2504,7 @@ select.rx-premium-input {
 
 /* ── Extra Compact for Tighter Widths <= 980px ── */
 @media (max-width: 980px) {
+
   .rx-candidate-table th,
   .rx-candidate-table td {
     padding: 6px 3px !important;

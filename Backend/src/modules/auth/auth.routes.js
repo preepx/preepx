@@ -206,4 +206,177 @@ router.get("/linkedin/callback", async (req, res) => {
   }
 });
 
+
+
+// =========================================================
+// GITHUB OAUTH (Standard OAuth 2.0)
+// =========================================================
+
+// Step 1: Redirect to GitHub Authorization
+router.get("/github", (req, res) => {
+  const clientId = process.env.GITHUB_CLIENT_ID;
+  const frontendUrl = getFrontendUrl();
+  const backendUrl = getBackendUrl();
+
+  if (!clientId || !process.env.GITHUB_CLIENT_SECRET) {
+    return res.redirect(`${frontendUrl}/auth?error=github_not_configured`);
+  }
+
+  const redirectUri = process.env.GITHUB_CALLBACK_URL || `${backendUrl}/api/auth/github/callback`;
+  const state = req.query.state || "candidate";
+  const scope = "user:email";
+
+  const githubAuthUrl = `https://github.com/login/oauth/authorize?client_id=${encodeURIComponent(
+    clientId
+  )}&redirect_uri=${encodeURIComponent(redirectUri)}&state=${encodeURIComponent(state)}&scope=${encodeURIComponent(scope)}`;
+
+  res.redirect(githubAuthUrl);
+});
+
+// Step 2: GitHub Callback
+router.get("/github/callback", async (req, res) => {
+  const frontendUrl = getFrontendUrl();
+  const backendUrl = getBackendUrl();
+  const redirectUri = process.env.GITHUB_CALLBACK_URL || `${backendUrl}/api/auth/github/callback`;
+
+  const { code, state, error, error_description } = req.query;
+
+  if (error || !code) {
+    console.error("GitHub OAuth error from provider:", error, error_description);
+    return res.redirect(`${frontendUrl}/auth?error=github_failed`);
+  }
+
+  try {
+    // 1. Exchange authorization code for access token
+    const tokenResponse = await axios.post(
+      "https://github.com/login/oauth/access_token",
+      {
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
+        code,
+        redirect_uri: redirectUri,
+      },
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+
+    const accessToken = tokenResponse.data?.access_token;
+    if (!accessToken) {
+      throw new Error("No access_token returned by GitHub");
+    }
+
+    // 2. Fetch user profile from GitHub API
+    const userResponse = await axios.get("https://api.github.com/user", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "User-Agent": "PreepX-App",
+      },
+    });
+
+    const userInfo = userResponse.data;
+    let email = (userInfo?.email || "").trim().toLowerCase();
+    const githubId = userInfo?.id;
+
+    // If profile email is private, fetch from user emails endpoint
+    if (!email) {
+      try {
+        const emailsResponse = await axios.get("https://api.github.com/user/emails", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "User-Agent": "PreepX-App",
+          },
+        });
+        const emails = Array.isArray(emailsResponse.data) ? emailsResponse.data : [];
+        const primary = emails.find((e) => e.primary && e.verified) || emails.find((e) => e.verified) || emails[0];
+        if (primary && primary.email) {
+          email = primary.email.trim().toLowerCase();
+        }
+      } catch (emailErr) {
+        console.error("Could not fetch GitHub user emails:", emailErr.message);
+      }
+    }
+
+    if (!email) {
+      return res.redirect(`${frontendUrl}/auth?error=github_no_email`);
+    }
+
+    let user = await User.findOne({ email });
+
+    if (user) {
+      // Existing user account with this email — link GitHub and log into existing account
+      let updated = false;
+      if (!user.githubId && githubId) {
+        user.githubId = String(githubId);
+        updated = true;
+      }
+      if (!user.profilePic && userInfo.avatar_url) {
+        user.profilePic = userInfo.avatar_url;
+        updated = true;
+      }
+      if (!user.github && userInfo.html_url) {
+        user.github = userInfo.html_url;
+        updated = true;
+      }
+      if (updated) {
+        await user.save();
+      }
+    } else {
+      // Handle referral if passed in state
+      let referredBy = undefined;
+      if (state && typeof state === "string" && state.startsWith("REF-")) {
+        const referrer = await User.findOne({ referralCode: state });
+        if (referrer) {
+          referredBy = referrer._id;
+          referrer.referralCount = (referrer.referralCount || 0) + 1;
+          await referrer.save();
+        }
+      }
+
+      // New user — create user record automatically
+      const newReferralCode = "REF-" + crypto.randomBytes(3).toString("hex").toUpperCase();
+      user = await User.create({
+        fullName:
+          userInfo.name ||
+          userInfo.login ||
+          email.split("@")[0],
+        email,
+        githubId: String(githubId),
+        profilePic: userInfo.avatar_url || null,
+        github: userInfo.html_url || "",
+        referralCode: newReferralCode,
+        referredBy,
+      });
+
+      try {
+        const walletService = require("../wallet/wallet.service");
+        await walletService.addBonusToWallet(user._id, 20, "Signup bonus");
+      } catch (wErr) {
+        console.error("GitHub signup bonus error:", wErr);
+      }
+
+      try {
+        const sendWelcomeEmailUser = require("../../../utils/sendWelcomeEmailUser");
+        await sendWelcomeEmailUser(user.email, user.fullName);
+      } catch (mErr) {
+        console.error("GitHub welcome email error:", mErr);
+      }
+    }
+
+    const token = jwt.sign({ id: user._id }, envConfig.jwt.secret, { expiresIn: "7d" });
+
+    const params = new URLSearchParams({
+      token,
+      user: JSON.stringify(safeUser(user)),
+    });
+
+    res.redirect(`${frontendUrl}/auth/callback?${params.toString()}`);
+  } catch (err) {
+    console.error("GitHub OAuth callback exception:", err.response?.data || err.message);
+    res.redirect(`${frontendUrl}/auth?error=github_failed`);
+  }
+});
+
 module.exports = router;

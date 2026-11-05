@@ -118,18 +118,22 @@
 }
 
 [data-theme="light"] .auth-social-btn,
+[data-theme="light"] .auth-social-icon-btn,
 [data-theme="light"] .auth-google-btn-full,
 [data-theme="light"] .auth-social-btn-full {
   background: #ffffff;
   border-color: #cbd5e1;
   color: #0f172a;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
 }
 
 [data-theme="light"] .auth-social-btn:hover:not(:disabled),
+[data-theme="light"] .auth-social-icon-btn:hover:not(:disabled),
 [data-theme="light"] .auth-google-btn-full:hover:not(:disabled),
 [data-theme="light"] .auth-social-btn-full:hover:not(:disabled) {
   background: #f8fafc;
   border-color: #94a3b8;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="light"] .auth-switch-prompt {

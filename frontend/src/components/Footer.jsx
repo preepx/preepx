@@ -47,9 +47,9 @@ function Footer({ onRecruiterClick }) {
               <a href="https://www.instagram.com/preepx.in?stkn=OWEwaTg2dWczM2Jh" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="Instagram">
                 <img src="/socialicon/insta.png" alt="" className="footer-social-image" />
               </a>
-              <a href="https://github.com/preepx" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="GitHub">
+              {/* <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="GitHub">
                 <img src="/socialicon/github.png" alt="" className="footer-social-image" />
-              </a>
+              </a> */}
               <a href="mailto:support@preepx.com" className="footer-social-icon" aria-label="Email">
                 <img src="/socialicon/gmail.png" alt="" className="footer-social-image" />
               </a>
