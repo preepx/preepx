@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema(
     email: { type: String, required: true, unique: true },
     password: { type: String },           // optional â€” Google users ka password nahi hota
     googleId: { type: String },           // Google OAuth ID
+    linkedinId: { type: String },         // LinkedIn OAuth ID
     profilePic: { type: String },
     points: { type: Number, default: 0 },
     lifetimePoints: { type: Number, default: 0 },

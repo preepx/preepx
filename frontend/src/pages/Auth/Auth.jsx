@@ -99,6 +99,15 @@ function Auth({ defaultRole }) {
     if (params.get("error") === "google_failed") {
       showAppError("Failed to authenticate with Google. Please try again.", "Google Sign-In Failed");
       navigate("/auth", { replace: true });
+    } else if (params.get("error") === "linkedin_failed") {
+      showAppError("Failed to authenticate with LinkedIn. Please try again.", "LinkedIn Sign-In Failed");
+      navigate("/auth", { replace: true });
+    } else if (params.get("error") === "linkedin_not_configured") {
+      showAppError("LinkedIn login is not configured yet. Please configure LINKEDIN_CLIENT_ID and LINKEDIN_CLIENT_SECRET in the backend environment.", "LinkedIn Setup Required");
+      navigate("/auth", { replace: true });
+    } else if (params.get("error") === "linkedin_no_email") {
+      showAppError("Could not retrieve a verified email address from your LinkedIn account.", "No Email Provided");
+      navigate("/auth", { replace: true });
     }
 
     const refCode = params.get("ref");
@@ -137,6 +146,15 @@ function Auth({ defaultRole }) {
     let url = `${apiBase.replace(/\/api$/, "")}/api/auth/google`;
     if (candidateReg.referralCode) {
       url += `?state=${candidateReg.referralCode}`;
+    }
+    window.location.href = url;
+  };
+
+  const handleLinkedInLogin = () => {
+    const apiBase = API.defaults.baseURL;
+    let url = `${apiBase.replace(/\/api$/, "")}/api/auth/linkedin`;
+    if (candidateReg.referralCode) {
+      url += `?state=${encodeURIComponent(candidateReg.referralCode)}`;
     }
     window.location.href = url;
   };
@@ -543,6 +561,7 @@ function Auth({ defaultRole }) {
                   setScreen("forgot-email");
                 }}
                 onGoogleLogin={handleGoogleLogin}
+                onLinkedInLogin={handleLinkedInLogin}
                 onSwitchToRegister={() => {
                   setScreen("register");
                   resetOtp();
@@ -565,6 +584,7 @@ function Auth({ defaultRole }) {
                 loading={loading}
                 onSubmit={handleCandidateRegister}
                 onGoogleLogin={handleGoogleLogin}
+                onLinkedInLogin={handleLinkedInLogin}
                 onSwitchToLogin={() => {
                   setScreen("login");
                   resetOtp();

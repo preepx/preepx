@@ -113,13 +113,16 @@ function JobsLayout({ children }) {
         {/* ── SIDEBAR (Left column, full height) ── */}
         <aside className={`sidebar ${mobileOpen ? "mobile-open" : ""}`}>
           <div className="sidebar-top">
-            <Link to="/apply-jobs" className="sidebar-brand" onClick={() => setMobileOpen(false)}>
-              {collapsed && !mobileOpen ? (
-                <img src="/logo.png" alt="PreepX" style={{ height: "32px", objectFit: "contain", marginLeft: "4px" }} />
-              ) : (
-                <img src="/preepx_logo.png" alt="PreepX" className="brand-logo-img" style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }} />
-              )}
-            </Link>
+            {(!collapsed || mobileOpen) && (
+              <Link to="/apply-jobs" className="sidebar-brand" onClick={() => setMobileOpen(false)}>
+                <img
+                  src="/preepx_logo.png"
+                  alt="PreepX"
+                  className="brand-logo-img"
+                  style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }}
+                />
+              </Link>
+            )}
             <button
               type="button"
               className="sidebar-toggle desktop-only"

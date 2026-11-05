@@ -431,3 +431,26 @@
     background: #fef2f2;
     color: #dc2626;
 }
+/* Collapsed sidebar alignment for expand button and icons */
+.jl-root.collapsed .sidebar:not(.mobile-open) .sidebar-top {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    min-height: 58px !important;
+    height: 58px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.jl-root.collapsed .sidebar:not(.mobile-open) .sidebar-toggle {
+    margin: 0 auto !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    align-self: center !important;
+}
+
+.jl-root.collapsed .sidebar:not(.mobile-open) .sidebar-link {
+    justify-content: center !important;
+    padding: 9px 0 !important;
+}

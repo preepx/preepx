@@ -118,14 +118,16 @@
 }
 
 [data-theme="light"] .auth-social-btn,
-[data-theme="light"] .auth-google-btn-full {
+[data-theme="light"] .auth-google-btn-full,
+[data-theme="light"] .auth-social-btn-full {
   background: #ffffff;
   border-color: #cbd5e1;
   color: #0f172a;
 }
 
 [data-theme="light"] .auth-social-btn:hover:not(:disabled),
-[data-theme="light"] .auth-google-btn-full:hover:not(:disabled) {
+[data-theme="light"] .auth-google-btn-full:hover:not(:disabled),
+[data-theme="light"] .auth-social-btn-full:hover:not(:disabled) {
   background: #f8fafc;
   border-color: #94a3b8;
 }

@@ -1096,3 +1096,27 @@
   background: rgba(99, 102, 241, 0.2);
   border-color: rgba(99, 102, 241, 0.4);
 }
+/* Collapsed sidebar center alignment */
+.app-layout.collapsed .sidebar:not(.mobile-open) .sidebar-top {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  min-height: 58px !important;
+  height: 58px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.app-layout.collapsed .sidebar:not(.mobile-open) .sidebar-toggle,
+.app-layout.collapsed .sidebar:not(.mobile-open) .sidebar-top .sidebar-toggle {
+  margin: 0 auto !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  align-self: center !important;
+}
+
+.app-layout.collapsed .sidebar:not(.mobile-open) .sidebar-link {
+  justify-content: center !important;
+  padding: 9px 0 !important;
+}
