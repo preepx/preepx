@@ -215,7 +215,7 @@ html {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  background: var(--im-purple);
+  background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -263,7 +263,7 @@ html {
 }
 
 .im-interviewer-name {
-  background: var(--im-purple);
+  background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%);
   padding: 4px 12px;
   border-radius: 8px;
   font-size: 0.85rem;
@@ -415,7 +415,7 @@ html {
 }
 
 .im-next-btn {
-  background: var(--im-blue);
+  background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -430,7 +430,7 @@ html {
 }
 
 .im-next-btn:hover:not(:disabled) {
-  background: #2563eb;
+  background: linear-gradient(90deg, #2b42b5 0%, #3b0d7b 100%);
 }
 
 .im-next-btn:disabled {
@@ -555,7 +555,8 @@ html {
 
   .im-cc-overlay {
     left: 16px;
-    right: 132px; /* 100px (pip width) + 16px (gap) + 16px (margin) */
+    right: 132px;
+    /* 100px (pip width) + 16px (gap) + 16px (margin) */
     bottom: 16px;
   }
 

@@ -227,14 +227,14 @@ function AppLayout({ children }) {
       <div className={`app-layout ${collapsed ? "collapsed" : ""} ${hideSidebar ? "hide-sidebar" : ""}`}>
         {!location.pathname.includes("/pdf") && !hideSidebar && (
           <header className="topbar new-topbar">
-            <div className="topbar-left-section">
+            <div className="topbar-sidebar-zone">
               {!collapsed || mobileOpen ? (
                 <Link to="/interview" className="sidebar-brand">
                   <img
                     src="/preepx_logo.png"
                     alt="PreepX"
                     className="brand-logo-img"
-                    style={{ height: "100px", objectFit: "contain", margin: "-28px 0 -28px 10px" }}
+                    style={{ height: "130px", paddingTop: "10px", objectFit: "contain", margin: "-28px 0 -28px 6px" }}
                   />
                 </Link>
               ) : null}
@@ -255,11 +255,12 @@ function AppLayout({ children }) {
               >
                 <img src="/hemgor.svg" alt="Menu" style={{ width: 18, height: 18, display: 'block', margin: 'auto' }} />
               </button>
+            </div>
 
+            <div className="topbar-left-section">
               <button
                 type="button"
                 className="topbar-apply-jobs-btn"
-                style={{ marginLeft: '24px' }}
                 onClick={() => navigate("/apply-jobs")}
               >
                 <img src="/applyjob.svg" alt="Apply Jobs" style={{ width: 22, height: 22, display: 'block', transform: 'translateY(2px)' }} />
@@ -338,7 +339,7 @@ function AppLayout({ children }) {
                 <div className="sidebar-top mobile-only">
                   <Link to="/interview" className="sidebar-brand">
                     <img
-                      src="/preepx_logo.png"
+                      src="/preepx_logo_copy.png"
                       alt="PreepX"
                       className="brand-logo-img"
                       style={{ height: "46px", objectFit: "contain" }}

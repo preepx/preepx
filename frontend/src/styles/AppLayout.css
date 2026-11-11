@@ -390,16 +390,53 @@
 }
 
 .new-topbar {
-  padding: 0 16px;
+  padding: 0 16px 0 0;
 }
 
-/* Left Section */
+/* Sidebar header zone in topbar (matches sidebar width & border) */
+.topbar-sidebar-zone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
+  height: 56px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  border-right: 1px solid var(--border);
+  transition: width 0.25s ease, min-width 0.25s ease, max-width 0.25s ease;
+  flex-shrink: 0;
+}
+
+.topbar-sidebar-zone .sidebar-toggle {
+  margin: 0;
+  margin-left: 0;
+}
+
+.app-layout.collapsed .topbar-sidebar-zone {
+  width: 68px;
+  min-width: 68px;
+  max-width: 68px;
+  padding: 0;
+  justify-content: center;
+}
+
+.app-layout.collapsed .topbar-sidebar-zone .sidebar-toggle {
+  margin: 0 auto !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  align-self: center !important;
+}
+
+/* Left Section next to sidebar zone */
 .topbar-left-section {
   display: flex;
   align-items: center;
   gap: 16px;
   flex: 1;
   max-width: 480px;
+  padding-left: 18px;
 }
 
 .topbar-apply-jobs-btn {
@@ -691,8 +728,8 @@
     display: flex !important;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     background: rgba(0, 0, 0, 0.05);
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -737,7 +774,7 @@
   }
 
   .new-topbar {
-    padding: 0 10px;
+    padding: 0 10px !important;
     height: 54px;
     gap: 6px;
     position: sticky;
@@ -747,17 +784,13 @@
     box-sizing: border-box;
   }
 
-  .mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-  }
-
-  .topbar-left-section {
-    gap: 8px;
-    flex-shrink: 0;
+  .topbar-sidebar-zone,
+  .app-layout.collapsed .topbar-sidebar-zone {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    border-right: none !important;
+    padding: 0 !important;
   }
 
   .mobile-menu-btn {
@@ -767,6 +800,12 @@
     width: 34px;
     height: 34px;
     order: -1;
+  }
+
+  .topbar-left-section {
+    padding-left: 0 !important;
+    gap: 8px;
+    flex-shrink: 0;
   }
 
   .topbar .sidebar-brand {
@@ -1096,6 +1135,7 @@
   background: rgba(99, 102, 241, 0.2);
   border-color: rgba(99, 102, 241, 0.4);
 }
+
 /* Collapsed sidebar center alignment */
 .app-layout.collapsed .sidebar:not(.mobile-open) .sidebar-top {
   display: flex !important;
@@ -1109,7 +1149,8 @@
 }
 
 .app-layout.collapsed .sidebar:not(.mobile-open) .sidebar-toggle,
-.app-layout.collapsed .sidebar:not(.mobile-open) .sidebar-top .sidebar-toggle {
+.app-layout.collapsed .sidebar:not(.mobile-open) .sidebar-top .sidebar-toggle,
+.app-layout.collapsed .topbar-sidebar-zone .sidebar-toggle {
   margin: 0 auto !important;
   margin-left: 0 !important;
   margin-right: 0 !important;

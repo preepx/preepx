@@ -3,10 +3,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   LayoutDashboard, Briefcase, Search, ClipboardCheck, User, LogOut,
   Bell, ChevronDown, Bookmark, Video, FileText,
-  Settings, Moon, Sun, MessageSquare, Menu, X, CalendarDays, Zap, Globe
+  Settings, Moon, Sun, MessageSquare, Menu, X, CalendarDays, Zap, Globe, Bot
 } from "lucide-react";
 import API from "@/utils/api";
-import { getMyApplications } from "../services/candidateJobsAPI";
+import { getMyApplications, getSavedJobs } from "../services/candidateJobsAPI";
 import { getMyAssessments } from "@/services/assessmentAPI";
 import { useTheme } from "@/hooks/useTheme";
 import { getStoredUser, clearAuth } from "@/utils/authUtils";
@@ -28,8 +28,9 @@ const NAV_SECTIONS = [
   {
     label: "APPLICATIONS",
     items: [
-      { to: "/apply-jobs/assessments", icon: ClipboardCheck, label: "Assessments", badge: "New", badgePill: true },
-      { to: "/apply-jobs/saved", icon: Bookmark, label: "Saved Jobs" },
+      { to: "/apply-jobs/assessments", icon: ClipboardCheck, label: "Assessments", badgeKey: "assessments" },
+      { to: "/apply-jobs/ai-interviews", icon: Bot, label: "AI Interviews", badgeKey: "aiInterviews" },
+      { to: "/apply-jobs/saved", icon: Bookmark, label: "Saved Jobs", badgeKey: "savedJobs" },
       { to: "/apply-jobs/my-applications", icon: Briefcase, label: "My Applications", badgeKey: "applications" },
     ]
   },
@@ -48,6 +49,8 @@ function JobsLayout({ children }) {
   const [showNotifications, setShowNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [assessmentBadge, setAssessmentBadge] = useState(0);
+  const [aiInterviewBadge, setAiInterviewBadge] = useState(0);
+  const [savedJobsBadge, setSavedJobsBadge] = useState(0);
   const [applicationBadge, setApplicationBadge] = useState(0);
   const [searchVal, setSearchVal] = useState("");
   const [showServicesMenu, setShowServicesMenu] = useState(false);
@@ -76,16 +79,25 @@ function JobsLayout({ children }) {
 
   useEffect(() => {
     getMyAssessments().then((data) => {
-      const pending = (data || []).filter((a) => a.status !== "completed").length;
-      setAssessmentBadge(pending);
-    }).catch(() => { });
+      setAssessmentBadge((data || []).length);
+    }).catch(() => { setAssessmentBadge(0); });
+
+    getSavedJobs().then((data) => {
+      setSavedJobsBadge((data || []).length);
+    }).catch(() => { setSavedJobsBadge(0); });
 
     getMyApplications().then((data) => {
-      const n = (data || []).filter((a) =>
-        ["shortlisted", "assessment_sent", "offered", "hired", "selected"].includes(a.status)
+      const allApps = data || [];
+      setApplicationBadge(allApps.length);
+
+      const aiCount = allApps.filter((a) =>
+        ["ai_interview", "interview"].includes(a.status) || a.aiInterviewId || (a.aiInterviewScore && a.aiInterviewScore > 0)
       ).length;
-      setApplicationBadge(n || 0);
-    }).catch(() => { setApplicationBadge(0); });
+      setAiInterviewBadge(aiCount);
+    }).catch(() => {
+      setApplicationBadge(0);
+      setAiInterviewBadge(0);
+    });
 
     API.get("/users/notifications").then((res) =>
       setNotifications([...(res.data || [])].reverse())
@@ -149,7 +161,12 @@ function JobsLayout({ children }) {
                   <span className="sidebar-section-label">{sectionLabel}</span>
                 )}
                 {items.map(({ to, icon: Icon, label, badge, badgePill, badgeKey, exact }) => {
-                  const dynBadge = badgeKey === "applications" ? applicationBadge : 0;
+                  let dynBadge = null;
+                  if (badgeKey === "assessments") dynBadge = assessmentBadge;
+                  else if (badgeKey === "aiInterviews") dynBadge = aiInterviewBadge;
+                  else if (badgeKey === "savedJobs") dynBadge = savedJobsBadge;
+                  else if (badgeKey === "applications") dynBadge = applicationBadge;
+
                   const active = isActive(to, exact);
                   return (
                     <Link
@@ -165,6 +182,24 @@ function JobsLayout({ children }) {
                           <span className="sidebar-link-label">{label}</span>
                           {badgePill && <span className="nav-new-badge" style={{ background: '#2563eb', color: '#fff', fontSize: '10px', padding: '2px 7px', borderRadius: '8px', marginLeft: 'auto' }}>New</span>}
                           {badge && !badgePill && <span className="nav-free-badge" style={{ marginLeft: 'auto' }}>{badge}</span>}
+                          {dynBadge !== null && dynBadge !== undefined && (dynBadge > 0 || badgeKey) && !badgePill && (
+                            <span
+                              className="nav-new-badge"
+                              style={{
+                                background: '#2563eb',
+                                color: '#ffffff',
+                                fontSize: '10.5px',
+                                padding: '1px 7px',
+                                borderRadius: '10px',
+                                marginLeft: 'auto',
+                                fontWeight: '700',
+                                minWidth: '18px',
+                                textAlign: 'center'
+                              }}
+                            >
+                              {dynBadge}
+                            </span>
+                          )}
                         </>
                       )}
                     </Link>

@@ -134,12 +134,18 @@
 }
 
 .footer-brand-logo {
-  height: 60px;
-  max-width: 170px;
-  width: auto;
+  height: 66px;
+  /* max-width: 170px; */
+  /* width: auto; */
   object-fit: contain;
   filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4));
   transition: transform 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-brand-logo {
+    height: 35px;
+  }
 }
 
 .footer-brand-logo:hover {
