@@ -14,7 +14,7 @@ export default function AuthHero({ onRecruiterClick, onClose }) {
           onClick={(e) => { e.preventDefault(); onClose?.(); }}
           style={{ display: "inline-block", cursor: "pointer" }}
         >
-          <img src="/preepx_logo.png" alt="PreepX" className="auth-brand-logo" />
+          <img src="/preepx_logo_copy.png" alt="PreepX" className="auth-brand-logo" />
         </a>
 
         <h1 className="auth-brand-title">

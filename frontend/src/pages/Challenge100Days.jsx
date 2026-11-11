@@ -115,7 +115,7 @@ const Challenge100Days = () => {
 
   const userRealRank = useMemo(() => {
     if (leaderboardRank) return leaderboardRank;
-    const idx = leaderboard.findIndex(u => 
+    const idx = leaderboard.findIndex(u =>
       u.isCurrentUser || (u._id && user._id && u._id === user._id) || (user?.fullName && u.fullName === user.fullName && Math.abs((u.points || 0) - xp) < 5)
     );
     if (idx !== -1) return leaderboard[idx].rank || (idx + 1);
@@ -423,49 +423,54 @@ const Challenge100Days = () => {
       </div>
 
       {/* ─── Stats Row ─── */}
-      <section className="c100-stats-section" aria-label="Your Progress Stats">
-        <div className="c100-stats-grid">
-          <div className="c100-stat-card" style={{ "--accent": "#ef4444" }}>
-            <div className="c100-stat-icon">
-              <img src="https://raw.githubusercontent.com/microsoft/fluentui-emoji/main/assets/Fire/3D/fire_3d.png" alt="Streak" style={{ width: 20, height: 20 }} />
-            </div>
-            <div className="c100-stat-text-block">
-              <span className="c100-stat-val"><AnimatedNumber value={streak} /></span>
-              <span className="c100-stat-lbl">Current Streak</span>
-              <span className="c100-stat-sub">Keep it up!</span>
-            </div>
+      <section className="ud-stats-row" style={{ marginBottom: "0px" }}>
+        {/* Days Remaining */}
+        <div className="ud-stat-card-new">
+          <div className="ud-stat-icon-wrapper" style={{ backgroundColor: '#F0F5FF', color: '#3B82F6' }}>
+            <Target size={20} />
           </div>
-          <div className="c100-stat-card" style={{ "--accent": "#0ea5e9" }}>
-            <div className="c100-stat-icon"><Target size={20} /></div>
-            <div className="c100-stat-text-block">
-              <span className="c100-stat-val"><AnimatedNumber value={daysRemaining} /></span>
-              <span className="c100-stat-lbl">Days Remaining</span>
-              <span className="c100-stat-sub">Finish strong</span>
-            </div>
+          <div className="ud-stat-info">
+            <span className="ud-stat-val-new">
+              <AnimatedNumber value={daysRemaining} />
+            </span>
+            <span className="ud-stat-lbl-new">Days Remaining</span>
           </div>
-          <div className="c100-stat-card" style={{ "--accent": "#8b5cf6" }}>
-            <div className="c100-stat-icon"><Zap size={20} /></div>
-            <div className="c100-stat-text-block">
-              <span className="c100-stat-val"><AnimatedNumber value={xp} /> XP</span>
-              <span className="c100-stat-lbl">XP Points</span>
-              <span className="c100-stat-sub">Next: 55 XP</span>
-            </div>
+        </div>
+
+        {/* XP Points */}
+        <div className="ud-stat-card-new">
+          <div className="ud-stat-icon-wrapper" style={{ backgroundColor: '#F5F3FF', color: '#8B5CF6' }}>
+            <Zap size={20} />
           </div>
-          <div className="c100-stat-card" style={{ "--accent": "#3b82f6" }}>
-            <div className="c100-stat-icon"><BarChart3 size={20} /></div>
-            <div className="c100-stat-text-block">
-              <span className="c100-stat-val"><AnimatedNumber value={completedCount} /></span>
-              <span className="c100-stat-lbl">Problems Solved</span>
-              <span className="c100-stat-sub">This Journey</span>
-            </div>
+          <div className="ud-stat-info">
+            <span className="ud-stat-val-new">
+              <AnimatedNumber value={xp} /> XP
+            </span>
+            <span className="ud-stat-lbl-new">XP Points</span>
           </div>
-          <div className="c100-stat-card" style={{ "--accent": "#f59e0b" }}>
-            <div className="c100-stat-icon"><Crown size={20} /></div>
-            <div className="c100-stat-text-block">
-              <span className="c100-stat-val">{displayRank}</span>
-              <span className="c100-stat-lbl">Global Rank</span>
-              <span className="c100-stat-sub">Keep climbing</span>
-            </div>
+        </div>
+
+        {/* Problems Solved */}
+        <div className="ud-stat-card-new">
+          <div className="ud-stat-icon-wrapper" style={{ backgroundColor: '#F0F5FF', color: '#3B82F6' }}>
+            <BarChart3 size={20} />
+          </div>
+          <div className="ud-stat-info">
+            <span className="ud-stat-val-new">
+              <AnimatedNumber value={completedCount} />
+            </span>
+            <span className="ud-stat-lbl-new">Problems Solved</span>
+          </div>
+        </div>
+
+        {/* Global Rank */}
+        <div className="ud-stat-card-new">
+          <div className="ud-stat-icon-wrapper" style={{ backgroundColor: '#FFF7ED', color: '#F97316' }}>
+            <Crown size={20} />
+          </div>
+          <div className="ud-stat-info">
+            <span className="ud-stat-val-new">{displayRank}</span>
+            <span className="ud-stat-lbl-new">Global Rank</span>
           </div>
         </div>
       </section>
@@ -765,8 +770,8 @@ const Challenge100Days = () => {
           </div>
           <div className="leaderboard-list">
             {leaderboard.slice(0, 5).map((u, idx) => {
-              const isCurrentUser = u.isCurrentUser || 
-                (u._id && user._id && String(u._id) === String(user._id)) || 
+              const isCurrentUser = u.isCurrentUser ||
+                (u._id && user._id && String(u._id) === String(user._id)) ||
                 (user?.fullName && u.fullName === user.fullName && Math.abs((u.points || 0) - xp) < 5);
               const rank = u.rank || idx + 1;
               let rankElem = <span className="lb-rank">{rank}</span>;
@@ -798,8 +803,8 @@ const Challenge100Days = () => {
 
             {/* 6th row: shows current user highlighted with real rank if not in top 5, or 6th person if user is in top 5 */}
             {(() => {
-              const userInTop5 = leaderboard.slice(0, 5).some(u => 
-                u.isCurrentUser || (u._id && user._id && String(u._id) === String(user._id)) || 
+              const userInTop5 = leaderboard.slice(0, 5).some(u =>
+                u.isCurrentUser || (u._id && user._id && String(u._id) === String(user._id)) ||
                 (user?.fullName && u.fullName === user.fullName && Math.abs((u.points || 0) - xp) < 5)
               );
 

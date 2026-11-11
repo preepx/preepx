@@ -32,7 +32,7 @@ function Footer({ onRecruiterClick }) {
           {/* Brand Column */}
           <div className="footer-brand-col">
             <Link to="/" className="footer-logo-link">
-              <img src="/preepx_logo.png" alt="PreepX" className="footer-brand-logo" />
+              <img src="/landing/footer.svg" alt="PreepX" className="footer-brand-logo" />
             </Link>
             <p className="footer-brand-desc">
               The intelligent AI hiring & preparation ecosystem. Empowering candidates to prove their skills while enabling modern recruiters to discover and hire top talent.

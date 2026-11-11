@@ -3,6 +3,7 @@
    ========================================================= */
 
 @media (min-width: 1025px) {
+
     .jl-root.collapsed .jl-sidebar,
     .jl-root.collapsed .sidebar {
         width: 68px;
@@ -342,7 +343,7 @@
         grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
         gap: 6px !important;
     }
-    
+
     .jl-mega-menu::before {
         display: none;
     }
@@ -352,25 +353,25 @@
         white-space: normal;
         word-break: break-word;
     }
-    
+
     .jl-mega-section a {
         font-size: 11px !important;
         white-space: normal;
         word-break: break-word;
         line-height: 1.3;
     }
-    
+
     .jl-mega-promo {
         font-size: 10px !important;
         white-space: normal;
         word-break: break-word;
     }
-    
+
     .jl-mega-col {
         gap: 14px !important;
         padding: 0 4px !important;
     }
-    
+
     .jl-mega-section {
         gap: 8px !important;
     }

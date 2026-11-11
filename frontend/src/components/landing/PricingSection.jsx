@@ -217,8 +217,9 @@ function PricingSection({ onRecruiterClick }) {
         </div>
 
         {/* Mobile View Toggle */}
-        <div className="flex sm:hidden items-center justify-between p-1 bg-slate-200/70 rounded-full border border-slate-300/80 mb-6 shadow-inner w-full max-w-[320px]">
+        <div style={{ marginTop: "3px" }} className="flex sm:hidden items-center justify-between p-1 bg-slate-200/70 rounded-full border border-slate-300/80 mb-6 shadow-inner w-[90vw] max-w-[320px]">
           <button
+            style={{ paddingTop: "3px", paddingBottom: "3px" }}
             type="button"
             onClick={() => setActiveTab("all")}
             className={`flex-1 py-1.5 px-2 rounded-full text-[12px] font-bold transition-all text-center ${activeTab === "all"
@@ -229,6 +230,7 @@ function PricingSection({ onRecruiterClick }) {
             All Plans
           </button>
           <button
+            style={{ paddingTop: "3px", paddingBottom: "3px" }}
             type="button"
             onClick={() => setActiveTab("candidate")}
             className={`flex-1 py-1.5 px-2 rounded-full text-[12px] font-bold transition-all text-center flex items-center justify-center gap-1 ${activeTab === "candidate"
@@ -239,6 +241,7 @@ function PricingSection({ onRecruiterClick }) {
             Candidate <span className={`text-[10px] ${activeTab === "candidate" ? "text-blue-100" : "text-slate-400"}`}>(2)</span>
           </button>
           <button
+            style={{ paddingTop: "3px", paddingBottom: "3px" }}
             type="button"
             onClick={() => setActiveTab("recruiter")}
             className={`flex-1 py-1.5 px-2 rounded-full text-[12px] font-bold transition-all text-center flex items-center justify-center gap-1 ${activeTab === "recruiter"
@@ -261,7 +264,7 @@ function PricingSection({ onRecruiterClick }) {
               }`}
           >
             {/* Candidate Title */}
-            <div className="flex justify-start w-full max-w-[340px] min-[480px]:max-w-[460px]">
+            <div className="flex justify-start w-[90vw] max-w-[340px] min-[480px]:max-w-[460px]">
               <div className="flex items-center gap-3">
                 <img src="/landing/condinateplan.svg" alt="Candidate Plan Icon" className="w-6 h-6 shrink-0" />
                 <div>
@@ -361,7 +364,7 @@ function PricingSection({ onRecruiterClick }) {
               }`}
           >
             {/* Recruiter Title */}
-            <div className="flex justify-start w-full max-w-[320px] sm:max-w-[465px] min-[900px]:max-w-[700px] lg:max-w-[700px] xl:max-w-none">
+            <div className="flex justify-start max-w-[320px] sm:max-w-[465px] min-[900px]:max-w-[700px] lg:max-w-[700px] xl:max-w-[700px] w-[90vw]">
               <div className="flex items-center gap-3">
                 <img src="/landing/recuirterplan.svg" alt="Recruiter Plan Icon" className="w-6 h-6 shrink-0" />
                 <div>

@@ -28,6 +28,7 @@ const ApplyJobsDashboard = lazy(() => import("@/features/apply-jobs/pages/ApplyJ
 const JobBoard = lazy(() => import("@/features/apply-jobs/pages/JobBoard"));
 const JobsMyApplications = lazy(() => import("@/features/apply-jobs/pages/JobsMyApplications"));
 const JobsAssessments = lazy(() => import("@/features/apply-jobs/pages/JobsAssessments"));
+const JobsAiInterviews = lazy(() => import("@/features/apply-jobs/pages/JobsAiInterviews"));
 const SavedJobs = lazy(() => import("@/features/apply-jobs/pages/SavedJobs"));
 const MyAssessments = lazy(() => import("@/pages/MyAssessments"));
 const TakeAssessment = lazy(() => import("@/pages/TakeAssessment"));
@@ -249,6 +250,14 @@ export const candidateRoutes = [
     element: (
       <ProtectedRoute allowedRoles={candidateRoles}>
         <JobsAssessments />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/apply-jobs/ai-interviews",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <JobsAiInterviews />
       </ProtectedRoute>
     ),
   },
