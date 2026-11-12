@@ -501,6 +501,70 @@ body.notification-modal-open .chatbot-overlay {
   border-color: #1e40af;
 }
 
+/* --- Contact Us Bar (Before Sending) --- */
+.chatbot-contact-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.chatbot-contact-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.chatbot-contact-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  display: inline-block;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+}
+
+.chatbot-contact-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4f46e5;
+  background: #ffffff;
+  border: 1px solid #e0e7ff;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.chatbot-contact-pill:hover {
+  background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 2px 8px rgba(61, 94, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.chatbot-bubble a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.chatbot-bubble a:hover {
+  color: #3730a3;
+}
+
 /* --- Input Row --- */
 .chatbot-input-row {
   display: flex;
@@ -644,5 +708,16 @@ body.notification-modal-open .chatbot-overlay {
 
   .chatbot-chips::-webkit-scrollbar {
     display: none;
+  }
+
+  .chatbot-contact-bar {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .chatbot-contact-pill {
+    font-size: 11px;
+    padding: 3px 8px;
+    gap: 4px;
   }
 }
