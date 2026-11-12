@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {
   X, Send, Bot, RefreshCw, Sparkles,
   Mic, Code2, FileText, Target, BookOpen, Building2, Trophy, IndianRupee,
-  ClipboardList, BarChart2, Zap, Phone, Briefcase
+  ClipboardList, BarChart2, Zap, Phone, Briefcase, Mail
 } from "lucide-react";
 import "@/styles/landing/ChatBot.css";
 
@@ -23,6 +23,7 @@ const CANDIDATE_CHIPS = [
   { label: "Company Prep", icon: <Building2 size={14} /> },
   { label: "Leaderboard", icon: <Trophy size={14} /> },
   { label: "Pricing", icon: <IndianRupee size={14} /> },
+  { label: "Contact Us", icon: <Mail size={14} /> },
 ];
 
 const RECRUITER_CHIPS = [
@@ -35,6 +36,7 @@ const RECRUITER_CHIPS = [
   { label: "Hiring Pipeline", icon: <BarChart2 size={14} /> },
   { label: "Recruiter Pricing", icon: <IndianRupee size={14} /> },
   { label: "Fast-Track Hiring", icon: <Zap size={14} /> },
+  { label: "Contact Us", icon: <Mail size={14} /> },
   { label: "Contact Sales", icon: <Phone size={14} /> },
 ];
 
@@ -93,6 +95,8 @@ const KB = {
   howToStart: `🚀 **How to Get Started with PreepX?**\n\n**Step 1:** Register\n• Go to /auth\n• Sign up using Email or Google\n• Free account is activated instantly\n\n**Step 2:** Explore Free Features\n• BTech Notes — available immediately\n• Dashboard — progress tracking\n• Basic features — no payment needed\n\n**Step 3:** Start Practicing\n• Mock Interview → /interview\n• Coding Hub → /100-days-challenge\n• Objective Exam → /objective-exam\n\n**Step 4:** Upgrade for Unlimited Access\n• 7 Days = ₹79\n• 1 Month = ₹299 (recommended!)\n\n**Step 5:** Get Hired!\n• Rank up on the Leaderboard\n• Earn certificates\n• Get discovered by recruiters 🎯`,
 
   analytics: `📊 **Performance Analytics**\n\nTrack your progress intelligently!\n\n**Available on the Dashboard:**\n• Interview performance trends\n• Subject-wise strength analysis\n• Coding problem solving stats\n• Daily/Weekly/Monthly progress\n• XP earning history\n• Streak tracking\n\n**Interview Analytics:**\n• Technical score breakdown\n• Communication score\n• Confidence metrics\n• Improvement areas highlighted\n• Comparison with top performers\n\n**Coding Analytics:**\n• Problems solved count\n• Topic-wise mastery\n• Time complexity awareness\n• Contest rankings\n\n➡️ **View Analytics:** /analytics`,
+
+  contactUs: `📞 **Contact PreepX Support Team**\n\nNeed help, have feedback, or want to report an issue? We're here for you!\n\n📧 **Official Support Email:**\n[support@preepx.com](mailto:support@preepx.com)\n\n**We assist with:**\n• 🎓 **Candidates:** Mock interviews, assessments, resume ATS score, notes, certificates & billing\n• 🏢 **Recruiters:** Job postings, candidate management, pipeline, custom assessments & enterprise plans\n• 🛠️ **Technical Support:** Bug reports, login/account issues, payment queries\n\n⏱️ **Response Time:** Typically within 24 hours\n\nFeel free to write to us directly at **support@preepx.com**! 🤝`,
 
   default: `🤔 I didn't quite catch that, but here is how I can help you:\n\n🎤 **Mock Interview** — AI-powered practice\n💻 **Coding Hub** — 100 Days DSA challenge\n📄 **ATS Score** — Resume optimization\n📚 **BTech Notes** — Free study material\n💰 **Pricing** — ₹79 / ₹299 plans\n🏢 **Company Prep** — Google, Amazon, etc.\n🎯 **Objective Exam** — MCQ with certificates\n🏆 **Leaderboard** — XP & rewards\n💳 **Wallet** — Coins & subscriptions\n🔒 **Security** — Privacy policy\n🚀 **How to Start** — Getting started guide\n\nAsk me about any specific topic, and I'll provide full details!`,
 };
@@ -172,8 +176,14 @@ function getResponse(input, mode) {
   // API/Integrations
   if (q.includes("api") || q.includes("integrat") || q.includes("sso") || q.includes("webhook") || q.includes("connect") || q.includes("enterprise")) return KB.recruiterAPI;
 
-  // Contact Sales
-  if (q.includes("contact") || q.includes("sales") || q.includes("demo") || q.includes("email") || q.includes("support") || q.includes("talk")) return KB.contactSales;
+  // Contact Us / Support
+  if (q.includes("contact") || q.includes("support") || q.includes("help") || q.includes("reach") || q.includes("mail")) {
+    if (mode === "recruiter" && (q.includes("sales") || q.includes("demo") || q.includes("enterprise"))) {
+      return KB.contactSales;
+    }
+    return KB.contactUs;
+  }
+  if (q.includes("sales") || q.includes("demo") || q.includes("talk")) return KB.contactSales;
 
   // Security/Privacy
   if (q.includes("secur") || q.includes("privac") || q.includes("safe") || q.includes("data") || q.includes("camera") || q.includes("audio")) return KB.security;
@@ -192,6 +202,7 @@ function getResponse(input, mode) {
 
 function parseMarkdown(text) {
   return text
+    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
     .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
     .replace(/\*(.*?)\*/g, "<em>$1</em>")
     .replace(/~~(.*?)~~/g, "<s>$1</s>")
@@ -424,6 +435,22 @@ export default function ChatBot() {
             })()}
           </div>
         )}
+
+        {/* Contact Us Bar (Before Sending) */}
+        <div className="chatbot-contact-bar">
+          <div className="chatbot-contact-left">
+            <span className="chatbot-contact-dot" />
+            <span className="chatbot-contact-text">Need help? Contact us:</span>
+          </div>
+          <a
+            href="mailto:support@preepx.com"
+            className="chatbot-contact-pill"
+            title="Email PreepX Support directly"
+          >
+            <Mail size={13} />
+            <span>support@preepx.com</span>
+          </a>
+        </div>
 
         {/* Input */}
         <div className="chatbot-input-row">

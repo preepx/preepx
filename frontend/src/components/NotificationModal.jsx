@@ -5,31 +5,140 @@ import API from "@/utils/api";
 export const DUMMY_NOTIFICATIONS = [];
 
 export const getNotifIcon = (notif) => {
-  if (!notif) return '🔔';
-  if (notif.icon && notif.icon.length <= 4) return notif.icon;
-  const t = ((notif.type || '') + ' ' + (notif.title || '')).toLowerCase();
-  if (t.includes('interview') || t.includes('voice')) return '🎙️';
-  if (t.includes('resume') || t.includes('ats')) return '📄';
-  if (t.includes('code') || t.includes('challenge')) return '💻';
-  if (t.includes('exam') || t.includes('assessment')) return '📝';
-  if (t.includes('reward') || t.includes('coin') || t.includes('xp') || t.includes('wallet') || t.includes('balance') || t.includes('cashback')) return '💰';
-  if (t.includes('job') || t.includes('recruiter') || t.includes('application') || t.includes('shortlist')) return '🎉';
-  if (t.includes('badge') || t.includes('streak') || t.includes('milestone')) return '🏆';
-  return '🔔';
+  if (!notif) return '/PreepX/fluent_bot-sparkle-28-regular.png';
+
+  // If already an image path or URL
+  if (typeof notif.icon === 'string' && (notif.icon.startsWith('/') || notif.icon.startsWith('http'))) {
+    return notif.icon;
+  }
+
+  const rawIcon = notif.icon || '';
+  const type = (notif.type || '').toLowerCase();
+  const title = (notif.title || '').toLowerCase();
+  const message = (notif.message || '').toLowerCase();
+  const t = `${type} ${title} ${message}`;
+
+  // 1. Gift / Daily Streak / Rewards / XP (matches "🎁" emoji)
+  if (
+    rawIcon.includes('🎁') ||
+    t.includes('daily') ||
+    t.includes('streak') ||
+    t.includes('reward') ||
+    t.includes('xp_earned') ||
+    t.includes('gift') ||
+    t.includes('bonus') ||
+    t.includes('xp claimed') ||
+    t.includes('login reward')
+  ) {
+    return '/PreepX/lucide_gift.png';
+  }
+
+  // 2. AI Interview / Interview Invitation / Voice / Bot (matches "🎯" & "🎙️" emoji)
+  if (
+    rawIcon.includes('🎯') ||
+    rawIcon.includes('🎙️') ||
+    t.includes('ai interview') ||
+    t.includes('mock interview') ||
+    type === 'interview' ||
+    t.includes('interview invitation') ||
+    t.includes('interview scheduled') ||
+    t.includes('interview completed')
+  ) {
+    if (t.includes('voice') || t.includes('audio') || t.includes('mic')) {
+      return '/PreepX/bi_mic-fill.png';
+    }
+    return '/PreepX/fluent_bot-sparkle-28-regular.png';
+  }
+
+  // 3. Job Assessment / Skill Assessment / Clipboard (matches "📋" & "📝" emoji)
+  if (
+    rawIcon.includes('📋') ||
+    rawIcon.includes('📝') ||
+    type === 'assessment' ||
+    t.includes('assessment')
+  ) {
+    return '/PreepX/flowbite_file-lines-outline.png';
+  }
+
+  // 4. Jobs / Recruiter / Applications / Shortlisted
+  if (
+    type === 'job' ||
+    type === 'job_shortlisted' ||
+    type === 'job_rejected' ||
+    t.includes('shortlist') ||
+    t.includes('application') ||
+    t.includes('recruiter') ||
+    t.includes('job') ||
+    t.includes('hiring')
+  ) {
+    return '/PreepX/ep_suitcase-line.png';
+  }
+
+  // 5. Coding Hub / Coding Challenge (matches "💻" emoji)
+  if (
+    rawIcon.includes('💻') ||
+    t.includes('coding') ||
+    t.includes('challenge') ||
+    t.includes('code') ||
+    t.includes('programming')
+  ) {
+    return '/PreepX/hugeicons_message-programming.png';
+  }
+
+  // 6. Objective Exam / Test
+  if (t.includes('objective exam') || t.includes('exam')) {
+    return '/PreepX/fluent_notepad-edit-20-filled.png';
+  }
+
+  // 7. ATS Resume Score / Scanner (matches "📄" emoji)
+  if (
+    rawIcon.includes('📄') ||
+    t.includes('resume') ||
+    t.includes('ats') ||
+    t.includes('scan')
+  ) {
+    return '/PreepX/boxicons_scan.png';
+  }
+
+  // 8. Certificate
+  if (t.includes('certificate')) {
+    return '/PreepX/fluent_certificate-24-filled.png';
+  }
+
+  // 9. Trophy / Badges / Milestones / Rank (matches "🏆" & "⭐" emoji)
+  if (
+    rawIcon.includes('🏆') ||
+    rawIcon.includes('⭐') ||
+    t.includes('trophy') ||
+    t.includes('badge') ||
+    t.includes('milestone') ||
+    t.includes('leaderboard') ||
+    t.includes('winner')
+  ) {
+    return '/PreepX/bi_trophy.png';
+  }
+
+  // 10. Wallet / Balance / Payment / Coins / Cash (matches "💰" & "🪙" emoji)
+  if (
+    rawIcon.includes('💰') ||
+    rawIcon.includes('🪙') ||
+    type === 'wallet_credit' ||
+    t.includes('wallet') ||
+    t.includes('balance') ||
+    t.includes('recharge') ||
+    t.includes('rupee') ||
+    t.includes('cashback') ||
+    t.includes('coin')
+  ) {
+    return '/PreepX/famicons_wallet-outline.png';
+  }
+
+  // Fallback default icon
+  return '/PreepX/fluent_bot-sparkle-28-regular.png';
 };
 
-export const getNotifIconBg = (notif) => {
-  if (!notif) return '#EFF6FF';
-  if (notif.iconBg) return notif.iconBg;
-  const t = ((notif.type || '') + ' ' + (notif.title || '')).toLowerCase();
-  if (t.includes('interview') || t.includes('voice')) return '#EAF2FE';
-  if (t.includes('resume') || t.includes('ats')) return '#F0FDF4';
-  if (t.includes('code') || t.includes('challenge')) return '#FEF2F2';
-  if (t.includes('exam') || t.includes('assessment')) return '#FAF5FF';
-  if (t.includes('reward') || t.includes('coin') || t.includes('xp') || t.includes('wallet') || t.includes('balance') || t.includes('cashback')) return '#FEF4D6';
-  if (t.includes('job') || t.includes('recruiter') || t.includes('application') || t.includes('shortlist')) return '#ECFDF5';
-  if (t.includes('badge') || t.includes('streak') || t.includes('milestone')) return '#FFF7ED';
-  return '#EFF6FF';
+export const getNotifIconBg = () => {
+  return '#ffffff';
 };
 
 const getTimeDisplay = (notif) => {
@@ -193,16 +302,33 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
           width: '38px',
           height: '38px',
           borderRadius: '50%',
-          backgroundColor: getNotifIconBg(notif),
+          backgroundColor: '#ffffff',
+          border: '1px solid #EDF2F7',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: '18px',
           flexShrink: 0,
           boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
         }}
       >
-        {getNotifIcon(notif)}
+        {(() => {
+          const icon = getNotifIcon(notif);
+          if (typeof icon === 'string' && (icon.startsWith('/') || icon.startsWith('http'))) {
+            return (
+              <img
+                src={icon}
+                alt=""
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  objectFit: 'contain',
+                  display: 'block',
+                }}
+              />
+            );
+          }
+          return <span style={{ fontSize: '18px', lineHeight: 1 }}>{icon}</span>;
+        })()}
       </div>
 
       {/* Middle content & Time */}
