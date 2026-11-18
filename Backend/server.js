@@ -180,6 +180,7 @@ app.use("/api/subscription", require("./src/modules/subscription/subscription.ro
 app.use("/api/btec-notes", require("./src/modules/btec-notes/btecNote.routes"));
 app.use("/api/coding", require("./src/modules/coding/coding.routes"));
 app.use("/api/tts", require("./src/routes/ttsRoutes"));
+app.use("/api/feedback", require("./src/modules/feedback/feedback.routes"));
 
 const setupSwagger = require("./config/swagger");
 setupSwagger(app);

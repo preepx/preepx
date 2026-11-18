@@ -663,7 +663,7 @@
   display: none;
 }
 
-.desktop-only {
+.sidebar-toggle.desktop-only {
   display: flex;
 }
 

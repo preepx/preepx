@@ -79,7 +79,7 @@ export default function RecruiterBilling() {
           email: user.email || "",
           contact: user.phone || "",
         },
-        theme: { color: "#22c55e" },
+        theme: { color: "#2563EB" },
       };
 
       const rzp = new window.Razorpay(options);
@@ -116,7 +116,7 @@ export default function RecruiterBilling() {
       {loading ? <Loader /> : (
         <div className="rp-wrap">
           <section className="rp-hero">
-            <div className="rp-hero-icon"><Briefcase size={22} /></div>
+            <div className="rp-hero-icon"><Briefcase size={22} color="#ffffff" strokeWidth={2.2} /></div>
             <div>
               <h1>Recruiter Plan</h1>
               <p>Find, evaluate and hire the right talent faster with AI-powered insights.</p>

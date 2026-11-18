@@ -641,6 +641,13 @@
 
 .quick-start-panel {
   padding: 24px;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.quick-start-panel.desktop-only {
+  display: flex !important;
+  flex-direction: column !important;
 }
 
 .quick-start-panel h2 {

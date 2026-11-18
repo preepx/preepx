@@ -3,8 +3,10 @@ import ReactDOM from "react-dom";
 import {
   X, Send, Bot, RefreshCw, Sparkles,
   Mic, Code2, FileText, Target, BookOpen, Building2, Trophy, IndianRupee,
-  ClipboardList, BarChart2, Zap, Phone, Briefcase, Mail
+  ClipboardList, BarChart2, Zap, Phone, Briefcase, Mail, AlertTriangle, Loader2
 } from "lucide-react";
+import API from "@/utils/api";
+import notify from "@/utils/notify";
 import "@/styles/landing/ChatBot.css";
 
 const BOT_NAME = "PreepX AI Concierge";
@@ -82,13 +84,13 @@ const KB = {
 
   recruiterPipeline: `📊 **Hiring Pipeline Management**\n\nAll candidates in one place — organized and trackable!\n\n**Pipeline Stages:**\n• 📥 Applied → 🔍 Screening → 💻 Assessment → 🎤 Interview → ✅ Shortlisted → 🤝 Hired\n\n**Features:**\n• Drag-and-drop candidate management\n• Stage-wise candidate counts\n• Bulk actions (move/reject/shortlist)\n• Automated email notifications to candidates\n• Interview scheduling integration\n• Notes & feedback per candidate\n\n**Collaboration:**\n• Team member access & roles\n• Shared evaluation notes\n• Approval workflows\n• Activity logs & audit trail\n\n**Analytics:**\n• Funnel conversion rates\n• Average time-per-stage\n• Source tracking\n• Offer acceptance rates\n\n➡️ **Setup Pipeline:** /auth?role=recruiter`,
 
-  recruiterPricing: `💰 **Recruiter Pricing Plans**\n\n━━━ **RECRUITER PLANS** ━━━\n\n🏢 **Starter — ₹1,999/month**\n*For Small Teams*\n• Up to **5 Job Posts/month**\n• AI Candidate Scoring\n• Basic Hiring Pipeline\n• Email Support\n\n⭐ **Growth — ₹3,999/month** *(Best Value)*\n*For Growing Teams*\n• Up to **20 Job Posts/month**\n• Advanced AI Insights\n• Automated Screening\n• Priority Support\n• Team collaboration tools\n\n🏗️ **Enterprise — Custom Pricing**\n*For Large Organizations*\n• Unlimited Job Posts\n• Custom API Integrations\n• Dedicated Account Manager\n• SSO & Team Access Control\n• 24/7 Priority Support\n• White-label options\n\n**All plans include:**\n• AI Candidate Scoring\n• Custom Assessments\n• Hiring Pipeline\n• Candidate Comparison\n\n📞 **Contact us:** support@preepx.com\n➡️ **Start Free Trial:** /auth?role=recruiter`,
+  recruiterPricing: `💰 **Recruiter Pricing Plans**\n\n━━━ **RECRUITER PLANS** ━━━\n\n🏢 **Starter — ₹1,999/month**\n*For Small Teams*\n• Up to **5 Job Posts/month**\n• AI Candidate Scoring\n• Basic Hiring Pipeline\n• Email Support\n\n⭐ **Growth — ₹3,999/month** *(Best Value)*\n*For Growing Teams*\n• Up to **20 Job Posts/month**\n• Advanced AI Insights\n• Automated Screening\n• Priority Support\n• Team collaboration tools\n\n🏗️ **Enterprise — Custom Pricing**\n*For Large Organizations*\n• Unlimited Job Posts\n• Custom API Integrations\n• Dedicated Account Manager\n• SSO & Team Access Control\n• 24/7 Priority Support\n• White-label options\n\n**All plans include:**\n• AI Candidate Scoring\n• Custom Assessments\n• Hiring Pipeline\n• Candidate Comparison\n\n📞 **Contact us:** contact@preepx.in\n➡️ **Start Free Trial:** /auth?role=recruiter`,
 
   recruiterFastTrack: `⚡ **Fast-Track Hiring with PreepX**\n\nTraditional hiring takes weeks — with PreepX, it takes days!\n\n**Traditional Hiring:**\n❌ Manual resume screening — days\n❌ Phone screening rounds — 1 week\n❌ Assignment evaluation — days\n❌ Final interviews — 1 week\n⏱️ **Total: 3-6 weeks**\n\n**PreepX Fast-Track:**\n✅ AI auto-screening — **minutes**\n✅ Proctored assessment — **1-2 days**\n✅ AI evaluation & ranking — **instant**\n✅ Shortlist top candidates — **same day**\n⚡ **Total: 2-5 days**\n\n**Result:**\n• 3x faster time-to-hire\n• 60% reduction in screening costs\n• Higher quality candidates\n• Zero manual evaluation bias\n\n➡️ **Start Hiring:** /auth?role=recruiter`,
 
   recruiterAPI: `🔗 **API & Integrations**\n\nIntegrate PreepX seamlessly with your existing HR stack!\n\n**Available Integrations:**\n• 📧 **Email**: Gmail, Outlook\n• 📅 **Calendar**: Google Calendar, Calendly\n• 💼 **ATS**: Greenhouse, Lever, Workday\n• 💬 **Communication**: Slack, Teams\n• 📊 **Analytics**: Custom dashboards\n\n**PreepX REST API:**\n• Candidate data export\n• Assessment results webhook\n• Job posting automation\n• Custom scoring endpoints\n• Bulk candidate management\n\n**Enterprise Features:**\n• SSO (Single Sign-On) support\n• Custom branding / white-label\n• Dedicated API rate limits\n• SLA guarantee\n• On-premise deployment option\n\n**Available in:** Enterprise Plan only\n📞 **Contact:** enterprise@preepx.com`,
 
-  contactSales: `📞 **Contact PreepX Sales Team**\n\nHave specific requirements? Let's talk!\n\n**For Recruiters:**\n📧 Email: support@preepx.com\n💼 LinkedIn: PreepX Technologies\n\n**Enterprise Enquiries:**\n📧 enterprise@preepx.com\n\n**What we can help with:**\n• Custom pricing for large teams\n• Enterprise plan demo\n• API integration support\n• Bulk candidate hiring setup\n• Partnership opportunities\n• White-label solutions\n\n**Response Time:**\n• Email: Within 24 hours\n• Enterprise: Within 4 hours\n\n➡️ **Or start directly:** /auth?role=recruiter\n\nWe will help you find the best solution! 🤝`,
+  contactSales: `📞 **Contact PreepX Sales Team**\n\nHave specific requirements? Let's talk!\n\n**For Recruiters:**\n📧 Email: contact@preepx.in\n💼 LinkedIn: PreepX Technologies\n\n**Enterprise Enquiries:**\n📧 enterprise@preepx.com\n\n**What we can help with:**\n• Custom pricing for large teams\n• Enterprise plan demo\n• API integration support\n• Bulk candidate hiring setup\n• Partnership opportunities\n• White-label solutions\n\n**Response Time:**\n• Email: Within 24 hours\n• Enterprise: Within 4 hours\n\n➡️ **Or start directly:** /auth?role=recruiter\n\nWe will help you find the best solution! 🤝`,
 
   security: `🔒 **Privacy & Security**\n\nPreepX Data Privacy Policies:\n\n• **Camera data:** Local processing for interview proctoring — **never stored or sold**\n• **Audio transcription:** Complies with Enterprise-grade data privacy standards\n• **Resume data:** Securely stored, strictly for ATS analysis\n• **HTTPS** encrypted data transmission\n• No third-party data sharing\n\nYour data is 100% safe! ✅`,
 
@@ -96,7 +98,7 @@ const KB = {
 
   analytics: `📊 **Performance Analytics**\n\nTrack your progress intelligently!\n\n**Available on the Dashboard:**\n• Interview performance trends\n• Subject-wise strength analysis\n• Coding problem solving stats\n• Daily/Weekly/Monthly progress\n• XP earning history\n• Streak tracking\n\n**Interview Analytics:**\n• Technical score breakdown\n• Communication score\n• Confidence metrics\n• Improvement areas highlighted\n• Comparison with top performers\n\n**Coding Analytics:**\n• Problems solved count\n• Topic-wise mastery\n• Time complexity awareness\n• Contest rankings\n\n➡️ **View Analytics:** /analytics`,
 
-  contactUs: `📞 **Contact PreepX Support Team**\n\nNeed help, have feedback, or want to report an issue? We're here for you!\n\n📧 **Official Support Email:**\n[support@preepx.com](mailto:support@preepx.com)\n\n**We assist with:**\n• 🎓 **Candidates:** Mock interviews, assessments, resume ATS score, notes, certificates & billing\n• 🏢 **Recruiters:** Job postings, candidate management, pipeline, custom assessments & enterprise plans\n• 🛠️ **Technical Support:** Bug reports, login/account issues, payment queries\n\n⏱️ **Response Time:** Typically within 24 hours\n\nFeel free to write to us directly at **support@preepx.com**! 🤝`,
+  contactUs: `📞 **Contact PreepX Support Team**\n\nNeed help, have feedback, or want to report an issue? We're here for you!\n\n📧 **Official Support Email:**\n[contact@preepx.in](mailto:contact@preepx.in)\n\n**We assist with:**\n• 🎓 **Candidates:** Mock interviews, assessments, resume ATS score, notes, certificates & billing\n• 🏢 **Recruiters:** Job postings, candidate management, pipeline, custom assessments & enterprise plans\n• 🛠️ **Technical Support:** Bug reports, login/account issues, payment queries\n\n⏱️ **Response Time:** Typically within 24 hours\n\nFeel free to write to us directly at **contact@preepx.in**! 🤝`,
 
   default: `🤔 I didn't quite catch that, but here is how I can help you:\n\n🎤 **Mock Interview** — AI-powered practice\n💻 **Coding Hub** — 100 Days DSA challenge\n📄 **ATS Score** — Resume optimization\n📚 **BTech Notes** — Free study material\n💰 **Pricing** — ₹79 / ₹299 plans\n🏢 **Company Prep** — Google, Amazon, etc.\n🎯 **Objective Exam** — MCQ with certificates\n🏆 **Leaderboard** — XP & rewards\n💳 **Wallet** — Coins & subscriptions\n🔒 **Security** — Privacy policy\n🚀 **How to Start** — Getting started guide\n\nAsk me about any specific topic, and I'll provide full details!`,
 };
@@ -305,6 +307,93 @@ export default function ChatBot() {
     setMessages([{ from: "bot", text: ROLE_GREETING, id: Date.now(), isRoleSelect: true }]);
   };
 
+  /* ── Support / Query Modal State & Handlers ── */
+  const [showQueryModal, setShowQueryModal] = useState(false);
+  const [queryForm, setQueryForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submittingQuery, setSubmittingQuery] = useState(false);
+  const [queryError, setQueryError] = useState("");
+
+  const handleOpenQueryModal = () => {
+    let localUser = {};
+    try {
+      localUser = JSON.parse(localStorage.getItem("user") || "{}");
+    } catch {
+      localUser = {};
+    }
+    setQueryForm({
+      name: localUser.name || localUser.fullName || "",
+      email: localUser.email || "",
+      subject: "Query for PreepX Support",
+      message: "",
+    });
+    setQueryError("");
+    setShowQueryModal(true);
+  };
+
+  const handleSendQuery = async (e) => {
+    if (e) e.preventDefault();
+    setQueryError("");
+
+    if (!queryForm.name.trim()) {
+      setQueryError("Please enter your name.");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!queryForm.email.trim() || !emailRegex.test(queryForm.email.trim())) {
+      setQueryError("Please enter a valid email address.");
+      return;
+    }
+    if (!queryForm.message.trim()) {
+      setQueryError("Please enter your query or issue.");
+      return;
+    }
+
+    setSubmittingQuery(true);
+    try {
+      const res = await API.post("/feedback", {
+        name: queryForm.name.trim(),
+        email: queryForm.email.trim(),
+        subject: queryForm.subject.trim() || "Query for PreepX Support",
+        message: queryForm.message.trim(),
+        source: "chatbot_support",
+      });
+
+      if (res.data?.success) {
+        notify.success("Query sent successfully! Our team will contact you at your email.");
+        setShowQueryModal(false);
+        const userEmail = queryForm.email.trim();
+        setQueryForm({ name: "", email: "", subject: "", message: "" });
+        // Add helpful confirmation message into the chat conversation
+        setMessages((prev) => [
+          ...prev,
+          {
+            from: "bot",
+            text: `✅ **Query Received!**\n\nYour message has been sent directly to our support team at **contact@preepx.in**.\n\nWe will review your inquiry and get back to you at **${userEmail}** shortly! 🤝`,
+            id: Date.now(),
+          },
+        ]);
+      } else {
+        const errorMsg = res.data?.message || "Failed to send query.";
+        setQueryError(errorMsg);
+        notify.error(errorMsg);
+      }
+    } catch (err) {
+      const errorMsg =
+        err.response?.data?.message ||
+        err.message ||
+        "Failed to send query. Please try again.";
+      setQueryError(errorMsg);
+      notify.error(errorMsg);
+    } finally {
+      setSubmittingQuery(false);
+    }
+  };
+
   const chatContent = (
     <>
       {/* FAB Button */}
@@ -442,14 +531,15 @@ export default function ChatBot() {
             <span className="chatbot-contact-dot" />
             <span className="chatbot-contact-text">Need help? Contact us:</span>
           </div>
-          <a
-            href="mailto:support@preepx.com"
+          <button
+            type="button"
+            onClick={handleOpenQueryModal}
             className="chatbot-contact-pill"
-            title="Email PreepX Support directly"
+            title="Have a query AI couldn't solve? Write to contact@preepx.in"
           >
             <Mail size={13} />
-            <span>support@preepx.com</span>
-          </a>
+            <span>contact@preepx.in</span>
+          </button>
         </div>
 
         {/* Input */}
@@ -474,6 +564,163 @@ export default function ChatBot() {
       </div>
 
       {open && <div className="chatbot-overlay" onClick={() => setOpen(false)} />}
+
+      {/* Support / Query Modal */}
+      {showQueryModal && (
+        <div
+          className="chatbot-modal-overlay"
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !submittingQuery) {
+              setShowQueryModal(false);
+            }
+          }}
+        >
+          <div className="chatbot-modal-card" role="dialog" aria-modal="true" aria-labelledby="chatbot-query-modal-title">
+            {/* Header */}
+            <div className="chatbot-modal-header">
+              <div className="chatbot-modal-header-content">
+                <div className="chatbot-modal-header-icon">
+                  <Mail size={18} />
+                </div>
+                <div>
+                  <h3 id="chatbot-query-modal-title" className="chatbot-modal-title">Contact PreepX Support</h3>
+                  <p className="chatbot-modal-subtitle">
+                    Have a query AI couldn't solve? Write to our team directly.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="chatbot-modal-close"
+                onClick={() => !submittingQuery && setShowQueryModal(false)}
+                disabled={submittingQuery}
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Form */}
+            <form onSubmit={handleSendQuery}>
+              <div className="chatbot-modal-body">
+                {/* Target Email Info Badge */}
+                <div className="chatbot-modal-info-pill">
+                  <span className="chatbot-modal-info-dot" />
+                  <span>Sending inquiry to: <strong>contact@preepx.in</strong></span>
+                </div>
+
+                {queryError && (
+                  <div className="chatbot-modal-error-alert">
+                    <AlertTriangle size={15} />
+                    <span>{queryError}</span>
+                  </div>
+                )}
+
+                {/* Name */}
+                <div className="chatbot-modal-form-group">
+                  <label className="chatbot-modal-label">
+                    Your Name <span className="chatbot-modal-label-req">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="chatbot-modal-input"
+                    value={queryForm.name}
+                    onChange={(e) =>
+                      setQueryForm((prev) => ({ ...prev, name: e.target.value }))
+                    }
+                    placeholder="Enter your name"
+                    required
+                    disabled={submittingQuery}
+                  />
+                </div>
+
+                {/* Email */}
+                <div className="chatbot-modal-form-group">
+                  <label className="chatbot-modal-label">
+                    Your Email Address <span className="chatbot-modal-label-req">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    className="chatbot-modal-input"
+                    value={queryForm.email}
+                    onChange={(e) =>
+                      setQueryForm((prev) => ({ ...prev, email: e.target.value }))
+                    }
+                    placeholder="name@example.com"
+                    required
+                    disabled={submittingQuery}
+                  />
+                </div>
+
+                {/* Subject */}
+                <div className="chatbot-modal-form-group">
+                  <label className="chatbot-modal-label">
+                    Subject <span className="chatbot-modal-label-req">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="chatbot-modal-input"
+                    value={queryForm.subject}
+                    onChange={(e) =>
+                      setQueryForm((prev) => ({ ...prev, subject: e.target.value }))
+                    }
+                    placeholder="e.g. Account issue, assessment doubt, pricing"
+                    required
+                    disabled={submittingQuery}
+                  />
+                </div>
+
+                {/* Query / Message */}
+                <div className="chatbot-modal-form-group">
+                  <label className="chatbot-modal-label">
+                    Your Query / Message <span className="chatbot-modal-label-req">*</span>
+                  </label>
+                  <textarea
+                    rows={4}
+                    className="chatbot-modal-textarea"
+                    value={queryForm.message}
+                    onChange={(e) =>
+                      setQueryForm((prev) => ({ ...prev, message: e.target.value }))
+                    }
+                    placeholder="Tell us what you need help with or what AI couldn't resolve..."
+                    required
+                    disabled={submittingQuery}
+                  />
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="chatbot-modal-footer">
+                <button
+                  type="button"
+                  className="chatbot-modal-btn-cancel"
+                  onClick={() => setShowQueryModal(false)}
+                  disabled={submittingQuery}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="chatbot-modal-btn-submit"
+                  disabled={submittingQuery}
+                >
+                  {submittingQuery ? (
+                    <>
+                      <Loader2 size={14} className="animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send size={14} />
+                      <span>Send Query</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 

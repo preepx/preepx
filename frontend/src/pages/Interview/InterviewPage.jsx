@@ -359,7 +359,7 @@ const InterviewPage = () => {
 
         <div className="side-panels">
 
-          <div className="panel quick-start-panel desktop-only">
+          <div className="panel quick-start-panel desktop-only" style={{ display: 'flex', flexDirection: 'column' }}>
             <h2>Quick Actions</h2>
             <button className="action-btn primary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => setShowModal(true)}>
               <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><img src="/sidebar/mockintervieww.svg" alt="New" style={{ width: 18, height: 18, filter: 'brightness(0) invert(1)' }} /></span> New Interview

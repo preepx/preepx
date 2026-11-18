@@ -22,6 +22,11 @@ function Footer({ onRecruiterClick }) {
     }
   };
 
+  const rawWhatsapp = (import.meta.env.VITE_WHATSAPP_NUMBER || "").toString().trim();
+  const cleanWhatsapp = rawWhatsapp.replace(/\D/g, "");
+  const whatsappNumber = cleanWhatsapp.length === 10 ? `91${cleanWhatsapp}` : cleanWhatsapp;
+  const whatsappUrl = whatsappNumber ? `https://wa.me/${whatsappNumber}` : "#";
+
   return (
     <footer className="prepx-landing-footer">
       <div className="footer-container">
@@ -50,8 +55,11 @@ function Footer({ onRecruiterClick }) {
               {/* <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="GitHub">
                 <img src="/socialicon/github.png" alt="" className="footer-social-image" />
               </a> */}
-              <a href="mailto:support@preepx.com" className="footer-social-icon" aria-label="Email">
+              <a href="mailto:contact@preepx.in" className="footer-social-icon" aria-label="Email">
                 <img src="/socialicon/gmail.png" alt="" className="footer-social-image" />
+              </a>
+              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="footer-social-icon" aria-label="WhatsApp">
+                <img src="/socialicon/whatsapp.png" alt="" className="footer-social-image" />
               </a>
             </div>
           </div>

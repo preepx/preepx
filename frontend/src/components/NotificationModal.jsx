@@ -375,7 +375,7 @@ const NotificationItem = ({ notif, onRead, onDelete }) => {
 };
 
 // Polished Skeleton Loader for initial state while notifications arrive
-const NotificationSkeleton = () => (
+const NotificationSkeleton = ({ titleWidth = '145px', descWidth = '80%', timeWidth = '50px' }) => (
   <div
     style={{
       display: 'flex',
@@ -389,27 +389,42 @@ const NotificationSkeleton = () => (
     }}
   >
     <div style={{ width: '6px', height: '38px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-      <div style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#E2E8F0', animation: 'skeletonPulse 1.4s ease-in-out infinite' }} />
+      <div
+        className="notif-skeleton-shimmer"
+        style={{ width: '6px', height: '6px', borderRadius: '50%' }}
+      />
     </div>
 
     <div
+      className="notif-skeleton-shimmer"
       style={{
         width: '38px',
         height: '38px',
         borderRadius: '50%',
-        backgroundColor: '#F1F5F9',
         flexShrink: 0,
-        animation: 'skeletonPulse 1.4s ease-in-out infinite',
+        border: '1px solid #EDF2F7',
       }}
     />
 
-    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, paddingTop: '3px', gap: '6px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <div style={{ width: '130px', height: '12px', borderRadius: '4px', backgroundColor: '#F1F5F9', animation: 'skeletonPulse 1.4s ease-in-out infinite' }} />
-        <div style={{ width: '50px', height: '10px', borderRadius: '4px', backgroundColor: '#F1F5F9', animation: 'skeletonPulse 1.4s ease-in-out infinite' }} />
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, minWidth: 0, paddingTop: '3px', gap: '8px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px' }}>
+        <div
+          className="notif-skeleton-shimmer"
+          style={{ width: titleWidth, height: '13px', borderRadius: '4px' }}
+        />
+        <div
+          className="notif-skeleton-shimmer"
+          style={{ width: timeWidth, height: '10px', borderRadius: '4px' }}
+        />
       </div>
-      <div style={{ width: '80%', height: '11px', borderRadius: '4px', backgroundColor: '#F1F5F9', animation: 'skeletonPulse 1.4s ease-in-out infinite' }} />
-      <div style={{ width: '40%', height: '10px', borderRadius: '4px', backgroundColor: '#F1F5F9', animation: 'skeletonPulse 1.4s ease-in-out infinite' }} />
+      <div
+        className="notif-skeleton-shimmer"
+        style={{ width: descWidth, height: '11px', borderRadius: '4px' }}
+      />
+      <div
+        className="notif-skeleton-shimmer"
+        style={{ width: '38%', height: '10px', borderRadius: '4px' }}
+      />
     </div>
   </div>
 );
@@ -694,9 +709,14 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
               0% { transform: rotate(0deg); }
               100% { transform: rotate(360deg); }
             }
-            @keyframes skeletonPulse {
-              0%, 100% { opacity: 1; }
-              50% { opacity: 0.38; }
+            .notif-skeleton-shimmer {
+              background: linear-gradient(90deg, #f1f5f9 0%, #e2e8f0 50%, #f1f5f9 100%);
+              background-size: 200% 100%;
+              animation: notifShimmer 1.5s ease-in-out infinite;
+            }
+            @keyframes notifShimmer {
+              0% { background-position: 200% 0; }
+              100% { background-position: -200% 0; }
             }
           `}
         </style>
@@ -719,36 +739,12 @@ const NotificationModal = ({ isOpen, onClose, notifs = [], setNotifs }) => {
           {initialLoading ? (
             /* Initial Loading State: Skeletons shown until notifications arrive */
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  padding: '12px 28px',
-                  backgroundColor: '#F8FAFC',
-                  borderBottom: '1px solid #F1F5F9',
-                }}
-              >
-                <div
-                  style={{
-                    width: '14px',
-                    height: '14px',
-                    border: '2px solid #CBD5E1',
-                    borderTopColor: '#2563EB',
-                    borderRadius: '50%',
-                    animation: 'notifSpinner 0.65s linear infinite',
-                  }}
-                />
-                <span style={{ fontSize: '12.5px', color: '#64748B', fontWeight: 500 }}>
-                  Fetching your notifications...
-                </span>
-              </div>
-              <NotificationSkeleton />
-              <NotificationSkeleton />
-              <NotificationSkeleton />
-              <NotificationSkeleton />
-              <NotificationSkeleton />
+              <NotificationSkeleton titleWidth="145px" descWidth="85%" timeWidth="54px" />
+              <NotificationSkeleton titleWidth="180px" descWidth="65%" timeWidth="48px" />
+              <NotificationSkeleton titleWidth="130px" descWidth="90%" timeWidth="58px" />
+              <NotificationSkeleton titleWidth="165px" descWidth="75%" timeWidth="50px" />
+              <NotificationSkeleton titleWidth="140px" descWidth="70%" timeWidth="52px" />
+              <NotificationSkeleton titleWidth="175px" descWidth="80%" timeWidth="46px" />
             </div>
           ) : items.length > 0 ? (
             <div style={{ display: 'flex', flexDirection: 'column' }}>

@@ -33,8 +33,8 @@ export default function FAQ() {
         </p>
       </header>
 
-      <div className="guide-container" style={{ maxWidth: "860px", paddingBottom: "80px" }}>
-        <main className="guide-content">
+      <div className="guide-container" style={{ maxWidth: "860px", width: "100%", margin: "-24px auto 0", paddingBottom: "80px", boxSizing: "border-box" }}>
+        <main className="guide-content" style={{ width: "100%", boxSizing: "border-box" }}>
 
           {/* Category Tabs */}
           <div style={{
@@ -80,7 +80,7 @@ export default function FAQ() {
           </p>
 
           {/* Accordion */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "10px", width: "100%" }}>
             {filtered.map((faq, i) => {
               const isOpen = openFaq === i;
               return (
@@ -97,6 +97,8 @@ export default function FAQ() {
                     cursor: "pointer",
                     transition: "all 0.2s ease",
                     boxShadow: isOpen ? "0 4px 20px rgba(2,132,199,0.1)" : "none",
+                    width: "100%",
+                    boxSizing: "border-box",
                   }}
                 >
                   <div style={{
@@ -148,6 +150,8 @@ export default function FAQ() {
             border: "1px solid var(--hpw-border)",
             borderRadius: '8px',
             textAlign: "center",
+            width: "100%",
+            boxSizing: "border-box",
           }}>
             <h3 style={{ marginBottom: "10px", fontSize: "18px" }}>Still have a question?</h3>
             <p style={{ color: "var(--hpw-text-muted)", marginBottom: "16px", fontSize: "14px" }}>

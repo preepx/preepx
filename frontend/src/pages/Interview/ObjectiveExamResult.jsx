@@ -12,7 +12,11 @@ import {
   BarChart2,
   AlertTriangle,
   Sparkles,
+  MessageSquare,
+  Send,
+  Loader2,
 } from "lucide-react";
+import API from "@/utils/api";
 import {
   FaJava,
   FaPython,
@@ -358,6 +362,89 @@ export default function ObjectiveExamResult({
     navigate("/objective-exam");
   };
 
+  /* ── Feedback Modal State & Handlers ── */
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [feedbackForm, setFeedbackForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submittingFeedback, setSubmittingFeedback] = useState(false);
+  const [feedbackError, setFeedbackError] = useState("");
+
+  const handleOpenFeedback = () => {
+    let localUser = {};
+    try {
+      localUser = JSON.parse(localStorage.getItem("user") || "{}");
+    } catch {
+      localUser = {};
+    }
+    const prefillName = localUser.name || localUser.fullName || "";
+    const prefillEmail = localUser.email || "";
+
+    setFeedbackForm({
+      name: prefillName,
+      email: prefillEmail,
+      subject: `Feedback on ${formattedTopic} Objective Exam`,
+      message: "",
+    });
+    setFeedbackError("");
+    setShowFeedbackModal(true);
+  };
+
+  const handleSendFeedback = async (e) => {
+    if (e) e.preventDefault();
+    setFeedbackError("");
+
+    if (!feedbackForm.name.trim()) {
+      setFeedbackError("Please enter your name.");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!feedbackForm.email.trim() || !emailRegex.test(feedbackForm.email.trim())) {
+      setFeedbackError("Please enter a valid email address.");
+      return;
+    }
+    if (!feedbackForm.message.trim()) {
+      setFeedbackError("Please enter your feedback message.");
+      return;
+    }
+
+    setSubmittingFeedback(true);
+    try {
+      const res = await API.post("/feedback", {
+        name: feedbackForm.name.trim(),
+        email: feedbackForm.email.trim(),
+        subject: feedbackForm.subject.trim() || `Feedback on ${formattedTopic} Objective Exam`,
+        message: feedbackForm.message.trim(),
+        examTopic: formattedTopic,
+        score: `${score}/${totalQuestions}`,
+        accuracy: `${accuracy}%`,
+        examId: results?._id || "",
+      });
+
+      if (res.data?.success) {
+        notify.success("Thank you! Your feedback has been sent to our team.");
+        setShowFeedbackModal(false);
+        setFeedbackForm({ name: "", email: "", subject: "", message: "" });
+      } else {
+        const errorMsg = res.data?.message || "Failed to send feedback.";
+        setFeedbackError(errorMsg);
+        notify.error(errorMsg);
+      }
+    } catch (err) {
+      const errorMsg =
+        err.response?.data?.message ||
+        err.message ||
+        "Failed to send feedback. Please try again.";
+      setFeedbackError(errorMsg);
+      notify.error(errorMsg);
+    } finally {
+      setSubmittingFeedback(false);
+    }
+  };
+
   return (
     <div className="oer-page-wrap">
       <div className="oer-container">
@@ -404,6 +491,15 @@ export default function ObjectiveExamResult({
             >
               <Download size={16} className="text-blue-600" />
               <span>Download Report</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleOpenFeedback}
+              className="oer-btn-secondary"
+            >
+              <MessageSquare size={16} className="text-blue-600" />
+              <span>Feedback</span>
             </button>
 
             <button
@@ -703,6 +799,163 @@ export default function ObjectiveExamResult({
         </div>
 
       </div>
+
+      {/* Feedback Dialog / Modal */}
+      {showFeedbackModal && (
+        <div
+          className="oer-modal-overlay print:hidden"
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !submittingFeedback) {
+              setShowFeedbackModal(false);
+            }
+          }}
+        >
+          <div className="oer-modal-card" role="dialog" aria-modal="true" aria-labelledby="oer-feedback-dialog-title">
+            {/* Modal Header */}
+            <div className="oer-modal-header">
+              <div className="oer-modal-header-content">
+                <div className="oer-modal-header-icon">
+                  <MessageSquare size={20} />
+                </div>
+                <div>
+                  <h3 id="oer-feedback-dialog-title" className="oer-modal-title">Share Your Feedback</h3>
+                  <p className="oer-modal-subtitle">
+                    Help us improve questions, explanations, or your exam experience.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="oer-modal-close"
+                onClick={() => !submittingFeedback && setShowFeedbackModal(false)}
+                disabled={submittingFeedback}
+                aria-label="Close dialog"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Modal Body / Form */}
+            <form onSubmit={handleSendFeedback}>
+              <div className="oer-modal-body">
+                {/* Exam Context Pill */}
+                <div className="oer-modal-meta-pill">
+                  <span>Topic: <strong>{formattedTopic}</strong></span>
+                  <span>Score: <strong>{score}/{totalQuestions} ({accuracy}%)</strong></span>
+                </div>
+
+                {feedbackError && (
+                  <div className="oer-modal-error-alert">
+                    <AlertTriangle size={16} />
+                    <span>{feedbackError}</span>
+                  </div>
+                )}
+
+                {/* Candidate Name */}
+                <div className="oer-modal-form-group">
+                  <label className="oer-modal-label">
+                    Candidate Name <span className="oer-modal-label-req">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="oer-modal-input"
+                    value={feedbackForm.name}
+                    onChange={(e) =>
+                      setFeedbackForm((prev) => ({ ...prev, name: e.target.value }))
+                    }
+                    placeholder="Enter your full name"
+                    required
+                    disabled={submittingFeedback}
+                  />
+                </div>
+
+                {/* Candidate Email */}
+                <div className="oer-modal-form-group">
+                  <label className="oer-modal-label">
+                    Candidate Email <span className="oer-modal-label-req">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    className="oer-modal-input"
+                    value={feedbackForm.email}
+                    onChange={(e) =>
+                      setFeedbackForm((prev) => ({ ...prev, email: e.target.value }))
+                    }
+                    placeholder="Enter your email address"
+                    required
+                    disabled={submittingFeedback}
+                  />
+                </div>
+
+                {/* Subject */}
+                <div className="oer-modal-form-group">
+                  <label className="oer-modal-label">
+                    Subject <span className="oer-modal-label-req">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="oer-modal-input"
+                    value={feedbackForm.subject}
+                    onChange={(e) =>
+                      setFeedbackForm((prev) => ({ ...prev, subject: e.target.value }))
+                    }
+                    placeholder="e.g., Feedback on questions or explanation"
+                    required
+                    disabled={submittingFeedback}
+                  />
+                </div>
+
+                {/* Feedback Message */}
+                <div className="oer-modal-form-group">
+                  <label className="oer-modal-label">
+                    Your Feedback <span className="oer-modal-label-req">*</span>
+                  </label>
+                  <textarea
+                    rows={4}
+                    className="oer-modal-textarea"
+                    value={feedbackForm.message}
+                    onChange={(e) =>
+                      setFeedbackForm((prev) => ({ ...prev, message: e.target.value }))
+                    }
+                    placeholder="What did you like? Were there any incorrect questions or suggestions? Write your feedback here..."
+                    required
+                    disabled={submittingFeedback}
+                  />
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="oer-modal-footer">
+                <button
+                  type="button"
+                  className="oer-modal-btn-cancel"
+                  onClick={() => setShowFeedbackModal(false)}
+                  disabled={submittingFeedback}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="oer-modal-btn-submit"
+                  disabled={submittingFeedback}
+                >
+                  {submittingFeedback ? (
+                    <>
+                      <Loader2 size={15} className="animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send size={15} />
+                      <span>Send Feedback</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

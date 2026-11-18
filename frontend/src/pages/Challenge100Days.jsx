@@ -15,6 +15,7 @@ import PreChallengeSetupModal from "@/components/PreChallengeSetupModal";
 import TopCompaniesWidget from "@/features/apply-jobs/components/TopCompaniesWidget";
 import "@/styles/Challenge100Days.css";
 import "@/styles/Challenge100DaysDash.css";
+import "@/styles/dashboard/ud-stats.css";
 
 const TOTAL_DAYS = 100;
 
@@ -507,15 +508,16 @@ const Challenge100Days = () => {
 
             <div className="c100-today-graphic" style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <img
-                src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Laptop.png"
+                src="/codinghublaptop100.png"
                 alt="Code Challenge"
                 className="today-3d-graphic"
                 style={{
-                  width: '160px',
-                  height: '160px',
+                  width: '210px',
+                  height: 'auto',
+                  maxHeight: '150px',
                   objectFit: 'contain',
                   animation: 'floatImage 4s ease-in-out infinite',
-                  filter: 'drop-shadow(0 15px 25px rgba(0,0,0,0.5))'
+                  filter: 'drop-shadow(0 14px 22px rgba(0,0,0,0.22))'
                 }}
               />
               <style>{`

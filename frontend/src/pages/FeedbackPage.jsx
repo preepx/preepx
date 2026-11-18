@@ -17,7 +17,11 @@ import {
   Trophy,
   Award,
   Clock,
+  Send,
+  Loader2,
+  AlertTriangle,
 } from "lucide-react";
+import API from "@/utils/api";
 import {
   FaJava,
   FaPython,
@@ -271,6 +275,91 @@ export default function FeedbackPage() {
     navigate("/interview");
   };
 
+  /* ── Feedback Modal State & Handlers ── */
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [feedbackForm, setFeedbackForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [submittingFeedback, setSubmittingFeedback] = useState(false);
+  const [feedbackError, setFeedbackError] = useState("");
+
+  const handleOpenFeedback = () => {
+    let localUser = {};
+    try {
+      localUser = JSON.parse(localStorage.getItem("user") || "{}");
+    } catch {
+      localUser = {};
+    }
+    const prefillName = localUser.name || localUser.fullName || "";
+    const prefillEmail = localUser.email || "";
+
+    setFeedbackForm({
+      name: prefillName,
+      email: prefillEmail,
+      subject: `Feedback on ${jobTitle} Interview Result`,
+      message: "",
+    });
+    setFeedbackError("");
+    setShowFeedbackModal(true);
+  };
+
+  const handleSendFeedback = async (e) => {
+    if (e) e.preventDefault();
+    setFeedbackError("");
+
+    if (!feedbackForm.name.trim()) {
+      setFeedbackError("Please enter your name.");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!feedbackForm.email.trim() || !emailRegex.test(feedbackForm.email.trim())) {
+      setFeedbackError("Please enter a valid email address.");
+      return;
+    }
+    if (!feedbackForm.message.trim()) {
+      setFeedbackError("Please enter your feedback message.");
+      return;
+    }
+
+    setSubmittingFeedback(true);
+    try {
+      const res = await API.post("/feedback", {
+        name: feedbackForm.name.trim(),
+        email: feedbackForm.email.trim(),
+        subject: feedbackForm.subject.trim() || `Feedback on ${jobTitle} Interview Result`,
+        message: feedbackForm.message.trim(),
+        interviewRole: jobTitle,
+        examTopic: jobTopic || jobTitle,
+        score: `${score}/${max}`,
+        accuracy: `${percentage}%`,
+        examId: interview?._id || "",
+        source: "interview_result",
+      });
+
+      if (res.data?.success) {
+        notify.success("Thank you! Your feedback has been sent to our team.");
+        setShowFeedbackModal(false);
+        setFeedbackForm({ name: "", email: "", subject: "", message: "" });
+      } else {
+        const errorMsg = res.data?.message || "Failed to send feedback.";
+        setFeedbackError(errorMsg);
+        notify.error(errorMsg);
+      }
+    } catch (err) {
+      const errorMsg =
+        err.response?.data?.message ||
+        err.message ||
+        "Failed to send feedback. Please try again.";
+      setFeedbackError(errorMsg);
+      notify.error(errorMsg);
+    } finally {
+      setSubmittingFeedback(false);
+    }
+  };
+
   if (!results.length) {
     return (
       <div className="ifp-page-wrap">
@@ -345,6 +434,15 @@ export default function FeedbackPage() {
             >
               <Download size={16} className="text-blue-600" />
               <span>Download Report</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={handleOpenFeedback}
+              className="ifp-btn-secondary"
+            >
+              <MessageSquare size={16} className="text-blue-600" />
+              <span>Feedback</span>
             </button>
 
             <button
@@ -665,6 +763,163 @@ export default function FeedbackPage() {
         </div>
 
       </div>
+
+      {/* Feedback Dialog / Modal */}
+      {showFeedbackModal && (
+        <div
+          className="ifp-modal-overlay print:hidden"
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !submittingFeedback) {
+              setShowFeedbackModal(false);
+            }
+          }}
+        >
+          <div className="ifp-modal-card" role="dialog" aria-modal="true" aria-labelledby="ifp-feedback-dialog-title">
+            {/* Modal Header */}
+            <div className="ifp-modal-header">
+              <div className="ifp-modal-header-content">
+                <div className="ifp-modal-header-icon">
+                  <MessageSquare size={20} />
+                </div>
+                <div>
+                  <h3 id="ifp-feedback-dialog-title" className="ifp-modal-title">Share Your Feedback</h3>
+                  <p className="ifp-modal-subtitle">
+                    Help us improve interview questions, AI evaluations, or scoring.
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="ifp-modal-close"
+                onClick={() => !submittingFeedback && setShowFeedbackModal(false)}
+                disabled={submittingFeedback}
+                aria-label="Close dialog"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Modal Body / Form */}
+            <form onSubmit={handleSendFeedback}>
+              <div className="ifp-modal-body">
+                {/* Interview Context Pill */}
+                <div className="ifp-modal-meta-pill">
+                  <span>Role: <strong>{jobTitle}</strong></span>
+                  <span>Score: <strong>{score}/{max} ({percentage}%)</strong></span>
+                </div>
+
+                {feedbackError && (
+                  <div className="ifp-modal-error-alert">
+                    <AlertTriangle size={16} />
+                    <span>{feedbackError}</span>
+                  </div>
+                )}
+
+                {/* Candidate Name */}
+                <div className="ifp-modal-form-group">
+                  <label className="ifp-modal-label">
+                    Candidate Name <span className="ifp-modal-label-req">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="ifp-modal-input"
+                    value={feedbackForm.name}
+                    onChange={(e) =>
+                      setFeedbackForm((prev) => ({ ...prev, name: e.target.value }))
+                    }
+                    placeholder="Enter your full name"
+                    required
+                    disabled={submittingFeedback}
+                  />
+                </div>
+
+                {/* Candidate Email */}
+                <div className="ifp-modal-form-group">
+                  <label className="ifp-modal-label">
+                    Candidate Email <span className="ifp-modal-label-req">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    className="ifp-modal-input"
+                    value={feedbackForm.email}
+                    onChange={(e) =>
+                      setFeedbackForm((prev) => ({ ...prev, email: e.target.value }))
+                    }
+                    placeholder="Enter your email address"
+                    required
+                    disabled={submittingFeedback}
+                  />
+                </div>
+
+                {/* Subject */}
+                <div className="ifp-modal-form-group">
+                  <label className="ifp-modal-label">
+                    Subject <span className="ifp-modal-label-req">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className="ifp-modal-input"
+                    value={feedbackForm.subject}
+                    onChange={(e) =>
+                      setFeedbackForm((prev) => ({ ...prev, subject: e.target.value }))
+                    }
+                    placeholder="e.g., Feedback on AI evaluation or question accuracy"
+                    required
+                    disabled={submittingFeedback}
+                  />
+                </div>
+
+                {/* Feedback Message */}
+                <div className="ifp-modal-form-group">
+                  <label className="ifp-modal-label">
+                    Your Feedback <span className="ifp-modal-label-req">*</span>
+                  </label>
+                  <textarea
+                    rows={4}
+                    className="ifp-modal-textarea"
+                    value={feedbackForm.message}
+                    onChange={(e) =>
+                      setFeedbackForm((prev) => ({ ...prev, message: e.target.value }))
+                    }
+                    placeholder="What did you think of the interview questions or AI evaluation? Let us know your suggestions..."
+                    required
+                    disabled={submittingFeedback}
+                  />
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="ifp-modal-footer">
+                <button
+                  type="button"
+                  className="ifp-modal-btn-cancel"
+                  onClick={() => setShowFeedbackModal(false)}
+                  disabled={submittingFeedback}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="ifp-modal-btn-submit"
+                  disabled={submittingFeedback}
+                >
+                  {submittingFeedback ? (
+                    <>
+                      <Loader2 size={15} className="animate-spin" />
+                      <span>Sending...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Send size={15} />
+                      <span>Send Feedback</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

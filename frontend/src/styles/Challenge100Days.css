@@ -316,6 +316,119 @@
   font-weight: 500;
 }
 
+/* ── Direct support for .ud-stats-row inside Challenge 100 Days ── */
+.c100-page .ud-stats-row {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 16px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.c100-page .ud-stat-card-new {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  background: #ffffff !important;
+  border: 1px solid var(--border, #e5e7eb) !important;
+  border-radius: 8px !important;
+  padding: 13px 20px !important;
+  gap: 16px !important;
+  transition: all 0.2s ease !important;
+  box-sizing: border-box !important;
+}
+
+[data-theme="dark"] .c100-page .ud-stat-card-new {
+  background: var(--c100-surface-card, #1a2234) !important;
+  border-color: var(--c100-border, rgba(255, 255, 255, 0.1)) !important;
+}
+
+.c100-page .ud-stat-card-new:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+.c100-page .ud-stat-icon-wrapper {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+.c100-page .ud-stat-info {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+}
+
+.c100-page .ud-stat-val-new {
+  display: block !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #111827 !important;
+  line-height: 1.2 !important;
+}
+
+[data-theme="dark"] .c100-page .ud-stat-val-new {
+  color: #f1f5f9 !important;
+}
+
+.c100-page .ud-stat-lbl-new {
+  display: block !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #6B7280 !important;
+  margin-top: 2px !important;
+  line-height: 1.2 !important;
+}
+
+[data-theme="dark"] .c100-page .ud-stat-lbl-new {
+  color: #94a3b8 !important;
+}
+
+@media (max-width: 1024px) {
+  .c100-page .ud-stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .c100-page .ud-stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 8px !important;
+  }
+
+  .c100-page .ud-stat-card-new {
+    padding: 10px 8px !important;
+    gap: 8px !important;
+    border-radius: 8px !important;
+  }
+
+  .c100-page .ud-stat-icon-wrapper {
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .c100-page .ud-stat-icon-wrapper svg {
+    width: 16px !important;
+    height: 16px !important;
+  }
+
+  .c100-page .ud-stat-val-new {
+    font-size: 15px !important;
+  }
+
+  .c100-page .ud-stat-lbl-new {
+    font-size: 10px !important;
+  }
+}
+
 /* ══════════════════════════════════════════════════════════════
    3. ROADMAP & CURRICULUM SECTION
    ══════════════════════════════════════════════════════════════ */

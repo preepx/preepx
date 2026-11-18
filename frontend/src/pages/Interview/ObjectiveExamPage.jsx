@@ -281,7 +281,7 @@ const ObjectiveExamPage = () => {
               </div>
             </div>
           )}
-          <div className="panel quick-start-panel desktop-only">
+          <div className="panel quick-start-panel desktop-only" style={{ display: 'flex', flexDirection: 'column' }}>
             <h2>Quick Actions</h2>
             <button className="action-btn primary full" style={{ justifyContent: 'flex-start', paddingLeft: '24px' }} onClick={() => navigate("/objective-exam/take")}>
               <span style={{ width: 24, display: 'flex', justifyContent: 'center' }}><img src="/sidebar/objectiveexamicon.svg" alt="New" style={{ width: 20, height: 20, filter: 'brightness(0) invert(1)' }} /></span> New Objective Exam

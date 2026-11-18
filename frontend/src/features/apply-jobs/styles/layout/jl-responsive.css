@@ -54,7 +54,7 @@
     display: none !important;
 }
 
-.desktop-only {
+.sidebar-toggle.desktop-only {
     display: inline-flex !important;
 }
 
