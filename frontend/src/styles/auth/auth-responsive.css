@@ -166,25 +166,30 @@
   }
 
   .auth-social-btns-row {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    justify-content: center !important;
-    gap: 16px !important;
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
     width: 100% !important;
-    margin: 6px 0 4px 0;
+    margin: 8px 0 4px 0 !important;
   }
 
+  .auth-social-btn,
   .auth-social-icon-btn {
-    width: 44px !important;
-    height: 44px !important;
-    flex: 0 0 44px !important;
-    aspect-ratio: 1 / 1 !important;
+    height: 40px !important;
+    width: 100% !important;
+    flex: none !important;
+    aspect-ratio: auto !important;
+    font-size: 12px !important;
+    gap: 6px !important;
+    padding: 0 4px !important;
   }
 
+  .auth-social-btn svg,
   .auth-social-icon-btn svg {
-    width: 22px;
-    height: 22px;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
   }
 
   .auth-divider-line {

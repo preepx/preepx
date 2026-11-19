@@ -13,7 +13,7 @@ function AuthCallback() {
     const error = params.get("error");
 
     if (error || !token) {
-      navigate("/auth?error=google_failed", { replace: true });
+      navigate(error ? `/auth?error=${encodeURIComponent(error)}` : "/auth?error=google_failed", { replace: true });
       return;
     }
 
