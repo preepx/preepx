@@ -19,5 +19,9 @@ router.get("/seed-temp", codingController.seedProblemsTemp);
 // Mark a challenge day as complete
 router.post("/challenge/complete", protect, codingController.completeChallengeDay);
 
+// Level Certificates for Curriculum Roadmap (Foundation, Core DSA, Advanced, Mastery)
+router.get("/certificates", protect, codingController.getMyCodingCertificates);
+router.post("/certificate/unlock", protect, codingController.unlockCodingCertificate);
+
 module.exports = router;
 

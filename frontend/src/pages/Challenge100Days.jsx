@@ -5,13 +5,15 @@ import {
   Code2, TrendingUp, Zap, Target, Brain, Sparkles, Gem,
   Calendar, Clock, Star, Flag, Award, ArrowRight,
   Crown, Rocket, Shield, Swords, Compass, Layers, Check, BarChart3,
-  Medal, Gift, Activity, LayoutList, Building2
+  Medal, Gift, Activity, LayoutList, Building2, Eye
 } from "lucide-react";
 import API from "@/utils/api";
 import notify from "@/utils/notify";
-import { getCodingChallenge, startCodingChallenge } from "@/services/codingAPI";
+import { getCodingChallenge, startCodingChallenge, getMyCodingCertificates, unlockCodingCertificate } from "@/services/codingAPI";
 import { getStoredUser } from "@/utils/authUtils";
 import PreChallengeSetupModal from "@/components/PreChallengeSetupModal";
+import CodingCertificateModal from "@/components/CodingCertificateModal";
+import CodingRoadmapModal from "@/components/CodingRoadmapModal";
 import TopCompaniesWidget from "@/features/apply-jobs/components/TopCompaniesWidget";
 import "@/styles/Challenge100Days.css";
 import "@/styles/Challenge100DaysDash.css";
@@ -30,7 +32,7 @@ const PHASES = [
   { id: 1, upTo: 25, start: 1, name: "Foundation", desc: "Day 1-25", icon: Shield, color: "#6366f1" },
   { id: 2, upTo: 50, start: 26, name: "Core DSA", desc: "Day 26-50", icon: Code2, color: "#0ea5e9" },
   { id: 3, upTo: 75, start: 51, name: "Advanced", desc: "Day 51-75", icon: Rocket, color: "#10b981" },
-  { id: 4, upTo: 100, start: 76, name: "Mastery", desc: "Day 76-100", icon: Lock, color: "#f59e0b" },
+  { id: 4, upTo: 100, start: 76, name: "Mastery", desc: "Day 76-100", icon: Trophy, color: "#f59e0b" },
 ];
 
 const MILESTONES = [
@@ -106,6 +108,13 @@ const Challenge100Days = () => {
   const [selectedPhaseFilter, setSelectedPhaseFilter] = useState("all");
   const [showSetupModal, setShowSetupModal] = useState(false);
   const [pendingChallenge, setPendingChallenge] = useState(null);
+
+  // ── Curriculum Roadmap & Milestone Certificates State ──
+  const [codingCertData, setCodingCertData] = useState({ certificates: [], phases: [] });
+  const [showRoadmapModal, setShowRoadmapModal] = useState(false);
+  const [activeCertModal, setActiveCertModal] = useState(null);
+  const [unlockingPhaseId, setUnlockingPhaseId] = useState(null);
+
   const scrollRef = useRef(null);
   const activeCardRef = useRef(null);
   const navigate = useNavigate();
@@ -164,7 +173,46 @@ const Challenge100Days = () => {
         }
       })
       .catch((err) => console.warn("Could not fetch user activity dashboard", err));
+
+    getMyCodingCertificates()
+      .then((res) => {
+        if (res?.success) {
+          setCodingCertData(res.data || { certificates: [], phases: [] });
+        }
+      })
+      .catch((err) => console.warn("Failed to fetch coding certificates", err));
   }, []);
+
+  const phaseCertMap = useMemo(() => {
+    const map = {};
+    (codingCertData?.phases || []).forEach((p) => {
+      map[p.phaseId] = p;
+    });
+    return map;
+  }, [codingCertData]);
+
+  const handleUnlockCert = async (phaseId) => {
+    try {
+      setUnlockingPhaseId(phaseId);
+      const res = await unlockCodingCertificate(phaseId);
+      if (res?.success) {
+        notify.success(res.message || "Certificate unlocked successfully!");
+        const certRes = await getMyCodingCertificates();
+        if (certRes?.success) {
+          setCodingCertData(certRes.data || { certificates: [], phases: [] });
+        }
+        if (res.data?.certificate) {
+          setActiveCertModal(res.data.certificate);
+        }
+      } else {
+        notify.error(res?.message || "Could not unlock certificate");
+      }
+    } catch (err) {
+      notify.error(err.response?.data?.message || "Failed to unlock certificate");
+    } finally {
+      setUnlockingPhaseId(null);
+    }
+  };
 
   const isCompleted = (day) => (progress.completedDays || []).includes(day);
   const isUnlocked = (day) => day === 1 || (progress.completedDays || []).includes(day - 1);
@@ -555,7 +603,14 @@ const Challenge100Days = () => {
         <div className="c100-roadmap-compact">
           <div className="compact-header">
             <h3>Curriculum Roadmap</h3>
-            <span className="view-all">View Roadmap <ArrowRight size={14} /></span>
+            <span
+              className="view-all"
+              onClick={() => setShowRoadmapModal(true)}
+              role="button"
+              tabIndex={0}
+            >
+              View Roadmap <ArrowRight size={14} />
+            </span>
           </div>
 
           <div className="c100-phases-compact">
@@ -565,15 +620,71 @@ const Challenge100Days = () => {
               const isDone = currentPhaseIdx > idx;
               const isLocked = idx > currentPhaseIdx;
 
+              const certInfo = phaseCertMap[phase.id];
+              const completedInPhase = (progress?.completedDays || []).filter(
+                (d) => d >= phase.start && d <= phase.upTo
+              ).length;
+              const isEligible = certInfo?.isCompleted || completedInPhase >= 25 || (progress?.completedDays?.length || 0) >= phase.upTo;
+              const cert = certInfo?.certificate;
+              const hasCert = Boolean(cert);
+
+              const handlePhaseClick = () => {
+                if (hasCert) {
+                  setActiveCertModal(cert);
+                } else if (isEligible) {
+                  handleUnlockCert(phase.id);
+                } else {
+                  setShowRoadmapModal(true);
+                }
+              };
+
               return (
-                <div key={phase.id} className={`phase-compact-box ${isActive ? 'active' : ''} ${isDone ? 'done' : ''} ${isLocked ? 'locked' : ''}`}>
-                  <div className="phase-icon" style={{ background: isActive ? '#6366f1' : 'rgba(255,255,255,0.05)', color: isActive ? '#fff' : phase.color }}>
+                <div
+                  key={phase.id}
+                  className={`phase-compact-box ${isActive ? 'active' : ''} ${isDone ? 'done' : ''} ${isLocked ? 'locked' : ''} ${hasCert ? 'has-cert' : ''} ${isEligible && !hasCert ? 'eligible' : ''}`}
+                  onClick={handlePhaseClick}
+                  title={hasCert ? "Click to view Certificate" : isEligible ? "Click to unlock Certificate" : "Click to view Curriculum details"}
+                >
+                  <div
+                    className="phase-icon"
+                    style={{
+                      background: hasCert ? '#dcfce7' : isActive ? '#6366f1' : 'rgba(255,255,255,0.05)',
+                      color: hasCert ? '#15803d' : isActive ? '#fff' : phase.color,
+                    }}
+                  >
                     <PhaseIcon size={20} />
                   </div>
                   <div className="phase-info">
                     <strong>{phase.name}</strong>
                     <span>{phase.desc}</span>
                   </div>
+
+                  {/* Certificate Status Pill */}
+                  {hasCert ? (
+                    <span className="phase-cert-pill unlocked">
+                      <Award size={11} /> Cert Unlocked
+                    </span>
+                  ) : isEligible ? (
+                    <button
+                      type="button"
+                      className="phase-cert-pill ready"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleUnlockCert(phase.id);
+                      }}
+                      disabled={unlockingPhaseId === phase.id}
+                    >
+                      <Sparkles size={11} /> {unlockingPhaseId === phase.id ? "Unlocking..." : "Unlock Cert"}
+                    </button>
+                  ) : completedInPhase > 0 ? (
+                    <span className="phase-cert-pill prog">
+                      {completedInPhase}/25 Days
+                    </span>
+                  ) : (
+                    <span className="phase-cert-pill locked">
+                      <Lock size={10} /> Locked
+                    </span>
+                  )}
                 </div>
               );
             })}
@@ -581,48 +692,109 @@ const Challenge100Days = () => {
 
           <div className="roadmap-progress-line">
             <div className="line-bg">
-              <div className="line-fill" style={{ width: '25%' }}></div>
+              <div
+                className="line-fill"
+                style={{
+                  width: `${Math.min(100, Math.round(((progress?.completedDays?.length || 0) / TOTAL_DAYS) * 100))}%`
+                }}
+              ></div>
             </div>
             <div className="line-nodes">
-              <div className="node active"><Check size={12} /></div>
-              <div className="node"><Lock size={12} /></div>
-              <div className="node"><Lock size={12} /></div>
-              <div className="node"><Lock size={12} /></div>
+              {PHASES.map((p, pIdx) => {
+                const completedInThis = (progress?.completedDays || []).filter(
+                  (d) => d >= p.start && d <= p.upTo
+                ).length;
+                const phaseDone = completedInThis >= 25 || (progress?.completedDays?.length || 0) >= p.upTo;
+                const isCurrent = pIdx === currentPhaseIdx;
+                return (
+                  <div
+                    key={p.id}
+                    className={`node ${phaseDone ? 'active' : isCurrent ? 'active' : ''}`}
+                    title={`${p.name} (${p.desc})`}
+                    onClick={() => setShowRoadmapModal(true)}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {phaseDone ? <Check size={12} /> : isCurrent ? <Activity size={12} /> : <Lock size={12} />}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
 
+        {/* ─── Rewards (Level Milestone Certificates) ─── */}
         <div className="c100-achievements-card">
           <div className="achievements-header">
             <div className="title"><Trophy size={16} /> Rewards</div>
-            <span className="view-all">View All</span>
+            <span
+              className="view-all"
+              onClick={() => setShowRoadmapModal(true)}
+              role="button"
+              tabIndex={0}
+            >
+              View All <ArrowRight size={13} />
+            </span>
           </div>
 
           <div className="achievements-list">
-            <div className="achievement-item">
-              <div className="achiev-icon bg-gold"><Trophy size={16} /></div>
-              <div className="achiev-text">
-                <strong>Completion Certificate</strong>
-                <span>Complete 100 days</span>
-              </div>
-              <div className="achiev-status"><Lock size={16} /></div>
-            </div>
-            <div className="achievement-item">
-              <div className="achiev-icon bg-green"><Shield size={16} /></div>
-              <div className="achiev-text">
-                <strong>Interview Ready Badge</strong>
-                <span>Solve 200 problems</span>
-              </div>
-              <div className="achiev-status"><Lock size={16} /></div>
-            </div>
-            <div className="achievement-item">
-              <div className="achiev-icon bg-purple"><Gift size={16} /></div>
-              <div className="achiev-text">
-                <strong>Premium Access</strong>
-                <span>Unlock premium content</span>
-              </div>
-              <div className="achiev-status"><Lock size={16} /></div>
-            </div>
+            {PHASES.map((phase) => {
+              const PhaseIcon = phase.icon;
+              const certInfo = phaseCertMap[phase.id];
+              const completedInPhase = (progress?.completedDays || []).filter(
+                (d) => d >= phase.start && d <= phase.upTo
+              ).length;
+              const isEligible = certInfo?.isCompleted || completedInPhase >= 25 || (progress?.completedDays?.length || 0) >= phase.upTo;
+              const cert = certInfo?.certificate;
+              const hasCert = Boolean(cert);
+
+              return (
+                <div key={phase.id} className="achievement-item">
+                  <div
+                    className="achiev-icon"
+                    style={{
+                      background: hasCert ? '#10b981' : isEligible ? '#f59e0b' : `${phase.color}22`,
+                      color: hasCert ? '#ffffff' : isEligible ? '#ffffff' : phase.color,
+                      border: `1px solid ${phase.color}44`,
+                    }}
+                  >
+                    {hasCert ? <Award size={16} /> : <PhaseIcon size={16} />}
+                  </div>
+                  <div className="achiev-text">
+                    <strong>{phase.name} Certificate</strong>
+                    <span>{phase.desc} • {isEligible ? "Milestone Achieved" : `Complete ${phase.upTo} days`}</span>
+                  </div>
+
+                  {hasCert ? (
+                    <button
+                      type="button"
+                      className="achiev-action-btn view"
+                      onClick={() => setActiveCertModal(cert)}
+                      title="View & Download Certificate"
+                    >
+                      <Eye size={12} /> View
+                    </button>
+                  ) : isEligible ? (
+                    <button
+                      type="button"
+                      className="achiev-action-btn unlock"
+                      onClick={() => handleUnlockCert(phase.id)}
+                      disabled={unlockingPhaseId === phase.id}
+                      title="Unlock this Certificate now"
+                    >
+                      <Sparkles size={12} /> {unlockingPhaseId === phase.id ? "..." : "Unlock"}
+                    </button>
+                  ) : (
+                    <div className="achiev-status">
+                      {completedInPhase > 0 ? (
+                        <span className="achiev-badge-prog">{completedInPhase}/25</span>
+                      ) : (
+                        <Lock size={15} />
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -926,6 +1098,28 @@ const Challenge100Days = () => {
         <PreChallengeSetupModal
           onProceed={handleSetupProceed}
           onCancel={() => { setShowSetupModal(false); setPendingChallenge(null); }}
+        />
+      )}
+
+      {showRoadmapModal && (
+        <CodingRoadmapModal
+          phases={PHASES}
+          phaseCertMap={phaseCertMap}
+          progress={progress}
+          onClose={() => setShowRoadmapModal(false)}
+          onUnlock={handleUnlockCert}
+          onViewCert={(cert) => {
+            setShowRoadmapModal(false);
+            setActiveCertModal(cert);
+          }}
+          unlockingPhaseId={unlockingPhaseId}
+        />
+      )}
+
+      {activeCertModal && (
+        <CodingCertificateModal
+          cert={activeCertModal}
+          onClose={() => setActiveCertModal(null)}
         />
       )}
     </div>

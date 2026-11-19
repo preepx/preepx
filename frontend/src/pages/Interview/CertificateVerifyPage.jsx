@@ -42,6 +42,8 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
       })
     : "";
 
+  const isCodingCert = cert?.type === "CODING_CHALLENGE";
+
   return (
     <div className="cert-print-wrapper" id="certificate-print">
       {/* Certificate Main Canvas - Single Source of Truth */}
@@ -159,7 +161,9 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
               <h1 className="cert-main-title">CERTIFICATE</h1>
               <div className="cert-sub-title-row">
                 <span className="cert-sub-line"></span>
-                <span className="cert-sub-title-text">OF PERFORMANCE</span>
+                <span className="cert-sub-title-text">
+                  {isCodingCert ? "OF ACHIEVEMENT" : "OF PERFORMANCE"}
+                </span>
                 <span className="cert-sub-line"></span>
               </div>
             </div>
@@ -193,12 +197,12 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
                   y="18"
                   fill="#ffffff"
                   fontFamily="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-                  fontSize="13"
+                  fontSize="12.5"
                   fontWeight="700"
                   letterSpacing="0.5"
                   textAnchor="middle"
                 >
-                  Objective Assessment Achievement
+                  {isCodingCert ? `${cert.levelName} DSA Curriculum Achievement` : "Objective Assessment Achievement"}
                 </text>
               </svg>
             </div>
@@ -221,10 +225,20 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
             {/* Performance for text */}
             <div className="cert-achievement-desc">
               <p className="cert-desc-line1">
-                for demonstrating consistent performance and successfully completing
+                {isCodingCert
+                  ? "for successfully completing and mastering the curriculum milestone"
+                  : "for demonstrating consistent performance and successfully completing"}
               </p>
-              <h3 className="cert-desc-subject">OBJECTIVE ASSESSMENTS</h3>
-              <p className="cert-desc-line2">on the PreepX platform.</p>
+              <h3 className="cert-desc-subject">
+                {isCodingCert
+                  ? `${cert.levelName.toUpperCase()} DSA (${cert.levelDays})`
+                  : "OBJECTIVE ASSESSMENTS"}
+              </h3>
+              <p className="cert-desc-line2">
+                {isCodingCert
+                  ? "in the PreepX 100-Day Coding Challenge."
+                  : "on the PreepX platform."}
+              </p>
             </div>
 
             {/* 6 KPI Cards Grid */}
@@ -234,8 +248,12 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
                 <div className="cert-metric-icon-wrap icon-purple">
                   <FileText size={18} />
                 </div>
-                <div className="cert-metric-num">{cert.totalExams}</div>
-                <div className="cert-metric-label">EXAMS ATTEMPTED</div>
+                <div className="cert-metric-num">
+                  {isCodingCert ? (cert.completedDaysCount || 25) : cert.totalExams}
+                </div>
+                <div className="cert-metric-label">
+                  {isCodingCert ? "DAYS COMPLETED" : "EXAMS ATTEMPTED"}
+                </div>
               </div>
 
               {/* Metric 2 */}
@@ -243,8 +261,12 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
                 <div className="cert-metric-icon-wrap icon-blue">
                   <ListChecks size={18} />
                 </div>
-                <div className="cert-metric-num">{cert.totalQuestions}</div>
-                <div className="cert-metric-label">QUESTIONS SOLVED</div>
+                <div className="cert-metric-num" style={{ fontSize: isCodingCert ? "15px" : undefined }}>
+                  {isCodingCert ? cert.levelName : cert.totalQuestions}
+                </div>
+                <div className="cert-metric-label">
+                  {isCodingCert ? "CURRICULUM LEVEL" : "QUESTIONS SOLVED"}
+                </div>
               </div>
 
               {/* Metric 3 */}
@@ -252,8 +274,12 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
                 <div className="cert-metric-icon-wrap icon-teal">
                   <CheckCircle2 size={18} />
                 </div>
-                <div className="cert-metric-num">{cert.totalCorrect}</div>
-                <div className="cert-metric-label">CORRECT ANSWERS</div>
+                <div className="cert-metric-num" style={{ fontSize: isCodingCert ? "15px" : undefined }}>
+                  {isCodingCert ? cert.levelDays : cert.totalCorrect}
+                </div>
+                <div className="cert-metric-label">
+                  {isCodingCert ? "DAYS RANGE" : "CORRECT ANSWERS"}
+                </div>
               </div>
 
               {/* Metric 4 */}
@@ -261,8 +287,12 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
                 <div className="cert-metric-icon-wrap icon-indigo">
                   <Target size={18} />
                 </div>
-                <div className="cert-metric-num">{cert.accuracy}%</div>
-                <div className="cert-metric-label">OVERALL ACCURACY</div>
+                <div className="cert-metric-num">
+                  {isCodingCert ? `${cert.streak || 1} Days` : `${cert.accuracy}%`}
+                </div>
+                <div className="cert-metric-label">
+                  {isCodingCert ? "ACTIVE STREAK" : "OVERALL ACCURACY"}
+                </div>
               </div>
 
               {/* Metric 5 */}
@@ -270,8 +300,12 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
                 <div className="cert-metric-icon-wrap icon-blue-dark">
                   <Trophy size={18} />
                 </div>
-                <div className="cert-metric-num">{cert.bestScore}%</div>
-                <div className="cert-metric-label">BEST SCORE</div>
+                <div className="cert-metric-num">
+                  {isCodingCert ? `+${cert.xpEarned || 250} XP` : `${cert.bestScore}%`}
+                </div>
+                <div className="cert-metric-label">
+                  {isCodingCert ? "XP EARNED" : "BEST SCORE"}
+                </div>
               </div>
 
               {/* Metric 6 */}
@@ -279,8 +313,12 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
                 <div className="cert-metric-icon-wrap icon-purple-dark">
                   <BarChart3 size={18} />
                 </div>
-                <div className="cert-metric-num">{cert.averageScore || cert.accuracy}%</div>
-                <div className="cert-metric-label">AVG. SCORE</div>
+                <div className="cert-metric-num" style={{ fontSize: isCodingCert ? "15px" : undefined }}>
+                  {isCodingCert ? "Verified" : `${cert.averageScore || cert.accuracy}%`}
+                </div>
+                <div className="cert-metric-label">
+                  {isCodingCert ? "VERIFIED STATUS" : "AVG. SCORE"}
+                </div>
               </div>
             </div>
 
@@ -293,7 +331,26 @@ const CertificatePrint = React.forwardRef(({ cert }, ref) => {
                   <span className="decor-diamond"></span>
                   <span className="decor-dot"></span>
                 </div>
-                {cert.technologyPerformance?.length > 0 ? (
+                {isCodingCert ? (
+                  <div className="cert-mastery-list">
+                    <div className="cert-mastery-row">
+                      <span className="cert-mastery-topic">DSA Concepts & Problem Solving</span>
+                      <span className="cert-mastery-val">100%</span>
+                    </div>
+                    <div className="cert-mastery-row">
+                      <span className="cert-mastery-topic">Time & Space Complexity Awareness</span>
+                      <span className="cert-mastery-val">100%</span>
+                    </div>
+                    <div className="cert-mastery-row">
+                      <span className="cert-mastery-topic">Code Optimization & Clean Syntax</span>
+                      <span className="cert-mastery-val">100%</span>
+                    </div>
+                    <div className="cert-mastery-row">
+                      <span className="cert-mastery-topic">Curriculum Level: {cert.levelName}</span>
+                      <span className="cert-mastery-val">Completed</span>
+                    </div>
+                  </div>
+                ) : cert.technologyPerformance?.length > 0 ? (
                   <div className="cert-mastery-list">
                     {cert.technologyPerformance.slice(0, 4).map((t) => (
                       <div key={t.topic} className="cert-mastery-row">

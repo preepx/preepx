@@ -503,11 +503,72 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.phase-compact-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
 .phase-compact-box.active {
   background: rgba(47, 111, 91, 0.1);
   border-color: #2f6f5b;
+}
+
+.phase-compact-box.has-cert {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.phase-compact-box.eligible {
+  border-color: rgba(245, 158, 11, 0.5);
+  background: rgba(245, 158, 11, 0.08);
+}
+
+.phase-cert-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-top: 2px;
+  transition: all 0.15s ease;
+}
+
+.phase-cert-pill.unlocked {
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
+}
+
+.phase-cert-pill.ready {
+  background: #fef3c7;
+  color: #b45309;
+  border: 1px solid #fde68a;
+  animation: pulseReadyPill 1.6s infinite;
+}
+
+@keyframes pulseReadyPill {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.phase-cert-pill.prog {
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.phase-cert-pill.locked {
+  background: transparent;
+  color: #94a3b8;
+  font-size: 10px;
 }
 
 .phase-icon {
@@ -660,10 +721,64 @@
 
 .achiev-status {
   color: var(--c100-text-muted);
+  display: flex;
+  align-items: center;
 }
 
 .achiev-status.done {
   color: #34d399;
+}
+
+.achiev-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.achiev-action-btn.view {
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #bfdbfe;
+}
+
+.achiev-action-btn.view:hover {
+  background: #dbeafe;
+  color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.achiev-action-btn.unlock {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.3);
+}
+
+.achiev-action-btn.unlock:hover:not(:disabled) {
+  background: linear-gradient(135deg, #d97706, #b45309);
+  transform: translateY(-1px);
+}
+
+.achiev-action-btn.unlock:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.achiev-badge-prog {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 3px 8px;
+  border-radius: 6px;
 }
 
 .achiev-progress {

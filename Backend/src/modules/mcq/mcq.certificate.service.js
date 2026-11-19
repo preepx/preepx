@@ -1,5 +1,6 @@
 const MCQResult = require("../../../models/MCQResult");
 const ObjCertificate = require("../../../models/ObjCertificate");
+const CodingCertificate = require("../../../models/CodingCertificate");
 const User = require("../../../models/User");
 const walletService = require("../wallet/wallet.service");
 const { NotFoundError, BadRequestError } = require("../../common/exceptions/customErrors");
@@ -298,26 +299,51 @@ const getCertificateForUser = async (userId) => {
  */
 const verifyCertificateById = async (certificateId) => {
   const cert = await ObjCertificate.findOne({ certificateId }).lean();
-  if (!cert) return { valid: false, reason: "NOT_FOUND" };
-  if (cert.status === "REVOKED") return { valid: false, reason: "REVOKED", certificate: null };
+  if (cert) {
+    if (cert.status === "REVOKED") return { valid: false, reason: "REVOKED", certificate: null };
+    return {
+      valid: true,
+      certificate: {
+        certificateId: cert.certificateId,
+        userNameSnapshot: cert.userNameSnapshot,
+        type: cert.type || "OBJECTIVE_PERFORMANCE",
+        totalExams: cert.totalExams,
+        totalQuestions: cert.totalQuestions,
+        totalCorrect: cert.totalCorrect,
+        accuracy: cert.accuracy,
+        bestScore: cert.bestScore,
+        averageScore: cert.averageScore,
+        technologyPerformance: cert.technologyPerformance,
+        issueDate: cert.issueDate,
+        status: cert.status,
+      },
+    };
+  }
 
-  // Return only safe public fields
-  return {
-    valid: true,
-    certificate: {
-      certificateId: cert.certificateId,
-      userNameSnapshot: cert.userNameSnapshot,
-      totalExams: cert.totalExams,
-      totalQuestions: cert.totalQuestions,
-      totalCorrect: cert.totalCorrect,
-      accuracy: cert.accuracy,
-      bestScore: cert.bestScore,
-      averageScore: cert.averageScore,
-      technologyPerformance: cert.technologyPerformance,
-      issueDate: cert.issueDate,
-      status: cert.status,
-    },
-  };
+  // Check Coding Challenge Level Certificates
+  const codingCert = await CodingCertificate.findOne({ certificateId }).lean();
+  if (codingCert) {
+    if (codingCert.status === "REVOKED") return { valid: false, reason: "REVOKED", certificate: null };
+    return {
+      valid: true,
+      certificate: {
+        certificateId: codingCert.certificateId,
+        userNameSnapshot: codingCert.userNameSnapshot,
+        type: "CODING_CHALLENGE",
+        levelName: codingCert.levelName,
+        levelDays: codingCert.levelDays,
+        phaseId: codingCert.phaseId,
+        completedDaysCount: codingCert.completedDaysCount,
+        totalDays: codingCert.totalDays,
+        streak: codingCert.streak,
+        xpEarned: codingCert.xpEarned,
+        issueDate: codingCert.issueDate,
+        status: codingCert.status,
+      },
+    };
+  }
+
+  return { valid: false, reason: "NOT_FOUND" };
 };
 
 module.exports = {

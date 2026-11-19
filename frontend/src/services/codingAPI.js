@@ -17,3 +17,9 @@ export const evaluateCode = (payload) =>
 
 export const saveCodingResult = (payload) =>
   API.post("/coding/results", payload).then((r) => r.data);
+
+export const getMyCodingCertificates = () =>
+  API.get("/coding/certificates").then((r) => r.data);
+
+export const unlockCodingCertificate = (phaseId) =>
+  API.post("/coding/certificate/unlock", { phaseId: parseInt(phaseId, 10) }).then((r) => r.data);

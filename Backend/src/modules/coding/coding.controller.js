@@ -155,5 +155,37 @@ const completeChallengeDay = catchAsync(async (req, res) => {
   res.status(200).json({ success: true, data: result });
 });
 
-module.exports = { startCodingSession, saveCodingResult, getAllCodingResults, evaluateCode, getProblems, getProblemById, seedProblemsTemp, getChallenge, completeChallengeDay };
+const getMyCodingCertificates = catchAsync(async (req, res) => {
+  const userId = req.user;
+  const result = await codingService.getMyCodingCertificates(userId);
+  res.status(200).json({ success: true, data: result });
+});
+
+const unlockCodingCertificate = catchAsync(async (req, res) => {
+  const userId = req.user;
+  const { phaseId, forceUnlock } = req.body;
+  const result = await codingService.unlockCodingCertificate(userId, phaseId, forceUnlock);
+  res.status(result.alreadyUnlocked ? 200 : 201).json({
+    success: true,
+    alreadyUnlocked: result.alreadyUnlocked,
+    message: result.alreadyUnlocked
+      ? "Certificate already unlocked."
+      : "Level Certificate unlocked successfully!",
+    certificate: result.certificate,
+  });
+});
+
+module.exports = {
+  startCodingSession,
+  saveCodingResult,
+  getAllCodingResults,
+  evaluateCode,
+  getProblems,
+  getProblemById,
+  seedProblemsTemp,
+  getChallenge,
+  completeChallengeDay,
+  getMyCodingCertificates,
+  unlockCodingCertificate,
+};
 

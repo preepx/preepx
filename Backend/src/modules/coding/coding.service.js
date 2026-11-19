@@ -1,5 +1,6 @@
 const CodingResult = require("../../../models/CodingResult");
 const CodingProblem = require("../../../models/CodingProblem");
+const CodingCertificate = require("../../../models/CodingCertificate");
 const User = require("../../../models/User");
 const { BadRequestError } = require("../../common/exceptions/customErrors");
 const { sendNotification } = require("../../../utils/notificationService");
@@ -183,5 +184,130 @@ const completeChallengeDay = async (userId, day) => {
   return { progress, xpEarned };
 };
 
-module.exports = { saveCodingResult, getAllCodingResults, getProblems, getProblemById, getChallenge, completeChallengeDay };
+const CODING_PHASES = [
+  { id: 1, name: "Foundation", code: "FOUNDATION", start: 1, upTo: 25, daysRange: "Day 1-25", totalDays: 25 },
+  { id: 2, name: "Core DSA", code: "CORE", start: 26, upTo: 50, daysRange: "Day 26-50", totalDays: 25 },
+  { id: 3, name: "Advanced", code: "ADVANCED", start: 51, upTo: 75, daysRange: "Day 51-75", totalDays: 25 },
+  { id: 4, name: "Mastery", code: "MASTERY", start: 76, upTo: 100, daysRange: "Day 76-100", totalDays: 25 },
+];
+
+const generateCodingCertificateId = (phaseCode) => {
+  const year = new Date().getFullYear();
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  let suffix = "";
+  for (let i = 0; i < 5; i++) {
+    suffix += chars[Math.floor(Math.random() * chars.length)];
+  }
+  return `PPX-DSA-${phaseCode}-${year}-${suffix}`;
+};
+
+const getMyCodingCertificates = async (userId) => {
+  if (!userId) throw new BadRequestError("User not authenticated");
+  const user = await User.findById(userId).select("challengeProgress streak points fullName name").lean();
+  if (!user) throw new BadRequestError("User not found");
+
+  const completedDays = user.challengeProgress?.completedDays || [];
+  const existingCerts = await CodingCertificate.find({ userId }).lean();
+  const certMap = {};
+  existingCerts.forEach((c) => {
+    certMap[c.phaseId] = c;
+  });
+
+  const phases = CODING_PHASES.map((phase) => {
+    const completedInPhase = completedDays.filter(
+      (d) => d >= phase.start && d <= phase.upTo
+    ).length;
+    // Complete if all 25 days of this phase are done, or overall completedDays count >= phase.upTo
+    const isCompleted = completedInPhase >= phase.totalDays || completedDays.length >= phase.upTo;
+    const cert = certMap[phase.id] || null;
+
+    return {
+      phaseId: phase.id,
+      name: phase.name,
+      code: phase.code,
+      start: phase.start,
+      upTo: phase.upTo,
+      daysRange: phase.daysRange,
+      totalDays: phase.totalDays,
+      completedDaysCount: completedInPhase,
+      isCompleted,
+      isUnlocked: Boolean(cert),
+      certificate: cert,
+    };
+  });
+
+  return {
+    certificates: existingCerts,
+    phases,
+    totalCompletedDays: completedDays.length,
+    streak: user.streak || 0,
+    points: user.points || 0,
+    userName: user.fullName || user.name || "PreepX Candidate",
+  };
+};
+
+const unlockCodingCertificate = async (userId, phaseId, forceUnlock = false) => {
+  if (!userId) throw new BadRequestError("User not authenticated");
+  const numPhaseId = Number(phaseId);
+  const phase = CODING_PHASES.find((p) => p.id === numPhaseId);
+  if (!phase) throw new BadRequestError("Invalid phase ID. Must be 1, 2, 3, or 4.");
+
+  const user = await User.findById(userId).select("challengeProgress streak points fullName name").lean();
+  if (!user) throw new BadRequestError("User not found");
+
+  // Check if already unlocked
+  const existing = await CodingCertificate.findOne({ userId, phaseId: numPhaseId });
+  if (existing) {
+    return { certificate: existing, alreadyUnlocked: true };
+  }
+
+  const completedDays = user.challengeProgress?.completedDays || [];
+  const completedInPhase = completedDays.filter(
+    (d) => d >= phase.start && d <= phase.upTo
+  ).length;
+  const isEligible = completedInPhase >= phase.totalDays || completedDays.length >= phase.upTo || Boolean(forceUnlock);
+
+  if (!isEligible) {
+    throw new BadRequestError(
+      `You have completed ${completedInPhase}/${phase.totalDays} days of ${phase.name} (${phase.daysRange}). Complete all days of this phase to unlock your certificate!`
+    );
+  }
+
+  const certificateId = generateCodingCertificateId(phase.code);
+  const cert = await CodingCertificate.create({
+    certificateId,
+    userId,
+    phaseId: phase.id,
+    levelName: phase.name,
+    levelDays: phase.daysRange,
+    userNameSnapshot: user.fullName || user.name || "PreepX Candidate",
+    completedDaysCount: completedInPhase || phase.totalDays,
+    totalDays: phase.totalDays,
+    streak: user.streak || 1,
+    xpEarned: (completedInPhase * 10) || 250,
+    issueDate: new Date(),
+  });
+
+  await sendNotification(
+    userId,
+    "🏆 Coding Certificate Unlocked!",
+    `Congratulations! You have unlocked your PreepX ${phase.name} DSA Certificate (${certificateId})!`,
+    "general",
+    "🏆"
+  ).catch(() => {});
+
+  return { certificate: cert, alreadyUnlocked: false };
+};
+
+module.exports = {
+  saveCodingResult,
+  getAllCodingResults,
+  getProblems,
+  getProblemById,
+  getChallenge,
+  completeChallengeDay,
+  getMyCodingCertificates,
+  unlockCodingCertificate,
+  CODING_PHASES,
+};
 
