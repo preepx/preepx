@@ -534,27 +534,31 @@ body.notification-modal-open .chatbot-overlay {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: #4f46e5;
-  background: #ffffff;
-  border: 1px solid #e0e7ff;
+  color: #ffffff;
+  background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%);
+  border: none;
   text-decoration: none;
   cursor: pointer;
   font-family: inherit;
   outline: none;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 6px rgba(61, 94, 255, 0.25);
 }
 
 .chatbot-contact-pill:hover {
-  background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%);
+  background: linear-gradient(90deg, #2b4be6 0%, #4c0fa6 100%);
   color: #ffffff;
-  border-color: transparent;
-  box-shadow: 0 2px 8px rgba(61, 94, 255, 0.3);
+  box-shadow: 0 3px 10px rgba(43, 75, 230, 0.4);
   transform: translateY(-1px);
+}
+
+.chatbot-contact-pill:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(43, 75, 230, 0.3);
 }
 
 .chatbot-bubble a {
@@ -954,19 +958,20 @@ body.notification-modal-open .chatbot-overlay {
   align-items: center;
   gap: 6px;
   padding: 8px 18px;
-  background: linear-gradient(135deg, #4f46e5 0%, #3d5eff 100%);
+  background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%);
   color: #ffffff;
   border: none;
   border-radius: 6px;
   font-size: 12.5px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.25);
-  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(61, 94, 255, 0.25);
+  transition: all 0.2s ease;
 }
 
 .chatbot-modal-btn-submit:hover:not(:disabled) {
-  opacity: 0.95;
+  background: linear-gradient(90deg, #2b4be6 0%, #4c0fa6 100%);
+  box-shadow: 0 3px 10px rgba(43, 75, 230, 0.4);
   transform: translateY(-1px);
 }
 

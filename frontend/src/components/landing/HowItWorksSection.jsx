@@ -284,15 +284,32 @@ function HowItWorksSection() {
                 </div>
 
                 {/* Hiring Pipeline */}
-                <div className="mt-[12px] ml-0 w-full rounded-[8px] border border-gray-500 bg-[#84D4FF] px-[8px] min-[360px]:px-[16px] pb-[8px] pt-[10px] overflow-hidden" style={{ minHeight: '90px' }}>
-                  <h4 className="mt-0 mb-[4px] text-left font-sans text-[13px] min-[360px]:text-[14px] min-[860px]:text-[16px] font-medium leading-[24px] tracking-normal text-[#111]">Hiring Pipeline</h4>
-                  <div className="mt-[4px]">
+                <div
+                  className="mt-[14px] ml-0 w-full rounded-[8px] border border-gray-500 bg-[#84D4FF] overflow-hidden"
+                  style={{
+                    minHeight: '96px',
+                    padding: '14px 20px 12px 20px',
+                    boxSizing: 'border-box'
+                  }}
+                >
+                  <h4
+                    className="text-left font-sans font-semibold tracking-normal text-[#111]"
+                    style={{
+                      margin: '0 0 8px 0',
+                      padding: '0px',
+                      fontSize: '15px',
+                      lineHeight: '1.2'
+                    }}
+                  >
+                    Hiring Pipeline
+                  </h4>
+                  <div style={{ marginTop: '4px' }}>
                     {/* Stage Labels & Counts */}
-                    <div className="grid grid-cols-5 text-center gap-x-0.5 min-[360px]:gap-x-0 mb-[3px] min-[860px]:mb-[4px]">
+                    <div className="grid grid-cols-5 text-center mb-[4px]">
                       {PIPELINE.map((step) => (
                         <div key={step.label} className="flex flex-col items-center">
-                          <span className="text-[7.5px] min-[360px]:text-[9px] min-[860px]:text-[11px] font-medium text-black truncate max-w-full" style={{ padding: '0 1px' }}>{step.label}</span>
-                          <span className="text-[8.5px] min-[360px]:text-[10px] min-[860px]:text-[12px] font-bold text-black">{step.val}</span>
+                          <span className="text-[8px] min-[360px]:text-[9.5px] min-[860px]:text-[11px] font-medium text-black truncate max-w-full" style={{ padding: '0 1px' }}>{step.label}</span>
+                          <span className="text-[9px] min-[360px]:text-[10.5px] min-[860px]:text-[12px] font-bold text-black">{step.val}</span>
                         </div>
                       ))}
                     </div>

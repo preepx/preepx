@@ -38,81 +38,86 @@ function HeroSection({ onRecruiterClick }) {
             PreepX is an AI-powered platform that helps candidates prepare better and helps recruiters hire the right talent faster.
           </p>
 
-          {/* Action Buttons */}
-          <div className="flex flex-row gap-2 sm:gap-3 mb-5 justify-center lg:justify-start flex-nowrap w-full mx-auto lg:mx-0" style={{ marginTop: '16px', maxWidth: '100%', padding: '0 4px' }}>
-            <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none w-full sm:w-[195px] lg:w-[200px]">
-              <button
-                onClick={() => navigate('/auth?role=candidate')}
-                className="group relative inline-flex items-center justify-center text-white transition-all transform hover:-translate-y-0.5 overflow-hidden hover:opacity-90 leading-none w-full h-[38px] sm:h-[46px]"
-                style={{
-                  background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
-                  gap: '4px',
-                  borderRadius: '8px',
-                  border: 'none',
-                  padding: '0 8px',
-                  boxSizing: 'border-box',
-                  fontFamily: 'Inter, sans-serif',
-                  fontWeight: 500,
-                  fontSize: 'clamp(9px, 2.5vw, 15px)',
-                  letterSpacing: '0px',
-                  whiteSpace: 'nowrap'
-                }}
-              >
-                <img src="/landing/Vector.svg" alt="Candidate" className="w-[10px] h-[10px] min-[360px]:w-[12px] min-[360px]:h-[12px] sm:w-[16px] sm:h-[16px]" />
-                <span>I'm a Candidate</span>
-                <span className="ml-0.5 sm:ml-1">→</span>
-              </button>
-              <span className="text-[7.5px] min-[360px]:text-[8.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Start preparing for your dream role</span>
+          {/* Action Buttons & Feature Tags Section (Centered relative to the buttons) */}
+          <div className="w-full sm:max-w-[412px] mx-auto lg:mx-0" style={{ marginTop: '16px' }}>
+            {/* Action Buttons */}
+            <div className="flex flex-row gap-2 sm:gap-3 mb-5 justify-between flex-nowrap w-full">
+              <div className="flex flex-col gap-1 items-center flex-1 w-full sm:w-[195px] lg:w-[200px]">
+                <button
+                  onClick={() => navigate('/auth?role=candidate')}
+                  className="group relative inline-flex items-center justify-center text-white transition-all transform hover:-translate-y-0.5 overflow-hidden hover:opacity-90 leading-none w-full h-[38px] sm:h-[46px]"
+                  style={{
+                    background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
+                    gap: '4px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    padding: '0 8px',
+                    boxSizing: 'border-box',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 500,
+                    fontSize: 'clamp(9px, 2.5vw, 15px)',
+                    letterSpacing: '0px',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  <img src="/landing/Vector.svg" alt="Candidate" className="w-[10px] h-[10px] min-[360px]:w-[12px] min-[360px]:h-[12px] sm:w-[16px] sm:h-[16px]" />
+                  <span>I'm a Candidate</span>
+                  <span className="ml-0.5 sm:ml-1">→</span>
+                </button>
+                <span className="text-[7.5px] min-[360px]:text-[8.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Start preparing for your dream role</span>
+              </div>
+
+              <div className="flex flex-col gap-1 items-center flex-1 w-full sm:w-[195px] lg:w-[200px]">
+                <button
+                  onClick={handleRecruiterClick}
+                  className="group relative inline-flex items-center justify-center text-white transition-all transform hover:-translate-y-0.5 overflow-hidden hover:opacity-90 leading-none w-full h-[38px] sm:h-[46px]"
+                  style={{
+                    background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
+                    gap: '4px',
+                    borderRadius: '8px',
+                    border: 'none',
+                    padding: '0 8px',
+                    boxSizing: 'border-box',
+                    fontFamily: 'Inter, sans-serif',
+                    fontWeight: 500,
+                    fontSize: 'clamp(9px, 2.5vw, 15px)',
+                    letterSpacing: '0px',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  <img src="/landing/fluent-mdl2_add-work.svg" alt="Recruiter" className="w-[10px] h-[10px] min-[360px]:w-[12px] min-[360px]:h-[12px] sm:w-[16px] sm:h-[16px]" />
+                  <span>I'm a Recruiter</span>
+                  <span className="ml-0.5 sm:ml-1">→</span>
+                </button>
+                <span className="text-[7.5px] min-[360px]:text-[8.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Find and hire the best talent</span>
+              </div>
             </div>
 
-            <div className="flex flex-col gap-1 items-center flex-1 lg:flex-none w-full sm:w-[195px] lg:w-[200px]">
-              <button
-                onClick={handleRecruiterClick}
-                className="group relative inline-flex items-center justify-center text-white transition-all transform hover:-translate-y-0.5 overflow-hidden hover:opacity-90 leading-none w-full h-[38px] sm:h-[46px]"
-                style={{
-                  background: 'linear-gradient(90deg, #3D5EFF 0%, #6017C7 100%)',
-                  gap: '4px',
-                  borderRadius: '8px',
-                  border: 'none',
-                  padding: '0 8px',
-                  boxSizing: 'border-box',
-                  fontFamily: 'Inter, sans-serif',
-                  fontWeight: 500,
-                  fontSize: 'clamp(9px, 2.5vw, 15px)',
-                  letterSpacing: '0px',
-                  whiteSpace: 'nowrap'
-                }}
+            {/* Feature Tags - Stretches from "Start preparing..." to "...best talent" */}
+            <div className="flex flex-row items-center gap-1.5 sm:gap-2.5 w-full" style={{ marginTop: '14px' }}>
+              <div
+                className="flex-1 min-w-0 inline-flex items-center justify-center bg-[#E5E9FF] border-slate-900 font-medium text-slate-900 shadow-sm whitespace-nowrap cursor-default hover:bg-[#dbe2ff] transition-all"
+                style={{ height: '34px', gap: '5px', borderRadius: '8px', borderWidth: '1.5px', padding: '0px 6px', boxSizing: 'border-box' }}
               >
-                <img src="/landing/fluent-mdl2_add-work.svg" alt="Recruiter" className="w-[10px] h-[10px] min-[360px]:w-[12px] min-[360px]:h-[12px] sm:w-[16px] sm:h-[16px]" />
-                <span>I'm a Recruiter</span>
-                <span className="ml-0.5 sm:ml-1">→</span>
-              </button>
-              <span className="text-[7.5px] min-[360px]:text-[8.5px] sm:text-[11px] text-[#555] font-medium text-center block w-full leading-tight">Find and hire the best talent</span>
-            </div>
-          </div>
+                <img src="/landing/bi_mic-fill.svg" alt="Mic" className="w-3 h-3 flex-shrink-0" />
+                <span className="text-[9px] min-[360px]:text-[9.5px] sm:text-[10.5px] truncate">AI Mock Interviews</span>
+              </div>
 
-          {/* Feature Tags */}
-          <div className="flex flex-wrap items-center gap-1.5 justify-center lg:justify-start" style={{ marginTop: '12px' }}>
-            <div
-              className="inline-flex items-center justify-center bg-[#E5E9FF] border-slate-900 font-medium text-slate-900 shadow-sm whitespace-nowrap flex-shrink-0"
-              style={{ height: '32px', gap: '4px', borderRadius: '8px', borderWidth: '1.5px', padding: '0px 8px', boxSizing: 'border-box', fontSize: '10px' }}
-            >
-              <img src="/landing/bi_mic-fill.svg" alt="Mic" className="w-3 h-3" />
-              <span>AI Mock Interviews</span>
-            </div>
-            <div
-              className="inline-flex items-center justify-center bg-[#E5E9FF] border-slate-900 font-medium text-slate-900 shadow-sm whitespace-nowrap flex-shrink-0"
-              style={{ height: '32px', gap: '4px', borderRadius: '8px', borderWidth: '1.5px', padding: '0px 8px', boxSizing: 'border-box', fontSize: '10px' }}
-            >
-              <img src="/landing/fluent_notepad-edit-20-filled.svg" alt="Exam" className="w-3 h-3" />
-              <span>Objective Exam</span>
-            </div>
-            <div
-              className="inline-flex items-center justify-center bg-[#E5E9FF] border-slate-900 font-medium text-slate-900 shadow-sm whitespace-nowrap flex-shrink-0"
-              style={{ height: '32px', gap: '4px', borderRadius: '8px', borderWidth: '1.5px', padding: '0px 8px', boxSizing: 'border-box', fontSize: '10px' }}
-            >
-              <img src="/landing/hugeicons_message-programming.svg" alt="Code" className="w-3 h-3" />
-              <span>Coding Challenges</span>
+              <div
+                className="flex-1 min-w-0 inline-flex items-center justify-center bg-[#E5E9FF] border-slate-900 font-medium text-slate-900 shadow-sm whitespace-nowrap cursor-default hover:bg-[#dbe2ff] transition-all"
+                style={{ height: '34px', gap: '5px', borderRadius: '8px', borderWidth: '1.5px', padding: '0px 6px', boxSizing: 'border-box' }}
+              >
+                <img src="/landing/fluent_notepad-edit-20-filled.svg" alt="Exam" className="w-3 h-3 flex-shrink-0" />
+                <span className="text-[9px] min-[360px]:text-[9.5px] sm:text-[10.5px] truncate">Objective Exam</span>
+              </div>
+
+              <div
+                className="flex-1 min-w-0 inline-flex items-center justify-center bg-[#E5E9FF] border-slate-900 font-medium text-slate-900 shadow-sm whitespace-nowrap cursor-default hover:bg-[#dbe2ff] transition-all"
+                style={{ height: '34px', gap: '5px', borderRadius: '8px', borderWidth: '1.5px', padding: '0px 6px', boxSizing: 'border-box' }}
+              >
+                <img src="/landing/hugeicons_message-programming.svg" alt="Code" className="w-3 h-3 flex-shrink-0" />
+                <span className="text-[9px] min-[360px]:text-[9.5px] sm:text-[10.5px] truncate">Coding Challenges</span>
+              </div>
             </div>
           </div>
 

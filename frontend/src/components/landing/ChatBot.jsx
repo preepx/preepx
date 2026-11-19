@@ -373,7 +373,7 @@ export default function ChatBot() {
           ...prev,
           {
             from: "bot",
-            text: `✅ **Query Received!**\n\nYour message has been sent directly to our support team at **contact@preepx.in**.\n\nWe will review your inquiry and get back to you at **${userEmail}** shortly! 🤝`,
+            text: `✅ **Query Received!**\n\nYour message has been sent directly to our support team.\n\nWe will review your inquiry and get back to you at **${userEmail}** shortly! 🤝`,
             id: Date.now(),
           },
         ]);
@@ -529,16 +529,16 @@ export default function ChatBot() {
         <div className="chatbot-contact-bar">
           <div className="chatbot-contact-left">
             <span className="chatbot-contact-dot" />
-            <span className="chatbot-contact-text">Need help? Contact us:</span>
+            <span className="chatbot-contact-text">Need help?</span>
           </div>
           <button
             type="button"
             onClick={handleOpenQueryModal}
             className="chatbot-contact-pill"
-            title="Have a query AI couldn't solve? Write to contact@preepx.in"
+            title="Have a query AI couldn't solve? Write to PreepX Support team"
           >
             <Mail size={13} />
-            <span>contact@preepx.in</span>
+            <span>Contact Us</span>
           </button>
         </div>
 
@@ -603,10 +603,10 @@ export default function ChatBot() {
             {/* Form */}
             <form onSubmit={handleSendQuery}>
               <div className="chatbot-modal-body">
-                {/* Target Email Info Badge */}
+                {/* Support Team Info Badge */}
                 <div className="chatbot-modal-info-pill">
                   <span className="chatbot-modal-info-dot" />
-                  <span>Sending inquiry to: <strong>contact@preepx.in</strong></span>
+                  <span>Direct message to <strong>PreepX Support Team</strong></span>
                 </div>
 
                 {queryError && (
