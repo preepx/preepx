@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X, Gift, Calendar, Shield } from 'lucide-react';
+import { User, Wallet, History, ArrowLeft, Briefcase, GraduationCap, PlusCircle, Star, Terminal, Users, X, Gift, Calendar, Shield, XCircle } from 'lucide-react';
 import api from '../utils/api';
 import './UserDetails.css';
 import Pagination from '../components/Pagination';
@@ -21,6 +21,23 @@ const UserDetails = () => {
   const [planToAssign, setPlanToAssign] = useState('Pro Plan');
   const [planDays, setPlanDays] = useState(30);
   const [assigningPlan, setAssigningPlan] = useState(false);
+  const [deactivatingPlan, setDeactivatingPlan] = useState(false);
+
+  const handleDeactivatePlan = async () => {
+    const planName = data?.user?.subscription?.planName || 'Pro Plan';
+    if (!window.confirm(`Are you sure you want to deactivate / cancel ${data?.user?.fullName || 'this user'}'s ${planName}?`)) return;
+    setDeactivatingPlan(true);
+    try {
+      await api.put(`/users/${id}/plan/deactivate`);
+      const updatedData = await api.get(`/users/${id}`);
+      setData(updatedData.data);
+      alert('Pro Plan cancelled/deactivated successfully.');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to deactivate plan');
+    } finally {
+      setDeactivatingPlan(false);
+    }
+  };
 
   const [referrals, setReferrals] = useState([]);
   const [showReferralsModal, setShowReferralsModal] = useState(false);
@@ -158,6 +175,61 @@ const UserDetails = () => {
                   <p><strong>Plan:</strong> {user.subscription.planName || user.subscription.planId}</p>
                   <p><strong>Status:</strong> <span style={{ color: '#10b981', fontWeight: 'bold' }}>Active</span></p>
                   <p><strong>Expires:</strong> {user.subscription.expiresAt ? new Date(user.subscription.expiresAt).toLocaleDateString() : 'N/A'}</p>
+                  {user.subscription.paymentMethod && (
+                    <p><strong>Payment Method:</strong> <span className="badge badge-accent" style={{ marginLeft: 6 }}>{user.subscription.paymentMethod}</span></p>
+                  )}
+                  {user.subscription.walletUsed > 0 && (
+                    <p><strong>Wallet Balance Used:</strong> ₹{user.subscription.walletUsed}</p>
+                  )}
+                  {user.subscription.amountPaid > 0 && (
+                    <p><strong>External Paid:</strong> ₹{user.subscription.amountPaid}</p>
+                  )}
+                  {Array.isArray(user.subscriptionQueue) &&
+                    user.subscriptionQueue.filter((q) => q.status === "scheduled").length > 0 && (
+                      <div style={{ marginTop: '0.75rem', paddingTop: '0.75rem', borderTop: '1px dashed rgba(255,255,255,0.1)' }}>
+                        <p style={{ fontWeight: 'bold', marginBottom: '4px', color: '#38bdf8' }}>
+                          📅 Queued Plans ({user.subscriptionQueue.filter((q) => q.status === "scheduled").length}):
+                        </p>
+                        {user.subscriptionQueue
+                          .filter((q) => q.status === "scheduled")
+                          .map((q, idx) => (
+                            <p key={idx} style={{ fontSize: '0.85rem', marginBottom: '2px', color: 'var(--text-secondary)' }}>
+                              • <strong>{q.planName}</strong> (Scheduled: {new Date(q.scheduledStartDate).toLocaleDateString()}, Mode: {q.paymentMethod || 'Razorpay'})
+                            </p>
+                          ))}
+                      </div>
+                    )}
+                  <button
+                    onClick={handleDeactivatePlan}
+                    disabled={deactivatingPlan}
+                    style={{
+                      marginTop: '0.85rem',
+                      width: '100%',
+                      padding: '0.5rem 1rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.4rem',
+                      fontSize: '0.85rem',
+                      background: 'rgba(239, 68, 68, 0.15)',
+                      color: '#ef4444',
+                      border: '1px solid rgba(239, 68, 68, 0.3)',
+                      borderRadius: '6px',
+                      cursor: 'pointer',
+                      fontWeight: '600',
+                      transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = '#ef4444';
+                      e.currentTarget.style.color = '#ffffff';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'rgba(239, 68, 68, 0.15)';
+                      e.currentTarget.style.color = '#ef4444';
+                    }}
+                  >
+                    <XCircle size={16} /> {deactivatingPlan ? 'Cancelling...' : 'Cancel / Deactivate Plan'}
+                  </button>
                 </>
               ) : (
                 <p className="text-secondary">No active subscription.</p>

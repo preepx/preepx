@@ -1,8 +1,15 @@
-import React, { useState } from "react";
-import { IndianRupee, Mic, Zap, Shield, TrendingUp, Plus, X } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { IndianRupee, Mic, Zap, Shield, TrendingUp, Plus, X, FileText } from "lucide-react";
 import notify from "@/utils/notify";
 import { useWallet, TransactionList, createOrder, verifyPayment, WALLET_PRICING } from "@/features/wallet";
-import { useSubscription, PlanCards } from "@/features/subscription";
+import {
+  useSubscription,
+  PlanCards,
+  SubscriptionReceiptModal,
+  SubscriptionReceiptList,
+  getSubscriptionReceipts,
+  getSubscriptionReceiptById,
+} from "@/features/subscription";
 import '@/styles/WalletPage.css';
 
 import Loader from "@/components/Loader";
@@ -24,7 +31,70 @@ function WalletPage() {
   const [customAmount, setCustomAmount] = useState(1);
   const [buying, setBuying] = useState(false);
 
+  // Subscription Receipts state
+  const [activeHistoryTab, setActiveHistoryTab] = useState("wallet"); // "wallet" | "subscriptions"
+  const [receipts, setReceipts] = useState([]);
+  const [receiptsLoading, setReceiptsLoading] = useState(false);
+  const [selectedReceipt, setSelectedReceipt] = useState(null);
+  const [showReceiptModal, setShowReceiptModal] = useState(false);
+
   const loading = walletLoading || subLoading;
+
+  const loadReceipts = async () => {
+    try {
+      setReceiptsLoading(true);
+      const res = await getSubscriptionReceipts();
+      setReceipts(res?.receipts || []);
+    } catch (err) {
+      console.error("Failed to load receipts", err);
+    } finally {
+      setReceiptsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadReceipts();
+  }, []);
+
+  const handleOpenReceipt = async (receiptOrId) => {
+    if (!receiptOrId) {
+      if (receipts.length > 0) {
+        setSelectedReceipt(receipts[0]);
+        setShowReceiptModal(true);
+      } else {
+        notify.info("No receipts found yet");
+      }
+      return;
+    }
+
+    if (typeof receiptOrId === "object") {
+      setSelectedReceipt(receiptOrId);
+      setShowReceiptModal(true);
+      return;
+    }
+
+    // Receipt ID string
+    const existing = receipts.find(
+      (r) => r.receiptId === receiptOrId || r._id === receiptOrId
+    );
+    if (existing) {
+      setSelectedReceipt(existing);
+      setShowReceiptModal(true);
+      return;
+    }
+
+    try {
+      const data = await getSubscriptionReceiptById(receiptOrId);
+      if (data?.receipt) {
+        setSelectedReceipt(data.receipt);
+        setShowReceiptModal(true);
+      } else {
+        notify.info("Receipt details not found");
+      }
+    } catch (err) {
+      notify.error("Could not fetch receipt details");
+    }
+  };
 
   if (loading && !config) {
     return <Loader />;
@@ -130,8 +200,6 @@ function WalletPage() {
 
       </div>
 
-
-
       <div className="wallet-pricing-grid">
         <div className="wallet-pricing-item">
           <Mic size={20} />
@@ -159,16 +227,88 @@ function WalletPage() {
       <PlanCards
         plans={plans}
         currentSub={currentSub}
-        onPurchaseSuccess={() => {
+        walletBalance={balance}
+        onViewReceipt={handleOpenReceipt}
+        onPurchaseSuccess={(result) => {
           refreshSub();
           refreshWallet();
+          loadReceipts();
+          if (result?.receipt) {
+            setSelectedReceipt(result.receipt);
+            setShowReceiptModal(true);
+          }
         }}
       />
 
       <div className="wallet-txn-section">
-        <h3>Transaction History</h3>
-        <TransactionList transactions={transactions} />
+        {/* Toggle between Wallet Transactions and Subscription Receipts */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "16px",
+            flexWrap: "wrap",
+            gap: "10px",
+          }}
+        >
+          <div style={{ display: "flex", gap: "8px" }}>
+            <button
+              type="button"
+              className={`wallet-tab-btn ${activeHistoryTab === "wallet" ? "active" : ""}`}
+              onClick={() => setActiveHistoryTab("wallet")}
+              style={{
+                padding: "8px 16px",
+                borderRadius: "8px",
+                fontSize: "14px",
+                fontWeight: "700",
+                cursor: "pointer",
+                border: activeHistoryTab === "wallet" ? "1px solid #3b82f6" : "1px solid var(--border)",
+                background: activeHistoryTab === "wallet" ? "#eff6ff" : "var(--surface)",
+                color: activeHistoryTab === "wallet" ? "#2563eb" : "var(--text-muted)",
+                transition: "all 0.2s ease"
+              }}
+            >
+              Wallet Transactions ({transactions.length})
+            </button>
+            <button
+              type="button"
+              className={`wallet-tab-btn ${activeHistoryTab === "subscriptions" ? "active" : ""}`}
+              onClick={() => setActiveHistoryTab("subscriptions")}
+              style={{
+                padding: "8px 16px",
+                borderRadius: "8px",
+                fontSize: "14px",
+                fontWeight: "700",
+                cursor: "pointer",
+                border: activeHistoryTab === "subscriptions" ? "1px solid #3b82f6" : "1px solid var(--border)",
+                background: activeHistoryTab === "subscriptions" ? "#eff6ff" : "var(--surface)",
+                color: activeHistoryTab === "subscriptions" ? "#2563eb" : "var(--text-muted)",
+                transition: "all 0.2s ease"
+              }}
+            >
+              Subscription Receipts ({receipts.length})
+            </button>
+          </div>
+        </div>
+
+        {activeHistoryTab === "wallet" ? (
+          <TransactionList transactions={transactions} />
+        ) : (
+          <SubscriptionReceiptList
+            receipts={receipts}
+            loading={receiptsLoading}
+            onViewReceipt={handleOpenReceipt}
+          />
+        )}
       </div>
+
+      {/* Official Payment Receipt Modal */}
+      <SubscriptionReceiptModal
+        isOpen={showReceiptModal}
+        onClose={() => setShowReceiptModal(false)}
+        receipt={selectedReceipt}
+      />
 
       {/* Add Money Modal */}
       {showAddModal && (

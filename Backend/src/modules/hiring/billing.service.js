@@ -7,6 +7,7 @@ const companyService = require("./company.service");
 const paymentService = require("../../services/payment.service");
 const { sendRecruiterNotification } = require("../../../utils/recruiterNotificationService");
 const { NotFoundError, ForbiddenError, BadRequestError } = require("../../common/exceptions/customErrors");
+const { Resend } = require("resend");
 
 const INCLUDED_IN_ALL = [
   "AI Candidate Scoring",
@@ -20,7 +21,7 @@ const PLAN_DEFS = [
     name: "Starter",
     slug: "starter",
     tagline: "For Small Teams",
-    priceInr: 1999,
+    priceInr: 999,
     billingCycle: "monthly",
     ctaLabel: "Start Hiring",
     highlight: false,
@@ -263,6 +264,8 @@ const getBilling = async (recruiterId) => {
     subscription = await syncUsagePeriod(subscription, recruiterId);
   }
 
+  await SubscriptionPlan.updateOne({ slug: "starter", priceInr: { $ne: 999 } }, { $set: { priceInr: 999 } });
+
   const plans = await SubscriptionPlan.find({ isActive: true }).sort({ sortOrder: 1, priceInr: 1 }).lean();
   const jobPostsThisMonth = await countJobPostsThisMonth(recruiterId);
   const planDoc = subscription?.planId;
@@ -404,7 +407,20 @@ const verifyPayment = async (recruiterId, { razorpay_order_id, razorpay_payment_
   };
 };
 
-const contactSales = async (recruiterId, note = "") => {
+const contactSales = async (recruiterId, payload = {}) => {
+  const note =
+    typeof payload === "string"
+      ? payload
+      : payload.note || payload.message || payload.requirements || "";
+  const customName =
+    typeof payload === "object" ? (payload.name || payload.fullName || "").trim() : "";
+  const customEmail =
+    typeof payload === "object" ? (payload.email || "").trim() : "";
+  const customPhone =
+    typeof payload === "object" ? (payload.phone || "").trim() : "";
+  const customCompany =
+    typeof payload === "object" ? (payload.company || payload.companyName || "").trim() : "";
+
   const plan = await SubscriptionPlan.findOne({ slug: "enterprise", isActive: true });
   if (!plan) throw new NotFoundError("Enterprise plan not found");
   const recruiter = await companyService.getRecruiterContext(recruiterId);
@@ -447,7 +463,115 @@ const contactSales = async (recruiterId, note = "") => {
     "🏢"
   );
 
-  return { message: "Sales request submitted. Our team will reach out shortly." };
+  // Send Email via Resend to contact@preepx.in
+  const apiKey = process.env.RESEND_API_KEY;
+  if (apiKey) {
+    try {
+      const resend = new Resend(apiKey);
+      const toEmail = process.env.FEEDBACK_TO_EMAIL || "contact@preepx.in";
+      const fromEmail = process.env.RESEND_FROM_EMAIL || "PreepX <contact@preepx.in>";
+
+      const leadName = customName || recruiter.fullName || "Recruiter";
+      const leadEmail = customEmail || recruiter.email;
+      const leadPhone = customPhone || recruiter.phone || "Not provided";
+      const leadCompany = customCompany || recruiter.companyName || recruiter.companyId?.name || "Not specified";
+
+      const emailSubject = `PreepX Enterprise Sales Inquiry: ${leadName} (${leadCompany})`;
+
+      const sanitizedMessage = String(note || "No specific hiring requirements entered.")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+
+      const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PreepX Enterprise Sales Inquiry</title>
+</head>
+<body style="margin: 0; padding: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b;">
+  <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+    <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); padding: 24px 28px; color: #ffffff;">
+      <div style="display: inline-block; background: #2563eb; color: #ffffff; font-size: 11px; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px;">
+        Enterprise Inbound Lead
+      </div>
+      <h1 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.01em;">Enterprise Plan — Contact Sales Inquiry</h1>
+      <p style="margin: 6px 0 0 0; font-size: 14px; opacity: 0.85;">A recruiter requested custom Enterprise pricing, integrations & access</p>
+    </div>
+    
+    <div style="padding: 24px 28px;">
+      <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px 20px; margin-bottom: 24px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600; width: 140px;">Contact Name:</td>
+            <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${leadName}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Work Email:</td>
+            <td style="padding: 6px 0;"><a href="mailto:${leadEmail}" style="color: #2563eb; text-decoration: none; font-weight: 600;">${leadEmail}</a></td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Company Name:</td>
+            <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">${leadCompany}</td>
+          </tr>
+          ${leadPhone && leadPhone !== "Not provided" ? `
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Phone / Contact:</td>
+            <td style="padding: 6px 0; color: #0f172a;">${leadPhone}</td>
+          </tr>` : ""}
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Plan of Interest:</td>
+            <td style="padding: 6px 0; color: #0f172a; font-weight: 600;">Enterprise (Custom Pricing, SSO, Custom Integrations)</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #64748b; font-weight: 600;">Submitted At:</td>
+            <td style="padding: 6px 0; color: #64748b;">${new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" })} IST</td>
+          </tr>
+        </table>
+      </div>
+
+      <div style="margin-bottom: 24px;">
+        <h3 style="margin: 0 0 10px 0; font-size: 13px; color: #475569; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+          Hiring Volume & Requirements
+        </h3>
+        <div style="background-color: #f1f5f9; border: 1px solid #cbd5e1; border-left: 4px solid #2563eb; border-radius: 8px; padding: 16px; white-space: pre-wrap; font-size: 14px; line-height: 1.6; color: #1e293b;">
+${sanitizedMessage}
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid #e2e8f0; padding-top: 18px; font-size: 12px; color: #94a3b8; text-align: center; line-height: 1.5;">
+        Sent via <strong>PreepX Recruiter Portal</strong>.<br/>
+        Reply directly to this email to reach <strong>${leadName}</strong> at <strong>${leadEmail}</strong>.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+`;
+
+      const { data: resendData, error: resendError } = await resend.emails.send({
+        from: fromEmail,
+        to: [toEmail],
+        reply_to: leadEmail,
+        subject: emailSubject,
+        html: htmlContent,
+      });
+
+      if (resendError) {
+        console.error("[CONTACT_SALES] Resend API Error:", resendError);
+      } else {
+        console.log(`[CONTACT_SALES] Sales email dispatched to ${toEmail} successfully via Resend! ID: ${resendData?.id}`);
+      }
+    } catch (resendErr) {
+      console.error("[CONTACT_SALES] Exception sending email via Resend:", resendErr);
+    }
+  } else {
+    console.warn("[CONTACT_SALES] RESEND_API_KEY is not defined. Email dispatch skipped.");
+  }
+
+  return { message: "Sales request submitted successfully! Our team will contact you shortly." };
 };
 
 const selectPlan = async (recruiterId, planSlug) => {

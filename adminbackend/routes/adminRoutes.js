@@ -14,6 +14,7 @@ const {
   addXpToUser,
   getUserReferrals,
   assignProPlan,
+  deactivateProPlan,
 } = require("../controllers/adminController");
 
 const {
@@ -73,6 +74,8 @@ router.put("/users/:id/block", toggleUserBlock);
 router.post("/users/:id/wallet/add", addCoinsToWallet);
 router.post("/users/:id/xp/add", addXpToUser);
 router.post("/users/:id/plan/assign", assignProPlan);
+router.put("/users/:id/plan/deactivate", deactivateProPlan);
+router.post("/users/:id/plan/cancel", deactivateProPlan);
 router.get("/transactions", getTransactions);
 router.get("/purchases", getPurchases);
 

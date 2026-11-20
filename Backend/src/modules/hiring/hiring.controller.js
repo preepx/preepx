@@ -259,7 +259,7 @@ exports.verifyBillingPayment = catchAsync(async (req, res) => {
 });
 
 exports.contactSales = catchAsync(async (req, res) => {
-  const data = await billingService.contactSales(req.user, req.body.note || "");
+  const data = await billingService.contactSales(req.user, req.body);
   res.json({ success: true, data, message: data.message });
 });
 

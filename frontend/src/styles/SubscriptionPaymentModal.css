@@ -1,0 +1,721 @@
+/* Subscription Payment Confirmation Modal (Landscape Oriented) */
+
+.sub-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  padding: 16px;
+  animation: subModalFadeIn 0.2s ease-out;
+}
+
+@keyframes subModalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Landscape Modal Container: Width > Height, No Scrollbars on Desktop */
+.sub-modal-card {
+  background: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 760px;
+  box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  animation: subModalSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden; /* No scrollbar on desktop */
+}
+
+[data-theme="dark"] .sub-modal-card {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  color: #f8fafc;
+}
+
+@keyframes subModalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Compact Header */
+.sub-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-bottom: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+[data-theme="dark"] .sub-modal-header {
+  background: #1e293b;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.sub-modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sub-modal-icon-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+  flex-shrink: 0;
+}
+
+.sub-modal-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .sub-modal-title {
+  color: #f8fafc;
+}
+
+.sub-modal-subtitle {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+[data-theme="dark"] .sub-modal-subtitle {
+  color: #94a3b8;
+}
+
+.sub-modal-close-btn {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sub-modal-close-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+[data-theme="dark"] .sub-modal-close-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+/* Two-Column Landscape Grid */
+.sub-modal-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 14px 20px;
+  align-items: stretch;
+}
+
+/* Left Column */
+.sub-modal-left-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.sub-modal-plan-card {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+
+[data-theme="dark"] .sub-modal-plan-card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.7) 100%);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.sub-modal-plan-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.sub-modal-plan-name-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sub-modal-plan-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #d97706;
+  background: #fef3c7;
+  padding: 2px 7px;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+[data-theme="dark"] .sub-modal-plan-badge {
+  background: rgba(217, 119, 6, 0.2);
+  color: #fbbf24;
+}
+
+.sub-modal-plan-name {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 2px 0 0 0;
+}
+
+[data-theme="dark"] .sub-modal-plan-name {
+  color: #f8fafc;
+}
+
+.sub-modal-plan-tagline {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .sub-modal-plan-tagline {
+  color: #94a3b8;
+}
+
+.sub-modal-plan-pricing {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.sub-modal-plan-offer {
+  font-size: 24px;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1;
+}
+
+[data-theme="dark"] .sub-modal-plan-offer {
+  color: #f8fafc;
+}
+
+.sub-modal-plan-real {
+  font-size: 12px;
+  text-decoration: line-through;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.sub-modal-plan-saving {
+  font-size: 10px;
+  font-weight: 700;
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-top: 3px;
+}
+
+[data-theme="dark"] .sub-modal-plan-saving {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #34d399;
+}
+
+/* Compact Benefits 2x2 Grid */
+.sub-modal-features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px dashed #cbd5e1;
+}
+
+[data-theme="dark"] .sub-modal-features-grid {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.sub-modal-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #334155;
+  line-height: 1.2;
+}
+
+[data-theme="dark"] .sub-modal-feature-item {
+  color: #cbd5e1;
+}
+
+/* Queue Info Callout */
+.sub-modal-queue-notice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #0369a1;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 6px;
+  padding: 5px 8px;
+}
+
+[data-theme="dark"] .sub-modal-queue-notice {
+  background: rgba(14, 165, 233, 0.12);
+  border-color: rgba(14, 165, 233, 0.25);
+  color: #7dd3fc;
+}
+
+/* Right Column */
+.sub-modal-right-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Wallet Card Box */
+.sub-modal-wallet-card {
+  background: #f0fdf4;
+  border: 1.5px solid #86efac;
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .sub-modal-wallet-card {
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.sub-modal-wallet-card.disabled {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+  opacity: 0.7;
+}
+
+[data-theme="dark"] .sub-modal-wallet-card.disabled {
+  background: rgba(30, 41, 59, 0.4);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.sub-modal-wallet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sub-modal-wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sub-modal-wallet-icon-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.sub-modal-wallet-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #166534;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+[data-theme="dark"] .sub-modal-wallet-title {
+  color: #34d399;
+}
+
+.sub-modal-wallet-balance-val {
+  font-size: 13px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+[data-theme="dark"] .sub-modal-wallet-balance-val {
+  color: #f8fafc;
+}
+
+.sub-modal-wallet-applied-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 2px 7px;
+  border-radius: 5px;
+  border: 1px solid #a7f3d0;
+}
+
+[data-theme="dark"] .sub-modal-wallet-applied-badge {
+  background: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+/* Checkbox Row */
+.sub-modal-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 6px 10px;
+  border-radius: 7px;
+  border: 1px solid #bbf7d0;
+  transition: all 0.15s ease;
+}
+
+[data-theme="dark"] .sub-modal-checkbox-row {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.sub-modal-checkbox-row:hover:not(.disabled) {
+  background: #ffffff;
+  border-color: #10b981;
+}
+
+.sub-modal-checkbox-row.disabled {
+  cursor: not-allowed;
+  border-color: #cbd5e1;
+}
+
+.sub-modal-checkbox-input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #10b981;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.sub-modal-checkbox-text-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.sub-modal-checkbox-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+[data-theme="dark"] .sub-modal-checkbox-label {
+  color: #f8fafc;
+}
+
+.sub-modal-checkbox-sub {
+  font-size: 10px;
+  color: #059669;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .sub-modal-checkbox-sub {
+  color: #34d399;
+}
+
+/* Payment Breakdown Card */
+.sub-modal-breakdown-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+[data-theme="dark"] .sub-modal-breakdown-card {
+  background: rgba(15, 23, 42, 0.5);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.sub-modal-breakdown-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 0.4px;
+  margin: 0 0 2px 0;
+}
+
+[data-theme="dark"] .sub-modal-breakdown-title {
+  color: #94a3b8;
+}
+
+.sub-modal-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #475569;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .sub-modal-breakdown-row {
+  color: #cbd5e1;
+}
+
+.sub-modal-breakdown-row.discount {
+  color: #10b981;
+  font-weight: 700;
+}
+
+[data-theme="dark"] .sub-modal-breakdown-row.discount {
+  color: #34d399;
+}
+
+.sub-modal-divider {
+  height: 1px;
+  background: #e2e8f0;
+  margin: 2px 0;
+}
+
+[data-theme="dark"] .sub-modal-divider {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sub-modal-breakdown-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+[data-theme="dark"] .sub-modal-breakdown-total {
+  color: #ffffff;
+}
+
+.sub-modal-total-amount {
+  font-size: 18px;
+  font-weight: 900;
+  color: #3d5eff;
+}
+
+[data-theme="dark"] .sub-modal-total-amount {
+  color: #60a5fa;
+}
+
+.sub-modal-total-amount.free {
+  color: #10b981;
+}
+
+[data-theme="dark"] .sub-modal-total-amount.free {
+  color: #34d399;
+}
+
+/* Compact Footer: Cancel on Left, CTA on Right */
+.sub-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px 14px;
+  border-top: 1px solid #e2e8f0;
+  background: #ffffff;
+  gap: 12px;
+}
+
+[data-theme="dark"] .sub-modal-footer {
+  background: #1e293b;
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.sub-modal-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sub-modal-cancel-btn {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sub-modal-cancel-btn:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+[data-theme="dark"] .sub-modal-cancel-btn {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #cbd5e1;
+}
+
+[data-theme="dark"] .sub-modal-cancel-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.sub-modal-security-note {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .sub-modal-security-note {
+  color: #94a3b8;
+}
+
+.sub-modal-submit-btn {
+  padding: 9px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #ffffff;
+  transition: all 0.2s ease;
+  min-width: 190px;
+}
+
+.sub-modal-submit-btn.gateway-btn {
+  background: linear-gradient(90deg, #3d5eff 0%, #6017c7 100%);
+  box-shadow: 0 3px 12px rgba(61, 94, 255, 0.3);
+}
+
+.sub-modal-submit-btn.gateway-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #2b4be6 0%, #4c0fa6 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(61, 94, 255, 0.4);
+}
+
+.sub-modal-submit-btn.wallet-btn {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 3px 12px rgba(16, 185, 129, 0.35);
+}
+
+.sub-modal-submit-btn.wallet-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.45);
+}
+
+.sub-modal-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.sub-modal-error-alert {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 20px 0;
+}
+
+[data-theme="dark"] .sub-modal-error-alert {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+/* Responsive for Mobile Screens (< 640px) */
+@media (max-width: 640px) {
+  .sub-modal-card {
+    max-height: 92vh;
+    overflow-y: auto;
+  }
+
+  .sub-modal-main-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .sub-modal-footer {
+    flex-direction: column-reverse;
+    gap: 10px;
+    padding: 12px 16px;
+  }
+
+  .sub-modal-footer-left {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sub-modal-submit-btn {
+    width: 100%;
+  }
+}

@@ -1,62 +1,24 @@
 import React, { useState } from "react";
-import { CheckCircle, ShieldCheck, Zap, IndianRupee, Calendar, ArrowRight } from "lucide-react";
+import { CheckCircle, ShieldCheck, Zap, IndianRupee, Calendar, ArrowRight, FileText } from "lucide-react";
 import notify from "@/utils/notify";
-import { createSubscriptionOrder, verifySubscriptionPayment } from "../services/subscriptionAPI";
 import { SUBSCRIPTION_PLANS } from "../constants/subscriptionConfig";
-import "@/styles/CoinPackages.css"; // We'll reuse existing package styles or add new ones
+import SubscriptionPaymentModal from "./SubscriptionPaymentModal";
+import "@/styles/CoinPackages.css";
 
-function PlanCards({ plans = SUBSCRIPTION_PLANS, onPurchaseSuccess, currentSub }) {
-  const [buying, setBuying] = useState(null);
+function PlanCards({
+  plans = SUBSCRIPTION_PLANS,
+  onPurchaseSuccess,
+  currentSub,
+  walletBalance = 0,
+  onViewReceipt,
+}) {
   const [activePlan, setActivePlan] = useState(plans.find((p) => p.popular)?.id || plans[0]?.id);
+  const [selectedPlanForModal, setSelectedPlanForModal] = useState(null);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
 
-  const handleBuy = async (plan) => {
-    setBuying(plan.id);
-    try {
-      const orderData = await createSubscriptionOrder(plan.id);
-      const userStr = localStorage.getItem("user");
-      const user = userStr ? JSON.parse(userStr) : {};
-
-      const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID || "rzp_live_TIldjHmH0HwMPb",
-        amount: orderData.amount,
-        currency: orderData.currency,
-        name: "PreepX Pro Access",
-        description: `${plan.name} Subscription`,
-        order_id: orderData.orderId,
-        handler: async function (response) {
-          try {
-            const verifyData = await verifySubscriptionPayment({
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              planId: plan.id,
-            });
-            notify.success(verifyData.message);
-            onPurchaseSuccess?.(verifyData);
-          } catch (error) {
-            notify.error(error.response?.data?.message || "Payment verification failed");
-          }
-        },
-        prefill: {
-          name: user.fullName || "PreepX User",
-          email: user.email || "user@example.com",
-          contact: user.phone || "",
-        },
-        theme: {
-          color: plan.color || "#4f46e5",
-        },
-      };
-
-      const rzp1 = new window.Razorpay(options);
-      rzp1.on("payment.failed", function () {
-        notify.error("Payment failed. Please try again.");
-      });
-      rzp1.open();
-    } catch (err) {
-      notify.error(err.response?.data?.message || "Failed to initiate purchase");
-    } finally {
-      setBuying(null);
-    }
+  const handleOpenPaymentModal = (plan) => {
+    setSelectedPlanForModal(plan);
+    setShowPaymentModal(true);
   };
 
   return (
@@ -67,9 +29,95 @@ function PlanCards({ plans = SUBSCRIPTION_PLANS, onPurchaseSuccess, currentSub }
       </div>
 
       {currentSub?.status === "active" && (
-        <div className="coin-packages-notice" style={{ background: "rgba(16, 185, 129, 0.1)", color: "#10b981", border: "1px solid rgba(16, 185, 129, 0.2)" }}>
-          <ShieldCheck size={16} />
-          <span>You have an active {currentSub.planName} plan. Buying a new plan will extend your validity from {currentSub.expiresAt ? new Date(currentSub.expiresAt).toLocaleDateString() : 'now'}.</span>
+        <div
+          className="coin-packages-notice"
+          style={{
+            background: "rgba(16, 185, 129, 0.1)",
+            color: "#047857",
+            border: "1px solid rgba(16, 185, 129, 0.25)",
+            display: "flex",
+            flexDirection: "column",
+            gap: "8px",
+            alignItems: "flex-start",
+            padding: "14px 18px",
+            borderRadius: "10px",
+            marginTop: "16px",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "12px",
+              width: "100%",
+              flexWrap: "wrap",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", flex: 1, minWidth: "260px" }}>
+              <ShieldCheck size={20} color="#10b981" style={{ flexShrink: 0 }} />
+              <span style={{ fontSize: "13px", fontWeight: "600", lineHeight: "1.4" }}>
+                Active Plan: <strong>{currentSub.planName}</strong> (Valid till{" "}
+                {currentSub.expiresAt ? new Date(currentSub.expiresAt).toLocaleDateString("en-IN") : "now"}).
+                New plan purchases are queued sequentially and activate automatically without losing any days!
+              </span>
+            </div>
+
+            {onViewReceipt && (
+              <button
+                type="button"
+                onClick={() => onViewReceipt(currentSub?.receiptId)}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  background: "#ffffff",
+                  color: "#047857",
+                  border: "1px solid #a7f3d0",
+                  padding: "6px 12px",
+                  borderRadius: "6px",
+                  fontSize: "12px",
+                  fontWeight: "700",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                <FileText size={13} />
+                <span>View Current Receipt</span>
+              </button>
+            )}
+          </div>
+
+          {Array.isArray(currentSub?.queuedSubscriptions) && currentSub.queuedSubscriptions.length > 0 && (
+            <div style={{ display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap", marginTop: "4px", paddingLeft: "28px" }}>
+              <span style={{ fontSize: "12px", fontWeight: "700", color: "#065f46" }}>Next in Queue:</span>
+              {currentSub.queuedSubscriptions.map((q, idx) => (
+                <span
+                  key={idx}
+                  onClick={() => q.receiptId && onViewReceipt?.(q.receiptId)}
+                  style={{
+                    fontSize: "11px",
+                    fontWeight: "700",
+                    background: "#ffffff",
+                    color: "#0284c7",
+                    border: "1px solid #bae6fd",
+                    padding: "3px 8px",
+                    borderRadius: "6px",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "4px",
+                    cursor: q.receiptId ? "pointer" : "default",
+                  }}
+                  title={q.receiptId ? "Click to view receipt" : ""}
+                >
+                  📅 {q.planName} (Activates {new Date(q.scheduledStartDate).toLocaleDateString("en-IN")})
+                  {q.receiptId && <span style={{ opacity: 0.7, fontSize: "10px" }}>🧾</span>}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
       )}
 
@@ -118,9 +166,8 @@ function PlanCards({ plans = SUBSCRIPTION_PLANS, onPurchaseSuccess, currentSub }
               className="coin-pack-btn"
               onClick={(e) => {
                 e.stopPropagation();
-                handleBuy(plan);
+                handleOpenPaymentModal(plan);
               }}
-              disabled={buying === plan.id}
               style={{ 
                 background: activePlan === plan.id ? "#f59e0b" : "transparent",
                 color: activePlan === plan.id ? "#ffffff" : "var(--text)",
@@ -134,11 +181,12 @@ function PlanCards({ plans = SUBSCRIPTION_PLANS, onPurchaseSuccess, currentSub }
                 fontSize: "0.95rem",
                 fontWeight: "700",
                 padding: "10px",
+                cursor: "pointer",
                 transition: "all 0.2s ease"
               }}
             >
-              {buying === plan.id ? "Processing…" : `Subscribe for ₹${plan.offerPrice}`}
-              {!buying && <ArrowRight size={16} />}
+              <span>Subscribe for ₹{plan.offerPrice}</span>
+              <ArrowRight size={16} />
             </button>
 
             <ul style={{ listStyle: "none", padding: 0, margin: "24px 0 0 0", textAlign: "left", fontSize: "0.85rem", color: "var(--text)", fontWeight: "600" }}>
@@ -150,6 +198,16 @@ function PlanCards({ plans = SUBSCRIPTION_PLANS, onPurchaseSuccess, currentSub }
           </div>
         ))}
       </div>
+
+      {/* Subscription Payment & Partial Wallet Redemption Modal (Landscape) */}
+      <SubscriptionPaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => setShowPaymentModal(false)}
+        plan={selectedPlanForModal}
+        walletBalance={walletBalance}
+        currentSub={currentSub}
+        onSuccess={onPurchaseSuccess}
+      />
     </div>
   );
 }

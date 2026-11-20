@@ -1,4 +1,9 @@
 const User = require('../../models/User');
+const {
+  checkAndProcessAllSubscriptionQueues,
+  checkAndSendExpiryReminders,
+  checkAndSendExpiredEmails,
+} = require('../modules/subscription/subscription.service');
 
 const resetDailyLoginRewards = async () => {
   try {
@@ -11,6 +16,16 @@ const resetDailyLoginRewards = async () => {
     console.log(`[Cron] Daily login reset complete. Modified ${result.modifiedCount} users.`);
   } catch (error) {
     console.error('[Cron] Error resetting daily login rewards:', error);
+  }
+};
+
+const runSubscriptionLifecycleChecks = async () => {
+  try {
+    await checkAndProcessAllSubscriptionQueues();
+    await checkAndSendExpiryReminders();
+    await checkAndSendExpiredEmails();
+  } catch (err) {
+    console.error('[Cron] Error running subscription lifecycle checks:', err.message);
   }
 };
 
@@ -29,13 +44,21 @@ const scheduleDailyMidnightJob = () => {
 
   setTimeout(() => {
     resetDailyLoginRewards();
+    runSubscriptionLifecycleChecks();
     // Then run it every 24 hours
     setInterval(resetDailyLoginRewards, 24 * 60 * 60 * 1000);
   }, msUntilMidnight);
+
+  // Also run subscription queue and lifecycle processor every 30 minutes
+  setInterval(runSubscriptionLifecycleChecks, 30 * 60 * 1000);
 };
 
 const initCronJobs = () => {
   scheduleDailyMidnightJob();
+  // Run once at startup
+  runSubscriptionLifecycleChecks().catch((err) =>
+    console.warn('[Cron] Startup subscription checks error:', err.message)
+  );
 };
 
 module.exports = initCronJobs;

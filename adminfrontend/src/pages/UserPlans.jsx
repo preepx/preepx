@@ -1,33 +1,52 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Eye, Search } from 'lucide-react';
+import { Shield, Eye, Search, XCircle, Loader2 } from 'lucide-react';
 import api from '../utils/api';
 import Pagination from '../components/Pagination';
 
 const UserPlans = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [actionLoading, setActionLoading] = useState(null);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const navigate = useNavigate();
 
+  const fetchUsers = async () => {
+    try {
+      const response = await api.get('/users');
+      // Only keep users with an active subscription
+      const subscribedUsers = response.data.filter(u => u.subscription?.status === 'active');
+      setUsers(subscribedUsers);
+    } catch (err) {
+      setError('Failed to load users.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await api.get('/users');
-        // Only keep users with an active subscription
-        const subscribedUsers = response.data.filter(u => u.subscription?.status === 'active');
-        setUsers(subscribedUsers);
-      } catch (err) {
-        setError('Failed to load users.');
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchUsers();
   }, []);
+
+  const handleDeactivatePlan = async (user) => {
+    const planTitle = user.subscription?.planName || 'Pro Plan';
+    const confirmMsg = `Are you sure you want to deactivate / cancel ${user.fullName}'s ${planTitle}?`;
+    if (!window.confirm(confirmMsg)) return;
+
+    setActionLoading(user._id);
+    try {
+      await api.put(`/users/${user._id}/plan/deactivate`);
+      setUsers((prev) => prev.filter((u) => u._id !== user._id));
+      alert(`Plan for ${user.fullName} has been deactivated successfully.`);
+    } catch (err) {
+      alert(err.response?.data?.message || 'Failed to deactivate plan.');
+    } finally {
+      setActionLoading(null);
+    }
+  };
 
   // Filter users based on search term
   const filteredUsers = users.filter(user => {
@@ -85,6 +104,7 @@ const UserPlans = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Plan Name</th>
+                <th>Payment Mode</th>
                 <th>Expiry Date</th>
                 <th>Actions</th>
               </tr>
@@ -110,21 +130,81 @@ const UserPlans = () => {
                       <Shield size={14} /> {user.subscription?.planName || 'Pro'}
                     </span>
                   </td>
+                  <td>
+                    <span className="badge" style={{
+                      background: user.subscription?.paymentMethod === 'Wallet' 
+                        ? 'rgba(16, 185, 129, 0.15)' 
+                        : user.subscription?.paymentMethod === 'Wallet + Razorpay'
+                        ? 'rgba(99, 102, 241, 0.15)'
+                        : 'rgba(255, 255, 255, 0.08)',
+                      color: user.subscription?.paymentMethod === 'Wallet' 
+                        ? '#10b981' 
+                        : user.subscription?.paymentMethod === 'Wallet + Razorpay'
+                        ? '#818cf8'
+                        : 'var(--text-secondary)',
+                      fontSize: '0.75rem',
+                      fontWeight: 600,
+                    }}>
+                      {user.subscription?.paymentMethod || 'Razorpay'}
+                      {user.subscription?.walletUsed > 0 ? ` (-₹${user.subscription.walletUsed})` : ''}
+                    </span>
+                  </td>
                   <td>{user.subscription?.expiresAt ? new Date(user.subscription.expiresAt).toLocaleDateString() : 'N/A'}</td>
                   <td>
-                    <button 
-                      className="btn-primary" 
-                      style={{ padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
-                      onClick={() => navigate(`/users/${user._id}`)}
-                    >
-                      <Eye size={16} /> View
-                    </button>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <button 
+                        className="btn-primary" 
+                        style={{ padding: '0.45rem 0.85rem', display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.85rem' }}
+                        onClick={() => navigate(`/users/${user._id}`)}
+                      >
+                        <Eye size={15} /> View
+                      </button>
+                      <button
+                        style={{
+                          padding: '0.45rem 0.85rem',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.4rem',
+                          fontSize: '0.85rem',
+                          background: 'rgba(239, 68, 68, 0.15)',
+                          color: '#ef4444',
+                          border: '1px solid rgba(239, 68, 68, 0.3)',
+                          borderRadius: '6px',
+                          cursor: 'pointer',
+                          fontWeight: '600',
+                          transition: 'all 0.2s',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = '#ef4444';
+                          e.currentTarget.style.color = '#ffffff';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = 'rgba(239, 68, 68, 0.15)';
+                          e.currentTarget.style.color = '#ef4444';
+                        }}
+                        onClick={() => handleDeactivatePlan(user)}
+                        disabled={actionLoading === user._id}
+                        title="Cancel / Deactivate Pro Plan"
+                      >
+                        {actionLoading === user._id ? (
+                          <>
+                            <Loader2 size={15} className="animate-spin" />
+                            <span>Cancelling...</span>
+                          </>
+                        ) : (
+                          <>
+                            <XCircle size={15} />
+                            <span>Cancel Plan</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
               {currentUsers.length === 0 && (
                 <tr>
-                  <td colSpan="5" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
+                  <td colSpan="6" style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
                     No active subscribers found
                   </td>
                 </tr>

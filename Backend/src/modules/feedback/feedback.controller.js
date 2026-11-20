@@ -52,6 +52,9 @@ exports.sendFeedback = async (req, res) => {
     if (source === "chatbot_support") {
       headerTitle = "PreepX Support & User Inquiry";
       headerSubtitle = "New inquiry submitted via PreepX AI Concierge / Support";
+    } else if (source === "enterprise_sales" || source === "contact_sales") {
+      headerTitle = "PreepX Enterprise Sales Inquiry";
+      headerSubtitle = "New sales inquiry submitted for PreepX Enterprise Plan";
     } else if (source === "interview_result") {
       headerTitle = "PreepX Mock Interview Feedback";
       headerSubtitle = "New candidate feedback received from Mock Interview Results";
@@ -63,6 +66,8 @@ exports.sendFeedback = async (req, res) => {
     let defaultSubject = `PreepX Feedback from ${name.trim()}`;
     if (source === "chatbot_support") {
       defaultSubject = `PreepX Support Query from ${name.trim()}`;
+    } else if (source === "enterprise_sales" || source === "contact_sales") {
+      defaultSubject = `PreepX Enterprise Sales Inquiry from ${name.trim()}`;
     } else if (source === "interview_result") {
       defaultSubject = `PreepX Interview Feedback - ${interviewRole || examTopic || "Mock Interview"}`;
     } else if (examTopic) {

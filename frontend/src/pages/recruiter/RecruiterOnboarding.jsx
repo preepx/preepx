@@ -154,7 +154,7 @@ export default function RecruiterOnboarding() {
               <h2 style={{ marginTop: 0 }}>Start hiring with a trial</h2>
               <p className="rx-muted">You get a 14-day Starter trial (up to 5 job posts). Upgrade to Growth anytime from Billing.</p>
               <div style={{ display: "grid", gap: 12, marginTop: 16 }}>
-                {(plans.length ? plans.filter((p) => p.slug === "starter") : [{ name: "Starter", slug: "starter", priceInr: 1999 }]).map((p) => (
+                {(plans.length ? plans.filter((p) => p.slug === "starter") : [{ name: "Starter", slug: "starter", priceInr: 999 }]).map((p) => (
                   <div key={p.slug} className="rx-card" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
                       <strong>{p.name} trial</strong>

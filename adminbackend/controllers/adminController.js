@@ -398,6 +398,59 @@ const assignProPlan = async (req, res) => {
   }
 };
 
+// @desc    Deactivate / Cancel User's Pro Plan
+const deactivateProPlan = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const previousPlanName = user.subscription?.planName || "Pro Plan";
+
+    // Expire the active subscription
+    user.subscription = {
+      ...(user.subscription?.toObject ? user.subscription.toObject() : (user.subscription || {})),
+      status: "expired",
+    };
+
+    // Cancel all queued plans
+    if (Array.isArray(user.subscriptionQueue)) {
+      user.subscriptionQueue.forEach((q) => {
+        if (q.status === "scheduled") {
+          q.status = "cancelled";
+        }
+      });
+    }
+
+    await user.save();
+
+    // Trigger internal notification webhook
+    try {
+      const backendUrl = process.env.BACKEND_URL;
+      if (backendUrl) {
+        await fetch(`${backendUrl}/api/internal/notify`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            userId: req.params.id,
+            title: "Pro Plan Cancelled",
+            message: `Your ${previousPlanName} has been cancelled by Admin.`,
+            icon: "ℹ️",
+          }),
+        });
+      }
+    } catch (e) {
+      console.error("Webhook notification failed:", e.message);
+    }
+
+    res.json({
+      message: `Plan for ${user.fullName} has been deactivated successfully`,
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
 module.exports = {
   adminLogin,
   getDashboardStats,
@@ -409,5 +462,6 @@ module.exports = {
   addCoinsToWallet,
   addXpToUser,
   getUserReferrals,
-  assignProPlan
+  assignProPlan,
+  deactivateProPlan,
 };

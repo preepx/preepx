@@ -280,7 +280,7 @@ const RecruiterDetails = () => {
                   <p style={{ fontSize: 12, color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 10 }}>Assign / Extend Plan</p>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                     <select className="input-field" value={assignSlug} onChange={(e) => setAssignSlug(e.target.value)}>
-                      <option value="starter">Starter — ₹1,999/mo</option>
+                      <option value="starter">Starter — ₹999/mo</option>
                       <option value="growth">Growth — ₹3,999/mo</option>
                       <option value="enterprise">Enterprise — Custom</option>
                     </select>

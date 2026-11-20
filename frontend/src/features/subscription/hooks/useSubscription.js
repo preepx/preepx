@@ -44,6 +44,8 @@ export function useSubscription({ autoFetch = true } = {}) {
     expiresAt: sub?.expiresAt || null,
     daysLeft: sub?.daysLeft || 0,
     plans: sub?.plans || [],
+    queuedSubscriptions: sub?.queuedSubscriptions || [],
+    hasQueuedPlans: Boolean(sub?.hasQueuedPlans),
     rawData: data,
     loading,
     error,

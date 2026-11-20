@@ -24,6 +24,13 @@ class PaymentService {
     return await this.razorpayInstance.orders.create(options);
   }
 
+  async fetchOrder(orderId) {
+    if (!this.isConfigured()) {
+      throw new Error("Razorpay is not configured");
+    }
+    return await this.razorpayInstance.orders.fetch(orderId);
+  }
+
   verifySignature(orderId, paymentId, signature) {
     const generatedSignature = crypto
       .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)

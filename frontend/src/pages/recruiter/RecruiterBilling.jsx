@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  Briefcase, Check, Star, Shield, Zap, Headphones, Building2,
+  Briefcase, Check, Star, Shield, Zap, Headphones, Building2, Building, Mail, Phone, User, X, AlertCircle, Loader2,
 } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
@@ -27,14 +27,39 @@ export default function RecruiterBilling() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [buying, setBuying] = useState(null);
-  const [salesNote, setSalesNote] = useState("");
   const [showSales, setShowSales] = useState(false);
+  const [salesError, setSalesError] = useState("");
+  const [salesForm, setSalesForm] = useState({
+    name: "",
+    email: "",
+    company: "",
+    phone: "",
+    message: "",
+  });
 
   const refresh = () => getBilling().then(setData);
 
   useEffect(() => {
     refresh().finally(() => setLoading(false));
   }, []);
+
+  const openSalesModal = () => {
+    try {
+      const userStr = localStorage.getItem("user");
+      const user = userStr ? JSON.parse(userStr) : {};
+      setSalesForm((prev) => ({
+        name: prev.name || user.fullName || user.name || "",
+        email: prev.email || user.email || "",
+        company: prev.company || user.companyName || (data?.subscription?.companyName) || "",
+        phone: prev.phone || user.phone || "",
+        message: prev.message || "",
+      }));
+    } catch {
+      // ignore
+    }
+    setSalesError("");
+    setShowSales(true);
+  };
 
   const sub = data?.subscription;
   const usage = data?.usage;
@@ -43,7 +68,7 @@ export default function RecruiterBilling() {
 
   const handlePay = async (plan) => {
     if (plan.contactSales) {
-      setShowSales(true);
+      openSalesModal();
       return;
     }
     setBuying(plan.slug);
@@ -92,16 +117,51 @@ export default function RecruiterBilling() {
     }
   };
 
-  const submitSales = async () => {
+  const submitSales = async (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    setSalesError("");
+
+    if (!salesForm.name.trim()) {
+      setSalesError("Please enter your name.");
+      return;
+    }
+    if (!salesForm.email.trim()) {
+      setSalesError("Please enter your work email.");
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(salesForm.email.trim())) {
+      setSalesError("Please enter a valid email address.");
+      return;
+    }
+    if (!salesForm.message.trim()) {
+      setSalesError("Please enter your hiring requirements or team volume.");
+      return;
+    }
+
     setBuying("enterprise");
     try {
-      const res = await contactRecruiterSales(salesNote);
-      notify.success(res.message || "Sales request sent");
+      const res = await contactRecruiterSales({
+        name: salesForm.name.trim(),
+        email: salesForm.email.trim(),
+        company: salesForm.company.trim(),
+        phone: salesForm.phone.trim(),
+        note: salesForm.message.trim(),
+      });
+      notify.success(res.message || "Sales request submitted successfully! Our team will contact you shortly.");
       setShowSales(false);
-      setSalesNote("");
+      setSalesForm({
+        name: "",
+        email: "",
+        company: "",
+        phone: "",
+        message: "",
+      });
       await refresh();
     } catch (err) {
-      notify.error(err.response?.data?.message || "Could not submit request");
+      const msg = err.response?.data?.message || "Could not submit request. Please try again.";
+      setSalesError(msg);
+      notify.error(msg);
     } finally {
       setBuying(null);
     }
@@ -172,7 +232,7 @@ export default function RecruiterBilling() {
                   slug: "starter",
                   name: "Starter",
                   tagline: "For Small Teams",
-                  priceInr: 1999,
+                  priceInr: 999,
                   ctaLabel: "Start Hiring",
                   highlight: false,
                   contactSales: false,
@@ -204,7 +264,7 @@ export default function RecruiterBilling() {
               const dbPlans = data?.plans || [];
               const plans = STATIC_PLANS.map((sp) => {
                 const dbPlan = dbPlans.find((p) => p.slug === sp.slug);
-                return dbPlan ? { ...sp, ...dbPlan, priceInr: sp.priceInr, features: sp.features } : sp;
+                return dbPlan ? { ...sp, ...dbPlan, priceInr: dbPlan.priceInr ?? sp.priceInr, features: sp.features } : sp;
               });
 
               return plans.map((plan) => {
@@ -277,18 +337,161 @@ export default function RecruiterBilling() {
           )}
 
           {showSales && (
-            <div className="rp-modal" onClick={() => setShowSales(false)}>
-              <div className="rp-modal-card" onClick={(e) => e.stopPropagation()}>
-                <Building2 size={28} />
-                <h3>Contact Sales</h3>
-                <p>Tell us about your hiring volume. We’ll tailor Enterprise pricing, SSO, and API access.</p>
-                <textarea rows={4} value={salesNote} onChange={(e) => setSalesNote(e.target.value)} placeholder="Team size, monthly job volume, integrations…" />
-                <div className="rp-modal-actions">
-                  <button type="button" className="rp-btn ghost" onClick={() => setShowSales(false)}>Cancel</button>
-                  <button type="button" className="rp-btn solid" disabled={buying === "enterprise"} onClick={submitSales}>
-                    {buying === "enterprise" ? "Sending…" : "Submit request"}
+            <div className="rp-modal" onClick={() => !buying && setShowSales(false)}>
+              <div
+                className="rp-modal-card rp-sales-modal"
+                onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="sales-modal-title"
+              >
+                <div className="rp-sales-modal-header">
+                  <div className="rp-sales-modal-icon">
+                    <Building2 size={22} />
+                  </div>
+                  <div className="rp-sales-modal-titles">
+                    <h3 id="sales-modal-title">Contact Sales</h3>
+                    <p>
+                      Tell us about your hiring needs. We’ll tailor Enterprise pricing, custom integrations, SSO, and API access.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="rp-sales-modal-close"
+                    onClick={() => !buying && setShowSales(false)}
+                    aria-label="Close"
+                    disabled={buying === "enterprise"}
+                  >
+                    <X size={18} />
                   </button>
                 </div>
+
+                <div className="rp-sales-badge">
+                  <span className="rp-sales-badge-dot" />
+                  <span>Direct inquiry will be sent to <strong>contact@preepx.in</strong></span>
+                </div>
+
+                {salesError && (
+                  <div className="rp-sales-error">
+                    <AlertCircle size={16} />
+                    <span>{salesError}</span>
+                  </div>
+                )}
+
+                <form onSubmit={submitSales} className="rp-sales-form">
+                  <div className="rp-form-row">
+                    <div className="rp-form-group">
+                      <label className="rp-form-label">
+                        Your Name <span className="rp-required">*</span>
+                      </label>
+                      <div className="rp-input-wrap">
+                        <User size={15} className="rp-input-icon" />
+                        <input
+                          type="text"
+                          className="rp-input"
+                          placeholder="Enter your name"
+                          value={salesForm.name}
+                          onChange={(e) => setSalesForm({ ...salesForm, name: e.target.value })}
+                          disabled={buying === "enterprise"}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="rp-form-group">
+                      <label className="rp-form-label">
+                        Work Email <span className="rp-required">*</span>
+                      </label>
+                      <div className="rp-input-wrap">
+                        <Mail size={15} className="rp-input-icon" />
+                        <input
+                          type="email"
+                          className="rp-input"
+                          placeholder="name@company.com"
+                          value={salesForm.email}
+                          onChange={(e) => setSalesForm({ ...salesForm, email: e.target.value })}
+                          disabled={buying === "enterprise"}
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rp-form-row">
+                    <div className="rp-form-group">
+                      <label className="rp-form-label">Company Name</label>
+                      <div className="rp-input-wrap">
+                        <Building size={15} className="rp-input-icon" />
+                        <input
+                          type="text"
+                          className="rp-input"
+                          placeholder="e.g. Acme Corp"
+                          value={salesForm.company}
+                          onChange={(e) => setSalesForm({ ...salesForm, company: e.target.value })}
+                          disabled={buying === "enterprise"}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="rp-form-group">
+                      <label className="rp-form-label">Phone / WhatsApp (Optional)</label>
+                      <div className="rp-input-wrap">
+                        <Phone size={15} className="rp-input-icon" />
+                        <input
+                          type="tel"
+                          className="rp-input"
+                          placeholder="+91 98765 43210"
+                          value={salesForm.phone}
+                          onChange={(e) => setSalesForm({ ...salesForm, phone: e.target.value })}
+                          disabled={buying === "enterprise"}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rp-form-group">
+                    <label className="rp-form-label">
+                      Hiring Volume & Requirements <span className="rp-required">*</span>
+                    </label>
+                    <textarea
+                      rows={4}
+                      className="rp-textarea"
+                      value={salesForm.message}
+                      onChange={(e) => setSalesForm({ ...salesForm, message: e.target.value })}
+                      placeholder="Tell us about your team size, monthly job openings, candidate volume, or required integrations..."
+                      disabled={buying === "enterprise"}
+                      required
+                    />
+                  </div>
+
+                  <div className="rp-modal-actions">
+                    <button
+                      type="button"
+                      className="rp-btn ghost"
+                      onClick={() => setShowSales(false)}
+                      disabled={buying === "enterprise"}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="rp-btn solid rp-btn-submit"
+                      disabled={buying === "enterprise"}
+                    >
+                      {buying === "enterprise" ? (
+                        <>
+                          <Loader2 size={16} className="rp-spin" />
+                          <span>Sending Inquiry...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Mail size={16} />
+                          <span>Submit Request</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           )}
