@@ -407,6 +407,29 @@
   border-top: 1px solid var(--border);
 }
 
+.rp-receipt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(37, 99, 235, 0.08);
+  color: #2563EB;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.rp-receipt-btn:hover {
+  background: #2563EB;
+  color: #ffffff;
+  border-color: #2563EB;
+  transform: translateY(-1px);
+}
+
 .rp-history .mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11px;

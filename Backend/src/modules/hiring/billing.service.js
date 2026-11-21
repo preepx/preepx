@@ -8,6 +8,7 @@ const paymentService = require("../../services/payment.service");
 const { sendRecruiterNotification } = require("../../../utils/recruiterNotificationService");
 const { NotFoundError, ForbiddenError, BadRequestError } = require("../../common/exceptions/customErrors");
 const { Resend } = require("resend");
+const { recruiterReceiptService } = require("../recruiter-billing-notifications");
 
 const INCLUDED_IN_ALL = [
   "AI Candidate Scoring",
@@ -279,6 +280,12 @@ const getBilling = async (recruiterId) => {
       : Math.max(0, jobLimit - jobPostsThisMonth);
 
   const payments = await RecruiterPayment.find({ recruiterId }).sort({ createdAt: -1 }).limit(25).lean();
+  let receipts = [];
+  try {
+    receipts = await recruiterReceiptService.getReceiptsByRecruiterId(recruiterId);
+  } catch (rErr) {
+    console.warn("[RecruiterBilling] Error fetching receipts for billing:", rErr.message);
+  }
 
   return {
     includedInAll: INCLUDED_IN_ALL,
@@ -303,6 +310,7 @@ const getBilling = async (recruiterId) => {
       periodKey: monthKey(),
     },
     payments,
+    receipts,
     company: recruiter.companyId,
     razorpayConfigured: paymentService.isConfigured(),
   };
@@ -400,10 +408,28 @@ const verifyPayment = async (recruiterId, { razorpay_order_id, razorpay_payment_
     "💳"
   );
 
+  // Generate official recruiter receipt and trigger confirmation email via our dedicated module
+  let receipt = null;
+  try {
+    receipt = await recruiterReceiptService.createReceiptForPayment({
+      recruiterId,
+      plan,
+      razorpayOrderId: razorpay_order_id,
+      razorpayPaymentId: razorpay_payment_id,
+      startDate: sub.currentPeriodStart,
+      expiryDate: sub.currentPeriodEnd,
+      amountInr: plan.priceInr,
+    });
+  } catch (receiptErr) {
+    console.error("[RecruiterBilling] Error generating receipt:", receiptErr.message);
+  }
+
   return {
     plan: { slug: plan.slug, name: plan.name, priceInr: plan.priceInr },
     expiresAt: sub.currentPeriodEnd,
     status: sub.status,
+    receiptId: receipt?.receiptId || null,
+    receipt,
   };
 };
 

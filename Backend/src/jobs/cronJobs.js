@@ -4,6 +4,7 @@ const {
   checkAndSendExpiryReminders,
   checkAndSendExpiredEmails,
 } = require('../modules/subscription/subscription.service');
+const { runRecruiterSubscriptionExpiryJob } = require('../modules/recruiter-billing-notifications');
 
 const resetDailyLoginRewards = async () => {
   try {
@@ -24,6 +25,7 @@ const runSubscriptionLifecycleChecks = async () => {
     await checkAndProcessAllSubscriptionQueues();
     await checkAndSendExpiryReminders();
     await checkAndSendExpiredEmails();
+    await runRecruiterSubscriptionExpiryJob();
   } catch (err) {
     console.error('[Cron] Error running subscription lifecycle checks:', err.message);
   }

@@ -81,9 +81,9 @@ export default function SubscriptionPaymentModal({
 
         notify.success(
           result.message ||
-            (result.subscription?.isQueued
-              ? `🎉 ${plan.name} plan queued using ₹${walletDeduction} wallet balance!`
-              : `🎉 ${plan.name} plan activated using ₹${walletDeduction} wallet balance!`)
+          (result.subscription?.isQueued
+            ? `🎉 ${plan.name} plan queued using ₹${walletDeduction} wallet balance!`
+            : `🎉 ${plan.name} plan activated using ₹${walletDeduction} wallet balance!`)
         );
 
         onSuccess?.(result);
@@ -258,19 +258,19 @@ export default function SubscriptionPaymentModal({
               {/* Compact Benefits 2x2 Grid */}
               <div className="sub-modal-features-grid">
                 <div className="sub-modal-feature-item">
-                  <CheckCircle2 size={13} color="#10b981" />
+                  <CheckCircle2 size={14} color="#2563eb" />
                   <span>Unlimited AI Interviews</span>
                 </div>
                 <div className="sub-modal-feature-item">
-                  <CheckCircle2 size={13} color="#10b981" />
+                  <CheckCircle2 size={14} color="#2563eb" />
                   <span>Unlimited Objective Exams</span>
                 </div>
                 <div className="sub-modal-feature-item">
-                  <CheckCircle2 size={13} color="#10b981" />
+                  <CheckCircle2 size={14} color="#2563eb" />
                   <span>Unlimited ATS Scans</span>
                 </div>
                 <div className="sub-modal-feature-item">
-                  <CheckCircle2 size={13} color="#10b981" />
+                  <CheckCircle2 size={14} color="#2563eb" />
                   <span>Verified Certificates</span>
                 </div>
               </div>
@@ -295,9 +295,8 @@ export default function SubscriptionPaymentModal({
           <div className="sub-modal-right-col">
             {/* Wallet Balance & Checkbox Card */}
             <div
-              className={`sub-modal-wallet-card ${
-                numWalletBalance <= 0 ? "disabled" : ""
-              }`}
+              className={`sub-modal-wallet-card ${numWalletBalance <= 0 ? "disabled" : ""
+                }`}
             >
               <div className="sub-modal-wallet-header">
                 <div className="sub-modal-wallet-info">
@@ -312,18 +311,20 @@ export default function SubscriptionPaymentModal({
                   </div>
                 </div>
 
-                {useWallet && walletDeduction > 0 && (
-                  <span className="sub-modal-wallet-applied-badge">
-                    -₹{walletDeduction} applied
-                  </span>
-                )}
+                <span
+                  className="sub-modal-wallet-applied-badge"
+                  style={{
+                    visibility: useWallet && walletDeduction > 0 ? "visible" : "hidden",
+                  }}
+                >
+                  -₹{walletDeduction} applied
+                </span>
               </div>
 
               {/* Use Wallet Balance Checkbox */}
               <label
-                className={`sub-modal-checkbox-row ${
-                  numWalletBalance <= 0 || processing ? "disabled" : ""
-                }`}
+                className={`sub-modal-checkbox-row ${numWalletBalance <= 0 || processing ? "disabled" : ""
+                  }`}
               >
                 <input
                   type="checkbox"
@@ -340,8 +341,8 @@ export default function SubscriptionPaymentModal({
                     {numWalletBalance <= 0
                       ? "No wallet balance available"
                       : useWallet
-                      ? `₹${walletDeduction} applied • ₹${walletRemainingAfter} left in wallet`
-                      : "Check to deduct wallet balance"}
+                        ? `₹${walletDeduction} applied • ₹${walletRemainingAfter} left in wallet`
+                    : `₹0 applied • ₹${numWalletBalance} available in wallet`}
                   </div>
                 </div>
               </label>
@@ -356,21 +357,25 @@ export default function SubscriptionPaymentModal({
                 <span>₹{planPrice}</span>
               </div>
 
-              {useWallet && walletDeduction > 0 && (
-                <div className="sub-modal-breakdown-row discount">
-                  <span>Wallet Balance Applied:</span>
-                  <span>-₹{walletDeduction}</span>
-                </div>
-              )}
+              <div
+                className={`sub-modal-breakdown-row ${useWallet && walletDeduction > 0 ? "discount" : "muted"
+                  }`}
+              >
+                <span>Wallet Balance Applied:</span>
+                <span>
+                  {useWallet && walletDeduction > 0
+                    ? `-₹${walletDeduction}`
+                    : "₹0"}
+                </span>
+              </div>
 
               <div className="sub-modal-divider" />
 
               <div className="sub-modal-breakdown-total">
                 <span>Remaining Amount to Pay:</span>
                 <span
-                  className={`sub-modal-total-amount ${
-                    remainingPayable === 0 ? "free" : ""
-                  }`}
+                  className={`sub-modal-total-amount ${remainingPayable === 0 ? "free" : ""
+                    }`}
                 >
                   ₹{remainingPayable}
                 </span>
@@ -398,9 +403,7 @@ export default function SubscriptionPaymentModal({
 
           <button
             type="button"
-            className={`sub-modal-submit-btn ${
-              isFullWalletPayment ? "wallet-btn" : "gateway-btn"
-            }`}
+            className="sub-modal-submit-btn"
             onClick={handleProceed}
             disabled={processing}
           >
@@ -414,7 +417,8 @@ export default function SubscriptionPaymentModal({
             ) : isFullWalletPayment ? (
               <>
                 <Sparkles size={16} />
-                <span>Confirm &amp; Pay ₹{walletDeduction} with Wallet</span>
+                <span>Pay ₹{walletDeduction} &amp; Subscribe</span>
+                <ArrowRight size={14} />
               </>
             ) : (
               <>

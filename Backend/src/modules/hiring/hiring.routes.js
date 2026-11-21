@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const hiringController = require("./hiring.controller");
 const recruiterProtect = require("../../../middleware/recruiterMiddleware");
+const { recruiterBillingNotificationRoutes } = require("../recruiter-billing-notifications");
 const {
   validateCreateJob, validateUpdateJob, validateRecruiterProfile,
   validateCompanyProfile, validatePipelineMove, validateScheduleInterview,
@@ -55,6 +56,7 @@ router.post("/interviews", validateScheduleInterview, hiringController.scheduleI
 router.patch("/interviews/:interviewId", hiringController.updateInterview);
 
 router.get("/billing", hiringController.getBilling);
+router.use("/billing/receipts", recruiterBillingNotificationRoutes);
 router.post("/billing/select-plan", hiringController.selectPlan);
 router.post("/billing/create-order", hiringController.createBillingOrder);
 router.post("/billing/verify-payment", hiringController.verifyBillingPayment);

@@ -12,6 +12,9 @@ const recruiterSubscriptionSchema = new mongoose.Schema(
     currentPeriodEnd: { type: Date },
     razorpayOrderId: { type: String, default: null },
     razorpayPaymentId: { type: String, default: null },
+    receiptId: { type: String, default: null },
+    expiryReminder2DaysSent: { type: Boolean, default: false },
+    expiredEmailSent: { type: Boolean, default: false },
     usage: {
       candidateViews: { type: Number, default: 0 },
       assessmentsSent: { type: Number, default: 0 },

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
-  Briefcase, Check, Star, Shield, Zap, Headphones, Building2, Building, Mail, Phone, User, X, AlertCircle, Loader2,
+  Briefcase, Check, Star, Shield, Zap, Headphones, Building2, Building, Mail, Phone, User, X, AlertCircle, Loader2, FileText,
 } from "lucide-react";
 import RecruiterLayout from "@/layouts/RecruiterLayout";
 import {
   getBilling, createRecruiterPlanOrder, verifyRecruiterPlanPayment, contactRecruiterSales,
 } from "@/services/recruiterAPI";
+import RecruiterReceiptModal from "@/components/recruiter/RecruiterReceiptModal";
 import notify from "@/utils/notify";
 import Loader from "@/components/Loader";
 import "@/styles/RecruiterBilling.css";
@@ -28,6 +29,8 @@ export default function RecruiterBilling() {
   const [loading, setLoading] = useState(true);
   const [buying, setBuying] = useState(null);
   const [showSales, setShowSales] = useState(false);
+  const [selectedReceipt, setSelectedReceipt] = useState(null);
+  const [showReceiptModal, setShowReceiptModal] = useState(false);
   const [salesError, setSalesError] = useState("");
   const [salesForm, setSalesForm] = useState({
     name: "",
@@ -38,6 +41,49 @@ export default function RecruiterBilling() {
   });
 
   const refresh = () => getBilling().then(setData);
+
+  const handleViewReceipt = (p) => {
+    if (p?.receiptId) {
+      setSelectedReceipt(p);
+      setShowReceiptModal(true);
+      return;
+    }
+
+    const matched = (data?.receipts || []).find(
+      (r) =>
+        (p.razorpayPaymentId && r.razorpayPaymentId === p.razorpayPaymentId) ||
+        (p.razorpayOrderId && r.razorpayOrderId === p.razorpayOrderId) ||
+        p.planSlug === r.planSlug
+    );
+
+    if (matched) {
+      setSelectedReceipt(matched);
+      setShowReceiptModal(true);
+      return;
+    }
+
+    const userStr = localStorage.getItem("user");
+    const user = userStr ? JSON.parse(userStr) : {};
+    const fallbackReceipt = {
+      receiptId: `RCP-REC-${(p._id || "").slice(-8).toUpperCase()}`,
+      recruiterName: user.fullName || user.name || "Recruiter",
+      recruiterEmail: user.email,
+      companyName: user.companyName || data?.company?.name || "",
+      planName: p.planName || "Starter",
+      planSlug: p.planSlug || "starter",
+      planDurationDays: 30,
+      amountInr: p.amountInr || (p.planSlug === "growth" ? 3999 : 999),
+      razorpayPaymentId: p.razorpayPaymentId || "N/A",
+      razorpayOrderId: p.razorpayOrderId || "N/A",
+      purchaseDate: p.createdAt,
+      startDate: p.periodStart || p.createdAt,
+      expiryDate: p.periodEnd || new Date(new Date(p.createdAt).getTime() + 30 * 24 * 60 * 60 * 1000),
+      paymentStatus: "paid",
+      paymentMethod: "Razorpay Online",
+    };
+    setSelectedReceipt(fallbackReceipt);
+    setShowReceiptModal(true);
+  };
 
   useEffect(() => {
     refresh().finally(() => setLoading(false));
@@ -94,6 +140,10 @@ export default function RecruiterBilling() {
               planSlug: plan.slug,
             });
             notify.success(result.message || `${plan.name} activated`);
+            if (result.receipt) {
+              setSelectedReceipt(result.receipt);
+              setShowReceiptModal(true);
+            }
             await refresh();
           } catch (err) {
             notify.error(err.response?.data?.message || "Payment verification failed");
@@ -319,6 +369,7 @@ export default function RecruiterBilling() {
                     <th>Amount</th>
                     <th>Status</th>
                     <th>Reference</th>
+                    <th style={{ textAlign: "right" }}>Receipt</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -329,6 +380,19 @@ export default function RecruiterBilling() {
                       <td>{p.amountInr ? `₹${p.amountInr.toLocaleString("en-IN")}` : "—"}</td>
                       <td><span className={`rp-pill ${p.status === "completed" ? "ok" : p.status === "inquiry" ? "info" : "warn"}`}>{p.status}</span></td>
                       <td className="mono">{p.razorpayPaymentId || p.type}</td>
+                      <td style={{ textAlign: "right" }}>
+                        {p.status === "completed" && (
+                          <button
+                            type="button"
+                            className="rp-receipt-btn"
+                            onClick={() => handleViewReceipt(p)}
+                            title="View / Download Payment Receipt"
+                          >
+                            <FileText size={12} />
+                            <span>Receipt</span>
+                          </button>
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -495,6 +559,12 @@ export default function RecruiterBilling() {
               </div>
             </div>
           )}
+
+          <RecruiterReceiptModal
+            isOpen={showReceiptModal}
+            onClose={() => setShowReceiptModal(false)}
+            receipt={selectedReceipt}
+          />
         </div>
       )}
     </RecruiterLayout>

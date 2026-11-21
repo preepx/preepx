@@ -58,6 +58,9 @@ export const contactRecruiterSales = (payload = {}) =>
     typeof payload === "string" ? { note: payload } : payload
   ).then((r) => r.data);
 
+export const getRecruiterReceipts = () => API.get(`${BASE}/billing/receipts`).then((r) => r.data.data);
+export const getRecruiterReceiptById = (receiptId) => API.get(`${BASE}/billing/receipts/${receiptId}`).then((r) => r.data.data);
+
 export const getRecruiterNotifications = () => API.get("/recruiter/notifications").then((r) => r.data.data);
 export const markRecruiterNotificationRead = (notifId) => API.put(`/recruiter/notifications/${notifId}/read`).then((r) => r.data.data);
 export const markAllRecruiterNotificationsRead = () => API.put("/recruiter/notifications/read-all").then((r) => r.data.data);
