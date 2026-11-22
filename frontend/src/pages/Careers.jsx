@@ -12,7 +12,7 @@ export default function Careers() {
 
   return (
     <div className="user-guide-page">
-      {/* HERO */}
+      {/* HEROd */}
       <header className="guide-hero" style={{ paddingBottom: "70px" }}>
         <h1 style={{ maxWidth: "700px", margin: "0 auto 20px" }}>
           Your Next Opportunity Starts With Better Preparation
