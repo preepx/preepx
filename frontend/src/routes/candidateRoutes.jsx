@@ -36,6 +36,21 @@ const InterviewLobby = lazy(() => import("@/pages/Interview/InterviewLobby"));
 const StartInterview = lazy(() => import("@/pages/Interview/StartInterview"));
 const InterviewMode = lazy(() => import("@/pages/Interview/InterviewMode"));
 const FeedbackPage = lazy(() => import("@/pages/FeedbackPage"));
+const SystemDesignPage = lazy(() => import("@/pages/SystemDesignPage"));
+const InterviewPrepPage = lazy(() => import("@/pages/InterviewPrepPage"));
+const AIPracticePage = lazy(() => import("@/pages/AIPracticePage"));
+const LearningPathsPage = lazy(() => import("@/pages/LearningPathsPage"));
+const VideoCoursesPage = lazy(() => import("@/pages/VideoCoursesPage"));
+const StudyResourcesPage = lazy(() => import("@/pages/StudyResourcesPage"));
+const ResumeBuilderPage = lazy(() => import("@/pages/ResumeBuilderPage"));
+const CareerCoachPage = lazy(() => import("@/pages/CareerCoachPage"));
+const SalaryInsightsPage = lazy(() => import("@/pages/SalaryInsightsPage"));
+const DiscussPage = lazy(() => import("@/pages/DiscussPage"));
+const StudyGroupsPage = lazy(() => import("@/pages/StudyGroupsPage"));
+const CampusAmbassadorPage = lazy(() => import("@/pages/CampusAmbassadorPage"));
+const CodePlaygroundPage = lazy(() => import("@/pages/CodePlaygroundPage"));
+const ProjectShowcasePage = lazy(() => import("@/pages/ProjectShowcasePage"));
+const CollaborationPage = lazy(() => import("@/pages/CollaborationPage"));
 
 const candidateRoles = ["candidate", undefined];
 
@@ -337,6 +352,126 @@ export const candidateRoutes = [
     element: (
       <ProtectedRoute>
         <FeedbackPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/system-design",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <SystemDesignPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/interview-prep",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <InterviewPrepPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/ai-practice",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <AIPracticePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/learning-paths",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <LearningPathsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/video-courses",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <VideoCoursesPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/study-resources",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <StudyResourcesPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/resume-builder",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <ResumeBuilderPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/career-coach",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <CareerCoachPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/salary-insights",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <SalaryInsightsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/discuss",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <DiscussPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/study-groups",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <StudyGroupsPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/campus-ambassador",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <CampusAmbassadorPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/code-playground",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <CodePlaygroundPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/project-showcase",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <ProjectShowcasePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/collaboration",
+    element: (
+      <ProtectedRoute allowedRoles={candidateRoles}>
+        <CollaborationPage />
       </ProtectedRoute>
     ),
   },

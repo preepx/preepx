@@ -58,6 +58,9 @@ function usesAppLayout(pathname) {
     "/user-dashboard", "/interview", "/analytics", "/leaderboard", "/achievements", "/rewards",
     "/settings", "/profile", "/resume-interview", "/ats-score", "/btech-notes", "/objective-exam", "/wallet",
     "/my-assessments", "/my-applications", "/100-days-challenge", "/company-prep", "/top-companies",
+    "/system-design", "/interview-prep", "/ai-practice", "/learning-paths", "/video-courses",
+    "/study-resources", "/resume-builder", "/career-coach", "/salary-insights", "/discuss",
+    "/study-groups", "/campus-ambassador", "/code-playground", "/project-showcase", "/collaboration",
   ];
   return (
     sidebarRoutes.includes(pathname) ||
